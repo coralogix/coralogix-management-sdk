@@ -13,126 +13,171 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Recurring - struct for Recurring
+// checks if the Recurring type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Recurring{}
+
+// Recurring Recurring schedule that activates the alert scheduler rule on a repeating cadence.
 type Recurring struct {
-	RecurringAlwaysActive *RecurringAlwaysActive
-	RecurringSchedule *RecurringSchedule
+	// Always.
+	AlwaysActive map[string]interface{} `json:"alwaysActive,omitempty"`
+	Schedule *RecurringDynamic `json:"schedule,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// RecurringAlwaysActiveAsRecurring is a convenience function that returns RecurringAlwaysActive wrapped in Recurring
-func RecurringAlwaysActiveAsRecurring(v *RecurringAlwaysActive) Recurring {
-	return Recurring{
-		RecurringAlwaysActive: v,
+type _Recurring Recurring
+
+// NewRecurring instantiates a new Recurring object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRecurring() *Recurring {
+	this := Recurring{}
+	return &this
+}
+
+// NewRecurringWithDefaults instantiates a new Recurring object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRecurringWithDefaults() *Recurring {
+	this := Recurring{}
+	return &this
+}
+
+// GetAlwaysActive returns the AlwaysActive field value if set, zero value otherwise.
+func (o *Recurring) GetAlwaysActive() map[string]interface{} {
+	if o == nil || IsNil(o.AlwaysActive) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.AlwaysActive
 }
 
-// RecurringScheduleAsRecurring is a convenience function that returns RecurringSchedule wrapped in Recurring
-func RecurringScheduleAsRecurring(v *RecurringSchedule) Recurring {
-	return Recurring{
-		RecurringSchedule: v,
+// GetAlwaysActiveOk returns a tuple with the AlwaysActive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Recurring) GetAlwaysActiveOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.AlwaysActive) {
+		return map[string]interface{}{}, false
 	}
+	return o.AlwaysActive, true
 }
 
+// HasAlwaysActive returns a boolean if a field has been set.
+func (o *Recurring) HasAlwaysActive() bool {
+	if o != nil && !IsNil(o.AlwaysActive) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Recurring) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into RecurringAlwaysActive
-	err = json.Unmarshal(data, &dst.RecurringAlwaysActive)
-	if err == nil {
-		jsonRecurringAlwaysActive, _ := json.Marshal(dst.RecurringAlwaysActive)
-		if string(jsonRecurringAlwaysActive) == "{}" { // empty struct
-			dst.RecurringAlwaysActive = nil
-		} else {
-			if err = validator.Validate(dst.RecurringAlwaysActive); err != nil {
-				dst.RecurringAlwaysActive = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAlwaysActive gets a reference to the given map[string]interface{} and assigns it to the AlwaysActive field.
+func (o *Recurring) SetAlwaysActive(v map[string]interface{}) {
+	o.AlwaysActive = v
+}
+
+// GetSchedule returns the Schedule field value if set, zero value otherwise.
+func (o *Recurring) GetSchedule() RecurringDynamic {
+	if o == nil || IsNil(o.Schedule) {
+		var ret RecurringDynamic
+		return ret
+	}
+	return *o.Schedule
+}
+
+// GetScheduleOk returns a tuple with the Schedule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Recurring) GetScheduleOk() (*RecurringDynamic, bool) {
+	if o == nil || IsNil(o.Schedule) {
+		return nil, false
+	}
+	return o.Schedule, true
+}
+
+// HasSchedule returns a boolean if a field has been set.
+func (o *Recurring) HasSchedule() bool {
+	if o != nil && !IsNil(o.Schedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchedule gets a reference to the given RecurringDynamic and assigns it to the Schedule field.
+func (o *Recurring) SetSchedule(v RecurringDynamic) {
+	o.Schedule = &v
+}
+
+func (o Recurring) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Recurring) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AlwaysActive) {
+		toSerialize["alwaysActive"] = o.AlwaysActive
+	}
+	if !IsNil(o.Schedule) {
+		toSerialize["schedule"] = o.Schedule
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["alwaysActive"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["schedule"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [alwaysActive, schedule] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Recurring) UnmarshalJSON(data []byte) (err error) {
+	varRecurring := _Recurring{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRecurring)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Recurring(varRecurring)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["alwaysActive"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RecurringAlwaysActive = nil
-	}
-
-	// try to unmarshal data into RecurringSchedule
-	err = json.Unmarshal(data, &dst.RecurringSchedule)
-	if err == nil {
-		jsonRecurringSchedule, _ := json.Marshal(dst.RecurringSchedule)
-		if string(jsonRecurringSchedule) == "{}" { // empty struct
-			dst.RecurringSchedule = nil
-		} else {
-			if err = validator.Validate(dst.RecurringSchedule); err != nil {
-				dst.RecurringSchedule = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["schedule"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RecurringSchedule = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [alwaysActive, schedule] may be set"}
+		}
+
+		delete(additionalProperties, "alwaysActive")
+		delete(additionalProperties, "schedule")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.RecurringAlwaysActive = nil
-		dst.RecurringSchedule = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Recurring)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Recurring) MarshalJSON() ([]byte, error) {
-	if src.RecurringAlwaysActive != nil {
-		return json.Marshal(&src.RecurringAlwaysActive)
-	}
-
-	if src.RecurringSchedule != nil {
-		return json.Marshal(&src.RecurringSchedule)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Recurring) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.RecurringAlwaysActive != nil {
-		return obj.RecurringAlwaysActive
-	}
-
-	if obj.RecurringSchedule != nil {
-		return obj.RecurringSchedule
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Recurring) GetActualInstanceValue() (interface{}) {
-	if obj.RecurringAlwaysActive != nil {
-		return *obj.RecurringAlwaysActive
-	}
-
-	if obj.RecurringSchedule != nil {
-		return *obj.RecurringSchedule
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableRecurring struct {

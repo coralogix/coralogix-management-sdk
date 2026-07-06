@@ -90,13 +90,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [ActionExecutionRequest](docs/ActionExecutionRequest.md)
- - [ActionExecutionRequestCreate](docs/ActionExecutionRequestCreate.md)
- - [ActionExecutionRequestDelete](docs/ActionExecutionRequestDelete.md)
- - [ActionExecutionRequestReplace](docs/ActionExecutionRequestReplace.md)
  - [ActionExecutionResponse](docs/ActionExecutionResponse.md)
- - [ActionExecutionResponseCreate](docs/ActionExecutionResponseCreate.md)
- - [ActionExecutionResponseDelete](docs/ActionExecutionResponseDelete.md)
- - [ActionExecutionResponseReplace](docs/ActionExecutionResponseReplace.md)
  - [ActionsServiceAtomicBatchExecuteActionsRequest](docs/ActionsServiceAtomicBatchExecuteActionsRequest.md)
  - [ActionsServiceCreateActionRequest](docs/ActionsServiceCreateActionRequest.md)
  - [ActionsServiceOrderActionsRequest](docs/ActionsServiceOrderActionsRequest.md)
@@ -108,8 +102,6 @@ Class | Method | HTTP request | Description
  - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetActionResponse](docs/GetActionResponse.md)
  - [ListActionsResponse](docs/ListActionsResponse.md)

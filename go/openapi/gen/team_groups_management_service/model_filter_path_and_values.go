@@ -14,125 +14,230 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// FilterPathAndValues - struct for FilterPathAndValues
+// checks if the FilterPathAndValues type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FilterPathAndValues{}
+
+// FilterPathAndValues This data structure represents a filter path and values
 type FilterPathAndValues struct {
-	FilterPathAndValuesFilters *FilterPathAndValuesFilters
-	FilterPathAndValuesMultipleValues *FilterPathAndValuesMultipleValues
+	Filters *Filters `json:"filters,omitempty"`
+	MultipleValues *MultipleValues `json:"multipleValues,omitempty"`
+	Path string `json:"path"`
+	AdditionalProperties map[string]interface{}
 }
 
-// FilterPathAndValuesFiltersAsFilterPathAndValues is a convenience function that returns FilterPathAndValuesFilters wrapped in FilterPathAndValues
-func FilterPathAndValuesFiltersAsFilterPathAndValues(v *FilterPathAndValuesFilters) FilterPathAndValues {
-	return FilterPathAndValues{
-		FilterPathAndValuesFilters: v,
+type _FilterPathAndValues FilterPathAndValues
+
+// NewFilterPathAndValues instantiates a new FilterPathAndValues object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewFilterPathAndValues(path string) *FilterPathAndValues {
+	this := FilterPathAndValues{}
+	this.Path = path
+	return &this
+}
+
+// NewFilterPathAndValuesWithDefaults instantiates a new FilterPathAndValues object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewFilterPathAndValuesWithDefaults() *FilterPathAndValues {
+	this := FilterPathAndValues{}
+	return &this
+}
+
+// GetFilters returns the Filters field value if set, zero value otherwise.
+func (o *FilterPathAndValues) GetFilters() Filters {
+	if o == nil || IsNil(o.Filters) {
+		var ret Filters
+		return ret
 	}
+	return *o.Filters
 }
 
-// FilterPathAndValuesMultipleValuesAsFilterPathAndValues is a convenience function that returns FilterPathAndValuesMultipleValues wrapped in FilterPathAndValues
-func FilterPathAndValuesMultipleValuesAsFilterPathAndValues(v *FilterPathAndValuesMultipleValues) FilterPathAndValues {
-	return FilterPathAndValues{
-		FilterPathAndValuesMultipleValues: v,
+// GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilterPathAndValues) GetFiltersOk() (*Filters, bool) {
+	if o == nil || IsNil(o.Filters) {
+		return nil, false
 	}
+	return o.Filters, true
 }
 
+// HasFilters returns a boolean if a field has been set.
+func (o *FilterPathAndValues) HasFilters() bool {
+	if o != nil && !IsNil(o.Filters) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *FilterPathAndValues) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into FilterPathAndValuesFilters
-	err = json.Unmarshal(data, &dst.FilterPathAndValuesFilters)
-	if err == nil {
-		jsonFilterPathAndValuesFilters, _ := json.Marshal(dst.FilterPathAndValuesFilters)
-		if string(jsonFilterPathAndValuesFilters) == "{}" { // empty struct
-			dst.FilterPathAndValuesFilters = nil
-		} else {
-			if err = validator.Validate(dst.FilterPathAndValuesFilters); err != nil {
-				dst.FilterPathAndValuesFilters = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetFilters gets a reference to the given Filters and assigns it to the Filters field.
+func (o *FilterPathAndValues) SetFilters(v Filters) {
+	o.Filters = &v
+}
+
+// GetMultipleValues returns the MultipleValues field value if set, zero value otherwise.
+func (o *FilterPathAndValues) GetMultipleValues() MultipleValues {
+	if o == nil || IsNil(o.MultipleValues) {
+		var ret MultipleValues
+		return ret
+	}
+	return *o.MultipleValues
+}
+
+// GetMultipleValuesOk returns a tuple with the MultipleValues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilterPathAndValues) GetMultipleValuesOk() (*MultipleValues, bool) {
+	if o == nil || IsNil(o.MultipleValues) {
+		return nil, false
+	}
+	return o.MultipleValues, true
+}
+
+// HasMultipleValues returns a boolean if a field has been set.
+func (o *FilterPathAndValues) HasMultipleValues() bool {
+	if o != nil && !IsNil(o.MultipleValues) {
+		return true
+	}
+
+	return false
+}
+
+// SetMultipleValues gets a reference to the given MultipleValues and assigns it to the MultipleValues field.
+func (o *FilterPathAndValues) SetMultipleValues(v MultipleValues) {
+	o.MultipleValues = &v
+}
+
+// GetPath returns the Path field value
+func (o *FilterPathAndValues) GetPath() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Path
+}
+
+// GetPathOk returns a tuple with the Path field value
+// and a boolean to check if the value has been set.
+func (o *FilterPathAndValues) GetPathOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Path, true
+}
+
+// SetPath sets field value
+func (o *FilterPathAndValues) SetPath(v string) {
+	o.Path = v
+}
+
+func (o FilterPathAndValues) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FilterPathAndValues) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Filters) {
+		toSerialize["filters"] = o.Filters
+	}
+	if !IsNil(o.MultipleValues) {
+		toSerialize["multipleValues"] = o.MultipleValues
+	}
+	toSerialize["path"] = o.Path
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	requiredOneOfGroup0Matches := 0
+	if _, exists := toSerialize["multipleValues"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["filters"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches != 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [multipleValues, filters] must be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *FilterPathAndValues) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"path",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.FilterPathAndValuesFilters = nil
 	}
 
-	// try to unmarshal data into FilterPathAndValuesMultipleValues
-	err = json.Unmarshal(data, &dst.FilterPathAndValuesMultipleValues)
-	if err == nil {
-		jsonFilterPathAndValuesMultipleValues, _ := json.Marshal(dst.FilterPathAndValuesMultipleValues)
-		if string(jsonFilterPathAndValuesMultipleValues) == "{}" { // empty struct
-			dst.FilterPathAndValuesMultipleValues = nil
-		} else {
-			if err = validator.Validate(dst.FilterPathAndValuesMultipleValues); err != nil {
-				dst.FilterPathAndValuesMultipleValues = nil
-			} else {
-				match++
-			}
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["multipleValues"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["filters"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [multipleValues, filters] may be set"}
+	}
+
+	varFilterPathAndValues := _FilterPathAndValues{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFilterPathAndValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FilterPathAndValues(varFilterPathAndValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		requiredOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["multipleValues"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FilterPathAndValuesMultipleValues = nil
+		if _, exists := additionalProperties["filters"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
+		}
+		if requiredOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [multipleValues, filters] may be set"}
+		}
+
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "multipleValues")
+		delete(additionalProperties, "path")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.FilterPathAndValuesFilters = nil
-		dst.FilterPathAndValuesMultipleValues = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(FilterPathAndValues)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src FilterPathAndValues) MarshalJSON() ([]byte, error) {
-	if src.FilterPathAndValuesFilters != nil {
-		return json.Marshal(&src.FilterPathAndValuesFilters)
-	}
-
-	if src.FilterPathAndValuesMultipleValues != nil {
-		return json.Marshal(&src.FilterPathAndValuesMultipleValues)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *FilterPathAndValues) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.FilterPathAndValuesFilters != nil {
-		return obj.FilterPathAndValuesFilters
-	}
-
-	if obj.FilterPathAndValuesMultipleValues != nil {
-		return obj.FilterPathAndValuesMultipleValues
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj FilterPathAndValues) GetActualInstanceValue() (interface{}) {
-	if obj.FilterPathAndValuesFilters != nil {
-		return *obj.FilterPathAndValuesFilters
-	}
-
-	if obj.FilterPathAndValuesMultipleValues != nil {
-		return *obj.FilterPathAndValuesMultipleValues
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableFilterPathAndValues struct {

@@ -13,126 +13,170 @@ package notifications_testing_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// TestResult - struct for TestResult
+// checks if the TestResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TestResult{}
+
+// TestResult Result of a notification test, either a success or failure.
 type TestResult struct {
-	TestResultFailureVariant *TestResultFailureVariant
-	TestResultSuccessVariant *TestResultSuccessVariant
+	Failure *TestResultFailure `json:"failure,omitempty"`
+	Success *TestResultSuccess `json:"success,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// TestResultFailureVariantAsTestResult is a convenience function that returns TestResultFailureVariant wrapped in TestResult
-func TestResultFailureVariantAsTestResult(v *TestResultFailureVariant) TestResult {
-	return TestResult{
-		TestResultFailureVariant: v,
+type _TestResult TestResult
+
+// NewTestResult instantiates a new TestResult object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewTestResult() *TestResult {
+	this := TestResult{}
+	return &this
+}
+
+// NewTestResultWithDefaults instantiates a new TestResult object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewTestResultWithDefaults() *TestResult {
+	this := TestResult{}
+	return &this
+}
+
+// GetFailure returns the Failure field value if set, zero value otherwise.
+func (o *TestResult) GetFailure() TestResultFailure {
+	if o == nil || IsNil(o.Failure) {
+		var ret TestResultFailure
+		return ret
 	}
+	return *o.Failure
 }
 
-// TestResultSuccessVariantAsTestResult is a convenience function that returns TestResultSuccessVariant wrapped in TestResult
-func TestResultSuccessVariantAsTestResult(v *TestResultSuccessVariant) TestResult {
-	return TestResult{
-		TestResultSuccessVariant: v,
+// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestResult) GetFailureOk() (*TestResultFailure, bool) {
+	if o == nil || IsNil(o.Failure) {
+		return nil, false
 	}
+	return o.Failure, true
 }
 
+// HasFailure returns a boolean if a field has been set.
+func (o *TestResult) HasFailure() bool {
+	if o != nil && !IsNil(o.Failure) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *TestResult) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into TestResultFailureVariant
-	err = json.Unmarshal(data, &dst.TestResultFailureVariant)
-	if err == nil {
-		jsonTestResultFailureVariant, _ := json.Marshal(dst.TestResultFailureVariant)
-		if string(jsonTestResultFailureVariant) == "{}" { // empty struct
-			dst.TestResultFailureVariant = nil
-		} else {
-			if err = validator.Validate(dst.TestResultFailureVariant); err != nil {
-				dst.TestResultFailureVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetFailure gets a reference to the given TestResultFailure and assigns it to the Failure field.
+func (o *TestResult) SetFailure(v TestResultFailure) {
+	o.Failure = &v
+}
+
+// GetSuccess returns the Success field value if set, zero value otherwise.
+func (o *TestResult) GetSuccess() TestResultSuccess {
+	if o == nil || IsNil(o.Success) {
+		var ret TestResultSuccess
+		return ret
+	}
+	return *o.Success
+}
+
+// GetSuccessOk returns a tuple with the Success field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestResult) GetSuccessOk() (*TestResultSuccess, bool) {
+	if o == nil || IsNil(o.Success) {
+		return nil, false
+	}
+	return o.Success, true
+}
+
+// HasSuccess returns a boolean if a field has been set.
+func (o *TestResult) HasSuccess() bool {
+	if o != nil && !IsNil(o.Success) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuccess gets a reference to the given TestResultSuccess and assigns it to the Success field.
+func (o *TestResult) SetSuccess(v TestResultSuccess) {
+	o.Success = &v
+}
+
+func (o TestResult) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TestResult) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Failure) {
+		toSerialize["failure"] = o.Failure
+	}
+	if !IsNil(o.Success) {
+		toSerialize["success"] = o.Success
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["success"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["failure"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *TestResult) UnmarshalJSON(data []byte) (err error) {
+	varTestResult := _TestResult{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestResult(varTestResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["success"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TestResultFailureVariant = nil
-	}
-
-	// try to unmarshal data into TestResultSuccessVariant
-	err = json.Unmarshal(data, &dst.TestResultSuccessVariant)
-	if err == nil {
-		jsonTestResultSuccessVariant, _ := json.Marshal(dst.TestResultSuccessVariant)
-		if string(jsonTestResultSuccessVariant) == "{}" { // empty struct
-			dst.TestResultSuccessVariant = nil
-		} else {
-			if err = validator.Validate(dst.TestResultSuccessVariant); err != nil {
-				dst.TestResultSuccessVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["failure"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TestResultSuccessVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+		}
+
+		delete(additionalProperties, "failure")
+		delete(additionalProperties, "success")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TestResultFailureVariant = nil
-		dst.TestResultSuccessVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TestResult)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src TestResult) MarshalJSON() ([]byte, error) {
-	if src.TestResultFailureVariant != nil {
-		return json.Marshal(&src.TestResultFailureVariant)
-	}
-
-	if src.TestResultSuccessVariant != nil {
-		return json.Marshal(&src.TestResultSuccessVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *TestResult) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.TestResultFailureVariant != nil {
-		return obj.TestResultFailureVariant
-	}
-
-	if obj.TestResultSuccessVariant != nil {
-		return obj.TestResultSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj TestResult) GetActualInstanceValue() (interface{}) {
-	if obj.TestResultFailureVariant != nil {
-		return *obj.TestResultFailureVariant
-	}
-
-	if obj.TestResultSuccessVariant != nil {
-		return *obj.TestResultSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableTestResult struct {

@@ -1,663 +1,793 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /data-exploration/views/v1/views:
-    get:
-      description: Lists all company public views
-      externalDocs:
-        url: ""
-      operationId: ViewsService_ListViews
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                views:
-                - filters:
-                    filters:
-                    - name: applicationName
-                      selectedValues:
-                        demo: true
-                    - name: subsystemName
-                      selectedValues:
-                        demo: true
-                    - name: operationName
-                      selectedValues:
-                        demo: true
-                    - name: serviceName
-                      selectedValues:
-                        demo: true
-                    - name: severity
-                      selectedValues:
-                        demo: true
-                  id: 52
-                  name: Logs view
-                  searchQuery:
-                    query: logs
-                  timeSelection:
-                    customSelection:
-                      fromTime: 2024-01-25T11:31:43.152Z
-                      toTime: 2024-01-25T11:37:13.238Z
-              schema:
-                $ref: "#/components/schemas/ListViewsResponse"
-          description: ""
-      summary: List views service
-      tags:
-      - Views service
-    post:
-      description: Creates a new view
-      externalDocs:
-        url: ""
-      operationId: ViewsService_CreateView
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ViewFolder"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                filters:
-                  filters:
-                  - name: applicationName
-                    selectedValues:
-                      demo: true
-                  - name: subsystemName
-                    selectedValues:
-                      demo: true
-                  - name: operationName
-                    selectedValues:
-                      demo: true
-                  - name: serviceName
-                    selectedValues:
-                      demo: true
-                  - name: severity
-                    selectedValues:
-                      demo: true
-                id: 52
-                name: Logs view
-                searchQuery:
-                  query: logs
-                timeSelection:
-                  customSelection:
-                    fromTime: 2024-01-25T11:31:43.152Z
-                    toTime: 2024-01-25T11:37:13.238Z
-              schema:
-                $ref: "#/components/schemas/View"
-          description: ""
-      summary: Create a view service
-      tags:
-      - Views service
-  /data-exploration/views/v1/views/{id}:
-    delete:
-      description: Deletes a view by ID
-      externalDocs:
-        url: ""
-      operationId: ViewsService_DeleteView
-      parameters:
-      - description: id
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: id
-          example: 52
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteViewResponse"
-          description: ""
-      summary: Delete view service
-      tags:
-      - Views service
-    get:
-      description: Gets a view by ID
-      externalDocs:
-        url: ""
-      operationId: ViewsService_GetView
-      parameters:
-      - description: id
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: id
-          example: 52
-          format: int32
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                filters:
-                  filters:
-                  - name: applicationName
-                    selectedValues:
-                      demo: true
-                  - name: subsystemName
-                    selectedValues:
-                      demo: true
-                  - name: operationName
-                    selectedValues:
-                      demo: true
-                  - name: serviceName
-                    selectedValues:
-                      demo: true
-                  - name: severity
-                    selectedValues:
-                      demo: true
-                id: 52
-                name: Logs view
-                searchQuery:
-                  query: logs
-                timeSelection:
-                  customSelection:
-                    fromTime: 2024-01-25T11:31:43.152Z
-                    toTime: 2024-01-25T11:37:13.238Z
-              schema:
-                $ref: "#/components/schemas/View"
-          description: ""
-      summary: Get view service
-      tags:
-      - Views service
-    put:
-      description: Replaces an existing view
-      externalDocs:
-        url: ""
-      operationId: ViewsService_ReplaceView
-      parameters:
-      - description: id
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: id
-          example: 52
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/View_1"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                filters:
-                  filters:
-                  - name: applicationName
-                    selectedValues:
-                      demo: true
-                  - name: subsystemName
-                    selectedValues:
-                      demo: true
-                  - name: operationName
-                    selectedValues:
-                      demo: true
-                  - name: serviceName
-                    selectedValues:
-                      demo: true
-                  - name: severity
-                    selectedValues:
-                      demo: true
-                id: 52
-                name: Logs view
-                searchQuery:
-                  query: logs new
-                timeSelection:
-                  customSelection:
-                    fromTime: 2024-01-25T11:31:43.152Z
-                    toTime: 2024-01-25T11:37:13.238Z
-              schema:
-                $ref: "#/components/schemas/View"
-          description: ""
-      summary: Replace a view service
-      tags:
-      - Views service
-components:
-  schemas:
-    CustomTimeSelection:
-      description: Custom time selection.
-      example:
-        fromTime: 2024-01-25T11:31:43.152Z
-        toTime: 2024-01-25T11:35:43.152Z
-      externalDocs:
-        url: ""
-      properties:
-        fromTime:
-          description: The from time.
-          example: 2024-01-25T11:31:43.152Z
-          format: date-time
-          minLength: 1
-          type: string
-        toTime:
-          description: The to time.
-          example: 2024-01-25T11:35:43.152Z
-          format: date-time
-          minLength: 1
-          type: string
-      required:
-      - fromTime
-      - toTime
-      type: object
-    DeleteViewResponse:
-      additionalProperties: false
-      description: Response returned after successfully deleting a view.
-      externalDocs:
-        url: ""
-      type: object
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    ListViewsResponse:
-      description: Response containing a list of views.
-      example:
-        views:
-        - isCompactMode: true
-          searchQuery:
-            query: query
-            syntaxType: SYNTAX_TYPE_UNSPECIFIED
-          name: Logs view
-          viewType: VIEW_TYPE_UNSPECIFIED
-          filters:
-            filters:
-            - selectedValues:
-                key: true
-              name: applicationName
-            - selectedValues:
-                key: true
-              name: applicationName
-          id: 52
-          folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
-          timeSelection:
-            customSelection:
-              fromTime: 2024-01-25T11:31:43.152Z
-              toTime: 2024-01-25T11:35:43.152Z
-        - isCompactMode: true
-          searchQuery:
-            query: query
-            syntaxType: SYNTAX_TYPE_UNSPECIFIED
-          name: Logs view
-          viewType: VIEW_TYPE_UNSPECIFIED
-          filters:
-            filters:
-            - selectedValues:
-                key: true
-              name: applicationName
-            - selectedValues:
-                key: true
-              name: applicationName
-          id: 52
-          folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
-          timeSelection:
-            customSelection:
-              fromTime: 2024-01-25T11:31:43.152Z
-              toTime: 2024-01-25T11:35:43.152Z
-      externalDocs:
-        url: ""
-      properties:
-        views:
-          description: The views.
-          items:
-            $ref: "#/components/schemas/View"
-          minItems: 0
-          type: array
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    QuickTimeSelection:
-      description: Quick time selection.
-      externalDocs:
-        url: ""
-      properties:
-        caption:
-          deprecated: true
-          description: Folder name
-          example: Last Hour
-          minLength: 1
-          type: string
-        seconds:
-          description: Folder name
-          example: 3600
-          format: int64
-          minimum: 0
-          type: integer
-      required:
-      - seconds
-      type: object
-    SearchQuery:
-      description: Search query.
-      example:
-        query: query
-        syntaxType: SYNTAX_TYPE_UNSPECIFIED
-      externalDocs:
-        url: ""
-      properties:
-        query:
-          description: Query string.
-          minLength: 1
-          type: string
-        syntaxType:
-          $ref: "#/components/schemas/SyntaxType"
-      required:
-      - query
-      title: SearchQuery
-      type: object
-    SelectedFilters:
-      description: Selected filters.
-      example:
-        filters:
-        - selectedValues:
-            key: true
-          name: applicationName
-        - selectedValues:
-            key: true
-          name: applicationName
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          description: List of filters.
-          items:
-            $ref: "#/components/schemas/views.v1.Filter"
-          minItems: 1
-          type: array
-      type: object
-    SyntaxType:
-      description: Syntax type.
-      enum:
-      - SYNTAX_TYPE_UNSPECIFIED
-      - SYNTAX_TYPE_LUCENE
-      - SYNTAX_TYPE_DATAPRIME
-      type: string
-    TimeSelection:
-      oneOf:
-      - $ref: "#/components/schemas/TimeSelectionCustomSelection"
-      - $ref: "#/components/schemas/TimeSelectionQuickSelection"
-    TimeSelectionCustomSelection:
-      description: Time selection.
-      example:
-        customSelection:
-          fromTime: 2024-01-25T11:31:43.152Z
-          toTime: 2024-01-25T11:35:43.152Z
-      externalDocs:
-        url: ""
-      properties:
-        customSelection:
-          $ref: "#/components/schemas/CustomTimeSelection"
-      required:
-      - customSelection
-      type: object
-    TimeSelectionQuickSelection:
-      description: Time selection.
-      externalDocs:
-        url: ""
-      properties:
-        quickSelection:
-          $ref: "#/components/schemas/QuickTimeSelection"
-      required:
-      - quickSelection
-      type: object
-    View:
-      description: Response for views.
-      example:
-        isCompactMode: true
-        searchQuery:
-          query: query
-          syntaxType: SYNTAX_TYPE_UNSPECIFIED
-        name: Logs view
-        viewType: VIEW_TYPE_UNSPECIFIED
-        filters:
-          filters:
-          - selectedValues:
-              key: true
-            name: applicationName
-          - selectedValues:
-              key: true
-            name: applicationName
-        id: 52
-        folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
-        timeSelection:
-          customSelection:
-            fromTime: 2024-01-25T11:31:43.152Z
-            toTime: 2024-01-25T11:35:43.152Z
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/SelectedFilters"
-        folderId:
-          description: Unique identifier for folders
-          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
-          type: string
-        id:
-          description: id
-          example: 52
-          format: int32
-          type: integer
-        isCompactMode:
-          description: The is compact mode.
-          type: boolean
-        name:
-          description: View name
-          example: Logs view
-          minLength: 1
-          type: string
-        searchQuery:
-          $ref: "#/components/schemas/SearchQuery"
-        timeSelection:
-          $ref: "#/components/schemas/TimeSelection"
-        viewType:
-          $ref: "#/components/schemas/ViewType"
-      required:
-      - id
-      - name
-      - timeSelection
-      title: View
-      type: object
-    ViewType:
-      description: View type.
-      enum:
-      - VIEW_TYPE_UNSPECIFIED
-      - VIEW_TYPE_LOGS
-      - VIEW_TYPE_TEMPLATES
-      - VIEW_TYPE_ARCHIVE_LOGS
-      - VIEW_TYPE_ARCHIVE_TEMPLATES
-      type: string
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    views.v1.Filter:
-      description: View folder.
-      example:
-        selectedValues:
-          key: true
-        name: applicationName
-      externalDocs:
-        url: ""
-      properties:
-        name:
-          description: Filter name
-          example: applicationName
-          minLength: 1
-          type: string
-        selectedValues:
-          additionalProperties:
-            type: boolean
-          description: Filter selected values
-          type: object
-      required:
-      - name
-      - selectedValues
-      title: ViewFolder
-      type: object
-    ViewFolder:
-      description: View folder.
-      example:
-        searchQuery:
-          query: query
-          syntaxType: SYNTAX_TYPE_UNSPECIFIED
-        name: Logs view
-        viewType: VIEW_TYPE_UNSPECIFIED
-        filters:
-          filters:
-          - selectedValues:
-              key: true
-            name: applicationName
-          - selectedValues:
-              key: true
-            name: applicationName
-        folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
-        timeSelection:
-          customSelection:
-            fromTime: 2024-01-25T11:31:43.152Z
-            toTime: 2024-01-25T11:35:43.152Z
-      properties:
-        filters:
-          $ref: "#/components/schemas/SelectedFilters"
-        folderId:
-          description: Unique identifier for folders
-          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
-          type: string
-        name:
-          description: View name
-          example: Logs view
-          minLength: 1
-          type: string
-        searchQuery:
-          $ref: "#/components/schemas/SearchQuery"
-        timeSelection:
-          $ref: "#/components/schemas/TimeSelection"
-        viewType:
-          $ref: "#/components/schemas/ViewType"
-      required:
-      - name
-      - timeSelection
-      title: ViewFolder
-      type: object
-    View_1:
-      description: Response for views.
-      properties:
-        filters:
-          $ref: "#/components/schemas/SelectedFilters"
-        folderId:
-          description: Unique identifier for folders
-          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
-          type: string
-        isCompactMode:
-          description: The is compact mode.
-          type: boolean
-        name:
-          description: View name
-          example: Logs view
-          minLength: 1
-          type: string
-        searchQuery:
-          $ref: "#/components/schemas/SearchQuery"
-        timeSelection:
-          $ref: "#/components/schemas/TimeSelection"
-        viewType:
-          $ref: "#/components/schemas/ViewType"
-      required:
-      - name
-      - timeSelection
-      title: View
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/data-exploration/views/v1/views": {
+      "get": {
+        "tags": [
+          "Views service"
+        ],
+        "summary": "List views service",
+        "description": "Lists all company public views",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_ListViews",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewsResponse"
+                },
+                "example": {
+                  "views": [
+                    {
+                      "filters": {
+                        "filters": [
+                          {
+                            "name": "applicationName",
+                            "selectedValues": {
+                              "demo": true
+                            }
+                          },
+                          {
+                            "name": "subsystemName",
+                            "selectedValues": {
+                              "demo": true
+                            }
+                          },
+                          {
+                            "name": "operationName",
+                            "selectedValues": {
+                              "demo": true
+                            }
+                          },
+                          {
+                            "name": "serviceName",
+                            "selectedValues": {
+                              "demo": true
+                            }
+                          },
+                          {
+                            "name": "severity",
+                            "selectedValues": {
+                              "demo": true
+                            }
+                          }
+                        ]
+                      },
+                      "id": 52,
+                      "name": "Logs view",
+                      "searchQuery": {
+                        "query": "logs"
+                      },
+                      "timeSelection": {
+                        "customSelection": {
+                          "fromTime": "2024-01-25T11:31:43.152Z",
+                          "toTime": "2024-01-25T11:37:13.238Z"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Views service"
+        ],
+        "summary": "Create a view service",
+        "description": "Creates a new view",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_CreateView",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "ViewFolder",
+                "description": "View folder.",
+                "type": "object",
+                "properties": {
+                  "filters": {
+                    "$ref": "#/components/schemas/SelectedFilters"
+                  },
+                  "folderId": {
+                    "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+                    "description": "Unique identifier for folders",
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    "minLength": 36,
+                    "maxLength": 36
+                  },
+                  "name": {
+                    "example": "Logs view",
+                    "description": "View name",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "searchQuery": {
+                    "$ref": "#/components/schemas/SearchQuery"
+                  },
+                  "timeSelection": {
+                    "$ref": "#/components/schemas/TimeSelection"
+                  },
+                  "viewType": {
+                    "$ref": "#/components/schemas/ViewType"
+                  }
+                },
+                "required": [
+                  "name",
+                  "timeSelection"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/View"
+                },
+                "example": {
+                  "filters": {
+                    "filters": [
+                      {
+                        "name": "applicationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "subsystemName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "operationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "serviceName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "severity",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      }
+                    ]
+                  },
+                  "id": 52,
+                  "name": "Logs view",
+                  "searchQuery": {
+                    "query": "logs"
+                  },
+                  "timeSelection": {
+                    "customSelection": {
+                      "fromTime": "2024-01-25T11:31:43.152Z",
+                      "toTime": "2024-01-25T11:37:13.238Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data-exploration/views/v1/views/{id}": {
+      "get": {
+        "tags": [
+          "Views service"
+        ],
+        "summary": "Get view service",
+        "description": "Gets a view by ID",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_GetView",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/View"
+                },
+                "example": {
+                  "filters": {
+                    "filters": [
+                      {
+                        "name": "applicationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "subsystemName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "operationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "serviceName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "severity",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      }
+                    ]
+                  },
+                  "id": 52,
+                  "name": "Logs view",
+                  "searchQuery": {
+                    "query": "logs"
+                  },
+                  "timeSelection": {
+                    "customSelection": {
+                      "fromTime": "2024-01-25T11:31:43.152Z",
+                      "toTime": "2024-01-25T11:37:13.238Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Views service"
+        ],
+        "summary": "Replace a view service",
+        "description": "Replaces an existing view",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_ReplaceView",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "View",
+                "description": "Response for views.",
+                "type": "object",
+                "properties": {
+                  "filters": {
+                    "$ref": "#/components/schemas/SelectedFilters"
+                  },
+                  "folderId": {
+                    "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+                    "description": "Unique identifier for folders",
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    "minLength": 36,
+                    "maxLength": 36
+                  },
+                  "isCompactMode": {
+                    "description": "The is compact mode.",
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "example": "Logs view",
+                    "description": "View name",
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "searchQuery": {
+                    "$ref": "#/components/schemas/SearchQuery"
+                  },
+                  "timeSelection": {
+                    "$ref": "#/components/schemas/TimeSelection"
+                  },
+                  "viewType": {
+                    "$ref": "#/components/schemas/ViewType"
+                  }
+                },
+                "required": [
+                  "name",
+                  "timeSelection"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/View"
+                },
+                "example": {
+                  "filters": {
+                    "filters": [
+                      {
+                        "name": "applicationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "subsystemName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "operationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "serviceName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "severity",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      }
+                    ]
+                  },
+                  "id": 52,
+                  "name": "Logs view",
+                  "searchQuery": {
+                    "query": "logs new"
+                  },
+                  "timeSelection": {
+                    "customSelection": {
+                      "fromTime": "2024-01-25T11:31:43.152Z",
+                      "toTime": "2024-01-25T11:37:13.238Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views service"
+        ],
+        "summary": "Delete view service",
+        "description": "Deletes a view by ID",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_DeleteView",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteViewResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "example": 52,
+            "description": "id",
+            "type": "integer",
+            "format": "int32"
+          },
+          "style": "simple"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "CustomTimeSelection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Custom time selection.",
+        "type": "object",
+        "properties": {
+          "fromTime": {
+            "example": "2024-01-25T11:31:43.152Z",
+            "description": "The from time.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 1
+          },
+          "toTime": {
+            "example": "2024-01-25T11:35:43.152Z",
+            "description": "The to time.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "fromTime",
+          "toTime"
+        ]
+      },
+      "DeleteViewResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting a view.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "ListViewsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of views.",
+        "type": "object",
+        "properties": {
+          "views": {
+            "description": "The views.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/View"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "QuickTimeSelection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Quick time selection.",
+        "type": "object",
+        "properties": {
+          "caption": {
+            "deprecated": true,
+            "example": "Last Hour",
+            "description": "Folder name",
+            "type": "string",
+            "minLength": 1
+          },
+          "seconds": {
+            "example": 3600,
+            "description": "Folder name",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "seconds"
+        ]
+      },
+      "SearchQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SearchQuery",
+        "description": "Search query.",
+        "type": "object",
+        "properties": {
+          "query": {
+            "description": "Query string.",
+            "type": "string",
+            "minLength": 1
+          },
+          "syntaxType": {
+            "$ref": "#/components/schemas/SyntaxType"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "SelectedFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Selected filters.",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "description": "List of filters.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/views.v1.Filter"
+            },
+            "minItems": 1
+          }
+        }
+      },
+      "SyntaxType": {
+        "description": "Syntax type.",
+        "type": "string",
+        "enum": [
+          "SYNTAX_TYPE_UNSPECIFIED",
+          "SYNTAX_TYPE_LUCENE",
+          "SYNTAX_TYPE_DATAPRIME"
+        ]
+      },
+      "TimeSelection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Time selection.",
+        "type": "object",
+        "properties": {
+          "customSelection": {
+            "$ref": "#/components/schemas/CustomTimeSelection"
+          },
+          "quickSelection": {
+            "$ref": "#/components/schemas/QuickTimeSelection"
+          }
+        },
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "quickSelection"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "customSelection"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "quickSelection"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "customSelection"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "View": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "View",
+        "description": "Response for views.",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/SelectedFilters"
+          },
+          "folderId": {
+            "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+            "description": "Unique identifier for folders",
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "id": {
+            "example": 52,
+            "description": "id",
+            "type": "integer",
+            "format": "int32"
+          },
+          "isCompactMode": {
+            "description": "The is compact mode.",
+            "type": "boolean"
+          },
+          "name": {
+            "example": "Logs view",
+            "description": "View name",
+            "type": "string",
+            "minLength": 1
+          },
+          "searchQuery": {
+            "$ref": "#/components/schemas/SearchQuery"
+          },
+          "timeSelection": {
+            "$ref": "#/components/schemas/TimeSelection"
+          },
+          "viewType": {
+            "$ref": "#/components/schemas/ViewType"
+          }
+        },
+        "required": [
+          "name",
+          "id",
+          "timeSelection"
+        ]
+      },
+      "ViewType": {
+        "description": "View type.",
+        "type": "string",
+        "enum": [
+          "VIEW_TYPE_UNSPECIFIED",
+          "VIEW_TYPE_LOGS",
+          "VIEW_TYPE_TEMPLATES",
+          "VIEW_TYPE_ARCHIVE_LOGS",
+          "VIEW_TYPE_ARCHIVE_TEMPLATES"
+        ]
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      },
+      "views.v1.Filter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ViewFolder",
+        "description": "View folder.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "applicationName",
+            "description": "Filter name",
+            "type": "string",
+            "minLength": 1
+          },
+          "selectedValues": {
+            "description": "Filter selected values",
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "selectedValues"
+        ]
+      }
+    }
+  }
+}

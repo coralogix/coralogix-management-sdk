@@ -339,10 +339,8 @@ func TestSlackPreset(t *testing.T) {
 		ConfigOverrides: []presets.ConfigOverrides{
 			{
 				ConditionType: &presets.NotificationCenterConditionType{
-					NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
-						MatchEntityTypeAndSubType: presets.MatchEntityTypeAndSubTypeCondition{
-							EntitySubType: presets.PtrString("logsImmediateResolved"),
-						},
+					MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
+						EntitySubType: presets.PtrString("logsImmediateResolved"),
 					},
 				},
 				MessageConfig: &presets.MessageConfig{
@@ -416,10 +414,8 @@ func TestPagerdutyPreset(t *testing.T) {
 		ConfigOverrides: []presets.ConfigOverrides{
 			{
 				ConditionType: &presets.NotificationCenterConditionType{
-					NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
-						MatchEntityTypeAndSubType: presets.MatchEntityTypeAndSubTypeCondition{
-							EntitySubType: presets.PtrString("logsImmediateTriggered"),
-						},
+					MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
+						EntitySubType: presets.PtrString("logsImmediateTriggered"),
 					},
 				},
 				MessageConfig: &presets.MessageConfig{
@@ -535,13 +531,9 @@ func TestGlobalRouter(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	createAlertReq := alerts.CreateAlertDefinitionRequest{
-		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesLogsRatioThreshold: CreateLogsRatioAlert(),
-		},
+		AlertDefProperties: CreateLogsRatioAlert(),
 	}
-	createAlertReq.AlertDefProperties.
-		AlertDefPropertiesLogsRatioThreshold.
-		NotificationGroup.
+	createAlertReq.AlertDefProperties.NotificationGroup.
 		Router = &alerts.NotificationRouter{
 		Id: replacedRouter.Router.Id,
 	}
@@ -738,10 +730,8 @@ func getHttpsPreset(name string) *presets.CreateCustomPresetRequest {
 						},
 					},
 					ConditionType: &presets.NotificationCenterConditionType{
-						NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
-							MatchEntityTypeAndSubType: presets.MatchEntityTypeAndSubTypeCondition{
-								EntitySubType: presets.PtrString("logsImmediateResolved"),
-							},
+						MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
+							EntitySubType: presets.PtrString("logsImmediateResolved"),
 						},
 					},
 				},

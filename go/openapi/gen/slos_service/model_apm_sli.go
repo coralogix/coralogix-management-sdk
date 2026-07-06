@@ -13,126 +13,285 @@ package slos_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ApmSli - struct for ApmSli
+// checks if the ApmSli type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApmSli{}
+
+// ApmSli Definition of an APM-based SLI with automatic query generation
 type ApmSli struct {
-	ApmSliErrorConfig *ApmSliErrorConfig
-	ApmSliLatencyConfig *ApmSliLatencyConfig
+	// Configuration for error-based APM SLI
+	ErrorConfig map[string]interface{} `json:"errorConfig,omitempty"`
+	// Additional label-based filters to apply to the metrics
+	Filters []ApmFilter `json:"filters,omitempty"`
+	// Labels to group SLO results by
+	GroupingKeys []string `json:"groupingKeys,omitempty"`
+	LatencyConfig *ApmLatencySli `json:"latencyConfig,omitempty"`
+	// List of service names to monitor
+	Services []string `json:"services,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// ApmSliErrorConfigAsApmSli is a convenience function that returns ApmSliErrorConfig wrapped in ApmSli
-func ApmSliErrorConfigAsApmSli(v *ApmSliErrorConfig) ApmSli {
-	return ApmSli{
-		ApmSliErrorConfig: v,
+type _ApmSli ApmSli
+
+// NewApmSli instantiates a new ApmSli object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewApmSli() *ApmSli {
+	this := ApmSli{}
+	return &this
+}
+
+// NewApmSliWithDefaults instantiates a new ApmSli object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewApmSliWithDefaults() *ApmSli {
+	this := ApmSli{}
+	return &this
+}
+
+// GetErrorConfig returns the ErrorConfig field value if set, zero value otherwise.
+func (o *ApmSli) GetErrorConfig() map[string]interface{} {
+	if o == nil || IsNil(o.ErrorConfig) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.ErrorConfig
 }
 
-// ApmSliLatencyConfigAsApmSli is a convenience function that returns ApmSliLatencyConfig wrapped in ApmSli
-func ApmSliLatencyConfigAsApmSli(v *ApmSliLatencyConfig) ApmSli {
-	return ApmSli{
-		ApmSliLatencyConfig: v,
+// GetErrorConfigOk returns a tuple with the ErrorConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmSli) GetErrorConfigOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ErrorConfig) {
+		return map[string]interface{}{}, false
 	}
+	return o.ErrorConfig, true
 }
 
+// HasErrorConfig returns a boolean if a field has been set.
+func (o *ApmSli) HasErrorConfig() bool {
+	if o != nil && !IsNil(o.ErrorConfig) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ApmSli) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ApmSliErrorConfig
-	err = json.Unmarshal(data, &dst.ApmSliErrorConfig)
-	if err == nil {
-		jsonApmSliErrorConfig, _ := json.Marshal(dst.ApmSliErrorConfig)
-		if string(jsonApmSliErrorConfig) == "{}" { // empty struct
-			dst.ApmSliErrorConfig = nil
-		} else {
-			if err = validator.Validate(dst.ApmSliErrorConfig); err != nil {
-				dst.ApmSliErrorConfig = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetErrorConfig gets a reference to the given map[string]interface{} and assigns it to the ErrorConfig field.
+func (o *ApmSli) SetErrorConfig(v map[string]interface{}) {
+	o.ErrorConfig = v
+}
+
+// GetFilters returns the Filters field value if set, zero value otherwise.
+func (o *ApmSli) GetFilters() []ApmFilter {
+	if o == nil || IsNil(o.Filters) {
+		var ret []ApmFilter
+		return ret
+	}
+	return o.Filters
+}
+
+// GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmSli) GetFiltersOk() ([]ApmFilter, bool) {
+	if o == nil || IsNil(o.Filters) {
+		return nil, false
+	}
+	return o.Filters, true
+}
+
+// HasFilters returns a boolean if a field has been set.
+func (o *ApmSli) HasFilters() bool {
+	if o != nil && !IsNil(o.Filters) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilters gets a reference to the given []ApmFilter and assigns it to the Filters field.
+func (o *ApmSli) SetFilters(v []ApmFilter) {
+	o.Filters = v
+}
+
+// GetGroupingKeys returns the GroupingKeys field value if set, zero value otherwise.
+func (o *ApmSli) GetGroupingKeys() []string {
+	if o == nil || IsNil(o.GroupingKeys) {
+		var ret []string
+		return ret
+	}
+	return o.GroupingKeys
+}
+
+// GetGroupingKeysOk returns a tuple with the GroupingKeys field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmSli) GetGroupingKeysOk() ([]string, bool) {
+	if o == nil || IsNil(o.GroupingKeys) {
+		return nil, false
+	}
+	return o.GroupingKeys, true
+}
+
+// HasGroupingKeys returns a boolean if a field has been set.
+func (o *ApmSli) HasGroupingKeys() bool {
+	if o != nil && !IsNil(o.GroupingKeys) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupingKeys gets a reference to the given []string and assigns it to the GroupingKeys field.
+func (o *ApmSli) SetGroupingKeys(v []string) {
+	o.GroupingKeys = v
+}
+
+// GetLatencyConfig returns the LatencyConfig field value if set, zero value otherwise.
+func (o *ApmSli) GetLatencyConfig() ApmLatencySli {
+	if o == nil || IsNil(o.LatencyConfig) {
+		var ret ApmLatencySli
+		return ret
+	}
+	return *o.LatencyConfig
+}
+
+// GetLatencyConfigOk returns a tuple with the LatencyConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmSli) GetLatencyConfigOk() (*ApmLatencySli, bool) {
+	if o == nil || IsNil(o.LatencyConfig) {
+		return nil, false
+	}
+	return o.LatencyConfig, true
+}
+
+// HasLatencyConfig returns a boolean if a field has been set.
+func (o *ApmSli) HasLatencyConfig() bool {
+	if o != nil && !IsNil(o.LatencyConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatencyConfig gets a reference to the given ApmLatencySli and assigns it to the LatencyConfig field.
+func (o *ApmSli) SetLatencyConfig(v ApmLatencySli) {
+	o.LatencyConfig = &v
+}
+
+// GetServices returns the Services field value if set, zero value otherwise.
+func (o *ApmSli) GetServices() []string {
+	if o == nil || IsNil(o.Services) {
+		var ret []string
+		return ret
+	}
+	return o.Services
+}
+
+// GetServicesOk returns a tuple with the Services field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmSli) GetServicesOk() ([]string, bool) {
+	if o == nil || IsNil(o.Services) {
+		return nil, false
+	}
+	return o.Services, true
+}
+
+// HasServices returns a boolean if a field has been set.
+func (o *ApmSli) HasServices() bool {
+	if o != nil && !IsNil(o.Services) {
+		return true
+	}
+
+	return false
+}
+
+// SetServices gets a reference to the given []string and assigns it to the Services field.
+func (o *ApmSli) SetServices(v []string) {
+	o.Services = v
+}
+
+func (o ApmSli) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApmSli) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ErrorConfig) {
+		toSerialize["errorConfig"] = o.ErrorConfig
+	}
+	if !IsNil(o.Filters) {
+		toSerialize["filters"] = o.Filters
+	}
+	if !IsNil(o.GroupingKeys) {
+		toSerialize["groupingKeys"] = o.GroupingKeys
+	}
+	if !IsNil(o.LatencyConfig) {
+		toSerialize["latencyConfig"] = o.LatencyConfig
+	}
+	if !IsNil(o.Services) {
+		toSerialize["services"] = o.Services
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["errorConfig"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["latencyConfig"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [errorConfig, latencyConfig] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ApmSli) UnmarshalJSON(data []byte) (err error) {
+	varApmSli := _ApmSli{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApmSli)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApmSli(varApmSli)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["errorConfig"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ApmSliErrorConfig = nil
-	}
-
-	// try to unmarshal data into ApmSliLatencyConfig
-	err = json.Unmarshal(data, &dst.ApmSliLatencyConfig)
-	if err == nil {
-		jsonApmSliLatencyConfig, _ := json.Marshal(dst.ApmSliLatencyConfig)
-		if string(jsonApmSliLatencyConfig) == "{}" { // empty struct
-			dst.ApmSliLatencyConfig = nil
-		} else {
-			if err = validator.Validate(dst.ApmSliLatencyConfig); err != nil {
-				dst.ApmSliLatencyConfig = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["latencyConfig"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ApmSliLatencyConfig = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [errorConfig, latencyConfig] may be set"}
+		}
+
+		delete(additionalProperties, "errorConfig")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "groupingKeys")
+		delete(additionalProperties, "latencyConfig")
+		delete(additionalProperties, "services")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ApmSliErrorConfig = nil
-		dst.ApmSliLatencyConfig = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ApmSli)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ApmSli) MarshalJSON() ([]byte, error) {
-	if src.ApmSliErrorConfig != nil {
-		return json.Marshal(&src.ApmSliErrorConfig)
-	}
-
-	if src.ApmSliLatencyConfig != nil {
-		return json.Marshal(&src.ApmSliLatencyConfig)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ApmSli) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ApmSliErrorConfig != nil {
-		return obj.ApmSliErrorConfig
-	}
-
-	if obj.ApmSliLatencyConfig != nil {
-		return obj.ApmSliLatencyConfig
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ApmSli) GetActualInstanceValue() (interface{}) {
-	if obj.ApmSliErrorConfig != nil {
-		return *obj.ApmSliErrorConfig
-	}
-
-	if obj.ApmSliLatencyConfig != nil {
-		return *obj.ApmSliLatencyConfig
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableApmSli struct {

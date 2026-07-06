@@ -686,14 +686,14 @@
                       "config": {
                         "competition": {}
                       },
-                      "createdAt": "2026-06-02T15:30:00.000Z",
+                      "createdAt": "2026-06-02T15:30:00Z",
                       "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
                       "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
                       "isEnabled": true,
                       "subsystem": "api",
                       "target": "RESPONSE",
                       "threshold": 0.7,
-                      "updatedAt": "2026-06-02T15:35:00.000Z"
+                      "updatedAt": "2026-06-02T15:35:00Z"
                     }
                   ]
                 }
@@ -770,14 +770,14 @@
                     "config": {
                       "competition": {}
                     },
-                    "createdAt": "2026-06-02T15:30:00.000Z",
+                    "createdAt": "2026-06-02T15:30:00Z",
                     "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
                     "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
                     "isEnabled": true,
                     "subsystem": "api",
                     "target": "RESPONSE",
                     "threshold": 0.7,
-                    "updatedAt": "2026-06-02T15:35:00.000Z"
+                    "updatedAt": "2026-06-02T15:35:00Z"
                   }
                 }
               }
@@ -797,14 +797,14 @@
                     "config": {
                       "competition": {}
                     },
-                    "createdAt": "2026-06-02T15:30:00.000Z",
+                    "createdAt": "2026-06-02T15:30:00Z",
                     "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
                     "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
                     "isEnabled": true,
                     "subsystem": "api",
                     "target": "RESPONSE",
                     "threshold": 0.7,
-                    "updatedAt": "2026-06-02T15:35:00.000Z"
+                    "updatedAt": "2026-06-02T15:35:00Z"
                   }
                 }
               }
@@ -855,14 +855,14 @@
                     "config": {
                       "competition": {}
                     },
-                    "createdAt": "2026-06-02T15:30:00.000Z",
+                    "createdAt": "2026-06-02T15:30:00Z",
                     "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
                     "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
                     "isEnabled": true,
                     "subsystem": "api",
                     "target": "RESPONSE",
                     "threshold": 0.7,
-                    "updatedAt": "2026-06-02T15:35:00.000Z"
+                    "updatedAt": "2026-06-02T15:35:00Z"
                   }
                 }
               }
@@ -1003,14 +1003,14 @@
                     "config": {
                       "competition": {}
                     },
-                    "createdAt": "2026-06-02T15:30:00.000Z",
+                    "createdAt": "2026-06-02T15:30:00Z",
                     "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
                     "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
                     "isEnabled": true,
                     "subsystem": "api",
                     "target": "RESPONSE",
                     "threshold": 0.7,
-                    "updatedAt": "2026-06-02T15:35:00.000Z"
+                    "updatedAt": "2026-06-02T15:35:00Z"
                   }
                 }
               }
@@ -1335,67 +1335,6 @@
         }
       },
       "EvaluationConfig": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/EvaluationConfigAllowedTopics"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigCompetition"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigCustomEvaluation"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigHallucinationCompleteness"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigHallucinationContextAdherence"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigHallucinationContextRelevance"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigHallucinationCorrectness"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigHallucinationTaskAdherence"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigLanguageMismatch"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigPii"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigPromptInjection"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigRestrictedTopics"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigSexism"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigSqlAllowedTables"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigSqlHallucination"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigSqlLoad"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigSqlReadOnly"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigSqlRestrictedTables"
-          },
-          {
-            "$ref": "#/components/schemas/EvaluationConfigToxicity"
-          }
-        ]
-      },
-      "EvaluationConfigAllowedTopics": {
         "externalDocs": {
           "url": ""
         },
@@ -1404,280 +1343,302 @@
         "properties": {
           "allowedTopics": {
             "$ref": "#/components/schemas/AllowedTopicsConfig"
-          }
-        },
-        "required": [
-          "allowedTopics"
-        ]
-      },
-      "EvaluationConfigCompetition": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "competition": {
             "$ref": "#/components/schemas/CompetitionConfig"
-          }
-        },
-        "required": [
-          "competition"
-        ]
-      },
-      "EvaluationConfigCustomEvaluation": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "customEvaluation": {
             "$ref": "#/components/schemas/CustomEvaluationConfig"
-          }
-        },
-        "required": [
-          "customEvaluation"
-        ]
-      },
-      "EvaluationConfigHallucinationCompleteness": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "hallucinationCompleteness": {
             "$ref": "#/components/schemas/HallucinationCompletenessConfig"
-          }
-        },
-        "required": [
-          "hallucinationCompleteness"
-        ]
-      },
-      "EvaluationConfigHallucinationContextAdherence": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "hallucinationContextAdherence": {
             "$ref": "#/components/schemas/HallucinationContextAdherenceConfig"
-          }
-        },
-        "required": [
-          "hallucinationContextAdherence"
-        ]
-      },
-      "EvaluationConfigHallucinationContextRelevance": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "hallucinationContextRelevance": {
             "$ref": "#/components/schemas/HallucinationContextRelevanceConfig"
-          }
-        },
-        "required": [
-          "hallucinationContextRelevance"
-        ]
-      },
-      "EvaluationConfigHallucinationCorrectness": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "hallucinationCorrectness": {
             "$ref": "#/components/schemas/HallucinationCorrectnessConfig"
-          }
-        },
-        "required": [
-          "hallucinationCorrectness"
-        ]
-      },
-      "EvaluationConfigHallucinationTaskAdherence": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "hallucinationTaskAdherence": {
             "$ref": "#/components/schemas/HallucinationTaskAdherenceConfig"
-          }
-        },
-        "required": [
-          "hallucinationTaskAdherence"
-        ]
-      },
-      "EvaluationConfigLanguageMismatch": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "languageMismatch": {
             "$ref": "#/components/schemas/LanguageMismatchConfig"
-          }
-        },
-        "required": [
-          "languageMismatch"
-        ]
-      },
-      "EvaluationConfigPii": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "pii": {
             "$ref": "#/components/schemas/PiiConfig"
-          }
-        },
-        "required": [
-          "pii"
-        ]
-      },
-      "EvaluationConfigPromptInjection": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "promptInjection": {
             "$ref": "#/components/schemas/PromptInjectionConfig"
-          }
-        },
-        "required": [
-          "promptInjection"
-        ]
-      },
-      "EvaluationConfigRestrictedTopics": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "restrictedTopics": {
             "$ref": "#/components/schemas/RestrictedTopicsConfig"
-          }
-        },
-        "required": [
-          "restrictedTopics"
-        ]
-      },
-      "EvaluationConfigSexism": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "sexism": {
             "$ref": "#/components/schemas/SexismConfig"
-          }
-        },
-        "required": [
-          "sexism"
-        ]
-      },
-      "EvaluationConfigSqlAllowedTables": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "sqlAllowedTables": {
             "$ref": "#/components/schemas/SqlAllowedTablesConfig"
-          }
-        },
-        "required": [
-          "sqlAllowedTables"
-        ]
-      },
-      "EvaluationConfigSqlHallucination": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "sqlHallucination": {
             "$ref": "#/components/schemas/SqlHallucinationConfig"
-          }
-        },
-        "required": [
-          "sqlHallucination"
-        ]
-      },
-      "EvaluationConfigSqlLoad": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "sqlLoad": {
             "$ref": "#/components/schemas/SqlLoadConfig"
-          }
-        },
-        "required": [
-          "sqlLoad"
-        ]
-      },
-      "EvaluationConfigSqlReadOnly": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "sqlReadOnly": {
             "$ref": "#/components/schemas/SqlReadOnlyConfig"
-          }
-        },
-        "required": [
-          "sqlReadOnly"
-        ]
-      },
-      "EvaluationConfigSqlRestrictedTables": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "sqlRestrictedTables": {
             "$ref": "#/components/schemas/SqlRestrictedTablesConfig"
-          }
-        },
-        "required": [
-          "sqlRestrictedTables"
-        ]
-      },
-      "EvaluationConfigToxicity": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "type": "object",
-        "properties": {
+          },
           "toxicity": {
             "$ref": "#/components/schemas/ToxicityConfig"
           }
         },
-        "required": [
-          "toxicity"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "allowedTopics"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "competition"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "hallucinationCompleteness"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "hallucinationContextAdherence"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "hallucinationContextRelevance"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "hallucinationCorrectness"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "pii"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "promptInjection"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "restrictedTopics"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sexism"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sqlAllowedTables"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sqlHallucination"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sqlReadOnly"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sqlRestrictedTables"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "toxicity"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "hallucinationTaskAdherence"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sqlLoad"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "languageMismatch"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "customEvaluation"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "allowedTopics"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "competition"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "hallucinationCompleteness"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "hallucinationContextAdherence"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "hallucinationContextRelevance"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "hallucinationCorrectness"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "pii"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "promptInjection"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "restrictedTopics"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sexism"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sqlAllowedTables"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sqlHallucination"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sqlReadOnly"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sqlRestrictedTables"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "toxicity"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "hallucinationTaskAdherence"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sqlLoad"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "languageMismatch"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "customEvaluation"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "EvaluationTarget": {
@@ -1714,16 +1675,6 @@
         ]
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -1734,26 +1685,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -1764,9 +1695,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {

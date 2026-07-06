@@ -13,202 +13,256 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// HexagonQuery - struct for HexagonQuery
+// checks if the HexagonQuery type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HexagonQuery{}
+
+// HexagonQuery Discriminated union of possible query types for the hexagon widget.
 type HexagonQuery struct {
-	HexagonQueryDataprime *HexagonQueryDataprime
-	HexagonQueryLogs *HexagonQueryLogs
-	HexagonQueryMetrics *HexagonQueryMetrics
-	HexagonQuerySpans *HexagonQuerySpans
+	Dataprime *HexagonDataprimeQuery `json:"dataprime,omitempty"`
+	Logs *HexagonLogsQuery `json:"logs,omitempty"`
+	Metrics *HexagonMetricsQuery `json:"metrics,omitempty"`
+	Spans *HexagonSpansQuery `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// HexagonQueryDataprimeAsHexagonQuery is a convenience function that returns HexagonQueryDataprime wrapped in HexagonQuery
-func HexagonQueryDataprimeAsHexagonQuery(v *HexagonQueryDataprime) HexagonQuery {
-	return HexagonQuery{
-		HexagonQueryDataprime: v,
+type _HexagonQuery HexagonQuery
+
+// NewHexagonQuery instantiates a new HexagonQuery object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewHexagonQuery() *HexagonQuery {
+	this := HexagonQuery{}
+	return &this
+}
+
+// NewHexagonQueryWithDefaults instantiates a new HexagonQuery object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewHexagonQueryWithDefaults() *HexagonQuery {
+	this := HexagonQuery{}
+	return &this
+}
+
+// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+func (o *HexagonQuery) GetDataprime() HexagonDataprimeQuery {
+	if o == nil || IsNil(o.Dataprime) {
+		var ret HexagonDataprimeQuery
+		return ret
 	}
+	return *o.Dataprime
 }
 
-// HexagonQueryLogsAsHexagonQuery is a convenience function that returns HexagonQueryLogs wrapped in HexagonQuery
-func HexagonQueryLogsAsHexagonQuery(v *HexagonQueryLogs) HexagonQuery {
-	return HexagonQuery{
-		HexagonQueryLogs: v,
+// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HexagonQuery) GetDataprimeOk() (*HexagonDataprimeQuery, bool) {
+	if o == nil || IsNil(o.Dataprime) {
+		return nil, false
 	}
+	return o.Dataprime, true
 }
 
-// HexagonQueryMetricsAsHexagonQuery is a convenience function that returns HexagonQueryMetrics wrapped in HexagonQuery
-func HexagonQueryMetricsAsHexagonQuery(v *HexagonQueryMetrics) HexagonQuery {
-	return HexagonQuery{
-		HexagonQueryMetrics: v,
+// HasDataprime returns a boolean if a field has been set.
+func (o *HexagonQuery) HasDataprime() bool {
+	if o != nil && !IsNil(o.Dataprime) {
+		return true
 	}
+
+	return false
 }
 
-// HexagonQuerySpansAsHexagonQuery is a convenience function that returns HexagonQuerySpans wrapped in HexagonQuery
-func HexagonQuerySpansAsHexagonQuery(v *HexagonQuerySpans) HexagonQuery {
-	return HexagonQuery{
-		HexagonQuerySpans: v,
+// SetDataprime gets a reference to the given HexagonDataprimeQuery and assigns it to the Dataprime field.
+func (o *HexagonQuery) SetDataprime(v HexagonDataprimeQuery) {
+	o.Dataprime = &v
+}
+
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *HexagonQuery) GetLogs() HexagonLogsQuery {
+	if o == nil || IsNil(o.Logs) {
+		var ret HexagonLogsQuery
+		return ret
 	}
+	return *o.Logs
 }
 
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HexagonQuery) GetLogsOk() (*HexagonLogsQuery, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
+	}
+	return o.Logs, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *HexagonQuery) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into HexagonQueryDataprime
-	err = json.Unmarshal(data, &dst.HexagonQueryDataprime)
-	if err == nil {
-		jsonHexagonQueryDataprime, _ := json.Marshal(dst.HexagonQueryDataprime)
-		if string(jsonHexagonQueryDataprime) == "{}" { // empty struct
-			dst.HexagonQueryDataprime = nil
-		} else {
-			if err = validator.Validate(dst.HexagonQueryDataprime); err != nil {
-				dst.HexagonQueryDataprime = nil
-			} else {
-				match++
-			}
+// HasLogs returns a boolean if a field has been set.
+func (o *HexagonQuery) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogs gets a reference to the given HexagonLogsQuery and assigns it to the Logs field.
+func (o *HexagonQuery) SetLogs(v HexagonLogsQuery) {
+	o.Logs = &v
+}
+
+// GetMetrics returns the Metrics field value if set, zero value otherwise.
+func (o *HexagonQuery) GetMetrics() HexagonMetricsQuery {
+	if o == nil || IsNil(o.Metrics) {
+		var ret HexagonMetricsQuery
+		return ret
+	}
+	return *o.Metrics
+}
+
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HexagonQuery) GetMetricsOk() (*HexagonMetricsQuery, bool) {
+	if o == nil || IsNil(o.Metrics) {
+		return nil, false
+	}
+	return o.Metrics, true
+}
+
+// HasMetrics returns a boolean if a field has been set.
+func (o *HexagonQuery) HasMetrics() bool {
+	if o != nil && !IsNil(o.Metrics) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetrics gets a reference to the given HexagonMetricsQuery and assigns it to the Metrics field.
+func (o *HexagonQuery) SetMetrics(v HexagonMetricsQuery) {
+	o.Metrics = &v
+}
+
+// GetSpans returns the Spans field value if set, zero value otherwise.
+func (o *HexagonQuery) GetSpans() HexagonSpansQuery {
+	if o == nil || IsNil(o.Spans) {
+		var ret HexagonSpansQuery
+		return ret
+	}
+	return *o.Spans
+}
+
+// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HexagonQuery) GetSpansOk() (*HexagonSpansQuery, bool) {
+	if o == nil || IsNil(o.Spans) {
+		return nil, false
+	}
+	return o.Spans, true
+}
+
+// HasSpans returns a boolean if a field has been set.
+func (o *HexagonQuery) HasSpans() bool {
+	if o != nil && !IsNil(o.Spans) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpans gets a reference to the given HexagonSpansQuery and assigns it to the Spans field.
+func (o *HexagonQuery) SetSpans(v HexagonSpansQuery) {
+	o.Spans = &v
+}
+
+func (o HexagonQuery) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HexagonQuery) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dataprime) {
+		toSerialize["dataprime"] = o.Dataprime
+	}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Metrics) {
+		toSerialize["metrics"] = o.Metrics
+	}
+	if !IsNil(o.Spans) {
+		toSerialize["spans"] = o.Spans
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["metrics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["logs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spans"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dataprime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metrics, logs, spans, dataprime] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *HexagonQuery) UnmarshalJSON(data []byte) (err error) {
+	varHexagonQuery := _HexagonQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHexagonQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HexagonQuery(varHexagonQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["metrics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HexagonQueryDataprime = nil
-	}
-
-	// try to unmarshal data into HexagonQueryLogs
-	err = json.Unmarshal(data, &dst.HexagonQueryLogs)
-	if err == nil {
-		jsonHexagonQueryLogs, _ := json.Marshal(dst.HexagonQueryLogs)
-		if string(jsonHexagonQueryLogs) == "{}" { // empty struct
-			dst.HexagonQueryLogs = nil
-		} else {
-			if err = validator.Validate(dst.HexagonQueryLogs); err != nil {
-				dst.HexagonQueryLogs = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["logs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HexagonQueryLogs = nil
-	}
-
-	// try to unmarshal data into HexagonQueryMetrics
-	err = json.Unmarshal(data, &dst.HexagonQueryMetrics)
-	if err == nil {
-		jsonHexagonQueryMetrics, _ := json.Marshal(dst.HexagonQueryMetrics)
-		if string(jsonHexagonQueryMetrics) == "{}" { // empty struct
-			dst.HexagonQueryMetrics = nil
-		} else {
-			if err = validator.Validate(dst.HexagonQueryMetrics); err != nil {
-				dst.HexagonQueryMetrics = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spans"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HexagonQueryMetrics = nil
-	}
-
-	// try to unmarshal data into HexagonQuerySpans
-	err = json.Unmarshal(data, &dst.HexagonQuerySpans)
-	if err == nil {
-		jsonHexagonQuerySpans, _ := json.Marshal(dst.HexagonQuerySpans)
-		if string(jsonHexagonQuerySpans) == "{}" { // empty struct
-			dst.HexagonQuerySpans = nil
-		} else {
-			if err = validator.Validate(dst.HexagonQuerySpans); err != nil {
-				dst.HexagonQuerySpans = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dataprime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HexagonQuerySpans = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [metrics, logs, spans, dataprime] may be set"}
+		}
+
+		delete(additionalProperties, "dataprime")
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.HexagonQueryDataprime = nil
-		dst.HexagonQueryLogs = nil
-		dst.HexagonQueryMetrics = nil
-		dst.HexagonQuerySpans = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(HexagonQuery)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src HexagonQuery) MarshalJSON() ([]byte, error) {
-	if src.HexagonQueryDataprime != nil {
-		return json.Marshal(&src.HexagonQueryDataprime)
-	}
-
-	if src.HexagonQueryLogs != nil {
-		return json.Marshal(&src.HexagonQueryLogs)
-	}
-
-	if src.HexagonQueryMetrics != nil {
-		return json.Marshal(&src.HexagonQueryMetrics)
-	}
-
-	if src.HexagonQuerySpans != nil {
-		return json.Marshal(&src.HexagonQuerySpans)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *HexagonQuery) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.HexagonQueryDataprime != nil {
-		return obj.HexagonQueryDataprime
-	}
-
-	if obj.HexagonQueryLogs != nil {
-		return obj.HexagonQueryLogs
-	}
-
-	if obj.HexagonQueryMetrics != nil {
-		return obj.HexagonQueryMetrics
-	}
-
-	if obj.HexagonQuerySpans != nil {
-		return obj.HexagonQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj HexagonQuery) GetActualInstanceValue() (interface{}) {
-	if obj.HexagonQueryDataprime != nil {
-		return *obj.HexagonQueryDataprime
-	}
-
-	if obj.HexagonQueryLogs != nil {
-		return *obj.HexagonQueryLogs
-	}
-
-	if obj.HexagonQueryMetrics != nil {
-		return *obj.HexagonQueryMetrics
-	}
-
-	if obj.HexagonQuerySpans != nil {
-		return *obj.HexagonQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableHexagonQuery struct {

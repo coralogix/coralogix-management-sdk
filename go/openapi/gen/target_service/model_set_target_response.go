@@ -26,7 +26,7 @@ type SetTargetResponse struct {
 	Format *TargetFormat `json:"format,omitempty"`
 	// Whether archiving to this target is active.
 	IsActive bool `json:"isActive"`
-	S3 *S3TargetSpec `json:"s3,omitempty"`
+	S3 S3TargetSpec `json:"s3"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,9 +36,10 @@ type _SetTargetResponse SetTargetResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSetTargetResponse(isActive bool) *SetTargetResponse {
+func NewSetTargetResponse(isActive bool, s3 S3TargetSpec) *SetTargetResponse {
 	this := SetTargetResponse{}
 	this.IsActive = isActive
+	this.S3 = s3
 	return &this
 }
 
@@ -106,36 +107,28 @@ func (o *SetTargetResponse) SetIsActive(v bool) {
 	o.IsActive = v
 }
 
-// GetS3 returns the S3 field value if set, zero value otherwise.
+// GetS3 returns the S3 field value
 func (o *SetTargetResponse) GetS3() S3TargetSpec {
-	if o == nil || IsNil(o.S3) {
+	if o == nil {
 		var ret S3TargetSpec
 		return ret
 	}
-	return *o.S3
+
+	return o.S3
 }
 
-// GetS3Ok returns a tuple with the S3 field value if set, nil otherwise
+// GetS3Ok returns a tuple with the S3 field value
 // and a boolean to check if the value has been set.
 func (o *SetTargetResponse) GetS3Ok() (*S3TargetSpec, bool) {
-	if o == nil || IsNil(o.S3) {
+	if o == nil {
 		return nil, false
 	}
-	return o.S3, true
+	return &o.S3, true
 }
 
-// HasS3 returns a boolean if a field has been set.
-func (o *SetTargetResponse) HasS3() bool {
-	if o != nil && !IsNil(o.S3) {
-		return true
-	}
-
-	return false
-}
-
-// SetS3 gets a reference to the given S3TargetSpec and assigns it to the S3 field.
+// SetS3 sets field value
 func (o *SetTargetResponse) SetS3(v S3TargetSpec) {
-	o.S3 = &v
+	o.S3 = v
 }
 
 func (o SetTargetResponse) MarshalJSON() ([]byte, error) {
@@ -152,9 +145,7 @@ func (o SetTargetResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["format"] = o.Format
 	}
 	toSerialize["isActive"] = o.IsActive
-	if !IsNil(o.S3) {
-		toSerialize["s3"] = o.S3
-	}
+	toSerialize["s3"] = o.S3
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -169,6 +160,7 @@ func (o *SetTargetResponse) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"isActive",
+		"s3",
 	}
 
 	allProperties := make(map[string]interface{})

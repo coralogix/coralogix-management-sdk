@@ -26,10 +26,10 @@ import (
 )
 
 // A list response that mixes a known alert kind with a server-side new alert
-// kind must decode cleanly. The unknown alert is kept; its AlertDefProperties
-// wrapper exists with all variant pointers nil so callers can detect "I don't
-// understand this one" via GetActualInstance() == nil.
-func TestListAlertDefsResponse_UnknownVariantKeepsAlertWithNilOneOf(t *testing.T) {
+// kind must decode cleanly. Unknown future properties are preserved in
+// AdditionalProperties so older SDK clients can keep reading the rest of the
+// response.
+func TestListAlertDefsResponse_UnknownVariantKeepsAlertWithAdditionalProperties(t *testing.T) {
 	payload := `{
 		"alertDefs": [
 			{
@@ -65,11 +65,8 @@ func TestListAlertDefsResponse_UnknownVariantKeepsAlertWithNilOneOf(t *testing.T
 	if known.AlertDefProperties == nil {
 		t.Fatal("expected known alert to have non-nil AlertDefProperties wrapper")
 	}
-	if known.AlertDefProperties.GetActualInstance() == nil {
-		t.Fatal("expected known alert to resolve to a variant (got GetActualInstance == nil)")
-	}
-	if known.AlertDefProperties.AlertDefPropertiesLogsImmediate == nil {
-		t.Fatal("expected known alert to resolve to AlertDefPropertiesLogsImmediate")
+	if _, ok := known.AlertDefProperties.AdditionalProperties["logsImmediate"]; ok {
+		t.Fatal("expected known logsImmediate to decode as a typed field")
 	}
 
 	unknown := resp.AlertDefs[1]
@@ -79,24 +76,22 @@ func TestListAlertDefsResponse_UnknownVariantKeepsAlertWithNilOneOf(t *testing.T
 	if unknown.AlertDefProperties == nil {
 		t.Fatal("expected unknown alert to keep non-nil AlertDefProperties wrapper")
 	}
-	if unknown.AlertDefProperties.GetActualInstance() != nil {
-		t.Fatalf("expected unknown variant to leave GetActualInstance() == nil, got %T",
-			unknown.AlertDefProperties.GetActualInstance())
+	if _, ok := unknown.AlertDefProperties.AdditionalProperties["futureKindProps"]; !ok {
+		t.Fatal("expected unknown futureKindProps to be preserved in AdditionalProperties")
 	}
 }
 
 // Regression guard: a single standalone unknown-variant AlertDefProperties
 // payload (the GET-by-id case) must also decode without error.
-func TestAlertDefProperties_StandaloneUnknownVariantDecodesAsNil(t *testing.T) {
+func TestAlertDefProperties_StandaloneUnknownVariantPreserved(t *testing.T) {
 	payload := `{"name": "future-alert", "futureKindProps": {"some": "field"}}`
 
 	var props alerts.AlertDefProperties
 	if err := json.Unmarshal([]byte(payload), &props); err != nil {
 		t.Fatalf("expected unmarshal to succeed, got: %v", err)
 	}
-	if props.GetActualInstance() != nil {
-		t.Fatalf("expected GetActualInstance() == nil for unknown variant, got %T",
-			props.GetActualInstance())
+	if _, ok := props.AdditionalProperties["futureKindProps"]; !ok {
+		t.Fatal("expected unknown futureKindProps to be preserved in AdditionalProperties")
 	}
 }
 
@@ -118,12 +113,16 @@ func TestListAlertDefsResponse_AllKnownVariantsUnchanged(t *testing.T) {
 	if len(resp.AlertDefs) != 2 {
 		t.Fatalf("expected 2 alerts, got %d", len(resp.AlertDefs))
 	}
-	if resp.AlertDefs[0].AlertDefProperties == nil ||
-		resp.AlertDefs[0].AlertDefProperties.AlertDefPropertiesLogsImmediate == nil {
-		t.Fatal("expected a1 to resolve to AlertDefPropertiesLogsImmediate")
+	if resp.AlertDefs[0].AlertDefProperties == nil {
+		t.Fatal("expected a1 to have non-nil AlertDefProperties wrapper")
 	}
-	if resp.AlertDefs[1].AlertDefProperties == nil ||
-		resp.AlertDefs[1].AlertDefProperties.AlertDefPropertiesMetricThreshold == nil {
-		t.Fatal("expected a2 to resolve to AlertDefPropertiesMetricThreshold")
+	if _, ok := resp.AlertDefs[0].AlertDefProperties.AdditionalProperties["logsImmediate"]; ok {
+		t.Fatal("expected a1 logsImmediate to decode as a typed field")
+	}
+	if resp.AlertDefs[1].AlertDefProperties == nil {
+		t.Fatal("expected a2 to have non-nil AlertDefProperties wrapper")
+	}
+	if _, ok := resp.AlertDefs[1].AlertDefProperties.AdditionalProperties["metricThreshold"]; ok {
+		t.Fatal("expected a2 metricThreshold to decode as a typed field")
 	}
 }

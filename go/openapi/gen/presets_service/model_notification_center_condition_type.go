@@ -13,126 +13,171 @@ package presets_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// NotificationCenterConditionType - struct for NotificationCenterConditionType
+// checks if the NotificationCenterConditionType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NotificationCenterConditionType{}
+
+// NotificationCenterConditionType Field condition.condition type.
 type NotificationCenterConditionType struct {
-	NotificationCenterConditionTypeMatchEntityType *NotificationCenterConditionTypeMatchEntityType
-	NotificationCenterConditionTypeMatchEntityTypeAndSubType *NotificationCenterConditionTypeMatchEntityTypeAndSubType
+	// Match entity type condition.
+	MatchEntityType map[string]interface{} `json:"matchEntityType,omitempty"`
+	MatchEntityTypeAndSubType *MatchEntityTypeAndSubTypeCondition `json:"matchEntityTypeAndSubType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// NotificationCenterConditionTypeMatchEntityTypeAsNotificationCenterConditionType is a convenience function that returns NotificationCenterConditionTypeMatchEntityType wrapped in NotificationCenterConditionType
-func NotificationCenterConditionTypeMatchEntityTypeAsNotificationCenterConditionType(v *NotificationCenterConditionTypeMatchEntityType) NotificationCenterConditionType {
-	return NotificationCenterConditionType{
-		NotificationCenterConditionTypeMatchEntityType: v,
+type _NotificationCenterConditionType NotificationCenterConditionType
+
+// NewNotificationCenterConditionType instantiates a new NotificationCenterConditionType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewNotificationCenterConditionType() *NotificationCenterConditionType {
+	this := NotificationCenterConditionType{}
+	return &this
+}
+
+// NewNotificationCenterConditionTypeWithDefaults instantiates a new NotificationCenterConditionType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewNotificationCenterConditionTypeWithDefaults() *NotificationCenterConditionType {
+	this := NotificationCenterConditionType{}
+	return &this
+}
+
+// GetMatchEntityType returns the MatchEntityType field value if set, zero value otherwise.
+func (o *NotificationCenterConditionType) GetMatchEntityType() map[string]interface{} {
+	if o == nil || IsNil(o.MatchEntityType) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.MatchEntityType
 }
 
-// NotificationCenterConditionTypeMatchEntityTypeAndSubTypeAsNotificationCenterConditionType is a convenience function that returns NotificationCenterConditionTypeMatchEntityTypeAndSubType wrapped in NotificationCenterConditionType
-func NotificationCenterConditionTypeMatchEntityTypeAndSubTypeAsNotificationCenterConditionType(v *NotificationCenterConditionTypeMatchEntityTypeAndSubType) NotificationCenterConditionType {
-	return NotificationCenterConditionType{
-		NotificationCenterConditionTypeMatchEntityTypeAndSubType: v,
+// GetMatchEntityTypeOk returns a tuple with the MatchEntityType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationCenterConditionType) GetMatchEntityTypeOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.MatchEntityType) {
+		return map[string]interface{}{}, false
 	}
+	return o.MatchEntityType, true
 }
 
+// HasMatchEntityType returns a boolean if a field has been set.
+func (o *NotificationCenterConditionType) HasMatchEntityType() bool {
+	if o != nil && !IsNil(o.MatchEntityType) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *NotificationCenterConditionType) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into NotificationCenterConditionTypeMatchEntityType
-	err = json.Unmarshal(data, &dst.NotificationCenterConditionTypeMatchEntityType)
-	if err == nil {
-		jsonNotificationCenterConditionTypeMatchEntityType, _ := json.Marshal(dst.NotificationCenterConditionTypeMatchEntityType)
-		if string(jsonNotificationCenterConditionTypeMatchEntityType) == "{}" { // empty struct
-			dst.NotificationCenterConditionTypeMatchEntityType = nil
-		} else {
-			if err = validator.Validate(dst.NotificationCenterConditionTypeMatchEntityType); err != nil {
-				dst.NotificationCenterConditionTypeMatchEntityType = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetMatchEntityType gets a reference to the given map[string]interface{} and assigns it to the MatchEntityType field.
+func (o *NotificationCenterConditionType) SetMatchEntityType(v map[string]interface{}) {
+	o.MatchEntityType = v
+}
+
+// GetMatchEntityTypeAndSubType returns the MatchEntityTypeAndSubType field value if set, zero value otherwise.
+func (o *NotificationCenterConditionType) GetMatchEntityTypeAndSubType() MatchEntityTypeAndSubTypeCondition {
+	if o == nil || IsNil(o.MatchEntityTypeAndSubType) {
+		var ret MatchEntityTypeAndSubTypeCondition
+		return ret
+	}
+	return *o.MatchEntityTypeAndSubType
+}
+
+// GetMatchEntityTypeAndSubTypeOk returns a tuple with the MatchEntityTypeAndSubType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationCenterConditionType) GetMatchEntityTypeAndSubTypeOk() (*MatchEntityTypeAndSubTypeCondition, bool) {
+	if o == nil || IsNil(o.MatchEntityTypeAndSubType) {
+		return nil, false
+	}
+	return o.MatchEntityTypeAndSubType, true
+}
+
+// HasMatchEntityTypeAndSubType returns a boolean if a field has been set.
+func (o *NotificationCenterConditionType) HasMatchEntityTypeAndSubType() bool {
+	if o != nil && !IsNil(o.MatchEntityTypeAndSubType) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchEntityTypeAndSubType gets a reference to the given MatchEntityTypeAndSubTypeCondition and assigns it to the MatchEntityTypeAndSubType field.
+func (o *NotificationCenterConditionType) SetMatchEntityTypeAndSubType(v MatchEntityTypeAndSubTypeCondition) {
+	o.MatchEntityTypeAndSubType = &v
+}
+
+func (o NotificationCenterConditionType) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NotificationCenterConditionType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.MatchEntityType) {
+		toSerialize["matchEntityType"] = o.MatchEntityType
+	}
+	if !IsNil(o.MatchEntityTypeAndSubType) {
+		toSerialize["matchEntityTypeAndSubType"] = o.MatchEntityTypeAndSubType
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["matchEntityType"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["matchEntityTypeAndSubType"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [matchEntityType, matchEntityTypeAndSubType] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *NotificationCenterConditionType) UnmarshalJSON(data []byte) (err error) {
+	varNotificationCenterConditionType := _NotificationCenterConditionType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varNotificationCenterConditionType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotificationCenterConditionType(varNotificationCenterConditionType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["matchEntityType"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.NotificationCenterConditionTypeMatchEntityType = nil
-	}
-
-	// try to unmarshal data into NotificationCenterConditionTypeMatchEntityTypeAndSubType
-	err = json.Unmarshal(data, &dst.NotificationCenterConditionTypeMatchEntityTypeAndSubType)
-	if err == nil {
-		jsonNotificationCenterConditionTypeMatchEntityTypeAndSubType, _ := json.Marshal(dst.NotificationCenterConditionTypeMatchEntityTypeAndSubType)
-		if string(jsonNotificationCenterConditionTypeMatchEntityTypeAndSubType) == "{}" { // empty struct
-			dst.NotificationCenterConditionTypeMatchEntityTypeAndSubType = nil
-		} else {
-			if err = validator.Validate(dst.NotificationCenterConditionTypeMatchEntityTypeAndSubType); err != nil {
-				dst.NotificationCenterConditionTypeMatchEntityTypeAndSubType = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["matchEntityTypeAndSubType"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.NotificationCenterConditionTypeMatchEntityTypeAndSubType = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [matchEntityType, matchEntityTypeAndSubType] may be set"}
+		}
+
+		delete(additionalProperties, "matchEntityType")
+		delete(additionalProperties, "matchEntityTypeAndSubType")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.NotificationCenterConditionTypeMatchEntityType = nil
-		dst.NotificationCenterConditionTypeMatchEntityTypeAndSubType = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(NotificationCenterConditionType)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src NotificationCenterConditionType) MarshalJSON() ([]byte, error) {
-	if src.NotificationCenterConditionTypeMatchEntityType != nil {
-		return json.Marshal(&src.NotificationCenterConditionTypeMatchEntityType)
-	}
-
-	if src.NotificationCenterConditionTypeMatchEntityTypeAndSubType != nil {
-		return json.Marshal(&src.NotificationCenterConditionTypeMatchEntityTypeAndSubType)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *NotificationCenterConditionType) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.NotificationCenterConditionTypeMatchEntityType != nil {
-		return obj.NotificationCenterConditionTypeMatchEntityType
-	}
-
-	if obj.NotificationCenterConditionTypeMatchEntityTypeAndSubType != nil {
-		return obj.NotificationCenterConditionTypeMatchEntityTypeAndSubType
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj NotificationCenterConditionType) GetActualInstanceValue() (interface{}) {
-	if obj.NotificationCenterConditionTypeMatchEntityType != nil {
-		return *obj.NotificationCenterConditionTypeMatchEntityType
-	}
-
-	if obj.NotificationCenterConditionTypeMatchEntityTypeAndSubType != nil {
-		return *obj.NotificationCenterConditionTypeMatchEntityTypeAndSubType
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableNotificationCenterConditionType struct {

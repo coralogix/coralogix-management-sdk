@@ -1,951 +1,1069 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /actions/actions/v2:
-    get:
-      description: Returns all actions for the team.
-      externalDocs:
-        url: ""
-      operationId: ActionsService_ListActions
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListActionsResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: List Actions
-      tags:
-      - Actions Service
-    post:
-      description: Creates a new action.
-      externalDocs:
-        url: ""
-      operationId: ActionsService_CreateAction
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ActionsService_CreateAction_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateActionResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Create Action
-      tags:
-      - Actions Service
-    put:
-      description: Replaces all actions with the provided set.
-      externalDocs:
-        url: ""
-      operationId: ActionsService_ReplaceAction
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ActionsService_ReplaceAction_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReplaceActionResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Replace Action
-      tags:
-      - Actions Service
-  /actions/actions/v2/{id}:
-    delete:
-      description: Deletes the action with the specified ID.
-      externalDocs:
-        url: ""
-      operationId: ActionsService_DeleteAction
-      parameters:
-      - description: Unique identifier.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteActionResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Delete Action
-      tags:
-      - Actions Service
-    get:
-      description: Returns the details of a specific action.
-      externalDocs:
-        url: ""
-      operationId: ActionsService_GetAction
-      parameters:
-      - description: Unique identifier.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetActionResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Get Action
-      tags:
-      - Actions Service
-  /actions/batch/v2:
-    post:
-      description: Creates multiple actions in a single request.
-      externalDocs:
-        url: ""
-      operationId: ActionsService_AtomicBatchExecuteActions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AtomicBatchExecuteActionsResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Atomic Batch Execute Actions
-      tags:
-      - Actions Service
-  /actions/order/v2:
-    post:
-      description: Updates the display order of actions.
-      externalDocs:
-        url: ""
-      operationId: ActionsService_OrderActions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ActionsService_OrderActions_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OrderActionsResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Order Actions
-      tags:
-      - Actions Service
-components:
-  schemas:
-    ActionExecutionRequest:
-      oneOf:
-      - $ref: "#/components/schemas/ActionExecutionRequestCreate"
-      - $ref: "#/components/schemas/ActionExecutionRequestDelete"
-      - $ref: "#/components/schemas/ActionExecutionRequestReplace"
-    ActionExecutionRequestCreate:
-      description: This data structure represents a request to execute an Action operation.
-      externalDocs:
-        url: ""
-      properties:
-        create:
-          $ref: "#/components/schemas/CreateActionRequest"
-      required:
-      - create
-      type: object
-    ActionExecutionRequestDelete:
-      description: This data structure represents a request to execute an Action operation.
-      externalDocs:
-        url: ""
-      properties:
-        delete:
-          $ref: "#/components/schemas/DeleteActionRequest"
-      required:
-      - delete
-      type: object
-    ActionExecutionRequestReplace:
-      description: This data structure represents a request to execute an Action operation.
-      externalDocs:
-        url: ""
-      properties:
-        replace:
-          $ref: "#/components/schemas/ReplaceActionRequest"
-      required:
-      - replace
-      type: object
-    ActionExecutionResponse:
-      oneOf:
-      - $ref: "#/components/schemas/ActionExecutionResponseCreate"
-      - $ref: "#/components/schemas/ActionExecutionResponseDelete"
-      - $ref: "#/components/schemas/ActionExecutionResponseReplace"
-    ActionExecutionResponseCreate:
-      description: This data structure represents a response to an Action execution
-        request.
-      example:
-        create:
-          action:
-            urlFields:
-            - name: name
-              required: true
-            - name: name
-              required: true
-            dpxlFilter: dpxlFilter
-            createdBy: createdBy
-            sourceType: SOURCE_TYPE_UNSPECIFIED
-            subsystemNames:
-            - subsystemNames
-            - subsystemNames
-            name: name
-            description: description
-            applicationNames:
-            - applicationNames
-            - applicationNames
-            id: id
-            isPrivate: true
-            url: url
-            isHidden: true
-      externalDocs:
-        url: ""
-      properties:
-        create:
-          $ref: "#/components/schemas/CreateActionResponse"
-      required:
-      - create
-      type: object
-    ActionExecutionResponseDelete:
-      description: This data structure represents a response to an Action execution
-        request.
-      externalDocs:
-        url: ""
-      properties:
-        delete:
-          additionalProperties: false
-          description: This data structure represents the response to delete an Action.
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - delete
-      type: object
-    ActionExecutionResponseReplace:
-      description: This data structure represents a response to an Action execution
-        request.
-      externalDocs:
-        url: ""
-      properties:
-        replace:
-          $ref: "#/components/schemas/ReplaceActionResponse"
-      required:
-      - replace
-      type: object
-    AtomicBatchExecuteActionsResponse:
-      description: This data structure represents the response to a batch Action execution
-        request.
-      example:
-        matchingResponses:
-        - create:
-            action:
-              urlFields:
-              - name: name
-                required: true
-              - name: name
-                required: true
-              dpxlFilter: dpxlFilter
-              createdBy: createdBy
-              sourceType: SOURCE_TYPE_UNSPECIFIED
-              subsystemNames:
-              - subsystemNames
-              - subsystemNames
-              name: name
-              description: description
-              applicationNames:
-              - applicationNames
-              - applicationNames
-              id: id
-              isPrivate: true
-              url: url
-              isHidden: true
-        - create:
-            action:
-              urlFields:
-              - name: name
-                required: true
-              - name: name
-                required: true
-              dpxlFilter: dpxlFilter
-              createdBy: createdBy
-              sourceType: SOURCE_TYPE_UNSPECIFIED
-              subsystemNames:
-              - subsystemNames
-              - subsystemNames
-              name: name
-              description: description
-              applicationNames:
-              - applicationNames
-              - applicationNames
-              id: id
-              isPrivate: true
-              url: url
-              isHidden: true
-      externalDocs:
-        url: ""
-      properties:
-        matchingResponses:
-          description: The matching responses.
-          items:
-            $ref: "#/components/schemas/ActionExecutionResponse"
-          minItems: 0
-          type: array
-      type: object
-    CreateActionRequest:
-      description: This data structure represents the request to create an Action.
-      externalDocs:
-        url: ""
-      properties:
-        applicationNames:
-          description: The application names.
-          items:
-            description: The application names.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        description:
-          description: Human-readable description.
-          minLength: 0
-          type: string
-        dpxlFilter:
-          description: The dpxl filter.
-          minLength: 0
-          type: string
-        isPrivate:
-          description: The is private.
-          type: boolean
-        name:
-          description: Display name.
-          minLength: 0
-          type: string
-        sourceType:
-          $ref: "#/components/schemas/v2.SourceType"
-        subsystemNames:
-          description: The subsystem names.
-          items:
-            description: The subsystem names.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        url:
-          description: URL.
-          minLength: 0
-          type: string
-        urlFields:
-          description: The url fields.
-          items:
-            $ref: "#/components/schemas/UrlField"
-          minItems: 0
-          type: array
-      type: object
-    CreateActionResponse:
-      description: This data structure represents the response to create an Action.
-      example:
-        action:
-          urlFields:
-          - name: name
-            required: true
-          - name: name
-            required: true
-          dpxlFilter: dpxlFilter
-          createdBy: createdBy
-          sourceType: SOURCE_TYPE_UNSPECIFIED
-          subsystemNames:
-          - subsystemNames
-          - subsystemNames
-          name: name
-          description: description
-          applicationNames:
-          - applicationNames
-          - applicationNames
-          id: id
-          isPrivate: true
-          url: url
-          isHidden: true
-      externalDocs:
-        url: ""
-      properties:
-        action:
-          $ref: "#/components/schemas/v2.Action"
-      type: object
-    DeleteActionRequest:
-      description: This data structure represents the request to delete an Action.
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-      type: object
-    DeleteActionResponse:
-      additionalProperties: false
-      description: This data structure represents the response to delete an Action.
-      externalDocs:
-        url: ""
-      type: object
-    Error:
-      description: Standard error response body returned for a failed request.
-      example:
-        code: 139
-        message: message
-      properties:
-        code:
-          description: "HTTP status code of the error (for example 400, 404, 500)."
-          format: int32
-          maximum: 599
-          minimum: 100
-          type: integer
-        message:
-          description: Human-readable description of the error.
-          maxLength: 4096
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    GetActionResponse:
-      description: This data structure represents the response to get an Action.
-      example:
-        action:
-          urlFields:
-          - name: name
-            required: true
-          - name: name
-            required: true
-          dpxlFilter: dpxlFilter
-          createdBy: createdBy
-          sourceType: SOURCE_TYPE_UNSPECIFIED
-          subsystemNames:
-          - subsystemNames
-          - subsystemNames
-          name: name
-          description: description
-          applicationNames:
-          - applicationNames
-          - applicationNames
-          id: id
-          isPrivate: true
-          url: url
-          isHidden: true
-      externalDocs:
-        url: ""
-      properties:
-        action:
-          $ref: "#/components/schemas/v2.Action"
-      type: object
-    ListActionsResponse:
-      description: This data structure represents the response containing a list of
-        Actions.
-      example:
-        actions:
-        - urlFields:
-          - name: name
-            required: true
-          - name: name
-            required: true
-          dpxlFilter: dpxlFilter
-          createdBy: createdBy
-          sourceType: SOURCE_TYPE_UNSPECIFIED
-          subsystemNames:
-          - subsystemNames
-          - subsystemNames
-          name: name
-          description: description
-          applicationNames:
-          - applicationNames
-          - applicationNames
-          id: id
-          isPrivate: true
-          url: url
-          isHidden: true
-        - urlFields:
-          - name: name
-            required: true
-          - name: name
-            required: true
-          dpxlFilter: dpxlFilter
-          createdBy: createdBy
-          sourceType: SOURCE_TYPE_UNSPECIFIED
-          subsystemNames:
-          - subsystemNames
-          - subsystemNames
-          name: name
-          description: description
-          applicationNames:
-          - applicationNames
-          - applicationNames
-          id: id
-          isPrivate: true
-          url: url
-          isHidden: true
-      externalDocs:
-        url: ""
-      properties:
-        actions:
-          description: List of actions.
-          items:
-            $ref: "#/components/schemas/v2.Action"
-          minItems: 0
-          type: array
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    OrderActionsResponse:
-      additionalProperties: false
-      description: This data structure represents the response to order Actions.
-      externalDocs:
-        url: ""
-      type: object
-    ReplaceActionRequest:
-      description: This data structure represents the request to replace an Action.
-      externalDocs:
-        url: ""
-      properties:
-        action:
-          $ref: "#/components/schemas/v2.Action"
-      type: object
-    ReplaceActionResponse:
-      description: This data structure represents the response to replace an Action.
-      example:
-        action:
-          urlFields:
-          - name: name
-            required: true
-          - name: name
-            required: true
-          dpxlFilter: dpxlFilter
-          createdBy: createdBy
-          sourceType: SOURCE_TYPE_UNSPECIFIED
-          subsystemNames:
-          - subsystemNames
-          - subsystemNames
-          name: name
-          description: description
-          applicationNames:
-          - applicationNames
-          - applicationNames
-          id: id
-          isPrivate: true
-          url: url
-          isHidden: true
-      externalDocs:
-        url: ""
-      properties:
-        action:
-          $ref: "#/components/schemas/v2.Action"
-      type: object
-    UrlField:
-      description: Declares a URL field that may be required for the Action to be
-        invokable on a log.
-      example:
-        name: name
-        required: true
-      externalDocs:
-        url: ""
-      properties:
-        name:
-          description: Display name.
-          minLength: 0
-          type: string
-        required:
-          description: The required.
-          type: boolean
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v2.Action:
-      description: This data structure represents an Action.
-      example:
-        urlFields:
-        - name: name
-          required: true
-        - name: name
-          required: true
-        dpxlFilter: dpxlFilter
-        createdBy: createdBy
-        sourceType: SOURCE_TYPE_UNSPECIFIED
-        subsystemNames:
-        - subsystemNames
-        - subsystemNames
-        name: name
-        description: description
-        applicationNames:
-        - applicationNames
-        - applicationNames
-        id: id
-        isPrivate: true
-        url: url
-        isHidden: true
-      externalDocs:
-        url: ""
-      properties:
-        applicationNames:
-          description: The application names.
-          items:
-            description: The application names.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        createdBy:
-          description: The created by.
-          minLength: 0
-          type: string
-        description:
-          description: Human-readable description.
-          minLength: 0
-          type: string
-        dpxlFilter:
-          description: The dpxl filter.
-          minLength: 0
-          type: string
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        isHidden:
-          description: The is hidden.
-          type: boolean
-        isPrivate:
-          description: The is private.
-          type: boolean
-        name:
-          description: Display name.
-          minLength: 0
-          type: string
-        sourceType:
-          $ref: "#/components/schemas/v2.SourceType"
-        subsystemNames:
-          description: The subsystem names.
-          items:
-            description: The subsystem names.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        url:
-          description: URL.
-          minLength: 0
-          type: string
-        urlFields:
-          description: The url fields.
-          items:
-            $ref: "#/components/schemas/UrlField"
-          minItems: 0
-          type: array
-      type: object
-    v2.SourceType:
-      description: Source type.
-      enum:
-      - SOURCE_TYPE_UNSPECIFIED
-      - SOURCE_TYPE_LOG
-      - SOURCE_TYPE_DATA_MAP
-      type: string
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    ActionsService_ReplaceAction_request:
-      description: This data structure represents the request to replace an Action.
-      properties:
-        action:
-          $ref: "#/components/schemas/v2.Action"
-      type: object
-    ActionsService_CreateAction_request:
-      description: This data structure represents the request to create an Action.
-      properties:
-        applicationNames:
-          description: The application names.
-          items:
-            description: The application names.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        description:
-          description: Human-readable description.
-          minLength: 0
-          type: string
-        dpxlFilter:
-          description: The dpxl filter.
-          minLength: 0
-          type: string
-        isPrivate:
-          description: The is private.
-          type: boolean
-        name:
-          description: Display name.
-          minLength: 0
-          type: string
-        sourceType:
-          $ref: "#/components/schemas/v2.SourceType"
-        subsystemNames:
-          description: The subsystem names.
-          items:
-            description: The subsystem names.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        url:
-          description: URL.
-          minLength: 0
-          type: string
-        urlFields:
-          description: The url fields.
-          items:
-            $ref: "#/components/schemas/UrlField"
-          minItems: 0
-          type: array
-      type: object
-    ActionsService_AtomicBatchExecuteActions_request:
-      description: This data structure represents a request to execute a batch of
-        Action operations atomically.
-      properties:
-        requests:
-          description: The requests.
-          items:
-            $ref: "#/components/schemas/ActionExecutionRequest"
-          minItems: 0
-          type: array
-      type: object
-    ActionsService_OrderActions_request:
-      description: This data structure represents the request to order Actions.
-      properties:
-        privateActionsOrder:
-          additionalProperties:
-            format: int64
-            minimum: 0
-            type: integer
-          description: The private actions order.
-          type: object
-        sharedActionsOrder:
-          additionalProperties:
-            format: int64
-            minimum: 0
-            type: integer
-          description: The shared actions order.
-          type: object
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/actions/actions/v2": {
+      "get": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "List Actions",
+        "description": "Returns all actions for the team.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_ListActions",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListActionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Replace Action",
+        "description": "Replaces all actions with the provided set.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_ReplaceAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure represents the request to replace an Action.",
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "$ref": "#/components/schemas/v2.Action"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Create Action",
+        "description": "Creates a new action.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_CreateAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure represents the request to create an Action.",
+                "type": "object",
+                "properties": {
+                  "applicationNames": {
+                    "description": "The application names.",
+                    "type": "array",
+                    "items": {
+                      "description": "The application names.",
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
+                  },
+                  "description": {
+                    "description": "Human-readable description.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "dpxlFilter": {
+                    "description": "The dpxl filter.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "isPrivate": {
+                    "description": "The is private.",
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "Display name.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "sourceType": {
+                    "$ref": "#/components/schemas/v2.SourceType"
+                  },
+                  "subsystemNames": {
+                    "description": "The subsystem names.",
+                    "type": "array",
+                    "items": {
+                      "description": "The subsystem names.",
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
+                  },
+                  "url": {
+                    "description": "URL.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "urlFields": {
+                    "description": "The url fields.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UrlField"
+                    },
+                    "minItems": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actions/actions/v2/{id}": {
+      "get": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Get Action",
+        "description": "Returns the details of a specific action.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_GetAction",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Delete Action",
+        "description": "Deletes the action with the specified ID.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_DeleteAction",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "Unique identifier.",
+          "required": true,
+          "schema": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "style": "simple"
+        }
+      ]
+    },
+    "/actions/batch/v2": {
+      "post": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Atomic Batch Execute Actions",
+        "description": "Creates multiple actions in a single request.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_AtomicBatchExecuteActions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure represents a request to execute a batch of Action operations atomically.",
+                "type": "object",
+                "properties": {
+                  "requests": {
+                    "description": "The requests.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ActionExecutionRequest"
+                    },
+                    "minItems": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtomicBatchExecuteActionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actions/order/v2": {
+      "post": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Order Actions",
+        "description": "Updates the display order of actions.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_OrderActions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure represents the request to order Actions.",
+                "type": "object",
+                "properties": {
+                  "privateActionsOrder": {
+                    "description": "The private actions order.",
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "integer",
+                      "format": "int64",
+                      "minimum": 0
+                    }
+                  },
+                  "sharedActionsOrder": {
+                    "description": "The shared actions order.",
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "integer",
+                      "format": "int64",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderActionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActionExecutionRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents a request to execute an Action operation.",
+        "type": "object",
+        "properties": {
+          "create": {
+            "$ref": "#/components/schemas/CreateActionRequest"
+          },
+          "delete": {
+            "$ref": "#/components/schemas/DeleteActionRequest"
+          },
+          "replace": {
+            "$ref": "#/components/schemas/ReplaceActionRequest"
+          }
+        },
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "create"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "replace"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "delete"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "create"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "replace"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "delete"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "ActionExecutionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents a response to an Action execution request.",
+        "type": "object",
+        "properties": {
+          "create": {
+            "$ref": "#/components/schemas/CreateActionResponse"
+          },
+          "delete": {
+            "$ref": "#/components/schemas/DeleteActionResponse"
+          },
+          "replace": {
+            "$ref": "#/components/schemas/ReplaceActionResponse"
+          }
+        },
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "create"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "replace"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "delete"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "create"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "replace"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "delete"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "AtomicBatchExecuteActionsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents the response to a batch Action execution request.",
+        "type": "object",
+        "properties": {
+          "matchingResponses": {
+            "description": "The matching responses.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActionExecutionResponse"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "CreateActionRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents the request to create an Action.",
+        "type": "object",
+        "properties": {
+          "applicationNames": {
+            "description": "The application names.",
+            "type": "array",
+            "items": {
+              "description": "The application names.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "minLength": 0
+          },
+          "dpxlFilter": {
+            "description": "The dpxl filter.",
+            "type": "string",
+            "minLength": 0
+          },
+          "isPrivate": {
+            "description": "The is private.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "minLength": 0
+          },
+          "sourceType": {
+            "$ref": "#/components/schemas/v2.SourceType"
+          },
+          "subsystemNames": {
+            "description": "The subsystem names.",
+            "type": "array",
+            "items": {
+              "description": "The subsystem names.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "url": {
+            "description": "URL.",
+            "type": "string",
+            "minLength": 0
+          },
+          "urlFields": {
+            "description": "The url fields.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UrlField"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "CreateActionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents the response to create an Action.",
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/v2.Action"
+          }
+        }
+      },
+      "DeleteActionRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents the request to delete an Action.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "DeleteActionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents the response to delete an Action.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetActionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents the response to get an Action.",
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/v2.Action"
+          }
+        }
+      },
+      "ListActionsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents the response containing a list of Actions.",
+        "type": "object",
+        "properties": {
+          "actions": {
+            "description": "List of actions.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v2.Action"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "OrderActionsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents the response to order Actions.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ReplaceActionRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents the request to replace an Action.",
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/v2.Action"
+          }
+        }
+      },
+      "ReplaceActionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents the response to replace an Action.",
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/v2.Action"
+          }
+        }
+      },
+      "UrlField": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Declares a URL field that may be required for the Action to be invokable on a log.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "minLength": 0
+          },
+          "required": {
+            "description": "The required.",
+            "type": "boolean"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v2.Action": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "This data structure represents an Action.",
+        "type": "object",
+        "properties": {
+          "applicationNames": {
+            "description": "The application names.",
+            "type": "array",
+            "items": {
+              "description": "The application names.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "createdBy": {
+            "description": "The created by.",
+            "type": "string",
+            "minLength": 0
+          },
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "minLength": 0
+          },
+          "dpxlFilter": {
+            "description": "The dpxl filter.",
+            "type": "string",
+            "minLength": 0
+          },
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "isHidden": {
+            "description": "The is hidden.",
+            "type": "boolean"
+          },
+          "isPrivate": {
+            "description": "The is private.",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "minLength": 0
+          },
+          "sourceType": {
+            "$ref": "#/components/schemas/v2.SourceType"
+          },
+          "subsystemNames": {
+            "description": "The subsystem names.",
+            "type": "array",
+            "items": {
+              "description": "The subsystem names.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "url": {
+            "description": "URL.",
+            "type": "string",
+            "minLength": 0
+          },
+          "urlFields": {
+            "description": "The url fields.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UrlField"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "v2.SourceType": {
+        "description": "Source type.",
+        "type": "string",
+        "enum": [
+          "SOURCE_TYPE_UNSPECIFIED",
+          "SOURCE_TYPE_LOG",
+          "SOURCE_TYPE_DATA_MAP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

@@ -14,125 +14,747 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Policy - struct for Policy
+// checks if the Policy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Policy{}
+
+// Policy A policy is a set of rules that define the behavior of the Coralogix system for a specific company.
 type Policy struct {
-	PolicyLogRules *PolicyLogRules
-	PolicySpanRules *PolicySpanRules
+	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
+	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
+	// Internal Coralogix company/team identifier that owns this policy.
+	CompanyId int32 `json:"companyId"`
+	// Timestamp (RFC 3339) when the policy was created.
+	CreatedAt *string `json:"createdAt,omitempty"`
+	// Soft-delete marker; when true the policy has been deleted and is no longer applied.
+	Deleted bool `json:"deleted"`
+	// Optional free-text description of the policy's purpose.
+	Description *string `json:"description,omitempty"`
+	// Indicates whether the policy is actively evaluated and applied.
+	Enabled bool `json:"enabled"`
+	// Unique identifier for the policy.
+	Id string `json:"id"`
+	LogRules *LogRules `json:"logRules,omitempty"`
+	// Human-readable name for the policy.
+	Name string `json:"name"`
+	// Ordering priority that determines the sequence in which policies are evaluated.
+	Order int32 `json:"order"`
+	Priority QuotaV1Priority `json:"priority"`
+	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
+	PriorityOverrideStatus *PriorityOverrideStatus `json:"priorityOverrideStatus,omitempty"`
+	SpanRules *SpanRules `json:"spanRules,omitempty"`
+	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	// List of data targets/destinations to which this policy routes data.
+	Targets []V1Target `json:"targets,omitempty"`
+	// Timestamp (RFC 3339) when the policy was last updated.
+	UpdatedAt *string `json:"updatedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// PolicyLogRulesAsPolicy is a convenience function that returns PolicyLogRules wrapped in Policy
-func PolicyLogRulesAsPolicy(v *PolicyLogRules) Policy {
-	return Policy{
-		PolicyLogRules: v,
+type _Policy Policy
+
+// NewPolicy instantiates a new Policy object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewPolicy(companyId int32, deleted bool, enabled bool, id string, name string, order int32, priority QuotaV1Priority) *Policy {
+	this := Policy{}
+	this.CompanyId = companyId
+	this.Deleted = deleted
+	this.Enabled = enabled
+	this.Id = id
+	this.Name = name
+	this.Order = order
+	this.Priority = priority
+	return &this
+}
+
+// NewPolicyWithDefaults instantiates a new Policy object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewPolicyWithDefaults() *Policy {
+	this := Policy{}
+	return &this
+}
+
+// GetApplicationRule returns the ApplicationRule field value if set, zero value otherwise.
+func (o *Policy) GetApplicationRule() QuotaV1Rule {
+	if o == nil || IsNil(o.ApplicationRule) {
+		var ret QuotaV1Rule
+		return ret
 	}
+	return *o.ApplicationRule
 }
 
-// PolicySpanRulesAsPolicy is a convenience function that returns PolicySpanRules wrapped in Policy
-func PolicySpanRulesAsPolicy(v *PolicySpanRules) Policy {
-	return Policy{
-		PolicySpanRules: v,
+// GetApplicationRuleOk returns a tuple with the ApplicationRule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetApplicationRuleOk() (*QuotaV1Rule, bool) {
+	if o == nil || IsNil(o.ApplicationRule) {
+		return nil, false
 	}
+	return o.ApplicationRule, true
 }
 
+// HasApplicationRule returns a boolean if a field has been set.
+func (o *Policy) HasApplicationRule() bool {
+	if o != nil && !IsNil(o.ApplicationRule) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Policy) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into PolicyLogRules
-	err = json.Unmarshal(data, &dst.PolicyLogRules)
-	if err == nil {
-		jsonPolicyLogRules, _ := json.Marshal(dst.PolicyLogRules)
-		if string(jsonPolicyLogRules) == "{}" { // empty struct
-			dst.PolicyLogRules = nil
-		} else {
-			if err = validator.Validate(dst.PolicyLogRules); err != nil {
-				dst.PolicyLogRules = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetApplicationRule gets a reference to the given QuotaV1Rule and assigns it to the ApplicationRule field.
+func (o *Policy) SetApplicationRule(v QuotaV1Rule) {
+	o.ApplicationRule = &v
+}
+
+// GetArchiveRetention returns the ArchiveRetention field value if set, zero value otherwise.
+func (o *Policy) GetArchiveRetention() ArchiveRetention {
+	if o == nil || IsNil(o.ArchiveRetention) {
+		var ret ArchiveRetention
+		return ret
+	}
+	return *o.ArchiveRetention
+}
+
+// GetArchiveRetentionOk returns a tuple with the ArchiveRetention field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetArchiveRetentionOk() (*ArchiveRetention, bool) {
+	if o == nil || IsNil(o.ArchiveRetention) {
+		return nil, false
+	}
+	return o.ArchiveRetention, true
+}
+
+// HasArchiveRetention returns a boolean if a field has been set.
+func (o *Policy) HasArchiveRetention() bool {
+	if o != nil && !IsNil(o.ArchiveRetention) {
+		return true
+	}
+
+	return false
+}
+
+// SetArchiveRetention gets a reference to the given ArchiveRetention and assigns it to the ArchiveRetention field.
+func (o *Policy) SetArchiveRetention(v ArchiveRetention) {
+	o.ArchiveRetention = &v
+}
+
+// GetCompanyId returns the CompanyId field value
+func (o *Policy) GetCompanyId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.CompanyId
+}
+
+// GetCompanyIdOk returns a tuple with the CompanyId field value
+// and a boolean to check if the value has been set.
+func (o *Policy) GetCompanyIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CompanyId, true
+}
+
+// SetCompanyId sets field value
+func (o *Policy) SetCompanyId(v int32) {
+	o.CompanyId = v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *Policy) GetCreatedAt() string {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetCreatedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *Policy) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
+func (o *Policy) SetCreatedAt(v string) {
+	o.CreatedAt = &v
+}
+
+// GetDeleted returns the Deleted field value
+func (o *Policy) GetDeleted() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Deleted
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value
+// and a boolean to check if the value has been set.
+func (o *Policy) GetDeletedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Deleted, true
+}
+
+// SetDeleted sets field value
+func (o *Policy) SetDeleted(v bool) {
+	o.Deleted = v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *Policy) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *Policy) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *Policy) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetEnabled returns the Enabled field value
+func (o *Policy) GetEnabled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value
+// and a boolean to check if the value has been set.
+func (o *Policy) GetEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Enabled, true
+}
+
+// SetEnabled sets field value
+func (o *Policy) SetEnabled(v bool) {
+	o.Enabled = v
+}
+
+// GetId returns the Id field value
+func (o *Policy) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *Policy) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *Policy) SetId(v string) {
+	o.Id = v
+}
+
+// GetLogRules returns the LogRules field value if set, zero value otherwise.
+func (o *Policy) GetLogRules() LogRules {
+	if o == nil || IsNil(o.LogRules) {
+		var ret LogRules
+		return ret
+	}
+	return *o.LogRules
+}
+
+// GetLogRulesOk returns a tuple with the LogRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetLogRulesOk() (*LogRules, bool) {
+	if o == nil || IsNil(o.LogRules) {
+		return nil, false
+	}
+	return o.LogRules, true
+}
+
+// HasLogRules returns a boolean if a field has been set.
+func (o *Policy) HasLogRules() bool {
+	if o != nil && !IsNil(o.LogRules) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogRules gets a reference to the given LogRules and assigns it to the LogRules field.
+func (o *Policy) SetLogRules(v LogRules) {
+	o.LogRules = &v
+}
+
+// GetName returns the Name field value
+func (o *Policy) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *Policy) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *Policy) SetName(v string) {
+	o.Name = v
+}
+
+// GetOrder returns the Order field value
+func (o *Policy) GetOrder() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Order
+}
+
+// GetOrderOk returns a tuple with the Order field value
+// and a boolean to check if the value has been set.
+func (o *Policy) GetOrderOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Order, true
+}
+
+// SetOrder sets field value
+func (o *Policy) SetOrder(v int32) {
+	o.Order = v
+}
+
+// GetPriority returns the Priority field value
+func (o *Policy) GetPriority() QuotaV1Priority {
+	if o == nil {
+		var ret QuotaV1Priority
+		return ret
+	}
+
+	return o.Priority
+}
+
+// GetPriorityOk returns a tuple with the Priority field value
+// and a boolean to check if the value has been set.
+func (o *Policy) GetPriorityOk() (*QuotaV1Priority, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Priority, true
+}
+
+// SetPriority sets field value
+func (o *Policy) SetPriority(v QuotaV1Priority) {
+	o.Priority = v
+}
+
+// GetPriorityOverride returns the PriorityOverride field value if set, zero value otherwise.
+func (o *Policy) GetPriorityOverride() PriorityOverride {
+	if o == nil || IsNil(o.PriorityOverride) {
+		var ret PriorityOverride
+		return ret
+	}
+	return *o.PriorityOverride
+}
+
+// GetPriorityOverrideOk returns a tuple with the PriorityOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetPriorityOverrideOk() (*PriorityOverride, bool) {
+	if o == nil || IsNil(o.PriorityOverride) {
+		return nil, false
+	}
+	return o.PriorityOverride, true
+}
+
+// HasPriorityOverride returns a boolean if a field has been set.
+func (o *Policy) HasPriorityOverride() bool {
+	if o != nil && !IsNil(o.PriorityOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorityOverride gets a reference to the given PriorityOverride and assigns it to the PriorityOverride field.
+func (o *Policy) SetPriorityOverride(v PriorityOverride) {
+	o.PriorityOverride = &v
+}
+
+// GetPriorityOverrideStatus returns the PriorityOverrideStatus field value if set, zero value otherwise.
+func (o *Policy) GetPriorityOverrideStatus() PriorityOverrideStatus {
+	if o == nil || IsNil(o.PriorityOverrideStatus) {
+		var ret PriorityOverrideStatus
+		return ret
+	}
+	return *o.PriorityOverrideStatus
+}
+
+// GetPriorityOverrideStatusOk returns a tuple with the PriorityOverrideStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetPriorityOverrideStatusOk() (*PriorityOverrideStatus, bool) {
+	if o == nil || IsNil(o.PriorityOverrideStatus) {
+		return nil, false
+	}
+	return o.PriorityOverrideStatus, true
+}
+
+// HasPriorityOverrideStatus returns a boolean if a field has been set.
+func (o *Policy) HasPriorityOverrideStatus() bool {
+	if o != nil && !IsNil(o.PriorityOverrideStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorityOverrideStatus gets a reference to the given PriorityOverrideStatus and assigns it to the PriorityOverrideStatus field.
+func (o *Policy) SetPriorityOverrideStatus(v PriorityOverrideStatus) {
+	o.PriorityOverrideStatus = &v
+}
+
+// GetSpanRules returns the SpanRules field value if set, zero value otherwise.
+func (o *Policy) GetSpanRules() SpanRules {
+	if o == nil || IsNil(o.SpanRules) {
+		var ret SpanRules
+		return ret
+	}
+	return *o.SpanRules
+}
+
+// GetSpanRulesOk returns a tuple with the SpanRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetSpanRulesOk() (*SpanRules, bool) {
+	if o == nil || IsNil(o.SpanRules) {
+		return nil, false
+	}
+	return o.SpanRules, true
+}
+
+// HasSpanRules returns a boolean if a field has been set.
+func (o *Policy) HasSpanRules() bool {
+	if o != nil && !IsNil(o.SpanRules) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpanRules gets a reference to the given SpanRules and assigns it to the SpanRules field.
+func (o *Policy) SetSpanRules(v SpanRules) {
+	o.SpanRules = &v
+}
+
+// GetSubsystemRule returns the SubsystemRule field value if set, zero value otherwise.
+func (o *Policy) GetSubsystemRule() QuotaV1Rule {
+	if o == nil || IsNil(o.SubsystemRule) {
+		var ret QuotaV1Rule
+		return ret
+	}
+	return *o.SubsystemRule
+}
+
+// GetSubsystemRuleOk returns a tuple with the SubsystemRule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetSubsystemRuleOk() (*QuotaV1Rule, bool) {
+	if o == nil || IsNil(o.SubsystemRule) {
+		return nil, false
+	}
+	return o.SubsystemRule, true
+}
+
+// HasSubsystemRule returns a boolean if a field has been set.
+func (o *Policy) HasSubsystemRule() bool {
+	if o != nil && !IsNil(o.SubsystemRule) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubsystemRule gets a reference to the given QuotaV1Rule and assigns it to the SubsystemRule field.
+func (o *Policy) SetSubsystemRule(v QuotaV1Rule) {
+	o.SubsystemRule = &v
+}
+
+// GetTargets returns the Targets field value if set, zero value otherwise.
+func (o *Policy) GetTargets() []V1Target {
+	if o == nil || IsNil(o.Targets) {
+		var ret []V1Target
+		return ret
+	}
+	return o.Targets
+}
+
+// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetTargetsOk() ([]V1Target, bool) {
+	if o == nil || IsNil(o.Targets) {
+		return nil, false
+	}
+	return o.Targets, true
+}
+
+// HasTargets returns a boolean if a field has been set.
+func (o *Policy) HasTargets() bool {
+	if o != nil && !IsNil(o.Targets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargets gets a reference to the given []V1Target and assigns it to the Targets field.
+func (o *Policy) SetTargets(v []V1Target) {
+	o.Targets = v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *Policy) GetUpdatedAt() string {
+	if o == nil || IsNil(o.UpdatedAt) {
+		var ret string
+		return ret
+	}
+	return *o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Policy) GetUpdatedAtOk() (*string, bool) {
+	if o == nil || IsNil(o.UpdatedAt) {
+		return nil, false
+	}
+	return o.UpdatedAt, true
+}
+
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *Policy) HasUpdatedAt() bool {
+	if o != nil && !IsNil(o.UpdatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given string and assigns it to the UpdatedAt field.
+func (o *Policy) SetUpdatedAt(v string) {
+	o.UpdatedAt = &v
+}
+
+func (o Policy) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Policy) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApplicationRule) {
+		toSerialize["applicationRule"] = o.ApplicationRule
+	}
+	if !IsNil(o.ArchiveRetention) {
+		toSerialize["archiveRetention"] = o.ArchiveRetention
+	}
+	toSerialize["companyId"] = o.CompanyId
+	if !IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
+	toSerialize["deleted"] = o.Deleted
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	toSerialize["enabled"] = o.Enabled
+	toSerialize["id"] = o.Id
+	if !IsNil(o.LogRules) {
+		toSerialize["logRules"] = o.LogRules
+	}
+	toSerialize["name"] = o.Name
+	toSerialize["order"] = o.Order
+	toSerialize["priority"] = o.Priority
+	if !IsNil(o.PriorityOverride) {
+		toSerialize["priorityOverride"] = o.PriorityOverride
+	}
+	if !IsNil(o.PriorityOverrideStatus) {
+		toSerialize["priorityOverrideStatus"] = o.PriorityOverrideStatus
+	}
+	if !IsNil(o.SpanRules) {
+		toSerialize["spanRules"] = o.SpanRules
+	}
+	if !IsNil(o.SubsystemRule) {
+		toSerialize["subsystemRule"] = o.SubsystemRule
+	}
+	if !IsNil(o.Targets) {
+		toSerialize["targets"] = o.Targets
+	}
+	if !IsNil(o.UpdatedAt) {
+		toSerialize["updatedAt"] = o.UpdatedAt
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logRules"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spanRules"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logRules, spanRules] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Policy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"companyId",
+		"deleted",
+		"enabled",
+		"id",
+		"name",
+		"order",
+		"priority",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.PolicyLogRules = nil
 	}
 
-	// try to unmarshal data into PolicySpanRules
-	err = json.Unmarshal(data, &dst.PolicySpanRules)
-	if err == nil {
-		jsonPolicySpanRules, _ := json.Marshal(dst.PolicySpanRules)
-		if string(jsonPolicySpanRules) == "{}" { // empty struct
-			dst.PolicySpanRules = nil
-		} else {
-			if err = validator.Validate(dst.PolicySpanRules); err != nil {
-				dst.PolicySpanRules = nil
-			} else {
-				match++
-			}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["logRules"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["spanRules"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [logRules, spanRules] may be set"}
+	}
+
+	varPolicy := _Policy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPolicy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Policy(varPolicy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logRules"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PolicySpanRules = nil
+		if _, exists := additionalProperties["spanRules"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logRules, spanRules] may be set"}
+		}
+
+		delete(additionalProperties, "applicationRule")
+		delete(additionalProperties, "archiveRetention")
+		delete(additionalProperties, "companyId")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "logRules")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "priorityOverride")
+		delete(additionalProperties, "priorityOverrideStatus")
+		delete(additionalProperties, "spanRules")
+		delete(additionalProperties, "subsystemRule")
+		delete(additionalProperties, "targets")
+		delete(additionalProperties, "updatedAt")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.PolicyLogRules = nil
-		dst.PolicySpanRules = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Policy)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Policy) MarshalJSON() ([]byte, error) {
-	if src.PolicyLogRules != nil {
-		return json.Marshal(&src.PolicyLogRules)
-	}
-
-	if src.PolicySpanRules != nil {
-		return json.Marshal(&src.PolicySpanRules)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Policy) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.PolicyLogRules != nil {
-		return obj.PolicyLogRules
-	}
-
-	if obj.PolicySpanRules != nil {
-		return obj.PolicySpanRules
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Policy) GetActualInstanceValue() (interface{}) {
-	if obj.PolicyLogRules != nil {
-		return *obj.PolicyLogRules
-	}
-
-	if obj.PolicySpanRules != nil {
-		return *obj.PolicySpanRules
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullablePolicy struct {

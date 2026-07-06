@@ -462,16 +462,6 @@
         "additionalProperties": false
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -482,26 +472,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -512,9 +482,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {
@@ -647,16 +633,6 @@
         ]
       },
       "TimeSelection": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TimeSelectionCustomSelection"
-          },
-          {
-            "$ref": "#/components/schemas/TimeSelectionQuickSelection"
-          }
-        ]
-      },
-      "TimeSelectionCustomSelection": {
         "externalDocs": {
           "url": ""
         },
@@ -665,25 +641,47 @@
         "properties": {
           "customSelection": {
             "$ref": "#/components/schemas/CustomTimeSelection"
-          }
-        },
-        "required": [
-          "customSelection"
-        ]
-      },
-      "TimeSelectionQuickSelection": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Time selection.",
-        "type": "object",
-        "properties": {
+          },
           "quickSelection": {
             "$ref": "#/components/schemas/QuickTimeSelection"
           }
         },
-        "required": [
-          "quickSelection"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "quickSelection"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "customSelection"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "quickSelection"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "customSelection"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "View": {

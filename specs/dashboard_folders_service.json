@@ -11,7 +11,7 @@
           "Dashboard folders service"
         ],
         "summary": "List dashboard folders",
-        "description": "List all dashboard folders accessible.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
+        "description": "List all dashboard folders accessible.",
         "externalDocs": {
           "url": ""
         },
@@ -67,7 +67,7 @@
           "Dashboard folders service"
         ],
         "summary": "Replace a dashboard folder",
-        "description": "Replaces an existing dashboard folder.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
+        "description": "Replaces an existing dashboard folder.",
         "externalDocs": {
           "url": ""
         },
@@ -144,7 +144,7 @@
           "Dashboard folders service"
         ],
         "summary": "Create a dashboard folder",
-        "description": "Creates a new dashboard folder.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
+        "description": "Creates a new dashboard folder.",
         "externalDocs": {
           "url": ""
         },
@@ -223,7 +223,7 @@
           "Dashboard folders service"
         ],
         "summary": "Get a dashboard folder",
-        "description": "Returns a dashboard folder data.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
+        "description": "Returns a dashboard folder data.",
         "externalDocs": {
           "url": ""
         },
@@ -292,7 +292,7 @@
           "Dashboard folders service"
         ],
         "summary": "Delete a dashboard folder",
-        "description": "Deletes the dashboard folder with the specified ID.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
+        "description": "Deletes the dashboard folder with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -445,16 +445,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -465,26 +455,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -495,9 +465,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {

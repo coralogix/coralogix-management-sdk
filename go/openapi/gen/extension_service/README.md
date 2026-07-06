@@ -95,8 +95,6 @@ Class | Method | HTTP request | Description
  - [ExtensionItemBinaryBinaryType](docs/ExtensionItemBinaryBinaryType.md)
  - [ExtensionRevision](docs/ExtensionRevision.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetAllExtensionsRequest](docs/GetAllExtensionsRequest.md)
  - [GetAllExtensionsRequestFilter](docs/GetAllExtensionsRequestFilter.md)

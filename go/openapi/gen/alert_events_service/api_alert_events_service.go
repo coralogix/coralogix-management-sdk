@@ -53,9 +53,6 @@ AlertEventServiceGetAlertEvent Get alert event by ID
 
 Returns the alert event with the specified ID.
 
-Requires the following permissions:
-- `alerts:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Unique identifier.
  @return ApiAlertEventServiceGetAlertEventRequest
@@ -220,9 +217,6 @@ func (r ApiAlertEventServiceGetAlertEventsStatsRequest) Execute() (*GetAlertEven
 AlertEventServiceGetAlertEventsStats Get alert events statistics
 
 Returns statistical data for alert events.
-
-Requires the following permissions:
-- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertEventServiceGetAlertEventsStatsRequest

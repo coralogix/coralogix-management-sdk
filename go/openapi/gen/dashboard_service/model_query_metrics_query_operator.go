@@ -13,126 +13,170 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// QueryMetricsQueryOperator - struct for QueryMetricsQueryOperator
+// checks if the QueryMetricsQueryOperator type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &QueryMetricsQueryOperator{}
+
+// QueryMetricsQueryOperator Operator.
 type QueryMetricsQueryOperator struct {
-	QueryMetricsQueryOperatorEquals *QueryMetricsQueryOperatorEquals
-	QueryMetricsQueryOperatorNotEquals *QueryMetricsQueryOperatorNotEquals
+	Equals *QueryMetricsQueryEquals `json:"equals,omitempty"`
+	NotEquals *QueryMetricsQueryNotEquals `json:"notEquals,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// QueryMetricsQueryOperatorEqualsAsQueryMetricsQueryOperator is a convenience function that returns QueryMetricsQueryOperatorEquals wrapped in QueryMetricsQueryOperator
-func QueryMetricsQueryOperatorEqualsAsQueryMetricsQueryOperator(v *QueryMetricsQueryOperatorEquals) QueryMetricsQueryOperator {
-	return QueryMetricsQueryOperator{
-		QueryMetricsQueryOperatorEquals: v,
+type _QueryMetricsQueryOperator QueryMetricsQueryOperator
+
+// NewQueryMetricsQueryOperator instantiates a new QueryMetricsQueryOperator object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewQueryMetricsQueryOperator() *QueryMetricsQueryOperator {
+	this := QueryMetricsQueryOperator{}
+	return &this
+}
+
+// NewQueryMetricsQueryOperatorWithDefaults instantiates a new QueryMetricsQueryOperator object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewQueryMetricsQueryOperatorWithDefaults() *QueryMetricsQueryOperator {
+	this := QueryMetricsQueryOperator{}
+	return &this
+}
+
+// GetEquals returns the Equals field value if set, zero value otherwise.
+func (o *QueryMetricsQueryOperator) GetEquals() QueryMetricsQueryEquals {
+	if o == nil || IsNil(o.Equals) {
+		var ret QueryMetricsQueryEquals
+		return ret
 	}
+	return *o.Equals
 }
 
-// QueryMetricsQueryOperatorNotEqualsAsQueryMetricsQueryOperator is a convenience function that returns QueryMetricsQueryOperatorNotEquals wrapped in QueryMetricsQueryOperator
-func QueryMetricsQueryOperatorNotEqualsAsQueryMetricsQueryOperator(v *QueryMetricsQueryOperatorNotEquals) QueryMetricsQueryOperator {
-	return QueryMetricsQueryOperator{
-		QueryMetricsQueryOperatorNotEquals: v,
+// GetEqualsOk returns a tuple with the Equals field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryMetricsQueryOperator) GetEqualsOk() (*QueryMetricsQueryEquals, bool) {
+	if o == nil || IsNil(o.Equals) {
+		return nil, false
 	}
+	return o.Equals, true
 }
 
+// HasEquals returns a boolean if a field has been set.
+func (o *QueryMetricsQueryOperator) HasEquals() bool {
+	if o != nil && !IsNil(o.Equals) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *QueryMetricsQueryOperator) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into QueryMetricsQueryOperatorEquals
-	err = json.Unmarshal(data, &dst.QueryMetricsQueryOperatorEquals)
-	if err == nil {
-		jsonQueryMetricsQueryOperatorEquals, _ := json.Marshal(dst.QueryMetricsQueryOperatorEquals)
-		if string(jsonQueryMetricsQueryOperatorEquals) == "{}" { // empty struct
-			dst.QueryMetricsQueryOperatorEquals = nil
-		} else {
-			if err = validator.Validate(dst.QueryMetricsQueryOperatorEquals); err != nil {
-				dst.QueryMetricsQueryOperatorEquals = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetEquals gets a reference to the given QueryMetricsQueryEquals and assigns it to the Equals field.
+func (o *QueryMetricsQueryOperator) SetEquals(v QueryMetricsQueryEquals) {
+	o.Equals = &v
+}
+
+// GetNotEquals returns the NotEquals field value if set, zero value otherwise.
+func (o *QueryMetricsQueryOperator) GetNotEquals() QueryMetricsQueryNotEquals {
+	if o == nil || IsNil(o.NotEquals) {
+		var ret QueryMetricsQueryNotEquals
+		return ret
+	}
+	return *o.NotEquals
+}
+
+// GetNotEqualsOk returns a tuple with the NotEquals field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryMetricsQueryOperator) GetNotEqualsOk() (*QueryMetricsQueryNotEquals, bool) {
+	if o == nil || IsNil(o.NotEquals) {
+		return nil, false
+	}
+	return o.NotEquals, true
+}
+
+// HasNotEquals returns a boolean if a field has been set.
+func (o *QueryMetricsQueryOperator) HasNotEquals() bool {
+	if o != nil && !IsNil(o.NotEquals) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotEquals gets a reference to the given QueryMetricsQueryNotEquals and assigns it to the NotEquals field.
+func (o *QueryMetricsQueryOperator) SetNotEquals(v QueryMetricsQueryNotEquals) {
+	o.NotEquals = &v
+}
+
+func (o QueryMetricsQueryOperator) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o QueryMetricsQueryOperator) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Equals) {
+		toSerialize["equals"] = o.Equals
+	}
+	if !IsNil(o.NotEquals) {
+		toSerialize["notEquals"] = o.NotEquals
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["equals"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["notEquals"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [equals, notEquals] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *QueryMetricsQueryOperator) UnmarshalJSON(data []byte) (err error) {
+	varQueryMetricsQueryOperator := _QueryMetricsQueryOperator{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryMetricsQueryOperator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryMetricsQueryOperator(varQueryMetricsQueryOperator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["equals"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QueryMetricsQueryOperatorEquals = nil
-	}
-
-	// try to unmarshal data into QueryMetricsQueryOperatorNotEquals
-	err = json.Unmarshal(data, &dst.QueryMetricsQueryOperatorNotEquals)
-	if err == nil {
-		jsonQueryMetricsQueryOperatorNotEquals, _ := json.Marshal(dst.QueryMetricsQueryOperatorNotEquals)
-		if string(jsonQueryMetricsQueryOperatorNotEquals) == "{}" { // empty struct
-			dst.QueryMetricsQueryOperatorNotEquals = nil
-		} else {
-			if err = validator.Validate(dst.QueryMetricsQueryOperatorNotEquals); err != nil {
-				dst.QueryMetricsQueryOperatorNotEquals = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["notEquals"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QueryMetricsQueryOperatorNotEquals = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [equals, notEquals] may be set"}
+		}
+
+		delete(additionalProperties, "equals")
+		delete(additionalProperties, "notEquals")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.QueryMetricsQueryOperatorEquals = nil
-		dst.QueryMetricsQueryOperatorNotEquals = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(QueryMetricsQueryOperator)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src QueryMetricsQueryOperator) MarshalJSON() ([]byte, error) {
-	if src.QueryMetricsQueryOperatorEquals != nil {
-		return json.Marshal(&src.QueryMetricsQueryOperatorEquals)
-	}
-
-	if src.QueryMetricsQueryOperatorNotEquals != nil {
-		return json.Marshal(&src.QueryMetricsQueryOperatorNotEquals)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *QueryMetricsQueryOperator) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.QueryMetricsQueryOperatorEquals != nil {
-		return obj.QueryMetricsQueryOperatorEquals
-	}
-
-	if obj.QueryMetricsQueryOperatorNotEquals != nil {
-		return obj.QueryMetricsQueryOperatorNotEquals
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj QueryMetricsQueryOperator) GetActualInstanceValue() (interface{}) {
-	if obj.QueryMetricsQueryOperatorEquals != nil {
-		return *obj.QueryMetricsQueryOperatorEquals
-	}
-
-	if obj.QueryMetricsQueryOperatorNotEquals != nil {
-		return *obj.QueryMetricsQueryOperatorNotEquals
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableQueryMetricsQueryOperator struct {

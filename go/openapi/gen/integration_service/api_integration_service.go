@@ -38,9 +38,6 @@ IntegrationServiceDeleteIntegration Delete integration
 
 Removes the specified deployed integration instance.
 
-Requires the following permissions:
-- `integrations:Deploy`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId The unique identifier of the integration instance to delete.
  @return ApiIntegrationServiceDeleteIntegrationRequest
@@ -178,9 +175,6 @@ func (r ApiIntegrationServiceGetDeployedIntegrationRequest) Execute() (*GetDeplo
 IntegrationServiceGetDeployedIntegration Get deployed integration
 
 Returns the deployed instance of the specified integration.
-
-Requires the following permissions:
-- `integrations:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId The integration id.
@@ -326,9 +320,6 @@ func (r ApiIntegrationServiceGetIntegrationDefinitionRequest) Execute() (*GetInt
 IntegrationServiceGetIntegrationDefinition Get integration definition
 
 Returns the definition for the specified integration type.
-
-Requires the following permissions:
-- `integrations:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id The unique identifier of the integration definition.
@@ -478,9 +469,6 @@ IntegrationServiceGetIntegrationDetails Get integration details
 
 Returns the details of the specified integration.
 
-Requires the following permissions:
-- `integrations:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id The unique identifier of the integration.
  @return ApiIntegrationServiceGetIntegrationDetailsRequest
@@ -628,9 +616,6 @@ IntegrationServiceGetIntegrations Get all integrations
 
 Returns all available integration definitions.
 
-Requires the following permissions:
-- `integrations:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceGetIntegrationsRequest
 */
@@ -765,9 +750,6 @@ func (r ApiIntegrationServiceGetManagedIntegrationStatusRequest) Execute() (*Get
 IntegrationServiceGetManagedIntegrationStatus Get managed integration status
 
 Returns the status of the specified managed integration.
-
-Requires the following permissions:
-- `integrations:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId The unique identifier of the managed integration.
@@ -912,9 +894,6 @@ func (r ApiIntegrationServiceGetRumApplicationVersionDataRequest) Execute() (*Ge
 IntegrationServiceGetRumApplicationVersionData Get RUM integration versions data
 
 Returns RUM application version data.
-
-Requires the following permissions:
-- `integrations:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceGetRumApplicationVersionDataRequest
@@ -1071,9 +1050,6 @@ IntegrationServiceGetTemplate Get integration template
 
 Returns the template for an integration.
 
-Requires the following permissions:
-- `integrations:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceGetTemplateRequest
 */
@@ -1214,9 +1190,6 @@ IntegrationServiceListManagedIntegrationKeys List managed integration keys
 
 Returns a list of managed integration keys.
 
-Requires the following permissions:
-- `integrations:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceListManagedIntegrationKeysRequest
 */
@@ -1353,9 +1326,6 @@ func (r ApiIntegrationServiceSaveIntegrationRequest) Execute() (*SaveIntegration
 IntegrationServiceSaveIntegration Save integration registration metadata
 
 Creates or updates an integration deployment.
-
-Requires the following permissions:
-- `integrations:Deploy`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceSaveIntegrationRequest
@@ -1496,9 +1466,6 @@ IntegrationServiceSyncRumData Trigger sync of RUM integration data
 
 Syncs RUM data for the team.
 
-Requires the following permissions:
-- `integrations:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceSyncRumDataRequest
 */
@@ -1638,9 +1605,6 @@ IntegrationServiceTestIntegration Test integration
 
 Tests the integration configuration.
 
-Requires the following permissions:
-- `integrations:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceTestIntegrationRequest
 */
@@ -1779,9 +1743,6 @@ func (r ApiIntegrationServiceUpdateIntegrationRequest) Execute() (map[string]int
 IntegrationServiceUpdateIntegration Update integration
 
 Updates an existing integration deployment.
-
-Requires the following permissions:
-- `integrations:Deploy`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIntegrationServiceUpdateIntegrationRequest

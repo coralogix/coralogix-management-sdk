@@ -79,9 +79,6 @@ ExtensionDeploymentServiceDeployExtension Deploy extension
 
 Deploys an extension.
 
-Requires the following permissions:
-- `extensions:Deploy`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceDeployExtensionRequest
 */
@@ -255,9 +252,6 @@ ExtensionDeploymentServiceGetDeployedExtensions Get deployed extensions
 
 Returns all deployed extensions.
 
-Requires the following permissions:
-- `extensions:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceGetDeployedExtensionsRequest
 */
@@ -394,9 +388,6 @@ func (r ApiExtensionDeploymentServiceUndeployExtensionRequest) Execute() (*Undep
 ExtensionDeploymentServiceUndeployExtension Revert deployment of extension
 
 Undeploys the specified extension.
-
-Requires the following permissions:
-- `extensions:Deploy`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceUndeployExtensionRequest
@@ -572,9 +563,6 @@ func (r ApiExtensionDeploymentServiceUpdateExtensionRequest) Execute() (*UpdateE
 ExtensionDeploymentServiceUpdateExtension Update extension
 
 Updates a deployed extension.
-
-Requires the following permissions:
-- `extensions:Deploy`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceUpdateExtensionRequest

@@ -318,12 +318,12 @@ func (a *SlosServiceAPIService) SlosServiceBatchGetSlosExecute(r ApiSlosServiceB
 type ApiSlosServiceCreateSloRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
+	slo1 *Slo1
 	silenceDataValidations *bool
 }
 
-func (r ApiSlosServiceCreateSloRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceCreateSloRequest {
-	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
+func (r ApiSlosServiceCreateSloRequest) Slo1(slo1 Slo1) ApiSlosServiceCreateSloRequest {
+	r.slo1 = &slo1
 	return r
 }
 
@@ -372,8 +372,8 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.slosServiceReplaceSloRequest == nil {
-		return localVarReturnValue, nil, reportError("slosServiceReplaceSloRequest is required and must be specified")
+	if r.slo1 == nil {
+		return localVarReturnValue, nil, reportError("slo1 is required and must be specified")
 	}
 
 	if r.silenceDataValidations != nil {
@@ -397,7 +397,7 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceReplaceSloRequest
+	localVarPostBody = r.slo1
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1026,12 +1026,12 @@ func (a *SlosServiceAPIService) SlosServiceListSlosExecute(r ApiSlosServiceListS
 type ApiSlosServiceReplaceSloRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
+	slo1 *Slo1
 	silenceDataValidations *bool
 }
 
-func (r ApiSlosServiceReplaceSloRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceReplaceSloRequest {
-	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
+func (r ApiSlosServiceReplaceSloRequest) Slo1(slo1 Slo1) ApiSlosServiceReplaceSloRequest {
+	r.slo1 = &slo1
 	return r
 }
 
@@ -1080,8 +1080,8 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.slosServiceReplaceSloRequest == nil {
-		return localVarReturnValue, nil, reportError("slosServiceReplaceSloRequest is required and must be specified")
+	if r.slo1 == nil {
+		return localVarReturnValue, nil, reportError("slo1 is required and must be specified")
 	}
 
 	if r.silenceDataValidations != nil {
@@ -1105,7 +1105,7 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceReplaceSloRequest
+	localVarPostBody = r.slo1
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1178,11 +1178,11 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 type ApiSlosServiceValidateReplaceSloAlertsRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
+	slo1 *Slo1
 }
 
-func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
-	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
+func (r ApiSlosServiceValidateReplaceSloAlertsRequest) Slo1(slo1 Slo1) ApiSlosServiceValidateReplaceSloAlertsRequest {
+	r.slo1 = &slo1
 	return r
 }
 
@@ -1225,8 +1225,8 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.slosServiceReplaceSloRequest == nil {
-		return localVarReturnValue, nil, reportError("slosServiceReplaceSloRequest is required and must be specified")
+	if r.slo1 == nil {
+		return localVarReturnValue, nil, reportError("slo1 is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1247,7 +1247,7 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceReplaceSloRequest
+	localVarPostBody = r.slo1
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

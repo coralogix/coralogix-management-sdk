@@ -14,125 +14,232 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// IncidentSearchQuery - struct for IncidentSearchQuery
+// checks if the IncidentSearchQuery type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IncidentSearchQuery{}
+
+// IncidentSearchQuery Incident search query.
 type IncidentSearchQuery struct {
-	IncidentSearchQueryContextualLabel *IncidentSearchQueryContextualLabel
-	IncidentSearchQueryIncidentField *IncidentSearchQueryIncidentField
+	// The contextual label to search in.
+	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	IncidentField *IncidentFields `json:"incidentField,omitempty"`
+	// The search query
+	Query string `json:"query"`
+	AdditionalProperties map[string]interface{}
 }
 
-// IncidentSearchQueryContextualLabelAsIncidentSearchQuery is a convenience function that returns IncidentSearchQueryContextualLabel wrapped in IncidentSearchQuery
-func IncidentSearchQueryContextualLabelAsIncidentSearchQuery(v *IncidentSearchQueryContextualLabel) IncidentSearchQuery {
-	return IncidentSearchQuery{
-		IncidentSearchQueryContextualLabel: v,
+type _IncidentSearchQuery IncidentSearchQuery
+
+// NewIncidentSearchQuery instantiates a new IncidentSearchQuery object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewIncidentSearchQuery(query string) *IncidentSearchQuery {
+	this := IncidentSearchQuery{}
+	this.Query = query
+	return &this
+}
+
+// NewIncidentSearchQueryWithDefaults instantiates a new IncidentSearchQuery object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewIncidentSearchQueryWithDefaults() *IncidentSearchQuery {
+	this := IncidentSearchQuery{}
+	return &this
+}
+
+// GetContextualLabel returns the ContextualLabel field value if set, zero value otherwise.
+func (o *IncidentSearchQuery) GetContextualLabel() string {
+	if o == nil || IsNil(o.ContextualLabel) {
+		var ret string
+		return ret
 	}
+	return *o.ContextualLabel
 }
 
-// IncidentSearchQueryIncidentFieldAsIncidentSearchQuery is a convenience function that returns IncidentSearchQueryIncidentField wrapped in IncidentSearchQuery
-func IncidentSearchQueryIncidentFieldAsIncidentSearchQuery(v *IncidentSearchQueryIncidentField) IncidentSearchQuery {
-	return IncidentSearchQuery{
-		IncidentSearchQueryIncidentField: v,
+// GetContextualLabelOk returns a tuple with the ContextualLabel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentSearchQuery) GetContextualLabelOk() (*string, bool) {
+	if o == nil || IsNil(o.ContextualLabel) {
+		return nil, false
 	}
+	return o.ContextualLabel, true
 }
 
+// HasContextualLabel returns a boolean if a field has been set.
+func (o *IncidentSearchQuery) HasContextualLabel() bool {
+	if o != nil && !IsNil(o.ContextualLabel) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *IncidentSearchQuery) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into IncidentSearchQueryContextualLabel
-	err = json.Unmarshal(data, &dst.IncidentSearchQueryContextualLabel)
-	if err == nil {
-		jsonIncidentSearchQueryContextualLabel, _ := json.Marshal(dst.IncidentSearchQueryContextualLabel)
-		if string(jsonIncidentSearchQueryContextualLabel) == "{}" { // empty struct
-			dst.IncidentSearchQueryContextualLabel = nil
-		} else {
-			if err = validator.Validate(dst.IncidentSearchQueryContextualLabel); err != nil {
-				dst.IncidentSearchQueryContextualLabel = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetContextualLabel gets a reference to the given string and assigns it to the ContextualLabel field.
+func (o *IncidentSearchQuery) SetContextualLabel(v string) {
+	o.ContextualLabel = &v
+}
+
+// GetIncidentField returns the IncidentField field value if set, zero value otherwise.
+func (o *IncidentSearchQuery) GetIncidentField() IncidentFields {
+	if o == nil || IsNil(o.IncidentField) {
+		var ret IncidentFields
+		return ret
+	}
+	return *o.IncidentField
+}
+
+// GetIncidentFieldOk returns a tuple with the IncidentField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentSearchQuery) GetIncidentFieldOk() (*IncidentFields, bool) {
+	if o == nil || IsNil(o.IncidentField) {
+		return nil, false
+	}
+	return o.IncidentField, true
+}
+
+// HasIncidentField returns a boolean if a field has been set.
+func (o *IncidentSearchQuery) HasIncidentField() bool {
+	if o != nil && !IsNil(o.IncidentField) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncidentField gets a reference to the given IncidentFields and assigns it to the IncidentField field.
+func (o *IncidentSearchQuery) SetIncidentField(v IncidentFields) {
+	o.IncidentField = &v
+}
+
+// GetQuery returns the Query field value
+func (o *IncidentSearchQuery) GetQuery() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Query
+}
+
+// GetQueryOk returns a tuple with the Query field value
+// and a boolean to check if the value has been set.
+func (o *IncidentSearchQuery) GetQueryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Query, true
+}
+
+// SetQuery sets field value
+func (o *IncidentSearchQuery) SetQuery(v string) {
+	o.Query = v
+}
+
+func (o IncidentSearchQuery) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IncidentSearchQuery) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ContextualLabel) {
+		toSerialize["contextualLabel"] = o.ContextualLabel
+	}
+	if !IsNil(o.IncidentField) {
+		toSerialize["incidentField"] = o.IncidentField
+	}
+	toSerialize["query"] = o.Query
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	requiredOneOfGroup0Matches := 0
+	if _, exists := toSerialize["incidentField"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["contextualLabel"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches != 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [incidentField, contextualLabel] must be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *IncidentSearchQuery) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"query",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.IncidentSearchQueryContextualLabel = nil
 	}
 
-	// try to unmarshal data into IncidentSearchQueryIncidentField
-	err = json.Unmarshal(data, &dst.IncidentSearchQueryIncidentField)
-	if err == nil {
-		jsonIncidentSearchQueryIncidentField, _ := json.Marshal(dst.IncidentSearchQueryIncidentField)
-		if string(jsonIncidentSearchQueryIncidentField) == "{}" { // empty struct
-			dst.IncidentSearchQueryIncidentField = nil
-		} else {
-			if err = validator.Validate(dst.IncidentSearchQueryIncidentField); err != nil {
-				dst.IncidentSearchQueryIncidentField = nil
-			} else {
-				match++
-			}
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["incidentField"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["contextualLabel"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [incidentField, contextualLabel] may be set"}
+	}
+
+	varIncidentSearchQuery := _IncidentSearchQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentSearchQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentSearchQuery(varIncidentSearchQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		requiredOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["incidentField"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentSearchQueryIncidentField = nil
+		if _, exists := additionalProperties["contextualLabel"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
+		}
+		if requiredOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [incidentField, contextualLabel] may be set"}
+		}
+
+		delete(additionalProperties, "contextualLabel")
+		delete(additionalProperties, "incidentField")
+		delete(additionalProperties, "query")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.IncidentSearchQueryContextualLabel = nil
-		dst.IncidentSearchQueryIncidentField = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(IncidentSearchQuery)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src IncidentSearchQuery) MarshalJSON() ([]byte, error) {
-	if src.IncidentSearchQueryContextualLabel != nil {
-		return json.Marshal(&src.IncidentSearchQueryContextualLabel)
-	}
-
-	if src.IncidentSearchQueryIncidentField != nil {
-		return json.Marshal(&src.IncidentSearchQueryIncidentField)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *IncidentSearchQuery) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.IncidentSearchQueryContextualLabel != nil {
-		return obj.IncidentSearchQueryContextualLabel
-	}
-
-	if obj.IncidentSearchQueryIncidentField != nil {
-		return obj.IncidentSearchQueryIncidentField
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj IncidentSearchQuery) GetActualInstanceValue() (interface{}) {
-	if obj.IncidentSearchQueryContextualLabel != nil {
-		return *obj.IncidentSearchQueryContextualLabel
-	}
-
-	if obj.IncidentSearchQueryIncidentField != nil {
-		return *obj.IncidentSearchQueryIncidentField
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableIncidentSearchQuery struct {

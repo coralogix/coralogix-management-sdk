@@ -1,0 +1,1013 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/fleet-manager/configuration-groups/v1": {
+      "post": {
+        "tags": [
+          "Fleet Manager Configuration Groups"
+        ],
+        "summary": "Create configuration group",
+        "description": "Creates a fleet-manager configuration group.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PublicConfigurationGroupService_CreatePublicConfigurationGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to create a fleet-manager configuration group.",
+                "type": "object",
+                "properties": {
+                  "group": {
+                    "$ref": "#/components/schemas/PublicCreateConfigurationGroupRequest"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePublicConfigurationGroupResponse"
+                },
+                "example": {
+                  "group": {
+                    "description": "Collector configuration group for production.",
+                    "families": [],
+                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                    "name": "Production collectors",
+                    "priorityOrder": 100,
+                    "tags": [
+                      "production"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Configuration group already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fleet-manager/configuration-groups/v1/{id}": {
+      "get": {
+        "tags": [
+          "Fleet Manager Configuration Groups"
+        ],
+        "summary": "Get configuration group",
+        "description": "Gets a fleet-manager configuration group by ID.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PublicConfigurationGroupService_GetPublicConfigurationGroup",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "latest_family_only",
+            "description": "Return only the latest configuration family when true.",
+            "schema": {
+              "description": "Return only the latest configuration family when true.",
+              "type": "boolean"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPublicConfigurationGroupResponse"
+                },
+                "example": {
+                  "group": {
+                    "description": "Collector configuration group for production.",
+                    "families": [],
+                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                    "name": "Production collectors",
+                    "priorityOrder": 100,
+                    "tags": [
+                      "production"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration group not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Fleet Manager Configuration Groups"
+        ],
+        "summary": "Update configuration group",
+        "description": "Updates provided fleet-manager configuration group fields and optionally updates the latest family.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PublicConfigurationGroupService_ReplacePublicConfigurationGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to update a fleet-manager configuration group.",
+                "type": "object",
+                "properties": {
+                  "group": {
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "description": "Fields used to update a fleet-manager configuration group. Omitted optional fields keep their existing values.",
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "description": "Human-readable description.",
+                        "type": "string",
+                        "pattern": "^[\\s\\S]*$",
+                        "minLength": 0,
+                        "maxLength": 4096
+                      },
+                      "family": {
+                        "externalDocs": {
+                          "url": ""
+                        },
+                        "description": "Fields used to update the latest configuration family. Omitted optional fields keep their existing values.",
+                        "type": "object",
+                        "properties": {
+                          "active": {
+                            "description": "Whether this family is active.",
+                            "type": "boolean"
+                          },
+                          "collectorVersion": {
+                            "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
+                            "type": "string",
+                            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+                            "minLength": 5,
+                            "maxLength": 256
+                          },
+                          "description": {
+                            "description": "Human-readable description.",
+                            "type": "string",
+                            "pattern": "^[\\s\\S]*$",
+                            "minLength": 0,
+                            "maxLength": 4096
+                          },
+                          "metadata": {
+                            "description": "Metadata stored with this configuration family.",
+                            "type": "object",
+                            "additionalProperties": {
+                              "type": "string",
+                              "pattern": "^[\\s\\S]*$",
+                              "minLength": 0,
+                              "maxLength": 4096
+                            }
+                          },
+                          "remoteConfigurations": {
+                            "description": "Remote configurations to use when creating or replacing family content.",
+                            "type": "array",
+                            "items": {},
+                            "minItems": 0,
+                            "maxItems": 128
+                          }
+                        }
+                      },
+                      "name": {
+                        "description": "Display name.",
+                        "type": "string",
+                        "pattern": "^[\\s\\S]*$",
+                        "minLength": 0,
+                        "maxLength": 256
+                      },
+                      "priorityOrder": {
+                        "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647
+                      },
+                      "tags": {
+                        "description": "Tags attached to the configuration group.",
+                        "type": "array",
+                        "items": {
+                          "description": "Tags attached to the configuration group.",
+                          "type": "string",
+                          "pattern": "^[\\s\\S]*$",
+                          "minLength": 0,
+                          "maxLength": 256
+                        },
+                        "minItems": 0,
+                        "maxItems": 64
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplacePublicConfigurationGroupResponse"
+                },
+                "example": {
+                  "group": {
+                    "description": "Updated collector configuration group.",
+                    "families": [],
+                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                    "name": "Production collectors",
+                    "priorityOrder": 100,
+                    "tags": [
+                      "production"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration group not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "Configuration group UUID v7.",
+          "required": true,
+          "schema": {
+            "description": "Configuration group UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "style": "simple"
+        }
+      ]
+    },
+    "/fleet-manager/configuration-groups/v1/{id}/archive": {
+      "post": {
+        "tags": [
+          "Fleet Manager Configuration Groups"
+        ],
+        "summary": "Archive configuration group",
+        "description": "Archives a fleet-manager configuration group.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PublicConfigurationGroupService_ArchivePublicConfigurationGroup",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Configuration group UUID v7.",
+            "required": true,
+            "schema": {
+              "description": "Configuration group UUID v7.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchivePublicConfigurationGroupResponse"
+                },
+                "example": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration group not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ArchivePublicConfigurationGroupResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Empty response returned after archiving a fleet-manager configuration group.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "CreatePublicConfigurationGroupResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the created fleet-manager configuration group.",
+        "type": "object",
+        "properties": {
+          "group": {
+            "$ref": "#/components/schemas/PublicConfigurationGroup"
+          }
+        }
+      },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetPublicConfigurationGroupResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the requested fleet-manager configuration group.",
+        "type": "object",
+        "properties": {
+          "group": {
+            "$ref": "#/components/schemas/PublicConfigurationGroup"
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "PublicAgentSelectorRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Agent selector used in requests.",
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "description": "Flat agent attributes to match. If collectorVersion is set, service.version must match it or is added automatically.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
+            }
+          }
+        }
+      },
+      "PublicAgentSelectorResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Agent selector returned in responses.",
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "description": "Flat agent attributes matched by the selector.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
+            }
+          }
+        }
+      },
+      "PublicChartName": {
+        "title": "Fleet-manager chart name",
+        "description": "Helm chart name for fleet-manager configuration families.",
+        "type": "string",
+        "enum": [
+          "PUBLIC_CHART_NAME_UNSPECIFIED",
+          "PUBLIC_CHART_NAME_OTEL_INTEGRATION",
+          "PUBLIC_CHART_NAME_OPENTELEMETRY_COLLECTOR",
+          "PUBLIC_CHART_NAME_OTEL_LINUX_STANDALONE",
+          "PUBLIC_CHART_NAME_OTEL_WINDOWS_STANDALONE",
+          "PUBLIC_CHART_NAME_OTEL_MACOS_STANDALONE",
+          "PUBLIC_CHART_NAME_OTEL_ECS_EC2"
+        ]
+      },
+      "PublicConfigurationFamilyRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Initial configuration family to create.",
+        "type": "object",
+        "properties": {
+          "active": {
+            "description": "Whether this family is active.",
+            "type": "boolean"
+          },
+          "basedOnConfigurationFamilyId": {
+            "description": "Configuration family UUID v7 this family is based on.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "collectorVersion": {
+            "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "minLength": 5,
+            "maxLength": 256
+          },
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "metadata": {
+            "description": "Metadata stored with this configuration family.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
+            }
+          },
+          "remoteConfigurations": {
+            "description": "Remote configurations to create in this family.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicRemoteConfigurationRequest"
+            },
+            "minItems": 1,
+            "maxItems": 128
+          }
+        }
+      },
+      "PublicConfigurationFamilyResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration family returned by Fleet Manager.",
+        "type": "object",
+        "properties": {
+          "active": {
+            "description": "Whether this family is active.",
+            "type": "boolean"
+          },
+          "basedOnConfigurationFamilyId": {
+            "description": "Configuration family UUID v7 this family is based on.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "chartName": {
+            "$ref": "#/components/schemas/PublicChartName"
+          },
+          "chartVersion": {
+            "description": "Helm chart or template version used by this family.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "collectorVersion": {
+            "description": "Collector semantic version this configuration family targets, without a leading v prefix.",
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "minLength": 5,
+            "maxLength": 256
+          },
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "id": {
+            "description": "Configuration family UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "integrationVersion": {
+            "description": "Integration version from the onboarding flow.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "lastActivatedAt": {
+            "description": "Time when this family was last activated.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0,
+            "maxLength": 64
+          },
+          "metadata": {
+            "description": "Metadata stored with this configuration family.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
+            }
+          },
+          "remoteConfigurations": {
+            "description": "Remote configurations in this family.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicRemoteConfigurationResponse"
+            },
+            "minItems": 0,
+            "maxItems": 128
+          },
+          "version": {
+            "description": "Monotonic version number of this configuration family within its group.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      },
+      "PublicConfigurationGroup": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Fleet-manager configuration group.",
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "families": {
+            "description": "Configuration families in this group.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicConfigurationFamilyResponse"
+            },
+            "minItems": 0,
+            "maxItems": 128
+          },
+          "id": {
+            "description": "Configuration group UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "priorityOrder": {
+            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "tags": {
+            "description": "Tags attached to the configuration group.",
+            "type": "array",
+            "items": {
+              "description": "Tags attached to the configuration group.",
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 256
+            },
+            "minItems": 0,
+            "maxItems": 64
+          }
+        }
+      },
+      "PublicCreateConfigurationGroupRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Payload used to create a fleet-manager configuration group.",
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "families": {
+            "description": "Initial configuration family to create with this group. At most one item is accepted.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicConfigurationFamilyRequest"
+            },
+            "minItems": 0,
+            "maxItems": 1
+          },
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "priorityOrder": {
+            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "tags": {
+            "description": "Tags attached to the configuration group.",
+            "type": "array",
+            "items": {
+              "description": "Tags attached to the configuration group.",
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 256
+            },
+            "minItems": 0,
+            "maxItems": 64
+          }
+        }
+      },
+      "PublicRemoteConfigurationRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Remote configuration to create.",
+        "type": "object",
+        "properties": {
+          "agentSelector": {
+            "$ref": "#/components/schemas/PublicAgentSelectorRequest"
+          },
+          "name": {
+            "description": "Remote configuration name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "rawConfiguration": {
+            "description": "OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          }
+        }
+      },
+      "PublicRemoteConfigurationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Remote configuration returned by Fleet Manager.",
+        "type": "object",
+        "properties": {
+          "agentSelector": {
+            "$ref": "#/components/schemas/PublicAgentSelectorResponse"
+          },
+          "createdAt": {
+            "description": "Time when this remote configuration was created.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0,
+            "maxLength": 64
+          },
+          "hash": {
+            "description": "SHA-256 hash of the normalized raw configuration content.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "id": {
+            "description": "Remote configuration UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "name": {
+            "description": "Remote configuration name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "rawConfiguration": {
+            "description": "Normalized OpenTelemetry Collector configuration YAML.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          },
+          "updatedAt": {
+            "description": "Time when this remote configuration was last updated.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0,
+            "maxLength": 64
+          }
+        }
+      },
+      "ReplacePublicConfigurationGroupResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the updated fleet-manager configuration group.",
+        "type": "object",
+        "properties": {
+          "group": {
+            "$ref": "#/components/schemas/PublicConfigurationGroup"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

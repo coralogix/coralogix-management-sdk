@@ -13,126 +13,170 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// GeomapFieldConfig - struct for GeomapFieldConfig
+// checks if the GeomapFieldConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GeomapFieldConfig{}
+
+// GeomapFieldConfig Geomap field config.
 type GeomapFieldConfig struct {
-	GeomapFieldConfigAwsRegionConfig *GeomapFieldConfigAwsRegionConfig
-	GeomapFieldConfigCoordinateConfig *GeomapFieldConfigCoordinateConfig
+	AwsRegionConfig *GeomapAwsRegionConfig `json:"awsRegionConfig,omitempty"`
+	CoordinateConfig *GeomapCoordinateConfig `json:"coordinateConfig,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// GeomapFieldConfigAwsRegionConfigAsGeomapFieldConfig is a convenience function that returns GeomapFieldConfigAwsRegionConfig wrapped in GeomapFieldConfig
-func GeomapFieldConfigAwsRegionConfigAsGeomapFieldConfig(v *GeomapFieldConfigAwsRegionConfig) GeomapFieldConfig {
-	return GeomapFieldConfig{
-		GeomapFieldConfigAwsRegionConfig: v,
+type _GeomapFieldConfig GeomapFieldConfig
+
+// NewGeomapFieldConfig instantiates a new GeomapFieldConfig object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewGeomapFieldConfig() *GeomapFieldConfig {
+	this := GeomapFieldConfig{}
+	return &this
+}
+
+// NewGeomapFieldConfigWithDefaults instantiates a new GeomapFieldConfig object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewGeomapFieldConfigWithDefaults() *GeomapFieldConfig {
+	this := GeomapFieldConfig{}
+	return &this
+}
+
+// GetAwsRegionConfig returns the AwsRegionConfig field value if set, zero value otherwise.
+func (o *GeomapFieldConfig) GetAwsRegionConfig() GeomapAwsRegionConfig {
+	if o == nil || IsNil(o.AwsRegionConfig) {
+		var ret GeomapAwsRegionConfig
+		return ret
 	}
+	return *o.AwsRegionConfig
 }
 
-// GeomapFieldConfigCoordinateConfigAsGeomapFieldConfig is a convenience function that returns GeomapFieldConfigCoordinateConfig wrapped in GeomapFieldConfig
-func GeomapFieldConfigCoordinateConfigAsGeomapFieldConfig(v *GeomapFieldConfigCoordinateConfig) GeomapFieldConfig {
-	return GeomapFieldConfig{
-		GeomapFieldConfigCoordinateConfig: v,
+// GetAwsRegionConfigOk returns a tuple with the AwsRegionConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapFieldConfig) GetAwsRegionConfigOk() (*GeomapAwsRegionConfig, bool) {
+	if o == nil || IsNil(o.AwsRegionConfig) {
+		return nil, false
 	}
+	return o.AwsRegionConfig, true
 }
 
+// HasAwsRegionConfig returns a boolean if a field has been set.
+func (o *GeomapFieldConfig) HasAwsRegionConfig() bool {
+	if o != nil && !IsNil(o.AwsRegionConfig) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *GeomapFieldConfig) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into GeomapFieldConfigAwsRegionConfig
-	err = json.Unmarshal(data, &dst.GeomapFieldConfigAwsRegionConfig)
-	if err == nil {
-		jsonGeomapFieldConfigAwsRegionConfig, _ := json.Marshal(dst.GeomapFieldConfigAwsRegionConfig)
-		if string(jsonGeomapFieldConfigAwsRegionConfig) == "{}" { // empty struct
-			dst.GeomapFieldConfigAwsRegionConfig = nil
-		} else {
-			if err = validator.Validate(dst.GeomapFieldConfigAwsRegionConfig); err != nil {
-				dst.GeomapFieldConfigAwsRegionConfig = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAwsRegionConfig gets a reference to the given GeomapAwsRegionConfig and assigns it to the AwsRegionConfig field.
+func (o *GeomapFieldConfig) SetAwsRegionConfig(v GeomapAwsRegionConfig) {
+	o.AwsRegionConfig = &v
+}
+
+// GetCoordinateConfig returns the CoordinateConfig field value if set, zero value otherwise.
+func (o *GeomapFieldConfig) GetCoordinateConfig() GeomapCoordinateConfig {
+	if o == nil || IsNil(o.CoordinateConfig) {
+		var ret GeomapCoordinateConfig
+		return ret
+	}
+	return *o.CoordinateConfig
+}
+
+// GetCoordinateConfigOk returns a tuple with the CoordinateConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapFieldConfig) GetCoordinateConfigOk() (*GeomapCoordinateConfig, bool) {
+	if o == nil || IsNil(o.CoordinateConfig) {
+		return nil, false
+	}
+	return o.CoordinateConfig, true
+}
+
+// HasCoordinateConfig returns a boolean if a field has been set.
+func (o *GeomapFieldConfig) HasCoordinateConfig() bool {
+	if o != nil && !IsNil(o.CoordinateConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoordinateConfig gets a reference to the given GeomapCoordinateConfig and assigns it to the CoordinateConfig field.
+func (o *GeomapFieldConfig) SetCoordinateConfig(v GeomapCoordinateConfig) {
+	o.CoordinateConfig = &v
+}
+
+func (o GeomapFieldConfig) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o GeomapFieldConfig) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AwsRegionConfig) {
+		toSerialize["awsRegionConfig"] = o.AwsRegionConfig
+	}
+	if !IsNil(o.CoordinateConfig) {
+		toSerialize["coordinateConfig"] = o.CoordinateConfig
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["coordinateConfig"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["awsRegionConfig"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [coordinateConfig, awsRegionConfig] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *GeomapFieldConfig) UnmarshalJSON(data []byte) (err error) {
+	varGeomapFieldConfig := _GeomapFieldConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapFieldConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapFieldConfig(varGeomapFieldConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["coordinateConfig"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GeomapFieldConfigAwsRegionConfig = nil
-	}
-
-	// try to unmarshal data into GeomapFieldConfigCoordinateConfig
-	err = json.Unmarshal(data, &dst.GeomapFieldConfigCoordinateConfig)
-	if err == nil {
-		jsonGeomapFieldConfigCoordinateConfig, _ := json.Marshal(dst.GeomapFieldConfigCoordinateConfig)
-		if string(jsonGeomapFieldConfigCoordinateConfig) == "{}" { // empty struct
-			dst.GeomapFieldConfigCoordinateConfig = nil
-		} else {
-			if err = validator.Validate(dst.GeomapFieldConfigCoordinateConfig); err != nil {
-				dst.GeomapFieldConfigCoordinateConfig = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["awsRegionConfig"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GeomapFieldConfigCoordinateConfig = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [coordinateConfig, awsRegionConfig] may be set"}
+		}
+
+		delete(additionalProperties, "awsRegionConfig")
+		delete(additionalProperties, "coordinateConfig")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.GeomapFieldConfigAwsRegionConfig = nil
-		dst.GeomapFieldConfigCoordinateConfig = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(GeomapFieldConfig)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src GeomapFieldConfig) MarshalJSON() ([]byte, error) {
-	if src.GeomapFieldConfigAwsRegionConfig != nil {
-		return json.Marshal(&src.GeomapFieldConfigAwsRegionConfig)
-	}
-
-	if src.GeomapFieldConfigCoordinateConfig != nil {
-		return json.Marshal(&src.GeomapFieldConfigCoordinateConfig)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *GeomapFieldConfig) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.GeomapFieldConfigAwsRegionConfig != nil {
-		return obj.GeomapFieldConfigAwsRegionConfig
-	}
-
-	if obj.GeomapFieldConfigCoordinateConfig != nil {
-		return obj.GeomapFieldConfigCoordinateConfig
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj GeomapFieldConfig) GetActualInstanceValue() (interface{}) {
-	if obj.GeomapFieldConfigAwsRegionConfig != nil {
-		return *obj.GeomapFieldConfigAwsRegionConfig
-	}
-
-	if obj.GeomapFieldConfigCoordinateConfig != nil {
-		return *obj.GeomapFieldConfigCoordinateConfig
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableGeomapFieldConfig struct {

@@ -38,9 +38,6 @@ ContextualDataIntegrationServiceDeleteContextualDataIntegration Delete contextua
 
 Deletes the specified contextual data integration.
 
-Requires the following permissions:
-- `contextual-data:UpdateConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id The integration id.
  @return ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest
@@ -185,9 +182,6 @@ func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitio
 ContextualDataIntegrationServiceGetContextualDataIntegrationDefinition Get contextual data integration definition
 
 Returns the definition for the specified contextual data integration type.
-
-Requires the following permissions:
-- `contextual-data:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id The unique identifier of the contextual data integration definition.
@@ -337,9 +331,6 @@ ContextualDataIntegrationServiceGetContextualDataIntegrationDetails Get contextu
 
 Returns the details of the specified contextual data integration.
 
-Requires the following permissions:
-- `contextual-data:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id The unique identifier of the contextual data integration.
  @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest
@@ -487,9 +478,6 @@ ContextualDataIntegrationServiceGetContextualDataIntegrations Get all contextual
 
 Returns all contextual data integrations for the team.
 
-Requires the following permissions:
-- `contextual-data:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest
 */
@@ -630,9 +618,6 @@ ContextualDataIntegrationServiceSaveContextualDataIntegration Save contextual da
 
 Creates a new contextual data integration.
 
-Requires the following permissions:
-- `contextual-data:UpdateConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest
 */
@@ -772,9 +757,6 @@ func (r ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest)
 ContextualDataIntegrationServiceTestContextualDataIntegration Test contextual data integration
 
 Tests the specified contextual data integration.
-
-Requires the following permissions:
-- `contextual-data:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId The unique identifier of the contextual data integration to test.
@@ -920,9 +902,6 @@ func (r ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationReques
 ContextualDataIntegrationServiceUpdateContextualDataIntegration Update contextual data integration
 
 Updates an existing contextual data integration.
-
-Requires the following permissions:
-- `contextual-data:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationRequest

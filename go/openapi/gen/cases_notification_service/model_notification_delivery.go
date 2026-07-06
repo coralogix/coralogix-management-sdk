@@ -13,164 +13,318 @@ package cases_notification_service
 import (
 	"bytes"
 	"encoding/json"
+	"time"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// NotificationDelivery - struct for NotificationDelivery
+// checks if the NotificationDelivery type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NotificationDelivery{}
+
+// NotificationDelivery Delivery results for a single notification.
 type NotificationDelivery struct {
-	NotificationDeliveryAttempted *NotificationDeliveryAttempted
-	NotificationDeliveryNoNotificationCreated *NotificationDeliveryNoNotificationCreated
-	NotificationDeliveryNoRouterMatched *NotificationDeliveryNoRouterMatched
+	Attempted *RoutedDelivery `json:"attempted,omitempty"`
+	NoNotificationCreated *NoNotificationCreatedResult `json:"noNotificationCreated,omitempty"`
+	// Indicates that no router matched the notification request.
+	NoRouterMatched map[string]interface{} `json:"noRouterMatched,omitempty"`
+	// The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests
+	RequestNotificationId *string `json:"requestNotificationId,omitempty"`
+	// When the notification was triggered
+	Timestamp time.Time `json:"timestamp"`
+	AdditionalProperties map[string]interface{}
 }
 
-// NotificationDeliveryAttemptedAsNotificationDelivery is a convenience function that returns NotificationDeliveryAttempted wrapped in NotificationDelivery
-func NotificationDeliveryAttemptedAsNotificationDelivery(v *NotificationDeliveryAttempted) NotificationDelivery {
-	return NotificationDelivery{
-		NotificationDeliveryAttempted: v,
+type _NotificationDelivery NotificationDelivery
+
+// NewNotificationDelivery instantiates a new NotificationDelivery object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewNotificationDelivery(timestamp time.Time) *NotificationDelivery {
+	this := NotificationDelivery{}
+	this.Timestamp = timestamp
+	return &this
+}
+
+// NewNotificationDeliveryWithDefaults instantiates a new NotificationDelivery object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewNotificationDeliveryWithDefaults() *NotificationDelivery {
+	this := NotificationDelivery{}
+	return &this
+}
+
+// GetAttempted returns the Attempted field value if set, zero value otherwise.
+func (o *NotificationDelivery) GetAttempted() RoutedDelivery {
+	if o == nil || IsNil(o.Attempted) {
+		var ret RoutedDelivery
+		return ret
 	}
+	return *o.Attempted
 }
 
-// NotificationDeliveryNoNotificationCreatedAsNotificationDelivery is a convenience function that returns NotificationDeliveryNoNotificationCreated wrapped in NotificationDelivery
-func NotificationDeliveryNoNotificationCreatedAsNotificationDelivery(v *NotificationDeliveryNoNotificationCreated) NotificationDelivery {
-	return NotificationDelivery{
-		NotificationDeliveryNoNotificationCreated: v,
+// GetAttemptedOk returns a tuple with the Attempted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationDelivery) GetAttemptedOk() (*RoutedDelivery, bool) {
+	if o == nil || IsNil(o.Attempted) {
+		return nil, false
 	}
+	return o.Attempted, true
 }
 
-// NotificationDeliveryNoRouterMatchedAsNotificationDelivery is a convenience function that returns NotificationDeliveryNoRouterMatched wrapped in NotificationDelivery
-func NotificationDeliveryNoRouterMatchedAsNotificationDelivery(v *NotificationDeliveryNoRouterMatched) NotificationDelivery {
-	return NotificationDelivery{
-		NotificationDeliveryNoRouterMatched: v,
+// HasAttempted returns a boolean if a field has been set.
+func (o *NotificationDelivery) HasAttempted() bool {
+	if o != nil && !IsNil(o.Attempted) {
+		return true
 	}
+
+	return false
 }
 
+// SetAttempted gets a reference to the given RoutedDelivery and assigns it to the Attempted field.
+func (o *NotificationDelivery) SetAttempted(v RoutedDelivery) {
+	o.Attempted = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *NotificationDelivery) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into NotificationDeliveryAttempted
-	err = json.Unmarshal(data, &dst.NotificationDeliveryAttempted)
-	if err == nil {
-		jsonNotificationDeliveryAttempted, _ := json.Marshal(dst.NotificationDeliveryAttempted)
-		if string(jsonNotificationDeliveryAttempted) == "{}" { // empty struct
-			dst.NotificationDeliveryAttempted = nil
-		} else {
-			if err = validator.Validate(dst.NotificationDeliveryAttempted); err != nil {
-				dst.NotificationDeliveryAttempted = nil
-			} else {
-				match++
-			}
+// GetNoNotificationCreated returns the NoNotificationCreated field value if set, zero value otherwise.
+func (o *NotificationDelivery) GetNoNotificationCreated() NoNotificationCreatedResult {
+	if o == nil || IsNil(o.NoNotificationCreated) {
+		var ret NoNotificationCreatedResult
+		return ret
+	}
+	return *o.NoNotificationCreated
+}
+
+// GetNoNotificationCreatedOk returns a tuple with the NoNotificationCreated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationDelivery) GetNoNotificationCreatedOk() (*NoNotificationCreatedResult, bool) {
+	if o == nil || IsNil(o.NoNotificationCreated) {
+		return nil, false
+	}
+	return o.NoNotificationCreated, true
+}
+
+// HasNoNotificationCreated returns a boolean if a field has been set.
+func (o *NotificationDelivery) HasNoNotificationCreated() bool {
+	if o != nil && !IsNil(o.NoNotificationCreated) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoNotificationCreated gets a reference to the given NoNotificationCreatedResult and assigns it to the NoNotificationCreated field.
+func (o *NotificationDelivery) SetNoNotificationCreated(v NoNotificationCreatedResult) {
+	o.NoNotificationCreated = &v
+}
+
+// GetNoRouterMatched returns the NoRouterMatched field value if set, zero value otherwise.
+func (o *NotificationDelivery) GetNoRouterMatched() map[string]interface{} {
+	if o == nil || IsNil(o.NoRouterMatched) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.NoRouterMatched
+}
+
+// GetNoRouterMatchedOk returns a tuple with the NoRouterMatched field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationDelivery) GetNoRouterMatchedOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.NoRouterMatched) {
+		return map[string]interface{}{}, false
+	}
+	return o.NoRouterMatched, true
+}
+
+// HasNoRouterMatched returns a boolean if a field has been set.
+func (o *NotificationDelivery) HasNoRouterMatched() bool {
+	if o != nil && !IsNil(o.NoRouterMatched) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoRouterMatched gets a reference to the given map[string]interface{} and assigns it to the NoRouterMatched field.
+func (o *NotificationDelivery) SetNoRouterMatched(v map[string]interface{}) {
+	o.NoRouterMatched = v
+}
+
+// GetRequestNotificationId returns the RequestNotificationId field value if set, zero value otherwise.
+func (o *NotificationDelivery) GetRequestNotificationId() string {
+	if o == nil || IsNil(o.RequestNotificationId) {
+		var ret string
+		return ret
+	}
+	return *o.RequestNotificationId
+}
+
+// GetRequestNotificationIdOk returns a tuple with the RequestNotificationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationDelivery) GetRequestNotificationIdOk() (*string, bool) {
+	if o == nil || IsNil(o.RequestNotificationId) {
+		return nil, false
+	}
+	return o.RequestNotificationId, true
+}
+
+// HasRequestNotificationId returns a boolean if a field has been set.
+func (o *NotificationDelivery) HasRequestNotificationId() bool {
+	if o != nil && !IsNil(o.RequestNotificationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestNotificationId gets a reference to the given string and assigns it to the RequestNotificationId field.
+func (o *NotificationDelivery) SetRequestNotificationId(v string) {
+	o.RequestNotificationId = &v
+}
+
+// GetTimestamp returns the Timestamp field value
+func (o *NotificationDelivery) GetTimestamp() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.Timestamp
+}
+
+// GetTimestampOk returns a tuple with the Timestamp field value
+// and a boolean to check if the value has been set.
+func (o *NotificationDelivery) GetTimestampOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Timestamp, true
+}
+
+// SetTimestamp sets field value
+func (o *NotificationDelivery) SetTimestamp(v time.Time) {
+	o.Timestamp = v
+}
+
+func (o NotificationDelivery) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NotificationDelivery) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Attempted) {
+		toSerialize["attempted"] = o.Attempted
+	}
+	if !IsNil(o.NoNotificationCreated) {
+		toSerialize["noNotificationCreated"] = o.NoNotificationCreated
+	}
+	if !IsNil(o.NoRouterMatched) {
+		toSerialize["noRouterMatched"] = o.NoRouterMatched
+	}
+	if !IsNil(o.RequestNotificationId) {
+		toSerialize["requestNotificationId"] = o.RequestNotificationId
+	}
+	toSerialize["timestamp"] = o.Timestamp
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["noRouterMatched"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["noNotificationCreated"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["attempted"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [noRouterMatched, noNotificationCreated, attempted] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *NotificationDelivery) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"timestamp",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.NotificationDeliveryAttempted = nil
 	}
 
-	// try to unmarshal data into NotificationDeliveryNoNotificationCreated
-	err = json.Unmarshal(data, &dst.NotificationDeliveryNoNotificationCreated)
-	if err == nil {
-		jsonNotificationDeliveryNoNotificationCreated, _ := json.Marshal(dst.NotificationDeliveryNoNotificationCreated)
-		if string(jsonNotificationDeliveryNoNotificationCreated) == "{}" { // empty struct
-			dst.NotificationDeliveryNoNotificationCreated = nil
-		} else {
-			if err = validator.Validate(dst.NotificationDeliveryNoNotificationCreated); err != nil {
-				dst.NotificationDeliveryNoNotificationCreated = nil
-			} else {
-				match++
-			}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["noRouterMatched"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["noNotificationCreated"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["attempted"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [noRouterMatched, noNotificationCreated, attempted] may be set"}
+	}
+
+	varNotificationDelivery := _NotificationDelivery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varNotificationDelivery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotificationDelivery(varNotificationDelivery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["noRouterMatched"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.NotificationDeliveryNoNotificationCreated = nil
-	}
-
-	// try to unmarshal data into NotificationDeliveryNoRouterMatched
-	err = json.Unmarshal(data, &dst.NotificationDeliveryNoRouterMatched)
-	if err == nil {
-		jsonNotificationDeliveryNoRouterMatched, _ := json.Marshal(dst.NotificationDeliveryNoRouterMatched)
-		if string(jsonNotificationDeliveryNoRouterMatched) == "{}" { // empty struct
-			dst.NotificationDeliveryNoRouterMatched = nil
-		} else {
-			if err = validator.Validate(dst.NotificationDeliveryNoRouterMatched); err != nil {
-				dst.NotificationDeliveryNoRouterMatched = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["noNotificationCreated"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.NotificationDeliveryNoRouterMatched = nil
+		if _, exists := additionalProperties["attempted"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [noRouterMatched, noNotificationCreated, attempted] may be set"}
+		}
+
+		delete(additionalProperties, "attempted")
+		delete(additionalProperties, "noNotificationCreated")
+		delete(additionalProperties, "noRouterMatched")
+		delete(additionalProperties, "requestNotificationId")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.NotificationDeliveryAttempted = nil
-		dst.NotificationDeliveryNoNotificationCreated = nil
-		dst.NotificationDeliveryNoRouterMatched = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(NotificationDelivery)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src NotificationDelivery) MarshalJSON() ([]byte, error) {
-	if src.NotificationDeliveryAttempted != nil {
-		return json.Marshal(&src.NotificationDeliveryAttempted)
-	}
-
-	if src.NotificationDeliveryNoNotificationCreated != nil {
-		return json.Marshal(&src.NotificationDeliveryNoNotificationCreated)
-	}
-
-	if src.NotificationDeliveryNoRouterMatched != nil {
-		return json.Marshal(&src.NotificationDeliveryNoRouterMatched)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *NotificationDelivery) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.NotificationDeliveryAttempted != nil {
-		return obj.NotificationDeliveryAttempted
-	}
-
-	if obj.NotificationDeliveryNoNotificationCreated != nil {
-		return obj.NotificationDeliveryNoNotificationCreated
-	}
-
-	if obj.NotificationDeliveryNoRouterMatched != nil {
-		return obj.NotificationDeliveryNoRouterMatched
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj NotificationDelivery) GetActualInstanceValue() (interface{}) {
-	if obj.NotificationDeliveryAttempted != nil {
-		return *obj.NotificationDeliveryAttempted
-	}
-
-	if obj.NotificationDeliveryNoNotificationCreated != nil {
-		return *obj.NotificationDeliveryNoNotificationCreated
-	}
-
-	if obj.NotificationDeliveryNoRouterMatched != nil {
-		return *obj.NotificationDeliveryNoRouterMatched
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableNotificationDelivery struct {

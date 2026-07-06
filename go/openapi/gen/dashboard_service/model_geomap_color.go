@@ -13,126 +13,170 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// GeomapColor - struct for GeomapColor
+// checks if the GeomapColor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GeomapColor{}
+
+// GeomapColor Geomap color.
 type GeomapColor struct {
-	GeomapColorColorRange *GeomapColorColorRange
-	GeomapColorSize *GeomapColorSize
+	ColorRange *ColorGradientType `json:"colorRange,omitempty"`
+	Size *ColorSolidType `json:"size,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// GeomapColorColorRangeAsGeomapColor is a convenience function that returns GeomapColorColorRange wrapped in GeomapColor
-func GeomapColorColorRangeAsGeomapColor(v *GeomapColorColorRange) GeomapColor {
-	return GeomapColor{
-		GeomapColorColorRange: v,
+type _GeomapColor GeomapColor
+
+// NewGeomapColor instantiates a new GeomapColor object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewGeomapColor() *GeomapColor {
+	this := GeomapColor{}
+	return &this
+}
+
+// NewGeomapColorWithDefaults instantiates a new GeomapColor object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewGeomapColorWithDefaults() *GeomapColor {
+	this := GeomapColor{}
+	return &this
+}
+
+// GetColorRange returns the ColorRange field value if set, zero value otherwise.
+func (o *GeomapColor) GetColorRange() ColorGradientType {
+	if o == nil || IsNil(o.ColorRange) {
+		var ret ColorGradientType
+		return ret
 	}
+	return *o.ColorRange
 }
 
-// GeomapColorSizeAsGeomapColor is a convenience function that returns GeomapColorSize wrapped in GeomapColor
-func GeomapColorSizeAsGeomapColor(v *GeomapColorSize) GeomapColor {
-	return GeomapColor{
-		GeomapColorSize: v,
+// GetColorRangeOk returns a tuple with the ColorRange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapColor) GetColorRangeOk() (*ColorGradientType, bool) {
+	if o == nil || IsNil(o.ColorRange) {
+		return nil, false
 	}
+	return o.ColorRange, true
 }
 
+// HasColorRange returns a boolean if a field has been set.
+func (o *GeomapColor) HasColorRange() bool {
+	if o != nil && !IsNil(o.ColorRange) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *GeomapColor) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into GeomapColorColorRange
-	err = json.Unmarshal(data, &dst.GeomapColorColorRange)
-	if err == nil {
-		jsonGeomapColorColorRange, _ := json.Marshal(dst.GeomapColorColorRange)
-		if string(jsonGeomapColorColorRange) == "{}" { // empty struct
-			dst.GeomapColorColorRange = nil
-		} else {
-			if err = validator.Validate(dst.GeomapColorColorRange); err != nil {
-				dst.GeomapColorColorRange = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetColorRange gets a reference to the given ColorGradientType and assigns it to the ColorRange field.
+func (o *GeomapColor) SetColorRange(v ColorGradientType) {
+	o.ColorRange = &v
+}
+
+// GetSize returns the Size field value if set, zero value otherwise.
+func (o *GeomapColor) GetSize() ColorSolidType {
+	if o == nil || IsNil(o.Size) {
+		var ret ColorSolidType
+		return ret
+	}
+	return *o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapColor) GetSizeOk() (*ColorSolidType, bool) {
+	if o == nil || IsNil(o.Size) {
+		return nil, false
+	}
+	return o.Size, true
+}
+
+// HasSize returns a boolean if a field has been set.
+func (o *GeomapColor) HasSize() bool {
+	if o != nil && !IsNil(o.Size) {
+		return true
+	}
+
+	return false
+}
+
+// SetSize gets a reference to the given ColorSolidType and assigns it to the Size field.
+func (o *GeomapColor) SetSize(v ColorSolidType) {
+	o.Size = &v
+}
+
+func (o GeomapColor) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o GeomapColor) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ColorRange) {
+		toSerialize["colorRange"] = o.ColorRange
+	}
+	if !IsNil(o.Size) {
+		toSerialize["size"] = o.Size
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["size"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["colorRange"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [size, colorRange] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *GeomapColor) UnmarshalJSON(data []byte) (err error) {
+	varGeomapColor := _GeomapColor{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapColor)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapColor(varGeomapColor)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["size"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GeomapColorColorRange = nil
-	}
-
-	// try to unmarshal data into GeomapColorSize
-	err = json.Unmarshal(data, &dst.GeomapColorSize)
-	if err == nil {
-		jsonGeomapColorSize, _ := json.Marshal(dst.GeomapColorSize)
-		if string(jsonGeomapColorSize) == "{}" { // empty struct
-			dst.GeomapColorSize = nil
-		} else {
-			if err = validator.Validate(dst.GeomapColorSize); err != nil {
-				dst.GeomapColorSize = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["colorRange"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GeomapColorSize = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [size, colorRange] may be set"}
+		}
+
+		delete(additionalProperties, "colorRange")
+		delete(additionalProperties, "size")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.GeomapColorColorRange = nil
-		dst.GeomapColorSize = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(GeomapColor)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src GeomapColor) MarshalJSON() ([]byte, error) {
-	if src.GeomapColorColorRange != nil {
-		return json.Marshal(&src.GeomapColorColorRange)
-	}
-
-	if src.GeomapColorSize != nil {
-		return json.Marshal(&src.GeomapColorSize)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *GeomapColor) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.GeomapColorColorRange != nil {
-		return obj.GeomapColorColorRange
-	}
-
-	if obj.GeomapColorSize != nil {
-		return obj.GeomapColorSize
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj GeomapColor) GetActualInstanceValue() (interface{}) {
-	if obj.GeomapColorColorRange != nil {
-		return *obj.GeomapColorColorRange
-	}
-
-	if obj.GeomapColorSize != nil {
-		return *obj.GeomapColorSize
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableGeomapColor struct {

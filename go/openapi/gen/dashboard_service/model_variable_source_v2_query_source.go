@@ -13,202 +13,404 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// VariableSourceV2QuerySource - struct for VariableSourceV2QuerySource
+// checks if the VariableSourceV2QuerySource type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VariableSourceV2QuerySource{}
+
+// VariableSourceV2QuerySource Variable source backed by a query against logs, metrics, spans, or Dataprime data.
 type VariableSourceV2QuerySource struct {
-	VariableSourceV2QuerySourceDataprimeQuery *VariableSourceV2QuerySourceDataprimeQuery
-	VariableSourceV2QuerySourceLogsQuery *VariableSourceV2QuerySourceLogsQuery
-	VariableSourceV2QuerySourceMetricsQuery *VariableSourceV2QuerySourceMetricsQuery
-	VariableSourceV2QuerySourceSpansQuery *VariableSourceV2QuerySourceSpansQuery
+	AllOption *AllOption `json:"allOption,omitempty"`
+	DataprimeQuery *QuerySourceDataprimeQuery `json:"dataprimeQuery,omitempty"`
+	LogsQuery *QuerySourceLogsQuery `json:"logsQuery,omitempty"`
+	MetricsQuery *QuerySourceMetricsQuery `json:"metricsQuery,omitempty"`
+	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`
+	SpansQuery *QuerySourceSpansQuery `json:"spansQuery,omitempty"`
+	ValueDisplayOptions *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
+	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// VariableSourceV2QuerySourceDataprimeQueryAsVariableSourceV2QuerySource is a convenience function that returns VariableSourceV2QuerySourceDataprimeQuery wrapped in VariableSourceV2QuerySource
-func VariableSourceV2QuerySourceDataprimeQueryAsVariableSourceV2QuerySource(v *VariableSourceV2QuerySourceDataprimeQuery) VariableSourceV2QuerySource {
-	return VariableSourceV2QuerySource{
-		VariableSourceV2QuerySourceDataprimeQuery: v,
+type _VariableSourceV2QuerySource VariableSourceV2QuerySource
+
+// NewVariableSourceV2QuerySource instantiates a new VariableSourceV2QuerySource object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewVariableSourceV2QuerySource() *VariableSourceV2QuerySource {
+	this := VariableSourceV2QuerySource{}
+	return &this
+}
+
+// NewVariableSourceV2QuerySourceWithDefaults instantiates a new VariableSourceV2QuerySource object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewVariableSourceV2QuerySourceWithDefaults() *VariableSourceV2QuerySource {
+	this := VariableSourceV2QuerySource{}
+	return &this
+}
+
+// GetAllOption returns the AllOption field value if set, zero value otherwise.
+func (o *VariableSourceV2QuerySource) GetAllOption() AllOption {
+	if o == nil || IsNil(o.AllOption) {
+		var ret AllOption
+		return ret
 	}
+	return *o.AllOption
 }
 
-// VariableSourceV2QuerySourceLogsQueryAsVariableSourceV2QuerySource is a convenience function that returns VariableSourceV2QuerySourceLogsQuery wrapped in VariableSourceV2QuerySource
-func VariableSourceV2QuerySourceLogsQueryAsVariableSourceV2QuerySource(v *VariableSourceV2QuerySourceLogsQuery) VariableSourceV2QuerySource {
-	return VariableSourceV2QuerySource{
-		VariableSourceV2QuerySourceLogsQuery: v,
+// GetAllOptionOk returns a tuple with the AllOption field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2QuerySource) GetAllOptionOk() (*AllOption, bool) {
+	if o == nil || IsNil(o.AllOption) {
+		return nil, false
 	}
+	return o.AllOption, true
 }
 
-// VariableSourceV2QuerySourceMetricsQueryAsVariableSourceV2QuerySource is a convenience function that returns VariableSourceV2QuerySourceMetricsQuery wrapped in VariableSourceV2QuerySource
-func VariableSourceV2QuerySourceMetricsQueryAsVariableSourceV2QuerySource(v *VariableSourceV2QuerySourceMetricsQuery) VariableSourceV2QuerySource {
-	return VariableSourceV2QuerySource{
-		VariableSourceV2QuerySourceMetricsQuery: v,
+// HasAllOption returns a boolean if a field has been set.
+func (o *VariableSourceV2QuerySource) HasAllOption() bool {
+	if o != nil && !IsNil(o.AllOption) {
+		return true
 	}
+
+	return false
 }
 
-// VariableSourceV2QuerySourceSpansQueryAsVariableSourceV2QuerySource is a convenience function that returns VariableSourceV2QuerySourceSpansQuery wrapped in VariableSourceV2QuerySource
-func VariableSourceV2QuerySourceSpansQueryAsVariableSourceV2QuerySource(v *VariableSourceV2QuerySourceSpansQuery) VariableSourceV2QuerySource {
-	return VariableSourceV2QuerySource{
-		VariableSourceV2QuerySourceSpansQuery: v,
+// SetAllOption gets a reference to the given AllOption and assigns it to the AllOption field.
+func (o *VariableSourceV2QuerySource) SetAllOption(v AllOption) {
+	o.AllOption = &v
+}
+
+// GetDataprimeQuery returns the DataprimeQuery field value if set, zero value otherwise.
+func (o *VariableSourceV2QuerySource) GetDataprimeQuery() QuerySourceDataprimeQuery {
+	if o == nil || IsNil(o.DataprimeQuery) {
+		var ret QuerySourceDataprimeQuery
+		return ret
 	}
+	return *o.DataprimeQuery
 }
 
+// GetDataprimeQueryOk returns a tuple with the DataprimeQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2QuerySource) GetDataprimeQueryOk() (*QuerySourceDataprimeQuery, bool) {
+	if o == nil || IsNil(o.DataprimeQuery) {
+		return nil, false
+	}
+	return o.DataprimeQuery, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *VariableSourceV2QuerySource) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into VariableSourceV2QuerySourceDataprimeQuery
-	err = json.Unmarshal(data, &dst.VariableSourceV2QuerySourceDataprimeQuery)
-	if err == nil {
-		jsonVariableSourceV2QuerySourceDataprimeQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceDataprimeQuery)
-		if string(jsonVariableSourceV2QuerySourceDataprimeQuery) == "{}" { // empty struct
-			dst.VariableSourceV2QuerySourceDataprimeQuery = nil
-		} else {
-			if err = validator.Validate(dst.VariableSourceV2QuerySourceDataprimeQuery); err != nil {
-				dst.VariableSourceV2QuerySourceDataprimeQuery = nil
-			} else {
-				match++
-			}
+// HasDataprimeQuery returns a boolean if a field has been set.
+func (o *VariableSourceV2QuerySource) HasDataprimeQuery() bool {
+	if o != nil && !IsNil(o.DataprimeQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataprimeQuery gets a reference to the given QuerySourceDataprimeQuery and assigns it to the DataprimeQuery field.
+func (o *VariableSourceV2QuerySource) SetDataprimeQuery(v QuerySourceDataprimeQuery) {
+	o.DataprimeQuery = &v
+}
+
+// GetLogsQuery returns the LogsQuery field value if set, zero value otherwise.
+func (o *VariableSourceV2QuerySource) GetLogsQuery() QuerySourceLogsQuery {
+	if o == nil || IsNil(o.LogsQuery) {
+		var ret QuerySourceLogsQuery
+		return ret
+	}
+	return *o.LogsQuery
+}
+
+// GetLogsQueryOk returns a tuple with the LogsQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2QuerySource) GetLogsQueryOk() (*QuerySourceLogsQuery, bool) {
+	if o == nil || IsNil(o.LogsQuery) {
+		return nil, false
+	}
+	return o.LogsQuery, true
+}
+
+// HasLogsQuery returns a boolean if a field has been set.
+func (o *VariableSourceV2QuerySource) HasLogsQuery() bool {
+	if o != nil && !IsNil(o.LogsQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsQuery gets a reference to the given QuerySourceLogsQuery and assigns it to the LogsQuery field.
+func (o *VariableSourceV2QuerySource) SetLogsQuery(v QuerySourceLogsQuery) {
+	o.LogsQuery = &v
+}
+
+// GetMetricsQuery returns the MetricsQuery field value if set, zero value otherwise.
+func (o *VariableSourceV2QuerySource) GetMetricsQuery() QuerySourceMetricsQuery {
+	if o == nil || IsNil(o.MetricsQuery) {
+		var ret QuerySourceMetricsQuery
+		return ret
+	}
+	return *o.MetricsQuery
+}
+
+// GetMetricsQueryOk returns a tuple with the MetricsQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2QuerySource) GetMetricsQueryOk() (*QuerySourceMetricsQuery, bool) {
+	if o == nil || IsNil(o.MetricsQuery) {
+		return nil, false
+	}
+	return o.MetricsQuery, true
+}
+
+// HasMetricsQuery returns a boolean if a field has been set.
+func (o *VariableSourceV2QuerySource) HasMetricsQuery() bool {
+	if o != nil && !IsNil(o.MetricsQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricsQuery gets a reference to the given QuerySourceMetricsQuery and assigns it to the MetricsQuery field.
+func (o *VariableSourceV2QuerySource) SetMetricsQuery(v QuerySourceMetricsQuery) {
+	o.MetricsQuery = &v
+}
+
+// GetRefreshStrategy returns the RefreshStrategy field value if set, zero value otherwise.
+func (o *VariableSourceV2QuerySource) GetRefreshStrategy() VariableSourceV2RefreshStrategy {
+	if o == nil || IsNil(o.RefreshStrategy) {
+		var ret VariableSourceV2RefreshStrategy
+		return ret
+	}
+	return *o.RefreshStrategy
+}
+
+// GetRefreshStrategyOk returns a tuple with the RefreshStrategy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2QuerySource) GetRefreshStrategyOk() (*VariableSourceV2RefreshStrategy, bool) {
+	if o == nil || IsNil(o.RefreshStrategy) {
+		return nil, false
+	}
+	return o.RefreshStrategy, true
+}
+
+// HasRefreshStrategy returns a boolean if a field has been set.
+func (o *VariableSourceV2QuerySource) HasRefreshStrategy() bool {
+	if o != nil && !IsNil(o.RefreshStrategy) {
+		return true
+	}
+
+	return false
+}
+
+// SetRefreshStrategy gets a reference to the given VariableSourceV2RefreshStrategy and assigns it to the RefreshStrategy field.
+func (o *VariableSourceV2QuerySource) SetRefreshStrategy(v VariableSourceV2RefreshStrategy) {
+	o.RefreshStrategy = &v
+}
+
+// GetSpansQuery returns the SpansQuery field value if set, zero value otherwise.
+func (o *VariableSourceV2QuerySource) GetSpansQuery() QuerySourceSpansQuery {
+	if o == nil || IsNil(o.SpansQuery) {
+		var ret QuerySourceSpansQuery
+		return ret
+	}
+	return *o.SpansQuery
+}
+
+// GetSpansQueryOk returns a tuple with the SpansQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2QuerySource) GetSpansQueryOk() (*QuerySourceSpansQuery, bool) {
+	if o == nil || IsNil(o.SpansQuery) {
+		return nil, false
+	}
+	return o.SpansQuery, true
+}
+
+// HasSpansQuery returns a boolean if a field has been set.
+func (o *VariableSourceV2QuerySource) HasSpansQuery() bool {
+	if o != nil && !IsNil(o.SpansQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpansQuery gets a reference to the given QuerySourceSpansQuery and assigns it to the SpansQuery field.
+func (o *VariableSourceV2QuerySource) SetSpansQuery(v QuerySourceSpansQuery) {
+	o.SpansQuery = &v
+}
+
+// GetValueDisplayOptions returns the ValueDisplayOptions field value if set, zero value otherwise.
+func (o *VariableSourceV2QuerySource) GetValueDisplayOptions() VariableSourceV2ValueDisplayOptions {
+	if o == nil || IsNil(o.ValueDisplayOptions) {
+		var ret VariableSourceV2ValueDisplayOptions
+		return ret
+	}
+	return *o.ValueDisplayOptions
+}
+
+// GetValueDisplayOptionsOk returns a tuple with the ValueDisplayOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2QuerySource) GetValueDisplayOptionsOk() (*VariableSourceV2ValueDisplayOptions, bool) {
+	if o == nil || IsNil(o.ValueDisplayOptions) {
+		return nil, false
+	}
+	return o.ValueDisplayOptions, true
+}
+
+// HasValueDisplayOptions returns a boolean if a field has been set.
+func (o *VariableSourceV2QuerySource) HasValueDisplayOptions() bool {
+	if o != nil && !IsNil(o.ValueDisplayOptions) {
+		return true
+	}
+
+	return false
+}
+
+// SetValueDisplayOptions gets a reference to the given VariableSourceV2ValueDisplayOptions and assigns it to the ValueDisplayOptions field.
+func (o *VariableSourceV2QuerySource) SetValueDisplayOptions(v VariableSourceV2ValueDisplayOptions) {
+	o.ValueDisplayOptions = &v
+}
+
+// GetValuesOrderDirection returns the ValuesOrderDirection field value if set, zero value otherwise.
+func (o *VariableSourceV2QuerySource) GetValuesOrderDirection() OrderDirection {
+	if o == nil || IsNil(o.ValuesOrderDirection) {
+		var ret OrderDirection
+		return ret
+	}
+	return *o.ValuesOrderDirection
+}
+
+// GetValuesOrderDirectionOk returns a tuple with the ValuesOrderDirection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2QuerySource) GetValuesOrderDirectionOk() (*OrderDirection, bool) {
+	if o == nil || IsNil(o.ValuesOrderDirection) {
+		return nil, false
+	}
+	return o.ValuesOrderDirection, true
+}
+
+// HasValuesOrderDirection returns a boolean if a field has been set.
+func (o *VariableSourceV2QuerySource) HasValuesOrderDirection() bool {
+	if o != nil && !IsNil(o.ValuesOrderDirection) {
+		return true
+	}
+
+	return false
+}
+
+// SetValuesOrderDirection gets a reference to the given OrderDirection and assigns it to the ValuesOrderDirection field.
+func (o *VariableSourceV2QuerySource) SetValuesOrderDirection(v OrderDirection) {
+	o.ValuesOrderDirection = &v
+}
+
+func (o VariableSourceV2QuerySource) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VariableSourceV2QuerySource) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AllOption) {
+		toSerialize["allOption"] = o.AllOption
+	}
+	if !IsNil(o.DataprimeQuery) {
+		toSerialize["dataprimeQuery"] = o.DataprimeQuery
+	}
+	if !IsNil(o.LogsQuery) {
+		toSerialize["logsQuery"] = o.LogsQuery
+	}
+	if !IsNil(o.MetricsQuery) {
+		toSerialize["metricsQuery"] = o.MetricsQuery
+	}
+	if !IsNil(o.RefreshStrategy) {
+		toSerialize["refreshStrategy"] = o.RefreshStrategy
+	}
+	if !IsNil(o.SpansQuery) {
+		toSerialize["spansQuery"] = o.SpansQuery
+	}
+	if !IsNil(o.ValueDisplayOptions) {
+		toSerialize["valueDisplayOptions"] = o.ValueDisplayOptions
+	}
+	if !IsNil(o.ValuesOrderDirection) {
+		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logsQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metricsQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spansQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dataprimeQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsQuery, metricsQuery, spansQuery, dataprimeQuery] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *VariableSourceV2QuerySource) UnmarshalJSON(data []byte) (err error) {
+	varVariableSourceV2QuerySource := _VariableSourceV2QuerySource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableSourceV2QuerySource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableSourceV2QuerySource(varVariableSourceV2QuerySource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logsQuery"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableSourceV2QuerySourceDataprimeQuery = nil
-	}
-
-	// try to unmarshal data into VariableSourceV2QuerySourceLogsQuery
-	err = json.Unmarshal(data, &dst.VariableSourceV2QuerySourceLogsQuery)
-	if err == nil {
-		jsonVariableSourceV2QuerySourceLogsQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceLogsQuery)
-		if string(jsonVariableSourceV2QuerySourceLogsQuery) == "{}" { // empty struct
-			dst.VariableSourceV2QuerySourceLogsQuery = nil
-		} else {
-			if err = validator.Validate(dst.VariableSourceV2QuerySourceLogsQuery); err != nil {
-				dst.VariableSourceV2QuerySourceLogsQuery = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metricsQuery"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableSourceV2QuerySourceLogsQuery = nil
-	}
-
-	// try to unmarshal data into VariableSourceV2QuerySourceMetricsQuery
-	err = json.Unmarshal(data, &dst.VariableSourceV2QuerySourceMetricsQuery)
-	if err == nil {
-		jsonVariableSourceV2QuerySourceMetricsQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceMetricsQuery)
-		if string(jsonVariableSourceV2QuerySourceMetricsQuery) == "{}" { // empty struct
-			dst.VariableSourceV2QuerySourceMetricsQuery = nil
-		} else {
-			if err = validator.Validate(dst.VariableSourceV2QuerySourceMetricsQuery); err != nil {
-				dst.VariableSourceV2QuerySourceMetricsQuery = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spansQuery"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableSourceV2QuerySourceMetricsQuery = nil
-	}
-
-	// try to unmarshal data into VariableSourceV2QuerySourceSpansQuery
-	err = json.Unmarshal(data, &dst.VariableSourceV2QuerySourceSpansQuery)
-	if err == nil {
-		jsonVariableSourceV2QuerySourceSpansQuery, _ := json.Marshal(dst.VariableSourceV2QuerySourceSpansQuery)
-		if string(jsonVariableSourceV2QuerySourceSpansQuery) == "{}" { // empty struct
-			dst.VariableSourceV2QuerySourceSpansQuery = nil
-		} else {
-			if err = validator.Validate(dst.VariableSourceV2QuerySourceSpansQuery); err != nil {
-				dst.VariableSourceV2QuerySourceSpansQuery = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dataprimeQuery"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableSourceV2QuerySourceSpansQuery = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logsQuery, metricsQuery, spansQuery, dataprimeQuery] may be set"}
+		}
+
+		delete(additionalProperties, "allOption")
+		delete(additionalProperties, "dataprimeQuery")
+		delete(additionalProperties, "logsQuery")
+		delete(additionalProperties, "metricsQuery")
+		delete(additionalProperties, "refreshStrategy")
+		delete(additionalProperties, "spansQuery")
+		delete(additionalProperties, "valueDisplayOptions")
+		delete(additionalProperties, "valuesOrderDirection")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.VariableSourceV2QuerySourceDataprimeQuery = nil
-		dst.VariableSourceV2QuerySourceLogsQuery = nil
-		dst.VariableSourceV2QuerySourceMetricsQuery = nil
-		dst.VariableSourceV2QuerySourceSpansQuery = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(VariableSourceV2QuerySource)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src VariableSourceV2QuerySource) MarshalJSON() ([]byte, error) {
-	if src.VariableSourceV2QuerySourceDataprimeQuery != nil {
-		return json.Marshal(&src.VariableSourceV2QuerySourceDataprimeQuery)
-	}
-
-	if src.VariableSourceV2QuerySourceLogsQuery != nil {
-		return json.Marshal(&src.VariableSourceV2QuerySourceLogsQuery)
-	}
-
-	if src.VariableSourceV2QuerySourceMetricsQuery != nil {
-		return json.Marshal(&src.VariableSourceV2QuerySourceMetricsQuery)
-	}
-
-	if src.VariableSourceV2QuerySourceSpansQuery != nil {
-		return json.Marshal(&src.VariableSourceV2QuerySourceSpansQuery)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *VariableSourceV2QuerySource) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.VariableSourceV2QuerySourceDataprimeQuery != nil {
-		return obj.VariableSourceV2QuerySourceDataprimeQuery
-	}
-
-	if obj.VariableSourceV2QuerySourceLogsQuery != nil {
-		return obj.VariableSourceV2QuerySourceLogsQuery
-	}
-
-	if obj.VariableSourceV2QuerySourceMetricsQuery != nil {
-		return obj.VariableSourceV2QuerySourceMetricsQuery
-	}
-
-	if obj.VariableSourceV2QuerySourceSpansQuery != nil {
-		return obj.VariableSourceV2QuerySourceSpansQuery
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj VariableSourceV2QuerySource) GetActualInstanceValue() (interface{}) {
-	if obj.VariableSourceV2QuerySourceDataprimeQuery != nil {
-		return *obj.VariableSourceV2QuerySourceDataprimeQuery
-	}
-
-	if obj.VariableSourceV2QuerySourceLogsQuery != nil {
-		return *obj.VariableSourceV2QuerySourceLogsQuery
-	}
-
-	if obj.VariableSourceV2QuerySourceMetricsQuery != nil {
-		return *obj.VariableSourceV2QuerySourceMetricsQuery
-	}
-
-	if obj.VariableSourceV2QuerySourceSpansQuery != nil {
-		return *obj.VariableSourceV2QuerySourceSpansQuery
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableVariableSourceV2QuerySource struct {

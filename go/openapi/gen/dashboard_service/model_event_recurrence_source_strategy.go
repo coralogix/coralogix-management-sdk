@@ -13,126 +13,170 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// EventRecurrenceSourceStrategy - struct for EventRecurrenceSourceStrategy
+// checks if the EventRecurrenceSourceStrategy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EventRecurrenceSourceStrategy{}
+
+// EventRecurrenceSourceStrategy Determines how the recurrence event is rendered: as an instant point or a sliding window duration.
 type EventRecurrenceSourceStrategy struct {
-	EventRecurrenceSourceStrategyDurationVariant *EventRecurrenceSourceStrategyDurationVariant
-	EventRecurrenceSourceStrategyInstantVariant *EventRecurrenceSourceStrategyInstantVariant
+	Duration *EventRecurrenceSourceStrategyDuration `json:"duration,omitempty"`
+	Instant *EventRecurrenceSourceStrategyInstant `json:"instant,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// EventRecurrenceSourceStrategyDurationVariantAsEventRecurrenceSourceStrategy is a convenience function that returns EventRecurrenceSourceStrategyDurationVariant wrapped in EventRecurrenceSourceStrategy
-func EventRecurrenceSourceStrategyDurationVariantAsEventRecurrenceSourceStrategy(v *EventRecurrenceSourceStrategyDurationVariant) EventRecurrenceSourceStrategy {
-	return EventRecurrenceSourceStrategy{
-		EventRecurrenceSourceStrategyDurationVariant: v,
+type _EventRecurrenceSourceStrategy EventRecurrenceSourceStrategy
+
+// NewEventRecurrenceSourceStrategy instantiates a new EventRecurrenceSourceStrategy object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewEventRecurrenceSourceStrategy() *EventRecurrenceSourceStrategy {
+	this := EventRecurrenceSourceStrategy{}
+	return &this
+}
+
+// NewEventRecurrenceSourceStrategyWithDefaults instantiates a new EventRecurrenceSourceStrategy object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewEventRecurrenceSourceStrategyWithDefaults() *EventRecurrenceSourceStrategy {
+	this := EventRecurrenceSourceStrategy{}
+	return &this
+}
+
+// GetDuration returns the Duration field value if set, zero value otherwise.
+func (o *EventRecurrenceSourceStrategy) GetDuration() EventRecurrenceSourceStrategyDuration {
+	if o == nil || IsNil(o.Duration) {
+		var ret EventRecurrenceSourceStrategyDuration
+		return ret
 	}
+	return *o.Duration
 }
 
-// EventRecurrenceSourceStrategyInstantVariantAsEventRecurrenceSourceStrategy is a convenience function that returns EventRecurrenceSourceStrategyInstantVariant wrapped in EventRecurrenceSourceStrategy
-func EventRecurrenceSourceStrategyInstantVariantAsEventRecurrenceSourceStrategy(v *EventRecurrenceSourceStrategyInstantVariant) EventRecurrenceSourceStrategy {
-	return EventRecurrenceSourceStrategy{
-		EventRecurrenceSourceStrategyInstantVariant: v,
+// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventRecurrenceSourceStrategy) GetDurationOk() (*EventRecurrenceSourceStrategyDuration, bool) {
+	if o == nil || IsNil(o.Duration) {
+		return nil, false
 	}
+	return o.Duration, true
 }
 
+// HasDuration returns a boolean if a field has been set.
+func (o *EventRecurrenceSourceStrategy) HasDuration() bool {
+	if o != nil && !IsNil(o.Duration) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *EventRecurrenceSourceStrategy) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into EventRecurrenceSourceStrategyDurationVariant
-	err = json.Unmarshal(data, &dst.EventRecurrenceSourceStrategyDurationVariant)
-	if err == nil {
-		jsonEventRecurrenceSourceStrategyDurationVariant, _ := json.Marshal(dst.EventRecurrenceSourceStrategyDurationVariant)
-		if string(jsonEventRecurrenceSourceStrategyDurationVariant) == "{}" { // empty struct
-			dst.EventRecurrenceSourceStrategyDurationVariant = nil
-		} else {
-			if err = validator.Validate(dst.EventRecurrenceSourceStrategyDurationVariant); err != nil {
-				dst.EventRecurrenceSourceStrategyDurationVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetDuration gets a reference to the given EventRecurrenceSourceStrategyDuration and assigns it to the Duration field.
+func (o *EventRecurrenceSourceStrategy) SetDuration(v EventRecurrenceSourceStrategyDuration) {
+	o.Duration = &v
+}
+
+// GetInstant returns the Instant field value if set, zero value otherwise.
+func (o *EventRecurrenceSourceStrategy) GetInstant() EventRecurrenceSourceStrategyInstant {
+	if o == nil || IsNil(o.Instant) {
+		var ret EventRecurrenceSourceStrategyInstant
+		return ret
+	}
+	return *o.Instant
+}
+
+// GetInstantOk returns a tuple with the Instant field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventRecurrenceSourceStrategy) GetInstantOk() (*EventRecurrenceSourceStrategyInstant, bool) {
+	if o == nil || IsNil(o.Instant) {
+		return nil, false
+	}
+	return o.Instant, true
+}
+
+// HasInstant returns a boolean if a field has been set.
+func (o *EventRecurrenceSourceStrategy) HasInstant() bool {
+	if o != nil && !IsNil(o.Instant) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstant gets a reference to the given EventRecurrenceSourceStrategyInstant and assigns it to the Instant field.
+func (o *EventRecurrenceSourceStrategy) SetInstant(v EventRecurrenceSourceStrategyInstant) {
+	o.Instant = &v
+}
+
+func (o EventRecurrenceSourceStrategy) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EventRecurrenceSourceStrategy) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Duration) {
+		toSerialize["duration"] = o.Duration
+	}
+	if !IsNil(o.Instant) {
+		toSerialize["instant"] = o.Instant
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["instant"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["duration"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [instant, duration] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *EventRecurrenceSourceStrategy) UnmarshalJSON(data []byte) (err error) {
+	varEventRecurrenceSourceStrategy := _EventRecurrenceSourceStrategy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEventRecurrenceSourceStrategy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EventRecurrenceSourceStrategy(varEventRecurrenceSourceStrategy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["instant"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EventRecurrenceSourceStrategyDurationVariant = nil
-	}
-
-	// try to unmarshal data into EventRecurrenceSourceStrategyInstantVariant
-	err = json.Unmarshal(data, &dst.EventRecurrenceSourceStrategyInstantVariant)
-	if err == nil {
-		jsonEventRecurrenceSourceStrategyInstantVariant, _ := json.Marshal(dst.EventRecurrenceSourceStrategyInstantVariant)
-		if string(jsonEventRecurrenceSourceStrategyInstantVariant) == "{}" { // empty struct
-			dst.EventRecurrenceSourceStrategyInstantVariant = nil
-		} else {
-			if err = validator.Validate(dst.EventRecurrenceSourceStrategyInstantVariant); err != nil {
-				dst.EventRecurrenceSourceStrategyInstantVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["duration"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EventRecurrenceSourceStrategyInstantVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [instant, duration] may be set"}
+		}
+
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "instant")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.EventRecurrenceSourceStrategyDurationVariant = nil
-		dst.EventRecurrenceSourceStrategyInstantVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(EventRecurrenceSourceStrategy)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src EventRecurrenceSourceStrategy) MarshalJSON() ([]byte, error) {
-	if src.EventRecurrenceSourceStrategyDurationVariant != nil {
-		return json.Marshal(&src.EventRecurrenceSourceStrategyDurationVariant)
-	}
-
-	if src.EventRecurrenceSourceStrategyInstantVariant != nil {
-		return json.Marshal(&src.EventRecurrenceSourceStrategyInstantVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *EventRecurrenceSourceStrategy) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.EventRecurrenceSourceStrategyDurationVariant != nil {
-		return obj.EventRecurrenceSourceStrategyDurationVariant
-	}
-
-	if obj.EventRecurrenceSourceStrategyInstantVariant != nil {
-		return obj.EventRecurrenceSourceStrategyInstantVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj EventRecurrenceSourceStrategy) GetActualInstanceValue() (interface{}) {
-	if obj.EventRecurrenceSourceStrategyDurationVariant != nil {
-		return *obj.EventRecurrenceSourceStrategyDurationVariant
-	}
-
-	if obj.EventRecurrenceSourceStrategyInstantVariant != nil {
-		return *obj.EventRecurrenceSourceStrategyInstantVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableEventRecurrenceSourceStrategy struct {

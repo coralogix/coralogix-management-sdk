@@ -899,16 +899,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -919,26 +909,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -949,9 +919,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {
@@ -1312,86 +1298,69 @@
         }
       },
       "RuleMatcher": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/RuleMatcherApplicationName"
-          },
-          {
-            "$ref": "#/components/schemas/RuleMatcherSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/RuleMatcherSubsystemName"
-          }
-        ]
-      },
-      "RuleMatcherApplicationName": {
         "type": "object",
         "properties": {
           "applicationName": {
             "$ref": "#/components/schemas/ApplicationNameConstraint"
-          }
-        },
-        "required": [
-          "applicationName"
-        ]
-      },
-      "RuleMatcherSeverity": {
-        "type": "object",
-        "properties": {
+          },
           "severity": {
             "$ref": "#/components/schemas/SeverityConstraint"
-          }
-        },
-        "required": [
-          "severity"
-        ]
-      },
-      "RuleMatcherSubsystemName": {
-        "type": "object",
-        "properties": {
+          },
           "subsystemName": {
             "$ref": "#/components/schemas/SubsystemNameConstraint"
           }
         },
-        "required": [
-          "subsystemName"
-        ]
-      },
-      "RuleParameters": {
-        "oneOf": [
+        "allOf": [
           {
-            "$ref": "#/components/schemas/RuleParametersAllowParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersBlockParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersExtractParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersParseParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "applicationName"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "subsystemName"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "severity"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "applicationName"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "subsystemName"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "severity"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
-      "RuleParametersAllowParameters": {
+      "RuleParameters": {
         "externalDocs": {
           "url": ""
         },
@@ -1400,145 +1369,167 @@
         "properties": {
           "allowParameters": {
             "$ref": "#/components/schemas/AllowParameters"
-          }
-        },
-        "required": [
-          "allowParameters"
-        ]
-      },
-      "RuleParametersBlockParameters": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Rule parameters.",
-        "type": "object",
-        "properties": {
+          },
           "blockParameters": {
             "$ref": "#/components/schemas/BlockParameters"
-          }
-        },
-        "required": [
-          "blockParameters"
-        ]
-      },
-      "RuleParametersExtractParameters": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Rule parameters.",
-        "type": "object",
-        "properties": {
+          },
           "extractParameters": {
             "$ref": "#/components/schemas/ExtractParameters"
-          }
-        },
-        "required": [
-          "extractParameters"
-        ]
-      },
-      "RuleParametersExtractTimestampParameters": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Rule parameters.",
-        "type": "object",
-        "properties": {
+          },
           "extractTimestampParameters": {
             "$ref": "#/components/schemas/ExtractTimestampParameters"
-          }
-        },
-        "required": [
-          "extractTimestampParameters"
-        ]
-      },
-      "RuleParametersJsonExtractParameters": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Rule parameters.",
-        "type": "object",
-        "properties": {
+          },
           "jsonExtractParameters": {
             "$ref": "#/components/schemas/JsonExtractParameters"
-          }
-        },
-        "required": [
-          "jsonExtractParameters"
-        ]
-      },
-      "RuleParametersJsonParseParameters": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Rule parameters.",
-        "type": "object",
-        "properties": {
+          },
           "jsonParseParameters": {
             "$ref": "#/components/schemas/JsonParseParameters"
-          }
-        },
-        "required": [
-          "jsonParseParameters"
-        ]
-      },
-      "RuleParametersJsonStringifyParameters": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Rule parameters.",
-        "type": "object",
-        "properties": {
+          },
           "jsonStringifyParameters": {
             "$ref": "#/components/schemas/JsonStringifyParameters"
-          }
-        },
-        "required": [
-          "jsonStringifyParameters"
-        ]
-      },
-      "RuleParametersParseParameters": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Rule parameters.",
-        "type": "object",
-        "properties": {
+          },
           "parseParameters": {
             "$ref": "#/components/schemas/ParseParameters"
-          }
-        },
-        "required": [
-          "parseParameters"
-        ]
-      },
-      "RuleParametersRemoveFieldsParameters": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Rule parameters.",
-        "type": "object",
-        "properties": {
+          },
           "removeFieldsParameters": {
             "$ref": "#/components/schemas/RemoveFieldsParameters"
-          }
-        },
-        "required": [
-          "removeFieldsParameters"
-        ]
-      },
-      "RuleParametersReplaceParameters": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Rule parameters.",
-        "type": "object",
-        "properties": {
+          },
           "replaceParameters": {
             "$ref": "#/components/schemas/ReplaceParameters"
           }
         },
-        "required": [
-          "replaceParameters"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "extractParameters"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "jsonExtractParameters"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "replaceParameters"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "parseParameters"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "allowParameters"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "blockParameters"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "extractTimestampParameters"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "removeFieldsParameters"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "jsonStringifyParameters"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "jsonParseParameters"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "extractParameters"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "jsonExtractParameters"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "replaceParameters"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "parseParameters"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "allowParameters"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "blockParameters"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "extractTimestampParameters"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "removeFieldsParameters"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "jsonStringifyParameters"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "jsonParseParameters"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "RuleSubgroup": {

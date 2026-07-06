@@ -13,164 +13,213 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// VariableSourceV2 - struct for VariableSourceV2
+// checks if the VariableSourceV2 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VariableSourceV2{}
+
+// VariableSourceV2 Variable source v2.
 type VariableSourceV2 struct {
-	VariableSourceV2Query *VariableSourceV2Query
-	VariableSourceV2Static *VariableSourceV2Static
-	VariableSourceV2Textbox *VariableSourceV2Textbox
+	Query *VariableSourceV2QuerySource `json:"query,omitempty"`
+	Static *StaticSource `json:"static,omitempty"`
+	Textbox *TextboxSource `json:"textbox,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// VariableSourceV2QueryAsVariableSourceV2 is a convenience function that returns VariableSourceV2Query wrapped in VariableSourceV2
-func VariableSourceV2QueryAsVariableSourceV2(v *VariableSourceV2Query) VariableSourceV2 {
-	return VariableSourceV2{
-		VariableSourceV2Query: v,
+type _VariableSourceV2 VariableSourceV2
+
+// NewVariableSourceV2 instantiates a new VariableSourceV2 object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewVariableSourceV2() *VariableSourceV2 {
+	this := VariableSourceV2{}
+	return &this
+}
+
+// NewVariableSourceV2WithDefaults instantiates a new VariableSourceV2 object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewVariableSourceV2WithDefaults() *VariableSourceV2 {
+	this := VariableSourceV2{}
+	return &this
+}
+
+// GetQuery returns the Query field value if set, zero value otherwise.
+func (o *VariableSourceV2) GetQuery() VariableSourceV2QuerySource {
+	if o == nil || IsNil(o.Query) {
+		var ret VariableSourceV2QuerySource
+		return ret
 	}
+	return *o.Query
 }
 
-// VariableSourceV2StaticAsVariableSourceV2 is a convenience function that returns VariableSourceV2Static wrapped in VariableSourceV2
-func VariableSourceV2StaticAsVariableSourceV2(v *VariableSourceV2Static) VariableSourceV2 {
-	return VariableSourceV2{
-		VariableSourceV2Static: v,
+// GetQueryOk returns a tuple with the Query field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2) GetQueryOk() (*VariableSourceV2QuerySource, bool) {
+	if o == nil || IsNil(o.Query) {
+		return nil, false
 	}
+	return o.Query, true
 }
 
-// VariableSourceV2TextboxAsVariableSourceV2 is a convenience function that returns VariableSourceV2Textbox wrapped in VariableSourceV2
-func VariableSourceV2TextboxAsVariableSourceV2(v *VariableSourceV2Textbox) VariableSourceV2 {
-	return VariableSourceV2{
-		VariableSourceV2Textbox: v,
+// HasQuery returns a boolean if a field has been set.
+func (o *VariableSourceV2) HasQuery() bool {
+	if o != nil && !IsNil(o.Query) {
+		return true
 	}
+
+	return false
 }
 
+// SetQuery gets a reference to the given VariableSourceV2QuerySource and assigns it to the Query field.
+func (o *VariableSourceV2) SetQuery(v VariableSourceV2QuerySource) {
+	o.Query = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *VariableSourceV2) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into VariableSourceV2Query
-	err = json.Unmarshal(data, &dst.VariableSourceV2Query)
-	if err == nil {
-		jsonVariableSourceV2Query, _ := json.Marshal(dst.VariableSourceV2Query)
-		if string(jsonVariableSourceV2Query) == "{}" { // empty struct
-			dst.VariableSourceV2Query = nil
-		} else {
-			if err = validator.Validate(dst.VariableSourceV2Query); err != nil {
-				dst.VariableSourceV2Query = nil
-			} else {
-				match++
-			}
+// GetStatic returns the Static field value if set, zero value otherwise.
+func (o *VariableSourceV2) GetStatic() StaticSource {
+	if o == nil || IsNil(o.Static) {
+		var ret StaticSource
+		return ret
+	}
+	return *o.Static
+}
+
+// GetStaticOk returns a tuple with the Static field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2) GetStaticOk() (*StaticSource, bool) {
+	if o == nil || IsNil(o.Static) {
+		return nil, false
+	}
+	return o.Static, true
+}
+
+// HasStatic returns a boolean if a field has been set.
+func (o *VariableSourceV2) HasStatic() bool {
+	if o != nil && !IsNil(o.Static) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatic gets a reference to the given StaticSource and assigns it to the Static field.
+func (o *VariableSourceV2) SetStatic(v StaticSource) {
+	o.Static = &v
+}
+
+// GetTextbox returns the Textbox field value if set, zero value otherwise.
+func (o *VariableSourceV2) GetTextbox() TextboxSource {
+	if o == nil || IsNil(o.Textbox) {
+		var ret TextboxSource
+		return ret
+	}
+	return *o.Textbox
+}
+
+// GetTextboxOk returns a tuple with the Textbox field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableSourceV2) GetTextboxOk() (*TextboxSource, bool) {
+	if o == nil || IsNil(o.Textbox) {
+		return nil, false
+	}
+	return o.Textbox, true
+}
+
+// HasTextbox returns a boolean if a field has been set.
+func (o *VariableSourceV2) HasTextbox() bool {
+	if o != nil && !IsNil(o.Textbox) {
+		return true
+	}
+
+	return false
+}
+
+// SetTextbox gets a reference to the given TextboxSource and assigns it to the Textbox field.
+func (o *VariableSourceV2) SetTextbox(v TextboxSource) {
+	o.Textbox = &v
+}
+
+func (o VariableSourceV2) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VariableSourceV2) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Query) {
+		toSerialize["query"] = o.Query
+	}
+	if !IsNil(o.Static) {
+		toSerialize["static"] = o.Static
+	}
+	if !IsNil(o.Textbox) {
+		toSerialize["textbox"] = o.Textbox
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["static"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["query"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["textbox"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [static, query, textbox] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *VariableSourceV2) UnmarshalJSON(data []byte) (err error) {
+	varVariableSourceV2 := _VariableSourceV2{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableSourceV2)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableSourceV2(varVariableSourceV2)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["static"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableSourceV2Query = nil
-	}
-
-	// try to unmarshal data into VariableSourceV2Static
-	err = json.Unmarshal(data, &dst.VariableSourceV2Static)
-	if err == nil {
-		jsonVariableSourceV2Static, _ := json.Marshal(dst.VariableSourceV2Static)
-		if string(jsonVariableSourceV2Static) == "{}" { // empty struct
-			dst.VariableSourceV2Static = nil
-		} else {
-			if err = validator.Validate(dst.VariableSourceV2Static); err != nil {
-				dst.VariableSourceV2Static = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["query"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableSourceV2Static = nil
-	}
-
-	// try to unmarshal data into VariableSourceV2Textbox
-	err = json.Unmarshal(data, &dst.VariableSourceV2Textbox)
-	if err == nil {
-		jsonVariableSourceV2Textbox, _ := json.Marshal(dst.VariableSourceV2Textbox)
-		if string(jsonVariableSourceV2Textbox) == "{}" { // empty struct
-			dst.VariableSourceV2Textbox = nil
-		} else {
-			if err = validator.Validate(dst.VariableSourceV2Textbox); err != nil {
-				dst.VariableSourceV2Textbox = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["textbox"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableSourceV2Textbox = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [static, query, textbox] may be set"}
+		}
+
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "static")
+		delete(additionalProperties, "textbox")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.VariableSourceV2Query = nil
-		dst.VariableSourceV2Static = nil
-		dst.VariableSourceV2Textbox = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(VariableSourceV2)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src VariableSourceV2) MarshalJSON() ([]byte, error) {
-	if src.VariableSourceV2Query != nil {
-		return json.Marshal(&src.VariableSourceV2Query)
-	}
-
-	if src.VariableSourceV2Static != nil {
-		return json.Marshal(&src.VariableSourceV2Static)
-	}
-
-	if src.VariableSourceV2Textbox != nil {
-		return json.Marshal(&src.VariableSourceV2Textbox)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *VariableSourceV2) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.VariableSourceV2Query != nil {
-		return obj.VariableSourceV2Query
-	}
-
-	if obj.VariableSourceV2Static != nil {
-		return obj.VariableSourceV2Static
-	}
-
-	if obj.VariableSourceV2Textbox != nil {
-		return obj.VariableSourceV2Textbox
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj VariableSourceV2) GetActualInstanceValue() (interface{}) {
-	if obj.VariableSourceV2Query != nil {
-		return *obj.VariableSourceV2Query
-	}
-
-	if obj.VariableSourceV2Static != nil {
-		return *obj.VariableSourceV2Static
-	}
-
-	if obj.VariableSourceV2Textbox != nil {
-		return *obj.VariableSourceV2Textbox
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableVariableSourceV2 struct {

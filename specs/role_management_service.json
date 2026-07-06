@@ -87,13 +87,82 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request for creating a custom role.",
                 "type": "object",
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateRoleRequestParentRoleId"
+                "properties": {
+                  "description": {
+                    "description": "Human-readable description.",
+                    "type": "string",
+                    "minLength": 0
                   },
+                  "name": {
+                    "description": "Display name.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "parentRoleId": {
+                    "description": "The parent role id.",
+                    "type": "integer",
+                    "format": "int64",
+                    "minimum": 0
+                  },
+                  "parentRoleName": {
+                    "description": "The parent role name.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "permissions": {
+                    "description": "List of permissions.",
+                    "type": "array",
+                    "items": {
+                      "description": "List of permissions.",
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
+                  },
+                  "teamId": {
+                    "description": "Team identifier.",
+                    "type": "integer",
+                    "format": "int64",
+                    "minimum": 0
+                  }
+                },
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateRoleRequestParentRoleName"
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "parentRoleId"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "parentRoleName"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "not": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "required": [
+                                "parentRoleId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "parentRoleName"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 ]
               }
@@ -447,93 +516,6 @@
   },
   "components": {
     "schemas": {
-      "CreateRoleRequestParentRoleId": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Request for creating a custom role.",
-        "type": "object",
-        "properties": {
-          "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "minLength": 0
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "minLength": 0
-          },
-          "parentRoleId": {
-            "description": "The parent role id.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          },
-          "permissions": {
-            "description": "List of permissions.",
-            "type": "array",
-            "items": {
-              "description": "List of permissions.",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
-          },
-          "teamId": {
-            "description": "Team identifier.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          }
-        },
-        "required": [
-          "parentRoleId"
-        ]
-      },
-      "CreateRoleRequestParentRoleName": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Request for creating a custom role.",
-        "type": "object",
-        "properties": {
-          "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "minLength": 0
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "minLength": 0
-          },
-          "parentRoleName": {
-            "description": "The parent role name.",
-            "type": "string",
-            "minLength": 0
-          },
-          "permissions": {
-            "description": "List of permissions.",
-            "type": "array",
-            "items": {
-              "description": "List of permissions.",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
-          },
-          "teamId": {
-            "description": "Team identifier.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          }
-        },
-        "required": [
-          "parentRoleName"
-        ]
-      },
       "CreateRoleResponse": {
         "externalDocs": {
           "url": ""
@@ -630,16 +612,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -650,26 +622,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -680,9 +632,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {

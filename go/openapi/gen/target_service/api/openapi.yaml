@@ -1,393 +1,479 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /logs/data-setup/v2:
-    get:
-      description: Returns the current log archive target configuration.
-      externalDocs:
-        url: ""
-      operationId: S3TargetService_GetTarget
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/S3TargetServiceGetTargetResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Get target
-      tags:
-      - Target Service
-    post:
-      description: Sets the log archive target configuration.
-      externalDocs:
-        url: ""
-      operationId: S3TargetService_SetTarget
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Set_Target_Response"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/S3TargetServiceSetTargetResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Set target
-      tags:
-      - Target Service
-components:
-  schemas:
-    ArchiveSpec:
-      description: This data structure contains metadata about the archive.
-      example:
-        enableTags: true
-        archivingFormatId: json_id
-        format: TARGET_FORMAT_UNSPECIFIED
-        isActive: true
-      externalDocs:
-        description: Find out more about archives
-        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-      properties:
-        archivingFormatId:
-          deprecated: true
-          description: The archiving format ID.
-          example: json_id
-          minLength: 0
-          type: string
-        enableTags:
-          description: The enable tags.
-          example: true
-          type: boolean
-        format:
-          $ref: "#/components/schemas/TargetFormat"
-        isActive:
-          description: The archiving format id.
-          example: true
-          type: boolean
-      required:
-      - bucket
-      title: Archive Spec
-      type: object
-    Error:
-      description: Standard error response body returned for a failed request.
-      example:
-        code: 139
-        message: message
-      properties:
-        code:
-          description: "HTTP status code of the error (for example 400, 404, 500)."
-          format: int32
-          maximum: 599
-          minimum: 100
-          type: integer
-        message:
-          description: Human-readable description of the error.
-          maxLength: 4096
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    IBMCosTargetSpec:
-      description: This data structure represents an IBM COS target.
-      example:
-        endpoint: http://some.endpoint.com:8081
-        bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
-        bucketCrn: bucket_crn
-        serviceCrn: service_crn
-      externalDocs:
-        description: Find out more about archives
-        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-      properties:
-        bucketCrn:
-          description: The bucket crn.
-          example: bucket_crn
-          minLength: 0
-          type: string
-        bucketType:
-          $ref: "#/components/schemas/IbmBucketType"
-        endpoint:
-          description: Endpoint.
-          example: http://some.endpoint.com:8081
-          minLength: 0
-          type: string
-        serviceCrn:
-          description: The service crn.
-          example: service_crn
-          minLength: 0
-          type: string
-      required:
-      - bucketCrn
-      - endpoint
-      title: IBM COS Target Spec
-      type: object
-    IbmBucketType:
-      description: Ibm bucket type.
-      enum:
-      - IBM_BUCKET_TYPE_UNSPECIFIED
-      - IBM_BUCKET_TYPE_EXTERNAL
-      - IBM_BUCKET_TYPE_INTERNAL
-      type: string
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    S3TargetServiceGetTargetResponse:
-      description: This data structure is used to retrieve a storage target for logs.
-      example:
-        target:
-          archiveSpec:
-            enableTags: true
-            archivingFormatId: json_id
-            format: TARGET_FORMAT_UNSPECIFIED
-            isActive: true
-          ibmCos:
-            endpoint: http://some.endpoint.com:8081
-            bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
-            bucketCrn: bucket_crn
-            serviceCrn: service_crn
-      externalDocs:
-        description: Find out more about archives
-        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-      properties:
-        target:
-          $ref: "#/components/schemas/v2.Target"
-      required:
-      - target
-      title: Get Target Response
-      type: object
-    S3TargetServiceSetTargetResponse:
-      description: This data structure is obtained after setting a storage target
-        for logs.
-      example:
-        target:
-          archiveSpec:
-            enableTags: true
-            archivingFormatId: json_id
-            format: TARGET_FORMAT_UNSPECIFIED
-            isActive: true
-          ibmCos:
-            endpoint: http://some.endpoint.com:8081
-            bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
-            bucketCrn: bucket_crn
-            serviceCrn: service_crn
-      externalDocs:
-        description: Find out more about archives
-        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-      properties:
-        target:
-          $ref: "#/components/schemas/v2.Target"
-      required:
-      - target
-      title: Set Target Response
-      type: object
-    S3TargetSpec:
-      description: This data structure represents an S3 target.
-      externalDocs:
-        description: Find out more about archives
-        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-      properties:
-        bucket:
-          description: Bucket name.
-          example: bucket
-          minLength: 0
-          type: string
-        externalId:
-          description: External identifier.
-          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
-          minLength: 0
-          type: string
-        region:
-          description: Region.
-          example: us-west-2
-          minLength: 0
-          type: string
-        roleArn:
-          description: The role arn.
-          example: arn:aws:iam::123456789012:role/CoralogixArchive
-          minLength: 0
-          type: string
-      required:
-      - bucket
-      title: S3 Target Spec
-      type: object
-    TargetFormat:
-      description: Target format.
-      enum:
-      - TARGET_FORMAT_UNSPECIFIED
-      - TARGET_FORMAT_CX_DATA_V1
-      type: string
-    V2TargetIbmCos:
-      description: This data structure represents a target to archive logs.
-      example:
-        archiveSpec:
-          enableTags: true
-          archivingFormatId: json_id
-          format: TARGET_FORMAT_UNSPECIFIED
-          isActive: true
-        ibmCos:
-          endpoint: http://some.endpoint.com:8081
-          bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
-          bucketCrn: bucket_crn
-          serviceCrn: service_crn
-      externalDocs:
-        description: Find out more about archives
-        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-      properties:
-        archiveSpec:
-          $ref: "#/components/schemas/ArchiveSpec"
-        ibmCos:
-          $ref: "#/components/schemas/IBMCosTargetSpec"
-      required:
-      - ibmCos
-      - targetSpecarchiveSpec
-      title: Target
-      type: object
-    V2TargetS3:
-      description: This data structure represents a target to archive logs.
-      externalDocs:
-        description: Find out more about archives
-        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
-      properties:
-        archiveSpec:
-          $ref: "#/components/schemas/ArchiveSpec"
-        s3:
-          $ref: "#/components/schemas/S3TargetSpec"
-      required:
-      - s3
-      - targetSpecarchiveSpec
-      title: Target
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v2.Target:
-      oneOf:
-      - $ref: "#/components/schemas/V2TargetIbmCos"
-      - $ref: "#/components/schemas/V2TargetS3"
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    Set_Target_Response:
-      description: This data structure is used to set a storage target for logs.
-      properties:
-        format:
-          $ref: "#/components/schemas/TargetFormat"
-        isActive:
-          description: Whether archiving to this target is active.
-          example: true
-          type: boolean
-        s3:
-          $ref: "#/components/schemas/S3TargetSpec"
-      required:
-      - isActive
-      title: Set Target Response
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/logs/data-setup/v2": {
+      "get": {
+        "tags": [
+          "Target Service"
+        ],
+        "summary": "Get target",
+        "description": "Returns the current log archive target configuration.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "S3TargetService_GetTarget",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/S3TargetServiceGetTargetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Target Service"
+        ],
+        "summary": "Set target",
+        "description": "Sets the log archive target configuration.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "S3TargetService_SetTarget",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Set Target Response",
+                "description": "This data structure is used to set a storage target for logs.",
+                "type": "object",
+                "properties": {
+                  "format": {
+                    "$ref": "#/components/schemas/TargetFormat"
+                  },
+                  "isActive": {
+                    "example": true,
+                    "description": "Whether archiving to this target is active.",
+                    "type": "boolean"
+                  },
+                  "s3": {
+                    "$ref": "#/components/schemas/S3TargetSpec"
+                  }
+                },
+                "required": [
+                  "isActive",
+                  "s3"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/S3TargetServiceSetTargetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ArchiveSpec": {
+        "externalDocs": {
+          "description": "Find out more about archives",
+          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+        },
+        "title": "Archive Spec",
+        "description": "This data structure contains metadata about the archive.",
+        "type": "object",
+        "properties": {
+          "archivingFormatId": {
+            "deprecated": true,
+            "example": "json_id",
+            "description": "The archiving format ID.",
+            "type": "string",
+            "minLength": 0
+          },
+          "enableTags": {
+            "example": true,
+            "description": "The enable tags.",
+            "type": "boolean"
+          },
+          "format": {
+            "$ref": "#/components/schemas/TargetFormat"
+          },
+          "isActive": {
+            "example": true,
+            "description": "The archiving format id.",
+            "type": "boolean"
+          }
+        }
+      },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "IBMCosTargetSpec": {
+        "externalDocs": {
+          "description": "Find out more about archives",
+          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+        },
+        "title": "IBM COS Target Spec",
+        "description": "This data structure represents an IBM COS target.",
+        "type": "object",
+        "properties": {
+          "bucketCrn": {
+            "example": "bucket_crn",
+            "description": "The bucket crn.",
+            "type": "string",
+            "minLength": 0
+          },
+          "bucketType": {
+            "$ref": "#/components/schemas/IbmBucketType"
+          },
+          "endpoint": {
+            "example": "http://some.endpoint.com:8081",
+            "description": "Endpoint.",
+            "type": "string",
+            "minLength": 0
+          },
+          "serviceCrn": {
+            "example": "service_crn",
+            "description": "The service crn.",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "bucketCrn",
+          "endpoint"
+        ]
+      },
+      "IbmBucketType": {
+        "description": "Ibm bucket type.",
+        "type": "string",
+        "enum": [
+          "IBM_BUCKET_TYPE_UNSPECIFIED",
+          "IBM_BUCKET_TYPE_EXTERNAL",
+          "IBM_BUCKET_TYPE_INTERNAL"
+        ]
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "S3TargetServiceGetTargetResponse": {
+        "externalDocs": {
+          "description": "Find out more about archives",
+          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+        },
+        "title": "Get Target Response",
+        "description": "This data structure is used to retrieve a storage target for logs.",
+        "type": "object",
+        "properties": {
+          "target": {
+            "$ref": "#/components/schemas/v2.Target"
+          }
+        },
+        "required": [
+          "target"
+        ]
+      },
+      "S3TargetServiceSetTargetResponse": {
+        "externalDocs": {
+          "description": "Find out more about archives",
+          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+        },
+        "title": "Set Target Response",
+        "description": "This data structure is obtained after setting a storage target for logs.",
+        "type": "object",
+        "properties": {
+          "target": {
+            "$ref": "#/components/schemas/v2.Target"
+          }
+        },
+        "required": [
+          "target"
+        ]
+      },
+      "S3TargetSpec": {
+        "externalDocs": {
+          "description": "Find out more about archives",
+          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+        },
+        "title": "S3 Target Spec",
+        "description": "This data structure represents an S3 target.",
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "example": "bucket",
+            "description": "Bucket name.",
+            "type": "string",
+            "minLength": 0
+          },
+          "externalId": {
+            "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+            "description": "External identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "region": {
+            "example": "us-west-2",
+            "description": "Region.",
+            "type": "string",
+            "minLength": 0
+          },
+          "roleArn": {
+            "example": "arn:aws:iam::123456789012:role/CoralogixArchive",
+            "description": "The role arn.",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "bucket"
+        ]
+      },
+      "TargetFormat": {
+        "description": "Target format.",
+        "type": "string",
+        "enum": [
+          "TARGET_FORMAT_UNSPECIFIED",
+          "TARGET_FORMAT_CX_DATA_V1"
+        ]
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v2.Target": {
+        "externalDocs": {
+          "description": "Find out more about archives",
+          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+        },
+        "title": "Target",
+        "description": "This data structure represents a target to archive logs.",
+        "type": "object",
+        "properties": {
+          "archiveSpec": {
+            "$ref": "#/components/schemas/ArchiveSpec"
+          },
+          "ibmCos": {
+            "$ref": "#/components/schemas/IBMCosTargetSpec"
+          },
+          "s3": {
+            "$ref": "#/components/schemas/S3TargetSpec"
+          }
+        },
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "s3"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "ibmCos"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "s3"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "ibmCos"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

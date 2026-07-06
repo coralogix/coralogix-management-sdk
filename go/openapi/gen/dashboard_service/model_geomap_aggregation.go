@@ -13,240 +13,300 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// GeomapAggregation - struct for GeomapAggregation
+// checks if the GeomapAggregation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GeomapAggregation{}
+
+// GeomapAggregation Geomap aggregation.
 type GeomapAggregation struct {
-	GeomapAggregationAvg *GeomapAggregationAvg
-	GeomapAggregationCount *GeomapAggregationCount
-	GeomapAggregationMax *GeomapAggregationMax
-	GeomapAggregationMin *GeomapAggregationMin
-	GeomapAggregationSum *GeomapAggregationSum
+	Avg *GeomapAggregationFieldBased `json:"avg,omitempty"`
+	// Geomap aggregation simple.
+	Count map[string]interface{} `json:"count,omitempty"`
+	Max *GeomapAggregationFieldBased `json:"max,omitempty"`
+	Min *GeomapAggregationFieldBased `json:"min,omitempty"`
+	Sum *GeomapAggregationFieldBased `json:"sum,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// GeomapAggregationAvgAsGeomapAggregation is a convenience function that returns GeomapAggregationAvg wrapped in GeomapAggregation
-func GeomapAggregationAvgAsGeomapAggregation(v *GeomapAggregationAvg) GeomapAggregation {
-	return GeomapAggregation{
-		GeomapAggregationAvg: v,
+type _GeomapAggregation GeomapAggregation
+
+// NewGeomapAggregation instantiates a new GeomapAggregation object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewGeomapAggregation() *GeomapAggregation {
+	this := GeomapAggregation{}
+	return &this
+}
+
+// NewGeomapAggregationWithDefaults instantiates a new GeomapAggregation object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewGeomapAggregationWithDefaults() *GeomapAggregation {
+	this := GeomapAggregation{}
+	return &this
+}
+
+// GetAvg returns the Avg field value if set, zero value otherwise.
+func (o *GeomapAggregation) GetAvg() GeomapAggregationFieldBased {
+	if o == nil || IsNil(o.Avg) {
+		var ret GeomapAggregationFieldBased
+		return ret
 	}
+	return *o.Avg
 }
 
-// GeomapAggregationCountAsGeomapAggregation is a convenience function that returns GeomapAggregationCount wrapped in GeomapAggregation
-func GeomapAggregationCountAsGeomapAggregation(v *GeomapAggregationCount) GeomapAggregation {
-	return GeomapAggregation{
-		GeomapAggregationCount: v,
+// GetAvgOk returns a tuple with the Avg field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapAggregation) GetAvgOk() (*GeomapAggregationFieldBased, bool) {
+	if o == nil || IsNil(o.Avg) {
+		return nil, false
 	}
+	return o.Avg, true
 }
 
-// GeomapAggregationMaxAsGeomapAggregation is a convenience function that returns GeomapAggregationMax wrapped in GeomapAggregation
-func GeomapAggregationMaxAsGeomapAggregation(v *GeomapAggregationMax) GeomapAggregation {
-	return GeomapAggregation{
-		GeomapAggregationMax: v,
+// HasAvg returns a boolean if a field has been set.
+func (o *GeomapAggregation) HasAvg() bool {
+	if o != nil && !IsNil(o.Avg) {
+		return true
 	}
+
+	return false
 }
 
-// GeomapAggregationMinAsGeomapAggregation is a convenience function that returns GeomapAggregationMin wrapped in GeomapAggregation
-func GeomapAggregationMinAsGeomapAggregation(v *GeomapAggregationMin) GeomapAggregation {
-	return GeomapAggregation{
-		GeomapAggregationMin: v,
+// SetAvg gets a reference to the given GeomapAggregationFieldBased and assigns it to the Avg field.
+func (o *GeomapAggregation) SetAvg(v GeomapAggregationFieldBased) {
+	o.Avg = &v
+}
+
+// GetCount returns the Count field value if set, zero value otherwise.
+func (o *GeomapAggregation) GetCount() map[string]interface{} {
+	if o == nil || IsNil(o.Count) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.Count
 }
 
-// GeomapAggregationSumAsGeomapAggregation is a convenience function that returns GeomapAggregationSum wrapped in GeomapAggregation
-func GeomapAggregationSumAsGeomapAggregation(v *GeomapAggregationSum) GeomapAggregation {
-	return GeomapAggregation{
-		GeomapAggregationSum: v,
+// GetCountOk returns a tuple with the Count field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapAggregation) GetCountOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Count) {
+		return map[string]interface{}{}, false
 	}
+	return o.Count, true
 }
 
+// HasCount returns a boolean if a field has been set.
+func (o *GeomapAggregation) HasCount() bool {
+	if o != nil && !IsNil(o.Count) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *GeomapAggregation) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into GeomapAggregationAvg
-	err = json.Unmarshal(data, &dst.GeomapAggregationAvg)
-	if err == nil {
-		jsonGeomapAggregationAvg, _ := json.Marshal(dst.GeomapAggregationAvg)
-		if string(jsonGeomapAggregationAvg) == "{}" { // empty struct
-			dst.GeomapAggregationAvg = nil
-		} else {
-			if err = validator.Validate(dst.GeomapAggregationAvg); err != nil {
-				dst.GeomapAggregationAvg = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetCount gets a reference to the given map[string]interface{} and assigns it to the Count field.
+func (o *GeomapAggregation) SetCount(v map[string]interface{}) {
+	o.Count = v
+}
+
+// GetMax returns the Max field value if set, zero value otherwise.
+func (o *GeomapAggregation) GetMax() GeomapAggregationFieldBased {
+	if o == nil || IsNil(o.Max) {
+		var ret GeomapAggregationFieldBased
+		return ret
+	}
+	return *o.Max
+}
+
+// GetMaxOk returns a tuple with the Max field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapAggregation) GetMaxOk() (*GeomapAggregationFieldBased, bool) {
+	if o == nil || IsNil(o.Max) {
+		return nil, false
+	}
+	return o.Max, true
+}
+
+// HasMax returns a boolean if a field has been set.
+func (o *GeomapAggregation) HasMax() bool {
+	if o != nil && !IsNil(o.Max) {
+		return true
+	}
+
+	return false
+}
+
+// SetMax gets a reference to the given GeomapAggregationFieldBased and assigns it to the Max field.
+func (o *GeomapAggregation) SetMax(v GeomapAggregationFieldBased) {
+	o.Max = &v
+}
+
+// GetMin returns the Min field value if set, zero value otherwise.
+func (o *GeomapAggregation) GetMin() GeomapAggregationFieldBased {
+	if o == nil || IsNil(o.Min) {
+		var ret GeomapAggregationFieldBased
+		return ret
+	}
+	return *o.Min
+}
+
+// GetMinOk returns a tuple with the Min field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapAggregation) GetMinOk() (*GeomapAggregationFieldBased, bool) {
+	if o == nil || IsNil(o.Min) {
+		return nil, false
+	}
+	return o.Min, true
+}
+
+// HasMin returns a boolean if a field has been set.
+func (o *GeomapAggregation) HasMin() bool {
+	if o != nil && !IsNil(o.Min) {
+		return true
+	}
+
+	return false
+}
+
+// SetMin gets a reference to the given GeomapAggregationFieldBased and assigns it to the Min field.
+func (o *GeomapAggregation) SetMin(v GeomapAggregationFieldBased) {
+	o.Min = &v
+}
+
+// GetSum returns the Sum field value if set, zero value otherwise.
+func (o *GeomapAggregation) GetSum() GeomapAggregationFieldBased {
+	if o == nil || IsNil(o.Sum) {
+		var ret GeomapAggregationFieldBased
+		return ret
+	}
+	return *o.Sum
+}
+
+// GetSumOk returns a tuple with the Sum field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapAggregation) GetSumOk() (*GeomapAggregationFieldBased, bool) {
+	if o == nil || IsNil(o.Sum) {
+		return nil, false
+	}
+	return o.Sum, true
+}
+
+// HasSum returns a boolean if a field has been set.
+func (o *GeomapAggregation) HasSum() bool {
+	if o != nil && !IsNil(o.Sum) {
+		return true
+	}
+
+	return false
+}
+
+// SetSum gets a reference to the given GeomapAggregationFieldBased and assigns it to the Sum field.
+func (o *GeomapAggregation) SetSum(v GeomapAggregationFieldBased) {
+	o.Sum = &v
+}
+
+func (o GeomapAggregation) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o GeomapAggregation) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Avg) {
+		toSerialize["avg"] = o.Avg
+	}
+	if !IsNil(o.Count) {
+		toSerialize["count"] = o.Count
+	}
+	if !IsNil(o.Max) {
+		toSerialize["max"] = o.Max
+	}
+	if !IsNil(o.Min) {
+		toSerialize["min"] = o.Min
+	}
+	if !IsNil(o.Sum) {
+		toSerialize["sum"] = o.Sum
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["count"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sum"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["min"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["max"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["avg"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [count, sum, min, max, avg] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *GeomapAggregation) UnmarshalJSON(data []byte) (err error) {
+	varGeomapAggregation := _GeomapAggregation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapAggregation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapAggregation(varGeomapAggregation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["count"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GeomapAggregationAvg = nil
-	}
-
-	// try to unmarshal data into GeomapAggregationCount
-	err = json.Unmarshal(data, &dst.GeomapAggregationCount)
-	if err == nil {
-		jsonGeomapAggregationCount, _ := json.Marshal(dst.GeomapAggregationCount)
-		if string(jsonGeomapAggregationCount) == "{}" { // empty struct
-			dst.GeomapAggregationCount = nil
-		} else {
-			if err = validator.Validate(dst.GeomapAggregationCount); err != nil {
-				dst.GeomapAggregationCount = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sum"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GeomapAggregationCount = nil
-	}
-
-	// try to unmarshal data into GeomapAggregationMax
-	err = json.Unmarshal(data, &dst.GeomapAggregationMax)
-	if err == nil {
-		jsonGeomapAggregationMax, _ := json.Marshal(dst.GeomapAggregationMax)
-		if string(jsonGeomapAggregationMax) == "{}" { // empty struct
-			dst.GeomapAggregationMax = nil
-		} else {
-			if err = validator.Validate(dst.GeomapAggregationMax); err != nil {
-				dst.GeomapAggregationMax = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["min"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GeomapAggregationMax = nil
-	}
-
-	// try to unmarshal data into GeomapAggregationMin
-	err = json.Unmarshal(data, &dst.GeomapAggregationMin)
-	if err == nil {
-		jsonGeomapAggregationMin, _ := json.Marshal(dst.GeomapAggregationMin)
-		if string(jsonGeomapAggregationMin) == "{}" { // empty struct
-			dst.GeomapAggregationMin = nil
-		} else {
-			if err = validator.Validate(dst.GeomapAggregationMin); err != nil {
-				dst.GeomapAggregationMin = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["max"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GeomapAggregationMin = nil
-	}
-
-	// try to unmarshal data into GeomapAggregationSum
-	err = json.Unmarshal(data, &dst.GeomapAggregationSum)
-	if err == nil {
-		jsonGeomapAggregationSum, _ := json.Marshal(dst.GeomapAggregationSum)
-		if string(jsonGeomapAggregationSum) == "{}" { // empty struct
-			dst.GeomapAggregationSum = nil
-		} else {
-			if err = validator.Validate(dst.GeomapAggregationSum); err != nil {
-				dst.GeomapAggregationSum = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["avg"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GeomapAggregationSum = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [count, sum, min, max, avg] may be set"}
+		}
+
+		delete(additionalProperties, "avg")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		delete(additionalProperties, "sum")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.GeomapAggregationAvg = nil
-		dst.GeomapAggregationCount = nil
-		dst.GeomapAggregationMax = nil
-		dst.GeomapAggregationMin = nil
-		dst.GeomapAggregationSum = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(GeomapAggregation)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src GeomapAggregation) MarshalJSON() ([]byte, error) {
-	if src.GeomapAggregationAvg != nil {
-		return json.Marshal(&src.GeomapAggregationAvg)
-	}
-
-	if src.GeomapAggregationCount != nil {
-		return json.Marshal(&src.GeomapAggregationCount)
-	}
-
-	if src.GeomapAggregationMax != nil {
-		return json.Marshal(&src.GeomapAggregationMax)
-	}
-
-	if src.GeomapAggregationMin != nil {
-		return json.Marshal(&src.GeomapAggregationMin)
-	}
-
-	if src.GeomapAggregationSum != nil {
-		return json.Marshal(&src.GeomapAggregationSum)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *GeomapAggregation) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.GeomapAggregationAvg != nil {
-		return obj.GeomapAggregationAvg
-	}
-
-	if obj.GeomapAggregationCount != nil {
-		return obj.GeomapAggregationCount
-	}
-
-	if obj.GeomapAggregationMax != nil {
-		return obj.GeomapAggregationMax
-	}
-
-	if obj.GeomapAggregationMin != nil {
-		return obj.GeomapAggregationMin
-	}
-
-	if obj.GeomapAggregationSum != nil {
-		return obj.GeomapAggregationSum
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj GeomapAggregation) GetActualInstanceValue() (interface{}) {
-	if obj.GeomapAggregationAvg != nil {
-		return *obj.GeomapAggregationAvg
-	}
-
-	if obj.GeomapAggregationCount != nil {
-		return *obj.GeomapAggregationCount
-	}
-
-	if obj.GeomapAggregationMax != nil {
-		return *obj.GeomapAggregationMax
-	}
-
-	if obj.GeomapAggregationMin != nil {
-		return *obj.GeomapAggregationMin
-	}
-
-	if obj.GeomapAggregationSum != nil {
-		return *obj.GeomapAggregationSum
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableGeomapAggregation struct {

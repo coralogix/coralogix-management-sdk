@@ -13,202 +13,256 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// GaugeQuery - struct for GaugeQuery
+// checks if the GaugeQuery type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GaugeQuery{}
+
+// GaugeQuery Discriminated union of possible query types for the gauge widget.
 type GaugeQuery struct {
-	GaugeQueryDataprime *GaugeQueryDataprime
-	GaugeQueryLogs *GaugeQueryLogs
-	GaugeQueryMetrics *GaugeQueryMetrics
-	GaugeQuerySpans *GaugeQuerySpans
+	Dataprime *GaugeDataprimeQuery `json:"dataprime,omitempty"`
+	Logs *GaugeLogsQuery `json:"logs,omitempty"`
+	Metrics *GaugeMetricsQuery `json:"metrics,omitempty"`
+	Spans *GaugeSpansQuery `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// GaugeQueryDataprimeAsGaugeQuery is a convenience function that returns GaugeQueryDataprime wrapped in GaugeQuery
-func GaugeQueryDataprimeAsGaugeQuery(v *GaugeQueryDataprime) GaugeQuery {
-	return GaugeQuery{
-		GaugeQueryDataprime: v,
+type _GaugeQuery GaugeQuery
+
+// NewGaugeQuery instantiates a new GaugeQuery object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewGaugeQuery() *GaugeQuery {
+	this := GaugeQuery{}
+	return &this
+}
+
+// NewGaugeQueryWithDefaults instantiates a new GaugeQuery object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewGaugeQueryWithDefaults() *GaugeQuery {
+	this := GaugeQuery{}
+	return &this
+}
+
+// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+func (o *GaugeQuery) GetDataprime() GaugeDataprimeQuery {
+	if o == nil || IsNil(o.Dataprime) {
+		var ret GaugeDataprimeQuery
+		return ret
 	}
+	return *o.Dataprime
 }
 
-// GaugeQueryLogsAsGaugeQuery is a convenience function that returns GaugeQueryLogs wrapped in GaugeQuery
-func GaugeQueryLogsAsGaugeQuery(v *GaugeQueryLogs) GaugeQuery {
-	return GaugeQuery{
-		GaugeQueryLogs: v,
+// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GaugeQuery) GetDataprimeOk() (*GaugeDataprimeQuery, bool) {
+	if o == nil || IsNil(o.Dataprime) {
+		return nil, false
 	}
+	return o.Dataprime, true
 }
 
-// GaugeQueryMetricsAsGaugeQuery is a convenience function that returns GaugeQueryMetrics wrapped in GaugeQuery
-func GaugeQueryMetricsAsGaugeQuery(v *GaugeQueryMetrics) GaugeQuery {
-	return GaugeQuery{
-		GaugeQueryMetrics: v,
+// HasDataprime returns a boolean if a field has been set.
+func (o *GaugeQuery) HasDataprime() bool {
+	if o != nil && !IsNil(o.Dataprime) {
+		return true
 	}
+
+	return false
 }
 
-// GaugeQuerySpansAsGaugeQuery is a convenience function that returns GaugeQuerySpans wrapped in GaugeQuery
-func GaugeQuerySpansAsGaugeQuery(v *GaugeQuerySpans) GaugeQuery {
-	return GaugeQuery{
-		GaugeQuerySpans: v,
+// SetDataprime gets a reference to the given GaugeDataprimeQuery and assigns it to the Dataprime field.
+func (o *GaugeQuery) SetDataprime(v GaugeDataprimeQuery) {
+	o.Dataprime = &v
+}
+
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *GaugeQuery) GetLogs() GaugeLogsQuery {
+	if o == nil || IsNil(o.Logs) {
+		var ret GaugeLogsQuery
+		return ret
 	}
+	return *o.Logs
 }
 
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GaugeQuery) GetLogsOk() (*GaugeLogsQuery, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
+	}
+	return o.Logs, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *GaugeQuery) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into GaugeQueryDataprime
-	err = json.Unmarshal(data, &dst.GaugeQueryDataprime)
-	if err == nil {
-		jsonGaugeQueryDataprime, _ := json.Marshal(dst.GaugeQueryDataprime)
-		if string(jsonGaugeQueryDataprime) == "{}" { // empty struct
-			dst.GaugeQueryDataprime = nil
-		} else {
-			if err = validator.Validate(dst.GaugeQueryDataprime); err != nil {
-				dst.GaugeQueryDataprime = nil
-			} else {
-				match++
-			}
+// HasLogs returns a boolean if a field has been set.
+func (o *GaugeQuery) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogs gets a reference to the given GaugeLogsQuery and assigns it to the Logs field.
+func (o *GaugeQuery) SetLogs(v GaugeLogsQuery) {
+	o.Logs = &v
+}
+
+// GetMetrics returns the Metrics field value if set, zero value otherwise.
+func (o *GaugeQuery) GetMetrics() GaugeMetricsQuery {
+	if o == nil || IsNil(o.Metrics) {
+		var ret GaugeMetricsQuery
+		return ret
+	}
+	return *o.Metrics
+}
+
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GaugeQuery) GetMetricsOk() (*GaugeMetricsQuery, bool) {
+	if o == nil || IsNil(o.Metrics) {
+		return nil, false
+	}
+	return o.Metrics, true
+}
+
+// HasMetrics returns a boolean if a field has been set.
+func (o *GaugeQuery) HasMetrics() bool {
+	if o != nil && !IsNil(o.Metrics) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetrics gets a reference to the given GaugeMetricsQuery and assigns it to the Metrics field.
+func (o *GaugeQuery) SetMetrics(v GaugeMetricsQuery) {
+	o.Metrics = &v
+}
+
+// GetSpans returns the Spans field value if set, zero value otherwise.
+func (o *GaugeQuery) GetSpans() GaugeSpansQuery {
+	if o == nil || IsNil(o.Spans) {
+		var ret GaugeSpansQuery
+		return ret
+	}
+	return *o.Spans
+}
+
+// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GaugeQuery) GetSpansOk() (*GaugeSpansQuery, bool) {
+	if o == nil || IsNil(o.Spans) {
+		return nil, false
+	}
+	return o.Spans, true
+}
+
+// HasSpans returns a boolean if a field has been set.
+func (o *GaugeQuery) HasSpans() bool {
+	if o != nil && !IsNil(o.Spans) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpans gets a reference to the given GaugeSpansQuery and assigns it to the Spans field.
+func (o *GaugeQuery) SetSpans(v GaugeSpansQuery) {
+	o.Spans = &v
+}
+
+func (o GaugeQuery) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o GaugeQuery) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dataprime) {
+		toSerialize["dataprime"] = o.Dataprime
+	}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Metrics) {
+		toSerialize["metrics"] = o.Metrics
+	}
+	if !IsNil(o.Spans) {
+		toSerialize["spans"] = o.Spans
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["metrics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["logs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spans"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dataprime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metrics, logs, spans, dataprime] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *GaugeQuery) UnmarshalJSON(data []byte) (err error) {
+	varGaugeQuery := _GaugeQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGaugeQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GaugeQuery(varGaugeQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["metrics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GaugeQueryDataprime = nil
-	}
-
-	// try to unmarshal data into GaugeQueryLogs
-	err = json.Unmarshal(data, &dst.GaugeQueryLogs)
-	if err == nil {
-		jsonGaugeQueryLogs, _ := json.Marshal(dst.GaugeQueryLogs)
-		if string(jsonGaugeQueryLogs) == "{}" { // empty struct
-			dst.GaugeQueryLogs = nil
-		} else {
-			if err = validator.Validate(dst.GaugeQueryLogs); err != nil {
-				dst.GaugeQueryLogs = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["logs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GaugeQueryLogs = nil
-	}
-
-	// try to unmarshal data into GaugeQueryMetrics
-	err = json.Unmarshal(data, &dst.GaugeQueryMetrics)
-	if err == nil {
-		jsonGaugeQueryMetrics, _ := json.Marshal(dst.GaugeQueryMetrics)
-		if string(jsonGaugeQueryMetrics) == "{}" { // empty struct
-			dst.GaugeQueryMetrics = nil
-		} else {
-			if err = validator.Validate(dst.GaugeQueryMetrics); err != nil {
-				dst.GaugeQueryMetrics = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spans"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GaugeQueryMetrics = nil
-	}
-
-	// try to unmarshal data into GaugeQuerySpans
-	err = json.Unmarshal(data, &dst.GaugeQuerySpans)
-	if err == nil {
-		jsonGaugeQuerySpans, _ := json.Marshal(dst.GaugeQuerySpans)
-		if string(jsonGaugeQuerySpans) == "{}" { // empty struct
-			dst.GaugeQuerySpans = nil
-		} else {
-			if err = validator.Validate(dst.GaugeQuerySpans); err != nil {
-				dst.GaugeQuerySpans = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dataprime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GaugeQuerySpans = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [metrics, logs, spans, dataprime] may be set"}
+		}
+
+		delete(additionalProperties, "dataprime")
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.GaugeQueryDataprime = nil
-		dst.GaugeQueryLogs = nil
-		dst.GaugeQueryMetrics = nil
-		dst.GaugeQuerySpans = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(GaugeQuery)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src GaugeQuery) MarshalJSON() ([]byte, error) {
-	if src.GaugeQueryDataprime != nil {
-		return json.Marshal(&src.GaugeQueryDataprime)
-	}
-
-	if src.GaugeQueryLogs != nil {
-		return json.Marshal(&src.GaugeQueryLogs)
-	}
-
-	if src.GaugeQueryMetrics != nil {
-		return json.Marshal(&src.GaugeQueryMetrics)
-	}
-
-	if src.GaugeQuerySpans != nil {
-		return json.Marshal(&src.GaugeQuerySpans)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *GaugeQuery) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.GaugeQueryDataprime != nil {
-		return obj.GaugeQueryDataprime
-	}
-
-	if obj.GaugeQueryLogs != nil {
-		return obj.GaugeQueryLogs
-	}
-
-	if obj.GaugeQueryMetrics != nil {
-		return obj.GaugeQueryMetrics
-	}
-
-	if obj.GaugeQuerySpans != nil {
-		return obj.GaugeQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj GaugeQuery) GetActualInstanceValue() (interface{}) {
-	if obj.GaugeQueryDataprime != nil {
-		return *obj.GaugeQueryDataprime
-	}
-
-	if obj.GaugeQueryLogs != nil {
-		return *obj.GaugeQueryLogs
-	}
-
-	if obj.GaugeQueryMetrics != nil {
-		return *obj.GaugeQueryMetrics
-	}
-
-	if obj.GaugeQuerySpans != nil {
-		return *obj.GaugeQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableGaugeQuery struct {

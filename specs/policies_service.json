@@ -175,13 +175,101 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Update Policy Request",
+                "description": "This data structue is used to update an existing policy.",
                 "type": "object",
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
+                "properties": {
+                  "applicationRule": {
+                    "$ref": "#/components/schemas/quota.v1.Rule"
                   },
+                  "archiveRetention": {
+                    "$ref": "#/components/schemas/ArchiveRetention"
+                  },
+                  "description": {
+                    "example": "My Policy Description",
+                    "description": "Optional free-text description of the policy's purpose.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "enabled": {
+                    "example": true,
+                    "description": "Indicates whether the policy should be actively evaluated and applied.",
+                    "type": "boolean"
+                  },
+                  "id": {
+                    "example": "policy_id",
+                    "description": "Unique identifier of the policy to update.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "logRules": {
+                    "$ref": "#/components/schemas/LogRules"
+                  },
+                  "name": {
+                    "example": "My Policy",
+                    "description": "Human-readable name for the policy.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "priority": {
+                    "$ref": "#/components/schemas/quota.v1.Priority"
+                  },
+                  "priorityOverride": {
+                    "$ref": "#/components/schemas/PriorityOverride"
+                  },
+                  "spanRules": {
+                    "$ref": "#/components/schemas/SpanRules"
+                  },
+                  "subsystemRule": {
+                    "$ref": "#/components/schemas/quota.v1.Rule"
+                  },
+                  "targets": {
+                    "description": "List of data targets/destinations to which this policy routes data.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/v1.Target"
+                    },
+                    "minItems": 0
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "logRules"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "spanRules"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "not": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "required": [
+                                "logRules"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "spanRules"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 ]
               }
@@ -246,13 +334,98 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Create Policy Request",
+                "description": "This data structue is used to create a new policy.",
                 "type": "object",
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/CreatePolicyRequestLogRules"
+                "properties": {
+                  "applicationRule": {
+                    "$ref": "#/components/schemas/quota.v1.Rule"
                   },
+                  "archiveRetention": {
+                    "$ref": "#/components/schemas/ArchiveRetention"
+                  },
+                  "description": {
+                    "example": "My Policy Description",
+                    "description": "Optional free-text description of the policy's purpose.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "disabled": {
+                    "description": "When true, the policy is disabled and will not be evaluated.",
+                    "type": "boolean"
+                  },
+                  "logRules": {
+                    "$ref": "#/components/schemas/LogRules"
+                  },
+                  "name": {
+                    "example": "My Policy",
+                    "description": "Human-readable name for the policy.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "placement": {
+                    "$ref": "#/components/schemas/Placement"
+                  },
+                  "priority": {
+                    "$ref": "#/components/schemas/quota.v1.Priority"
+                  },
+                  "priorityOverride": {
+                    "$ref": "#/components/schemas/PriorityOverride"
+                  },
+                  "spanRules": {
+                    "$ref": "#/components/schemas/SpanRules"
+                  },
+                  "subsystemRule": {
+                    "$ref": "#/components/schemas/quota.v1.Rule"
+                  },
+                  "targets": {
+                    "description": "List of data targets/destinations to which this policy routes data.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/v1.Target"
+                    },
+                    "minItems": 0
+                  }
+                },
+                "required": [
+                  "name",
+                  "priority"
+                ],
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreatePolicyRequestSpanRules"
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "logRules"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "spanRules"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "not": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "required": [
+                                "logRules"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "spanRules"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 ]
               }
@@ -319,19 +492,107 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Forecast Policy Usage Request",
+                "description": "Request to forecast the usage in bytes of a draft TCO policy, based on the bytes matched by its filter rules over a given time window.",
                 "type": "object",
-                "oneOf": [
+                "properties": {
+                  "applicationRule": {
+                    "$ref": "#/components/schemas/quota.v1.Rule"
+                  },
+                  "day": {
+                    "$ref": "#/components/schemas/Day"
+                  },
+                  "logRules": {
+                    "$ref": "#/components/schemas/LogRules"
+                  },
+                  "spanRules": {
+                    "$ref": "#/components/schemas/SpanRules"
+                  },
+                  "subsystemRule": {
+                    "$ref": "#/components/schemas/quota.v1.Rule"
+                  },
+                  "timeBucketMs": {
+                    "example": "3600000",
+                    "description": "Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.",
+                    "type": "string",
+                    "pattern": "^-?[0-9]+$",
+                    "minLength": 1,
+                    "maxLength": 20
+                  },
+                  "week": {
+                    "$ref": "#/components/schemas/Week"
+                  }
+                },
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/ForecastPolicyUsageRequestLogRulesDay"
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "logRules"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "spanRules"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "not": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "required": [
+                                "logRules"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "spanRules"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/ForecastPolicyUsageRequestLogRulesWeek"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ForecastPolicyUsageRequestSpanRulesDay"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ForecastPolicyUsageRequestSpanRulesWeek"
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "day"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "week"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "not": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "required": [
+                                "day"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "week"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 ]
               }
@@ -1050,128 +1311,6 @@
           "logRules"
         ]
       },
-      "CreatePolicyRequestLogRules": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
-        "title": "Create Policy Request",
-        "description": "This data structue is used to create a new policy.",
-        "type": "object",
-        "properties": {
-          "applicationRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "archiveRetention": {
-            "$ref": "#/components/schemas/ArchiveRetention"
-          },
-          "description": {
-            "example": "My Policy Description",
-            "description": "Optional free-text description of the policy's purpose.",
-            "type": "string",
-            "minLength": 0
-          },
-          "disabled": {
-            "description": "When true, the policy is disabled and will not be evaluated.",
-            "type": "boolean"
-          },
-          "logRules": {
-            "$ref": "#/components/schemas/LogRules"
-          },
-          "name": {
-            "example": "My Policy",
-            "description": "Human-readable name for the policy.",
-            "type": "string",
-            "minLength": 0
-          },
-          "placement": {
-            "$ref": "#/components/schemas/Placement"
-          },
-          "priority": {
-            "$ref": "#/components/schemas/quota.v1.Priority"
-          },
-          "priorityOverride": {
-            "$ref": "#/components/schemas/PriorityOverride"
-          },
-          "subsystemRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "targets": {
-            "description": "List of data targets/destinations to which this policy routes data.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/v1.Target"
-            },
-            "minItems": 0
-          }
-        },
-        "required": [
-          "name",
-          "priority",
-          "logRules"
-        ]
-      },
-      "CreatePolicyRequestSpanRules": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
-        "title": "Create Policy Request",
-        "description": "This data structue is used to create a new policy.",
-        "type": "object",
-        "properties": {
-          "applicationRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "archiveRetention": {
-            "$ref": "#/components/schemas/ArchiveRetention"
-          },
-          "description": {
-            "example": "My Policy Description",
-            "description": "Optional free-text description of the policy's purpose.",
-            "type": "string",
-            "minLength": 0
-          },
-          "disabled": {
-            "description": "When true, the policy is disabled and will not be evaluated.",
-            "type": "boolean"
-          },
-          "name": {
-            "example": "My Policy",
-            "description": "Human-readable name for the policy.",
-            "type": "string",
-            "minLength": 0
-          },
-          "placement": {
-            "$ref": "#/components/schemas/Placement"
-          },
-          "priority": {
-            "$ref": "#/components/schemas/quota.v1.Priority"
-          },
-          "priorityOverride": {
-            "$ref": "#/components/schemas/PriorityOverride"
-          },
-          "spanRules": {
-            "$ref": "#/components/schemas/SpanRules"
-          },
-          "subsystemRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "targets": {
-            "description": "List of data targets/destinations to which this policy routes data.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/v1.Target"
-            },
-            "minItems": 0
-          }
-        },
-        "required": [
-          "name",
-          "priority",
-          "spanRules"
-        ]
-      },
       "CreatePolicyResponse": {
         "externalDocs": {
           "description": "Find out more about quota management.",
@@ -1260,16 +1399,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -1280,26 +1409,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -1310,9 +1419,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {
@@ -1345,146 +1470,6 @@
         "description": "First.",
         "type": "object",
         "additionalProperties": false
-      },
-      "ForecastPolicyUsageRequestLogRulesDay": {
-        "externalDocs": {
-          "description": "Find out more about DPXL expressions.",
-          "url": "https://coralogix.com/docs/dataprime/user-guide/dpxl/"
-        },
-        "title": "Forecast Policy Usage Request",
-        "description": "Request to forecast the usage in bytes of a draft TCO policy, based on the bytes matched by its filter rules over a given time window.",
-        "type": "object",
-        "properties": {
-          "applicationRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "day": {
-            "$ref": "#/components/schemas/Day"
-          },
-          "logRules": {
-            "$ref": "#/components/schemas/LogRules"
-          },
-          "subsystemRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "timeBucketMs": {
-            "example": "3600000",
-            "description": "Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.",
-            "type": "string",
-            "pattern": "^-?[0-9]+$",
-            "minLength": 1,
-            "maxLength": 20
-          }
-        },
-        "required": [
-          "day",
-          "logRules"
-        ]
-      },
-      "ForecastPolicyUsageRequestLogRulesWeek": {
-        "externalDocs": {
-          "description": "Find out more about DPXL expressions.",
-          "url": "https://coralogix.com/docs/dataprime/user-guide/dpxl/"
-        },
-        "title": "Forecast Policy Usage Request",
-        "description": "Request to forecast the usage in bytes of a draft TCO policy, based on the bytes matched by its filter rules over a given time window.",
-        "type": "object",
-        "properties": {
-          "applicationRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "logRules": {
-            "$ref": "#/components/schemas/LogRules"
-          },
-          "subsystemRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "timeBucketMs": {
-            "example": "3600000",
-            "description": "Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.",
-            "type": "string",
-            "pattern": "^-?[0-9]+$",
-            "minLength": 1,
-            "maxLength": 20
-          },
-          "week": {
-            "$ref": "#/components/schemas/Week"
-          }
-        },
-        "required": [
-          "logRules",
-          "week"
-        ]
-      },
-      "ForecastPolicyUsageRequestSpanRulesDay": {
-        "externalDocs": {
-          "description": "Find out more about DPXL expressions.",
-          "url": "https://coralogix.com/docs/dataprime/user-guide/dpxl/"
-        },
-        "title": "Forecast Policy Usage Request",
-        "description": "Request to forecast the usage in bytes of a draft TCO policy, based on the bytes matched by its filter rules over a given time window.",
-        "type": "object",
-        "properties": {
-          "applicationRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "day": {
-            "$ref": "#/components/schemas/Day"
-          },
-          "spanRules": {
-            "$ref": "#/components/schemas/SpanRules"
-          },
-          "subsystemRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "timeBucketMs": {
-            "example": "3600000",
-            "description": "Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.",
-            "type": "string",
-            "pattern": "^-?[0-9]+$",
-            "minLength": 1,
-            "maxLength": 20
-          }
-        },
-        "required": [
-          "day",
-          "spanRules"
-        ]
-      },
-      "ForecastPolicyUsageRequestSpanRulesWeek": {
-        "externalDocs": {
-          "description": "Find out more about DPXL expressions.",
-          "url": "https://coralogix.com/docs/dataprime/user-guide/dpxl/"
-        },
-        "title": "Forecast Policy Usage Request",
-        "description": "Request to forecast the usage in bytes of a draft TCO policy, based on the bytes matched by its filter rules over a given time window.",
-        "type": "object",
-        "properties": {
-          "applicationRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "spanRules": {
-            "$ref": "#/components/schemas/SpanRules"
-          },
-          "subsystemRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "timeBucketMs": {
-            "example": "3600000",
-            "description": "Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.",
-            "type": "string",
-            "pattern": "^-?[0-9]+$",
-            "minLength": 1,
-            "maxLength": 20
-          },
-          "week": {
-            "$ref": "#/components/schemas/Week"
-          }
-        },
-        "required": [
-          "spanRules",
-          "week"
-        ]
       },
       "ForecastPolicyUsageResponse": {
         "externalDocs": {
@@ -1551,10 +1536,7 @@
           "policy": {
             "$ref": "#/components/schemas/Policy"
           }
-        },
-        "required": [
-          "id"
-        ]
+        }
       },
       "GetPolicySettingsResponse": {
         "externalDocs": {
@@ -1671,16 +1653,6 @@
         }
       },
       "Placement": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/PlacementFirst"
-          },
-          {
-            "$ref": "#/components/schemas/PlacementLast"
-          }
-        ]
-      },
-      "PlacementFirst": {
         "externalDocs": {
           "url": ""
         },
@@ -1689,38 +1661,50 @@
         "properties": {
           "first": {
             "$ref": "#/components/schemas/First"
-          }
-        },
-        "required": [
-          "first"
-        ]
-      },
-      "PlacementLast": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Placement.",
-        "type": "object",
-        "properties": {
+          },
           "last": {
             "$ref": "#/components/schemas/Last"
           }
         },
-        "required": [
-          "last"
-        ]
-      },
-      "Policy": {
-        "oneOf": [
+        "allOf": [
           {
-            "$ref": "#/components/schemas/PolicyLogRules"
-          },
-          {
-            "$ref": "#/components/schemas/PolicySpanRules"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "first"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "last"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "first"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "last"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
-      "PolicyLogRules": {
+      "Policy": {
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
@@ -1742,7 +1726,7 @@
             "format": "int32"
           },
           "createdAt": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "description": "Timestamp (RFC 3339) when the policy was created.",
             "type": "string",
             "minLength": 0
@@ -1793,6 +1777,9 @@
           "priorityOverrideStatus": {
             "$ref": "#/components/schemas/PriorityOverrideStatus"
           },
+          "spanRules": {
+            "$ref": "#/components/schemas/SpanRules"
+          },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
@@ -1805,7 +1792,7 @@
             "minItems": 0
           },
           "updatedAt": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "description": "Timestamp (RFC 3339) when the policy was last updated.",
             "type": "string",
             "minLength": 0
@@ -1818,8 +1805,44 @@
           "priority",
           "deleted",
           "enabled",
-          "order",
-          "logRules"
+          "order"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "logRules"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "spanRules"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "logRules"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "spanRules"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "PolicyOrder": {
@@ -1847,108 +1870,6 @@
         "required": [
           "order",
           "id"
-        ]
-      },
-      "PolicySpanRules": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
-        "title": "Policy",
-        "description": "A policy is a set of rules that define the behavior of the Coralogix system for a specific company.",
-        "type": "object",
-        "properties": {
-          "applicationRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "archiveRetention": {
-            "$ref": "#/components/schemas/ArchiveRetention"
-          },
-          "companyId": {
-            "example": 1234,
-            "description": "Internal Coralogix company/team identifier that owns this policy.",
-            "type": "integer",
-            "format": "int32"
-          },
-          "createdAt": {
-            "example": "2021-01-01T00:00:00.000Z",
-            "description": "Timestamp (RFC 3339) when the policy was created.",
-            "type": "string",
-            "minLength": 0
-          },
-          "deleted": {
-            "example": false,
-            "description": "Soft-delete marker; when true the policy has been deleted and is no longer applied.",
-            "type": "boolean"
-          },
-          "description": {
-            "example": "My Policy Description",
-            "description": "Optional free-text description of the policy's purpose.",
-            "type": "string",
-            "minLength": 0
-          },
-          "enabled": {
-            "example": true,
-            "description": "Indicates whether the policy is actively evaluated and applied.",
-            "type": "boolean"
-          },
-          "id": {
-            "example": "policy_id",
-            "description": "Unique identifier for the policy.",
-            "type": "string",
-            "minLength": 0
-          },
-          "name": {
-            "example": "My Policy",
-            "description": "Human-readable name for the policy.",
-            "type": "string",
-            "minLength": 0
-          },
-          "order": {
-            "example": 1,
-            "description": "Ordering priority that determines the sequence in which policies are evaluated.",
-            "type": "integer",
-            "format": "int32"
-          },
-          "priority": {
-            "$ref": "#/components/schemas/quota.v1.Priority"
-          },
-          "priorityOverride": {
-            "$ref": "#/components/schemas/PriorityOverride"
-          },
-          "priorityOverrideStatus": {
-            "$ref": "#/components/schemas/PriorityOverrideStatus"
-          },
-          "spanRules": {
-            "$ref": "#/components/schemas/SpanRules"
-          },
-          "subsystemRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "targets": {
-            "description": "List of data targets/destinations to which this policy routes data.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/v1.Target"
-            },
-            "minItems": 0
-          },
-          "updatedAt": {
-            "example": "2021-01-01T00:00:00.000Z",
-            "description": "Timestamp (RFC 3339) when the policy was last updated.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "id",
-          "companyId",
-          "name",
-          "priority",
-          "deleted",
-          "enabled",
-          "order",
-          "spanRules"
         ]
       },
       "PriorityOverride": {
@@ -2155,134 +2076,6 @@
           "metaFieldsValues",
           "matched",
           "policy"
-        ]
-      },
-      "UpdatePolicyRequestLogRules": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
-        "title": "Update Policy Request",
-        "description": "This data structue is used to update an existing policy.",
-        "type": "object",
-        "properties": {
-          "applicationRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "archiveRetention": {
-            "$ref": "#/components/schemas/ArchiveRetention"
-          },
-          "description": {
-            "example": "My Policy Description",
-            "description": "Optional free-text description of the policy's purpose.",
-            "type": "string",
-            "minLength": 0
-          },
-          "enabled": {
-            "example": true,
-            "description": "Indicates whether the policy should be actively evaluated and applied.",
-            "type": "boolean"
-          },
-          "id": {
-            "example": "policy_id",
-            "description": "Unique identifier of the policy to update.",
-            "type": "string",
-            "minLength": 0
-          },
-          "logRules": {
-            "$ref": "#/components/schemas/LogRules"
-          },
-          "name": {
-            "example": "My Policy",
-            "description": "Human-readable name for the policy.",
-            "type": "string",
-            "minLength": 0
-          },
-          "priority": {
-            "$ref": "#/components/schemas/quota.v1.Priority"
-          },
-          "priorityOverride": {
-            "$ref": "#/components/schemas/PriorityOverride"
-          },
-          "subsystemRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "targets": {
-            "description": "List of data targets/destinations to which this policy routes data.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/v1.Target"
-            },
-            "minItems": 0
-          }
-        },
-        "required": [
-          "id",
-          "logRules"
-        ]
-      },
-      "UpdatePolicyRequestSpanRules": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
-        "title": "Update Policy Request",
-        "description": "This data structue is used to update an existing policy.",
-        "type": "object",
-        "properties": {
-          "applicationRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "archiveRetention": {
-            "$ref": "#/components/schemas/ArchiveRetention"
-          },
-          "description": {
-            "example": "My Policy Description",
-            "description": "Optional free-text description of the policy's purpose.",
-            "type": "string",
-            "minLength": 0
-          },
-          "enabled": {
-            "example": true,
-            "description": "Indicates whether the policy should be actively evaluated and applied.",
-            "type": "boolean"
-          },
-          "id": {
-            "example": "policy_id",
-            "description": "Unique identifier of the policy to update.",
-            "type": "string",
-            "minLength": 0
-          },
-          "name": {
-            "example": "My Policy",
-            "description": "Human-readable name for the policy.",
-            "type": "string",
-            "minLength": 0
-          },
-          "priority": {
-            "$ref": "#/components/schemas/quota.v1.Priority"
-          },
-          "priorityOverride": {
-            "$ref": "#/components/schemas/PriorityOverride"
-          },
-          "spanRules": {
-            "$ref": "#/components/schemas/SpanRules"
-          },
-          "subsystemRule": {
-            "$ref": "#/components/schemas/quota.v1.Rule"
-          },
-          "targets": {
-            "description": "List of data targets/destinations to which this policy routes data.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/v1.Target"
-            },
-            "minItems": 0
-          }
-        },
-        "required": [
-          "id",
-          "spanRules"
         ]
       },
       "UpdatePolicyResponse": {

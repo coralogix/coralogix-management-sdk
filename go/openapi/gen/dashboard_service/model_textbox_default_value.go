@@ -13,316 +13,395 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// TextboxDefaultValue - struct for TextboxDefaultValue
+// checks if the TextboxDefaultValue type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TextboxDefaultValue{}
+
+// TextboxDefaultValue Textbox default value.
 type TextboxDefaultValue struct {
-	TextboxDefaultValueDefaultIntervalValue *TextboxDefaultValueDefaultIntervalValue
-	TextboxDefaultValueDefaultLuceneValue *TextboxDefaultValueDefaultLuceneValue
-	TextboxDefaultValueDefaultNumericValue *TextboxDefaultValueDefaultNumericValue
-	TextboxDefaultValueDefaultRegexValue *TextboxDefaultValueDefaultRegexValue
-	TextboxDefaultValueDefaultStringValue *TextboxDefaultValueDefaultStringValue
-	TextboxDefaultValueSingleNumeric *TextboxDefaultValueSingleNumeric
-	TextboxDefaultValueSingleString *TextboxDefaultValueSingleString
+	DefaultIntervalValue *TextboxDefaultIntervalValue `json:"defaultIntervalValue,omitempty"`
+	DefaultLuceneValue *TextboxDefaultLuceneValue `json:"defaultLuceneValue,omitempty"`
+	DefaultNumericValue *TextboxDefaultNumericValue `json:"defaultNumericValue,omitempty"`
+	DefaultRegexValue *TextboxDefaultRegexValue `json:"defaultRegexValue,omitempty"`
+	DefaultStringValue *TextboxDefaultStringValue `json:"defaultStringValue,omitempty"`
+	// Deprecated. Default numeric value for the textbox variable.
+	// Deprecated
+	SingleNumeric *float32 `json:"singleNumeric,omitempty"`
+	// Deprecated. Default string value for the textbox variable.
+	// Deprecated
+	SingleString *string `json:"singleString,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// TextboxDefaultValueDefaultIntervalValueAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueDefaultIntervalValue wrapped in TextboxDefaultValue
-func TextboxDefaultValueDefaultIntervalValueAsTextboxDefaultValue(v *TextboxDefaultValueDefaultIntervalValue) TextboxDefaultValue {
-	return TextboxDefaultValue{
-		TextboxDefaultValueDefaultIntervalValue: v,
+type _TextboxDefaultValue TextboxDefaultValue
+
+// NewTextboxDefaultValue instantiates a new TextboxDefaultValue object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewTextboxDefaultValue() *TextboxDefaultValue {
+	this := TextboxDefaultValue{}
+	return &this
+}
+
+// NewTextboxDefaultValueWithDefaults instantiates a new TextboxDefaultValue object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewTextboxDefaultValueWithDefaults() *TextboxDefaultValue {
+	this := TextboxDefaultValue{}
+	return &this
+}
+
+// GetDefaultIntervalValue returns the DefaultIntervalValue field value if set, zero value otherwise.
+func (o *TextboxDefaultValue) GetDefaultIntervalValue() TextboxDefaultIntervalValue {
+	if o == nil || IsNil(o.DefaultIntervalValue) {
+		var ret TextboxDefaultIntervalValue
+		return ret
 	}
+	return *o.DefaultIntervalValue
 }
 
-// TextboxDefaultValueDefaultLuceneValueAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueDefaultLuceneValue wrapped in TextboxDefaultValue
-func TextboxDefaultValueDefaultLuceneValueAsTextboxDefaultValue(v *TextboxDefaultValueDefaultLuceneValue) TextboxDefaultValue {
-	return TextboxDefaultValue{
-		TextboxDefaultValueDefaultLuceneValue: v,
+// GetDefaultIntervalValueOk returns a tuple with the DefaultIntervalValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TextboxDefaultValue) GetDefaultIntervalValueOk() (*TextboxDefaultIntervalValue, bool) {
+	if o == nil || IsNil(o.DefaultIntervalValue) {
+		return nil, false
 	}
+	return o.DefaultIntervalValue, true
 }
 
-// TextboxDefaultValueDefaultNumericValueAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueDefaultNumericValue wrapped in TextboxDefaultValue
-func TextboxDefaultValueDefaultNumericValueAsTextboxDefaultValue(v *TextboxDefaultValueDefaultNumericValue) TextboxDefaultValue {
-	return TextboxDefaultValue{
-		TextboxDefaultValueDefaultNumericValue: v,
+// HasDefaultIntervalValue returns a boolean if a field has been set.
+func (o *TextboxDefaultValue) HasDefaultIntervalValue() bool {
+	if o != nil && !IsNil(o.DefaultIntervalValue) {
+		return true
 	}
+
+	return false
 }
 
-// TextboxDefaultValueDefaultRegexValueAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueDefaultRegexValue wrapped in TextboxDefaultValue
-func TextboxDefaultValueDefaultRegexValueAsTextboxDefaultValue(v *TextboxDefaultValueDefaultRegexValue) TextboxDefaultValue {
-	return TextboxDefaultValue{
-		TextboxDefaultValueDefaultRegexValue: v,
+// SetDefaultIntervalValue gets a reference to the given TextboxDefaultIntervalValue and assigns it to the DefaultIntervalValue field.
+func (o *TextboxDefaultValue) SetDefaultIntervalValue(v TextboxDefaultIntervalValue) {
+	o.DefaultIntervalValue = &v
+}
+
+// GetDefaultLuceneValue returns the DefaultLuceneValue field value if set, zero value otherwise.
+func (o *TextboxDefaultValue) GetDefaultLuceneValue() TextboxDefaultLuceneValue {
+	if o == nil || IsNil(o.DefaultLuceneValue) {
+		var ret TextboxDefaultLuceneValue
+		return ret
 	}
+	return *o.DefaultLuceneValue
 }
 
-// TextboxDefaultValueDefaultStringValueAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueDefaultStringValue wrapped in TextboxDefaultValue
-func TextboxDefaultValueDefaultStringValueAsTextboxDefaultValue(v *TextboxDefaultValueDefaultStringValue) TextboxDefaultValue {
-	return TextboxDefaultValue{
-		TextboxDefaultValueDefaultStringValue: v,
+// GetDefaultLuceneValueOk returns a tuple with the DefaultLuceneValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TextboxDefaultValue) GetDefaultLuceneValueOk() (*TextboxDefaultLuceneValue, bool) {
+	if o == nil || IsNil(o.DefaultLuceneValue) {
+		return nil, false
 	}
+	return o.DefaultLuceneValue, true
 }
 
-// TextboxDefaultValueSingleNumericAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueSingleNumeric wrapped in TextboxDefaultValue
-func TextboxDefaultValueSingleNumericAsTextboxDefaultValue(v *TextboxDefaultValueSingleNumeric) TextboxDefaultValue {
-	return TextboxDefaultValue{
-		TextboxDefaultValueSingleNumeric: v,
+// HasDefaultLuceneValue returns a boolean if a field has been set.
+func (o *TextboxDefaultValue) HasDefaultLuceneValue() bool {
+	if o != nil && !IsNil(o.DefaultLuceneValue) {
+		return true
 	}
+
+	return false
 }
 
-// TextboxDefaultValueSingleStringAsTextboxDefaultValue is a convenience function that returns TextboxDefaultValueSingleString wrapped in TextboxDefaultValue
-func TextboxDefaultValueSingleStringAsTextboxDefaultValue(v *TextboxDefaultValueSingleString) TextboxDefaultValue {
-	return TextboxDefaultValue{
-		TextboxDefaultValueSingleString: v,
+// SetDefaultLuceneValue gets a reference to the given TextboxDefaultLuceneValue and assigns it to the DefaultLuceneValue field.
+func (o *TextboxDefaultValue) SetDefaultLuceneValue(v TextboxDefaultLuceneValue) {
+	o.DefaultLuceneValue = &v
+}
+
+// GetDefaultNumericValue returns the DefaultNumericValue field value if set, zero value otherwise.
+func (o *TextboxDefaultValue) GetDefaultNumericValue() TextboxDefaultNumericValue {
+	if o == nil || IsNil(o.DefaultNumericValue) {
+		var ret TextboxDefaultNumericValue
+		return ret
 	}
+	return *o.DefaultNumericValue
 }
 
+// GetDefaultNumericValueOk returns a tuple with the DefaultNumericValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TextboxDefaultValue) GetDefaultNumericValueOk() (*TextboxDefaultNumericValue, bool) {
+	if o == nil || IsNil(o.DefaultNumericValue) {
+		return nil, false
+	}
+	return o.DefaultNumericValue, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *TextboxDefaultValue) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into TextboxDefaultValueDefaultIntervalValue
-	err = json.Unmarshal(data, &dst.TextboxDefaultValueDefaultIntervalValue)
-	if err == nil {
-		jsonTextboxDefaultValueDefaultIntervalValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultIntervalValue)
-		if string(jsonTextboxDefaultValueDefaultIntervalValue) == "{}" { // empty struct
-			dst.TextboxDefaultValueDefaultIntervalValue = nil
-		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueDefaultIntervalValue); err != nil {
-				dst.TextboxDefaultValueDefaultIntervalValue = nil
-			} else {
-				match++
-			}
+// HasDefaultNumericValue returns a boolean if a field has been set.
+func (o *TextboxDefaultValue) HasDefaultNumericValue() bool {
+	if o != nil && !IsNil(o.DefaultNumericValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultNumericValue gets a reference to the given TextboxDefaultNumericValue and assigns it to the DefaultNumericValue field.
+func (o *TextboxDefaultValue) SetDefaultNumericValue(v TextboxDefaultNumericValue) {
+	o.DefaultNumericValue = &v
+}
+
+// GetDefaultRegexValue returns the DefaultRegexValue field value if set, zero value otherwise.
+func (o *TextboxDefaultValue) GetDefaultRegexValue() TextboxDefaultRegexValue {
+	if o == nil || IsNil(o.DefaultRegexValue) {
+		var ret TextboxDefaultRegexValue
+		return ret
+	}
+	return *o.DefaultRegexValue
+}
+
+// GetDefaultRegexValueOk returns a tuple with the DefaultRegexValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TextboxDefaultValue) GetDefaultRegexValueOk() (*TextboxDefaultRegexValue, bool) {
+	if o == nil || IsNil(o.DefaultRegexValue) {
+		return nil, false
+	}
+	return o.DefaultRegexValue, true
+}
+
+// HasDefaultRegexValue returns a boolean if a field has been set.
+func (o *TextboxDefaultValue) HasDefaultRegexValue() bool {
+	if o != nil && !IsNil(o.DefaultRegexValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultRegexValue gets a reference to the given TextboxDefaultRegexValue and assigns it to the DefaultRegexValue field.
+func (o *TextboxDefaultValue) SetDefaultRegexValue(v TextboxDefaultRegexValue) {
+	o.DefaultRegexValue = &v
+}
+
+// GetDefaultStringValue returns the DefaultStringValue field value if set, zero value otherwise.
+func (o *TextboxDefaultValue) GetDefaultStringValue() TextboxDefaultStringValue {
+	if o == nil || IsNil(o.DefaultStringValue) {
+		var ret TextboxDefaultStringValue
+		return ret
+	}
+	return *o.DefaultStringValue
+}
+
+// GetDefaultStringValueOk returns a tuple with the DefaultStringValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TextboxDefaultValue) GetDefaultStringValueOk() (*TextboxDefaultStringValue, bool) {
+	if o == nil || IsNil(o.DefaultStringValue) {
+		return nil, false
+	}
+	return o.DefaultStringValue, true
+}
+
+// HasDefaultStringValue returns a boolean if a field has been set.
+func (o *TextboxDefaultValue) HasDefaultStringValue() bool {
+	if o != nil && !IsNil(o.DefaultStringValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultStringValue gets a reference to the given TextboxDefaultStringValue and assigns it to the DefaultStringValue field.
+func (o *TextboxDefaultValue) SetDefaultStringValue(v TextboxDefaultStringValue) {
+	o.DefaultStringValue = &v
+}
+
+// GetSingleNumeric returns the SingleNumeric field value if set, zero value otherwise.
+// Deprecated
+func (o *TextboxDefaultValue) GetSingleNumeric() float32 {
+	if o == nil || IsNil(o.SingleNumeric) {
+		var ret float32
+		return ret
+	}
+	return *o.SingleNumeric
+}
+
+// GetSingleNumericOk returns a tuple with the SingleNumeric field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *TextboxDefaultValue) GetSingleNumericOk() (*float32, bool) {
+	if o == nil || IsNil(o.SingleNumeric) {
+		return nil, false
+	}
+	return o.SingleNumeric, true
+}
+
+// HasSingleNumeric returns a boolean if a field has been set.
+func (o *TextboxDefaultValue) HasSingleNumeric() bool {
+	if o != nil && !IsNil(o.SingleNumeric) {
+		return true
+	}
+
+	return false
+}
+
+// SetSingleNumeric gets a reference to the given float32 and assigns it to the SingleNumeric field.
+// Deprecated
+func (o *TextboxDefaultValue) SetSingleNumeric(v float32) {
+	o.SingleNumeric = &v
+}
+
+// GetSingleString returns the SingleString field value if set, zero value otherwise.
+// Deprecated
+func (o *TextboxDefaultValue) GetSingleString() string {
+	if o == nil || IsNil(o.SingleString) {
+		var ret string
+		return ret
+	}
+	return *o.SingleString
+}
+
+// GetSingleStringOk returns a tuple with the SingleString field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *TextboxDefaultValue) GetSingleStringOk() (*string, bool) {
+	if o == nil || IsNil(o.SingleString) {
+		return nil, false
+	}
+	return o.SingleString, true
+}
+
+// HasSingleString returns a boolean if a field has been set.
+func (o *TextboxDefaultValue) HasSingleString() bool {
+	if o != nil && !IsNil(o.SingleString) {
+		return true
+	}
+
+	return false
+}
+
+// SetSingleString gets a reference to the given string and assigns it to the SingleString field.
+// Deprecated
+func (o *TextboxDefaultValue) SetSingleString(v string) {
+	o.SingleString = &v
+}
+
+func (o TextboxDefaultValue) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TextboxDefaultValue) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.DefaultIntervalValue) {
+		toSerialize["defaultIntervalValue"] = o.DefaultIntervalValue
+	}
+	if !IsNil(o.DefaultLuceneValue) {
+		toSerialize["defaultLuceneValue"] = o.DefaultLuceneValue
+	}
+	if !IsNil(o.DefaultNumericValue) {
+		toSerialize["defaultNumericValue"] = o.DefaultNumericValue
+	}
+	if !IsNil(o.DefaultRegexValue) {
+		toSerialize["defaultRegexValue"] = o.DefaultRegexValue
+	}
+	if !IsNil(o.DefaultStringValue) {
+		toSerialize["defaultStringValue"] = o.DefaultStringValue
+	}
+	if !IsNil(o.SingleNumeric) {
+		toSerialize["singleNumeric"] = o.SingleNumeric
+	}
+	if !IsNil(o.SingleString) {
+		toSerialize["singleString"] = o.SingleString
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["singleString"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["singleNumeric"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["defaultStringValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["defaultNumericValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["defaultLuceneValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["defaultRegexValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["defaultIntervalValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [singleString, singleNumeric, defaultStringValue, defaultNumericValue, defaultLuceneValue, defaultRegexValue, defaultIntervalValue] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *TextboxDefaultValue) UnmarshalJSON(data []byte) (err error) {
+	varTextboxDefaultValue := _TextboxDefaultValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxDefaultValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxDefaultValue(varTextboxDefaultValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["singleString"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TextboxDefaultValueDefaultIntervalValue = nil
-	}
-
-	// try to unmarshal data into TextboxDefaultValueDefaultLuceneValue
-	err = json.Unmarshal(data, &dst.TextboxDefaultValueDefaultLuceneValue)
-	if err == nil {
-		jsonTextboxDefaultValueDefaultLuceneValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultLuceneValue)
-		if string(jsonTextboxDefaultValueDefaultLuceneValue) == "{}" { // empty struct
-			dst.TextboxDefaultValueDefaultLuceneValue = nil
-		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueDefaultLuceneValue); err != nil {
-				dst.TextboxDefaultValueDefaultLuceneValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["singleNumeric"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TextboxDefaultValueDefaultLuceneValue = nil
-	}
-
-	// try to unmarshal data into TextboxDefaultValueDefaultNumericValue
-	err = json.Unmarshal(data, &dst.TextboxDefaultValueDefaultNumericValue)
-	if err == nil {
-		jsonTextboxDefaultValueDefaultNumericValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultNumericValue)
-		if string(jsonTextboxDefaultValueDefaultNumericValue) == "{}" { // empty struct
-			dst.TextboxDefaultValueDefaultNumericValue = nil
-		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueDefaultNumericValue); err != nil {
-				dst.TextboxDefaultValueDefaultNumericValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["defaultStringValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TextboxDefaultValueDefaultNumericValue = nil
-	}
-
-	// try to unmarshal data into TextboxDefaultValueDefaultRegexValue
-	err = json.Unmarshal(data, &dst.TextboxDefaultValueDefaultRegexValue)
-	if err == nil {
-		jsonTextboxDefaultValueDefaultRegexValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultRegexValue)
-		if string(jsonTextboxDefaultValueDefaultRegexValue) == "{}" { // empty struct
-			dst.TextboxDefaultValueDefaultRegexValue = nil
-		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueDefaultRegexValue); err != nil {
-				dst.TextboxDefaultValueDefaultRegexValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["defaultNumericValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TextboxDefaultValueDefaultRegexValue = nil
-	}
-
-	// try to unmarshal data into TextboxDefaultValueDefaultStringValue
-	err = json.Unmarshal(data, &dst.TextboxDefaultValueDefaultStringValue)
-	if err == nil {
-		jsonTextboxDefaultValueDefaultStringValue, _ := json.Marshal(dst.TextboxDefaultValueDefaultStringValue)
-		if string(jsonTextboxDefaultValueDefaultStringValue) == "{}" { // empty struct
-			dst.TextboxDefaultValueDefaultStringValue = nil
-		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueDefaultStringValue); err != nil {
-				dst.TextboxDefaultValueDefaultStringValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["defaultLuceneValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TextboxDefaultValueDefaultStringValue = nil
-	}
-
-	// try to unmarshal data into TextboxDefaultValueSingleNumeric
-	err = json.Unmarshal(data, &dst.TextboxDefaultValueSingleNumeric)
-	if err == nil {
-		jsonTextboxDefaultValueSingleNumeric, _ := json.Marshal(dst.TextboxDefaultValueSingleNumeric)
-		if string(jsonTextboxDefaultValueSingleNumeric) == "{}" { // empty struct
-			dst.TextboxDefaultValueSingleNumeric = nil
-		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueSingleNumeric); err != nil {
-				dst.TextboxDefaultValueSingleNumeric = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["defaultRegexValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TextboxDefaultValueSingleNumeric = nil
-	}
-
-	// try to unmarshal data into TextboxDefaultValueSingleString
-	err = json.Unmarshal(data, &dst.TextboxDefaultValueSingleString)
-	if err == nil {
-		jsonTextboxDefaultValueSingleString, _ := json.Marshal(dst.TextboxDefaultValueSingleString)
-		if string(jsonTextboxDefaultValueSingleString) == "{}" { // empty struct
-			dst.TextboxDefaultValueSingleString = nil
-		} else {
-			if err = validator.Validate(dst.TextboxDefaultValueSingleString); err != nil {
-				dst.TextboxDefaultValueSingleString = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["defaultIntervalValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TextboxDefaultValueSingleString = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [singleString, singleNumeric, defaultStringValue, defaultNumericValue, defaultLuceneValue, defaultRegexValue, defaultIntervalValue] may be set"}
+		}
+
+		delete(additionalProperties, "defaultIntervalValue")
+		delete(additionalProperties, "defaultLuceneValue")
+		delete(additionalProperties, "defaultNumericValue")
+		delete(additionalProperties, "defaultRegexValue")
+		delete(additionalProperties, "defaultStringValue")
+		delete(additionalProperties, "singleNumeric")
+		delete(additionalProperties, "singleString")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TextboxDefaultValueDefaultIntervalValue = nil
-		dst.TextboxDefaultValueDefaultLuceneValue = nil
-		dst.TextboxDefaultValueDefaultNumericValue = nil
-		dst.TextboxDefaultValueDefaultRegexValue = nil
-		dst.TextboxDefaultValueDefaultStringValue = nil
-		dst.TextboxDefaultValueSingleNumeric = nil
-		dst.TextboxDefaultValueSingleString = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TextboxDefaultValue)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src TextboxDefaultValue) MarshalJSON() ([]byte, error) {
-	if src.TextboxDefaultValueDefaultIntervalValue != nil {
-		return json.Marshal(&src.TextboxDefaultValueDefaultIntervalValue)
-	}
-
-	if src.TextboxDefaultValueDefaultLuceneValue != nil {
-		return json.Marshal(&src.TextboxDefaultValueDefaultLuceneValue)
-	}
-
-	if src.TextboxDefaultValueDefaultNumericValue != nil {
-		return json.Marshal(&src.TextboxDefaultValueDefaultNumericValue)
-	}
-
-	if src.TextboxDefaultValueDefaultRegexValue != nil {
-		return json.Marshal(&src.TextboxDefaultValueDefaultRegexValue)
-	}
-
-	if src.TextboxDefaultValueDefaultStringValue != nil {
-		return json.Marshal(&src.TextboxDefaultValueDefaultStringValue)
-	}
-
-	if src.TextboxDefaultValueSingleNumeric != nil {
-		return json.Marshal(&src.TextboxDefaultValueSingleNumeric)
-	}
-
-	if src.TextboxDefaultValueSingleString != nil {
-		return json.Marshal(&src.TextboxDefaultValueSingleString)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *TextboxDefaultValue) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.TextboxDefaultValueDefaultIntervalValue != nil {
-		return obj.TextboxDefaultValueDefaultIntervalValue
-	}
-
-	if obj.TextboxDefaultValueDefaultLuceneValue != nil {
-		return obj.TextboxDefaultValueDefaultLuceneValue
-	}
-
-	if obj.TextboxDefaultValueDefaultNumericValue != nil {
-		return obj.TextboxDefaultValueDefaultNumericValue
-	}
-
-	if obj.TextboxDefaultValueDefaultRegexValue != nil {
-		return obj.TextboxDefaultValueDefaultRegexValue
-	}
-
-	if obj.TextboxDefaultValueDefaultStringValue != nil {
-		return obj.TextboxDefaultValueDefaultStringValue
-	}
-
-	if obj.TextboxDefaultValueSingleNumeric != nil {
-		return obj.TextboxDefaultValueSingleNumeric
-	}
-
-	if obj.TextboxDefaultValueSingleString != nil {
-		return obj.TextboxDefaultValueSingleString
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj TextboxDefaultValue) GetActualInstanceValue() (interface{}) {
-	if obj.TextboxDefaultValueDefaultIntervalValue != nil {
-		return *obj.TextboxDefaultValueDefaultIntervalValue
-	}
-
-	if obj.TextboxDefaultValueDefaultLuceneValue != nil {
-		return *obj.TextboxDefaultValueDefaultLuceneValue
-	}
-
-	if obj.TextboxDefaultValueDefaultNumericValue != nil {
-		return *obj.TextboxDefaultValueDefaultNumericValue
-	}
-
-	if obj.TextboxDefaultValueDefaultRegexValue != nil {
-		return *obj.TextboxDefaultValueDefaultRegexValue
-	}
-
-	if obj.TextboxDefaultValueDefaultStringValue != nil {
-		return *obj.TextboxDefaultValueDefaultStringValue
-	}
-
-	if obj.TextboxDefaultValueSingleNumeric != nil {
-		return *obj.TextboxDefaultValueSingleNumeric
-	}
-
-	if obj.TextboxDefaultValueSingleString != nil {
-		return *obj.TextboxDefaultValueSingleString
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableTextboxDefaultValue struct {

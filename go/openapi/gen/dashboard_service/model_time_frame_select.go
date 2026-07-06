@@ -13,126 +13,171 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// TimeFrameSelect - struct for TimeFrameSelect
+// checks if the TimeFrameSelect type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TimeFrameSelect{}
+
+// TimeFrameSelect Time frame select.
 type TimeFrameSelect struct {
-	TimeFrameSelectAbsoluteTimeFrame *TimeFrameSelectAbsoluteTimeFrame
-	TimeFrameSelectRelativeTimeFrame *TimeFrameSelectRelativeTimeFrame
+	AbsoluteTimeFrame *TimeFrame `json:"absoluteTimeFrame,omitempty"`
+	// Relative time frame expressed as a duration offset from the current time (e.g., last 15 minutes).
+	RelativeTimeFrame *string `json:"relativeTimeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// TimeFrameSelectAbsoluteTimeFrameAsTimeFrameSelect is a convenience function that returns TimeFrameSelectAbsoluteTimeFrame wrapped in TimeFrameSelect
-func TimeFrameSelectAbsoluteTimeFrameAsTimeFrameSelect(v *TimeFrameSelectAbsoluteTimeFrame) TimeFrameSelect {
-	return TimeFrameSelect{
-		TimeFrameSelectAbsoluteTimeFrame: v,
+type _TimeFrameSelect TimeFrameSelect
+
+// NewTimeFrameSelect instantiates a new TimeFrameSelect object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewTimeFrameSelect() *TimeFrameSelect {
+	this := TimeFrameSelect{}
+	return &this
+}
+
+// NewTimeFrameSelectWithDefaults instantiates a new TimeFrameSelect object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewTimeFrameSelectWithDefaults() *TimeFrameSelect {
+	this := TimeFrameSelect{}
+	return &this
+}
+
+// GetAbsoluteTimeFrame returns the AbsoluteTimeFrame field value if set, zero value otherwise.
+func (o *TimeFrameSelect) GetAbsoluteTimeFrame() TimeFrame {
+	if o == nil || IsNil(o.AbsoluteTimeFrame) {
+		var ret TimeFrame
+		return ret
 	}
+	return *o.AbsoluteTimeFrame
 }
 
-// TimeFrameSelectRelativeTimeFrameAsTimeFrameSelect is a convenience function that returns TimeFrameSelectRelativeTimeFrame wrapped in TimeFrameSelect
-func TimeFrameSelectRelativeTimeFrameAsTimeFrameSelect(v *TimeFrameSelectRelativeTimeFrame) TimeFrameSelect {
-	return TimeFrameSelect{
-		TimeFrameSelectRelativeTimeFrame: v,
+// GetAbsoluteTimeFrameOk returns a tuple with the AbsoluteTimeFrame field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TimeFrameSelect) GetAbsoluteTimeFrameOk() (*TimeFrame, bool) {
+	if o == nil || IsNil(o.AbsoluteTimeFrame) {
+		return nil, false
 	}
+	return o.AbsoluteTimeFrame, true
 }
 
+// HasAbsoluteTimeFrame returns a boolean if a field has been set.
+func (o *TimeFrameSelect) HasAbsoluteTimeFrame() bool {
+	if o != nil && !IsNil(o.AbsoluteTimeFrame) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *TimeFrameSelect) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into TimeFrameSelectAbsoluteTimeFrame
-	err = json.Unmarshal(data, &dst.TimeFrameSelectAbsoluteTimeFrame)
-	if err == nil {
-		jsonTimeFrameSelectAbsoluteTimeFrame, _ := json.Marshal(dst.TimeFrameSelectAbsoluteTimeFrame)
-		if string(jsonTimeFrameSelectAbsoluteTimeFrame) == "{}" { // empty struct
-			dst.TimeFrameSelectAbsoluteTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.TimeFrameSelectAbsoluteTimeFrame); err != nil {
-				dst.TimeFrameSelectAbsoluteTimeFrame = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAbsoluteTimeFrame gets a reference to the given TimeFrame and assigns it to the AbsoluteTimeFrame field.
+func (o *TimeFrameSelect) SetAbsoluteTimeFrame(v TimeFrame) {
+	o.AbsoluteTimeFrame = &v
+}
+
+// GetRelativeTimeFrame returns the RelativeTimeFrame field value if set, zero value otherwise.
+func (o *TimeFrameSelect) GetRelativeTimeFrame() string {
+	if o == nil || IsNil(o.RelativeTimeFrame) {
+		var ret string
+		return ret
+	}
+	return *o.RelativeTimeFrame
+}
+
+// GetRelativeTimeFrameOk returns a tuple with the RelativeTimeFrame field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TimeFrameSelect) GetRelativeTimeFrameOk() (*string, bool) {
+	if o == nil || IsNil(o.RelativeTimeFrame) {
+		return nil, false
+	}
+	return o.RelativeTimeFrame, true
+}
+
+// HasRelativeTimeFrame returns a boolean if a field has been set.
+func (o *TimeFrameSelect) HasRelativeTimeFrame() bool {
+	if o != nil && !IsNil(o.RelativeTimeFrame) {
+		return true
+	}
+
+	return false
+}
+
+// SetRelativeTimeFrame gets a reference to the given string and assigns it to the RelativeTimeFrame field.
+func (o *TimeFrameSelect) SetRelativeTimeFrame(v string) {
+	o.RelativeTimeFrame = &v
+}
+
+func (o TimeFrameSelect) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TimeFrameSelect) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AbsoluteTimeFrame) {
+		toSerialize["absoluteTimeFrame"] = o.AbsoluteTimeFrame
+	}
+	if !IsNil(o.RelativeTimeFrame) {
+		toSerialize["relativeTimeFrame"] = o.RelativeTimeFrame
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["absoluteTimeFrame"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["relativeTimeFrame"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [absoluteTimeFrame, relativeTimeFrame] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *TimeFrameSelect) UnmarshalJSON(data []byte) (err error) {
+	varTimeFrameSelect := _TimeFrameSelect{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeFrameSelect)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeFrameSelect(varTimeFrameSelect)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["absoluteTimeFrame"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TimeFrameSelectAbsoluteTimeFrame = nil
-	}
-
-	// try to unmarshal data into TimeFrameSelectRelativeTimeFrame
-	err = json.Unmarshal(data, &dst.TimeFrameSelectRelativeTimeFrame)
-	if err == nil {
-		jsonTimeFrameSelectRelativeTimeFrame, _ := json.Marshal(dst.TimeFrameSelectRelativeTimeFrame)
-		if string(jsonTimeFrameSelectRelativeTimeFrame) == "{}" { // empty struct
-			dst.TimeFrameSelectRelativeTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.TimeFrameSelectRelativeTimeFrame); err != nil {
-				dst.TimeFrameSelectRelativeTimeFrame = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["relativeTimeFrame"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TimeFrameSelectRelativeTimeFrame = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [absoluteTimeFrame, relativeTimeFrame] may be set"}
+		}
+
+		delete(additionalProperties, "absoluteTimeFrame")
+		delete(additionalProperties, "relativeTimeFrame")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TimeFrameSelectAbsoluteTimeFrame = nil
-		dst.TimeFrameSelectRelativeTimeFrame = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TimeFrameSelect)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src TimeFrameSelect) MarshalJSON() ([]byte, error) {
-	if src.TimeFrameSelectAbsoluteTimeFrame != nil {
-		return json.Marshal(&src.TimeFrameSelectAbsoluteTimeFrame)
-	}
-
-	if src.TimeFrameSelectRelativeTimeFrame != nil {
-		return json.Marshal(&src.TimeFrameSelectRelativeTimeFrame)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *TimeFrameSelect) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.TimeFrameSelectAbsoluteTimeFrame != nil {
-		return obj.TimeFrameSelectAbsoluteTimeFrame
-	}
-
-	if obj.TimeFrameSelectRelativeTimeFrame != nil {
-		return obj.TimeFrameSelectRelativeTimeFrame
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj TimeFrameSelect) GetActualInstanceValue() (interface{}) {
-	if obj.TimeFrameSelectAbsoluteTimeFrame != nil {
-		return *obj.TimeFrameSelectAbsoluteTimeFrame
-	}
-
-	if obj.TimeFrameSelectRelativeTimeFrame != nil {
-		return *obj.TimeFrameSelectRelativeTimeFrame
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableTimeFrameSelect struct {

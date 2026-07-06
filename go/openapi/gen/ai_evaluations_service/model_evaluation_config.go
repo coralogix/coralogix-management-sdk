@@ -13,772 +13,911 @@ package ai_evaluations_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// EvaluationConfig - struct for EvaluationConfig
+// checks if the EvaluationConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EvaluationConfig{}
+
+// EvaluationConfig Type-specific configuration for an evaluation. Exactly one variant is set.
 type EvaluationConfig struct {
-	EvaluationConfigAllowedTopics *EvaluationConfigAllowedTopics
-	EvaluationConfigCompetition *EvaluationConfigCompetition
-	EvaluationConfigCustomEvaluation *EvaluationConfigCustomEvaluation
-	EvaluationConfigHallucinationCompleteness *EvaluationConfigHallucinationCompleteness
-	EvaluationConfigHallucinationContextAdherence *EvaluationConfigHallucinationContextAdherence
-	EvaluationConfigHallucinationContextRelevance *EvaluationConfigHallucinationContextRelevance
-	EvaluationConfigHallucinationCorrectness *EvaluationConfigHallucinationCorrectness
-	EvaluationConfigHallucinationTaskAdherence *EvaluationConfigHallucinationTaskAdherence
-	EvaluationConfigLanguageMismatch *EvaluationConfigLanguageMismatch
-	EvaluationConfigPii *EvaluationConfigPii
-	EvaluationConfigPromptInjection *EvaluationConfigPromptInjection
-	EvaluationConfigRestrictedTopics *EvaluationConfigRestrictedTopics
-	EvaluationConfigSexism *EvaluationConfigSexism
-	EvaluationConfigSqlAllowedTables *EvaluationConfigSqlAllowedTables
-	EvaluationConfigSqlHallucination *EvaluationConfigSqlHallucination
-	EvaluationConfigSqlLoad *EvaluationConfigSqlLoad
-	EvaluationConfigSqlReadOnly *EvaluationConfigSqlReadOnly
-	EvaluationConfigSqlRestrictedTables *EvaluationConfigSqlRestrictedTables
-	EvaluationConfigToxicity *EvaluationConfigToxicity
+	AllowedTopics *AllowedTopicsConfig `json:"allowedTopics,omitempty"`
+	Competition *CompetitionConfig `json:"competition,omitempty"`
+	CustomEvaluation *CustomEvaluationConfig `json:"customEvaluation,omitempty"`
+	// Configuration for the HallucinationCompleteness evaluation (no fields).
+	HallucinationCompleteness map[string]interface{} `json:"hallucinationCompleteness,omitempty"`
+	// Configuration for the HallucinationContextAdherence evaluation (no fields).
+	HallucinationContextAdherence map[string]interface{} `json:"hallucinationContextAdherence,omitempty"`
+	// Configuration for the HallucinationContextRelevance evaluation (no fields).
+	HallucinationContextRelevance map[string]interface{} `json:"hallucinationContextRelevance,omitempty"`
+	// Configuration for the HallucinationCorrectness evaluation (no fields).
+	HallucinationCorrectness map[string]interface{} `json:"hallucinationCorrectness,omitempty"`
+	// Configuration for the HallucinationTaskAdherence evaluation (no fields).
+	HallucinationTaskAdherence map[string]interface{} `json:"hallucinationTaskAdherence,omitempty"`
+	// Configuration for the LanguageMismatch evaluation (no fields).
+	LanguageMismatch map[string]interface{} `json:"languageMismatch,omitempty"`
+	Pii *PiiConfig `json:"pii,omitempty"`
+	PromptInjection *PromptInjectionConfig `json:"promptInjection,omitempty"`
+	RestrictedTopics *RestrictedTopicsConfig `json:"restrictedTopics,omitempty"`
+	// Configuration for the Sexism evaluation (no fields).
+	Sexism map[string]interface{} `json:"sexism,omitempty"`
+	SqlAllowedTables *SqlAllowedTablesConfig `json:"sqlAllowedTables,omitempty"`
+	// Configuration for the SqlHallucination evaluation (no fields).
+	SqlHallucination map[string]interface{} `json:"sqlHallucination,omitempty"`
+	SqlLoad *SqlLoadConfig `json:"sqlLoad,omitempty"`
+	// Configuration for the SqlReadOnly evaluation (no fields).
+	SqlReadOnly map[string]interface{} `json:"sqlReadOnly,omitempty"`
+	SqlRestrictedTables *SqlRestrictedTablesConfig `json:"sqlRestrictedTables,omitempty"`
+	// Configuration for the Toxicity evaluation (no fields).
+	Toxicity map[string]interface{} `json:"toxicity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// EvaluationConfigAllowedTopicsAsEvaluationConfig is a convenience function that returns EvaluationConfigAllowedTopics wrapped in EvaluationConfig
-func EvaluationConfigAllowedTopicsAsEvaluationConfig(v *EvaluationConfigAllowedTopics) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigAllowedTopics: v,
+type _EvaluationConfig EvaluationConfig
+
+// NewEvaluationConfig instantiates a new EvaluationConfig object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewEvaluationConfig() *EvaluationConfig {
+	this := EvaluationConfig{}
+	return &this
+}
+
+// NewEvaluationConfigWithDefaults instantiates a new EvaluationConfig object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewEvaluationConfigWithDefaults() *EvaluationConfig {
+	this := EvaluationConfig{}
+	return &this
+}
+
+// GetAllowedTopics returns the AllowedTopics field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetAllowedTopics() AllowedTopicsConfig {
+	if o == nil || IsNil(o.AllowedTopics) {
+		var ret AllowedTopicsConfig
+		return ret
 	}
+	return *o.AllowedTopics
 }
 
-// EvaluationConfigCompetitionAsEvaluationConfig is a convenience function that returns EvaluationConfigCompetition wrapped in EvaluationConfig
-func EvaluationConfigCompetitionAsEvaluationConfig(v *EvaluationConfigCompetition) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigCompetition: v,
+// GetAllowedTopicsOk returns a tuple with the AllowedTopics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetAllowedTopicsOk() (*AllowedTopicsConfig, bool) {
+	if o == nil || IsNil(o.AllowedTopics) {
+		return nil, false
 	}
+	return o.AllowedTopics, true
 }
 
-// EvaluationConfigCustomEvaluationAsEvaluationConfig is a convenience function that returns EvaluationConfigCustomEvaluation wrapped in EvaluationConfig
-func EvaluationConfigCustomEvaluationAsEvaluationConfig(v *EvaluationConfigCustomEvaluation) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigCustomEvaluation: v,
+// HasAllowedTopics returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasAllowedTopics() bool {
+	if o != nil && !IsNil(o.AllowedTopics) {
+		return true
 	}
+
+	return false
 }
 
-// EvaluationConfigHallucinationCompletenessAsEvaluationConfig is a convenience function that returns EvaluationConfigHallucinationCompleteness wrapped in EvaluationConfig
-func EvaluationConfigHallucinationCompletenessAsEvaluationConfig(v *EvaluationConfigHallucinationCompleteness) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigHallucinationCompleteness: v,
+// SetAllowedTopics gets a reference to the given AllowedTopicsConfig and assigns it to the AllowedTopics field.
+func (o *EvaluationConfig) SetAllowedTopics(v AllowedTopicsConfig) {
+	o.AllowedTopics = &v
+}
+
+// GetCompetition returns the Competition field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetCompetition() CompetitionConfig {
+	if o == nil || IsNil(o.Competition) {
+		var ret CompetitionConfig
+		return ret
 	}
+	return *o.Competition
 }
 
-// EvaluationConfigHallucinationContextAdherenceAsEvaluationConfig is a convenience function that returns EvaluationConfigHallucinationContextAdherence wrapped in EvaluationConfig
-func EvaluationConfigHallucinationContextAdherenceAsEvaluationConfig(v *EvaluationConfigHallucinationContextAdherence) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigHallucinationContextAdherence: v,
+// GetCompetitionOk returns a tuple with the Competition field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetCompetitionOk() (*CompetitionConfig, bool) {
+	if o == nil || IsNil(o.Competition) {
+		return nil, false
 	}
+	return o.Competition, true
 }
 
-// EvaluationConfigHallucinationContextRelevanceAsEvaluationConfig is a convenience function that returns EvaluationConfigHallucinationContextRelevance wrapped in EvaluationConfig
-func EvaluationConfigHallucinationContextRelevanceAsEvaluationConfig(v *EvaluationConfigHallucinationContextRelevance) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigHallucinationContextRelevance: v,
+// HasCompetition returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasCompetition() bool {
+	if o != nil && !IsNil(o.Competition) {
+		return true
 	}
+
+	return false
 }
 
-// EvaluationConfigHallucinationCorrectnessAsEvaluationConfig is a convenience function that returns EvaluationConfigHallucinationCorrectness wrapped in EvaluationConfig
-func EvaluationConfigHallucinationCorrectnessAsEvaluationConfig(v *EvaluationConfigHallucinationCorrectness) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigHallucinationCorrectness: v,
+// SetCompetition gets a reference to the given CompetitionConfig and assigns it to the Competition field.
+func (o *EvaluationConfig) SetCompetition(v CompetitionConfig) {
+	o.Competition = &v
+}
+
+// GetCustomEvaluation returns the CustomEvaluation field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetCustomEvaluation() CustomEvaluationConfig {
+	if o == nil || IsNil(o.CustomEvaluation) {
+		var ret CustomEvaluationConfig
+		return ret
 	}
+	return *o.CustomEvaluation
 }
 
-// EvaluationConfigHallucinationTaskAdherenceAsEvaluationConfig is a convenience function that returns EvaluationConfigHallucinationTaskAdherence wrapped in EvaluationConfig
-func EvaluationConfigHallucinationTaskAdherenceAsEvaluationConfig(v *EvaluationConfigHallucinationTaskAdherence) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigHallucinationTaskAdherence: v,
+// GetCustomEvaluationOk returns a tuple with the CustomEvaluation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetCustomEvaluationOk() (*CustomEvaluationConfig, bool) {
+	if o == nil || IsNil(o.CustomEvaluation) {
+		return nil, false
 	}
+	return o.CustomEvaluation, true
 }
 
-// EvaluationConfigLanguageMismatchAsEvaluationConfig is a convenience function that returns EvaluationConfigLanguageMismatch wrapped in EvaluationConfig
-func EvaluationConfigLanguageMismatchAsEvaluationConfig(v *EvaluationConfigLanguageMismatch) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigLanguageMismatch: v,
+// HasCustomEvaluation returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasCustomEvaluation() bool {
+	if o != nil && !IsNil(o.CustomEvaluation) {
+		return true
 	}
+
+	return false
 }
 
-// EvaluationConfigPiiAsEvaluationConfig is a convenience function that returns EvaluationConfigPii wrapped in EvaluationConfig
-func EvaluationConfigPiiAsEvaluationConfig(v *EvaluationConfigPii) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigPii: v,
+// SetCustomEvaluation gets a reference to the given CustomEvaluationConfig and assigns it to the CustomEvaluation field.
+func (o *EvaluationConfig) SetCustomEvaluation(v CustomEvaluationConfig) {
+	o.CustomEvaluation = &v
+}
+
+// GetHallucinationCompleteness returns the HallucinationCompleteness field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetHallucinationCompleteness() map[string]interface{} {
+	if o == nil || IsNil(o.HallucinationCompleteness) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.HallucinationCompleteness
 }
 
-// EvaluationConfigPromptInjectionAsEvaluationConfig is a convenience function that returns EvaluationConfigPromptInjection wrapped in EvaluationConfig
-func EvaluationConfigPromptInjectionAsEvaluationConfig(v *EvaluationConfigPromptInjection) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigPromptInjection: v,
+// GetHallucinationCompletenessOk returns a tuple with the HallucinationCompleteness field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetHallucinationCompletenessOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.HallucinationCompleteness) {
+		return map[string]interface{}{}, false
 	}
+	return o.HallucinationCompleteness, true
 }
 
-// EvaluationConfigRestrictedTopicsAsEvaluationConfig is a convenience function that returns EvaluationConfigRestrictedTopics wrapped in EvaluationConfig
-func EvaluationConfigRestrictedTopicsAsEvaluationConfig(v *EvaluationConfigRestrictedTopics) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigRestrictedTopics: v,
+// HasHallucinationCompleteness returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasHallucinationCompleteness() bool {
+	if o != nil && !IsNil(o.HallucinationCompleteness) {
+		return true
 	}
+
+	return false
 }
 
-// EvaluationConfigSexismAsEvaluationConfig is a convenience function that returns EvaluationConfigSexism wrapped in EvaluationConfig
-func EvaluationConfigSexismAsEvaluationConfig(v *EvaluationConfigSexism) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigSexism: v,
+// SetHallucinationCompleteness gets a reference to the given map[string]interface{} and assigns it to the HallucinationCompleteness field.
+func (o *EvaluationConfig) SetHallucinationCompleteness(v map[string]interface{}) {
+	o.HallucinationCompleteness = v
+}
+
+// GetHallucinationContextAdherence returns the HallucinationContextAdherence field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetHallucinationContextAdherence() map[string]interface{} {
+	if o == nil || IsNil(o.HallucinationContextAdherence) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.HallucinationContextAdherence
 }
 
-// EvaluationConfigSqlAllowedTablesAsEvaluationConfig is a convenience function that returns EvaluationConfigSqlAllowedTables wrapped in EvaluationConfig
-func EvaluationConfigSqlAllowedTablesAsEvaluationConfig(v *EvaluationConfigSqlAllowedTables) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigSqlAllowedTables: v,
+// GetHallucinationContextAdherenceOk returns a tuple with the HallucinationContextAdherence field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetHallucinationContextAdherenceOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.HallucinationContextAdherence) {
+		return map[string]interface{}{}, false
 	}
+	return o.HallucinationContextAdherence, true
 }
 
-// EvaluationConfigSqlHallucinationAsEvaluationConfig is a convenience function that returns EvaluationConfigSqlHallucination wrapped in EvaluationConfig
-func EvaluationConfigSqlHallucinationAsEvaluationConfig(v *EvaluationConfigSqlHallucination) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigSqlHallucination: v,
+// HasHallucinationContextAdherence returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasHallucinationContextAdherence() bool {
+	if o != nil && !IsNil(o.HallucinationContextAdherence) {
+		return true
 	}
+
+	return false
 }
 
-// EvaluationConfigSqlLoadAsEvaluationConfig is a convenience function that returns EvaluationConfigSqlLoad wrapped in EvaluationConfig
-func EvaluationConfigSqlLoadAsEvaluationConfig(v *EvaluationConfigSqlLoad) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigSqlLoad: v,
+// SetHallucinationContextAdherence gets a reference to the given map[string]interface{} and assigns it to the HallucinationContextAdherence field.
+func (o *EvaluationConfig) SetHallucinationContextAdherence(v map[string]interface{}) {
+	o.HallucinationContextAdherence = v
+}
+
+// GetHallucinationContextRelevance returns the HallucinationContextRelevance field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetHallucinationContextRelevance() map[string]interface{} {
+	if o == nil || IsNil(o.HallucinationContextRelevance) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.HallucinationContextRelevance
 }
 
-// EvaluationConfigSqlReadOnlyAsEvaluationConfig is a convenience function that returns EvaluationConfigSqlReadOnly wrapped in EvaluationConfig
-func EvaluationConfigSqlReadOnlyAsEvaluationConfig(v *EvaluationConfigSqlReadOnly) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigSqlReadOnly: v,
+// GetHallucinationContextRelevanceOk returns a tuple with the HallucinationContextRelevance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetHallucinationContextRelevanceOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.HallucinationContextRelevance) {
+		return map[string]interface{}{}, false
 	}
+	return o.HallucinationContextRelevance, true
 }
 
-// EvaluationConfigSqlRestrictedTablesAsEvaluationConfig is a convenience function that returns EvaluationConfigSqlRestrictedTables wrapped in EvaluationConfig
-func EvaluationConfigSqlRestrictedTablesAsEvaluationConfig(v *EvaluationConfigSqlRestrictedTables) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigSqlRestrictedTables: v,
+// HasHallucinationContextRelevance returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasHallucinationContextRelevance() bool {
+	if o != nil && !IsNil(o.HallucinationContextRelevance) {
+		return true
 	}
+
+	return false
 }
 
-// EvaluationConfigToxicityAsEvaluationConfig is a convenience function that returns EvaluationConfigToxicity wrapped in EvaluationConfig
-func EvaluationConfigToxicityAsEvaluationConfig(v *EvaluationConfigToxicity) EvaluationConfig {
-	return EvaluationConfig{
-		EvaluationConfigToxicity: v,
+// SetHallucinationContextRelevance gets a reference to the given map[string]interface{} and assigns it to the HallucinationContextRelevance field.
+func (o *EvaluationConfig) SetHallucinationContextRelevance(v map[string]interface{}) {
+	o.HallucinationContextRelevance = v
+}
+
+// GetHallucinationCorrectness returns the HallucinationCorrectness field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetHallucinationCorrectness() map[string]interface{} {
+	if o == nil || IsNil(o.HallucinationCorrectness) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.HallucinationCorrectness
 }
 
+// GetHallucinationCorrectnessOk returns a tuple with the HallucinationCorrectness field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetHallucinationCorrectnessOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.HallucinationCorrectness) {
+		return map[string]interface{}{}, false
+	}
+	return o.HallucinationCorrectness, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *EvaluationConfig) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into EvaluationConfigAllowedTopics
-	err = json.Unmarshal(data, &dst.EvaluationConfigAllowedTopics)
-	if err == nil {
-		jsonEvaluationConfigAllowedTopics, _ := json.Marshal(dst.EvaluationConfigAllowedTopics)
-		if string(jsonEvaluationConfigAllowedTopics) == "{}" { // empty struct
-			dst.EvaluationConfigAllowedTopics = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigAllowedTopics); err != nil {
-				dst.EvaluationConfigAllowedTopics = nil
-			} else {
-				match++
-			}
+// HasHallucinationCorrectness returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasHallucinationCorrectness() bool {
+	if o != nil && !IsNil(o.HallucinationCorrectness) {
+		return true
+	}
+
+	return false
+}
+
+// SetHallucinationCorrectness gets a reference to the given map[string]interface{} and assigns it to the HallucinationCorrectness field.
+func (o *EvaluationConfig) SetHallucinationCorrectness(v map[string]interface{}) {
+	o.HallucinationCorrectness = v
+}
+
+// GetHallucinationTaskAdherence returns the HallucinationTaskAdherence field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetHallucinationTaskAdherence() map[string]interface{} {
+	if o == nil || IsNil(o.HallucinationTaskAdherence) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.HallucinationTaskAdherence
+}
+
+// GetHallucinationTaskAdherenceOk returns a tuple with the HallucinationTaskAdherence field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetHallucinationTaskAdherenceOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.HallucinationTaskAdherence) {
+		return map[string]interface{}{}, false
+	}
+	return o.HallucinationTaskAdherence, true
+}
+
+// HasHallucinationTaskAdherence returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasHallucinationTaskAdherence() bool {
+	if o != nil && !IsNil(o.HallucinationTaskAdherence) {
+		return true
+	}
+
+	return false
+}
+
+// SetHallucinationTaskAdherence gets a reference to the given map[string]interface{} and assigns it to the HallucinationTaskAdherence field.
+func (o *EvaluationConfig) SetHallucinationTaskAdherence(v map[string]interface{}) {
+	o.HallucinationTaskAdherence = v
+}
+
+// GetLanguageMismatch returns the LanguageMismatch field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetLanguageMismatch() map[string]interface{} {
+	if o == nil || IsNil(o.LanguageMismatch) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.LanguageMismatch
+}
+
+// GetLanguageMismatchOk returns a tuple with the LanguageMismatch field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetLanguageMismatchOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.LanguageMismatch) {
+		return map[string]interface{}{}, false
+	}
+	return o.LanguageMismatch, true
+}
+
+// HasLanguageMismatch returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasLanguageMismatch() bool {
+	if o != nil && !IsNil(o.LanguageMismatch) {
+		return true
+	}
+
+	return false
+}
+
+// SetLanguageMismatch gets a reference to the given map[string]interface{} and assigns it to the LanguageMismatch field.
+func (o *EvaluationConfig) SetLanguageMismatch(v map[string]interface{}) {
+	o.LanguageMismatch = v
+}
+
+// GetPii returns the Pii field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetPii() PiiConfig {
+	if o == nil || IsNil(o.Pii) {
+		var ret PiiConfig
+		return ret
+	}
+	return *o.Pii
+}
+
+// GetPiiOk returns a tuple with the Pii field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetPiiOk() (*PiiConfig, bool) {
+	if o == nil || IsNil(o.Pii) {
+		return nil, false
+	}
+	return o.Pii, true
+}
+
+// HasPii returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasPii() bool {
+	if o != nil && !IsNil(o.Pii) {
+		return true
+	}
+
+	return false
+}
+
+// SetPii gets a reference to the given PiiConfig and assigns it to the Pii field.
+func (o *EvaluationConfig) SetPii(v PiiConfig) {
+	o.Pii = &v
+}
+
+// GetPromptInjection returns the PromptInjection field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetPromptInjection() PromptInjectionConfig {
+	if o == nil || IsNil(o.PromptInjection) {
+		var ret PromptInjectionConfig
+		return ret
+	}
+	return *o.PromptInjection
+}
+
+// GetPromptInjectionOk returns a tuple with the PromptInjection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetPromptInjectionOk() (*PromptInjectionConfig, bool) {
+	if o == nil || IsNil(o.PromptInjection) {
+		return nil, false
+	}
+	return o.PromptInjection, true
+}
+
+// HasPromptInjection returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasPromptInjection() bool {
+	if o != nil && !IsNil(o.PromptInjection) {
+		return true
+	}
+
+	return false
+}
+
+// SetPromptInjection gets a reference to the given PromptInjectionConfig and assigns it to the PromptInjection field.
+func (o *EvaluationConfig) SetPromptInjection(v PromptInjectionConfig) {
+	o.PromptInjection = &v
+}
+
+// GetRestrictedTopics returns the RestrictedTopics field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetRestrictedTopics() RestrictedTopicsConfig {
+	if o == nil || IsNil(o.RestrictedTopics) {
+		var ret RestrictedTopicsConfig
+		return ret
+	}
+	return *o.RestrictedTopics
+}
+
+// GetRestrictedTopicsOk returns a tuple with the RestrictedTopics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetRestrictedTopicsOk() (*RestrictedTopicsConfig, bool) {
+	if o == nil || IsNil(o.RestrictedTopics) {
+		return nil, false
+	}
+	return o.RestrictedTopics, true
+}
+
+// HasRestrictedTopics returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasRestrictedTopics() bool {
+	if o != nil && !IsNil(o.RestrictedTopics) {
+		return true
+	}
+
+	return false
+}
+
+// SetRestrictedTopics gets a reference to the given RestrictedTopicsConfig and assigns it to the RestrictedTopics field.
+func (o *EvaluationConfig) SetRestrictedTopics(v RestrictedTopicsConfig) {
+	o.RestrictedTopics = &v
+}
+
+// GetSexism returns the Sexism field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetSexism() map[string]interface{} {
+	if o == nil || IsNil(o.Sexism) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Sexism
+}
+
+// GetSexismOk returns a tuple with the Sexism field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetSexismOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Sexism) {
+		return map[string]interface{}{}, false
+	}
+	return o.Sexism, true
+}
+
+// HasSexism returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasSexism() bool {
+	if o != nil && !IsNil(o.Sexism) {
+		return true
+	}
+
+	return false
+}
+
+// SetSexism gets a reference to the given map[string]interface{} and assigns it to the Sexism field.
+func (o *EvaluationConfig) SetSexism(v map[string]interface{}) {
+	o.Sexism = v
+}
+
+// GetSqlAllowedTables returns the SqlAllowedTables field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetSqlAllowedTables() SqlAllowedTablesConfig {
+	if o == nil || IsNil(o.SqlAllowedTables) {
+		var ret SqlAllowedTablesConfig
+		return ret
+	}
+	return *o.SqlAllowedTables
+}
+
+// GetSqlAllowedTablesOk returns a tuple with the SqlAllowedTables field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetSqlAllowedTablesOk() (*SqlAllowedTablesConfig, bool) {
+	if o == nil || IsNil(o.SqlAllowedTables) {
+		return nil, false
+	}
+	return o.SqlAllowedTables, true
+}
+
+// HasSqlAllowedTables returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasSqlAllowedTables() bool {
+	if o != nil && !IsNil(o.SqlAllowedTables) {
+		return true
+	}
+
+	return false
+}
+
+// SetSqlAllowedTables gets a reference to the given SqlAllowedTablesConfig and assigns it to the SqlAllowedTables field.
+func (o *EvaluationConfig) SetSqlAllowedTables(v SqlAllowedTablesConfig) {
+	o.SqlAllowedTables = &v
+}
+
+// GetSqlHallucination returns the SqlHallucination field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetSqlHallucination() map[string]interface{} {
+	if o == nil || IsNil(o.SqlHallucination) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.SqlHallucination
+}
+
+// GetSqlHallucinationOk returns a tuple with the SqlHallucination field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetSqlHallucinationOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.SqlHallucination) {
+		return map[string]interface{}{}, false
+	}
+	return o.SqlHallucination, true
+}
+
+// HasSqlHallucination returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasSqlHallucination() bool {
+	if o != nil && !IsNil(o.SqlHallucination) {
+		return true
+	}
+
+	return false
+}
+
+// SetSqlHallucination gets a reference to the given map[string]interface{} and assigns it to the SqlHallucination field.
+func (o *EvaluationConfig) SetSqlHallucination(v map[string]interface{}) {
+	o.SqlHallucination = v
+}
+
+// GetSqlLoad returns the SqlLoad field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetSqlLoad() SqlLoadConfig {
+	if o == nil || IsNil(o.SqlLoad) {
+		var ret SqlLoadConfig
+		return ret
+	}
+	return *o.SqlLoad
+}
+
+// GetSqlLoadOk returns a tuple with the SqlLoad field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetSqlLoadOk() (*SqlLoadConfig, bool) {
+	if o == nil || IsNil(o.SqlLoad) {
+		return nil, false
+	}
+	return o.SqlLoad, true
+}
+
+// HasSqlLoad returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasSqlLoad() bool {
+	if o != nil && !IsNil(o.SqlLoad) {
+		return true
+	}
+
+	return false
+}
+
+// SetSqlLoad gets a reference to the given SqlLoadConfig and assigns it to the SqlLoad field.
+func (o *EvaluationConfig) SetSqlLoad(v SqlLoadConfig) {
+	o.SqlLoad = &v
+}
+
+// GetSqlReadOnly returns the SqlReadOnly field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetSqlReadOnly() map[string]interface{} {
+	if o == nil || IsNil(o.SqlReadOnly) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.SqlReadOnly
+}
+
+// GetSqlReadOnlyOk returns a tuple with the SqlReadOnly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetSqlReadOnlyOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.SqlReadOnly) {
+		return map[string]interface{}{}, false
+	}
+	return o.SqlReadOnly, true
+}
+
+// HasSqlReadOnly returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasSqlReadOnly() bool {
+	if o != nil && !IsNil(o.SqlReadOnly) {
+		return true
+	}
+
+	return false
+}
+
+// SetSqlReadOnly gets a reference to the given map[string]interface{} and assigns it to the SqlReadOnly field.
+func (o *EvaluationConfig) SetSqlReadOnly(v map[string]interface{}) {
+	o.SqlReadOnly = v
+}
+
+// GetSqlRestrictedTables returns the SqlRestrictedTables field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetSqlRestrictedTables() SqlRestrictedTablesConfig {
+	if o == nil || IsNil(o.SqlRestrictedTables) {
+		var ret SqlRestrictedTablesConfig
+		return ret
+	}
+	return *o.SqlRestrictedTables
+}
+
+// GetSqlRestrictedTablesOk returns a tuple with the SqlRestrictedTables field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetSqlRestrictedTablesOk() (*SqlRestrictedTablesConfig, bool) {
+	if o == nil || IsNil(o.SqlRestrictedTables) {
+		return nil, false
+	}
+	return o.SqlRestrictedTables, true
+}
+
+// HasSqlRestrictedTables returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasSqlRestrictedTables() bool {
+	if o != nil && !IsNil(o.SqlRestrictedTables) {
+		return true
+	}
+
+	return false
+}
+
+// SetSqlRestrictedTables gets a reference to the given SqlRestrictedTablesConfig and assigns it to the SqlRestrictedTables field.
+func (o *EvaluationConfig) SetSqlRestrictedTables(v SqlRestrictedTablesConfig) {
+	o.SqlRestrictedTables = &v
+}
+
+// GetToxicity returns the Toxicity field value if set, zero value otherwise.
+func (o *EvaluationConfig) GetToxicity() map[string]interface{} {
+	if o == nil || IsNil(o.Toxicity) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Toxicity
+}
+
+// GetToxicityOk returns a tuple with the Toxicity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EvaluationConfig) GetToxicityOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Toxicity) {
+		return map[string]interface{}{}, false
+	}
+	return o.Toxicity, true
+}
+
+// HasToxicity returns a boolean if a field has been set.
+func (o *EvaluationConfig) HasToxicity() bool {
+	if o != nil && !IsNil(o.Toxicity) {
+		return true
+	}
+
+	return false
+}
+
+// SetToxicity gets a reference to the given map[string]interface{} and assigns it to the Toxicity field.
+func (o *EvaluationConfig) SetToxicity(v map[string]interface{}) {
+	o.Toxicity = v
+}
+
+func (o EvaluationConfig) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EvaluationConfig) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AllowedTopics) {
+		toSerialize["allowedTopics"] = o.AllowedTopics
+	}
+	if !IsNil(o.Competition) {
+		toSerialize["competition"] = o.Competition
+	}
+	if !IsNil(o.CustomEvaluation) {
+		toSerialize["customEvaluation"] = o.CustomEvaluation
+	}
+	if !IsNil(o.HallucinationCompleteness) {
+		toSerialize["hallucinationCompleteness"] = o.HallucinationCompleteness
+	}
+	if !IsNil(o.HallucinationContextAdherence) {
+		toSerialize["hallucinationContextAdherence"] = o.HallucinationContextAdherence
+	}
+	if !IsNil(o.HallucinationContextRelevance) {
+		toSerialize["hallucinationContextRelevance"] = o.HallucinationContextRelevance
+	}
+	if !IsNil(o.HallucinationCorrectness) {
+		toSerialize["hallucinationCorrectness"] = o.HallucinationCorrectness
+	}
+	if !IsNil(o.HallucinationTaskAdherence) {
+		toSerialize["hallucinationTaskAdherence"] = o.HallucinationTaskAdherence
+	}
+	if !IsNil(o.LanguageMismatch) {
+		toSerialize["languageMismatch"] = o.LanguageMismatch
+	}
+	if !IsNil(o.Pii) {
+		toSerialize["pii"] = o.Pii
+	}
+	if !IsNil(o.PromptInjection) {
+		toSerialize["promptInjection"] = o.PromptInjection
+	}
+	if !IsNil(o.RestrictedTopics) {
+		toSerialize["restrictedTopics"] = o.RestrictedTopics
+	}
+	if !IsNil(o.Sexism) {
+		toSerialize["sexism"] = o.Sexism
+	}
+	if !IsNil(o.SqlAllowedTables) {
+		toSerialize["sqlAllowedTables"] = o.SqlAllowedTables
+	}
+	if !IsNil(o.SqlHallucination) {
+		toSerialize["sqlHallucination"] = o.SqlHallucination
+	}
+	if !IsNil(o.SqlLoad) {
+		toSerialize["sqlLoad"] = o.SqlLoad
+	}
+	if !IsNil(o.SqlReadOnly) {
+		toSerialize["sqlReadOnly"] = o.SqlReadOnly
+	}
+	if !IsNil(o.SqlRestrictedTables) {
+		toSerialize["sqlRestrictedTables"] = o.SqlRestrictedTables
+	}
+	if !IsNil(o.Toxicity) {
+		toSerialize["toxicity"] = o.Toxicity
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["allowedTopics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["competition"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["hallucinationCompleteness"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["hallucinationContextAdherence"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["hallucinationContextRelevance"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["hallucinationCorrectness"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["pii"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["promptInjection"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["restrictedTopics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sexism"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sqlAllowedTables"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sqlHallucination"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sqlReadOnly"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sqlRestrictedTables"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["toxicity"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["hallucinationTaskAdherence"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sqlLoad"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["languageMismatch"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["customEvaluation"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [allowedTopics, competition, hallucinationCompleteness, hallucinationContextAdherence, hallucinationContextRelevance, hallucinationCorrectness, pii, promptInjection, restrictedTopics, sexism, sqlAllowedTables, sqlHallucination, sqlReadOnly, sqlRestrictedTables, toxicity, hallucinationTaskAdherence, sqlLoad, languageMismatch, customEvaluation] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *EvaluationConfig) UnmarshalJSON(data []byte) (err error) {
+	varEvaluationConfig := _EvaluationConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEvaluationConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EvaluationConfig(varEvaluationConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["allowedTopics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigAllowedTopics = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigCompetition
-	err = json.Unmarshal(data, &dst.EvaluationConfigCompetition)
-	if err == nil {
-		jsonEvaluationConfigCompetition, _ := json.Marshal(dst.EvaluationConfigCompetition)
-		if string(jsonEvaluationConfigCompetition) == "{}" { // empty struct
-			dst.EvaluationConfigCompetition = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigCompetition); err != nil {
-				dst.EvaluationConfigCompetition = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["competition"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigCompetition = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigCustomEvaluation
-	err = json.Unmarshal(data, &dst.EvaluationConfigCustomEvaluation)
-	if err == nil {
-		jsonEvaluationConfigCustomEvaluation, _ := json.Marshal(dst.EvaluationConfigCustomEvaluation)
-		if string(jsonEvaluationConfigCustomEvaluation) == "{}" { // empty struct
-			dst.EvaluationConfigCustomEvaluation = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigCustomEvaluation); err != nil {
-				dst.EvaluationConfigCustomEvaluation = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["hallucinationCompleteness"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigCustomEvaluation = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigHallucinationCompleteness
-	err = json.Unmarshal(data, &dst.EvaluationConfigHallucinationCompleteness)
-	if err == nil {
-		jsonEvaluationConfigHallucinationCompleteness, _ := json.Marshal(dst.EvaluationConfigHallucinationCompleteness)
-		if string(jsonEvaluationConfigHallucinationCompleteness) == "{}" { // empty struct
-			dst.EvaluationConfigHallucinationCompleteness = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigHallucinationCompleteness); err != nil {
-				dst.EvaluationConfigHallucinationCompleteness = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["hallucinationContextAdherence"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigHallucinationCompleteness = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigHallucinationContextAdherence
-	err = json.Unmarshal(data, &dst.EvaluationConfigHallucinationContextAdherence)
-	if err == nil {
-		jsonEvaluationConfigHallucinationContextAdherence, _ := json.Marshal(dst.EvaluationConfigHallucinationContextAdherence)
-		if string(jsonEvaluationConfigHallucinationContextAdherence) == "{}" { // empty struct
-			dst.EvaluationConfigHallucinationContextAdherence = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigHallucinationContextAdherence); err != nil {
-				dst.EvaluationConfigHallucinationContextAdherence = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["hallucinationContextRelevance"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigHallucinationContextAdherence = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigHallucinationContextRelevance
-	err = json.Unmarshal(data, &dst.EvaluationConfigHallucinationContextRelevance)
-	if err == nil {
-		jsonEvaluationConfigHallucinationContextRelevance, _ := json.Marshal(dst.EvaluationConfigHallucinationContextRelevance)
-		if string(jsonEvaluationConfigHallucinationContextRelevance) == "{}" { // empty struct
-			dst.EvaluationConfigHallucinationContextRelevance = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigHallucinationContextRelevance); err != nil {
-				dst.EvaluationConfigHallucinationContextRelevance = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["hallucinationCorrectness"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigHallucinationContextRelevance = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigHallucinationCorrectness
-	err = json.Unmarshal(data, &dst.EvaluationConfigHallucinationCorrectness)
-	if err == nil {
-		jsonEvaluationConfigHallucinationCorrectness, _ := json.Marshal(dst.EvaluationConfigHallucinationCorrectness)
-		if string(jsonEvaluationConfigHallucinationCorrectness) == "{}" { // empty struct
-			dst.EvaluationConfigHallucinationCorrectness = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigHallucinationCorrectness); err != nil {
-				dst.EvaluationConfigHallucinationCorrectness = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["pii"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigHallucinationCorrectness = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigHallucinationTaskAdherence
-	err = json.Unmarshal(data, &dst.EvaluationConfigHallucinationTaskAdherence)
-	if err == nil {
-		jsonEvaluationConfigHallucinationTaskAdherence, _ := json.Marshal(dst.EvaluationConfigHallucinationTaskAdherence)
-		if string(jsonEvaluationConfigHallucinationTaskAdherence) == "{}" { // empty struct
-			dst.EvaluationConfigHallucinationTaskAdherence = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigHallucinationTaskAdherence); err != nil {
-				dst.EvaluationConfigHallucinationTaskAdherence = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["promptInjection"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigHallucinationTaskAdherence = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigLanguageMismatch
-	err = json.Unmarshal(data, &dst.EvaluationConfigLanguageMismatch)
-	if err == nil {
-		jsonEvaluationConfigLanguageMismatch, _ := json.Marshal(dst.EvaluationConfigLanguageMismatch)
-		if string(jsonEvaluationConfigLanguageMismatch) == "{}" { // empty struct
-			dst.EvaluationConfigLanguageMismatch = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigLanguageMismatch); err != nil {
-				dst.EvaluationConfigLanguageMismatch = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["restrictedTopics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigLanguageMismatch = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigPii
-	err = json.Unmarshal(data, &dst.EvaluationConfigPii)
-	if err == nil {
-		jsonEvaluationConfigPii, _ := json.Marshal(dst.EvaluationConfigPii)
-		if string(jsonEvaluationConfigPii) == "{}" { // empty struct
-			dst.EvaluationConfigPii = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigPii); err != nil {
-				dst.EvaluationConfigPii = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sexism"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigPii = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigPromptInjection
-	err = json.Unmarshal(data, &dst.EvaluationConfigPromptInjection)
-	if err == nil {
-		jsonEvaluationConfigPromptInjection, _ := json.Marshal(dst.EvaluationConfigPromptInjection)
-		if string(jsonEvaluationConfigPromptInjection) == "{}" { // empty struct
-			dst.EvaluationConfigPromptInjection = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigPromptInjection); err != nil {
-				dst.EvaluationConfigPromptInjection = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sqlAllowedTables"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigPromptInjection = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigRestrictedTopics
-	err = json.Unmarshal(data, &dst.EvaluationConfigRestrictedTopics)
-	if err == nil {
-		jsonEvaluationConfigRestrictedTopics, _ := json.Marshal(dst.EvaluationConfigRestrictedTopics)
-		if string(jsonEvaluationConfigRestrictedTopics) == "{}" { // empty struct
-			dst.EvaluationConfigRestrictedTopics = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigRestrictedTopics); err != nil {
-				dst.EvaluationConfigRestrictedTopics = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sqlHallucination"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigRestrictedTopics = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigSexism
-	err = json.Unmarshal(data, &dst.EvaluationConfigSexism)
-	if err == nil {
-		jsonEvaluationConfigSexism, _ := json.Marshal(dst.EvaluationConfigSexism)
-		if string(jsonEvaluationConfigSexism) == "{}" { // empty struct
-			dst.EvaluationConfigSexism = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigSexism); err != nil {
-				dst.EvaluationConfigSexism = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sqlReadOnly"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigSexism = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigSqlAllowedTables
-	err = json.Unmarshal(data, &dst.EvaluationConfigSqlAllowedTables)
-	if err == nil {
-		jsonEvaluationConfigSqlAllowedTables, _ := json.Marshal(dst.EvaluationConfigSqlAllowedTables)
-		if string(jsonEvaluationConfigSqlAllowedTables) == "{}" { // empty struct
-			dst.EvaluationConfigSqlAllowedTables = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigSqlAllowedTables); err != nil {
-				dst.EvaluationConfigSqlAllowedTables = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sqlRestrictedTables"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigSqlAllowedTables = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigSqlHallucination
-	err = json.Unmarshal(data, &dst.EvaluationConfigSqlHallucination)
-	if err == nil {
-		jsonEvaluationConfigSqlHallucination, _ := json.Marshal(dst.EvaluationConfigSqlHallucination)
-		if string(jsonEvaluationConfigSqlHallucination) == "{}" { // empty struct
-			dst.EvaluationConfigSqlHallucination = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigSqlHallucination); err != nil {
-				dst.EvaluationConfigSqlHallucination = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["toxicity"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigSqlHallucination = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigSqlLoad
-	err = json.Unmarshal(data, &dst.EvaluationConfigSqlLoad)
-	if err == nil {
-		jsonEvaluationConfigSqlLoad, _ := json.Marshal(dst.EvaluationConfigSqlLoad)
-		if string(jsonEvaluationConfigSqlLoad) == "{}" { // empty struct
-			dst.EvaluationConfigSqlLoad = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigSqlLoad); err != nil {
-				dst.EvaluationConfigSqlLoad = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["hallucinationTaskAdherence"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigSqlLoad = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigSqlReadOnly
-	err = json.Unmarshal(data, &dst.EvaluationConfigSqlReadOnly)
-	if err == nil {
-		jsonEvaluationConfigSqlReadOnly, _ := json.Marshal(dst.EvaluationConfigSqlReadOnly)
-		if string(jsonEvaluationConfigSqlReadOnly) == "{}" { // empty struct
-			dst.EvaluationConfigSqlReadOnly = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigSqlReadOnly); err != nil {
-				dst.EvaluationConfigSqlReadOnly = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sqlLoad"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigSqlReadOnly = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigSqlRestrictedTables
-	err = json.Unmarshal(data, &dst.EvaluationConfigSqlRestrictedTables)
-	if err == nil {
-		jsonEvaluationConfigSqlRestrictedTables, _ := json.Marshal(dst.EvaluationConfigSqlRestrictedTables)
-		if string(jsonEvaluationConfigSqlRestrictedTables) == "{}" { // empty struct
-			dst.EvaluationConfigSqlRestrictedTables = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigSqlRestrictedTables); err != nil {
-				dst.EvaluationConfigSqlRestrictedTables = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["languageMismatch"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigSqlRestrictedTables = nil
-	}
-
-	// try to unmarshal data into EvaluationConfigToxicity
-	err = json.Unmarshal(data, &dst.EvaluationConfigToxicity)
-	if err == nil {
-		jsonEvaluationConfigToxicity, _ := json.Marshal(dst.EvaluationConfigToxicity)
-		if string(jsonEvaluationConfigToxicity) == "{}" { // empty struct
-			dst.EvaluationConfigToxicity = nil
-		} else {
-			if err = validator.Validate(dst.EvaluationConfigToxicity); err != nil {
-				dst.EvaluationConfigToxicity = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["customEvaluation"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EvaluationConfigToxicity = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [allowedTopics, competition, hallucinationCompleteness, hallucinationContextAdherence, hallucinationContextRelevance, hallucinationCorrectness, pii, promptInjection, restrictedTopics, sexism, sqlAllowedTables, sqlHallucination, sqlReadOnly, sqlRestrictedTables, toxicity, hallucinationTaskAdherence, sqlLoad, languageMismatch, customEvaluation] may be set"}
+		}
+
+		delete(additionalProperties, "allowedTopics")
+		delete(additionalProperties, "competition")
+		delete(additionalProperties, "customEvaluation")
+		delete(additionalProperties, "hallucinationCompleteness")
+		delete(additionalProperties, "hallucinationContextAdherence")
+		delete(additionalProperties, "hallucinationContextRelevance")
+		delete(additionalProperties, "hallucinationCorrectness")
+		delete(additionalProperties, "hallucinationTaskAdherence")
+		delete(additionalProperties, "languageMismatch")
+		delete(additionalProperties, "pii")
+		delete(additionalProperties, "promptInjection")
+		delete(additionalProperties, "restrictedTopics")
+		delete(additionalProperties, "sexism")
+		delete(additionalProperties, "sqlAllowedTables")
+		delete(additionalProperties, "sqlHallucination")
+		delete(additionalProperties, "sqlLoad")
+		delete(additionalProperties, "sqlReadOnly")
+		delete(additionalProperties, "sqlRestrictedTables")
+		delete(additionalProperties, "toxicity")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.EvaluationConfigAllowedTopics = nil
-		dst.EvaluationConfigCompetition = nil
-		dst.EvaluationConfigCustomEvaluation = nil
-		dst.EvaluationConfigHallucinationCompleteness = nil
-		dst.EvaluationConfigHallucinationContextAdherence = nil
-		dst.EvaluationConfigHallucinationContextRelevance = nil
-		dst.EvaluationConfigHallucinationCorrectness = nil
-		dst.EvaluationConfigHallucinationTaskAdherence = nil
-		dst.EvaluationConfigLanguageMismatch = nil
-		dst.EvaluationConfigPii = nil
-		dst.EvaluationConfigPromptInjection = nil
-		dst.EvaluationConfigRestrictedTopics = nil
-		dst.EvaluationConfigSexism = nil
-		dst.EvaluationConfigSqlAllowedTables = nil
-		dst.EvaluationConfigSqlHallucination = nil
-		dst.EvaluationConfigSqlLoad = nil
-		dst.EvaluationConfigSqlReadOnly = nil
-		dst.EvaluationConfigSqlRestrictedTables = nil
-		dst.EvaluationConfigToxicity = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(EvaluationConfig)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src EvaluationConfig) MarshalJSON() ([]byte, error) {
-	if src.EvaluationConfigAllowedTopics != nil {
-		return json.Marshal(&src.EvaluationConfigAllowedTopics)
-	}
-
-	if src.EvaluationConfigCompetition != nil {
-		return json.Marshal(&src.EvaluationConfigCompetition)
-	}
-
-	if src.EvaluationConfigCustomEvaluation != nil {
-		return json.Marshal(&src.EvaluationConfigCustomEvaluation)
-	}
-
-	if src.EvaluationConfigHallucinationCompleteness != nil {
-		return json.Marshal(&src.EvaluationConfigHallucinationCompleteness)
-	}
-
-	if src.EvaluationConfigHallucinationContextAdherence != nil {
-		return json.Marshal(&src.EvaluationConfigHallucinationContextAdherence)
-	}
-
-	if src.EvaluationConfigHallucinationContextRelevance != nil {
-		return json.Marshal(&src.EvaluationConfigHallucinationContextRelevance)
-	}
-
-	if src.EvaluationConfigHallucinationCorrectness != nil {
-		return json.Marshal(&src.EvaluationConfigHallucinationCorrectness)
-	}
-
-	if src.EvaluationConfigHallucinationTaskAdherence != nil {
-		return json.Marshal(&src.EvaluationConfigHallucinationTaskAdherence)
-	}
-
-	if src.EvaluationConfigLanguageMismatch != nil {
-		return json.Marshal(&src.EvaluationConfigLanguageMismatch)
-	}
-
-	if src.EvaluationConfigPii != nil {
-		return json.Marshal(&src.EvaluationConfigPii)
-	}
-
-	if src.EvaluationConfigPromptInjection != nil {
-		return json.Marshal(&src.EvaluationConfigPromptInjection)
-	}
-
-	if src.EvaluationConfigRestrictedTopics != nil {
-		return json.Marshal(&src.EvaluationConfigRestrictedTopics)
-	}
-
-	if src.EvaluationConfigSexism != nil {
-		return json.Marshal(&src.EvaluationConfigSexism)
-	}
-
-	if src.EvaluationConfigSqlAllowedTables != nil {
-		return json.Marshal(&src.EvaluationConfigSqlAllowedTables)
-	}
-
-	if src.EvaluationConfigSqlHallucination != nil {
-		return json.Marshal(&src.EvaluationConfigSqlHallucination)
-	}
-
-	if src.EvaluationConfigSqlLoad != nil {
-		return json.Marshal(&src.EvaluationConfigSqlLoad)
-	}
-
-	if src.EvaluationConfigSqlReadOnly != nil {
-		return json.Marshal(&src.EvaluationConfigSqlReadOnly)
-	}
-
-	if src.EvaluationConfigSqlRestrictedTables != nil {
-		return json.Marshal(&src.EvaluationConfigSqlRestrictedTables)
-	}
-
-	if src.EvaluationConfigToxicity != nil {
-		return json.Marshal(&src.EvaluationConfigToxicity)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *EvaluationConfig) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.EvaluationConfigAllowedTopics != nil {
-		return obj.EvaluationConfigAllowedTopics
-	}
-
-	if obj.EvaluationConfigCompetition != nil {
-		return obj.EvaluationConfigCompetition
-	}
-
-	if obj.EvaluationConfigCustomEvaluation != nil {
-		return obj.EvaluationConfigCustomEvaluation
-	}
-
-	if obj.EvaluationConfigHallucinationCompleteness != nil {
-		return obj.EvaluationConfigHallucinationCompleteness
-	}
-
-	if obj.EvaluationConfigHallucinationContextAdherence != nil {
-		return obj.EvaluationConfigHallucinationContextAdherence
-	}
-
-	if obj.EvaluationConfigHallucinationContextRelevance != nil {
-		return obj.EvaluationConfigHallucinationContextRelevance
-	}
-
-	if obj.EvaluationConfigHallucinationCorrectness != nil {
-		return obj.EvaluationConfigHallucinationCorrectness
-	}
-
-	if obj.EvaluationConfigHallucinationTaskAdherence != nil {
-		return obj.EvaluationConfigHallucinationTaskAdherence
-	}
-
-	if obj.EvaluationConfigLanguageMismatch != nil {
-		return obj.EvaluationConfigLanguageMismatch
-	}
-
-	if obj.EvaluationConfigPii != nil {
-		return obj.EvaluationConfigPii
-	}
-
-	if obj.EvaluationConfigPromptInjection != nil {
-		return obj.EvaluationConfigPromptInjection
-	}
-
-	if obj.EvaluationConfigRestrictedTopics != nil {
-		return obj.EvaluationConfigRestrictedTopics
-	}
-
-	if obj.EvaluationConfigSexism != nil {
-		return obj.EvaluationConfigSexism
-	}
-
-	if obj.EvaluationConfigSqlAllowedTables != nil {
-		return obj.EvaluationConfigSqlAllowedTables
-	}
-
-	if obj.EvaluationConfigSqlHallucination != nil {
-		return obj.EvaluationConfigSqlHallucination
-	}
-
-	if obj.EvaluationConfigSqlLoad != nil {
-		return obj.EvaluationConfigSqlLoad
-	}
-
-	if obj.EvaluationConfigSqlReadOnly != nil {
-		return obj.EvaluationConfigSqlReadOnly
-	}
-
-	if obj.EvaluationConfigSqlRestrictedTables != nil {
-		return obj.EvaluationConfigSqlRestrictedTables
-	}
-
-	if obj.EvaluationConfigToxicity != nil {
-		return obj.EvaluationConfigToxicity
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj EvaluationConfig) GetActualInstanceValue() (interface{}) {
-	if obj.EvaluationConfigAllowedTopics != nil {
-		return *obj.EvaluationConfigAllowedTopics
-	}
-
-	if obj.EvaluationConfigCompetition != nil {
-		return *obj.EvaluationConfigCompetition
-	}
-
-	if obj.EvaluationConfigCustomEvaluation != nil {
-		return *obj.EvaluationConfigCustomEvaluation
-	}
-
-	if obj.EvaluationConfigHallucinationCompleteness != nil {
-		return *obj.EvaluationConfigHallucinationCompleteness
-	}
-
-	if obj.EvaluationConfigHallucinationContextAdherence != nil {
-		return *obj.EvaluationConfigHallucinationContextAdherence
-	}
-
-	if obj.EvaluationConfigHallucinationContextRelevance != nil {
-		return *obj.EvaluationConfigHallucinationContextRelevance
-	}
-
-	if obj.EvaluationConfigHallucinationCorrectness != nil {
-		return *obj.EvaluationConfigHallucinationCorrectness
-	}
-
-	if obj.EvaluationConfigHallucinationTaskAdherence != nil {
-		return *obj.EvaluationConfigHallucinationTaskAdherence
-	}
-
-	if obj.EvaluationConfigLanguageMismatch != nil {
-		return *obj.EvaluationConfigLanguageMismatch
-	}
-
-	if obj.EvaluationConfigPii != nil {
-		return *obj.EvaluationConfigPii
-	}
-
-	if obj.EvaluationConfigPromptInjection != nil {
-		return *obj.EvaluationConfigPromptInjection
-	}
-
-	if obj.EvaluationConfigRestrictedTopics != nil {
-		return *obj.EvaluationConfigRestrictedTopics
-	}
-
-	if obj.EvaluationConfigSexism != nil {
-		return *obj.EvaluationConfigSexism
-	}
-
-	if obj.EvaluationConfigSqlAllowedTables != nil {
-		return *obj.EvaluationConfigSqlAllowedTables
-	}
-
-	if obj.EvaluationConfigSqlHallucination != nil {
-		return *obj.EvaluationConfigSqlHallucination
-	}
-
-	if obj.EvaluationConfigSqlLoad != nil {
-		return *obj.EvaluationConfigSqlLoad
-	}
-
-	if obj.EvaluationConfigSqlReadOnly != nil {
-		return *obj.EvaluationConfigSqlReadOnly
-	}
-
-	if obj.EvaluationConfigSqlRestrictedTables != nil {
-		return *obj.EvaluationConfigSqlRestrictedTables
-	}
-
-	if obj.EvaluationConfigToxicity != nil {
-		return *obj.EvaluationConfigToxicity
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableEvaluationConfig struct {

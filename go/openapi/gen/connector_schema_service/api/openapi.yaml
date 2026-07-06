@@ -1,1257 +1,371 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /notifications/notification-center/v1/connector-schemas:
-    get:
-      description: Returns the schema definition for notification connectors.
-      externalDocs:
-        url: ""
-      operationId: ConnectorSchemaService_GetConnectorSchema
-      parameters:
-      - description: Connector type whose schema to retrieve.
-        explode: true
-        in: query
-        name: type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.ConnectorType"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetConnectorSchemaResponse"
-          description: ""
-      summary: Get Connector Schema
-      tags:
-      - Connector Schema service
-components:
-  schemas:
-    ConnectorConfigSchema:
-      description: Connector config schema.
-      example:
-        fields:
-        - allowedValues:
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          default: default
-          allowOverrides: true
-          fieldName: fieldName
-          description: description
-          fieldType: FIELD_TYPE_UNSPECIFIED
-          required: true
-        - allowedValues:
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          default: default
-          allowOverrides: true
-          fieldName: fieldName
-          description: description
-          fieldType: FIELD_TYPE_UNSPECIFIED
-          required: true
-        - allowedValues:
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          default: default
-          allowOverrides: true
-          fieldName: fieldName
-          description: description
-          fieldType: FIELD_TYPE_UNSPECIFIED
-          required: true
-        - allowedValues:
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          default: default
-          allowOverrides: true
-          fieldName: fieldName
-          description: description
-          fieldType: FIELD_TYPE_UNSPECIFIED
-          required: true
-        - allowedValues:
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          default: default
-          allowOverrides: true
-          fieldName: fieldName
-          description: description
-          fieldType: FIELD_TYPE_UNSPECIFIED
-          required: true
-      externalDocs:
-        url: ""
-      properties:
-        fields:
-          description: List of fields.
-          items:
-            $ref: "#/components/schemas/ConnectorConfigSchemaField"
-          maxItems: 100
-          minItems: 0
-          type: array
-      type: object
-    ConnectorConfigSchemaField:
-      example:
-        allowedValues:
-        - allowedValues
-        - allowedValues
-        - allowedValues
-        - allowedValues
-        - allowedValues
-        default: default
-        allowOverrides: true
-        fieldName: fieldName
-        description: description
-        fieldType: FIELD_TYPE_UNSPECIFIED
-        required: true
-      properties:
-        allowOverrides:
-          description: The allow overrides.
-          type: boolean
-        allowedValues:
-          description: The allowed values.
-          items:
-            description: The allowed values.
-            minLength: 0
-            type: string
-          maxItems: 100
-          minItems: 0
-          type: array
-        default:
-          description: The default.
-          maxLength: 4096
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        description:
-          description: Human-readable description.
-          maxLength: 4096
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        fieldName:
-          description: The field name.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        fieldType:
-          $ref: "#/components/schemas/FieldType"
-        required:
-          description: The required.
-          type: boolean
-      type: object
-    ConnectorSchema:
-      description: Connector schema.
-      example:
-        connectorConfigSchema:
-          fields:
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            allowOverrides: true
-            fieldName: fieldName
-            description: description
-            fieldType: FIELD_TYPE_UNSPECIFIED
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            allowOverrides: true
-            fieldName: fieldName
-            description: description
-            fieldType: FIELD_TYPE_UNSPECIFIED
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            allowOverrides: true
-            fieldName: fieldName
-            description: description
-            fieldType: FIELD_TYPE_UNSPECIFIED
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            allowOverrides: true
-            fieldName: fieldName
-            description: description
-            fieldType: FIELD_TYPE_UNSPECIFIED
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            allowOverrides: true
-            fieldName: fieldName
-            description: description
-            fieldType: FIELD_TYPE_UNSPECIFIED
-            required: true
-        supportedPayloadTypes:
-        - supportedPayloadTypes
-        - supportedPayloadTypes
-        - supportedPayloadTypes
-        - supportedPayloadTypes
-        - supportedPayloadTypes
-        type: CONNECTOR_TYPE_UNSPECIFIED
-        messageConfigSchemas:
-        - payloadType: payloadType
-          fields:
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-        - payloadType: payloadType
-          fields:
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-        - payloadType: payloadType
-          fields:
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-        - payloadType: payloadType
-          fields:
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-        - payloadType: payloadType
-          fields:
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-          - allowedValues:
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            - allowedValues
-            default: default
-            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-            fieldName: fieldName
-            disableOverride: true
-            description: description
-            fieldType: null
-            required: true
-      externalDocs:
-        url: ""
-      properties:
-        connectorConfigSchema:
-          $ref: "#/components/schemas/ConnectorConfigSchema"
-        messageConfigSchemas:
-          description: The message config schemas.
-          items:
-            $ref: "#/components/schemas/MessageConfigSchema"
-          maxItems: 100
-          minItems: 1
-          type: array
-        supportedPayloadTypes:
-          description: The supported payload types.
-          items:
-            description: The supported payload types.
-            minLength: 0
-            type: string
-          maxItems: 100
-          minItems: 1
-          type: array
-        type:
-          $ref: "#/components/schemas/notification_center.ConnectorType"
-      type: object
-    FieldType:
-      description: Field type.
-      enum:
-      - FIELD_TYPE_UNSPECIFIED
-      - STRING
-      - NON_EMPTY_STRING
-      - KEY_VALUE_PAIRS
-      - JSON_OBJECT
-      - DATE
-      - URL
-      - ARRAY_OF_STRINGS
-      - BOOLEAN
-      type: string
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    GetConnectorSchemaResponse:
-      description: Response containing the schema definition for a notification connector
-        type.
-      example:
-        connectorSchema:
-          connectorConfigSchema:
-            fields:
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              allowOverrides: true
-              fieldName: fieldName
-              description: description
-              fieldType: FIELD_TYPE_UNSPECIFIED
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              allowOverrides: true
-              fieldName: fieldName
-              description: description
-              fieldType: FIELD_TYPE_UNSPECIFIED
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              allowOverrides: true
-              fieldName: fieldName
-              description: description
-              fieldType: FIELD_TYPE_UNSPECIFIED
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              allowOverrides: true
-              fieldName: fieldName
-              description: description
-              fieldType: FIELD_TYPE_UNSPECIFIED
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              allowOverrides: true
-              fieldName: fieldName
-              description: description
-              fieldType: FIELD_TYPE_UNSPECIFIED
-              required: true
-          supportedPayloadTypes:
-          - supportedPayloadTypes
-          - supportedPayloadTypes
-          - supportedPayloadTypes
-          - supportedPayloadTypes
-          - supportedPayloadTypes
-          type: CONNECTOR_TYPE_UNSPECIFIED
-          messageConfigSchemas:
-          - payloadType: payloadType
-            fields:
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-          - payloadType: payloadType
-            fields:
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-          - payloadType: payloadType
-            fields:
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-          - payloadType: payloadType
-            fields:
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-          - payloadType: payloadType
-            fields:
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-            - allowedValues:
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              - allowedValues
-              default: default
-              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-              fieldName: fieldName
-              disableOverride: true
-              description: description
-              fieldType: null
-              required: true
-      externalDocs:
-        url: ""
-      properties:
-        connectorSchema:
-          $ref: "#/components/schemas/ConnectorSchema"
-      type: object
-    MessageConfigSchema:
-      example:
-        payloadType: payloadType
-        fields:
-        - allowedValues:
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          default: default
-          renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-          fieldName: fieldName
-          disableOverride: true
-          description: description
-          fieldType: null
-          required: true
-        - allowedValues:
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          default: default
-          renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-          fieldName: fieldName
-          disableOverride: true
-          description: description
-          fieldType: null
-          required: true
-        - allowedValues:
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          default: default
-          renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-          fieldName: fieldName
-          disableOverride: true
-          description: description
-          fieldType: null
-          required: true
-        - allowedValues:
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          default: default
-          renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-          fieldName: fieldName
-          disableOverride: true
-          description: description
-          fieldType: null
-          required: true
-        - allowedValues:
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          - allowedValues
-          default: default
-          renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-          fieldName: fieldName
-          disableOverride: true
-          description: description
-          fieldType: null
-          required: true
-      properties:
-        fields:
-          description: List of fields.
-          items:
-            $ref: "#/components/schemas/MessageConfigSchemaField"
-          maxItems: 100
-          minItems: 0
-          type: array
-        payloadType:
-          description: Type of the payload.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    MessageConfigSchemaField:
-      example:
-        allowedValues:
-        - allowedValues
-        - allowedValues
-        - allowedValues
-        - allowedValues
-        - allowedValues
-        default: default
-        renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
-        fieldName: fieldName
-        disableOverride: true
-        description: description
-        fieldType: null
-        required: true
-      properties:
-        allowedValues:
-          description: The allowed values.
-          items:
-            description: The allowed values.
-            maxLength: 4096
-            minLength: 0
-            pattern: "^[\\s\\S]*$"
-            type: string
-          maxItems: 100
-          minItems: 0
-          type: array
-        default:
-          description: The default.
-          maxLength: 4096
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        description:
-          description: Human-readable description.
-          maxLength: 4096
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        disableOverride:
-          description: The disable override.
-          type: boolean
-        fieldName:
-          description: The field name.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        fieldType:
-          $ref: "#/components/schemas/FieldType"
-        renderingMode:
-          $ref: "#/components/schemas/TemplateRenderingMode"
-        required:
-          description: The required.
-          type: boolean
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    TemplateRenderingMode:
-      description: Template rendering mode.
-      enum:
-      - TEMPLATE_RENDERING_MODE_UNSPECIFIED
-      - RELAXED
-      - STRICT
-      type: string
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    notification_center.ConnectorType:
-      description: Connector type.
-      enum:
-      - CONNECTOR_TYPE_UNSPECIFIED
-      - SLACK
-      - GENERIC_HTTPS
-      - PAGERDUTY
-      - IBM_EVENT_NOTIFICATIONS
-      - SERVICE_NOW
-      - EMAIL
-      - PAGERDUTY_INCIDENTS
-      - MICROSOFT_TEAMS
-      type: string
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/notifications/notification-center/v1/connector-schemas": {
+      "get": {
+        "tags": [
+          "Connector Schema service"
+        ],
+        "summary": "Get Connector Schema",
+        "description": "Returns the schema definition for notification connectors.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ConnectorSchemaService_GetConnectorSchema",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Connector type whose schema to retrieve.",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.ConnectorType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConnectorSchemaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConnectorConfigSchema": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Connector config schema.",
+        "type": "object",
+        "properties": {
+          "fields": {
+            "description": "List of fields.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectorConfigSchemaField"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        }
+      },
+      "ConnectorConfigSchemaField": {
+        "type": "object",
+        "properties": {
+          "allowOverrides": {
+            "description": "The allow overrides.",
+            "type": "boolean"
+          },
+          "allowedValues": {
+            "description": "The allowed values.",
+            "type": "array",
+            "items": {
+              "description": "The allowed values.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "default": {
+            "description": "The default.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "fieldName": {
+            "description": "The field name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "fieldType": {
+            "$ref": "#/components/schemas/FieldType"
+          },
+          "required": {
+            "description": "The required.",
+            "type": "boolean"
+          }
+        }
+      },
+      "ConnectorSchema": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Connector schema.",
+        "type": "object",
+        "properties": {
+          "connectorConfigSchema": {
+            "$ref": "#/components/schemas/ConnectorConfigSchema"
+          },
+          "messageConfigSchemas": {
+            "description": "The message config schemas.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageConfigSchema"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          },
+          "supportedPayloadTypes": {
+            "description": "The supported payload types.",
+            "type": "array",
+            "items": {
+              "description": "The supported payload types.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 1,
+            "maxItems": 100
+          },
+          "type": {
+            "$ref": "#/components/schemas/notification_center.ConnectorType"
+          }
+        }
+      },
+      "FieldType": {
+        "description": "Field type.",
+        "type": "string",
+        "enum": [
+          "FIELD_TYPE_UNSPECIFIED",
+          "STRING",
+          "NON_EMPTY_STRING",
+          "KEY_VALUE_PAIRS",
+          "JSON_OBJECT",
+          "DATE",
+          "URL",
+          "ARRAY_OF_STRINGS",
+          "BOOLEAN"
+        ]
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetConnectorSchemaResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the schema definition for a notification connector type.",
+        "type": "object",
+        "properties": {
+          "connectorSchema": {
+            "$ref": "#/components/schemas/ConnectorSchema"
+          }
+        }
+      },
+      "MessageConfigSchema": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "description": "List of fields.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageConfigSchemaField"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "payloadType": {
+            "description": "Type of the payload.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      },
+      "MessageConfigSchemaField": {
+        "type": "object",
+        "properties": {
+          "allowedValues": {
+            "description": "The allowed values.",
+            "type": "array",
+            "items": {
+              "description": "The allowed values.",
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "default": {
+            "description": "The default.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "disableOverride": {
+            "description": "The disable override.",
+            "type": "boolean"
+          },
+          "fieldName": {
+            "description": "The field name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "fieldType": {
+            "$ref": "#/components/schemas/FieldType"
+          },
+          "renderingMode": {
+            "$ref": "#/components/schemas/TemplateRenderingMode"
+          },
+          "required": {
+            "description": "The required.",
+            "type": "boolean"
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "TemplateRenderingMode": {
+        "description": "Template rendering mode.",
+        "type": "string",
+        "enum": [
+          "TEMPLATE_RENDERING_MODE_UNSPECIFIED",
+          "RELAXED",
+          "STRICT"
+        ]
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "notification_center.ConnectorType": {
+        "description": "Connector type.",
+        "type": "string",
+        "enum": [
+          "CONNECTOR_TYPE_UNSPECIFIED",
+          "SLACK",
+          "GENERIC_HTTPS",
+          "PAGERDUTY",
+          "IBM_EVENT_NOTIFICATIONS",
+          "SERVICE_NOW",
+          "EMAIL",
+          "PAGERDUTY_INCIDENTS",
+          "MICROSOFT_TEAMS"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

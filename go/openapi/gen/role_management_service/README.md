@@ -88,15 +88,11 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [CreateRoleRequestParentRoleId](docs/CreateRoleRequestParentRoleId.md)
- - [CreateRoleRequestParentRoleName](docs/CreateRoleRequestParentRoleName.md)
  - [CreateRoleResponse](docs/CreateRoleResponse.md)
  - [CustomRole](docs/CustomRole.md)
  - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetCustomRoleResponse](docs/GetCustomRoleResponse.md)
  - [ListCustomRolesResponse](docs/ListCustomRolesResponse.md)

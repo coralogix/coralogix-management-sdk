@@ -13,126 +13,171 @@ package global_routers_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ValidateEntityLabelMatcherResult - struct for ValidateEntityLabelMatcherResult
+// checks if the ValidateEntityLabelMatcherResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ValidateEntityLabelMatcherResult{}
+
+// ValidateEntityLabelMatcherResult Result of validating an entity label matcher, indicating whether it is valid or contains errors.
 type ValidateEntityLabelMatcherResult struct {
-	ValidateEntityLabelMatcherResultFailureVariant *ValidateEntityLabelMatcherResultFailureVariant
-	ValidateEntityLabelMatcherResultSuccessVariant *ValidateEntityLabelMatcherResultSuccessVariant
+	Failure *ValidateEntityLabelMatcherResultFailure `json:"failure,omitempty"`
+	// Test integration result.success.
+	Success map[string]interface{} `json:"success,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// ValidateEntityLabelMatcherResultFailureVariantAsValidateEntityLabelMatcherResult is a convenience function that returns ValidateEntityLabelMatcherResultFailureVariant wrapped in ValidateEntityLabelMatcherResult
-func ValidateEntityLabelMatcherResultFailureVariantAsValidateEntityLabelMatcherResult(v *ValidateEntityLabelMatcherResultFailureVariant) ValidateEntityLabelMatcherResult {
-	return ValidateEntityLabelMatcherResult{
-		ValidateEntityLabelMatcherResultFailureVariant: v,
+type _ValidateEntityLabelMatcherResult ValidateEntityLabelMatcherResult
+
+// NewValidateEntityLabelMatcherResult instantiates a new ValidateEntityLabelMatcherResult object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewValidateEntityLabelMatcherResult() *ValidateEntityLabelMatcherResult {
+	this := ValidateEntityLabelMatcherResult{}
+	return &this
+}
+
+// NewValidateEntityLabelMatcherResultWithDefaults instantiates a new ValidateEntityLabelMatcherResult object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewValidateEntityLabelMatcherResultWithDefaults() *ValidateEntityLabelMatcherResult {
+	this := ValidateEntityLabelMatcherResult{}
+	return &this
+}
+
+// GetFailure returns the Failure field value if set, zero value otherwise.
+func (o *ValidateEntityLabelMatcherResult) GetFailure() ValidateEntityLabelMatcherResultFailure {
+	if o == nil || IsNil(o.Failure) {
+		var ret ValidateEntityLabelMatcherResultFailure
+		return ret
 	}
+	return *o.Failure
 }
 
-// ValidateEntityLabelMatcherResultSuccessVariantAsValidateEntityLabelMatcherResult is a convenience function that returns ValidateEntityLabelMatcherResultSuccessVariant wrapped in ValidateEntityLabelMatcherResult
-func ValidateEntityLabelMatcherResultSuccessVariantAsValidateEntityLabelMatcherResult(v *ValidateEntityLabelMatcherResultSuccessVariant) ValidateEntityLabelMatcherResult {
-	return ValidateEntityLabelMatcherResult{
-		ValidateEntityLabelMatcherResultSuccessVariant: v,
+// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateEntityLabelMatcherResult) GetFailureOk() (*ValidateEntityLabelMatcherResultFailure, bool) {
+	if o == nil || IsNil(o.Failure) {
+		return nil, false
 	}
+	return o.Failure, true
 }
 
+// HasFailure returns a boolean if a field has been set.
+func (o *ValidateEntityLabelMatcherResult) HasFailure() bool {
+	if o != nil && !IsNil(o.Failure) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ValidateEntityLabelMatcherResult) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ValidateEntityLabelMatcherResultFailureVariant
-	err = json.Unmarshal(data, &dst.ValidateEntityLabelMatcherResultFailureVariant)
-	if err == nil {
-		jsonValidateEntityLabelMatcherResultFailureVariant, _ := json.Marshal(dst.ValidateEntityLabelMatcherResultFailureVariant)
-		if string(jsonValidateEntityLabelMatcherResultFailureVariant) == "{}" { // empty struct
-			dst.ValidateEntityLabelMatcherResultFailureVariant = nil
-		} else {
-			if err = validator.Validate(dst.ValidateEntityLabelMatcherResultFailureVariant); err != nil {
-				dst.ValidateEntityLabelMatcherResultFailureVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetFailure gets a reference to the given ValidateEntityLabelMatcherResultFailure and assigns it to the Failure field.
+func (o *ValidateEntityLabelMatcherResult) SetFailure(v ValidateEntityLabelMatcherResultFailure) {
+	o.Failure = &v
+}
+
+// GetSuccess returns the Success field value if set, zero value otherwise.
+func (o *ValidateEntityLabelMatcherResult) GetSuccess() map[string]interface{} {
+	if o == nil || IsNil(o.Success) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Success
+}
+
+// GetSuccessOk returns a tuple with the Success field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateEntityLabelMatcherResult) GetSuccessOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Success) {
+		return map[string]interface{}{}, false
+	}
+	return o.Success, true
+}
+
+// HasSuccess returns a boolean if a field has been set.
+func (o *ValidateEntityLabelMatcherResult) HasSuccess() bool {
+	if o != nil && !IsNil(o.Success) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuccess gets a reference to the given map[string]interface{} and assigns it to the Success field.
+func (o *ValidateEntityLabelMatcherResult) SetSuccess(v map[string]interface{}) {
+	o.Success = v
+}
+
+func (o ValidateEntityLabelMatcherResult) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ValidateEntityLabelMatcherResult) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Failure) {
+		toSerialize["failure"] = o.Failure
+	}
+	if !IsNil(o.Success) {
+		toSerialize["success"] = o.Success
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["success"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["failure"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ValidateEntityLabelMatcherResult) UnmarshalJSON(data []byte) (err error) {
+	varValidateEntityLabelMatcherResult := _ValidateEntityLabelMatcherResult{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varValidateEntityLabelMatcherResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ValidateEntityLabelMatcherResult(varValidateEntityLabelMatcherResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["success"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ValidateEntityLabelMatcherResultFailureVariant = nil
-	}
-
-	// try to unmarshal data into ValidateEntityLabelMatcherResultSuccessVariant
-	err = json.Unmarshal(data, &dst.ValidateEntityLabelMatcherResultSuccessVariant)
-	if err == nil {
-		jsonValidateEntityLabelMatcherResultSuccessVariant, _ := json.Marshal(dst.ValidateEntityLabelMatcherResultSuccessVariant)
-		if string(jsonValidateEntityLabelMatcherResultSuccessVariant) == "{}" { // empty struct
-			dst.ValidateEntityLabelMatcherResultSuccessVariant = nil
-		} else {
-			if err = validator.Validate(dst.ValidateEntityLabelMatcherResultSuccessVariant); err != nil {
-				dst.ValidateEntityLabelMatcherResultSuccessVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["failure"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ValidateEntityLabelMatcherResultSuccessVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+		}
+
+		delete(additionalProperties, "failure")
+		delete(additionalProperties, "success")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ValidateEntityLabelMatcherResultFailureVariant = nil
-		dst.ValidateEntityLabelMatcherResultSuccessVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ValidateEntityLabelMatcherResult)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ValidateEntityLabelMatcherResult) MarshalJSON() ([]byte, error) {
-	if src.ValidateEntityLabelMatcherResultFailureVariant != nil {
-		return json.Marshal(&src.ValidateEntityLabelMatcherResultFailureVariant)
-	}
-
-	if src.ValidateEntityLabelMatcherResultSuccessVariant != nil {
-		return json.Marshal(&src.ValidateEntityLabelMatcherResultSuccessVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ValidateEntityLabelMatcherResult) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ValidateEntityLabelMatcherResultFailureVariant != nil {
-		return obj.ValidateEntityLabelMatcherResultFailureVariant
-	}
-
-	if obj.ValidateEntityLabelMatcherResultSuccessVariant != nil {
-		return obj.ValidateEntityLabelMatcherResultSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ValidateEntityLabelMatcherResult) GetActualInstanceValue() (interface{}) {
-	if obj.ValidateEntityLabelMatcherResultFailureVariant != nil {
-		return *obj.ValidateEntityLabelMatcherResultFailureVariant
-	}
-
-	if obj.ValidateEntityLabelMatcherResultSuccessVariant != nil {
-		return *obj.ValidateEntityLabelMatcherResultSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableValidateEntityLabelMatcherResult struct {

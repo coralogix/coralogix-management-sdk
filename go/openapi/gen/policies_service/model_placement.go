@@ -13,126 +13,172 @@ package policies_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Placement - struct for Placement
+// checks if the Placement type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Placement{}
+
+// Placement Placement.
 type Placement struct {
-	PlacementFirst *PlacementFirst
-	PlacementLast *PlacementLast
+	// First.
+	First map[string]interface{} `json:"first,omitempty"`
+	// Last.
+	Last map[string]interface{} `json:"last,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// PlacementFirstAsPlacement is a convenience function that returns PlacementFirst wrapped in Placement
-func PlacementFirstAsPlacement(v *PlacementFirst) Placement {
-	return Placement{
-		PlacementFirst: v,
+type _Placement Placement
+
+// NewPlacement instantiates a new Placement object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewPlacement() *Placement {
+	this := Placement{}
+	return &this
+}
+
+// NewPlacementWithDefaults instantiates a new Placement object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewPlacementWithDefaults() *Placement {
+	this := Placement{}
+	return &this
+}
+
+// GetFirst returns the First field value if set, zero value otherwise.
+func (o *Placement) GetFirst() map[string]interface{} {
+	if o == nil || IsNil(o.First) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.First
 }
 
-// PlacementLastAsPlacement is a convenience function that returns PlacementLast wrapped in Placement
-func PlacementLastAsPlacement(v *PlacementLast) Placement {
-	return Placement{
-		PlacementLast: v,
+// GetFirstOk returns a tuple with the First field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Placement) GetFirstOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.First) {
+		return map[string]interface{}{}, false
 	}
+	return o.First, true
 }
 
+// HasFirst returns a boolean if a field has been set.
+func (o *Placement) HasFirst() bool {
+	if o != nil && !IsNil(o.First) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Placement) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into PlacementFirst
-	err = json.Unmarshal(data, &dst.PlacementFirst)
-	if err == nil {
-		jsonPlacementFirst, _ := json.Marshal(dst.PlacementFirst)
-		if string(jsonPlacementFirst) == "{}" { // empty struct
-			dst.PlacementFirst = nil
-		} else {
-			if err = validator.Validate(dst.PlacementFirst); err != nil {
-				dst.PlacementFirst = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetFirst gets a reference to the given map[string]interface{} and assigns it to the First field.
+func (o *Placement) SetFirst(v map[string]interface{}) {
+	o.First = v
+}
+
+// GetLast returns the Last field value if set, zero value otherwise.
+func (o *Placement) GetLast() map[string]interface{} {
+	if o == nil || IsNil(o.Last) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Last
+}
+
+// GetLastOk returns a tuple with the Last field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Placement) GetLastOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Last) {
+		return map[string]interface{}{}, false
+	}
+	return o.Last, true
+}
+
+// HasLast returns a boolean if a field has been set.
+func (o *Placement) HasLast() bool {
+	if o != nil && !IsNil(o.Last) {
+		return true
+	}
+
+	return false
+}
+
+// SetLast gets a reference to the given map[string]interface{} and assigns it to the Last field.
+func (o *Placement) SetLast(v map[string]interface{}) {
+	o.Last = v
+}
+
+func (o Placement) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Placement) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.First) {
+		toSerialize["first"] = o.First
+	}
+	if !IsNil(o.Last) {
+		toSerialize["last"] = o.Last
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["first"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["last"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [first, last] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Placement) UnmarshalJSON(data []byte) (err error) {
+	varPlacement := _Placement{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPlacement)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Placement(varPlacement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["first"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PlacementFirst = nil
-	}
-
-	// try to unmarshal data into PlacementLast
-	err = json.Unmarshal(data, &dst.PlacementLast)
-	if err == nil {
-		jsonPlacementLast, _ := json.Marshal(dst.PlacementLast)
-		if string(jsonPlacementLast) == "{}" { // empty struct
-			dst.PlacementLast = nil
-		} else {
-			if err = validator.Validate(dst.PlacementLast); err != nil {
-				dst.PlacementLast = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["last"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PlacementLast = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [first, last] may be set"}
+		}
+
+		delete(additionalProperties, "first")
+		delete(additionalProperties, "last")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.PlacementFirst = nil
-		dst.PlacementLast = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Placement)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Placement) MarshalJSON() ([]byte, error) {
-	if src.PlacementFirst != nil {
-		return json.Marshal(&src.PlacementFirst)
-	}
-
-	if src.PlacementLast != nil {
-		return json.Marshal(&src.PlacementLast)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Placement) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.PlacementFirst != nil {
-		return obj.PlacementFirst
-	}
-
-	if obj.PlacementLast != nil {
-		return obj.PlacementLast
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Placement) GetActualInstanceValue() (interface{}) {
-	if obj.PlacementFirst != nil {
-		return *obj.PlacementFirst
-	}
-
-	if obj.PlacementLast != nil {
-		return *obj.PlacementLast
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullablePlacement struct {

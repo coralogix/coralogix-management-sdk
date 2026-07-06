@@ -13,126 +13,170 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// FilterOperator - struct for FilterOperator
+// checks if the FilterOperator type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FilterOperator{}
+
+// FilterOperator This data structure defines the comparison operation for the filter.
 type FilterOperator struct {
-	FilterOperatorEquals *FilterOperatorEquals
-	FilterOperatorNotEquals *FilterOperatorNotEquals
+	Equals *FilterEquals `json:"equals,omitempty"`
+	NotEquals *FilterNotEquals `json:"notEquals,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// FilterOperatorEqualsAsFilterOperator is a convenience function that returns FilterOperatorEquals wrapped in FilterOperator
-func FilterOperatorEqualsAsFilterOperator(v *FilterOperatorEquals) FilterOperator {
-	return FilterOperator{
-		FilterOperatorEquals: v,
+type _FilterOperator FilterOperator
+
+// NewFilterOperator instantiates a new FilterOperator object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewFilterOperator() *FilterOperator {
+	this := FilterOperator{}
+	return &this
+}
+
+// NewFilterOperatorWithDefaults instantiates a new FilterOperator object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewFilterOperatorWithDefaults() *FilterOperator {
+	this := FilterOperator{}
+	return &this
+}
+
+// GetEquals returns the Equals field value if set, zero value otherwise.
+func (o *FilterOperator) GetEquals() FilterEquals {
+	if o == nil || IsNil(o.Equals) {
+		var ret FilterEquals
+		return ret
 	}
+	return *o.Equals
 }
 
-// FilterOperatorNotEqualsAsFilterOperator is a convenience function that returns FilterOperatorNotEquals wrapped in FilterOperator
-func FilterOperatorNotEqualsAsFilterOperator(v *FilterOperatorNotEquals) FilterOperator {
-	return FilterOperator{
-		FilterOperatorNotEquals: v,
+// GetEqualsOk returns a tuple with the Equals field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilterOperator) GetEqualsOk() (*FilterEquals, bool) {
+	if o == nil || IsNil(o.Equals) {
+		return nil, false
 	}
+	return o.Equals, true
 }
 
+// HasEquals returns a boolean if a field has been set.
+func (o *FilterOperator) HasEquals() bool {
+	if o != nil && !IsNil(o.Equals) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *FilterOperator) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into FilterOperatorEquals
-	err = json.Unmarshal(data, &dst.FilterOperatorEquals)
-	if err == nil {
-		jsonFilterOperatorEquals, _ := json.Marshal(dst.FilterOperatorEquals)
-		if string(jsonFilterOperatorEquals) == "{}" { // empty struct
-			dst.FilterOperatorEquals = nil
-		} else {
-			if err = validator.Validate(dst.FilterOperatorEquals); err != nil {
-				dst.FilterOperatorEquals = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetEquals gets a reference to the given FilterEquals and assigns it to the Equals field.
+func (o *FilterOperator) SetEquals(v FilterEquals) {
+	o.Equals = &v
+}
+
+// GetNotEquals returns the NotEquals field value if set, zero value otherwise.
+func (o *FilterOperator) GetNotEquals() FilterNotEquals {
+	if o == nil || IsNil(o.NotEquals) {
+		var ret FilterNotEquals
+		return ret
+	}
+	return *o.NotEquals
+}
+
+// GetNotEqualsOk returns a tuple with the NotEquals field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilterOperator) GetNotEqualsOk() (*FilterNotEquals, bool) {
+	if o == nil || IsNil(o.NotEquals) {
+		return nil, false
+	}
+	return o.NotEquals, true
+}
+
+// HasNotEquals returns a boolean if a field has been set.
+func (o *FilterOperator) HasNotEquals() bool {
+	if o != nil && !IsNil(o.NotEquals) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotEquals gets a reference to the given FilterNotEquals and assigns it to the NotEquals field.
+func (o *FilterOperator) SetNotEquals(v FilterNotEquals) {
+	o.NotEquals = &v
+}
+
+func (o FilterOperator) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FilterOperator) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Equals) {
+		toSerialize["equals"] = o.Equals
+	}
+	if !IsNil(o.NotEquals) {
+		toSerialize["notEquals"] = o.NotEquals
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["equals"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["notEquals"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [equals, notEquals] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *FilterOperator) UnmarshalJSON(data []byte) (err error) {
+	varFilterOperator := _FilterOperator{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFilterOperator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FilterOperator(varFilterOperator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["equals"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FilterOperatorEquals = nil
-	}
-
-	// try to unmarshal data into FilterOperatorNotEquals
-	err = json.Unmarshal(data, &dst.FilterOperatorNotEquals)
-	if err == nil {
-		jsonFilterOperatorNotEquals, _ := json.Marshal(dst.FilterOperatorNotEquals)
-		if string(jsonFilterOperatorNotEquals) == "{}" { // empty struct
-			dst.FilterOperatorNotEquals = nil
-		} else {
-			if err = validator.Validate(dst.FilterOperatorNotEquals); err != nil {
-				dst.FilterOperatorNotEquals = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["notEquals"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FilterOperatorNotEquals = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [equals, notEquals] may be set"}
+		}
+
+		delete(additionalProperties, "equals")
+		delete(additionalProperties, "notEquals")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.FilterOperatorEquals = nil
-		dst.FilterOperatorNotEquals = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(FilterOperator)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src FilterOperator) MarshalJSON() ([]byte, error) {
-	if src.FilterOperatorEquals != nil {
-		return json.Marshal(&src.FilterOperatorEquals)
-	}
-
-	if src.FilterOperatorNotEquals != nil {
-		return json.Marshal(&src.FilterOperatorNotEquals)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *FilterOperator) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.FilterOperatorEquals != nil {
-		return obj.FilterOperatorEquals
-	}
-
-	if obj.FilterOperatorNotEquals != nil {
-		return obj.FilterOperatorNotEquals
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj FilterOperator) GetActualInstanceValue() (interface{}) {
-	if obj.FilterOperatorEquals != nil {
-		return *obj.FilterOperatorEquals
-	}
-
-	if obj.FilterOperatorNotEquals != nil {
-		return *obj.FilterOperatorNotEquals
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableFilterOperator struct {

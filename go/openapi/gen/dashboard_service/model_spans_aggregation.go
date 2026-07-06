@@ -13,126 +13,170 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// SpansAggregation - struct for SpansAggregation
+// checks if the SpansAggregation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SpansAggregation{}
+
+// SpansAggregation Spans aggregation.
 type SpansAggregation struct {
-	SpansAggregationDimensionAggregation *SpansAggregationDimensionAggregation
-	SpansAggregationMetricAggregation *SpansAggregationMetricAggregation
+	DimensionAggregation *DimensionAggregation `json:"dimensionAggregation,omitempty"`
+	MetricAggregation *MetricAggregation `json:"metricAggregation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// SpansAggregationDimensionAggregationAsSpansAggregation is a convenience function that returns SpansAggregationDimensionAggregation wrapped in SpansAggregation
-func SpansAggregationDimensionAggregationAsSpansAggregation(v *SpansAggregationDimensionAggregation) SpansAggregation {
-	return SpansAggregation{
-		SpansAggregationDimensionAggregation: v,
+type _SpansAggregation SpansAggregation
+
+// NewSpansAggregation instantiates a new SpansAggregation object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSpansAggregation() *SpansAggregation {
+	this := SpansAggregation{}
+	return &this
+}
+
+// NewSpansAggregationWithDefaults instantiates a new SpansAggregation object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewSpansAggregationWithDefaults() *SpansAggregation {
+	this := SpansAggregation{}
+	return &this
+}
+
+// GetDimensionAggregation returns the DimensionAggregation field value if set, zero value otherwise.
+func (o *SpansAggregation) GetDimensionAggregation() DimensionAggregation {
+	if o == nil || IsNil(o.DimensionAggregation) {
+		var ret DimensionAggregation
+		return ret
 	}
+	return *o.DimensionAggregation
 }
 
-// SpansAggregationMetricAggregationAsSpansAggregation is a convenience function that returns SpansAggregationMetricAggregation wrapped in SpansAggregation
-func SpansAggregationMetricAggregationAsSpansAggregation(v *SpansAggregationMetricAggregation) SpansAggregation {
-	return SpansAggregation{
-		SpansAggregationMetricAggregation: v,
+// GetDimensionAggregationOk returns a tuple with the DimensionAggregation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpansAggregation) GetDimensionAggregationOk() (*DimensionAggregation, bool) {
+	if o == nil || IsNil(o.DimensionAggregation) {
+		return nil, false
 	}
+	return o.DimensionAggregation, true
 }
 
+// HasDimensionAggregation returns a boolean if a field has been set.
+func (o *SpansAggregation) HasDimensionAggregation() bool {
+	if o != nil && !IsNil(o.DimensionAggregation) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *SpansAggregation) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into SpansAggregationDimensionAggregation
-	err = json.Unmarshal(data, &dst.SpansAggregationDimensionAggregation)
-	if err == nil {
-		jsonSpansAggregationDimensionAggregation, _ := json.Marshal(dst.SpansAggregationDimensionAggregation)
-		if string(jsonSpansAggregationDimensionAggregation) == "{}" { // empty struct
-			dst.SpansAggregationDimensionAggregation = nil
-		} else {
-			if err = validator.Validate(dst.SpansAggregationDimensionAggregation); err != nil {
-				dst.SpansAggregationDimensionAggregation = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetDimensionAggregation gets a reference to the given DimensionAggregation and assigns it to the DimensionAggregation field.
+func (o *SpansAggregation) SetDimensionAggregation(v DimensionAggregation) {
+	o.DimensionAggregation = &v
+}
+
+// GetMetricAggregation returns the MetricAggregation field value if set, zero value otherwise.
+func (o *SpansAggregation) GetMetricAggregation() MetricAggregation {
+	if o == nil || IsNil(o.MetricAggregation) {
+		var ret MetricAggregation
+		return ret
+	}
+	return *o.MetricAggregation
+}
+
+// GetMetricAggregationOk returns a tuple with the MetricAggregation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpansAggregation) GetMetricAggregationOk() (*MetricAggregation, bool) {
+	if o == nil || IsNil(o.MetricAggregation) {
+		return nil, false
+	}
+	return o.MetricAggregation, true
+}
+
+// HasMetricAggregation returns a boolean if a field has been set.
+func (o *SpansAggregation) HasMetricAggregation() bool {
+	if o != nil && !IsNil(o.MetricAggregation) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricAggregation gets a reference to the given MetricAggregation and assigns it to the MetricAggregation field.
+func (o *SpansAggregation) SetMetricAggregation(v MetricAggregation) {
+	o.MetricAggregation = &v
+}
+
+func (o SpansAggregation) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SpansAggregation) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.DimensionAggregation) {
+		toSerialize["dimensionAggregation"] = o.DimensionAggregation
+	}
+	if !IsNil(o.MetricAggregation) {
+		toSerialize["metricAggregation"] = o.MetricAggregation
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["metricAggregation"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dimensionAggregation"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metricAggregation, dimensionAggregation] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *SpansAggregation) UnmarshalJSON(data []byte) (err error) {
+	varSpansAggregation := _SpansAggregation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpansAggregation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpansAggregation(varSpansAggregation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["metricAggregation"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SpansAggregationDimensionAggregation = nil
-	}
-
-	// try to unmarshal data into SpansAggregationMetricAggregation
-	err = json.Unmarshal(data, &dst.SpansAggregationMetricAggregation)
-	if err == nil {
-		jsonSpansAggregationMetricAggregation, _ := json.Marshal(dst.SpansAggregationMetricAggregation)
-		if string(jsonSpansAggregationMetricAggregation) == "{}" { // empty struct
-			dst.SpansAggregationMetricAggregation = nil
-		} else {
-			if err = validator.Validate(dst.SpansAggregationMetricAggregation); err != nil {
-				dst.SpansAggregationMetricAggregation = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dimensionAggregation"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SpansAggregationMetricAggregation = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [metricAggregation, dimensionAggregation] may be set"}
+		}
+
+		delete(additionalProperties, "dimensionAggregation")
+		delete(additionalProperties, "metricAggregation")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.SpansAggregationDimensionAggregation = nil
-		dst.SpansAggregationMetricAggregation = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(SpansAggregation)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src SpansAggregation) MarshalJSON() ([]byte, error) {
-	if src.SpansAggregationDimensionAggregation != nil {
-		return json.Marshal(&src.SpansAggregationDimensionAggregation)
-	}
-
-	if src.SpansAggregationMetricAggregation != nil {
-		return json.Marshal(&src.SpansAggregationMetricAggregation)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *SpansAggregation) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.SpansAggregationDimensionAggregation != nil {
-		return obj.SpansAggregationDimensionAggregation
-	}
-
-	if obj.SpansAggregationMetricAggregation != nil {
-		return obj.SpansAggregationMetricAggregation
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj SpansAggregation) GetActualInstanceValue() (interface{}) {
-	if obj.SpansAggregationDimensionAggregation != nil {
-		return *obj.SpansAggregationDimensionAggregation
-	}
-
-	if obj.SpansAggregationMetricAggregation != nil {
-		return *obj.SpansAggregationMetricAggregation
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSpansAggregation struct {

@@ -89,8 +89,6 @@ Class | Method | HTTP request | Description
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FieldType](docs/FieldType.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetConnectorSchemaResponse](docs/GetConnectorSchemaResponse.md)
  - [MessageConfigSchema](docs/MessageConfigSchema.md)

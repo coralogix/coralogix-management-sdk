@@ -22,7 +22,7 @@ var _ MappedNullable = &SloFilterPredicate{}
 
 // SloFilterPredicate Predicate used for filtering SLOs
 type SloFilterPredicate struct {
-	Is *SloFilterPredicateIs `json:"is,omitempty"`
+	Is *IsFilterPredicate `json:"is,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,9 +46,9 @@ func NewSloFilterPredicateWithDefaults() *SloFilterPredicate {
 }
 
 // GetIs returns the Is field value if set, zero value otherwise.
-func (o *SloFilterPredicate) GetIs() SloFilterPredicateIs {
+func (o *SloFilterPredicate) GetIs() IsFilterPredicate {
 	if o == nil || IsNil(o.Is) {
-		var ret SloFilterPredicateIs
+		var ret IsFilterPredicate
 		return ret
 	}
 	return *o.Is
@@ -56,7 +56,7 @@ func (o *SloFilterPredicate) GetIs() SloFilterPredicateIs {
 
 // GetIsOk returns a tuple with the Is field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SloFilterPredicate) GetIsOk() (*SloFilterPredicateIs, bool) {
+func (o *SloFilterPredicate) GetIsOk() (*IsFilterPredicate, bool) {
 	if o == nil || IsNil(o.Is) {
 		return nil, false
 	}
@@ -72,8 +72,8 @@ func (o *SloFilterPredicate) HasIs() bool {
 	return false
 }
 
-// SetIs gets a reference to the given SloFilterPredicateIs and assigns it to the Is field.
-func (o *SloFilterPredicate) SetIs(v SloFilterPredicateIs) {
+// SetIs gets a reference to the given IsFilterPredicate and assigns it to the Is field.
+func (o *SloFilterPredicate) SetIs(v IsFilterPredicate) {
 	o.Is = &v
 }
 

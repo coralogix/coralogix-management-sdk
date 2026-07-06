@@ -43,9 +43,6 @@ ExtensionServiceGetAllExtensions Get all extensions
 
 Creates a new extension.
 
-Requires the following permissions:
-- `extensions:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionServiceGetAllExtensionsRequest
 */
@@ -193,9 +190,6 @@ func (r ApiExtensionServiceGetExtensionRequest) Execute() (*V1Extension, *http.R
 ExtensionServiceGetExtension Get extension by ID
 
 Returns the details of the specified extension.
-
-Requires the following permissions:
-- `extensions:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Unique identifier.

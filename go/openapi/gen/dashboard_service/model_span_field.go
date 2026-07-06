@@ -13,164 +13,215 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// SpanField - struct for SpanField
+// checks if the SpanField type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SpanField{}
+
+// SpanField Span field.
 type SpanField struct {
-	SpanFieldMetadataField *SpanFieldMetadataField
-	SpanFieldProcessTagField *SpanFieldProcessTagField
-	SpanFieldTagField *SpanFieldTagField
+	MetadataField *MetadataField `json:"metadataField,omitempty"`
+	// Name of a process-level tag field to use as the data source.
+	ProcessTagField *string `json:"processTagField,omitempty"`
+	// Name of a span tag field to use as the data source.
+	TagField *string `json:"tagField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// SpanFieldMetadataFieldAsSpanField is a convenience function that returns SpanFieldMetadataField wrapped in SpanField
-func SpanFieldMetadataFieldAsSpanField(v *SpanFieldMetadataField) SpanField {
-	return SpanField{
-		SpanFieldMetadataField: v,
+type _SpanField SpanField
+
+// NewSpanField instantiates a new SpanField object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSpanField() *SpanField {
+	this := SpanField{}
+	return &this
+}
+
+// NewSpanFieldWithDefaults instantiates a new SpanField object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewSpanFieldWithDefaults() *SpanField {
+	this := SpanField{}
+	return &this
+}
+
+// GetMetadataField returns the MetadataField field value if set, zero value otherwise.
+func (o *SpanField) GetMetadataField() MetadataField {
+	if o == nil || IsNil(o.MetadataField) {
+		var ret MetadataField
+		return ret
 	}
+	return *o.MetadataField
 }
 
-// SpanFieldProcessTagFieldAsSpanField is a convenience function that returns SpanFieldProcessTagField wrapped in SpanField
-func SpanFieldProcessTagFieldAsSpanField(v *SpanFieldProcessTagField) SpanField {
-	return SpanField{
-		SpanFieldProcessTagField: v,
+// GetMetadataFieldOk returns a tuple with the MetadataField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpanField) GetMetadataFieldOk() (*MetadataField, bool) {
+	if o == nil || IsNil(o.MetadataField) {
+		return nil, false
 	}
+	return o.MetadataField, true
 }
 
-// SpanFieldTagFieldAsSpanField is a convenience function that returns SpanFieldTagField wrapped in SpanField
-func SpanFieldTagFieldAsSpanField(v *SpanFieldTagField) SpanField {
-	return SpanField{
-		SpanFieldTagField: v,
+// HasMetadataField returns a boolean if a field has been set.
+func (o *SpanField) HasMetadataField() bool {
+	if o != nil && !IsNil(o.MetadataField) {
+		return true
 	}
+
+	return false
 }
 
+// SetMetadataField gets a reference to the given MetadataField and assigns it to the MetadataField field.
+func (o *SpanField) SetMetadataField(v MetadataField) {
+	o.MetadataField = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *SpanField) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into SpanFieldMetadataField
-	err = json.Unmarshal(data, &dst.SpanFieldMetadataField)
-	if err == nil {
-		jsonSpanFieldMetadataField, _ := json.Marshal(dst.SpanFieldMetadataField)
-		if string(jsonSpanFieldMetadataField) == "{}" { // empty struct
-			dst.SpanFieldMetadataField = nil
-		} else {
-			if err = validator.Validate(dst.SpanFieldMetadataField); err != nil {
-				dst.SpanFieldMetadataField = nil
-			} else {
-				match++
-			}
+// GetProcessTagField returns the ProcessTagField field value if set, zero value otherwise.
+func (o *SpanField) GetProcessTagField() string {
+	if o == nil || IsNil(o.ProcessTagField) {
+		var ret string
+		return ret
+	}
+	return *o.ProcessTagField
+}
+
+// GetProcessTagFieldOk returns a tuple with the ProcessTagField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpanField) GetProcessTagFieldOk() (*string, bool) {
+	if o == nil || IsNil(o.ProcessTagField) {
+		return nil, false
+	}
+	return o.ProcessTagField, true
+}
+
+// HasProcessTagField returns a boolean if a field has been set.
+func (o *SpanField) HasProcessTagField() bool {
+	if o != nil && !IsNil(o.ProcessTagField) {
+		return true
+	}
+
+	return false
+}
+
+// SetProcessTagField gets a reference to the given string and assigns it to the ProcessTagField field.
+func (o *SpanField) SetProcessTagField(v string) {
+	o.ProcessTagField = &v
+}
+
+// GetTagField returns the TagField field value if set, zero value otherwise.
+func (o *SpanField) GetTagField() string {
+	if o == nil || IsNil(o.TagField) {
+		var ret string
+		return ret
+	}
+	return *o.TagField
+}
+
+// GetTagFieldOk returns a tuple with the TagField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpanField) GetTagFieldOk() (*string, bool) {
+	if o == nil || IsNil(o.TagField) {
+		return nil, false
+	}
+	return o.TagField, true
+}
+
+// HasTagField returns a boolean if a field has been set.
+func (o *SpanField) HasTagField() bool {
+	if o != nil && !IsNil(o.TagField) {
+		return true
+	}
+
+	return false
+}
+
+// SetTagField gets a reference to the given string and assigns it to the TagField field.
+func (o *SpanField) SetTagField(v string) {
+	o.TagField = &v
+}
+
+func (o SpanField) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SpanField) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.MetadataField) {
+		toSerialize["metadataField"] = o.MetadataField
+	}
+	if !IsNil(o.ProcessTagField) {
+		toSerialize["processTagField"] = o.ProcessTagField
+	}
+	if !IsNil(o.TagField) {
+		toSerialize["tagField"] = o.TagField
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["metadataField"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["tagField"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["processTagField"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metadataField, tagField, processTagField] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *SpanField) UnmarshalJSON(data []byte) (err error) {
+	varSpanField := _SpanField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpanField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpanField(varSpanField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["metadataField"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SpanFieldMetadataField = nil
-	}
-
-	// try to unmarshal data into SpanFieldProcessTagField
-	err = json.Unmarshal(data, &dst.SpanFieldProcessTagField)
-	if err == nil {
-		jsonSpanFieldProcessTagField, _ := json.Marshal(dst.SpanFieldProcessTagField)
-		if string(jsonSpanFieldProcessTagField) == "{}" { // empty struct
-			dst.SpanFieldProcessTagField = nil
-		} else {
-			if err = validator.Validate(dst.SpanFieldProcessTagField); err != nil {
-				dst.SpanFieldProcessTagField = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["tagField"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SpanFieldProcessTagField = nil
-	}
-
-	// try to unmarshal data into SpanFieldTagField
-	err = json.Unmarshal(data, &dst.SpanFieldTagField)
-	if err == nil {
-		jsonSpanFieldTagField, _ := json.Marshal(dst.SpanFieldTagField)
-		if string(jsonSpanFieldTagField) == "{}" { // empty struct
-			dst.SpanFieldTagField = nil
-		} else {
-			if err = validator.Validate(dst.SpanFieldTagField); err != nil {
-				dst.SpanFieldTagField = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["processTagField"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SpanFieldTagField = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [metadataField, tagField, processTagField] may be set"}
+		}
+
+		delete(additionalProperties, "metadataField")
+		delete(additionalProperties, "processTagField")
+		delete(additionalProperties, "tagField")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.SpanFieldMetadataField = nil
-		dst.SpanFieldProcessTagField = nil
-		dst.SpanFieldTagField = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(SpanField)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src SpanField) MarshalJSON() ([]byte, error) {
-	if src.SpanFieldMetadataField != nil {
-		return json.Marshal(&src.SpanFieldMetadataField)
-	}
-
-	if src.SpanFieldProcessTagField != nil {
-		return json.Marshal(&src.SpanFieldProcessTagField)
-	}
-
-	if src.SpanFieldTagField != nil {
-		return json.Marshal(&src.SpanFieldTagField)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *SpanField) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.SpanFieldMetadataField != nil {
-		return obj.SpanFieldMetadataField
-	}
-
-	if obj.SpanFieldProcessTagField != nil {
-		return obj.SpanFieldProcessTagField
-	}
-
-	if obj.SpanFieldTagField != nil {
-		return obj.SpanFieldTagField
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj SpanField) GetActualInstanceValue() (interface{}) {
-	if obj.SpanFieldMetadataField != nil {
-		return *obj.SpanFieldMetadataField
-	}
-
-	if obj.SpanFieldProcessTagField != nil {
-		return *obj.SpanFieldProcessTagField
-	}
-
-	if obj.SpanFieldTagField != nil {
-		return *obj.SpanFieldTagField
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSpanField struct {

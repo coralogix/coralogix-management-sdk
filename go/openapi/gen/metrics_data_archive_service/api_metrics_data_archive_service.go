@@ -25,11 +25,11 @@ type MetricsDataArchiveServiceAPIService service
 type ApiMetricsConfiguratorPublicServiceConfigureTenantRequest struct {
 	ctx context.Context
 	ApiService *MetricsDataArchiveServiceAPIService
-	metricsConfiguratorPublicServiceConfigureTenantRequest *MetricsConfiguratorPublicServiceConfigureTenantRequest
+	configureTenantRequest *ConfigureTenantRequest
 }
 
-func (r ApiMetricsConfiguratorPublicServiceConfigureTenantRequest) MetricsConfiguratorPublicServiceConfigureTenantRequest(metricsConfiguratorPublicServiceConfigureTenantRequest MetricsConfiguratorPublicServiceConfigureTenantRequest) ApiMetricsConfiguratorPublicServiceConfigureTenantRequest {
-	r.metricsConfiguratorPublicServiceConfigureTenantRequest = &metricsConfiguratorPublicServiceConfigureTenantRequest
+func (r ApiMetricsConfiguratorPublicServiceConfigureTenantRequest) ConfigureTenantRequest(configureTenantRequest ConfigureTenantRequest) ApiMetricsConfiguratorPublicServiceConfigureTenantRequest {
+	r.configureTenantRequest = &configureTenantRequest
 	return r
 }
 
@@ -72,8 +72,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.metricsConfiguratorPublicServiceConfigureTenantRequest == nil {
-		return localVarReturnValue, nil, reportError("metricsConfiguratorPublicServiceConfigureTenantRequest is required and must be specified")
+	if r.configureTenantRequest == nil {
+		return localVarReturnValue, nil, reportError("configureTenantRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -94,7 +94,7 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceCo
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.metricsConfiguratorPublicServiceConfigureTenantRequest
+	localVarPostBody = r.configureTenantRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -560,11 +560,11 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceGe
 type ApiMetricsConfiguratorPublicServiceUpdateRequest struct {
 	ctx context.Context
 	ApiService *MetricsDataArchiveServiceAPIService
-	metricsConfiguratorPublicServiceUpdateRequest *MetricsConfiguratorPublicServiceUpdateRequest
+	updateTenantRequest *UpdateTenantRequest
 }
 
-func (r ApiMetricsConfiguratorPublicServiceUpdateRequest) MetricsConfiguratorPublicServiceUpdateRequest(metricsConfiguratorPublicServiceUpdateRequest MetricsConfiguratorPublicServiceUpdateRequest) ApiMetricsConfiguratorPublicServiceUpdateRequest {
-	r.metricsConfiguratorPublicServiceUpdateRequest = &metricsConfiguratorPublicServiceUpdateRequest
+func (r ApiMetricsConfiguratorPublicServiceUpdateRequest) UpdateTenantRequest(updateTenantRequest UpdateTenantRequest) ApiMetricsConfiguratorPublicServiceUpdateRequest {
+	r.updateTenantRequest = &updateTenantRequest
 	return r
 }
 
@@ -607,8 +607,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceUp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.metricsConfiguratorPublicServiceUpdateRequest == nil {
-		return localVarReturnValue, nil, reportError("metricsConfiguratorPublicServiceUpdateRequest is required and must be specified")
+	if r.updateTenantRequest == nil {
+		return localVarReturnValue, nil, reportError("updateTenantRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -629,7 +629,7 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceUp
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.metricsConfiguratorPublicServiceUpdateRequest
+	localVarPostBody = r.updateTenantRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -702,11 +702,11 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceUp
 type ApiMetricsConfiguratorPublicServiceValidateBucketRequest struct {
 	ctx context.Context
 	ApiService *MetricsDataArchiveServiceAPIService
-	metricsConfiguratorPublicServiceValidateBucketRequest *MetricsConfiguratorPublicServiceValidateBucketRequest
+	bucketValidationRequest *BucketValidationRequest
 }
 
-func (r ApiMetricsConfiguratorPublicServiceValidateBucketRequest) MetricsConfiguratorPublicServiceValidateBucketRequest(metricsConfiguratorPublicServiceValidateBucketRequest MetricsConfiguratorPublicServiceValidateBucketRequest) ApiMetricsConfiguratorPublicServiceValidateBucketRequest {
-	r.metricsConfiguratorPublicServiceValidateBucketRequest = &metricsConfiguratorPublicServiceValidateBucketRequest
+func (r ApiMetricsConfiguratorPublicServiceValidateBucketRequest) BucketValidationRequest(bucketValidationRequest BucketValidationRequest) ApiMetricsConfiguratorPublicServiceValidateBucketRequest {
+	r.bucketValidationRequest = &bucketValidationRequest
 	return r
 }
 
@@ -749,8 +749,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceVa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.metricsConfiguratorPublicServiceValidateBucketRequest == nil {
-		return localVarReturnValue, nil, reportError("metricsConfiguratorPublicServiceValidateBucketRequest is required and must be specified")
+	if r.bucketValidationRequest == nil {
+		return localVarReturnValue, nil, reportError("bucketValidationRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -771,7 +771,7 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceVa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.metricsConfiguratorPublicServiceValidateBucketRequest
+	localVarPostBody = r.bucketValidationRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -13,126 +13,172 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// AssigneeOption - struct for AssigneeOption
+// checks if the AssigneeOption type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AssigneeOption{}
+
+// AssigneeOption Assignee filter option representing either a specific assignee or unassigned cases.
 type AssigneeOption struct {
-	AssigneeOptionAssignee *AssigneeOptionAssignee
-	AssigneeOptionUnassigned *AssigneeOptionUnassigned
+	// User identifier of the assignee to filter by
+	Assignee *string `json:"assignee,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Marker selecting cases that have no assignee.
+	Unassigned map[string]interface{} `json:"unassigned,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// AssigneeOptionAssigneeAsAssigneeOption is a convenience function that returns AssigneeOptionAssignee wrapped in AssigneeOption
-func AssigneeOptionAssigneeAsAssigneeOption(v *AssigneeOptionAssignee) AssigneeOption {
-	return AssigneeOption{
-		AssigneeOptionAssignee: v,
+type _AssigneeOption AssigneeOption
+
+// NewAssigneeOption instantiates a new AssigneeOption object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAssigneeOption() *AssigneeOption {
+	this := AssigneeOption{}
+	return &this
+}
+
+// NewAssigneeOptionWithDefaults instantiates a new AssigneeOption object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAssigneeOptionWithDefaults() *AssigneeOption {
+	this := AssigneeOption{}
+	return &this
+}
+
+// GetAssignee returns the Assignee field value if set, zero value otherwise.
+func (o *AssigneeOption) GetAssignee() string {
+	if o == nil || IsNil(o.Assignee) {
+		var ret string
+		return ret
 	}
+	return *o.Assignee
 }
 
-// AssigneeOptionUnassignedAsAssigneeOption is a convenience function that returns AssigneeOptionUnassigned wrapped in AssigneeOption
-func AssigneeOptionUnassignedAsAssigneeOption(v *AssigneeOptionUnassigned) AssigneeOption {
-	return AssigneeOption{
-		AssigneeOptionUnassigned: v,
+// GetAssigneeOk returns a tuple with the Assignee field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssigneeOption) GetAssigneeOk() (*string, bool) {
+	if o == nil || IsNil(o.Assignee) {
+		return nil, false
 	}
+	return o.Assignee, true
 }
 
+// HasAssignee returns a boolean if a field has been set.
+func (o *AssigneeOption) HasAssignee() bool {
+	if o != nil && !IsNil(o.Assignee) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *AssigneeOption) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into AssigneeOptionAssignee
-	err = json.Unmarshal(data, &dst.AssigneeOptionAssignee)
-	if err == nil {
-		jsonAssigneeOptionAssignee, _ := json.Marshal(dst.AssigneeOptionAssignee)
-		if string(jsonAssigneeOptionAssignee) == "{}" { // empty struct
-			dst.AssigneeOptionAssignee = nil
-		} else {
-			if err = validator.Validate(dst.AssigneeOptionAssignee); err != nil {
-				dst.AssigneeOptionAssignee = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAssignee gets a reference to the given string and assigns it to the Assignee field.
+func (o *AssigneeOption) SetAssignee(v string) {
+	o.Assignee = &v
+}
+
+// GetUnassigned returns the Unassigned field value if set, zero value otherwise.
+func (o *AssigneeOption) GetUnassigned() map[string]interface{} {
+	if o == nil || IsNil(o.Unassigned) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Unassigned
+}
+
+// GetUnassignedOk returns a tuple with the Unassigned field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssigneeOption) GetUnassignedOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Unassigned) {
+		return map[string]interface{}{}, false
+	}
+	return o.Unassigned, true
+}
+
+// HasUnassigned returns a boolean if a field has been set.
+func (o *AssigneeOption) HasUnassigned() bool {
+	if o != nil && !IsNil(o.Unassigned) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnassigned gets a reference to the given map[string]interface{} and assigns it to the Unassigned field.
+func (o *AssigneeOption) SetUnassigned(v map[string]interface{}) {
+	o.Unassigned = v
+}
+
+func (o AssigneeOption) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AssigneeOption) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Assignee) {
+		toSerialize["assignee"] = o.Assignee
+	}
+	if !IsNil(o.Unassigned) {
+		toSerialize["unassigned"] = o.Unassigned
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["assignee"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["unassigned"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [assignee, unassigned] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *AssigneeOption) UnmarshalJSON(data []byte) (err error) {
+	varAssigneeOption := _AssigneeOption{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAssigneeOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AssigneeOption(varAssigneeOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["assignee"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AssigneeOptionAssignee = nil
-	}
-
-	// try to unmarshal data into AssigneeOptionUnassigned
-	err = json.Unmarshal(data, &dst.AssigneeOptionUnassigned)
-	if err == nil {
-		jsonAssigneeOptionUnassigned, _ := json.Marshal(dst.AssigneeOptionUnassigned)
-		if string(jsonAssigneeOptionUnassigned) == "{}" { // empty struct
-			dst.AssigneeOptionUnassigned = nil
-		} else {
-			if err = validator.Validate(dst.AssigneeOptionUnassigned); err != nil {
-				dst.AssigneeOptionUnassigned = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["unassigned"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AssigneeOptionUnassigned = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [assignee, unassigned] may be set"}
+		}
+
+		delete(additionalProperties, "assignee")
+		delete(additionalProperties, "unassigned")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AssigneeOptionAssignee = nil
-		dst.AssigneeOptionUnassigned = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(AssigneeOption)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src AssigneeOption) MarshalJSON() ([]byte, error) {
-	if src.AssigneeOptionAssignee != nil {
-		return json.Marshal(&src.AssigneeOptionAssignee)
-	}
-
-	if src.AssigneeOptionUnassigned != nil {
-		return json.Marshal(&src.AssigneeOptionUnassigned)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *AssigneeOption) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.AssigneeOptionAssignee != nil {
-		return obj.AssigneeOptionAssignee
-	}
-
-	if obj.AssigneeOptionUnassigned != nil {
-		return obj.AssigneeOptionUnassigned
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj AssigneeOption) GetActualInstanceValue() (interface{}) {
-	if obj.AssigneeOptionAssignee != nil {
-		return *obj.AssigneeOptionAssignee
-	}
-
-	if obj.AssigneeOptionUnassigned != nil {
-		return *obj.AssigneeOptionUnassigned
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableAssigneeOption struct {

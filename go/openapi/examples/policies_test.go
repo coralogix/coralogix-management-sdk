@@ -31,75 +31,71 @@ func TestPolicies(t *testing.T) {
 	client := cxsdk.NewTCOPoliciesClient(cfg)
 
 	policyName := "Example tco_policy from SDK" + uuid.NewString()
-	createReq := tcopolicies.PoliciesServiceCreatePolicyRequest{
-		CreatePolicyRequestLogRules: &tcopolicies.CreatePolicyRequestLogRules{
-			Name:     policyName,
-			Priority: tcopolicies.QUOTAV1PRIORITY_PRIORITY_TYPE_LOW,
-			LogRules: tcopolicies.LogRules{
-				Severities: []tcopolicies.QuotaV1Severity{
-					tcopolicies.QUOTAV1SEVERITY_SEVERITY_ERROR,
-					tcopolicies.QUOTAV1SEVERITY_SEVERITY_CRITICAL,
-				},
+	createReq := tcopolicies.CreatePolicyRequest{
+		Name:     policyName,
+		Priority: tcopolicies.QUOTAV1PRIORITY_PRIORITY_TYPE_LOW,
+		LogRules: &tcopolicies.LogRules{
+			Severities: []tcopolicies.QuotaV1Severity{
+				tcopolicies.QUOTAV1SEVERITY_SEVERITY_ERROR,
+				tcopolicies.QUOTAV1SEVERITY_SEVERITY_CRITICAL,
 			},
-			ApplicationRule: &tcopolicies.QuotaV1Rule{
-				Name:       tcopolicies.PtrString("prod-app"),
-				RuleTypeId: tcopolicies.RULETYPEID_RULE_TYPE_ID_IS.Ptr(),
-			},
-			SubsystemRule: &tcopolicies.QuotaV1Rule{
-				Name:       tcopolicies.PtrString("mobile"),
-				RuleTypeId: tcopolicies.RULETYPEID_RULE_TYPE_ID_IS_NOT.Ptr(),
-			},
-			ArchiveRetention: &tcopolicies.ArchiveRetention{
-				Id: tcopolicies.PtrString("e1c980d0-c910-4c54-8326-67f3cf95645a"),
-			},
+		},
+		ApplicationRule: &tcopolicies.QuotaV1Rule{
+			Name:       tcopolicies.PtrString("prod-app"),
+			RuleTypeId: tcopolicies.RULETYPEID_RULE_TYPE_ID_IS.Ptr(),
+		},
+		SubsystemRule: &tcopolicies.QuotaV1Rule{
+			Name:       tcopolicies.PtrString("mobile"),
+			RuleTypeId: tcopolicies.RULETYPEID_RULE_TYPE_ID_IS_NOT.Ptr(),
+		},
+		ArchiveRetention: &tcopolicies.ArchiveRetention{
+			Id: tcopolicies.PtrString("e1c980d0-c910-4c54-8326-67f3cf95645a"),
 		},
 	}
 
 	createResp, httpResp, err := client.
 		PoliciesServiceCreatePolicy(ctx).
-		PoliciesServiceCreatePolicyRequest(createReq).
+		CreatePolicyRequest(createReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
-	policyID := createResp.GetPolicy().PolicyLogRules.Id
+	policyID := createResp.GetPolicy().Id
 
 	getResp, _, err := client.
 		PoliciesServiceGetPolicy(ctx, policyID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, policyName, getResp.GetPolicy().PolicyLogRules.Name)
+	require.Equal(t, policyName, getResp.GetPolicy().Name)
 
 	updatedName := "Updated Example tco_policy from SDK" + uuid.NewString()
-	updateReq := tcopolicies.PoliciesServiceUpdatePolicyRequest{
-		UpdatePolicyRequestLogRules: &tcopolicies.UpdatePolicyRequestLogRules{
-			Name:     tcopolicies.PtrString(updatedName),
-			Id:       policyID,
-			Priority: tcopolicies.QUOTAV1PRIORITY_PRIORITY_TYPE_LOW.Ptr(),
-			LogRules: tcopolicies.LogRules{
-				Severities: []tcopolicies.QuotaV1Severity{
-					tcopolicies.QUOTAV1SEVERITY_SEVERITY_ERROR,
-					tcopolicies.QUOTAV1SEVERITY_SEVERITY_CRITICAL,
-				},
+	updateReq := tcopolicies.UpdatePolicyRequest{
+		Name:     tcopolicies.PtrString(updatedName),
+		Id:       policyID,
+		Priority: tcopolicies.QUOTAV1PRIORITY_PRIORITY_TYPE_LOW.Ptr(),
+		LogRules: &tcopolicies.LogRules{
+			Severities: []tcopolicies.QuotaV1Severity{
+				tcopolicies.QUOTAV1SEVERITY_SEVERITY_ERROR,
+				tcopolicies.QUOTAV1SEVERITY_SEVERITY_CRITICAL,
 			},
-			ApplicationRule: &tcopolicies.QuotaV1Rule{
-				Name:       tcopolicies.PtrString("prod-app"),
-				RuleTypeId: tcopolicies.RULETYPEID_RULE_TYPE_ID_IS.Ptr(),
-			},
-			SubsystemRule: &tcopolicies.QuotaV1Rule{
-				Name:       tcopolicies.PtrString("mobile"),
-				RuleTypeId: tcopolicies.RULETYPEID_RULE_TYPE_ID_IS_NOT.Ptr(),
-			},
-			ArchiveRetention: &tcopolicies.ArchiveRetention{
-				Id: tcopolicies.PtrString("e1c980d0-c910-4c54-8326-67f3cf95645a"),
-			},
+		},
+		ApplicationRule: &tcopolicies.QuotaV1Rule{
+			Name:       tcopolicies.PtrString("prod-app"),
+			RuleTypeId: tcopolicies.RULETYPEID_RULE_TYPE_ID_IS.Ptr(),
+		},
+		SubsystemRule: &tcopolicies.QuotaV1Rule{
+			Name:       tcopolicies.PtrString("mobile"),
+			RuleTypeId: tcopolicies.RULETYPEID_RULE_TYPE_ID_IS_NOT.Ptr(),
+		},
+		ArchiveRetention: &tcopolicies.ArchiveRetention{
+			Id: tcopolicies.PtrString("e1c980d0-c910-4c54-8326-67f3cf95645a"),
 		},
 	}
 	updateResp, _, err := client.
 		PoliciesServiceUpdatePolicy(ctx).
-		PoliciesServiceUpdatePolicyRequest(updateReq).
+		UpdatePolicyRequest(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, updatedName, updateResp.GetPolicy().PolicyLogRules.Name)
+	require.Equal(t, updatedName, updateResp.GetPolicy().Name)
 
 	listResp, _, err := client.
 		PoliciesServiceGetCompanyPolicies(ctx).
@@ -108,7 +104,7 @@ func TestPolicies(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	found := false
 	for _, policy := range listResp.GetPolicies() {
-		if policy.PolicyLogRules != nil && policy.PolicyLogRules.Id == policyID {
+		if policy.Id == policyID {
 			found = true
 			break
 		}

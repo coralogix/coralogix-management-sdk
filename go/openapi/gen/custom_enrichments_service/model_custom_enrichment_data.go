@@ -13,126 +13,209 @@ package custom_enrichments_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// CustomEnrichmentData - struct for CustomEnrichmentData
+// checks if the CustomEnrichmentData type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CustomEnrichmentData{}
+
+// CustomEnrichmentData Custom enrichment data including definition and raw content.
 type CustomEnrichmentData struct {
-	CustomEnrichmentDataBinary *CustomEnrichmentDataBinary
-	CustomEnrichmentDataTextual *CustomEnrichmentDataTextual
+	// Binary content of the enrichment data file encoded as base64.
+	Binary *string `json:"binary,omitempty"`
+	Definition *CustomEnrichment `json:"definition,omitempty"`
+	// Textual content of the enrichment data file as a UTF-8 string.
+	Textual *string `json:"textual,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// CustomEnrichmentDataBinaryAsCustomEnrichmentData is a convenience function that returns CustomEnrichmentDataBinary wrapped in CustomEnrichmentData
-func CustomEnrichmentDataBinaryAsCustomEnrichmentData(v *CustomEnrichmentDataBinary) CustomEnrichmentData {
-	return CustomEnrichmentData{
-		CustomEnrichmentDataBinary: v,
+type _CustomEnrichmentData CustomEnrichmentData
+
+// NewCustomEnrichmentData instantiates a new CustomEnrichmentData object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewCustomEnrichmentData() *CustomEnrichmentData {
+	this := CustomEnrichmentData{}
+	return &this
+}
+
+// NewCustomEnrichmentDataWithDefaults instantiates a new CustomEnrichmentData object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewCustomEnrichmentDataWithDefaults() *CustomEnrichmentData {
+	this := CustomEnrichmentData{}
+	return &this
+}
+
+// GetBinary returns the Binary field value if set, zero value otherwise.
+func (o *CustomEnrichmentData) GetBinary() string {
+	if o == nil || IsNil(o.Binary) {
+		var ret string
+		return ret
 	}
+	return *o.Binary
 }
 
-// CustomEnrichmentDataTextualAsCustomEnrichmentData is a convenience function that returns CustomEnrichmentDataTextual wrapped in CustomEnrichmentData
-func CustomEnrichmentDataTextualAsCustomEnrichmentData(v *CustomEnrichmentDataTextual) CustomEnrichmentData {
-	return CustomEnrichmentData{
-		CustomEnrichmentDataTextual: v,
+// GetBinaryOk returns a tuple with the Binary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomEnrichmentData) GetBinaryOk() (*string, bool) {
+	if o == nil || IsNil(o.Binary) {
+		return nil, false
 	}
+	return o.Binary, true
 }
 
+// HasBinary returns a boolean if a field has been set.
+func (o *CustomEnrichmentData) HasBinary() bool {
+	if o != nil && !IsNil(o.Binary) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *CustomEnrichmentData) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into CustomEnrichmentDataBinary
-	err = json.Unmarshal(data, &dst.CustomEnrichmentDataBinary)
-	if err == nil {
-		jsonCustomEnrichmentDataBinary, _ := json.Marshal(dst.CustomEnrichmentDataBinary)
-		if string(jsonCustomEnrichmentDataBinary) == "{}" { // empty struct
-			dst.CustomEnrichmentDataBinary = nil
-		} else {
-			if err = validator.Validate(dst.CustomEnrichmentDataBinary); err != nil {
-				dst.CustomEnrichmentDataBinary = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetBinary gets a reference to the given string and assigns it to the Binary field.
+func (o *CustomEnrichmentData) SetBinary(v string) {
+	o.Binary = &v
+}
+
+// GetDefinition returns the Definition field value if set, zero value otherwise.
+func (o *CustomEnrichmentData) GetDefinition() CustomEnrichment {
+	if o == nil || IsNil(o.Definition) {
+		var ret CustomEnrichment
+		return ret
+	}
+	return *o.Definition
+}
+
+// GetDefinitionOk returns a tuple with the Definition field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomEnrichmentData) GetDefinitionOk() (*CustomEnrichment, bool) {
+	if o == nil || IsNil(o.Definition) {
+		return nil, false
+	}
+	return o.Definition, true
+}
+
+// HasDefinition returns a boolean if a field has been set.
+func (o *CustomEnrichmentData) HasDefinition() bool {
+	if o != nil && !IsNil(o.Definition) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefinition gets a reference to the given CustomEnrichment and assigns it to the Definition field.
+func (o *CustomEnrichmentData) SetDefinition(v CustomEnrichment) {
+	o.Definition = &v
+}
+
+// GetTextual returns the Textual field value if set, zero value otherwise.
+func (o *CustomEnrichmentData) GetTextual() string {
+	if o == nil || IsNil(o.Textual) {
+		var ret string
+		return ret
+	}
+	return *o.Textual
+}
+
+// GetTextualOk returns a tuple with the Textual field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomEnrichmentData) GetTextualOk() (*string, bool) {
+	if o == nil || IsNil(o.Textual) {
+		return nil, false
+	}
+	return o.Textual, true
+}
+
+// HasTextual returns a boolean if a field has been set.
+func (o *CustomEnrichmentData) HasTextual() bool {
+	if o != nil && !IsNil(o.Textual) {
+		return true
+	}
+
+	return false
+}
+
+// SetTextual gets a reference to the given string and assigns it to the Textual field.
+func (o *CustomEnrichmentData) SetTextual(v string) {
+	o.Textual = &v
+}
+
+func (o CustomEnrichmentData) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CustomEnrichmentData) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Binary) {
+		toSerialize["binary"] = o.Binary
+	}
+	if !IsNil(o.Definition) {
+		toSerialize["definition"] = o.Definition
+	}
+	if !IsNil(o.Textual) {
+		toSerialize["textual"] = o.Textual
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["textual"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["binary"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [textual, binary] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *CustomEnrichmentData) UnmarshalJSON(data []byte) (err error) {
+	varCustomEnrichmentData := _CustomEnrichmentData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCustomEnrichmentData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomEnrichmentData(varCustomEnrichmentData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["textual"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CustomEnrichmentDataBinary = nil
-	}
-
-	// try to unmarshal data into CustomEnrichmentDataTextual
-	err = json.Unmarshal(data, &dst.CustomEnrichmentDataTextual)
-	if err == nil {
-		jsonCustomEnrichmentDataTextual, _ := json.Marshal(dst.CustomEnrichmentDataTextual)
-		if string(jsonCustomEnrichmentDataTextual) == "{}" { // empty struct
-			dst.CustomEnrichmentDataTextual = nil
-		} else {
-			if err = validator.Validate(dst.CustomEnrichmentDataTextual); err != nil {
-				dst.CustomEnrichmentDataTextual = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["binary"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CustomEnrichmentDataTextual = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [textual, binary] may be set"}
+		}
+
+		delete(additionalProperties, "binary")
+		delete(additionalProperties, "definition")
+		delete(additionalProperties, "textual")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.CustomEnrichmentDataBinary = nil
-		dst.CustomEnrichmentDataTextual = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(CustomEnrichmentData)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src CustomEnrichmentData) MarshalJSON() ([]byte, error) {
-	if src.CustomEnrichmentDataBinary != nil {
-		return json.Marshal(&src.CustomEnrichmentDataBinary)
-	}
-
-	if src.CustomEnrichmentDataTextual != nil {
-		return json.Marshal(&src.CustomEnrichmentDataTextual)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *CustomEnrichmentData) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.CustomEnrichmentDataBinary != nil {
-		return obj.CustomEnrichmentDataBinary
-	}
-
-	if obj.CustomEnrichmentDataTextual != nil {
-		return obj.CustomEnrichmentDataTextual
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj CustomEnrichmentData) GetActualInstanceValue() (interface{}) {
-	if obj.CustomEnrichmentDataBinary != nil {
-		return *obj.CustomEnrichmentDataBinary
-	}
-
-	if obj.CustomEnrichmentDataTextual != nil {
-		return *obj.CustomEnrichmentDataTextual
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableCustomEnrichmentData struct {

@@ -20,6 +20,8 @@ SPECS_DIR="specs"
 OUT_BASE="go/openapi/gen"
 TEMPLATE_DIR="go/openapi/templates"
 OPENAPI_TOOLS_CONFIG="openapitools.json"
+CODEGEN_SPECS_DIR="$(mktemp -d ".openapi-codegen-specs.XXXXXX")"
+trap 'rm -rf "$CODEGEN_SPECS_DIR"' EXIT
 
 source "$SCRIPT_DIR/openapi_generator_common.sh"
 
@@ -31,12 +33,15 @@ for spec in "$SPECS_DIR"/*; do
   filename=$(basename -- "$spec")
   name="${filename%.*}"
   outdir="$OUT_BASE/$name"
+  codegen_spec="$CODEGEN_SPECS_DIR/$filename"
+
+  python3 "$SCRIPT_DIR/sanitize_openapi_for_go_codegen.py" "$spec" "$codegen_spec"
 
   echo ">>> Processing file: '$filename' (name='$name')"
   echo ">>> Outdir: '$outdir'"
 
   if ! run_openapi_generator generate \
-    -i "$spec" \
+    -i "$codegen_spec" \
     -g go \
     -o "$outdir" \
     --template-dir="$TEMPLATE_DIR" \
@@ -47,4 +52,9 @@ for spec in "$SPECS_DIR"/*; do
   fi
 
   normalize_regex_validator_tags "$outdir"
+
+  # The sanitized spec is only a workaround for Go code generation. Keep the
+  # package-local OpenAPI artifact identical to the canonical split spec so
+  # downstream consumers still see the full validation constraints.
+  cp "$spec" "$outdir/api/openapi.yaml"
 done

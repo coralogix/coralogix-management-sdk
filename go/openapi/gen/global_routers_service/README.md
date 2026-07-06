@@ -95,8 +95,6 @@ Class | Method | HTTP request | Description
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FallbackTarget](docs/FallbackTarget.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetGlobalRouterResponse](docs/GetGlobalRouterResponse.md)
  - [GlobalRouter](docs/GlobalRouter.md)
@@ -113,8 +111,6 @@ Class | Method | HTTP request | Description
  - [ValidateEntityLabelMatcherResponse](docs/ValidateEntityLabelMatcherResponse.md)
  - [ValidateEntityLabelMatcherResult](docs/ValidateEntityLabelMatcherResult.md)
  - [ValidateEntityLabelMatcherResultFailure](docs/ValidateEntityLabelMatcherResultFailure.md)
- - [ValidateEntityLabelMatcherResultFailureVariant](docs/ValidateEntityLabelMatcherResultFailureVariant.md)
- - [ValidateEntityLabelMatcherResultSuccessVariant](docs/ValidateEntityLabelMatcherResultSuccessVariant.md)
 
 
 ## Documentation For Authorization

@@ -1,2243 +1,2128 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /ai/custom-evaluations/v3:
-    get:
-      description: Lists all custom evaluations defined in the catalog.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_GetCustomEvaluations
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                items:
-                - applicationIds:
-                  - 175677d1-fc90-4a89-9e35-0590b188ebb2
-                  config:
-                    examples:
-                    - conversation: "User: is our product better than CompetitorY?"
-                      score: "1"
-                    instructions: Flag the response if it mentions a competitor.
-                    policyType: quality
-                    safe: No competitor mentioned
-                    shouldIncludeSystemPrompt: false
-                    violates: Mentions a competitor
-                  description: Flags competitor references in responses.
-                  id: 3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d
-                  name: No competitor mentions
-              schema:
-                $ref: "#/components/schemas/GetCustomEvaluationsResponse"
-          description: ""
-      summary: List custom evaluations
-      tags:
-      - AI Evaluations Service
-    post:
-      description: Creates a new custom evaluation in the catalog.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_CreateCustomEvaluation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AiEvaluationsService_CreateCustomEvaluation_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                item:
-                  applicationIds:
-                  - 175677d1-fc90-4a89-9e35-0590b188ebb2
-                  config:
-                    examples:
-                    - conversation: "User: is our product better than CompetitorY?"
-                      score: "1"
-                    instructions: Flag the response if it mentions a competitor.
-                    policyType: quality
-                    safe: No competitor mentioned
-                    shouldIncludeSystemPrompt: false
-                    violates: Mentions a competitor
-                  description: Flags competitor references in responses.
-                  id: 3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d
-                  name: No competitor mentions
-              schema:
-                $ref: "#/components/schemas/CreateCustomEvaluationResponse"
-          description: ""
-        "201":
-          content:
-            application/json:
-              example:
-                item:
-                  applicationIds:
-                  - 175677d1-fc90-4a89-9e35-0590b188ebb2
-                  config:
-                    examples:
-                    - conversation: "User: is our product better than CompetitorY?"
-                      score: "1"
-                    instructions: Flag the response if it mentions a competitor.
-                    policyType: quality
-                    safe: No competitor mentioned
-                    shouldIncludeSystemPrompt: false
-                    violates: Mentions a competitor
-                  description: Flags competitor references in responses.
-                  id: 3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d
-                  name: No competitor mentions
-              schema:
-                $ref: "#/components/schemas/CreateCustomEvaluationResponse"
-          description: Custom evaluation created
-      summary: Create custom evaluation
-      tags:
-      - AI Evaluations Service
-  /ai/custom-evaluations/v3/by-application/{application_id}:
-    get:
-      description: Lists custom evaluations linked to a specific AI application.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_ListCustomEvaluationsForApplication
-      parameters:
-      - description: Unique identifier of the AI application.
-        explode: false
-        in: path
-        name: application_id
-        required: true
-        schema:
-          description: Unique identifier of the AI application.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                items:
-                - applicationIds:
-                  - 175677d1-fc90-4a89-9e35-0590b188ebb2
-                  config:
-                    examples:
-                    - conversation: "User: is our product better than CompetitorY?"
-                      score: "1"
-                    instructions: Flag the response if it mentions a competitor.
-                    policyType: quality
-                    safe: No competitor mentioned
-                    shouldIncludeSystemPrompt: false
-                    violates: Mentions a competitor
-                  description: Flags competitor references in responses.
-                  id: 3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d
-                  name: No competitor mentions
-              schema:
-                $ref: "#/components/schemas/ListCustomEvaluationsForApplicationResponse"
-          description: ""
-      summary: List custom evaluations for application
-      tags:
-      - AI Evaluations Service
-  /ai/custom-evaluations/v3/{id}:
-    delete:
-      description: Deletes a custom evaluation from the catalog.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_DeleteCustomEvaluation
-      parameters:
-      - description: Unique identifier of the custom evaluation to delete.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier of the custom evaluation to delete.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                id: 3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d
-              schema:
-                $ref: "#/components/schemas/DeleteCustomEvaluationResponse"
-          description: ""
-      summary: Delete custom evaluation
-      tags:
-      - AI Evaluations Service
-    patch:
-      description: Updates one or more fields of an existing custom evaluation.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_UpdateCustomEvaluation
-      parameters:
-      - description: Unique identifier of the custom evaluation to update.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier of the custom evaluation to update.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AiEvaluationsService_UpdateCustomEvaluation_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                item:
-                  applicationIds:
-                  - 175677d1-fc90-4a89-9e35-0590b188ebb2
-                  config:
-                    examples:
-                    - conversation: "User: is our product better than CompetitorY?"
-                      score: "1"
-                    instructions: Flag the response if it mentions a competitor.
-                    policyType: quality
-                    safe: No competitor mentioned
-                    shouldIncludeSystemPrompt: false
-                    violates: Mentions a competitor
-                  description: Flags competitor references in responses.
-                  id: 3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d
-                  name: No competitor mentions
-              schema:
-                $ref: "#/components/schemas/UpdateCustomEvaluationResponse"
-          description: ""
-      summary: Update custom evaluation
-      tags:
-      - AI Evaluations Service
-  /ai/custom-evaluations/v3/{id}/applications/{application_id}:
-    delete:
-      description: Removes the association between a custom evaluation and an AI application.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_UnlinkCustomEvaluationFromApp
-      parameters:
-      - description: Unique identifier of the custom evaluation.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier of the custom evaluation.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        style: simple
-      - description: Unique identifier of the AI application to unlink from.
-        explode: false
-        in: path
-        name: application_id
-        required: true
-        schema:
-          description: Unique identifier of the AI application to unlink from.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                applicationId: 175677d1-fc90-4a89-9e35-0590b188ebb2
-                id: 3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d
-              schema:
-                $ref: "#/components/schemas/UnlinkCustomEvaluationFromAppResponse"
-          description: ""
-      summary: Unlink custom evaluation from application
-      tags:
-      - AI Evaluations Service
-    post:
-      description: Associates a custom evaluation with an AI application.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_LinkCustomEvaluation
-      parameters:
-      - description: Unique identifier of the custom evaluation.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier of the custom evaluation.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        style: simple
-      - description: Unique identifier of the AI application to link to.
-        explode: false
-        in: path
-        name: application_id
-        required: true
-        schema:
-          description: Unique identifier of the AI application to link to.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                applicationId: 175677d1-fc90-4a89-9e35-0590b188ebb2
-                id: 3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d
-              schema:
-                $ref: "#/components/schemas/LinkCustomEvaluationResponse"
-          description: ""
-      summary: Link custom evaluation to application
-      tags:
-      - AI Evaluations Service
-  /ai/evaluation-counts/v3/per-type:
-    get:
-      description: Returns the count of AI applications grouped by evaluation type.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_CountAiAppsPerEvalType
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                counts:
-                  PII: 3
-                  PROMPT_INJECTION: 1
-                  TOXICITY: 0
-              schema:
-                $ref: "#/components/schemas/CountAiAppsPerEvalTypeResponse"
-          description: ""
-      summary: Count applications per evaluation type
-      tags:
-      - AI Evaluations Service
-  /ai/evaluations/v3:
-    get:
-      description: "Lists AI evaluations, optionally filtered by application, subsystem,\
-        \ or evaluation type."
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_ListAiEvaluations
-      parameters:
-      - description: Filter by application name.
-        explode: true
-        in: query
-        name: application
-        required: false
-        schema:
-          description: Filter by application name.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        style: form
-      - description: Filter by subsystem.
-        explode: true
-        in: query
-        name: subsystem
-        required: false
-        schema:
-          description: Filter by subsystem.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        style: form
-      - description: Filter by evaluation type.
-        explode: true
-        in: query
-        name: evaluation_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/EvaluationType"
-        style: form
-      - description: Number of items per page. Default 200 if omitted.
-        explode: true
-        in: query
-        name: page_size
-        required: false
-        schema:
-          description: Number of items per page. Default 200 if omitted.
-          format: int32
-          maximum: 1000
-          minimum: 1
-          type: integer
-        style: form
-      - description: Zero-based page offset. Default 0 if omitted.
-        explode: true
-        in: query
-        name: page_offset
-        required: false
-        schema:
-          description: Zero-based page offset. Default 0 if omitted.
-          format: int64
-          maximum: 10000
-          minimum: 0
-          type: integer
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                aiEvaluations:
-                - application: checkout
-                  companyId: "12345"
-                  config:
-                    competition: {}
-                  createdAt: 2026-06-02T15:30:00.000Z
-                  createdBy: 7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d
-                  id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
-                  isEnabled: true
-                  subsystem: api
-                  target: RESPONSE
-                  threshold: 0.7
-                  updatedAt: 2026-06-02T15:35:00.000Z
-              schema:
-                $ref: "#/components/schemas/ListAiEvaluationsResponse"
-          description: ""
-      summary: List AI evaluations
-      tags:
-      - AI Evaluations Service
-    post:
-      description: Creates a new AI evaluation for an application.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_CreateAiEvaluation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AiEvaluationsService_CreateAiEvaluation_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                aiEvaluation:
-                  application: checkout
-                  companyId: "12345"
-                  config:
-                    competition: {}
-                  createdAt: 2026-06-02T15:30:00.000Z
-                  createdBy: 7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d
-                  id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
-                  isEnabled: true
-                  subsystem: api
-                  target: RESPONSE
-                  threshold: 0.7
-                  updatedAt: 2026-06-02T15:35:00.000Z
-              schema:
-                $ref: "#/components/schemas/CreateAiEvaluationResponse"
-          description: ""
-        "201":
-          content:
-            application/json:
-              example:
-                aiEvaluation:
-                  application: checkout
-                  companyId: "12345"
-                  config:
-                    competition: {}
-                  createdAt: 2026-06-02T15:30:00.000Z
-                  createdBy: 7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d
-                  id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
-                  isEnabled: true
-                  subsystem: api
-                  target: RESPONSE
-                  threshold: 0.7
-                  updatedAt: 2026-06-02T15:35:00.000Z
-              schema:
-                $ref: "#/components/schemas/CreateAiEvaluationResponse"
-          description: AI evaluation created
-      summary: Create AI evaluation
-      tags:
-      - AI Evaluations Service
-  /ai/evaluations/v3/{id}:
-    delete:
-      description: Deletes an AI evaluation by its unique identifier.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_DeleteAiEvaluation
-      parameters:
-      - description: Unique identifier of the AI evaluation to delete.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier of the AI evaluation to delete.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
-              schema:
-                $ref: "#/components/schemas/DeleteAiEvaluationResponse"
-          description: ""
-      summary: Delete AI evaluation
-      tags:
-      - AI Evaluations Service
-    get:
-      description: Gets an AI evaluation by its unique identifier.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_GetAiEvaluation
-      parameters:
-      - description: Unique identifier of the AI evaluation.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier of the AI evaluation.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                aiEvaluation:
-                  application: checkout
-                  companyId: "12345"
-                  config:
-                    competition: {}
-                  createdAt: 2026-06-02T15:30:00.000Z
-                  createdBy: 7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d
-                  id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
-                  isEnabled: true
-                  subsystem: api
-                  target: RESPONSE
-                  threshold: 0.7
-                  updatedAt: 2026-06-02T15:35:00.000Z
-              schema:
-                $ref: "#/components/schemas/GetAiEvaluationResponse"
-          description: ""
-      summary: Get AI evaluation
-      tags:
-      - AI Evaluations Service
-    patch:
-      description: Updates one or more fields of an existing AI evaluation.
-      externalDocs:
-        url: ""
-      operationId: AiEvaluationsService_UpdateAiEvaluation
-      parameters:
-      - description: Unique identifier of the AI evaluation to update.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier of the AI evaluation to update.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AiEvaluationsService_UpdateAiEvaluation_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                aiEvaluation:
-                  application: checkout
-                  companyId: "12345"
-                  config:
-                    competition: {}
-                  createdAt: 2026-06-02T15:30:00.000Z
-                  createdBy: 7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d
-                  id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
-                  isEnabled: true
-                  subsystem: api
-                  target: RESPONSE
-                  threshold: 0.7
-                  updatedAt: 2026-06-02T15:35:00.000Z
-              schema:
-                $ref: "#/components/schemas/UpdateAiEvaluationResponse"
-          description: ""
-      summary: Update AI evaluation
-      tags:
-      - AI Evaluations Service
-components:
-  schemas:
-    AiEvaluation:
-      description: A configured AI evaluation that runs against an AI application's
-        spans.
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        companyId: companyId
-        application: application
-        createdBy: createdBy
-        isEnabled: true
-        subsystem: subsystem
-        threshold: 0.08008281904610115
-        id: id
-        config:
-          allowedTopics:
-            topics:
-            - topics
-            - topics
-            - topics
-            - topics
-            - topics
-        target: PROMPT
-        updatedAt: 2000-01-23T04:56:07.000+00:00
-      externalDocs:
-        url: ""
-      properties:
-        application:
-          description: Name of the AI application this evaluation belongs to.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        companyId:
-          description: Company that owns this evaluation.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        config:
-          $ref: "#/components/schemas/EvaluationConfig"
-        createdAt:
-          description: RFC3339 timestamp when the evaluation was created.
-          format: date-time
-          maxLength: 35
-          minLength: 20
-          type: string
-        createdBy:
-          description: UUID of the user who created this evaluation. Set automatically
-            by the server from the authenticated identity; not provided by the client.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        id:
-          description: Unique identifier of the AI evaluation.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        isEnabled:
-          description: Whether the evaluation is currently active.
-          type: boolean
-        subsystem:
-          description: Subsystem within the application.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        target:
-          $ref: "#/components/schemas/EvaluationTarget"
-        threshold:
-          description: Score threshold. Must be between 0.0 and 1.0 inclusive.
-          format: double
-          maximum: 1
-          minimum: 0
-          type: number
-        updatedAt:
-          description: RFC3339 timestamp when the evaluation was last updated.
-          format: date-time
-          maxLength: 35
-          minLength: 20
-          type: string
-      type: object
-    AllowedTopicsConfig:
-      description: Configuration for the AllowedTopics evaluation.
-      example:
-        topics:
-        - topics
-        - topics
-        - topics
-        - topics
-        - topics
-      externalDocs:
-        url: ""
-      properties:
-        topics:
-          description: Topics considered allowed.
-          items:
-            description: Topics considered allowed.
-            maxLength: 256
-            minLength: 1
-            pattern: "^[\\s\\S]+$"
-            type: string
-          maxItems: 1024
-          minItems: 1
-          type: array
-      type: object
-    CompetitionConfig:
-      description: Configuration for the Competition evaluation.
-      externalDocs:
-        url: ""
-      properties:
-        competitors:
-          description: Competitor names to watch for.
-          items:
-            description: Competitor names to watch for.
-            maxLength: 256
-            minLength: 1
-            pattern: "^[\\s\\S]+$"
-            type: string
-          maxItems: 1024
-          minItems: 1
-          type: array
-      type: object
-    CountAiAppsPerEvalTypeResponse:
-      description: Response containing counts of AI applications per evaluation type.
-      example:
-        counts:
-          key: 0
-      externalDocs:
-        url: ""
-      properties:
-        counts:
-          additionalProperties:
-            format: int64
-            minimum: 0
-            type: integer
-          description: Map of evaluation-type name to count of AI applications using
-            it.
-          type: object
-      type: object
-    CreateAiEvaluationResponse:
-      description: Response returned after creating an AI evaluation.
-      example:
-        aiEvaluation:
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          companyId: companyId
-          application: application
-          createdBy: createdBy
-          isEnabled: true
-          subsystem: subsystem
-          threshold: 0.08008281904610115
-          id: id
-          config:
-            allowedTopics:
-              topics:
-              - topics
-              - topics
-              - topics
-              - topics
-              - topics
-          target: PROMPT
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-      externalDocs:
-        url: ""
-      properties:
-        aiEvaluation:
-          $ref: "#/components/schemas/AiEvaluation"
-      type: object
-    CreateCustomEvaluationResponse:
-      description: Response returned after creating a custom evaluation.
-      example:
-        item:
-          name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-      externalDocs:
-        url: ""
-      properties:
-        item:
-          $ref: "#/components/schemas/CustomEvaluation"
-      type: object
-    CustomEvaluation:
-      description: A custom evaluation defined in the catalog.
-      example:
-        name: name
-        description: description
-        id: id
-        config:
-          instructions: instructions
-          violates: violates
-          examples:
-          - score: score
-            conversation: conversation
-          - score: score
-            conversation: conversation
-          - score: score
-            conversation: conversation
-          - score: score
-            conversation: conversation
-          - score: score
-            conversation: conversation
-          shouldIncludeSystemPrompt: true
-          policyType: policyType
-          safe: safe
-        applicationIds:
-        - applicationIds
-        - applicationIds
-        - applicationIds
-        - applicationIds
-        - applicationIds
-      externalDocs:
-        url: ""
-      properties:
-        applicationIds:
-          description: IDs of AI applications this custom evaluation is linked to.
-          items:
-            description: IDs of AI applications this custom evaluation is linked to.
-            maxLength: 36
-            minLength: 36
-            pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            type: string
-          maxItems: 1024
-          minItems: 0
-          type: array
-        config:
-          $ref: "#/components/schemas/CustomEvaluationConfig"
-        description:
-          description: Human-readable description.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        id:
-          description: Unique identifier of the custom evaluation.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        name:
-          description: Display name of the custom evaluation.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-      type: object
-    CustomEvaluationConfig:
-      description: Custom evaluation policy details (instructions + examples for the
-        LLM evaluator).
-      example:
-        instructions: instructions
-        violates: violates
-        examples:
-        - score: score
-          conversation: conversation
-        - score: score
-          conversation: conversation
-        - score: score
-          conversation: conversation
-        - score: score
-          conversation: conversation
-        - score: score
-          conversation: conversation
-        shouldIncludeSystemPrompt: true
-        policyType: policyType
-        safe: safe
-      externalDocs:
-        url: ""
-      properties:
-        examples:
-          description: Example conversations and expected scores.
-          items:
-            $ref: "#/components/schemas/CustomEvaluationExample"
-          maxItems: 100
-          minItems: 0
-          type: array
-        instructions:
-          description: Instructions sent to the LLM evaluator.
-          maxLength: 1048576
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        policyType:
-          description: Policy type identifier.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        safe:
-          description: Description of what counts as safe.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        shouldIncludeSystemPrompt:
-          description: Whether to include the system prompt in the LLM input.
-          type: boolean
-        violates:
-          description: Description of what counts as violating the policy.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    CustomEvaluationExample:
-      description: A single labeled example for a custom evaluation.
-      example:
-        score: score
-        conversation: conversation
-      externalDocs:
-        url: ""
-      properties:
-        conversation:
-          description: Example conversation text.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        score:
-          description: Expected score for this example.
-          maxLength: 4
-          minLength: 1
-          pattern: "^[0-9]+$"
-          type: string
-      type: object
-    DeleteAiEvaluationResponse:
-      description: Response returned after deleting an AI evaluation.
-      example:
-        id: id
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          description: Unique identifier of the deleted AI evaluation.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-      type: object
-    DeleteCustomEvaluationResponse:
-      description: Response returned after deleting a custom evaluation.
-      example:
-        id: id
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          description: Unique identifier of the deleted custom evaluation.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-      type: object
-    EvaluationConfig:
-      oneOf:
-      - $ref: "#/components/schemas/EvaluationConfigAllowedTopics"
-      - $ref: "#/components/schemas/EvaluationConfigCompetition"
-      - $ref: "#/components/schemas/EvaluationConfigCustomEvaluation"
-      - $ref: "#/components/schemas/EvaluationConfigHallucinationCompleteness"
-      - $ref: "#/components/schemas/EvaluationConfigHallucinationContextAdherence"
-      - $ref: "#/components/schemas/EvaluationConfigHallucinationContextRelevance"
-      - $ref: "#/components/schemas/EvaluationConfigHallucinationCorrectness"
-      - $ref: "#/components/schemas/EvaluationConfigHallucinationTaskAdherence"
-      - $ref: "#/components/schemas/EvaluationConfigLanguageMismatch"
-      - $ref: "#/components/schemas/EvaluationConfigPii"
-      - $ref: "#/components/schemas/EvaluationConfigPromptInjection"
-      - $ref: "#/components/schemas/EvaluationConfigRestrictedTopics"
-      - $ref: "#/components/schemas/EvaluationConfigSexism"
-      - $ref: "#/components/schemas/EvaluationConfigSqlAllowedTables"
-      - $ref: "#/components/schemas/EvaluationConfigSqlHallucination"
-      - $ref: "#/components/schemas/EvaluationConfigSqlLoad"
-      - $ref: "#/components/schemas/EvaluationConfigSqlReadOnly"
-      - $ref: "#/components/schemas/EvaluationConfigSqlRestrictedTables"
-      - $ref: "#/components/schemas/EvaluationConfigToxicity"
-    EvaluationConfigAllowedTopics:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      example:
-        allowedTopics:
-          topics:
-          - topics
-          - topics
-          - topics
-          - topics
-          - topics
-      externalDocs:
-        url: ""
-      properties:
-        allowedTopics:
-          $ref: "#/components/schemas/AllowedTopicsConfig"
-      required:
-      - allowedTopics
-      type: object
-    EvaluationConfigCompetition:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        competition:
-          $ref: "#/components/schemas/CompetitionConfig"
-      required:
-      - competition
-      type: object
-    EvaluationConfigCustomEvaluation:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        customEvaluation:
-          $ref: "#/components/schemas/CustomEvaluationConfig"
-      required:
-      - customEvaluation
-      type: object
-    EvaluationConfigHallucinationCompleteness:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        hallucinationCompleteness:
-          additionalProperties: false
-          description: Configuration for the HallucinationCompleteness evaluation
-            (no fields).
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - hallucinationCompleteness
-      type: object
-    EvaluationConfigHallucinationContextAdherence:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        hallucinationContextAdherence:
-          additionalProperties: false
-          description: Configuration for the HallucinationContextAdherence evaluation
-            (no fields).
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - hallucinationContextAdherence
-      type: object
-    EvaluationConfigHallucinationContextRelevance:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        hallucinationContextRelevance:
-          additionalProperties: false
-          description: Configuration for the HallucinationContextRelevance evaluation
-            (no fields).
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - hallucinationContextRelevance
-      type: object
-    EvaluationConfigHallucinationCorrectness:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        hallucinationCorrectness:
-          additionalProperties: false
-          description: Configuration for the HallucinationCorrectness evaluation (no
-            fields).
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - hallucinationCorrectness
-      type: object
-    EvaluationConfigHallucinationTaskAdherence:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        hallucinationTaskAdherence:
-          additionalProperties: false
-          description: Configuration for the HallucinationTaskAdherence evaluation
-            (no fields).
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - hallucinationTaskAdherence
-      type: object
-    EvaluationConfigLanguageMismatch:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        languageMismatch:
-          additionalProperties: false
-          description: Configuration for the LanguageMismatch evaluation (no fields).
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - languageMismatch
-      type: object
-    EvaluationConfigPii:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        pii:
-          $ref: "#/components/schemas/PiiConfig"
-      required:
-      - pii
-      type: object
-    EvaluationConfigPromptInjection:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        promptInjection:
-          $ref: "#/components/schemas/PromptInjectionConfig"
-      required:
-      - promptInjection
-      type: object
-    EvaluationConfigRestrictedTopics:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        restrictedTopics:
-          $ref: "#/components/schemas/RestrictedTopicsConfig"
-      required:
-      - restrictedTopics
-      type: object
-    EvaluationConfigSexism:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        sexism:
-          additionalProperties: false
-          description: Configuration for the Sexism evaluation (no fields).
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - sexism
-      type: object
-    EvaluationConfigSqlAllowedTables:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        sqlAllowedTables:
-          $ref: "#/components/schemas/SqlAllowedTablesConfig"
-      required:
-      - sqlAllowedTables
-      type: object
-    EvaluationConfigSqlHallucination:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        sqlHallucination:
-          additionalProperties: false
-          description: Configuration for the SqlHallucination evaluation (no fields).
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - sqlHallucination
-      type: object
-    EvaluationConfigSqlLoad:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        sqlLoad:
-          $ref: "#/components/schemas/SqlLoadConfig"
-      required:
-      - sqlLoad
-      type: object
-    EvaluationConfigSqlReadOnly:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        sqlReadOnly:
-          additionalProperties: false
-          description: Configuration for the SqlReadOnly evaluation (no fields).
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - sqlReadOnly
-      type: object
-    EvaluationConfigSqlRestrictedTables:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        sqlRestrictedTables:
-          $ref: "#/components/schemas/SqlRestrictedTablesConfig"
-      required:
-      - sqlRestrictedTables
-      type: object
-    EvaluationConfigToxicity:
-      description: Type-specific configuration for an evaluation. Exactly one variant
-        is set.
-      externalDocs:
-        url: ""
-      properties:
-        toxicity:
-          additionalProperties: false
-          description: Configuration for the Toxicity evaluation (no fields).
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - toxicity
-      type: object
-    EvaluationTarget:
-      description: "Target span content the evaluation runs against: PROMPT, RESPONSE,\
-        \ or CONVERSATION."
-      enum:
-      - PROMPT
-      - RESPONSE
-      - CONVERSATION
-      type: string
-    EvaluationType:
-      enum:
-      - ALLOWED_TOPICS
-      - COMPETITION
-      - HALLUCINATION_COMPLETENESS
-      - HALLUCINATION_CONTEXT_ADHERENCE
-      - HALLUCINATION_CONTEXT_RELEVANCE
-      - HALLUCINATION_CORRECTNESS
-      - PII
-      - PROMPT_INJECTION
-      - RESTRICTED_TOPICS
-      - SEXISM
-      - SQL_ALLOWED_TABLES
-      - SQL_HALLUCINATION
-      - SQL_READ_ONLY
-      - SQL_RESTRICTED_TABLES
-      - TOXICITY
-      - HALLUCINATION_TASK_ADHERENCE
-      - SQL_LOAD
-      - LANGUAGE_MISMATCH
-      - CUSTOM_EVALUATION
-      type: string
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    GetAiEvaluationResponse:
-      description: Response containing the requested AI evaluation.
-      example:
-        aiEvaluation:
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          companyId: companyId
-          application: application
-          createdBy: createdBy
-          isEnabled: true
-          subsystem: subsystem
-          threshold: 0.08008281904610115
-          id: id
-          config:
-            allowedTopics:
-              topics:
-              - topics
-              - topics
-              - topics
-              - topics
-              - topics
-          target: PROMPT
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-      externalDocs:
-        url: ""
-      properties:
-        aiEvaluation:
-          $ref: "#/components/schemas/AiEvaluation"
-      type: object
-    GetCustomEvaluationsResponse:
-      description: Response containing the custom evaluations in the catalog.
-      example:
-        items:
-        - name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-        - name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-        - name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-        - name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-        - name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-      externalDocs:
-        url: ""
-      properties:
-        items:
-          description: The custom evaluations in the catalog.
-          items:
-            $ref: "#/components/schemas/CustomEvaluation"
-          maxItems: 10000
-          minItems: 0
-          type: array
-      type: object
-    HallucinationCompletenessConfig:
-      additionalProperties: false
-      description: Configuration for the HallucinationCompleteness evaluation (no
-        fields).
-      externalDocs:
-        url: ""
-      type: object
-    HallucinationContextAdherenceConfig:
-      additionalProperties: false
-      description: Configuration for the HallucinationContextAdherence evaluation
-        (no fields).
-      externalDocs:
-        url: ""
-      type: object
-    HallucinationContextRelevanceConfig:
-      additionalProperties: false
-      description: Configuration for the HallucinationContextRelevance evaluation
-        (no fields).
-      externalDocs:
-        url: ""
-      type: object
-    HallucinationCorrectnessConfig:
-      additionalProperties: false
-      description: Configuration for the HallucinationCorrectness evaluation (no fields).
-      externalDocs:
-        url: ""
-      type: object
-    HallucinationTaskAdherenceConfig:
-      additionalProperties: false
-      description: Configuration for the HallucinationTaskAdherence evaluation (no
-        fields).
-      externalDocs:
-        url: ""
-      type: object
-    LanguageMismatchConfig:
-      additionalProperties: false
-      description: Configuration for the LanguageMismatch evaluation (no fields).
-      externalDocs:
-        url: ""
-      type: object
-    LinkCustomEvaluationResponse:
-      description: Response returned after linking.
-      example:
-        id: id
-        applicationId: applicationId
-      externalDocs:
-        url: ""
-      properties:
-        applicationId:
-          description: Unique identifier of the AI application that was linked.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        id:
-          description: Unique identifier of the custom evaluation.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-      type: object
-    ListAiEvaluationsResponse:
-      description: Response containing a page of AI evaluations.
-      example:
-        aiEvaluations:
-        - createdAt: 2000-01-23T04:56:07.000+00:00
-          companyId: companyId
-          application: application
-          createdBy: createdBy
-          isEnabled: true
-          subsystem: subsystem
-          threshold: 0.08008281904610115
-          id: id
-          config:
-            allowedTopics:
-              topics:
-              - topics
-              - topics
-              - topics
-              - topics
-              - topics
-          target: PROMPT
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-        - createdAt: 2000-01-23T04:56:07.000+00:00
-          companyId: companyId
-          application: application
-          createdBy: createdBy
-          isEnabled: true
-          subsystem: subsystem
-          threshold: 0.08008281904610115
-          id: id
-          config:
-            allowedTopics:
-              topics:
-              - topics
-              - topics
-              - topics
-              - topics
-              - topics
-          target: PROMPT
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-        - createdAt: 2000-01-23T04:56:07.000+00:00
-          companyId: companyId
-          application: application
-          createdBy: createdBy
-          isEnabled: true
-          subsystem: subsystem
-          threshold: 0.08008281904610115
-          id: id
-          config:
-            allowedTopics:
-              topics:
-              - topics
-              - topics
-              - topics
-              - topics
-              - topics
-          target: PROMPT
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-        - createdAt: 2000-01-23T04:56:07.000+00:00
-          companyId: companyId
-          application: application
-          createdBy: createdBy
-          isEnabled: true
-          subsystem: subsystem
-          threshold: 0.08008281904610115
-          id: id
-          config:
-            allowedTopics:
-              topics:
-              - topics
-              - topics
-              - topics
-              - topics
-              - topics
-          target: PROMPT
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-        - createdAt: 2000-01-23T04:56:07.000+00:00
-          companyId: companyId
-          application: application
-          createdBy: createdBy
-          isEnabled: true
-          subsystem: subsystem
-          threshold: 0.08008281904610115
-          id: id
-          config:
-            allowedTopics:
-              topics:
-              - topics
-              - topics
-              - topics
-              - topics
-              - topics
-          target: PROMPT
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-      externalDocs:
-        url: ""
-      properties:
-        aiEvaluations:
-          description: The list of AI evaluations on this page.
-          items:
-            $ref: "#/components/schemas/AiEvaluation"
-          maxItems: 1000
-          minItems: 0
-          type: array
-      type: object
-    ListCustomEvaluationsForApplicationResponse:
-      description: Response containing custom evaluations linked to the application.
-      example:
-        items:
-        - name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-        - name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-        - name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-        - name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-        - name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-      externalDocs:
-        url: ""
-      properties:
-        items:
-          description: Custom evaluations linked to the application.
-          items:
-            $ref: "#/components/schemas/CustomEvaluation"
-          maxItems: 1024
-          minItems: 0
-          type: array
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    PiiCategory:
-      enum:
-      - PHONE_NUMBER
-      - EMAIL_ADDRESS
-      - CREDIT_CARD
-      - IBAN_CODE
-      - US_SSN
-      type: string
-    PiiConfig:
-      description: Configuration for the PII evaluation.
-      externalDocs:
-        url: ""
-      properties:
-        categories:
-          description: PII categories to detect.
-          items:
-            $ref: "#/components/schemas/PiiCategory"
-          maxItems: 1024
-          minItems: 1
-          type: array
-      type: object
-    PromptInjectionConfig:
-      description: Configuration for the PromptInjection evaluation.
-      externalDocs:
-        url: ""
-      properties:
-        additionalContext:
-          description: Additional context passed to the LLM evaluator.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    RestrictedTopicsConfig:
-      description: Configuration for the RestrictedTopics evaluation.
-      externalDocs:
-        url: ""
-      properties:
-        topics:
-          description: Topics that should not appear.
-          items:
-            description: Topics that should not appear.
-            maxLength: 256
-            minLength: 1
-            pattern: "^[\\s\\S]+$"
-            type: string
-          maxItems: 1024
-          minItems: 1
-          type: array
-      type: object
-    SexismConfig:
-      additionalProperties: false
-      description: Configuration for the Sexism evaluation (no fields).
-      externalDocs:
-        url: ""
-      type: object
-    SqlAllowedTablesConfig:
-      description: Configuration for the SqlAllowedTables evaluation.
-      externalDocs:
-        url: ""
-      properties:
-        tables:
-          description: SQL table names that are allowed.
-          items:
-            description: SQL table names that are allowed.
-            maxLength: 256
-            minLength: 1
-            pattern: "^[\\s\\S]+$"
-            type: string
-          maxItems: 1024
-          minItems: 1
-          type: array
-      type: object
-    SqlHallucinationConfig:
-      additionalProperties: false
-      description: Configuration for the SqlHallucination evaluation (no fields).
-      externalDocs:
-        url: ""
-      type: object
-    SqlLoadConfig:
-      description: "Configuration for the SqlLoad evaluation: caps on query complexity."
-      externalDocs:
-        url: ""
-      properties:
-        allowRecursiveCte:
-          description: Whether recursive CTEs are allowed.
-          type: boolean
-        cteLimit:
-          description: Maximum CTEs allowed in a query.
-          maxLength: 4
-          minLength: 1
-          pattern: "^[0-9]+$"
-          type: string
-        joinLimit:
-          description: Maximum JOINs allowed in a query.
-          maxLength: 4
-          minLength: 1
-          pattern: "^[0-9]+$"
-          type: string
-      type: object
-    SqlReadOnlyConfig:
-      additionalProperties: false
-      description: Configuration for the SqlReadOnly evaluation (no fields).
-      externalDocs:
-        url: ""
-      type: object
-    SqlRestrictedTablesConfig:
-      description: Configuration for the SqlRestrictedTables evaluation.
-      externalDocs:
-        url: ""
-      properties:
-        tables:
-          description: SQL table names that are not allowed.
-          items:
-            description: SQL table names that are not allowed.
-            maxLength: 256
-            minLength: 1
-            pattern: "^[\\s\\S]+$"
-            type: string
-          maxItems: 1024
-          minItems: 1
-          type: array
-      type: object
-    ToxicityConfig:
-      additionalProperties: false
-      description: Configuration for the Toxicity evaluation (no fields).
-      externalDocs:
-        url: ""
-      type: object
-    UnlinkCustomEvaluationFromAppResponse:
-      description: Response returned after unlinking.
-      example:
-        id: id
-        applicationId: applicationId
-      externalDocs:
-        url: ""
-      properties:
-        applicationId:
-          description: Unique identifier of the AI application that was unlinked.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-        id:
-          description: Unique identifier of the custom evaluation.
-          maxLength: 36
-          minLength: 36
-          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          type: string
-      type: object
-    UpdateAiEvaluationResponse:
-      description: Response returned after updating an AI evaluation.
-      example:
-        aiEvaluation:
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          companyId: companyId
-          application: application
-          createdBy: createdBy
-          isEnabled: true
-          subsystem: subsystem
-          threshold: 0.08008281904610115
-          id: id
-          config:
-            allowedTopics:
-              topics:
-              - topics
-              - topics
-              - topics
-              - topics
-              - topics
-          target: PROMPT
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-      externalDocs:
-        url: ""
-      properties:
-        aiEvaluation:
-          $ref: "#/components/schemas/AiEvaluation"
-      type: object
-    UpdateCustomEvaluationResponse:
-      description: Response returned after updating a custom evaluation.
-      example:
-        item:
-          name: name
-          description: description
-          id: id
-          config:
-            instructions: instructions
-            violates: violates
-            examples:
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            - score: score
-              conversation: conversation
-            shouldIncludeSystemPrompt: true
-            policyType: policyType
-            safe: safe
-          applicationIds:
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-          - applicationIds
-      externalDocs:
-        url: ""
-      properties:
-        item:
-          $ref: "#/components/schemas/CustomEvaluation"
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    AiEvaluationsService_CreateCustomEvaluation_request:
-      description: Request to create a custom evaluation in the catalog.
-      properties:
-        applicationIds:
-          description: IDs of AI applications to link this custom evaluation to.
-          items:
-            description: IDs of AI applications to link this custom evaluation to.
-            maxLength: 36
-            minLength: 36
-            pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            type: string
-          maxItems: 1024
-          minItems: 0
-          type: array
-        description:
-          description: Human-readable description.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        examples:
-          description: Example conversations and expected scores.
-          items:
-            $ref: "#/components/schemas/CustomEvaluationExample"
-          maxItems: 100
-          minItems: 0
-          type: array
-        instructions:
-          description: Instructions sent to the LLM evaluator.
-          maxLength: 1048576
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        name:
-          description: Display name of the custom evaluation.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        policyType:
-          description: Policy type identifier.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        safe:
-          description: Description of what counts as safe.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        shouldIncludeSystemPrompt:
-          description: Whether to include the system prompt in the LLM input.
-          type: boolean
-        violates:
-          description: Description of what counts as violating the policy.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    AiEvaluationsService_UpdateCustomEvaluation_request:
-      description: Request to update a custom evaluation in the catalog.
-      properties:
-        description:
-          description: Human-readable description.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        examples:
-          description: Example conversations and expected scores.
-          items:
-            $ref: "#/components/schemas/CustomEvaluationExample"
-          maxItems: 100
-          minItems: 0
-          type: array
-        instructions:
-          description: Instructions sent to the LLM evaluator.
-          maxLength: 1048576
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        name:
-          description: Display name of the custom evaluation.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        policyType:
-          description: Policy type identifier.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        safe:
-          description: Description of what counts as safe.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        shouldIncludeSystemPrompt:
-          description: Whether to include the system prompt in the LLM input.
-          type: boolean
-        updateMask:
-          description: "Comma-separated list of field paths to update. When provided,\
-            \ only the listed fields are touched; a listed field that is absent from\
-            \ the request body is cleared. When omitted, only fields present in the\
-            \ body are updated."
-          maxLength: 1024
-          minLength: 1
-          pattern: "^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$"
-          type: string
-        violates:
-          description: Description of what counts as violating the policy.
-          maxLength: 65536
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    AiEvaluationsService_CreateAiEvaluation_request:
-      description: Request to create a new AI evaluation.
-      properties:
-        application:
-          description: Name of the AI application this evaluation belongs to.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        config:
-          $ref: "#/components/schemas/EvaluationConfig"
-        isEnabled:
-          description: Whether the evaluation should start active.
-          type: boolean
-        subsystem:
-          description: Subsystem within the application.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        target:
-          $ref: "#/components/schemas/EvaluationTarget"
-        threshold:
-          description: Score threshold. Must be between 0.0 and 1.0 inclusive.
-          format: double
-          maximum: 1
-          minimum: 0
-          type: number
-      type: object
-    AiEvaluationsService_UpdateAiEvaluation_request:
-      description: Request to update an existing AI evaluation.
-      properties:
-        application:
-          description: Name of the AI application this evaluation belongs to.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        config:
-          $ref: "#/components/schemas/EvaluationConfig"
-        isEnabled:
-          description: Whether the evaluation is active.
-          type: boolean
-        subsystem:
-          description: Subsystem within the application.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-        target:
-          $ref: "#/components/schemas/EvaluationTarget"
-        threshold:
-          description: Score threshold. Must be between 0.0 and 1.0 inclusive.
-          format: double
-          maximum: 1
-          minimum: 0
-          type: number
-        updateMask:
-          description: "Comma-separated list of field paths to update. When provided,\
-            \ only the listed fields are touched; a listed field that is absent from\
-            \ the request body is cleared. When omitted, only fields present in the\
-            \ body are updated."
-          maxLength: 1024
-          minLength: 1
-          pattern: "^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$"
-          type: string
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/ai/custom-evaluations/v3": {
+      "get": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "List custom evaluations",
+        "description": "Lists all custom evaluations defined in the catalog.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_GetCustomEvaluations",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCustomEvaluationsResponse"
+                },
+                "example": {
+                  "items": [
+                    {
+                      "applicationIds": [
+                        "175677d1-fc90-4a89-9e35-0590b188ebb2"
+                      ],
+                      "config": {
+                        "examples": [
+                          {
+                            "conversation": "User: is our product better than CompetitorY?",
+                            "score": "1"
+                          }
+                        ],
+                        "instructions": "Flag the response if it mentions a competitor.",
+                        "policyType": "quality",
+                        "safe": "No competitor mentioned",
+                        "shouldIncludeSystemPrompt": false,
+                        "violates": "Mentions a competitor"
+                      },
+                      "description": "Flags competitor references in responses.",
+                      "id": "3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d",
+                      "name": "No competitor mentions"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "Create custom evaluation",
+        "description": "Creates a new custom evaluation in the catalog.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_CreateCustomEvaluation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to create a custom evaluation in the catalog.",
+                "type": "object",
+                "properties": {
+                  "applicationIds": {
+                    "description": "IDs of AI applications to link this custom evaluation to.",
+                    "type": "array",
+                    "items": {
+                      "description": "IDs of AI applications to link this custom evaluation to.",
+                      "type": "string",
+                      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                      "minLength": 36,
+                      "maxLength": 36
+                    },
+                    "minItems": 0,
+                    "maxItems": 1024
+                  },
+                  "description": {
+                    "description": "Human-readable description.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65536
+                  },
+                  "examples": {
+                    "description": "Example conversations and expected scores.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CustomEvaluationExample"
+                    },
+                    "minItems": 0,
+                    "maxItems": 100
+                  },
+                  "instructions": {
+                    "description": "Instructions sent to the LLM evaluator.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 1048576
+                  },
+                  "name": {
+                    "description": "Display name of the custom evaluation.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  "policyType": {
+                    "description": "Policy type identifier.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  "safe": {
+                    "description": "Description of what counts as safe.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65536
+                  },
+                  "shouldIncludeSystemPrompt": {
+                    "description": "Whether to include the system prompt in the LLM input.",
+                    "type": "boolean"
+                  },
+                  "violates": {
+                    "description": "Description of what counts as violating the policy.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65536
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCustomEvaluationResponse"
+                },
+                "example": {
+                  "item": {
+                    "applicationIds": [
+                      "175677d1-fc90-4a89-9e35-0590b188ebb2"
+                    ],
+                    "config": {
+                      "examples": [
+                        {
+                          "conversation": "User: is our product better than CompetitorY?",
+                          "score": "1"
+                        }
+                      ],
+                      "instructions": "Flag the response if it mentions a competitor.",
+                      "policyType": "quality",
+                      "safe": "No competitor mentioned",
+                      "shouldIncludeSystemPrompt": false,
+                      "violates": "Mentions a competitor"
+                    },
+                    "description": "Flags competitor references in responses.",
+                    "id": "3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d",
+                    "name": "No competitor mentions"
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Custom evaluation created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCustomEvaluationResponse"
+                },
+                "example": {
+                  "item": {
+                    "applicationIds": [
+                      "175677d1-fc90-4a89-9e35-0590b188ebb2"
+                    ],
+                    "config": {
+                      "examples": [
+                        {
+                          "conversation": "User: is our product better than CompetitorY?",
+                          "score": "1"
+                        }
+                      ],
+                      "instructions": "Flag the response if it mentions a competitor.",
+                      "policyType": "quality",
+                      "safe": "No competitor mentioned",
+                      "shouldIncludeSystemPrompt": false,
+                      "violates": "Mentions a competitor"
+                    },
+                    "description": "Flags competitor references in responses.",
+                    "id": "3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d",
+                    "name": "No competitor mentions"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/custom-evaluations/v3/by-application/{application_id}": {
+      "get": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "List custom evaluations for application",
+        "description": "Lists custom evaluations linked to a specific AI application.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_ListCustomEvaluationsForApplication",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "application_id",
+            "description": "Unique identifier of the AI application.",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier of the AI application.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCustomEvaluationsForApplicationResponse"
+                },
+                "example": {
+                  "items": [
+                    {
+                      "applicationIds": [
+                        "175677d1-fc90-4a89-9e35-0590b188ebb2"
+                      ],
+                      "config": {
+                        "examples": [
+                          {
+                            "conversation": "User: is our product better than CompetitorY?",
+                            "score": "1"
+                          }
+                        ],
+                        "instructions": "Flag the response if it mentions a competitor.",
+                        "policyType": "quality",
+                        "safe": "No competitor mentioned",
+                        "shouldIncludeSystemPrompt": false,
+                        "violates": "Mentions a competitor"
+                      },
+                      "description": "Flags competitor references in responses.",
+                      "id": "3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d",
+                      "name": "No competitor mentions"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/custom-evaluations/v3/{id}": {
+      "delete": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "Delete custom evaluation",
+        "description": "Deletes a custom evaluation from the catalog.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_DeleteCustomEvaluation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Unique identifier of the custom evaluation to delete.",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier of the custom evaluation to delete.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCustomEvaluationResponse"
+                },
+                "example": {
+                  "id": "3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "Update custom evaluation",
+        "description": "Updates one or more fields of an existing custom evaluation.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_UpdateCustomEvaluation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Unique identifier of the custom evaluation to update.",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier of the custom evaluation to update.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to update a custom evaluation in the catalog.",
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "description": "Human-readable description.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65536
+                  },
+                  "examples": {
+                    "description": "Example conversations and expected scores.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CustomEvaluationExample"
+                    },
+                    "minItems": 0,
+                    "maxItems": 100
+                  },
+                  "instructions": {
+                    "description": "Instructions sent to the LLM evaluator.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 1048576
+                  },
+                  "name": {
+                    "description": "Display name of the custom evaluation.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  "policyType": {
+                    "description": "Policy type identifier.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  "safe": {
+                    "description": "Description of what counts as safe.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65536
+                  },
+                  "shouldIncludeSystemPrompt": {
+                    "description": "Whether to include the system prompt in the LLM input.",
+                    "type": "boolean"
+                  },
+                  "updateMask": {
+                    "description": "Comma-separated list of field paths to update. When provided, only the listed fields are touched; a listed field that is absent from the request body is cleared. When omitted, only fields present in the body are updated.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$",
+                    "minLength": 1,
+                    "maxLength": 1024
+                  },
+                  "violates": {
+                    "description": "Description of what counts as violating the policy.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65536
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCustomEvaluationResponse"
+                },
+                "example": {
+                  "item": {
+                    "applicationIds": [
+                      "175677d1-fc90-4a89-9e35-0590b188ebb2"
+                    ],
+                    "config": {
+                      "examples": [
+                        {
+                          "conversation": "User: is our product better than CompetitorY?",
+                          "score": "1"
+                        }
+                      ],
+                      "instructions": "Flag the response if it mentions a competitor.",
+                      "policyType": "quality",
+                      "safe": "No competitor mentioned",
+                      "shouldIncludeSystemPrompt": false,
+                      "violates": "Mentions a competitor"
+                    },
+                    "description": "Flags competitor references in responses.",
+                    "id": "3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d",
+                    "name": "No competitor mentions"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/custom-evaluations/v3/{id}/applications/{application_id}": {
+      "post": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "Link custom evaluation to application",
+        "description": "Associates a custom evaluation with an AI application.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_LinkCustomEvaluation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "application_id",
+            "description": "Unique identifier of the AI application to link to.",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier of the AI application to link to.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkCustomEvaluationResponse"
+                },
+                "example": {
+                  "applicationId": "175677d1-fc90-4a89-9e35-0590b188ebb2",
+                  "id": "3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "Unlink custom evaluation from application",
+        "description": "Removes the association between a custom evaluation and an AI application.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_UnlinkCustomEvaluationFromApp",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "application_id",
+            "description": "Unique identifier of the AI application to unlink from.",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier of the AI application to unlink from.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnlinkCustomEvaluationFromAppResponse"
+                },
+                "example": {
+                  "applicationId": "175677d1-fc90-4a89-9e35-0590b188ebb2",
+                  "id": "3a9b8c7d-6e5f-4a3b-2c1d-0e9f8a7b6c5d"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "Unique identifier of the custom evaluation.",
+          "required": true,
+          "schema": {
+            "description": "Unique identifier of the custom evaluation.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "style": "simple"
+        }
+      ]
+    },
+    "/ai/evaluation-counts/v3/per-type": {
+      "get": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "Count applications per evaluation type",
+        "description": "Returns the count of AI applications grouped by evaluation type.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_CountAiAppsPerEvalType",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CountAiAppsPerEvalTypeResponse"
+                },
+                "example": {
+                  "counts": {
+                    "PII": 3,
+                    "PROMPT_INJECTION": 1,
+                    "TOXICITY": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/evaluations/v3": {
+      "get": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "List AI evaluations",
+        "description": "Lists AI evaluations, optionally filtered by application, subsystem, or evaluation type.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_ListAiEvaluations",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "application",
+            "description": "Filter by application name.",
+            "schema": {
+              "description": "Filter by application name.",
+              "type": "string",
+              "pattern": "^[\\s\\S]+$",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "subsystem",
+            "description": "Filter by subsystem.",
+            "schema": {
+              "description": "Filter by subsystem.",
+              "type": "string",
+              "pattern": "^[\\s\\S]+$",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "evaluation_type",
+            "description": "Filter by evaluation type.",
+            "schema": {
+              "$ref": "#/components/schemas/EvaluationType"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "page_size",
+            "description": "Number of items per page. Default 200 if omitted.",
+            "schema": {
+              "description": "Number of items per page. Default 200 if omitted.",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "page_offset",
+            "description": "Zero-based page offset. Default 0 if omitted.",
+            "schema": {
+              "description": "Zero-based page offset. Default 0 if omitted.",
+              "type": "integer",
+              "format": "int64",
+              "minimum": 0,
+              "maximum": 10000
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAiEvaluationsResponse"
+                },
+                "example": {
+                  "aiEvaluations": [
+                    {
+                      "application": "checkout",
+                      "companyId": "12345",
+                      "config": {
+                        "competition": {}
+                      },
+                      "createdAt": "2026-06-02T15:30:00Z",
+                      "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
+                      "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
+                      "isEnabled": true,
+                      "subsystem": "api",
+                      "target": "RESPONSE",
+                      "threshold": 0.7,
+                      "updatedAt": "2026-06-02T15:35:00Z"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "Create AI evaluation",
+        "description": "Creates a new AI evaluation for an application.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_CreateAiEvaluation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to create a new AI evaluation.",
+                "type": "object",
+                "properties": {
+                  "application": {
+                    "description": "Name of the AI application this evaluation belongs to.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  "config": {
+                    "$ref": "#/components/schemas/EvaluationConfig"
+                  },
+                  "isEnabled": {
+                    "description": "Whether the evaluation should start active.",
+                    "type": "boolean"
+                  },
+                  "subsystem": {
+                    "description": "Subsystem within the application.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  "target": {
+                    "$ref": "#/components/schemas/EvaluationTarget"
+                  },
+                  "threshold": {
+                    "description": "Score threshold. Must be between 0.0 and 1.0 inclusive.",
+                    "type": "number",
+                    "format": "double",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAiEvaluationResponse"
+                },
+                "example": {
+                  "aiEvaluation": {
+                    "application": "checkout",
+                    "companyId": "12345",
+                    "config": {
+                      "competition": {}
+                    },
+                    "createdAt": "2026-06-02T15:30:00Z",
+                    "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
+                    "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
+                    "isEnabled": true,
+                    "subsystem": "api",
+                    "target": "RESPONSE",
+                    "threshold": 0.7,
+                    "updatedAt": "2026-06-02T15:35:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "AI evaluation created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAiEvaluationResponse"
+                },
+                "example": {
+                  "aiEvaluation": {
+                    "application": "checkout",
+                    "companyId": "12345",
+                    "config": {
+                      "competition": {}
+                    },
+                    "createdAt": "2026-06-02T15:30:00Z",
+                    "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
+                    "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
+                    "isEnabled": true,
+                    "subsystem": "api",
+                    "target": "RESPONSE",
+                    "threshold": 0.7,
+                    "updatedAt": "2026-06-02T15:35:00Z"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/evaluations/v3/{id}": {
+      "get": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "Get AI evaluation",
+        "description": "Gets an AI evaluation by its unique identifier.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_GetAiEvaluation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Unique identifier of the AI evaluation.",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier of the AI evaluation.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAiEvaluationResponse"
+                },
+                "example": {
+                  "aiEvaluation": {
+                    "application": "checkout",
+                    "companyId": "12345",
+                    "config": {
+                      "competition": {}
+                    },
+                    "createdAt": "2026-06-02T15:30:00Z",
+                    "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
+                    "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
+                    "isEnabled": true,
+                    "subsystem": "api",
+                    "target": "RESPONSE",
+                    "threshold": 0.7,
+                    "updatedAt": "2026-06-02T15:35:00Z"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "Delete AI evaluation",
+        "description": "Deletes an AI evaluation by its unique identifier.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_DeleteAiEvaluation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Unique identifier of the AI evaluation to delete.",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier of the AI evaluation to delete.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteAiEvaluationResponse"
+                },
+                "example": {
+                  "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AI Evaluations Service"
+        ],
+        "summary": "Update AI evaluation",
+        "description": "Updates one or more fields of an existing AI evaluation.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AiEvaluationsService_UpdateAiEvaluation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Unique identifier of the AI evaluation to update.",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier of the AI evaluation to update.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to update an existing AI evaluation.",
+                "type": "object",
+                "properties": {
+                  "application": {
+                    "description": "Name of the AI application this evaluation belongs to.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  "config": {
+                    "$ref": "#/components/schemas/EvaluationConfig"
+                  },
+                  "isEnabled": {
+                    "description": "Whether the evaluation is active.",
+                    "type": "boolean"
+                  },
+                  "subsystem": {
+                    "description": "Subsystem within the application.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  "target": {
+                    "$ref": "#/components/schemas/EvaluationTarget"
+                  },
+                  "threshold": {
+                    "description": "Score threshold. Must be between 0.0 and 1.0 inclusive.",
+                    "type": "number",
+                    "format": "double",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "updateMask": {
+                    "description": "Comma-separated list of field paths to update. When provided, only the listed fields are touched; a listed field that is absent from the request body is cleared. When omitted, only fields present in the body are updated.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$",
+                    "minLength": 1,
+                    "maxLength": 1024
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateAiEvaluationResponse"
+                },
+                "example": {
+                  "aiEvaluation": {
+                    "application": "checkout",
+                    "companyId": "12345",
+                    "config": {
+                      "competition": {}
+                    },
+                    "createdAt": "2026-06-02T15:30:00Z",
+                    "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
+                    "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
+                    "isEnabled": true,
+                    "subsystem": "api",
+                    "target": "RESPONSE",
+                    "threshold": 0.7,
+                    "updatedAt": "2026-06-02T15:35:00Z"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AiEvaluation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A configured AI evaluation that runs against an AI application's spans.",
+        "type": "object",
+        "properties": {
+          "application": {
+            "description": "Name of the AI application this evaluation belongs to.",
+            "type": "string",
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "companyId": {
+            "description": "Company that owns this evaluation.",
+            "type": "string",
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "config": {
+            "$ref": "#/components/schemas/EvaluationConfig"
+          },
+          "createdAt": {
+            "description": "RFC3339 timestamp when the evaluation was created.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 20,
+            "maxLength": 35
+          },
+          "createdBy": {
+            "description": "UUID of the user who created this evaluation. Set automatically by the server from the authenticated identity; not provided by the client.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "id": {
+            "description": "Unique identifier of the AI evaluation.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "isEnabled": {
+            "description": "Whether the evaluation is currently active.",
+            "type": "boolean"
+          },
+          "subsystem": {
+            "description": "Subsystem within the application.",
+            "type": "string",
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "target": {
+            "$ref": "#/components/schemas/EvaluationTarget"
+          },
+          "threshold": {
+            "description": "Score threshold. Must be between 0.0 and 1.0 inclusive.",
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "updatedAt": {
+            "description": "RFC3339 timestamp when the evaluation was last updated.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 20,
+            "maxLength": 35
+          }
+        }
+      },
+      "AllowedTopicsConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the AllowedTopics evaluation.",
+        "type": "object",
+        "properties": {
+          "topics": {
+            "description": "Topics considered allowed.",
+            "type": "array",
+            "items": {
+              "description": "Topics considered allowed.",
+              "type": "string",
+              "pattern": "^[\\s\\S]+$",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "minItems": 1,
+            "maxItems": 1024
+          }
+        }
+      },
+      "CompetitionConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the Competition evaluation.",
+        "type": "object",
+        "properties": {
+          "competitors": {
+            "description": "Competitor names to watch for.",
+            "type": "array",
+            "items": {
+              "description": "Competitor names to watch for.",
+              "type": "string",
+              "pattern": "^[\\s\\S]+$",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "minItems": 1,
+            "maxItems": 1024
+          }
+        }
+      },
+      "CountAiAppsPerEvalTypeResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing counts of AI applications per evaluation type.",
+        "type": "object",
+        "properties": {
+          "counts": {
+            "description": "Map of evaluation-type name to count of AI applications using it.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 0
+            }
+          }
+        }
+      },
+      "CreateAiEvaluationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after creating an AI evaluation.",
+        "type": "object",
+        "properties": {
+          "aiEvaluation": {
+            "$ref": "#/components/schemas/AiEvaluation"
+          }
+        }
+      },
+      "CreateCustomEvaluationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after creating a custom evaluation.",
+        "type": "object",
+        "properties": {
+          "item": {
+            "$ref": "#/components/schemas/CustomEvaluation"
+          }
+        }
+      },
+      "CustomEvaluation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A custom evaluation defined in the catalog.",
+        "type": "object",
+        "properties": {
+          "applicationIds": {
+            "description": "IDs of AI applications this custom evaluation is linked to.",
+            "type": "array",
+            "items": {
+              "description": "IDs of AI applications this custom evaluation is linked to.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "minItems": 0,
+            "maxItems": 1024
+          },
+          "config": {
+            "$ref": "#/components/schemas/CustomEvaluationConfig"
+          },
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65536
+          },
+          "id": {
+            "description": "Unique identifier of the custom evaluation.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "name": {
+            "description": "Display name of the custom evaluation.",
+            "type": "string",
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      },
+      "CustomEvaluationConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Custom evaluation policy details (instructions + examples for the LLM evaluator).",
+        "type": "object",
+        "properties": {
+          "examples": {
+            "description": "Example conversations and expected scores.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEvaluationExample"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "instructions": {
+            "description": "Instructions sent to the LLM evaluator.",
+            "type": "string",
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 1048576
+          },
+          "policyType": {
+            "description": "Policy type identifier.",
+            "type": "string",
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "safe": {
+            "description": "Description of what counts as safe.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65536
+          },
+          "shouldIncludeSystemPrompt": {
+            "description": "Whether to include the system prompt in the LLM input.",
+            "type": "boolean"
+          },
+          "violates": {
+            "description": "Description of what counts as violating the policy.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65536
+          }
+        }
+      },
+      "CustomEvaluationExample": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A single labeled example for a custom evaluation.",
+        "type": "object",
+        "properties": {
+          "conversation": {
+            "description": "Example conversation text.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65536
+          },
+          "score": {
+            "description": "Expected score for this example.",
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 4
+          }
+        }
+      },
+      "DeleteAiEvaluationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after deleting an AI evaluation.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique identifier of the deleted AI evaluation.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          }
+        }
+      },
+      "DeleteCustomEvaluationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after deleting a custom evaluation.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique identifier of the deleted custom evaluation.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          }
+        }
+      },
+      "EvaluationConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
+        "type": "object",
+        "properties": {
+          "allowedTopics": {
+            "$ref": "#/components/schemas/AllowedTopicsConfig"
+          },
+          "competition": {
+            "$ref": "#/components/schemas/CompetitionConfig"
+          },
+          "customEvaluation": {
+            "$ref": "#/components/schemas/CustomEvaluationConfig"
+          },
+          "hallucinationCompleteness": {
+            "$ref": "#/components/schemas/HallucinationCompletenessConfig"
+          },
+          "hallucinationContextAdherence": {
+            "$ref": "#/components/schemas/HallucinationContextAdherenceConfig"
+          },
+          "hallucinationContextRelevance": {
+            "$ref": "#/components/schemas/HallucinationContextRelevanceConfig"
+          },
+          "hallucinationCorrectness": {
+            "$ref": "#/components/schemas/HallucinationCorrectnessConfig"
+          },
+          "hallucinationTaskAdherence": {
+            "$ref": "#/components/schemas/HallucinationTaskAdherenceConfig"
+          },
+          "languageMismatch": {
+            "$ref": "#/components/schemas/LanguageMismatchConfig"
+          },
+          "pii": {
+            "$ref": "#/components/schemas/PiiConfig"
+          },
+          "promptInjection": {
+            "$ref": "#/components/schemas/PromptInjectionConfig"
+          },
+          "restrictedTopics": {
+            "$ref": "#/components/schemas/RestrictedTopicsConfig"
+          },
+          "sexism": {
+            "$ref": "#/components/schemas/SexismConfig"
+          },
+          "sqlAllowedTables": {
+            "$ref": "#/components/schemas/SqlAllowedTablesConfig"
+          },
+          "sqlHallucination": {
+            "$ref": "#/components/schemas/SqlHallucinationConfig"
+          },
+          "sqlLoad": {
+            "$ref": "#/components/schemas/SqlLoadConfig"
+          },
+          "sqlReadOnly": {
+            "$ref": "#/components/schemas/SqlReadOnlyConfig"
+          },
+          "sqlRestrictedTables": {
+            "$ref": "#/components/schemas/SqlRestrictedTablesConfig"
+          },
+          "toxicity": {
+            "$ref": "#/components/schemas/ToxicityConfig"
+          }
+        },
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "allowedTopics"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "competition"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "hallucinationCompleteness"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "hallucinationContextAdherence"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "hallucinationContextRelevance"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "hallucinationCorrectness"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "pii"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "promptInjection"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "restrictedTopics"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sexism"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sqlAllowedTables"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sqlHallucination"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sqlReadOnly"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sqlRestrictedTables"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "toxicity"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "hallucinationTaskAdherence"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sqlLoad"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "languageMismatch"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "customEvaluation"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "allowedTopics"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "competition"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "hallucinationCompleteness"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "hallucinationContextAdherence"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "hallucinationContextRelevance"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "hallucinationCorrectness"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "pii"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "promptInjection"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "restrictedTopics"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sexism"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sqlAllowedTables"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sqlHallucination"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sqlReadOnly"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sqlRestrictedTables"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "toxicity"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "hallucinationTaskAdherence"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sqlLoad"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "languageMismatch"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "customEvaluation"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "EvaluationTarget": {
+        "description": "Target span content the evaluation runs against: PROMPT, RESPONSE, or CONVERSATION.",
+        "type": "string",
+        "enum": [
+          "PROMPT",
+          "RESPONSE",
+          "CONVERSATION"
+        ]
+      },
+      "EvaluationType": {
+        "type": "string",
+        "enum": [
+          "ALLOWED_TOPICS",
+          "COMPETITION",
+          "HALLUCINATION_COMPLETENESS",
+          "HALLUCINATION_CONTEXT_ADHERENCE",
+          "HALLUCINATION_CONTEXT_RELEVANCE",
+          "HALLUCINATION_CORRECTNESS",
+          "PII",
+          "PROMPT_INJECTION",
+          "RESTRICTED_TOPICS",
+          "SEXISM",
+          "SQL_ALLOWED_TABLES",
+          "SQL_HALLUCINATION",
+          "SQL_READ_ONLY",
+          "SQL_RESTRICTED_TABLES",
+          "TOXICITY",
+          "HALLUCINATION_TASK_ADHERENCE",
+          "SQL_LOAD",
+          "LANGUAGE_MISMATCH",
+          "CUSTOM_EVALUATION"
+        ]
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetAiEvaluationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the requested AI evaluation.",
+        "type": "object",
+        "properties": {
+          "aiEvaluation": {
+            "$ref": "#/components/schemas/AiEvaluation"
+          }
+        }
+      },
+      "GetCustomEvaluationsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the custom evaluations in the catalog.",
+        "type": "object",
+        "properties": {
+          "items": {
+            "description": "The custom evaluations in the catalog.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEvaluation"
+            },
+            "minItems": 0,
+            "maxItems": 10000
+          }
+        }
+      },
+      "HallucinationCompletenessConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the HallucinationCompleteness evaluation (no fields).",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "HallucinationContextAdherenceConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the HallucinationContextAdherence evaluation (no fields).",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "HallucinationContextRelevanceConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the HallucinationContextRelevance evaluation (no fields).",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "HallucinationCorrectnessConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the HallucinationCorrectness evaluation (no fields).",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "HallucinationTaskAdherenceConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the HallucinationTaskAdherence evaluation (no fields).",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "LanguageMismatchConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the LanguageMismatch evaluation (no fields).",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "LinkCustomEvaluationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after linking.",
+        "type": "object",
+        "properties": {
+          "applicationId": {
+            "description": "Unique identifier of the AI application that was linked.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "id": {
+            "description": "Unique identifier of the custom evaluation.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          }
+        }
+      },
+      "ListAiEvaluationsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a page of AI evaluations.",
+        "type": "object",
+        "properties": {
+          "aiEvaluations": {
+            "description": "The list of AI evaluations on this page.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AiEvaluation"
+            },
+            "minItems": 0,
+            "maxItems": 1000
+          }
+        }
+      },
+      "ListCustomEvaluationsForApplicationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing custom evaluations linked to the application.",
+        "type": "object",
+        "properties": {
+          "items": {
+            "description": "Custom evaluations linked to the application.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomEvaluation"
+            },
+            "minItems": 0,
+            "maxItems": 1024
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "PiiCategory": {
+        "type": "string",
+        "enum": [
+          "PHONE_NUMBER",
+          "EMAIL_ADDRESS",
+          "CREDIT_CARD",
+          "IBAN_CODE",
+          "US_SSN"
+        ]
+      },
+      "PiiConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the PII evaluation.",
+        "type": "object",
+        "properties": {
+          "categories": {
+            "description": "PII categories to detect.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PiiCategory"
+            },
+            "minItems": 1,
+            "maxItems": 1024
+          }
+        }
+      },
+      "PromptInjectionConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the PromptInjection evaluation.",
+        "type": "object",
+        "properties": {
+          "additionalContext": {
+            "description": "Additional context passed to the LLM evaluator.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65536
+          }
+        }
+      },
+      "RestrictedTopicsConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the RestrictedTopics evaluation.",
+        "type": "object",
+        "properties": {
+          "topics": {
+            "description": "Topics that should not appear.",
+            "type": "array",
+            "items": {
+              "description": "Topics that should not appear.",
+              "type": "string",
+              "pattern": "^[\\s\\S]+$",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "minItems": 1,
+            "maxItems": 1024
+          }
+        }
+      },
+      "SexismConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the Sexism evaluation (no fields).",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SqlAllowedTablesConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the SqlAllowedTables evaluation.",
+        "type": "object",
+        "properties": {
+          "tables": {
+            "description": "SQL table names that are allowed.",
+            "type": "array",
+            "items": {
+              "description": "SQL table names that are allowed.",
+              "type": "string",
+              "pattern": "^[\\s\\S]+$",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "minItems": 1,
+            "maxItems": 1024
+          }
+        }
+      },
+      "SqlHallucinationConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the SqlHallucination evaluation (no fields).",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SqlLoadConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the SqlLoad evaluation: caps on query complexity.",
+        "type": "object",
+        "properties": {
+          "allowRecursiveCte": {
+            "description": "Whether recursive CTEs are allowed.",
+            "type": "boolean"
+          },
+          "cteLimit": {
+            "description": "Maximum CTEs allowed in a query.",
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 4
+          },
+          "joinLimit": {
+            "description": "Maximum JOINs allowed in a query.",
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 4
+          }
+        }
+      },
+      "SqlReadOnlyConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the SqlReadOnly evaluation (no fields).",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SqlRestrictedTablesConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the SqlRestrictedTables evaluation.",
+        "type": "object",
+        "properties": {
+          "tables": {
+            "description": "SQL table names that are not allowed.",
+            "type": "array",
+            "items": {
+              "description": "SQL table names that are not allowed.",
+              "type": "string",
+              "pattern": "^[\\s\\S]+$",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "minItems": 1,
+            "maxItems": 1024
+          }
+        }
+      },
+      "ToxicityConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration for the Toxicity evaluation (no fields).",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UnlinkCustomEvaluationFromAppResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after unlinking.",
+        "type": "object",
+        "properties": {
+          "applicationId": {
+            "description": "Unique identifier of the AI application that was unlinked.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "id": {
+            "description": "Unique identifier of the custom evaluation.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          }
+        }
+      },
+      "UpdateAiEvaluationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after updating an AI evaluation.",
+        "type": "object",
+        "properties": {
+          "aiEvaluation": {
+            "$ref": "#/components/schemas/AiEvaluation"
+          }
+        }
+      },
+      "UpdateCustomEvaluationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after updating a custom evaluation.",
+        "type": "object",
+        "properties": {
+          "item": {
+            "$ref": "#/components/schemas/CustomEvaluation"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

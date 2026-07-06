@@ -14,125 +14,232 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// AccessType - struct for AccessType
+// checks if the AccessType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AccessType{}
+
+// AccessType Defines the access duration for a user. Can be either permanent (indefinite) or temporary (expires at a specific time).
 type AccessType struct {
-	AccessTypePermanentAccess *AccessTypePermanentAccess
-	AccessTypeTemporaryAccess *AccessTypeTemporaryAccess
+	// Type of access: 'permanent' or 'temporary'
+	AccessType string `json:"accessType"`
+	// User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.
+	PermanentAccess map[string]interface{} `json:"permanentAccess,omitempty"`
+	TemporaryAccess *TemporaryAccess `json:"temporaryAccess,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// AccessTypePermanentAccessAsAccessType is a convenience function that returns AccessTypePermanentAccess wrapped in AccessType
-func AccessTypePermanentAccessAsAccessType(v *AccessTypePermanentAccess) AccessType {
-	return AccessType{
-		AccessTypePermanentAccess: v,
+type _AccessType AccessType
+
+// NewAccessType instantiates a new AccessType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAccessType(accessType string) *AccessType {
+	this := AccessType{}
+	this.AccessType = accessType
+	return &this
+}
+
+// NewAccessTypeWithDefaults instantiates a new AccessType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAccessTypeWithDefaults() *AccessType {
+	this := AccessType{}
+	return &this
+}
+
+// GetAccessType returns the AccessType field value
+func (o *AccessType) GetAccessType() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
+
+	return o.AccessType
 }
 
-// AccessTypeTemporaryAccessAsAccessType is a convenience function that returns AccessTypeTemporaryAccess wrapped in AccessType
-func AccessTypeTemporaryAccessAsAccessType(v *AccessTypeTemporaryAccess) AccessType {
-	return AccessType{
-		AccessTypeTemporaryAccess: v,
+// GetAccessTypeOk returns a tuple with the AccessType field value
+// and a boolean to check if the value has been set.
+func (o *AccessType) GetAccessTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
 	}
+	return &o.AccessType, true
 }
 
+// SetAccessType sets field value
+func (o *AccessType) SetAccessType(v string) {
+	o.AccessType = v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *AccessType) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into AccessTypePermanentAccess
-	err = json.Unmarshal(data, &dst.AccessTypePermanentAccess)
-	if err == nil {
-		jsonAccessTypePermanentAccess, _ := json.Marshal(dst.AccessTypePermanentAccess)
-		if string(jsonAccessTypePermanentAccess) == "{}" { // empty struct
-			dst.AccessTypePermanentAccess = nil
-		} else {
-			if err = validator.Validate(dst.AccessTypePermanentAccess); err != nil {
-				dst.AccessTypePermanentAccess = nil
-			} else {
-				match++
-			}
+// GetPermanentAccess returns the PermanentAccess field value if set, zero value otherwise.
+func (o *AccessType) GetPermanentAccess() map[string]interface{} {
+	if o == nil || IsNil(o.PermanentAccess) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.PermanentAccess
+}
+
+// GetPermanentAccessOk returns a tuple with the PermanentAccess field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessType) GetPermanentAccessOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.PermanentAccess) {
+		return map[string]interface{}{}, false
+	}
+	return o.PermanentAccess, true
+}
+
+// HasPermanentAccess returns a boolean if a field has been set.
+func (o *AccessType) HasPermanentAccess() bool {
+	if o != nil && !IsNil(o.PermanentAccess) {
+		return true
+	}
+
+	return false
+}
+
+// SetPermanentAccess gets a reference to the given map[string]interface{} and assigns it to the PermanentAccess field.
+func (o *AccessType) SetPermanentAccess(v map[string]interface{}) {
+	o.PermanentAccess = v
+}
+
+// GetTemporaryAccess returns the TemporaryAccess field value if set, zero value otherwise.
+func (o *AccessType) GetTemporaryAccess() TemporaryAccess {
+	if o == nil || IsNil(o.TemporaryAccess) {
+		var ret TemporaryAccess
+		return ret
+	}
+	return *o.TemporaryAccess
+}
+
+// GetTemporaryAccessOk returns a tuple with the TemporaryAccess field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessType) GetTemporaryAccessOk() (*TemporaryAccess, bool) {
+	if o == nil || IsNil(o.TemporaryAccess) {
+		return nil, false
+	}
+	return o.TemporaryAccess, true
+}
+
+// HasTemporaryAccess returns a boolean if a field has been set.
+func (o *AccessType) HasTemporaryAccess() bool {
+	if o != nil && !IsNil(o.TemporaryAccess) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemporaryAccess gets a reference to the given TemporaryAccess and assigns it to the TemporaryAccess field.
+func (o *AccessType) SetTemporaryAccess(v TemporaryAccess) {
+	o.TemporaryAccess = &v
+}
+
+func (o AccessType) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AccessType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["accessType"] = o.AccessType
+	if !IsNil(o.PermanentAccess) {
+		toSerialize["permanentAccess"] = o.PermanentAccess
+	}
+	if !IsNil(o.TemporaryAccess) {
+		toSerialize["temporaryAccess"] = o.TemporaryAccess
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["permanentAccess"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["temporaryAccess"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [permanentAccess, temporaryAccess] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *AccessType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"accessType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.AccessTypePermanentAccess = nil
 	}
 
-	// try to unmarshal data into AccessTypeTemporaryAccess
-	err = json.Unmarshal(data, &dst.AccessTypeTemporaryAccess)
-	if err == nil {
-		jsonAccessTypeTemporaryAccess, _ := json.Marshal(dst.AccessTypeTemporaryAccess)
-		if string(jsonAccessTypeTemporaryAccess) == "{}" { // empty struct
-			dst.AccessTypeTemporaryAccess = nil
-		} else {
-			if err = validator.Validate(dst.AccessTypeTemporaryAccess); err != nil {
-				dst.AccessTypeTemporaryAccess = nil
-			} else {
-				match++
-			}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["permanentAccess"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["temporaryAccess"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [permanentAccess, temporaryAccess] may be set"}
+	}
+
+	varAccessType := _AccessType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAccessType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AccessType(varAccessType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["permanentAccess"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AccessTypeTemporaryAccess = nil
+		if _, exists := additionalProperties["temporaryAccess"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [permanentAccess, temporaryAccess] may be set"}
+		}
+
+		delete(additionalProperties, "accessType")
+		delete(additionalProperties, "permanentAccess")
+		delete(additionalProperties, "temporaryAccess")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AccessTypePermanentAccess = nil
-		dst.AccessTypeTemporaryAccess = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(AccessType)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src AccessType) MarshalJSON() ([]byte, error) {
-	if src.AccessTypePermanentAccess != nil {
-		return json.Marshal(&src.AccessTypePermanentAccess)
-	}
-
-	if src.AccessTypeTemporaryAccess != nil {
-		return json.Marshal(&src.AccessTypeTemporaryAccess)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *AccessType) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.AccessTypePermanentAccess != nil {
-		return obj.AccessTypePermanentAccess
-	}
-
-	if obj.AccessTypeTemporaryAccess != nil {
-		return obj.AccessTypeTemporaryAccess
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj AccessType) GetActualInstanceValue() (interface{}) {
-	if obj.AccessTypePermanentAccess != nil {
-		return *obj.AccessTypePermanentAccess
-	}
-
-	if obj.AccessTypeTemporaryAccess != nil {
-		return *obj.AccessTypeTemporaryAccess
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableAccessType struct {

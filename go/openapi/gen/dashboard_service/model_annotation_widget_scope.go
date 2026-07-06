@@ -13,126 +13,171 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// AnnotationWidgetScope - struct for AnnotationWidgetScope
+// checks if the AnnotationWidgetScope type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AnnotationWidgetScope{}
+
+// AnnotationWidgetScope Widget scope.
 type AnnotationWidgetScope struct {
-	AnnotationWidgetScopeAllWidgetsVariant *AnnotationWidgetScopeAllWidgetsVariant
-	AnnotationWidgetScopeSpecificWidgetsVariant *AnnotationWidgetScopeSpecificWidgetsVariant
+	// Indicates that the annotation applies to all widgets in the dashboard.
+	AllWidgets map[string]interface{} `json:"allWidgets,omitempty"`
+	SpecificWidgets *AnnotationWidgetScopeSpecificWidgets `json:"specificWidgets,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// AnnotationWidgetScopeAllWidgetsVariantAsAnnotationWidgetScope is a convenience function that returns AnnotationWidgetScopeAllWidgetsVariant wrapped in AnnotationWidgetScope
-func AnnotationWidgetScopeAllWidgetsVariantAsAnnotationWidgetScope(v *AnnotationWidgetScopeAllWidgetsVariant) AnnotationWidgetScope {
-	return AnnotationWidgetScope{
-		AnnotationWidgetScopeAllWidgetsVariant: v,
+type _AnnotationWidgetScope AnnotationWidgetScope
+
+// NewAnnotationWidgetScope instantiates a new AnnotationWidgetScope object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAnnotationWidgetScope() *AnnotationWidgetScope {
+	this := AnnotationWidgetScope{}
+	return &this
+}
+
+// NewAnnotationWidgetScopeWithDefaults instantiates a new AnnotationWidgetScope object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAnnotationWidgetScopeWithDefaults() *AnnotationWidgetScope {
+	this := AnnotationWidgetScope{}
+	return &this
+}
+
+// GetAllWidgets returns the AllWidgets field value if set, zero value otherwise.
+func (o *AnnotationWidgetScope) GetAllWidgets() map[string]interface{} {
+	if o == nil || IsNil(o.AllWidgets) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.AllWidgets
 }
 
-// AnnotationWidgetScopeSpecificWidgetsVariantAsAnnotationWidgetScope is a convenience function that returns AnnotationWidgetScopeSpecificWidgetsVariant wrapped in AnnotationWidgetScope
-func AnnotationWidgetScopeSpecificWidgetsVariantAsAnnotationWidgetScope(v *AnnotationWidgetScopeSpecificWidgetsVariant) AnnotationWidgetScope {
-	return AnnotationWidgetScope{
-		AnnotationWidgetScopeSpecificWidgetsVariant: v,
+// GetAllWidgetsOk returns a tuple with the AllWidgets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnnotationWidgetScope) GetAllWidgetsOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.AllWidgets) {
+		return map[string]interface{}{}, false
 	}
+	return o.AllWidgets, true
 }
 
+// HasAllWidgets returns a boolean if a field has been set.
+func (o *AnnotationWidgetScope) HasAllWidgets() bool {
+	if o != nil && !IsNil(o.AllWidgets) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *AnnotationWidgetScope) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into AnnotationWidgetScopeAllWidgetsVariant
-	err = json.Unmarshal(data, &dst.AnnotationWidgetScopeAllWidgetsVariant)
-	if err == nil {
-		jsonAnnotationWidgetScopeAllWidgetsVariant, _ := json.Marshal(dst.AnnotationWidgetScopeAllWidgetsVariant)
-		if string(jsonAnnotationWidgetScopeAllWidgetsVariant) == "{}" { // empty struct
-			dst.AnnotationWidgetScopeAllWidgetsVariant = nil
-		} else {
-			if err = validator.Validate(dst.AnnotationWidgetScopeAllWidgetsVariant); err != nil {
-				dst.AnnotationWidgetScopeAllWidgetsVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAllWidgets gets a reference to the given map[string]interface{} and assigns it to the AllWidgets field.
+func (o *AnnotationWidgetScope) SetAllWidgets(v map[string]interface{}) {
+	o.AllWidgets = v
+}
+
+// GetSpecificWidgets returns the SpecificWidgets field value if set, zero value otherwise.
+func (o *AnnotationWidgetScope) GetSpecificWidgets() AnnotationWidgetScopeSpecificWidgets {
+	if o == nil || IsNil(o.SpecificWidgets) {
+		var ret AnnotationWidgetScopeSpecificWidgets
+		return ret
+	}
+	return *o.SpecificWidgets
+}
+
+// GetSpecificWidgetsOk returns a tuple with the SpecificWidgets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnnotationWidgetScope) GetSpecificWidgetsOk() (*AnnotationWidgetScopeSpecificWidgets, bool) {
+	if o == nil || IsNil(o.SpecificWidgets) {
+		return nil, false
+	}
+	return o.SpecificWidgets, true
+}
+
+// HasSpecificWidgets returns a boolean if a field has been set.
+func (o *AnnotationWidgetScope) HasSpecificWidgets() bool {
+	if o != nil && !IsNil(o.SpecificWidgets) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpecificWidgets gets a reference to the given AnnotationWidgetScopeSpecificWidgets and assigns it to the SpecificWidgets field.
+func (o *AnnotationWidgetScope) SetSpecificWidgets(v AnnotationWidgetScopeSpecificWidgets) {
+	o.SpecificWidgets = &v
+}
+
+func (o AnnotationWidgetScope) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AnnotationWidgetScope) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AllWidgets) {
+		toSerialize["allWidgets"] = o.AllWidgets
+	}
+	if !IsNil(o.SpecificWidgets) {
+		toSerialize["specificWidgets"] = o.SpecificWidgets
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["allWidgets"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["specificWidgets"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [allWidgets, specificWidgets] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *AnnotationWidgetScope) UnmarshalJSON(data []byte) (err error) {
+	varAnnotationWidgetScope := _AnnotationWidgetScope{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAnnotationWidgetScope)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AnnotationWidgetScope(varAnnotationWidgetScope)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["allWidgets"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AnnotationWidgetScopeAllWidgetsVariant = nil
-	}
-
-	// try to unmarshal data into AnnotationWidgetScopeSpecificWidgetsVariant
-	err = json.Unmarshal(data, &dst.AnnotationWidgetScopeSpecificWidgetsVariant)
-	if err == nil {
-		jsonAnnotationWidgetScopeSpecificWidgetsVariant, _ := json.Marshal(dst.AnnotationWidgetScopeSpecificWidgetsVariant)
-		if string(jsonAnnotationWidgetScopeSpecificWidgetsVariant) == "{}" { // empty struct
-			dst.AnnotationWidgetScopeSpecificWidgetsVariant = nil
-		} else {
-			if err = validator.Validate(dst.AnnotationWidgetScopeSpecificWidgetsVariant); err != nil {
-				dst.AnnotationWidgetScopeSpecificWidgetsVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["specificWidgets"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AnnotationWidgetScopeSpecificWidgetsVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [allWidgets, specificWidgets] may be set"}
+		}
+
+		delete(additionalProperties, "allWidgets")
+		delete(additionalProperties, "specificWidgets")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AnnotationWidgetScopeAllWidgetsVariant = nil
-		dst.AnnotationWidgetScopeSpecificWidgetsVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(AnnotationWidgetScope)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src AnnotationWidgetScope) MarshalJSON() ([]byte, error) {
-	if src.AnnotationWidgetScopeAllWidgetsVariant != nil {
-		return json.Marshal(&src.AnnotationWidgetScopeAllWidgetsVariant)
-	}
-
-	if src.AnnotationWidgetScopeSpecificWidgetsVariant != nil {
-		return json.Marshal(&src.AnnotationWidgetScopeSpecificWidgetsVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *AnnotationWidgetScope) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.AnnotationWidgetScopeAllWidgetsVariant != nil {
-		return obj.AnnotationWidgetScopeAllWidgetsVariant
-	}
-
-	if obj.AnnotationWidgetScopeSpecificWidgetsVariant != nil {
-		return obj.AnnotationWidgetScopeSpecificWidgetsVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj AnnotationWidgetScope) GetActualInstanceValue() (interface{}) {
-	if obj.AnnotationWidgetScopeAllWidgetsVariant != nil {
-		return *obj.AnnotationWidgetScopeAllWidgetsVariant
-	}
-
-	if obj.AnnotationWidgetScopeSpecificWidgetsVariant != nil {
-		return *obj.AnnotationWidgetScopeSpecificWidgetsVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableAnnotationWidgetScope struct {

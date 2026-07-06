@@ -13,240 +13,304 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ColorsBy - struct for ColorsBy
+// checks if the ColorsBy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ColorsBy{}
+
+// ColorsBy Defines the coloring strategy applied to widget data series.
 type ColorsBy struct {
-	ColorsByAggregationVariant *ColorsByAggregationVariant
-	ColorsByCategoryVariant *ColorsByCategoryVariant
-	ColorsByGroupByVariant *ColorsByGroupByVariant
-	ColorsByQueryVariant *ColorsByQueryVariant
-	ColorsByStackVariant *ColorsByStackVariant
+	// Colors by aggregation.
+	Aggregation map[string]interface{} `json:"aggregation,omitempty"`
+	// Colors by category.
+	Category map[string]interface{} `json:"category,omitempty"`
+	// Colors by group by.
+	GroupBy map[string]interface{} `json:"groupBy,omitempty"`
+	// Colors by query.
+	Query map[string]interface{} `json:"query,omitempty"`
+	// Colors by stack.
+	Stack map[string]interface{} `json:"stack,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// ColorsByAggregationVariantAsColorsBy is a convenience function that returns ColorsByAggregationVariant wrapped in ColorsBy
-func ColorsByAggregationVariantAsColorsBy(v *ColorsByAggregationVariant) ColorsBy {
-	return ColorsBy{
-		ColorsByAggregationVariant: v,
+type _ColorsBy ColorsBy
+
+// NewColorsBy instantiates a new ColorsBy object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewColorsBy() *ColorsBy {
+	this := ColorsBy{}
+	return &this
+}
+
+// NewColorsByWithDefaults instantiates a new ColorsBy object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewColorsByWithDefaults() *ColorsBy {
+	this := ColorsBy{}
+	return &this
+}
+
+// GetAggregation returns the Aggregation field value if set, zero value otherwise.
+func (o *ColorsBy) GetAggregation() map[string]interface{} {
+	if o == nil || IsNil(o.Aggregation) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.Aggregation
 }
 
-// ColorsByCategoryVariantAsColorsBy is a convenience function that returns ColorsByCategoryVariant wrapped in ColorsBy
-func ColorsByCategoryVariantAsColorsBy(v *ColorsByCategoryVariant) ColorsBy {
-	return ColorsBy{
-		ColorsByCategoryVariant: v,
+// GetAggregationOk returns a tuple with the Aggregation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ColorsBy) GetAggregationOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Aggregation) {
+		return map[string]interface{}{}, false
 	}
+	return o.Aggregation, true
 }
 
-// ColorsByGroupByVariantAsColorsBy is a convenience function that returns ColorsByGroupByVariant wrapped in ColorsBy
-func ColorsByGroupByVariantAsColorsBy(v *ColorsByGroupByVariant) ColorsBy {
-	return ColorsBy{
-		ColorsByGroupByVariant: v,
+// HasAggregation returns a boolean if a field has been set.
+func (o *ColorsBy) HasAggregation() bool {
+	if o != nil && !IsNil(o.Aggregation) {
+		return true
 	}
+
+	return false
 }
 
-// ColorsByQueryVariantAsColorsBy is a convenience function that returns ColorsByQueryVariant wrapped in ColorsBy
-func ColorsByQueryVariantAsColorsBy(v *ColorsByQueryVariant) ColorsBy {
-	return ColorsBy{
-		ColorsByQueryVariant: v,
+// SetAggregation gets a reference to the given map[string]interface{} and assigns it to the Aggregation field.
+func (o *ColorsBy) SetAggregation(v map[string]interface{}) {
+	o.Aggregation = v
+}
+
+// GetCategory returns the Category field value if set, zero value otherwise.
+func (o *ColorsBy) GetCategory() map[string]interface{} {
+	if o == nil || IsNil(o.Category) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.Category
 }
 
-// ColorsByStackVariantAsColorsBy is a convenience function that returns ColorsByStackVariant wrapped in ColorsBy
-func ColorsByStackVariantAsColorsBy(v *ColorsByStackVariant) ColorsBy {
-	return ColorsBy{
-		ColorsByStackVariant: v,
+// GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ColorsBy) GetCategoryOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Category) {
+		return map[string]interface{}{}, false
 	}
+	return o.Category, true
 }
 
+// HasCategory returns a boolean if a field has been set.
+func (o *ColorsBy) HasCategory() bool {
+	if o != nil && !IsNil(o.Category) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ColorsBy) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ColorsByAggregationVariant
-	err = json.Unmarshal(data, &dst.ColorsByAggregationVariant)
-	if err == nil {
-		jsonColorsByAggregationVariant, _ := json.Marshal(dst.ColorsByAggregationVariant)
-		if string(jsonColorsByAggregationVariant) == "{}" { // empty struct
-			dst.ColorsByAggregationVariant = nil
-		} else {
-			if err = validator.Validate(dst.ColorsByAggregationVariant); err != nil {
-				dst.ColorsByAggregationVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetCategory gets a reference to the given map[string]interface{} and assigns it to the Category field.
+func (o *ColorsBy) SetCategory(v map[string]interface{}) {
+	o.Category = v
+}
+
+// GetGroupBy returns the GroupBy field value if set, zero value otherwise.
+func (o *ColorsBy) GetGroupBy() map[string]interface{} {
+	if o == nil || IsNil(o.GroupBy) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.GroupBy
+}
+
+// GetGroupByOk returns a tuple with the GroupBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ColorsBy) GetGroupByOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.GroupBy) {
+		return map[string]interface{}{}, false
+	}
+	return o.GroupBy, true
+}
+
+// HasGroupBy returns a boolean if a field has been set.
+func (o *ColorsBy) HasGroupBy() bool {
+	if o != nil && !IsNil(o.GroupBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupBy gets a reference to the given map[string]interface{} and assigns it to the GroupBy field.
+func (o *ColorsBy) SetGroupBy(v map[string]interface{}) {
+	o.GroupBy = v
+}
+
+// GetQuery returns the Query field value if set, zero value otherwise.
+func (o *ColorsBy) GetQuery() map[string]interface{} {
+	if o == nil || IsNil(o.Query) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Query
+}
+
+// GetQueryOk returns a tuple with the Query field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ColorsBy) GetQueryOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Query) {
+		return map[string]interface{}{}, false
+	}
+	return o.Query, true
+}
+
+// HasQuery returns a boolean if a field has been set.
+func (o *ColorsBy) HasQuery() bool {
+	if o != nil && !IsNil(o.Query) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuery gets a reference to the given map[string]interface{} and assigns it to the Query field.
+func (o *ColorsBy) SetQuery(v map[string]interface{}) {
+	o.Query = v
+}
+
+// GetStack returns the Stack field value if set, zero value otherwise.
+func (o *ColorsBy) GetStack() map[string]interface{} {
+	if o == nil || IsNil(o.Stack) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Stack
+}
+
+// GetStackOk returns a tuple with the Stack field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ColorsBy) GetStackOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Stack) {
+		return map[string]interface{}{}, false
+	}
+	return o.Stack, true
+}
+
+// HasStack returns a boolean if a field has been set.
+func (o *ColorsBy) HasStack() bool {
+	if o != nil && !IsNil(o.Stack) {
+		return true
+	}
+
+	return false
+}
+
+// SetStack gets a reference to the given map[string]interface{} and assigns it to the Stack field.
+func (o *ColorsBy) SetStack(v map[string]interface{}) {
+	o.Stack = v
+}
+
+func (o ColorsBy) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ColorsBy) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Aggregation) {
+		toSerialize["aggregation"] = o.Aggregation
+	}
+	if !IsNil(o.Category) {
+		toSerialize["category"] = o.Category
+	}
+	if !IsNil(o.GroupBy) {
+		toSerialize["groupBy"] = o.GroupBy
+	}
+	if !IsNil(o.Query) {
+		toSerialize["query"] = o.Query
+	}
+	if !IsNil(o.Stack) {
+		toSerialize["stack"] = o.Stack
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["stack"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["groupBy"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["aggregation"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["query"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["category"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [stack, groupBy, aggregation, query, category] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ColorsBy) UnmarshalJSON(data []byte) (err error) {
+	varColorsBy := _ColorsBy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varColorsBy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ColorsBy(varColorsBy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["stack"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ColorsByAggregationVariant = nil
-	}
-
-	// try to unmarshal data into ColorsByCategoryVariant
-	err = json.Unmarshal(data, &dst.ColorsByCategoryVariant)
-	if err == nil {
-		jsonColorsByCategoryVariant, _ := json.Marshal(dst.ColorsByCategoryVariant)
-		if string(jsonColorsByCategoryVariant) == "{}" { // empty struct
-			dst.ColorsByCategoryVariant = nil
-		} else {
-			if err = validator.Validate(dst.ColorsByCategoryVariant); err != nil {
-				dst.ColorsByCategoryVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["groupBy"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ColorsByCategoryVariant = nil
-	}
-
-	// try to unmarshal data into ColorsByGroupByVariant
-	err = json.Unmarshal(data, &dst.ColorsByGroupByVariant)
-	if err == nil {
-		jsonColorsByGroupByVariant, _ := json.Marshal(dst.ColorsByGroupByVariant)
-		if string(jsonColorsByGroupByVariant) == "{}" { // empty struct
-			dst.ColorsByGroupByVariant = nil
-		} else {
-			if err = validator.Validate(dst.ColorsByGroupByVariant); err != nil {
-				dst.ColorsByGroupByVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["aggregation"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ColorsByGroupByVariant = nil
-	}
-
-	// try to unmarshal data into ColorsByQueryVariant
-	err = json.Unmarshal(data, &dst.ColorsByQueryVariant)
-	if err == nil {
-		jsonColorsByQueryVariant, _ := json.Marshal(dst.ColorsByQueryVariant)
-		if string(jsonColorsByQueryVariant) == "{}" { // empty struct
-			dst.ColorsByQueryVariant = nil
-		} else {
-			if err = validator.Validate(dst.ColorsByQueryVariant); err != nil {
-				dst.ColorsByQueryVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["query"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ColorsByQueryVariant = nil
-	}
-
-	// try to unmarshal data into ColorsByStackVariant
-	err = json.Unmarshal(data, &dst.ColorsByStackVariant)
-	if err == nil {
-		jsonColorsByStackVariant, _ := json.Marshal(dst.ColorsByStackVariant)
-		if string(jsonColorsByStackVariant) == "{}" { // empty struct
-			dst.ColorsByStackVariant = nil
-		} else {
-			if err = validator.Validate(dst.ColorsByStackVariant); err != nil {
-				dst.ColorsByStackVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["category"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ColorsByStackVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [stack, groupBy, aggregation, query, category] may be set"}
+		}
+
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "groupBy")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "stack")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ColorsByAggregationVariant = nil
-		dst.ColorsByCategoryVariant = nil
-		dst.ColorsByGroupByVariant = nil
-		dst.ColorsByQueryVariant = nil
-		dst.ColorsByStackVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ColorsBy)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ColorsBy) MarshalJSON() ([]byte, error) {
-	if src.ColorsByAggregationVariant != nil {
-		return json.Marshal(&src.ColorsByAggregationVariant)
-	}
-
-	if src.ColorsByCategoryVariant != nil {
-		return json.Marshal(&src.ColorsByCategoryVariant)
-	}
-
-	if src.ColorsByGroupByVariant != nil {
-		return json.Marshal(&src.ColorsByGroupByVariant)
-	}
-
-	if src.ColorsByQueryVariant != nil {
-		return json.Marshal(&src.ColorsByQueryVariant)
-	}
-
-	if src.ColorsByStackVariant != nil {
-		return json.Marshal(&src.ColorsByStackVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ColorsBy) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ColorsByAggregationVariant != nil {
-		return obj.ColorsByAggregationVariant
-	}
-
-	if obj.ColorsByCategoryVariant != nil {
-		return obj.ColorsByCategoryVariant
-	}
-
-	if obj.ColorsByGroupByVariant != nil {
-		return obj.ColorsByGroupByVariant
-	}
-
-	if obj.ColorsByQueryVariant != nil {
-		return obj.ColorsByQueryVariant
-	}
-
-	if obj.ColorsByStackVariant != nil {
-		return obj.ColorsByStackVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ColorsBy) GetActualInstanceValue() (interface{}) {
-	if obj.ColorsByAggregationVariant != nil {
-		return *obj.ColorsByAggregationVariant
-	}
-
-	if obj.ColorsByCategoryVariant != nil {
-		return *obj.ColorsByCategoryVariant
-	}
-
-	if obj.ColorsByGroupByVariant != nil {
-		return *obj.ColorsByGroupByVariant
-	}
-
-	if obj.ColorsByQueryVariant != nil {
-		return *obj.ColorsByQueryVariant
-	}
-
-	if obj.ColorsByStackVariant != nil {
-		return *obj.ColorsByStackVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableColorsBy struct {

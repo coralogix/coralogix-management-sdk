@@ -13,164 +13,214 @@ package actions_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ActionExecutionResponse - struct for ActionExecutionResponse
+// checks if the ActionExecutionResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ActionExecutionResponse{}
+
+// ActionExecutionResponse This data structure represents a response to an Action execution request.
 type ActionExecutionResponse struct {
-	ActionExecutionResponseCreate *ActionExecutionResponseCreate
-	ActionExecutionResponseDelete *ActionExecutionResponseDelete
-	ActionExecutionResponseReplace *ActionExecutionResponseReplace
+	Create *CreateActionResponse `json:"create,omitempty"`
+	// This data structure represents the response to delete an Action.
+	Delete map[string]interface{} `json:"delete,omitempty"`
+	Replace *ReplaceActionResponse `json:"replace,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// ActionExecutionResponseCreateAsActionExecutionResponse is a convenience function that returns ActionExecutionResponseCreate wrapped in ActionExecutionResponse
-func ActionExecutionResponseCreateAsActionExecutionResponse(v *ActionExecutionResponseCreate) ActionExecutionResponse {
-	return ActionExecutionResponse{
-		ActionExecutionResponseCreate: v,
+type _ActionExecutionResponse ActionExecutionResponse
+
+// NewActionExecutionResponse instantiates a new ActionExecutionResponse object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewActionExecutionResponse() *ActionExecutionResponse {
+	this := ActionExecutionResponse{}
+	return &this
+}
+
+// NewActionExecutionResponseWithDefaults instantiates a new ActionExecutionResponse object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewActionExecutionResponseWithDefaults() *ActionExecutionResponse {
+	this := ActionExecutionResponse{}
+	return &this
+}
+
+// GetCreate returns the Create field value if set, zero value otherwise.
+func (o *ActionExecutionResponse) GetCreate() CreateActionResponse {
+	if o == nil || IsNil(o.Create) {
+		var ret CreateActionResponse
+		return ret
 	}
+	return *o.Create
 }
 
-// ActionExecutionResponseDeleteAsActionExecutionResponse is a convenience function that returns ActionExecutionResponseDelete wrapped in ActionExecutionResponse
-func ActionExecutionResponseDeleteAsActionExecutionResponse(v *ActionExecutionResponseDelete) ActionExecutionResponse {
-	return ActionExecutionResponse{
-		ActionExecutionResponseDelete: v,
+// GetCreateOk returns a tuple with the Create field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ActionExecutionResponse) GetCreateOk() (*CreateActionResponse, bool) {
+	if o == nil || IsNil(o.Create) {
+		return nil, false
 	}
+	return o.Create, true
 }
 
-// ActionExecutionResponseReplaceAsActionExecutionResponse is a convenience function that returns ActionExecutionResponseReplace wrapped in ActionExecutionResponse
-func ActionExecutionResponseReplaceAsActionExecutionResponse(v *ActionExecutionResponseReplace) ActionExecutionResponse {
-	return ActionExecutionResponse{
-		ActionExecutionResponseReplace: v,
+// HasCreate returns a boolean if a field has been set.
+func (o *ActionExecutionResponse) HasCreate() bool {
+	if o != nil && !IsNil(o.Create) {
+		return true
 	}
+
+	return false
 }
 
+// SetCreate gets a reference to the given CreateActionResponse and assigns it to the Create field.
+func (o *ActionExecutionResponse) SetCreate(v CreateActionResponse) {
+	o.Create = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ActionExecutionResponse) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ActionExecutionResponseCreate
-	err = json.Unmarshal(data, &dst.ActionExecutionResponseCreate)
-	if err == nil {
-		jsonActionExecutionResponseCreate, _ := json.Marshal(dst.ActionExecutionResponseCreate)
-		if string(jsonActionExecutionResponseCreate) == "{}" { // empty struct
-			dst.ActionExecutionResponseCreate = nil
-		} else {
-			if err = validator.Validate(dst.ActionExecutionResponseCreate); err != nil {
-				dst.ActionExecutionResponseCreate = nil
-			} else {
-				match++
-			}
+// GetDelete returns the Delete field value if set, zero value otherwise.
+func (o *ActionExecutionResponse) GetDelete() map[string]interface{} {
+	if o == nil || IsNil(o.Delete) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Delete
+}
+
+// GetDeleteOk returns a tuple with the Delete field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ActionExecutionResponse) GetDeleteOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Delete) {
+		return map[string]interface{}{}, false
+	}
+	return o.Delete, true
+}
+
+// HasDelete returns a boolean if a field has been set.
+func (o *ActionExecutionResponse) HasDelete() bool {
+	if o != nil && !IsNil(o.Delete) {
+		return true
+	}
+
+	return false
+}
+
+// SetDelete gets a reference to the given map[string]interface{} and assigns it to the Delete field.
+func (o *ActionExecutionResponse) SetDelete(v map[string]interface{}) {
+	o.Delete = v
+}
+
+// GetReplace returns the Replace field value if set, zero value otherwise.
+func (o *ActionExecutionResponse) GetReplace() ReplaceActionResponse {
+	if o == nil || IsNil(o.Replace) {
+		var ret ReplaceActionResponse
+		return ret
+	}
+	return *o.Replace
+}
+
+// GetReplaceOk returns a tuple with the Replace field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ActionExecutionResponse) GetReplaceOk() (*ReplaceActionResponse, bool) {
+	if o == nil || IsNil(o.Replace) {
+		return nil, false
+	}
+	return o.Replace, true
+}
+
+// HasReplace returns a boolean if a field has been set.
+func (o *ActionExecutionResponse) HasReplace() bool {
+	if o != nil && !IsNil(o.Replace) {
+		return true
+	}
+
+	return false
+}
+
+// SetReplace gets a reference to the given ReplaceActionResponse and assigns it to the Replace field.
+func (o *ActionExecutionResponse) SetReplace(v ReplaceActionResponse) {
+	o.Replace = &v
+}
+
+func (o ActionExecutionResponse) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ActionExecutionResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Create) {
+		toSerialize["create"] = o.Create
+	}
+	if !IsNil(o.Delete) {
+		toSerialize["delete"] = o.Delete
+	}
+	if !IsNil(o.Replace) {
+		toSerialize["replace"] = o.Replace
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["create"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["replace"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["delete"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [create, replace, delete] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ActionExecutionResponse) UnmarshalJSON(data []byte) (err error) {
+	varActionExecutionResponse := _ActionExecutionResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActionExecutionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActionExecutionResponse(varActionExecutionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["create"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ActionExecutionResponseCreate = nil
-	}
-
-	// try to unmarshal data into ActionExecutionResponseDelete
-	err = json.Unmarshal(data, &dst.ActionExecutionResponseDelete)
-	if err == nil {
-		jsonActionExecutionResponseDelete, _ := json.Marshal(dst.ActionExecutionResponseDelete)
-		if string(jsonActionExecutionResponseDelete) == "{}" { // empty struct
-			dst.ActionExecutionResponseDelete = nil
-		} else {
-			if err = validator.Validate(dst.ActionExecutionResponseDelete); err != nil {
-				dst.ActionExecutionResponseDelete = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["replace"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ActionExecutionResponseDelete = nil
-	}
-
-	// try to unmarshal data into ActionExecutionResponseReplace
-	err = json.Unmarshal(data, &dst.ActionExecutionResponseReplace)
-	if err == nil {
-		jsonActionExecutionResponseReplace, _ := json.Marshal(dst.ActionExecutionResponseReplace)
-		if string(jsonActionExecutionResponseReplace) == "{}" { // empty struct
-			dst.ActionExecutionResponseReplace = nil
-		} else {
-			if err = validator.Validate(dst.ActionExecutionResponseReplace); err != nil {
-				dst.ActionExecutionResponseReplace = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["delete"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ActionExecutionResponseReplace = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [create, replace, delete] may be set"}
+		}
+
+		delete(additionalProperties, "create")
+		delete(additionalProperties, "delete")
+		delete(additionalProperties, "replace")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ActionExecutionResponseCreate = nil
-		dst.ActionExecutionResponseDelete = nil
-		dst.ActionExecutionResponseReplace = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ActionExecutionResponse)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ActionExecutionResponse) MarshalJSON() ([]byte, error) {
-	if src.ActionExecutionResponseCreate != nil {
-		return json.Marshal(&src.ActionExecutionResponseCreate)
-	}
-
-	if src.ActionExecutionResponseDelete != nil {
-		return json.Marshal(&src.ActionExecutionResponseDelete)
-	}
-
-	if src.ActionExecutionResponseReplace != nil {
-		return json.Marshal(&src.ActionExecutionResponseReplace)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ActionExecutionResponse) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ActionExecutionResponseCreate != nil {
-		return obj.ActionExecutionResponseCreate
-	}
-
-	if obj.ActionExecutionResponseDelete != nil {
-		return obj.ActionExecutionResponseDelete
-	}
-
-	if obj.ActionExecutionResponseReplace != nil {
-		return obj.ActionExecutionResponseReplace
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ActionExecutionResponse) GetActualInstanceValue() (interface{}) {
-	if obj.ActionExecutionResponseCreate != nil {
-		return *obj.ActionExecutionResponseCreate
-	}
-
-	if obj.ActionExecutionResponseDelete != nil {
-		return *obj.ActionExecutionResponseDelete
-	}
-
-	if obj.ActionExecutionResponseReplace != nil {
-		return *obj.ActionExecutionResponseReplace
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableActionExecutionResponse struct {

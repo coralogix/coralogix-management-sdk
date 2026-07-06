@@ -14,125 +14,231 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// RoleUpdateAction - struct for RoleUpdateAction
+// checks if the RoleUpdateAction type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RoleUpdateAction{}
+
+// RoleUpdateAction Clear role.
 type RoleUpdateAction struct {
-	RoleUpdateActionClear *RoleUpdateActionClear
-	RoleUpdateActionSetRoleId *RoleUpdateActionSetRoleId
+	// Discriminator indicating the role update action type (set_role_id or clear).
+	ActionType string `json:"actionType"`
+	Clear *ClearRole `json:"clear,omitempty"`
+	SetRoleId *SetRoleId `json:"setRoleId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// RoleUpdateActionClearAsRoleUpdateAction is a convenience function that returns RoleUpdateActionClear wrapped in RoleUpdateAction
-func RoleUpdateActionClearAsRoleUpdateAction(v *RoleUpdateActionClear) RoleUpdateAction {
-	return RoleUpdateAction{
-		RoleUpdateActionClear: v,
+type _RoleUpdateAction RoleUpdateAction
+
+// NewRoleUpdateAction instantiates a new RoleUpdateAction object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRoleUpdateAction(actionType string) *RoleUpdateAction {
+	this := RoleUpdateAction{}
+	this.ActionType = actionType
+	return &this
+}
+
+// NewRoleUpdateActionWithDefaults instantiates a new RoleUpdateAction object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRoleUpdateActionWithDefaults() *RoleUpdateAction {
+	this := RoleUpdateAction{}
+	return &this
+}
+
+// GetActionType returns the ActionType field value
+func (o *RoleUpdateAction) GetActionType() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
+
+	return o.ActionType
 }
 
-// RoleUpdateActionSetRoleIdAsRoleUpdateAction is a convenience function that returns RoleUpdateActionSetRoleId wrapped in RoleUpdateAction
-func RoleUpdateActionSetRoleIdAsRoleUpdateAction(v *RoleUpdateActionSetRoleId) RoleUpdateAction {
-	return RoleUpdateAction{
-		RoleUpdateActionSetRoleId: v,
+// GetActionTypeOk returns a tuple with the ActionType field value
+// and a boolean to check if the value has been set.
+func (o *RoleUpdateAction) GetActionTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
 	}
+	return &o.ActionType, true
 }
 
+// SetActionType sets field value
+func (o *RoleUpdateAction) SetActionType(v string) {
+	o.ActionType = v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *RoleUpdateAction) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into RoleUpdateActionClear
-	err = json.Unmarshal(data, &dst.RoleUpdateActionClear)
-	if err == nil {
-		jsonRoleUpdateActionClear, _ := json.Marshal(dst.RoleUpdateActionClear)
-		if string(jsonRoleUpdateActionClear) == "{}" { // empty struct
-			dst.RoleUpdateActionClear = nil
-		} else {
-			if err = validator.Validate(dst.RoleUpdateActionClear); err != nil {
-				dst.RoleUpdateActionClear = nil
-			} else {
-				match++
-			}
+// GetClear returns the Clear field value if set, zero value otherwise.
+func (o *RoleUpdateAction) GetClear() ClearRole {
+	if o == nil || IsNil(o.Clear) {
+		var ret ClearRole
+		return ret
+	}
+	return *o.Clear
+}
+
+// GetClearOk returns a tuple with the Clear field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoleUpdateAction) GetClearOk() (*ClearRole, bool) {
+	if o == nil || IsNil(o.Clear) {
+		return nil, false
+	}
+	return o.Clear, true
+}
+
+// HasClear returns a boolean if a field has been set.
+func (o *RoleUpdateAction) HasClear() bool {
+	if o != nil && !IsNil(o.Clear) {
+		return true
+	}
+
+	return false
+}
+
+// SetClear gets a reference to the given ClearRole and assigns it to the Clear field.
+func (o *RoleUpdateAction) SetClear(v ClearRole) {
+	o.Clear = &v
+}
+
+// GetSetRoleId returns the SetRoleId field value if set, zero value otherwise.
+func (o *RoleUpdateAction) GetSetRoleId() SetRoleId {
+	if o == nil || IsNil(o.SetRoleId) {
+		var ret SetRoleId
+		return ret
+	}
+	return *o.SetRoleId
+}
+
+// GetSetRoleIdOk returns a tuple with the SetRoleId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoleUpdateAction) GetSetRoleIdOk() (*SetRoleId, bool) {
+	if o == nil || IsNil(o.SetRoleId) {
+		return nil, false
+	}
+	return o.SetRoleId, true
+}
+
+// HasSetRoleId returns a boolean if a field has been set.
+func (o *RoleUpdateAction) HasSetRoleId() bool {
+	if o != nil && !IsNil(o.SetRoleId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSetRoleId gets a reference to the given SetRoleId and assigns it to the SetRoleId field.
+func (o *RoleUpdateAction) SetSetRoleId(v SetRoleId) {
+	o.SetRoleId = &v
+}
+
+func (o RoleUpdateAction) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RoleUpdateAction) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["actionType"] = o.ActionType
+	if !IsNil(o.Clear) {
+		toSerialize["clear"] = o.Clear
+	}
+	if !IsNil(o.SetRoleId) {
+		toSerialize["setRoleId"] = o.SetRoleId
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["setRoleId"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["clear"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [setRoleId, clear] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *RoleUpdateAction) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"actionType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.RoleUpdateActionClear = nil
 	}
 
-	// try to unmarshal data into RoleUpdateActionSetRoleId
-	err = json.Unmarshal(data, &dst.RoleUpdateActionSetRoleId)
-	if err == nil {
-		jsonRoleUpdateActionSetRoleId, _ := json.Marshal(dst.RoleUpdateActionSetRoleId)
-		if string(jsonRoleUpdateActionSetRoleId) == "{}" { // empty struct
-			dst.RoleUpdateActionSetRoleId = nil
-		} else {
-			if err = validator.Validate(dst.RoleUpdateActionSetRoleId); err != nil {
-				dst.RoleUpdateActionSetRoleId = nil
-			} else {
-				match++
-			}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["setRoleId"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["clear"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [setRoleId, clear] may be set"}
+	}
+
+	varRoleUpdateAction := _RoleUpdateAction{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRoleUpdateAction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RoleUpdateAction(varRoleUpdateAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["setRoleId"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RoleUpdateActionSetRoleId = nil
+		if _, exists := additionalProperties["clear"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [setRoleId, clear] may be set"}
+		}
+
+		delete(additionalProperties, "actionType")
+		delete(additionalProperties, "clear")
+		delete(additionalProperties, "setRoleId")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.RoleUpdateActionClear = nil
-		dst.RoleUpdateActionSetRoleId = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(RoleUpdateAction)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src RoleUpdateAction) MarshalJSON() ([]byte, error) {
-	if src.RoleUpdateActionClear != nil {
-		return json.Marshal(&src.RoleUpdateActionClear)
-	}
-
-	if src.RoleUpdateActionSetRoleId != nil {
-		return json.Marshal(&src.RoleUpdateActionSetRoleId)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *RoleUpdateAction) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.RoleUpdateActionClear != nil {
-		return obj.RoleUpdateActionClear
-	}
-
-	if obj.RoleUpdateActionSetRoleId != nil {
-		return obj.RoleUpdateActionSetRoleId
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj RoleUpdateAction) GetActualInstanceValue() (interface{}) {
-	if obj.RoleUpdateActionClear != nil {
-		return *obj.RoleUpdateActionClear
-	}
-
-	if obj.RoleUpdateActionSetRoleId != nil {
-		return *obj.RoleUpdateActionSetRoleId
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableRoleUpdateAction struct {

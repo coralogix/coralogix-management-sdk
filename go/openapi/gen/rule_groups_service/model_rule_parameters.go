@@ -13,430 +13,514 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// RuleParameters - struct for RuleParameters
+// checks if the RuleParameters type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RuleParameters{}
+
+// RuleParameters Rule parameters.
 type RuleParameters struct {
-	RuleParametersAllowParameters *RuleParametersAllowParameters
-	RuleParametersBlockParameters *RuleParametersBlockParameters
-	RuleParametersExtractParameters *RuleParametersExtractParameters
-	RuleParametersExtractTimestampParameters *RuleParametersExtractTimestampParameters
-	RuleParametersJsonExtractParameters *RuleParametersJsonExtractParameters
-	RuleParametersJsonParseParameters *RuleParametersJsonParseParameters
-	RuleParametersJsonStringifyParameters *RuleParametersJsonStringifyParameters
-	RuleParametersParseParameters *RuleParametersParseParameters
-	RuleParametersRemoveFieldsParameters *RuleParametersRemoveFieldsParameters
-	RuleParametersReplaceParameters *RuleParametersReplaceParameters
+	AllowParameters *AllowParameters `json:"allowParameters,omitempty"`
+	BlockParameters *BlockParameters `json:"blockParameters,omitempty"`
+	ExtractParameters *ExtractParameters `json:"extractParameters,omitempty"`
+	ExtractTimestampParameters *ExtractTimestampParameters `json:"extractTimestampParameters,omitempty"`
+	JsonExtractParameters *JsonExtractParameters `json:"jsonExtractParameters,omitempty"`
+	JsonParseParameters *JsonParseParameters `json:"jsonParseParameters,omitempty"`
+	JsonStringifyParameters *JsonStringifyParameters `json:"jsonStringifyParameters,omitempty"`
+	ParseParameters *ParseParameters `json:"parseParameters,omitempty"`
+	RemoveFieldsParameters *RemoveFieldsParameters `json:"removeFieldsParameters,omitempty"`
+	ReplaceParameters *ReplaceParameters `json:"replaceParameters,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// RuleParametersAllowParametersAsRuleParameters is a convenience function that returns RuleParametersAllowParameters wrapped in RuleParameters
-func RuleParametersAllowParametersAsRuleParameters(v *RuleParametersAllowParameters) RuleParameters {
-	return RuleParameters{
-		RuleParametersAllowParameters: v,
+type _RuleParameters RuleParameters
+
+// NewRuleParameters instantiates a new RuleParameters object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRuleParameters() *RuleParameters {
+	this := RuleParameters{}
+	return &this
+}
+
+// NewRuleParametersWithDefaults instantiates a new RuleParameters object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRuleParametersWithDefaults() *RuleParameters {
+	this := RuleParameters{}
+	return &this
+}
+
+// GetAllowParameters returns the AllowParameters field value if set, zero value otherwise.
+func (o *RuleParameters) GetAllowParameters() AllowParameters {
+	if o == nil || IsNil(o.AllowParameters) {
+		var ret AllowParameters
+		return ret
 	}
+	return *o.AllowParameters
 }
 
-// RuleParametersBlockParametersAsRuleParameters is a convenience function that returns RuleParametersBlockParameters wrapped in RuleParameters
-func RuleParametersBlockParametersAsRuleParameters(v *RuleParametersBlockParameters) RuleParameters {
-	return RuleParameters{
-		RuleParametersBlockParameters: v,
+// GetAllowParametersOk returns a tuple with the AllowParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleParameters) GetAllowParametersOk() (*AllowParameters, bool) {
+	if o == nil || IsNil(o.AllowParameters) {
+		return nil, false
 	}
+	return o.AllowParameters, true
 }
 
-// RuleParametersExtractParametersAsRuleParameters is a convenience function that returns RuleParametersExtractParameters wrapped in RuleParameters
-func RuleParametersExtractParametersAsRuleParameters(v *RuleParametersExtractParameters) RuleParameters {
-	return RuleParameters{
-		RuleParametersExtractParameters: v,
+// HasAllowParameters returns a boolean if a field has been set.
+func (o *RuleParameters) HasAllowParameters() bool {
+	if o != nil && !IsNil(o.AllowParameters) {
+		return true
 	}
+
+	return false
 }
 
-// RuleParametersExtractTimestampParametersAsRuleParameters is a convenience function that returns RuleParametersExtractTimestampParameters wrapped in RuleParameters
-func RuleParametersExtractTimestampParametersAsRuleParameters(v *RuleParametersExtractTimestampParameters) RuleParameters {
-	return RuleParameters{
-		RuleParametersExtractTimestampParameters: v,
+// SetAllowParameters gets a reference to the given AllowParameters and assigns it to the AllowParameters field.
+func (o *RuleParameters) SetAllowParameters(v AllowParameters) {
+	o.AllowParameters = &v
+}
+
+// GetBlockParameters returns the BlockParameters field value if set, zero value otherwise.
+func (o *RuleParameters) GetBlockParameters() BlockParameters {
+	if o == nil || IsNil(o.BlockParameters) {
+		var ret BlockParameters
+		return ret
 	}
+	return *o.BlockParameters
 }
 
-// RuleParametersJsonExtractParametersAsRuleParameters is a convenience function that returns RuleParametersJsonExtractParameters wrapped in RuleParameters
-func RuleParametersJsonExtractParametersAsRuleParameters(v *RuleParametersJsonExtractParameters) RuleParameters {
-	return RuleParameters{
-		RuleParametersJsonExtractParameters: v,
+// GetBlockParametersOk returns a tuple with the BlockParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleParameters) GetBlockParametersOk() (*BlockParameters, bool) {
+	if o == nil || IsNil(o.BlockParameters) {
+		return nil, false
 	}
+	return o.BlockParameters, true
 }
 
-// RuleParametersJsonParseParametersAsRuleParameters is a convenience function that returns RuleParametersJsonParseParameters wrapped in RuleParameters
-func RuleParametersJsonParseParametersAsRuleParameters(v *RuleParametersJsonParseParameters) RuleParameters {
-	return RuleParameters{
-		RuleParametersJsonParseParameters: v,
+// HasBlockParameters returns a boolean if a field has been set.
+func (o *RuleParameters) HasBlockParameters() bool {
+	if o != nil && !IsNil(o.BlockParameters) {
+		return true
 	}
+
+	return false
 }
 
-// RuleParametersJsonStringifyParametersAsRuleParameters is a convenience function that returns RuleParametersJsonStringifyParameters wrapped in RuleParameters
-func RuleParametersJsonStringifyParametersAsRuleParameters(v *RuleParametersJsonStringifyParameters) RuleParameters {
-	return RuleParameters{
-		RuleParametersJsonStringifyParameters: v,
+// SetBlockParameters gets a reference to the given BlockParameters and assigns it to the BlockParameters field.
+func (o *RuleParameters) SetBlockParameters(v BlockParameters) {
+	o.BlockParameters = &v
+}
+
+// GetExtractParameters returns the ExtractParameters field value if set, zero value otherwise.
+func (o *RuleParameters) GetExtractParameters() ExtractParameters {
+	if o == nil || IsNil(o.ExtractParameters) {
+		var ret ExtractParameters
+		return ret
 	}
+	return *o.ExtractParameters
 }
 
-// RuleParametersParseParametersAsRuleParameters is a convenience function that returns RuleParametersParseParameters wrapped in RuleParameters
-func RuleParametersParseParametersAsRuleParameters(v *RuleParametersParseParameters) RuleParameters {
-	return RuleParameters{
-		RuleParametersParseParameters: v,
+// GetExtractParametersOk returns a tuple with the ExtractParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleParameters) GetExtractParametersOk() (*ExtractParameters, bool) {
+	if o == nil || IsNil(o.ExtractParameters) {
+		return nil, false
 	}
+	return o.ExtractParameters, true
 }
 
-// RuleParametersRemoveFieldsParametersAsRuleParameters is a convenience function that returns RuleParametersRemoveFieldsParameters wrapped in RuleParameters
-func RuleParametersRemoveFieldsParametersAsRuleParameters(v *RuleParametersRemoveFieldsParameters) RuleParameters {
-	return RuleParameters{
-		RuleParametersRemoveFieldsParameters: v,
+// HasExtractParameters returns a boolean if a field has been set.
+func (o *RuleParameters) HasExtractParameters() bool {
+	if o != nil && !IsNil(o.ExtractParameters) {
+		return true
 	}
+
+	return false
 }
 
-// RuleParametersReplaceParametersAsRuleParameters is a convenience function that returns RuleParametersReplaceParameters wrapped in RuleParameters
-func RuleParametersReplaceParametersAsRuleParameters(v *RuleParametersReplaceParameters) RuleParameters {
-	return RuleParameters{
-		RuleParametersReplaceParameters: v,
+// SetExtractParameters gets a reference to the given ExtractParameters and assigns it to the ExtractParameters field.
+func (o *RuleParameters) SetExtractParameters(v ExtractParameters) {
+	o.ExtractParameters = &v
+}
+
+// GetExtractTimestampParameters returns the ExtractTimestampParameters field value if set, zero value otherwise.
+func (o *RuleParameters) GetExtractTimestampParameters() ExtractTimestampParameters {
+	if o == nil || IsNil(o.ExtractTimestampParameters) {
+		var ret ExtractTimestampParameters
+		return ret
 	}
+	return *o.ExtractTimestampParameters
 }
 
+// GetExtractTimestampParametersOk returns a tuple with the ExtractTimestampParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleParameters) GetExtractTimestampParametersOk() (*ExtractTimestampParameters, bool) {
+	if o == nil || IsNil(o.ExtractTimestampParameters) {
+		return nil, false
+	}
+	return o.ExtractTimestampParameters, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into RuleParametersAllowParameters
-	err = json.Unmarshal(data, &dst.RuleParametersAllowParameters)
-	if err == nil {
-		jsonRuleParametersAllowParameters, _ := json.Marshal(dst.RuleParametersAllowParameters)
-		if string(jsonRuleParametersAllowParameters) == "{}" { // empty struct
-			dst.RuleParametersAllowParameters = nil
-		} else {
-			if err = validator.Validate(dst.RuleParametersAllowParameters); err != nil {
-				dst.RuleParametersAllowParameters = nil
-			} else {
-				match++
-			}
+// HasExtractTimestampParameters returns a boolean if a field has been set.
+func (o *RuleParameters) HasExtractTimestampParameters() bool {
+	if o != nil && !IsNil(o.ExtractTimestampParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtractTimestampParameters gets a reference to the given ExtractTimestampParameters and assigns it to the ExtractTimestampParameters field.
+func (o *RuleParameters) SetExtractTimestampParameters(v ExtractTimestampParameters) {
+	o.ExtractTimestampParameters = &v
+}
+
+// GetJsonExtractParameters returns the JsonExtractParameters field value if set, zero value otherwise.
+func (o *RuleParameters) GetJsonExtractParameters() JsonExtractParameters {
+	if o == nil || IsNil(o.JsonExtractParameters) {
+		var ret JsonExtractParameters
+		return ret
+	}
+	return *o.JsonExtractParameters
+}
+
+// GetJsonExtractParametersOk returns a tuple with the JsonExtractParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleParameters) GetJsonExtractParametersOk() (*JsonExtractParameters, bool) {
+	if o == nil || IsNil(o.JsonExtractParameters) {
+		return nil, false
+	}
+	return o.JsonExtractParameters, true
+}
+
+// HasJsonExtractParameters returns a boolean if a field has been set.
+func (o *RuleParameters) HasJsonExtractParameters() bool {
+	if o != nil && !IsNil(o.JsonExtractParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsonExtractParameters gets a reference to the given JsonExtractParameters and assigns it to the JsonExtractParameters field.
+func (o *RuleParameters) SetJsonExtractParameters(v JsonExtractParameters) {
+	o.JsonExtractParameters = &v
+}
+
+// GetJsonParseParameters returns the JsonParseParameters field value if set, zero value otherwise.
+func (o *RuleParameters) GetJsonParseParameters() JsonParseParameters {
+	if o == nil || IsNil(o.JsonParseParameters) {
+		var ret JsonParseParameters
+		return ret
+	}
+	return *o.JsonParseParameters
+}
+
+// GetJsonParseParametersOk returns a tuple with the JsonParseParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleParameters) GetJsonParseParametersOk() (*JsonParseParameters, bool) {
+	if o == nil || IsNil(o.JsonParseParameters) {
+		return nil, false
+	}
+	return o.JsonParseParameters, true
+}
+
+// HasJsonParseParameters returns a boolean if a field has been set.
+func (o *RuleParameters) HasJsonParseParameters() bool {
+	if o != nil && !IsNil(o.JsonParseParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsonParseParameters gets a reference to the given JsonParseParameters and assigns it to the JsonParseParameters field.
+func (o *RuleParameters) SetJsonParseParameters(v JsonParseParameters) {
+	o.JsonParseParameters = &v
+}
+
+// GetJsonStringifyParameters returns the JsonStringifyParameters field value if set, zero value otherwise.
+func (o *RuleParameters) GetJsonStringifyParameters() JsonStringifyParameters {
+	if o == nil || IsNil(o.JsonStringifyParameters) {
+		var ret JsonStringifyParameters
+		return ret
+	}
+	return *o.JsonStringifyParameters
+}
+
+// GetJsonStringifyParametersOk returns a tuple with the JsonStringifyParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleParameters) GetJsonStringifyParametersOk() (*JsonStringifyParameters, bool) {
+	if o == nil || IsNil(o.JsonStringifyParameters) {
+		return nil, false
+	}
+	return o.JsonStringifyParameters, true
+}
+
+// HasJsonStringifyParameters returns a boolean if a field has been set.
+func (o *RuleParameters) HasJsonStringifyParameters() bool {
+	if o != nil && !IsNil(o.JsonStringifyParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetJsonStringifyParameters gets a reference to the given JsonStringifyParameters and assigns it to the JsonStringifyParameters field.
+func (o *RuleParameters) SetJsonStringifyParameters(v JsonStringifyParameters) {
+	o.JsonStringifyParameters = &v
+}
+
+// GetParseParameters returns the ParseParameters field value if set, zero value otherwise.
+func (o *RuleParameters) GetParseParameters() ParseParameters {
+	if o == nil || IsNil(o.ParseParameters) {
+		var ret ParseParameters
+		return ret
+	}
+	return *o.ParseParameters
+}
+
+// GetParseParametersOk returns a tuple with the ParseParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleParameters) GetParseParametersOk() (*ParseParameters, bool) {
+	if o == nil || IsNil(o.ParseParameters) {
+		return nil, false
+	}
+	return o.ParseParameters, true
+}
+
+// HasParseParameters returns a boolean if a field has been set.
+func (o *RuleParameters) HasParseParameters() bool {
+	if o != nil && !IsNil(o.ParseParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetParseParameters gets a reference to the given ParseParameters and assigns it to the ParseParameters field.
+func (o *RuleParameters) SetParseParameters(v ParseParameters) {
+	o.ParseParameters = &v
+}
+
+// GetRemoveFieldsParameters returns the RemoveFieldsParameters field value if set, zero value otherwise.
+func (o *RuleParameters) GetRemoveFieldsParameters() RemoveFieldsParameters {
+	if o == nil || IsNil(o.RemoveFieldsParameters) {
+		var ret RemoveFieldsParameters
+		return ret
+	}
+	return *o.RemoveFieldsParameters
+}
+
+// GetRemoveFieldsParametersOk returns a tuple with the RemoveFieldsParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleParameters) GetRemoveFieldsParametersOk() (*RemoveFieldsParameters, bool) {
+	if o == nil || IsNil(o.RemoveFieldsParameters) {
+		return nil, false
+	}
+	return o.RemoveFieldsParameters, true
+}
+
+// HasRemoveFieldsParameters returns a boolean if a field has been set.
+func (o *RuleParameters) HasRemoveFieldsParameters() bool {
+	if o != nil && !IsNil(o.RemoveFieldsParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoveFieldsParameters gets a reference to the given RemoveFieldsParameters and assigns it to the RemoveFieldsParameters field.
+func (o *RuleParameters) SetRemoveFieldsParameters(v RemoveFieldsParameters) {
+	o.RemoveFieldsParameters = &v
+}
+
+// GetReplaceParameters returns the ReplaceParameters field value if set, zero value otherwise.
+func (o *RuleParameters) GetReplaceParameters() ReplaceParameters {
+	if o == nil || IsNil(o.ReplaceParameters) {
+		var ret ReplaceParameters
+		return ret
+	}
+	return *o.ReplaceParameters
+}
+
+// GetReplaceParametersOk returns a tuple with the ReplaceParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleParameters) GetReplaceParametersOk() (*ReplaceParameters, bool) {
+	if o == nil || IsNil(o.ReplaceParameters) {
+		return nil, false
+	}
+	return o.ReplaceParameters, true
+}
+
+// HasReplaceParameters returns a boolean if a field has been set.
+func (o *RuleParameters) HasReplaceParameters() bool {
+	if o != nil && !IsNil(o.ReplaceParameters) {
+		return true
+	}
+
+	return false
+}
+
+// SetReplaceParameters gets a reference to the given ReplaceParameters and assigns it to the ReplaceParameters field.
+func (o *RuleParameters) SetReplaceParameters(v ReplaceParameters) {
+	o.ReplaceParameters = &v
+}
+
+func (o RuleParameters) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RuleParameters) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AllowParameters) {
+		toSerialize["allowParameters"] = o.AllowParameters
+	}
+	if !IsNil(o.BlockParameters) {
+		toSerialize["blockParameters"] = o.BlockParameters
+	}
+	if !IsNil(o.ExtractParameters) {
+		toSerialize["extractParameters"] = o.ExtractParameters
+	}
+	if !IsNil(o.ExtractTimestampParameters) {
+		toSerialize["extractTimestampParameters"] = o.ExtractTimestampParameters
+	}
+	if !IsNil(o.JsonExtractParameters) {
+		toSerialize["jsonExtractParameters"] = o.JsonExtractParameters
+	}
+	if !IsNil(o.JsonParseParameters) {
+		toSerialize["jsonParseParameters"] = o.JsonParseParameters
+	}
+	if !IsNil(o.JsonStringifyParameters) {
+		toSerialize["jsonStringifyParameters"] = o.JsonStringifyParameters
+	}
+	if !IsNil(o.ParseParameters) {
+		toSerialize["parseParameters"] = o.ParseParameters
+	}
+	if !IsNil(o.RemoveFieldsParameters) {
+		toSerialize["removeFieldsParameters"] = o.RemoveFieldsParameters
+	}
+	if !IsNil(o.ReplaceParameters) {
+		toSerialize["replaceParameters"] = o.ReplaceParameters
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["extractParameters"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["jsonExtractParameters"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["replaceParameters"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["parseParameters"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["allowParameters"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["blockParameters"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["extractTimestampParameters"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["removeFieldsParameters"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["jsonStringifyParameters"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["jsonParseParameters"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [extractParameters, jsonExtractParameters, replaceParameters, parseParameters, allowParameters, blockParameters, extractTimestampParameters, removeFieldsParameters, jsonStringifyParameters, jsonParseParameters] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *RuleParameters) UnmarshalJSON(data []byte) (err error) {
+	varRuleParameters := _RuleParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleParameters(varRuleParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["extractParameters"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleParametersAllowParameters = nil
-	}
-
-	// try to unmarshal data into RuleParametersBlockParameters
-	err = json.Unmarshal(data, &dst.RuleParametersBlockParameters)
-	if err == nil {
-		jsonRuleParametersBlockParameters, _ := json.Marshal(dst.RuleParametersBlockParameters)
-		if string(jsonRuleParametersBlockParameters) == "{}" { // empty struct
-			dst.RuleParametersBlockParameters = nil
-		} else {
-			if err = validator.Validate(dst.RuleParametersBlockParameters); err != nil {
-				dst.RuleParametersBlockParameters = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["jsonExtractParameters"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleParametersBlockParameters = nil
-	}
-
-	// try to unmarshal data into RuleParametersExtractParameters
-	err = json.Unmarshal(data, &dst.RuleParametersExtractParameters)
-	if err == nil {
-		jsonRuleParametersExtractParameters, _ := json.Marshal(dst.RuleParametersExtractParameters)
-		if string(jsonRuleParametersExtractParameters) == "{}" { // empty struct
-			dst.RuleParametersExtractParameters = nil
-		} else {
-			if err = validator.Validate(dst.RuleParametersExtractParameters); err != nil {
-				dst.RuleParametersExtractParameters = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["replaceParameters"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleParametersExtractParameters = nil
-	}
-
-	// try to unmarshal data into RuleParametersExtractTimestampParameters
-	err = json.Unmarshal(data, &dst.RuleParametersExtractTimestampParameters)
-	if err == nil {
-		jsonRuleParametersExtractTimestampParameters, _ := json.Marshal(dst.RuleParametersExtractTimestampParameters)
-		if string(jsonRuleParametersExtractTimestampParameters) == "{}" { // empty struct
-			dst.RuleParametersExtractTimestampParameters = nil
-		} else {
-			if err = validator.Validate(dst.RuleParametersExtractTimestampParameters); err != nil {
-				dst.RuleParametersExtractTimestampParameters = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["parseParameters"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleParametersExtractTimestampParameters = nil
-	}
-
-	// try to unmarshal data into RuleParametersJsonExtractParameters
-	err = json.Unmarshal(data, &dst.RuleParametersJsonExtractParameters)
-	if err == nil {
-		jsonRuleParametersJsonExtractParameters, _ := json.Marshal(dst.RuleParametersJsonExtractParameters)
-		if string(jsonRuleParametersJsonExtractParameters) == "{}" { // empty struct
-			dst.RuleParametersJsonExtractParameters = nil
-		} else {
-			if err = validator.Validate(dst.RuleParametersJsonExtractParameters); err != nil {
-				dst.RuleParametersJsonExtractParameters = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["allowParameters"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleParametersJsonExtractParameters = nil
-	}
-
-	// try to unmarshal data into RuleParametersJsonParseParameters
-	err = json.Unmarshal(data, &dst.RuleParametersJsonParseParameters)
-	if err == nil {
-		jsonRuleParametersJsonParseParameters, _ := json.Marshal(dst.RuleParametersJsonParseParameters)
-		if string(jsonRuleParametersJsonParseParameters) == "{}" { // empty struct
-			dst.RuleParametersJsonParseParameters = nil
-		} else {
-			if err = validator.Validate(dst.RuleParametersJsonParseParameters); err != nil {
-				dst.RuleParametersJsonParseParameters = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["blockParameters"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleParametersJsonParseParameters = nil
-	}
-
-	// try to unmarshal data into RuleParametersJsonStringifyParameters
-	err = json.Unmarshal(data, &dst.RuleParametersJsonStringifyParameters)
-	if err == nil {
-		jsonRuleParametersJsonStringifyParameters, _ := json.Marshal(dst.RuleParametersJsonStringifyParameters)
-		if string(jsonRuleParametersJsonStringifyParameters) == "{}" { // empty struct
-			dst.RuleParametersJsonStringifyParameters = nil
-		} else {
-			if err = validator.Validate(dst.RuleParametersJsonStringifyParameters); err != nil {
-				dst.RuleParametersJsonStringifyParameters = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["extractTimestampParameters"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleParametersJsonStringifyParameters = nil
-	}
-
-	// try to unmarshal data into RuleParametersParseParameters
-	err = json.Unmarshal(data, &dst.RuleParametersParseParameters)
-	if err == nil {
-		jsonRuleParametersParseParameters, _ := json.Marshal(dst.RuleParametersParseParameters)
-		if string(jsonRuleParametersParseParameters) == "{}" { // empty struct
-			dst.RuleParametersParseParameters = nil
-		} else {
-			if err = validator.Validate(dst.RuleParametersParseParameters); err != nil {
-				dst.RuleParametersParseParameters = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["removeFieldsParameters"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleParametersParseParameters = nil
-	}
-
-	// try to unmarshal data into RuleParametersRemoveFieldsParameters
-	err = json.Unmarshal(data, &dst.RuleParametersRemoveFieldsParameters)
-	if err == nil {
-		jsonRuleParametersRemoveFieldsParameters, _ := json.Marshal(dst.RuleParametersRemoveFieldsParameters)
-		if string(jsonRuleParametersRemoveFieldsParameters) == "{}" { // empty struct
-			dst.RuleParametersRemoveFieldsParameters = nil
-		} else {
-			if err = validator.Validate(dst.RuleParametersRemoveFieldsParameters); err != nil {
-				dst.RuleParametersRemoveFieldsParameters = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["jsonStringifyParameters"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleParametersRemoveFieldsParameters = nil
-	}
-
-	// try to unmarshal data into RuleParametersReplaceParameters
-	err = json.Unmarshal(data, &dst.RuleParametersReplaceParameters)
-	if err == nil {
-		jsonRuleParametersReplaceParameters, _ := json.Marshal(dst.RuleParametersReplaceParameters)
-		if string(jsonRuleParametersReplaceParameters) == "{}" { // empty struct
-			dst.RuleParametersReplaceParameters = nil
-		} else {
-			if err = validator.Validate(dst.RuleParametersReplaceParameters); err != nil {
-				dst.RuleParametersReplaceParameters = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["jsonParseParameters"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleParametersReplaceParameters = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [extractParameters, jsonExtractParameters, replaceParameters, parseParameters, allowParameters, blockParameters, extractTimestampParameters, removeFieldsParameters, jsonStringifyParameters, jsonParseParameters] may be set"}
+		}
+
+		delete(additionalProperties, "allowParameters")
+		delete(additionalProperties, "blockParameters")
+		delete(additionalProperties, "extractParameters")
+		delete(additionalProperties, "extractTimestampParameters")
+		delete(additionalProperties, "jsonExtractParameters")
+		delete(additionalProperties, "jsonParseParameters")
+		delete(additionalProperties, "jsonStringifyParameters")
+		delete(additionalProperties, "parseParameters")
+		delete(additionalProperties, "removeFieldsParameters")
+		delete(additionalProperties, "replaceParameters")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.RuleParametersAllowParameters = nil
-		dst.RuleParametersBlockParameters = nil
-		dst.RuleParametersExtractParameters = nil
-		dst.RuleParametersExtractTimestampParameters = nil
-		dst.RuleParametersJsonExtractParameters = nil
-		dst.RuleParametersJsonParseParameters = nil
-		dst.RuleParametersJsonStringifyParameters = nil
-		dst.RuleParametersParseParameters = nil
-		dst.RuleParametersRemoveFieldsParameters = nil
-		dst.RuleParametersReplaceParameters = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(RuleParameters)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src RuleParameters) MarshalJSON() ([]byte, error) {
-	if src.RuleParametersAllowParameters != nil {
-		return json.Marshal(&src.RuleParametersAllowParameters)
-	}
-
-	if src.RuleParametersBlockParameters != nil {
-		return json.Marshal(&src.RuleParametersBlockParameters)
-	}
-
-	if src.RuleParametersExtractParameters != nil {
-		return json.Marshal(&src.RuleParametersExtractParameters)
-	}
-
-	if src.RuleParametersExtractTimestampParameters != nil {
-		return json.Marshal(&src.RuleParametersExtractTimestampParameters)
-	}
-
-	if src.RuleParametersJsonExtractParameters != nil {
-		return json.Marshal(&src.RuleParametersJsonExtractParameters)
-	}
-
-	if src.RuleParametersJsonParseParameters != nil {
-		return json.Marshal(&src.RuleParametersJsonParseParameters)
-	}
-
-	if src.RuleParametersJsonStringifyParameters != nil {
-		return json.Marshal(&src.RuleParametersJsonStringifyParameters)
-	}
-
-	if src.RuleParametersParseParameters != nil {
-		return json.Marshal(&src.RuleParametersParseParameters)
-	}
-
-	if src.RuleParametersRemoveFieldsParameters != nil {
-		return json.Marshal(&src.RuleParametersRemoveFieldsParameters)
-	}
-
-	if src.RuleParametersReplaceParameters != nil {
-		return json.Marshal(&src.RuleParametersReplaceParameters)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *RuleParameters) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.RuleParametersAllowParameters != nil {
-		return obj.RuleParametersAllowParameters
-	}
-
-	if obj.RuleParametersBlockParameters != nil {
-		return obj.RuleParametersBlockParameters
-	}
-
-	if obj.RuleParametersExtractParameters != nil {
-		return obj.RuleParametersExtractParameters
-	}
-
-	if obj.RuleParametersExtractTimestampParameters != nil {
-		return obj.RuleParametersExtractTimestampParameters
-	}
-
-	if obj.RuleParametersJsonExtractParameters != nil {
-		return obj.RuleParametersJsonExtractParameters
-	}
-
-	if obj.RuleParametersJsonParseParameters != nil {
-		return obj.RuleParametersJsonParseParameters
-	}
-
-	if obj.RuleParametersJsonStringifyParameters != nil {
-		return obj.RuleParametersJsonStringifyParameters
-	}
-
-	if obj.RuleParametersParseParameters != nil {
-		return obj.RuleParametersParseParameters
-	}
-
-	if obj.RuleParametersRemoveFieldsParameters != nil {
-		return obj.RuleParametersRemoveFieldsParameters
-	}
-
-	if obj.RuleParametersReplaceParameters != nil {
-		return obj.RuleParametersReplaceParameters
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj RuleParameters) GetActualInstanceValue() (interface{}) {
-	if obj.RuleParametersAllowParameters != nil {
-		return *obj.RuleParametersAllowParameters
-	}
-
-	if obj.RuleParametersBlockParameters != nil {
-		return *obj.RuleParametersBlockParameters
-	}
-
-	if obj.RuleParametersExtractParameters != nil {
-		return *obj.RuleParametersExtractParameters
-	}
-
-	if obj.RuleParametersExtractTimestampParameters != nil {
-		return *obj.RuleParametersExtractTimestampParameters
-	}
-
-	if obj.RuleParametersJsonExtractParameters != nil {
-		return *obj.RuleParametersJsonExtractParameters
-	}
-
-	if obj.RuleParametersJsonParseParameters != nil {
-		return *obj.RuleParametersJsonParseParameters
-	}
-
-	if obj.RuleParametersJsonStringifyParameters != nil {
-		return *obj.RuleParametersJsonStringifyParameters
-	}
-
-	if obj.RuleParametersParseParameters != nil {
-		return *obj.RuleParametersParseParameters
-	}
-
-	if obj.RuleParametersRemoveFieldsParameters != nil {
-		return *obj.RuleParametersRemoveFieldsParameters
-	}
-
-	if obj.RuleParametersReplaceParameters != nil {
-		return *obj.RuleParametersReplaceParameters
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableRuleParameters struct {

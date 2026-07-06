@@ -13,164 +13,213 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// QueryMetricsQueryType - struct for QueryMetricsQueryType
+// checks if the QueryMetricsQueryType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &QueryMetricsQueryType{}
+
+// QueryMetricsQueryType Discriminated union specifying what kind of metric data to fetch: metric names, label names, or label values.
 type QueryMetricsQueryType struct {
-	QueryMetricsQueryTypeLabelNameVariant *QueryMetricsQueryTypeLabelNameVariant
-	QueryMetricsQueryTypeLabelValueVariant *QueryMetricsQueryTypeLabelValueVariant
-	QueryMetricsQueryTypeMetricNameVariant *QueryMetricsQueryTypeMetricNameVariant
+	LabelName *QueryMetricsQueryTypeLabelName `json:"labelName,omitempty"`
+	LabelValue *QueryMetricsQueryTypeLabelValue `json:"labelValue,omitempty"`
+	MetricName *QueryMetricsQueryTypeMetricName `json:"metricName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// QueryMetricsQueryTypeLabelNameVariantAsQueryMetricsQueryType is a convenience function that returns QueryMetricsQueryTypeLabelNameVariant wrapped in QueryMetricsQueryType
-func QueryMetricsQueryTypeLabelNameVariantAsQueryMetricsQueryType(v *QueryMetricsQueryTypeLabelNameVariant) QueryMetricsQueryType {
-	return QueryMetricsQueryType{
-		QueryMetricsQueryTypeLabelNameVariant: v,
+type _QueryMetricsQueryType QueryMetricsQueryType
+
+// NewQueryMetricsQueryType instantiates a new QueryMetricsQueryType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewQueryMetricsQueryType() *QueryMetricsQueryType {
+	this := QueryMetricsQueryType{}
+	return &this
+}
+
+// NewQueryMetricsQueryTypeWithDefaults instantiates a new QueryMetricsQueryType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewQueryMetricsQueryTypeWithDefaults() *QueryMetricsQueryType {
+	this := QueryMetricsQueryType{}
+	return &this
+}
+
+// GetLabelName returns the LabelName field value if set, zero value otherwise.
+func (o *QueryMetricsQueryType) GetLabelName() QueryMetricsQueryTypeLabelName {
+	if o == nil || IsNil(o.LabelName) {
+		var ret QueryMetricsQueryTypeLabelName
+		return ret
 	}
+	return *o.LabelName
 }
 
-// QueryMetricsQueryTypeLabelValueVariantAsQueryMetricsQueryType is a convenience function that returns QueryMetricsQueryTypeLabelValueVariant wrapped in QueryMetricsQueryType
-func QueryMetricsQueryTypeLabelValueVariantAsQueryMetricsQueryType(v *QueryMetricsQueryTypeLabelValueVariant) QueryMetricsQueryType {
-	return QueryMetricsQueryType{
-		QueryMetricsQueryTypeLabelValueVariant: v,
+// GetLabelNameOk returns a tuple with the LabelName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryMetricsQueryType) GetLabelNameOk() (*QueryMetricsQueryTypeLabelName, bool) {
+	if o == nil || IsNil(o.LabelName) {
+		return nil, false
 	}
+	return o.LabelName, true
 }
 
-// QueryMetricsQueryTypeMetricNameVariantAsQueryMetricsQueryType is a convenience function that returns QueryMetricsQueryTypeMetricNameVariant wrapped in QueryMetricsQueryType
-func QueryMetricsQueryTypeMetricNameVariantAsQueryMetricsQueryType(v *QueryMetricsQueryTypeMetricNameVariant) QueryMetricsQueryType {
-	return QueryMetricsQueryType{
-		QueryMetricsQueryTypeMetricNameVariant: v,
+// HasLabelName returns a boolean if a field has been set.
+func (o *QueryMetricsQueryType) HasLabelName() bool {
+	if o != nil && !IsNil(o.LabelName) {
+		return true
 	}
+
+	return false
 }
 
+// SetLabelName gets a reference to the given QueryMetricsQueryTypeLabelName and assigns it to the LabelName field.
+func (o *QueryMetricsQueryType) SetLabelName(v QueryMetricsQueryTypeLabelName) {
+	o.LabelName = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *QueryMetricsQueryType) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into QueryMetricsQueryTypeLabelNameVariant
-	err = json.Unmarshal(data, &dst.QueryMetricsQueryTypeLabelNameVariant)
-	if err == nil {
-		jsonQueryMetricsQueryTypeLabelNameVariant, _ := json.Marshal(dst.QueryMetricsQueryTypeLabelNameVariant)
-		if string(jsonQueryMetricsQueryTypeLabelNameVariant) == "{}" { // empty struct
-			dst.QueryMetricsQueryTypeLabelNameVariant = nil
-		} else {
-			if err = validator.Validate(dst.QueryMetricsQueryTypeLabelNameVariant); err != nil {
-				dst.QueryMetricsQueryTypeLabelNameVariant = nil
-			} else {
-				match++
-			}
+// GetLabelValue returns the LabelValue field value if set, zero value otherwise.
+func (o *QueryMetricsQueryType) GetLabelValue() QueryMetricsQueryTypeLabelValue {
+	if o == nil || IsNil(o.LabelValue) {
+		var ret QueryMetricsQueryTypeLabelValue
+		return ret
+	}
+	return *o.LabelValue
+}
+
+// GetLabelValueOk returns a tuple with the LabelValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryMetricsQueryType) GetLabelValueOk() (*QueryMetricsQueryTypeLabelValue, bool) {
+	if o == nil || IsNil(o.LabelValue) {
+		return nil, false
+	}
+	return o.LabelValue, true
+}
+
+// HasLabelValue returns a boolean if a field has been set.
+func (o *QueryMetricsQueryType) HasLabelValue() bool {
+	if o != nil && !IsNil(o.LabelValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabelValue gets a reference to the given QueryMetricsQueryTypeLabelValue and assigns it to the LabelValue field.
+func (o *QueryMetricsQueryType) SetLabelValue(v QueryMetricsQueryTypeLabelValue) {
+	o.LabelValue = &v
+}
+
+// GetMetricName returns the MetricName field value if set, zero value otherwise.
+func (o *QueryMetricsQueryType) GetMetricName() QueryMetricsQueryTypeMetricName {
+	if o == nil || IsNil(o.MetricName) {
+		var ret QueryMetricsQueryTypeMetricName
+		return ret
+	}
+	return *o.MetricName
+}
+
+// GetMetricNameOk returns a tuple with the MetricName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryMetricsQueryType) GetMetricNameOk() (*QueryMetricsQueryTypeMetricName, bool) {
+	if o == nil || IsNil(o.MetricName) {
+		return nil, false
+	}
+	return o.MetricName, true
+}
+
+// HasMetricName returns a boolean if a field has been set.
+func (o *QueryMetricsQueryType) HasMetricName() bool {
+	if o != nil && !IsNil(o.MetricName) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricName gets a reference to the given QueryMetricsQueryTypeMetricName and assigns it to the MetricName field.
+func (o *QueryMetricsQueryType) SetMetricName(v QueryMetricsQueryTypeMetricName) {
+	o.MetricName = &v
+}
+
+func (o QueryMetricsQueryType) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o QueryMetricsQueryType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.LabelName) {
+		toSerialize["labelName"] = o.LabelName
+	}
+	if !IsNil(o.LabelValue) {
+		toSerialize["labelValue"] = o.LabelValue
+	}
+	if !IsNil(o.MetricName) {
+		toSerialize["metricName"] = o.MetricName
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["metricName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["labelName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["labelValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metricName, labelName, labelValue] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *QueryMetricsQueryType) UnmarshalJSON(data []byte) (err error) {
+	varQueryMetricsQueryType := _QueryMetricsQueryType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryMetricsQueryType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryMetricsQueryType(varQueryMetricsQueryType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["metricName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QueryMetricsQueryTypeLabelNameVariant = nil
-	}
-
-	// try to unmarshal data into QueryMetricsQueryTypeLabelValueVariant
-	err = json.Unmarshal(data, &dst.QueryMetricsQueryTypeLabelValueVariant)
-	if err == nil {
-		jsonQueryMetricsQueryTypeLabelValueVariant, _ := json.Marshal(dst.QueryMetricsQueryTypeLabelValueVariant)
-		if string(jsonQueryMetricsQueryTypeLabelValueVariant) == "{}" { // empty struct
-			dst.QueryMetricsQueryTypeLabelValueVariant = nil
-		} else {
-			if err = validator.Validate(dst.QueryMetricsQueryTypeLabelValueVariant); err != nil {
-				dst.QueryMetricsQueryTypeLabelValueVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["labelName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QueryMetricsQueryTypeLabelValueVariant = nil
-	}
-
-	// try to unmarshal data into QueryMetricsQueryTypeMetricNameVariant
-	err = json.Unmarshal(data, &dst.QueryMetricsQueryTypeMetricNameVariant)
-	if err == nil {
-		jsonQueryMetricsQueryTypeMetricNameVariant, _ := json.Marshal(dst.QueryMetricsQueryTypeMetricNameVariant)
-		if string(jsonQueryMetricsQueryTypeMetricNameVariant) == "{}" { // empty struct
-			dst.QueryMetricsQueryTypeMetricNameVariant = nil
-		} else {
-			if err = validator.Validate(dst.QueryMetricsQueryTypeMetricNameVariant); err != nil {
-				dst.QueryMetricsQueryTypeMetricNameVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["labelValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QueryMetricsQueryTypeMetricNameVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [metricName, labelName, labelValue] may be set"}
+		}
+
+		delete(additionalProperties, "labelName")
+		delete(additionalProperties, "labelValue")
+		delete(additionalProperties, "metricName")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.QueryMetricsQueryTypeLabelNameVariant = nil
-		dst.QueryMetricsQueryTypeLabelValueVariant = nil
-		dst.QueryMetricsQueryTypeMetricNameVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(QueryMetricsQueryType)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src QueryMetricsQueryType) MarshalJSON() ([]byte, error) {
-	if src.QueryMetricsQueryTypeLabelNameVariant != nil {
-		return json.Marshal(&src.QueryMetricsQueryTypeLabelNameVariant)
-	}
-
-	if src.QueryMetricsQueryTypeLabelValueVariant != nil {
-		return json.Marshal(&src.QueryMetricsQueryTypeLabelValueVariant)
-	}
-
-	if src.QueryMetricsQueryTypeMetricNameVariant != nil {
-		return json.Marshal(&src.QueryMetricsQueryTypeMetricNameVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *QueryMetricsQueryType) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.QueryMetricsQueryTypeLabelNameVariant != nil {
-		return obj.QueryMetricsQueryTypeLabelNameVariant
-	}
-
-	if obj.QueryMetricsQueryTypeLabelValueVariant != nil {
-		return obj.QueryMetricsQueryTypeLabelValueVariant
-	}
-
-	if obj.QueryMetricsQueryTypeMetricNameVariant != nil {
-		return obj.QueryMetricsQueryTypeMetricNameVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj QueryMetricsQueryType) GetActualInstanceValue() (interface{}) {
-	if obj.QueryMetricsQueryTypeLabelNameVariant != nil {
-		return *obj.QueryMetricsQueryTypeLabelNameVariant
-	}
-
-	if obj.QueryMetricsQueryTypeLabelValueVariant != nil {
-		return *obj.QueryMetricsQueryTypeLabelValueVariant
-	}
-
-	if obj.QueryMetricsQueryTypeMetricNameVariant != nil {
-		return *obj.QueryMetricsQueryTypeMetricNameVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableQueryMetricsQueryType struct {

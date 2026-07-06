@@ -15,8 +15,6 @@ model_delete_team_group_response.go
 model_error.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go
-model_filter_path_and_values_filters.go
-model_filter_path_and_values_multiple_values.go
 model_filters.go
 model_get_group_users_response.go
 model_get_team_group_by_name_response.go
@@ -29,12 +27,8 @@ model_rbac_v2_user.go
 model_role.go
 model_role_update.go
 model_role_update_action.go
-model_role_update_action_clear.go
-model_role_update_action_set_role_id.go
 model_scope_update.go
 model_scope_update_action.go
-model_scope_update_action_clear.go
-model_scope_update_action_set_scope_id.go
 model_set_role_id.go
 model_set_scope_id.go
 model_team_group.go
@@ -44,9 +38,6 @@ model_user_id_list.go
 model_user_status.go
 model_user_updates.go
 model_user_updates_operation.go
-model_user_updates_operation_add.go
-model_user_updates_operation_remove.go
-model_user_updates_operation_set.go
 model_v2_scope.go
 model_v3_filter_operator.go
 response.go

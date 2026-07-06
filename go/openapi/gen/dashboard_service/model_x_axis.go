@@ -13,164 +13,214 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// XAxis - struct for XAxis
+// checks if the XAxis type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &XAxis{}
+
+// XAxis X axis.
 type XAxis struct {
-	XAxisTime *XAxisTime
-	XAxisTimeBuckets *XAxisTimeBuckets
-	XAxisValue *XAxisValue
+	Time *XAxisByTime `json:"time,omitempty"`
+	TimeBuckets *IntervalResolution `json:"timeBuckets,omitempty"`
+	// X axis by value.
+	Value map[string]interface{} `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// XAxisTimeAsXAxis is a convenience function that returns XAxisTime wrapped in XAxis
-func XAxisTimeAsXAxis(v *XAxisTime) XAxis {
-	return XAxis{
-		XAxisTime: v,
+type _XAxis XAxis
+
+// NewXAxis instantiates a new XAxis object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewXAxis() *XAxis {
+	this := XAxis{}
+	return &this
+}
+
+// NewXAxisWithDefaults instantiates a new XAxis object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewXAxisWithDefaults() *XAxis {
+	this := XAxis{}
+	return &this
+}
+
+// GetTime returns the Time field value if set, zero value otherwise.
+func (o *XAxis) GetTime() XAxisByTime {
+	if o == nil || IsNil(o.Time) {
+		var ret XAxisByTime
+		return ret
 	}
+	return *o.Time
 }
 
-// XAxisTimeBucketsAsXAxis is a convenience function that returns XAxisTimeBuckets wrapped in XAxis
-func XAxisTimeBucketsAsXAxis(v *XAxisTimeBuckets) XAxis {
-	return XAxis{
-		XAxisTimeBuckets: v,
+// GetTimeOk returns a tuple with the Time field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XAxis) GetTimeOk() (*XAxisByTime, bool) {
+	if o == nil || IsNil(o.Time) {
+		return nil, false
 	}
+	return o.Time, true
 }
 
-// XAxisValueAsXAxis is a convenience function that returns XAxisValue wrapped in XAxis
-func XAxisValueAsXAxis(v *XAxisValue) XAxis {
-	return XAxis{
-		XAxisValue: v,
+// HasTime returns a boolean if a field has been set.
+func (o *XAxis) HasTime() bool {
+	if o != nil && !IsNil(o.Time) {
+		return true
 	}
+
+	return false
 }
 
+// SetTime gets a reference to the given XAxisByTime and assigns it to the Time field.
+func (o *XAxis) SetTime(v XAxisByTime) {
+	o.Time = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *XAxis) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into XAxisTime
-	err = json.Unmarshal(data, &dst.XAxisTime)
-	if err == nil {
-		jsonXAxisTime, _ := json.Marshal(dst.XAxisTime)
-		if string(jsonXAxisTime) == "{}" { // empty struct
-			dst.XAxisTime = nil
-		} else {
-			if err = validator.Validate(dst.XAxisTime); err != nil {
-				dst.XAxisTime = nil
-			} else {
-				match++
-			}
+// GetTimeBuckets returns the TimeBuckets field value if set, zero value otherwise.
+func (o *XAxis) GetTimeBuckets() IntervalResolution {
+	if o == nil || IsNil(o.TimeBuckets) {
+		var ret IntervalResolution
+		return ret
+	}
+	return *o.TimeBuckets
+}
+
+// GetTimeBucketsOk returns a tuple with the TimeBuckets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XAxis) GetTimeBucketsOk() (*IntervalResolution, bool) {
+	if o == nil || IsNil(o.TimeBuckets) {
+		return nil, false
+	}
+	return o.TimeBuckets, true
+}
+
+// HasTimeBuckets returns a boolean if a field has been set.
+func (o *XAxis) HasTimeBuckets() bool {
+	if o != nil && !IsNil(o.TimeBuckets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeBuckets gets a reference to the given IntervalResolution and assigns it to the TimeBuckets field.
+func (o *XAxis) SetTimeBuckets(v IntervalResolution) {
+	o.TimeBuckets = &v
+}
+
+// GetValue returns the Value field value if set, zero value otherwise.
+func (o *XAxis) GetValue() map[string]interface{} {
+	if o == nil || IsNil(o.Value) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XAxis) GetValueOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Value) {
+		return map[string]interface{}{}, false
+	}
+	return o.Value, true
+}
+
+// HasValue returns a boolean if a field has been set.
+func (o *XAxis) HasValue() bool {
+	if o != nil && !IsNil(o.Value) {
+		return true
+	}
+
+	return false
+}
+
+// SetValue gets a reference to the given map[string]interface{} and assigns it to the Value field.
+func (o *XAxis) SetValue(v map[string]interface{}) {
+	o.Value = v
+}
+
+func (o XAxis) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o XAxis) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Time) {
+		toSerialize["time"] = o.Time
+	}
+	if !IsNil(o.TimeBuckets) {
+		toSerialize["timeBuckets"] = o.TimeBuckets
+	}
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["value"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["time"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["timeBuckets"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [value, time, timeBuckets] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *XAxis) UnmarshalJSON(data []byte) (err error) {
+	varXAxis := _XAxis{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varXAxis)
+
+	if err != nil {
+		return err
+	}
+
+	*o = XAxis(varXAxis)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["value"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.XAxisTime = nil
-	}
-
-	// try to unmarshal data into XAxisTimeBuckets
-	err = json.Unmarshal(data, &dst.XAxisTimeBuckets)
-	if err == nil {
-		jsonXAxisTimeBuckets, _ := json.Marshal(dst.XAxisTimeBuckets)
-		if string(jsonXAxisTimeBuckets) == "{}" { // empty struct
-			dst.XAxisTimeBuckets = nil
-		} else {
-			if err = validator.Validate(dst.XAxisTimeBuckets); err != nil {
-				dst.XAxisTimeBuckets = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["time"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.XAxisTimeBuckets = nil
-	}
-
-	// try to unmarshal data into XAxisValue
-	err = json.Unmarshal(data, &dst.XAxisValue)
-	if err == nil {
-		jsonXAxisValue, _ := json.Marshal(dst.XAxisValue)
-		if string(jsonXAxisValue) == "{}" { // empty struct
-			dst.XAxisValue = nil
-		} else {
-			if err = validator.Validate(dst.XAxisValue); err != nil {
-				dst.XAxisValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["timeBuckets"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.XAxisValue = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [value, time, timeBuckets] may be set"}
+		}
+
+		delete(additionalProperties, "time")
+		delete(additionalProperties, "timeBuckets")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.XAxisTime = nil
-		dst.XAxisTimeBuckets = nil
-		dst.XAxisValue = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(XAxis)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src XAxis) MarshalJSON() ([]byte, error) {
-	if src.XAxisTime != nil {
-		return json.Marshal(&src.XAxisTime)
-	}
-
-	if src.XAxisTimeBuckets != nil {
-		return json.Marshal(&src.XAxisTimeBuckets)
-	}
-
-	if src.XAxisValue != nil {
-		return json.Marshal(&src.XAxisValue)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *XAxis) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.XAxisTime != nil {
-		return obj.XAxisTime
-	}
-
-	if obj.XAxisTimeBuckets != nil {
-		return obj.XAxisTimeBuckets
-	}
-
-	if obj.XAxisValue != nil {
-		return obj.XAxisValue
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj XAxis) GetActualInstanceValue() (interface{}) {
-	if obj.XAxisTime != nil {
-		return *obj.XAxisTime
-	}
-
-	if obj.XAxisTimeBuckets != nil {
-		return *obj.XAxisTimeBuckets
-	}
-
-	if obj.XAxisValue != nil {
-		return *obj.XAxisValue
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableXAxis struct {

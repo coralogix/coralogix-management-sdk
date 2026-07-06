@@ -13,164 +13,213 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// FilterSource - struct for FilterSource
+// checks if the FilterSource type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FilterSource{}
+
+// FilterSource Defines the type of data the filter applies to.
 type FilterSource struct {
-	FilterSourceLogs *FilterSourceLogs
-	FilterSourceMetrics *FilterSourceMetrics
-	FilterSourceSpans *FilterSourceSpans
+	Logs *FilterLogsFilter `json:"logs,omitempty"`
+	Metrics *MetricsFilter `json:"metrics,omitempty"`
+	Spans *SpansFilter `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// FilterSourceLogsAsFilterSource is a convenience function that returns FilterSourceLogs wrapped in FilterSource
-func FilterSourceLogsAsFilterSource(v *FilterSourceLogs) FilterSource {
-	return FilterSource{
-		FilterSourceLogs: v,
+type _FilterSource FilterSource
+
+// NewFilterSource instantiates a new FilterSource object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewFilterSource() *FilterSource {
+	this := FilterSource{}
+	return &this
+}
+
+// NewFilterSourceWithDefaults instantiates a new FilterSource object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewFilterSourceWithDefaults() *FilterSource {
+	this := FilterSource{}
+	return &this
+}
+
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *FilterSource) GetLogs() FilterLogsFilter {
+	if o == nil || IsNil(o.Logs) {
+		var ret FilterLogsFilter
+		return ret
 	}
+	return *o.Logs
 }
 
-// FilterSourceMetricsAsFilterSource is a convenience function that returns FilterSourceMetrics wrapped in FilterSource
-func FilterSourceMetricsAsFilterSource(v *FilterSourceMetrics) FilterSource {
-	return FilterSource{
-		FilterSourceMetrics: v,
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilterSource) GetLogsOk() (*FilterLogsFilter, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
 	}
+	return o.Logs, true
 }
 
-// FilterSourceSpansAsFilterSource is a convenience function that returns FilterSourceSpans wrapped in FilterSource
-func FilterSourceSpansAsFilterSource(v *FilterSourceSpans) FilterSource {
-	return FilterSource{
-		FilterSourceSpans: v,
+// HasLogs returns a boolean if a field has been set.
+func (o *FilterSource) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
 	}
+
+	return false
 }
 
+// SetLogs gets a reference to the given FilterLogsFilter and assigns it to the Logs field.
+func (o *FilterSource) SetLogs(v FilterLogsFilter) {
+	o.Logs = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *FilterSource) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into FilterSourceLogs
-	err = json.Unmarshal(data, &dst.FilterSourceLogs)
-	if err == nil {
-		jsonFilterSourceLogs, _ := json.Marshal(dst.FilterSourceLogs)
-		if string(jsonFilterSourceLogs) == "{}" { // empty struct
-			dst.FilterSourceLogs = nil
-		} else {
-			if err = validator.Validate(dst.FilterSourceLogs); err != nil {
-				dst.FilterSourceLogs = nil
-			} else {
-				match++
-			}
+// GetMetrics returns the Metrics field value if set, zero value otherwise.
+func (o *FilterSource) GetMetrics() MetricsFilter {
+	if o == nil || IsNil(o.Metrics) {
+		var ret MetricsFilter
+		return ret
+	}
+	return *o.Metrics
+}
+
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilterSource) GetMetricsOk() (*MetricsFilter, bool) {
+	if o == nil || IsNil(o.Metrics) {
+		return nil, false
+	}
+	return o.Metrics, true
+}
+
+// HasMetrics returns a boolean if a field has been set.
+func (o *FilterSource) HasMetrics() bool {
+	if o != nil && !IsNil(o.Metrics) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetrics gets a reference to the given MetricsFilter and assigns it to the Metrics field.
+func (o *FilterSource) SetMetrics(v MetricsFilter) {
+	o.Metrics = &v
+}
+
+// GetSpans returns the Spans field value if set, zero value otherwise.
+func (o *FilterSource) GetSpans() SpansFilter {
+	if o == nil || IsNil(o.Spans) {
+		var ret SpansFilter
+		return ret
+	}
+	return *o.Spans
+}
+
+// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FilterSource) GetSpansOk() (*SpansFilter, bool) {
+	if o == nil || IsNil(o.Spans) {
+		return nil, false
+	}
+	return o.Spans, true
+}
+
+// HasSpans returns a boolean if a field has been set.
+func (o *FilterSource) HasSpans() bool {
+	if o != nil && !IsNil(o.Spans) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpans gets a reference to the given SpansFilter and assigns it to the Spans field.
+func (o *FilterSource) SetSpans(v SpansFilter) {
+	o.Spans = &v
+}
+
+func (o FilterSource) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FilterSource) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Metrics) {
+		toSerialize["metrics"] = o.Metrics
+	}
+	if !IsNil(o.Spans) {
+		toSerialize["spans"] = o.Spans
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spans"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metrics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logs, spans, metrics] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *FilterSource) UnmarshalJSON(data []byte) (err error) {
+	varFilterSource := _FilterSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFilterSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FilterSource(varFilterSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FilterSourceLogs = nil
-	}
-
-	// try to unmarshal data into FilterSourceMetrics
-	err = json.Unmarshal(data, &dst.FilterSourceMetrics)
-	if err == nil {
-		jsonFilterSourceMetrics, _ := json.Marshal(dst.FilterSourceMetrics)
-		if string(jsonFilterSourceMetrics) == "{}" { // empty struct
-			dst.FilterSourceMetrics = nil
-		} else {
-			if err = validator.Validate(dst.FilterSourceMetrics); err != nil {
-				dst.FilterSourceMetrics = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spans"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FilterSourceMetrics = nil
-	}
-
-	// try to unmarshal data into FilterSourceSpans
-	err = json.Unmarshal(data, &dst.FilterSourceSpans)
-	if err == nil {
-		jsonFilterSourceSpans, _ := json.Marshal(dst.FilterSourceSpans)
-		if string(jsonFilterSourceSpans) == "{}" { // empty struct
-			dst.FilterSourceSpans = nil
-		} else {
-			if err = validator.Validate(dst.FilterSourceSpans); err != nil {
-				dst.FilterSourceSpans = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metrics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FilterSourceSpans = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logs, spans, metrics] may be set"}
+		}
+
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.FilterSourceLogs = nil
-		dst.FilterSourceMetrics = nil
-		dst.FilterSourceSpans = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(FilterSource)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src FilterSource) MarshalJSON() ([]byte, error) {
-	if src.FilterSourceLogs != nil {
-		return json.Marshal(&src.FilterSourceLogs)
-	}
-
-	if src.FilterSourceMetrics != nil {
-		return json.Marshal(&src.FilterSourceMetrics)
-	}
-
-	if src.FilterSourceSpans != nil {
-		return json.Marshal(&src.FilterSourceSpans)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *FilterSource) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.FilterSourceLogs != nil {
-		return obj.FilterSourceLogs
-	}
-
-	if obj.FilterSourceMetrics != nil {
-		return obj.FilterSourceMetrics
-	}
-
-	if obj.FilterSourceSpans != nil {
-		return obj.FilterSourceSpans
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj FilterSource) GetActualInstanceValue() (interface{}) {
-	if obj.FilterSourceLogs != nil {
-		return *obj.FilterSourceLogs
-	}
-
-	if obj.FilterSourceMetrics != nil {
-		return *obj.FilterSourceMetrics
-	}
-
-	if obj.FilterSourceSpans != nil {
-		return *obj.FilterSourceSpans
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableFilterSource struct {

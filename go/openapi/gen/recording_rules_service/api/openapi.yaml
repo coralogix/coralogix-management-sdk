@@ -1,681 +1,697 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /recording-rules/recording-rules/v1:
-    get:
-      description: Returns all recording rule groups for the team.
-      externalDocs:
-        url: ""
-      operationId: RuleGroupSets_List
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RuleGroupSetListing"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: List Recording Rules
-      tags:
-      - Recording Rules Service
-    post:
-      description: Creates a new recording rule group.
-      externalDocs:
-        url: ""
-      operationId: RuleGroupSets_Create
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Create_Rule_Group_Set"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateRuleGroupSetResult"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Create Recording Rules
-      tags:
-      - Recording Rules Service
-  /recording-rules/recording-rules/v1/{id}:
-    delete:
-      description: Deletes the recording rule group with the specified ID.
-      externalDocs:
-        url: ""
-      operationId: RuleGroupSets_Delete
-      parameters:
-      - description: Unique identifier.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Delete Recording Rules
-      tags:
-      - Recording Rules Service
-    get:
-      description: Returns the details of the specified recording rule group.
-      externalDocs:
-        url: ""
-      operationId: RuleGroupSets_Fetch
-      parameters:
-      - description: Unique identifier.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OutRuleGroupSet"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Get Recording Rules
-      tags:
-      - Recording Rules Service
-    put:
-      description: Updates the specified recording rule group.
-      externalDocs:
-        url: ""
-      operationId: RuleGroupSets_Update
-      parameters:
-      - description: Unique identifier.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Update_Rule_Group_Set"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Update Recording Rules
-      tags:
-      - Recording Rules Service
-components:
-  schemas:
-    CreateRuleGroupSetResult:
-      description: Result of creating a rule group set.
-      example:
-        id: id
-      externalDocs:
-        description: Find out more about recording rules
-        url: https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
-      properties:
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-      title: Create Rule Group Set Result
-      type: object
-    Error:
-      description: Standard error response body returned for a failed request.
-      example:
-        code: 397
-        message: message
-      properties:
-        code:
-          description: "HTTP status code of the error (for example 400, 404, 500)."
-          format: int32
-          maximum: 599
-          minimum: 100
-          type: integer
-        message:
-          description: Human-readable description of the error.
-          maxLength: 4096
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    InRule:
-      description: A rule within a group that defines a recording rule expression.
-      externalDocs:
-        description: Find out more about recording rules
-        url: https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
-      properties:
-        evaluationDelayMs:
-          description: The delay in milliseconds before evaluating the recording rule
-            expression. Allows late-arriving data to be ingested before evaluation.
-          example: 60000
-          format: int64
-          minimum: 0
-          type: integer
-        expr:
-          description: The expr.
-          minLength: 0
-          type: string
-        labels:
-          additionalProperties:
-            minLength: 0
-            type: string
-          description: List of labels.
-          type: object
-        record:
-          description: Record.
-          minLength: 0
-          type: string
-      title: In Rule
-      type: object
-    InRuleGroup:
-      description: A group of recording rules.
-      externalDocs:
-        description: Find out more about recording rules
-        url: https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
-      properties:
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        interval:
-          description: Interval.
-          format: int64
-          minimum: 0
-          type: integer
-        limit:
-          description: Limit.
-          maxLength: 20
-          minLength: 1
-          pattern: "^[0-9]+$"
-          type: string
-        name:
-          description: Display name.
-          minLength: 0
-          type: string
-        rules:
-          description: List of rules.
-          items:
-            $ref: "#/components/schemas/InRule"
-          minItems: 0
-          type: array
-        version:
-          description: Version number.
-          format: int64
-          minimum: 0
-          type: integer
-      title: In Rule Group
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    OutRule:
-      example:
-        lastEvalDurationMs: lastEvalDurationMs
-        record: record
-        evaluationDelayMs: 0
-        expr: expr
-        labels:
-          key: labels
-      properties:
-        evaluationDelayMs:
-          description: The evaluation delay ms.
-          format: int64
-          minimum: 0
-          type: integer
-        expr:
-          description: The expr.
-          minLength: 0
-          type: string
-        labels:
-          additionalProperties:
-            minLength: 0
-            type: string
-          description: List of labels.
-          type: object
-        lastEvalDurationMs:
-          description: The last eval duration ms.
-          maxLength: 20
-          minLength: 1
-          pattern: "^[0-9]+$"
-          type: string
-        record:
-          description: Record.
-          minLength: 0
-          type: string
-      type: object
-    OutRuleGroup:
-      example:
-        limit: limit
-        name: name
-        interval: 0
-        rules:
-        - lastEvalDurationMs: lastEvalDurationMs
-          record: record
-          evaluationDelayMs: 0
-          expr: expr
-          labels:
-            key: labels
-        - lastEvalDurationMs: lastEvalDurationMs
-          record: record
-          evaluationDelayMs: 0
-          expr: expr
-          labels:
-            key: labels
-        id: id
-        lastEvalAt: lastEvalAt
-        version: 0
-      properties:
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        interval:
-          description: Interval.
-          format: int64
-          minimum: 0
-          type: integer
-        lastEvalAt:
-          description: The last eval at.
-          maxLength: 20
-          minLength: 1
-          pattern: "^[0-9]+$"
-          type: string
-        limit:
-          description: Limit.
-          maxLength: 20
-          minLength: 1
-          pattern: "^[0-9]+$"
-          type: string
-        name:
-          description: Display name.
-          minLength: 0
-          type: string
-        rules:
-          description: List of rules.
-          items:
-            $ref: "#/components/schemas/OutRule"
-          minItems: 0
-          type: array
-        version:
-          description: Version number.
-          format: int64
-          minimum: 0
-          type: integer
-      type: object
-    OutRuleGroupSet:
-      description: An output set of rule groups.
-      example:
-        name: name
-        groups:
-        - limit: limit
-          name: name
-          interval: 0
-          rules:
-          - lastEvalDurationMs: lastEvalDurationMs
-            record: record
-            evaluationDelayMs: 0
-            expr: expr
-            labels:
-              key: labels
-          - lastEvalDurationMs: lastEvalDurationMs
-            record: record
-            evaluationDelayMs: 0
-            expr: expr
-            labels:
-              key: labels
-          id: id
-          lastEvalAt: lastEvalAt
-          version: 0
-        - limit: limit
-          name: name
-          interval: 0
-          rules:
-          - lastEvalDurationMs: lastEvalDurationMs
-            record: record
-            evaluationDelayMs: 0
-            expr: expr
-            labels:
-              key: labels
-          - lastEvalDurationMs: lastEvalDurationMs
-            record: record
-            evaluationDelayMs: 0
-            expr: expr
-            labels:
-              key: labels
-          id: id
-          lastEvalAt: lastEvalAt
-          version: 0
-        id: id
-      externalDocs:
-        description: Find out more about recording rules
-        url: https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
-      properties:
-        groups:
-          description: List of groups.
-          items:
-            $ref: "#/components/schemas/OutRuleGroup"
-          minItems: 0
-          type: array
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        name:
-          description: Display name.
-          minLength: 0
-          type: string
-      title: Out Rule Group Set
-      type: object
-    RuleGroupSetListing:
-      description: A listing of rule group sets.
-      example:
-        sets:
-        - name: name
-          groups:
-          - limit: limit
-            name: name
-            interval: 0
-            rules:
-            - lastEvalDurationMs: lastEvalDurationMs
-              record: record
-              evaluationDelayMs: 0
-              expr: expr
-              labels:
-                key: labels
-            - lastEvalDurationMs: lastEvalDurationMs
-              record: record
-              evaluationDelayMs: 0
-              expr: expr
-              labels:
-                key: labels
-            id: id
-            lastEvalAt: lastEvalAt
-            version: 0
-          - limit: limit
-            name: name
-            interval: 0
-            rules:
-            - lastEvalDurationMs: lastEvalDurationMs
-              record: record
-              evaluationDelayMs: 0
-              expr: expr
-              labels:
-                key: labels
-            - lastEvalDurationMs: lastEvalDurationMs
-              record: record
-              evaluationDelayMs: 0
-              expr: expr
-              labels:
-                key: labels
-            id: id
-            lastEvalAt: lastEvalAt
-            version: 0
-          id: id
-        - name: name
-          groups:
-          - limit: limit
-            name: name
-            interval: 0
-            rules:
-            - lastEvalDurationMs: lastEvalDurationMs
-              record: record
-              evaluationDelayMs: 0
-              expr: expr
-              labels:
-                key: labels
-            - lastEvalDurationMs: lastEvalDurationMs
-              record: record
-              evaluationDelayMs: 0
-              expr: expr
-              labels:
-                key: labels
-            id: id
-            lastEvalAt: lastEvalAt
-            version: 0
-          - limit: limit
-            name: name
-            interval: 0
-            rules:
-            - lastEvalDurationMs: lastEvalDurationMs
-              record: record
-              evaluationDelayMs: 0
-              expr: expr
-              labels:
-                key: labels
-            - lastEvalDurationMs: lastEvalDurationMs
-              record: record
-              evaluationDelayMs: 0
-              expr: expr
-              labels:
-                key: labels
-            id: id
-            lastEvalAt: lastEvalAt
-            version: 0
-          id: id
-      externalDocs:
-        description: Find out more about recording rules
-        url: https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
-      properties:
-        sets:
-          description: The sets.
-          items:
-            $ref: "#/components/schemas/OutRuleGroupSet"
-          minItems: 0
-          type: array
-      title: Rule Group Set Listing
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    Create_Rule_Group_Set:
-      description: A set of rule groups to create.
-      properties:
-        groups:
-          description: List of groups.
-          items:
-            $ref: "#/components/schemas/InRuleGroup"
-          minItems: 0
-          type: array
-        name:
-          description: Display name.
-          minLength: 0
-          type: string
-      title: Create Rule Group Set
-      type: object
-    Update_Rule_Group_Set:
-      description: A set of rule groups to update.
-      properties:
-        groups:
-          description: List of groups.
-          items:
-            $ref: "#/components/schemas/InRuleGroup"
-          minItems: 0
-          type: array
-        name:
-          description: Display name.
-          minLength: 0
-          type: string
-      title: Update Rule Group Set
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/recording-rules/recording-rules/v1": {
+      "get": {
+        "tags": [
+          "Recording Rules Service"
+        ],
+        "summary": "List Recording Rules",
+        "description": "Returns all recording rule groups for the team.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RuleGroupSets_List",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleGroupSetListing"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Recording Rules Service"
+        ],
+        "summary": "Create Recording Rules",
+        "description": "Creates a new recording rule group.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RuleGroupSets_Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create Rule Group Set",
+                "description": "A set of rule groups to create.",
+                "type": "object",
+                "properties": {
+                  "groups": {
+                    "description": "List of groups.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/InRuleGroup"
+                    },
+                    "minItems": 0
+                  },
+                  "name": {
+                    "description": "Display name.",
+                    "type": "string",
+                    "minLength": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateRuleGroupSetResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recording-rules/recording-rules/v1/{id}": {
+      "get": {
+        "tags": [
+          "Recording Rules Service"
+        ],
+        "summary": "Get Recording Rules",
+        "description": "Returns the details of the specified recording rule group.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RuleGroupSets_Fetch",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutRuleGroupSet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Recording Rules Service"
+        ],
+        "summary": "Update Recording Rules",
+        "description": "Updates the specified recording rule group.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RuleGroupSets_Update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Update Rule Group Set",
+                "description": "A set of rule groups to update.",
+                "type": "object",
+                "properties": {
+                  "groups": {
+                    "description": "List of groups.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/InRuleGroup"
+                    },
+                    "minItems": 0
+                  },
+                  "name": {
+                    "description": "Display name.",
+                    "type": "string",
+                    "minLength": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Recording Rules Service"
+        ],
+        "summary": "Delete Recording Rules",
+        "description": "Deletes the recording rule group with the specified ID.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RuleGroupSets_Delete",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "Unique identifier.",
+          "required": true,
+          "schema": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "style": "simple"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateRuleGroupSetResult": {
+        "externalDocs": {
+          "description": "Find out more about recording rules",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+        },
+        "title": "Create Rule Group Set Result",
+        "description": "Result of creating a rule group set.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "InRule": {
+        "externalDocs": {
+          "description": "Find out more about recording rules",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+        },
+        "title": "In Rule",
+        "description": "A rule within a group that defines a recording rule expression.",
+        "type": "object",
+        "properties": {
+          "evaluationDelayMs": {
+            "example": 60000,
+            "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "expr": {
+            "description": "The expr.",
+            "type": "string",
+            "minLength": 0
+          },
+          "labels": {
+            "description": "List of labels.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 0
+            }
+          },
+          "record": {
+            "description": "Record.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "InRuleGroup": {
+        "externalDocs": {
+          "description": "Find out more about recording rules",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+        },
+        "title": "In Rule Group",
+        "description": "A group of recording rules.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "interval": {
+            "description": "Interval.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "limit": {
+            "description": "Limit.",
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "minLength": 0
+          },
+          "rules": {
+            "description": "List of rules.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InRule"
+            },
+            "minItems": 0
+          },
+          "version": {
+            "description": "Version number.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "OutRule": {
+        "type": "object",
+        "properties": {
+          "evaluationDelayMs": {
+            "description": "The evaluation delay ms.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "expr": {
+            "description": "The expr.",
+            "type": "string",
+            "minLength": 0
+          },
+          "labels": {
+            "description": "List of labels.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 0
+            }
+          },
+          "lastEvalDurationMs": {
+            "description": "The last eval duration ms.",
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "record": {
+            "description": "Record.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "OutRuleGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "interval": {
+            "description": "Interval.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "lastEvalAt": {
+            "description": "The last eval at.",
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "limit": {
+            "description": "Limit.",
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "minLength": 0
+          },
+          "rules": {
+            "description": "List of rules.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OutRule"
+            },
+            "minItems": 0
+          },
+          "version": {
+            "description": "Version number.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          }
+        }
+      },
+      "OutRuleGroupSet": {
+        "externalDocs": {
+          "description": "Find out more about recording rules",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+        },
+        "title": "Out Rule Group Set",
+        "description": "An output set of rule groups.",
+        "type": "object",
+        "properties": {
+          "groups": {
+            "description": "List of groups.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OutRuleGroup"
+            },
+            "minItems": 0
+          },
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "RuleGroupSetListing": {
+        "externalDocs": {
+          "description": "Find out more about recording rules",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+        },
+        "title": "Rule Group Set Listing",
+        "description": "A listing of rule group sets.",
+        "type": "object",
+        "properties": {
+          "sets": {
+            "description": "The sets.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OutRuleGroupSet"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

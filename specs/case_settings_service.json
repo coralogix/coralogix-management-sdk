@@ -11,7 +11,7 @@
           "Case Settings service"
         ],
         "summary": "Create a case settings team configuration",
-        "description": "Create a new case settings team configuration with an optional display name and settings.\n\nRequires the following permissions:\n- `case-config:Update`",
+        "description": "Create a new case settings team configuration with an optional display name and settings.",
         "externalDocs": {
           "url": ""
         },
@@ -120,7 +120,7 @@
           "Case Settings service"
         ],
         "summary": "Get a case settings team configuration",
-        "description": "Retrieve a single case settings team configuration by its identifier.\n\nRequires the following permissions:\n- `case-config:Read`",
+        "description": "Retrieve a single case settings team configuration by its identifier.",
         "externalDocs": {
           "url": ""
         },
@@ -213,7 +213,7 @@
           "Case Settings service"
         ],
         "summary": "Delete a case settings team configuration",
-        "description": "Delete a case settings team configuration by its identifier.\n\nRequires the following permissions:\n- `case-config:Update`",
+        "description": "Delete a case settings team configuration by its identifier.",
         "externalDocs": {
           "url": ""
         },
@@ -306,7 +306,7 @@
           "Case Settings service"
         ],
         "summary": "Update a case settings team configuration",
-        "description": "Update the display name and/or settings of an existing case settings team configuration.\n\nRequires the following permissions:\n- `case-config:Update`",
+        "description": "Update the display name and/or settings of an existing case settings team configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -428,7 +428,7 @@
           "Case Settings service"
         ],
         "summary": "Get the active case settings team configuration",
-        "description": "Retrieve the currently active case settings team configuration (after any org- or user-level precedence resolution).\n\nRequires the following permissions:\n- `case-config:Read`",
+        "description": "Retrieve the currently active case settings team configuration (after any org- or user-level precedence resolution).",
         "externalDocs": {
           "url": ""
         },
@@ -496,7 +496,7 @@
           "Case Settings service"
         ],
         "summary": "Get system default case settings team configuration settings",
-        "description": "Retrieve the platform-wide default settings for case settings team configurations.\n\nRequires the following permissions:\n- `case-config:Read`",
+        "description": "Retrieve the platform-wide default settings for case settings team configurations.",
         "externalDocs": {
           "url": ""
         },
@@ -662,7 +662,7 @@
             "$ref": "#/components/schemas/CaseLifecycle"
           },
           "createTime": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the team configuration was created",
             "type": "string",
             "format": "date-time",
@@ -723,12 +723,55 @@
         "additionalProperties": false
       },
       "EntityLabelFilter": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/EntityLabelFilterAll"
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "All or EntityLabel list",
+        "description": "Select all items from a specific list of EntityLabels (Key/Values).",
+        "type": "object",
+        "properties": {
+          "all": {
+            "$ref": "#/components/schemas/All"
           },
+          "values": {
+            "$ref": "#/components/schemas/EntityLabelFilter.Values"
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/EntityLabelFilterValuesVariant"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "all"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "values"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "all"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "values"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
@@ -748,38 +791,6 @@
             "minItems": 0
           }
         }
-      },
-      "EntityLabelFilterAll": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "All or EntityLabel list",
-        "description": "Select all items from a specific list of EntityLabels (Key/Values).",
-        "type": "object",
-        "properties": {
-          "all": {
-            "$ref": "#/components/schemas/All"
-          }
-        },
-        "required": [
-          "all"
-        ]
-      },
-      "EntityLabelFilterValuesVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "All or EntityLabel list",
-        "description": "Select all items from a specific list of EntityLabels (Key/Values).",
-        "type": "object",
-        "properties": {
-          "values": {
-            "$ref": "#/components/schemas/EntityLabelFilter.Values"
-          }
-        },
-        "required": [
-          "values"
-        ]
       },
       "Error": {
         "description": "Standard error response body returned for a failed request.",
@@ -802,16 +813,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -822,26 +823,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -852,9 +833,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {
@@ -987,12 +984,55 @@
         ]
       },
       "IndicatorPriorityFilter": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/IndicatorPriorityFilterAll"
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "All or IndicatorPriority list",
+        "description": "Select all priorities or a specific list of IndicatorPriority values.",
+        "type": "object",
+        "properties": {
+          "all": {
+            "$ref": "#/components/schemas/All"
           },
+          "values": {
+            "$ref": "#/components/schemas/IndicatorPriorityFilter.Values"
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/IndicatorPriorityFilterValuesVariant"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "all"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "values"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "all"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "values"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
@@ -1012,38 +1052,6 @@
             "minItems": 0
           }
         }
-      },
-      "IndicatorPriorityFilterAll": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "All or IndicatorPriority list",
-        "description": "Select all priorities or a specific list of IndicatorPriority values.",
-        "type": "object",
-        "properties": {
-          "all": {
-            "$ref": "#/components/schemas/All"
-          }
-        },
-        "required": [
-          "all"
-        ]
-      },
-      "IndicatorPriorityFilterValuesVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "All or IndicatorPriority list",
-        "description": "Select all priorities or a specific list of IndicatorPriority values.",
-        "type": "object",
-        "properties": {
-          "values": {
-            "$ref": "#/components/schemas/IndicatorPriorityFilter.Values"
-          }
-        },
-        "required": [
-          "values"
-        ]
       },
       "KPISettings": {
         "externalDocs": {

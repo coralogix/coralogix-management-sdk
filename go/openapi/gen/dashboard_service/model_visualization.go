@@ -13,620 +13,729 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Visualization - struct for Visualization
+// checks if the Visualization type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Visualization{}
+
+// Visualization Visualization.
 type Visualization struct {
-	VisualizationGaugeVariant *VisualizationGaugeVariant
-	VisualizationGeomap *VisualizationGeomap
-	VisualizationHeatmap *VisualizationHeatmap
-	VisualizationHexagonBins *VisualizationHexagonBins
-	VisualizationHorizontalBars *VisualizationHorizontalBars
-	VisualizationHorizontalBarsMulti *VisualizationHorizontalBarsMulti
-	VisualizationPieChartVariant *VisualizationPieChartVariant
-	VisualizationStat *VisualizationStat
-	VisualizationStatCard *VisualizationStatCard
-	VisualizationTable *VisualizationTable
-	VisualizationTimeSeriesBars *VisualizationTimeSeriesBars
-	VisualizationTimeSeriesLines *VisualizationTimeSeriesLines
-	VisualizationTimeSeriesLinesMulti *VisualizationTimeSeriesLinesMulti
-	VisualizationVerticalBars *VisualizationVerticalBars
-	VisualizationVerticalBarsMulti *VisualizationVerticalBarsMulti
+	Gauge *VisualizationGauge `json:"gauge,omitempty"`
+	Geomap *Geomap `json:"geomap,omitempty"`
+	Heatmap *Heatmap `json:"heatmap,omitempty"`
+	HexagonBins *HexagonBins `json:"hexagonBins,omitempty"`
+	HorizontalBars *HorizontalBars `json:"horizontalBars,omitempty"`
+	HorizontalBarsMulti *HorizontalBarsMulti `json:"horizontalBarsMulti,omitempty"`
+	PieChart *VisualizationPieChart `json:"pieChart,omitempty"`
+	Stat *Stat `json:"stat,omitempty"`
+	StatCard *StatCard `json:"statCard,omitempty"`
+	Table *Table `json:"table,omitempty"`
+	TimeSeriesBars *TimeSeriesBars `json:"timeSeriesBars,omitempty"`
+	TimeSeriesLines *TimeSeriesLines `json:"timeSeriesLines,omitempty"`
+	TimeSeriesLinesMulti *TimeSeriesLinesMulti `json:"timeSeriesLinesMulti,omitempty"`
+	VerticalBars *VerticalBars `json:"verticalBars,omitempty"`
+	VerticalBarsMulti *VerticalBarsMulti `json:"verticalBarsMulti,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// VisualizationGaugeVariantAsVisualization is a convenience function that returns VisualizationGaugeVariant wrapped in Visualization
-func VisualizationGaugeVariantAsVisualization(v *VisualizationGaugeVariant) Visualization {
-	return Visualization{
-		VisualizationGaugeVariant: v,
+type _Visualization Visualization
+
+// NewVisualization instantiates a new Visualization object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewVisualization() *Visualization {
+	this := Visualization{}
+	return &this
+}
+
+// NewVisualizationWithDefaults instantiates a new Visualization object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewVisualizationWithDefaults() *Visualization {
+	this := Visualization{}
+	return &this
+}
+
+// GetGauge returns the Gauge field value if set, zero value otherwise.
+func (o *Visualization) GetGauge() VisualizationGauge {
+	if o == nil || IsNil(o.Gauge) {
+		var ret VisualizationGauge
+		return ret
 	}
+	return *o.Gauge
 }
 
-// VisualizationGeomapAsVisualization is a convenience function that returns VisualizationGeomap wrapped in Visualization
-func VisualizationGeomapAsVisualization(v *VisualizationGeomap) Visualization {
-	return Visualization{
-		VisualizationGeomap: v,
+// GetGaugeOk returns a tuple with the Gauge field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetGaugeOk() (*VisualizationGauge, bool) {
+	if o == nil || IsNil(o.Gauge) {
+		return nil, false
 	}
+	return o.Gauge, true
 }
 
-// VisualizationHeatmapAsVisualization is a convenience function that returns VisualizationHeatmap wrapped in Visualization
-func VisualizationHeatmapAsVisualization(v *VisualizationHeatmap) Visualization {
-	return Visualization{
-		VisualizationHeatmap: v,
+// HasGauge returns a boolean if a field has been set.
+func (o *Visualization) HasGauge() bool {
+	if o != nil && !IsNil(o.Gauge) {
+		return true
 	}
+
+	return false
 }
 
-// VisualizationHexagonBinsAsVisualization is a convenience function that returns VisualizationHexagonBins wrapped in Visualization
-func VisualizationHexagonBinsAsVisualization(v *VisualizationHexagonBins) Visualization {
-	return Visualization{
-		VisualizationHexagonBins: v,
+// SetGauge gets a reference to the given VisualizationGauge and assigns it to the Gauge field.
+func (o *Visualization) SetGauge(v VisualizationGauge) {
+	o.Gauge = &v
+}
+
+// GetGeomap returns the Geomap field value if set, zero value otherwise.
+func (o *Visualization) GetGeomap() Geomap {
+	if o == nil || IsNil(o.Geomap) {
+		var ret Geomap
+		return ret
 	}
+	return *o.Geomap
 }
 
-// VisualizationHorizontalBarsAsVisualization is a convenience function that returns VisualizationHorizontalBars wrapped in Visualization
-func VisualizationHorizontalBarsAsVisualization(v *VisualizationHorizontalBars) Visualization {
-	return Visualization{
-		VisualizationHorizontalBars: v,
+// GetGeomapOk returns a tuple with the Geomap field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetGeomapOk() (*Geomap, bool) {
+	if o == nil || IsNil(o.Geomap) {
+		return nil, false
 	}
+	return o.Geomap, true
 }
 
-// VisualizationHorizontalBarsMultiAsVisualization is a convenience function that returns VisualizationHorizontalBarsMulti wrapped in Visualization
-func VisualizationHorizontalBarsMultiAsVisualization(v *VisualizationHorizontalBarsMulti) Visualization {
-	return Visualization{
-		VisualizationHorizontalBarsMulti: v,
+// HasGeomap returns a boolean if a field has been set.
+func (o *Visualization) HasGeomap() bool {
+	if o != nil && !IsNil(o.Geomap) {
+		return true
 	}
+
+	return false
 }
 
-// VisualizationPieChartVariantAsVisualization is a convenience function that returns VisualizationPieChartVariant wrapped in Visualization
-func VisualizationPieChartVariantAsVisualization(v *VisualizationPieChartVariant) Visualization {
-	return Visualization{
-		VisualizationPieChartVariant: v,
+// SetGeomap gets a reference to the given Geomap and assigns it to the Geomap field.
+func (o *Visualization) SetGeomap(v Geomap) {
+	o.Geomap = &v
+}
+
+// GetHeatmap returns the Heatmap field value if set, zero value otherwise.
+func (o *Visualization) GetHeatmap() Heatmap {
+	if o == nil || IsNil(o.Heatmap) {
+		var ret Heatmap
+		return ret
 	}
+	return *o.Heatmap
 }
 
-// VisualizationStatAsVisualization is a convenience function that returns VisualizationStat wrapped in Visualization
-func VisualizationStatAsVisualization(v *VisualizationStat) Visualization {
-	return Visualization{
-		VisualizationStat: v,
+// GetHeatmapOk returns a tuple with the Heatmap field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetHeatmapOk() (*Heatmap, bool) {
+	if o == nil || IsNil(o.Heatmap) {
+		return nil, false
 	}
+	return o.Heatmap, true
 }
 
-// VisualizationStatCardAsVisualization is a convenience function that returns VisualizationStatCard wrapped in Visualization
-func VisualizationStatCardAsVisualization(v *VisualizationStatCard) Visualization {
-	return Visualization{
-		VisualizationStatCard: v,
+// HasHeatmap returns a boolean if a field has been set.
+func (o *Visualization) HasHeatmap() bool {
+	if o != nil && !IsNil(o.Heatmap) {
+		return true
 	}
+
+	return false
 }
 
-// VisualizationTableAsVisualization is a convenience function that returns VisualizationTable wrapped in Visualization
-func VisualizationTableAsVisualization(v *VisualizationTable) Visualization {
-	return Visualization{
-		VisualizationTable: v,
+// SetHeatmap gets a reference to the given Heatmap and assigns it to the Heatmap field.
+func (o *Visualization) SetHeatmap(v Heatmap) {
+	o.Heatmap = &v
+}
+
+// GetHexagonBins returns the HexagonBins field value if set, zero value otherwise.
+func (o *Visualization) GetHexagonBins() HexagonBins {
+	if o == nil || IsNil(o.HexagonBins) {
+		var ret HexagonBins
+		return ret
 	}
+	return *o.HexagonBins
 }
 
-// VisualizationTimeSeriesBarsAsVisualization is a convenience function that returns VisualizationTimeSeriesBars wrapped in Visualization
-func VisualizationTimeSeriesBarsAsVisualization(v *VisualizationTimeSeriesBars) Visualization {
-	return Visualization{
-		VisualizationTimeSeriesBars: v,
+// GetHexagonBinsOk returns a tuple with the HexagonBins field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetHexagonBinsOk() (*HexagonBins, bool) {
+	if o == nil || IsNil(o.HexagonBins) {
+		return nil, false
 	}
+	return o.HexagonBins, true
 }
 
-// VisualizationTimeSeriesLinesAsVisualization is a convenience function that returns VisualizationTimeSeriesLines wrapped in Visualization
-func VisualizationTimeSeriesLinesAsVisualization(v *VisualizationTimeSeriesLines) Visualization {
-	return Visualization{
-		VisualizationTimeSeriesLines: v,
+// HasHexagonBins returns a boolean if a field has been set.
+func (o *Visualization) HasHexagonBins() bool {
+	if o != nil && !IsNil(o.HexagonBins) {
+		return true
 	}
+
+	return false
 }
 
-// VisualizationTimeSeriesLinesMultiAsVisualization is a convenience function that returns VisualizationTimeSeriesLinesMulti wrapped in Visualization
-func VisualizationTimeSeriesLinesMultiAsVisualization(v *VisualizationTimeSeriesLinesMulti) Visualization {
-	return Visualization{
-		VisualizationTimeSeriesLinesMulti: v,
+// SetHexagonBins gets a reference to the given HexagonBins and assigns it to the HexagonBins field.
+func (o *Visualization) SetHexagonBins(v HexagonBins) {
+	o.HexagonBins = &v
+}
+
+// GetHorizontalBars returns the HorizontalBars field value if set, zero value otherwise.
+func (o *Visualization) GetHorizontalBars() HorizontalBars {
+	if o == nil || IsNil(o.HorizontalBars) {
+		var ret HorizontalBars
+		return ret
 	}
+	return *o.HorizontalBars
 }
 
-// VisualizationVerticalBarsAsVisualization is a convenience function that returns VisualizationVerticalBars wrapped in Visualization
-func VisualizationVerticalBarsAsVisualization(v *VisualizationVerticalBars) Visualization {
-	return Visualization{
-		VisualizationVerticalBars: v,
+// GetHorizontalBarsOk returns a tuple with the HorizontalBars field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetHorizontalBarsOk() (*HorizontalBars, bool) {
+	if o == nil || IsNil(o.HorizontalBars) {
+		return nil, false
 	}
+	return o.HorizontalBars, true
 }
 
-// VisualizationVerticalBarsMultiAsVisualization is a convenience function that returns VisualizationVerticalBarsMulti wrapped in Visualization
-func VisualizationVerticalBarsMultiAsVisualization(v *VisualizationVerticalBarsMulti) Visualization {
-	return Visualization{
-		VisualizationVerticalBarsMulti: v,
+// HasHorizontalBars returns a boolean if a field has been set.
+func (o *Visualization) HasHorizontalBars() bool {
+	if o != nil && !IsNil(o.HorizontalBars) {
+		return true
 	}
+
+	return false
 }
 
+// SetHorizontalBars gets a reference to the given HorizontalBars and assigns it to the HorizontalBars field.
+func (o *Visualization) SetHorizontalBars(v HorizontalBars) {
+	o.HorizontalBars = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Visualization) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into VisualizationGaugeVariant
-	err = json.Unmarshal(data, &dst.VisualizationGaugeVariant)
-	if err == nil {
-		jsonVisualizationGaugeVariant, _ := json.Marshal(dst.VisualizationGaugeVariant)
-		if string(jsonVisualizationGaugeVariant) == "{}" { // empty struct
-			dst.VisualizationGaugeVariant = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationGaugeVariant); err != nil {
-				dst.VisualizationGaugeVariant = nil
-			} else {
-				match++
-			}
+// GetHorizontalBarsMulti returns the HorizontalBarsMulti field value if set, zero value otherwise.
+func (o *Visualization) GetHorizontalBarsMulti() HorizontalBarsMulti {
+	if o == nil || IsNil(o.HorizontalBarsMulti) {
+		var ret HorizontalBarsMulti
+		return ret
+	}
+	return *o.HorizontalBarsMulti
+}
+
+// GetHorizontalBarsMultiOk returns a tuple with the HorizontalBarsMulti field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetHorizontalBarsMultiOk() (*HorizontalBarsMulti, bool) {
+	if o == nil || IsNil(o.HorizontalBarsMulti) {
+		return nil, false
+	}
+	return o.HorizontalBarsMulti, true
+}
+
+// HasHorizontalBarsMulti returns a boolean if a field has been set.
+func (o *Visualization) HasHorizontalBarsMulti() bool {
+	if o != nil && !IsNil(o.HorizontalBarsMulti) {
+		return true
+	}
+
+	return false
+}
+
+// SetHorizontalBarsMulti gets a reference to the given HorizontalBarsMulti and assigns it to the HorizontalBarsMulti field.
+func (o *Visualization) SetHorizontalBarsMulti(v HorizontalBarsMulti) {
+	o.HorizontalBarsMulti = &v
+}
+
+// GetPieChart returns the PieChart field value if set, zero value otherwise.
+func (o *Visualization) GetPieChart() VisualizationPieChart {
+	if o == nil || IsNil(o.PieChart) {
+		var ret VisualizationPieChart
+		return ret
+	}
+	return *o.PieChart
+}
+
+// GetPieChartOk returns a tuple with the PieChart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetPieChartOk() (*VisualizationPieChart, bool) {
+	if o == nil || IsNil(o.PieChart) {
+		return nil, false
+	}
+	return o.PieChart, true
+}
+
+// HasPieChart returns a boolean if a field has been set.
+func (o *Visualization) HasPieChart() bool {
+	if o != nil && !IsNil(o.PieChart) {
+		return true
+	}
+
+	return false
+}
+
+// SetPieChart gets a reference to the given VisualizationPieChart and assigns it to the PieChart field.
+func (o *Visualization) SetPieChart(v VisualizationPieChart) {
+	o.PieChart = &v
+}
+
+// GetStat returns the Stat field value if set, zero value otherwise.
+func (o *Visualization) GetStat() Stat {
+	if o == nil || IsNil(o.Stat) {
+		var ret Stat
+		return ret
+	}
+	return *o.Stat
+}
+
+// GetStatOk returns a tuple with the Stat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetStatOk() (*Stat, bool) {
+	if o == nil || IsNil(o.Stat) {
+		return nil, false
+	}
+	return o.Stat, true
+}
+
+// HasStat returns a boolean if a field has been set.
+func (o *Visualization) HasStat() bool {
+	if o != nil && !IsNil(o.Stat) {
+		return true
+	}
+
+	return false
+}
+
+// SetStat gets a reference to the given Stat and assigns it to the Stat field.
+func (o *Visualization) SetStat(v Stat) {
+	o.Stat = &v
+}
+
+// GetStatCard returns the StatCard field value if set, zero value otherwise.
+func (o *Visualization) GetStatCard() StatCard {
+	if o == nil || IsNil(o.StatCard) {
+		var ret StatCard
+		return ret
+	}
+	return *o.StatCard
+}
+
+// GetStatCardOk returns a tuple with the StatCard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetStatCardOk() (*StatCard, bool) {
+	if o == nil || IsNil(o.StatCard) {
+		return nil, false
+	}
+	return o.StatCard, true
+}
+
+// HasStatCard returns a boolean if a field has been set.
+func (o *Visualization) HasStatCard() bool {
+	if o != nil && !IsNil(o.StatCard) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatCard gets a reference to the given StatCard and assigns it to the StatCard field.
+func (o *Visualization) SetStatCard(v StatCard) {
+	o.StatCard = &v
+}
+
+// GetTable returns the Table field value if set, zero value otherwise.
+func (o *Visualization) GetTable() Table {
+	if o == nil || IsNil(o.Table) {
+		var ret Table
+		return ret
+	}
+	return *o.Table
+}
+
+// GetTableOk returns a tuple with the Table field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetTableOk() (*Table, bool) {
+	if o == nil || IsNil(o.Table) {
+		return nil, false
+	}
+	return o.Table, true
+}
+
+// HasTable returns a boolean if a field has been set.
+func (o *Visualization) HasTable() bool {
+	if o != nil && !IsNil(o.Table) {
+		return true
+	}
+
+	return false
+}
+
+// SetTable gets a reference to the given Table and assigns it to the Table field.
+func (o *Visualization) SetTable(v Table) {
+	o.Table = &v
+}
+
+// GetTimeSeriesBars returns the TimeSeriesBars field value if set, zero value otherwise.
+func (o *Visualization) GetTimeSeriesBars() TimeSeriesBars {
+	if o == nil || IsNil(o.TimeSeriesBars) {
+		var ret TimeSeriesBars
+		return ret
+	}
+	return *o.TimeSeriesBars
+}
+
+// GetTimeSeriesBarsOk returns a tuple with the TimeSeriesBars field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetTimeSeriesBarsOk() (*TimeSeriesBars, bool) {
+	if o == nil || IsNil(o.TimeSeriesBars) {
+		return nil, false
+	}
+	return o.TimeSeriesBars, true
+}
+
+// HasTimeSeriesBars returns a boolean if a field has been set.
+func (o *Visualization) HasTimeSeriesBars() bool {
+	if o != nil && !IsNil(o.TimeSeriesBars) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeSeriesBars gets a reference to the given TimeSeriesBars and assigns it to the TimeSeriesBars field.
+func (o *Visualization) SetTimeSeriesBars(v TimeSeriesBars) {
+	o.TimeSeriesBars = &v
+}
+
+// GetTimeSeriesLines returns the TimeSeriesLines field value if set, zero value otherwise.
+func (o *Visualization) GetTimeSeriesLines() TimeSeriesLines {
+	if o == nil || IsNil(o.TimeSeriesLines) {
+		var ret TimeSeriesLines
+		return ret
+	}
+	return *o.TimeSeriesLines
+}
+
+// GetTimeSeriesLinesOk returns a tuple with the TimeSeriesLines field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetTimeSeriesLinesOk() (*TimeSeriesLines, bool) {
+	if o == nil || IsNil(o.TimeSeriesLines) {
+		return nil, false
+	}
+	return o.TimeSeriesLines, true
+}
+
+// HasTimeSeriesLines returns a boolean if a field has been set.
+func (o *Visualization) HasTimeSeriesLines() bool {
+	if o != nil && !IsNil(o.TimeSeriesLines) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeSeriesLines gets a reference to the given TimeSeriesLines and assigns it to the TimeSeriesLines field.
+func (o *Visualization) SetTimeSeriesLines(v TimeSeriesLines) {
+	o.TimeSeriesLines = &v
+}
+
+// GetTimeSeriesLinesMulti returns the TimeSeriesLinesMulti field value if set, zero value otherwise.
+func (o *Visualization) GetTimeSeriesLinesMulti() TimeSeriesLinesMulti {
+	if o == nil || IsNil(o.TimeSeriesLinesMulti) {
+		var ret TimeSeriesLinesMulti
+		return ret
+	}
+	return *o.TimeSeriesLinesMulti
+}
+
+// GetTimeSeriesLinesMultiOk returns a tuple with the TimeSeriesLinesMulti field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetTimeSeriesLinesMultiOk() (*TimeSeriesLinesMulti, bool) {
+	if o == nil || IsNil(o.TimeSeriesLinesMulti) {
+		return nil, false
+	}
+	return o.TimeSeriesLinesMulti, true
+}
+
+// HasTimeSeriesLinesMulti returns a boolean if a field has been set.
+func (o *Visualization) HasTimeSeriesLinesMulti() bool {
+	if o != nil && !IsNil(o.TimeSeriesLinesMulti) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeSeriesLinesMulti gets a reference to the given TimeSeriesLinesMulti and assigns it to the TimeSeriesLinesMulti field.
+func (o *Visualization) SetTimeSeriesLinesMulti(v TimeSeriesLinesMulti) {
+	o.TimeSeriesLinesMulti = &v
+}
+
+// GetVerticalBars returns the VerticalBars field value if set, zero value otherwise.
+func (o *Visualization) GetVerticalBars() VerticalBars {
+	if o == nil || IsNil(o.VerticalBars) {
+		var ret VerticalBars
+		return ret
+	}
+	return *o.VerticalBars
+}
+
+// GetVerticalBarsOk returns a tuple with the VerticalBars field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetVerticalBarsOk() (*VerticalBars, bool) {
+	if o == nil || IsNil(o.VerticalBars) {
+		return nil, false
+	}
+	return o.VerticalBars, true
+}
+
+// HasVerticalBars returns a boolean if a field has been set.
+func (o *Visualization) HasVerticalBars() bool {
+	if o != nil && !IsNil(o.VerticalBars) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerticalBars gets a reference to the given VerticalBars and assigns it to the VerticalBars field.
+func (o *Visualization) SetVerticalBars(v VerticalBars) {
+	o.VerticalBars = &v
+}
+
+// GetVerticalBarsMulti returns the VerticalBarsMulti field value if set, zero value otherwise.
+func (o *Visualization) GetVerticalBarsMulti() VerticalBarsMulti {
+	if o == nil || IsNil(o.VerticalBarsMulti) {
+		var ret VerticalBarsMulti
+		return ret
+	}
+	return *o.VerticalBarsMulti
+}
+
+// GetVerticalBarsMultiOk returns a tuple with the VerticalBarsMulti field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Visualization) GetVerticalBarsMultiOk() (*VerticalBarsMulti, bool) {
+	if o == nil || IsNil(o.VerticalBarsMulti) {
+		return nil, false
+	}
+	return o.VerticalBarsMulti, true
+}
+
+// HasVerticalBarsMulti returns a boolean if a field has been set.
+func (o *Visualization) HasVerticalBarsMulti() bool {
+	if o != nil && !IsNil(o.VerticalBarsMulti) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerticalBarsMulti gets a reference to the given VerticalBarsMulti and assigns it to the VerticalBarsMulti field.
+func (o *Visualization) SetVerticalBarsMulti(v VerticalBarsMulti) {
+	o.VerticalBarsMulti = &v
+}
+
+func (o Visualization) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Visualization) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Gauge) {
+		toSerialize["gauge"] = o.Gauge
+	}
+	if !IsNil(o.Geomap) {
+		toSerialize["geomap"] = o.Geomap
+	}
+	if !IsNil(o.Heatmap) {
+		toSerialize["heatmap"] = o.Heatmap
+	}
+	if !IsNil(o.HexagonBins) {
+		toSerialize["hexagonBins"] = o.HexagonBins
+	}
+	if !IsNil(o.HorizontalBars) {
+		toSerialize["horizontalBars"] = o.HorizontalBars
+	}
+	if !IsNil(o.HorizontalBarsMulti) {
+		toSerialize["horizontalBarsMulti"] = o.HorizontalBarsMulti
+	}
+	if !IsNil(o.PieChart) {
+		toSerialize["pieChart"] = o.PieChart
+	}
+	if !IsNil(o.Stat) {
+		toSerialize["stat"] = o.Stat
+	}
+	if !IsNil(o.StatCard) {
+		toSerialize["statCard"] = o.StatCard
+	}
+	if !IsNil(o.Table) {
+		toSerialize["table"] = o.Table
+	}
+	if !IsNil(o.TimeSeriesBars) {
+		toSerialize["timeSeriesBars"] = o.TimeSeriesBars
+	}
+	if !IsNil(o.TimeSeriesLines) {
+		toSerialize["timeSeriesLines"] = o.TimeSeriesLines
+	}
+	if !IsNil(o.TimeSeriesLinesMulti) {
+		toSerialize["timeSeriesLinesMulti"] = o.TimeSeriesLinesMulti
+	}
+	if !IsNil(o.VerticalBars) {
+		toSerialize["verticalBars"] = o.VerticalBars
+	}
+	if !IsNil(o.VerticalBarsMulti) {
+		toSerialize["verticalBarsMulti"] = o.VerticalBarsMulti
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["table"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["timeSeriesLines"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["timeSeriesBars"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["stat"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["gauge"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["hexagonBins"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["pieChart"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["horizontalBars"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["verticalBars"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["heatmap"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["geomap"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["timeSeriesLinesMulti"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["verticalBarsMulti"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["horizontalBarsMulti"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["statCard"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [table, timeSeriesLines, timeSeriesBars, stat, gauge, hexagonBins, pieChart, horizontalBars, verticalBars, heatmap, geomap, timeSeriesLinesMulti, verticalBarsMulti, horizontalBarsMulti, statCard] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Visualization) UnmarshalJSON(data []byte) (err error) {
+	varVisualization := _Visualization{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualization)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Visualization(varVisualization)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["table"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationGaugeVariant = nil
-	}
-
-	// try to unmarshal data into VisualizationGeomap
-	err = json.Unmarshal(data, &dst.VisualizationGeomap)
-	if err == nil {
-		jsonVisualizationGeomap, _ := json.Marshal(dst.VisualizationGeomap)
-		if string(jsonVisualizationGeomap) == "{}" { // empty struct
-			dst.VisualizationGeomap = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationGeomap); err != nil {
-				dst.VisualizationGeomap = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["timeSeriesLines"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationGeomap = nil
-	}
-
-	// try to unmarshal data into VisualizationHeatmap
-	err = json.Unmarshal(data, &dst.VisualizationHeatmap)
-	if err == nil {
-		jsonVisualizationHeatmap, _ := json.Marshal(dst.VisualizationHeatmap)
-		if string(jsonVisualizationHeatmap) == "{}" { // empty struct
-			dst.VisualizationHeatmap = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationHeatmap); err != nil {
-				dst.VisualizationHeatmap = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["timeSeriesBars"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationHeatmap = nil
-	}
-
-	// try to unmarshal data into VisualizationHexagonBins
-	err = json.Unmarshal(data, &dst.VisualizationHexagonBins)
-	if err == nil {
-		jsonVisualizationHexagonBins, _ := json.Marshal(dst.VisualizationHexagonBins)
-		if string(jsonVisualizationHexagonBins) == "{}" { // empty struct
-			dst.VisualizationHexagonBins = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationHexagonBins); err != nil {
-				dst.VisualizationHexagonBins = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["stat"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationHexagonBins = nil
-	}
-
-	// try to unmarshal data into VisualizationHorizontalBars
-	err = json.Unmarshal(data, &dst.VisualizationHorizontalBars)
-	if err == nil {
-		jsonVisualizationHorizontalBars, _ := json.Marshal(dst.VisualizationHorizontalBars)
-		if string(jsonVisualizationHorizontalBars) == "{}" { // empty struct
-			dst.VisualizationHorizontalBars = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationHorizontalBars); err != nil {
-				dst.VisualizationHorizontalBars = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["gauge"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationHorizontalBars = nil
-	}
-
-	// try to unmarshal data into VisualizationHorizontalBarsMulti
-	err = json.Unmarshal(data, &dst.VisualizationHorizontalBarsMulti)
-	if err == nil {
-		jsonVisualizationHorizontalBarsMulti, _ := json.Marshal(dst.VisualizationHorizontalBarsMulti)
-		if string(jsonVisualizationHorizontalBarsMulti) == "{}" { // empty struct
-			dst.VisualizationHorizontalBarsMulti = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationHorizontalBarsMulti); err != nil {
-				dst.VisualizationHorizontalBarsMulti = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["hexagonBins"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationHorizontalBarsMulti = nil
-	}
-
-	// try to unmarshal data into VisualizationPieChartVariant
-	err = json.Unmarshal(data, &dst.VisualizationPieChartVariant)
-	if err == nil {
-		jsonVisualizationPieChartVariant, _ := json.Marshal(dst.VisualizationPieChartVariant)
-		if string(jsonVisualizationPieChartVariant) == "{}" { // empty struct
-			dst.VisualizationPieChartVariant = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationPieChartVariant); err != nil {
-				dst.VisualizationPieChartVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["pieChart"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationPieChartVariant = nil
-	}
-
-	// try to unmarshal data into VisualizationStat
-	err = json.Unmarshal(data, &dst.VisualizationStat)
-	if err == nil {
-		jsonVisualizationStat, _ := json.Marshal(dst.VisualizationStat)
-		if string(jsonVisualizationStat) == "{}" { // empty struct
-			dst.VisualizationStat = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationStat); err != nil {
-				dst.VisualizationStat = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["horizontalBars"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationStat = nil
-	}
-
-	// try to unmarshal data into VisualizationStatCard
-	err = json.Unmarshal(data, &dst.VisualizationStatCard)
-	if err == nil {
-		jsonVisualizationStatCard, _ := json.Marshal(dst.VisualizationStatCard)
-		if string(jsonVisualizationStatCard) == "{}" { // empty struct
-			dst.VisualizationStatCard = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationStatCard); err != nil {
-				dst.VisualizationStatCard = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["verticalBars"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationStatCard = nil
-	}
-
-	// try to unmarshal data into VisualizationTable
-	err = json.Unmarshal(data, &dst.VisualizationTable)
-	if err == nil {
-		jsonVisualizationTable, _ := json.Marshal(dst.VisualizationTable)
-		if string(jsonVisualizationTable) == "{}" { // empty struct
-			dst.VisualizationTable = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationTable); err != nil {
-				dst.VisualizationTable = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["heatmap"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationTable = nil
-	}
-
-	// try to unmarshal data into VisualizationTimeSeriesBars
-	err = json.Unmarshal(data, &dst.VisualizationTimeSeriesBars)
-	if err == nil {
-		jsonVisualizationTimeSeriesBars, _ := json.Marshal(dst.VisualizationTimeSeriesBars)
-		if string(jsonVisualizationTimeSeriesBars) == "{}" { // empty struct
-			dst.VisualizationTimeSeriesBars = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationTimeSeriesBars); err != nil {
-				dst.VisualizationTimeSeriesBars = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["geomap"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationTimeSeriesBars = nil
-	}
-
-	// try to unmarshal data into VisualizationTimeSeriesLines
-	err = json.Unmarshal(data, &dst.VisualizationTimeSeriesLines)
-	if err == nil {
-		jsonVisualizationTimeSeriesLines, _ := json.Marshal(dst.VisualizationTimeSeriesLines)
-		if string(jsonVisualizationTimeSeriesLines) == "{}" { // empty struct
-			dst.VisualizationTimeSeriesLines = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationTimeSeriesLines); err != nil {
-				dst.VisualizationTimeSeriesLines = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["timeSeriesLinesMulti"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationTimeSeriesLines = nil
-	}
-
-	// try to unmarshal data into VisualizationTimeSeriesLinesMulti
-	err = json.Unmarshal(data, &dst.VisualizationTimeSeriesLinesMulti)
-	if err == nil {
-		jsonVisualizationTimeSeriesLinesMulti, _ := json.Marshal(dst.VisualizationTimeSeriesLinesMulti)
-		if string(jsonVisualizationTimeSeriesLinesMulti) == "{}" { // empty struct
-			dst.VisualizationTimeSeriesLinesMulti = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationTimeSeriesLinesMulti); err != nil {
-				dst.VisualizationTimeSeriesLinesMulti = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["verticalBarsMulti"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationTimeSeriesLinesMulti = nil
-	}
-
-	// try to unmarshal data into VisualizationVerticalBars
-	err = json.Unmarshal(data, &dst.VisualizationVerticalBars)
-	if err == nil {
-		jsonVisualizationVerticalBars, _ := json.Marshal(dst.VisualizationVerticalBars)
-		if string(jsonVisualizationVerticalBars) == "{}" { // empty struct
-			dst.VisualizationVerticalBars = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationVerticalBars); err != nil {
-				dst.VisualizationVerticalBars = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["horizontalBarsMulti"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationVerticalBars = nil
-	}
-
-	// try to unmarshal data into VisualizationVerticalBarsMulti
-	err = json.Unmarshal(data, &dst.VisualizationVerticalBarsMulti)
-	if err == nil {
-		jsonVisualizationVerticalBarsMulti, _ := json.Marshal(dst.VisualizationVerticalBarsMulti)
-		if string(jsonVisualizationVerticalBarsMulti) == "{}" { // empty struct
-			dst.VisualizationVerticalBarsMulti = nil
-		} else {
-			if err = validator.Validate(dst.VisualizationVerticalBarsMulti); err != nil {
-				dst.VisualizationVerticalBarsMulti = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["statCard"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VisualizationVerticalBarsMulti = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [table, timeSeriesLines, timeSeriesBars, stat, gauge, hexagonBins, pieChart, horizontalBars, verticalBars, heatmap, geomap, timeSeriesLinesMulti, verticalBarsMulti, horizontalBarsMulti, statCard] may be set"}
+		}
+
+		delete(additionalProperties, "gauge")
+		delete(additionalProperties, "geomap")
+		delete(additionalProperties, "heatmap")
+		delete(additionalProperties, "hexagonBins")
+		delete(additionalProperties, "horizontalBars")
+		delete(additionalProperties, "horizontalBarsMulti")
+		delete(additionalProperties, "pieChart")
+		delete(additionalProperties, "stat")
+		delete(additionalProperties, "statCard")
+		delete(additionalProperties, "table")
+		delete(additionalProperties, "timeSeriesBars")
+		delete(additionalProperties, "timeSeriesLines")
+		delete(additionalProperties, "timeSeriesLinesMulti")
+		delete(additionalProperties, "verticalBars")
+		delete(additionalProperties, "verticalBarsMulti")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.VisualizationGaugeVariant = nil
-		dst.VisualizationGeomap = nil
-		dst.VisualizationHeatmap = nil
-		dst.VisualizationHexagonBins = nil
-		dst.VisualizationHorizontalBars = nil
-		dst.VisualizationHorizontalBarsMulti = nil
-		dst.VisualizationPieChartVariant = nil
-		dst.VisualizationStat = nil
-		dst.VisualizationStatCard = nil
-		dst.VisualizationTable = nil
-		dst.VisualizationTimeSeriesBars = nil
-		dst.VisualizationTimeSeriesLines = nil
-		dst.VisualizationTimeSeriesLinesMulti = nil
-		dst.VisualizationVerticalBars = nil
-		dst.VisualizationVerticalBarsMulti = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Visualization)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Visualization) MarshalJSON() ([]byte, error) {
-	if src.VisualizationGaugeVariant != nil {
-		return json.Marshal(&src.VisualizationGaugeVariant)
-	}
-
-	if src.VisualizationGeomap != nil {
-		return json.Marshal(&src.VisualizationGeomap)
-	}
-
-	if src.VisualizationHeatmap != nil {
-		return json.Marshal(&src.VisualizationHeatmap)
-	}
-
-	if src.VisualizationHexagonBins != nil {
-		return json.Marshal(&src.VisualizationHexagonBins)
-	}
-
-	if src.VisualizationHorizontalBars != nil {
-		return json.Marshal(&src.VisualizationHorizontalBars)
-	}
-
-	if src.VisualizationHorizontalBarsMulti != nil {
-		return json.Marshal(&src.VisualizationHorizontalBarsMulti)
-	}
-
-	if src.VisualizationPieChartVariant != nil {
-		return json.Marshal(&src.VisualizationPieChartVariant)
-	}
-
-	if src.VisualizationStat != nil {
-		return json.Marshal(&src.VisualizationStat)
-	}
-
-	if src.VisualizationStatCard != nil {
-		return json.Marshal(&src.VisualizationStatCard)
-	}
-
-	if src.VisualizationTable != nil {
-		return json.Marshal(&src.VisualizationTable)
-	}
-
-	if src.VisualizationTimeSeriesBars != nil {
-		return json.Marshal(&src.VisualizationTimeSeriesBars)
-	}
-
-	if src.VisualizationTimeSeriesLines != nil {
-		return json.Marshal(&src.VisualizationTimeSeriesLines)
-	}
-
-	if src.VisualizationTimeSeriesLinesMulti != nil {
-		return json.Marshal(&src.VisualizationTimeSeriesLinesMulti)
-	}
-
-	if src.VisualizationVerticalBars != nil {
-		return json.Marshal(&src.VisualizationVerticalBars)
-	}
-
-	if src.VisualizationVerticalBarsMulti != nil {
-		return json.Marshal(&src.VisualizationVerticalBarsMulti)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Visualization) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.VisualizationGaugeVariant != nil {
-		return obj.VisualizationGaugeVariant
-	}
-
-	if obj.VisualizationGeomap != nil {
-		return obj.VisualizationGeomap
-	}
-
-	if obj.VisualizationHeatmap != nil {
-		return obj.VisualizationHeatmap
-	}
-
-	if obj.VisualizationHexagonBins != nil {
-		return obj.VisualizationHexagonBins
-	}
-
-	if obj.VisualizationHorizontalBars != nil {
-		return obj.VisualizationHorizontalBars
-	}
-
-	if obj.VisualizationHorizontalBarsMulti != nil {
-		return obj.VisualizationHorizontalBarsMulti
-	}
-
-	if obj.VisualizationPieChartVariant != nil {
-		return obj.VisualizationPieChartVariant
-	}
-
-	if obj.VisualizationStat != nil {
-		return obj.VisualizationStat
-	}
-
-	if obj.VisualizationStatCard != nil {
-		return obj.VisualizationStatCard
-	}
-
-	if obj.VisualizationTable != nil {
-		return obj.VisualizationTable
-	}
-
-	if obj.VisualizationTimeSeriesBars != nil {
-		return obj.VisualizationTimeSeriesBars
-	}
-
-	if obj.VisualizationTimeSeriesLines != nil {
-		return obj.VisualizationTimeSeriesLines
-	}
-
-	if obj.VisualizationTimeSeriesLinesMulti != nil {
-		return obj.VisualizationTimeSeriesLinesMulti
-	}
-
-	if obj.VisualizationVerticalBars != nil {
-		return obj.VisualizationVerticalBars
-	}
-
-	if obj.VisualizationVerticalBarsMulti != nil {
-		return obj.VisualizationVerticalBarsMulti
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Visualization) GetActualInstanceValue() (interface{}) {
-	if obj.VisualizationGaugeVariant != nil {
-		return *obj.VisualizationGaugeVariant
-	}
-
-	if obj.VisualizationGeomap != nil {
-		return *obj.VisualizationGeomap
-	}
-
-	if obj.VisualizationHeatmap != nil {
-		return *obj.VisualizationHeatmap
-	}
-
-	if obj.VisualizationHexagonBins != nil {
-		return *obj.VisualizationHexagonBins
-	}
-
-	if obj.VisualizationHorizontalBars != nil {
-		return *obj.VisualizationHorizontalBars
-	}
-
-	if obj.VisualizationHorizontalBarsMulti != nil {
-		return *obj.VisualizationHorizontalBarsMulti
-	}
-
-	if obj.VisualizationPieChartVariant != nil {
-		return *obj.VisualizationPieChartVariant
-	}
-
-	if obj.VisualizationStat != nil {
-		return *obj.VisualizationStat
-	}
-
-	if obj.VisualizationStatCard != nil {
-		return *obj.VisualizationStatCard
-	}
-
-	if obj.VisualizationTable != nil {
-		return *obj.VisualizationTable
-	}
-
-	if obj.VisualizationTimeSeriesBars != nil {
-		return *obj.VisualizationTimeSeriesBars
-	}
-
-	if obj.VisualizationTimeSeriesLines != nil {
-		return *obj.VisualizationTimeSeriesLines
-	}
-
-	if obj.VisualizationTimeSeriesLinesMulti != nil {
-		return *obj.VisualizationTimeSeriesLinesMulti
-	}
-
-	if obj.VisualizationVerticalBars != nil {
-		return *obj.VisualizationVerticalBars
-	}
-
-	if obj.VisualizationVerticalBarsMulti != nil {
-		return *obj.VisualizationVerticalBarsMulti
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableVisualization struct {

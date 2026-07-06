@@ -13,164 +13,819 @@ package slos_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
+	"time"
 )
 
 var _ = bytes.MinRead
 
-// Slo - struct for Slo
+// checks if the Slo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Slo{}
+
+// Slo Definition of an SLO
 type Slo struct {
-	SloApmSli *SloApmSli
-	SloRequestBasedMetricSli *SloRequestBasedMetricSli
-	SloWindowBasedMetricSli *SloWindowBasedMetricSli
+	ApmSli *ApmSli `json:"apmSli,omitempty"`
+	ApmSliMetadata *ApmSli `json:"apmSliMetadata,omitempty"`
+	// RFC3339 timestamp of when the SLO was created.
+	CreateTime *time.Time `json:"createTime,omitempty"`
+	// Email or identifier of the user who created the SLO.
+	Creator *string `json:"creator,omitempty"`
+	// Human-readable description of the SLO.
+	Description *string `json:"description,omitempty"`
+	Grouping *V1Grouping `json:"grouping,omitempty"`
+	// Unique identifier of the SLO.
+	Id *string `json:"id,omitempty"`
+	// List of labels.
+	Labels *map[string]string `json:"labels,omitempty"`
+	// Human-readable display name for the SLO.
+	Name *string `json:"name,omitempty"`
+	OwnershipTags *SloOwnershipTags `json:"ownershipTags,omitempty"`
+	ProductType *SloProductType `json:"productType,omitempty"`
+	RequestBasedMetricSli *RequestBasedMetricSli `json:"requestBasedMetricSli,omitempty"`
+	Revision *V1Revision `json:"revision,omitempty"`
+	SloTimeFrame *SloTimeFrame `json:"sloTimeFrame,omitempty"`
+	SloType *SloType `json:"sloType,omitempty"`
+	// Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).
+	TargetThresholdPercentage *float32 `json:"targetThresholdPercentage,omitempty"`
+	// Deprecated: SLO type string. Use slo_type instead.
+	// Deprecated
+	Type *string `json:"type,omitempty"`
+	// Timestamp of the last update.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	WindowBasedMetricSli *WindowBasedMetricSli `json:"windowBasedMetricSli,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// SloApmSliAsSlo is a convenience function that returns SloApmSli wrapped in Slo
-func SloApmSliAsSlo(v *SloApmSli) Slo {
-	return Slo{
-		SloApmSli: v,
+type _Slo Slo
+
+// NewSlo instantiates a new Slo object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSlo() *Slo {
+	this := Slo{}
+	return &this
+}
+
+// NewSloWithDefaults instantiates a new Slo object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewSloWithDefaults() *Slo {
+	this := Slo{}
+	return &this
+}
+
+// GetApmSli returns the ApmSli field value if set, zero value otherwise.
+func (o *Slo) GetApmSli() ApmSli {
+	if o == nil || IsNil(o.ApmSli) {
+		var ret ApmSli
+		return ret
 	}
+	return *o.ApmSli
 }
 
-// SloRequestBasedMetricSliAsSlo is a convenience function that returns SloRequestBasedMetricSli wrapped in Slo
-func SloRequestBasedMetricSliAsSlo(v *SloRequestBasedMetricSli) Slo {
-	return Slo{
-		SloRequestBasedMetricSli: v,
+// GetApmSliOk returns a tuple with the ApmSli field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetApmSliOk() (*ApmSli, bool) {
+	if o == nil || IsNil(o.ApmSli) {
+		return nil, false
 	}
+	return o.ApmSli, true
 }
 
-// SloWindowBasedMetricSliAsSlo is a convenience function that returns SloWindowBasedMetricSli wrapped in Slo
-func SloWindowBasedMetricSliAsSlo(v *SloWindowBasedMetricSli) Slo {
-	return Slo{
-		SloWindowBasedMetricSli: v,
+// HasApmSli returns a boolean if a field has been set.
+func (o *Slo) HasApmSli() bool {
+	if o != nil && !IsNil(o.ApmSli) {
+		return true
 	}
+
+	return false
 }
 
+// SetApmSli gets a reference to the given ApmSli and assigns it to the ApmSli field.
+func (o *Slo) SetApmSli(v ApmSli) {
+	o.ApmSli = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Slo) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into SloApmSli
-	err = json.Unmarshal(data, &dst.SloApmSli)
-	if err == nil {
-		jsonSloApmSli, _ := json.Marshal(dst.SloApmSli)
-		if string(jsonSloApmSli) == "{}" { // empty struct
-			dst.SloApmSli = nil
-		} else {
-			if err = validator.Validate(dst.SloApmSli); err != nil {
-				dst.SloApmSli = nil
-			} else {
-				match++
-			}
+// GetApmSliMetadata returns the ApmSliMetadata field value if set, zero value otherwise.
+func (o *Slo) GetApmSliMetadata() ApmSli {
+	if o == nil || IsNil(o.ApmSliMetadata) {
+		var ret ApmSli
+		return ret
+	}
+	return *o.ApmSliMetadata
+}
+
+// GetApmSliMetadataOk returns a tuple with the ApmSliMetadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetApmSliMetadataOk() (*ApmSli, bool) {
+	if o == nil || IsNil(o.ApmSliMetadata) {
+		return nil, false
+	}
+	return o.ApmSliMetadata, true
+}
+
+// HasApmSliMetadata returns a boolean if a field has been set.
+func (o *Slo) HasApmSliMetadata() bool {
+	if o != nil && !IsNil(o.ApmSliMetadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetApmSliMetadata gets a reference to the given ApmSli and assigns it to the ApmSliMetadata field.
+func (o *Slo) SetApmSliMetadata(v ApmSli) {
+	o.ApmSliMetadata = &v
+}
+
+// GetCreateTime returns the CreateTime field value if set, zero value otherwise.
+func (o *Slo) GetCreateTime() time.Time {
+	if o == nil || IsNil(o.CreateTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreateTime
+}
+
+// GetCreateTimeOk returns a tuple with the CreateTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetCreateTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CreateTime) {
+		return nil, false
+	}
+	return o.CreateTime, true
+}
+
+// HasCreateTime returns a boolean if a field has been set.
+func (o *Slo) HasCreateTime() bool {
+	if o != nil && !IsNil(o.CreateTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreateTime gets a reference to the given time.Time and assigns it to the CreateTime field.
+func (o *Slo) SetCreateTime(v time.Time) {
+	o.CreateTime = &v
+}
+
+// GetCreator returns the Creator field value if set, zero value otherwise.
+func (o *Slo) GetCreator() string {
+	if o == nil || IsNil(o.Creator) {
+		var ret string
+		return ret
+	}
+	return *o.Creator
+}
+
+// GetCreatorOk returns a tuple with the Creator field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetCreatorOk() (*string, bool) {
+	if o == nil || IsNil(o.Creator) {
+		return nil, false
+	}
+	return o.Creator, true
+}
+
+// HasCreator returns a boolean if a field has been set.
+func (o *Slo) HasCreator() bool {
+	if o != nil && !IsNil(o.Creator) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreator gets a reference to the given string and assigns it to the Creator field.
+func (o *Slo) SetCreator(v string) {
+	o.Creator = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *Slo) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *Slo) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *Slo) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetGrouping returns the Grouping field value if set, zero value otherwise.
+func (o *Slo) GetGrouping() V1Grouping {
+	if o == nil || IsNil(o.Grouping) {
+		var ret V1Grouping
+		return ret
+	}
+	return *o.Grouping
+}
+
+// GetGroupingOk returns a tuple with the Grouping field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetGroupingOk() (*V1Grouping, bool) {
+	if o == nil || IsNil(o.Grouping) {
+		return nil, false
+	}
+	return o.Grouping, true
+}
+
+// HasGrouping returns a boolean if a field has been set.
+func (o *Slo) HasGrouping() bool {
+	if o != nil && !IsNil(o.Grouping) {
+		return true
+	}
+
+	return false
+}
+
+// SetGrouping gets a reference to the given V1Grouping and assigns it to the Grouping field.
+func (o *Slo) SetGrouping(v V1Grouping) {
+	o.Grouping = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *Slo) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *Slo) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *Slo) SetId(v string) {
+	o.Id = &v
+}
+
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *Slo) GetLabels() map[string]string {
+	if o == nil || IsNil(o.Labels) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Labels
+}
+
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetLabelsOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Labels) {
+		return nil, false
+	}
+	return o.Labels, true
+}
+
+// HasLabels returns a boolean if a field has been set.
+func (o *Slo) HasLabels() bool {
+	if o != nil && !IsNil(o.Labels) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
+func (o *Slo) SetLabels(v map[string]string) {
+	o.Labels = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *Slo) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *Slo) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *Slo) SetName(v string) {
+	o.Name = &v
+}
+
+// GetOwnershipTags returns the OwnershipTags field value if set, zero value otherwise.
+func (o *Slo) GetOwnershipTags() SloOwnershipTags {
+	if o == nil || IsNil(o.OwnershipTags) {
+		var ret SloOwnershipTags
+		return ret
+	}
+	return *o.OwnershipTags
+}
+
+// GetOwnershipTagsOk returns a tuple with the OwnershipTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetOwnershipTagsOk() (*SloOwnershipTags, bool) {
+	if o == nil || IsNil(o.OwnershipTags) {
+		return nil, false
+	}
+	return o.OwnershipTags, true
+}
+
+// HasOwnershipTags returns a boolean if a field has been set.
+func (o *Slo) HasOwnershipTags() bool {
+	if o != nil && !IsNil(o.OwnershipTags) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwnershipTags gets a reference to the given SloOwnershipTags and assigns it to the OwnershipTags field.
+func (o *Slo) SetOwnershipTags(v SloOwnershipTags) {
+	o.OwnershipTags = &v
+}
+
+// GetProductType returns the ProductType field value if set, zero value otherwise.
+func (o *Slo) GetProductType() SloProductType {
+	if o == nil || IsNil(o.ProductType) {
+		var ret SloProductType
+		return ret
+	}
+	return *o.ProductType
+}
+
+// GetProductTypeOk returns a tuple with the ProductType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetProductTypeOk() (*SloProductType, bool) {
+	if o == nil || IsNil(o.ProductType) {
+		return nil, false
+	}
+	return o.ProductType, true
+}
+
+// HasProductType returns a boolean if a field has been set.
+func (o *Slo) HasProductType() bool {
+	if o != nil && !IsNil(o.ProductType) {
+		return true
+	}
+
+	return false
+}
+
+// SetProductType gets a reference to the given SloProductType and assigns it to the ProductType field.
+func (o *Slo) SetProductType(v SloProductType) {
+	o.ProductType = &v
+}
+
+// GetRequestBasedMetricSli returns the RequestBasedMetricSli field value if set, zero value otherwise.
+func (o *Slo) GetRequestBasedMetricSli() RequestBasedMetricSli {
+	if o == nil || IsNil(o.RequestBasedMetricSli) {
+		var ret RequestBasedMetricSli
+		return ret
+	}
+	return *o.RequestBasedMetricSli
+}
+
+// GetRequestBasedMetricSliOk returns a tuple with the RequestBasedMetricSli field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetRequestBasedMetricSliOk() (*RequestBasedMetricSli, bool) {
+	if o == nil || IsNil(o.RequestBasedMetricSli) {
+		return nil, false
+	}
+	return o.RequestBasedMetricSli, true
+}
+
+// HasRequestBasedMetricSli returns a boolean if a field has been set.
+func (o *Slo) HasRequestBasedMetricSli() bool {
+	if o != nil && !IsNil(o.RequestBasedMetricSli) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestBasedMetricSli gets a reference to the given RequestBasedMetricSli and assigns it to the RequestBasedMetricSli field.
+func (o *Slo) SetRequestBasedMetricSli(v RequestBasedMetricSli) {
+	o.RequestBasedMetricSli = &v
+}
+
+// GetRevision returns the Revision field value if set, zero value otherwise.
+func (o *Slo) GetRevision() V1Revision {
+	if o == nil || IsNil(o.Revision) {
+		var ret V1Revision
+		return ret
+	}
+	return *o.Revision
+}
+
+// GetRevisionOk returns a tuple with the Revision field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetRevisionOk() (*V1Revision, bool) {
+	if o == nil || IsNil(o.Revision) {
+		return nil, false
+	}
+	return o.Revision, true
+}
+
+// HasRevision returns a boolean if a field has been set.
+func (o *Slo) HasRevision() bool {
+	if o != nil && !IsNil(o.Revision) {
+		return true
+	}
+
+	return false
+}
+
+// SetRevision gets a reference to the given V1Revision and assigns it to the Revision field.
+func (o *Slo) SetRevision(v V1Revision) {
+	o.Revision = &v
+}
+
+// GetSloTimeFrame returns the SloTimeFrame field value if set, zero value otherwise.
+func (o *Slo) GetSloTimeFrame() SloTimeFrame {
+	if o == nil || IsNil(o.SloTimeFrame) {
+		var ret SloTimeFrame
+		return ret
+	}
+	return *o.SloTimeFrame
+}
+
+// GetSloTimeFrameOk returns a tuple with the SloTimeFrame field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetSloTimeFrameOk() (*SloTimeFrame, bool) {
+	if o == nil || IsNil(o.SloTimeFrame) {
+		return nil, false
+	}
+	return o.SloTimeFrame, true
+}
+
+// HasSloTimeFrame returns a boolean if a field has been set.
+func (o *Slo) HasSloTimeFrame() bool {
+	if o != nil && !IsNil(o.SloTimeFrame) {
+		return true
+	}
+
+	return false
+}
+
+// SetSloTimeFrame gets a reference to the given SloTimeFrame and assigns it to the SloTimeFrame field.
+func (o *Slo) SetSloTimeFrame(v SloTimeFrame) {
+	o.SloTimeFrame = &v
+}
+
+// GetSloType returns the SloType field value if set, zero value otherwise.
+func (o *Slo) GetSloType() SloType {
+	if o == nil || IsNil(o.SloType) {
+		var ret SloType
+		return ret
+	}
+	return *o.SloType
+}
+
+// GetSloTypeOk returns a tuple with the SloType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetSloTypeOk() (*SloType, bool) {
+	if o == nil || IsNil(o.SloType) {
+		return nil, false
+	}
+	return o.SloType, true
+}
+
+// HasSloType returns a boolean if a field has been set.
+func (o *Slo) HasSloType() bool {
+	if o != nil && !IsNil(o.SloType) {
+		return true
+	}
+
+	return false
+}
+
+// SetSloType gets a reference to the given SloType and assigns it to the SloType field.
+func (o *Slo) SetSloType(v SloType) {
+	o.SloType = &v
+}
+
+// GetTargetThresholdPercentage returns the TargetThresholdPercentage field value if set, zero value otherwise.
+func (o *Slo) GetTargetThresholdPercentage() float32 {
+	if o == nil || IsNil(o.TargetThresholdPercentage) {
+		var ret float32
+		return ret
+	}
+	return *o.TargetThresholdPercentage
+}
+
+// GetTargetThresholdPercentageOk returns a tuple with the TargetThresholdPercentage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetTargetThresholdPercentageOk() (*float32, bool) {
+	if o == nil || IsNil(o.TargetThresholdPercentage) {
+		return nil, false
+	}
+	return o.TargetThresholdPercentage, true
+}
+
+// HasTargetThresholdPercentage returns a boolean if a field has been set.
+func (o *Slo) HasTargetThresholdPercentage() bool {
+	if o != nil && !IsNil(o.TargetThresholdPercentage) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetThresholdPercentage gets a reference to the given float32 and assigns it to the TargetThresholdPercentage field.
+func (o *Slo) SetTargetThresholdPercentage(v float32) {
+	o.TargetThresholdPercentage = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+// Deprecated
+func (o *Slo) GetType() string {
+	if o == nil || IsNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *Slo) GetTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *Slo) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+// Deprecated
+func (o *Slo) SetType(v string) {
+	o.Type = &v
+}
+
+// GetUpdateTime returns the UpdateTime field value if set, zero value otherwise.
+func (o *Slo) GetUpdateTime() time.Time {
+	if o == nil || IsNil(o.UpdateTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.UpdateTime
+}
+
+// GetUpdateTimeOk returns a tuple with the UpdateTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetUpdateTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.UpdateTime) {
+		return nil, false
+	}
+	return o.UpdateTime, true
+}
+
+// HasUpdateTime returns a boolean if a field has been set.
+func (o *Slo) HasUpdateTime() bool {
+	if o != nil && !IsNil(o.UpdateTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdateTime gets a reference to the given time.Time and assigns it to the UpdateTime field.
+func (o *Slo) SetUpdateTime(v time.Time) {
+	o.UpdateTime = &v
+}
+
+// GetWindowBasedMetricSli returns the WindowBasedMetricSli field value if set, zero value otherwise.
+func (o *Slo) GetWindowBasedMetricSli() WindowBasedMetricSli {
+	if o == nil || IsNil(o.WindowBasedMetricSli) {
+		var ret WindowBasedMetricSli
+		return ret
+	}
+	return *o.WindowBasedMetricSli
+}
+
+// GetWindowBasedMetricSliOk returns a tuple with the WindowBasedMetricSli field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo) GetWindowBasedMetricSliOk() (*WindowBasedMetricSli, bool) {
+	if o == nil || IsNil(o.WindowBasedMetricSli) {
+		return nil, false
+	}
+	return o.WindowBasedMetricSli, true
+}
+
+// HasWindowBasedMetricSli returns a boolean if a field has been set.
+func (o *Slo) HasWindowBasedMetricSli() bool {
+	if o != nil && !IsNil(o.WindowBasedMetricSli) {
+		return true
+	}
+
+	return false
+}
+
+// SetWindowBasedMetricSli gets a reference to the given WindowBasedMetricSli and assigns it to the WindowBasedMetricSli field.
+func (o *Slo) SetWindowBasedMetricSli(v WindowBasedMetricSli) {
+	o.WindowBasedMetricSli = &v
+}
+
+func (o Slo) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Slo) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApmSli) {
+		toSerialize["apmSli"] = o.ApmSli
+	}
+	if !IsNil(o.ApmSliMetadata) {
+		toSerialize["apmSliMetadata"] = o.ApmSliMetadata
+	}
+	if !IsNil(o.CreateTime) {
+		toSerialize["createTime"] = o.CreateTime
+	}
+	if !IsNil(o.Creator) {
+		toSerialize["creator"] = o.Creator
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Grouping) {
+		toSerialize["grouping"] = o.Grouping
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Labels) {
+		toSerialize["labels"] = o.Labels
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.OwnershipTags) {
+		toSerialize["ownershipTags"] = o.OwnershipTags
+	}
+	if !IsNil(o.ProductType) {
+		toSerialize["productType"] = o.ProductType
+	}
+	if !IsNil(o.RequestBasedMetricSli) {
+		toSerialize["requestBasedMetricSli"] = o.RequestBasedMetricSli
+	}
+	if !IsNil(o.Revision) {
+		toSerialize["revision"] = o.Revision
+	}
+	if !IsNil(o.SloTimeFrame) {
+		toSerialize["sloTimeFrame"] = o.SloTimeFrame
+	}
+	if !IsNil(o.SloType) {
+		toSerialize["sloType"] = o.SloType
+	}
+	if !IsNil(o.TargetThresholdPercentage) {
+		toSerialize["targetThresholdPercentage"] = o.TargetThresholdPercentage
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.UpdateTime) {
+		toSerialize["updateTime"] = o.UpdateTime
+	}
+	if !IsNil(o.WindowBasedMetricSli) {
+		toSerialize["windowBasedMetricSli"] = o.WindowBasedMetricSli
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["requestBasedMetricSli"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["windowBasedMetricSli"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["apmSli"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [requestBasedMetricSli, windowBasedMetricSli, apmSli] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Slo) UnmarshalJSON(data []byte) (err error) {
+	varSlo := _Slo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSlo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Slo(varSlo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["requestBasedMetricSli"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloApmSli = nil
-	}
-
-	// try to unmarshal data into SloRequestBasedMetricSli
-	err = json.Unmarshal(data, &dst.SloRequestBasedMetricSli)
-	if err == nil {
-		jsonSloRequestBasedMetricSli, _ := json.Marshal(dst.SloRequestBasedMetricSli)
-		if string(jsonSloRequestBasedMetricSli) == "{}" { // empty struct
-			dst.SloRequestBasedMetricSli = nil
-		} else {
-			if err = validator.Validate(dst.SloRequestBasedMetricSli); err != nil {
-				dst.SloRequestBasedMetricSli = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["windowBasedMetricSli"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloRequestBasedMetricSli = nil
-	}
-
-	// try to unmarshal data into SloWindowBasedMetricSli
-	err = json.Unmarshal(data, &dst.SloWindowBasedMetricSli)
-	if err == nil {
-		jsonSloWindowBasedMetricSli, _ := json.Marshal(dst.SloWindowBasedMetricSli)
-		if string(jsonSloWindowBasedMetricSli) == "{}" { // empty struct
-			dst.SloWindowBasedMetricSli = nil
-		} else {
-			if err = validator.Validate(dst.SloWindowBasedMetricSli); err != nil {
-				dst.SloWindowBasedMetricSli = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["apmSli"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloWindowBasedMetricSli = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [requestBasedMetricSli, windowBasedMetricSli, apmSli] may be set"}
+		}
+
+		delete(additionalProperties, "apmSli")
+		delete(additionalProperties, "apmSliMetadata")
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "grouping")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "ownershipTags")
+		delete(additionalProperties, "productType")
+		delete(additionalProperties, "requestBasedMetricSli")
+		delete(additionalProperties, "revision")
+		delete(additionalProperties, "sloTimeFrame")
+		delete(additionalProperties, "sloType")
+		delete(additionalProperties, "targetThresholdPercentage")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updateTime")
+		delete(additionalProperties, "windowBasedMetricSli")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.SloApmSli = nil
-		dst.SloRequestBasedMetricSli = nil
-		dst.SloWindowBasedMetricSli = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Slo)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Slo) MarshalJSON() ([]byte, error) {
-	if src.SloApmSli != nil {
-		return json.Marshal(&src.SloApmSli)
-	}
-
-	if src.SloRequestBasedMetricSli != nil {
-		return json.Marshal(&src.SloRequestBasedMetricSli)
-	}
-
-	if src.SloWindowBasedMetricSli != nil {
-		return json.Marshal(&src.SloWindowBasedMetricSli)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Slo) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.SloApmSli != nil {
-		return obj.SloApmSli
-	}
-
-	if obj.SloRequestBasedMetricSli != nil {
-		return obj.SloRequestBasedMetricSli
-	}
-
-	if obj.SloWindowBasedMetricSli != nil {
-		return obj.SloWindowBasedMetricSli
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Slo) GetActualInstanceValue() (interface{}) {
-	if obj.SloApmSli != nil {
-		return *obj.SloApmSli
-	}
-
-	if obj.SloRequestBasedMetricSli != nil {
-		return *obj.SloRequestBasedMetricSli
-	}
-
-	if obj.SloWindowBasedMetricSli != nil {
-		return *obj.SloWindowBasedMetricSli
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSlo struct {

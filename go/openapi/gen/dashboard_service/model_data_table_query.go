@@ -13,202 +13,256 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// DataTableQuery - struct for DataTableQuery
+// checks if the DataTableQuery type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DataTableQuery{}
+
+// DataTableQuery Discriminated union of possible query types for the data table widget.
 type DataTableQuery struct {
-	DataTableQueryDataprime *DataTableQueryDataprime
-	DataTableQueryLogs *DataTableQueryLogs
-	DataTableQueryMetrics *DataTableQueryMetrics
-	DataTableQuerySpans *DataTableQuerySpans
+	Dataprime *DataTableDataprimeQuery `json:"dataprime,omitempty"`
+	Logs *DataTableLogsQuery `json:"logs,omitempty"`
+	Metrics *DataTableMetricsQuery `json:"metrics,omitempty"`
+	Spans *DataTableSpansQuery `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// DataTableQueryDataprimeAsDataTableQuery is a convenience function that returns DataTableQueryDataprime wrapped in DataTableQuery
-func DataTableQueryDataprimeAsDataTableQuery(v *DataTableQueryDataprime) DataTableQuery {
-	return DataTableQuery{
-		DataTableQueryDataprime: v,
+type _DataTableQuery DataTableQuery
+
+// NewDataTableQuery instantiates a new DataTableQuery object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDataTableQuery() *DataTableQuery {
+	this := DataTableQuery{}
+	return &this
+}
+
+// NewDataTableQueryWithDefaults instantiates a new DataTableQuery object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDataTableQueryWithDefaults() *DataTableQuery {
+	this := DataTableQuery{}
+	return &this
+}
+
+// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+func (o *DataTableQuery) GetDataprime() DataTableDataprimeQuery {
+	if o == nil || IsNil(o.Dataprime) {
+		var ret DataTableDataprimeQuery
+		return ret
 	}
+	return *o.Dataprime
 }
 
-// DataTableQueryLogsAsDataTableQuery is a convenience function that returns DataTableQueryLogs wrapped in DataTableQuery
-func DataTableQueryLogsAsDataTableQuery(v *DataTableQueryLogs) DataTableQuery {
-	return DataTableQuery{
-		DataTableQueryLogs: v,
+// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataTableQuery) GetDataprimeOk() (*DataTableDataprimeQuery, bool) {
+	if o == nil || IsNil(o.Dataprime) {
+		return nil, false
 	}
+	return o.Dataprime, true
 }
 
-// DataTableQueryMetricsAsDataTableQuery is a convenience function that returns DataTableQueryMetrics wrapped in DataTableQuery
-func DataTableQueryMetricsAsDataTableQuery(v *DataTableQueryMetrics) DataTableQuery {
-	return DataTableQuery{
-		DataTableQueryMetrics: v,
+// HasDataprime returns a boolean if a field has been set.
+func (o *DataTableQuery) HasDataprime() bool {
+	if o != nil && !IsNil(o.Dataprime) {
+		return true
 	}
+
+	return false
 }
 
-// DataTableQuerySpansAsDataTableQuery is a convenience function that returns DataTableQuerySpans wrapped in DataTableQuery
-func DataTableQuerySpansAsDataTableQuery(v *DataTableQuerySpans) DataTableQuery {
-	return DataTableQuery{
-		DataTableQuerySpans: v,
+// SetDataprime gets a reference to the given DataTableDataprimeQuery and assigns it to the Dataprime field.
+func (o *DataTableQuery) SetDataprime(v DataTableDataprimeQuery) {
+	o.Dataprime = &v
+}
+
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *DataTableQuery) GetLogs() DataTableLogsQuery {
+	if o == nil || IsNil(o.Logs) {
+		var ret DataTableLogsQuery
+		return ret
 	}
+	return *o.Logs
 }
 
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataTableQuery) GetLogsOk() (*DataTableLogsQuery, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
+	}
+	return o.Logs, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *DataTableQuery) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into DataTableQueryDataprime
-	err = json.Unmarshal(data, &dst.DataTableQueryDataprime)
-	if err == nil {
-		jsonDataTableQueryDataprime, _ := json.Marshal(dst.DataTableQueryDataprime)
-		if string(jsonDataTableQueryDataprime) == "{}" { // empty struct
-			dst.DataTableQueryDataprime = nil
-		} else {
-			if err = validator.Validate(dst.DataTableQueryDataprime); err != nil {
-				dst.DataTableQueryDataprime = nil
-			} else {
-				match++
-			}
+// HasLogs returns a boolean if a field has been set.
+func (o *DataTableQuery) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogs gets a reference to the given DataTableLogsQuery and assigns it to the Logs field.
+func (o *DataTableQuery) SetLogs(v DataTableLogsQuery) {
+	o.Logs = &v
+}
+
+// GetMetrics returns the Metrics field value if set, zero value otherwise.
+func (o *DataTableQuery) GetMetrics() DataTableMetricsQuery {
+	if o == nil || IsNil(o.Metrics) {
+		var ret DataTableMetricsQuery
+		return ret
+	}
+	return *o.Metrics
+}
+
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataTableQuery) GetMetricsOk() (*DataTableMetricsQuery, bool) {
+	if o == nil || IsNil(o.Metrics) {
+		return nil, false
+	}
+	return o.Metrics, true
+}
+
+// HasMetrics returns a boolean if a field has been set.
+func (o *DataTableQuery) HasMetrics() bool {
+	if o != nil && !IsNil(o.Metrics) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetrics gets a reference to the given DataTableMetricsQuery and assigns it to the Metrics field.
+func (o *DataTableQuery) SetMetrics(v DataTableMetricsQuery) {
+	o.Metrics = &v
+}
+
+// GetSpans returns the Spans field value if set, zero value otherwise.
+func (o *DataTableQuery) GetSpans() DataTableSpansQuery {
+	if o == nil || IsNil(o.Spans) {
+		var ret DataTableSpansQuery
+		return ret
+	}
+	return *o.Spans
+}
+
+// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataTableQuery) GetSpansOk() (*DataTableSpansQuery, bool) {
+	if o == nil || IsNil(o.Spans) {
+		return nil, false
+	}
+	return o.Spans, true
+}
+
+// HasSpans returns a boolean if a field has been set.
+func (o *DataTableQuery) HasSpans() bool {
+	if o != nil && !IsNil(o.Spans) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpans gets a reference to the given DataTableSpansQuery and assigns it to the Spans field.
+func (o *DataTableQuery) SetSpans(v DataTableSpansQuery) {
+	o.Spans = &v
+}
+
+func (o DataTableQuery) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DataTableQuery) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dataprime) {
+		toSerialize["dataprime"] = o.Dataprime
+	}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Metrics) {
+		toSerialize["metrics"] = o.Metrics
+	}
+	if !IsNil(o.Spans) {
+		toSerialize["spans"] = o.Spans
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spans"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metrics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dataprime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logs, spans, metrics, dataprime] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *DataTableQuery) UnmarshalJSON(data []byte) (err error) {
+	varDataTableQuery := _DataTableQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataTableQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataTableQuery(varDataTableQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DataTableQueryDataprime = nil
-	}
-
-	// try to unmarshal data into DataTableQueryLogs
-	err = json.Unmarshal(data, &dst.DataTableQueryLogs)
-	if err == nil {
-		jsonDataTableQueryLogs, _ := json.Marshal(dst.DataTableQueryLogs)
-		if string(jsonDataTableQueryLogs) == "{}" { // empty struct
-			dst.DataTableQueryLogs = nil
-		} else {
-			if err = validator.Validate(dst.DataTableQueryLogs); err != nil {
-				dst.DataTableQueryLogs = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spans"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DataTableQueryLogs = nil
-	}
-
-	// try to unmarshal data into DataTableQueryMetrics
-	err = json.Unmarshal(data, &dst.DataTableQueryMetrics)
-	if err == nil {
-		jsonDataTableQueryMetrics, _ := json.Marshal(dst.DataTableQueryMetrics)
-		if string(jsonDataTableQueryMetrics) == "{}" { // empty struct
-			dst.DataTableQueryMetrics = nil
-		} else {
-			if err = validator.Validate(dst.DataTableQueryMetrics); err != nil {
-				dst.DataTableQueryMetrics = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metrics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DataTableQueryMetrics = nil
-	}
-
-	// try to unmarshal data into DataTableQuerySpans
-	err = json.Unmarshal(data, &dst.DataTableQuerySpans)
-	if err == nil {
-		jsonDataTableQuerySpans, _ := json.Marshal(dst.DataTableQuerySpans)
-		if string(jsonDataTableQuerySpans) == "{}" { // empty struct
-			dst.DataTableQuerySpans = nil
-		} else {
-			if err = validator.Validate(dst.DataTableQuerySpans); err != nil {
-				dst.DataTableQuerySpans = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dataprime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DataTableQuerySpans = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logs, spans, metrics, dataprime] may be set"}
+		}
+
+		delete(additionalProperties, "dataprime")
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.DataTableQueryDataprime = nil
-		dst.DataTableQueryLogs = nil
-		dst.DataTableQueryMetrics = nil
-		dst.DataTableQuerySpans = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(DataTableQuery)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src DataTableQuery) MarshalJSON() ([]byte, error) {
-	if src.DataTableQueryDataprime != nil {
-		return json.Marshal(&src.DataTableQueryDataprime)
-	}
-
-	if src.DataTableQueryLogs != nil {
-		return json.Marshal(&src.DataTableQueryLogs)
-	}
-
-	if src.DataTableQueryMetrics != nil {
-		return json.Marshal(&src.DataTableQueryMetrics)
-	}
-
-	if src.DataTableQuerySpans != nil {
-		return json.Marshal(&src.DataTableQuerySpans)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *DataTableQuery) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.DataTableQueryDataprime != nil {
-		return obj.DataTableQueryDataprime
-	}
-
-	if obj.DataTableQueryLogs != nil {
-		return obj.DataTableQueryLogs
-	}
-
-	if obj.DataTableQueryMetrics != nil {
-		return obj.DataTableQueryMetrics
-	}
-
-	if obj.DataTableQuerySpans != nil {
-		return obj.DataTableQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj DataTableQuery) GetActualInstanceValue() (interface{}) {
-	if obj.DataTableQueryDataprime != nil {
-		return *obj.DataTableQueryDataprime
-	}
-
-	if obj.DataTableQueryLogs != nil {
-		return *obj.DataTableQueryLogs
-	}
-
-	if obj.DataTableQueryMetrics != nil {
-		return *obj.DataTableQueryMetrics
-	}
-
-	if obj.DataTableQuerySpans != nil {
-		return *obj.DataTableQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableDataTableQuery struct {

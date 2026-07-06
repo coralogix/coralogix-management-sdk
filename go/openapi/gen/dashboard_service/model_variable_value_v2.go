@@ -13,278 +13,342 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// VariableValueV2 - struct for VariableValueV2
+// checks if the VariableValueV2 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VariableValueV2{}
+
+// VariableValueV2 Discriminated union representing the current runtime value of a dashboard variable (string, numeric, regex, Lucene, or interval).
 type VariableValueV2 struct {
-	VariableValueV2Interval *VariableValueV2Interval
-	VariableValueV2Lucene *VariableValueV2Lucene
-	VariableValueV2MultiString *VariableValueV2MultiString
-	VariableValueV2Regex *VariableValueV2Regex
-	VariableValueV2SingleNumeric *VariableValueV2SingleNumeric
-	VariableValueV2SingleString *VariableValueV2SingleString
+	Interval *IntervalValue `json:"interval,omitempty"`
+	Lucene *LuceneQueryValue `json:"lucene,omitempty"`
+	MultiString *MultiStringValue `json:"multiString,omitempty"`
+	Regex *RegexValue `json:"regex,omitempty"`
+	SingleNumeric *VariableValueV2SingleNumericValue `json:"singleNumeric,omitempty"`
+	SingleString *SingleStringValue `json:"singleString,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// VariableValueV2IntervalAsVariableValueV2 is a convenience function that returns VariableValueV2Interval wrapped in VariableValueV2
-func VariableValueV2IntervalAsVariableValueV2(v *VariableValueV2Interval) VariableValueV2 {
-	return VariableValueV2{
-		VariableValueV2Interval: v,
+type _VariableValueV2 VariableValueV2
+
+// NewVariableValueV2 instantiates a new VariableValueV2 object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewVariableValueV2() *VariableValueV2 {
+	this := VariableValueV2{}
+	return &this
+}
+
+// NewVariableValueV2WithDefaults instantiates a new VariableValueV2 object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewVariableValueV2WithDefaults() *VariableValueV2 {
+	this := VariableValueV2{}
+	return &this
+}
+
+// GetInterval returns the Interval field value if set, zero value otherwise.
+func (o *VariableValueV2) GetInterval() IntervalValue {
+	if o == nil || IsNil(o.Interval) {
+		var ret IntervalValue
+		return ret
 	}
+	return *o.Interval
 }
 
-// VariableValueV2LuceneAsVariableValueV2 is a convenience function that returns VariableValueV2Lucene wrapped in VariableValueV2
-func VariableValueV2LuceneAsVariableValueV2(v *VariableValueV2Lucene) VariableValueV2 {
-	return VariableValueV2{
-		VariableValueV2Lucene: v,
+// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableValueV2) GetIntervalOk() (*IntervalValue, bool) {
+	if o == nil || IsNil(o.Interval) {
+		return nil, false
 	}
+	return o.Interval, true
 }
 
-// VariableValueV2MultiStringAsVariableValueV2 is a convenience function that returns VariableValueV2MultiString wrapped in VariableValueV2
-func VariableValueV2MultiStringAsVariableValueV2(v *VariableValueV2MultiString) VariableValueV2 {
-	return VariableValueV2{
-		VariableValueV2MultiString: v,
+// HasInterval returns a boolean if a field has been set.
+func (o *VariableValueV2) HasInterval() bool {
+	if o != nil && !IsNil(o.Interval) {
+		return true
 	}
+
+	return false
 }
 
-// VariableValueV2RegexAsVariableValueV2 is a convenience function that returns VariableValueV2Regex wrapped in VariableValueV2
-func VariableValueV2RegexAsVariableValueV2(v *VariableValueV2Regex) VariableValueV2 {
-	return VariableValueV2{
-		VariableValueV2Regex: v,
+// SetInterval gets a reference to the given IntervalValue and assigns it to the Interval field.
+func (o *VariableValueV2) SetInterval(v IntervalValue) {
+	o.Interval = &v
+}
+
+// GetLucene returns the Lucene field value if set, zero value otherwise.
+func (o *VariableValueV2) GetLucene() LuceneQueryValue {
+	if o == nil || IsNil(o.Lucene) {
+		var ret LuceneQueryValue
+		return ret
 	}
+	return *o.Lucene
 }
 
-// VariableValueV2SingleNumericAsVariableValueV2 is a convenience function that returns VariableValueV2SingleNumeric wrapped in VariableValueV2
-func VariableValueV2SingleNumericAsVariableValueV2(v *VariableValueV2SingleNumeric) VariableValueV2 {
-	return VariableValueV2{
-		VariableValueV2SingleNumeric: v,
+// GetLuceneOk returns a tuple with the Lucene field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableValueV2) GetLuceneOk() (*LuceneQueryValue, bool) {
+	if o == nil || IsNil(o.Lucene) {
+		return nil, false
 	}
+	return o.Lucene, true
 }
 
-// VariableValueV2SingleStringAsVariableValueV2 is a convenience function that returns VariableValueV2SingleString wrapped in VariableValueV2
-func VariableValueV2SingleStringAsVariableValueV2(v *VariableValueV2SingleString) VariableValueV2 {
-	return VariableValueV2{
-		VariableValueV2SingleString: v,
+// HasLucene returns a boolean if a field has been set.
+func (o *VariableValueV2) HasLucene() bool {
+	if o != nil && !IsNil(o.Lucene) {
+		return true
 	}
+
+	return false
 }
 
+// SetLucene gets a reference to the given LuceneQueryValue and assigns it to the Lucene field.
+func (o *VariableValueV2) SetLucene(v LuceneQueryValue) {
+	o.Lucene = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *VariableValueV2) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into VariableValueV2Interval
-	err = json.Unmarshal(data, &dst.VariableValueV2Interval)
-	if err == nil {
-		jsonVariableValueV2Interval, _ := json.Marshal(dst.VariableValueV2Interval)
-		if string(jsonVariableValueV2Interval) == "{}" { // empty struct
-			dst.VariableValueV2Interval = nil
-		} else {
-			if err = validator.Validate(dst.VariableValueV2Interval); err != nil {
-				dst.VariableValueV2Interval = nil
-			} else {
-				match++
-			}
+// GetMultiString returns the MultiString field value if set, zero value otherwise.
+func (o *VariableValueV2) GetMultiString() MultiStringValue {
+	if o == nil || IsNil(o.MultiString) {
+		var ret MultiStringValue
+		return ret
+	}
+	return *o.MultiString
+}
+
+// GetMultiStringOk returns a tuple with the MultiString field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableValueV2) GetMultiStringOk() (*MultiStringValue, bool) {
+	if o == nil || IsNil(o.MultiString) {
+		return nil, false
+	}
+	return o.MultiString, true
+}
+
+// HasMultiString returns a boolean if a field has been set.
+func (o *VariableValueV2) HasMultiString() bool {
+	if o != nil && !IsNil(o.MultiString) {
+		return true
+	}
+
+	return false
+}
+
+// SetMultiString gets a reference to the given MultiStringValue and assigns it to the MultiString field.
+func (o *VariableValueV2) SetMultiString(v MultiStringValue) {
+	o.MultiString = &v
+}
+
+// GetRegex returns the Regex field value if set, zero value otherwise.
+func (o *VariableValueV2) GetRegex() RegexValue {
+	if o == nil || IsNil(o.Regex) {
+		var ret RegexValue
+		return ret
+	}
+	return *o.Regex
+}
+
+// GetRegexOk returns a tuple with the Regex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableValueV2) GetRegexOk() (*RegexValue, bool) {
+	if o == nil || IsNil(o.Regex) {
+		return nil, false
+	}
+	return o.Regex, true
+}
+
+// HasRegex returns a boolean if a field has been set.
+func (o *VariableValueV2) HasRegex() bool {
+	if o != nil && !IsNil(o.Regex) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegex gets a reference to the given RegexValue and assigns it to the Regex field.
+func (o *VariableValueV2) SetRegex(v RegexValue) {
+	o.Regex = &v
+}
+
+// GetSingleNumeric returns the SingleNumeric field value if set, zero value otherwise.
+func (o *VariableValueV2) GetSingleNumeric() VariableValueV2SingleNumericValue {
+	if o == nil || IsNil(o.SingleNumeric) {
+		var ret VariableValueV2SingleNumericValue
+		return ret
+	}
+	return *o.SingleNumeric
+}
+
+// GetSingleNumericOk returns a tuple with the SingleNumeric field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableValueV2) GetSingleNumericOk() (*VariableValueV2SingleNumericValue, bool) {
+	if o == nil || IsNil(o.SingleNumeric) {
+		return nil, false
+	}
+	return o.SingleNumeric, true
+}
+
+// HasSingleNumeric returns a boolean if a field has been set.
+func (o *VariableValueV2) HasSingleNumeric() bool {
+	if o != nil && !IsNil(o.SingleNumeric) {
+		return true
+	}
+
+	return false
+}
+
+// SetSingleNumeric gets a reference to the given VariableValueV2SingleNumericValue and assigns it to the SingleNumeric field.
+func (o *VariableValueV2) SetSingleNumeric(v VariableValueV2SingleNumericValue) {
+	o.SingleNumeric = &v
+}
+
+// GetSingleString returns the SingleString field value if set, zero value otherwise.
+func (o *VariableValueV2) GetSingleString() SingleStringValue {
+	if o == nil || IsNil(o.SingleString) {
+		var ret SingleStringValue
+		return ret
+	}
+	return *o.SingleString
+}
+
+// GetSingleStringOk returns a tuple with the SingleString field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableValueV2) GetSingleStringOk() (*SingleStringValue, bool) {
+	if o == nil || IsNil(o.SingleString) {
+		return nil, false
+	}
+	return o.SingleString, true
+}
+
+// HasSingleString returns a boolean if a field has been set.
+func (o *VariableValueV2) HasSingleString() bool {
+	if o != nil && !IsNil(o.SingleString) {
+		return true
+	}
+
+	return false
+}
+
+// SetSingleString gets a reference to the given SingleStringValue and assigns it to the SingleString field.
+func (o *VariableValueV2) SetSingleString(v SingleStringValue) {
+	o.SingleString = &v
+}
+
+func (o VariableValueV2) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VariableValueV2) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Interval) {
+		toSerialize["interval"] = o.Interval
+	}
+	if !IsNil(o.Lucene) {
+		toSerialize["lucene"] = o.Lucene
+	}
+	if !IsNil(o.MultiString) {
+		toSerialize["multiString"] = o.MultiString
+	}
+	if !IsNil(o.Regex) {
+		toSerialize["regex"] = o.Regex
+	}
+	if !IsNil(o.SingleNumeric) {
+		toSerialize["singleNumeric"] = o.SingleNumeric
+	}
+	if !IsNil(o.SingleString) {
+		toSerialize["singleString"] = o.SingleString
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["multiString"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["singleString"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["singleNumeric"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["regex"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["lucene"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["interval"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [multiString, singleString, singleNumeric, regex, lucene, interval] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *VariableValueV2) UnmarshalJSON(data []byte) (err error) {
+	varVariableValueV2 := _VariableValueV2{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableValueV2)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableValueV2(varVariableValueV2)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["multiString"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableValueV2Interval = nil
-	}
-
-	// try to unmarshal data into VariableValueV2Lucene
-	err = json.Unmarshal(data, &dst.VariableValueV2Lucene)
-	if err == nil {
-		jsonVariableValueV2Lucene, _ := json.Marshal(dst.VariableValueV2Lucene)
-		if string(jsonVariableValueV2Lucene) == "{}" { // empty struct
-			dst.VariableValueV2Lucene = nil
-		} else {
-			if err = validator.Validate(dst.VariableValueV2Lucene); err != nil {
-				dst.VariableValueV2Lucene = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["singleString"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableValueV2Lucene = nil
-	}
-
-	// try to unmarshal data into VariableValueV2MultiString
-	err = json.Unmarshal(data, &dst.VariableValueV2MultiString)
-	if err == nil {
-		jsonVariableValueV2MultiString, _ := json.Marshal(dst.VariableValueV2MultiString)
-		if string(jsonVariableValueV2MultiString) == "{}" { // empty struct
-			dst.VariableValueV2MultiString = nil
-		} else {
-			if err = validator.Validate(dst.VariableValueV2MultiString); err != nil {
-				dst.VariableValueV2MultiString = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["singleNumeric"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableValueV2MultiString = nil
-	}
-
-	// try to unmarshal data into VariableValueV2Regex
-	err = json.Unmarshal(data, &dst.VariableValueV2Regex)
-	if err == nil {
-		jsonVariableValueV2Regex, _ := json.Marshal(dst.VariableValueV2Regex)
-		if string(jsonVariableValueV2Regex) == "{}" { // empty struct
-			dst.VariableValueV2Regex = nil
-		} else {
-			if err = validator.Validate(dst.VariableValueV2Regex); err != nil {
-				dst.VariableValueV2Regex = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["regex"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableValueV2Regex = nil
-	}
-
-	// try to unmarshal data into VariableValueV2SingleNumeric
-	err = json.Unmarshal(data, &dst.VariableValueV2SingleNumeric)
-	if err == nil {
-		jsonVariableValueV2SingleNumeric, _ := json.Marshal(dst.VariableValueV2SingleNumeric)
-		if string(jsonVariableValueV2SingleNumeric) == "{}" { // empty struct
-			dst.VariableValueV2SingleNumeric = nil
-		} else {
-			if err = validator.Validate(dst.VariableValueV2SingleNumeric); err != nil {
-				dst.VariableValueV2SingleNumeric = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["lucene"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableValueV2SingleNumeric = nil
-	}
-
-	// try to unmarshal data into VariableValueV2SingleString
-	err = json.Unmarshal(data, &dst.VariableValueV2SingleString)
-	if err == nil {
-		jsonVariableValueV2SingleString, _ := json.Marshal(dst.VariableValueV2SingleString)
-		if string(jsonVariableValueV2SingleString) == "{}" { // empty struct
-			dst.VariableValueV2SingleString = nil
-		} else {
-			if err = validator.Validate(dst.VariableValueV2SingleString); err != nil {
-				dst.VariableValueV2SingleString = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["interval"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableValueV2SingleString = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [multiString, singleString, singleNumeric, regex, lucene, interval] may be set"}
+		}
+
+		delete(additionalProperties, "interval")
+		delete(additionalProperties, "lucene")
+		delete(additionalProperties, "multiString")
+		delete(additionalProperties, "regex")
+		delete(additionalProperties, "singleNumeric")
+		delete(additionalProperties, "singleString")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.VariableValueV2Interval = nil
-		dst.VariableValueV2Lucene = nil
-		dst.VariableValueV2MultiString = nil
-		dst.VariableValueV2Regex = nil
-		dst.VariableValueV2SingleNumeric = nil
-		dst.VariableValueV2SingleString = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(VariableValueV2)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src VariableValueV2) MarshalJSON() ([]byte, error) {
-	if src.VariableValueV2Interval != nil {
-		return json.Marshal(&src.VariableValueV2Interval)
-	}
-
-	if src.VariableValueV2Lucene != nil {
-		return json.Marshal(&src.VariableValueV2Lucene)
-	}
-
-	if src.VariableValueV2MultiString != nil {
-		return json.Marshal(&src.VariableValueV2MultiString)
-	}
-
-	if src.VariableValueV2Regex != nil {
-		return json.Marshal(&src.VariableValueV2Regex)
-	}
-
-	if src.VariableValueV2SingleNumeric != nil {
-		return json.Marshal(&src.VariableValueV2SingleNumeric)
-	}
-
-	if src.VariableValueV2SingleString != nil {
-		return json.Marshal(&src.VariableValueV2SingleString)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *VariableValueV2) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.VariableValueV2Interval != nil {
-		return obj.VariableValueV2Interval
-	}
-
-	if obj.VariableValueV2Lucene != nil {
-		return obj.VariableValueV2Lucene
-	}
-
-	if obj.VariableValueV2MultiString != nil {
-		return obj.VariableValueV2MultiString
-	}
-
-	if obj.VariableValueV2Regex != nil {
-		return obj.VariableValueV2Regex
-	}
-
-	if obj.VariableValueV2SingleNumeric != nil {
-		return obj.VariableValueV2SingleNumeric
-	}
-
-	if obj.VariableValueV2SingleString != nil {
-		return obj.VariableValueV2SingleString
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj VariableValueV2) GetActualInstanceValue() (interface{}) {
-	if obj.VariableValueV2Interval != nil {
-		return *obj.VariableValueV2Interval
-	}
-
-	if obj.VariableValueV2Lucene != nil {
-		return *obj.VariableValueV2Lucene
-	}
-
-	if obj.VariableValueV2MultiString != nil {
-		return *obj.VariableValueV2MultiString
-	}
-
-	if obj.VariableValueV2Regex != nil {
-		return *obj.VariableValueV2Regex
-	}
-
-	if obj.VariableValueV2SingleNumeric != nil {
-		return *obj.VariableValueV2SingleNumeric
-	}
-
-	if obj.VariableValueV2SingleString != nil {
-		return *obj.VariableValueV2SingleString
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableVariableValueV2 struct {

@@ -1,176 +1,219 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /notifications/notification-center/v1/entity-types:
-    get:
-      description: Returns all available notification entity types.
-      externalDocs:
-        url: ""
-      operationId: EntitiesService_ListEntityTypes
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListEntityTypesResponse"
-          description: ""
-      summary: List Entity Types
-      tags:
-      - Entities service
-  /notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes:
-    get:
-      description: Returns all sub-types for the specified entity type.
-      externalDocs:
-        url: ""
-      operationId: EntitiesService_ListEntitySubTypes
-      parameters:
-      - description: Entity type whose sub-types to list.
-        explode: false
-        in: path
-        name: entity_type
-        required: true
-        schema:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListEntitySubTypesResponse"
-          description: ""
-      summary: List Entity Subtypes
-      tags:
-      - Entities service
-components:
-  schemas:
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    ListEntitySubTypesResponse:
-      description: Response containing a list of notification entity sub-types.
-      example:
-        entitySubTypes:
-        - entitySubTypes
-        - entitySubTypes
-        - entitySubTypes
-        - entitySubTypes
-        - entitySubTypes
-      externalDocs:
-        url: ""
-      properties:
-        entitySubTypes:
-          description: The entity sub types.
-          items:
-            description: The entity sub types.
-            minLength: 0
-            type: string
-          maxItems: 100
-          minItems: 0
-          type: array
-      type: object
-    ListEntityTypesResponse:
-      description: Response containing a list of notification entity types.
-      example:
-        entityTypes:
-        - ENTITY_TYPE_UNSPECIFIED
-        - ENTITY_TYPE_UNSPECIFIED
-        - ENTITY_TYPE_UNSPECIFIED
-        - ENTITY_TYPE_UNSPECIFIED
-        - ENTITY_TYPE_UNSPECIFIED
-      externalDocs:
-        url: ""
-      properties:
-        entityTypes:
-          description: The supported payload types.
-          items:
-            $ref: "#/components/schemas/notification_center.EntityType"
-          maxItems: 100
-          minItems: 0
-          type: array
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    notification_center.EntityType:
-      description: Entity type.
-      enum:
-      - ENTITY_TYPE_UNSPECIFIED
-      - ALERTS
-      - TEST_NOTIFICATIONS
-      - CASES
-      type: string
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/notifications/notification-center/v1/entity-types": {
+      "get": {
+        "tags": [
+          "Entities service"
+        ],
+        "summary": "List Entity Types",
+        "description": "Returns all available notification entity types.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EntitiesService_ListEntityTypes",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEntityTypesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes": {
+      "get": {
+        "tags": [
+          "Entities service"
+        ],
+        "summary": "List Entity Subtypes",
+        "description": "Returns all sub-types for the specified entity type.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EntitiesService_ListEntitySubTypes",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entity_type",
+            "description": "Entity type whose sub-types to list.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.EntityType"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEntitySubTypesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "ListEntitySubTypesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of notification entity sub-types.",
+        "type": "object",
+        "properties": {
+          "entitySubTypes": {
+            "description": "The entity sub types.",
+            "type": "array",
+            "items": {
+              "description": "The entity sub types.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        }
+      },
+      "ListEntityTypesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of notification entity types.",
+        "type": "object",
+        "properties": {
+          "entityTypes": {
+            "description": "The supported payload types.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/notification_center.EntityType"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "notification_center.EntityType": {
+        "description": "Entity type.",
+        "type": "string",
+        "enum": [
+          "ENTITY_TYPE_UNSPECIFIED",
+          "ALERTS",
+          "TEST_NOTIFICATIONS",
+          "CASES"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

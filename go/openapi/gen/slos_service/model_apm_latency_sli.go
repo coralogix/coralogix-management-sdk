@@ -13,126 +13,246 @@ package slos_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ApmLatencySli - struct for ApmLatencySli
+// checks if the ApmLatencySli type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApmLatencySli{}
+
+// ApmLatencySli Configuration for latency-based APM SLI
 type ApmLatencySli struct {
-	ApmLatencySliAverage *ApmLatencySliAverage
-	ApmLatencySliQuantile *ApmLatencySliQuantile
+	// Average/mean-based latency measurement
+	Average map[string]interface{} `json:"average,omitempty"`
+	Quantile *ApmLatencyQuantile `json:"quantile,omitempty"`
+	// Threshold in milliseconds. Good when latency <= threshold, bad when latency > threshold.
+	Threshold *float32 `json:"threshold,omitempty"`
+	TimeWindow *WindowSloWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// ApmLatencySliAverageAsApmLatencySli is a convenience function that returns ApmLatencySliAverage wrapped in ApmLatencySli
-func ApmLatencySliAverageAsApmLatencySli(v *ApmLatencySliAverage) ApmLatencySli {
-	return ApmLatencySli{
-		ApmLatencySliAverage: v,
+type _ApmLatencySli ApmLatencySli
+
+// NewApmLatencySli instantiates a new ApmLatencySli object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewApmLatencySli() *ApmLatencySli {
+	this := ApmLatencySli{}
+	return &this
+}
+
+// NewApmLatencySliWithDefaults instantiates a new ApmLatencySli object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewApmLatencySliWithDefaults() *ApmLatencySli {
+	this := ApmLatencySli{}
+	return &this
+}
+
+// GetAverage returns the Average field value if set, zero value otherwise.
+func (o *ApmLatencySli) GetAverage() map[string]interface{} {
+	if o == nil || IsNil(o.Average) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.Average
 }
 
-// ApmLatencySliQuantileAsApmLatencySli is a convenience function that returns ApmLatencySliQuantile wrapped in ApmLatencySli
-func ApmLatencySliQuantileAsApmLatencySli(v *ApmLatencySliQuantile) ApmLatencySli {
-	return ApmLatencySli{
-		ApmLatencySliQuantile: v,
+// GetAverageOk returns a tuple with the Average field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmLatencySli) GetAverageOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Average) {
+		return map[string]interface{}{}, false
 	}
+	return o.Average, true
 }
 
+// HasAverage returns a boolean if a field has been set.
+func (o *ApmLatencySli) HasAverage() bool {
+	if o != nil && !IsNil(o.Average) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ApmLatencySli) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ApmLatencySliAverage
-	err = json.Unmarshal(data, &dst.ApmLatencySliAverage)
-	if err == nil {
-		jsonApmLatencySliAverage, _ := json.Marshal(dst.ApmLatencySliAverage)
-		if string(jsonApmLatencySliAverage) == "{}" { // empty struct
-			dst.ApmLatencySliAverage = nil
-		} else {
-			if err = validator.Validate(dst.ApmLatencySliAverage); err != nil {
-				dst.ApmLatencySliAverage = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAverage gets a reference to the given map[string]interface{} and assigns it to the Average field.
+func (o *ApmLatencySli) SetAverage(v map[string]interface{}) {
+	o.Average = v
+}
+
+// GetQuantile returns the Quantile field value if set, zero value otherwise.
+func (o *ApmLatencySli) GetQuantile() ApmLatencyQuantile {
+	if o == nil || IsNil(o.Quantile) {
+		var ret ApmLatencyQuantile
+		return ret
+	}
+	return *o.Quantile
+}
+
+// GetQuantileOk returns a tuple with the Quantile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmLatencySli) GetQuantileOk() (*ApmLatencyQuantile, bool) {
+	if o == nil || IsNil(o.Quantile) {
+		return nil, false
+	}
+	return o.Quantile, true
+}
+
+// HasQuantile returns a boolean if a field has been set.
+func (o *ApmLatencySli) HasQuantile() bool {
+	if o != nil && !IsNil(o.Quantile) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuantile gets a reference to the given ApmLatencyQuantile and assigns it to the Quantile field.
+func (o *ApmLatencySli) SetQuantile(v ApmLatencyQuantile) {
+	o.Quantile = &v
+}
+
+// GetThreshold returns the Threshold field value if set, zero value otherwise.
+func (o *ApmLatencySli) GetThreshold() float32 {
+	if o == nil || IsNil(o.Threshold) {
+		var ret float32
+		return ret
+	}
+	return *o.Threshold
+}
+
+// GetThresholdOk returns a tuple with the Threshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmLatencySli) GetThresholdOk() (*float32, bool) {
+	if o == nil || IsNil(o.Threshold) {
+		return nil, false
+	}
+	return o.Threshold, true
+}
+
+// HasThreshold returns a boolean if a field has been set.
+func (o *ApmLatencySli) HasThreshold() bool {
+	if o != nil && !IsNil(o.Threshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetThreshold gets a reference to the given float32 and assigns it to the Threshold field.
+func (o *ApmLatencySli) SetThreshold(v float32) {
+	o.Threshold = &v
+}
+
+// GetTimeWindow returns the TimeWindow field value if set, zero value otherwise.
+func (o *ApmLatencySli) GetTimeWindow() WindowSloWindow {
+	if o == nil || IsNil(o.TimeWindow) {
+		var ret WindowSloWindow
+		return ret
+	}
+	return *o.TimeWindow
+}
+
+// GetTimeWindowOk returns a tuple with the TimeWindow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmLatencySli) GetTimeWindowOk() (*WindowSloWindow, bool) {
+	if o == nil || IsNil(o.TimeWindow) {
+		return nil, false
+	}
+	return o.TimeWindow, true
+}
+
+// HasTimeWindow returns a boolean if a field has been set.
+func (o *ApmLatencySli) HasTimeWindow() bool {
+	if o != nil && !IsNil(o.TimeWindow) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeWindow gets a reference to the given WindowSloWindow and assigns it to the TimeWindow field.
+func (o *ApmLatencySli) SetTimeWindow(v WindowSloWindow) {
+	o.TimeWindow = &v
+}
+
+func (o ApmLatencySli) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ApmLatencySli) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Average) {
+		toSerialize["average"] = o.Average
+	}
+	if !IsNil(o.Quantile) {
+		toSerialize["quantile"] = o.Quantile
+	}
+	if !IsNil(o.Threshold) {
+		toSerialize["threshold"] = o.Threshold
+	}
+	if !IsNil(o.TimeWindow) {
+		toSerialize["timeWindow"] = o.TimeWindow
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["quantile"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["average"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [quantile, average] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ApmLatencySli) UnmarshalJSON(data []byte) (err error) {
+	varApmLatencySli := _ApmLatencySli{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApmLatencySli)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApmLatencySli(varApmLatencySli)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["quantile"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ApmLatencySliAverage = nil
-	}
-
-	// try to unmarshal data into ApmLatencySliQuantile
-	err = json.Unmarshal(data, &dst.ApmLatencySliQuantile)
-	if err == nil {
-		jsonApmLatencySliQuantile, _ := json.Marshal(dst.ApmLatencySliQuantile)
-		if string(jsonApmLatencySliQuantile) == "{}" { // empty struct
-			dst.ApmLatencySliQuantile = nil
-		} else {
-			if err = validator.Validate(dst.ApmLatencySliQuantile); err != nil {
-				dst.ApmLatencySliQuantile = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["average"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ApmLatencySliQuantile = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [quantile, average] may be set"}
+		}
+
+		delete(additionalProperties, "average")
+		delete(additionalProperties, "quantile")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "timeWindow")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ApmLatencySliAverage = nil
-		dst.ApmLatencySliQuantile = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ApmLatencySli)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ApmLatencySli) MarshalJSON() ([]byte, error) {
-	if src.ApmLatencySliAverage != nil {
-		return json.Marshal(&src.ApmLatencySliAverage)
-	}
-
-	if src.ApmLatencySliQuantile != nil {
-		return json.Marshal(&src.ApmLatencySliQuantile)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ApmLatencySli) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ApmLatencySliAverage != nil {
-		return obj.ApmLatencySliAverage
-	}
-
-	if obj.ApmLatencySliQuantile != nil {
-		return obj.ApmLatencySliQuantile
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ApmLatencySli) GetActualInstanceValue() (interface{}) {
-	if obj.ApmLatencySliAverage != nil {
-		return *obj.ApmLatencySliAverage
-	}
-
-	if obj.ApmLatencySliQuantile != nil {
-		return *obj.ApmLatencySliQuantile
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableApmLatencySli struct {

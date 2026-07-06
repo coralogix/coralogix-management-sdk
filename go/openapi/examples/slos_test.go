@@ -32,36 +32,32 @@ func TestSLOs(t *testing.T) {
 
 	sloName := "example_slo_" + uuid.NewString()
 	sloPayload := getRequestBasedSlo(sloName)
-	createReq := slos.SlosServiceReplaceSloRequest{
-		SloRequestBasedMetricSli: sloPayload,
-	}
+	createReq := *sloPayload
 	createResp, httpResp, err := client.SlosServiceCreateSlo(ctx).
-		SlosServiceReplaceSloRequest(createReq).
+		Slo1(createReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
-	sloID := createResp.GetSlo().SloRequestBasedMetricSli.GetId()
+	sloID := createResp.Slo.GetId()
 	getResp, httpResp, err := client.
 		SlosServiceGetSlo(ctx, sloID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, sloName, getResp.GetSlo().SloRequestBasedMetricSli.GetName())
+	require.Equal(t, sloName, getResp.Slo.GetName())
 
 	updatedName := "updated_example_slo_" + uuid.NewString()
 	updatePayload := sloPayload
 	updatePayload.Id = &sloID
 	updatePayload.Name = &updatedName
 
-	updateReq := slos.SlosServiceReplaceSloRequest{
-		SloRequestBasedMetricSli: updatePayload,
-	}
+	updateReq := *updatePayload
 
 	updateResp, httpResp, err := client.
 		SlosServiceReplaceSlo(ctx).
-		SlosServiceReplaceSloRequest(updateReq).
+		Slo1(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, updatedName, updateResp.GetSlo().SloRequestBasedMetricSli.GetName())
+	require.Equal(t, updatedName, updateResp.Slo.GetName())
 
 	listResp, httpResp, err := client.
 		SlosServiceListSlos(ctx).
@@ -70,7 +66,7 @@ func TestSLOs(t *testing.T) {
 
 	found := false
 	for _, s := range listResp.GetSlos() {
-		if s.SloRequestBasedMetricSli.GetId() == sloID {
+		if s.GetId() == sloID {
 			found = true
 			break
 		}
@@ -83,17 +79,17 @@ func TestSLOs(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
-func getRequestBasedSlo(name string) *slos.SloRequestBasedMetricSli {
+func getRequestBasedSlo(name string) *slos.Slo1 {
 	desc := "example SLO created via OpenAPI SDK"
 	target := float32(30.0)
 	goodEventsQuery := "avg(rate(cpu_usage_seconds_total[1m])) by (instance)"
 	totalEventsQuery := "avg(rate(cpu_usage_seconds_total[1m])) by (instance)"
 
-	return &slos.SloRequestBasedMetricSli{
+	return &slos.Slo1{
 		Name:                      &name,
 		Description:               slos.PtrString(desc),
 		TargetThresholdPercentage: &target,
-		RequestBasedMetricSli: slos.RequestBasedMetricSli{
+		RequestBasedMetricSli: &slos.RequestBasedMetricSli{
 			GoodEvents: &slos.Metric{
 				Query: &goodEventsQuery,
 			},

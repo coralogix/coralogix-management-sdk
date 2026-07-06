@@ -13,164 +13,216 @@ package api_keys_admin_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Owner - struct for Owner
+// checks if the Owner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Owner{}
+
+// Owner Owner.
 type Owner struct {
-	OwnerOrganisationId *OwnerOrganisationId
-	OwnerTeamId *OwnerTeamId
-	OwnerUserId *OwnerUserId
+	// Organisation identifier of the API key owner.
+	OrganisationId *string `json:"organisationId,omitempty"`
+	// The team id.
+	TeamId *int64 `json:"teamId,omitempty"`
+	// User identifier of the API key owner.
+	UserId *string `json:"userId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// OwnerOrganisationIdAsOwner is a convenience function that returns OwnerOrganisationId wrapped in Owner
-func OwnerOrganisationIdAsOwner(v *OwnerOrganisationId) Owner {
-	return Owner{
-		OwnerOrganisationId: v,
+type _Owner Owner
+
+// NewOwner instantiates a new Owner object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewOwner() *Owner {
+	this := Owner{}
+	return &this
+}
+
+// NewOwnerWithDefaults instantiates a new Owner object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewOwnerWithDefaults() *Owner {
+	this := Owner{}
+	return &this
+}
+
+// GetOrganisationId returns the OrganisationId field value if set, zero value otherwise.
+func (o *Owner) GetOrganisationId() string {
+	if o == nil || IsNil(o.OrganisationId) {
+		var ret string
+		return ret
 	}
+	return *o.OrganisationId
 }
 
-// OwnerTeamIdAsOwner is a convenience function that returns OwnerTeamId wrapped in Owner
-func OwnerTeamIdAsOwner(v *OwnerTeamId) Owner {
-	return Owner{
-		OwnerTeamId: v,
+// GetOrganisationIdOk returns a tuple with the OrganisationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Owner) GetOrganisationIdOk() (*string, bool) {
+	if o == nil || IsNil(o.OrganisationId) {
+		return nil, false
 	}
+	return o.OrganisationId, true
 }
 
-// OwnerUserIdAsOwner is a convenience function that returns OwnerUserId wrapped in Owner
-func OwnerUserIdAsOwner(v *OwnerUserId) Owner {
-	return Owner{
-		OwnerUserId: v,
+// HasOrganisationId returns a boolean if a field has been set.
+func (o *Owner) HasOrganisationId() bool {
+	if o != nil && !IsNil(o.OrganisationId) {
+		return true
 	}
+
+	return false
 }
 
+// SetOrganisationId gets a reference to the given string and assigns it to the OrganisationId field.
+func (o *Owner) SetOrganisationId(v string) {
+	o.OrganisationId = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Owner) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into OwnerOrganisationId
-	err = json.Unmarshal(data, &dst.OwnerOrganisationId)
-	if err == nil {
-		jsonOwnerOrganisationId, _ := json.Marshal(dst.OwnerOrganisationId)
-		if string(jsonOwnerOrganisationId) == "{}" { // empty struct
-			dst.OwnerOrganisationId = nil
-		} else {
-			if err = validator.Validate(dst.OwnerOrganisationId); err != nil {
-				dst.OwnerOrganisationId = nil
-			} else {
-				match++
-			}
+// GetTeamId returns the TeamId field value if set, zero value otherwise.
+func (o *Owner) GetTeamId() int64 {
+	if o == nil || IsNil(o.TeamId) {
+		var ret int64
+		return ret
+	}
+	return *o.TeamId
+}
+
+// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Owner) GetTeamIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.TeamId) {
+		return nil, false
+	}
+	return o.TeamId, true
+}
+
+// HasTeamId returns a boolean if a field has been set.
+func (o *Owner) HasTeamId() bool {
+	if o != nil && !IsNil(o.TeamId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamId gets a reference to the given int64 and assigns it to the TeamId field.
+func (o *Owner) SetTeamId(v int64) {
+	o.TeamId = &v
+}
+
+// GetUserId returns the UserId field value if set, zero value otherwise.
+func (o *Owner) GetUserId() string {
+	if o == nil || IsNil(o.UserId) {
+		var ret string
+		return ret
+	}
+	return *o.UserId
+}
+
+// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Owner) GetUserIdOk() (*string, bool) {
+	if o == nil || IsNil(o.UserId) {
+		return nil, false
+	}
+	return o.UserId, true
+}
+
+// HasUserId returns a boolean if a field has been set.
+func (o *Owner) HasUserId() bool {
+	if o != nil && !IsNil(o.UserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserId gets a reference to the given string and assigns it to the UserId field.
+func (o *Owner) SetUserId(v string) {
+	o.UserId = &v
+}
+
+func (o Owner) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Owner) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.OrganisationId) {
+		toSerialize["organisationId"] = o.OrganisationId
+	}
+	if !IsNil(o.TeamId) {
+		toSerialize["teamId"] = o.TeamId
+	}
+	if !IsNil(o.UserId) {
+		toSerialize["userId"] = o.UserId
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["userId"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["teamId"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["organisationId"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [userId, teamId, organisationId] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Owner) UnmarshalJSON(data []byte) (err error) {
+	varOwner := _Owner{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOwner)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Owner(varOwner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["userId"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OwnerOrganisationId = nil
-	}
-
-	// try to unmarshal data into OwnerTeamId
-	err = json.Unmarshal(data, &dst.OwnerTeamId)
-	if err == nil {
-		jsonOwnerTeamId, _ := json.Marshal(dst.OwnerTeamId)
-		if string(jsonOwnerTeamId) == "{}" { // empty struct
-			dst.OwnerTeamId = nil
-		} else {
-			if err = validator.Validate(dst.OwnerTeamId); err != nil {
-				dst.OwnerTeamId = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["teamId"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OwnerTeamId = nil
-	}
-
-	// try to unmarshal data into OwnerUserId
-	err = json.Unmarshal(data, &dst.OwnerUserId)
-	if err == nil {
-		jsonOwnerUserId, _ := json.Marshal(dst.OwnerUserId)
-		if string(jsonOwnerUserId) == "{}" { // empty struct
-			dst.OwnerUserId = nil
-		} else {
-			if err = validator.Validate(dst.OwnerUserId); err != nil {
-				dst.OwnerUserId = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["organisationId"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OwnerUserId = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [userId, teamId, organisationId] may be set"}
+		}
+
+		delete(additionalProperties, "organisationId")
+		delete(additionalProperties, "teamId")
+		delete(additionalProperties, "userId")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.OwnerOrganisationId = nil
-		dst.OwnerTeamId = nil
-		dst.OwnerUserId = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Owner)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Owner) MarshalJSON() ([]byte, error) {
-	if src.OwnerOrganisationId != nil {
-		return json.Marshal(&src.OwnerOrganisationId)
-	}
-
-	if src.OwnerTeamId != nil {
-		return json.Marshal(&src.OwnerTeamId)
-	}
-
-	if src.OwnerUserId != nil {
-		return json.Marshal(&src.OwnerUserId)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Owner) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.OwnerOrganisationId != nil {
-		return obj.OwnerOrganisationId
-	}
-
-	if obj.OwnerTeamId != nil {
-		return obj.OwnerTeamId
-	}
-
-	if obj.OwnerUserId != nil {
-		return obj.OwnerUserId
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Owner) GetActualInstanceValue() (interface{}) {
-	if obj.OwnerOrganisationId != nil {
-		return *obj.OwnerOrganisationId
-	}
-
-	if obj.OwnerTeamId != nil {
-		return *obj.OwnerTeamId
-	}
-
-	if obj.OwnerUserId != nil {
-		return *obj.OwnerUserId
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableOwner struct {

@@ -13,240 +13,299 @@ package data_usage_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Dimension - struct for Dimension
+// checks if the Dimension type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Dimension{}
+
+// Dimension struct for Dimension
 type Dimension struct {
-	DimensionGenericDimension *DimensionGenericDimension
-	DimensionPillar *DimensionPillar
-	DimensionPriority *DimensionPriority
-	DimensionSeverity *DimensionSeverity
-	DimensionTier *DimensionTier
+	GenericDimension *GenericDimension `json:"genericDimension,omitempty"`
+	Pillar *Pillar `json:"pillar,omitempty"`
+	Priority *V2Priority `json:"priority,omitempty"`
+	Severity *DatausageV2Severity `json:"severity,omitempty"`
+	Tier *V2TcoTier `json:"tier,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// DimensionGenericDimensionAsDimension is a convenience function that returns DimensionGenericDimension wrapped in Dimension
-func DimensionGenericDimensionAsDimension(v *DimensionGenericDimension) Dimension {
-	return Dimension{
-		DimensionGenericDimension: v,
+type _Dimension Dimension
+
+// NewDimension instantiates a new Dimension object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDimension() *Dimension {
+	this := Dimension{}
+	return &this
+}
+
+// NewDimensionWithDefaults instantiates a new Dimension object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDimensionWithDefaults() *Dimension {
+	this := Dimension{}
+	return &this
+}
+
+// GetGenericDimension returns the GenericDimension field value if set, zero value otherwise.
+func (o *Dimension) GetGenericDimension() GenericDimension {
+	if o == nil || IsNil(o.GenericDimension) {
+		var ret GenericDimension
+		return ret
 	}
+	return *o.GenericDimension
 }
 
-// DimensionPillarAsDimension is a convenience function that returns DimensionPillar wrapped in Dimension
-func DimensionPillarAsDimension(v *DimensionPillar) Dimension {
-	return Dimension{
-		DimensionPillar: v,
+// GetGenericDimensionOk returns a tuple with the GenericDimension field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dimension) GetGenericDimensionOk() (*GenericDimension, bool) {
+	if o == nil || IsNil(o.GenericDimension) {
+		return nil, false
 	}
+	return o.GenericDimension, true
 }
 
-// DimensionPriorityAsDimension is a convenience function that returns DimensionPriority wrapped in Dimension
-func DimensionPriorityAsDimension(v *DimensionPriority) Dimension {
-	return Dimension{
-		DimensionPriority: v,
+// HasGenericDimension returns a boolean if a field has been set.
+func (o *Dimension) HasGenericDimension() bool {
+	if o != nil && !IsNil(o.GenericDimension) {
+		return true
 	}
+
+	return false
 }
 
-// DimensionSeverityAsDimension is a convenience function that returns DimensionSeverity wrapped in Dimension
-func DimensionSeverityAsDimension(v *DimensionSeverity) Dimension {
-	return Dimension{
-		DimensionSeverity: v,
+// SetGenericDimension gets a reference to the given GenericDimension and assigns it to the GenericDimension field.
+func (o *Dimension) SetGenericDimension(v GenericDimension) {
+	o.GenericDimension = &v
+}
+
+// GetPillar returns the Pillar field value if set, zero value otherwise.
+func (o *Dimension) GetPillar() Pillar {
+	if o == nil || IsNil(o.Pillar) {
+		var ret Pillar
+		return ret
 	}
+	return *o.Pillar
 }
 
-// DimensionTierAsDimension is a convenience function that returns DimensionTier wrapped in Dimension
-func DimensionTierAsDimension(v *DimensionTier) Dimension {
-	return Dimension{
-		DimensionTier: v,
+// GetPillarOk returns a tuple with the Pillar field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dimension) GetPillarOk() (*Pillar, bool) {
+	if o == nil || IsNil(o.Pillar) {
+		return nil, false
 	}
+	return o.Pillar, true
 }
 
+// HasPillar returns a boolean if a field has been set.
+func (o *Dimension) HasPillar() bool {
+	if o != nil && !IsNil(o.Pillar) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Dimension) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into DimensionGenericDimension
-	err = json.Unmarshal(data, &dst.DimensionGenericDimension)
-	if err == nil {
-		jsonDimensionGenericDimension, _ := json.Marshal(dst.DimensionGenericDimension)
-		if string(jsonDimensionGenericDimension) == "{}" { // empty struct
-			dst.DimensionGenericDimension = nil
-		} else {
-			if err = validator.Validate(dst.DimensionGenericDimension); err != nil {
-				dst.DimensionGenericDimension = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetPillar gets a reference to the given Pillar and assigns it to the Pillar field.
+func (o *Dimension) SetPillar(v Pillar) {
+	o.Pillar = &v
+}
+
+// GetPriority returns the Priority field value if set, zero value otherwise.
+func (o *Dimension) GetPriority() V2Priority {
+	if o == nil || IsNil(o.Priority) {
+		var ret V2Priority
+		return ret
+	}
+	return *o.Priority
+}
+
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dimension) GetPriorityOk() (*V2Priority, bool) {
+	if o == nil || IsNil(o.Priority) {
+		return nil, false
+	}
+	return o.Priority, true
+}
+
+// HasPriority returns a boolean if a field has been set.
+func (o *Dimension) HasPriority() bool {
+	if o != nil && !IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given V2Priority and assigns it to the Priority field.
+func (o *Dimension) SetPriority(v V2Priority) {
+	o.Priority = &v
+}
+
+// GetSeverity returns the Severity field value if set, zero value otherwise.
+func (o *Dimension) GetSeverity() DatausageV2Severity {
+	if o == nil || IsNil(o.Severity) {
+		var ret DatausageV2Severity
+		return ret
+	}
+	return *o.Severity
+}
+
+// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dimension) GetSeverityOk() (*DatausageV2Severity, bool) {
+	if o == nil || IsNil(o.Severity) {
+		return nil, false
+	}
+	return o.Severity, true
+}
+
+// HasSeverity returns a boolean if a field has been set.
+func (o *Dimension) HasSeverity() bool {
+	if o != nil && !IsNil(o.Severity) {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverity gets a reference to the given DatausageV2Severity and assigns it to the Severity field.
+func (o *Dimension) SetSeverity(v DatausageV2Severity) {
+	o.Severity = &v
+}
+
+// GetTier returns the Tier field value if set, zero value otherwise.
+func (o *Dimension) GetTier() V2TcoTier {
+	if o == nil || IsNil(o.Tier) {
+		var ret V2TcoTier
+		return ret
+	}
+	return *o.Tier
+}
+
+// GetTierOk returns a tuple with the Tier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dimension) GetTierOk() (*V2TcoTier, bool) {
+	if o == nil || IsNil(o.Tier) {
+		return nil, false
+	}
+	return o.Tier, true
+}
+
+// HasTier returns a boolean if a field has been set.
+func (o *Dimension) HasTier() bool {
+	if o != nil && !IsNil(o.Tier) {
+		return true
+	}
+
+	return false
+}
+
+// SetTier gets a reference to the given V2TcoTier and assigns it to the Tier field.
+func (o *Dimension) SetTier(v V2TcoTier) {
+	o.Tier = &v
+}
+
+func (o Dimension) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Dimension) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.GenericDimension) {
+		toSerialize["genericDimension"] = o.GenericDimension
+	}
+	if !IsNil(o.Pillar) {
+		toSerialize["pillar"] = o.Pillar
+	}
+	if !IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
+	}
+	if !IsNil(o.Severity) {
+		toSerialize["severity"] = o.Severity
+	}
+	if !IsNil(o.Tier) {
+		toSerialize["tier"] = o.Tier
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["pillar"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["genericDimension"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["tier"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["severity"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["priority"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [pillar, genericDimension, tier, severity, priority] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Dimension) UnmarshalJSON(data []byte) (err error) {
+	varDimension := _Dimension{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDimension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Dimension(varDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["pillar"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DimensionGenericDimension = nil
-	}
-
-	// try to unmarshal data into DimensionPillar
-	err = json.Unmarshal(data, &dst.DimensionPillar)
-	if err == nil {
-		jsonDimensionPillar, _ := json.Marshal(dst.DimensionPillar)
-		if string(jsonDimensionPillar) == "{}" { // empty struct
-			dst.DimensionPillar = nil
-		} else {
-			if err = validator.Validate(dst.DimensionPillar); err != nil {
-				dst.DimensionPillar = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["genericDimension"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DimensionPillar = nil
-	}
-
-	// try to unmarshal data into DimensionPriority
-	err = json.Unmarshal(data, &dst.DimensionPriority)
-	if err == nil {
-		jsonDimensionPriority, _ := json.Marshal(dst.DimensionPriority)
-		if string(jsonDimensionPriority) == "{}" { // empty struct
-			dst.DimensionPriority = nil
-		} else {
-			if err = validator.Validate(dst.DimensionPriority); err != nil {
-				dst.DimensionPriority = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["tier"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DimensionPriority = nil
-	}
-
-	// try to unmarshal data into DimensionSeverity
-	err = json.Unmarshal(data, &dst.DimensionSeverity)
-	if err == nil {
-		jsonDimensionSeverity, _ := json.Marshal(dst.DimensionSeverity)
-		if string(jsonDimensionSeverity) == "{}" { // empty struct
-			dst.DimensionSeverity = nil
-		} else {
-			if err = validator.Validate(dst.DimensionSeverity); err != nil {
-				dst.DimensionSeverity = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["severity"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DimensionSeverity = nil
-	}
-
-	// try to unmarshal data into DimensionTier
-	err = json.Unmarshal(data, &dst.DimensionTier)
-	if err == nil {
-		jsonDimensionTier, _ := json.Marshal(dst.DimensionTier)
-		if string(jsonDimensionTier) == "{}" { // empty struct
-			dst.DimensionTier = nil
-		} else {
-			if err = validator.Validate(dst.DimensionTier); err != nil {
-				dst.DimensionTier = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["priority"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DimensionTier = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [pillar, genericDimension, tier, severity, priority] may be set"}
+		}
+
+		delete(additionalProperties, "genericDimension")
+		delete(additionalProperties, "pillar")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "tier")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.DimensionGenericDimension = nil
-		dst.DimensionPillar = nil
-		dst.DimensionPriority = nil
-		dst.DimensionSeverity = nil
-		dst.DimensionTier = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Dimension)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Dimension) MarshalJSON() ([]byte, error) {
-	if src.DimensionGenericDimension != nil {
-		return json.Marshal(&src.DimensionGenericDimension)
-	}
-
-	if src.DimensionPillar != nil {
-		return json.Marshal(&src.DimensionPillar)
-	}
-
-	if src.DimensionPriority != nil {
-		return json.Marshal(&src.DimensionPriority)
-	}
-
-	if src.DimensionSeverity != nil {
-		return json.Marshal(&src.DimensionSeverity)
-	}
-
-	if src.DimensionTier != nil {
-		return json.Marshal(&src.DimensionTier)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Dimension) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.DimensionGenericDimension != nil {
-		return obj.DimensionGenericDimension
-	}
-
-	if obj.DimensionPillar != nil {
-		return obj.DimensionPillar
-	}
-
-	if obj.DimensionPriority != nil {
-		return obj.DimensionPriority
-	}
-
-	if obj.DimensionSeverity != nil {
-		return obj.DimensionSeverity
-	}
-
-	if obj.DimensionTier != nil {
-		return obj.DimensionTier
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Dimension) GetActualInstanceValue() (interface{}) {
-	if obj.DimensionGenericDimension != nil {
-		return *obj.DimensionGenericDimension
-	}
-
-	if obj.DimensionPillar != nil {
-		return *obj.DimensionPillar
-	}
-
-	if obj.DimensionPriority != nil {
-		return *obj.DimensionPriority
-	}
-
-	if obj.DimensionSeverity != nil {
-		return *obj.DimensionSeverity
-	}
-
-	if obj.DimensionTier != nil {
-		return *obj.DimensionTier
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableDimension struct {

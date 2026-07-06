@@ -43,9 +43,6 @@ AlertDefsServiceBulkDeleteAlertDefs Bulk delete alert definitions
 
 Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are.
 
-Requires the following permissions:
-- `alerts:UpdateConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceBulkDeleteAlertDefsRequest
 */
@@ -184,9 +181,6 @@ func (r ApiAlertDefsServiceBulkReplaceAlertDefsRequest) Execute() (*BulkReplaceA
 AlertDefsServiceBulkReplaceAlertDefs Bulk replace alert definitions
 
 Replaces all alert definitions with the provided set.
-
-Requires the following permissions:
-- `alerts:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceBulkReplaceAlertDefsRequest
@@ -327,9 +321,6 @@ AlertDefsServiceCreateAlertDef Create an alert
 
 Creates a new alert definition.
 
-Requires the following permissions:
-- `alerts:UpdateConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceCreateAlertDefRequest
 */
@@ -463,9 +454,6 @@ func (r ApiAlertDefsServiceDeleteAlertDefRequest) Execute() (map[string]interfac
 AlertDefsServiceDeleteAlertDef DeleteAlertDef
 
 Deletes the alert definition with the specified ID.
-
-Requires the following permissions:
-- `alerts:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id The unique identifier of the alert definition to delete.
@@ -603,9 +591,6 @@ func (r ApiAlertDefsServiceDownloadAlertsRequest) Execute() (*DownloadAlertsResp
 AlertDefsServiceDownloadAlerts Download alerts
 
 Download a list of all accessible alert definitions in base64-encoded byte format.
-
-Requires the following permissions:
-- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceDownloadAlertsRequest
@@ -745,9 +730,6 @@ AlertDefsServiceFilterOptionCounts Get counts for filter options
 
 Returns counts for different filter options based on the provided filters
 
-Requires the following permissions:
-- `alerts:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceFilterOptionCountsRequest
 */
@@ -882,9 +864,6 @@ func (r ApiAlertDefsServiceGetAlertDefRequest) Execute() (*GetAlertDefResponse, 
 AlertDefsServiceGetAlertDef Get alert definition by ID
 
 Returns the details of the specified alert definition.
-
-Requires the following permissions:
-- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Alert definition ID
@@ -1023,9 +1002,6 @@ func (r ApiAlertDefsServiceGetAlertDefByVersionIdRequest) Execute() (*GetAlertDe
 AlertDefsServiceGetAlertDefByVersionId Get alert definition by alert version ID
 
 Returns the alert definition with the specified version ID.
-
-Requires the following permissions:
-- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param alertVersionId Alert version ID
@@ -1185,9 +1161,6 @@ AlertDefsServiceListAlertDefs Get a list of all accessible alert definitions
 
 Returns all alert definitions for the team.
 
-Requires the following permissions:
-- `alerts:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceListAlertDefsRequest
 */
@@ -1333,9 +1306,6 @@ func (r ApiAlertDefsServiceReplaceAlertDefRequest) Execute() (*ReplaceAlertDefRe
 AlertDefsServiceReplaceAlertDef Replace an alert definition
 
 Updates an existing alert definition.
-
-Requires the following permissions:
-- `alerts:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceReplaceAlertDefRequest

@@ -13,164 +13,213 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// MultiSelectQuery - struct for MultiSelectQuery
+// checks if the MultiSelectQuery type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MultiSelectQuery{}
+
+// MultiSelectQuery Discriminated union specifying whether to query logs, metrics, or spans for variable values.
 type MultiSelectQuery struct {
-	MultiSelectQueryLogsQuery *MultiSelectQueryLogsQuery
-	MultiSelectQueryMetricsQuery *MultiSelectQueryMetricsQuery
-	MultiSelectQuerySpansQuery *MultiSelectQuerySpansQuery
+	LogsQuery *QueryLogsQuery `json:"logsQuery,omitempty"`
+	MetricsQuery *QueryMetricsQuery `json:"metricsQuery,omitempty"`
+	SpansQuery *QuerySpansQuery `json:"spansQuery,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// MultiSelectQueryLogsQueryAsMultiSelectQuery is a convenience function that returns MultiSelectQueryLogsQuery wrapped in MultiSelectQuery
-func MultiSelectQueryLogsQueryAsMultiSelectQuery(v *MultiSelectQueryLogsQuery) MultiSelectQuery {
-	return MultiSelectQuery{
-		MultiSelectQueryLogsQuery: v,
+type _MultiSelectQuery MultiSelectQuery
+
+// NewMultiSelectQuery instantiates a new MultiSelectQuery object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewMultiSelectQuery() *MultiSelectQuery {
+	this := MultiSelectQuery{}
+	return &this
+}
+
+// NewMultiSelectQueryWithDefaults instantiates a new MultiSelectQuery object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewMultiSelectQueryWithDefaults() *MultiSelectQuery {
+	this := MultiSelectQuery{}
+	return &this
+}
+
+// GetLogsQuery returns the LogsQuery field value if set, zero value otherwise.
+func (o *MultiSelectQuery) GetLogsQuery() QueryLogsQuery {
+	if o == nil || IsNil(o.LogsQuery) {
+		var ret QueryLogsQuery
+		return ret
 	}
+	return *o.LogsQuery
 }
 
-// MultiSelectQueryMetricsQueryAsMultiSelectQuery is a convenience function that returns MultiSelectQueryMetricsQuery wrapped in MultiSelectQuery
-func MultiSelectQueryMetricsQueryAsMultiSelectQuery(v *MultiSelectQueryMetricsQuery) MultiSelectQuery {
-	return MultiSelectQuery{
-		MultiSelectQueryMetricsQuery: v,
+// GetLogsQueryOk returns a tuple with the LogsQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiSelectQuery) GetLogsQueryOk() (*QueryLogsQuery, bool) {
+	if o == nil || IsNil(o.LogsQuery) {
+		return nil, false
 	}
+	return o.LogsQuery, true
 }
 
-// MultiSelectQuerySpansQueryAsMultiSelectQuery is a convenience function that returns MultiSelectQuerySpansQuery wrapped in MultiSelectQuery
-func MultiSelectQuerySpansQueryAsMultiSelectQuery(v *MultiSelectQuerySpansQuery) MultiSelectQuery {
-	return MultiSelectQuery{
-		MultiSelectQuerySpansQuery: v,
+// HasLogsQuery returns a boolean if a field has been set.
+func (o *MultiSelectQuery) HasLogsQuery() bool {
+	if o != nil && !IsNil(o.LogsQuery) {
+		return true
 	}
+
+	return false
 }
 
+// SetLogsQuery gets a reference to the given QueryLogsQuery and assigns it to the LogsQuery field.
+func (o *MultiSelectQuery) SetLogsQuery(v QueryLogsQuery) {
+	o.LogsQuery = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *MultiSelectQuery) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into MultiSelectQueryLogsQuery
-	err = json.Unmarshal(data, &dst.MultiSelectQueryLogsQuery)
-	if err == nil {
-		jsonMultiSelectQueryLogsQuery, _ := json.Marshal(dst.MultiSelectQueryLogsQuery)
-		if string(jsonMultiSelectQueryLogsQuery) == "{}" { // empty struct
-			dst.MultiSelectQueryLogsQuery = nil
-		} else {
-			if err = validator.Validate(dst.MultiSelectQueryLogsQuery); err != nil {
-				dst.MultiSelectQueryLogsQuery = nil
-			} else {
-				match++
-			}
+// GetMetricsQuery returns the MetricsQuery field value if set, zero value otherwise.
+func (o *MultiSelectQuery) GetMetricsQuery() QueryMetricsQuery {
+	if o == nil || IsNil(o.MetricsQuery) {
+		var ret QueryMetricsQuery
+		return ret
+	}
+	return *o.MetricsQuery
+}
+
+// GetMetricsQueryOk returns a tuple with the MetricsQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiSelectQuery) GetMetricsQueryOk() (*QueryMetricsQuery, bool) {
+	if o == nil || IsNil(o.MetricsQuery) {
+		return nil, false
+	}
+	return o.MetricsQuery, true
+}
+
+// HasMetricsQuery returns a boolean if a field has been set.
+func (o *MultiSelectQuery) HasMetricsQuery() bool {
+	if o != nil && !IsNil(o.MetricsQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricsQuery gets a reference to the given QueryMetricsQuery and assigns it to the MetricsQuery field.
+func (o *MultiSelectQuery) SetMetricsQuery(v QueryMetricsQuery) {
+	o.MetricsQuery = &v
+}
+
+// GetSpansQuery returns the SpansQuery field value if set, zero value otherwise.
+func (o *MultiSelectQuery) GetSpansQuery() QuerySpansQuery {
+	if o == nil || IsNil(o.SpansQuery) {
+		var ret QuerySpansQuery
+		return ret
+	}
+	return *o.SpansQuery
+}
+
+// GetSpansQueryOk returns a tuple with the SpansQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiSelectQuery) GetSpansQueryOk() (*QuerySpansQuery, bool) {
+	if o == nil || IsNil(o.SpansQuery) {
+		return nil, false
+	}
+	return o.SpansQuery, true
+}
+
+// HasSpansQuery returns a boolean if a field has been set.
+func (o *MultiSelectQuery) HasSpansQuery() bool {
+	if o != nil && !IsNil(o.SpansQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpansQuery gets a reference to the given QuerySpansQuery and assigns it to the SpansQuery field.
+func (o *MultiSelectQuery) SetSpansQuery(v QuerySpansQuery) {
+	o.SpansQuery = &v
+}
+
+func (o MultiSelectQuery) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MultiSelectQuery) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.LogsQuery) {
+		toSerialize["logsQuery"] = o.LogsQuery
+	}
+	if !IsNil(o.MetricsQuery) {
+		toSerialize["metricsQuery"] = o.MetricsQuery
+	}
+	if !IsNil(o.SpansQuery) {
+		toSerialize["spansQuery"] = o.SpansQuery
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logsQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metricsQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spansQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsQuery, metricsQuery, spansQuery] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *MultiSelectQuery) UnmarshalJSON(data []byte) (err error) {
+	varMultiSelectQuery := _MultiSelectQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectQuery(varMultiSelectQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logsQuery"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiSelectQueryLogsQuery = nil
-	}
-
-	// try to unmarshal data into MultiSelectQueryMetricsQuery
-	err = json.Unmarshal(data, &dst.MultiSelectQueryMetricsQuery)
-	if err == nil {
-		jsonMultiSelectQueryMetricsQuery, _ := json.Marshal(dst.MultiSelectQueryMetricsQuery)
-		if string(jsonMultiSelectQueryMetricsQuery) == "{}" { // empty struct
-			dst.MultiSelectQueryMetricsQuery = nil
-		} else {
-			if err = validator.Validate(dst.MultiSelectQueryMetricsQuery); err != nil {
-				dst.MultiSelectQueryMetricsQuery = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metricsQuery"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiSelectQueryMetricsQuery = nil
-	}
-
-	// try to unmarshal data into MultiSelectQuerySpansQuery
-	err = json.Unmarshal(data, &dst.MultiSelectQuerySpansQuery)
-	if err == nil {
-		jsonMultiSelectQuerySpansQuery, _ := json.Marshal(dst.MultiSelectQuerySpansQuery)
-		if string(jsonMultiSelectQuerySpansQuery) == "{}" { // empty struct
-			dst.MultiSelectQuerySpansQuery = nil
-		} else {
-			if err = validator.Validate(dst.MultiSelectQuerySpansQuery); err != nil {
-				dst.MultiSelectQuerySpansQuery = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spansQuery"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiSelectQuerySpansQuery = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logsQuery, metricsQuery, spansQuery] may be set"}
+		}
+
+		delete(additionalProperties, "logsQuery")
+		delete(additionalProperties, "metricsQuery")
+		delete(additionalProperties, "spansQuery")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.MultiSelectQueryLogsQuery = nil
-		dst.MultiSelectQueryMetricsQuery = nil
-		dst.MultiSelectQuerySpansQuery = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(MultiSelectQuery)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src MultiSelectQuery) MarshalJSON() ([]byte, error) {
-	if src.MultiSelectQueryLogsQuery != nil {
-		return json.Marshal(&src.MultiSelectQueryLogsQuery)
-	}
-
-	if src.MultiSelectQueryMetricsQuery != nil {
-		return json.Marshal(&src.MultiSelectQueryMetricsQuery)
-	}
-
-	if src.MultiSelectQuerySpansQuery != nil {
-		return json.Marshal(&src.MultiSelectQuerySpansQuery)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *MultiSelectQuery) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.MultiSelectQueryLogsQuery != nil {
-		return obj.MultiSelectQueryLogsQuery
-	}
-
-	if obj.MultiSelectQueryMetricsQuery != nil {
-		return obj.MultiSelectQueryMetricsQuery
-	}
-
-	if obj.MultiSelectQuerySpansQuery != nil {
-		return obj.MultiSelectQuerySpansQuery
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj MultiSelectQuery) GetActualInstanceValue() (interface{}) {
-	if obj.MultiSelectQueryLogsQuery != nil {
-		return *obj.MultiSelectQueryLogsQuery
-	}
-
-	if obj.MultiSelectQueryMetricsQuery != nil {
-		return *obj.MultiSelectQueryMetricsQuery
-	}
-
-	if obj.MultiSelectQuerySpansQuery != nil {
-		return *obj.MultiSelectQuerySpansQuery
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableMultiSelectQuery struct {

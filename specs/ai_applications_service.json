@@ -72,11 +72,11 @@
                     {
                       "application": "checkout",
                       "companyId": "12345",
-                      "createdAt": "2026-06-02T15:30:00.000Z",
+                      "createdAt": "2026-06-02T15:30:00Z",
                       "guardrailsIntegrated": true,
                       "id": "175677d1-fc90-4a89-9e35-0590b188ebb2",
                       "subsystem": "api",
-                      "updatedAt": "2026-06-02T15:35:00.000Z"
+                      "updatedAt": "2026-06-02T15:35:00Z"
                     }
                   ]
                 }
@@ -125,11 +125,11 @@
                   "aiApplication": {
                     "application": "checkout",
                     "companyId": "12345",
-                    "createdAt": "2026-06-02T15:30:00.000Z",
+                    "createdAt": "2026-06-02T15:30:00Z",
                     "guardrailsIntegrated": true,
                     "id": "175677d1-fc90-4a89-9e35-0590b188ebb2",
                     "subsystem": "api",
-                    "updatedAt": "2026-06-02T15:35:00.000Z"
+                    "updatedAt": "2026-06-02T15:35:00Z"
                   }
                 }
               }
@@ -446,16 +446,6 @@
         ]
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -466,26 +456,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -496,9 +466,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {

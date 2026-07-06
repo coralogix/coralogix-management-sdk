@@ -13,164 +13,213 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// RuleMatcher - struct for RuleMatcher
+// checks if the RuleMatcher type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RuleMatcher{}
+
+// RuleMatcher struct for RuleMatcher
 type RuleMatcher struct {
-	RuleMatcherApplicationName *RuleMatcherApplicationName
-	RuleMatcherSeverity *RuleMatcherSeverity
-	RuleMatcherSubsystemName *RuleMatcherSubsystemName
+	ApplicationName *ApplicationNameConstraint `json:"applicationName,omitempty"`
+	Severity *SeverityConstraint `json:"severity,omitempty"`
+	SubsystemName *SubsystemNameConstraint `json:"subsystemName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// RuleMatcherApplicationNameAsRuleMatcher is a convenience function that returns RuleMatcherApplicationName wrapped in RuleMatcher
-func RuleMatcherApplicationNameAsRuleMatcher(v *RuleMatcherApplicationName) RuleMatcher {
-	return RuleMatcher{
-		RuleMatcherApplicationName: v,
+type _RuleMatcher RuleMatcher
+
+// NewRuleMatcher instantiates a new RuleMatcher object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRuleMatcher() *RuleMatcher {
+	this := RuleMatcher{}
+	return &this
+}
+
+// NewRuleMatcherWithDefaults instantiates a new RuleMatcher object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRuleMatcherWithDefaults() *RuleMatcher {
+	this := RuleMatcher{}
+	return &this
+}
+
+// GetApplicationName returns the ApplicationName field value if set, zero value otherwise.
+func (o *RuleMatcher) GetApplicationName() ApplicationNameConstraint {
+	if o == nil || IsNil(o.ApplicationName) {
+		var ret ApplicationNameConstraint
+		return ret
 	}
+	return *o.ApplicationName
 }
 
-// RuleMatcherSeverityAsRuleMatcher is a convenience function that returns RuleMatcherSeverity wrapped in RuleMatcher
-func RuleMatcherSeverityAsRuleMatcher(v *RuleMatcherSeverity) RuleMatcher {
-	return RuleMatcher{
-		RuleMatcherSeverity: v,
+// GetApplicationNameOk returns a tuple with the ApplicationName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleMatcher) GetApplicationNameOk() (*ApplicationNameConstraint, bool) {
+	if o == nil || IsNil(o.ApplicationName) {
+		return nil, false
 	}
+	return o.ApplicationName, true
 }
 
-// RuleMatcherSubsystemNameAsRuleMatcher is a convenience function that returns RuleMatcherSubsystemName wrapped in RuleMatcher
-func RuleMatcherSubsystemNameAsRuleMatcher(v *RuleMatcherSubsystemName) RuleMatcher {
-	return RuleMatcher{
-		RuleMatcherSubsystemName: v,
+// HasApplicationName returns a boolean if a field has been set.
+func (o *RuleMatcher) HasApplicationName() bool {
+	if o != nil && !IsNil(o.ApplicationName) {
+		return true
 	}
+
+	return false
 }
 
+// SetApplicationName gets a reference to the given ApplicationNameConstraint and assigns it to the ApplicationName field.
+func (o *RuleMatcher) SetApplicationName(v ApplicationNameConstraint) {
+	o.ApplicationName = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *RuleMatcher) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into RuleMatcherApplicationName
-	err = json.Unmarshal(data, &dst.RuleMatcherApplicationName)
-	if err == nil {
-		jsonRuleMatcherApplicationName, _ := json.Marshal(dst.RuleMatcherApplicationName)
-		if string(jsonRuleMatcherApplicationName) == "{}" { // empty struct
-			dst.RuleMatcherApplicationName = nil
-		} else {
-			if err = validator.Validate(dst.RuleMatcherApplicationName); err != nil {
-				dst.RuleMatcherApplicationName = nil
-			} else {
-				match++
-			}
+// GetSeverity returns the Severity field value if set, zero value otherwise.
+func (o *RuleMatcher) GetSeverity() SeverityConstraint {
+	if o == nil || IsNil(o.Severity) {
+		var ret SeverityConstraint
+		return ret
+	}
+	return *o.Severity
+}
+
+// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleMatcher) GetSeverityOk() (*SeverityConstraint, bool) {
+	if o == nil || IsNil(o.Severity) {
+		return nil, false
+	}
+	return o.Severity, true
+}
+
+// HasSeverity returns a boolean if a field has been set.
+func (o *RuleMatcher) HasSeverity() bool {
+	if o != nil && !IsNil(o.Severity) {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverity gets a reference to the given SeverityConstraint and assigns it to the Severity field.
+func (o *RuleMatcher) SetSeverity(v SeverityConstraint) {
+	o.Severity = &v
+}
+
+// GetSubsystemName returns the SubsystemName field value if set, zero value otherwise.
+func (o *RuleMatcher) GetSubsystemName() SubsystemNameConstraint {
+	if o == nil || IsNil(o.SubsystemName) {
+		var ret SubsystemNameConstraint
+		return ret
+	}
+	return *o.SubsystemName
+}
+
+// GetSubsystemNameOk returns a tuple with the SubsystemName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleMatcher) GetSubsystemNameOk() (*SubsystemNameConstraint, bool) {
+	if o == nil || IsNil(o.SubsystemName) {
+		return nil, false
+	}
+	return o.SubsystemName, true
+}
+
+// HasSubsystemName returns a boolean if a field has been set.
+func (o *RuleMatcher) HasSubsystemName() bool {
+	if o != nil && !IsNil(o.SubsystemName) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubsystemName gets a reference to the given SubsystemNameConstraint and assigns it to the SubsystemName field.
+func (o *RuleMatcher) SetSubsystemName(v SubsystemNameConstraint) {
+	o.SubsystemName = &v
+}
+
+func (o RuleMatcher) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RuleMatcher) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApplicationName) {
+		toSerialize["applicationName"] = o.ApplicationName
+	}
+	if !IsNil(o.Severity) {
+		toSerialize["severity"] = o.Severity
+	}
+	if !IsNil(o.SubsystemName) {
+		toSerialize["subsystemName"] = o.SubsystemName
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["applicationName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["subsystemName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["severity"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [applicationName, subsystemName, severity] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *RuleMatcher) UnmarshalJSON(data []byte) (err error) {
+	varRuleMatcher := _RuleMatcher{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleMatcher)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleMatcher(varRuleMatcher)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["applicationName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleMatcherApplicationName = nil
-	}
-
-	// try to unmarshal data into RuleMatcherSeverity
-	err = json.Unmarshal(data, &dst.RuleMatcherSeverity)
-	if err == nil {
-		jsonRuleMatcherSeverity, _ := json.Marshal(dst.RuleMatcherSeverity)
-		if string(jsonRuleMatcherSeverity) == "{}" { // empty struct
-			dst.RuleMatcherSeverity = nil
-		} else {
-			if err = validator.Validate(dst.RuleMatcherSeverity); err != nil {
-				dst.RuleMatcherSeverity = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["subsystemName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleMatcherSeverity = nil
-	}
-
-	// try to unmarshal data into RuleMatcherSubsystemName
-	err = json.Unmarshal(data, &dst.RuleMatcherSubsystemName)
-	if err == nil {
-		jsonRuleMatcherSubsystemName, _ := json.Marshal(dst.RuleMatcherSubsystemName)
-		if string(jsonRuleMatcherSubsystemName) == "{}" { // empty struct
-			dst.RuleMatcherSubsystemName = nil
-		} else {
-			if err = validator.Validate(dst.RuleMatcherSubsystemName); err != nil {
-				dst.RuleMatcherSubsystemName = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["severity"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleMatcherSubsystemName = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [applicationName, subsystemName, severity] may be set"}
+		}
+
+		delete(additionalProperties, "applicationName")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "subsystemName")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.RuleMatcherApplicationName = nil
-		dst.RuleMatcherSeverity = nil
-		dst.RuleMatcherSubsystemName = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(RuleMatcher)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src RuleMatcher) MarshalJSON() ([]byte, error) {
-	if src.RuleMatcherApplicationName != nil {
-		return json.Marshal(&src.RuleMatcherApplicationName)
-	}
-
-	if src.RuleMatcherSeverity != nil {
-		return json.Marshal(&src.RuleMatcherSeverity)
-	}
-
-	if src.RuleMatcherSubsystemName != nil {
-		return json.Marshal(&src.RuleMatcherSubsystemName)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *RuleMatcher) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.RuleMatcherApplicationName != nil {
-		return obj.RuleMatcherApplicationName
-	}
-
-	if obj.RuleMatcherSeverity != nil {
-		return obj.RuleMatcherSeverity
-	}
-
-	if obj.RuleMatcherSubsystemName != nil {
-		return obj.RuleMatcherSubsystemName
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj RuleMatcher) GetActualInstanceValue() (interface{}) {
-	if obj.RuleMatcherApplicationName != nil {
-		return *obj.RuleMatcherApplicationName
-	}
-
-	if obj.RuleMatcherSeverity != nil {
-		return *obj.RuleMatcherSeverity
-	}
-
-	if obj.RuleMatcherSubsystemName != nil {
-		return *obj.RuleMatcherSubsystemName
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableRuleMatcher struct {

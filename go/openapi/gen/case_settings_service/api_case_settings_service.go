@@ -43,9 +43,6 @@ CaseSettingsServiceCreateCaseSettings Create a case settings team configuration
 
 Create a new case settings team configuration with an optional display name and settings.
 
-Requires the following permissions:
-- `case-config:Update`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCaseSettingsServiceCreateCaseSettingsRequest
 */
@@ -204,9 +201,6 @@ func (r ApiCaseSettingsServiceDeleteCaseSettingsRequest) Execute() (map[string]i
 CaseSettingsServiceDeleteCaseSettings Delete a case settings team configuration
 
 Delete a case settings team configuration by its identifier.
-
-Requires the following permissions:
-- `case-config:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID of the case settings team configuration to delete
@@ -370,9 +364,6 @@ CaseSettingsServiceGetActiveCaseSettings Get the active case settings team confi
 
 Retrieve the currently active case settings team configuration (after any org- or user-level precedence resolution).
 
-Requires the following permissions:
-- `case-config:Read`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCaseSettingsServiceGetActiveCaseSettingsRequest
 */
@@ -515,9 +506,6 @@ func (r ApiCaseSettingsServiceGetCaseSettingsRequest) Execute() (*GetCaseSetting
 CaseSettingsServiceGetCaseSettings Get a case settings team configuration
 
 Retrieve a single case settings team configuration by its identifier.
-
-Requires the following permissions:
-- `case-config:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID of the case settings team configuration
@@ -681,9 +669,6 @@ CaseSettingsServiceGetSystemDefaultCaseSettings Get system default case settings
 
 Retrieve the platform-wide default settings for case settings team configurations.
 
-Requires the following permissions:
-- `case-config:Read`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCaseSettingsServiceGetSystemDefaultCaseSettingsRequest
 */
@@ -821,9 +806,6 @@ func (r ApiCaseSettingsServiceUpdateCaseSettingsRequest) Execute() (*UpdateCaseS
 CaseSettingsServiceUpdateCaseSettings Update a case settings team configuration
 
 Update the display name and/or settings of an existing case settings team configuration.
-
-Requires the following permissions:
-- `case-config:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id ID of the case settings team configuration to update

@@ -11,7 +11,7 @@
           "Extension service"
         ],
         "summary": "Get all extensions",
-        "description": "Creates a new extension.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
+        "description": "Creates a new extension.",
         "externalDocs": {
           "url": ""
         },
@@ -89,7 +89,7 @@
           "Extension service"
         ],
         "summary": "Get extension by ID",
-        "description": "Returns the details of the specified extension.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
+        "description": "Returns the details of the specified extension.",
         "externalDocs": {
           "url": ""
         },
@@ -431,16 +431,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -451,26 +441,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -481,9 +451,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {

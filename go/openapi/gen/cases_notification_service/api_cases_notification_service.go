@@ -42,9 +42,6 @@ CasesNotificationServiceListNotificationDeliveries List notification deliveries 
 
 Retrieve notification delivery records for one or more cases, including routing, target, and outcome information.
 
-Requires the following permissions:
-- `case:Read`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCasesNotificationServiceListNotificationDeliveriesRequest
 */

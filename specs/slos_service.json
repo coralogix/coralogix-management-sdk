@@ -33,30 +33,147 @@
                 "type": "object",
                 "properties": {
                   "field": {
-                    "oneOf": [
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldConstFilter"
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "title": "SloFilterField",
+                    "description": "Field used for filtering SLOs",
+                    "type": "object",
+                    "properties": {
+                      "constFilter": {
+                        "$ref": "#/components/schemas/SloConstantFilterField"
                       },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldLabelName"
+                      "labelName": {
+                        "example": "environment",
+                        "description": "Filter by a specific SLO label key.",
+                        "type": "string",
+                        "minLength": 0
                       },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldOwnershipEnvironmentValues"
+                      "ownershipEnvironmentValues": {},
+                      "ownershipServiceValues": {},
+                      "ownershipTeamValues": {},
+                      "productType": {
+                        "description": "Filter discriminator for SLO product type values.",
+                        "type": "boolean"
                       },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldOwnershipServiceValues"
+                      "serviceName": {
+                        "example": "payment-service",
+                        "description": "Filter by service name from the APM SLI services list (not ownership tags). Only valid for APM product SLOs. MUST be used together with a product_type filter that includes APM; the server may reject the request otherwise. To filter by configured ownership service on any SLO type, use ownership_service_values instead.",
+                        "type": "string",
+                        "minLength": 0
                       },
+                      "sloType": {
+                        "description": "Filter discriminator for SLO type values.",
+                        "type": "boolean"
+                      }
+                    },
+                    "allOf": [
                       {
-                        "$ref": "#/components/schemas/SloFilterFieldOwnershipTeamValues"
-                      },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldProductType"
-                      },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldServiceName"
-                      },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldSloType"
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "constFilter"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "labelName"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "sloType"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "productType"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "serviceName"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "ownershipServiceValues"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "ownershipEnvironmentValues"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "ownershipTeamValues"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "not": {
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "constFilter"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "labelName"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "sloType"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "productType"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "serviceName"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "ownershipServiceValues"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "ownershipEnvironmentValues"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "ownershipTeamValues"
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        ]
                       }
                     ]
                   },
@@ -69,15 +186,64 @@
                     "type": "object",
                     "properties": {
                       "is": {
-                        "oneOf": [
+                        "externalDocs": {
+                          "url": ""
+                        },
+                        "title": "IsFilterPredicate",
+                        "description": "Predicate for SLO filters that checks if a field is equal to one of multiple values",
+                        "type": "object",
+                        "properties": {
+                          "productTypeValues": {},
+                          "stringValues": {},
+                          "typeValues": {}
+                        },
+                        "allOf": [
                           {
-                            "$ref": "#/components/schemas/IsFilterPredicateProductTypeValues"
-                          },
-                          {
-                            "$ref": "#/components/schemas/IsFilterPredicateStringValues"
-                          },
-                          {
-                            "$ref": "#/components/schemas/IsFilterPredicateTypeValues"
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "required": [
+                                  "stringValues"
+                                ]
+                              },
+                              {
+                                "type": "object",
+                                "required": [
+                                  "typeValues"
+                                ]
+                              },
+                              {
+                                "type": "object",
+                                "required": [
+                                  "productTypeValues"
+                                ]
+                              },
+                              {
+                                "type": "object",
+                                "not": {
+                                  "anyOf": [
+                                    {
+                                      "type": "object",
+                                      "required": [
+                                        "stringValues"
+                                      ]
+                                    },
+                                    {
+                                      "type": "object",
+                                      "required": [
+                                        "typeValues"
+                                      ]
+                                    },
+                                    {
+                                      "type": "object",
+                                      "required": [
+                                        "productTypeValues"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
                           }
                         ]
                       }
@@ -160,16 +326,145 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Slo",
+                "description": "Definition of an SLO",
                 "type": "object",
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/SloApmSli"
+                "properties": {
+                  "apmSli": {
+                    "$ref": "#/components/schemas/ApmSli"
                   },
-                  {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                  "apmSliMetadata": {
+                    "$ref": "#/components/schemas/ApmSli"
                   },
+                  "createTime": {
+                    "description": "RFC3339 timestamp of when the SLO was created.",
+                    "type": "string",
+                    "format": "date-time",
+                    "minLength": 0
+                  },
+                  "creator": {
+                    "example": "test@domain.com",
+                    "description": "Email or identifier of the user who created the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "description": {
+                    "example": "A brief description of my SLO",
+                    "description": "Human-readable description of the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "grouping": {
+                    "$ref": "#/components/schemas/v1.Grouping"
+                  },
+                  "id": {
+                    "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+                    "description": "Unique identifier of the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "labels": {
+                    "description": "List of labels.",
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string",
+                      "minLength": 0
+                    }
+                  },
+                  "name": {
+                    "example": "Example Slo Name",
+                    "description": "Human-readable display name for the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "ownershipTags": {
+                    "$ref": "#/components/schemas/SloOwnershipTags"
+                  },
+                  "productType": {
+                    "$ref": "#/components/schemas/SloProductType"
+                  },
+                  "requestBasedMetricSli": {
+                    "$ref": "#/components/schemas/RequestBasedMetricSli"
+                  },
+                  "revision": {
+                    "$ref": "#/components/schemas/v1.Revision"
+                  },
+                  "sloTimeFrame": {
+                    "$ref": "#/components/schemas/SloTimeFrame"
+                  },
+                  "sloType": {
+                    "$ref": "#/components/schemas/SloType"
+                  },
+                  "targetThresholdPercentage": {
+                    "example": 99.999,
+                    "description": "Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).",
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "type": {
+                    "deprecated": true,
+                    "example": "request",
+                    "description": "Deprecated: SLO type string. Use slo_type instead.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "updateTime": {
+                    "description": "Timestamp of the last update.",
+                    "type": "string",
+                    "format": "date-time",
+                    "minLength": 0
+                  },
+                  "windowBasedMetricSli": {
+                    "$ref": "#/components/schemas/WindowBasedMetricSli"
+                  }
+                },
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "requestBasedMetricSli"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "windowBasedMetricSli"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "apmSli"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "not": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "required": [
+                                "requestBasedMetricSli"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "windowBasedMetricSli"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "apmSli"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 ]
               }
@@ -247,16 +542,145 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Slo",
+                "description": "Definition of an SLO",
                 "type": "object",
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/SloApmSli"
+                "properties": {
+                  "apmSli": {
+                    "$ref": "#/components/schemas/ApmSli"
                   },
-                  {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                  "apmSliMetadata": {
+                    "$ref": "#/components/schemas/ApmSli"
                   },
+                  "createTime": {
+                    "description": "RFC3339 timestamp of when the SLO was created.",
+                    "type": "string",
+                    "format": "date-time",
+                    "minLength": 0
+                  },
+                  "creator": {
+                    "example": "test@domain.com",
+                    "description": "Email or identifier of the user who created the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "description": {
+                    "example": "A brief description of my SLO",
+                    "description": "Human-readable description of the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "grouping": {
+                    "$ref": "#/components/schemas/v1.Grouping"
+                  },
+                  "id": {
+                    "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+                    "description": "Unique identifier of the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "labels": {
+                    "description": "List of labels.",
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string",
+                      "minLength": 0
+                    }
+                  },
+                  "name": {
+                    "example": "Example Slo Name",
+                    "description": "Human-readable display name for the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "ownershipTags": {
+                    "$ref": "#/components/schemas/SloOwnershipTags"
+                  },
+                  "productType": {
+                    "$ref": "#/components/schemas/SloProductType"
+                  },
+                  "requestBasedMetricSli": {
+                    "$ref": "#/components/schemas/RequestBasedMetricSli"
+                  },
+                  "revision": {
+                    "$ref": "#/components/schemas/v1.Revision"
+                  },
+                  "sloTimeFrame": {
+                    "$ref": "#/components/schemas/SloTimeFrame"
+                  },
+                  "sloType": {
+                    "$ref": "#/components/schemas/SloType"
+                  },
+                  "targetThresholdPercentage": {
+                    "example": 99.999,
+                    "description": "Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).",
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "type": {
+                    "deprecated": true,
+                    "example": "request",
+                    "description": "Deprecated: SLO type string. Use slo_type instead.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "updateTime": {
+                    "description": "Timestamp of the last update.",
+                    "type": "string",
+                    "format": "date-time",
+                    "minLength": 0
+                  },
+                  "windowBasedMetricSli": {
+                    "$ref": "#/components/schemas/WindowBasedMetricSli"
+                  }
+                },
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "requestBasedMetricSli"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "windowBasedMetricSli"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "apmSli"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "not": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "required": [
+                                "requestBasedMetricSli"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "windowBasedMetricSli"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "apmSli"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 ]
               }
@@ -598,16 +1022,145 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Slo",
+                "description": "Definition of an SLO",
                 "type": "object",
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/SloApmSli"
+                "properties": {
+                  "apmSli": {
+                    "$ref": "#/components/schemas/ApmSli"
                   },
-                  {
-                    "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                  "apmSliMetadata": {
+                    "$ref": "#/components/schemas/ApmSli"
                   },
+                  "createTime": {
+                    "description": "RFC3339 timestamp of when the SLO was created.",
+                    "type": "string",
+                    "format": "date-time",
+                    "minLength": 0
+                  },
+                  "creator": {
+                    "example": "test@domain.com",
+                    "description": "Email or identifier of the user who created the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "description": {
+                    "example": "A brief description of my SLO",
+                    "description": "Human-readable description of the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "grouping": {
+                    "$ref": "#/components/schemas/v1.Grouping"
+                  },
+                  "id": {
+                    "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+                    "description": "Unique identifier of the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "labels": {
+                    "description": "List of labels.",
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string",
+                      "minLength": 0
+                    }
+                  },
+                  "name": {
+                    "example": "Example Slo Name",
+                    "description": "Human-readable display name for the SLO.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "ownershipTags": {
+                    "$ref": "#/components/schemas/SloOwnershipTags"
+                  },
+                  "productType": {
+                    "$ref": "#/components/schemas/SloProductType"
+                  },
+                  "requestBasedMetricSli": {
+                    "$ref": "#/components/schemas/RequestBasedMetricSli"
+                  },
+                  "revision": {
+                    "$ref": "#/components/schemas/v1.Revision"
+                  },
+                  "sloTimeFrame": {
+                    "$ref": "#/components/schemas/SloTimeFrame"
+                  },
+                  "sloType": {
+                    "$ref": "#/components/schemas/SloType"
+                  },
+                  "targetThresholdPercentage": {
+                    "example": 99.999,
+                    "description": "Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).",
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "type": {
+                    "deprecated": true,
+                    "example": "request",
+                    "description": "Deprecated: SLO type string. Use slo_type instead.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "updateTime": {
+                    "description": "Timestamp of the last update.",
+                    "type": "string",
+                    "format": "date-time",
+                    "minLength": 0
+                  },
+                  "windowBasedMetricSli": {
+                    "$ref": "#/components/schemas/WindowBasedMetricSli"
+                  }
+                },
+                "allOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "requestBasedMetricSli"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "windowBasedMetricSli"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "apmSli"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "not": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "required": [
+                                "requestBasedMetricSli"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "windowBasedMetricSli"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "apmSli"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 ]
               }
@@ -786,16 +1339,6 @@
         }
       },
       "ApmLatencySli": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ApmLatencySliAverage"
-          },
-          {
-            "$ref": "#/components/schemas/ApmLatencySliQuantile"
-          }
-        ]
-      },
-      "ApmLatencySliAverage": {
         "externalDocs": {
           "url": ""
         },
@@ -806,28 +1349,6 @@
           "average": {
             "$ref": "#/components/schemas/ApmLatencyAverage"
           },
-          "threshold": {
-            "example": 500,
-            "description": "Threshold in milliseconds. Good when latency <= threshold, bad when latency > threshold.",
-            "type": "number",
-            "format": "float"
-          },
-          "timeWindow": {
-            "$ref": "#/components/schemas/WindowSloWindow"
-          }
-        },
-        "required": [
-          "average"
-        ]
-      },
-      "ApmLatencySliQuantile": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "ApmLatencySli",
-        "description": "Configuration for latency-based APM SLI",
-        "type": "object",
-        "properties": {
           "quantile": {
             "$ref": "#/components/schemas/ApmLatencyQuantile"
           },
@@ -841,21 +1362,45 @@
             "$ref": "#/components/schemas/WindowSloWindow"
           }
         },
-        "required": [
-          "quantile"
-        ]
-      },
-      "ApmSli": {
-        "oneOf": [
+        "allOf": [
           {
-            "$ref": "#/components/schemas/ApmSliErrorConfig"
-          },
-          {
-            "$ref": "#/components/schemas/ApmSliLatencyConfig"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "quantile"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "average"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "quantile"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "average"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
-      "ApmSliErrorConfig": {
+      "ApmSli": {
         "externalDocs": {
           "url": ""
         },
@@ -866,55 +1411,6 @@
           "errorConfig": {
             "$ref": "#/components/schemas/ApmErrorSli"
           },
-          "filters": {
-            "description": "Additional label-based filters to apply to the metrics",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ApmFilter"
-            },
-            "minItems": 0
-          },
-          "groupingKeys": {
-            "example": [
-              "environment",
-              "region"
-            ],
-            "description": "Labels to group SLO results by",
-            "type": "array",
-            "items": {
-              "description": "Labels to group SLO results by",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
-          },
-          "services": {
-            "example": [
-              "my-service",
-              "payment-service"
-            ],
-            "description": "List of service names to monitor",
-            "type": "array",
-            "items": {
-              "description": "List of service names to monitor",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
-          }
-        },
-        "required": [
-          "errorConfig"
-        ]
-      },
-      "ApmSliLatencyConfig": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "ApmSli",
-        "description": "Definition of an APM-based SLI with automatic query generation",
-        "type": "object",
-        "properties": {
           "filters": {
             "description": "Additional label-based filters to apply to the metrics",
             "type": "array",
@@ -955,8 +1451,42 @@
             "minItems": 0
           }
         },
-        "required": [
-          "latencyConfig"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "errorConfig"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "latencyConfig"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "errorConfig"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "latencyConfig"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "BatchExecuteSloResponse": {
@@ -1143,16 +1673,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -1163,26 +1683,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -1193,9 +1693,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {
@@ -1252,54 +1768,6 @@
         },
         "required": [
           "zeroState"
-        ]
-      },
-      "IsFilterPredicateProductTypeValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "IsFilterPredicate",
-        "description": "Predicate for SLO filters that checks if a field is equal to one of multiple values",
-        "type": "object",
-        "properties": {
-          "productTypeValues": {
-            "$ref": "#/components/schemas/ProductTypeValues"
-          }
-        },
-        "required": [
-          "productTypeValues"
-        ]
-      },
-      "IsFilterPredicateStringValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "IsFilterPredicate",
-        "description": "Predicate for SLO filters that checks if a field is equal to one of multiple values",
-        "type": "object",
-        "properties": {
-          "stringValues": {
-            "$ref": "#/components/schemas/StringValues"
-          }
-        },
-        "required": [
-          "stringValues"
-        ]
-      },
-      "IsFilterPredicateTypeValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "IsFilterPredicate",
-        "description": "Predicate for SLO filters that checks if a field is equal to one of multiple values",
-        "type": "object",
-        "properties": {
-          "typeValues": {
-            "$ref": "#/components/schemas/TypeValues"
-          }
-        },
-        "required": [
-          "typeValues"
         ]
       },
       "ListSlosResponse": {
@@ -1359,23 +1827,6 @@
             "items": {
               "type": "string",
               "minLength": 0
-            },
-            "minItems": 0
-          }
-        }
-      },
-      "ProductTypeValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Product type values.",
-        "type": "object",
-        "properties": {
-          "values": {
-            "description": "The values.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SloProductType"
             },
             "minItems": 0
           }
@@ -1495,44 +1946,6 @@
         ]
       },
       "Slo": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/SloApmSli"
-          },
-          {
-            "$ref": "#/components/schemas/SloRequestBasedMetricSli"
-          },
-          {
-            "$ref": "#/components/schemas/SloWindowBasedMetricSli"
-          }
-        ]
-      },
-      "SloAlertValidityResult": {
-        "type": "object",
-        "properties": {
-          "alertVersionId": {
-            "description": "The alert version id.",
-            "type": "string",
-            "minLength": 0
-          },
-          "errorMessage": {
-            "description": "The error message.",
-            "type": "string",
-            "minLength": 0
-          },
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "minLength": 0
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "minLength": 0
-          }
-        }
-      },
-      "SloApmSli": {
         "externalDocs": {
           "url": ""
         },
@@ -1593,6 +2006,9 @@
           "productType": {
             "$ref": "#/components/schemas/SloProductType"
           },
+          "requestBasedMetricSli": {
+            "$ref": "#/components/schemas/RequestBasedMetricSli"
+          },
           "revision": {
             "$ref": "#/components/schemas/v1.Revision"
           },
@@ -1620,11 +2036,85 @@
             "type": "string",
             "format": "date-time",
             "minLength": 0
+          },
+          "windowBasedMetricSli": {
+            "$ref": "#/components/schemas/WindowBasedMetricSli"
           }
         },
-        "required": [
-          "apmSli"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "requestBasedMetricSli"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "windowBasedMetricSli"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "apmSli"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "requestBasedMetricSli"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "windowBasedMetricSli"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "apmSli"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
+      },
+      "SloAlertValidityResult": {
+        "type": "object",
+        "properties": {
+          "alertVersionId": {
+            "description": "The alert version id.",
+            "type": "string",
+            "minLength": 0
+          },
+          "errorMessage": {
+            "description": "The error message.",
+            "type": "string",
+            "minLength": 0
+          },
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
       },
       "SloConstantFilterField": {
         "description": "Slo constant filter field.",
@@ -1636,19 +2126,6 @@
         ]
       },
       "SloExecutionRequest": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
-          },
-          {
-            "$ref": "#/components/schemas/SloExecutionRequestDeleteSloRequest"
-          },
-          {
-            "$ref": "#/components/schemas/SloExecutionRequestReplaceSloRequest"
-          }
-        ]
-      },
-      "SloExecutionRequestCreateSloRequest": {
         "externalDocs": {
           "url": ""
         },
@@ -1658,61 +2135,40 @@
         "properties": {
           "createSloRequest": {
             "$ref": "#/components/schemas/CreateSloRequest"
-          }
-        },
-        "required": [
-          "request",
-          "createSloRequest"
-        ]
-      },
-      "SloExecutionRequestDeleteSloRequest": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloExecutionRequest",
-        "description": "Request for executing an SLO operation.",
-        "type": "object",
-        "properties": {
+          },
           "deleteSloRequest": {
             "$ref": "#/components/schemas/DeleteSloRequest"
-          }
-        },
-        "required": [
-          "request",
-          "deleteSloRequest"
-        ]
-      },
-      "SloExecutionRequestReplaceSloRequest": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloExecutionRequest",
-        "description": "Request for executing an SLO operation.",
-        "type": "object",
-        "properties": {
+          },
           "replaceSloRequest": {
             "$ref": "#/components/schemas/ReplaceSloRequest"
           }
         },
-        "required": [
-          "request",
-          "replaceSloRequest"
-        ]
-      },
-      "SloExecutionResponse": {
-        "oneOf": [
+        "allOf": [
           {
-            "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
-          },
-          {
-            "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
-          },
-          {
-            "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "createSloRequest"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "replaceSloRequest"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "deleteSloRequest"
+                ]
+              }
+            ]
           }
         ]
       },
-      "SloExecutionResponseCreateSloResponse": {
+      "SloExecutionResponse": {
         "externalDocs": {
           "url": ""
         },
@@ -1722,178 +2178,62 @@
         "properties": {
           "createSloResponse": {
             "$ref": "#/components/schemas/CreateSloResponse"
-          }
-        },
-        "required": [
-          "createSloResponse"
-        ]
-      },
-      "SloExecutionResponseDeleteSloResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloExecutionResponse",
-        "description": "Response for an executed SLO operation.",
-        "type": "object",
-        "properties": {
+          },
           "deleteSloResponse": {
             "$ref": "#/components/schemas/DeleteSloResponse"
-          }
-        },
-        "required": [
-          "deleteSloResponse"
-        ]
-      },
-      "SloExecutionResponseReplaceSloResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloExecutionResponse",
-        "description": "Response for an executed SLO operation.",
-        "type": "object",
-        "properties": {
+          },
           "replaceSloResponse": {
             "$ref": "#/components/schemas/ReplaceSloResponse"
           }
         },
-        "required": [
-          "replaceSloResponse"
-        ]
-      },
-      "SloFilterFieldConstFilter": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloFilterField",
-        "description": "Field used for filtering SLOs",
-        "type": "object",
-        "properties": {
-          "constFilter": {
-            "$ref": "#/components/schemas/SloConstantFilterField"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "createSloResponse"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "replaceSloResponse"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "deleteSloResponse"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "createSloResponse"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "replaceSloResponse"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "deleteSloResponse"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
-        },
-        "required": [
-          "constFilter"
-        ]
-      },
-      "SloFilterFieldLabelName": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloFilterField",
-        "description": "Field used for filtering SLOs",
-        "type": "object",
-        "properties": {
-          "labelName": {
-            "example": "environment",
-            "description": "Filter by a specific SLO label key.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "labelName"
-        ]
-      },
-      "SloFilterFieldOwnershipEnvironmentValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloFilterField",
-        "description": "Field used for filtering SLOs",
-        "type": "object",
-        "properties": {
-          "ownershipEnvironmentValues": {
-            "$ref": "#/components/schemas/StringValues"
-          }
-        },
-        "required": [
-          "ownershipEnvironmentValues"
-        ]
-      },
-      "SloFilterFieldOwnershipServiceValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloFilterField",
-        "description": "Field used for filtering SLOs",
-        "type": "object",
-        "properties": {
-          "ownershipServiceValues": {
-            "$ref": "#/components/schemas/StringValues"
-          }
-        },
-        "required": [
-          "ownershipServiceValues"
-        ]
-      },
-      "SloFilterFieldOwnershipTeamValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloFilterField",
-        "description": "Field used for filtering SLOs",
-        "type": "object",
-        "properties": {
-          "ownershipTeamValues": {
-            "$ref": "#/components/schemas/StringValues"
-          }
-        },
-        "required": [
-          "ownershipTeamValues"
-        ]
-      },
-      "SloFilterFieldProductType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloFilterField",
-        "description": "Field used for filtering SLOs",
-        "type": "object",
-        "properties": {
-          "productType": {
-            "description": "Filter discriminator for SLO product type values.",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "productType"
-        ]
-      },
-      "SloFilterFieldServiceName": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloFilterField",
-        "description": "Field used for filtering SLOs",
-        "type": "object",
-        "properties": {
-          "serviceName": {
-            "example": "payment-service",
-            "description": "Filter by service name from the APM SLI services list (not ownership tags). Only valid for APM product SLOs. MUST be used together with a product_type filter that includes APM; the server may reject the request otherwise. To filter by configured ownership service on any SLO type, use ownership_service_values instead.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "serviceName"
-        ]
-      },
-      "SloFilterFieldSloType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "SloFilterField",
-        "description": "Field used for filtering SLOs",
-        "type": "object",
-        "properties": {
-          "sloType": {
-            "description": "Filter discriminator for SLO type values.",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "sloType"
         ]
       },
       "SloOwnershipTag": {
@@ -1976,100 +2316,6 @@
           "SLO_PRODUCT_TYPE_APM"
         ]
       },
-      "SloRequestBasedMetricSli": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Slo",
-        "description": "Definition of an SLO",
-        "type": "object",
-        "properties": {
-          "apmSliMetadata": {
-            "$ref": "#/components/schemas/ApmSli"
-          },
-          "createTime": {
-            "description": "RFC3339 timestamp of when the SLO was created.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          },
-          "creator": {
-            "example": "test@domain.com",
-            "description": "Email or identifier of the user who created the SLO.",
-            "type": "string",
-            "minLength": 0
-          },
-          "description": {
-            "example": "A brief description of my SLO",
-            "description": "Human-readable description of the SLO.",
-            "type": "string",
-            "minLength": 0
-          },
-          "grouping": {
-            "$ref": "#/components/schemas/v1.Grouping"
-          },
-          "id": {
-            "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-            "description": "Unique identifier of the SLO.",
-            "type": "string",
-            "minLength": 0
-          },
-          "labels": {
-            "description": "List of labels.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string",
-              "minLength": 0
-            }
-          },
-          "name": {
-            "example": "Example Slo Name",
-            "description": "Human-readable display name for the SLO.",
-            "type": "string",
-            "minLength": 0
-          },
-          "ownershipTags": {
-            "$ref": "#/components/schemas/SloOwnershipTags"
-          },
-          "productType": {
-            "$ref": "#/components/schemas/SloProductType"
-          },
-          "requestBasedMetricSli": {
-            "$ref": "#/components/schemas/RequestBasedMetricSli"
-          },
-          "revision": {
-            "$ref": "#/components/schemas/v1.Revision"
-          },
-          "sloTimeFrame": {
-            "$ref": "#/components/schemas/SloTimeFrame"
-          },
-          "sloType": {
-            "$ref": "#/components/schemas/SloType"
-          },
-          "targetThresholdPercentage": {
-            "example": 99.999,
-            "description": "Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).",
-            "type": "number",
-            "format": "float"
-          },
-          "type": {
-            "deprecated": true,
-            "example": "request",
-            "description": "Deprecated: SLO type string. Use slo_type instead.",
-            "type": "string",
-            "minLength": 0
-          },
-          "updateTime": {
-            "description": "Timestamp of the last update.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "requestBasedMetricSli"
-        ]
-      },
       "SloTimeFrame": {
         "description": "Slo time frame.",
         "type": "string",
@@ -2088,136 +2334,6 @@
           "SLO_TYPE_REQUEST",
           "SLO_TYPE_WINDOW"
         ]
-      },
-      "SloWindowBasedMetricSli": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Slo",
-        "description": "Definition of an SLO",
-        "type": "object",
-        "properties": {
-          "apmSliMetadata": {
-            "$ref": "#/components/schemas/ApmSli"
-          },
-          "createTime": {
-            "description": "RFC3339 timestamp of when the SLO was created.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          },
-          "creator": {
-            "example": "test@domain.com",
-            "description": "Email or identifier of the user who created the SLO.",
-            "type": "string",
-            "minLength": 0
-          },
-          "description": {
-            "example": "A brief description of my SLO",
-            "description": "Human-readable description of the SLO.",
-            "type": "string",
-            "minLength": 0
-          },
-          "grouping": {
-            "$ref": "#/components/schemas/v1.Grouping"
-          },
-          "id": {
-            "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
-            "description": "Unique identifier of the SLO.",
-            "type": "string",
-            "minLength": 0
-          },
-          "labels": {
-            "description": "List of labels.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string",
-              "minLength": 0
-            }
-          },
-          "name": {
-            "example": "Example Slo Name",
-            "description": "Human-readable display name for the SLO.",
-            "type": "string",
-            "minLength": 0
-          },
-          "ownershipTags": {
-            "$ref": "#/components/schemas/SloOwnershipTags"
-          },
-          "productType": {
-            "$ref": "#/components/schemas/SloProductType"
-          },
-          "revision": {
-            "$ref": "#/components/schemas/v1.Revision"
-          },
-          "sloTimeFrame": {
-            "$ref": "#/components/schemas/SloTimeFrame"
-          },
-          "sloType": {
-            "$ref": "#/components/schemas/SloType"
-          },
-          "targetThresholdPercentage": {
-            "example": 99.999,
-            "description": "Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).",
-            "type": "number",
-            "format": "float"
-          },
-          "type": {
-            "deprecated": true,
-            "example": "request",
-            "description": "Deprecated: SLO type string. Use slo_type instead.",
-            "type": "string",
-            "minLength": 0
-          },
-          "updateTime": {
-            "description": "Timestamp of the last update.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          },
-          "windowBasedMetricSli": {
-            "$ref": "#/components/schemas/WindowBasedMetricSli"
-          }
-        },
-        "required": [
-          "windowBasedMetricSli"
-        ]
-      },
-      "StringValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "String values.",
-        "type": "object",
-        "properties": {
-          "values": {
-            "description": "The values.",
-            "type": "array",
-            "items": {
-              "description": "The values.",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
-          }
-        }
-      },
-      "TypeValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Type values.",
-        "type": "object",
-        "properties": {
-          "values": {
-            "description": "The values.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SloType"
-            },
-            "minItems": 0
-          }
-        }
       },
       "WindowBasedMetricSli": {
         "externalDocs": {

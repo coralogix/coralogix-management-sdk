@@ -11,7 +11,7 @@
           "Cases service"
         ],
         "summary": "Acknowledge multiple cases",
-        "description": "Mark multiple cases as acknowledged in a single operation.\n\nRequires the following permissions:\n- `case:Acknowledge`",
+        "description": "Mark multiple cases as acknowledged in a single operation.",
         "externalDocs": {
           "url": ""
         },
@@ -107,7 +107,7 @@
           "Cases service"
         ],
         "summary": "Acknowledge a case",
-        "description": "Mark the case as acknowledged by a user.\n\nRequires the following permissions:\n- `case:Acknowledge`",
+        "description": "Mark the case as acknowledged by a user.",
         "externalDocs": {
           "url": ""
         },
@@ -180,7 +180,7 @@
           "Cases service"
         ],
         "summary": "Unacknowledge a case",
-        "description": "Remove the acknowledgment from a case.\n\nRequires the following permissions:\n- `case:Acknowledge`",
+        "description": "Remove the acknowledgment from a case.",
         "externalDocs": {
           "url": ""
         },
@@ -255,7 +255,7 @@
           "Cases service"
         ],
         "summary": "Assign multiple cases to a user",
-        "description": "Assign multiple cases to a specific user in a single operation.\n\nRequires the following permissions:\n- `case:Assign`",
+        "description": "Assign multiple cases to a specific user in a single operation.",
         "externalDocs": {
           "url": ""
         },
@@ -349,7 +349,7 @@
           "Cases service"
         ],
         "summary": "Remove assignment from multiple cases",
-        "description": "Remove the current assignee from multiple cases in a single operation.\n\nRequires the following permissions:\n- `case:Assign`",
+        "description": "Remove the current assignee from multiple cases in a single operation.",
         "externalDocs": {
           "url": ""
         },
@@ -432,7 +432,7 @@
           "Cases service"
         ],
         "summary": "Assign a case to a user",
-        "description": "Assign a case to a specific user.\n\nRequires the following permissions:\n- `case:Assign`",
+        "description": "Assign a case to a specific user.",
         "externalDocs": {
           "url": ""
         },
@@ -525,7 +525,7 @@
           "Cases service"
         ],
         "summary": "Remove case assignment",
-        "description": "Remove the current assignee from a case.\n\nRequires the following permissions:\n- `case:Assign`",
+        "description": "Remove the current assignee from a case.",
         "externalDocs": {
           "url": ""
         },
@@ -600,7 +600,7 @@
           "Cases service"
         ],
         "summary": "List cases with filters",
-        "description": "List cases using filters, pagination and custom ordering.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "List cases using filters, pagination and custom ordering.",
         "externalDocs": {
           "url": ""
         },
@@ -680,7 +680,7 @@
           "Cases service"
         ],
         "summary": "Get case deep links",
-        "description": "Retrieve deep-link URLs for a case.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "Retrieve deep-link URLs for a case.",
         "externalDocs": {
           "url": ""
         },
@@ -755,7 +755,7 @@
           "Cases service"
         ],
         "summary": "Get case by ID",
-        "description": "Retrieve detailed information about a single case by its unique identifier.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "Retrieve detailed information about a single case by its unique identifier.",
         "externalDocs": {
           "url": ""
         },
@@ -828,7 +828,7 @@
           "Cases service"
         ],
         "summary": "Update case fields",
-        "description": "Apply a partial update (patch) to a case.\n\nRequires the following permissions:\n- `case:Update`",
+        "description": "Apply a partial update (patch) to a case.",
         "externalDocs": {
           "url": ""
         },
@@ -932,7 +932,7 @@
           "Cases service"
         ],
         "summary": "Close multiple cases",
-        "description": "Close multiple cases in a single operation.\n\nRequires the following permissions:\n- `case:Close`",
+        "description": "Close multiple cases in a single operation.",
         "externalDocs": {
           "url": ""
         },
@@ -1024,7 +1024,7 @@
           "Cases service"
         ],
         "summary": "Close a case",
-        "description": "Close a case that no longer requires action.\n\nRequires the following permissions:\n- `case:Close`",
+        "description": "Close a case that no longer requires action.",
         "externalDocs": {
           "url": ""
         },
@@ -1099,7 +1099,7 @@
           "Cases service"
         ],
         "summary": "Get available filter values",
-        "description": "Retrieve available filter and aggregation values for cases.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "Retrieve available filter and aggregation values for cases.",
         "externalDocs": {
           "url": ""
         },
@@ -1173,7 +1173,7 @@
           "Cases service"
         ],
         "summary": "Get available grouping keys",
-        "description": "Retrieve all available grouping keys that can be used for organizing and filtering Cases.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "Retrieve all available grouping keys that can be used for organizing and filtering Cases.",
         "externalDocs": {
           "url": ""
         },
@@ -1231,7 +1231,7 @@
           "Cases service"
         ],
         "summary": "Get case by indicator",
-        "description": "Retrieve a case by its source indicator. Currently supports Prometheus AlertManager alerts identified by fingerprint and start time.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "Retrieve a case by its source indicator. Currently supports Prometheus AlertManager alerts identified by fingerprint and start time.",
         "externalDocs": {
           "url": ""
         },
@@ -1263,7 +1263,7 @@
                 "example": {
                   "case": {
                     "category": "CASE_CATEGORY_AVAILABILITY",
-                    "createTime": "2025-09-22T10:30:00.000Z",
+                    "createTime": "2025-09-22T10:30:00Z",
                     "groupings": [],
                     "id": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
                     "impactedEntities": [],
@@ -1328,7 +1328,7 @@
           "Cases service"
         ],
         "summary": "Override priority for multiple cases",
-        "description": "Override the priority with for multiple cases in a single operation.\n\nRequires the following permissions:\n- `case:Update`",
+        "description": "Override the priority with for multiple cases in a single operation.",
         "externalDocs": {
           "url": ""
         },
@@ -1422,7 +1422,7 @@
           "Cases service"
         ],
         "summary": "Remove priority override from multiple cases",
-        "description": "Remove previously set priority overrides from multiple cases in a single operation.\n\nRequires the following permissions:\n- `case:Update`",
+        "description": "Remove previously set priority overrides from multiple cases in a single operation.",
         "externalDocs": {
           "url": ""
         },
@@ -1505,7 +1505,7 @@
           "Cases service"
         ],
         "summary": "Set priority override",
-        "description": "Override a case's computed priority with a specific value.\n\nRequires the following permissions:\n- `case:Update`",
+        "description": "Override a case's computed priority with a specific value.",
         "externalDocs": {
           "url": ""
         },
@@ -1581,7 +1581,7 @@
           "Cases service"
         ],
         "summary": "Remove priority override",
-        "description": "Remove a previously set priority override for a case.\n\nRequires the following permissions:\n- `case:Update`",
+        "description": "Remove a previously set priority override for a case.",
         "externalDocs": {
           "url": ""
         },
@@ -1656,7 +1656,7 @@
           "Cases service"
         ],
         "summary": "Resolve multiple cases",
-        "description": "Resolve multiple cases in a single operation.\n\nRequires the following permissions:\n- `case:Close`",
+        "description": "Resolve multiple cases in a single operation.",
         "externalDocs": {
           "url": ""
         },
@@ -1756,7 +1756,7 @@
           "Cases service"
         ],
         "summary": "Resolve a case",
-        "description": "Mark a case as resolved.\n\nRequires the following permissions:\n- `case:Close`",
+        "description": "Mark a case as resolved.",
         "externalDocs": {
           "url": ""
         },
@@ -2042,7 +2042,7 @@
             "$ref": "#/components/schemas/IndicatorPriority"
           },
           "resolveTime": {
-            "example": "2025-09-22T11:05:00.000Z",
+            "example": "2025-09-22T11:05:00Z",
             "description": "When present, timestamp when the alert resolved.",
             "type": "string",
             "format": "date-time",
@@ -2056,7 +2056,7 @@
             "$ref": "#/components/schemas/AlertSuppression"
           },
           "triggerTime": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the alert triggered.",
             "type": "string",
             "format": "date-time",
@@ -2094,25 +2094,6 @@
         }
       },
       "AlertIndicatorDeepLink": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AlertIndicatorDeepLinkLogs"
-          },
-          {
-            "$ref": "#/components/schemas/AlertIndicatorDeepLinkMetric"
-          },
-          {
-            "$ref": "#/components/schemas/AlertIndicatorDeepLinkRum"
-          },
-          {
-            "$ref": "#/components/schemas/AlertIndicatorDeepLinkSlo"
-          },
-          {
-            "$ref": "#/components/schemas/AlertIndicatorDeepLinkTracing"
-          }
-        ]
-      },
-      "AlertIndicatorDeepLinkLogs": {
         "externalDocs": {
           "url": ""
         },
@@ -2127,107 +2108,95 @@
           },
           "logs": {
             "$ref": "#/components/schemas/LogsLink"
-          }
-        },
-        "required": [
-          "logs"
-        ]
-      },
-      "AlertIndicatorDeepLinkMetric": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Alert indicator deep link",
-        "description": "Deep links derived from a single alert indicator on a case.",
-        "type": "object",
-        "properties": {
-          "alertDef": {
-            "description": "URL to the alert definition that triggered the indicator. Empty when not available.",
-            "type": "string",
-            "minLength": 0
           },
           "metric": {
             "$ref": "#/components/schemas/MetricLink"
-          }
-        },
-        "required": [
-          "metric"
-        ]
-      },
-      "AlertIndicatorDeepLinkRum": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Alert indicator deep link",
-        "description": "Deep links derived from a single alert indicator on a case.",
-        "type": "object",
-        "properties": {
-          "alertDef": {
-            "description": "URL to the alert definition that triggered the indicator. Empty when not available.",
-            "type": "string",
-            "minLength": 0
           },
           "rum": {
             "$ref": "#/components/schemas/RumLink"
-          }
-        },
-        "required": [
-          "rum"
-        ]
-      },
-      "AlertIndicatorDeepLinkSlo": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Alert indicator deep link",
-        "description": "Deep links derived from a single alert indicator on a case.",
-        "type": "object",
-        "properties": {
-          "alertDef": {
-            "description": "URL to the alert definition that triggered the indicator. Empty when not available.",
-            "type": "string",
-            "minLength": 0
           },
           "slo": {
             "$ref": "#/components/schemas/SloLink"
-          }
-        },
-        "required": [
-          "slo"
-        ]
-      },
-      "AlertIndicatorDeepLinkTracing": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Alert indicator deep link",
-        "description": "Deep links derived from a single alert indicator on a case.",
-        "type": "object",
-        "properties": {
-          "alertDef": {
-            "description": "URL to the alert definition that triggered the indicator. Empty when not available.",
-            "type": "string",
-            "minLength": 0
           },
           "tracing": {
             "$ref": "#/components/schemas/TracingLink"
           }
         },
-        "required": [
-          "tracing"
-        ]
-      },
-      "AlertSuppression": {
-        "oneOf": [
+        "allOf": [
           {
-            "$ref": "#/components/schemas/AlertSuppressionActiveSuppressionRules"
-          },
-          {
-            "$ref": "#/components/schemas/AlertSuppressionAlertDefinitionMuted"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "logs"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "metric"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "rum"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "slo"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "tracing"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "logs"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "metric"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "rum"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "slo"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "tracing"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
-      "AlertSuppressionActiveSuppressionRules": {
+      "AlertSuppression": {
         "externalDocs": {
           "url": ""
         },
@@ -2238,32 +2207,11 @@
           "activeSuppressionRules": {
             "$ref": "#/components/schemas/ActiveSuppressionRules"
           },
-          "suppressedTime": {
-            "example": "2025-09-22T10:30:00.000Z",
-            "description": "Timestamp when the alert got suppressed.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 20,
-            "maxLength": 30
-          }
-        },
-        "required": [
-          "activeSuppressionRules"
-        ]
-      },
-      "AlertSuppressionAlertDefinitionMuted": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Alert suppression details",
-        "description": "Data describing the suppression status of an alert indicator, including active suppression rules and muted state.",
-        "type": "object",
-        "properties": {
           "alertDefinitionMuted": {
             "$ref": "#/components/schemas/AlertDefinitionMuted"
           },
           "suppressedTime": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the alert got suppressed.",
             "type": "string",
             "format": "date-time",
@@ -2271,8 +2219,42 @@
             "maxLength": 30
           }
         },
-        "required": [
-          "alertDefinitionMuted"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "activeSuppressionRules"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "alertDefinitionMuted"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "activeSuppressionRules"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "alertDefinitionMuted"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "ApmDatabaseEntity": {
@@ -2397,16 +2379,6 @@
         }
       },
       "AssigneeOption": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AssigneeOptionAssignee"
-          },
-          {
-            "$ref": "#/components/schemas/AssigneeOptionUnassigned"
-          }
-        ]
-      },
-      "AssigneeOptionAssignee": {
         "externalDocs": {
           "url": ""
         },
@@ -2421,26 +2393,47 @@
             "pattern": "^[\\s\\S]*$",
             "minLength": 1,
             "maxLength": 256
-          }
-        },
-        "required": [
-          "assignee"
-        ]
-      },
-      "AssigneeOptionUnassigned": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Assignee option",
-        "description": "Assignee filter option representing either a specific assignee or unassigned cases.",
-        "type": "object",
-        "properties": {
+          },
           "unassigned": {
             "$ref": "#/components/schemas/Unassigned"
           }
         },
-        "required": [
-          "unassigned"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "assignee"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "unassigned"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "assignee"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "unassigned"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "BreachStatus": {
@@ -2465,7 +2458,7 @@
             "$ref": "#/components/schemas/BreachStatus"
           },
           "breachedAt": {
-            "example": "2025-09-22T11:00:00.000Z",
+            "example": "2025-09-22T11:00:00Z",
             "description": "When the KPI breach occurred",
             "type": "string",
             "format": "date-time",
@@ -2476,7 +2469,7 @@
             "$ref": "#/components/schemas/KPIPriority"
           },
           "createdAt": {
-            "example": "2025-09-22T11:00:00.000Z",
+            "example": "2025-09-22T11:00:00Z",
             "description": "When the breached KPI record was created",
             "type": "string",
             "format": "date-time",
@@ -2690,7 +2683,7 @@
             "$ref": "#/components/schemas/CaseCategory"
           },
           "createTime": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "When the case was created",
             "type": "string",
             "format": "date-time",
@@ -3064,30 +3057,145 @@
         ]
       },
       "CaseResolver": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/CaseResolverApiKeyVariant"
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Case resolver",
+        "description": "Entity responsible for resolving the case.",
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "$ref": "#/components/schemas/CaseResolver.ApiKey"
           },
-          {
-            "$ref": "#/components/schemas/CaseResolverCxUser"
+          "cxUser": {
+            "$ref": "#/components/schemas/CoralogixUser"
           },
-          {
-            "$ref": "#/components/schemas/CaseResolverMicrosoftTeams"
+          "microsoftTeams": {
+            "$ref": "#/components/schemas/MicrosoftTeams"
           },
-          {
-            "$ref": "#/components/schemas/CaseResolverPagerDuty"
+          "pagerDuty": {
+            "$ref": "#/components/schemas/PagerDuty"
           },
-          {
-            "$ref": "#/components/schemas/CaseResolverPrometheusAlertManager"
+          "prometheusAlertManager": {
+            "$ref": "#/components/schemas/PrometheusAlertManager"
           },
-          {
-            "$ref": "#/components/schemas/CaseResolverServiceNow"
+          "serviceNow": {
+            "$ref": "#/components/schemas/ServiceNow"
           },
-          {
-            "$ref": "#/components/schemas/CaseResolverSlack"
+          "slack": {
+            "$ref": "#/components/schemas/Slack"
           },
+          "system": {
+            "$ref": "#/components/schemas/System"
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/CaseResolverSystem"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "system"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "cxUser"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "serviceNow"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "apiKey"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "slack"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "prometheusAlertManager"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "pagerDuty"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "microsoftTeams"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "system"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "cxUser"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "serviceNow"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "apiKey"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "slack"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "prometheusAlertManager"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "pagerDuty"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "microsoftTeams"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
@@ -3099,134 +3207,6 @@
         "description": "Marker indicating that the case was resolved using an API key.",
         "type": "object",
         "additionalProperties": false
-      },
-      "CaseResolverApiKeyVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case resolver",
-        "description": "Entity responsible for resolving the case.",
-        "type": "object",
-        "properties": {
-          "apiKey": {
-            "$ref": "#/components/schemas/CaseResolver.ApiKey"
-          }
-        },
-        "required": [
-          "apiKey"
-        ]
-      },
-      "CaseResolverCxUser": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case resolver",
-        "description": "Entity responsible for resolving the case.",
-        "type": "object",
-        "properties": {
-          "cxUser": {
-            "$ref": "#/components/schemas/CoralogixUser"
-          }
-        },
-        "required": [
-          "cxUser"
-        ]
-      },
-      "CaseResolverMicrosoftTeams": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case resolver",
-        "description": "Entity responsible for resolving the case.",
-        "type": "object",
-        "properties": {
-          "microsoftTeams": {
-            "$ref": "#/components/schemas/MicrosoftTeams"
-          }
-        },
-        "required": [
-          "microsoftTeams"
-        ]
-      },
-      "CaseResolverPagerDuty": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case resolver",
-        "description": "Entity responsible for resolving the case.",
-        "type": "object",
-        "properties": {
-          "pagerDuty": {
-            "$ref": "#/components/schemas/PagerDuty"
-          }
-        },
-        "required": [
-          "pagerDuty"
-        ]
-      },
-      "CaseResolverPrometheusAlertManager": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case resolver",
-        "description": "Entity responsible for resolving the case.",
-        "type": "object",
-        "properties": {
-          "prometheusAlertManager": {
-            "$ref": "#/components/schemas/PrometheusAlertManager"
-          }
-        },
-        "required": [
-          "prometheusAlertManager"
-        ]
-      },
-      "CaseResolverServiceNow": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case resolver",
-        "description": "Entity responsible for resolving the case.",
-        "type": "object",
-        "properties": {
-          "serviceNow": {
-            "$ref": "#/components/schemas/ServiceNow"
-          }
-        },
-        "required": [
-          "serviceNow"
-        ]
-      },
-      "CaseResolverSlack": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case resolver",
-        "description": "Entity responsible for resolving the case.",
-        "type": "object",
-        "properties": {
-          "slack": {
-            "$ref": "#/components/schemas/Slack"
-          }
-        },
-        "required": [
-          "slack"
-        ]
-      },
-      "CaseResolverSystem": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case resolver",
-        "description": "Entity responsible for resolving the case.",
-        "type": "object",
-        "properties": {
-          "system": {
-            "$ref": "#/components/schemas/System"
-          }
-        },
-        "required": [
-          "system"
-        ]
       },
       "CaseStatus": {
         "description": "Case status.",
@@ -3294,16 +3274,6 @@
         ]
       },
       "ConnectorTypeFilter": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ConnectorTypeFilterConnectorType"
-          },
-          {
-            "$ref": "#/components/schemas/ConnectorTypeFilterNoConnector"
-          }
-        ]
-      },
-      "ConnectorTypeFilterConnectorType": {
         "externalDocs": {
           "url": ""
         },
@@ -3313,26 +3283,47 @@
         "properties": {
           "connectorType": {
             "$ref": "#/components/schemas/v1.ConnectorType"
-          }
-        },
-        "required": [
-          "connectorType"
-        ]
-      },
-      "ConnectorTypeFilterNoConnector": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Connector type filters",
-        "description": "Filters applied to cases based on connector types.",
-        "type": "object",
-        "properties": {
+          },
           "noConnector": {
             "$ref": "#/components/schemas/NoConnector"
           }
         },
-        "required": [
-          "noConnector"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "connectorType"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "noConnector"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "connectorType"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "noConnector"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "CoralogixUser": {
@@ -3353,7 +3344,7 @@
         "type": "object",
         "properties": {
           "from": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp marking the start of the date range",
             "type": "string",
             "format": "date-time",
@@ -3364,7 +3355,7 @@
             "$ref": "#/components/schemas/DateRangeMode"
           },
           "to": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp marking the end of the date range",
             "type": "string",
             "format": "date-time",
@@ -3517,16 +3508,6 @@
         ]
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -3537,26 +3518,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -3567,9 +3528,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {
@@ -3641,7 +3618,7 @@
             "maxItems": 1000
           },
           "lastResolvedAt": {
-            "example": "2025-09-22T11:05:00.000Z",
+            "example": "2025-09-22T11:05:00Z",
             "description": "When present, timestamp when the indicator last resolved.",
             "type": "string",
             "format": "date-time",
@@ -3649,7 +3626,7 @@
             "maxLength": 30
           },
           "lastTriggeredAt": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the indicator last triggered.",
             "type": "string",
             "format": "date-time",
@@ -3773,16 +3750,6 @@
         ]
       },
       "ImpactedEntity": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ImpactedEntityApmDatabase"
-          },
-          {
-            "$ref": "#/components/schemas/ImpactedEntityApmService"
-          }
-        ]
-      },
-      "ImpactedEntityApmDatabase": {
         "externalDocs": {
           "url": ""
         },
@@ -3792,26 +3759,47 @@
         "properties": {
           "apmDatabase": {
             "$ref": "#/components/schemas/ApmDatabaseEntity"
-          }
-        },
-        "required": [
-          "apmDatabase"
-        ]
-      },
-      "ImpactedEntityApmService": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Impacted entity",
-        "description": "Entity affected by a case (e.g., an APM service or database).",
-        "type": "object",
-        "properties": {
+          },
           "apmService": {
             "$ref": "#/components/schemas/ApmServiceEntity"
           }
         },
-        "required": [
-          "apmService"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "apmService"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "apmDatabase"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "apmService"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "apmDatabase"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "ImpactedEntityLink": {
@@ -4016,7 +4004,7 @@
         "type": "object",
         "properties": {
           "completedAt": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "When the analysis attempt completed.",
             "type": "string",
             "format": "date-time",
@@ -4040,7 +4028,7 @@
         "type": "object",
         "properties": {
           "generatedAt": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the analysis was generated.",
             "type": "string",
             "format": "date-time",
@@ -4184,7 +4172,7 @@
             }
           },
           "createdAt": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the alert was first observed.",
             "type": "string",
             "format": "date-time",
@@ -4225,7 +4213,7 @@
             "$ref": "#/components/schemas/PrometheusAlertStatus"
           },
           "updatedAt": {
-            "example": "2025-09-22T11:05:00.000Z",
+            "example": "2025-09-22T11:05:00Z",
             "description": "Timestamp when the alert was last updated.",
             "type": "string",
             "format": "date-time",
@@ -4291,7 +4279,7 @@
             "$ref": "#/components/schemas/IndicatorPriority"
           },
           "receivedAt": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the alert group was first received.",
             "type": "string",
             "format": "date-time",
@@ -4310,7 +4298,7 @@
             "$ref": "#/components/schemas/PrometheusAlertStatus"
           },
           "updatedAt": {
-            "example": "2025-09-22T11:05:00.000Z",
+            "example": "2025-09-22T11:05:00Z",
             "description": "Timestamp when the alert group was last updated.",
             "type": "string",
             "format": "date-time",
@@ -4356,7 +4344,7 @@
             "maxLength": 256
           },
           "startedAt": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "ISO-8601 timestamp of when the alert episode began (the `startsAt` field from Prometheus AlertManager).",
             "type": "string",
             "format": "date-time",
@@ -4391,16 +4379,6 @@
         ]
       },
       "PrometheusAlertStatus": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/PrometheusAlertStatusResolved"
-          },
-          {
-            "$ref": "#/components/schemas/PrometheusAlertStatusTriggered"
-          }
-        ]
-      },
-      "PrometheusAlertStatusResolved": {
         "externalDocs": {
           "url": ""
         },
@@ -4410,26 +4388,47 @@
         "properties": {
           "resolved": {
             "$ref": "#/components/schemas/Resolved"
-          }
-        },
-        "required": [
-          "resolved"
-        ]
-      },
-      "PrometheusAlertStatusTriggered": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Prometheus alert status",
-        "description": "Lifecycle status of a Prometheus alert or alert group.",
-        "type": "object",
-        "properties": {
+          },
           "triggered": {
             "$ref": "#/components/schemas/Triggered"
           }
         },
-        "required": [
-          "triggered"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "triggered"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "resolved"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "triggered"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "resolved"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "ResolutionDetails": {
@@ -4449,7 +4448,7 @@
             "maxLength": 4096
           },
           "resolveTime": {
-            "example": "2025-09-22T11:15:00.000Z",
+            "example": "2025-09-22T11:15:00Z",
             "description": "Timestamp when the case was resolved",
             "type": "string",
             "format": "date-time",
@@ -4486,7 +4485,7 @@
         "type": "object",
         "properties": {
           "resolvedAt": {
-            "example": "2025-09-22T11:05:00.000Z",
+            "example": "2025-09-22T11:05:00Z",
             "description": "Timestamp when the alert was resolved.",
             "type": "string",
             "format": "date-time",
@@ -4494,7 +4493,7 @@
             "maxLength": 30
           },
           "triggeredAt": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the alert was originally triggered.",
             "type": "string",
             "format": "date-time",
@@ -4624,7 +4623,7 @@
         "type": "object",
         "properties": {
           "triggeredAt": {
-            "example": "2025-09-22T10:30:00.000Z",
+            "example": "2025-09-22T10:30:00Z",
             "description": "Timestamp when the alert was triggered.",
             "type": "string",
             "format": "date-time",

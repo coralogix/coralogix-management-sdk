@@ -323,16 +323,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -343,26 +333,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -373,9 +343,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {
@@ -461,16 +447,6 @@
         }
       },
       "IDPParameters": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/IDPParametersMetadataContent"
-          },
-          {
-            "$ref": "#/components/schemas/IDPParametersMetadataUrl"
-          }
-        ]
-      },
-      "IDPParametersMetadataContent": {
         "externalDocs": {
           "description": "Find out more about enrichments",
           "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -501,43 +477,6 @@
             "type": "string",
             "minLength": 0
           },
-          "teamEntityId": {
-            "example": 1234567,
-            "description": "Coralogix team entity identifier used as the SAML service provider entity ID.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          }
-        },
-        "required": [
-          "metadataContent"
-        ]
-      },
-      "IDPParametersMetadataUrl": {
-        "externalDocs": {
-          "description": "Find out more about enrichments",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
-        "title": "IDP Parameters",
-        "description": "This data structure represents a set of SAML identity provider parameters",
-        "type": "object",
-        "properties": {
-          "active": {
-            "example": true,
-            "description": "Whether SAML SSO is currently active for this team.",
-            "type": "boolean"
-          },
-          "groupNames": {
-            "description": "List of group names mapped from the identity provider for role-based access.",
-            "type": "array",
-            "items": {
-              "example": "group1",
-              "description": "List of group names mapped from the identity provider for role-based access.",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
-          },
           "metadataUrl": {
             "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
             "description": "URL to the identity provider SAML metadata XML document.",
@@ -552,8 +491,42 @@
             "minimum": 0
           }
         },
-        "required": [
-          "metadataUrl"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "metadataUrl"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "metadataContent"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "metadataUrl"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "metadataContent"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "MultipleValues": {

@@ -14,125 +14,601 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// E2M - struct for E2M
+// checks if the E2M type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &E2M{}
+
+// E2M This data structure represents an Event to Metrics (E2M) object.
 type E2M struct {
-	E2MLogsQuery *E2MLogsQuery
-	E2MSpansQuery *E2MSpansQuery
+	// RFC3339 timestamp of when this E2M was created.
+	CreateTime *string `json:"createTime,omitempty"`
+	// Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.
+	DataSource *string `json:"dataSource,omitempty"`
+	// Human-readable description of this E2M.
+	Description *string `json:"description,omitempty"`
+	// Unique identifier for this E2M. Required on update requests.
+	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
+	// Indicates whether this E2M is for internal use only.
+	IsInternal *bool `json:"isInternal,omitempty"`
+	LogsQuery *V2LogsQuery `json:"logsQuery,omitempty"`
+	// Metric fields to extract and aggregate from the events.
+	MetricFields []V2MetricField `json:"metricFields,omitempty"`
+	// Metric labels to attach to the generated metrics.
+	MetricLabels []MetricLabel `json:"metricLabels,omitempty"`
+	// Human-readable name for this E2M.
+	Name string `json:"name"`
+	Permutations *E2MPermutations `json:"permutations,omitempty"`
+	SpansQuery *V2SpansQuery `json:"spansQuery,omitempty"`
+	Type E2MType `json:"type"`
+	// RFC3339 timestamp of when this E2M was last updated.
+	UpdateTime *string `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// E2MLogsQueryAsE2M is a convenience function that returns E2MLogsQuery wrapped in E2M
-func E2MLogsQueryAsE2M(v *E2MLogsQuery) E2M {
-	return E2M{
-		E2MLogsQuery: v,
+type _E2M E2M
+
+// NewE2M instantiates a new E2M object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewE2M(name string, type_ E2MType) *E2M {
+	this := E2M{}
+	this.Name = name
+	this.Type = type_
+	return &this
+}
+
+// NewE2MWithDefaults instantiates a new E2M object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewE2MWithDefaults() *E2M {
+	this := E2M{}
+	return &this
+}
+
+// GetCreateTime returns the CreateTime field value if set, zero value otherwise.
+func (o *E2M) GetCreateTime() string {
+	if o == nil || IsNil(o.CreateTime) {
+		var ret string
+		return ret
 	}
+	return *o.CreateTime
 }
 
-// E2MSpansQueryAsE2M is a convenience function that returns E2MSpansQuery wrapped in E2M
-func E2MSpansQueryAsE2M(v *E2MSpansQuery) E2M {
-	return E2M{
-		E2MSpansQuery: v,
+// GetCreateTimeOk returns a tuple with the CreateTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetCreateTimeOk() (*string, bool) {
+	if o == nil || IsNil(o.CreateTime) {
+		return nil, false
 	}
+	return o.CreateTime, true
 }
 
+// HasCreateTime returns a boolean if a field has been set.
+func (o *E2M) HasCreateTime() bool {
+	if o != nil && !IsNil(o.CreateTime) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *E2M) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into E2MLogsQuery
-	err = json.Unmarshal(data, &dst.E2MLogsQuery)
-	if err == nil {
-		jsonE2MLogsQuery, _ := json.Marshal(dst.E2MLogsQuery)
-		if string(jsonE2MLogsQuery) == "{}" { // empty struct
-			dst.E2MLogsQuery = nil
-		} else {
-			if err = validator.Validate(dst.E2MLogsQuery); err != nil {
-				dst.E2MLogsQuery = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetCreateTime gets a reference to the given string and assigns it to the CreateTime field.
+func (o *E2M) SetCreateTime(v string) {
+	o.CreateTime = &v
+}
+
+// GetDataSource returns the DataSource field value if set, zero value otherwise.
+func (o *E2M) GetDataSource() string {
+	if o == nil || IsNil(o.DataSource) {
+		var ret string
+		return ret
+	}
+	return *o.DataSource
+}
+
+// GetDataSourceOk returns a tuple with the DataSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetDataSourceOk() (*string, bool) {
+	if o == nil || IsNil(o.DataSource) {
+		return nil, false
+	}
+	return o.DataSource, true
+}
+
+// HasDataSource returns a boolean if a field has been set.
+func (o *E2M) HasDataSource() bool {
+	if o != nil && !IsNil(o.DataSource) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataSource gets a reference to the given string and assigns it to the DataSource field.
+func (o *E2M) SetDataSource(v string) {
+	o.DataSource = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *E2M) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *E2M) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *E2M) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *E2M) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *E2M) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *E2M) SetId(v string) {
+	o.Id = &v
+}
+
+// GetIsInternal returns the IsInternal field value if set, zero value otherwise.
+func (o *E2M) GetIsInternal() bool {
+	if o == nil || IsNil(o.IsInternal) {
+		var ret bool
+		return ret
+	}
+	return *o.IsInternal
+}
+
+// GetIsInternalOk returns a tuple with the IsInternal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetIsInternalOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsInternal) {
+		return nil, false
+	}
+	return o.IsInternal, true
+}
+
+// HasIsInternal returns a boolean if a field has been set.
+func (o *E2M) HasIsInternal() bool {
+	if o != nil && !IsNil(o.IsInternal) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsInternal gets a reference to the given bool and assigns it to the IsInternal field.
+func (o *E2M) SetIsInternal(v bool) {
+	o.IsInternal = &v
+}
+
+// GetLogsQuery returns the LogsQuery field value if set, zero value otherwise.
+func (o *E2M) GetLogsQuery() V2LogsQuery {
+	if o == nil || IsNil(o.LogsQuery) {
+		var ret V2LogsQuery
+		return ret
+	}
+	return *o.LogsQuery
+}
+
+// GetLogsQueryOk returns a tuple with the LogsQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetLogsQueryOk() (*V2LogsQuery, bool) {
+	if o == nil || IsNil(o.LogsQuery) {
+		return nil, false
+	}
+	return o.LogsQuery, true
+}
+
+// HasLogsQuery returns a boolean if a field has been set.
+func (o *E2M) HasLogsQuery() bool {
+	if o != nil && !IsNil(o.LogsQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsQuery gets a reference to the given V2LogsQuery and assigns it to the LogsQuery field.
+func (o *E2M) SetLogsQuery(v V2LogsQuery) {
+	o.LogsQuery = &v
+}
+
+// GetMetricFields returns the MetricFields field value if set, zero value otherwise.
+func (o *E2M) GetMetricFields() []V2MetricField {
+	if o == nil || IsNil(o.MetricFields) {
+		var ret []V2MetricField
+		return ret
+	}
+	return o.MetricFields
+}
+
+// GetMetricFieldsOk returns a tuple with the MetricFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetMetricFieldsOk() ([]V2MetricField, bool) {
+	if o == nil || IsNil(o.MetricFields) {
+		return nil, false
+	}
+	return o.MetricFields, true
+}
+
+// HasMetricFields returns a boolean if a field has been set.
+func (o *E2M) HasMetricFields() bool {
+	if o != nil && !IsNil(o.MetricFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricFields gets a reference to the given []V2MetricField and assigns it to the MetricFields field.
+func (o *E2M) SetMetricFields(v []V2MetricField) {
+	o.MetricFields = v
+}
+
+// GetMetricLabels returns the MetricLabels field value if set, zero value otherwise.
+func (o *E2M) GetMetricLabels() []MetricLabel {
+	if o == nil || IsNil(o.MetricLabels) {
+		var ret []MetricLabel
+		return ret
+	}
+	return o.MetricLabels
+}
+
+// GetMetricLabelsOk returns a tuple with the MetricLabels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetMetricLabelsOk() ([]MetricLabel, bool) {
+	if o == nil || IsNil(o.MetricLabels) {
+		return nil, false
+	}
+	return o.MetricLabels, true
+}
+
+// HasMetricLabels returns a boolean if a field has been set.
+func (o *E2M) HasMetricLabels() bool {
+	if o != nil && !IsNil(o.MetricLabels) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricLabels gets a reference to the given []MetricLabel and assigns it to the MetricLabels field.
+func (o *E2M) SetMetricLabels(v []MetricLabel) {
+	o.MetricLabels = v
+}
+
+// GetName returns the Name field value
+func (o *E2M) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *E2M) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *E2M) SetName(v string) {
+	o.Name = v
+}
+
+// GetPermutations returns the Permutations field value if set, zero value otherwise.
+func (o *E2M) GetPermutations() E2MPermutations {
+	if o == nil || IsNil(o.Permutations) {
+		var ret E2MPermutations
+		return ret
+	}
+	return *o.Permutations
+}
+
+// GetPermutationsOk returns a tuple with the Permutations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetPermutationsOk() (*E2MPermutations, bool) {
+	if o == nil || IsNil(o.Permutations) {
+		return nil, false
+	}
+	return o.Permutations, true
+}
+
+// HasPermutations returns a boolean if a field has been set.
+func (o *E2M) HasPermutations() bool {
+	if o != nil && !IsNil(o.Permutations) {
+		return true
+	}
+
+	return false
+}
+
+// SetPermutations gets a reference to the given E2MPermutations and assigns it to the Permutations field.
+func (o *E2M) SetPermutations(v E2MPermutations) {
+	o.Permutations = &v
+}
+
+// GetSpansQuery returns the SpansQuery field value if set, zero value otherwise.
+func (o *E2M) GetSpansQuery() V2SpansQuery {
+	if o == nil || IsNil(o.SpansQuery) {
+		var ret V2SpansQuery
+		return ret
+	}
+	return *o.SpansQuery
+}
+
+// GetSpansQueryOk returns a tuple with the SpansQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetSpansQueryOk() (*V2SpansQuery, bool) {
+	if o == nil || IsNil(o.SpansQuery) {
+		return nil, false
+	}
+	return o.SpansQuery, true
+}
+
+// HasSpansQuery returns a boolean if a field has been set.
+func (o *E2M) HasSpansQuery() bool {
+	if o != nil && !IsNil(o.SpansQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpansQuery gets a reference to the given V2SpansQuery and assigns it to the SpansQuery field.
+func (o *E2M) SetSpansQuery(v V2SpansQuery) {
+	o.SpansQuery = &v
+}
+
+// GetType returns the Type field value
+func (o *E2M) GetType() E2MType {
+	if o == nil {
+		var ret E2MType
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *E2M) GetTypeOk() (*E2MType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *E2M) SetType(v E2MType) {
+	o.Type = v
+}
+
+// GetUpdateTime returns the UpdateTime field value if set, zero value otherwise.
+func (o *E2M) GetUpdateTime() string {
+	if o == nil || IsNil(o.UpdateTime) {
+		var ret string
+		return ret
+	}
+	return *o.UpdateTime
+}
+
+// GetUpdateTimeOk returns a tuple with the UpdateTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2M) GetUpdateTimeOk() (*string, bool) {
+	if o == nil || IsNil(o.UpdateTime) {
+		return nil, false
+	}
+	return o.UpdateTime, true
+}
+
+// HasUpdateTime returns a boolean if a field has been set.
+func (o *E2M) HasUpdateTime() bool {
+	if o != nil && !IsNil(o.UpdateTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdateTime gets a reference to the given string and assigns it to the UpdateTime field.
+func (o *E2M) SetUpdateTime(v string) {
+	o.UpdateTime = &v
+}
+
+func (o E2M) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o E2M) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CreateTime) {
+		toSerialize["createTime"] = o.CreateTime
+	}
+	if !IsNil(o.DataSource) {
+		toSerialize["dataSource"] = o.DataSource
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.IsInternal) {
+		toSerialize["isInternal"] = o.IsInternal
+	}
+	if !IsNil(o.LogsQuery) {
+		toSerialize["logsQuery"] = o.LogsQuery
+	}
+	if !IsNil(o.MetricFields) {
+		toSerialize["metricFields"] = o.MetricFields
+	}
+	if !IsNil(o.MetricLabels) {
+		toSerialize["metricLabels"] = o.MetricLabels
+	}
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Permutations) {
+		toSerialize["permutations"] = o.Permutations
+	}
+	if !IsNil(o.SpansQuery) {
+		toSerialize["spansQuery"] = o.SpansQuery
+	}
+	toSerialize["type"] = o.Type
+	if !IsNil(o.UpdateTime) {
+		toSerialize["updateTime"] = o.UpdateTime
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["spansQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["logsQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [spansQuery, logsQuery] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *E2M) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.E2MLogsQuery = nil
 	}
 
-	// try to unmarshal data into E2MSpansQuery
-	err = json.Unmarshal(data, &dst.E2MSpansQuery)
-	if err == nil {
-		jsonE2MSpansQuery, _ := json.Marshal(dst.E2MSpansQuery)
-		if string(jsonE2MSpansQuery) == "{}" { // empty struct
-			dst.E2MSpansQuery = nil
-		} else {
-			if err = validator.Validate(dst.E2MSpansQuery); err != nil {
-				dst.E2MSpansQuery = nil
-			} else {
-				match++
-			}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["spansQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["logsQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [spansQuery, logsQuery] may be set"}
+	}
+
+	varE2M := _E2M{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varE2M)
+
+	if err != nil {
+		return err
+	}
+
+	*o = E2M(varE2M)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["spansQuery"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.E2MSpansQuery = nil
+		if _, exists := additionalProperties["logsQuery"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [spansQuery, logsQuery] may be set"}
+		}
+
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "dataSource")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "isInternal")
+		delete(additionalProperties, "logsQuery")
+		delete(additionalProperties, "metricFields")
+		delete(additionalProperties, "metricLabels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "permutations")
+		delete(additionalProperties, "spansQuery")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.E2MLogsQuery = nil
-		dst.E2MSpansQuery = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(E2M)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src E2M) MarshalJSON() ([]byte, error) {
-	if src.E2MLogsQuery != nil {
-		return json.Marshal(&src.E2MLogsQuery)
-	}
-
-	if src.E2MSpansQuery != nil {
-		return json.Marshal(&src.E2MSpansQuery)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *E2M) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.E2MLogsQuery != nil {
-		return obj.E2MLogsQuery
-	}
-
-	if obj.E2MSpansQuery != nil {
-		return obj.E2MSpansQuery
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj E2M) GetActualInstanceValue() (interface{}) {
-	if obj.E2MLogsQuery != nil {
-		return *obj.E2MLogsQuery
-	}
-
-	if obj.E2MSpansQuery != nil {
-		return *obj.E2MSpansQuery
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableE2M struct {

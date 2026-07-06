@@ -11,7 +11,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Get quota allocation rule set",
-        "description": "Returns the current quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Read`",
+        "description": "Returns the current quota allocation rules.",
         "externalDocs": {
           "url": ""
         },
@@ -90,7 +90,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Replace quota allocation rule set",
-        "description": "Updates the quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
+        "description": "Updates the quota allocation rules.",
         "externalDocs": {
           "url": ""
         },
@@ -176,7 +176,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Create quota allocation rule set",
-        "description": "Creates new quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
+        "description": "Creates new quota allocation rules.",
         "externalDocs": {
           "url": ""
         },
@@ -262,7 +262,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Delete quota allocation rule set",
-        "description": "Deletes the quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
+        "description": "Deletes the quota allocation rules.",
         "externalDocs": {
           "url": ""
         },
@@ -376,16 +376,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -396,26 +386,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -426,9 +396,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {

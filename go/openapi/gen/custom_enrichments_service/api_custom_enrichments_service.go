@@ -448,11 +448,11 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnr
 type ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest struct {
 	ctx context.Context
 	ApiService *CustomEnrichmentsServiceAPIService
-	searchClauses *[]CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner
+	searchClauses *[]SearchClause
 }
 
 // Search clauses used to filter custom enrichment data.
-func (r ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest) SearchClauses(searchClauses []CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner) ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest {
+func (r ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest) SearchClauses(searchClauses []SearchClause) ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest {
 	r.searchClauses = &searchClauses
 	return r
 }

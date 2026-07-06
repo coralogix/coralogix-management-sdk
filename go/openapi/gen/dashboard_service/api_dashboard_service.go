@@ -37,9 +37,6 @@ DashboardCatalogServiceGetDashboardCatalog Get dashboard catalog
 
 Get a list of all dashboards accessible.
 
-Requires the following permissions:
-- `team-dashboards:Read`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardCatalogServiceGetDashboardCatalogRequest
 */
@@ -178,9 +175,6 @@ DashboardsServiceAssignDashboardFolder Assign a dashboard to a folder
 
 Assigns the dashboard to a folder.
 
-Requires the following permissions:
-- `team-dashboards:Update`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId The dashboard id.
  @return ApiDashboardsServiceAssignDashboardFolderRequest
@@ -312,11 +306,11 @@ func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolderExecu
 type ApiDashboardsServiceCheckDashboardRequest struct {
 	ctx context.Context
 	ApiService *DashboardServiceAPIService
-	dashboardsServiceCheckDashboardRequest *DashboardsServiceCheckDashboardRequest
+	checkDashboardRequestDataStructure *CheckDashboardRequestDataStructure
 }
 
-func (r ApiDashboardsServiceCheckDashboardRequest) DashboardsServiceCheckDashboardRequest(dashboardsServiceCheckDashboardRequest DashboardsServiceCheckDashboardRequest) ApiDashboardsServiceCheckDashboardRequest {
-	r.dashboardsServiceCheckDashboardRequest = &dashboardsServiceCheckDashboardRequest
+func (r ApiDashboardsServiceCheckDashboardRequest) CheckDashboardRequestDataStructure(checkDashboardRequestDataStructure CheckDashboardRequestDataStructure) ApiDashboardsServiceCheckDashboardRequest {
+	r.checkDashboardRequestDataStructure = &checkDashboardRequestDataStructure
 	return r
 }
 
@@ -328,9 +322,6 @@ func (r ApiDashboardsServiceCheckDashboardRequest) Execute() (*CheckDashboardRes
 DashboardsServiceCheckDashboard Validate a dashboard and return issues
 
 Checks a dashboard definition or an existing dashboard by id and returns validation issues without persisting changes.
-
-Requires the following permissions:
-- `team-dashboards:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardsServiceCheckDashboardRequest
@@ -362,8 +353,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceCheckDashboardExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.dashboardsServiceCheckDashboardRequest == nil {
-		return localVarReturnValue, nil, reportError("dashboardsServiceCheckDashboardRequest is required and must be specified")
+	if r.checkDashboardRequestDataStructure == nil {
+		return localVarReturnValue, nil, reportError("checkDashboardRequestDataStructure is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -384,7 +375,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceCheckDashboardExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.dashboardsServiceCheckDashboardRequest
+	localVarPostBody = r.checkDashboardRequestDataStructure
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -473,9 +464,6 @@ func (r ApiDashboardsServiceCreateDashboardRequest) Execute() (*CreateDashboardR
 DashboardsServiceCreateDashboard Create a new dashboard
 
 Creates a new dashboard.
-
-Requires the following permissions:
-- `team-dashboards:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardsServiceCreateDashboardRequest
@@ -621,9 +609,6 @@ DashboardsServiceDeleteDashboard Delete a dashboard
 
 Deletes the dashboard with the specified ID.
 
-Requires the following permissions:
-- `team-dashboards:Update`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId The dashboard id.
  @return ApiDashboardsServiceDeleteDashboardRequest
@@ -765,9 +750,6 @@ DashboardsServiceGetDashboard Get a dashboard
 
 Returns the details of the specified dashboard.
 
-Requires the following permissions:
-- `team-dashboards:Read`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId The dashboard id.
  @return ApiDashboardsServiceGetDashboardRequest
@@ -905,9 +887,6 @@ func (r ApiDashboardsServiceGetDashboardBySlugRequest) Execute() (*GetDashboardB
 DashboardsServiceGetDashboardBySlug Get a dashboard by URL slug
 
 Returns the dashboard associated with the specified slug.
-
-Requires the following permissions:
-- `team-dashboards:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param slug The URL slug identifying the dashboard to retrieve.
@@ -1053,9 +1032,6 @@ func (r ApiDashboardsServicePinDashboardRequest) Execute() (map[string]interface
 DashboardsServicePinDashboard Add dashboard to favorites
 
 Pins the specified dashboard.
-
-Requires the following permissions:
-- `team-dashboards:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId The dashboard id.
@@ -1203,9 +1179,6 @@ DashboardsServiceReplaceDashboard Replace a dashboard
 
 Replaces an existing dashboard.
 
-Requires the following permissions:
-- `team-dashboards:Update`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardsServiceReplaceDashboardRequest
 */
@@ -1348,9 +1321,6 @@ func (r ApiDashboardsServiceReplaceDefaultDashboardRequest) Execute() (map[strin
 DashboardsServiceReplaceDefaultDashboard Replace the default dashboard
 
 Sets the specified dashboard as the default.
-
-Requires the following permissions:
-- `team-dashboards:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId The dashboard id.
@@ -1501,9 +1471,6 @@ func (r ApiDashboardsServiceUnpinDashboardRequest) Execute() (map[string]interfa
 DashboardsServiceUnpinDashboard Remove dashboard from favorites
 
 Unpins the specified dashboard.
-
-Requires the following permissions:
-- `team-dashboards:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId The dashboard id.

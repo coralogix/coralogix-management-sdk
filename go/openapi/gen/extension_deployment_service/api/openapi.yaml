@@ -1,832 +1,913 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /integrations/extensions/v1/deployed:
-    delete:
-      description: |-
-        Undeploys the specified extension.
-
-        Requires the following permissions:
-        - `extensions:Deploy`
-      externalDocs:
-        url: ""
-      operationId: ExtensionDeploymentService_UndeployExtension
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Revert_deployment_of_extension_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UndeployExtensionResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Revert deployment of extension
-      tags:
-      - Extension deployment service
-      x-coralogixPermissions:
-      - extensions:Deploy
-    get:
-      description: |-
-        Returns all deployed extensions.
-
-        Requires the following permissions:
-        - `extensions:ReadConfig`
-      externalDocs:
-        url: ""
-      operationId: ExtensionDeploymentService_GetDeployedExtensions
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetDeployedExtensionsResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Get deployed extensions
-      tags:
-      - Extension deployment service
-      x-coralogixPermissions:
-      - extensions:ReadConfig
-    post:
-      description: |-
-        Updates a deployed extension.
-
-        Requires the following permissions:
-        - `extensions:Deploy`
-      externalDocs:
-        url: ""
-      operationId: ExtensionDeploymentService_UpdateExtension
-      parameters:
-      - description: Unique identifier.
-        explode: true
-        in: query
-        name: id
-        required: false
-        schema:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        style: form
-      - description: Version number.
-        explode: true
-        in: query
-        name: version
-        required: false
-        schema:
-          description: Version number.
-          minLength: 0
-          type: string
-        style: form
-      - description: The item ids.
-        explode: true
-        in: query
-        name: item_ids
-        required: false
-        schema:
-          description: The item ids.
-          items:
-            description: The item ids.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        style: form
-      - description: The applications.
-        explode: true
-        in: query
-        name: applications
-        required: false
-        schema:
-          description: The applications.
-          items:
-            description: The applications.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        style: form
-      - description: The subsystems.
-        explode: true
-        in: query
-        name: subsystems
-        required: false
-        schema:
-          description: The subsystems.
-          items:
-            description: The subsystems.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        style: form
-      - description: The extension deployment configuration to update.
-        explode: true
-        in: query
-        name: extension_deployment
-        required: false
-        schema:
-          $ref: "#/components/schemas/Extension_deployment"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateExtensionResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Update extension
-      tags:
-      - Extension deployment service
-      x-coralogixPermissions:
-      - extensions:Deploy
-    put:
-      description: |-
-        Deploys an extension.
-
-        Requires the following permissions:
-        - `extensions:Deploy`
-      externalDocs:
-        url: ""
-      operationId: ExtensionDeploymentService_DeployExtension
-      parameters:
-      - description: Unique identifier.
-        explode: true
-        in: query
-        name: id
-        required: false
-        schema:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        style: form
-      - description: Version number.
-        explode: true
-        in: query
-        name: version
-        required: false
-        schema:
-          description: Version number.
-          minLength: 0
-          type: string
-        style: form
-      - description: The item ids.
-        explode: true
-        in: query
-        name: item_ids
-        required: false
-        schema:
-          description: The item ids.
-          items:
-            description: The item ids.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        style: form
-      - description: The applications.
-        explode: true
-        in: query
-        name: applications
-        required: false
-        schema:
-          description: The applications.
-          items:
-            description: The applications.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        style: form
-      - description: The subsystems.
-        explode: true
-        in: query
-        name: subsystems
-        required: false
-        schema:
-          description: The subsystems.
-          items:
-            description: The subsystems.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        style: form
-      - description: The extension deployment configuration.
-        explode: true
-        in: query
-        name: extension_deployment
-        required: false
-        schema:
-          $ref: "#/components/schemas/Extension_deployment"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeployExtensionResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Deploy extension
-      tags:
-      - Extension deployment service
-      x-coralogixPermissions:
-      - extensions:Deploy
-components:
-  schemas:
-    DeployExtensionResponse:
-      description: Response returned after successfully deploying an extension.
-      example:
-        extensionDeployment:
-          itemIds:
-          - itemIds
-          - itemIds
-          id: id
-          subsystems:
-          - subsystems
-          - subsystems
-          version: version
-          applications:
-          - applications
-          - applications
-      externalDocs:
-        url: ""
-      properties:
-        extensionDeployment:
-          $ref: "#/components/schemas/ExtensionDeployment"
-      title: Deploy extension response
-      type: object
-    DeployedExtension:
-      example:
-        summary:
-          deployedItemCounts:
-            alerts: 0
-            eventsToMetrics: 0
-            grafanaDashboards: 0
-            savedViews: 0
-            customDashboards: 0
-            kibanaDashboards: 0
-            actions: 0
-            metricsRuleGroup: 0
-            enrichments: 0
-            parsingRules: 0
-        itemIds:
-        - itemIds
-        - itemIds
-        id: id
-        subsystems:
-        - subsystems
-        - subsystems
-        version: version
-        applications:
-        - applications
-        - applications
-      externalDocs:
-        url: ""
-      properties:
-        applications:
-          description: The applications.
-          items:
-            description: The applications.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        itemIds:
-          description: The item ids.
-          items:
-            description: The item ids.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        subsystems:
-          description: The subsystems.
-          items:
-            description: The subsystems.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        summary:
-          $ref: "#/components/schemas/DeployedExtensionSummary"
-        version:
-          description: Version number.
-          minLength: 0
-          type: string
-      title: Deployed extension
-      type: object
-    DeployedExtensionSummary:
-      description: Deployed extension summary.
-      example:
-        deployedItemCounts:
-          alerts: 0
-          eventsToMetrics: 0
-          grafanaDashboards: 0
-          savedViews: 0
-          customDashboards: 0
-          kibanaDashboards: 0
-          actions: 0
-          metricsRuleGroup: 0
-          enrichments: 0
-          parsingRules: 0
-      externalDocs:
-        url: ""
-      properties:
-        deployedItemCounts:
-          $ref: "#/components/schemas/ItemCounts"
-      title: Deployed extension summary
-      type: object
-    Error:
-      description: Standard error response body returned for a failed request.
-      example:
-        code: 306
-        message: message
-      properties:
-        code:
-          description: "HTTP status code of the error (for example 400, 404, 500)."
-          format: int32
-          maximum: 599
-          minimum: 100
-          type: integer
-        message:
-          description: Human-readable description of the error.
-          maxLength: 4096
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    ExtensionDeployment:
-      description: Extension deployment.
-      example:
-        itemIds:
-        - itemIds
-        - itemIds
-        id: id
-        subsystems:
-        - subsystems
-        - subsystems
-        version: version
-        applications:
-        - applications
-        - applications
-      externalDocs:
-        url: ""
-      properties:
-        applications:
-          description: The applications.
-          items:
-            description: The applications.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        itemIds:
-          description: The item ids.
-          items:
-            description: The item ids.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        subsystems:
-          description: The subsystems.
-          items:
-            description: The subsystems.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        version:
-          description: Version number.
-          minLength: 0
-          type: string
-      title: Extension deployment
-      type: object
-    FailedItem:
-      example:
-        itemId: itemId
-        reason: reason
-        remoteId: remoteId
-      externalDocs:
-        url: ""
-      properties:
-        itemId:
-          description: The item id.
-          minLength: 0
-          type: string
-        reason:
-          description: Reason.
-          minLength: 0
-          type: string
-        remoteId:
-          description: The remote id.
-          minLength: 0
-          type: string
-      title: Failed item
-      type: object
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    GetDeployedExtensionsResponse:
-      description: Response containing a list of deployed extensions.
-      example:
-        deployedExtensions:
-        - summary:
-            deployedItemCounts:
-              alerts: 0
-              eventsToMetrics: 0
-              grafanaDashboards: 0
-              savedViews: 0
-              customDashboards: 0
-              kibanaDashboards: 0
-              actions: 0
-              metricsRuleGroup: 0
-              enrichments: 0
-              parsingRules: 0
-          itemIds:
-          - itemIds
-          - itemIds
-          id: id
-          subsystems:
-          - subsystems
-          - subsystems
-          version: version
-          applications:
-          - applications
-          - applications
-        - summary:
-            deployedItemCounts:
-              alerts: 0
-              eventsToMetrics: 0
-              grafanaDashboards: 0
-              savedViews: 0
-              customDashboards: 0
-              kibanaDashboards: 0
-              actions: 0
-              metricsRuleGroup: 0
-              enrichments: 0
-              parsingRules: 0
-          itemIds:
-          - itemIds
-          - itemIds
-          id: id
-          subsystems:
-          - subsystems
-          - subsystems
-          version: version
-          applications:
-          - applications
-          - applications
-      externalDocs:
-        url: ""
-      properties:
-        deployedExtensions:
-          description: The deployed extensions.
-          items:
-            $ref: "#/components/schemas/DeployedExtension"
-          minItems: 0
-          type: array
-      title: Get deployed extensions response
-      type: object
-    ItemCounts:
-      description: Item counts.
-      example:
-        alerts: 0
-        eventsToMetrics: 0
-        grafanaDashboards: 0
-        savedViews: 0
-        customDashboards: 0
-        kibanaDashboards: 0
-        actions: 0
-        metricsRuleGroup: 0
-        enrichments: 0
-        parsingRules: 0
-      externalDocs:
-        url: ""
-      properties:
-        actions:
-          description: List of actions.
-          format: int64
-          minimum: 0
-          type: integer
-        alerts:
-          description: List of alerts.
-          format: int64
-          minimum: 0
-          type: integer
-        customDashboards:
-          description: The custom dashboards.
-          format: int64
-          minimum: 0
-          type: integer
-        enrichments:
-          description: List of enrichments.
-          format: int64
-          minimum: 0
-          type: integer
-        eventsToMetrics:
-          description: The events to metrics.
-          format: int64
-          minimum: 0
-          type: integer
-        grafanaDashboards:
-          description: The grafana dashboards.
-          format: int64
-          minimum: 0
-          type: integer
-        kibanaDashboards:
-          description: The kibana dashboards.
-          format: int64
-          minimum: 0
-          type: integer
-        metricsRuleGroup:
-          description: The metrics rule group.
-          format: int64
-          minimum: 0
-          type: integer
-        parsingRules:
-          description: The parsing rules.
-          format: int64
-          minimum: 0
-          type: integer
-        savedViews:
-          description: The saved views.
-          format: int64
-          minimum: 0
-          type: integer
-      title: Item counts
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    UndeployExtensionResponse:
-      description: Response returned after successfully undeploying an extension.
-      example:
-        extensionDeployment:
-          itemIds:
-          - itemIds
-          - itemIds
-          id: id
-          subsystems:
-          - subsystems
-          - subsystems
-          version: version
-          applications:
-          - applications
-          - applications
-        failedItems:
-        - itemId: itemId
-          reason: reason
-          remoteId: remoteId
-        - itemId: itemId
-          reason: reason
-          remoteId: remoteId
-      externalDocs:
-        url: ""
-      properties:
-        extensionDeployment:
-          $ref: "#/components/schemas/ExtensionDeployment"
-        failedItems:
-          description: The failed items.
-          items:
-            $ref: "#/components/schemas/FailedItem"
-          minItems: 0
-          type: array
-      title: Revert deployment of extension response
-      type: object
-    UpdateExtensionResponse:
-      description: Response returned after successfully updating a deployed extension.
-      example:
-        extensionDeployment:
-          itemIds:
-          - itemIds
-          - itemIds
-          id: id
-          subsystems:
-          - subsystems
-          - subsystems
-          version: version
-          applications:
-          - applications
-          - applications
-      externalDocs:
-        url: ""
-      properties:
-        extensionDeployment:
-          $ref: "#/components/schemas/ExtensionDeployment"
-      title: Update extension response
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    Extension_deployment:
-      description: Extension deployment.
-      externalDocs:
-        url: ""
-      properties:
-        applications:
-          description: The applications.
-          items:
-            description: The applications.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        itemIds:
-          description: The item ids.
-          items:
-            description: The item ids.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        subsystems:
-          description: The subsystems.
-          items:
-            description: The subsystems.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        version:
-          description: Version number.
-          minLength: 0
-          type: string
-      title: Extension deployment
-      type: object
-    Revert_deployment_of_extension_request:
-      description: Request for undeploying an extension.
-      properties:
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        keptExtensionItems:
-          description: List of extension item IDs to retain after undeploying; all
-            other items will be removed.
-          items:
-            description: List of extension item IDs to retain after undeploying; all
-              other items will be removed.
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      title: Revert deployment of extension request
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/integrations/extensions/v1/deployed": {
+      "get": {
+        "tags": [
+          "Extension deployment service"
+        ],
+        "summary": "Get deployed extensions",
+        "description": "Returns all deployed extensions.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_GetDeployedExtensions",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDeployedExtensionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "extensions:ReadConfig"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Extension deployment service"
+        ],
+        "summary": "Deploy extension",
+        "description": "Deploys an extension.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_DeployExtension",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "Unique identifier.",
+            "schema": {
+              "description": "Unique identifier.",
+              "type": "string",
+              "minLength": 0
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "description": "Version number.",
+            "schema": {
+              "description": "Version number.",
+              "type": "string",
+              "minLength": 0
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "item_ids",
+            "description": "The item ids.",
+            "schema": {
+              "description": "The item ids.",
+              "type": "array",
+              "items": {
+                "description": "The item ids.",
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "applications",
+            "description": "The applications.",
+            "schema": {
+              "description": "The applications.",
+              "type": "array",
+              "items": {
+                "description": "The applications.",
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "subsystems",
+            "description": "The subsystems.",
+            "schema": {
+              "description": "The subsystems.",
+              "type": "array",
+              "items": {
+                "description": "The subsystems.",
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "extension_deployment",
+            "description": "The extension deployment configuration.",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "Extension deployment",
+              "description": "Extension deployment.",
+              "type": "object",
+              "properties": {
+                "applications": {
+                  "description": "The applications.",
+                  "type": "array",
+                  "items": {
+                    "description": "The applications.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
+                },
+                "id": {
+                  "description": "Unique identifier.",
+                  "type": "string",
+                  "minLength": 0
+                },
+                "itemIds": {
+                  "description": "The item ids.",
+                  "type": "array",
+                  "items": {
+                    "description": "The item ids.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
+                },
+                "subsystems": {
+                  "description": "The subsystems.",
+                  "type": "array",
+                  "items": {
+                    "description": "The subsystems.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
+                },
+                "version": {
+                  "description": "Version number.",
+                  "type": "string",
+                  "minLength": 0
+                }
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeployExtensionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "extensions:Deploy"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Extension deployment service"
+        ],
+        "summary": "Update extension",
+        "description": "Updates a deployed extension.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_UpdateExtension",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "Unique identifier.",
+            "schema": {
+              "description": "Unique identifier.",
+              "type": "string",
+              "minLength": 0
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "description": "Version number.",
+            "schema": {
+              "description": "Version number.",
+              "type": "string",
+              "minLength": 0
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "item_ids",
+            "description": "The item ids.",
+            "schema": {
+              "description": "The item ids.",
+              "type": "array",
+              "items": {
+                "description": "The item ids.",
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "applications",
+            "description": "The applications.",
+            "schema": {
+              "description": "The applications.",
+              "type": "array",
+              "items": {
+                "description": "The applications.",
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "subsystems",
+            "description": "The subsystems.",
+            "schema": {
+              "description": "The subsystems.",
+              "type": "array",
+              "items": {
+                "description": "The subsystems.",
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "extension_deployment",
+            "description": "The extension deployment configuration to update.",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "Extension deployment",
+              "description": "Extension deployment.",
+              "type": "object",
+              "properties": {
+                "applications": {
+                  "description": "The applications.",
+                  "type": "array",
+                  "items": {
+                    "description": "The applications.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
+                },
+                "id": {
+                  "description": "Unique identifier.",
+                  "type": "string",
+                  "minLength": 0
+                },
+                "itemIds": {
+                  "description": "The item ids.",
+                  "type": "array",
+                  "items": {
+                    "description": "The item ids.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
+                },
+                "subsystems": {
+                  "description": "The subsystems.",
+                  "type": "array",
+                  "items": {
+                    "description": "The subsystems.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
+                },
+                "version": {
+                  "description": "Version number.",
+                  "type": "string",
+                  "minLength": 0
+                }
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateExtensionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "extensions:Deploy"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Extension deployment service"
+        ],
+        "summary": "Revert deployment of extension",
+        "description": "Undeploys the specified extension.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_UndeployExtension",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Revert deployment of extension request",
+                "description": "Request for undeploying an extension.",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "Unique identifier.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "keptExtensionItems": {
+                    "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
+                    "type": "array",
+                    "items": {
+                      "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UndeployExtensionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "extensions:Deploy"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DeployExtensionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Deploy extension response",
+        "description": "Response returned after successfully deploying an extension.",
+        "type": "object",
+        "properties": {
+          "extensionDeployment": {
+            "$ref": "#/components/schemas/ExtensionDeployment"
+          }
+        }
+      },
+      "DeployedExtension": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Deployed extension",
+        "type": "object",
+        "properties": {
+          "applications": {
+            "description": "The applications.",
+            "type": "array",
+            "items": {
+              "description": "The applications.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "itemIds": {
+            "description": "The item ids.",
+            "type": "array",
+            "items": {
+              "description": "The item ids.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "subsystems": {
+            "description": "The subsystems.",
+            "type": "array",
+            "items": {
+              "description": "The subsystems.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "summary": {
+            "$ref": "#/components/schemas/DeployedExtensionSummary"
+          },
+          "version": {
+            "description": "Version number.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "DeployedExtensionSummary": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Deployed extension summary",
+        "description": "Deployed extension summary.",
+        "type": "object",
+        "properties": {
+          "deployedItemCounts": {
+            "$ref": "#/components/schemas/ItemCounts"
+          }
+        }
+      },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "ExtensionDeployment": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Extension deployment",
+        "description": "Extension deployment.",
+        "type": "object",
+        "properties": {
+          "applications": {
+            "description": "The applications.",
+            "type": "array",
+            "items": {
+              "description": "The applications.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "itemIds": {
+            "description": "The item ids.",
+            "type": "array",
+            "items": {
+              "description": "The item ids.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "subsystems": {
+            "description": "The subsystems.",
+            "type": "array",
+            "items": {
+              "description": "The subsystems.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "version": {
+            "description": "Version number.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "FailedItem": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Failed item",
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "description": "The item id.",
+            "type": "string",
+            "minLength": 0
+          },
+          "reason": {
+            "description": "Reason.",
+            "type": "string",
+            "minLength": 0
+          },
+          "remoteId": {
+            "description": "The remote id.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetDeployedExtensionsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get deployed extensions response",
+        "description": "Response containing a list of deployed extensions.",
+        "type": "object",
+        "properties": {
+          "deployedExtensions": {
+            "description": "The deployed extensions.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeployedExtension"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "ItemCounts": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Item counts",
+        "description": "Item counts.",
+        "type": "object",
+        "properties": {
+          "actions": {
+            "description": "List of actions.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "alerts": {
+            "description": "List of alerts.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "customDashboards": {
+            "description": "The custom dashboards.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "enrichments": {
+            "description": "List of enrichments.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "eventsToMetrics": {
+            "description": "The events to metrics.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "grafanaDashboards": {
+            "description": "The grafana dashboards.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "kibanaDashboards": {
+            "description": "The kibana dashboards.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "metricsRuleGroup": {
+            "description": "The metrics rule group.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "parsingRules": {
+            "description": "The parsing rules.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "savedViews": {
+            "description": "The saved views.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "UndeployExtensionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Revert deployment of extension response",
+        "description": "Response returned after successfully undeploying an extension.",
+        "type": "object",
+        "properties": {
+          "extensionDeployment": {
+            "$ref": "#/components/schemas/ExtensionDeployment"
+          },
+          "failedItems": {
+            "description": "The failed items.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FailedItem"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "UpdateExtensionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Update extension response",
+        "description": "Response returned after successfully updating a deployed extension.",
+        "type": "object",
+        "properties": {
+          "extensionDeployment": {
+            "$ref": "#/components/schemas/ExtensionDeployment"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

@@ -13,126 +13,171 @@ package case_settings_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// EntityLabelFilter - struct for EntityLabelFilter
+// checks if the EntityLabelFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EntityLabelFilter{}
+
+// EntityLabelFilter Select all items from a specific list of EntityLabels (Key/Values).
 type EntityLabelFilter struct {
-	EntityLabelFilterAll *EntityLabelFilterAll
-	EntityLabelFilterValuesVariant *EntityLabelFilterValuesVariant
+	// Represents selection of all items in the filter
+	All map[string]interface{} `json:"all,omitempty"`
+	Values *EntityLabelFilterValues `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// EntityLabelFilterAllAsEntityLabelFilter is a convenience function that returns EntityLabelFilterAll wrapped in EntityLabelFilter
-func EntityLabelFilterAllAsEntityLabelFilter(v *EntityLabelFilterAll) EntityLabelFilter {
-	return EntityLabelFilter{
-		EntityLabelFilterAll: v,
+type _EntityLabelFilter EntityLabelFilter
+
+// NewEntityLabelFilter instantiates a new EntityLabelFilter object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewEntityLabelFilter() *EntityLabelFilter {
+	this := EntityLabelFilter{}
+	return &this
+}
+
+// NewEntityLabelFilterWithDefaults instantiates a new EntityLabelFilter object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewEntityLabelFilterWithDefaults() *EntityLabelFilter {
+	this := EntityLabelFilter{}
+	return &this
+}
+
+// GetAll returns the All field value if set, zero value otherwise.
+func (o *EntityLabelFilter) GetAll() map[string]interface{} {
+	if o == nil || IsNil(o.All) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.All
 }
 
-// EntityLabelFilterValuesVariantAsEntityLabelFilter is a convenience function that returns EntityLabelFilterValuesVariant wrapped in EntityLabelFilter
-func EntityLabelFilterValuesVariantAsEntityLabelFilter(v *EntityLabelFilterValuesVariant) EntityLabelFilter {
-	return EntityLabelFilter{
-		EntityLabelFilterValuesVariant: v,
+// GetAllOk returns a tuple with the All field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EntityLabelFilter) GetAllOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.All) {
+		return map[string]interface{}{}, false
 	}
+	return o.All, true
 }
 
+// HasAll returns a boolean if a field has been set.
+func (o *EntityLabelFilter) HasAll() bool {
+	if o != nil && !IsNil(o.All) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *EntityLabelFilter) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into EntityLabelFilterAll
-	err = json.Unmarshal(data, &dst.EntityLabelFilterAll)
-	if err == nil {
-		jsonEntityLabelFilterAll, _ := json.Marshal(dst.EntityLabelFilterAll)
-		if string(jsonEntityLabelFilterAll) == "{}" { // empty struct
-			dst.EntityLabelFilterAll = nil
-		} else {
-			if err = validator.Validate(dst.EntityLabelFilterAll); err != nil {
-				dst.EntityLabelFilterAll = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAll gets a reference to the given map[string]interface{} and assigns it to the All field.
+func (o *EntityLabelFilter) SetAll(v map[string]interface{}) {
+	o.All = v
+}
+
+// GetValues returns the Values field value if set, zero value otherwise.
+func (o *EntityLabelFilter) GetValues() EntityLabelFilterValues {
+	if o == nil || IsNil(o.Values) {
+		var ret EntityLabelFilterValues
+		return ret
+	}
+	return *o.Values
+}
+
+// GetValuesOk returns a tuple with the Values field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EntityLabelFilter) GetValuesOk() (*EntityLabelFilterValues, bool) {
+	if o == nil || IsNil(o.Values) {
+		return nil, false
+	}
+	return o.Values, true
+}
+
+// HasValues returns a boolean if a field has been set.
+func (o *EntityLabelFilter) HasValues() bool {
+	if o != nil && !IsNil(o.Values) {
+		return true
+	}
+
+	return false
+}
+
+// SetValues gets a reference to the given EntityLabelFilterValues and assigns it to the Values field.
+func (o *EntityLabelFilter) SetValues(v EntityLabelFilterValues) {
+	o.Values = &v
+}
+
+func (o EntityLabelFilter) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EntityLabelFilter) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.All) {
+		toSerialize["all"] = o.All
+	}
+	if !IsNil(o.Values) {
+		toSerialize["values"] = o.Values
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["all"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["values"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [all, values] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *EntityLabelFilter) UnmarshalJSON(data []byte) (err error) {
+	varEntityLabelFilter := _EntityLabelFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEntityLabelFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EntityLabelFilter(varEntityLabelFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["all"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EntityLabelFilterAll = nil
-	}
-
-	// try to unmarshal data into EntityLabelFilterValuesVariant
-	err = json.Unmarshal(data, &dst.EntityLabelFilterValuesVariant)
-	if err == nil {
-		jsonEntityLabelFilterValuesVariant, _ := json.Marshal(dst.EntityLabelFilterValuesVariant)
-		if string(jsonEntityLabelFilterValuesVariant) == "{}" { // empty struct
-			dst.EntityLabelFilterValuesVariant = nil
-		} else {
-			if err = validator.Validate(dst.EntityLabelFilterValuesVariant); err != nil {
-				dst.EntityLabelFilterValuesVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["values"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EntityLabelFilterValuesVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [all, values] may be set"}
+		}
+
+		delete(additionalProperties, "all")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.EntityLabelFilterAll = nil
-		dst.EntityLabelFilterValuesVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(EntityLabelFilter)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src EntityLabelFilter) MarshalJSON() ([]byte, error) {
-	if src.EntityLabelFilterAll != nil {
-		return json.Marshal(&src.EntityLabelFilterAll)
-	}
-
-	if src.EntityLabelFilterValuesVariant != nil {
-		return json.Marshal(&src.EntityLabelFilterValuesVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *EntityLabelFilter) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.EntityLabelFilterAll != nil {
-		return obj.EntityLabelFilterAll
-	}
-
-	if obj.EntityLabelFilterValuesVariant != nil {
-		return obj.EntityLabelFilterValuesVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj EntityLabelFilter) GetActualInstanceValue() (interface{}) {
-	if obj.EntityLabelFilterAll != nil {
-		return *obj.EntityLabelFilterAll
-	}
-
-	if obj.EntityLabelFilterValuesVariant != nil {
-		return *obj.EntityLabelFilterValuesVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableEntityLabelFilter struct {

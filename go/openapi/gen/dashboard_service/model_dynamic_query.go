@@ -13,202 +13,256 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// DynamicQuery - struct for DynamicQuery
+// checks if the DynamicQuery type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DynamicQuery{}
+
+// DynamicQuery Discriminated union of possible query types for the dynamic widget.
 type DynamicQuery struct {
-	DynamicQueryDataprime *DynamicQueryDataprime
-	DynamicQueryLogs *DynamicQueryLogs
-	DynamicQueryMetrics *DynamicQueryMetrics
-	DynamicQuerySpans *DynamicQuerySpans
+	Dataprime *Dataprime `json:"dataprime,omitempty"`
+	Logs *Logs `json:"logs,omitempty"`
+	Metrics *Metrics `json:"metrics,omitempty"`
+	Spans *Spans `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// DynamicQueryDataprimeAsDynamicQuery is a convenience function that returns DynamicQueryDataprime wrapped in DynamicQuery
-func DynamicQueryDataprimeAsDynamicQuery(v *DynamicQueryDataprime) DynamicQuery {
-	return DynamicQuery{
-		DynamicQueryDataprime: v,
+type _DynamicQuery DynamicQuery
+
+// NewDynamicQuery instantiates a new DynamicQuery object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDynamicQuery() *DynamicQuery {
+	this := DynamicQuery{}
+	return &this
+}
+
+// NewDynamicQueryWithDefaults instantiates a new DynamicQuery object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDynamicQueryWithDefaults() *DynamicQuery {
+	this := DynamicQuery{}
+	return &this
+}
+
+// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+func (o *DynamicQuery) GetDataprime() Dataprime {
+	if o == nil || IsNil(o.Dataprime) {
+		var ret Dataprime
+		return ret
 	}
+	return *o.Dataprime
 }
 
-// DynamicQueryLogsAsDynamicQuery is a convenience function that returns DynamicQueryLogs wrapped in DynamicQuery
-func DynamicQueryLogsAsDynamicQuery(v *DynamicQueryLogs) DynamicQuery {
-	return DynamicQuery{
-		DynamicQueryLogs: v,
+// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DynamicQuery) GetDataprimeOk() (*Dataprime, bool) {
+	if o == nil || IsNil(o.Dataprime) {
+		return nil, false
 	}
+	return o.Dataprime, true
 }
 
-// DynamicQueryMetricsAsDynamicQuery is a convenience function that returns DynamicQueryMetrics wrapped in DynamicQuery
-func DynamicQueryMetricsAsDynamicQuery(v *DynamicQueryMetrics) DynamicQuery {
-	return DynamicQuery{
-		DynamicQueryMetrics: v,
+// HasDataprime returns a boolean if a field has been set.
+func (o *DynamicQuery) HasDataprime() bool {
+	if o != nil && !IsNil(o.Dataprime) {
+		return true
 	}
+
+	return false
 }
 
-// DynamicQuerySpansAsDynamicQuery is a convenience function that returns DynamicQuerySpans wrapped in DynamicQuery
-func DynamicQuerySpansAsDynamicQuery(v *DynamicQuerySpans) DynamicQuery {
-	return DynamicQuery{
-		DynamicQuerySpans: v,
+// SetDataprime gets a reference to the given Dataprime and assigns it to the Dataprime field.
+func (o *DynamicQuery) SetDataprime(v Dataprime) {
+	o.Dataprime = &v
+}
+
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *DynamicQuery) GetLogs() Logs {
+	if o == nil || IsNil(o.Logs) {
+		var ret Logs
+		return ret
 	}
+	return *o.Logs
 }
 
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DynamicQuery) GetLogsOk() (*Logs, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
+	}
+	return o.Logs, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *DynamicQuery) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into DynamicQueryDataprime
-	err = json.Unmarshal(data, &dst.DynamicQueryDataprime)
-	if err == nil {
-		jsonDynamicQueryDataprime, _ := json.Marshal(dst.DynamicQueryDataprime)
-		if string(jsonDynamicQueryDataprime) == "{}" { // empty struct
-			dst.DynamicQueryDataprime = nil
-		} else {
-			if err = validator.Validate(dst.DynamicQueryDataprime); err != nil {
-				dst.DynamicQueryDataprime = nil
-			} else {
-				match++
-			}
+// HasLogs returns a boolean if a field has been set.
+func (o *DynamicQuery) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogs gets a reference to the given Logs and assigns it to the Logs field.
+func (o *DynamicQuery) SetLogs(v Logs) {
+	o.Logs = &v
+}
+
+// GetMetrics returns the Metrics field value if set, zero value otherwise.
+func (o *DynamicQuery) GetMetrics() Metrics {
+	if o == nil || IsNil(o.Metrics) {
+		var ret Metrics
+		return ret
+	}
+	return *o.Metrics
+}
+
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DynamicQuery) GetMetricsOk() (*Metrics, bool) {
+	if o == nil || IsNil(o.Metrics) {
+		return nil, false
+	}
+	return o.Metrics, true
+}
+
+// HasMetrics returns a boolean if a field has been set.
+func (o *DynamicQuery) HasMetrics() bool {
+	if o != nil && !IsNil(o.Metrics) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetrics gets a reference to the given Metrics and assigns it to the Metrics field.
+func (o *DynamicQuery) SetMetrics(v Metrics) {
+	o.Metrics = &v
+}
+
+// GetSpans returns the Spans field value if set, zero value otherwise.
+func (o *DynamicQuery) GetSpans() Spans {
+	if o == nil || IsNil(o.Spans) {
+		var ret Spans
+		return ret
+	}
+	return *o.Spans
+}
+
+// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DynamicQuery) GetSpansOk() (*Spans, bool) {
+	if o == nil || IsNil(o.Spans) {
+		return nil, false
+	}
+	return o.Spans, true
+}
+
+// HasSpans returns a boolean if a field has been set.
+func (o *DynamicQuery) HasSpans() bool {
+	if o != nil && !IsNil(o.Spans) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpans gets a reference to the given Spans and assigns it to the Spans field.
+func (o *DynamicQuery) SetSpans(v Spans) {
+	o.Spans = &v
+}
+
+func (o DynamicQuery) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DynamicQuery) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dataprime) {
+		toSerialize["dataprime"] = o.Dataprime
+	}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Metrics) {
+		toSerialize["metrics"] = o.Metrics
+	}
+	if !IsNil(o.Spans) {
+		toSerialize["spans"] = o.Spans
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spans"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metrics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dataprime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logs, spans, metrics, dataprime] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *DynamicQuery) UnmarshalJSON(data []byte) (err error) {
+	varDynamicQuery := _DynamicQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDynamicQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DynamicQuery(varDynamicQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DynamicQueryDataprime = nil
-	}
-
-	// try to unmarshal data into DynamicQueryLogs
-	err = json.Unmarshal(data, &dst.DynamicQueryLogs)
-	if err == nil {
-		jsonDynamicQueryLogs, _ := json.Marshal(dst.DynamicQueryLogs)
-		if string(jsonDynamicQueryLogs) == "{}" { // empty struct
-			dst.DynamicQueryLogs = nil
-		} else {
-			if err = validator.Validate(dst.DynamicQueryLogs); err != nil {
-				dst.DynamicQueryLogs = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spans"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DynamicQueryLogs = nil
-	}
-
-	// try to unmarshal data into DynamicQueryMetrics
-	err = json.Unmarshal(data, &dst.DynamicQueryMetrics)
-	if err == nil {
-		jsonDynamicQueryMetrics, _ := json.Marshal(dst.DynamicQueryMetrics)
-		if string(jsonDynamicQueryMetrics) == "{}" { // empty struct
-			dst.DynamicQueryMetrics = nil
-		} else {
-			if err = validator.Validate(dst.DynamicQueryMetrics); err != nil {
-				dst.DynamicQueryMetrics = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metrics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DynamicQueryMetrics = nil
-	}
-
-	// try to unmarshal data into DynamicQuerySpans
-	err = json.Unmarshal(data, &dst.DynamicQuerySpans)
-	if err == nil {
-		jsonDynamicQuerySpans, _ := json.Marshal(dst.DynamicQuerySpans)
-		if string(jsonDynamicQuerySpans) == "{}" { // empty struct
-			dst.DynamicQuerySpans = nil
-		} else {
-			if err = validator.Validate(dst.DynamicQuerySpans); err != nil {
-				dst.DynamicQuerySpans = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dataprime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DynamicQuerySpans = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logs, spans, metrics, dataprime] may be set"}
+		}
+
+		delete(additionalProperties, "dataprime")
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.DynamicQueryDataprime = nil
-		dst.DynamicQueryLogs = nil
-		dst.DynamicQueryMetrics = nil
-		dst.DynamicQuerySpans = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(DynamicQuery)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src DynamicQuery) MarshalJSON() ([]byte, error) {
-	if src.DynamicQueryDataprime != nil {
-		return json.Marshal(&src.DynamicQueryDataprime)
-	}
-
-	if src.DynamicQueryLogs != nil {
-		return json.Marshal(&src.DynamicQueryLogs)
-	}
-
-	if src.DynamicQueryMetrics != nil {
-		return json.Marshal(&src.DynamicQueryMetrics)
-	}
-
-	if src.DynamicQuerySpans != nil {
-		return json.Marshal(&src.DynamicQuerySpans)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *DynamicQuery) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.DynamicQueryDataprime != nil {
-		return obj.DynamicQueryDataprime
-	}
-
-	if obj.DynamicQueryLogs != nil {
-		return obj.DynamicQueryLogs
-	}
-
-	if obj.DynamicQueryMetrics != nil {
-		return obj.DynamicQueryMetrics
-	}
-
-	if obj.DynamicQuerySpans != nil {
-		return obj.DynamicQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj DynamicQuery) GetActualInstanceValue() (interface{}) {
-	if obj.DynamicQueryDataprime != nil {
-		return *obj.DynamicQueryDataprime
-	}
-
-	if obj.DynamicQueryLogs != nil {
-		return *obj.DynamicQueryLogs
-	}
-
-	if obj.DynamicQueryMetrics != nil {
-		return *obj.DynamicQueryMetrics
-	}
-
-	if obj.DynamicQuerySpans != nil {
-		return *obj.DynamicQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableDynamicQuery struct {

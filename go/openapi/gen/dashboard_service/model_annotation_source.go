@@ -13,278 +13,342 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// AnnotationSource - struct for AnnotationSource
+// checks if the AnnotationSource type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AnnotationSource{}
+
+// AnnotationSource Source.
 type AnnotationSource struct {
-	AnnotationSourceDataprime *AnnotationSourceDataprime
-	AnnotationSourceEventRecurrence *AnnotationSourceEventRecurrence
-	AnnotationSourceLogs *AnnotationSourceLogs
-	AnnotationSourceManual *AnnotationSourceManual
-	AnnotationSourceMetrics *AnnotationSourceMetrics
-	AnnotationSourceSpans *AnnotationSourceSpans
+	Dataprime *DataprimeSource `json:"dataprime,omitempty"`
+	EventRecurrence *EventRecurrenceSource `json:"eventRecurrence,omitempty"`
+	Logs *LogsSource `json:"logs,omitempty"`
+	Manual *ManualSource `json:"manual,omitempty"`
+	Metrics *MetricsSource `json:"metrics,omitempty"`
+	Spans *SpansSource `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// AnnotationSourceDataprimeAsAnnotationSource is a convenience function that returns AnnotationSourceDataprime wrapped in AnnotationSource
-func AnnotationSourceDataprimeAsAnnotationSource(v *AnnotationSourceDataprime) AnnotationSource {
-	return AnnotationSource{
-		AnnotationSourceDataprime: v,
+type _AnnotationSource AnnotationSource
+
+// NewAnnotationSource instantiates a new AnnotationSource object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAnnotationSource() *AnnotationSource {
+	this := AnnotationSource{}
+	return &this
+}
+
+// NewAnnotationSourceWithDefaults instantiates a new AnnotationSource object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAnnotationSourceWithDefaults() *AnnotationSource {
+	this := AnnotationSource{}
+	return &this
+}
+
+// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+func (o *AnnotationSource) GetDataprime() DataprimeSource {
+	if o == nil || IsNil(o.Dataprime) {
+		var ret DataprimeSource
+		return ret
 	}
+	return *o.Dataprime
 }
 
-// AnnotationSourceEventRecurrenceAsAnnotationSource is a convenience function that returns AnnotationSourceEventRecurrence wrapped in AnnotationSource
-func AnnotationSourceEventRecurrenceAsAnnotationSource(v *AnnotationSourceEventRecurrence) AnnotationSource {
-	return AnnotationSource{
-		AnnotationSourceEventRecurrence: v,
+// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnnotationSource) GetDataprimeOk() (*DataprimeSource, bool) {
+	if o == nil || IsNil(o.Dataprime) {
+		return nil, false
 	}
+	return o.Dataprime, true
 }
 
-// AnnotationSourceLogsAsAnnotationSource is a convenience function that returns AnnotationSourceLogs wrapped in AnnotationSource
-func AnnotationSourceLogsAsAnnotationSource(v *AnnotationSourceLogs) AnnotationSource {
-	return AnnotationSource{
-		AnnotationSourceLogs: v,
+// HasDataprime returns a boolean if a field has been set.
+func (o *AnnotationSource) HasDataprime() bool {
+	if o != nil && !IsNil(o.Dataprime) {
+		return true
 	}
+
+	return false
 }
 
-// AnnotationSourceManualAsAnnotationSource is a convenience function that returns AnnotationSourceManual wrapped in AnnotationSource
-func AnnotationSourceManualAsAnnotationSource(v *AnnotationSourceManual) AnnotationSource {
-	return AnnotationSource{
-		AnnotationSourceManual: v,
+// SetDataprime gets a reference to the given DataprimeSource and assigns it to the Dataprime field.
+func (o *AnnotationSource) SetDataprime(v DataprimeSource) {
+	o.Dataprime = &v
+}
+
+// GetEventRecurrence returns the EventRecurrence field value if set, zero value otherwise.
+func (o *AnnotationSource) GetEventRecurrence() EventRecurrenceSource {
+	if o == nil || IsNil(o.EventRecurrence) {
+		var ret EventRecurrenceSource
+		return ret
 	}
+	return *o.EventRecurrence
 }
 
-// AnnotationSourceMetricsAsAnnotationSource is a convenience function that returns AnnotationSourceMetrics wrapped in AnnotationSource
-func AnnotationSourceMetricsAsAnnotationSource(v *AnnotationSourceMetrics) AnnotationSource {
-	return AnnotationSource{
-		AnnotationSourceMetrics: v,
+// GetEventRecurrenceOk returns a tuple with the EventRecurrence field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnnotationSource) GetEventRecurrenceOk() (*EventRecurrenceSource, bool) {
+	if o == nil || IsNil(o.EventRecurrence) {
+		return nil, false
 	}
+	return o.EventRecurrence, true
 }
 
-// AnnotationSourceSpansAsAnnotationSource is a convenience function that returns AnnotationSourceSpans wrapped in AnnotationSource
-func AnnotationSourceSpansAsAnnotationSource(v *AnnotationSourceSpans) AnnotationSource {
-	return AnnotationSource{
-		AnnotationSourceSpans: v,
+// HasEventRecurrence returns a boolean if a field has been set.
+func (o *AnnotationSource) HasEventRecurrence() bool {
+	if o != nil && !IsNil(o.EventRecurrence) {
+		return true
 	}
+
+	return false
 }
 
+// SetEventRecurrence gets a reference to the given EventRecurrenceSource and assigns it to the EventRecurrence field.
+func (o *AnnotationSource) SetEventRecurrence(v EventRecurrenceSource) {
+	o.EventRecurrence = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into AnnotationSourceDataprime
-	err = json.Unmarshal(data, &dst.AnnotationSourceDataprime)
-	if err == nil {
-		jsonAnnotationSourceDataprime, _ := json.Marshal(dst.AnnotationSourceDataprime)
-		if string(jsonAnnotationSourceDataprime) == "{}" { // empty struct
-			dst.AnnotationSourceDataprime = nil
-		} else {
-			if err = validator.Validate(dst.AnnotationSourceDataprime); err != nil {
-				dst.AnnotationSourceDataprime = nil
-			} else {
-				match++
-			}
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *AnnotationSource) GetLogs() LogsSource {
+	if o == nil || IsNil(o.Logs) {
+		var ret LogsSource
+		return ret
+	}
+	return *o.Logs
+}
+
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnnotationSource) GetLogsOk() (*LogsSource, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
+	}
+	return o.Logs, true
+}
+
+// HasLogs returns a boolean if a field has been set.
+func (o *AnnotationSource) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogs gets a reference to the given LogsSource and assigns it to the Logs field.
+func (o *AnnotationSource) SetLogs(v LogsSource) {
+	o.Logs = &v
+}
+
+// GetManual returns the Manual field value if set, zero value otherwise.
+func (o *AnnotationSource) GetManual() ManualSource {
+	if o == nil || IsNil(o.Manual) {
+		var ret ManualSource
+		return ret
+	}
+	return *o.Manual
+}
+
+// GetManualOk returns a tuple with the Manual field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnnotationSource) GetManualOk() (*ManualSource, bool) {
+	if o == nil || IsNil(o.Manual) {
+		return nil, false
+	}
+	return o.Manual, true
+}
+
+// HasManual returns a boolean if a field has been set.
+func (o *AnnotationSource) HasManual() bool {
+	if o != nil && !IsNil(o.Manual) {
+		return true
+	}
+
+	return false
+}
+
+// SetManual gets a reference to the given ManualSource and assigns it to the Manual field.
+func (o *AnnotationSource) SetManual(v ManualSource) {
+	o.Manual = &v
+}
+
+// GetMetrics returns the Metrics field value if set, zero value otherwise.
+func (o *AnnotationSource) GetMetrics() MetricsSource {
+	if o == nil || IsNil(o.Metrics) {
+		var ret MetricsSource
+		return ret
+	}
+	return *o.Metrics
+}
+
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnnotationSource) GetMetricsOk() (*MetricsSource, bool) {
+	if o == nil || IsNil(o.Metrics) {
+		return nil, false
+	}
+	return o.Metrics, true
+}
+
+// HasMetrics returns a boolean if a field has been set.
+func (o *AnnotationSource) HasMetrics() bool {
+	if o != nil && !IsNil(o.Metrics) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetrics gets a reference to the given MetricsSource and assigns it to the Metrics field.
+func (o *AnnotationSource) SetMetrics(v MetricsSource) {
+	o.Metrics = &v
+}
+
+// GetSpans returns the Spans field value if set, zero value otherwise.
+func (o *AnnotationSource) GetSpans() SpansSource {
+	if o == nil || IsNil(o.Spans) {
+		var ret SpansSource
+		return ret
+	}
+	return *o.Spans
+}
+
+// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnnotationSource) GetSpansOk() (*SpansSource, bool) {
+	if o == nil || IsNil(o.Spans) {
+		return nil, false
+	}
+	return o.Spans, true
+}
+
+// HasSpans returns a boolean if a field has been set.
+func (o *AnnotationSource) HasSpans() bool {
+	if o != nil && !IsNil(o.Spans) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpans gets a reference to the given SpansSource and assigns it to the Spans field.
+func (o *AnnotationSource) SetSpans(v SpansSource) {
+	o.Spans = &v
+}
+
+func (o AnnotationSource) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AnnotationSource) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dataprime) {
+		toSerialize["dataprime"] = o.Dataprime
+	}
+	if !IsNil(o.EventRecurrence) {
+		toSerialize["eventRecurrence"] = o.EventRecurrence
+	}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Manual) {
+		toSerialize["manual"] = o.Manual
+	}
+	if !IsNil(o.Metrics) {
+		toSerialize["metrics"] = o.Metrics
+	}
+	if !IsNil(o.Spans) {
+		toSerialize["spans"] = o.Spans
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["metrics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["logs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spans"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dataprime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["manual"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["eventRecurrence"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metrics, logs, spans, dataprime, manual, eventRecurrence] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *AnnotationSource) UnmarshalJSON(data []byte) (err error) {
+	varAnnotationSource := _AnnotationSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAnnotationSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AnnotationSource(varAnnotationSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["metrics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AnnotationSourceDataprime = nil
-	}
-
-	// try to unmarshal data into AnnotationSourceEventRecurrence
-	err = json.Unmarshal(data, &dst.AnnotationSourceEventRecurrence)
-	if err == nil {
-		jsonAnnotationSourceEventRecurrence, _ := json.Marshal(dst.AnnotationSourceEventRecurrence)
-		if string(jsonAnnotationSourceEventRecurrence) == "{}" { // empty struct
-			dst.AnnotationSourceEventRecurrence = nil
-		} else {
-			if err = validator.Validate(dst.AnnotationSourceEventRecurrence); err != nil {
-				dst.AnnotationSourceEventRecurrence = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["logs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AnnotationSourceEventRecurrence = nil
-	}
-
-	// try to unmarshal data into AnnotationSourceLogs
-	err = json.Unmarshal(data, &dst.AnnotationSourceLogs)
-	if err == nil {
-		jsonAnnotationSourceLogs, _ := json.Marshal(dst.AnnotationSourceLogs)
-		if string(jsonAnnotationSourceLogs) == "{}" { // empty struct
-			dst.AnnotationSourceLogs = nil
-		} else {
-			if err = validator.Validate(dst.AnnotationSourceLogs); err != nil {
-				dst.AnnotationSourceLogs = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spans"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AnnotationSourceLogs = nil
-	}
-
-	// try to unmarshal data into AnnotationSourceManual
-	err = json.Unmarshal(data, &dst.AnnotationSourceManual)
-	if err == nil {
-		jsonAnnotationSourceManual, _ := json.Marshal(dst.AnnotationSourceManual)
-		if string(jsonAnnotationSourceManual) == "{}" { // empty struct
-			dst.AnnotationSourceManual = nil
-		} else {
-			if err = validator.Validate(dst.AnnotationSourceManual); err != nil {
-				dst.AnnotationSourceManual = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dataprime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AnnotationSourceManual = nil
-	}
-
-	// try to unmarshal data into AnnotationSourceMetrics
-	err = json.Unmarshal(data, &dst.AnnotationSourceMetrics)
-	if err == nil {
-		jsonAnnotationSourceMetrics, _ := json.Marshal(dst.AnnotationSourceMetrics)
-		if string(jsonAnnotationSourceMetrics) == "{}" { // empty struct
-			dst.AnnotationSourceMetrics = nil
-		} else {
-			if err = validator.Validate(dst.AnnotationSourceMetrics); err != nil {
-				dst.AnnotationSourceMetrics = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["manual"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AnnotationSourceMetrics = nil
-	}
-
-	// try to unmarshal data into AnnotationSourceSpans
-	err = json.Unmarshal(data, &dst.AnnotationSourceSpans)
-	if err == nil {
-		jsonAnnotationSourceSpans, _ := json.Marshal(dst.AnnotationSourceSpans)
-		if string(jsonAnnotationSourceSpans) == "{}" { // empty struct
-			dst.AnnotationSourceSpans = nil
-		} else {
-			if err = validator.Validate(dst.AnnotationSourceSpans); err != nil {
-				dst.AnnotationSourceSpans = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["eventRecurrence"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AnnotationSourceSpans = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [metrics, logs, spans, dataprime, manual, eventRecurrence] may be set"}
+		}
+
+		delete(additionalProperties, "dataprime")
+		delete(additionalProperties, "eventRecurrence")
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "manual")
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AnnotationSourceDataprime = nil
-		dst.AnnotationSourceEventRecurrence = nil
-		dst.AnnotationSourceLogs = nil
-		dst.AnnotationSourceManual = nil
-		dst.AnnotationSourceMetrics = nil
-		dst.AnnotationSourceSpans = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(AnnotationSource)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src AnnotationSource) MarshalJSON() ([]byte, error) {
-	if src.AnnotationSourceDataprime != nil {
-		return json.Marshal(&src.AnnotationSourceDataprime)
-	}
-
-	if src.AnnotationSourceEventRecurrence != nil {
-		return json.Marshal(&src.AnnotationSourceEventRecurrence)
-	}
-
-	if src.AnnotationSourceLogs != nil {
-		return json.Marshal(&src.AnnotationSourceLogs)
-	}
-
-	if src.AnnotationSourceManual != nil {
-		return json.Marshal(&src.AnnotationSourceManual)
-	}
-
-	if src.AnnotationSourceMetrics != nil {
-		return json.Marshal(&src.AnnotationSourceMetrics)
-	}
-
-	if src.AnnotationSourceSpans != nil {
-		return json.Marshal(&src.AnnotationSourceSpans)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *AnnotationSource) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.AnnotationSourceDataprime != nil {
-		return obj.AnnotationSourceDataprime
-	}
-
-	if obj.AnnotationSourceEventRecurrence != nil {
-		return obj.AnnotationSourceEventRecurrence
-	}
-
-	if obj.AnnotationSourceLogs != nil {
-		return obj.AnnotationSourceLogs
-	}
-
-	if obj.AnnotationSourceManual != nil {
-		return obj.AnnotationSourceManual
-	}
-
-	if obj.AnnotationSourceMetrics != nil {
-		return obj.AnnotationSourceMetrics
-	}
-
-	if obj.AnnotationSourceSpans != nil {
-		return obj.AnnotationSourceSpans
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj AnnotationSource) GetActualInstanceValue() (interface{}) {
-	if obj.AnnotationSourceDataprime != nil {
-		return *obj.AnnotationSourceDataprime
-	}
-
-	if obj.AnnotationSourceEventRecurrence != nil {
-		return *obj.AnnotationSourceEventRecurrence
-	}
-
-	if obj.AnnotationSourceLogs != nil {
-		return *obj.AnnotationSourceLogs
-	}
-
-	if obj.AnnotationSourceManual != nil {
-		return *obj.AnnotationSourceManual
-	}
-
-	if obj.AnnotationSourceMetrics != nil {
-		return *obj.AnnotationSourceMetrics
-	}
-
-	if obj.AnnotationSourceSpans != nil {
-		return *obj.AnnotationSourceSpans
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableAnnotationSource struct {

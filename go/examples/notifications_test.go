@@ -230,7 +230,7 @@ func TestSlackPreset(t *testing.T) {
 	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewNotificationsClient(creator)
-	newPreset := CreateSlackPreset("TestGoSlackPreset")
+	newPreset := CreateSlackPreset(fmt.Sprintf("TestGoSlackPreset-%v", uuid.NewString()))
 
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
 		Preset: newPreset,

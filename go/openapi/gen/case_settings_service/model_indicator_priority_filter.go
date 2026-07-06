@@ -13,126 +13,171 @@ package case_settings_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// IndicatorPriorityFilter - struct for IndicatorPriorityFilter
+// checks if the IndicatorPriorityFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IndicatorPriorityFilter{}
+
+// IndicatorPriorityFilter Select all priorities or a specific list of IndicatorPriority values.
 type IndicatorPriorityFilter struct {
-	IndicatorPriorityFilterAll *IndicatorPriorityFilterAll
-	IndicatorPriorityFilterValuesVariant *IndicatorPriorityFilterValuesVariant
+	// Represents selection of all items in the filter
+	All map[string]interface{} `json:"all,omitempty"`
+	Values *IndicatorPriorityFilterValues `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// IndicatorPriorityFilterAllAsIndicatorPriorityFilter is a convenience function that returns IndicatorPriorityFilterAll wrapped in IndicatorPriorityFilter
-func IndicatorPriorityFilterAllAsIndicatorPriorityFilter(v *IndicatorPriorityFilterAll) IndicatorPriorityFilter {
-	return IndicatorPriorityFilter{
-		IndicatorPriorityFilterAll: v,
+type _IndicatorPriorityFilter IndicatorPriorityFilter
+
+// NewIndicatorPriorityFilter instantiates a new IndicatorPriorityFilter object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewIndicatorPriorityFilter() *IndicatorPriorityFilter {
+	this := IndicatorPriorityFilter{}
+	return &this
+}
+
+// NewIndicatorPriorityFilterWithDefaults instantiates a new IndicatorPriorityFilter object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewIndicatorPriorityFilterWithDefaults() *IndicatorPriorityFilter {
+	this := IndicatorPriorityFilter{}
+	return &this
+}
+
+// GetAll returns the All field value if set, zero value otherwise.
+func (o *IndicatorPriorityFilter) GetAll() map[string]interface{} {
+	if o == nil || IsNil(o.All) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.All
 }
 
-// IndicatorPriorityFilterValuesVariantAsIndicatorPriorityFilter is a convenience function that returns IndicatorPriorityFilterValuesVariant wrapped in IndicatorPriorityFilter
-func IndicatorPriorityFilterValuesVariantAsIndicatorPriorityFilter(v *IndicatorPriorityFilterValuesVariant) IndicatorPriorityFilter {
-	return IndicatorPriorityFilter{
-		IndicatorPriorityFilterValuesVariant: v,
+// GetAllOk returns a tuple with the All field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IndicatorPriorityFilter) GetAllOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.All) {
+		return map[string]interface{}{}, false
 	}
+	return o.All, true
 }
 
+// HasAll returns a boolean if a field has been set.
+func (o *IndicatorPriorityFilter) HasAll() bool {
+	if o != nil && !IsNil(o.All) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *IndicatorPriorityFilter) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into IndicatorPriorityFilterAll
-	err = json.Unmarshal(data, &dst.IndicatorPriorityFilterAll)
-	if err == nil {
-		jsonIndicatorPriorityFilterAll, _ := json.Marshal(dst.IndicatorPriorityFilterAll)
-		if string(jsonIndicatorPriorityFilterAll) == "{}" { // empty struct
-			dst.IndicatorPriorityFilterAll = nil
-		} else {
-			if err = validator.Validate(dst.IndicatorPriorityFilterAll); err != nil {
-				dst.IndicatorPriorityFilterAll = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAll gets a reference to the given map[string]interface{} and assigns it to the All field.
+func (o *IndicatorPriorityFilter) SetAll(v map[string]interface{}) {
+	o.All = v
+}
+
+// GetValues returns the Values field value if set, zero value otherwise.
+func (o *IndicatorPriorityFilter) GetValues() IndicatorPriorityFilterValues {
+	if o == nil || IsNil(o.Values) {
+		var ret IndicatorPriorityFilterValues
+		return ret
+	}
+	return *o.Values
+}
+
+// GetValuesOk returns a tuple with the Values field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IndicatorPriorityFilter) GetValuesOk() (*IndicatorPriorityFilterValues, bool) {
+	if o == nil || IsNil(o.Values) {
+		return nil, false
+	}
+	return o.Values, true
+}
+
+// HasValues returns a boolean if a field has been set.
+func (o *IndicatorPriorityFilter) HasValues() bool {
+	if o != nil && !IsNil(o.Values) {
+		return true
+	}
+
+	return false
+}
+
+// SetValues gets a reference to the given IndicatorPriorityFilterValues and assigns it to the Values field.
+func (o *IndicatorPriorityFilter) SetValues(v IndicatorPriorityFilterValues) {
+	o.Values = &v
+}
+
+func (o IndicatorPriorityFilter) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IndicatorPriorityFilter) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.All) {
+		toSerialize["all"] = o.All
+	}
+	if !IsNil(o.Values) {
+		toSerialize["values"] = o.Values
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["all"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["values"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [all, values] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *IndicatorPriorityFilter) UnmarshalJSON(data []byte) (err error) {
+	varIndicatorPriorityFilter := _IndicatorPriorityFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIndicatorPriorityFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IndicatorPriorityFilter(varIndicatorPriorityFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["all"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IndicatorPriorityFilterAll = nil
-	}
-
-	// try to unmarshal data into IndicatorPriorityFilterValuesVariant
-	err = json.Unmarshal(data, &dst.IndicatorPriorityFilterValuesVariant)
-	if err == nil {
-		jsonIndicatorPriorityFilterValuesVariant, _ := json.Marshal(dst.IndicatorPriorityFilterValuesVariant)
-		if string(jsonIndicatorPriorityFilterValuesVariant) == "{}" { // empty struct
-			dst.IndicatorPriorityFilterValuesVariant = nil
-		} else {
-			if err = validator.Validate(dst.IndicatorPriorityFilterValuesVariant); err != nil {
-				dst.IndicatorPriorityFilterValuesVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["values"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IndicatorPriorityFilterValuesVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [all, values] may be set"}
+		}
+
+		delete(additionalProperties, "all")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.IndicatorPriorityFilterAll = nil
-		dst.IndicatorPriorityFilterValuesVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(IndicatorPriorityFilter)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src IndicatorPriorityFilter) MarshalJSON() ([]byte, error) {
-	if src.IndicatorPriorityFilterAll != nil {
-		return json.Marshal(&src.IndicatorPriorityFilterAll)
-	}
-
-	if src.IndicatorPriorityFilterValuesVariant != nil {
-		return json.Marshal(&src.IndicatorPriorityFilterValuesVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *IndicatorPriorityFilter) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.IndicatorPriorityFilterAll != nil {
-		return obj.IndicatorPriorityFilterAll
-	}
-
-	if obj.IndicatorPriorityFilterValuesVariant != nil {
-		return obj.IndicatorPriorityFilterValuesVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj IndicatorPriorityFilter) GetActualInstanceValue() (interface{}) {
-	if obj.IndicatorPriorityFilterAll != nil {
-		return *obj.IndicatorPriorityFilterAll
-	}
-
-	if obj.IndicatorPriorityFilterValuesVariant != nil {
-		return *obj.IndicatorPriorityFilterValuesVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableIndicatorPriorityFilter struct {

@@ -13,126 +13,324 @@ package role_management_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// RoleManagementServiceCreateRoleRequest - struct for RoleManagementServiceCreateRoleRequest
+// checks if the RoleManagementServiceCreateRoleRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RoleManagementServiceCreateRoleRequest{}
+
+// RoleManagementServiceCreateRoleRequest Request for creating a custom role.
 type RoleManagementServiceCreateRoleRequest struct {
-	CreateRoleRequestParentRoleId *CreateRoleRequestParentRoleId
-	CreateRoleRequestParentRoleName *CreateRoleRequestParentRoleName
+	// Human-readable description.
+	Description *string `json:"description,omitempty"`
+	// Display name.
+	Name *string `json:"name,omitempty"`
+	// The parent role id.
+	ParentRoleId *int64 `json:"parentRoleId,omitempty"`
+	// The parent role name.
+	ParentRoleName *string `json:"parentRoleName,omitempty"`
+	// List of permissions.
+	Permissions []string `json:"permissions,omitempty"`
+	// Team identifier.
+	TeamId *int64 `json:"teamId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// CreateRoleRequestParentRoleIdAsRoleManagementServiceCreateRoleRequest is a convenience function that returns CreateRoleRequestParentRoleId wrapped in RoleManagementServiceCreateRoleRequest
-func CreateRoleRequestParentRoleIdAsRoleManagementServiceCreateRoleRequest(v *CreateRoleRequestParentRoleId) RoleManagementServiceCreateRoleRequest {
-	return RoleManagementServiceCreateRoleRequest{
-		CreateRoleRequestParentRoleId: v,
+type _RoleManagementServiceCreateRoleRequest RoleManagementServiceCreateRoleRequest
+
+// NewRoleManagementServiceCreateRoleRequest instantiates a new RoleManagementServiceCreateRoleRequest object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRoleManagementServiceCreateRoleRequest() *RoleManagementServiceCreateRoleRequest {
+	this := RoleManagementServiceCreateRoleRequest{}
+	return &this
+}
+
+// NewRoleManagementServiceCreateRoleRequestWithDefaults instantiates a new RoleManagementServiceCreateRoleRequest object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRoleManagementServiceCreateRoleRequestWithDefaults() *RoleManagementServiceCreateRoleRequest {
+	this := RoleManagementServiceCreateRoleRequest{}
+	return &this
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *RoleManagementServiceCreateRoleRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
 	}
+	return *o.Description
 }
 
-// CreateRoleRequestParentRoleNameAsRoleManagementServiceCreateRoleRequest is a convenience function that returns CreateRoleRequestParentRoleName wrapped in RoleManagementServiceCreateRoleRequest
-func CreateRoleRequestParentRoleNameAsRoleManagementServiceCreateRoleRequest(v *CreateRoleRequestParentRoleName) RoleManagementServiceCreateRoleRequest {
-	return RoleManagementServiceCreateRoleRequest{
-		CreateRoleRequestParentRoleName: v,
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoleManagementServiceCreateRoleRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
 	}
+	return o.Description, true
 }
 
+// HasDescription returns a boolean if a field has been set.
+func (o *RoleManagementServiceCreateRoleRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *RoleManagementServiceCreateRoleRequest) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into CreateRoleRequestParentRoleId
-	err = json.Unmarshal(data, &dst.CreateRoleRequestParentRoleId)
-	if err == nil {
-		jsonCreateRoleRequestParentRoleId, _ := json.Marshal(dst.CreateRoleRequestParentRoleId)
-		if string(jsonCreateRoleRequestParentRoleId) == "{}" { // empty struct
-			dst.CreateRoleRequestParentRoleId = nil
-		} else {
-			if err = validator.Validate(dst.CreateRoleRequestParentRoleId); err != nil {
-				dst.CreateRoleRequestParentRoleId = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *RoleManagementServiceCreateRoleRequest) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *RoleManagementServiceCreateRoleRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoleManagementServiceCreateRoleRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *RoleManagementServiceCreateRoleRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *RoleManagementServiceCreateRoleRequest) SetName(v string) {
+	o.Name = &v
+}
+
+// GetParentRoleId returns the ParentRoleId field value if set, zero value otherwise.
+func (o *RoleManagementServiceCreateRoleRequest) GetParentRoleId() int64 {
+	if o == nil || IsNil(o.ParentRoleId) {
+		var ret int64
+		return ret
+	}
+	return *o.ParentRoleId
+}
+
+// GetParentRoleIdOk returns a tuple with the ParentRoleId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoleManagementServiceCreateRoleRequest) GetParentRoleIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.ParentRoleId) {
+		return nil, false
+	}
+	return o.ParentRoleId, true
+}
+
+// HasParentRoleId returns a boolean if a field has been set.
+func (o *RoleManagementServiceCreateRoleRequest) HasParentRoleId() bool {
+	if o != nil && !IsNil(o.ParentRoleId) {
+		return true
+	}
+
+	return false
+}
+
+// SetParentRoleId gets a reference to the given int64 and assigns it to the ParentRoleId field.
+func (o *RoleManagementServiceCreateRoleRequest) SetParentRoleId(v int64) {
+	o.ParentRoleId = &v
+}
+
+// GetParentRoleName returns the ParentRoleName field value if set, zero value otherwise.
+func (o *RoleManagementServiceCreateRoleRequest) GetParentRoleName() string {
+	if o == nil || IsNil(o.ParentRoleName) {
+		var ret string
+		return ret
+	}
+	return *o.ParentRoleName
+}
+
+// GetParentRoleNameOk returns a tuple with the ParentRoleName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoleManagementServiceCreateRoleRequest) GetParentRoleNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ParentRoleName) {
+		return nil, false
+	}
+	return o.ParentRoleName, true
+}
+
+// HasParentRoleName returns a boolean if a field has been set.
+func (o *RoleManagementServiceCreateRoleRequest) HasParentRoleName() bool {
+	if o != nil && !IsNil(o.ParentRoleName) {
+		return true
+	}
+
+	return false
+}
+
+// SetParentRoleName gets a reference to the given string and assigns it to the ParentRoleName field.
+func (o *RoleManagementServiceCreateRoleRequest) SetParentRoleName(v string) {
+	o.ParentRoleName = &v
+}
+
+// GetPermissions returns the Permissions field value if set, zero value otherwise.
+func (o *RoleManagementServiceCreateRoleRequest) GetPermissions() []string {
+	if o == nil || IsNil(o.Permissions) {
+		var ret []string
+		return ret
+	}
+	return o.Permissions
+}
+
+// GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoleManagementServiceCreateRoleRequest) GetPermissionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Permissions) {
+		return nil, false
+	}
+	return o.Permissions, true
+}
+
+// HasPermissions returns a boolean if a field has been set.
+func (o *RoleManagementServiceCreateRoleRequest) HasPermissions() bool {
+	if o != nil && !IsNil(o.Permissions) {
+		return true
+	}
+
+	return false
+}
+
+// SetPermissions gets a reference to the given []string and assigns it to the Permissions field.
+func (o *RoleManagementServiceCreateRoleRequest) SetPermissions(v []string) {
+	o.Permissions = v
+}
+
+// GetTeamId returns the TeamId field value if set, zero value otherwise.
+func (o *RoleManagementServiceCreateRoleRequest) GetTeamId() int64 {
+	if o == nil || IsNil(o.TeamId) {
+		var ret int64
+		return ret
+	}
+	return *o.TeamId
+}
+
+// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoleManagementServiceCreateRoleRequest) GetTeamIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.TeamId) {
+		return nil, false
+	}
+	return o.TeamId, true
+}
+
+// HasTeamId returns a boolean if a field has been set.
+func (o *RoleManagementServiceCreateRoleRequest) HasTeamId() bool {
+	if o != nil && !IsNil(o.TeamId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamId gets a reference to the given int64 and assigns it to the TeamId field.
+func (o *RoleManagementServiceCreateRoleRequest) SetTeamId(v int64) {
+	o.TeamId = &v
+}
+
+func (o RoleManagementServiceCreateRoleRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RoleManagementServiceCreateRoleRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.ParentRoleId) {
+		toSerialize["parentRoleId"] = o.ParentRoleId
+	}
+	if !IsNil(o.ParentRoleName) {
+		toSerialize["parentRoleName"] = o.ParentRoleName
+	}
+	if !IsNil(o.Permissions) {
+		toSerialize["permissions"] = o.Permissions
+	}
+	if !IsNil(o.TeamId) {
+		toSerialize["teamId"] = o.TeamId
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["parentRoleId"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["parentRoleName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [parentRoleId, parentRoleName] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *RoleManagementServiceCreateRoleRequest) UnmarshalJSON(data []byte) (err error) {
+	varRoleManagementServiceCreateRoleRequest := _RoleManagementServiceCreateRoleRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRoleManagementServiceCreateRoleRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RoleManagementServiceCreateRoleRequest(varRoleManagementServiceCreateRoleRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["parentRoleId"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CreateRoleRequestParentRoleId = nil
-	}
-
-	// try to unmarshal data into CreateRoleRequestParentRoleName
-	err = json.Unmarshal(data, &dst.CreateRoleRequestParentRoleName)
-	if err == nil {
-		jsonCreateRoleRequestParentRoleName, _ := json.Marshal(dst.CreateRoleRequestParentRoleName)
-		if string(jsonCreateRoleRequestParentRoleName) == "{}" { // empty struct
-			dst.CreateRoleRequestParentRoleName = nil
-		} else {
-			if err = validator.Validate(dst.CreateRoleRequestParentRoleName); err != nil {
-				dst.CreateRoleRequestParentRoleName = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["parentRoleName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CreateRoleRequestParentRoleName = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [parentRoleId, parentRoleName] may be set"}
+		}
+
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "parentRoleId")
+		delete(additionalProperties, "parentRoleName")
+		delete(additionalProperties, "permissions")
+		delete(additionalProperties, "teamId")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.CreateRoleRequestParentRoleId = nil
-		dst.CreateRoleRequestParentRoleName = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(RoleManagementServiceCreateRoleRequest)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src RoleManagementServiceCreateRoleRequest) MarshalJSON() ([]byte, error) {
-	if src.CreateRoleRequestParentRoleId != nil {
-		return json.Marshal(&src.CreateRoleRequestParentRoleId)
-	}
-
-	if src.CreateRoleRequestParentRoleName != nil {
-		return json.Marshal(&src.CreateRoleRequestParentRoleName)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *RoleManagementServiceCreateRoleRequest) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.CreateRoleRequestParentRoleId != nil {
-		return obj.CreateRoleRequestParentRoleId
-	}
-
-	if obj.CreateRoleRequestParentRoleName != nil {
-		return obj.CreateRoleRequestParentRoleName
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj RoleManagementServiceCreateRoleRequest) GetActualInstanceValue() (interface{}) {
-	if obj.CreateRoleRequestParentRoleId != nil {
-		return *obj.CreateRoleRequestParentRoleId
-	}
-
-	if obj.CreateRoleRequestParentRoleName != nil {
-		return *obj.CreateRoleRequestParentRoleName
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableRoleManagementServiceCreateRoleRequest struct {

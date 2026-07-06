@@ -86,8 +86,6 @@ Class | Method | HTTP request | Description
 
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [ListEntitySubTypesResponse](docs/ListEntitySubTypesResponse.md)
  - [ListEntityTypesResponse](docs/ListEntityTypesResponse.md)

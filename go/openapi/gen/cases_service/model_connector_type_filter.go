@@ -13,126 +13,171 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ConnectorTypeFilter - struct for ConnectorTypeFilter
+// checks if the ConnectorTypeFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectorTypeFilter{}
+
+// ConnectorTypeFilter Filters applied to cases based on connector types.
 type ConnectorTypeFilter struct {
-	ConnectorTypeFilterConnectorType *ConnectorTypeFilterConnectorType
-	ConnectorTypeFilterNoConnector *ConnectorTypeFilterNoConnector
+	ConnectorType *V1ConnectorType `json:"connectorType,omitempty"`
+	// No connector.
+	NoConnector map[string]interface{} `json:"noConnector,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// ConnectorTypeFilterConnectorTypeAsConnectorTypeFilter is a convenience function that returns ConnectorTypeFilterConnectorType wrapped in ConnectorTypeFilter
-func ConnectorTypeFilterConnectorTypeAsConnectorTypeFilter(v *ConnectorTypeFilterConnectorType) ConnectorTypeFilter {
-	return ConnectorTypeFilter{
-		ConnectorTypeFilterConnectorType: v,
+type _ConnectorTypeFilter ConnectorTypeFilter
+
+// NewConnectorTypeFilter instantiates a new ConnectorTypeFilter object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewConnectorTypeFilter() *ConnectorTypeFilter {
+	this := ConnectorTypeFilter{}
+	return &this
+}
+
+// NewConnectorTypeFilterWithDefaults instantiates a new ConnectorTypeFilter object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewConnectorTypeFilterWithDefaults() *ConnectorTypeFilter {
+	this := ConnectorTypeFilter{}
+	return &this
+}
+
+// GetConnectorType returns the ConnectorType field value if set, zero value otherwise.
+func (o *ConnectorTypeFilter) GetConnectorType() V1ConnectorType {
+	if o == nil || IsNil(o.ConnectorType) {
+		var ret V1ConnectorType
+		return ret
 	}
+	return *o.ConnectorType
 }
 
-// ConnectorTypeFilterNoConnectorAsConnectorTypeFilter is a convenience function that returns ConnectorTypeFilterNoConnector wrapped in ConnectorTypeFilter
-func ConnectorTypeFilterNoConnectorAsConnectorTypeFilter(v *ConnectorTypeFilterNoConnector) ConnectorTypeFilter {
-	return ConnectorTypeFilter{
-		ConnectorTypeFilterNoConnector: v,
+// GetConnectorTypeOk returns a tuple with the ConnectorType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectorTypeFilter) GetConnectorTypeOk() (*V1ConnectorType, bool) {
+	if o == nil || IsNil(o.ConnectorType) {
+		return nil, false
 	}
+	return o.ConnectorType, true
 }
 
+// HasConnectorType returns a boolean if a field has been set.
+func (o *ConnectorTypeFilter) HasConnectorType() bool {
+	if o != nil && !IsNil(o.ConnectorType) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ConnectorTypeFilter) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ConnectorTypeFilterConnectorType
-	err = json.Unmarshal(data, &dst.ConnectorTypeFilterConnectorType)
-	if err == nil {
-		jsonConnectorTypeFilterConnectorType, _ := json.Marshal(dst.ConnectorTypeFilterConnectorType)
-		if string(jsonConnectorTypeFilterConnectorType) == "{}" { // empty struct
-			dst.ConnectorTypeFilterConnectorType = nil
-		} else {
-			if err = validator.Validate(dst.ConnectorTypeFilterConnectorType); err != nil {
-				dst.ConnectorTypeFilterConnectorType = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetConnectorType gets a reference to the given V1ConnectorType and assigns it to the ConnectorType field.
+func (o *ConnectorTypeFilter) SetConnectorType(v V1ConnectorType) {
+	o.ConnectorType = &v
+}
+
+// GetNoConnector returns the NoConnector field value if set, zero value otherwise.
+func (o *ConnectorTypeFilter) GetNoConnector() map[string]interface{} {
+	if o == nil || IsNil(o.NoConnector) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.NoConnector
+}
+
+// GetNoConnectorOk returns a tuple with the NoConnector field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectorTypeFilter) GetNoConnectorOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.NoConnector) {
+		return map[string]interface{}{}, false
+	}
+	return o.NoConnector, true
+}
+
+// HasNoConnector returns a boolean if a field has been set.
+func (o *ConnectorTypeFilter) HasNoConnector() bool {
+	if o != nil && !IsNil(o.NoConnector) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoConnector gets a reference to the given map[string]interface{} and assigns it to the NoConnector field.
+func (o *ConnectorTypeFilter) SetNoConnector(v map[string]interface{}) {
+	o.NoConnector = v
+}
+
+func (o ConnectorTypeFilter) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConnectorTypeFilter) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ConnectorType) {
+		toSerialize["connectorType"] = o.ConnectorType
+	}
+	if !IsNil(o.NoConnector) {
+		toSerialize["noConnector"] = o.NoConnector
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["connectorType"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["noConnector"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [connectorType, noConnector] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ConnectorTypeFilter) UnmarshalJSON(data []byte) (err error) {
+	varConnectorTypeFilter := _ConnectorTypeFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varConnectorTypeFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConnectorTypeFilter(varConnectorTypeFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["connectorType"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ConnectorTypeFilterConnectorType = nil
-	}
-
-	// try to unmarshal data into ConnectorTypeFilterNoConnector
-	err = json.Unmarshal(data, &dst.ConnectorTypeFilterNoConnector)
-	if err == nil {
-		jsonConnectorTypeFilterNoConnector, _ := json.Marshal(dst.ConnectorTypeFilterNoConnector)
-		if string(jsonConnectorTypeFilterNoConnector) == "{}" { // empty struct
-			dst.ConnectorTypeFilterNoConnector = nil
-		} else {
-			if err = validator.Validate(dst.ConnectorTypeFilterNoConnector); err != nil {
-				dst.ConnectorTypeFilterNoConnector = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["noConnector"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ConnectorTypeFilterNoConnector = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [connectorType, noConnector] may be set"}
+		}
+
+		delete(additionalProperties, "connectorType")
+		delete(additionalProperties, "noConnector")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ConnectorTypeFilterConnectorType = nil
-		dst.ConnectorTypeFilterNoConnector = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ConnectorTypeFilter)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ConnectorTypeFilter) MarshalJSON() ([]byte, error) {
-	if src.ConnectorTypeFilterConnectorType != nil {
-		return json.Marshal(&src.ConnectorTypeFilterConnectorType)
-	}
-
-	if src.ConnectorTypeFilterNoConnector != nil {
-		return json.Marshal(&src.ConnectorTypeFilterNoConnector)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ConnectorTypeFilter) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ConnectorTypeFilterConnectorType != nil {
-		return obj.ConnectorTypeFilterConnectorType
-	}
-
-	if obj.ConnectorTypeFilterNoConnector != nil {
-		return obj.ConnectorTypeFilterNoConnector
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ConnectorTypeFilter) GetActualInstanceValue() (interface{}) {
-	if obj.ConnectorTypeFilterConnectorType != nil {
-		return *obj.ConnectorTypeFilterConnectorType
-	}
-
-	if obj.ConnectorTypeFilterNoConnector != nil {
-		return *obj.ConnectorTypeFilterNoConnector
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableConnectorTypeFilter struct {

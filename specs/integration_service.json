@@ -11,7 +11,7 @@
           "Integration service"
         ],
         "summary": "Get all integrations",
-        "description": "Returns all available integration definitions.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Returns all available integration definitions.",
         "externalDocs": {
           "url": ""
         },
@@ -81,7 +81,7 @@
           "Integration service"
         ],
         "summary": "Get integration definition",
-        "description": "Returns the definition for the specified integration type.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Returns the definition for the specified integration type.",
         "externalDocs": {
           "url": ""
         },
@@ -164,7 +164,7 @@
           "Integration service"
         ],
         "summary": "Get deployed integration",
-        "description": "Returns the deployed instance of the specified integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Returns the deployed instance of the specified integration.",
         "externalDocs": {
           "url": ""
         },
@@ -237,7 +237,7 @@
           "Integration service"
         ],
         "summary": "Delete integration",
-        "description": "Removes the specified deployed integration instance.\n\nRequires the following permissions:\n- `integrations:Deploy`",
+        "description": "Removes the specified deployed integration instance.",
         "externalDocs": {
           "url": ""
         },
@@ -309,7 +309,7 @@
           "Integration service"
         ],
         "summary": "Get RUM integration versions data",
-        "description": "Returns RUM application version data.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Returns RUM application version data.",
         "externalDocs": {
           "url": ""
         },
@@ -380,7 +380,7 @@
           "Integration service"
         ],
         "summary": "Trigger sync of RUM integration data",
-        "description": "Syncs RUM data for the team.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Syncs RUM data for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -455,7 +455,7 @@
           "Integration service"
         ],
         "summary": "Get integration details",
-        "description": "Returns the details of the specified integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Returns the details of the specified integration.",
         "externalDocs": {
           "url": ""
         },
@@ -537,7 +537,7 @@
           "Integration service"
         ],
         "summary": "List managed integration keys",
-        "description": "Returns a list of managed integration keys.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Returns a list of managed integration keys.",
         "externalDocs": {
           "url": ""
         },
@@ -595,7 +595,7 @@
           "Integration service"
         ],
         "summary": "Get managed integration status",
-        "description": "Returns the status of the specified managed integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Returns the status of the specified managed integration.",
         "externalDocs": {
           "url": ""
         },
@@ -667,7 +667,7 @@
           "Integration service"
         ],
         "summary": "Update integration",
-        "description": "Updates an existing integration deployment.\n\nRequires the following permissions:\n- `integrations:Deploy`",
+        "description": "Updates an existing integration deployment.",
         "externalDocs": {
           "url": ""
         },
@@ -744,7 +744,7 @@
           "Integration service"
         ],
         "summary": "Save integration registration metadata",
-        "description": "Creates or updates an integration deployment.\n\nRequires the following permissions:\n- `integrations:Deploy`",
+        "description": "Creates or updates an integration deployment.",
         "externalDocs": {
           "url": ""
         },
@@ -818,7 +818,7 @@
           "Integration service"
         ],
         "summary": "Test integration",
-        "description": "Tests the integration configuration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Tests the integration configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -897,7 +897,7 @@
           "Integration service"
         ],
         "summary": "Get integration template",
-        "description": "Returns the template for an integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Returns the template for an integration.",
         "externalDocs": {
           "url": ""
         },
@@ -1601,28 +1601,6 @@
         }
       },
       "FieldInformation": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FieldInformationMultiText"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationMultipleSelection"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSelection"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingle"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingleBoolean"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingleNumber"
-          }
-        ]
-      },
-      "FieldInformationMultiText": {
         "externalDocs": {
           "url": ""
         },
@@ -1650,156 +1628,8 @@
           "multiText": {
             "$ref": "#/components/schemas/ListTextValue"
           },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "minLength": 0
-          },
-          "placeholder": {
-            "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string",
-            "minLength": 0
-          },
-          "predefined": {
-            "description": "Whether this field has a predefined value that is suggested to the user.",
-            "type": "boolean"
-          },
-          "readonly": {
-            "description": "Whether this field is read-only and cannot be modified by the user.",
-            "type": "boolean"
-          },
-          "required": {
-            "description": "Whether this field must be filled in before the integration can be deployed.",
-            "type": "boolean"
-          },
-          "templateParamName": {
-            "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string",
-            "minLength": 0
-          },
-          "tooltip": {
-            "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "type": {
-            "$ref": "#/components/schemas/InputType"
-          },
-          "upgradeNotice": {
-            "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "visible": {
-            "description": "Whether this field is visible in the integration configuration UI.",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "multiText"
-        ]
-      },
-      "FieldInformationMultipleSelection": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Field information",
-        "type": "object",
-        "properties": {
-          "allowedPattern": {
-            "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string",
-            "minLength": 0
-          },
-          "applicableIf": {
-            "$ref": "#/components/schemas/FieldCondition"
-          },
-          "documentationReference": {
-            "description": "Link to documentation providing more information about this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "groupId": {
-            "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string",
-            "minLength": 0
-          },
           "multipleSelection": {
             "$ref": "#/components/schemas/MultipleSelectionValue"
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "minLength": 0
-          },
-          "placeholder": {
-            "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string",
-            "minLength": 0
-          },
-          "predefined": {
-            "description": "Whether this field has a predefined value that is suggested to the user.",
-            "type": "boolean"
-          },
-          "readonly": {
-            "description": "Whether this field is read-only and cannot be modified by the user.",
-            "type": "boolean"
-          },
-          "required": {
-            "description": "Whether this field must be filled in before the integration can be deployed.",
-            "type": "boolean"
-          },
-          "templateParamName": {
-            "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string",
-            "minLength": 0
-          },
-          "tooltip": {
-            "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "type": {
-            "$ref": "#/components/schemas/InputType"
-          },
-          "upgradeNotice": {
-            "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "visible": {
-            "description": "Whether this field is visible in the integration configuration UI.",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "multipleSelection"
-        ]
-      },
-      "FieldInformationSelection": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Field information",
-        "type": "object",
-        "properties": {
-          "allowedPattern": {
-            "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string",
-            "minLength": 0
-          },
-          "applicableIf": {
-            "$ref": "#/components/schemas/FieldCondition"
-          },
-          "documentationReference": {
-            "description": "Link to documentation providing more information about this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "groupId": {
-            "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string",
-            "minLength": 0
           },
           "name": {
             "description": "Display name.",
@@ -1826,233 +1656,11 @@
           "selection": {
             "$ref": "#/components/schemas/SelectionValue"
           },
-          "templateParamName": {
-            "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string",
-            "minLength": 0
-          },
-          "tooltip": {
-            "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "type": {
-            "$ref": "#/components/schemas/InputType"
-          },
-          "upgradeNotice": {
-            "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "visible": {
-            "description": "Whether this field is visible in the integration configuration UI.",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "selection"
-        ]
-      },
-      "FieldInformationSingle": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Field information",
-        "type": "object",
-        "properties": {
-          "allowedPattern": {
-            "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string",
-            "minLength": 0
-          },
-          "applicableIf": {
-            "$ref": "#/components/schemas/FieldCondition"
-          },
-          "documentationReference": {
-            "description": "Link to documentation providing more information about this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "groupId": {
-            "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string",
-            "minLength": 0
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "minLength": 0
-          },
-          "placeholder": {
-            "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string",
-            "minLength": 0
-          },
-          "predefined": {
-            "description": "Whether this field has a predefined value that is suggested to the user.",
-            "type": "boolean"
-          },
-          "readonly": {
-            "description": "Whether this field is read-only and cannot be modified by the user.",
-            "type": "boolean"
-          },
-          "required": {
-            "description": "Whether this field must be filled in before the integration can be deployed.",
-            "type": "boolean"
-          },
           "single": {
             "$ref": "#/components/schemas/SingleValue"
           },
-          "templateParamName": {
-            "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string",
-            "minLength": 0
-          },
-          "tooltip": {
-            "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "type": {
-            "$ref": "#/components/schemas/InputType"
-          },
-          "upgradeNotice": {
-            "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "visible": {
-            "description": "Whether this field is visible in the integration configuration UI.",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "single"
-        ]
-      },
-      "FieldInformationSingleBoolean": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Field information",
-        "type": "object",
-        "properties": {
-          "allowedPattern": {
-            "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string",
-            "minLength": 0
-          },
-          "applicableIf": {
-            "$ref": "#/components/schemas/FieldCondition"
-          },
-          "documentationReference": {
-            "description": "Link to documentation providing more information about this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "groupId": {
-            "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string",
-            "minLength": 0
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "minLength": 0
-          },
-          "placeholder": {
-            "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string",
-            "minLength": 0
-          },
-          "predefined": {
-            "description": "Whether this field has a predefined value that is suggested to the user.",
-            "type": "boolean"
-          },
-          "readonly": {
-            "description": "Whether this field is read-only and cannot be modified by the user.",
-            "type": "boolean"
-          },
-          "required": {
-            "description": "Whether this field must be filled in before the integration can be deployed.",
-            "type": "boolean"
-          },
           "singleBoolean": {
             "$ref": "#/components/schemas/SingleBooleanValue"
-          },
-          "templateParamName": {
-            "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string",
-            "minLength": 0
-          },
-          "tooltip": {
-            "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "type": {
-            "$ref": "#/components/schemas/InputType"
-          },
-          "upgradeNotice": {
-            "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "visible": {
-            "description": "Whether this field is visible in the integration configuration UI.",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "singleBoolean"
-        ]
-      },
-      "FieldInformationSingleNumber": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Field information",
-        "type": "object",
-        "properties": {
-          "allowedPattern": {
-            "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string",
-            "minLength": 0
-          },
-          "applicableIf": {
-            "$ref": "#/components/schemas/FieldCondition"
-          },
-          "documentationReference": {
-            "description": "Link to documentation providing more information about this field.",
-            "type": "string",
-            "minLength": 0
-          },
-          "groupId": {
-            "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string",
-            "minLength": 0
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "minLength": 0
-          },
-          "placeholder": {
-            "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string",
-            "minLength": 0
-          },
-          "predefined": {
-            "description": "Whether this field has a predefined value that is suggested to the user.",
-            "type": "boolean"
-          },
-          "readonly": {
-            "description": "Whether this field is read-only and cannot be modified by the user.",
-            "type": "boolean"
-          },
-          "required": {
-            "description": "Whether this field must be filled in before the integration can be deployed.",
-            "type": "boolean"
           },
           "singleNumber": {
             "$ref": "#/components/schemas/IntegrationRevision.SingleNumericValue"
@@ -2080,21 +1688,93 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "singleNumber"
-        ]
-      },
-      "FilterPathAndValues": {
-        "oneOf": [
+        "allOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "single"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "multiText"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "multipleSelection"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "singleBoolean"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "selection"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "singleNumber"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "single"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "multiText"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "multipleSelection"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "singleBoolean"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "selection"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "singleNumber"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
-      "FilterPathAndValuesFilters": {
+      "FilterPathAndValues": {
         "externalDocs": {
           "url": ""
         },
@@ -2105,26 +1785,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -2135,9 +1795,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {
@@ -2500,16 +2176,6 @@
         }
       },
       "IntegrationDetails": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/IntegrationDetailsExternal"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationDetailsLocal"
-          }
-        ]
-      },
-      "IntegrationDetailsExternal": {
         "externalDocs": {
           "url": ""
         },
@@ -2541,48 +2207,47 @@
           },
           "integration": {
             "$ref": "#/components/schemas/Integration"
-          }
-        },
-        "required": [
-          "external"
-        ]
-      },
-      "IntegrationDetailsLocal": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration details",
-        "description": "This data structure represents a set of integration details.",
-        "type": "object",
-        "properties": {
-          "default": {
-            "$ref": "#/components/schemas/DefaultIntegrationDetails"
-          },
-          "docs": {
-            "description": "Documentation links associated with this integration.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IntegrationDoc"
-            },
-            "minItems": 0
-          },
-          "extensions": {
-            "description": "Extensions bundled with this integration for pre-built dashboards and alerts.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/v1.Extension"
-            },
-            "minItems": 0
-          },
-          "integration": {
-            "$ref": "#/components/schemas/Integration"
           },
           "local": {
             "$ref": "#/components/schemas/LocalChangelog"
           }
         },
-        "required": [
-          "local"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "local"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "external"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "local"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "external"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "IntegrationDoc": {
@@ -2649,24 +2314,150 @@
         }
       },
       "IntegrationRevision": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration revision",
+        "description": "This data structure represents an integration revision.",
+        "type": "object",
+        "properties": {
+          "azureArmTemplate": {
+            "$ref": "#/components/schemas/AzureArmTemplate"
           },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
+          "cloudFormation": {
+            "$ref": "#/components/schemas/CloudFormationTemplate"
           },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionHelmChart"
+          "featureFlag": {
+            "description": "The feature flag.",
+            "type": "string",
+            "minLength": 0
           },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionManagedService"
+          "fields": {
+            "description": "Configuration fields that users must fill in to deploy this integration revision.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldInformation"
+            },
+            "minItems": 0
           },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionRum"
+          "groups": {
+            "description": "UI groups used to organize configuration fields into logical sections.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationRevision.Group"
+            },
+            "minItems": 0
           },
+          "helmChart": {
+            "$ref": "#/components/schemas/HelmChart"
+          },
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "managedService": {
+            "$ref": "#/components/schemas/ManagedService"
+          },
+          "revisionDeploymentSupported": {
+            "description": "Whether this revision supports automated deployment through the Coralogix platform.",
+            "type": "boolean"
+          },
+          "rum": {
+            "$ref": "#/components/schemas/Rum"
+          },
+          "terraform": {
+            "$ref": "#/components/schemas/Terraform"
+          },
+          "upgradeInstructionsMd": {
+            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "cloudFormation"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "managedService"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "helmChart"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "azureArmTemplate"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "rum"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "terraform"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "cloudFormation"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "managedService"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "helmChart"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "azureArmTemplate"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "rum"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "terraform"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
@@ -2703,312 +2494,6 @@
             "format": "double"
           }
         }
-      },
-      "IntegrationRevisionAzureArmTemplate": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration revision",
-        "description": "This data structure represents an integration revision.",
-        "type": "object",
-        "properties": {
-          "azureArmTemplate": {
-            "$ref": "#/components/schemas/AzureArmTemplate"
-          },
-          "featureFlag": {
-            "description": "The feature flag.",
-            "type": "string",
-            "minLength": 0
-          },
-          "fields": {
-            "description": "Configuration fields that users must fill in to deploy this integration revision.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FieldInformation"
-            },
-            "minItems": 0
-          },
-          "groups": {
-            "description": "UI groups used to organize configuration fields into logical sections.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IntegrationRevision.Group"
-            },
-            "minItems": 0
-          },
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "minLength": 0
-          },
-          "revisionDeploymentSupported": {
-            "description": "Whether this revision supports automated deployment through the Coralogix platform.",
-            "type": "boolean"
-          },
-          "upgradeInstructionsMd": {
-            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "azureArmTemplate"
-        ]
-      },
-      "IntegrationRevisionCloudFormation": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration revision",
-        "description": "This data structure represents an integration revision.",
-        "type": "object",
-        "properties": {
-          "cloudFormation": {
-            "$ref": "#/components/schemas/CloudFormationTemplate"
-          },
-          "featureFlag": {
-            "description": "The feature flag.",
-            "type": "string",
-            "minLength": 0
-          },
-          "fields": {
-            "description": "Configuration fields that users must fill in to deploy this integration revision.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FieldInformation"
-            },
-            "minItems": 0
-          },
-          "groups": {
-            "description": "UI groups used to organize configuration fields into logical sections.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IntegrationRevision.Group"
-            },
-            "minItems": 0
-          },
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "minLength": 0
-          },
-          "revisionDeploymentSupported": {
-            "description": "Whether this revision supports automated deployment through the Coralogix platform.",
-            "type": "boolean"
-          },
-          "upgradeInstructionsMd": {
-            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "cloudFormation"
-        ]
-      },
-      "IntegrationRevisionHelmChart": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration revision",
-        "description": "This data structure represents an integration revision.",
-        "type": "object",
-        "properties": {
-          "featureFlag": {
-            "description": "The feature flag.",
-            "type": "string",
-            "minLength": 0
-          },
-          "fields": {
-            "description": "Configuration fields that users must fill in to deploy this integration revision.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FieldInformation"
-            },
-            "minItems": 0
-          },
-          "groups": {
-            "description": "UI groups used to organize configuration fields into logical sections.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IntegrationRevision.Group"
-            },
-            "minItems": 0
-          },
-          "helmChart": {
-            "$ref": "#/components/schemas/HelmChart"
-          },
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "minLength": 0
-          },
-          "revisionDeploymentSupported": {
-            "description": "Whether this revision supports automated deployment through the Coralogix platform.",
-            "type": "boolean"
-          },
-          "upgradeInstructionsMd": {
-            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "helmChart"
-        ]
-      },
-      "IntegrationRevisionManagedService": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration revision",
-        "description": "This data structure represents an integration revision.",
-        "type": "object",
-        "properties": {
-          "featureFlag": {
-            "description": "The feature flag.",
-            "type": "string",
-            "minLength": 0
-          },
-          "fields": {
-            "description": "Configuration fields that users must fill in to deploy this integration revision.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FieldInformation"
-            },
-            "minItems": 0
-          },
-          "groups": {
-            "description": "UI groups used to organize configuration fields into logical sections.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IntegrationRevision.Group"
-            },
-            "minItems": 0
-          },
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "minLength": 0
-          },
-          "managedService": {
-            "$ref": "#/components/schemas/ManagedService"
-          },
-          "revisionDeploymentSupported": {
-            "description": "Whether this revision supports automated deployment through the Coralogix platform.",
-            "type": "boolean"
-          },
-          "upgradeInstructionsMd": {
-            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "managedService"
-        ]
-      },
-      "IntegrationRevisionRum": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration revision",
-        "description": "This data structure represents an integration revision.",
-        "type": "object",
-        "properties": {
-          "featureFlag": {
-            "description": "The feature flag.",
-            "type": "string",
-            "minLength": 0
-          },
-          "fields": {
-            "description": "Configuration fields that users must fill in to deploy this integration revision.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FieldInformation"
-            },
-            "minItems": 0
-          },
-          "groups": {
-            "description": "UI groups used to organize configuration fields into logical sections.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IntegrationRevision.Group"
-            },
-            "minItems": 0
-          },
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "minLength": 0
-          },
-          "revisionDeploymentSupported": {
-            "description": "Whether this revision supports automated deployment through the Coralogix platform.",
-            "type": "boolean"
-          },
-          "rum": {
-            "$ref": "#/components/schemas/Rum"
-          },
-          "upgradeInstructionsMd": {
-            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "rum"
-        ]
-      },
-      "IntegrationRevisionTerraform": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration revision",
-        "description": "This data structure represents an integration revision.",
-        "type": "object",
-        "properties": {
-          "featureFlag": {
-            "description": "The feature flag.",
-            "type": "string",
-            "minLength": 0
-          },
-          "fields": {
-            "description": "Configuration fields that users must fill in to deploy this integration revision.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FieldInformation"
-            },
-            "minItems": 0
-          },
-          "groups": {
-            "description": "UI groups used to organize configuration fields into logical sections.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IntegrationRevision.Group"
-            },
-            "minItems": 0
-          },
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "minLength": 0
-          },
-          "revisionDeploymentSupported": {
-            "description": "Whether this revision supports automated deployment through the Coralogix platform.",
-            "type": "boolean"
-          },
-          "terraform": {
-            "$ref": "#/components/schemas/Terraform"
-          },
-          "upgradeInstructionsMd": {
-            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "terraform"
-        ]
       },
       "IntegrationStatus": {
         "externalDocs": {
@@ -3232,28 +2717,6 @@
         "additionalProperties": false
       },
       "Parameter": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ParameterApiKey"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterBooleanValue"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterNumericValue"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterSensitiveData"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterStringList"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterStringValue"
-          }
-        ]
-      },
-      "ParameterApiKey": {
         "externalDocs": {
           "url": ""
         },
@@ -3263,44 +2726,10 @@
           "apiKey": {
             "$ref": "#/components/schemas/ApiKeyData"
           },
-          "key": {
-            "description": "The key.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "apiKey"
-        ]
-      },
-      "ParameterBooleanValue": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Parameter",
-        "type": "object",
-        "properties": {
           "booleanValue": {
             "description": "Boolean value for this integration parameter.",
             "type": "boolean"
           },
-          "key": {
-            "description": "The key.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "booleanValue"
-        ]
-      },
-      "ParameterNumericValue": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Parameter",
-        "type": "object",
-        "properties": {
           "key": {
             "description": "The key.",
             "type": "string",
@@ -3310,63 +2739,12 @@
             "description": "Numeric value for this integration parameter.",
             "type": "number",
             "format": "double"
-          }
-        },
-        "required": [
-          "numericValue"
-        ]
-      },
-      "ParameterSensitiveData": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Parameter",
-        "type": "object",
-        "properties": {
-          "key": {
-            "description": "The key.",
-            "type": "string",
-            "minLength": 0
           },
           "sensitiveData": {
             "$ref": "#/components/schemas/SensitiveDataPlaceholder"
-          }
-        },
-        "required": [
-          "sensitiveData"
-        ]
-      },
-      "ParameterStringList": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Parameter",
-        "type": "object",
-        "properties": {
-          "key": {
-            "description": "The key.",
-            "type": "string",
-            "minLength": 0
           },
           "stringList": {
             "$ref": "#/components/schemas/StringList"
-          }
-        },
-        "required": [
-          "stringList"
-        ]
-      },
-      "ParameterStringValue": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Parameter",
-        "type": "object",
-        "properties": {
-          "key": {
-            "description": "The key.",
-            "type": "string",
-            "minLength": 0
           },
           "stringValue": {
             "description": "String value for this integration parameter.",
@@ -3374,8 +2752,90 @@
             "minLength": 0
           }
         },
-        "required": [
-          "stringValue"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "stringValue"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "booleanValue"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "stringList"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "apiKey"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "numericValue"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sensitiveData"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "stringValue"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "booleanValue"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "stringList"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "apiKey"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "numericValue"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "sensitiveData"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "PermissionResource": {
@@ -3409,19 +2869,6 @@
         "additionalProperties": false
       },
       "RegisteredInstance": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/RegisteredInstanceArm"
-          },
-          {
-            "$ref": "#/components/schemas/RegisteredInstanceCloudformation"
-          },
-          {
-            "$ref": "#/components/schemas/RegisteredInstanceEmpty"
-          }
-        ]
-      },
-      "RegisteredInstanceArm": {
         "externalDocs": {
           "url": ""
         },
@@ -3431,101 +2878,9 @@
           "arm": {
             "$ref": "#/components/schemas/ARMStack"
           },
-          "definitionVersion": {
-            "description": "The definition version.",
-            "type": "string",
-            "minLength": 0
-          },
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "minLength": 0
-          },
-          "integrationStatus": {
-            "$ref": "#/components/schemas/IntegrationStatus"
-          },
-          "isTesting": {
-            "description": "Whether this is a testing instance used for validation purposes only.",
-            "type": "boolean"
-          },
-          "lastUpdated": {
-            "description": "Timestamp of the last update to this integration instance.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          },
-          "parameters": {
-            "description": "The parameters.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Parameter"
-            },
-            "minItems": 0
-          },
-          "revisionLifecycle": {
-            "$ref": "#/components/schemas/RevisionLifecycle"
-          }
-        },
-        "required": [
-          "arm"
-        ]
-      },
-      "RegisteredInstanceCloudformation": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Registered instance",
-        "type": "object",
-        "properties": {
           "cloudformation": {
             "$ref": "#/components/schemas/CloudFormationStack"
           },
-          "definitionVersion": {
-            "description": "The definition version.",
-            "type": "string",
-            "minLength": 0
-          },
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "minLength": 0
-          },
-          "integrationStatus": {
-            "$ref": "#/components/schemas/IntegrationStatus"
-          },
-          "isTesting": {
-            "description": "Whether this is a testing instance used for validation purposes only.",
-            "type": "boolean"
-          },
-          "lastUpdated": {
-            "description": "Timestamp of the last update to this integration instance.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          },
-          "parameters": {
-            "description": "The parameters.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Parameter"
-            },
-            "minItems": 0
-          },
-          "revisionLifecycle": {
-            "$ref": "#/components/schemas/RevisionLifecycle"
-          }
-        },
-        "required": [
-          "cloudformation"
-        ]
-      },
-      "RegisteredInstanceEmpty": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Registered instance",
-        "type": "object",
-        "properties": {
           "definitionVersion": {
             "description": "The definition version.",
             "type": "string",
@@ -3564,8 +2919,54 @@
             "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
-        "required": [
-          "empty"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "empty"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "cloudformation"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "arm"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "empty"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "cloudformation"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "arm"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "RevisionLifecycle": {
@@ -3856,12 +3257,55 @@
         }
       },
       "TestIntegrationResult": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TestIntegrationResultFailure"
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Test integration result",
+        "description": "Test integration result.",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/v1.Failure"
           },
+          "success": {
+            "$ref": "#/components/schemas/TestIntegrationResult.Success"
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/TestIntegrationResultSuccessVariant"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "success"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "failure"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "success"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "failure"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
@@ -3873,38 +3317,6 @@
         "description": "Success.",
         "type": "object",
         "additionalProperties": false
-      },
-      "TestIntegrationResultFailure": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Test integration result",
-        "description": "Test integration result.",
-        "type": "object",
-        "properties": {
-          "failure": {
-            "$ref": "#/components/schemas/v1.Failure"
-          }
-        },
-        "required": [
-          "failure"
-        ]
-      },
-      "TestIntegrationResultSuccessVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Test integration result",
-        "description": "Test integration result.",
-        "type": "object",
-        "properties": {
-          "success": {
-            "$ref": "#/components/schemas/TestIntegrationResult.Success"
-          }
-        },
-        "required": [
-          "success"
-        ]
       },
       "Untracked": {
         "externalDocs": {
@@ -3922,118 +3334,6 @@
         "description": "Response returned after successfully updating an integration.",
         "type": "object",
         "additionalProperties": false
-      },
-      "V1IntegrationTypeArm": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "arm": {
-            "$ref": "#/components/schemas/AzureArm"
-          }
-        },
-        "required": [
-          "arm"
-        ]
-      },
-      "V1IntegrationTypeCloudformation": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "cloudformation": {
-            "$ref": "#/components/schemas/Cloudformation"
-          }
-        },
-        "required": [
-          "cloudformation"
-        ]
-      },
-      "V1IntegrationTypeContextualData": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "contextualData": {
-            "$ref": "#/components/schemas/ContextualData"
-          }
-        },
-        "required": [
-          "contextualData"
-        ]
-      },
-      "V1IntegrationTypeGenericWebhook": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "genericWebhook": {
-            "$ref": "#/components/schemas/GenericWebhook"
-          }
-        },
-        "required": [
-          "genericWebhook"
-        ]
-      },
-      "V1IntegrationTypeManaged": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "managed": {
-            "$ref": "#/components/schemas/Managed"
-          }
-        },
-        "required": [
-          "managed"
-        ]
-      },
-      "V1IntegrationTypePushBasedContextualData": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "pushBasedContextualData": {
-            "$ref": "#/components/schemas/PushBasedContextualData"
-          }
-        },
-        "required": [
-          "pushBasedContextualData"
-        ]
-      },
-      "V1IntegrationTypeUntracked": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
-        "properties": {
-          "untracked": {
-            "$ref": "#/components/schemas/Untracked"
-          }
-        },
-        "required": [
-          "untracked"
-        ]
       },
       "Variant": {
         "description": "Variant.",
@@ -4149,27 +3449,130 @@
         }
       },
       "v1.IntegrationType": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeArm"
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration type",
+        "description": "This data structure represents an integration type.",
+        "type": "object",
+        "properties": {
+          "arm": {
+            "$ref": "#/components/schemas/AzureArm"
           },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
+          "cloudformation": {
+            "$ref": "#/components/schemas/Cloudformation"
           },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
+          "contextualData": {
+            "$ref": "#/components/schemas/ContextualData"
           },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeGenericWebhook"
+          "genericWebhook": {
+            "$ref": "#/components/schemas/GenericWebhook"
           },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeManaged"
+          "managed": {
+            "$ref": "#/components/schemas/Managed"
           },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
+          "pushBasedContextualData": {
+            "$ref": "#/components/schemas/PushBasedContextualData"
           },
+          "untracked": {
+            "$ref": "#/components/schemas/Untracked"
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "managed"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "untracked"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "cloudformation"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "arm"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "pushBasedContextualData"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "contextualData"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "genericWebhook"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "managed"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "untracked"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "cloudformation"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "arm"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "pushBasedContextualData"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "contextualData"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "genericWebhook"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },

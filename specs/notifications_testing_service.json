@@ -477,16 +477,6 @@
         ]
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -497,26 +487,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -527,9 +497,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {
@@ -613,36 +599,6 @@
           }
         }
       },
-      "NotificationCenterConditionTypeMatchEntityType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Field condition.condition type.",
-        "type": "object",
-        "properties": {
-          "matchEntityType": {
-            "$ref": "#/components/schemas/MatchEntityTypeCondition"
-          }
-        },
-        "required": [
-          "matchEntityType"
-        ]
-      },
-      "NotificationCenterConditionTypeMatchEntityTypeAndSubType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Field condition.condition type.",
-        "type": "object",
-        "properties": {
-          "matchEntityTypeAndSubType": {
-            "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
-          }
-        },
-        "required": [
-          "matchEntityTypeAndSubType"
-        ]
-      },
       "TemplatedConnectorConfigField": {
         "type": "object",
         "properties": {
@@ -723,12 +679,54 @@
         }
       },
       "TestResult": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TestResultFailureVariant"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of a notification test, either a success or failure.",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/TestResult.Failure"
           },
+          "success": {
+            "$ref": "#/components/schemas/TestResult.Success"
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/TestResultSuccessVariant"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "success"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "failure"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "success"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "failure"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
@@ -772,43 +770,57 @@
           }
         }
       },
-      "TestResultFailureVariant": {
+      "TestRoutingConditionValidResponse": {
         "externalDocs": {
-          "url": ""
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         },
-        "description": "Result of a notification test, either a success or failure.",
+        "title": "Test Routing Condition Valid Response",
+        "description": "Response which specifies condition evaluation result or error",
         "type": "object",
         "properties": {
           "failure": {
-            "$ref": "#/components/schemas/TestResult.Failure"
-          }
-        },
-        "required": [
-          "failure"
-        ]
-      },
-      "TestResultSuccessVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Result of a notification test, either a success or failure.",
-        "type": "object",
-        "properties": {
-          "success": {
-            "$ref": "#/components/schemas/TestResult.Success"
-          }
-        },
-        "required": [
-          "success"
-        ]
-      },
-      "TestRoutingConditionValidResponse": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TestRoutingConditionValidResponseFailureVariant"
+            "$ref": "#/components/schemas/TestRoutingConditionValidResponse.Failure"
           },
+          "success": {
+            "$ref": "#/components/schemas/TestRoutingConditionValidResponse.Success"
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/TestRoutingConditionValidResponseSuccessVariant"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "success"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "failure"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "success"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "failure"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
@@ -843,40 +855,6 @@
           }
         }
       },
-      "TestRoutingConditionValidResponseFailureVariant": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
-        "title": "Test Routing Condition Valid Response",
-        "description": "Response which specifies condition evaluation result or error",
-        "type": "object",
-        "properties": {
-          "failure": {
-            "$ref": "#/components/schemas/TestRoutingConditionValidResponse.Failure"
-          }
-        },
-        "required": [
-          "failure"
-        ]
-      },
-      "TestRoutingConditionValidResponseSuccessVariant": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
-        "title": "Test Routing Condition Valid Response",
-        "description": "Response which specifies condition evaluation result or error",
-        "type": "object",
-        "properties": {
-          "success": {
-            "$ref": "#/components/schemas/TestRoutingConditionValidResponse.Success"
-          }
-        },
-        "required": [
-          "success"
-        ]
-      },
       "TestTemplateRenderResponse": {
         "externalDocs": {
           "url": ""
@@ -890,12 +868,54 @@
         }
       },
       "TestTemplateRenderResult": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TestTemplateRenderResultFailureVariant"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of a template render test, either a success with rendered output or a failure with reason.",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/TestTemplateRenderResult.Failure"
           },
+          "success": {
+            "$ref": "#/components/schemas/TestTemplateRenderResult.Success"
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/TestTemplateRenderResultSuccessVariant"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "success"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "failure"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "success"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "failure"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
@@ -936,36 +956,6 @@
           }
         }
       },
-      "TestTemplateRenderResultFailureVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Result of a template render test, either a success with rendered output or a failure with reason.",
-        "type": "object",
-        "properties": {
-          "failure": {
-            "$ref": "#/components/schemas/TestTemplateRenderResult.Failure"
-          }
-        },
-        "required": [
-          "failure"
-        ]
-      },
-      "TestTemplateRenderResultSuccessVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Result of a template render test, either a success with rendered output or a failure with reason.",
-        "type": "object",
-        "properties": {
-          "success": {
-            "$ref": "#/components/schemas/TestTemplateRenderResult.Success"
-          }
-        },
-        "required": [
-          "success"
-        ]
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -974,12 +964,54 @@
         ]
       },
       "notification_center.ConditionType": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/NotificationCenterConditionTypeMatchEntityType"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Field condition.condition type.",
+        "type": "object",
+        "properties": {
+          "matchEntityType": {
+            "$ref": "#/components/schemas/MatchEntityTypeCondition"
           },
+          "matchEntityTypeAndSubType": {
+            "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/NotificationCenterConditionTypeMatchEntityTypeAndSubType"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "matchEntityType"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "matchEntityTypeAndSubType"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "matchEntityType"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "matchEntityTypeAndSubType"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },

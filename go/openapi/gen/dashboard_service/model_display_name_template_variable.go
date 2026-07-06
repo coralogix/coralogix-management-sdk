@@ -13,126 +13,171 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// DisplayNameTemplateVariable - struct for DisplayNameTemplateVariable
+// checks if the DisplayNameTemplateVariable type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DisplayNameTemplateVariable{}
+
+// DisplayNameTemplateVariable A variable that can be referenced inside the display name template, backed by either an observation field or mapped values
 type DisplayNameTemplateVariable struct {
-	DisplayNameTemplateVariableMappedValues *DisplayNameTemplateVariableMappedValues
-	DisplayNameTemplateVariableObservationField *DisplayNameTemplateVariableObservationField
+	// Mapped values.
+	MappedValues map[string]interface{} `json:"mappedValues,omitempty"`
+	ObservationField *ObservationField `json:"observationField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// DisplayNameTemplateVariableMappedValuesAsDisplayNameTemplateVariable is a convenience function that returns DisplayNameTemplateVariableMappedValues wrapped in DisplayNameTemplateVariable
-func DisplayNameTemplateVariableMappedValuesAsDisplayNameTemplateVariable(v *DisplayNameTemplateVariableMappedValues) DisplayNameTemplateVariable {
-	return DisplayNameTemplateVariable{
-		DisplayNameTemplateVariableMappedValues: v,
+type _DisplayNameTemplateVariable DisplayNameTemplateVariable
+
+// NewDisplayNameTemplateVariable instantiates a new DisplayNameTemplateVariable object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDisplayNameTemplateVariable() *DisplayNameTemplateVariable {
+	this := DisplayNameTemplateVariable{}
+	return &this
+}
+
+// NewDisplayNameTemplateVariableWithDefaults instantiates a new DisplayNameTemplateVariable object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDisplayNameTemplateVariableWithDefaults() *DisplayNameTemplateVariable {
+	this := DisplayNameTemplateVariable{}
+	return &this
+}
+
+// GetMappedValues returns the MappedValues field value if set, zero value otherwise.
+func (o *DisplayNameTemplateVariable) GetMappedValues() map[string]interface{} {
+	if o == nil || IsNil(o.MappedValues) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.MappedValues
 }
 
-// DisplayNameTemplateVariableObservationFieldAsDisplayNameTemplateVariable is a convenience function that returns DisplayNameTemplateVariableObservationField wrapped in DisplayNameTemplateVariable
-func DisplayNameTemplateVariableObservationFieldAsDisplayNameTemplateVariable(v *DisplayNameTemplateVariableObservationField) DisplayNameTemplateVariable {
-	return DisplayNameTemplateVariable{
-		DisplayNameTemplateVariableObservationField: v,
+// GetMappedValuesOk returns a tuple with the MappedValues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DisplayNameTemplateVariable) GetMappedValuesOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.MappedValues) {
+		return map[string]interface{}{}, false
 	}
+	return o.MappedValues, true
 }
 
+// HasMappedValues returns a boolean if a field has been set.
+func (o *DisplayNameTemplateVariable) HasMappedValues() bool {
+	if o != nil && !IsNil(o.MappedValues) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *DisplayNameTemplateVariable) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into DisplayNameTemplateVariableMappedValues
-	err = json.Unmarshal(data, &dst.DisplayNameTemplateVariableMappedValues)
-	if err == nil {
-		jsonDisplayNameTemplateVariableMappedValues, _ := json.Marshal(dst.DisplayNameTemplateVariableMappedValues)
-		if string(jsonDisplayNameTemplateVariableMappedValues) == "{}" { // empty struct
-			dst.DisplayNameTemplateVariableMappedValues = nil
-		} else {
-			if err = validator.Validate(dst.DisplayNameTemplateVariableMappedValues); err != nil {
-				dst.DisplayNameTemplateVariableMappedValues = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetMappedValues gets a reference to the given map[string]interface{} and assigns it to the MappedValues field.
+func (o *DisplayNameTemplateVariable) SetMappedValues(v map[string]interface{}) {
+	o.MappedValues = v
+}
+
+// GetObservationField returns the ObservationField field value if set, zero value otherwise.
+func (o *DisplayNameTemplateVariable) GetObservationField() ObservationField {
+	if o == nil || IsNil(o.ObservationField) {
+		var ret ObservationField
+		return ret
+	}
+	return *o.ObservationField
+}
+
+// GetObservationFieldOk returns a tuple with the ObservationField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DisplayNameTemplateVariable) GetObservationFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.ObservationField) {
+		return nil, false
+	}
+	return o.ObservationField, true
+}
+
+// HasObservationField returns a boolean if a field has been set.
+func (o *DisplayNameTemplateVariable) HasObservationField() bool {
+	if o != nil && !IsNil(o.ObservationField) {
+		return true
+	}
+
+	return false
+}
+
+// SetObservationField gets a reference to the given ObservationField and assigns it to the ObservationField field.
+func (o *DisplayNameTemplateVariable) SetObservationField(v ObservationField) {
+	o.ObservationField = &v
+}
+
+func (o DisplayNameTemplateVariable) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DisplayNameTemplateVariable) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.MappedValues) {
+		toSerialize["mappedValues"] = o.MappedValues
+	}
+	if !IsNil(o.ObservationField) {
+		toSerialize["observationField"] = o.ObservationField
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["observationField"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["mappedValues"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [observationField, mappedValues] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *DisplayNameTemplateVariable) UnmarshalJSON(data []byte) (err error) {
+	varDisplayNameTemplateVariable := _DisplayNameTemplateVariable{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDisplayNameTemplateVariable)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DisplayNameTemplateVariable(varDisplayNameTemplateVariable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["observationField"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DisplayNameTemplateVariableMappedValues = nil
-	}
-
-	// try to unmarshal data into DisplayNameTemplateVariableObservationField
-	err = json.Unmarshal(data, &dst.DisplayNameTemplateVariableObservationField)
-	if err == nil {
-		jsonDisplayNameTemplateVariableObservationField, _ := json.Marshal(dst.DisplayNameTemplateVariableObservationField)
-		if string(jsonDisplayNameTemplateVariableObservationField) == "{}" { // empty struct
-			dst.DisplayNameTemplateVariableObservationField = nil
-		} else {
-			if err = validator.Validate(dst.DisplayNameTemplateVariableObservationField); err != nil {
-				dst.DisplayNameTemplateVariableObservationField = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["mappedValues"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DisplayNameTemplateVariableObservationField = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [observationField, mappedValues] may be set"}
+		}
+
+		delete(additionalProperties, "mappedValues")
+		delete(additionalProperties, "observationField")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.DisplayNameTemplateVariableMappedValues = nil
-		dst.DisplayNameTemplateVariableObservationField = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(DisplayNameTemplateVariable)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src DisplayNameTemplateVariable) MarshalJSON() ([]byte, error) {
-	if src.DisplayNameTemplateVariableMappedValues != nil {
-		return json.Marshal(&src.DisplayNameTemplateVariableMappedValues)
-	}
-
-	if src.DisplayNameTemplateVariableObservationField != nil {
-		return json.Marshal(&src.DisplayNameTemplateVariableObservationField)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *DisplayNameTemplateVariable) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.DisplayNameTemplateVariableMappedValues != nil {
-		return obj.DisplayNameTemplateVariableMappedValues
-	}
-
-	if obj.DisplayNameTemplateVariableObservationField != nil {
-		return obj.DisplayNameTemplateVariableObservationField
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj DisplayNameTemplateVariable) GetActualInstanceValue() (interface{}) {
-	if obj.DisplayNameTemplateVariableMappedValues != nil {
-		return *obj.DisplayNameTemplateVariableMappedValues
-	}
-
-	if obj.DisplayNameTemplateVariableObservationField != nil {
-		return *obj.DisplayNameTemplateVariableObservationField
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableDisplayNameTemplateVariable struct {

@@ -13,126 +13,247 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Timeframe - struct for Timeframe
+// checks if the Timeframe type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Timeframe{}
+
+// Timeframe Timeframe.
 type Timeframe struct {
-	TimeframeDuration *TimeframeDuration
-	TimeframeEndTime *TimeframeEndTime
+	Duration *V1Duration `json:"duration,omitempty"`
+	// End time.
+	EndTime *string `json:"endTime,omitempty"`
+	// Start time.
+	StartTime *string `json:"startTime,omitempty"`
+	// Timezone.
+	Timezone *string `json:"timezone,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// TimeframeDurationAsTimeframe is a convenience function that returns TimeframeDuration wrapped in Timeframe
-func TimeframeDurationAsTimeframe(v *TimeframeDuration) Timeframe {
-	return Timeframe{
-		TimeframeDuration: v,
+type _Timeframe Timeframe
+
+// NewTimeframe instantiates a new Timeframe object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewTimeframe() *Timeframe {
+	this := Timeframe{}
+	return &this
+}
+
+// NewTimeframeWithDefaults instantiates a new Timeframe object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewTimeframeWithDefaults() *Timeframe {
+	this := Timeframe{}
+	return &this
+}
+
+// GetDuration returns the Duration field value if set, zero value otherwise.
+func (o *Timeframe) GetDuration() V1Duration {
+	if o == nil || IsNil(o.Duration) {
+		var ret V1Duration
+		return ret
 	}
+	return *o.Duration
 }
 
-// TimeframeEndTimeAsTimeframe is a convenience function that returns TimeframeEndTime wrapped in Timeframe
-func TimeframeEndTimeAsTimeframe(v *TimeframeEndTime) Timeframe {
-	return Timeframe{
-		TimeframeEndTime: v,
+// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Timeframe) GetDurationOk() (*V1Duration, bool) {
+	if o == nil || IsNil(o.Duration) {
+		return nil, false
 	}
+	return o.Duration, true
 }
 
+// HasDuration returns a boolean if a field has been set.
+func (o *Timeframe) HasDuration() bool {
+	if o != nil && !IsNil(o.Duration) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Timeframe) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into TimeframeDuration
-	err = json.Unmarshal(data, &dst.TimeframeDuration)
-	if err == nil {
-		jsonTimeframeDuration, _ := json.Marshal(dst.TimeframeDuration)
-		if string(jsonTimeframeDuration) == "{}" { // empty struct
-			dst.TimeframeDuration = nil
-		} else {
-			if err = validator.Validate(dst.TimeframeDuration); err != nil {
-				dst.TimeframeDuration = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetDuration gets a reference to the given V1Duration and assigns it to the Duration field.
+func (o *Timeframe) SetDuration(v V1Duration) {
+	o.Duration = &v
+}
+
+// GetEndTime returns the EndTime field value if set, zero value otherwise.
+func (o *Timeframe) GetEndTime() string {
+	if o == nil || IsNil(o.EndTime) {
+		var ret string
+		return ret
+	}
+	return *o.EndTime
+}
+
+// GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Timeframe) GetEndTimeOk() (*string, bool) {
+	if o == nil || IsNil(o.EndTime) {
+		return nil, false
+	}
+	return o.EndTime, true
+}
+
+// HasEndTime returns a boolean if a field has been set.
+func (o *Timeframe) HasEndTime() bool {
+	if o != nil && !IsNil(o.EndTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetEndTime gets a reference to the given string and assigns it to the EndTime field.
+func (o *Timeframe) SetEndTime(v string) {
+	o.EndTime = &v
+}
+
+// GetStartTime returns the StartTime field value if set, zero value otherwise.
+func (o *Timeframe) GetStartTime() string {
+	if o == nil || IsNil(o.StartTime) {
+		var ret string
+		return ret
+	}
+	return *o.StartTime
+}
+
+// GetStartTimeOk returns a tuple with the StartTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Timeframe) GetStartTimeOk() (*string, bool) {
+	if o == nil || IsNil(o.StartTime) {
+		return nil, false
+	}
+	return o.StartTime, true
+}
+
+// HasStartTime returns a boolean if a field has been set.
+func (o *Timeframe) HasStartTime() bool {
+	if o != nil && !IsNil(o.StartTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartTime gets a reference to the given string and assigns it to the StartTime field.
+func (o *Timeframe) SetStartTime(v string) {
+	o.StartTime = &v
+}
+
+// GetTimezone returns the Timezone field value if set, zero value otherwise.
+func (o *Timeframe) GetTimezone() string {
+	if o == nil || IsNil(o.Timezone) {
+		var ret string
+		return ret
+	}
+	return *o.Timezone
+}
+
+// GetTimezoneOk returns a tuple with the Timezone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Timeframe) GetTimezoneOk() (*string, bool) {
+	if o == nil || IsNil(o.Timezone) {
+		return nil, false
+	}
+	return o.Timezone, true
+}
+
+// HasTimezone returns a boolean if a field has been set.
+func (o *Timeframe) HasTimezone() bool {
+	if o != nil && !IsNil(o.Timezone) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimezone gets a reference to the given string and assigns it to the Timezone field.
+func (o *Timeframe) SetTimezone(v string) {
+	o.Timezone = &v
+}
+
+func (o Timeframe) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Timeframe) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Duration) {
+		toSerialize["duration"] = o.Duration
+	}
+	if !IsNil(o.EndTime) {
+		toSerialize["endTime"] = o.EndTime
+	}
+	if !IsNil(o.StartTime) {
+		toSerialize["startTime"] = o.StartTime
+	}
+	if !IsNil(o.Timezone) {
+		toSerialize["timezone"] = o.Timezone
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["endTime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["duration"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [endTime, duration] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Timeframe) UnmarshalJSON(data []byte) (err error) {
+	varTimeframe := _Timeframe{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeframe)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Timeframe(varTimeframe)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["endTime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TimeframeDuration = nil
-	}
-
-	// try to unmarshal data into TimeframeEndTime
-	err = json.Unmarshal(data, &dst.TimeframeEndTime)
-	if err == nil {
-		jsonTimeframeEndTime, _ := json.Marshal(dst.TimeframeEndTime)
-		if string(jsonTimeframeEndTime) == "{}" { // empty struct
-			dst.TimeframeEndTime = nil
-		} else {
-			if err = validator.Validate(dst.TimeframeEndTime); err != nil {
-				dst.TimeframeEndTime = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["duration"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TimeframeEndTime = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [endTime, duration] may be set"}
+		}
+
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "endTime")
+		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "timezone")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TimeframeDuration = nil
-		dst.TimeframeEndTime = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Timeframe)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Timeframe) MarshalJSON() ([]byte, error) {
-	if src.TimeframeDuration != nil {
-		return json.Marshal(&src.TimeframeDuration)
-	}
-
-	if src.TimeframeEndTime != nil {
-		return json.Marshal(&src.TimeframeEndTime)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Timeframe) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.TimeframeDuration != nil {
-		return obj.TimeframeDuration
-	}
-
-	if obj.TimeframeEndTime != nil {
-		return obj.TimeframeEndTime
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Timeframe) GetActualInstanceValue() (interface{}) {
-	if obj.TimeframeDuration != nil {
-		return *obj.TimeframeDuration
-	}
-
-	if obj.TimeframeEndTime != nil {
-		return *obj.TimeframeEndTime
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableTimeframe struct {

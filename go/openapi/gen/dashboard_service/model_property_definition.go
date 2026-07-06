@@ -13,354 +13,431 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// PropertyDefinition - struct for PropertyDefinition
+// checks if the PropertyDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PropertyDefinition{}
+
+// PropertyDefinition Property definition.
 type PropertyDefinition struct {
-	PropertyDefinitionAlignment *PropertyDefinitionAlignment
-	PropertyDefinitionColumnDisplayName *PropertyDefinitionColumnDisplayName
-	PropertyDefinitionLink *PropertyDefinitionLink
-	PropertyDefinitionRegexExtract *PropertyDefinitionRegexExtract
-	PropertyDefinitionThresholds *PropertyDefinitionThresholds
-	PropertyDefinitionUnits *PropertyDefinitionUnits
-	PropertyDefinitionValuesAlias *PropertyDefinitionValuesAlias
-	PropertyDefinitionValuesMapping *PropertyDefinitionValuesMapping
+	Alignment *TextAlignment `json:"alignment,omitempty"`
+	// Column display name property, allows renaming the column header name
+	ColumnDisplayName *string `json:"columnDisplayName,omitempty"`
+	Link *PropertyLinks `json:"link,omitempty"`
+	// Value of Regex Extract property, a regex string
+	RegexExtract *string `json:"regexExtract,omitempty"`
+	Thresholds *PropertyThresholds `json:"thresholds,omitempty"`
+	Units *PropertyUnits `json:"units,omitempty"`
+	// Value alias property, used to give alias names to selected fields
+	ValuesAlias *string `json:"valuesAlias,omitempty"`
+	ValuesMapping *PropertyValuesMapping `json:"valuesMapping,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// PropertyDefinitionAlignmentAsPropertyDefinition is a convenience function that returns PropertyDefinitionAlignment wrapped in PropertyDefinition
-func PropertyDefinitionAlignmentAsPropertyDefinition(v *PropertyDefinitionAlignment) PropertyDefinition {
-	return PropertyDefinition{
-		PropertyDefinitionAlignment: v,
+type _PropertyDefinition PropertyDefinition
+
+// NewPropertyDefinition instantiates a new PropertyDefinition object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewPropertyDefinition() *PropertyDefinition {
+	this := PropertyDefinition{}
+	return &this
+}
+
+// NewPropertyDefinitionWithDefaults instantiates a new PropertyDefinition object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewPropertyDefinitionWithDefaults() *PropertyDefinition {
+	this := PropertyDefinition{}
+	return &this
+}
+
+// GetAlignment returns the Alignment field value if set, zero value otherwise.
+func (o *PropertyDefinition) GetAlignment() TextAlignment {
+	if o == nil || IsNil(o.Alignment) {
+		var ret TextAlignment
+		return ret
 	}
+	return *o.Alignment
 }
 
-// PropertyDefinitionColumnDisplayNameAsPropertyDefinition is a convenience function that returns PropertyDefinitionColumnDisplayName wrapped in PropertyDefinition
-func PropertyDefinitionColumnDisplayNameAsPropertyDefinition(v *PropertyDefinitionColumnDisplayName) PropertyDefinition {
-	return PropertyDefinition{
-		PropertyDefinitionColumnDisplayName: v,
+// GetAlignmentOk returns a tuple with the Alignment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PropertyDefinition) GetAlignmentOk() (*TextAlignment, bool) {
+	if o == nil || IsNil(o.Alignment) {
+		return nil, false
 	}
+	return o.Alignment, true
 }
 
-// PropertyDefinitionLinkAsPropertyDefinition is a convenience function that returns PropertyDefinitionLink wrapped in PropertyDefinition
-func PropertyDefinitionLinkAsPropertyDefinition(v *PropertyDefinitionLink) PropertyDefinition {
-	return PropertyDefinition{
-		PropertyDefinitionLink: v,
+// HasAlignment returns a boolean if a field has been set.
+func (o *PropertyDefinition) HasAlignment() bool {
+	if o != nil && !IsNil(o.Alignment) {
+		return true
 	}
+
+	return false
 }
 
-// PropertyDefinitionRegexExtractAsPropertyDefinition is a convenience function that returns PropertyDefinitionRegexExtract wrapped in PropertyDefinition
-func PropertyDefinitionRegexExtractAsPropertyDefinition(v *PropertyDefinitionRegexExtract) PropertyDefinition {
-	return PropertyDefinition{
-		PropertyDefinitionRegexExtract: v,
+// SetAlignment gets a reference to the given TextAlignment and assigns it to the Alignment field.
+func (o *PropertyDefinition) SetAlignment(v TextAlignment) {
+	o.Alignment = &v
+}
+
+// GetColumnDisplayName returns the ColumnDisplayName field value if set, zero value otherwise.
+func (o *PropertyDefinition) GetColumnDisplayName() string {
+	if o == nil || IsNil(o.ColumnDisplayName) {
+		var ret string
+		return ret
 	}
+	return *o.ColumnDisplayName
 }
 
-// PropertyDefinitionThresholdsAsPropertyDefinition is a convenience function that returns PropertyDefinitionThresholds wrapped in PropertyDefinition
-func PropertyDefinitionThresholdsAsPropertyDefinition(v *PropertyDefinitionThresholds) PropertyDefinition {
-	return PropertyDefinition{
-		PropertyDefinitionThresholds: v,
+// GetColumnDisplayNameOk returns a tuple with the ColumnDisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PropertyDefinition) GetColumnDisplayNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ColumnDisplayName) {
+		return nil, false
 	}
+	return o.ColumnDisplayName, true
 }
 
-// PropertyDefinitionUnitsAsPropertyDefinition is a convenience function that returns PropertyDefinitionUnits wrapped in PropertyDefinition
-func PropertyDefinitionUnitsAsPropertyDefinition(v *PropertyDefinitionUnits) PropertyDefinition {
-	return PropertyDefinition{
-		PropertyDefinitionUnits: v,
+// HasColumnDisplayName returns a boolean if a field has been set.
+func (o *PropertyDefinition) HasColumnDisplayName() bool {
+	if o != nil && !IsNil(o.ColumnDisplayName) {
+		return true
 	}
+
+	return false
 }
 
-// PropertyDefinitionValuesAliasAsPropertyDefinition is a convenience function that returns PropertyDefinitionValuesAlias wrapped in PropertyDefinition
-func PropertyDefinitionValuesAliasAsPropertyDefinition(v *PropertyDefinitionValuesAlias) PropertyDefinition {
-	return PropertyDefinition{
-		PropertyDefinitionValuesAlias: v,
+// SetColumnDisplayName gets a reference to the given string and assigns it to the ColumnDisplayName field.
+func (o *PropertyDefinition) SetColumnDisplayName(v string) {
+	o.ColumnDisplayName = &v
+}
+
+// GetLink returns the Link field value if set, zero value otherwise.
+func (o *PropertyDefinition) GetLink() PropertyLinks {
+	if o == nil || IsNil(o.Link) {
+		var ret PropertyLinks
+		return ret
 	}
+	return *o.Link
 }
 
-// PropertyDefinitionValuesMappingAsPropertyDefinition is a convenience function that returns PropertyDefinitionValuesMapping wrapped in PropertyDefinition
-func PropertyDefinitionValuesMappingAsPropertyDefinition(v *PropertyDefinitionValuesMapping) PropertyDefinition {
-	return PropertyDefinition{
-		PropertyDefinitionValuesMapping: v,
+// GetLinkOk returns a tuple with the Link field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PropertyDefinition) GetLinkOk() (*PropertyLinks, bool) {
+	if o == nil || IsNil(o.Link) {
+		return nil, false
 	}
+	return o.Link, true
 }
 
+// HasLink returns a boolean if a field has been set.
+func (o *PropertyDefinition) HasLink() bool {
+	if o != nil && !IsNil(o.Link) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into PropertyDefinitionAlignment
-	err = json.Unmarshal(data, &dst.PropertyDefinitionAlignment)
-	if err == nil {
-		jsonPropertyDefinitionAlignment, _ := json.Marshal(dst.PropertyDefinitionAlignment)
-		if string(jsonPropertyDefinitionAlignment) == "{}" { // empty struct
-			dst.PropertyDefinitionAlignment = nil
-		} else {
-			if err = validator.Validate(dst.PropertyDefinitionAlignment); err != nil {
-				dst.PropertyDefinitionAlignment = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetLink gets a reference to the given PropertyLinks and assigns it to the Link field.
+func (o *PropertyDefinition) SetLink(v PropertyLinks) {
+	o.Link = &v
+}
+
+// GetRegexExtract returns the RegexExtract field value if set, zero value otherwise.
+func (o *PropertyDefinition) GetRegexExtract() string {
+	if o == nil || IsNil(o.RegexExtract) {
+		var ret string
+		return ret
+	}
+	return *o.RegexExtract
+}
+
+// GetRegexExtractOk returns a tuple with the RegexExtract field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PropertyDefinition) GetRegexExtractOk() (*string, bool) {
+	if o == nil || IsNil(o.RegexExtract) {
+		return nil, false
+	}
+	return o.RegexExtract, true
+}
+
+// HasRegexExtract returns a boolean if a field has been set.
+func (o *PropertyDefinition) HasRegexExtract() bool {
+	if o != nil && !IsNil(o.RegexExtract) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegexExtract gets a reference to the given string and assigns it to the RegexExtract field.
+func (o *PropertyDefinition) SetRegexExtract(v string) {
+	o.RegexExtract = &v
+}
+
+// GetThresholds returns the Thresholds field value if set, zero value otherwise.
+func (o *PropertyDefinition) GetThresholds() PropertyThresholds {
+	if o == nil || IsNil(o.Thresholds) {
+		var ret PropertyThresholds
+		return ret
+	}
+	return *o.Thresholds
+}
+
+// GetThresholdsOk returns a tuple with the Thresholds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PropertyDefinition) GetThresholdsOk() (*PropertyThresholds, bool) {
+	if o == nil || IsNil(o.Thresholds) {
+		return nil, false
+	}
+	return o.Thresholds, true
+}
+
+// HasThresholds returns a boolean if a field has been set.
+func (o *PropertyDefinition) HasThresholds() bool {
+	if o != nil && !IsNil(o.Thresholds) {
+		return true
+	}
+
+	return false
+}
+
+// SetThresholds gets a reference to the given PropertyThresholds and assigns it to the Thresholds field.
+func (o *PropertyDefinition) SetThresholds(v PropertyThresholds) {
+	o.Thresholds = &v
+}
+
+// GetUnits returns the Units field value if set, zero value otherwise.
+func (o *PropertyDefinition) GetUnits() PropertyUnits {
+	if o == nil || IsNil(o.Units) {
+		var ret PropertyUnits
+		return ret
+	}
+	return *o.Units
+}
+
+// GetUnitsOk returns a tuple with the Units field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PropertyDefinition) GetUnitsOk() (*PropertyUnits, bool) {
+	if o == nil || IsNil(o.Units) {
+		return nil, false
+	}
+	return o.Units, true
+}
+
+// HasUnits returns a boolean if a field has been set.
+func (o *PropertyDefinition) HasUnits() bool {
+	if o != nil && !IsNil(o.Units) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnits gets a reference to the given PropertyUnits and assigns it to the Units field.
+func (o *PropertyDefinition) SetUnits(v PropertyUnits) {
+	o.Units = &v
+}
+
+// GetValuesAlias returns the ValuesAlias field value if set, zero value otherwise.
+func (o *PropertyDefinition) GetValuesAlias() string {
+	if o == nil || IsNil(o.ValuesAlias) {
+		var ret string
+		return ret
+	}
+	return *o.ValuesAlias
+}
+
+// GetValuesAliasOk returns a tuple with the ValuesAlias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PropertyDefinition) GetValuesAliasOk() (*string, bool) {
+	if o == nil || IsNil(o.ValuesAlias) {
+		return nil, false
+	}
+	return o.ValuesAlias, true
+}
+
+// HasValuesAlias returns a boolean if a field has been set.
+func (o *PropertyDefinition) HasValuesAlias() bool {
+	if o != nil && !IsNil(o.ValuesAlias) {
+		return true
+	}
+
+	return false
+}
+
+// SetValuesAlias gets a reference to the given string and assigns it to the ValuesAlias field.
+func (o *PropertyDefinition) SetValuesAlias(v string) {
+	o.ValuesAlias = &v
+}
+
+// GetValuesMapping returns the ValuesMapping field value if set, zero value otherwise.
+func (o *PropertyDefinition) GetValuesMapping() PropertyValuesMapping {
+	if o == nil || IsNil(o.ValuesMapping) {
+		var ret PropertyValuesMapping
+		return ret
+	}
+	return *o.ValuesMapping
+}
+
+// GetValuesMappingOk returns a tuple with the ValuesMapping field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PropertyDefinition) GetValuesMappingOk() (*PropertyValuesMapping, bool) {
+	if o == nil || IsNil(o.ValuesMapping) {
+		return nil, false
+	}
+	return o.ValuesMapping, true
+}
+
+// HasValuesMapping returns a boolean if a field has been set.
+func (o *PropertyDefinition) HasValuesMapping() bool {
+	if o != nil && !IsNil(o.ValuesMapping) {
+		return true
+	}
+
+	return false
+}
+
+// SetValuesMapping gets a reference to the given PropertyValuesMapping and assigns it to the ValuesMapping field.
+func (o *PropertyDefinition) SetValuesMapping(v PropertyValuesMapping) {
+	o.ValuesMapping = &v
+}
+
+func (o PropertyDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PropertyDefinition) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Alignment) {
+		toSerialize["alignment"] = o.Alignment
+	}
+	if !IsNil(o.ColumnDisplayName) {
+		toSerialize["columnDisplayName"] = o.ColumnDisplayName
+	}
+	if !IsNil(o.Link) {
+		toSerialize["link"] = o.Link
+	}
+	if !IsNil(o.RegexExtract) {
+		toSerialize["regexExtract"] = o.RegexExtract
+	}
+	if !IsNil(o.Thresholds) {
+		toSerialize["thresholds"] = o.Thresholds
+	}
+	if !IsNil(o.Units) {
+		toSerialize["units"] = o.Units
+	}
+	if !IsNil(o.ValuesAlias) {
+		toSerialize["valuesAlias"] = o.ValuesAlias
+	}
+	if !IsNil(o.ValuesMapping) {
+		toSerialize["valuesMapping"] = o.ValuesMapping
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["thresholds"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["alignment"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["units"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["regexExtract"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["link"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["valuesAlias"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["valuesMapping"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["columnDisplayName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [thresholds, alignment, units, regexExtract, link, valuesAlias, valuesMapping, columnDisplayName] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *PropertyDefinition) UnmarshalJSON(data []byte) (err error) {
+	varPropertyDefinition := _PropertyDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyDefinition(varPropertyDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["thresholds"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PropertyDefinitionAlignment = nil
-	}
-
-	// try to unmarshal data into PropertyDefinitionColumnDisplayName
-	err = json.Unmarshal(data, &dst.PropertyDefinitionColumnDisplayName)
-	if err == nil {
-		jsonPropertyDefinitionColumnDisplayName, _ := json.Marshal(dst.PropertyDefinitionColumnDisplayName)
-		if string(jsonPropertyDefinitionColumnDisplayName) == "{}" { // empty struct
-			dst.PropertyDefinitionColumnDisplayName = nil
-		} else {
-			if err = validator.Validate(dst.PropertyDefinitionColumnDisplayName); err != nil {
-				dst.PropertyDefinitionColumnDisplayName = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["alignment"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PropertyDefinitionColumnDisplayName = nil
-	}
-
-	// try to unmarshal data into PropertyDefinitionLink
-	err = json.Unmarshal(data, &dst.PropertyDefinitionLink)
-	if err == nil {
-		jsonPropertyDefinitionLink, _ := json.Marshal(dst.PropertyDefinitionLink)
-		if string(jsonPropertyDefinitionLink) == "{}" { // empty struct
-			dst.PropertyDefinitionLink = nil
-		} else {
-			if err = validator.Validate(dst.PropertyDefinitionLink); err != nil {
-				dst.PropertyDefinitionLink = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["units"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PropertyDefinitionLink = nil
-	}
-
-	// try to unmarshal data into PropertyDefinitionRegexExtract
-	err = json.Unmarshal(data, &dst.PropertyDefinitionRegexExtract)
-	if err == nil {
-		jsonPropertyDefinitionRegexExtract, _ := json.Marshal(dst.PropertyDefinitionRegexExtract)
-		if string(jsonPropertyDefinitionRegexExtract) == "{}" { // empty struct
-			dst.PropertyDefinitionRegexExtract = nil
-		} else {
-			if err = validator.Validate(dst.PropertyDefinitionRegexExtract); err != nil {
-				dst.PropertyDefinitionRegexExtract = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["regexExtract"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PropertyDefinitionRegexExtract = nil
-	}
-
-	// try to unmarshal data into PropertyDefinitionThresholds
-	err = json.Unmarshal(data, &dst.PropertyDefinitionThresholds)
-	if err == nil {
-		jsonPropertyDefinitionThresholds, _ := json.Marshal(dst.PropertyDefinitionThresholds)
-		if string(jsonPropertyDefinitionThresholds) == "{}" { // empty struct
-			dst.PropertyDefinitionThresholds = nil
-		} else {
-			if err = validator.Validate(dst.PropertyDefinitionThresholds); err != nil {
-				dst.PropertyDefinitionThresholds = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["link"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PropertyDefinitionThresholds = nil
-	}
-
-	// try to unmarshal data into PropertyDefinitionUnits
-	err = json.Unmarshal(data, &dst.PropertyDefinitionUnits)
-	if err == nil {
-		jsonPropertyDefinitionUnits, _ := json.Marshal(dst.PropertyDefinitionUnits)
-		if string(jsonPropertyDefinitionUnits) == "{}" { // empty struct
-			dst.PropertyDefinitionUnits = nil
-		} else {
-			if err = validator.Validate(dst.PropertyDefinitionUnits); err != nil {
-				dst.PropertyDefinitionUnits = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["valuesAlias"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PropertyDefinitionUnits = nil
-	}
-
-	// try to unmarshal data into PropertyDefinitionValuesAlias
-	err = json.Unmarshal(data, &dst.PropertyDefinitionValuesAlias)
-	if err == nil {
-		jsonPropertyDefinitionValuesAlias, _ := json.Marshal(dst.PropertyDefinitionValuesAlias)
-		if string(jsonPropertyDefinitionValuesAlias) == "{}" { // empty struct
-			dst.PropertyDefinitionValuesAlias = nil
-		} else {
-			if err = validator.Validate(dst.PropertyDefinitionValuesAlias); err != nil {
-				dst.PropertyDefinitionValuesAlias = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["valuesMapping"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PropertyDefinitionValuesAlias = nil
-	}
-
-	// try to unmarshal data into PropertyDefinitionValuesMapping
-	err = json.Unmarshal(data, &dst.PropertyDefinitionValuesMapping)
-	if err == nil {
-		jsonPropertyDefinitionValuesMapping, _ := json.Marshal(dst.PropertyDefinitionValuesMapping)
-		if string(jsonPropertyDefinitionValuesMapping) == "{}" { // empty struct
-			dst.PropertyDefinitionValuesMapping = nil
-		} else {
-			if err = validator.Validate(dst.PropertyDefinitionValuesMapping); err != nil {
-				dst.PropertyDefinitionValuesMapping = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["columnDisplayName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PropertyDefinitionValuesMapping = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [thresholds, alignment, units, regexExtract, link, valuesAlias, valuesMapping, columnDisplayName] may be set"}
+		}
+
+		delete(additionalProperties, "alignment")
+		delete(additionalProperties, "columnDisplayName")
+		delete(additionalProperties, "link")
+		delete(additionalProperties, "regexExtract")
+		delete(additionalProperties, "thresholds")
+		delete(additionalProperties, "units")
+		delete(additionalProperties, "valuesAlias")
+		delete(additionalProperties, "valuesMapping")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.PropertyDefinitionAlignment = nil
-		dst.PropertyDefinitionColumnDisplayName = nil
-		dst.PropertyDefinitionLink = nil
-		dst.PropertyDefinitionRegexExtract = nil
-		dst.PropertyDefinitionThresholds = nil
-		dst.PropertyDefinitionUnits = nil
-		dst.PropertyDefinitionValuesAlias = nil
-		dst.PropertyDefinitionValuesMapping = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(PropertyDefinition)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src PropertyDefinition) MarshalJSON() ([]byte, error) {
-	if src.PropertyDefinitionAlignment != nil {
-		return json.Marshal(&src.PropertyDefinitionAlignment)
-	}
-
-	if src.PropertyDefinitionColumnDisplayName != nil {
-		return json.Marshal(&src.PropertyDefinitionColumnDisplayName)
-	}
-
-	if src.PropertyDefinitionLink != nil {
-		return json.Marshal(&src.PropertyDefinitionLink)
-	}
-
-	if src.PropertyDefinitionRegexExtract != nil {
-		return json.Marshal(&src.PropertyDefinitionRegexExtract)
-	}
-
-	if src.PropertyDefinitionThresholds != nil {
-		return json.Marshal(&src.PropertyDefinitionThresholds)
-	}
-
-	if src.PropertyDefinitionUnits != nil {
-		return json.Marshal(&src.PropertyDefinitionUnits)
-	}
-
-	if src.PropertyDefinitionValuesAlias != nil {
-		return json.Marshal(&src.PropertyDefinitionValuesAlias)
-	}
-
-	if src.PropertyDefinitionValuesMapping != nil {
-		return json.Marshal(&src.PropertyDefinitionValuesMapping)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *PropertyDefinition) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.PropertyDefinitionAlignment != nil {
-		return obj.PropertyDefinitionAlignment
-	}
-
-	if obj.PropertyDefinitionColumnDisplayName != nil {
-		return obj.PropertyDefinitionColumnDisplayName
-	}
-
-	if obj.PropertyDefinitionLink != nil {
-		return obj.PropertyDefinitionLink
-	}
-
-	if obj.PropertyDefinitionRegexExtract != nil {
-		return obj.PropertyDefinitionRegexExtract
-	}
-
-	if obj.PropertyDefinitionThresholds != nil {
-		return obj.PropertyDefinitionThresholds
-	}
-
-	if obj.PropertyDefinitionUnits != nil {
-		return obj.PropertyDefinitionUnits
-	}
-
-	if obj.PropertyDefinitionValuesAlias != nil {
-		return obj.PropertyDefinitionValuesAlias
-	}
-
-	if obj.PropertyDefinitionValuesMapping != nil {
-		return obj.PropertyDefinitionValuesMapping
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj PropertyDefinition) GetActualInstanceValue() (interface{}) {
-	if obj.PropertyDefinitionAlignment != nil {
-		return *obj.PropertyDefinitionAlignment
-	}
-
-	if obj.PropertyDefinitionColumnDisplayName != nil {
-		return *obj.PropertyDefinitionColumnDisplayName
-	}
-
-	if obj.PropertyDefinitionLink != nil {
-		return *obj.PropertyDefinitionLink
-	}
-
-	if obj.PropertyDefinitionRegexExtract != nil {
-		return *obj.PropertyDefinitionRegexExtract
-	}
-
-	if obj.PropertyDefinitionThresholds != nil {
-		return *obj.PropertyDefinitionThresholds
-	}
-
-	if obj.PropertyDefinitionUnits != nil {
-		return *obj.PropertyDefinitionUnits
-	}
-
-	if obj.PropertyDefinitionValuesAlias != nil {
-		return *obj.PropertyDefinitionValuesAlias
-	}
-
-	if obj.PropertyDefinitionValuesMapping != nil {
-		return *obj.PropertyDefinitionValuesMapping
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullablePropertyDefinition struct {

@@ -13,354 +13,429 @@ package case_events_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// EventActor - struct for EventActor
+// checks if the EventActor type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EventActor{}
+
+// EventActor Actor that initiated the event.
 type EventActor struct {
-	EventActorApiKey *EventActorApiKey
-	EventActorMicrosoftTeams *EventActorMicrosoftTeams
-	EventActorPagerDuty *EventActorPagerDuty
-	EventActorPrometheusAlertManager *EventActorPrometheusAlertManager
-	EventActorServiceNow *EventActorServiceNow
-	EventActorSlack *EventActorSlack
-	EventActorSystem *EventActorSystem
-	EventActorUser *EventActorUser
+	ApiKey *ApiKeyActor `json:"apiKey,omitempty"`
+	MicrosoftTeams *MicrosoftTeamsActor `json:"microsoftTeams,omitempty"`
+	PagerDuty *PagerDutyActor `json:"pagerDuty,omitempty"`
+	PrometheusAlertManager *PrometheusAlertManagerActor `json:"prometheusAlertManager,omitempty"`
+	ServiceNow *ServiceNowActor `json:"serviceNow,omitempty"`
+	Slack *SlackActor `json:"slack,omitempty"`
+	// Empty message indicating system-initiated action.
+	System map[string]interface{} `json:"system,omitempty"`
+	User *UserActor `json:"user,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// EventActorApiKeyAsEventActor is a convenience function that returns EventActorApiKey wrapped in EventActor
-func EventActorApiKeyAsEventActor(v *EventActorApiKey) EventActor {
-	return EventActor{
-		EventActorApiKey: v,
+type _EventActor EventActor
+
+// NewEventActor instantiates a new EventActor object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewEventActor() *EventActor {
+	this := EventActor{}
+	return &this
+}
+
+// NewEventActorWithDefaults instantiates a new EventActor object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewEventActorWithDefaults() *EventActor {
+	this := EventActor{}
+	return &this
+}
+
+// GetApiKey returns the ApiKey field value if set, zero value otherwise.
+func (o *EventActor) GetApiKey() ApiKeyActor {
+	if o == nil || IsNil(o.ApiKey) {
+		var ret ApiKeyActor
+		return ret
 	}
+	return *o.ApiKey
 }
 
-// EventActorMicrosoftTeamsAsEventActor is a convenience function that returns EventActorMicrosoftTeams wrapped in EventActor
-func EventActorMicrosoftTeamsAsEventActor(v *EventActorMicrosoftTeams) EventActor {
-	return EventActor{
-		EventActorMicrosoftTeams: v,
+// GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventActor) GetApiKeyOk() (*ApiKeyActor, bool) {
+	if o == nil || IsNil(o.ApiKey) {
+		return nil, false
 	}
+	return o.ApiKey, true
 }
 
-// EventActorPagerDutyAsEventActor is a convenience function that returns EventActorPagerDuty wrapped in EventActor
-func EventActorPagerDutyAsEventActor(v *EventActorPagerDuty) EventActor {
-	return EventActor{
-		EventActorPagerDuty: v,
+// HasApiKey returns a boolean if a field has been set.
+func (o *EventActor) HasApiKey() bool {
+	if o != nil && !IsNil(o.ApiKey) {
+		return true
 	}
+
+	return false
 }
 
-// EventActorPrometheusAlertManagerAsEventActor is a convenience function that returns EventActorPrometheusAlertManager wrapped in EventActor
-func EventActorPrometheusAlertManagerAsEventActor(v *EventActorPrometheusAlertManager) EventActor {
-	return EventActor{
-		EventActorPrometheusAlertManager: v,
+// SetApiKey gets a reference to the given ApiKeyActor and assigns it to the ApiKey field.
+func (o *EventActor) SetApiKey(v ApiKeyActor) {
+	o.ApiKey = &v
+}
+
+// GetMicrosoftTeams returns the MicrosoftTeams field value if set, zero value otherwise.
+func (o *EventActor) GetMicrosoftTeams() MicrosoftTeamsActor {
+	if o == nil || IsNil(o.MicrosoftTeams) {
+		var ret MicrosoftTeamsActor
+		return ret
 	}
+	return *o.MicrosoftTeams
 }
 
-// EventActorServiceNowAsEventActor is a convenience function that returns EventActorServiceNow wrapped in EventActor
-func EventActorServiceNowAsEventActor(v *EventActorServiceNow) EventActor {
-	return EventActor{
-		EventActorServiceNow: v,
+// GetMicrosoftTeamsOk returns a tuple with the MicrosoftTeams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventActor) GetMicrosoftTeamsOk() (*MicrosoftTeamsActor, bool) {
+	if o == nil || IsNil(o.MicrosoftTeams) {
+		return nil, false
 	}
+	return o.MicrosoftTeams, true
 }
 
-// EventActorSlackAsEventActor is a convenience function that returns EventActorSlack wrapped in EventActor
-func EventActorSlackAsEventActor(v *EventActorSlack) EventActor {
-	return EventActor{
-		EventActorSlack: v,
+// HasMicrosoftTeams returns a boolean if a field has been set.
+func (o *EventActor) HasMicrosoftTeams() bool {
+	if o != nil && !IsNil(o.MicrosoftTeams) {
+		return true
 	}
+
+	return false
 }
 
-// EventActorSystemAsEventActor is a convenience function that returns EventActorSystem wrapped in EventActor
-func EventActorSystemAsEventActor(v *EventActorSystem) EventActor {
-	return EventActor{
-		EventActorSystem: v,
+// SetMicrosoftTeams gets a reference to the given MicrosoftTeamsActor and assigns it to the MicrosoftTeams field.
+func (o *EventActor) SetMicrosoftTeams(v MicrosoftTeamsActor) {
+	o.MicrosoftTeams = &v
+}
+
+// GetPagerDuty returns the PagerDuty field value if set, zero value otherwise.
+func (o *EventActor) GetPagerDuty() PagerDutyActor {
+	if o == nil || IsNil(o.PagerDuty) {
+		var ret PagerDutyActor
+		return ret
 	}
+	return *o.PagerDuty
 }
 
-// EventActorUserAsEventActor is a convenience function that returns EventActorUser wrapped in EventActor
-func EventActorUserAsEventActor(v *EventActorUser) EventActor {
-	return EventActor{
-		EventActorUser: v,
+// GetPagerDutyOk returns a tuple with the PagerDuty field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventActor) GetPagerDutyOk() (*PagerDutyActor, bool) {
+	if o == nil || IsNil(o.PagerDuty) {
+		return nil, false
 	}
+	return o.PagerDuty, true
 }
 
+// HasPagerDuty returns a boolean if a field has been set.
+func (o *EventActor) HasPagerDuty() bool {
+	if o != nil && !IsNil(o.PagerDuty) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *EventActor) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into EventActorApiKey
-	err = json.Unmarshal(data, &dst.EventActorApiKey)
-	if err == nil {
-		jsonEventActorApiKey, _ := json.Marshal(dst.EventActorApiKey)
-		if string(jsonEventActorApiKey) == "{}" { // empty struct
-			dst.EventActorApiKey = nil
-		} else {
-			if err = validator.Validate(dst.EventActorApiKey); err != nil {
-				dst.EventActorApiKey = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetPagerDuty gets a reference to the given PagerDutyActor and assigns it to the PagerDuty field.
+func (o *EventActor) SetPagerDuty(v PagerDutyActor) {
+	o.PagerDuty = &v
+}
+
+// GetPrometheusAlertManager returns the PrometheusAlertManager field value if set, zero value otherwise.
+func (o *EventActor) GetPrometheusAlertManager() PrometheusAlertManagerActor {
+	if o == nil || IsNil(o.PrometheusAlertManager) {
+		var ret PrometheusAlertManagerActor
+		return ret
+	}
+	return *o.PrometheusAlertManager
+}
+
+// GetPrometheusAlertManagerOk returns a tuple with the PrometheusAlertManager field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventActor) GetPrometheusAlertManagerOk() (*PrometheusAlertManagerActor, bool) {
+	if o == nil || IsNil(o.PrometheusAlertManager) {
+		return nil, false
+	}
+	return o.PrometheusAlertManager, true
+}
+
+// HasPrometheusAlertManager returns a boolean if a field has been set.
+func (o *EventActor) HasPrometheusAlertManager() bool {
+	if o != nil && !IsNil(o.PrometheusAlertManager) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrometheusAlertManager gets a reference to the given PrometheusAlertManagerActor and assigns it to the PrometheusAlertManager field.
+func (o *EventActor) SetPrometheusAlertManager(v PrometheusAlertManagerActor) {
+	o.PrometheusAlertManager = &v
+}
+
+// GetServiceNow returns the ServiceNow field value if set, zero value otherwise.
+func (o *EventActor) GetServiceNow() ServiceNowActor {
+	if o == nil || IsNil(o.ServiceNow) {
+		var ret ServiceNowActor
+		return ret
+	}
+	return *o.ServiceNow
+}
+
+// GetServiceNowOk returns a tuple with the ServiceNow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventActor) GetServiceNowOk() (*ServiceNowActor, bool) {
+	if o == nil || IsNil(o.ServiceNow) {
+		return nil, false
+	}
+	return o.ServiceNow, true
+}
+
+// HasServiceNow returns a boolean if a field has been set.
+func (o *EventActor) HasServiceNow() bool {
+	if o != nil && !IsNil(o.ServiceNow) {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceNow gets a reference to the given ServiceNowActor and assigns it to the ServiceNow field.
+func (o *EventActor) SetServiceNow(v ServiceNowActor) {
+	o.ServiceNow = &v
+}
+
+// GetSlack returns the Slack field value if set, zero value otherwise.
+func (o *EventActor) GetSlack() SlackActor {
+	if o == nil || IsNil(o.Slack) {
+		var ret SlackActor
+		return ret
+	}
+	return *o.Slack
+}
+
+// GetSlackOk returns a tuple with the Slack field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventActor) GetSlackOk() (*SlackActor, bool) {
+	if o == nil || IsNil(o.Slack) {
+		return nil, false
+	}
+	return o.Slack, true
+}
+
+// HasSlack returns a boolean if a field has been set.
+func (o *EventActor) HasSlack() bool {
+	if o != nil && !IsNil(o.Slack) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlack gets a reference to the given SlackActor and assigns it to the Slack field.
+func (o *EventActor) SetSlack(v SlackActor) {
+	o.Slack = &v
+}
+
+// GetSystem returns the System field value if set, zero value otherwise.
+func (o *EventActor) GetSystem() map[string]interface{} {
+	if o == nil || IsNil(o.System) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.System
+}
+
+// GetSystemOk returns a tuple with the System field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventActor) GetSystemOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.System) {
+		return map[string]interface{}{}, false
+	}
+	return o.System, true
+}
+
+// HasSystem returns a boolean if a field has been set.
+func (o *EventActor) HasSystem() bool {
+	if o != nil && !IsNil(o.System) {
+		return true
+	}
+
+	return false
+}
+
+// SetSystem gets a reference to the given map[string]interface{} and assigns it to the System field.
+func (o *EventActor) SetSystem(v map[string]interface{}) {
+	o.System = v
+}
+
+// GetUser returns the User field value if set, zero value otherwise.
+func (o *EventActor) GetUser() UserActor {
+	if o == nil || IsNil(o.User) {
+		var ret UserActor
+		return ret
+	}
+	return *o.User
+}
+
+// GetUserOk returns a tuple with the User field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventActor) GetUserOk() (*UserActor, bool) {
+	if o == nil || IsNil(o.User) {
+		return nil, false
+	}
+	return o.User, true
+}
+
+// HasUser returns a boolean if a field has been set.
+func (o *EventActor) HasUser() bool {
+	if o != nil && !IsNil(o.User) {
+		return true
+	}
+
+	return false
+}
+
+// SetUser gets a reference to the given UserActor and assigns it to the User field.
+func (o *EventActor) SetUser(v UserActor) {
+	o.User = &v
+}
+
+func (o EventActor) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EventActor) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApiKey) {
+		toSerialize["apiKey"] = o.ApiKey
+	}
+	if !IsNil(o.MicrosoftTeams) {
+		toSerialize["microsoftTeams"] = o.MicrosoftTeams
+	}
+	if !IsNil(o.PagerDuty) {
+		toSerialize["pagerDuty"] = o.PagerDuty
+	}
+	if !IsNil(o.PrometheusAlertManager) {
+		toSerialize["prometheusAlertManager"] = o.PrometheusAlertManager
+	}
+	if !IsNil(o.ServiceNow) {
+		toSerialize["serviceNow"] = o.ServiceNow
+	}
+	if !IsNil(o.Slack) {
+		toSerialize["slack"] = o.Slack
+	}
+	if !IsNil(o.System) {
+		toSerialize["system"] = o.System
+	}
+	if !IsNil(o.User) {
+		toSerialize["user"] = o.User
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["system"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["user"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["serviceNow"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["apiKey"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["slack"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["prometheusAlertManager"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["pagerDuty"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["microsoftTeams"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [system, user, serviceNow, apiKey, slack, prometheusAlertManager, pagerDuty, microsoftTeams] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *EventActor) UnmarshalJSON(data []byte) (err error) {
+	varEventActor := _EventActor{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEventActor)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EventActor(varEventActor)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["system"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EventActorApiKey = nil
-	}
-
-	// try to unmarshal data into EventActorMicrosoftTeams
-	err = json.Unmarshal(data, &dst.EventActorMicrosoftTeams)
-	if err == nil {
-		jsonEventActorMicrosoftTeams, _ := json.Marshal(dst.EventActorMicrosoftTeams)
-		if string(jsonEventActorMicrosoftTeams) == "{}" { // empty struct
-			dst.EventActorMicrosoftTeams = nil
-		} else {
-			if err = validator.Validate(dst.EventActorMicrosoftTeams); err != nil {
-				dst.EventActorMicrosoftTeams = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["user"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EventActorMicrosoftTeams = nil
-	}
-
-	// try to unmarshal data into EventActorPagerDuty
-	err = json.Unmarshal(data, &dst.EventActorPagerDuty)
-	if err == nil {
-		jsonEventActorPagerDuty, _ := json.Marshal(dst.EventActorPagerDuty)
-		if string(jsonEventActorPagerDuty) == "{}" { // empty struct
-			dst.EventActorPagerDuty = nil
-		} else {
-			if err = validator.Validate(dst.EventActorPagerDuty); err != nil {
-				dst.EventActorPagerDuty = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["serviceNow"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EventActorPagerDuty = nil
-	}
-
-	// try to unmarshal data into EventActorPrometheusAlertManager
-	err = json.Unmarshal(data, &dst.EventActorPrometheusAlertManager)
-	if err == nil {
-		jsonEventActorPrometheusAlertManager, _ := json.Marshal(dst.EventActorPrometheusAlertManager)
-		if string(jsonEventActorPrometheusAlertManager) == "{}" { // empty struct
-			dst.EventActorPrometheusAlertManager = nil
-		} else {
-			if err = validator.Validate(dst.EventActorPrometheusAlertManager); err != nil {
-				dst.EventActorPrometheusAlertManager = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["apiKey"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EventActorPrometheusAlertManager = nil
-	}
-
-	// try to unmarshal data into EventActorServiceNow
-	err = json.Unmarshal(data, &dst.EventActorServiceNow)
-	if err == nil {
-		jsonEventActorServiceNow, _ := json.Marshal(dst.EventActorServiceNow)
-		if string(jsonEventActorServiceNow) == "{}" { // empty struct
-			dst.EventActorServiceNow = nil
-		} else {
-			if err = validator.Validate(dst.EventActorServiceNow); err != nil {
-				dst.EventActorServiceNow = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["slack"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EventActorServiceNow = nil
-	}
-
-	// try to unmarshal data into EventActorSlack
-	err = json.Unmarshal(data, &dst.EventActorSlack)
-	if err == nil {
-		jsonEventActorSlack, _ := json.Marshal(dst.EventActorSlack)
-		if string(jsonEventActorSlack) == "{}" { // empty struct
-			dst.EventActorSlack = nil
-		} else {
-			if err = validator.Validate(dst.EventActorSlack); err != nil {
-				dst.EventActorSlack = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["prometheusAlertManager"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EventActorSlack = nil
-	}
-
-	// try to unmarshal data into EventActorSystem
-	err = json.Unmarshal(data, &dst.EventActorSystem)
-	if err == nil {
-		jsonEventActorSystem, _ := json.Marshal(dst.EventActorSystem)
-		if string(jsonEventActorSystem) == "{}" { // empty struct
-			dst.EventActorSystem = nil
-		} else {
-			if err = validator.Validate(dst.EventActorSystem); err != nil {
-				dst.EventActorSystem = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["pagerDuty"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EventActorSystem = nil
-	}
-
-	// try to unmarshal data into EventActorUser
-	err = json.Unmarshal(data, &dst.EventActorUser)
-	if err == nil {
-		jsonEventActorUser, _ := json.Marshal(dst.EventActorUser)
-		if string(jsonEventActorUser) == "{}" { // empty struct
-			dst.EventActorUser = nil
-		} else {
-			if err = validator.Validate(dst.EventActorUser); err != nil {
-				dst.EventActorUser = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["microsoftTeams"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EventActorUser = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [system, user, serviceNow, apiKey, slack, prometheusAlertManager, pagerDuty, microsoftTeams] may be set"}
+		}
+
+		delete(additionalProperties, "apiKey")
+		delete(additionalProperties, "microsoftTeams")
+		delete(additionalProperties, "pagerDuty")
+		delete(additionalProperties, "prometheusAlertManager")
+		delete(additionalProperties, "serviceNow")
+		delete(additionalProperties, "slack")
+		delete(additionalProperties, "system")
+		delete(additionalProperties, "user")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.EventActorApiKey = nil
-		dst.EventActorMicrosoftTeams = nil
-		dst.EventActorPagerDuty = nil
-		dst.EventActorPrometheusAlertManager = nil
-		dst.EventActorServiceNow = nil
-		dst.EventActorSlack = nil
-		dst.EventActorSystem = nil
-		dst.EventActorUser = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(EventActor)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src EventActor) MarshalJSON() ([]byte, error) {
-	if src.EventActorApiKey != nil {
-		return json.Marshal(&src.EventActorApiKey)
-	}
-
-	if src.EventActorMicrosoftTeams != nil {
-		return json.Marshal(&src.EventActorMicrosoftTeams)
-	}
-
-	if src.EventActorPagerDuty != nil {
-		return json.Marshal(&src.EventActorPagerDuty)
-	}
-
-	if src.EventActorPrometheusAlertManager != nil {
-		return json.Marshal(&src.EventActorPrometheusAlertManager)
-	}
-
-	if src.EventActorServiceNow != nil {
-		return json.Marshal(&src.EventActorServiceNow)
-	}
-
-	if src.EventActorSlack != nil {
-		return json.Marshal(&src.EventActorSlack)
-	}
-
-	if src.EventActorSystem != nil {
-		return json.Marshal(&src.EventActorSystem)
-	}
-
-	if src.EventActorUser != nil {
-		return json.Marshal(&src.EventActorUser)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *EventActor) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.EventActorApiKey != nil {
-		return obj.EventActorApiKey
-	}
-
-	if obj.EventActorMicrosoftTeams != nil {
-		return obj.EventActorMicrosoftTeams
-	}
-
-	if obj.EventActorPagerDuty != nil {
-		return obj.EventActorPagerDuty
-	}
-
-	if obj.EventActorPrometheusAlertManager != nil {
-		return obj.EventActorPrometheusAlertManager
-	}
-
-	if obj.EventActorServiceNow != nil {
-		return obj.EventActorServiceNow
-	}
-
-	if obj.EventActorSlack != nil {
-		return obj.EventActorSlack
-	}
-
-	if obj.EventActorSystem != nil {
-		return obj.EventActorSystem
-	}
-
-	if obj.EventActorUser != nil {
-		return obj.EventActorUser
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj EventActor) GetActualInstanceValue() (interface{}) {
-	if obj.EventActorApiKey != nil {
-		return *obj.EventActorApiKey
-	}
-
-	if obj.EventActorMicrosoftTeams != nil {
-		return *obj.EventActorMicrosoftTeams
-	}
-
-	if obj.EventActorPagerDuty != nil {
-		return *obj.EventActorPagerDuty
-	}
-
-	if obj.EventActorPrometheusAlertManager != nil {
-		return *obj.EventActorPrometheusAlertManager
-	}
-
-	if obj.EventActorServiceNow != nil {
-		return *obj.EventActorServiceNow
-	}
-
-	if obj.EventActorSlack != nil {
-		return *obj.EventActorSlack
-	}
-
-	if obj.EventActorSystem != nil {
-		return *obj.EventActorSystem
-	}
-
-	if obj.EventActorUser != nil {
-		return *obj.EventActorUser
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableEventActor struct {

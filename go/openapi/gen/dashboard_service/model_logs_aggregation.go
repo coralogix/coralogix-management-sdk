@@ -13,316 +13,386 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// LogsAggregation - struct for LogsAggregation
+// checks if the LogsAggregation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LogsAggregation{}
+
+// LogsAggregation Discriminated union of logs aggregation functions such as count, sum, average, min, max, and percentile.
 type LogsAggregation struct {
-	LogsAggregationAverage *LogsAggregationAverage
-	LogsAggregationCount *LogsAggregationCount
-	LogsAggregationCountDistinct *LogsAggregationCountDistinct
-	LogsAggregationMax *LogsAggregationMax
-	LogsAggregationMin *LogsAggregationMin
-	LogsAggregationPercentile *LogsAggregationPercentile
-	LogsAggregationSum *LogsAggregationSum
+	Average *Average `json:"average,omitempty"`
+	// Count.
+	Count map[string]interface{} `json:"count,omitempty"`
+	CountDistinct *CountDistinct `json:"countDistinct,omitempty"`
+	Max *Max `json:"max,omitempty"`
+	Min *Min `json:"min,omitempty"`
+	Percentile *Percentile `json:"percentile,omitempty"`
+	Sum *Sum `json:"sum,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// LogsAggregationAverageAsLogsAggregation is a convenience function that returns LogsAggregationAverage wrapped in LogsAggregation
-func LogsAggregationAverageAsLogsAggregation(v *LogsAggregationAverage) LogsAggregation {
-	return LogsAggregation{
-		LogsAggregationAverage: v,
+type _LogsAggregation LogsAggregation
+
+// NewLogsAggregation instantiates a new LogsAggregation object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewLogsAggregation() *LogsAggregation {
+	this := LogsAggregation{}
+	return &this
+}
+
+// NewLogsAggregationWithDefaults instantiates a new LogsAggregation object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewLogsAggregationWithDefaults() *LogsAggregation {
+	this := LogsAggregation{}
+	return &this
+}
+
+// GetAverage returns the Average field value if set, zero value otherwise.
+func (o *LogsAggregation) GetAverage() Average {
+	if o == nil || IsNil(o.Average) {
+		var ret Average
+		return ret
 	}
+	return *o.Average
 }
 
-// LogsAggregationCountAsLogsAggregation is a convenience function that returns LogsAggregationCount wrapped in LogsAggregation
-func LogsAggregationCountAsLogsAggregation(v *LogsAggregationCount) LogsAggregation {
-	return LogsAggregation{
-		LogsAggregationCount: v,
+// GetAverageOk returns a tuple with the Average field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsAggregation) GetAverageOk() (*Average, bool) {
+	if o == nil || IsNil(o.Average) {
+		return nil, false
 	}
+	return o.Average, true
 }
 
-// LogsAggregationCountDistinctAsLogsAggregation is a convenience function that returns LogsAggregationCountDistinct wrapped in LogsAggregation
-func LogsAggregationCountDistinctAsLogsAggregation(v *LogsAggregationCountDistinct) LogsAggregation {
-	return LogsAggregation{
-		LogsAggregationCountDistinct: v,
+// HasAverage returns a boolean if a field has been set.
+func (o *LogsAggregation) HasAverage() bool {
+	if o != nil && !IsNil(o.Average) {
+		return true
 	}
+
+	return false
 }
 
-// LogsAggregationMaxAsLogsAggregation is a convenience function that returns LogsAggregationMax wrapped in LogsAggregation
-func LogsAggregationMaxAsLogsAggregation(v *LogsAggregationMax) LogsAggregation {
-	return LogsAggregation{
-		LogsAggregationMax: v,
+// SetAverage gets a reference to the given Average and assigns it to the Average field.
+func (o *LogsAggregation) SetAverage(v Average) {
+	o.Average = &v
+}
+
+// GetCount returns the Count field value if set, zero value otherwise.
+func (o *LogsAggregation) GetCount() map[string]interface{} {
+	if o == nil || IsNil(o.Count) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.Count
 }
 
-// LogsAggregationMinAsLogsAggregation is a convenience function that returns LogsAggregationMin wrapped in LogsAggregation
-func LogsAggregationMinAsLogsAggregation(v *LogsAggregationMin) LogsAggregation {
-	return LogsAggregation{
-		LogsAggregationMin: v,
+// GetCountOk returns a tuple with the Count field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsAggregation) GetCountOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Count) {
+		return map[string]interface{}{}, false
 	}
+	return o.Count, true
 }
 
-// LogsAggregationPercentileAsLogsAggregation is a convenience function that returns LogsAggregationPercentile wrapped in LogsAggregation
-func LogsAggregationPercentileAsLogsAggregation(v *LogsAggregationPercentile) LogsAggregation {
-	return LogsAggregation{
-		LogsAggregationPercentile: v,
+// HasCount returns a boolean if a field has been set.
+func (o *LogsAggregation) HasCount() bool {
+	if o != nil && !IsNil(o.Count) {
+		return true
 	}
+
+	return false
 }
 
-// LogsAggregationSumAsLogsAggregation is a convenience function that returns LogsAggregationSum wrapped in LogsAggregation
-func LogsAggregationSumAsLogsAggregation(v *LogsAggregationSum) LogsAggregation {
-	return LogsAggregation{
-		LogsAggregationSum: v,
+// SetCount gets a reference to the given map[string]interface{} and assigns it to the Count field.
+func (o *LogsAggregation) SetCount(v map[string]interface{}) {
+	o.Count = v
+}
+
+// GetCountDistinct returns the CountDistinct field value if set, zero value otherwise.
+func (o *LogsAggregation) GetCountDistinct() CountDistinct {
+	if o == nil || IsNil(o.CountDistinct) {
+		var ret CountDistinct
+		return ret
 	}
+	return *o.CountDistinct
 }
 
+// GetCountDistinctOk returns a tuple with the CountDistinct field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsAggregation) GetCountDistinctOk() (*CountDistinct, bool) {
+	if o == nil || IsNil(o.CountDistinct) {
+		return nil, false
+	}
+	return o.CountDistinct, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *LogsAggregation) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into LogsAggregationAverage
-	err = json.Unmarshal(data, &dst.LogsAggregationAverage)
-	if err == nil {
-		jsonLogsAggregationAverage, _ := json.Marshal(dst.LogsAggregationAverage)
-		if string(jsonLogsAggregationAverage) == "{}" { // empty struct
-			dst.LogsAggregationAverage = nil
-		} else {
-			if err = validator.Validate(dst.LogsAggregationAverage); err != nil {
-				dst.LogsAggregationAverage = nil
-			} else {
-				match++
-			}
+// HasCountDistinct returns a boolean if a field has been set.
+func (o *LogsAggregation) HasCountDistinct() bool {
+	if o != nil && !IsNil(o.CountDistinct) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountDistinct gets a reference to the given CountDistinct and assigns it to the CountDistinct field.
+func (o *LogsAggregation) SetCountDistinct(v CountDistinct) {
+	o.CountDistinct = &v
+}
+
+// GetMax returns the Max field value if set, zero value otherwise.
+func (o *LogsAggregation) GetMax() Max {
+	if o == nil || IsNil(o.Max) {
+		var ret Max
+		return ret
+	}
+	return *o.Max
+}
+
+// GetMaxOk returns a tuple with the Max field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsAggregation) GetMaxOk() (*Max, bool) {
+	if o == nil || IsNil(o.Max) {
+		return nil, false
+	}
+	return o.Max, true
+}
+
+// HasMax returns a boolean if a field has been set.
+func (o *LogsAggregation) HasMax() bool {
+	if o != nil && !IsNil(o.Max) {
+		return true
+	}
+
+	return false
+}
+
+// SetMax gets a reference to the given Max and assigns it to the Max field.
+func (o *LogsAggregation) SetMax(v Max) {
+	o.Max = &v
+}
+
+// GetMin returns the Min field value if set, zero value otherwise.
+func (o *LogsAggregation) GetMin() Min {
+	if o == nil || IsNil(o.Min) {
+		var ret Min
+		return ret
+	}
+	return *o.Min
+}
+
+// GetMinOk returns a tuple with the Min field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsAggregation) GetMinOk() (*Min, bool) {
+	if o == nil || IsNil(o.Min) {
+		return nil, false
+	}
+	return o.Min, true
+}
+
+// HasMin returns a boolean if a field has been set.
+func (o *LogsAggregation) HasMin() bool {
+	if o != nil && !IsNil(o.Min) {
+		return true
+	}
+
+	return false
+}
+
+// SetMin gets a reference to the given Min and assigns it to the Min field.
+func (o *LogsAggregation) SetMin(v Min) {
+	o.Min = &v
+}
+
+// GetPercentile returns the Percentile field value if set, zero value otherwise.
+func (o *LogsAggregation) GetPercentile() Percentile {
+	if o == nil || IsNil(o.Percentile) {
+		var ret Percentile
+		return ret
+	}
+	return *o.Percentile
+}
+
+// GetPercentileOk returns a tuple with the Percentile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsAggregation) GetPercentileOk() (*Percentile, bool) {
+	if o == nil || IsNil(o.Percentile) {
+		return nil, false
+	}
+	return o.Percentile, true
+}
+
+// HasPercentile returns a boolean if a field has been set.
+func (o *LogsAggregation) HasPercentile() bool {
+	if o != nil && !IsNil(o.Percentile) {
+		return true
+	}
+
+	return false
+}
+
+// SetPercentile gets a reference to the given Percentile and assigns it to the Percentile field.
+func (o *LogsAggregation) SetPercentile(v Percentile) {
+	o.Percentile = &v
+}
+
+// GetSum returns the Sum field value if set, zero value otherwise.
+func (o *LogsAggregation) GetSum() Sum {
+	if o == nil || IsNil(o.Sum) {
+		var ret Sum
+		return ret
+	}
+	return *o.Sum
+}
+
+// GetSumOk returns a tuple with the Sum field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsAggregation) GetSumOk() (*Sum, bool) {
+	if o == nil || IsNil(o.Sum) {
+		return nil, false
+	}
+	return o.Sum, true
+}
+
+// HasSum returns a boolean if a field has been set.
+func (o *LogsAggregation) HasSum() bool {
+	if o != nil && !IsNil(o.Sum) {
+		return true
+	}
+
+	return false
+}
+
+// SetSum gets a reference to the given Sum and assigns it to the Sum field.
+func (o *LogsAggregation) SetSum(v Sum) {
+	o.Sum = &v
+}
+
+func (o LogsAggregation) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o LogsAggregation) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Average) {
+		toSerialize["average"] = o.Average
+	}
+	if !IsNil(o.Count) {
+		toSerialize["count"] = o.Count
+	}
+	if !IsNil(o.CountDistinct) {
+		toSerialize["countDistinct"] = o.CountDistinct
+	}
+	if !IsNil(o.Max) {
+		toSerialize["max"] = o.Max
+	}
+	if !IsNil(o.Min) {
+		toSerialize["min"] = o.Min
+	}
+	if !IsNil(o.Percentile) {
+		toSerialize["percentile"] = o.Percentile
+	}
+	if !IsNil(o.Sum) {
+		toSerialize["sum"] = o.Sum
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["count"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["countDistinct"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sum"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["average"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["min"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["max"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["percentile"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [count, countDistinct, sum, average, min, max, percentile] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *LogsAggregation) UnmarshalJSON(data []byte) (err error) {
+	varLogsAggregation := _LogsAggregation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsAggregation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsAggregation(varLogsAggregation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["count"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LogsAggregationAverage = nil
-	}
-
-	// try to unmarshal data into LogsAggregationCount
-	err = json.Unmarshal(data, &dst.LogsAggregationCount)
-	if err == nil {
-		jsonLogsAggregationCount, _ := json.Marshal(dst.LogsAggregationCount)
-		if string(jsonLogsAggregationCount) == "{}" { // empty struct
-			dst.LogsAggregationCount = nil
-		} else {
-			if err = validator.Validate(dst.LogsAggregationCount); err != nil {
-				dst.LogsAggregationCount = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["countDistinct"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LogsAggregationCount = nil
-	}
-
-	// try to unmarshal data into LogsAggregationCountDistinct
-	err = json.Unmarshal(data, &dst.LogsAggregationCountDistinct)
-	if err == nil {
-		jsonLogsAggregationCountDistinct, _ := json.Marshal(dst.LogsAggregationCountDistinct)
-		if string(jsonLogsAggregationCountDistinct) == "{}" { // empty struct
-			dst.LogsAggregationCountDistinct = nil
-		} else {
-			if err = validator.Validate(dst.LogsAggregationCountDistinct); err != nil {
-				dst.LogsAggregationCountDistinct = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sum"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LogsAggregationCountDistinct = nil
-	}
-
-	// try to unmarshal data into LogsAggregationMax
-	err = json.Unmarshal(data, &dst.LogsAggregationMax)
-	if err == nil {
-		jsonLogsAggregationMax, _ := json.Marshal(dst.LogsAggregationMax)
-		if string(jsonLogsAggregationMax) == "{}" { // empty struct
-			dst.LogsAggregationMax = nil
-		} else {
-			if err = validator.Validate(dst.LogsAggregationMax); err != nil {
-				dst.LogsAggregationMax = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["average"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LogsAggregationMax = nil
-	}
-
-	// try to unmarshal data into LogsAggregationMin
-	err = json.Unmarshal(data, &dst.LogsAggregationMin)
-	if err == nil {
-		jsonLogsAggregationMin, _ := json.Marshal(dst.LogsAggregationMin)
-		if string(jsonLogsAggregationMin) == "{}" { // empty struct
-			dst.LogsAggregationMin = nil
-		} else {
-			if err = validator.Validate(dst.LogsAggregationMin); err != nil {
-				dst.LogsAggregationMin = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["min"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LogsAggregationMin = nil
-	}
-
-	// try to unmarshal data into LogsAggregationPercentile
-	err = json.Unmarshal(data, &dst.LogsAggregationPercentile)
-	if err == nil {
-		jsonLogsAggregationPercentile, _ := json.Marshal(dst.LogsAggregationPercentile)
-		if string(jsonLogsAggregationPercentile) == "{}" { // empty struct
-			dst.LogsAggregationPercentile = nil
-		} else {
-			if err = validator.Validate(dst.LogsAggregationPercentile); err != nil {
-				dst.LogsAggregationPercentile = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["max"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LogsAggregationPercentile = nil
-	}
-
-	// try to unmarshal data into LogsAggregationSum
-	err = json.Unmarshal(data, &dst.LogsAggregationSum)
-	if err == nil {
-		jsonLogsAggregationSum, _ := json.Marshal(dst.LogsAggregationSum)
-		if string(jsonLogsAggregationSum) == "{}" { // empty struct
-			dst.LogsAggregationSum = nil
-		} else {
-			if err = validator.Validate(dst.LogsAggregationSum); err != nil {
-				dst.LogsAggregationSum = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["percentile"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LogsAggregationSum = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [count, countDistinct, sum, average, min, max, percentile] may be set"}
+		}
+
+		delete(additionalProperties, "average")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "countDistinct")
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		delete(additionalProperties, "percentile")
+		delete(additionalProperties, "sum")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.LogsAggregationAverage = nil
-		dst.LogsAggregationCount = nil
-		dst.LogsAggregationCountDistinct = nil
-		dst.LogsAggregationMax = nil
-		dst.LogsAggregationMin = nil
-		dst.LogsAggregationPercentile = nil
-		dst.LogsAggregationSum = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(LogsAggregation)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src LogsAggregation) MarshalJSON() ([]byte, error) {
-	if src.LogsAggregationAverage != nil {
-		return json.Marshal(&src.LogsAggregationAverage)
-	}
-
-	if src.LogsAggregationCount != nil {
-		return json.Marshal(&src.LogsAggregationCount)
-	}
-
-	if src.LogsAggregationCountDistinct != nil {
-		return json.Marshal(&src.LogsAggregationCountDistinct)
-	}
-
-	if src.LogsAggregationMax != nil {
-		return json.Marshal(&src.LogsAggregationMax)
-	}
-
-	if src.LogsAggregationMin != nil {
-		return json.Marshal(&src.LogsAggregationMin)
-	}
-
-	if src.LogsAggregationPercentile != nil {
-		return json.Marshal(&src.LogsAggregationPercentile)
-	}
-
-	if src.LogsAggregationSum != nil {
-		return json.Marshal(&src.LogsAggregationSum)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *LogsAggregation) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.LogsAggregationAverage != nil {
-		return obj.LogsAggregationAverage
-	}
-
-	if obj.LogsAggregationCount != nil {
-		return obj.LogsAggregationCount
-	}
-
-	if obj.LogsAggregationCountDistinct != nil {
-		return obj.LogsAggregationCountDistinct
-	}
-
-	if obj.LogsAggregationMax != nil {
-		return obj.LogsAggregationMax
-	}
-
-	if obj.LogsAggregationMin != nil {
-		return obj.LogsAggregationMin
-	}
-
-	if obj.LogsAggregationPercentile != nil {
-		return obj.LogsAggregationPercentile
-	}
-
-	if obj.LogsAggregationSum != nil {
-		return obj.LogsAggregationSum
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj LogsAggregation) GetActualInstanceValue() (interface{}) {
-	if obj.LogsAggregationAverage != nil {
-		return *obj.LogsAggregationAverage
-	}
-
-	if obj.LogsAggregationCount != nil {
-		return *obj.LogsAggregationCount
-	}
-
-	if obj.LogsAggregationCountDistinct != nil {
-		return *obj.LogsAggregationCountDistinct
-	}
-
-	if obj.LogsAggregationMax != nil {
-		return *obj.LogsAggregationMax
-	}
-
-	if obj.LogsAggregationMin != nil {
-		return *obj.LogsAggregationMin
-	}
-
-	if obj.LogsAggregationPercentile != nil {
-		return *obj.LogsAggregationPercentile
-	}
-
-	if obj.LogsAggregationSum != nil {
-		return *obj.LogsAggregationSum
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableLogsAggregation struct {

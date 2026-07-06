@@ -534,19 +534,6 @@
   "components": {
     "schemas": {
       "ActionExecutionRequest": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ActionExecutionRequestCreate"
-          },
-          {
-            "$ref": "#/components/schemas/ActionExecutionRequestDelete"
-          },
-          {
-            "$ref": "#/components/schemas/ActionExecutionRequestReplace"
-          }
-        ]
-      },
-      "ActionExecutionRequestCreate": {
         "externalDocs": {
           "url": ""
         },
@@ -555,56 +542,65 @@
         "properties": {
           "create": {
             "$ref": "#/components/schemas/CreateActionRequest"
-          }
-        },
-        "required": [
-          "create"
-        ]
-      },
-      "ActionExecutionRequestDelete": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "This data structure represents a request to execute an Action operation.",
-        "type": "object",
-        "properties": {
+          },
           "delete": {
             "$ref": "#/components/schemas/DeleteActionRequest"
-          }
-        },
-        "required": [
-          "delete"
-        ]
-      },
-      "ActionExecutionRequestReplace": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "This data structure represents a request to execute an Action operation.",
-        "type": "object",
-        "properties": {
+          },
           "replace": {
             "$ref": "#/components/schemas/ReplaceActionRequest"
           }
         },
-        "required": [
-          "replace"
-        ]
-      },
-      "ActionExecutionResponse": {
-        "oneOf": [
+        "allOf": [
           {
-            "$ref": "#/components/schemas/ActionExecutionResponseCreate"
-          },
-          {
-            "$ref": "#/components/schemas/ActionExecutionResponseDelete"
-          },
-          {
-            "$ref": "#/components/schemas/ActionExecutionResponseReplace"
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "create"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "replace"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "delete"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "create"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "replace"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "delete"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
           }
         ]
       },
-      "ActionExecutionResponseCreate": {
+      "ActionExecutionResponse": {
         "externalDocs": {
           "url": ""
         },
@@ -613,40 +609,62 @@
         "properties": {
           "create": {
             "$ref": "#/components/schemas/CreateActionResponse"
-          }
-        },
-        "required": [
-          "create"
-        ]
-      },
-      "ActionExecutionResponseDelete": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "This data structure represents a response to an Action execution request.",
-        "type": "object",
-        "properties": {
+          },
           "delete": {
             "$ref": "#/components/schemas/DeleteActionResponse"
-          }
-        },
-        "required": [
-          "delete"
-        ]
-      },
-      "ActionExecutionResponseReplace": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "This data structure represents a response to an Action execution request.",
-        "type": "object",
-        "properties": {
+          },
           "replace": {
             "$ref": "#/components/schemas/ReplaceActionResponse"
           }
         },
-        "required": [
-          "replace"
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "create"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "replace"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "delete"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "create"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "replace"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "delete"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         ]
       },
       "AtomicBatchExecuteActionsResponse": {
@@ -785,16 +803,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -805,26 +813,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -835,9 +823,25 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
         ]
       },
       "Filters": {

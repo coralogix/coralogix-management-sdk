@@ -452,11 +452,11 @@ func (a *PoliciesServiceAPIService) PoliciesServiceBulkTestLogPoliciesExecute(r 
 type ApiPoliciesServiceCreatePolicyRequest struct {
 	ctx context.Context
 	ApiService *PoliciesServiceAPIService
-	policiesServiceCreatePolicyRequest *PoliciesServiceCreatePolicyRequest
+	createPolicyRequest *CreatePolicyRequest
 }
 
-func (r ApiPoliciesServiceCreatePolicyRequest) PoliciesServiceCreatePolicyRequest(policiesServiceCreatePolicyRequest PoliciesServiceCreatePolicyRequest) ApiPoliciesServiceCreatePolicyRequest {
-	r.policiesServiceCreatePolicyRequest = &policiesServiceCreatePolicyRequest
+func (r ApiPoliciesServiceCreatePolicyRequest) CreatePolicyRequest(createPolicyRequest CreatePolicyRequest) ApiPoliciesServiceCreatePolicyRequest {
+	r.createPolicyRequest = &createPolicyRequest
 	return r
 }
 
@@ -499,8 +499,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicyExecute(r ApiPoli
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.policiesServiceCreatePolicyRequest == nil {
-		return localVarReturnValue, nil, reportError("policiesServiceCreatePolicyRequest is required and must be specified")
+	if r.createPolicyRequest == nil {
+		return localVarReturnValue, nil, reportError("createPolicyRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -521,7 +521,7 @@ func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicyExecute(r ApiPoli
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.policiesServiceCreatePolicyRequest
+	localVarPostBody = r.createPolicyRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -732,11 +732,11 @@ func (a *PoliciesServiceAPIService) PoliciesServiceDeletePolicyExecute(r ApiPoli
 type ApiPoliciesServiceForecastPolicyUsageRequest struct {
 	ctx context.Context
 	ApiService *PoliciesServiceAPIService
-	policiesServiceForecastPolicyUsageRequest *PoliciesServiceForecastPolicyUsageRequest
+	forecastPolicyUsageRequest *ForecastPolicyUsageRequest
 }
 
-func (r ApiPoliciesServiceForecastPolicyUsageRequest) PoliciesServiceForecastPolicyUsageRequest(policiesServiceForecastPolicyUsageRequest PoliciesServiceForecastPolicyUsageRequest) ApiPoliciesServiceForecastPolicyUsageRequest {
-	r.policiesServiceForecastPolicyUsageRequest = &policiesServiceForecastPolicyUsageRequest
+func (r ApiPoliciesServiceForecastPolicyUsageRequest) ForecastPolicyUsageRequest(forecastPolicyUsageRequest ForecastPolicyUsageRequest) ApiPoliciesServiceForecastPolicyUsageRequest {
+	r.forecastPolicyUsageRequest = &forecastPolicyUsageRequest
 	return r
 }
 
@@ -779,8 +779,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsageExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.policiesServiceForecastPolicyUsageRequest == nil {
-		return localVarReturnValue, nil, reportError("policiesServiceForecastPolicyUsageRequest is required and must be specified")
+	if r.forecastPolicyUsageRequest == nil {
+		return localVarReturnValue, nil, reportError("forecastPolicyUsageRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -801,7 +801,7 @@ func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsageExecute(r 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.policiesServiceForecastPolicyUsageRequest
+	localVarPostBody = r.forecastPolicyUsageRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1575,11 +1575,11 @@ func (a *PoliciesServiceAPIService) PoliciesServiceReplacePolicySettingsExecute(
 type ApiPoliciesServiceUpdatePolicyRequest struct {
 	ctx context.Context
 	ApiService *PoliciesServiceAPIService
-	policiesServiceUpdatePolicyRequest *PoliciesServiceUpdatePolicyRequest
+	updatePolicyRequest *UpdatePolicyRequest
 }
 
-func (r ApiPoliciesServiceUpdatePolicyRequest) PoliciesServiceUpdatePolicyRequest(policiesServiceUpdatePolicyRequest PoliciesServiceUpdatePolicyRequest) ApiPoliciesServiceUpdatePolicyRequest {
-	r.policiesServiceUpdatePolicyRequest = &policiesServiceUpdatePolicyRequest
+func (r ApiPoliciesServiceUpdatePolicyRequest) UpdatePolicyRequest(updatePolicyRequest UpdatePolicyRequest) ApiPoliciesServiceUpdatePolicyRequest {
+	r.updatePolicyRequest = &updatePolicyRequest
 	return r
 }
 
@@ -1622,8 +1622,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceUpdatePolicyExecute(r ApiPoli
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.policiesServiceUpdatePolicyRequest == nil {
-		return localVarReturnValue, nil, reportError("policiesServiceUpdatePolicyRequest is required and must be specified")
+	if r.updatePolicyRequest == nil {
+		return localVarReturnValue, nil, reportError("updatePolicyRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1644,7 +1644,7 @@ func (a *PoliciesServiceAPIService) PoliciesServiceUpdatePolicyExecute(r ApiPoli
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.policiesServiceUpdatePolicyRequest
+	localVarPostBody = r.updatePolicyRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

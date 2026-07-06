@@ -1,667 +1,771 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /aaa/api-keys/v3:
-    get:
-      description: Retrieve all API keys for team members.
-      externalDocs:
-        url: ""
-      operationId: ApiKeysAdminService_GetTeamMembersApiKeys
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetTeamMembersApiKeysResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Get Team Members API Keys
-      tags:
-      - API Keys Admin Service
-    post:
-      description: Creates a new API key for the authenticated team.
-      externalDocs:
-        url: ""
-      operationId: ApiKeysService_CreateApiKey
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Create_Api_Key_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateApiKeyResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Create API Key
-      tags:
-      - API Keys Service
-  /aaa/api-keys/v3/all/delete:
-    post:
-      description: Delete specified API keys.
-      externalDocs:
-        url: ""
-      operationId: ApiKeysAdminService_DeleteApiKeys
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Delete_API_Keys_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteApiKeysResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Delete API Keys
-      tags:
-      - API Keys Admin Service
-  /aaa/api-keys/v3/all/status:
-    post:
-      description: Activate or deactivate specified API keys.
-      externalDocs:
-        url: ""
-      operationId: ApiKeysAdminService_UpdateApiKeysStatus
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Update_API_Keys_Status_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateApiKeysStatusResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Update API Keys Status
-      tags:
-      - API Keys Admin Service
-components:
-  schemas:
-    ApiKeyOwner:
-      description: This data structure represents the owner of an API key.
-      example:
-        user:
-          userEmail: test@example.com
-          userId: user_123
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      properties:
-        user:
-          $ref: "#/components/schemas/ApiKeyUserOwner"
-      title: API Key Owner
-      type: object
-    ApiKeyStatusUpdate:
-      description: This data structure represents the status update for a specific
-        API key.
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      properties:
-        active:
-          description: Whether this resource is active.
-          example: true
-          type: boolean
-        keyId:
-          description: Key identifier.
-          example: key_abc123
-          minLength: 0
-          type: string
-      title: API Key Status Update
-      type: object
-    ApiKeySummary:
-      description: This data structure represents summary about an API key including
-        its permissions.
-      example:
-        presets:
-        - permissions:
-          - logs:read
-          - logs:read
-          name: my_preset
-          id: 1
-        - permissions:
-          - logs:read
-          - logs:read
-          name: my_preset
-          id: 1
-        apiKey:
-          owner:
-            user:
-              userEmail: test@example.com
-              userId: user_123
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          lastActivated: 2000-01-23T04:56:07.000+00:00
-          keyName: my_api_key
-          id: key_abc123
-          isActive: true
-        permissions:
-        - logs:read
-        - logs:read
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      properties:
-        apiKey:
-          $ref: "#/components/schemas/v3.ApiKey"
-        permissions:
-          description: List of permissions.
-          items:
-            description: List of permissions.
-            example: logs:read
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        presets:
-          description: List of permission presets.
-          items:
-            $ref: "#/components/schemas/PermissionsPreset"
-          minItems: 0
-          type: array
-      title: API Key Summary
-      type: object
-    ApiKeyUserOwner:
-      description: This data structure represents the user owner of an API key.
-      example:
-        userEmail: test@example.com
-        userId: user_123
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      properties:
-        userEmail:
-          description: The user email.
-          example: test@example.com
-          minLength: 0
-          type: string
-        userId:
-          description: The user id.
-          example: user_123
-          minLength: 0
-          type: string
-      title: API Key User Owner
-      type: object
-    CreateApiKeyRequest.KeyPermissions:
-      description: This data structure allows to specify loose permissions and permission
-        presets for an API key.
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      properties:
-        permissions:
-          description: List of permissions.
-          items:
-            description: List of permissions.
-            example: read_logs
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-        presets:
-          description: List of permission presets.
-          items:
-            description: List of permission presets.
-            example: my_preset
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      title: Key Permissions
-      type: object
-    CreateApiKeyResponse:
-      description: This data structure is the response obtained when creating an API
-        key.
-      example:
-        name: my_api_key
-        keyId: my_key_id
-        value: my_api_key_value
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      properties:
-        keyId:
-          description: Key identifier.
-          example: my_key_id
-          minLength: 0
-          type: string
-        name:
-          description: Display name.
-          example: my_api_key
-          minLength: 0
-          type: string
-        value:
-          description: The value.
-          example: my_api_key_value
-          minLength: 0
-          type: string
-      title: Create Api Key Response
-      type: object
-    DeleteApiKeysResponse:
-      additionalProperties: false
-      description: This data structure is the response obtained after deleting API
-        keys.
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      title: Delete API Keys Response
-      type: object
-    Error:
-      description: Standard error response body returned for a failed request.
-      example:
-        code: 139
-        message: message
-      properties:
-        code:
-          description: "HTTP status code of the error (for example 400, 404, 500)."
-          format: int32
-          maximum: 599
-          minimum: 100
-          type: integer
-        message:
-          description: Human-readable description of the error.
-          maxLength: 4096
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    GetTeamMembersApiKeysResponse:
-      description: This data structure is the response obtained when retrieving team
-        members API keys.
-      example:
-        keys:
-        - presets:
-          - permissions:
-            - logs:read
-            - logs:read
-            name: my_preset
-            id: 1
-          - permissions:
-            - logs:read
-            - logs:read
-            name: my_preset
-            id: 1
-          apiKey:
-            owner:
-              user:
-                userEmail: test@example.com
-                userId: user_123
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            lastActivated: 2000-01-23T04:56:07.000+00:00
-            keyName: my_api_key
-            id: key_abc123
-            isActive: true
-          permissions:
-          - logs:read
-          - logs:read
-        - presets:
-          - permissions:
-            - logs:read
-            - logs:read
-            name: my_preset
-            id: 1
-          - permissions:
-            - logs:read
-            - logs:read
-            name: my_preset
-            id: 1
-          apiKey:
-            owner:
-              user:
-                userEmail: test@example.com
-                userId: user_123
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            lastActivated: 2000-01-23T04:56:07.000+00:00
-            keyName: my_api_key
-            id: key_abc123
-            isActive: true
-          permissions:
-          - logs:read
-          - logs:read
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      properties:
-        keys:
-          description: The keys.
-          items:
-            $ref: "#/components/schemas/ApiKeySummary"
-          minItems: 0
-          type: array
-      title: Get Team Members API Keys Response
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    Owner:
-      oneOf:
-      - $ref: "#/components/schemas/OwnerOrganisationId"
-      - $ref: "#/components/schemas/OwnerTeamId"
-      - $ref: "#/components/schemas/OwnerUserId"
-    OwnerOrganisationId:
-      description: Owner.
-      externalDocs:
-        url: ""
-      properties:
-        organisationId:
-          description: Organisation identifier of the API key owner.
-          minLength: 0
-          type: string
-      required:
-      - organisationId
-      type: object
-    OwnerTeamId:
-      description: Owner.
-      externalDocs:
-        url: ""
-      properties:
-        teamId:
-          description: The team id.
-          format: int64
-          minimum: 0
-          type: integer
-      required:
-      - teamId
-      type: object
-    OwnerUserId:
-      description: Owner.
-      externalDocs:
-        url: ""
-      properties:
-        userId:
-          description: User identifier of the API key owner.
-          minLength: 0
-          type: string
-      required:
-      - userId
-      type: object
-    PermissionsPreset:
-      description: This data structure represents a preset set of permissions on an
-        API key.
-      example:
-        permissions:
-        - logs:read
-        - logs:read
-        name: my_preset
-        id: 1
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      properties:
-        id:
-          description: Unique identifier.
-          example: 1
-          format: int32
-          type: integer
-        name:
-          description: Display name.
-          example: my_preset
-          minLength: 0
-          type: string
-        permissions:
-          description: List of permissions.
-          items:
-            description: List of permissions.
-            example: logs:read
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      title: Permissions Preset
-      type: object
-    UpdateApiKeysStatusResponse:
-      additionalProperties: false
-      description: This data structure is the response obtained after updating API
-        keys status.
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      title: Update API Keys Status Response
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v3.ApiKey:
-      description: This data structure represents an API key with its metadata.
-      example:
-        owner:
-          user:
-            userEmail: test@example.com
-            userId: user_123
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        lastActivated: 2000-01-23T04:56:07.000+00:00
-        keyName: my_api_key
-        id: key_abc123
-        isActive: true
-      externalDocs:
-        description: Find out more about api keys
-        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
-      properties:
-        createdAt:
-          description: The timestamp when the API key was created.
-          format: date-time
-          minLength: 0
-          type: string
-        id:
-          description: Unique identifier.
-          example: key_abc123
-          minLength: 0
-          type: string
-        isActive:
-          description: Whether this resource is active.
-          type: boolean
-        keyName:
-          description: The key name.
-          example: my_api_key
-          minLength: 0
-          type: string
-        lastActivated:
-          description: The timestamp when the API key was last activated.
-          format: date-time
-          minLength: 0
-          type: string
-        owner:
-          $ref: "#/components/schemas/ApiKeyOwner"
-      title: API Key
-      type: object
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    Create_Api_Key_Request:
-      description: This data structure is used to create an API key.
-      properties:
-        accessPolicy:
-          description: JSON string representing the access policy for this API key.
-            Defines granular permissions for users and groups.
-          example: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\"\
-            :\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\"\
-            :\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
-          minLength: 0
-          type: string
-        hashed:
-          description: Whether the value is stored as a one-way hash.
-          example: true
-          type: boolean
-        keyPermissions:
-          $ref: "#/components/schemas/CreateApiKeyRequest.KeyPermissions"
-        name:
-          description: Display name.
-          example: my_api_key
-          minLength: 0
-          type: string
-        owner:
-          $ref: "#/components/schemas/Owner"
-      title: Create Api Key Request
-      type: object
-    Delete_API_Keys_Request:
-      description: This data structure is used to delete specified API keys.
-      properties:
-        keyIds:
-          description: List of API key IDs to delete.
-          items:
-            description: List of API key IDs to delete.
-            example: key_abc123
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      title: Delete API Keys Request
-      type: object
-    Update_API_Keys_Status_Request:
-      description: This data structure is used to update the status of specified API
-        keys.
-      properties:
-        updates:
-          description: The updates.
-          items:
-            $ref: "#/components/schemas/ApiKeyStatusUpdate"
-          minItems: 0
-          type: array
-      title: Update API Keys Status Request
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/aaa/api-keys/v3": {
+      "get": {
+        "tags": [
+          "API Keys Admin Service"
+        ],
+        "summary": "Get Team Members API Keys",
+        "description": "Retrieve all API keys for team members.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysAdminService_GetTeamMembersApiKeys",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamMembersApiKeysResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "API Keys Service"
+        ],
+        "summary": "Create API Key",
+        "description": "Creates a new API key for the authenticated team.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_CreateApiKey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create Api Key Request",
+                "description": "This data structure is used to create an API key.",
+                "type": "object",
+                "properties": {
+                  "accessPolicy": {
+                    "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}",
+                    "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "hashed": {
+                    "example": true,
+                    "description": "Whether the value is stored as a one-way hash.",
+                    "type": "boolean"
+                  },
+                  "keyPermissions": {
+                    "$ref": "#/components/schemas/CreateApiKeyRequest.KeyPermissions"
+                  },
+                  "name": {
+                    "example": "my_api_key",
+                    "description": "Display name.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "owner": {
+                    "$ref": "#/components/schemas/Owner"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateApiKeyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aaa/api-keys/v3/all/delete": {
+      "post": {
+        "tags": [
+          "API Keys Admin Service"
+        ],
+        "summary": "Delete API Keys",
+        "description": "Delete specified API keys.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysAdminService_DeleteApiKeys",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Delete API Keys Request",
+                "description": "This data structure is used to delete specified API keys.",
+                "type": "object",
+                "properties": {
+                  "keyIds": {
+                    "description": "List of API key IDs to delete.",
+                    "type": "array",
+                    "items": {
+                      "example": "key_abc123",
+                      "description": "List of API key IDs to delete.",
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteApiKeysResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aaa/api-keys/v3/all/status": {
+      "post": {
+        "tags": [
+          "API Keys Admin Service"
+        ],
+        "summary": "Update API Keys Status",
+        "description": "Activate or deactivate specified API keys.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysAdminService_UpdateApiKeysStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Update API Keys Status Request",
+                "description": "This data structure is used to update the status of specified API keys.",
+                "type": "object",
+                "properties": {
+                  "updates": {
+                    "description": "The updates.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ApiKeyStatusUpdate"
+                    },
+                    "minItems": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiKeysStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiKeyOwner": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key Owner",
+        "description": "This data structure represents the owner of an API key.",
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/ApiKeyUserOwner"
+          }
+        }
+      },
+      "ApiKeyStatusUpdate": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key Status Update",
+        "description": "This data structure represents the status update for a specific API key.",
+        "type": "object",
+        "properties": {
+          "active": {
+            "example": true,
+            "description": "Whether this resource is active.",
+            "type": "boolean"
+          },
+          "keyId": {
+            "example": "key_abc123",
+            "description": "Key identifier.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "ApiKeySummary": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key Summary",
+        "description": "This data structure represents summary about an API key including its permissions.",
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "$ref": "#/components/schemas/v3.ApiKey"
+          },
+          "permissions": {
+            "description": "List of permissions.",
+            "type": "array",
+            "items": {
+              "example": "logs:read",
+              "description": "List of permissions.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "presets": {
+            "description": "List of permission presets.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionsPreset"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "ApiKeyUserOwner": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key User Owner",
+        "description": "This data structure represents the user owner of an API key.",
+        "type": "object",
+        "properties": {
+          "userEmail": {
+            "example": "test@example.com",
+            "description": "The user email.",
+            "type": "string",
+            "minLength": 0
+          },
+          "userId": {
+            "example": "user_123",
+            "description": "The user id.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "CreateApiKeyRequest.KeyPermissions": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Key Permissions",
+        "description": "This data structure allows to specify loose permissions and permission presets for an API key.",
+        "type": "object",
+        "properties": {
+          "permissions": {
+            "description": "List of permissions.",
+            "type": "array",
+            "items": {
+              "example": "read_logs",
+              "description": "List of permissions.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "presets": {
+            "description": "List of permission presets.",
+            "type": "array",
+            "items": {
+              "example": "my_preset",
+              "description": "List of permission presets.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "CreateApiKeyResponse": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Create Api Key Response",
+        "description": "This data structure is the response obtained when creating an API key.",
+        "type": "object",
+        "properties": {
+          "keyId": {
+            "example": "my_key_id",
+            "description": "Key identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "name": {
+            "example": "my_api_key",
+            "description": "Display name.",
+            "type": "string",
+            "minLength": 0
+          },
+          "value": {
+            "example": "my_api_key_value",
+            "description": "The value.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "DeleteApiKeysResponse": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Delete API Keys Response",
+        "description": "This data structure is the response obtained after deleting API keys.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "multipleValues"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "filters"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetTeamMembersApiKeysResponse": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Get Team Members API Keys Response",
+        "description": "This data structure is the response obtained when retrieving team members API keys.",
+        "type": "object",
+        "properties": {
+          "keys": {
+            "description": "The keys.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiKeySummary"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "Owner": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Owner.",
+        "type": "object",
+        "properties": {
+          "organisationId": {
+            "description": "Organisation identifier of the API key owner.",
+            "type": "string",
+            "minLength": 0
+          },
+          "teamId": {
+            "description": "The team id.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "userId": {
+            "description": "User identifier of the API key owner.",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "userId"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "teamId"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "organisationId"
+                ]
+              },
+              {
+                "type": "object",
+                "not": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "userId"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "teamId"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "organisationId"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "PermissionsPreset": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Permissions Preset",
+        "description": "This data structure represents a preset set of permissions on an API key.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": 1,
+            "description": "Unique identifier.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "example": "my_preset",
+            "description": "Display name.",
+            "type": "string",
+            "minLength": 0
+          },
+          "permissions": {
+            "description": "List of permissions.",
+            "type": "array",
+            "items": {
+              "example": "logs:read",
+              "description": "List of permissions.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "UpdateApiKeysStatusResponse": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Update API Keys Status Response",
+        "description": "This data structure is the response obtained after updating API keys status.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.ApiKey": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key",
+        "description": "This data structure represents an API key with its metadata.",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "description": "The timestamp when the API key was created.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
+          },
+          "id": {
+            "example": "key_abc123",
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "isActive": {
+            "description": "Whether this resource is active.",
+            "type": "boolean"
+          },
+          "keyName": {
+            "example": "my_api_key",
+            "description": "The key name.",
+            "type": "string",
+            "minLength": 0
+          },
+          "lastActivated": {
+            "description": "The timestamp when the API key was last activated.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
+          },
+          "owner": {
+            "$ref": "#/components/schemas/ApiKeyOwner"
+          }
+        }
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

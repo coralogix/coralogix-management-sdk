@@ -13,126 +13,172 @@ package alert_definitions_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// MetricMissingValues - struct for MetricMissingValues
+// checks if the MetricMissingValues type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MetricMissingValues{}
+
+// MetricMissingValues Configuration for handling missing values in metric threshold alerts.
 type MetricMissingValues struct {
-	MetricMissingValuesMinNonNullValuesPct *MetricMissingValuesMinNonNullValuesPct
-	MetricMissingValuesReplaceWithZero *MetricMissingValuesReplaceWithZero
+	// If set, specifies the minimum percentage of non-null values required for the alert to be triggered
+	MinNonNullValuesPct *int64 `json:"minNonNullValuesPct,omitempty"`
+	// If set to true, missing values will be replaced with zero
+	ReplaceWithZero *bool `json:"replaceWithZero,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// MetricMissingValuesMinNonNullValuesPctAsMetricMissingValues is a convenience function that returns MetricMissingValuesMinNonNullValuesPct wrapped in MetricMissingValues
-func MetricMissingValuesMinNonNullValuesPctAsMetricMissingValues(v *MetricMissingValuesMinNonNullValuesPct) MetricMissingValues {
-	return MetricMissingValues{
-		MetricMissingValuesMinNonNullValuesPct: v,
+type _MetricMissingValues MetricMissingValues
+
+// NewMetricMissingValues instantiates a new MetricMissingValues object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewMetricMissingValues() *MetricMissingValues {
+	this := MetricMissingValues{}
+	return &this
+}
+
+// NewMetricMissingValuesWithDefaults instantiates a new MetricMissingValues object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewMetricMissingValuesWithDefaults() *MetricMissingValues {
+	this := MetricMissingValues{}
+	return &this
+}
+
+// GetMinNonNullValuesPct returns the MinNonNullValuesPct field value if set, zero value otherwise.
+func (o *MetricMissingValues) GetMinNonNullValuesPct() int64 {
+	if o == nil || IsNil(o.MinNonNullValuesPct) {
+		var ret int64
+		return ret
 	}
+	return *o.MinNonNullValuesPct
 }
 
-// MetricMissingValuesReplaceWithZeroAsMetricMissingValues is a convenience function that returns MetricMissingValuesReplaceWithZero wrapped in MetricMissingValues
-func MetricMissingValuesReplaceWithZeroAsMetricMissingValues(v *MetricMissingValuesReplaceWithZero) MetricMissingValues {
-	return MetricMissingValues{
-		MetricMissingValuesReplaceWithZero: v,
+// GetMinNonNullValuesPctOk returns a tuple with the MinNonNullValuesPct field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricMissingValues) GetMinNonNullValuesPctOk() (*int64, bool) {
+	if o == nil || IsNil(o.MinNonNullValuesPct) {
+		return nil, false
 	}
+	return o.MinNonNullValuesPct, true
 }
 
+// HasMinNonNullValuesPct returns a boolean if a field has been set.
+func (o *MetricMissingValues) HasMinNonNullValuesPct() bool {
+	if o != nil && !IsNil(o.MinNonNullValuesPct) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *MetricMissingValues) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into MetricMissingValuesMinNonNullValuesPct
-	err = json.Unmarshal(data, &dst.MetricMissingValuesMinNonNullValuesPct)
-	if err == nil {
-		jsonMetricMissingValuesMinNonNullValuesPct, _ := json.Marshal(dst.MetricMissingValuesMinNonNullValuesPct)
-		if string(jsonMetricMissingValuesMinNonNullValuesPct) == "{}" { // empty struct
-			dst.MetricMissingValuesMinNonNullValuesPct = nil
-		} else {
-			if err = validator.Validate(dst.MetricMissingValuesMinNonNullValuesPct); err != nil {
-				dst.MetricMissingValuesMinNonNullValuesPct = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetMinNonNullValuesPct gets a reference to the given int64 and assigns it to the MinNonNullValuesPct field.
+func (o *MetricMissingValues) SetMinNonNullValuesPct(v int64) {
+	o.MinNonNullValuesPct = &v
+}
+
+// GetReplaceWithZero returns the ReplaceWithZero field value if set, zero value otherwise.
+func (o *MetricMissingValues) GetReplaceWithZero() bool {
+	if o == nil || IsNil(o.ReplaceWithZero) {
+		var ret bool
+		return ret
+	}
+	return *o.ReplaceWithZero
+}
+
+// GetReplaceWithZeroOk returns a tuple with the ReplaceWithZero field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricMissingValues) GetReplaceWithZeroOk() (*bool, bool) {
+	if o == nil || IsNil(o.ReplaceWithZero) {
+		return nil, false
+	}
+	return o.ReplaceWithZero, true
+}
+
+// HasReplaceWithZero returns a boolean if a field has been set.
+func (o *MetricMissingValues) HasReplaceWithZero() bool {
+	if o != nil && !IsNil(o.ReplaceWithZero) {
+		return true
+	}
+
+	return false
+}
+
+// SetReplaceWithZero gets a reference to the given bool and assigns it to the ReplaceWithZero field.
+func (o *MetricMissingValues) SetReplaceWithZero(v bool) {
+	o.ReplaceWithZero = &v
+}
+
+func (o MetricMissingValues) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MetricMissingValues) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.MinNonNullValuesPct) {
+		toSerialize["minNonNullValuesPct"] = o.MinNonNullValuesPct
+	}
+	if !IsNil(o.ReplaceWithZero) {
+		toSerialize["replaceWithZero"] = o.ReplaceWithZero
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["replaceWithZero"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["minNonNullValuesPct"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [replaceWithZero, minNonNullValuesPct] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *MetricMissingValues) UnmarshalJSON(data []byte) (err error) {
+	varMetricMissingValues := _MetricMissingValues{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricMissingValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricMissingValues(varMetricMissingValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["replaceWithZero"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MetricMissingValuesMinNonNullValuesPct = nil
-	}
-
-	// try to unmarshal data into MetricMissingValuesReplaceWithZero
-	err = json.Unmarshal(data, &dst.MetricMissingValuesReplaceWithZero)
-	if err == nil {
-		jsonMetricMissingValuesReplaceWithZero, _ := json.Marshal(dst.MetricMissingValuesReplaceWithZero)
-		if string(jsonMetricMissingValuesReplaceWithZero) == "{}" { // empty struct
-			dst.MetricMissingValuesReplaceWithZero = nil
-		} else {
-			if err = validator.Validate(dst.MetricMissingValuesReplaceWithZero); err != nil {
-				dst.MetricMissingValuesReplaceWithZero = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["minNonNullValuesPct"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MetricMissingValuesReplaceWithZero = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [replaceWithZero, minNonNullValuesPct] may be set"}
+		}
+
+		delete(additionalProperties, "minNonNullValuesPct")
+		delete(additionalProperties, "replaceWithZero")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.MetricMissingValuesMinNonNullValuesPct = nil
-		dst.MetricMissingValuesReplaceWithZero = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(MetricMissingValues)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src MetricMissingValues) MarshalJSON() ([]byte, error) {
-	if src.MetricMissingValuesMinNonNullValuesPct != nil {
-		return json.Marshal(&src.MetricMissingValuesMinNonNullValuesPct)
-	}
-
-	if src.MetricMissingValuesReplaceWithZero != nil {
-		return json.Marshal(&src.MetricMissingValuesReplaceWithZero)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *MetricMissingValues) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.MetricMissingValuesMinNonNullValuesPct != nil {
-		return obj.MetricMissingValuesMinNonNullValuesPct
-	}
-
-	if obj.MetricMissingValuesReplaceWithZero != nil {
-		return obj.MetricMissingValuesReplaceWithZero
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj MetricMissingValues) GetActualInstanceValue() (interface{}) {
-	if obj.MetricMissingValuesMinNonNullValuesPct != nil {
-		return *obj.MetricMissingValuesMinNonNullValuesPct
-	}
-
-	if obj.MetricMissingValuesReplaceWithZero != nil {
-		return *obj.MetricMissingValuesReplaceWithZero
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableMetricMissingValues struct {

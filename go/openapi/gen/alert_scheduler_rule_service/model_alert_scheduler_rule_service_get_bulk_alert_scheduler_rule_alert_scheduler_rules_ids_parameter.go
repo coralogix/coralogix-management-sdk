@@ -13,126 +13,170 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter - struct for AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
+// checks if the AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter{}
+
+// AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter struct for AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
 type AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter struct {
-	FilterByAlertSchedulerRuleIdsAlertSchedulerIds *FilterByAlertSchedulerRuleIdsAlertSchedulerIds
-	FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
+	AlertSchedulerIds *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerIds `json:"alertSchedulerIds,omitempty"`
+	AlertSchedulerVersionIds *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds `json:"alertSchedulerVersionIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// FilterByAlertSchedulerRuleIdsAlertSchedulerIdsAsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter is a convenience function that returns FilterByAlertSchedulerRuleIdsAlertSchedulerIds wrapped in AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
-func FilterByAlertSchedulerRuleIdsAlertSchedulerIdsAsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter(v *FilterByAlertSchedulerRuleIdsAlertSchedulerIds) AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter {
-	return AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter{
-		FilterByAlertSchedulerRuleIdsAlertSchedulerIds: v,
+type _AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
+
+// NewAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter instantiates a new AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter() *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter {
+	this := AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter{}
+	return &this
+}
+
+// NewAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterWithDefaults instantiates a new AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterWithDefaults() *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter {
+	this := AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter{}
+	return &this
+}
+
+// GetAlertSchedulerIds returns the AlertSchedulerIds field value if set, zero value otherwise.
+func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) GetAlertSchedulerIds() AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerIds {
+	if o == nil || IsNil(o.AlertSchedulerIds) {
+		var ret AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerIds
+		return ret
 	}
+	return *o.AlertSchedulerIds
 }
 
-// FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIdsAsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter is a convenience function that returns FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds wrapped in AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
-func FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIdsAsAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter(v *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter {
-	return AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter{
-		FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds: v,
+// GetAlertSchedulerIdsOk returns a tuple with the AlertSchedulerIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) GetAlertSchedulerIdsOk() (*AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerIds, bool) {
+	if o == nil || IsNil(o.AlertSchedulerIds) {
+		return nil, false
 	}
+	return o.AlertSchedulerIds, true
 }
 
+// HasAlertSchedulerIds returns a boolean if a field has been set.
+func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) HasAlertSchedulerIds() bool {
+	if o != nil && !IsNil(o.AlertSchedulerIds) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into FilterByAlertSchedulerRuleIdsAlertSchedulerIds
-	err = json.Unmarshal(data, &dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds)
-	if err == nil {
-		jsonFilterByAlertSchedulerRuleIdsAlertSchedulerIds, _ := json.Marshal(dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds)
-		if string(jsonFilterByAlertSchedulerRuleIdsAlertSchedulerIds) == "{}" { // empty struct
-			dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds = nil
-		} else {
-			if err = validator.Validate(dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds); err != nil {
-				dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAlertSchedulerIds gets a reference to the given AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerIds and assigns it to the AlertSchedulerIds field.
+func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) SetAlertSchedulerIds(v AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerIds) {
+	o.AlertSchedulerIds = &v
+}
+
+// GetAlertSchedulerVersionIds returns the AlertSchedulerVersionIds field value if set, zero value otherwise.
+func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) GetAlertSchedulerVersionIds() AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds {
+	if o == nil || IsNil(o.AlertSchedulerVersionIds) {
+		var ret AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds
+		return ret
+	}
+	return *o.AlertSchedulerVersionIds
+}
+
+// GetAlertSchedulerVersionIdsOk returns a tuple with the AlertSchedulerVersionIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) GetAlertSchedulerVersionIdsOk() (*AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds, bool) {
+	if o == nil || IsNil(o.AlertSchedulerVersionIds) {
+		return nil, false
+	}
+	return o.AlertSchedulerVersionIds, true
+}
+
+// HasAlertSchedulerVersionIds returns a boolean if a field has been set.
+func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) HasAlertSchedulerVersionIds() bool {
+	if o != nil && !IsNil(o.AlertSchedulerVersionIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertSchedulerVersionIds gets a reference to the given AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds and assigns it to the AlertSchedulerVersionIds field.
+func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) SetAlertSchedulerVersionIds(v AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds) {
+	o.AlertSchedulerVersionIds = &v
+}
+
+func (o AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AlertSchedulerIds) {
+		toSerialize["alertSchedulerIds"] = o.AlertSchedulerIds
+	}
+	if !IsNil(o.AlertSchedulerVersionIds) {
+		toSerialize["alertSchedulerVersionIds"] = o.AlertSchedulerVersionIds
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["alertSchedulerIds"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["alertSchedulerVersionIds"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [alertSchedulerIds, alertSchedulerVersionIds] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) UnmarshalJSON(data []byte) (err error) {
+	varAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter := _AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter(varAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["alertSchedulerIds"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds = nil
-	}
-
-	// try to unmarshal data into FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
-	err = json.Unmarshal(data, &dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
-	if err == nil {
-		jsonFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds, _ := json.Marshal(dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
-		if string(jsonFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) == "{}" { // empty struct
-			dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds = nil
-		} else {
-			if err = validator.Validate(dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds); err != nil {
-				dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["alertSchedulerVersionIds"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [alertSchedulerIds, alertSchedulerVersionIds] may be set"}
+		}
+
+		delete(additionalProperties, "alertSchedulerIds")
+		delete(additionalProperties, "alertSchedulerVersionIds")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds = nil
-		dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) MarshalJSON() ([]byte, error) {
-	if src.FilterByAlertSchedulerRuleIdsAlertSchedulerIds != nil {
-		return json.Marshal(&src.FilterByAlertSchedulerRuleIdsAlertSchedulerIds)
-	}
-
-	if src.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds != nil {
-		return json.Marshal(&src.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.FilterByAlertSchedulerRuleIdsAlertSchedulerIds != nil {
-		return obj.FilterByAlertSchedulerRuleIdsAlertSchedulerIds
-	}
-
-	if obj.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds != nil {
-		return obj.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) GetActualInstanceValue() (interface{}) {
-	if obj.FilterByAlertSchedulerRuleIdsAlertSchedulerIds != nil {
-		return *obj.FilterByAlertSchedulerRuleIdsAlertSchedulerIds
-	}
-
-	if obj.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds != nil {
-		return *obj.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter struct {

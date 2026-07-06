@@ -13,126 +13,170 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ActionDefinition - struct for ActionDefinition
+// checks if the ActionDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ActionDefinition{}
+
+// ActionDefinition Defines the behavior of a dashboard action, either a custom URL or a built-in template.
 type ActionDefinition struct {
-	ActionDefinitionCustomAction *ActionDefinitionCustomAction
-	ActionDefinitionGoToDashboardAction *ActionDefinitionGoToDashboardAction
+	CustomAction *CustomAction `json:"customAction,omitempty"`
+	GoToDashboardAction *GoToDashboardTemplateAction `json:"goToDashboardAction,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// ActionDefinitionCustomActionAsActionDefinition is a convenience function that returns ActionDefinitionCustomAction wrapped in ActionDefinition
-func ActionDefinitionCustomActionAsActionDefinition(v *ActionDefinitionCustomAction) ActionDefinition {
-	return ActionDefinition{
-		ActionDefinitionCustomAction: v,
+type _ActionDefinition ActionDefinition
+
+// NewActionDefinition instantiates a new ActionDefinition object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewActionDefinition() *ActionDefinition {
+	this := ActionDefinition{}
+	return &this
+}
+
+// NewActionDefinitionWithDefaults instantiates a new ActionDefinition object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewActionDefinitionWithDefaults() *ActionDefinition {
+	this := ActionDefinition{}
+	return &this
+}
+
+// GetCustomAction returns the CustomAction field value if set, zero value otherwise.
+func (o *ActionDefinition) GetCustomAction() CustomAction {
+	if o == nil || IsNil(o.CustomAction) {
+		var ret CustomAction
+		return ret
 	}
+	return *o.CustomAction
 }
 
-// ActionDefinitionGoToDashboardActionAsActionDefinition is a convenience function that returns ActionDefinitionGoToDashboardAction wrapped in ActionDefinition
-func ActionDefinitionGoToDashboardActionAsActionDefinition(v *ActionDefinitionGoToDashboardAction) ActionDefinition {
-	return ActionDefinition{
-		ActionDefinitionGoToDashboardAction: v,
+// GetCustomActionOk returns a tuple with the CustomAction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ActionDefinition) GetCustomActionOk() (*CustomAction, bool) {
+	if o == nil || IsNil(o.CustomAction) {
+		return nil, false
 	}
+	return o.CustomAction, true
 }
 
+// HasCustomAction returns a boolean if a field has been set.
+func (o *ActionDefinition) HasCustomAction() bool {
+	if o != nil && !IsNil(o.CustomAction) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ActionDefinition) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ActionDefinitionCustomAction
-	err = json.Unmarshal(data, &dst.ActionDefinitionCustomAction)
-	if err == nil {
-		jsonActionDefinitionCustomAction, _ := json.Marshal(dst.ActionDefinitionCustomAction)
-		if string(jsonActionDefinitionCustomAction) == "{}" { // empty struct
-			dst.ActionDefinitionCustomAction = nil
-		} else {
-			if err = validator.Validate(dst.ActionDefinitionCustomAction); err != nil {
-				dst.ActionDefinitionCustomAction = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetCustomAction gets a reference to the given CustomAction and assigns it to the CustomAction field.
+func (o *ActionDefinition) SetCustomAction(v CustomAction) {
+	o.CustomAction = &v
+}
+
+// GetGoToDashboardAction returns the GoToDashboardAction field value if set, zero value otherwise.
+func (o *ActionDefinition) GetGoToDashboardAction() GoToDashboardTemplateAction {
+	if o == nil || IsNil(o.GoToDashboardAction) {
+		var ret GoToDashboardTemplateAction
+		return ret
+	}
+	return *o.GoToDashboardAction
+}
+
+// GetGoToDashboardActionOk returns a tuple with the GoToDashboardAction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ActionDefinition) GetGoToDashboardActionOk() (*GoToDashboardTemplateAction, bool) {
+	if o == nil || IsNil(o.GoToDashboardAction) {
+		return nil, false
+	}
+	return o.GoToDashboardAction, true
+}
+
+// HasGoToDashboardAction returns a boolean if a field has been set.
+func (o *ActionDefinition) HasGoToDashboardAction() bool {
+	if o != nil && !IsNil(o.GoToDashboardAction) {
+		return true
+	}
+
+	return false
+}
+
+// SetGoToDashboardAction gets a reference to the given GoToDashboardTemplateAction and assigns it to the GoToDashboardAction field.
+func (o *ActionDefinition) SetGoToDashboardAction(v GoToDashboardTemplateAction) {
+	o.GoToDashboardAction = &v
+}
+
+func (o ActionDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ActionDefinition) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CustomAction) {
+		toSerialize["customAction"] = o.CustomAction
+	}
+	if !IsNil(o.GoToDashboardAction) {
+		toSerialize["goToDashboardAction"] = o.GoToDashboardAction
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["customAction"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["goToDashboardAction"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [customAction, goToDashboardAction] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ActionDefinition) UnmarshalJSON(data []byte) (err error) {
+	varActionDefinition := _ActionDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActionDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActionDefinition(varActionDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["customAction"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ActionDefinitionCustomAction = nil
-	}
-
-	// try to unmarshal data into ActionDefinitionGoToDashboardAction
-	err = json.Unmarshal(data, &dst.ActionDefinitionGoToDashboardAction)
-	if err == nil {
-		jsonActionDefinitionGoToDashboardAction, _ := json.Marshal(dst.ActionDefinitionGoToDashboardAction)
-		if string(jsonActionDefinitionGoToDashboardAction) == "{}" { // empty struct
-			dst.ActionDefinitionGoToDashboardAction = nil
-		} else {
-			if err = validator.Validate(dst.ActionDefinitionGoToDashboardAction); err != nil {
-				dst.ActionDefinitionGoToDashboardAction = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["goToDashboardAction"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ActionDefinitionGoToDashboardAction = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [customAction, goToDashboardAction] may be set"}
+		}
+
+		delete(additionalProperties, "customAction")
+		delete(additionalProperties, "goToDashboardAction")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ActionDefinitionCustomAction = nil
-		dst.ActionDefinitionGoToDashboardAction = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ActionDefinition)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ActionDefinition) MarshalJSON() ([]byte, error) {
-	if src.ActionDefinitionCustomAction != nil {
-		return json.Marshal(&src.ActionDefinitionCustomAction)
-	}
-
-	if src.ActionDefinitionGoToDashboardAction != nil {
-		return json.Marshal(&src.ActionDefinitionGoToDashboardAction)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ActionDefinition) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ActionDefinitionCustomAction != nil {
-		return obj.ActionDefinitionCustomAction
-	}
-
-	if obj.ActionDefinitionGoToDashboardAction != nil {
-		return obj.ActionDefinitionGoToDashboardAction
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ActionDefinition) GetActualInstanceValue() (interface{}) {
-	if obj.ActionDefinitionCustomAction != nil {
-		return *obj.ActionDefinitionCustomAction
-	}
-
-	if obj.ActionDefinitionGoToDashboardAction != nil {
-		return *obj.ActionDefinitionGoToDashboardAction
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableActionDefinition struct {

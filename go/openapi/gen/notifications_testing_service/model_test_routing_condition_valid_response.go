@@ -13,126 +13,170 @@ package notifications_testing_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// TestRoutingConditionValidResponse - struct for TestRoutingConditionValidResponse
+// checks if the TestRoutingConditionValidResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TestRoutingConditionValidResponse{}
+
+// TestRoutingConditionValidResponse Response which specifies condition evaluation result or error
 type TestRoutingConditionValidResponse struct {
-	TestRoutingConditionValidResponseFailureVariant *TestRoutingConditionValidResponseFailureVariant
-	TestRoutingConditionValidResponseSuccessVariant *TestRoutingConditionValidResponseSuccessVariant
+	Failure *TestRoutingConditionValidResponseFailure `json:"failure,omitempty"`
+	Success *TestRoutingConditionValidResponseSuccess `json:"success,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// TestRoutingConditionValidResponseFailureVariantAsTestRoutingConditionValidResponse is a convenience function that returns TestRoutingConditionValidResponseFailureVariant wrapped in TestRoutingConditionValidResponse
-func TestRoutingConditionValidResponseFailureVariantAsTestRoutingConditionValidResponse(v *TestRoutingConditionValidResponseFailureVariant) TestRoutingConditionValidResponse {
-	return TestRoutingConditionValidResponse{
-		TestRoutingConditionValidResponseFailureVariant: v,
+type _TestRoutingConditionValidResponse TestRoutingConditionValidResponse
+
+// NewTestRoutingConditionValidResponse instantiates a new TestRoutingConditionValidResponse object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewTestRoutingConditionValidResponse() *TestRoutingConditionValidResponse {
+	this := TestRoutingConditionValidResponse{}
+	return &this
+}
+
+// NewTestRoutingConditionValidResponseWithDefaults instantiates a new TestRoutingConditionValidResponse object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewTestRoutingConditionValidResponseWithDefaults() *TestRoutingConditionValidResponse {
+	this := TestRoutingConditionValidResponse{}
+	return &this
+}
+
+// GetFailure returns the Failure field value if set, zero value otherwise.
+func (o *TestRoutingConditionValidResponse) GetFailure() TestRoutingConditionValidResponseFailure {
+	if o == nil || IsNil(o.Failure) {
+		var ret TestRoutingConditionValidResponseFailure
+		return ret
 	}
+	return *o.Failure
 }
 
-// TestRoutingConditionValidResponseSuccessVariantAsTestRoutingConditionValidResponse is a convenience function that returns TestRoutingConditionValidResponseSuccessVariant wrapped in TestRoutingConditionValidResponse
-func TestRoutingConditionValidResponseSuccessVariantAsTestRoutingConditionValidResponse(v *TestRoutingConditionValidResponseSuccessVariant) TestRoutingConditionValidResponse {
-	return TestRoutingConditionValidResponse{
-		TestRoutingConditionValidResponseSuccessVariant: v,
+// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestRoutingConditionValidResponse) GetFailureOk() (*TestRoutingConditionValidResponseFailure, bool) {
+	if o == nil || IsNil(o.Failure) {
+		return nil, false
 	}
+	return o.Failure, true
 }
 
+// HasFailure returns a boolean if a field has been set.
+func (o *TestRoutingConditionValidResponse) HasFailure() bool {
+	if o != nil && !IsNil(o.Failure) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *TestRoutingConditionValidResponse) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into TestRoutingConditionValidResponseFailureVariant
-	err = json.Unmarshal(data, &dst.TestRoutingConditionValidResponseFailureVariant)
-	if err == nil {
-		jsonTestRoutingConditionValidResponseFailureVariant, _ := json.Marshal(dst.TestRoutingConditionValidResponseFailureVariant)
-		if string(jsonTestRoutingConditionValidResponseFailureVariant) == "{}" { // empty struct
-			dst.TestRoutingConditionValidResponseFailureVariant = nil
-		} else {
-			if err = validator.Validate(dst.TestRoutingConditionValidResponseFailureVariant); err != nil {
-				dst.TestRoutingConditionValidResponseFailureVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetFailure gets a reference to the given TestRoutingConditionValidResponseFailure and assigns it to the Failure field.
+func (o *TestRoutingConditionValidResponse) SetFailure(v TestRoutingConditionValidResponseFailure) {
+	o.Failure = &v
+}
+
+// GetSuccess returns the Success field value if set, zero value otherwise.
+func (o *TestRoutingConditionValidResponse) GetSuccess() TestRoutingConditionValidResponseSuccess {
+	if o == nil || IsNil(o.Success) {
+		var ret TestRoutingConditionValidResponseSuccess
+		return ret
+	}
+	return *o.Success
+}
+
+// GetSuccessOk returns a tuple with the Success field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestRoutingConditionValidResponse) GetSuccessOk() (*TestRoutingConditionValidResponseSuccess, bool) {
+	if o == nil || IsNil(o.Success) {
+		return nil, false
+	}
+	return o.Success, true
+}
+
+// HasSuccess returns a boolean if a field has been set.
+func (o *TestRoutingConditionValidResponse) HasSuccess() bool {
+	if o != nil && !IsNil(o.Success) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuccess gets a reference to the given TestRoutingConditionValidResponseSuccess and assigns it to the Success field.
+func (o *TestRoutingConditionValidResponse) SetSuccess(v TestRoutingConditionValidResponseSuccess) {
+	o.Success = &v
+}
+
+func (o TestRoutingConditionValidResponse) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TestRoutingConditionValidResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Failure) {
+		toSerialize["failure"] = o.Failure
+	}
+	if !IsNil(o.Success) {
+		toSerialize["success"] = o.Success
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["success"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["failure"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+	}
+
+	return toSerialize, nil
+}
+
+func (o *TestRoutingConditionValidResponse) UnmarshalJSON(data []byte) (err error) {
+	varTestRoutingConditionValidResponse := _TestRoutingConditionValidResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestRoutingConditionValidResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestRoutingConditionValidResponse(varTestRoutingConditionValidResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["success"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TestRoutingConditionValidResponseFailureVariant = nil
-	}
-
-	// try to unmarshal data into TestRoutingConditionValidResponseSuccessVariant
-	err = json.Unmarshal(data, &dst.TestRoutingConditionValidResponseSuccessVariant)
-	if err == nil {
-		jsonTestRoutingConditionValidResponseSuccessVariant, _ := json.Marshal(dst.TestRoutingConditionValidResponseSuccessVariant)
-		if string(jsonTestRoutingConditionValidResponseSuccessVariant) == "{}" { // empty struct
-			dst.TestRoutingConditionValidResponseSuccessVariant = nil
-		} else {
-			if err = validator.Validate(dst.TestRoutingConditionValidResponseSuccessVariant); err != nil {
-				dst.TestRoutingConditionValidResponseSuccessVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["failure"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TestRoutingConditionValidResponseSuccessVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+		}
+
+		delete(additionalProperties, "failure")
+		delete(additionalProperties, "success")
+		o.AdditionalProperties = additionalProperties
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TestRoutingConditionValidResponseFailureVariant = nil
-		dst.TestRoutingConditionValidResponseSuccessVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TestRoutingConditionValidResponse)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src TestRoutingConditionValidResponse) MarshalJSON() ([]byte, error) {
-	if src.TestRoutingConditionValidResponseFailureVariant != nil {
-		return json.Marshal(&src.TestRoutingConditionValidResponseFailureVariant)
-	}
-
-	if src.TestRoutingConditionValidResponseSuccessVariant != nil {
-		return json.Marshal(&src.TestRoutingConditionValidResponseSuccessVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *TestRoutingConditionValidResponse) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.TestRoutingConditionValidResponseFailureVariant != nil {
-		return obj.TestRoutingConditionValidResponseFailureVariant
-	}
-
-	if obj.TestRoutingConditionValidResponseSuccessVariant != nil {
-		return obj.TestRoutingConditionValidResponseSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj TestRoutingConditionValidResponse) GetActualInstanceValue() (interface{}) {
-	if obj.TestRoutingConditionValidResponseFailureVariant != nil {
-		return *obj.TestRoutingConditionValidResponseFailureVariant
-	}
-
-	if obj.TestRoutingConditionValidResponseSuccessVariant != nil {
-		return *obj.TestRoutingConditionValidResponseSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableTestRoutingConditionValidResponse struct {

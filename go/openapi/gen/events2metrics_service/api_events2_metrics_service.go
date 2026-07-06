@@ -134,11 +134,11 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceAtomicBatchExecute
 type ApiEvents2MetricServiceCreateE2MRequest struct {
 	ctx context.Context
 	ApiService *Events2MetricsServiceAPIService
-	events2MetricServiceCreateE2MRequest *Events2MetricServiceCreateE2MRequest
+	e2MCreateParams *E2MCreateParams
 }
 
-func (r ApiEvents2MetricServiceCreateE2MRequest) Events2MetricServiceCreateE2MRequest(events2MetricServiceCreateE2MRequest Events2MetricServiceCreateE2MRequest) ApiEvents2MetricServiceCreateE2MRequest {
-	r.events2MetricServiceCreateE2MRequest = &events2MetricServiceCreateE2MRequest
+func (r ApiEvents2MetricServiceCreateE2MRequest) E2MCreateParams(e2MCreateParams E2MCreateParams) ApiEvents2MetricServiceCreateE2MRequest {
+	r.e2MCreateParams = &e2MCreateParams
 	return r
 }
 
@@ -181,8 +181,8 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceCreateE2MExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.events2MetricServiceCreateE2MRequest == nil {
-		return localVarReturnValue, nil, reportError("events2MetricServiceCreateE2MRequest is required and must be specified")
+	if r.e2MCreateParams == nil {
+		return localVarReturnValue, nil, reportError("e2MCreateParams is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -203,7 +203,7 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceCreateE2MExecute(r
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.events2MetricServiceCreateE2MRequest
+	localVarPostBody = r.e2MCreateParams
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -791,11 +791,11 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceListLabelsCardinal
 type ApiEvents2MetricServiceReplaceE2MRequest struct {
 	ctx context.Context
 	ApiService *Events2MetricsServiceAPIService
-	events2MetricServiceReplaceE2MRequest *Events2MetricServiceReplaceE2MRequest
+	e2M1 *E2M1
 }
 
-func (r ApiEvents2MetricServiceReplaceE2MRequest) Events2MetricServiceReplaceE2MRequest(events2MetricServiceReplaceE2MRequest Events2MetricServiceReplaceE2MRequest) ApiEvents2MetricServiceReplaceE2MRequest {
-	r.events2MetricServiceReplaceE2MRequest = &events2MetricServiceReplaceE2MRequest
+func (r ApiEvents2MetricServiceReplaceE2MRequest) E2M1(e2M1 E2M1) ApiEvents2MetricServiceReplaceE2MRequest {
+	r.e2M1 = &e2M1
 	return r
 }
 
@@ -838,8 +838,8 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceReplaceE2MExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.events2MetricServiceReplaceE2MRequest == nil {
-		return localVarReturnValue, nil, reportError("events2MetricServiceReplaceE2MRequest is required and must be specified")
+	if r.e2M1 == nil {
+		return localVarReturnValue, nil, reportError("e2M1 is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -860,7 +860,7 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceReplaceE2MExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.events2MetricServiceReplaceE2MRequest
+	localVarPostBody = r.e2M1
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
