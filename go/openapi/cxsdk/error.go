@@ -15,6 +15,7 @@
 package cxsdk
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
@@ -100,10 +101,22 @@ func IsNotFound(err error) bool {
 	return isResourceNotFoundBody(Body(err))
 }
 
-// isResourceNotFoundBody reports true only when the body is "Not Found: <message>" with a non-generic message
-// (i.e. not "Not Found: Not Found", which indicates the HTTP route/endpoint does not exist).
+// isResourceNotFoundBody reports true only when the error message is
+// "Not Found: <message>" with a non-generic message (i.e. not "Not Found: Not
+// Found", which indicates the HTTP route/endpoint does not exist).
+//
+// It tolerates both error body formats: the legacy plain-text body
+// ("Not Found: <message>") and the JSON body ({"code":404,"message":"Not
+// Found: <message>"}) that the API facade now returns. When the body is JSON
+// the check is applied to the "message" field; otherwise to the raw body.
 func isResourceNotFoundBody(b []byte) bool {
 	s := strings.TrimSpace(string(b))
+	var je struct {
+		Message string `json:"message"`
+	}
+	if json.Unmarshal(b, &je) == nil && je.Message != "" {
+		s = strings.TrimSpace(je.Message)
+	}
 	if !strings.HasPrefix(s, notFoundPrefix) {
 		return false
 	}
