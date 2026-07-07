@@ -507,20 +507,28 @@ func (a *AIApplicationsServiceAPIService) AiApplicationsServiceListAiApplication
 	localVarFormParams := url.Values{}
 
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.pageOffset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_offset", r.pageOffset, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_offset", r.pageOffset, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.evaluationTypes != nil {
 		t := *r.evaluationTypes
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "evaluation_types", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "evaluation_types", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "evaluation_types", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "evaluation_types", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header

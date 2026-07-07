@@ -962,19 +962,29 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceListAiEvaluationsEx
 	localVarFormParams := url.Values{}
 
 	if r.application != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "application", r.application, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "application", r.application, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.subsystem != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subsystem", r.subsystem, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "subsystem", r.subsystem, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.evaluationType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "evaluation_type", r.evaluationType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "evaluation_type", r.evaluationType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.pageOffset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_offset", r.pageOffset, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_offset", r.pageOffset, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

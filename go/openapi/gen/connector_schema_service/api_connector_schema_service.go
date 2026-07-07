@@ -75,7 +75,9 @@ func (a *ConnectorSchemaServiceAPIService) ConnectorSchemaServiceGetConnectorSch
 	localVarFormParams := url.Values{}
 
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

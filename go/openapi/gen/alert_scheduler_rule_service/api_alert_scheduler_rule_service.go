@@ -657,16 +657,24 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetBulkAl
 	localVarFormParams := url.Values{}
 
 	if r.activeTimeframe != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "active_timeframe", r.activeTimeframe, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "active_timeframe", r.activeTimeframe, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.enabled != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "enabled", r.enabled, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "enabled", r.enabled, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.alertSchedulerRulesIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "alert_scheduler_rules_ids", r.alertSchedulerRulesIds, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "alert_scheduler_rules_ids", r.alertSchedulerRulesIds, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.nextPageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page_token", r.nextPageToken, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "next_page_token", r.nextPageToken, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

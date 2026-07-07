@@ -370,7 +370,9 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceG
 	localVarFormParams := url.Values{}
 
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

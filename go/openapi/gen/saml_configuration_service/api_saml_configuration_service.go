@@ -75,7 +75,9 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetConfigur
 	localVarFormParams := url.Values{}
 
 	if r.teamId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "team_id", r.teamId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "team_id", r.teamId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -216,7 +218,9 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetSPParame
 	localVarFormParams := url.Values{}
 
 	if r.teamId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "team_id", r.teamId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "team_id", r.teamId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

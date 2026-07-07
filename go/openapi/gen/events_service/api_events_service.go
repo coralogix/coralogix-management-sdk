@@ -102,10 +102,14 @@ func (a *EventsServiceAPIService) EventsServiceBatchGetEventExecute(r ApiEventsS
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.orderBys != nil {
@@ -113,17 +117,25 @@ func (a *EventsServiceAPIService) EventsServiceBatchGetEventExecute(r ApiEventsS
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.pagination != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -282,14 +294,20 @@ func (a *EventsServiceAPIService) EventsServiceGetEventExecute(r ApiEventsServic
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.pagination != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -430,7 +448,9 @@ func (a *EventsServiceAPIService) EventsServiceGetEventsStatisticsExecute(r ApiE
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -603,31 +623,45 @@ func (a *EventsServiceAPIService) EventsServiceListAlertEventsExecute(r ApiEvent
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "alert_ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "alert_ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "alert_ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "alert_ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.timestampRange != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "timestamp_range", r.timestampRange, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "timestamp_range", r.timestampRange, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.cxEventLabels != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cx_event_labels", r.cxEventLabels, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "cx_event_labels", r.cxEventLabels, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.orderBys != nil {
 		t := *r.orderBys
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.pagination != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -782,21 +816,29 @@ func (a *EventsServiceAPIService) EventsServiceListEventsExecute(r ApiEventsServ
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.orderBys != nil {
 		t := *r.orderBys
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.pagination != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -937,7 +979,9 @@ func (a *EventsServiceAPIService) EventsServiceListEventsCountExecute(r ApiEvent
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

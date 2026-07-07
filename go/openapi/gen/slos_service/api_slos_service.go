@@ -223,10 +223,14 @@ func (a *SlosServiceAPIService) SlosServiceBatchGetSlosExecute(r ApiSlosServiceB
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -377,7 +381,9 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 	}
 
 	if r.silenceDataValidations != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "silence_data_validations", r.silenceDataValidations, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "silence_data_validations", r.silenceDataValidations, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -931,10 +937,14 @@ func (a *SlosServiceAPIService) SlosServiceListSlosExecute(r ApiSlosServiceListS
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "filters", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filters", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "filters", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filters", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -1085,7 +1095,9 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 	}
 
 	if r.silenceDataValidations != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "silence_data_validations", r.silenceDataValidations, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "silence_data_validations", r.silenceDataValidations, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

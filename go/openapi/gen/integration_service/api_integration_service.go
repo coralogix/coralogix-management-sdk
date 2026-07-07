@@ -359,7 +359,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetIntegrationDefinitio
 	}
 
 	if r.includeTestingRevision != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revision", r.includeTestingRevision, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revision", r.includeTestingRevision, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -507,7 +509,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetIntegrationDetailsEx
 	}
 
 	if r.includeTestingRevision != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revision", r.includeTestingRevision, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revision", r.includeTestingRevision, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -648,7 +652,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetIntegrationsExecute(
 	localVarFormParams := url.Values{}
 
 	if r.includeTestingRevision != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revision", r.includeTestingRevision, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revision", r.includeTestingRevision, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -927,7 +933,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetRumApplicationVersio
 	localVarFormParams := url.Values{}
 
 	if r.applicationName != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "application_name", r.applicationName, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "application_name", r.applicationName, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1082,13 +1090,19 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetTemplateExecute(r Ap
 	localVarFormParams := url.Values{}
 
 	if r.integrationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "integration_id", r.integrationId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "integration_id", r.integrationId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.commonArmParams != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "common_arm_params", r.commonArmParams, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "common_arm_params", r.commonArmParams, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.empty != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "empty", r.empty, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "empty", r.empty, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

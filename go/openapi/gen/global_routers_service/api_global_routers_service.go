@@ -81,10 +81,14 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceBatchGetGlobalRoute
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "global_router_ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "global_router_ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "global_router_ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "global_router_ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -526,10 +530,14 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceListGlobalRoutersEx
 	localVarFormParams := url.Values{}
 
 	if r.entityType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.sourceEntityLabels != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "source_entity_labels", r.sourceEntityLabels, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "source_entity_labels", r.sourceEntityLabels, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -745,7 +753,9 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceValidateEntityLabel
 	localVarFormParams := url.Values{}
 
 	if r.entityLabelMatcher != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "entity_label_matcher", r.entityLabelMatcher, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "entity_label_matcher", r.entityLabelMatcher, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

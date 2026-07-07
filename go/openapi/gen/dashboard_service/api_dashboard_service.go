@@ -647,7 +647,9 @@ func (a *DashboardServiceAPIService) DashboardsServiceDeleteDashboardExecute(r A
 	}
 
 	if r.requestId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1071,7 +1073,9 @@ func (a *DashboardServiceAPIService) DashboardsServicePinDashboardExecute(r ApiD
 	}
 
 	if r.requestId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1510,7 +1514,9 @@ func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboardExecute(r Ap
 	}
 
 	if r.requestId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

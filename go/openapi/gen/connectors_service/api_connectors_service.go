@@ -81,10 +81,14 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectorSummarie
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "connector_ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "connector_ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -198,10 +202,14 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectorsExecute
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "connector_ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "connector_ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -636,7 +644,9 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnectorTypeSummaries
 	localVarFormParams := url.Values{}
 
 	if r.supportedByEntityType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supported_by_entity_type", r.supportedByEntityType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "supported_by_entity_type", r.supportedByEntityType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -752,10 +762,14 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectorSummariesExe
 	localVarFormParams := url.Values{}
 
 	if r.connectorType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.supportedByEntityType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supported_by_entity_type", r.supportedByEntityType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "supported_by_entity_type", r.supportedByEntityType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -871,10 +885,14 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectorsExecute(r A
 	localVarFormParams := url.Values{}
 
 	if r.connectorType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.supportedByEntityType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supported_by_entity_type", r.supportedByEntityType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "supported_by_entity_type", r.supportedByEntityType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

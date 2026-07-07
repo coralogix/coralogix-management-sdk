@@ -149,7 +149,7 @@ func parameterValueToString( obj interface{}, key string ) string {
 
 // parameterAddToHeaderOrQuery adds the provided object to the request header or url query
 // supporting deep object syntax
-func parameterAddToHeaderOrQuery(headerOrQueryParams interface{}, keyPrefix string, obj interface{}, style string, collectionType string) {
+func parameterAddToHeaderOrQuery(headerOrQueryParams interface{}, keyPrefix string, obj interface{}, style string, collectionType string) error {
 	var v = reflect.ValueOf(obj)
 	var value = ""
 	if v == reflect.ValueOf(nil) {
@@ -163,20 +163,18 @@ func parameterAddToHeaderOrQuery(headerOrQueryParams interface{}, keyPrefix stri
 				if t,ok := obj.(MappedNullable); ok {
 					dataMap,err := t.ToMap()
 					if err != nil {
-						return
+						return err
 					}
-					parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, dataMap, style, collectionType)
-					return
+					return parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, dataMap, style, collectionType)
 				}
 				if t, ok := obj.(time.Time); ok {
-					parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, t.Format(time.RFC3339Nano), style, collectionType)
-					return
+					return parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, t.Format(time.RFC3339Nano), style, collectionType)
 				}
 				value = v.Type().String() + " value"
 			case reflect.Slice:
 				var indValue = reflect.ValueOf(obj)
 				if indValue == reflect.ValueOf(nil) {
-					return
+					return nil
 				}
 				var lenIndValue = indValue.Len()
 				for i:=0;i<lenIndValue;i++ {
@@ -185,27 +183,30 @@ func parameterAddToHeaderOrQuery(headerOrQueryParams interface{}, keyPrefix stri
 					if style == "deepObject" {
 						keyPrefixForCollectionType = keyPrefix + "[" + strconv.Itoa(i) + "]"
 					}
-					parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefixForCollectionType, arrayValue.Interface(), style, collectionType)
+					if err := parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefixForCollectionType, arrayValue.Interface(), style, collectionType); err != nil {
+						return err
+					}
 				}
-				return
+				return nil
 
 			case reflect.Map:
 				var indValue = reflect.ValueOf(obj)
 				if indValue == reflect.ValueOf(nil) {
-					return
+					return nil
 				}
 				iter := indValue.MapRange()
 				for iter.Next() {
 					k,v := iter.Key(), iter.Value()
-					parameterAddToHeaderOrQuery(headerOrQueryParams, fmt.Sprintf("%s[%s]", keyPrefix, k.String()), v.Interface(), style, collectionType)
+					if err := parameterAddToHeaderOrQuery(headerOrQueryParams, fmt.Sprintf("%s[%s]", keyPrefix, k.String()), v.Interface(), style, collectionType); err != nil {
+						return err
+					}
 				}
-				return
+				return nil
 
 			case reflect.Interface:
 				fallthrough
 			case reflect.Ptr:
-				parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, v.Elem().Interface(), style, collectionType)
-				return
+				return parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, v.Elem().Interface(), style, collectionType)
 
 			case reflect.Int, reflect.Int8, reflect.Int16,
 				reflect.Int32, reflect.Int64:
@@ -236,6 +237,7 @@ func parameterAddToHeaderOrQuery(headerOrQueryParams interface{}, keyPrefix stri
 			valuesMap[keyPrefix] = value
 			break
 	}
+	return nil
 }
 
 // helper for converting interface{} parameters to json strings

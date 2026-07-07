@@ -15,12 +15,37 @@
 package forwardcompat
 
 import (
+	"context"
 	"encoding/json"
+	"strings"
 	"testing"
 
+	scheduler "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_scheduler_rule_service"
 	events "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/events_service"
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
 )
+
+func TestQueryParameterOneOfValidationErrorIsReturned(t *testing.T) {
+	filter := scheduler.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter{}
+	filter.SetAlertSchedulerIds(scheduler.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerIds{
+		AlertSchedulerRuleIds: []string{"rule-id"},
+	})
+	filter.SetAlertSchedulerVersionIds(scheduler.AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds{
+		AlertSchedulerRuleVersionIds: []string{"version-id"},
+	})
+
+	client := scheduler.NewAPIClient(scheduler.NewConfiguration())
+	_, _, err := client.AlertSchedulerRuleServiceAPI.
+		AlertSchedulerRuleServiceGetBulkAlertSchedulerRule(context.Background()).
+		AlertSchedulerRulesIds(filter).
+		Execute()
+	if err == nil {
+		t.Fatal("expected invalid query oneOf filter to fail before sending the request")
+	}
+	if !strings.Contains(err.Error(), "at most one of [alertSchedulerIds, alertSchedulerVersionIds] may be set") {
+		t.Fatalf("unexpected error: %v", err)
+	}
+}
 
 func TestRequiredOneOf_ResponseUnknownFutureArmIsForwardCompatible(t *testing.T) {
 	payload := `{

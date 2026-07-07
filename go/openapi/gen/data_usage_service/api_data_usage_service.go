@@ -523,20 +523,28 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageExecute(r ApiDa
 	localVarFormParams := url.Values{}
 
 	if r.dateRange != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "date_range", r.dateRange, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "date_range", r.dateRange, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.resolution != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "resolution", r.resolution, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "resolution", r.resolution, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.aggregate != nil {
 		t := *r.aggregate
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "aggregate", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "aggregate", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "aggregate", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "aggregate", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.dimensionFilters != nil {
@@ -544,10 +552,14 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageExecute(r ApiDa
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "dimension_filters", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "dimension_filters", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "dimension_filters", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "dimension_filters", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -848,19 +860,29 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetLogsCountExecute(r ApiDa
 	localVarFormParams := url.Values{}
 
 	if r.dateRange != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "date_range", r.dateRange, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "date_range", r.dateRange, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.resolution != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "resolution", r.resolution, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "resolution", r.resolution, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.filters != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filters", r.filters, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filters", r.filters, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.subsystemAggregation != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subsystem_aggregation", r.subsystemAggregation, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "subsystem_aggregation", r.subsystemAggregation, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.applicationAggregation != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "application_aggregation", r.applicationAggregation, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "application_aggregation", r.applicationAggregation, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1015,13 +1037,19 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetSpansCountExecute(r ApiD
 	localVarFormParams := url.Values{}
 
 	if r.dateRange != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "date_range", r.dateRange, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "date_range", r.dateRange, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.resolution != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "resolution", r.resolution, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "resolution", r.resolution, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.filters != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filters", r.filters, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filters", r.filters, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

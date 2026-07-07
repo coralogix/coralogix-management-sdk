@@ -931,10 +931,14 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetCompanyPoliciesExecute(r A
 	localVarFormParams := url.Values{}
 
 	if r.enabledOnly != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "enabled_only", r.enabledOnly, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "enabled_only", r.enabledOnly, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.sourceType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "source_type", r.sourceType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "source_type", r.sourceType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

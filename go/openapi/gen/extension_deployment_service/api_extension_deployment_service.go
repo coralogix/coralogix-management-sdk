@@ -111,20 +111,28 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceDeployE
 	localVarFormParams := url.Values{}
 
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.version != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.itemIds != nil {
 		t := *r.itemIds
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "item_ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "item_ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "item_ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "item_ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.applications != nil {
@@ -132,10 +140,14 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceDeployE
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "applications", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "applications", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "applications", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "applications", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.subsystems != nil {
@@ -143,14 +155,20 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceDeployE
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "subsystems", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "subsystems", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "subsystems", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "subsystems", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.extensionDeployment != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "extension_deployment", r.extensionDeployment, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "extension_deployment", r.extensionDeployment, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -596,20 +614,28 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUpdateE
 	localVarFormParams := url.Values{}
 
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.version != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.itemIds != nil {
 		t := *r.itemIds
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "item_ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "item_ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "item_ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "item_ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.applications != nil {
@@ -617,10 +643,14 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUpdateE
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "applications", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "applications", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "applications", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "applications", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.subsystems != nil {
@@ -628,14 +658,20 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUpdateE
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "subsystems", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "subsystems", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "subsystems", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "subsystems", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	if r.extensionDeployment != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "extension_deployment", r.extensionDeployment, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "extension_deployment", r.extensionDeployment, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

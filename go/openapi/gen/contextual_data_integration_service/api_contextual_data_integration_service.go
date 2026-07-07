@@ -221,7 +221,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	}
 
 	if r.includeTestingIntegrations != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_integrations", r.includeTestingIntegrations, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_integrations", r.includeTestingIntegrations, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -369,7 +371,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	}
 
 	if r.includeTestingRevisions != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revisions", r.includeTestingRevisions, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revisions", r.includeTestingRevisions, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -510,7 +514,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	localVarFormParams := url.Values{}
 
 	if r.includeTestingIntegrations != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_integrations", r.includeTestingIntegrations, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_integrations", r.includeTestingIntegrations, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

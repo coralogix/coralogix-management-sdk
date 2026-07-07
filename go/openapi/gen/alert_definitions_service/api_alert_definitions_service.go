@@ -762,7 +762,9 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceFilterOptionCountsEx
 	localVarFormParams := url.Values{}
 
 	if r.queryFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "query_filter", r.queryFilter, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "query_filter", r.queryFilter, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1193,13 +1195,19 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceListAlertDefsExecute
 	localVarFormParams := url.Values{}
 
 	if r.queryFilter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "query_filter", r.queryFilter, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "query_filter", r.queryFilter, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.pagination != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.orderBys != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", r.orderBys, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", r.orderBys, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

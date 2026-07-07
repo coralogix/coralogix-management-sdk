@@ -718,20 +718,28 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceListLabelsCardinal
 	localVarFormParams := url.Values{}
 
 	if r.spansQuery != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "spans_query", r.spansQuery, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "spans_query", r.spansQuery, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.logsQuery != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "logs_query", r.logsQuery, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "logs_query", r.logsQuery, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.metricLabels != nil {
 		t := *r.metricLabels
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "metric_labels", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "metric_labels", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "metric_labels", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "metric_labels", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header

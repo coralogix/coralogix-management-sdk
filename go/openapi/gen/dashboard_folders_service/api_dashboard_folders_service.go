@@ -222,7 +222,9 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboa
 	}
 
 	if r.requestId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -370,7 +372,9 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardF
 	}
 
 	if r.requestId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

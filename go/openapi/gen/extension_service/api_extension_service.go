@@ -229,10 +229,14 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetExtensionExecute(r ApiEx
 	}
 
 	if r.includeDashboardBinaries != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_dashboard_binaries", r.includeDashboardBinaries, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_dashboard_binaries", r.includeDashboardBinaries, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.includeTestingRevision != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revision", r.includeTestingRevision, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revision", r.includeTestingRevision, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

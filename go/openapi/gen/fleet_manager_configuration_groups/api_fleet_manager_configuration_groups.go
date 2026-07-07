@@ -388,7 +388,9 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 	}
 
 	if r.latestFamilyOnly != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "latest_family_only", r.latestFamilyOnly, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "latest_family_only", r.latestFamilyOnly, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

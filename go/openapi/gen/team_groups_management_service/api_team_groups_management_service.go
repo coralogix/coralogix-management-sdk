@@ -389,10 +389,14 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsersEx
 	}
 
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -856,13 +860,19 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupsEx
 	localVarFormParams := url.Values{}
 
 	if r.teamId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "team_id", r.teamId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "team_id", r.teamId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

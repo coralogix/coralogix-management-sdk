@@ -81,10 +81,14 @@ func (a *PresetsServiceAPIService) PresetsServiceBatchGetPresetsExecute(r ApiPre
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "preset_ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "preset_ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "preset_ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "preset_ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -417,10 +421,14 @@ func (a *PresetsServiceAPIService) PresetsServiceGetDefaultPresetSummaryExecute(
 	localVarFormParams := url.Values{}
 
 	if r.connectorType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.entityType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -645,10 +653,14 @@ func (a *PresetsServiceAPIService) PresetsServiceGetSystemDefaultPresetSummaryEx
 	localVarFormParams := url.Values{}
 
 	if r.connectorType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.entityType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -764,10 +776,14 @@ func (a *PresetsServiceAPIService) PresetsServiceListPresetSummariesExecute(r Ap
 	localVarFormParams := url.Values{}
 
 	if r.connectorType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.entityType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -428,16 +428,24 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsersExecute(r 
 	}
 
 	if r.username != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "username", r.username, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "username", r.username, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

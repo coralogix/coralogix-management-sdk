@@ -214,7 +214,9 @@ func (a *IPAccessServiceAPIService) IpAccessServiceDeleteCompanyIpAccessSettings
 	localVarFormParams := url.Values{}
 
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -355,7 +357,9 @@ func (a *IPAccessServiceAPIService) IpAccessServiceGetCompanyIpAccessSettingsExe
 	localVarFormParams := url.Values{}
 
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
