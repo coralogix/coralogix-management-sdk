@@ -737,41 +737,37 @@
             "$ref": "#/components/schemas/EntityLabelFilter.Values"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "all"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "values"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "all"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "values"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "all"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "values"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "all"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "values"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -835,21 +831,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -998,41 +990,37 @@
             "$ref": "#/components/schemas/IndicatorPriorityFilter.Values"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "all"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "values"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "all"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "values"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "all"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "values"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "all"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "values"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

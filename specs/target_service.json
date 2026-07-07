@@ -219,21 +219,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -428,41 +424,37 @@
             "$ref": "#/components/schemas/S3TargetSpec"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "s3"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "ibmCos"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "s3"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "ibmCos"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "s3"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "ibmCos"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "s3"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "ibmCos"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

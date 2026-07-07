@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Prepare an OpenAPI spec for Go SDK code generation.
 
-The checked-in OpenAPI spec may contain independent oneOf constraints under
-allOf to model protobuf oneof groups. Those constraints are useful for schema
-validation, but OpenAPI Generator's Go client flattens their branch `required`
-fields into ordinary model fields. That makes every oneof arm required in Go.
+The checked-in OpenAPI spec may contain independent oneOf constraints to model
+protobuf oneof groups. A single protobuf oneof group is emitted as top-level
+oneOf; multiple groups are emitted as one oneOf constraint per allOf entry.
+Those constraints are useful for schema validation, but OpenAPI Generator's Go
+client flattens their branch `required` fields into ordinary model fields. That
+makes every oneof arm required in Go.
 
-For SDK codegen, strip only those validation-only allOf entries. The generated
-package still receives the original spec file after code generation.
+For SDK codegen, strip only those validation-only oneOf constraints. The
+generated package still receives the original spec file after code generation.
 """
 
 from __future__ import annotations
@@ -98,43 +100,57 @@ def sanitize(value: Any) -> Any:
 
     sanitized = {key: sanitize(child) for key, child in value.items()}
 
+    independent_oneof_constraints = []
+    has_top_level_independent_oneof = False
+    if isinstance(sanitized.get("oneOf"), list) and set(sanitized) != {"oneOf"}:
+        top_level_oneof = {"oneOf": sanitized["oneOf"]}
+        if is_independent_oneof_constraint(top_level_oneof):
+            has_top_level_independent_oneof = True
+            independent_oneof_constraints.append(top_level_oneof)
+
     all_of = sanitized.get("allOf")
     if isinstance(all_of, list):
-        required_oneof_groups = []
-        for entry in all_of:
-            fields = required_oneof_fields(entry)
-            if fields is None:
-                continue
-            required_oneof_groups.append(
-                {
-                    "index": len(required_oneof_groups),
-                    "fields": fields,
-                    "fieldList": ", ".join(fields),
-                }
-            )
-        if required_oneof_groups:
-            vendor_extensions = sanitized.setdefault("x-cx-codegen", {})
-            vendor_extensions["requiredOneOfGroups"] = required_oneof_groups
+        independent_oneof_constraints.extend(
+            entry for entry in all_of if is_independent_oneof_constraint(entry)
+        )
 
-        optional_oneof_groups = []
-        for entry in all_of:
-            fields = optional_oneof_fields(entry)
-            if fields is None:
-                continue
-            optional_oneof_groups.append(
-                {
-                    "index": len(optional_oneof_groups),
-                    "fields": fields,
-                    "fieldList": ", ".join(fields),
-                }
-            )
-        if optional_oneof_groups:
-            vendor_extensions = sanitized.setdefault("x-cx-codegen", {})
-            vendor_extensions["optionalOneOfGroups"] = optional_oneof_groups
+    required_oneof_groups = []
+    for entry in independent_oneof_constraints:
+        fields = required_oneof_fields(entry)
+        if fields is None:
+            continue
+        required_oneof_groups.append(
+            {
+                "index": len(required_oneof_groups),
+                "fields": fields,
+                "fieldList": ", ".join(fields),
+            }
+        )
+    if required_oneof_groups:
+        vendor_extensions = sanitized.setdefault("x-cx-codegen", {})
+        vendor_extensions["requiredOneOfGroups"] = required_oneof_groups
 
-        filtered = [
-            entry for entry in all_of if not is_independent_oneof_constraint(entry)
-        ]
+    optional_oneof_groups = []
+    for entry in independent_oneof_constraints:
+        fields = optional_oneof_fields(entry)
+        if fields is None:
+            continue
+        optional_oneof_groups.append(
+            {
+                "index": len(optional_oneof_groups),
+                "fields": fields,
+                "fieldList": ", ".join(fields),
+            }
+        )
+    if optional_oneof_groups:
+        vendor_extensions = sanitized.setdefault("x-cx-codegen", {})
+        vendor_extensions["optionalOneOfGroups"] = optional_oneof_groups
+
+    if has_top_level_independent_oneof:
+        sanitized.pop("oneOf")
+
+    if isinstance(all_of, list):
+        filtered = [entry for entry in all_of if not is_independent_oneof_constraint(entry)]
         if filtered:
             sanitized["allOf"] = filtered
         else:

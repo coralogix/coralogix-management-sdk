@@ -67,113 +67,109 @@
                         "type": "boolean"
                       }
                     },
-                    "allOf": [
+                    "oneOf": [
                       {
-                        "oneOf": [
-                          {
-                            "type": "object",
-                            "required": [
-                              "constFilter"
-                            ]
-                          },
-                          {
-                            "type": "object",
-                            "required": [
-                              "labelName"
-                            ]
-                          },
-                          {
-                            "type": "object",
-                            "required": [
-                              "sloType"
-                            ]
-                          },
-                          {
-                            "type": "object",
-                            "required": [
-                              "productType"
-                            ]
-                          },
-                          {
-                            "type": "object",
-                            "required": [
-                              "serviceName"
-                            ]
-                          },
-                          {
-                            "type": "object",
-                            "required": [
-                              "ownershipServiceValues"
-                            ]
-                          },
-                          {
-                            "type": "object",
-                            "required": [
-                              "ownershipEnvironmentValues"
-                            ]
-                          },
-                          {
-                            "type": "object",
-                            "required": [
-                              "ownershipTeamValues"
-                            ]
-                          },
-                          {
-                            "type": "object",
-                            "not": {
-                              "anyOf": [
-                                {
-                                  "type": "object",
-                                  "required": [
-                                    "constFilter"
-                                  ]
-                                },
-                                {
-                                  "type": "object",
-                                  "required": [
-                                    "labelName"
-                                  ]
-                                },
-                                {
-                                  "type": "object",
-                                  "required": [
-                                    "sloType"
-                                  ]
-                                },
-                                {
-                                  "type": "object",
-                                  "required": [
-                                    "productType"
-                                  ]
-                                },
-                                {
-                                  "type": "object",
-                                  "required": [
-                                    "serviceName"
-                                  ]
-                                },
-                                {
-                                  "type": "object",
-                                  "required": [
-                                    "ownershipServiceValues"
-                                  ]
-                                },
-                                {
-                                  "type": "object",
-                                  "required": [
-                                    "ownershipEnvironmentValues"
-                                  ]
-                                },
-                                {
-                                  "type": "object",
-                                  "required": [
-                                    "ownershipTeamValues"
-                                  ]
-                                }
+                        "type": "object",
+                        "required": [
+                          "constFilter"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "labelName"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "sloType"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "productType"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "serviceName"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "ownershipServiceValues"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "ownershipEnvironmentValues"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "ownershipTeamValues"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "not": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "required": [
+                                "constFilter"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "labelName"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "sloType"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "productType"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "serviceName"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "ownershipServiceValues"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "ownershipEnvironmentValues"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "ownershipTeamValues"
                               ]
                             }
-                          }
-                        ]
+                          ]
+                        }
                       }
                     ]
                   },
@@ -197,53 +193,49 @@
                           "stringValues": {},
                           "typeValues": {}
                         },
-                        "allOf": [
+                        "oneOf": [
                           {
-                            "oneOf": [
-                              {
-                                "type": "object",
-                                "required": [
-                                  "stringValues"
-                                ]
-                              },
-                              {
-                                "type": "object",
-                                "required": [
-                                  "typeValues"
-                                ]
-                              },
-                              {
-                                "type": "object",
-                                "required": [
-                                  "productTypeValues"
-                                ]
-                              },
-                              {
-                                "type": "object",
-                                "not": {
-                                  "anyOf": [
-                                    {
-                                      "type": "object",
-                                      "required": [
-                                        "stringValues"
-                                      ]
-                                    },
-                                    {
-                                      "type": "object",
-                                      "required": [
-                                        "typeValues"
-                                      ]
-                                    },
-                                    {
-                                      "type": "object",
-                                      "required": [
-                                        "productTypeValues"
-                                      ]
-                                    }
+                            "type": "object",
+                            "required": [
+                              "stringValues"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "typeValues"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "productTypeValues"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "not": {
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "stringValues"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "typeValues"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "productTypeValues"
                                   ]
                                 }
-                              }
-                            ]
+                              ]
+                            }
                           }
                         ]
                       }
@@ -418,53 +410,49 @@
                     "$ref": "#/components/schemas/WindowBasedMetricSli"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "requestBasedMetricSli"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "windowBasedMetricSli"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "apmSli"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "requestBasedMetricSli"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "windowBasedMetricSli"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "apmSli"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "requestBasedMetricSli"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "windowBasedMetricSli"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "apmSli"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "requestBasedMetricSli"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "windowBasedMetricSli"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "apmSli"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -634,53 +622,49 @@
                     "$ref": "#/components/schemas/WindowBasedMetricSli"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "requestBasedMetricSli"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "windowBasedMetricSli"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "apmSli"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "requestBasedMetricSli"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "windowBasedMetricSli"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "apmSli"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "requestBasedMetricSli"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "windowBasedMetricSli"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "apmSli"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "requestBasedMetricSli"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "windowBasedMetricSli"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "apmSli"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -1114,53 +1098,49 @@
                     "$ref": "#/components/schemas/WindowBasedMetricSli"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "requestBasedMetricSli"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "windowBasedMetricSli"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "apmSli"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "requestBasedMetricSli"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "windowBasedMetricSli"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "apmSli"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "requestBasedMetricSli"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "windowBasedMetricSli"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "apmSli"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "requestBasedMetricSli"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "windowBasedMetricSli"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "apmSli"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -1362,41 +1342,37 @@
             "$ref": "#/components/schemas/WindowSloWindow"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "quantile"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "average"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "quantile"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "average"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "quantile"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "average"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "quantile"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "average"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1451,41 +1427,37 @@
             "minItems": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "errorConfig"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "latencyConfig"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "errorConfig"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "latencyConfig"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "errorConfig"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "latencyConfig"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "errorConfig"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "latencyConfig"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1695,21 +1667,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -2041,53 +2009,49 @@
             "$ref": "#/components/schemas/WindowBasedMetricSli"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "requestBasedMetricSli"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "windowBasedMetricSli"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "apmSli"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "requestBasedMetricSli"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "windowBasedMetricSli"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "apmSli"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "requestBasedMetricSli"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "windowBasedMetricSli"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "apmSli"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "requestBasedMetricSli"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "windowBasedMetricSli"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "apmSli"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -2143,27 +2107,23 @@
             "$ref": "#/components/schemas/ReplaceSloRequest"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "createSloRequest"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "replaceSloRequest"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "deleteSloRequest"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "createSloRequest"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "replaceSloRequest"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "deleteSloRequest"
             ]
           }
         ]
@@ -2186,53 +2146,49 @@
             "$ref": "#/components/schemas/ReplaceSloResponse"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "createSloResponse"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "replaceSloResponse"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "deleteSloResponse"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "createSloResponse"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "replaceSloResponse"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "deleteSloResponse"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "createSloResponse"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "replaceSloResponse"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "deleteSloResponse"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "createSloResponse"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "replaceSloResponse"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "deleteSloResponse"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

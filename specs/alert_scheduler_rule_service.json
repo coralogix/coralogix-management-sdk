@@ -99,41 +99,37 @@
                   }
                 }
               },
-              "allOf": [
+              "oneOf": [
                 {
-                  "oneOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "alertSchedulerIds"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "alertSchedulerVersionIds"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "not": {
-                        "anyOf": [
-                          {
-                            "type": "object",
-                            "required": [
-                              "alertSchedulerIds"
-                            ]
-                          },
-                          {
-                            "type": "object",
-                            "required": [
-                              "alertSchedulerVersionIds"
-                            ]
-                          }
+                  "type": "object",
+                  "required": [
+                    "alertSchedulerIds"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "alertSchedulerVersionIds"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "not": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "alertSchedulerIds"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "alertSchedulerVersionIds"
                         ]
                       }
-                    }
-                  ]
+                    ]
+                  }
                 }
               ]
             },
@@ -883,21 +879,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -1047,41 +1039,37 @@
             "$ref": "#/components/schemas/Recurring.Dynamic"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "alwaysActive"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "schedule"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "alwaysActive"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "schedule"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "alwaysActive"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "schedule"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "alwaysActive"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "schedule"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1115,53 +1103,49 @@
             "$ref": "#/components/schemas/Weekly"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "daily"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "weekly"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "monthly"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "daily"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "weekly"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "monthly"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "daily"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "weekly"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "monthly"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "daily"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "weekly"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "monthly"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1182,41 +1166,37 @@
             "$ref": "#/components/schemas/ScheduleOperation"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "oneTime"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "recurring"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "oneTime"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "recurring"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "oneTime"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "recurring"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "oneTime"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "recurring"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1255,41 +1235,37 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "endTime"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "duration"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "endTime"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "duration"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "endTime"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "duration"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "endTime"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "duration"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1387,41 +1363,37 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "alertMetaLabels"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "alertUniqueIds"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "alertMetaLabels"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "alertUniqueIds"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "alertMetaLabels"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "alertUniqueIds"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "alertMetaLabels"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "alertUniqueIds"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

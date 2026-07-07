@@ -779,21 +779,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -1006,41 +1002,37 @@
         "required": [
           "actionType"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "setRoleId"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "clear"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "setRoleId"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "clear"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "setRoleId"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "clear"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "setRoleId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "clear"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1080,41 +1072,37 @@
         "required": [
           "actionType"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "setScopeId"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "clear"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "setScopeId"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "clear"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "setScopeId"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "clear"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "setScopeId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "clear"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1289,53 +1277,49 @@
         "required": [
           "operationType"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "add"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "remove"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "set"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "add"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "remove"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "set"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "add"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "remove"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "set"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "add"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "remove"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "set"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

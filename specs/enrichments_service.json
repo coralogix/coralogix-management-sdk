@@ -592,65 +592,61 @@
             "$ref": "#/components/schemas/SuspiciousIpType"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "geoIp"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "suspiciousIp"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "aws"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "customEnrichment"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "geoIp"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "suspiciousIp"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "aws"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "customEnrichment"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "geoIp"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "suspiciousIp"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "aws"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "customEnrichment"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "geoIp"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "suspiciousIp"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "aws"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "customEnrichment"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -677,21 +673,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]

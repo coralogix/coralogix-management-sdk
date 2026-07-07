@@ -567,41 +567,37 @@
         "required": [
           "accessType"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "permanentAccess"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "temporaryAccess"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "permanentAccess"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "temporaryAccess"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "permanentAccess"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "temporaryAccess"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "permanentAccess"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "temporaryAccess"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -666,21 +662,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]

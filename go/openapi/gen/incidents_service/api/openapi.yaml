@@ -107,21 +107,17 @@
                   "required": [
                     "query"
                   ],
-                  "allOf": [
+                  "oneOf": [
                     {
-                      "oneOf": [
-                        {
-                          "type": "object",
-                          "required": [
-                            "incidentField"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "contextualLabel"
-                          ]
-                        }
+                      "type": "object",
+                      "required": [
+                        "incidentField"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "contextualLabel"
                       ]
                     }
                   ]
@@ -197,21 +193,17 @@
                     "$ref": "#/components/schemas/v1.OrderByDirection"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "incidentField"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "contextualLabel"
-                        ]
-                      }
+                    "type": "object",
+                    "required": [
+                      "incidentField"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "contextualLabel"
                     ]
                   }
                 ]
@@ -2095,21 +2087,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -2197,41 +2185,37 @@
             "$ref": "#/components/schemas/IncidentFieldOneOf"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "incidentField"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "contextualLabels"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "incidentField"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "contextualLabels"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "incidentField"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "contextualLabels"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "incidentField"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "contextualLabels"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -2910,149 +2894,145 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "id"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "severity"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "name"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "createdAt"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "closedAt"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "state"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "status"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "lastStateUpdateTime"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "applicationName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "subsystemName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "duration"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "id"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "severity"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "name"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "createdAt"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "closedAt"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "state"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "status"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "lastStateUpdateTime"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "applicationName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "subsystemName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "duration"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "severity"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "name"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "createdAt"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "closedAt"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "state"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "status"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "lastStateUpdateTime"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "applicationName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "subsystemName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "duration"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "severity"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "createdAt"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "closedAt"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "state"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "lastStateUpdateTime"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "applicationName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "subsystemName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "duration"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3338,21 +3318,17 @@
         "required": [
           "query"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "incidentField"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "contextualLabel"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "incidentField"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "contextualLabel"
             ]
           }
         ]
@@ -3885,21 +3861,17 @@
         "required": [
           "direction"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "incidentField"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "contextualLabel"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "incidentField"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "contextualLabel"
             ]
           }
         ]

@@ -128,41 +128,37 @@
                     "minimum": 0
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "parentRoleId"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "parentRoleName"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "parentRoleId"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "parentRoleName"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "parentRoleId"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "parentRoleName"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "parentRoleId"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "parentRoleName"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -634,21 +630,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]

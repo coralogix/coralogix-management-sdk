@@ -550,53 +550,49 @@
             "$ref": "#/components/schemas/ReplaceActionRequest"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "create"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "replace"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "delete"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "create"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "replace"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "delete"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "create"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "replace"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "delete"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "create"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "replace"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "delete"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -617,53 +613,49 @@
             "$ref": "#/components/schemas/ReplaceActionResponse"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "create"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "replace"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "delete"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "create"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "replace"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "delete"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "create"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "replace"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "delete"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "create"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "replace"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "delete"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -825,21 +817,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]

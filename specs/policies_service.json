@@ -235,41 +235,37 @@
                 "required": [
                   "id"
                 ],
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "logRules"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "spanRules"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "logRules"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "spanRules"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "logRules"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "spanRules"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "logRules"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "spanRules"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -391,41 +387,37 @@
                   "name",
                   "priority"
                 ],
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "logRules"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "spanRules"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "logRules"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "spanRules"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "logRules"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "spanRules"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "logRules"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "spanRules"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -1421,21 +1413,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -1666,41 +1654,37 @@
             "$ref": "#/components/schemas/Last"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "first"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "last"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "first"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "last"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "first"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "last"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "first"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "last"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1807,41 +1791,37 @@
           "enabled",
           "order"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logRules"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spanRules"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logRules"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spanRules"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logRules"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spanRules"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logRules"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spanRules"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

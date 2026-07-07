@@ -461,21 +461,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -526,41 +522,37 @@
             "$ref": "#/components/schemas/AlertEvent"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "singlePermutation"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "multiplePermutation"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "singlePermutation"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "multiplePermutation"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "singlePermutation"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "multiplePermutation"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "singlePermutation"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "multiplePermutation"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

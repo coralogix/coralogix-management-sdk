@@ -93,53 +93,49 @@
                     "$ref": "#/components/schemas/S3Config"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "ibm"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "s3"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "gcs"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "ibm"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "s3"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "gcs"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "ibm"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "s3"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "gcs"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "ibm"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "s3"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "gcs"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -221,53 +217,49 @@
                     "$ref": "#/components/schemas/S3Config"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "ibm"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "s3"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "gcs"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "ibm"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "s3"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "gcs"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "ibm"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "s3"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "gcs"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "ibm"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "s3"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "gcs"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -458,53 +450,49 @@
                     "$ref": "#/components/schemas/S3Config"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "ibm"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "s3"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "gcs"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "ibm"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "s3"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "gcs"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "ibm"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "s3"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "gcs"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "ibm"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "s3"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "gcs"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -602,21 +590,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -805,53 +789,49 @@
             "minimum": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "ibm"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "s3"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "gcs"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "ibm"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "s3"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "gcs"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "ibm"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "s3"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "gcs"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "ibm"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "s3"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "gcs"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

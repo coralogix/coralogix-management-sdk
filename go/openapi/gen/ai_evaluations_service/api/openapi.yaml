@@ -1399,245 +1399,241 @@
             "$ref": "#/components/schemas/ToxicityConfig"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "allowedTopics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "competition"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "hallucinationCompleteness"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "hallucinationContextAdherence"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "hallucinationContextRelevance"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "hallucinationCorrectness"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "pii"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "promptInjection"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "restrictedTopics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sexism"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sqlAllowedTables"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sqlHallucination"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sqlReadOnly"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sqlRestrictedTables"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "toxicity"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "hallucinationTaskAdherence"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sqlLoad"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "languageMismatch"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "customEvaluation"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "allowedTopics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "competition"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "hallucinationCompleteness"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "hallucinationContextAdherence"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "hallucinationContextRelevance"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "hallucinationCorrectness"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "pii"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "promptInjection"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "restrictedTopics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sexism"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sqlAllowedTables"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sqlHallucination"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sqlReadOnly"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sqlRestrictedTables"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "toxicity"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "hallucinationTaskAdherence"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sqlLoad"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "languageMismatch"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "customEvaluation"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "allowedTopics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "competition"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "hallucinationCompleteness"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "hallucinationContextAdherence"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "hallucinationContextRelevance"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "hallucinationCorrectness"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "pii"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "promptInjection"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "restrictedTopics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sexism"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sqlAllowedTables"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sqlHallucination"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sqlReadOnly"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sqlRestrictedTables"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "toxicity"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "hallucinationTaskAdherence"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sqlLoad"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "languageMismatch"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "customEvaluation"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "allowedTopics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "competition"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "hallucinationCompleteness"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "hallucinationContextAdherence"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "hallucinationContextRelevance"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "hallucinationCorrectness"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "pii"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "promptInjection"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "restrictedTopics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sexism"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sqlAllowedTables"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sqlHallucination"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sqlReadOnly"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sqlRestrictedTables"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "toxicity"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "hallucinationTaskAdherence"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sqlLoad"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "languageMismatch"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "customEvaluation"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1697,21 +1693,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]

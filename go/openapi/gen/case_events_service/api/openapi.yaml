@@ -749,161 +749,157 @@
             "$ref": "#/components/schemas/UnassignedCaseEvent"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "assigned"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "unassigned"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "comment"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "statusChanged"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "notificationSent"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "notificationFailed"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "created"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "priorityDetailsChanged"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "titleChangedEvent"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "resolutionReasonChangedEvent"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "changeAssigneeFailed"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "kpiBreached"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "assigned"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "unassigned"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "comment"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "statusChanged"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "notificationSent"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "notificationFailed"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "created"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "priorityDetailsChanged"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "titleChangedEvent"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "resolutionReasonChangedEvent"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "changeAssigneeFailed"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "kpiBreached"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "assigned"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "unassigned"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "comment"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "statusChanged"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "notificationSent"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "notificationFailed"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "created"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "priorityDetailsChanged"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "titleChangedEvent"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "resolutionReasonChangedEvent"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "changeAssigneeFailed"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "kpiBreached"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "assigned"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "unassigned"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "comment"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "statusChanged"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "notificationSent"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "notificationFailed"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "created"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "priorityDetailsChanged"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "titleChangedEvent"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "resolutionReasonChangedEvent"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "changeAssigneeFailed"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "kpiBreached"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -961,27 +957,23 @@
             "$ref": "#/components/schemas/LogAttachment"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "log"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "customWidget"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "file"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "log"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "customWidget"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "file"
             ]
           }
         ]
@@ -1140,113 +1132,109 @@
             "$ref": "#/components/schemas/UserActor"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "system"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "user"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "serviceNow"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "apiKey"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "slack"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "prometheusAlertManager"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "pagerDuty"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "microsoftTeams"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "system"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "user"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "serviceNow"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "apiKey"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "slack"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "prometheusAlertManager"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "pagerDuty"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "microsoftTeams"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "system"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "user"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "serviceNow"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "apiKey"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "slack"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "prometheusAlertManager"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "pagerDuty"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "microsoftTeams"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "system"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "user"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "serviceNow"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "apiKey"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "slack"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "prometheusAlertManager"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "pagerDuty"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "microsoftTeams"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1305,21 +1293,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]

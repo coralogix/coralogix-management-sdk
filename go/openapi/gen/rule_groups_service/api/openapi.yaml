@@ -921,21 +921,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -1310,53 +1306,49 @@
             "$ref": "#/components/schemas/SubsystemNameConstraint"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "applicationName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "subsystemName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "severity"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "applicationName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "subsystemName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "severity"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "applicationName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "subsystemName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "severity"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "applicationName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "subsystemName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "severity"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1398,137 +1390,133 @@
             "$ref": "#/components/schemas/ReplaceParameters"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "extractParameters"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "jsonExtractParameters"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "replaceParameters"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "parseParameters"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "allowParameters"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "blockParameters"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "extractTimestampParameters"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "removeFieldsParameters"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "jsonStringifyParameters"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "jsonParseParameters"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "extractParameters"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "jsonExtractParameters"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "replaceParameters"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "parseParameters"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "allowParameters"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "blockParameters"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "extractTimestampParameters"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "removeFieldsParameters"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "jsonStringifyParameters"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "jsonParseParameters"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "extractParameters"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "jsonExtractParameters"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "replaceParameters"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "parseParameters"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "allowParameters"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "blockParameters"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "extractTimestampParameters"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "removeFieldsParameters"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "jsonStringifyParameters"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "jsonParseParameters"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "extractParameters"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "jsonExtractParameters"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "replaceParameters"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "parseParameters"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "allowParameters"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "blockParameters"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "extractTimestampParameters"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "removeFieldsParameters"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "jsonStringifyParameters"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "jsonParseParameters"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

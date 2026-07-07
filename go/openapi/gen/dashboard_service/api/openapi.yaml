@@ -42,41 +42,37 @@
                     "maxLength": 128
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "dashboard"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "dashboardId"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "dashboard"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "dashboardId"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "dashboard"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "dashboardId"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "dashboard"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "dashboardId"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -981,41 +977,37 @@
             "$ref": "#/components/schemas/GoToDashboardTemplateAction"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "customAction"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "goToDashboardAction"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "customAction"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "goToDashboardAction"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "customAction"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "goToDashboardAction"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "customAction"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "goToDashboardAction"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1104,89 +1096,85 @@
             "$ref": "#/components/schemas/SpansSource"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "metrics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spans"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataprime"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "manual"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "eventRecurrence"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "metrics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spans"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataprime"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "manual"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "eventRecurrence"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "metrics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spans"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataprime"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "manual"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "eventRecurrence"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "metrics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spans"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataprime"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "manual"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "eventRecurrence"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1204,41 +1192,37 @@
             "$ref": "#/components/schemas/Annotation.WidgetScope.SpecificWidgets"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "allWidgets"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "specificWidgets"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "allWidgets"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "specificWidgets"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "allWidgets"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "specificWidgets"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "allWidgets"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "specificWidgets"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1636,65 +1620,61 @@
             "$ref": "#/components/schemas/BarChart.SpansQuery"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spans"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metrics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataprime"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spans"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metrics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataprime"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spans"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metrics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataprime"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spans"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metrics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataprime"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1832,53 +1812,49 @@
             "$ref": "#/components/schemas/ColorLabelMapping.ValueMapping"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "range"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "value"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "regex"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "range"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "regex"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "range"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "value"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "regex"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "range"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "regex"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1938,77 +1914,73 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "stack"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "groupBy"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "aggregation"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "query"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "category"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "stack"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "groupBy"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "aggregation"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "query"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "category"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "stack"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "groupBy"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "aggregation"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "query"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "category"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "stack"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "groupBy"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "aggregation"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "query"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "category"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -2687,65 +2659,61 @@
             "$ref": "#/components/schemas/DataTable.SpansQuery"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spans"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metrics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataprime"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spans"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metrics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataprime"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spans"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metrics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataprime"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spans"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metrics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataprime"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -2855,53 +2823,49 @@
             "$ref": "#/components/schemas/DataprimeSource.Strategy.Range"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "instant"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "range"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "duration"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "instant"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "range"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "duration"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "instant"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "range"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "duration"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "instant"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "range"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "duration"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3014,41 +2978,37 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "observationField"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "mappedValues"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "observationField"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "mappedValues"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "observationField"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "mappedValues"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "observationField"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "mappedValues"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3072,65 +3032,61 @@
             "$ref": "#/components/schemas/Spans"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spans"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metrics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataprime"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spans"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metrics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataprime"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spans"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metrics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataprime"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spans"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metrics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataprime"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3176,41 +3132,37 @@
             "$ref": "#/components/schemas/Equals.Selection.ListSelection"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "all"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "list"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "all"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "all"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "list"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "all"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "list"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3297,41 +3249,37 @@
             "$ref": "#/components/schemas/EventRecurrenceSource.Strategy.Instant"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "instant"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "duration"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "instant"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "duration"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "instant"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "duration"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "instant"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "duration"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3446,41 +3394,37 @@
             "$ref": "#/components/schemas/Filter.NotEquals"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "equals"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "notEquals"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "equals"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "notEquals"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "equals"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "notEquals"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "equals"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "notEquals"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3502,53 +3446,49 @@
             "$ref": "#/components/schemas/SpansFilter"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spans"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metrics"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spans"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metrics"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spans"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metrics"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spans"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metrics"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3615,21 +3555,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -3803,65 +3739,61 @@
             "$ref": "#/components/schemas/Gauge.SpansQuery"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "metrics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spans"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataprime"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "metrics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spans"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataprime"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "metrics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spans"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataprime"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "metrics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spans"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataprime"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -4040,77 +3972,73 @@
             "$ref": "#/components/schemas/GeomapAggregationFieldBased"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "count"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sum"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "min"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "max"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "avg"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "count"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sum"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "min"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "max"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "avg"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "count"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sum"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "min"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "max"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "avg"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "count"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sum"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "min"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "max"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "avg"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -4160,41 +4088,37 @@
             "$ref": "#/components/schemas/ColorSolidType"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "size"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "colorRange"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "size"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "colorRange"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "size"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "colorRange"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "size"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "colorRange"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -4227,41 +4151,37 @@
             "$ref": "#/components/schemas/GeomapCoordinateConfig"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "coordinateConfig"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "awsRegionConfig"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "coordinateConfig"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "awsRegionConfig"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "coordinateConfig"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "awsRegionConfig"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "coordinateConfig"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "awsRegionConfig"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -4551,41 +4471,37 @@
             "minItems": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "preset"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "colorRange"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "preset"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "colorRange"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "preset"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "colorRange"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "preset"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "colorRange"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -4801,65 +4717,61 @@
             "$ref": "#/components/schemas/Hexagon.SpansQuery"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "metrics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spans"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataprime"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "metrics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spans"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataprime"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "metrics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spans"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataprime"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "metrics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spans"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataprime"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -5223,65 +5135,61 @@
             "$ref": "#/components/schemas/HorizontalBarChart.SpansQuery"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spans"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metrics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataprime"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spans"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metrics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataprime"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spans"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metrics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataprime"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spans"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metrics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataprime"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -5367,41 +5275,37 @@
             "$ref": "#/components/schemas/YAxisViewByValue"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "category"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "value"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "category"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "category"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "value"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "category"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "value"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -5698,41 +5602,37 @@
             "type": "boolean"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "auto"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "manual"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "auto"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "manual"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "auto"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "manual"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "auto"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "manual"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -6027,65 +5927,61 @@
             "$ref": "#/components/schemas/LineChart.SpansQuery"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metrics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spans"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataprime"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metrics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spans"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataprime"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metrics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spans"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataprime"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metrics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spans"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataprime"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -6370,101 +6266,97 @@
             "$ref": "#/components/schemas/Sum"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "count"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "countDistinct"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sum"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "average"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "min"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "max"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "percentile"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "count"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "countDistinct"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sum"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "average"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "min"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "max"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "percentile"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "count"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "countDistinct"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sum"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "average"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "min"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "max"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "percentile"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "count"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "countDistinct"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sum"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "average"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "min"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "max"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "percentile"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -6594,53 +6486,49 @@
             "$ref": "#/components/schemas/LogsSource.Strategy.Range"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "instant"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "range"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "duration"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "instant"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "range"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "duration"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "instant"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "range"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "duration"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "instant"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "range"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "duration"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -6775,41 +6663,37 @@
             "$ref": "#/components/schemas/ManualSource.Strategy.Range"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "instant"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "range"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "instant"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "range"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "instant"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "range"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "instant"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "range"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -7139,41 +7023,37 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "auto"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "custom"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "auto"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "custom"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "auto"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "custom"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "auto"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "custom"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -7253,53 +7133,49 @@
             "$ref": "#/components/schemas/Query.SpansQuery"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logsQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metricsQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spansQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsQuery"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metricsQuery"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spansQuery"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logsQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metricsQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spansQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logsQuery"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metricsQuery"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spansQuery"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -7344,41 +7220,37 @@
             "$ref": "#/components/schemas/MultiSelect.Selection.ListSelection"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "all"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "list"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "all"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "all"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "list"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "all"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "list"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -7442,77 +7314,73 @@
             "$ref": "#/components/schemas/SpanFieldSource"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logsPath"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metricLabel"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "constantList"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spanField"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "query"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsPath"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metricLabel"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "constantList"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spanField"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "query"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logsPath"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metricLabel"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "constantList"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spanField"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "query"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logsPath"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metricLabel"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "constantList"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spanField"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "query"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -7552,53 +7420,49 @@
             "$ref": "#/components/schemas/SelectedAllValue"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "all"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "list"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "selectedAll"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "all"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "selectedAll"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "all"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "list"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "selectedAll"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "all"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "list"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "selectedAll"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -7901,65 +7765,61 @@
             "$ref": "#/components/schemas/PieChart.SpansQuery"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spans"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metrics"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataprime"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spans"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metrics"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataprime"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spans"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metrics"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataprime"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spans"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metrics"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataprime"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -8135,113 +7995,109 @@
             "$ref": "#/components/schemas/PropertyValuesMapping"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "thresholds"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "alignment"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "units"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "regexExtract"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "link"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "valuesAlias"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "valuesMapping"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "columnDisplayName"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "thresholds"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "alignment"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "units"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "regexExtract"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "link"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "valuesAlias"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "valuesMapping"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "columnDisplayName"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "thresholds"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "alignment"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "units"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "regexExtract"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "link"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "valuesAlias"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "valuesMapping"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "columnDisplayName"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "thresholds"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "alignment"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "units"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "regexExtract"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "link"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "valuesAlias"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "valuesMapping"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "columnDisplayName"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -8390,41 +8246,37 @@
             "$ref": "#/components/schemas/Query.LogsQuery.Type.FieldValue"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "fieldName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "fieldValue"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "fieldName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "fieldValue"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "fieldName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "fieldValue"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "fieldName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "fieldValue"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -8518,41 +8370,37 @@
             "$ref": "#/components/schemas/Query.MetricsQuery.NotEquals"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "equals"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "notEquals"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "equals"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "notEquals"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "equals"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "notEquals"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "equals"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "notEquals"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -8603,41 +8451,37 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "stringValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "variableName"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "stringValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "variableName"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "stringValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "variableName"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "stringValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "variableName"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -8658,53 +8502,49 @@
             "$ref": "#/components/schemas/Query.MetricsQuery.Type.MetricName"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "metricName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "labelName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "labelValue"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "metricName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "labelName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "labelValue"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "metricName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "labelName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "labelValue"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "metricName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "labelName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "labelValue"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -8785,41 +8625,37 @@
             "$ref": "#/components/schemas/Query.SpansQuery.Type.FieldValue"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "fieldName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "fieldValue"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "fieldName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "fieldValue"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "fieldName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "fieldValue"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "fieldName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "fieldValue"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -8983,41 +8819,37 @@
             "$ref": "#/components/schemas/QuerySource.LogsQuery.Type.FieldValue"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "fieldName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "fieldValue"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "fieldName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "fieldValue"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "fieldName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "fieldValue"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "fieldName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "fieldValue"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -9111,41 +8943,37 @@
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.NotEquals"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "equals"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "notEquals"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "equals"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "notEquals"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "equals"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "notEquals"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "equals"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "notEquals"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -9196,41 +9024,37 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "stringValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "variableName"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "stringValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "variableName"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "stringValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "variableName"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "stringValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "variableName"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -9254,65 +9078,61 @@
             "$ref": "#/components/schemas/PromqlQuery"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "metricName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "labelName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "labelValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "promqlQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "metricName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "labelName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "labelValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "promqlQuery"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "metricName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "labelName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "labelValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "promqlQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "metricName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "labelName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "labelValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "promqlQuery"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -9393,41 +9213,37 @@
             "$ref": "#/components/schemas/QuerySource.SpansQuery.Type.FieldValue"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "fieldName"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "fieldValue"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "fieldName"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "fieldValue"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "fieldName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "fieldValue"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "fieldName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "fieldValue"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -9640,53 +9456,49 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "field"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "regex"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "fieldType"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "field"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "regex"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "fieldType"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "field"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "regex"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "fieldType"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "field"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "regex"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "fieldType"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -9744,41 +9556,37 @@
             "$ref": "#/components/schemas/InternalSectionOptions"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "internal"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "custom"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "internal"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "custom"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "internal"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "custom"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "internal"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "custom"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -9885,41 +9693,37 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "category"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "queryValue"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "category"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "queryValue"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "category"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "queryValue"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "category"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "queryValue"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -9944,53 +9748,49 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "metadataField"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "tagField"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "processTagField"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "metadataField"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "tagField"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "processTagField"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "metadataField"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "tagField"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "processTagField"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "metadataField"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "tagField"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "processTagField"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -10095,41 +9895,37 @@
             "$ref": "#/components/schemas/MetricAggregation"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "metricAggregation"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dimensionAggregation"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "metricAggregation"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dimensionAggregation"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "metricAggregation"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dimensionAggregation"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "metricAggregation"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dimensionAggregation"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -10255,53 +10051,49 @@
             "$ref": "#/components/schemas/SpansSource.Strategy.Range"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "instant"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "range"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "duration"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "instant"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "range"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "duration"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "instant"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "range"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "duration"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "instant"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "range"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "duration"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -10529,41 +10321,37 @@
             "minItems": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "observationField"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "mappedValues"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "observationField"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "mappedValues"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "observationField"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "mappedValues"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "observationField"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "mappedValues"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -10847,101 +10635,97 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "singleString"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "singleNumeric"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "defaultStringValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "defaultNumericValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "defaultLuceneValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "defaultRegexValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "defaultIntervalValue"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "singleString"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "singleNumeric"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "defaultStringValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "defaultNumericValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "defaultLuceneValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "defaultRegexValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "defaultIntervalValue"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "singleString"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "singleNumeric"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "defaultStringValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "defaultNumericValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "defaultLuceneValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "defaultRegexValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "defaultIntervalValue"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "singleString"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "singleNumeric"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "defaultStringValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "defaultNumericValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "defaultLuceneValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "defaultRegexValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "defaultIntervalValue"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -11003,41 +10787,37 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "absoluteTimeFrame"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "relativeTimeFrame"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "absoluteTimeFrame"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "relativeTimeFrame"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "absoluteTimeFrame"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "relativeTimeFrame"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "absoluteTimeFrame"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "relativeTimeFrame"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -11429,41 +11209,37 @@
             "$ref": "#/components/schemas/MultiSelect"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "constant"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "multiSelect"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "constant"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "multiSelect"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "constant"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "multiSelect"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "constant"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "multiSelect"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -11516,53 +11292,49 @@
             "$ref": "#/components/schemas/TextboxSource"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "static"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "query"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "textbox"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "static"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "query"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "textbox"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "static"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "query"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "textbox"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "static"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "query"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "textbox"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -11598,65 +11370,61 @@
             "$ref": "#/components/schemas/OrderDirection"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logsQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metricsQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "spansQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataprimeQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsQuery"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metricsQuery"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "spansQuery"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataprimeQuery"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logsQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metricsQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "spansQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataprimeQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logsQuery"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metricsQuery"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "spansQuery"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataprimeQuery"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -11750,89 +11518,85 @@
             "$ref": "#/components/schemas/SingleStringValue"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multiString"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "singleString"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "singleNumeric"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "regex"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "lucene"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "interval"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "multiString"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "singleString"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "singleNumeric"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "regex"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "lucene"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "interval"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "multiString"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "singleString"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "singleNumeric"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "regex"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "lucene"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "interval"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "multiString"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "singleString"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "singleNumeric"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "regex"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "lucene"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "interval"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -12119,197 +11883,193 @@
             "$ref": "#/components/schemas/VerticalBarsMulti"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "table"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "timeSeriesLines"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "timeSeriesBars"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "stat"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "gauge"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "hexagonBins"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "pieChart"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "horizontalBars"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "verticalBars"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "heatmap"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "geomap"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "timeSeriesLinesMulti"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "verticalBarsMulti"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "horizontalBarsMulti"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "statCard"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "table"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "timeSeriesLines"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "timeSeriesBars"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "stat"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "gauge"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "hexagonBins"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "pieChart"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "horizontalBars"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "verticalBars"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "heatmap"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "geomap"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "timeSeriesLinesMulti"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "verticalBarsMulti"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "horizontalBarsMulti"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "statCard"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "table"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "timeSeriesLines"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "timeSeriesBars"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "stat"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "gauge"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "hexagonBins"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "pieChart"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "horizontalBars"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "verticalBars"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "heatmap"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "geomap"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "timeSeriesLinesMulti"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "verticalBarsMulti"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "horizontalBarsMulti"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "statCard"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "table"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "timeSeriesLines"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "timeSeriesBars"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "stat"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "gauge"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "hexagonBins"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "pieChart"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "horizontalBars"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "verticalBars"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "heatmap"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "geomap"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "timeSeriesLinesMulti"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "verticalBarsMulti"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "horizontalBarsMulti"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "statCard"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -12701,125 +12461,121 @@
             "$ref": "#/components/schemas/widgets.PieChart"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "lineChart"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dataTable"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "gauge"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "pieChart"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "barChart"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "horizontalBarChart"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "markdown"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "hexagon"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "dynamic"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "lineChart"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dataTable"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "gauge"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "pieChart"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "barChart"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "horizontalBarChart"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "markdown"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "hexagon"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "dynamic"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "lineChart"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dataTable"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "gauge"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "pieChart"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "barChart"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "horizontalBarChart"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "markdown"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "hexagon"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "dynamic"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "lineChart"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dataTable"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "gauge"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "pieChart"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "barChart"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "horizontalBarChart"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "markdown"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "hexagon"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "dynamic"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -12858,53 +12614,49 @@
             "$ref": "#/components/schemas/XAxisByValue"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "value"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "time"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "timeBuckets"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "time"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "timeBuckets"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "value"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "time"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "timeBuckets"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "time"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "timeBuckets"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

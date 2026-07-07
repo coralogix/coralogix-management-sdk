@@ -484,21 +484,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -646,41 +642,37 @@
             "$ref": "#/components/schemas/QuickTimeSelection"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "quickSelection"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "customSelection"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "quickSelection"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "customSelection"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "quickSelection"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "customSelection"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "quickSelection"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "customSelection"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

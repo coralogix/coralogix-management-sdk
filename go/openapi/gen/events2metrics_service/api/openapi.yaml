@@ -123,41 +123,37 @@
                   "name",
                   "type"
                 ],
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "spansQuery"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "logsQuery"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "spansQuery"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "logsQuery"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "spansQuery"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "logsQuery"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "spansQuery"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "logsQuery"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -249,41 +245,37 @@
                 "required": [
                   "name"
                 ],
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "spansQuery"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "logsQuery"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "spansQuery"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "logsQuery"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "spansQuery"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "logsQuery"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "spansQuery"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "logsQuery"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -817,41 +809,37 @@
           "name",
           "type"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "spansQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logsQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "spansQuery"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsQuery"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "spansQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logsQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "spansQuery"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logsQuery"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -953,41 +941,37 @@
         "required": [
           "name"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "spansQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logsQuery"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "spansQuery"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsQuery"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "spansQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logsQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "spansQuery"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logsQuery"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1004,53 +988,49 @@
             "$ref": "#/components/schemas/ReplaceE2MRequest"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "create"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "replace"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "delete"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "create"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "replace"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "delete"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "create"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "replace"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "delete"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "create"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "replace"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "delete"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1067,53 +1047,49 @@
             "$ref": "#/components/schemas/ReplaceE2MResponse"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "created"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "replaced"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "deleted"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "created"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "replaced"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "deleted"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "created"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "replaced"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "deleted"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "created"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "replaced"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "deleted"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1174,21 +1150,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -1471,53 +1443,49 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "none"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "samples"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "histogram"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "none"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "samples"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "histogram"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "none"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "samples"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "histogram"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "none"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "samples"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "histogram"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

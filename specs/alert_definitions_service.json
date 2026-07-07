@@ -1155,197 +1155,193 @@
             "$ref": "#/components/schemas/AlertDefType"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logsImmediate"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "tracingImmediate"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logsThreshold"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logsRatioThreshold"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logsTimeRelativeThreshold"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metricThreshold"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "tracingThreshold"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "flow"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logsAnomaly"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metricAnomaly"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logsNewValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "logsUniqueCount"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sloThreshold"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "analyticsImmediate"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "analyticsThreshold"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsImmediate"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "tracingImmediate"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsThreshold"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsRatioThreshold"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsTimeRelativeThreshold"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metricThreshold"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "tracingThreshold"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "flow"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsAnomaly"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metricAnomaly"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsNewValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "logsUniqueCount"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sloThreshold"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "analyticsImmediate"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "analyticsThreshold"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logsImmediate"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "tracingImmediate"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logsThreshold"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logsRatioThreshold"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logsTimeRelativeThreshold"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metricThreshold"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "tracingThreshold"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "flow"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logsAnomaly"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metricAnomaly"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logsNewValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "logsUniqueCount"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sloThreshold"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "analyticsImmediate"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "analyticsThreshold"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logsImmediate"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "tracingImmediate"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logsThreshold"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logsRatioThreshold"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logsTimeRelativeThreshold"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metricThreshold"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "tracingThreshold"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "flow"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logsAnomaly"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metricAnomaly"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logsNewValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logsUniqueCount"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sloThreshold"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "analyticsImmediate"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "analyticsThreshold"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1694,41 +1690,37 @@
             "$ref": "#/components/schemas/BurnRateTypeSingle"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "dual"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "single"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "dual"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "single"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "dual"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "single"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "dual"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "single"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -2027,21 +2019,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -3153,41 +3141,37 @@
             "type": "boolean"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "replaceWithZero"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "minNonNullValuesPct"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "replaceWithZero"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "minNonNullValuesPct"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "replaceWithZero"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "minNonNullValuesPct"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "replaceWithZero"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "minNonNullValuesPct"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3302,41 +3286,37 @@
             "$ref": "#/components/schemas/MetricTimeWindowValue"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "metricTimeWindowSpecificValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metricTimeWindowDynamicDuration"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "metricTimeWindowSpecificValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metricTimeWindowDynamicDuration"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "metricTimeWindowSpecificValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metricTimeWindowDynamicDuration"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "metricTimeWindowSpecificValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metricTimeWindowDynamicDuration"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3596,41 +3576,37 @@
             "$ref": "#/components/schemas/v3.SloDefinition"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "errorBudget"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "burnRate"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "errorBudget"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "burnRate"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "errorBudget"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "burnRate"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "errorBudget"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "burnRate"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -4091,41 +4067,37 @@
             "$ref": "#/components/schemas/Recipients"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "integrationId"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "recipients"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "integrationId"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "recipients"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "integrationId"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "recipients"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "integrationId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "recipients"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

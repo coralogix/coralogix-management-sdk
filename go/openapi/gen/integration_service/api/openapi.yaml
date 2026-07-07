@@ -1688,89 +1688,85 @@
             "type": "boolean"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "single"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "multiText"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "multipleSelection"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "singleBoolean"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "selection"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "singleNumber"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "single"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "multiText"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "multipleSelection"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "singleBoolean"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "selection"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "singleNumber"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "single"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "multiText"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "multipleSelection"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "singleBoolean"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "selection"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "singleNumber"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "single"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "multiText"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "multipleSelection"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "singleBoolean"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "selection"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "singleNumber"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1797,21 +1793,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -2212,41 +2204,37 @@
             "$ref": "#/components/schemas/LocalChangelog"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "local"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "external"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "local"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "external"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "local"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "external"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "local"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "external"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -2375,89 +2363,85 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "cloudFormation"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "managedService"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "helmChart"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "azureArmTemplate"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "rum"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "terraform"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "cloudFormation"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "managedService"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "helmChart"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "azureArmTemplate"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "rum"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "terraform"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "cloudFormation"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "managedService"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "helmChart"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "azureArmTemplate"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "rum"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "terraform"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "cloudFormation"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "managedService"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "helmChart"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "azureArmTemplate"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "rum"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "terraform"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -2752,89 +2736,85 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "stringValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "booleanValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "stringList"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "apiKey"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "numericValue"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sensitiveData"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "stringValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "booleanValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "stringList"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "apiKey"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "numericValue"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sensitiveData"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "stringValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "booleanValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "stringList"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "apiKey"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "numericValue"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sensitiveData"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "stringValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "booleanValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "stringList"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "apiKey"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "numericValue"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sensitiveData"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -2919,53 +2899,49 @@
             "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "empty"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "cloudformation"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "arm"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "empty"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "cloudformation"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "arm"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "empty"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "cloudformation"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "arm"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "empty"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "cloudformation"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "arm"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3271,41 +3247,37 @@
             "$ref": "#/components/schemas/TestIntegrationResult.Success"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "success"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "failure"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "success"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "failure"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "success"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "failure"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "success"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "failure"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3478,101 +3450,97 @@
             "$ref": "#/components/schemas/Untracked"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "managed"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "untracked"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "cloudformation"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "arm"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "pushBasedContextualData"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "contextualData"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "genericWebhook"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "managed"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "untracked"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "cloudformation"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "arm"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "pushBasedContextualData"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "contextualData"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "genericWebhook"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "managed"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "untracked"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "cloudformation"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "arm"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "pushBasedContextualData"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "contextualData"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "genericWebhook"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "managed"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "untracked"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "cloudformation"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "arm"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "pushBasedContextualData"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "contextualData"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "genericWebhook"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

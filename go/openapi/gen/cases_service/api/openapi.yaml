@@ -2122,77 +2122,73 @@
             "$ref": "#/components/schemas/TracingLink"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "logs"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metric"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "rum"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "slo"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "tracing"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "logs"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metric"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "rum"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "slo"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "tracing"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "logs"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metric"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "rum"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "slo"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "tracing"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "logs"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metric"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "rum"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "slo"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "tracing"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -2219,41 +2215,37 @@
             "maxLength": 30
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "activeSuppressionRules"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "alertDefinitionMuted"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "activeSuppressionRules"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "alertDefinitionMuted"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "activeSuppressionRules"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "alertDefinitionMuted"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "activeSuppressionRules"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "alertDefinitionMuted"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -2398,41 +2390,37 @@
             "$ref": "#/components/schemas/Unassigned"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "assignee"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "unassigned"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "assignee"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "unassigned"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "assignee"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "unassigned"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "assignee"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "unassigned"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3089,113 +3077,109 @@
             "$ref": "#/components/schemas/System"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "system"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "cxUser"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "serviceNow"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "apiKey"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "slack"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "prometheusAlertManager"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "pagerDuty"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "microsoftTeams"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "system"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "cxUser"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "serviceNow"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "apiKey"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "slack"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "prometheusAlertManager"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "pagerDuty"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "microsoftTeams"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "system"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "cxUser"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "serviceNow"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "apiKey"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "slack"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "prometheusAlertManager"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "pagerDuty"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "microsoftTeams"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "system"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "cxUser"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "serviceNow"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "apiKey"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "slack"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "prometheusAlertManager"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "pagerDuty"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "microsoftTeams"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3288,41 +3272,37 @@
             "$ref": "#/components/schemas/NoConnector"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "connectorType"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "noConnector"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "connectorType"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "noConnector"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "connectorType"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "noConnector"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "connectorType"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "noConnector"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -3530,21 +3510,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -3764,41 +3740,37 @@
             "$ref": "#/components/schemas/ApmServiceEntity"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "apmService"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "apmDatabase"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "apmService"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "apmDatabase"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "apmService"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "apmDatabase"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "apmService"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "apmDatabase"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -4393,41 +4365,37 @@
             "$ref": "#/components/schemas/Triggered"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "triggered"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "resolved"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "triggered"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "resolved"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "triggered"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "resolved"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "triggered"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "resolved"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

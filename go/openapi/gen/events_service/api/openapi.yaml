@@ -933,41 +933,37 @@
             "$ref": "#/components/schemas/CxEvent"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "singleEvent"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "multipleEvents"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "singleEvent"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "multipleEvents"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "singleEvent"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "multipleEvents"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "singleEvent"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "multipleEvents"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1029,21 +1025,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]

@@ -546,21 +546,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -903,41 +899,37 @@
             "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "matchEntityType"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "matchEntityTypeAndSubType"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "matchEntityType"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "matchEntityTypeAndSubType"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "matchEntityType"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "matchEntityTypeAndSubType"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "matchEntityType"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "matchEntityTypeAndSubType"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

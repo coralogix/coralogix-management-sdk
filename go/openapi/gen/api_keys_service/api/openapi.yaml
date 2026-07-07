@@ -686,21 +686,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -917,53 +913,49 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "userId"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "teamId"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "organisationId"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "userId"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "teamId"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "organisationId"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "userId"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "teamId"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "organisationId"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "userId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "teamId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "organisationId"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

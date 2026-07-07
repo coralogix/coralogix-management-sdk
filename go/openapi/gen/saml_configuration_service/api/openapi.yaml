@@ -345,21 +345,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -491,41 +487,37 @@
             "minimum": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "metadataUrl"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "metadataContent"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "metadataUrl"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "metadataContent"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "metadataUrl"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "metadataContent"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "metadataUrl"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "metadataContent"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

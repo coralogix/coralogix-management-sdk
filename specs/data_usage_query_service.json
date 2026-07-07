@@ -108,41 +108,37 @@
                     "maxItems": 8
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "daily"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "hourly"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "daily"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "hourly"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "daily"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "hourly"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "daily"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "hourly"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -299,21 +295,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -528,41 +520,37 @@
             "$ref": "#/components/schemas/UsageDailyRelativeRange"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "dateRange"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "relativeRange"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "dateRange"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "relativeRange"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "dateRange"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "relativeRange"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "dateRange"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "relativeRange"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -649,41 +637,37 @@
             "$ref": "#/components/schemas/UsageTimestampRange"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "timeRange"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "relativeRange"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "timeRange"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "relativeRange"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "timeRange"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "relativeRange"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "timeRange"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "relativeRange"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

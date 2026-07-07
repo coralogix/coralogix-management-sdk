@@ -972,21 +972,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -1383,161 +1379,157 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "genericWebhook"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "slack"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "pagerDuty"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sendLog"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "emailGroup"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "microsoftTeams"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "jira"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "opsgenie"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "demisto"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "awsEventBridge"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "ibmEventNotifications"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "msTeamsWorkflow"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "genericWebhook"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "slack"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "pagerDuty"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sendLog"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "emailGroup"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "microsoftTeams"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "jira"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "opsgenie"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "demisto"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "awsEventBridge"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "ibmEventNotifications"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "msTeamsWorkflow"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "genericWebhook"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "slack"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "pagerDuty"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sendLog"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "emailGroup"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "microsoftTeams"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "jira"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "opsgenie"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "demisto"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "awsEventBridge"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "ibmEventNotifications"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "msTeamsWorkflow"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "genericWebhook"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "slack"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "pagerDuty"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sendLog"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "emailGroup"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "microsoftTeams"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "jira"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "opsgenie"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "demisto"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "awsEventBridge"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "ibmEventNotifications"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "msTeamsWorkflow"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1669,161 +1661,157 @@
             "minLength": 0
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "genericWebhook"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "slack"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "pagerDuty"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "sendLog"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "emailGroup"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "microsoftTeams"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "jira"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "opsgenie"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "demisto"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "awsEventBridge"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "ibmEventNotifications"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "msTeamsWorkflow"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "genericWebhook"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "slack"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "pagerDuty"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "sendLog"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "emailGroup"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "microsoftTeams"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "jira"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "opsgenie"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "demisto"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "awsEventBridge"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "ibmEventNotifications"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "msTeamsWorkflow"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "genericWebhook"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "slack"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "pagerDuty"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "sendLog"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "emailGroup"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "microsoftTeams"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "jira"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "opsgenie"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "demisto"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "awsEventBridge"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "ibmEventNotifications"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "msTeamsWorkflow"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "genericWebhook"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "slack"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "pagerDuty"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "sendLog"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "emailGroup"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "microsoftTeams"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "jira"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "opsgenie"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "demisto"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "awsEventBridge"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "ibmEventNotifications"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "msTeamsWorkflow"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1976,41 +1964,37 @@
             "$ref": "#/components/schemas/TestOutgoingWebhookResponse.Success"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "success"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "failure"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "success"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "failure"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "success"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "failure"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "success"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "failure"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

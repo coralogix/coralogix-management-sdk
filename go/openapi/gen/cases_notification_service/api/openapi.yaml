@@ -202,41 +202,37 @@
             "$ref": "#/components/schemas/DeliverySuccess"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "success"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "failure"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "success"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "failure"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "success"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "failure"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "success"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "failure"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -299,21 +295,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
@@ -441,53 +433,49 @@
         "required": [
           "timestamp"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "noRouterMatched"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "noNotificationCreated"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "attempted"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "noRouterMatched"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "noNotificationCreated"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "attempted"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "noRouterMatched"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "noNotificationCreated"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "attempted"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "noRouterMatched"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "noNotificationCreated"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "attempted"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },

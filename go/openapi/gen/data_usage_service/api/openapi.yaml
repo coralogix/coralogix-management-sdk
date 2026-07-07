@@ -119,77 +119,73 @@
                     "$ref": "#/components/schemas/v2.TcoTier"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "pillar"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "genericDimension"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "tier"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "severity"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "priority"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "pillar"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "genericDimension"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "tier"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "severity"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "priority"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "pillar"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "genericDimension"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "tier"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "severity"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "priority"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "pillar"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "genericDimension"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "tier"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "severity"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "priority"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               },
@@ -267,41 +263,37 @@
                     "$ref": "#/components/schemas/v2.Range"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "range"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "dateRange"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "range"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "dateRange"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "range"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "dateRange"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "range"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "dateRange"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -378,41 +370,37 @@
                     "$ref": "#/components/schemas/v2.Range"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "range"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "dateRange"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "range"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "dateRange"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "range"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "dateRange"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "range"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "dateRange"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -489,41 +477,37 @@
                     "$ref": "#/components/schemas/v2.Range"
                   }
                 },
-                "allOf": [
+                "oneOf": [
                   {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "range"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "dateRange"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "range"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "dateRange"
-                              ]
-                            }
+                    "type": "object",
+                    "required": [
+                      "range"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "dateRange"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "range"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "dateRange"
                           ]
                         }
-                      }
-                    ]
+                      ]
+                    }
                   }
                 ]
               }
@@ -1185,77 +1169,73 @@
             "$ref": "#/components/schemas/v2.TcoTier"
           }
         },
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "pillar"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "genericDimension"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "tier"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "severity"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "priority"
-                ]
-              },
-              {
-                "type": "object",
-                "not": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "pillar"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "genericDimension"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "tier"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "severity"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "priority"
-                      ]
-                    }
+            "type": "object",
+            "required": [
+              "pillar"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "genericDimension"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "tier"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "severity"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "priority"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "pillar"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "genericDimension"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "tier"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "severity"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "priority"
                   ]
                 }
-              }
-            ]
+              ]
+            }
           }
         ]
       },
@@ -1315,21 +1295,17 @@
         "required": [
           "path"
         ],
-        "allOf": [
+        "oneOf": [
           {
-            "oneOf": [
-              {
-                "type": "object",
-                "required": [
-                  "multipleValues"
-                ]
-              },
-              {
-                "type": "object",
-                "required": [
-                  "filters"
-                ]
-              }
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
             ]
           }
         ]
