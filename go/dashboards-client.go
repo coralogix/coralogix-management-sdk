@@ -863,6 +863,15 @@ type AnnotationManualSourceStrategyRange = annotations.Annotation_ManualSource_S
 // AnnotationManualSourceStrategyRangeInner is an annotation variant.
 type AnnotationManualSourceStrategyRangeInner = annotations.Annotation_ManualSource_Strategy_Range
 
+// AnnotationOrientation is the orientation of a manual annotation.
+type AnnotationOrientation = annotations.Annotation_AnnotationOrientation
+
+// AnnotationOrientation values.
+const (
+	AnnotationOrientationVerticalUnspecified = annotations.Annotation_ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED
+	AnnotationOrientationHorizontal          = annotations.Annotation_ANNOTATION_ORIENTATION_HORIZONTAL
+)
+
 // DashboardLayout is a dashboard layout type.
 type DashboardLayout = ast.Layout
 
