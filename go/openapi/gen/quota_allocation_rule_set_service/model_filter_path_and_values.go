@@ -166,7 +166,12 @@ func (o FilterPathAndValues) ToMap() (map[string]interface{}, error) {
 	if _, exists := toSerialize["filters"]; exists {
 		requiredOneOfGroup0Matches++
 	}
-	if requiredOneOfGroup0Matches != 1 {
+	if requiredOneOfGroup0Matches == 0 {
+		if len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [multipleValues, filters] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [multipleValues, filters] must be set"}
 	}
 

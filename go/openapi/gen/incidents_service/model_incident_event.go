@@ -450,7 +450,12 @@ func (o IncidentEvent) ToMap() (map[string]interface{}, error) {
 	if _, exists := toSerialize["close"]; exists {
 		requiredOneOfGroup0Matches++
 	}
-	if requiredOneOfGroup0Matches != 1 {
+	if requiredOneOfGroup0Matches == 0 {
+		if len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [snoozeIndicator, assignment, unassign, upsertState, acknowledge, close] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [snoozeIndicator, assignment, unassign, upsertState, acknowledge, close] must be set"}
 	}
 
@@ -461,7 +466,12 @@ func (o IncidentEvent) ToMap() (map[string]interface{}, error) {
 	if _, exists := toSerialize["operationalEvent"]; exists {
 		requiredOneOfGroup1Matches++
 	}
-	if requiredOneOfGroup1Matches != 1 {
+	if requiredOneOfGroup1Matches == 0 {
+		if len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [administrativeEvent, operationalEvent] must be set"}
+		}
+	}
+	if requiredOneOfGroup1Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [administrativeEvent, operationalEvent] must be set"}
 	}
 

@@ -177,7 +177,12 @@ func (o SloExecutionRequest) ToMap() (map[string]interface{}, error) {
 	if _, exists := toSerialize["deleteSloRequest"]; exists {
 		requiredOneOfGroup0Matches++
 	}
-	if requiredOneOfGroup0Matches != 1 {
+	if requiredOneOfGroup0Matches == 0 {
+		if len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [createSloRequest, replaceSloRequest, deleteSloRequest] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [createSloRequest, replaceSloRequest, deleteSloRequest] must be set"}
 	}
 

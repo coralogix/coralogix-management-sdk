@@ -67,6 +67,10 @@ func TestRequiredOneOf_ResponseUnknownFutureArmIsForwardCompatible(t *testing.T)
 	if _, ok := got.AdditionalProperties["futureValues"]; !ok {
 		t.Fatal("expected futureValues to be preserved in AdditionalProperties")
 	}
+
+	if _, err := json.Marshal(got); err != nil {
+		t.Fatalf("expected response object with unknown future oneOf arm to marshal, got: %v", err)
+	}
 }
 
 func TestRequiredOneOf_RequestMarshalStillRequiresExactlyOneKnownArm(t *testing.T) {
