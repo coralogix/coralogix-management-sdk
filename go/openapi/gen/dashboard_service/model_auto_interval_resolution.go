@@ -25,8 +25,9 @@ type AutoIntervalResolution struct {
 	// Maximum number of data points to display. The calculated interval ensures this limit is not exceeded.
 	MaximumDataPoints *int32 `json:"maximumDataPoints,omitempty"`
 	// Minimum interval duration. The calculated interval will not be smaller than this value.
-	MinimumInterval *string `json:"minimumInterval,omitempty"`
-	AdditionalProperties map[string]interface{}
+	MinimumInterval                   *string `json:"minimumInterval,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AutoIntervalResolution AutoIntervalResolution
@@ -113,7 +114,7 @@ func (o *AutoIntervalResolution) SetMinimumInterval(v string) {
 }
 
 func (o AutoIntervalResolution) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *AutoIntervalResolution) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "maximumDataPoints")
 		delete(additionalProperties, "minimumInterval")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableAutoIntervalResolution) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

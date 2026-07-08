@@ -24,9 +24,10 @@ var _ MappedNullable = &GaugeDataprimeQuery{}
 type GaugeDataprimeQuery struct {
 	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
 	// List of query filters
-	Filters []FilterSource `json:"filters,omitempty"`
-	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Filters                           []FilterSource   `json:"filters,omitempty"`
+	TimeFrame                         *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GaugeDataprimeQuery GaugeDataprimeQuery
@@ -145,7 +146,7 @@ func (o *GaugeDataprimeQuery) SetTimeFrame(v TimeFrameSelect) {
 }
 
 func (o GaugeDataprimeQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -190,6 +191,7 @@ func (o *GaugeDataprimeQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "filters")
 		delete(additionalProperties, "timeFrame")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -230,4 +232,3 @@ func (v *NullableGaugeDataprimeQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

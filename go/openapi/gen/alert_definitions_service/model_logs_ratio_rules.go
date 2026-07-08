@@ -22,9 +22,10 @@ var _ MappedNullable = &LogsRatioRules{}
 
 // LogsRatioRules Defines the rules for log-based ratio alerts
 type LogsRatioRules struct {
-	Condition *LogsRatioCondition `json:"condition,omitempty"`
-	Override *AlertDefOverride `json:"override,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Condition                         *LogsRatioCondition `json:"condition,omitempty"`
+	Override                          *AlertDefOverride   `json:"override,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogsRatioRules LogsRatioRules
@@ -111,7 +112,7 @@ func (o *LogsRatioRules) SetOverride(v AlertDefOverride) {
 }
 
 func (o LogsRatioRules) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *LogsRatioRules) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "condition")
 		delete(additionalProperties, "override")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableLogsRatioRules) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

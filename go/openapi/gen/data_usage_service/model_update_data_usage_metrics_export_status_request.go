@@ -23,8 +23,9 @@ var _ MappedNullable = &UpdateDataUsageMetricsExportStatusRequest{}
 // UpdateDataUsageMetricsExportStatusRequest This data structure is used to update data usage metrics export status.
 type UpdateDataUsageMetricsExportStatusRequest struct {
 	// Whether this resource is enabled.
-	Enabled *bool `json:"enabled,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Enabled                           *bool `json:"enabled,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UpdateDataUsageMetricsExportStatusRequest UpdateDataUsageMetricsExportStatusRequest
@@ -79,7 +80,7 @@ func (o *UpdateDataUsageMetricsExportStatusRequest) SetEnabled(v bool) {
 }
 
 func (o UpdateDataUsageMetricsExportStatusRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *UpdateDataUsageMetricsExportStatusRequest) UnmarshalJSON(data []byte) (
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "enabled")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableUpdateDataUsageMetricsExportStatusRequest) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

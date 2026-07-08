@@ -33,8 +33,9 @@ type PublicConfigurationFamilyRequest struct {
 	// Metadata stored with this configuration family.
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	// Remote configurations to create in this family.
-	RemoteConfigurations []PublicRemoteConfigurationRequest `json:"remoteConfigurations,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RemoteConfigurations              []PublicRemoteConfigurationRequest `json:"remoteConfigurations,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PublicConfigurationFamilyRequest PublicConfigurationFamilyRequest
@@ -249,7 +250,7 @@ func (o *PublicConfigurationFamilyRequest) SetRemoteConfigurations(v []PublicRem
 }
 
 func (o PublicConfigurationFamilyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,6 +307,7 @@ func (o *PublicConfigurationFamilyRequest) UnmarshalJSON(data []byte) (err error
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "remoteConfigurations")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -346,4 +348,3 @@ func (v *NullablePublicConfigurationFamilyRequest) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

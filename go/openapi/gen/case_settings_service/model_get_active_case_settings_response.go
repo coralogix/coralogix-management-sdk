@@ -23,8 +23,9 @@ var _ MappedNullable = &GetActiveCaseSettingsResponse{}
 
 // GetActiveCaseSettingsResponse Response containing the case settings team configuration currently active for the caller.
 type GetActiveCaseSettingsResponse struct {
-	CaseSettings CaseSettings `json:"caseSettings"`
-	AdditionalProperties map[string]interface{}
+	CaseSettings                      CaseSettings `json:"caseSettings"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetActiveCaseSettingsResponse GetActiveCaseSettingsResponse
@@ -72,7 +73,7 @@ func (o *GetActiveCaseSettingsResponse) SetCaseSettings(v CaseSettings) {
 }
 
 func (o GetActiveCaseSettingsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -103,10 +104,10 @@ func (o *GetActiveCaseSettingsResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -128,6 +129,7 @@ func (o *GetActiveCaseSettingsResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "caseSettings")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -168,4 +170,3 @@ func (v *NullableGetActiveCaseSettingsResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

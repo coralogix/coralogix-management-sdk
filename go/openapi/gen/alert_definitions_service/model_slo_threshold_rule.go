@@ -22,9 +22,10 @@ var _ MappedNullable = &SloThresholdRule{}
 
 // SloThresholdRule SLO threshold rule definition
 type SloThresholdRule struct {
-	Condition *SloThresholdCondition `json:"condition,omitempty"`
-	Override *AlertDefOverride `json:"override,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Condition                         *SloThresholdCondition `json:"condition,omitempty"`
+	Override                          *AlertDefOverride      `json:"override,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SloThresholdRule SloThresholdRule
@@ -111,7 +112,7 @@ func (o *SloThresholdRule) SetOverride(v AlertDefOverride) {
 }
 
 func (o SloThresholdRule) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *SloThresholdRule) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "condition")
 		delete(additionalProperties, "override")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableSloThresholdRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

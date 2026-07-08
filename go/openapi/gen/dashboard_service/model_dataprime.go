@@ -22,9 +22,10 @@ var _ MappedNullable = &Dataprime{}
 
 // Dataprime A Dataprime variant of the query
 type Dataprime struct {
-	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
-	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
-	AdditionalProperties map[string]interface{}
+	DataModeType                      *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
+	DataprimeQuery                    *CommonDataprimeQuery      `json:"dataprimeQuery,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Dataprime Dataprime
@@ -111,7 +112,7 @@ func (o *Dataprime) SetDataprimeQuery(v CommonDataprimeQuery) {
 }
 
 func (o Dataprime) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *Dataprime) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "dataModeType")
 		delete(additionalProperties, "dataprimeQuery")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableDataprime) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

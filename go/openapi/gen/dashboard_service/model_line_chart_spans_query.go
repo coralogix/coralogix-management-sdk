@@ -29,10 +29,11 @@ type LineChartSpansQuery struct {
 	// List of field names to group the span records
 	GroupBy []SpanField `json:"groupBy,omitempty"`
 	// A list of observation fields to group the records by
-	GroupBys []SpanObservationField `json:"groupBys,omitempty"`
-	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
-	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
-	AdditionalProperties map[string]interface{}
+	GroupBys                          []SpanObservationField `json:"groupBys,omitempty"`
+	LuceneQuery                       *LuceneQuery           `json:"luceneQuery,omitempty"`
+	TimeFrame                         *TimeFrameSelect       `json:"timeFrame,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LineChartSpansQuery LineChartSpansQuery
@@ -247,7 +248,7 @@ func (o *LineChartSpansQuery) SetTimeFrame(v TimeFrameSelect) {
 }
 
 func (o LineChartSpansQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -304,6 +305,7 @@ func (o *LineChartSpansQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "luceneQuery")
 		delete(additionalProperties, "timeFrame")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -344,4 +346,3 @@ func (v *NullableLineChartSpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -16,17 +16,16 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"reflect"
+	"strings"
 )
-
 
 // SlosServiceAPIService SlosServiceAPI service
 type SlosServiceAPIService service
 
 type ApiSlosServiceBatchExecuteSloRequest struct {
-	ctx context.Context
-	ApiService *SlosServiceAPIService
+	ctx                    context.Context
+	ApiService             *SlosServiceAPIService
 	batchExecuteSloRequest *BatchExecuteSloRequest
 }
 
@@ -44,24 +43,25 @@ SlosServiceBatchExecuteSlo Batch Execute Slo
 
 Triggers execution for all SLOs.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSlosServiceBatchExecuteSloRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSlosServiceBatchExecuteSloRequest
 */
 func (a *SlosServiceAPIService) SlosServiceBatchExecuteSlo(ctx context.Context) ApiSlosServiceBatchExecuteSloRequest {
 	return ApiSlosServiceBatchExecuteSloRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BatchExecuteSloResponse
+//
+//	@return BatchExecuteSloResponse
 func (a *SlosServiceAPIService) SlosServiceBatchExecuteSloExecute(r ApiSlosServiceBatchExecuteSloRequest) (*BatchExecuteSloResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BatchExecuteSloResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BatchExecuteSloResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlosServiceAPIService.SlosServiceBatchExecuteSlo")
@@ -126,8 +126,8 @@ func (a *SlosServiceAPIService) SlosServiceBatchExecuteSloExecute(r ApiSlosServi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -137,8 +137,8 @@ func (a *SlosServiceAPIService) SlosServiceBatchExecuteSloExecute(r ApiSlosServi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -148,8 +148,8 @@ func (a *SlosServiceAPIService) SlosServiceBatchExecuteSloExecute(r ApiSlosServi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -167,9 +167,9 @@ func (a *SlosServiceAPIService) SlosServiceBatchExecuteSloExecute(r ApiSlosServi
 }
 
 type ApiSlosServiceBatchGetSlosRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SlosServiceAPIService
-	ids *[]string
+	ids        *[]string
 }
 
 // The ids.
@@ -187,24 +187,25 @@ SlosServiceBatchGetSlos Batch Get Slo
 
 Returns all SLOs for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSlosServiceBatchGetSlosRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSlosServiceBatchGetSlosRequest
 */
 func (a *SlosServiceAPIService) SlosServiceBatchGetSlos(ctx context.Context) ApiSlosServiceBatchGetSlosRequest {
 	return ApiSlosServiceBatchGetSlosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BatchGetSlosResponse
+//
+//	@return BatchGetSlosResponse
 func (a *SlosServiceAPIService) SlosServiceBatchGetSlosExecute(r ApiSlosServiceBatchGetSlosRequest) (*BatchGetSlosResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BatchGetSlosResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BatchGetSlosResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlosServiceAPIService.SlosServiceBatchGetSlos")
@@ -279,8 +280,8 @@ func (a *SlosServiceAPIService) SlosServiceBatchGetSlosExecute(r ApiSlosServiceB
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -290,8 +291,8 @@ func (a *SlosServiceAPIService) SlosServiceBatchGetSlosExecute(r ApiSlosServiceB
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -301,8 +302,8 @@ func (a *SlosServiceAPIService) SlosServiceBatchGetSlosExecute(r ApiSlosServiceB
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -320,9 +321,9 @@ func (a *SlosServiceAPIService) SlosServiceBatchGetSlosExecute(r ApiSlosServiceB
 }
 
 type ApiSlosServiceCreateSloRequest struct {
-	ctx context.Context
-	ApiService *SlosServiceAPIService
-	slo1 *Slo1
+	ctx                    context.Context
+	ApiService             *SlosServiceAPIService
+	slo1                   *Slo1
 	silenceDataValidations *bool
 }
 
@@ -346,24 +347,25 @@ SlosServiceCreateSlo Create Slo
 
 Creates a new SLO.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSlosServiceCreateSloRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSlosServiceCreateSloRequest
 */
 func (a *SlosServiceAPIService) SlosServiceCreateSlo(ctx context.Context) ApiSlosServiceCreateSloRequest {
 	return ApiSlosServiceCreateSloRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateSloResponse
+//
+//	@return CreateSloResponse
 func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCreateSloRequest) (*CreateSloResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateSloResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateSloResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlosServiceAPIService.SlosServiceCreateSlo")
@@ -433,8 +435,8 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -444,8 +446,8 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -455,8 +457,8 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -474,9 +476,9 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 }
 
 type ApiSlosServiceDeleteSloRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SlosServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiSlosServiceDeleteSloRequest) Execute() (*DeleteSloResponse, *http.Response, error) {
@@ -488,26 +490,27 @@ SlosServiceDeleteSlo Delete Slo
 
 Deletes the SLO with the specified ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiSlosServiceDeleteSloRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiSlosServiceDeleteSloRequest
 */
 func (a *SlosServiceAPIService) SlosServiceDeleteSlo(ctx context.Context, id string) ApiSlosServiceDeleteSloRequest {
 	return ApiSlosServiceDeleteSloRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteSloResponse
+//
+//	@return DeleteSloResponse
 func (a *SlosServiceAPIService) SlosServiceDeleteSloExecute(r ApiSlosServiceDeleteSloRequest) (*DeleteSloResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteSloResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteSloResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlosServiceAPIService.SlosServiceDeleteSlo")
@@ -571,8 +574,8 @@ func (a *SlosServiceAPIService) SlosServiceDeleteSloExecute(r ApiSlosServiceDele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -582,8 +585,8 @@ func (a *SlosServiceAPIService) SlosServiceDeleteSloExecute(r ApiSlosServiceDele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -593,8 +596,8 @@ func (a *SlosServiceAPIService) SlosServiceDeleteSloExecute(r ApiSlosServiceDele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -612,9 +615,9 @@ func (a *SlosServiceAPIService) SlosServiceDeleteSloExecute(r ApiSlosServiceDele
 }
 
 type ApiSlosServiceGetSloRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SlosServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiSlosServiceGetSloRequest) Execute() (*GetSloResponse, *http.Response, error) {
@@ -626,26 +629,27 @@ SlosServiceGetSlo Get Slo
 
 Returns the details of the specified SLO.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiSlosServiceGetSloRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiSlosServiceGetSloRequest
 */
 func (a *SlosServiceAPIService) SlosServiceGetSlo(ctx context.Context, id string) ApiSlosServiceGetSloRequest {
 	return ApiSlosServiceGetSloRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetSloResponse
+//
+//	@return GetSloResponse
 func (a *SlosServiceAPIService) SlosServiceGetSloExecute(r ApiSlosServiceGetSloRequest) (*GetSloResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSloResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSloResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlosServiceAPIService.SlosServiceGetSlo")
@@ -709,8 +713,8 @@ func (a *SlosServiceAPIService) SlosServiceGetSloExecute(r ApiSlosServiceGetSloR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -720,8 +724,8 @@ func (a *SlosServiceAPIService) SlosServiceGetSloExecute(r ApiSlosServiceGetSloR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -731,8 +735,8 @@ func (a *SlosServiceAPIService) SlosServiceGetSloExecute(r ApiSlosServiceGetSloR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -750,7 +754,7 @@ func (a *SlosServiceAPIService) SlosServiceGetSloExecute(r ApiSlosServiceGetSloR
 }
 
 type ApiSlosServiceGetZeroStateRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SlosServiceAPIService
 }
 
@@ -763,24 +767,25 @@ SlosServiceGetZeroState Get Slo Zero State
 
 Returns the zero-state configuration for SLOs.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSlosServiceGetZeroStateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSlosServiceGetZeroStateRequest
 */
 func (a *SlosServiceAPIService) SlosServiceGetZeroState(ctx context.Context) ApiSlosServiceGetZeroStateRequest {
 	return ApiSlosServiceGetZeroStateRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetZeroStateResponse
+//
+//	@return GetZeroStateResponse
 func (a *SlosServiceAPIService) SlosServiceGetZeroStateExecute(r ApiSlosServiceGetZeroStateRequest) (*GetZeroStateResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetZeroStateResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetZeroStateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlosServiceAPIService.SlosServiceGetZeroState")
@@ -840,8 +845,8 @@ func (a *SlosServiceAPIService) SlosServiceGetZeroStateExecute(r ApiSlosServiceG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -851,8 +856,8 @@ func (a *SlosServiceAPIService) SlosServiceGetZeroStateExecute(r ApiSlosServiceG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -862,8 +867,8 @@ func (a *SlosServiceAPIService) SlosServiceGetZeroStateExecute(r ApiSlosServiceG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -881,9 +886,9 @@ func (a *SlosServiceAPIService) SlosServiceGetZeroStateExecute(r ApiSlosServiceG
 }
 
 type ApiSlosServiceListSlosRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SlosServiceAPIService
-	filters *[]SloFilter
+	filters    *[]SloFilter
 }
 
 // The filters.
@@ -901,24 +906,25 @@ SlosServiceListSlos List Slos
 
 Returns SLOs matching the given criteria.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSlosServiceListSlosRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSlosServiceListSlosRequest
 */
 func (a *SlosServiceAPIService) SlosServiceListSlos(ctx context.Context) ApiSlosServiceListSlosRequest {
 	return ApiSlosServiceListSlosRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListSlosResponse
+//
+//	@return ListSlosResponse
 func (a *SlosServiceAPIService) SlosServiceListSlosExecute(r ApiSlosServiceListSlosRequest) (*ListSlosResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListSlosResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSlosResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlosServiceAPIService.SlosServiceListSlos")
@@ -993,8 +999,8 @@ func (a *SlosServiceAPIService) SlosServiceListSlosExecute(r ApiSlosServiceListS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1004,8 +1010,8 @@ func (a *SlosServiceAPIService) SlosServiceListSlosExecute(r ApiSlosServiceListS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1015,8 +1021,8 @@ func (a *SlosServiceAPIService) SlosServiceListSlosExecute(r ApiSlosServiceListS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1034,9 +1040,9 @@ func (a *SlosServiceAPIService) SlosServiceListSlosExecute(r ApiSlosServiceListS
 }
 
 type ApiSlosServiceReplaceSloRequest struct {
-	ctx context.Context
-	ApiService *SlosServiceAPIService
-	slo1 *Slo1
+	ctx                    context.Context
+	ApiService             *SlosServiceAPIService
+	slo1                   *Slo1
 	silenceDataValidations *bool
 }
 
@@ -1060,24 +1066,25 @@ SlosServiceReplaceSlo Replace Slo
 
 Updates an existing SLO.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSlosServiceReplaceSloRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSlosServiceReplaceSloRequest
 */
 func (a *SlosServiceAPIService) SlosServiceReplaceSlo(ctx context.Context) ApiSlosServiceReplaceSloRequest {
 	return ApiSlosServiceReplaceSloRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReplaceSloResponse
+//
+//	@return ReplaceSloResponse
 func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceReplaceSloRequest) (*ReplaceSloResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceSloResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplaceSloResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlosServiceAPIService.SlosServiceReplaceSlo")
@@ -1147,8 +1154,8 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1158,8 +1165,8 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1169,8 +1176,8 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1188,9 +1195,9 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 }
 
 type ApiSlosServiceValidateReplaceSloAlertsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SlosServiceAPIService
-	slo1 *Slo1
+	slo1       *Slo1
 }
 
 func (r ApiSlosServiceValidateReplaceSloAlertsRequest) Slo1(slo1 Slo1) ApiSlosServiceValidateReplaceSloAlertsRequest {
@@ -1207,24 +1214,25 @@ SlosServiceValidateReplaceSloAlerts Replace Slo Pre-Validate Alerts
 
 Validates and updates an SLO.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSlosServiceValidateReplaceSloAlertsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSlosServiceValidateReplaceSloAlertsRequest
 */
 func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlerts(ctx context.Context) ApiSlosServiceValidateReplaceSloAlertsRequest {
 	return ApiSlosServiceValidateReplaceSloAlertsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReplaceSloAlertsValidationsResponse
+//
+//	@return ReplaceSloAlertsValidationsResponse
 func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r ApiSlosServiceValidateReplaceSloAlertsRequest) (*ReplaceSloAlertsValidationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceSloAlertsValidationsResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplaceSloAlertsValidationsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlosServiceAPIService.SlosServiceValidateReplaceSloAlerts")
@@ -1289,8 +1297,8 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1300,8 +1308,8 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1311,8 +1319,8 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

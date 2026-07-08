@@ -23,13 +23,13 @@ var _ MappedNullable = &FieldInformation{}
 // FieldInformation struct for FieldInformation
 type FieldInformation struct {
 	// Regular expression pattern that the field value must match for validation.
-	AllowedPattern *string `json:"allowedPattern,omitempty"`
-	ApplicableIf *FieldCondition `json:"applicableIf,omitempty"`
+	AllowedPattern *string         `json:"allowedPattern,omitempty"`
+	ApplicableIf   *FieldCondition `json:"applicableIf,omitempty"`
 	// Link to documentation providing more information about this field.
 	DocumentationReference *string `json:"documentationReference,omitempty"`
 	// Identifier of the UI group this field belongs to for form layout purposes.
-	GroupId *string `json:"groupId,omitempty"`
-	MultiText *ListTextValue `json:"multiText,omitempty"`
+	GroupId           *string                 `json:"groupId,omitempty"`
+	MultiText         *ListTextValue          `json:"multiText,omitempty"`
 	MultipleSelection *MultipleSelectionValue `json:"multipleSelection,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty"`
@@ -40,21 +40,22 @@ type FieldInformation struct {
 	// Whether this field is read-only and cannot be modified by the user.
 	Readonly *bool `json:"readonly,omitempty"`
 	// Whether this field must be filled in before the integration can be deployed.
-	Required *bool `json:"required,omitempty"`
-	Selection *SelectionValue `json:"selection,omitempty"`
-	Single *SingleValue `json:"single,omitempty"`
-	SingleBoolean *SingleBooleanValue `json:"singleBoolean,omitempty"`
-	SingleNumber *IntegrationRevisionSingleNumericValue `json:"singleNumber,omitempty"`
+	Required      *bool                                  `json:"required,omitempty"`
+	Selection     *SelectionValue                        `json:"selection,omitempty"`
+	Single        *SingleValue                           `json:"single,omitempty"`
+	SingleBoolean *SingleBooleanValue                    `json:"singleBoolean,omitempty"`
+	SingleNumber  *IntegrationRevisionSingleNumericValue `json:"singleNumber,omitempty"`
 	// Name of the template parameter this field maps to in the deployment template.
 	TemplateParamName *string `json:"templateParamName,omitempty"`
 	// Tooltip text displayed on hover to provide additional context for this field.
-	Tooltip *string `json:"tooltip,omitempty"`
-	Type *InputType `json:"type,omitempty"`
+	Tooltip *string    `json:"tooltip,omitempty"`
+	Type    *InputType `json:"type,omitempty"`
 	// Notice displayed to users when an upgrade is required to use this field.
 	UpgradeNotice *string `json:"upgradeNotice,omitempty"`
 	// Whether this field is visible in the integration configuration UI.
-	Visible *bool `json:"visible,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Visible                           *bool `json:"visible,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _FieldInformation FieldInformation
@@ -717,7 +718,7 @@ func (o *FieldInformation) SetVisible(v bool) {
 }
 
 func (o FieldInformation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -876,6 +877,7 @@ func (o *FieldInformation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "upgradeNotice")
 		delete(additionalProperties, "visible")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -916,4 +918,3 @@ func (v *NullableFieldInformation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

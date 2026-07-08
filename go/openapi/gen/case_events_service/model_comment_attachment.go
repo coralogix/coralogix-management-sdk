@@ -22,10 +22,11 @@ var _ MappedNullable = &CommentAttachment{}
 
 // CommentAttachment struct for CommentAttachment
 type CommentAttachment struct {
-	CustomWidget *CustomDashboardWidgetAttachment `json:"customWidget,omitempty"`
-	File *FileAttachment `json:"file,omitempty"`
-	Log *LogAttachment `json:"log,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CustomWidget                      *CustomDashboardWidgetAttachment `json:"customWidget,omitempty"`
+	File                              *FileAttachment                  `json:"file,omitempty"`
+	Log                               *LogAttachment                   `json:"log,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CommentAttachment CommentAttachment
@@ -144,7 +145,7 @@ func (o *CommentAttachment) SetLog(v LogAttachment) {
 }
 
 func (o CommentAttachment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -178,7 +179,7 @@ func (o CommentAttachment) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if len(o.AdditionalProperties) == 0 {
+		if !o.additionalPropertiesFromUnmarshal {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [log, customWidget, file] must be set"}
 		}
 	}
@@ -222,6 +223,7 @@ func (o *CommentAttachment) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "file")
 		delete(additionalProperties, "log")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -262,4 +264,3 @@ func (v *NullableCommentAttachment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

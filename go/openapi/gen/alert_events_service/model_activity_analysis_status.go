@@ -24,7 +24,7 @@ type ActivityAnalysisStatus string
 // List of ActivityAnalysisStatus
 const (
 	ACTIVITYANALYSISSTATUS_ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED ActivityAnalysisStatus = "ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED"
-	ACTIVITYANALYSISSTATUS_ACTIVITY_ANALYSIS_STATUS_MUTE ActivityAnalysisStatus = "ACTIVITY_ANALYSIS_STATUS_MUTE"
+	ACTIVITYANALYSISSTATUS_ACTIVITY_ANALYSIS_STATUS_MUTE                    ActivityAnalysisStatus = "ACTIVITY_ANALYSIS_STATUS_MUTE"
 )
 
 // All allowed values of ActivityAnalysisStatus enum
@@ -111,4 +111,3 @@ func (v *NullableActivityAnalysisStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

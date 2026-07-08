@@ -22,9 +22,10 @@ var _ MappedNullable = &SpansSourceStrategyDuration{}
 
 // SpansSourceStrategyDuration Duration strategy: uses a start timestamp and a duration field to define the annotation span.
 type SpansSourceStrategyDuration struct {
-	DurationField *ObservationField `json:"durationField,omitempty"`
-	StartTimestampField *ObservationField `json:"startTimestampField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	DurationField                     *ObservationField `json:"durationField,omitempty"`
+	StartTimestampField               *ObservationField `json:"startTimestampField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SpansSourceStrategyDuration SpansSourceStrategyDuration
@@ -111,7 +112,7 @@ func (o *SpansSourceStrategyDuration) SetStartTimestampField(v ObservationField)
 }
 
 func (o SpansSourceStrategyDuration) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *SpansSourceStrategyDuration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "durationField")
 		delete(additionalProperties, "startTimestampField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableSpansSourceStrategyDuration) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

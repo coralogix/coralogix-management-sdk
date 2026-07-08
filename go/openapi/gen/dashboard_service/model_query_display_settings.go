@@ -28,29 +28,30 @@ type QueryDisplaySettings struct {
 	// A list of category fields for grouping the query results
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme for this query, one of the predefined values
-	ColorScheme *string `json:"colorScheme,omitempty"`
+	ColorScheme *string `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// Whether to ignore color scheme and derive colors from algorithm
 	HashColors *bool `json:"hashColors,omitempty"`
 	// Reference to the query id from Dynamic.query_display_settings
-	QueryId string `json:"queryId"`
+	QueryId   string     `json:"queryId" validate:"regexp=^[\\s\\S]*$"`
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	// Max count of the series per query
 	SeriesCountLimit *string `json:"seriesCountLimit,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Custom template for the series name
-	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty"`
-	TemporalField *ObservationField `json:"temporalField,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
+	SeriesNameTemplate *string           `json:"seriesNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	TemporalField      *ObservationField `json:"temporalField,omitempty"`
+	Unit               *CommonUnit       `json:"unit,omitempty"`
 	// A list of numeric/value observation fields to display from the query results
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
-	YAxisMin *float32 `json:"yAxisMin,omitempty"`
-	AdditionalProperties map[string]interface{}
+	YAxisMin                          *float32 `json:"yAxisMin,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QueryDisplaySettings QueryDisplaySettings
@@ -546,7 +547,7 @@ func (o *QueryDisplaySettings) SetYAxisMin(v float32) {
 }
 
 func (o QueryDisplaySettings) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -619,10 +620,10 @@ func (o *QueryDisplaySettings) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -658,6 +659,7 @@ func (o *QueryDisplaySettings) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "yAxisMax")
 		delete(additionalProperties, "yAxisMin")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -698,4 +700,3 @@ func (v *NullableQueryDisplaySettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

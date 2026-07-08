@@ -16,17 +16,16 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"reflect"
+	"strings"
 )
-
 
 // ConnectorsServiceAPIService ConnectorsServiceAPI service
 type ConnectorsServiceAPIService service
 
 type ApiConnectorsServiceBatchGetConnectorSummariesRequest struct {
-	ctx context.Context
-	ApiService *ConnectorsServiceAPIService
+	ctx          context.Context
+	ApiService   *ConnectorsServiceAPIService
 	connectorIds *[]string
 }
 
@@ -45,24 +44,25 @@ ConnectorsServiceBatchGetConnectorSummaries Batch Get Connectors Summaries
 
 Returns summary information for all notification connectors.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiConnectorsServiceBatchGetConnectorSummariesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiConnectorsServiceBatchGetConnectorSummariesRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectorSummaries(ctx context.Context) ApiConnectorsServiceBatchGetConnectorSummariesRequest {
 	return ApiConnectorsServiceBatchGetConnectorSummariesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BatchGetConnectorSummariesResponse
+//
+//	@return BatchGetConnectorSummariesResponse
 func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectorSummariesExecute(r ApiConnectorsServiceBatchGetConnectorSummariesRequest) (*BatchGetConnectorSummariesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BatchGetConnectorSummariesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BatchGetConnectorSummariesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsServiceAPIService.ConnectorsServiceBatchGetConnectorSummaries")
@@ -146,8 +146,8 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectorSummarie
 }
 
 type ApiConnectorsServiceBatchGetConnectorsRequest struct {
-	ctx context.Context
-	ApiService *ConnectorsServiceAPIService
+	ctx          context.Context
+	ApiService   *ConnectorsServiceAPIService
 	connectorIds *[]string
 }
 
@@ -166,24 +166,25 @@ ConnectorsServiceBatchGetConnectors Batch Get Connectors
 
 Returns all notification connectors for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiConnectorsServiceBatchGetConnectorsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiConnectorsServiceBatchGetConnectorsRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectors(ctx context.Context) ApiConnectorsServiceBatchGetConnectorsRequest {
 	return ApiConnectorsServiceBatchGetConnectorsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BatchGetConnectorsResponse
+//
+//	@return BatchGetConnectorsResponse
 func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectorsExecute(r ApiConnectorsServiceBatchGetConnectorsRequest) (*BatchGetConnectorsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BatchGetConnectorsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BatchGetConnectorsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsServiceAPIService.ConnectorsServiceBatchGetConnectors")
@@ -267,8 +268,8 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceBatchGetConnectorsExecute
 }
 
 type ApiConnectorsServiceCreateConnectorRequest struct {
-	ctx context.Context
-	ApiService *ConnectorsServiceAPIService
+	ctx                    context.Context
+	ApiService             *ConnectorsServiceAPIService
 	createConnectorRequest *CreateConnectorRequest
 }
 
@@ -286,24 +287,25 @@ ConnectorsServiceCreateConnector Create a Connector
 
 Creates a new notification connector.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiConnectorsServiceCreateConnectorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiConnectorsServiceCreateConnectorRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceCreateConnector(ctx context.Context) ApiConnectorsServiceCreateConnectorRequest {
 	return ApiConnectorsServiceCreateConnectorRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateConnectorResponse
+//
+//	@return CreateConnectorResponse
 func (a *ConnectorsServiceAPIService) ConnectorsServiceCreateConnectorExecute(r ApiConnectorsServiceCreateConnectorRequest) (*CreateConnectorResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateConnectorResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateConnectorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsServiceAPIService.ConnectorsServiceCreateConnector")
@@ -374,9 +376,9 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceCreateConnectorExecute(r 
 }
 
 type ApiConnectorsServiceDeleteConnectorRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ConnectorsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiConnectorsServiceDeleteConnectorRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -388,26 +390,27 @@ ConnectorsServiceDeleteConnector Delete a Connector
 
 Deletes the notification connector with the specified ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiConnectorsServiceDeleteConnectorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiConnectorsServiceDeleteConnectorRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceDeleteConnector(ctx context.Context, id string) ApiConnectorsServiceDeleteConnectorRequest {
 	return ApiConnectorsServiceDeleteConnectorRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *ConnectorsServiceAPIService) ConnectorsServiceDeleteConnectorExecute(r ApiConnectorsServiceDeleteConnectorRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsServiceAPIService.ConnectorsServiceDeleteConnector")
@@ -483,9 +486,9 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceDeleteConnectorExecute(r 
 }
 
 type ApiConnectorsServiceGetConnectorRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ConnectorsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiConnectorsServiceGetConnectorRequest) Execute() (*GetConnectorResponse, *http.Response, error) {
@@ -497,26 +500,27 @@ ConnectorsServiceGetConnector Get a Connector
 
 Returns the details of the specified notification connector.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the connector.
- @return ApiConnectorsServiceGetConnectorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier of the connector.
+	@return ApiConnectorsServiceGetConnectorRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnector(ctx context.Context, id string) ApiConnectorsServiceGetConnectorRequest {
 	return ApiConnectorsServiceGetConnectorRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetConnectorResponse
+//
+//	@return GetConnectorResponse
 func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnectorExecute(r ApiConnectorsServiceGetConnectorRequest) (*GetConnectorResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetConnectorResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetConnectorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsServiceAPIService.ConnectorsServiceGetConnector")
@@ -592,8 +596,8 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnectorExecute(r Api
 }
 
 type ApiConnectorsServiceGetConnectorTypeSummariesRequest struct {
-	ctx context.Context
-	ApiService *ConnectorsServiceAPIService
+	ctx                   context.Context
+	ApiService            *ConnectorsServiceAPIService
 	supportedByEntityType *NotificationCenterEntityType
 }
 
@@ -612,24 +616,25 @@ ConnectorsServiceGetConnectorTypeSummaries Get Connector Type Summaries
 
 Returns summary information for all available connector types.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiConnectorsServiceGetConnectorTypeSummariesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiConnectorsServiceGetConnectorTypeSummariesRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnectorTypeSummaries(ctx context.Context) ApiConnectorsServiceGetConnectorTypeSummariesRequest {
 	return ApiConnectorsServiceGetConnectorTypeSummariesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetConnectorTypeSummariesResponse
+//
+//	@return GetConnectorTypeSummariesResponse
 func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnectorTypeSummariesExecute(r ApiConnectorsServiceGetConnectorTypeSummariesRequest) (*GetConnectorTypeSummariesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetConnectorTypeSummariesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetConnectorTypeSummariesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsServiceAPIService.ConnectorsServiceGetConnectorTypeSummaries")
@@ -703,9 +708,9 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnectorTypeSummaries
 }
 
 type ApiConnectorsServiceListConnectorSummariesRequest struct {
-	ctx context.Context
-	ApiService *ConnectorsServiceAPIService
-	connectorType *NotificationCenterConnectorType
+	ctx                   context.Context
+	ApiService            *ConnectorsServiceAPIService
+	connectorType         *NotificationCenterConnectorType
 	supportedByEntityType *NotificationCenterEntityType
 }
 
@@ -730,24 +735,25 @@ ConnectorsServiceListConnectorSummaries List Connector Summaries
 
 Returns a paginated list of notification connector summaries.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiConnectorsServiceListConnectorSummariesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiConnectorsServiceListConnectorSummariesRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectorSummaries(ctx context.Context) ApiConnectorsServiceListConnectorSummariesRequest {
 	return ApiConnectorsServiceListConnectorSummariesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListConnectorSummariesResponse
+//
+//	@return ListConnectorSummariesResponse
 func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectorSummariesExecute(r ApiConnectorsServiceListConnectorSummariesRequest) (*ListConnectorSummariesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListConnectorSummariesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListConnectorSummariesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsServiceAPIService.ConnectorsServiceListConnectorSummaries")
@@ -826,9 +832,9 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectorSummariesExe
 }
 
 type ApiConnectorsServiceListConnectorsRequest struct {
-	ctx context.Context
-	ApiService *ConnectorsServiceAPIService
-	connectorType *NotificationCenterConnectorType
+	ctx                   context.Context
+	ApiService            *ConnectorsServiceAPIService
+	connectorType         *NotificationCenterConnectorType
 	supportedByEntityType *NotificationCenterEntityType
 }
 
@@ -853,24 +859,25 @@ ConnectorsServiceListConnectors List Connectors
 
 Returns notification connectors with optional pagination.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiConnectorsServiceListConnectorsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiConnectorsServiceListConnectorsRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectors(ctx context.Context) ApiConnectorsServiceListConnectorsRequest {
 	return ApiConnectorsServiceListConnectorsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListConnectorsResponse
+//
+//	@return ListConnectorsResponse
 func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectorsExecute(r ApiConnectorsServiceListConnectorsRequest) (*ListConnectorsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListConnectorsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListConnectorsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsServiceAPIService.ConnectorsServiceListConnectors")
@@ -949,8 +956,8 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceListConnectorsExecute(r A
 }
 
 type ApiConnectorsServiceReplaceConnectorRequest struct {
-	ctx context.Context
-	ApiService *ConnectorsServiceAPIService
+	ctx                     context.Context
+	ApiService              *ConnectorsServiceAPIService
 	replaceConnectorRequest *ReplaceConnectorRequest
 }
 
@@ -968,24 +975,25 @@ ConnectorsServiceReplaceConnector Replace a Connector
 
 Updates an existing notification connector.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiConnectorsServiceReplaceConnectorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiConnectorsServiceReplaceConnectorRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceReplaceConnector(ctx context.Context) ApiConnectorsServiceReplaceConnectorRequest {
 	return ApiConnectorsServiceReplaceConnectorRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReplaceConnectorResponse
+//
+//	@return ReplaceConnectorResponse
 func (a *ConnectorsServiceAPIService) ConnectorsServiceReplaceConnectorExecute(r ApiConnectorsServiceReplaceConnectorRequest) (*ReplaceConnectorResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceConnectorResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplaceConnectorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorsServiceAPIService.ConnectorsServiceReplaceConnector")

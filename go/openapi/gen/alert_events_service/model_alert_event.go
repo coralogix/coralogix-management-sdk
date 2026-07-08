@@ -39,11 +39,12 @@ type AlertEvent struct {
 	// Labels for the permutation.
 	PermutationLabels *map[string]string `json:"permutationLabels,omitempty"`
 	// Identifier of the event before grouping.
-	PreGroupingEventId *string `json:"preGroupingEventId,omitempty"`
-	Status *AlertStatus `json:"status,omitempty"`
+	PreGroupingEventId *string      `json:"preGroupingEventId,omitempty"`
+	Status             *AlertStatus `json:"status,omitempty"`
 	// Timestamp of the event.
-	Timestamp *time.Time `json:"timestamp,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Timestamp                         *time.Time `json:"timestamp,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AlertEvent AlertEvent
@@ -418,7 +419,7 @@ func (o *AlertEvent) SetTimestamp(v time.Time) {
 }
 
 func (o AlertEvent) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -495,6 +496,7 @@ func (o *AlertEvent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "timestamp")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -535,4 +537,3 @@ func (v *NullableAlertEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

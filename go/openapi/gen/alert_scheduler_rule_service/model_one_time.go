@@ -22,8 +22,9 @@ var _ MappedNullable = &OneTime{}
 
 // OneTime One time.
 type OneTime struct {
-	Timeframe *Timeframe `json:"timeframe,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Timeframe                         *Timeframe `json:"timeframe,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _OneTime OneTime
@@ -78,7 +79,7 @@ func (o *OneTime) SetTimeframe(v Timeframe) {
 }
 
 func (o OneTime) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *OneTime) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "timeframe")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableOneTime) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

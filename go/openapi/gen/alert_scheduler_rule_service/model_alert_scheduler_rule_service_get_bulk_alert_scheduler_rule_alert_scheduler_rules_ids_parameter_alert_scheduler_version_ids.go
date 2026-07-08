@@ -23,8 +23,9 @@ var _ MappedNullable = &AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertS
 // AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds Alert scheduler rule version ids.
 type AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds struct {
 	// The alert scheduler rule version ids.
-	AlertSchedulerRuleVersionIds []string `json:"alertSchedulerRuleVersionIds,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AlertSchedulerRuleVersionIds      []string `json:"alertSchedulerRuleVersionIds,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds
@@ -79,7 +80,7 @@ func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesId
 }
 
 func (o AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameterAlertSchedulerVersionIds) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesId
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "alertSchedulerRuleVersionIds")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedule
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

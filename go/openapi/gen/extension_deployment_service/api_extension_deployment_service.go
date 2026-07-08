@@ -19,18 +19,17 @@ import (
 	"reflect"
 )
 
-
 // ExtensionDeploymentServiceAPIService ExtensionDeploymentServiceAPI service
 type ExtensionDeploymentServiceAPIService service
 
 type ApiExtensionDeploymentServiceDeployExtensionRequest struct {
-	ctx context.Context
-	ApiService *ExtensionDeploymentServiceAPIService
-	id *string
-	version *string
-	itemIds *[]string
-	applications *[]string
-	subsystems *[]string
+	ctx                 context.Context
+	ApiService          *ExtensionDeploymentServiceAPIService
+	id                  *string
+	version             *string
+	itemIds             *[]string
+	applications        *[]string
+	subsystems          *[]string
 	extensionDeployment *ExtensionDeployment
 }
 
@@ -79,24 +78,25 @@ ExtensionDeploymentServiceDeployExtension Deploy extension
 
 Deploys an extension.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiExtensionDeploymentServiceDeployExtensionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiExtensionDeploymentServiceDeployExtensionRequest
 */
 func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceDeployExtension(ctx context.Context) ApiExtensionDeploymentServiceDeployExtensionRequest {
 	return ApiExtensionDeploymentServiceDeployExtensionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DeployExtensionResponse
+//
+//	@return DeployExtensionResponse
 func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceDeployExtensionExecute(r ApiExtensionDeploymentServiceDeployExtensionRequest) (*DeployExtensionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeployExtensionResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeployExtensionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExtensionDeploymentServiceAPIService.ExtensionDeploymentServiceDeployExtension")
@@ -216,8 +216,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceDeployE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -227,8 +227,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceDeployE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -238,8 +238,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceDeployE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -257,7 +257,7 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceDeployE
 }
 
 type ApiExtensionDeploymentServiceGetDeployedExtensionsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ExtensionDeploymentServiceAPIService
 }
 
@@ -270,24 +270,25 @@ ExtensionDeploymentServiceGetDeployedExtensions Get deployed extensions
 
 Returns all deployed extensions.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiExtensionDeploymentServiceGetDeployedExtensionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiExtensionDeploymentServiceGetDeployedExtensionsRequest
 */
 func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceGetDeployedExtensions(ctx context.Context) ApiExtensionDeploymentServiceGetDeployedExtensionsRequest {
 	return ApiExtensionDeploymentServiceGetDeployedExtensionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetDeployedExtensionsResponse
+//
+//	@return GetDeployedExtensionsResponse
 func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceGetDeployedExtensionsExecute(r ApiExtensionDeploymentServiceGetDeployedExtensionsRequest) (*GetDeployedExtensionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDeployedExtensionsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDeployedExtensionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExtensionDeploymentServiceAPIService.ExtensionDeploymentServiceGetDeployedExtensions")
@@ -347,8 +348,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceGetDepl
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -358,8 +359,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceGetDepl
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -369,8 +370,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceGetDepl
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -388,8 +389,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceGetDepl
 }
 
 type ApiExtensionDeploymentServiceUndeployExtensionRequest struct {
-	ctx context.Context
-	ApiService *ExtensionDeploymentServiceAPIService
+	ctx                                context.Context
+	ApiService                         *ExtensionDeploymentServiceAPIService
 	revertDeploymentOfExtensionRequest *RevertDeploymentOfExtensionRequest
 }
 
@@ -407,24 +408,25 @@ ExtensionDeploymentServiceUndeployExtension Revert deployment of extension
 
 Undeploys the specified extension.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiExtensionDeploymentServiceUndeployExtensionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiExtensionDeploymentServiceUndeployExtensionRequest
 */
 func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUndeployExtension(ctx context.Context) ApiExtensionDeploymentServiceUndeployExtensionRequest {
 	return ApiExtensionDeploymentServiceUndeployExtensionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return UndeployExtensionResponse
+//
+//	@return UndeployExtensionResponse
 func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUndeployExtensionExecute(r ApiExtensionDeploymentServiceUndeployExtensionRequest) (*UndeployExtensionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UndeployExtensionResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UndeployExtensionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExtensionDeploymentServiceAPIService.ExtensionDeploymentServiceUndeployExtension")
@@ -486,8 +488,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUndeplo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -497,8 +499,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUndeplo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -508,8 +510,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUndeplo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -527,13 +529,13 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUndeplo
 }
 
 type ApiExtensionDeploymentServiceUpdateExtensionRequest struct {
-	ctx context.Context
-	ApiService *ExtensionDeploymentServiceAPIService
-	id *string
-	version *string
-	itemIds *[]string
-	applications *[]string
-	subsystems *[]string
+	ctx                 context.Context
+	ApiService          *ExtensionDeploymentServiceAPIService
+	id                  *string
+	version             *string
+	itemIds             *[]string
+	applications        *[]string
+	subsystems          *[]string
 	extensionDeployment *ExtensionDeployment
 }
 
@@ -582,24 +584,25 @@ ExtensionDeploymentServiceUpdateExtension Update extension
 
 Updates a deployed extension.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiExtensionDeploymentServiceUpdateExtensionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiExtensionDeploymentServiceUpdateExtensionRequest
 */
 func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUpdateExtension(ctx context.Context) ApiExtensionDeploymentServiceUpdateExtensionRequest {
 	return ApiExtensionDeploymentServiceUpdateExtensionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateExtensionResponse
+//
+//	@return UpdateExtensionResponse
 func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUpdateExtensionExecute(r ApiExtensionDeploymentServiceUpdateExtensionRequest) (*UpdateExtensionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateExtensionResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateExtensionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExtensionDeploymentServiceAPIService.ExtensionDeploymentServiceUpdateExtension")
@@ -719,8 +722,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUpdateE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -730,8 +733,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUpdateE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -741,8 +744,8 @@ func (a *ExtensionDeploymentServiceAPIService) ExtensionDeploymentServiceUpdateE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

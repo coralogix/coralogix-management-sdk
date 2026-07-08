@@ -24,9 +24,10 @@ var _ MappedNullable = &RoutedDelivery{}
 // RoutedDelivery Delivery attempts routed through a single router to one or more connectors.
 type RoutedDelivery struct {
 	// Individual delivery attempts to connectors
-	Attempts []DeliveryAttempt `json:"attempts"`
-	Router RouterInfo `json:"router"`
-	AdditionalProperties map[string]interface{}
+	Attempts                          []DeliveryAttempt `json:"attempts"`
+	Router                            RouterInfo        `json:"router"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RoutedDelivery RoutedDelivery
@@ -99,7 +100,7 @@ func (o *RoutedDelivery) SetRouter(v RouterInfo) {
 }
 
 func (o RoutedDelivery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -132,10 +133,10 @@ func (o *RoutedDelivery) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -158,6 +159,7 @@ func (o *RoutedDelivery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "attempts")
 		delete(additionalProperties, "router")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -198,4 +200,3 @@ func (v *NullableRoutedDelivery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

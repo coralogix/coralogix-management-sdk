@@ -24,7 +24,7 @@ var _ MappedNullable = &CasesV1GetFilterValuesResponse{}
 // CasesV1GetFilterValuesResponse Aggregated counts for building filters in the UI
 type CasesV1GetFilterValuesResponse struct {
 	// Aggregated case counts per alert definition ID. Only populated when alert_filters is provided in the request.
-	AlertIdAggregations []AlertIdAggregation `json:"alertIdAggregations"`
+	AlertIdAggregations  []AlertIdAggregation `json:"alertIdAggregations"`
 	AssigneeAggregations *AssigneeAggregation `json:"assigneeAggregations,omitempty"`
 	// Aggregated case counts grouped by category.
 	CategoryAggregations []CategoryAggregation `json:"categoryAggregations"`
@@ -37,8 +37,9 @@ type CasesV1GetFilterValuesResponse struct {
 	// Aggregated case counts grouped by priority.
 	PriorityAggregations []PriorityAggregation `json:"priorityAggregations"`
 	// Aggregated case counts grouped by status.
-	StatusAggregations []StatusAggregation `json:"statusAggregations"`
-	AdditionalProperties map[string]interface{}
+	StatusAggregations                []StatusAggregation `json:"statusAggregations"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CasesV1GetFilterValuesResponse CasesV1GetFilterValuesResponse
@@ -268,7 +269,7 @@ func (o *CasesV1GetFilterValuesResponse) SetStatusAggregations(v []StatusAggrega
 }
 
 func (o CasesV1GetFilterValuesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -314,10 +315,10 @@ func (o *CasesV1GetFilterValuesResponse) UnmarshalJSON(data []byte) (err error) 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -346,6 +347,7 @@ func (o *CasesV1GetFilterValuesResponse) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "priorityAggregations")
 		delete(additionalProperties, "statusAggregations")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -386,4 +388,3 @@ func (v *NullableCasesV1GetFilterValuesResponse) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

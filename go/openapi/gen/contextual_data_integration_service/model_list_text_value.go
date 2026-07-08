@@ -25,8 +25,9 @@ type ListTextValue struct {
 	// The default values.
 	DefaultValues []string `json:"defaultValues,omitempty"`
 	// Options.
-	Options []string `json:"options,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Options                           []string `json:"options,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListTextValue ListTextValue
@@ -113,7 +114,7 @@ func (o *ListTextValue) SetOptions(v []string) {
 }
 
 func (o ListTextValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *ListTextValue) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "defaultValues")
 		delete(additionalProperties, "options")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableListTextValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

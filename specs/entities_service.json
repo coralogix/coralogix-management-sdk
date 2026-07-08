@@ -30,6 +30,55 @@
         }
       }
     },
+    "/notifications/notification-center/v1/entity-types/{entity_type}/attachment-types": {
+      "get": {
+        "tags": [
+          "Entities service"
+        ],
+        "summary": "List Entity Type Attachment Types",
+        "description": "Returns all supported attachment types for the specified entity type.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EntitiesService_ListEntityTypeAttachmentTypes",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entity_type",
+            "description": "Entity type whose supported attachment types to list.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.EntityType"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListEntityTypeAttachmentTypesResponse"
+                },
+                "example": {
+                  "supportedAttachmentTypes": [
+                    {
+                      "defaultEnabled": true,
+                      "name": "alert_graph"
+                    },
+                    {
+                      "defaultEnabled": false,
+                      "name": "log_example"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes": {
       "get": {
         "tags": [
@@ -70,6 +119,28 @@
   },
   "components": {
     "schemas": {
+      "EntityTypeAttachmentType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Supported attachment type with its default enabled state.",
+        "type": "object",
+        "properties": {
+          "defaultEnabled": {
+            "example": true,
+            "description": "Whether this attachment type is included by default when policy is Auto.",
+            "type": "boolean"
+          },
+          "name": {
+            "example": "alert_graph",
+            "description": "Attachment type identifier (e.g. 'alert_graph', 'log_example').",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 100
+          }
+        }
+      },
       "FilterPathAndValues": {
         "externalDocs": {
           "url": ""
@@ -145,6 +216,24 @@
               "description": "The entity sub types.",
               "type": "string",
               "minLength": 0
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        }
+      },
+      "ListEntityTypeAttachmentTypesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of supported attachment types for the entity type.",
+        "type": "object",
+        "properties": {
+          "supportedAttachmentTypes": {
+            "description": "The supported attachment types.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityTypeAttachmentType"
             },
             "minItems": 0,
             "maxItems": 100

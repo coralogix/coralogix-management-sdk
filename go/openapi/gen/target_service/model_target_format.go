@@ -24,7 +24,7 @@ type TargetFormat string
 // List of TargetFormat
 const (
 	TARGETFORMAT_TARGET_FORMAT_UNSPECIFIED TargetFormat = "TARGET_FORMAT_UNSPECIFIED"
-	TARGETFORMAT_TARGET_FORMAT_CX_DATA_V1 TargetFormat = "TARGET_FORMAT_CX_DATA_V1"
+	TARGETFORMAT_TARGET_FORMAT_CX_DATA_V1  TargetFormat = "TARGET_FORMAT_CX_DATA_V1"
 )
 
 // All allowed values of TargetFormat enum
@@ -111,4 +111,3 @@ func (v *NullableTargetFormat) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,9 +22,10 @@ var _ MappedNullable = &UsageDailyQuery{}
 
 // UsageDailyQuery Day-oriented query. Always returns 1-day UTC buckets.
 type UsageDailyQuery struct {
-	DateRange *UsageCalendarDateRange `json:"dateRange,omitempty"`
-	RelativeRange *UsageDailyRelativeRange `json:"relativeRange,omitempty"`
-	AdditionalProperties map[string]interface{}
+	DateRange                         *UsageCalendarDateRange  `json:"dateRange,omitempty"`
+	RelativeRange                     *UsageDailyRelativeRange `json:"relativeRange,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UsageDailyQuery UsageDailyQuery
@@ -111,7 +112,7 @@ func (o *UsageDailyQuery) SetRelativeRange(v UsageDailyRelativeRange) {
 }
 
 func (o UsageDailyQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,6 +175,7 @@ func (o *UsageDailyQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "dateRange")
 		delete(additionalProperties, "relativeRange")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -214,4 +216,3 @@ func (v *NullableUsageDailyQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

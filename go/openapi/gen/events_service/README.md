@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
  - [ListEventsCountResponse](docs/ListEventsCountResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [TimestampRange](docs/TimestampRange.md)
+ - [TimestampRange1](docs/TimestampRange1.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
  - [V3GetEventResponse](docs/V3GetEventResponse.md)
  - [V3ListEventsResponse](docs/V3ListEventsResponse.md)

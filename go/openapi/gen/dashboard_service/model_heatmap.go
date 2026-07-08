@@ -27,25 +27,27 @@ type Heatmap struct {
 	// Optional number indicating the max value for gradient color axis. Automatically calculated from data if not provided.
 	ColorAxisMax *float32 `json:"colorAxisMax,omitempty"`
 	// Optional number indicating the lowest value for gradient color axis. Automatically calculated from data if not provided.
-	ColorAxisMin *float32 `json:"colorAxisMin,omitempty"`
-	ColorRange *ColorGradientType `json:"colorRange,omitempty"`
+	ColorAxisMin *float32           `json:"colorAxisMin,omitempty"`
+	ColorRange   *ColorGradientType `json:"colorRange,omitempty"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
-	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
-	Preset *HeatmapColorPreset `json:"preset,omitempty"`
-	ScaleType *ScaleType `json:"scaleType,omitempty"`
+	DecimalPrecision    *int32                      `json:"decimalPrecision,omitempty"`
+	HistogramBucketUnit *HeatmapHistogramBucketUnit `json:"histogramBucketUnit,omitempty"`
+	Preset              *HeatmapColorPreset         `json:"preset,omitempty"`
+	ScaleType           *ScaleType                  `json:"scaleType,omitempty"`
 	// Whether to render numeric values inside the heatmap tiles
-	ShowNumbers *bool `json:"showNumbers,omitempty"`
-	Tooltip *HeatmapTooltip `json:"tooltip,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
-	ValueField *ObservationField `json:"valueField,omitempty"`
+	ShowNumbers *bool             `json:"showNumbers,omitempty"`
+	Tooltip     *HeatmapTooltip   `json:"tooltip,omitempty"`
+	Unit        *CommonUnit       `json:"unit,omitempty"`
+	ValueField  *ObservationField `json:"valueField,omitempty"`
 	// List of observation fields used as x-axis categories in the heatmap grid.
-	XAxisFields []ObservationField `json:"xAxisFields,omitempty"`
-	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
+	XAxisFields     []ObservationField `json:"xAxisFields,omitempty"`
+	XAxisTimeFormat *XAxisTimeFormat   `json:"xAxisTimeFormat,omitempty"`
 	// List of observation fields used as y-axis categories in the heatmap grid.
-	YAxisFields []ObservationField `json:"yAxisFields,omitempty"`
-	AdditionalProperties map[string]interface{}
+	YAxisFields                       []ObservationField `json:"yAxisFields,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Heatmap Heatmap
@@ -257,6 +259,38 @@ func (o *Heatmap) HasDecimalPrecision() bool {
 // SetDecimalPrecision gets a reference to the given int32 and assigns it to the DecimalPrecision field.
 func (o *Heatmap) SetDecimalPrecision(v int32) {
 	o.DecimalPrecision = &v
+}
+
+// GetHistogramBucketUnit returns the HistogramBucketUnit field value if set, zero value otherwise.
+func (o *Heatmap) GetHistogramBucketUnit() HeatmapHistogramBucketUnit {
+	if o == nil || IsNil(o.HistogramBucketUnit) {
+		var ret HeatmapHistogramBucketUnit
+		return ret
+	}
+	return *o.HistogramBucketUnit
+}
+
+// GetHistogramBucketUnitOk returns a tuple with the HistogramBucketUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetHistogramBucketUnitOk() (*HeatmapHistogramBucketUnit, bool) {
+	if o == nil || IsNil(o.HistogramBucketUnit) {
+		return nil, false
+	}
+	return o.HistogramBucketUnit, true
+}
+
+// HasHistogramBucketUnit returns a boolean if a field has been set.
+func (o *Heatmap) HasHistogramBucketUnit() bool {
+	if o != nil && !IsNil(o.HistogramBucketUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetHistogramBucketUnit gets a reference to the given HeatmapHistogramBucketUnit and assigns it to the HistogramBucketUnit field.
+func (o *Heatmap) SetHistogramBucketUnit(v HeatmapHistogramBucketUnit) {
+	o.HistogramBucketUnit = &v
 }
 
 // GetPreset returns the Preset field value if set, zero value otherwise.
@@ -548,7 +582,7 @@ func (o *Heatmap) SetYAxisFields(v []ObservationField) {
 }
 
 func (o Heatmap) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -574,6 +608,9 @@ func (o Heatmap) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DecimalPrecision) {
 		toSerialize["decimalPrecision"] = o.DecimalPrecision
+	}
+	if !IsNil(o.HistogramBucketUnit) {
+		toSerialize["histogramBucketUnit"] = o.HistogramBucketUnit
 	}
 	if !IsNil(o.Preset) {
 		toSerialize["preset"] = o.Preset
@@ -653,6 +690,7 @@ func (o *Heatmap) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "colorRange")
 		delete(additionalProperties, "customUnit")
 		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "histogramBucketUnit")
 		delete(additionalProperties, "preset")
 		delete(additionalProperties, "scaleType")
 		delete(additionalProperties, "showNumbers")
@@ -663,6 +701,7 @@ func (o *Heatmap) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "xAxisTimeFormat")
 		delete(additionalProperties, "yAxisFields")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -703,4 +742,3 @@ func (v *NullableHeatmap) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

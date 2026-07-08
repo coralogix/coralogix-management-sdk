@@ -22,8 +22,9 @@ var _ MappedNullable = &QuerySpansQuery{}
 
 // QuerySpansQuery Spans query.
 type QuerySpansQuery struct {
-	Type *QuerySpansQueryType `json:"type,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Type                              *QuerySpansQueryType `json:"type,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QuerySpansQuery QuerySpansQuery
@@ -78,7 +79,7 @@ func (o *QuerySpansQuery) SetType(v QuerySpansQueryType) {
 }
 
 func (o QuerySpansQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *QuerySpansQuery) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableQuerySpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

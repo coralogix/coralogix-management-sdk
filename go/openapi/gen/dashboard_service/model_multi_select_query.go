@@ -22,10 +22,11 @@ var _ MappedNullable = &MultiSelectQuery{}
 
 // MultiSelectQuery Discriminated union specifying whether to query logs, metrics, or spans for variable values.
 type MultiSelectQuery struct {
-	LogsQuery *QueryLogsQuery `json:"logsQuery,omitempty"`
-	MetricsQuery *QueryMetricsQuery `json:"metricsQuery,omitempty"`
-	SpansQuery *QuerySpansQuery `json:"spansQuery,omitempty"`
-	AdditionalProperties map[string]interface{}
+	LogsQuery                         *QueryLogsQuery    `json:"logsQuery,omitempty"`
+	MetricsQuery                      *QueryMetricsQuery `json:"metricsQuery,omitempty"`
+	SpansQuery                        *QuerySpansQuery   `json:"spansQuery,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MultiSelectQuery MultiSelectQuery
@@ -144,7 +145,7 @@ func (o *MultiSelectQuery) SetSpansQuery(v QuerySpansQuery) {
 }
 
 func (o MultiSelectQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -217,6 +218,7 @@ func (o *MultiSelectQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "metricsQuery")
 		delete(additionalProperties, "spansQuery")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -257,4 +259,3 @@ func (v *NullableMultiSelectQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

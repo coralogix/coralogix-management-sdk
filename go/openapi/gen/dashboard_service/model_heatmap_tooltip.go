@@ -25,8 +25,9 @@ type HeatmapTooltip struct {
 	// Labels to display on the tooltip, should reference fields used in x-axis or y-axis
 	Labels []ObservationField `json:"labels,omitempty"`
 	// Custom template for the heatmap tooltip
-	MessageTemplate *string `json:"messageTemplate,omitempty"`
-	AdditionalProperties map[string]interface{}
+	MessageTemplate                   *string `json:"messageTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _HeatmapTooltip HeatmapTooltip
@@ -113,7 +114,7 @@ func (o *HeatmapTooltip) SetMessageTemplate(v string) {
 }
 
 func (o HeatmapTooltip) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *HeatmapTooltip) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "labels")
 		delete(additionalProperties, "messageTemplate")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableHeatmapTooltip) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

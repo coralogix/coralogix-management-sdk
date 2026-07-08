@@ -23,8 +23,9 @@ var _ MappedNullable = &PublicAgentSelectorRequest{}
 // PublicAgentSelectorRequest Agent selector used in requests.
 type PublicAgentSelectorRequest struct {
 	// Flat agent attributes to match. If collectorVersion is set, service.version must match it or is added automatically.
-	Attributes *map[string]string `json:"attributes,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Attributes                        *map[string]string `json:"attributes,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PublicAgentSelectorRequest PublicAgentSelectorRequest
@@ -79,7 +80,7 @@ func (o *PublicAgentSelectorRequest) SetAttributes(v map[string]string) {
 }
 
 func (o PublicAgentSelectorRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *PublicAgentSelectorRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "attributes")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullablePublicAgentSelectorRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

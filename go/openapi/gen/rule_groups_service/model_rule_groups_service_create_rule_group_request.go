@@ -37,9 +37,10 @@ type RuleGroupsServiceCreateRuleGroupRequest struct {
 	// The rule matchers.
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
 	// The rule subgroups.
-	RuleSubgroups []CreateRuleGroupRequestCreateRuleSubgroup `json:"ruleSubgroups,omitempty"`
-	TeamId *V1TeamId `json:"teamId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RuleSubgroups                     []CreateRuleGroupRequestCreateRuleSubgroup `json:"ruleSubgroups,omitempty"`
+	TeamId                            *V1TeamId                                  `json:"teamId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RuleGroupsServiceCreateRuleGroupRequest RuleGroupsServiceCreateRuleGroupRequest
@@ -350,7 +351,7 @@ func (o *RuleGroupsServiceCreateRuleGroupRequest) SetTeamId(v V1TeamId) {
 }
 
 func (o RuleGroupsServiceCreateRuleGroupRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -419,6 +420,7 @@ func (o *RuleGroupsServiceCreateRuleGroupRequest) UnmarshalJSON(data []byte) (er
 		delete(additionalProperties, "ruleSubgroups")
 		delete(additionalProperties, "teamId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -459,4 +461,3 @@ func (v *NullableRuleGroupsServiceCreateRuleGroupRequest) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

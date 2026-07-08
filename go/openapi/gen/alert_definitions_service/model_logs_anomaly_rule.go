@@ -22,8 +22,9 @@ var _ MappedNullable = &LogsAnomalyRule{}
 
 // LogsAnomalyRule Defines a rule for detecting log anomalies
 type LogsAnomalyRule struct {
-	Condition *LogsAnomalyCondition `json:"condition,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Condition                         *LogsAnomalyCondition `json:"condition,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogsAnomalyRule LogsAnomalyRule
@@ -78,7 +79,7 @@ func (o *LogsAnomalyRule) SetCondition(v LogsAnomalyCondition) {
 }
 
 func (o LogsAnomalyRule) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *LogsAnomalyRule) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "condition")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableLogsAnomalyRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

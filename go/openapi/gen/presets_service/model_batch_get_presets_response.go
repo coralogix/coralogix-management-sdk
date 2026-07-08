@@ -25,8 +25,9 @@ type BatchGetPresetsResponse struct {
 	// The not found ids.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	// List of permission presets.
-	Presets *map[string]Preset `json:"presets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Presets                           *map[string]Preset `json:"presets,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _BatchGetPresetsResponse BatchGetPresetsResponse
@@ -113,7 +114,7 @@ func (o *BatchGetPresetsResponse) SetPresets(v map[string]Preset) {
 }
 
 func (o BatchGetPresetsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *BatchGetPresetsResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "notFoundIds")
 		delete(additionalProperties, "presets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableBatchGetPresetsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

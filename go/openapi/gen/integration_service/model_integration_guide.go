@@ -25,8 +25,9 @@ type IntegrationGuide struct {
 	// The installation requirements.
 	InstallationRequirements *string `json:"installationRequirements,omitempty"`
 	// The introduction.
-	Introduction *string `json:"introduction,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Introduction                      *string `json:"introduction,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IntegrationGuide IntegrationGuide
@@ -113,7 +114,7 @@ func (o *IntegrationGuide) SetIntroduction(v string) {
 }
 
 func (o IntegrationGuide) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *IntegrationGuide) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "installationRequirements")
 		delete(additionalProperties, "introduction")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableIntegrationGuide) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

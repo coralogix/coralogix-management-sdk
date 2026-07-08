@@ -23,9 +23,10 @@ var _ MappedNullable = &MultiSelectSelection{}
 // MultiSelectSelection Discriminated union defining the current selection state: all values or a specific list of values.
 type MultiSelectSelection struct {
 	// All selection.
-	All map[string]interface{} `json:"all,omitempty"`
-	List *MultiSelectSelectionListSelection `json:"list,omitempty"`
-	AdditionalProperties map[string]interface{}
+	All                               map[string]interface{}             `json:"all,omitempty"`
+	List                              *MultiSelectSelectionListSelection `json:"list,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MultiSelectSelection MultiSelectSelection
@@ -112,7 +113,7 @@ func (o *MultiSelectSelection) SetList(v MultiSelectSelectionListSelection) {
 }
 
 func (o MultiSelectSelection) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -175,6 +176,7 @@ func (o *MultiSelectSelection) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "all")
 		delete(additionalProperties, "list")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -215,4 +217,3 @@ func (v *NullableMultiSelectSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

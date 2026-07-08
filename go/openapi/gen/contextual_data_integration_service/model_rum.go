@@ -25,8 +25,9 @@ type Rum struct {
 	// The browser sdk commands.
 	BrowserSdkCommands []CommandInformation `json:"browserSdkCommands,omitempty"`
 	// The source map commands.
-	SourceMapCommands []CommandInformation `json:"sourceMapCommands,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SourceMapCommands                 []CommandInformation `json:"sourceMapCommands,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Rum Rum
@@ -113,7 +114,7 @@ func (o *Rum) SetSourceMapCommands(v []CommandInformation) {
 }
 
 func (o Rum) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *Rum) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "browserSdkCommands")
 		delete(additionalProperties, "sourceMapCommands")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableRum) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

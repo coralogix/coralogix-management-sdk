@@ -25,15 +25,16 @@ type PropertyUnits struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
 	// Custom unit (requires to set unit field as 'custom' to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// A maximum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value
 	Max *float64 `json:"max,omitempty"`
 	// A minimum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value
-	Min *float64 `json:"min,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Min                               *float64    `json:"min,omitempty"`
+	Unit                              *CommonUnit `json:"unit,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PropertyUnits PropertyUnits
@@ -248,7 +249,7 @@ func (o *PropertyUnits) SetUnit(v CommonUnit) {
 }
 
 func (o PropertyUnits) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -305,6 +306,7 @@ func (o *PropertyUnits) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "min")
 		delete(additionalProperties, "unit")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -345,4 +347,3 @@ func (v *NullablePropertyUnits) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

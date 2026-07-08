@@ -24,7 +24,7 @@ type AlertDefOrderByDirection string
 // List of AlertDefOrderByDirection
 const (
 	ALERTDEFORDERBYDIRECTION_ALERT_DEF_ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED AlertDefOrderByDirection = "ALERT_DEF_ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED"
-	ALERTDEFORDERBYDIRECTION_ALERT_DEF_ORDER_BY_DIRECTION_DESC AlertDefOrderByDirection = "ALERT_DEF_ORDER_BY_DIRECTION_DESC"
+	ALERTDEFORDERBYDIRECTION_ALERT_DEF_ORDER_BY_DIRECTION_DESC               AlertDefOrderByDirection = "ALERT_DEF_ORDER_BY_DIRECTION_DESC"
 )
 
 // All allowed values of AlertDefOrderByDirection enum
@@ -111,4 +111,3 @@ func (v *NullableAlertDefOrderByDirection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

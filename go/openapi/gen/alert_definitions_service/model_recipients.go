@@ -23,8 +23,9 @@ var _ MappedNullable = &Recipients{}
 // Recipients List of email recipients for alert notifications
 type Recipients struct {
 	// The list of email recipients for alert notifications
-	Emails []string `json:"emails,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Emails                            []string `json:"emails,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Recipients Recipients
@@ -79,7 +80,7 @@ func (o *Recipients) SetEmails(v []string) {
 }
 
 func (o Recipients) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *Recipients) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "emails")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableRecipients) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

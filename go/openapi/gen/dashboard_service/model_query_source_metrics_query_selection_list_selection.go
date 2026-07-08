@@ -23,8 +23,9 @@ var _ MappedNullable = &QuerySourceMetricsQuerySelectionListSelection{}
 // QuerySourceMetricsQuerySelectionListSelection A list-based selection of string-or-variable values for metrics label filtering.
 type QuerySourceMetricsQuerySelectionListSelection struct {
 	// List of values.
-	Values []QuerySourceMetricsQueryStringOrVariable `json:"values,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Values                            []QuerySourceMetricsQueryStringOrVariable `json:"values,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QuerySourceMetricsQuerySelectionListSelection QuerySourceMetricsQuerySelectionListSelection
@@ -79,7 +80,7 @@ func (o *QuerySourceMetricsQuerySelectionListSelection) SetValues(v []QuerySourc
 }
 
 func (o QuerySourceMetricsQuerySelectionListSelection) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *QuerySourceMetricsQuerySelectionListSelection) UnmarshalJSON(data []byt
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableQuerySourceMetricsQuerySelectionListSelection) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

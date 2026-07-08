@@ -22,8 +22,9 @@ var _ MappedNullable = &CreateActionResponse{}
 
 // CreateActionResponse This data structure represents the response to create an Action.
 type CreateActionResponse struct {
-	Action *V2Action `json:"action,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Action                            *V2Action `json:"action,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateActionResponse CreateActionResponse
@@ -78,7 +79,7 @@ func (o *CreateActionResponse) SetAction(v V2Action) {
 }
 
 func (o CreateActionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *CreateActionResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "action")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableCreateActionResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

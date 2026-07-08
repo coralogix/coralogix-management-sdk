@@ -23,36 +23,37 @@ var _ MappedNullable = &TimeSeriesBars{}
 // TimeSeriesBars Time series bars.
 type TimeSeriesBars struct {
 	// Whether to render numeric value with abbreviation
-	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
-	BarValueDisplay *VisualizationBarValueDisplay `json:"barValueDisplay,omitempty"`
+	AllowAbbreviation *bool                         `json:"allowAbbreviation,omitempty"`
+	BarValueDisplay   *VisualizationBarValueDisplay `json:"barValueDisplay,omitempty"`
 	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme for this query, one of the predefined values
-	ColorScheme *string `json:"colorScheme,omitempty"`
+	ColorScheme *string `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// Whether to ignore color scheme and derive colors from algorithm
-	HashColors *bool `json:"hashColors,omitempty"`
-	Legend *Legend `json:"legend,omitempty"`
+	HashColors *bool   `json:"hashColors,omitempty"`
+	Legend     *Legend `json:"legend,omitempty"`
 	// How many slices can fit in a single bar
-	MaxSlicesPerBar *int32 `json:"maxSlicesPerBar,omitempty"`
-	ScaleType *ScaleType `json:"scaleType,omitempty"`
+	MaxSlicesPerBar *int32     `json:"maxSlicesPerBar,omitempty"`
+	ScaleType       *ScaleType `json:"scaleType,omitempty"`
 	// Custom template for the series name
-	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty"`
-	SortBy *SortByType `json:"sortBy,omitempty"`
-	TemporalField *ObservationField `json:"temporalField,omitempty"`
-	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
+	SeriesNameTemplate *string            `json:"seriesNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	SortBy             *SortByType        `json:"sortBy,omitempty"`
+	TemporalField      *ObservationField  `json:"temporalField,omitempty"`
+	Tooltip            *TimeSeriesTooltip `json:"tooltip,omitempty"`
+	Unit               *CommonUnit        `json:"unit,omitempty"`
 	// The value fields.
-	ValueFields []ObservationField `json:"valueFields,omitempty"`
-	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
+	ValueFields     []ObservationField `json:"valueFields,omitempty"`
+	XAxisTimeFormat *XAxisTimeFormat   `json:"xAxisTimeFormat,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
-	YAxisMin *float32 `json:"yAxisMin,omitempty"`
-	AdditionalProperties map[string]interface{}
+	YAxisMin                          *float32 `json:"yAxisMin,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TimeSeriesBars TimeSeriesBars
@@ -683,7 +684,7 @@ func (o *TimeSeriesBars) SetYAxisMin(v float32) {
 }
 
 func (o TimeSeriesBars) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -792,6 +793,7 @@ func (o *TimeSeriesBars) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "yAxisMax")
 		delete(additionalProperties, "yAxisMin")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -832,4 +834,3 @@ func (v *NullableTimeSeriesBars) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

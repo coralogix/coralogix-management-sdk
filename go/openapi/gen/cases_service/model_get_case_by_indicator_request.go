@@ -22,8 +22,9 @@ var _ MappedNullable = &GetCaseByIndicatorRequest{}
 
 // GetCaseByIndicatorRequest Request to retrieve a case associated with a given alert indicator.
 type GetCaseByIndicatorRequest struct {
-	PrometheusAlert *PrometheusAlertManagerIndicator `json:"prometheusAlert,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PrometheusAlert                   *PrometheusAlertManagerIndicator `json:"prometheusAlert,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetCaseByIndicatorRequest GetCaseByIndicatorRequest
@@ -78,7 +79,7 @@ func (o *GetCaseByIndicatorRequest) SetPrometheusAlert(v PrometheusAlertManagerI
 }
 
 func (o GetCaseByIndicatorRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *GetCaseByIndicatorRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "prometheusAlert")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableGetCaseByIndicatorRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

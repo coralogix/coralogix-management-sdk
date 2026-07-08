@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // FoldersForViewsServiceAPIService FoldersForViewsServiceAPI service
 type FoldersForViewsServiceAPIService service
 
 type ApiViewsFoldersServiceCreateViewFolderRequest struct {
-	ctx context.Context
-	ApiService *FoldersForViewsServiceAPIService
+	ctx                     context.Context
+	ApiService              *FoldersForViewsServiceAPIService
 	createViewFolderRequest *CreateViewFolderRequest
 }
 
@@ -43,24 +42,25 @@ ViewsFoldersServiceCreateViewFolder Create View Folder service
 
 Create view folder
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiViewsFoldersServiceCreateViewFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiViewsFoldersServiceCreateViewFolderRequest
 */
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceCreateViewFolder(ctx context.Context) ApiViewsFoldersServiceCreateViewFolderRequest {
 	return ApiViewsFoldersServiceCreateViewFolderRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ViewFolder
+//
+//	@return ViewFolder
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceCreateViewFolderExecute(r ApiViewsFoldersServiceCreateViewFolderRequest) (*ViewFolder, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ViewFolder
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ViewFolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FoldersForViewsServiceAPIService.ViewsFoldersServiceCreateViewFolder")
@@ -131,9 +131,9 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceCreateViewFolderEx
 }
 
 type ApiViewsFoldersServiceDeleteViewFolderRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *FoldersForViewsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiViewsFoldersServiceDeleteViewFolderRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -145,26 +145,27 @@ ViewsFoldersServiceDeleteViewFolder Delete View Folder service
 
 Deletes a view folder by ID
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier for folders
- @return ApiViewsFoldersServiceDeleteViewFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier for folders
+	@return ApiViewsFoldersServiceDeleteViewFolderRequest
 */
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceDeleteViewFolder(ctx context.Context, id string) ApiViewsFoldersServiceDeleteViewFolderRequest {
 	return ApiViewsFoldersServiceDeleteViewFolderRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceDeleteViewFolderExecute(r ApiViewsFoldersServiceDeleteViewFolderRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FoldersForViewsServiceAPIService.ViewsFoldersServiceDeleteViewFolder")
@@ -240,9 +241,9 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceDeleteViewFolderEx
 }
 
 type ApiViewsFoldersServiceGetViewFolderRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *FoldersForViewsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiViewsFoldersServiceGetViewFolderRequest) Execute() (*ViewFolder, *http.Response, error) {
@@ -254,26 +255,27 @@ ViewsFoldersServiceGetViewFolder Get View Folder service
 
 Create view folder
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier for folders
- @return ApiViewsFoldersServiceGetViewFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier for folders
+	@return ApiViewsFoldersServiceGetViewFolderRequest
 */
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceGetViewFolder(ctx context.Context, id string) ApiViewsFoldersServiceGetViewFolderRequest {
 	return ApiViewsFoldersServiceGetViewFolderRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return ViewFolder
+//
+//	@return ViewFolder
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceGetViewFolderExecute(r ApiViewsFoldersServiceGetViewFolderRequest) (*ViewFolder, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ViewFolder
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ViewFolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FoldersForViewsServiceAPIService.ViewsFoldersServiceGetViewFolder")
@@ -349,7 +351,7 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceGetViewFolderExecu
 }
 
 type ApiViewsFoldersServiceListViewFoldersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *FoldersForViewsServiceAPIService
 }
 
@@ -362,24 +364,25 @@ ViewsFoldersServiceListViewFolders List view folders service
 
 List view's folders
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiViewsFoldersServiceListViewFoldersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiViewsFoldersServiceListViewFoldersRequest
 */
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceListViewFolders(ctx context.Context) ApiViewsFoldersServiceListViewFoldersRequest {
 	return ApiViewsFoldersServiceListViewFoldersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListViewFoldersResponse
+//
+//	@return ListViewFoldersResponse
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceListViewFoldersExecute(r ApiViewsFoldersServiceListViewFoldersRequest) (*ListViewFoldersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListViewFoldersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListViewFoldersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FoldersForViewsServiceAPIService.ViewsFoldersServiceListViewFolders")
@@ -448,8 +451,8 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceListViewFoldersExe
 }
 
 type ApiViewsFoldersServiceReplaceViewFolderRequest struct {
-	ctx context.Context
-	ApiService *FoldersForViewsServiceAPIService
+	ctx         context.Context
+	ApiService  *FoldersForViewsServiceAPIService
 	viewFolder1 *ViewFolder1
 }
 
@@ -467,24 +470,25 @@ ViewsFoldersServiceReplaceViewFolder Replace View Folder service
 
 Replaces an existing view folder
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiViewsFoldersServiceReplaceViewFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiViewsFoldersServiceReplaceViewFolderRequest
 */
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceReplaceViewFolder(ctx context.Context) ApiViewsFoldersServiceReplaceViewFolderRequest {
 	return ApiViewsFoldersServiceReplaceViewFolderRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ViewFolder
+//
+//	@return ViewFolder
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceReplaceViewFolderExecute(r ApiViewsFoldersServiceReplaceViewFolderRequest) (*ViewFolder, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ViewFolder
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ViewFolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FoldersForViewsServiceAPIService.ViewsFoldersServiceReplaceViewFolder")

@@ -22,26 +22,27 @@ var _ MappedNullable = &IntegrationRevision{}
 
 // IntegrationRevision This data structure represents an integration revision.
 type IntegrationRevision struct {
-	AzureArmTemplate *AzureArmTemplate `json:"azureArmTemplate,omitempty"`
-	CloudFormation *CloudFormationTemplate `json:"cloudFormation,omitempty"`
+	AzureArmTemplate *AzureArmTemplate       `json:"azureArmTemplate,omitempty"`
+	CloudFormation   *CloudFormationTemplate `json:"cloudFormation,omitempty"`
 	// The feature flag.
 	FeatureFlag *string `json:"featureFlag,omitempty"`
 	// Configuration fields that users must fill in to deploy this integration revision.
 	Fields []FieldInformation `json:"fields,omitempty"`
 	// UI groups used to organize configuration fields into logical sections.
-	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
-	HelmChart *HelmChart `json:"helmChart,omitempty"`
+	Groups    []IntegrationRevisionGroup `json:"groups,omitempty"`
+	HelmChart *HelmChart                 `json:"helmChart,omitempty"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	// This data structure represents a managed service.
 	ManagedService map[string]interface{} `json:"managedService,omitempty"`
 	// Whether this revision supports automated deployment through the Coralogix platform.
-	RevisionDeploymentSupported *bool `json:"revisionDeploymentSupported,omitempty"`
-	Rum *Rum `json:"rum,omitempty"`
-	Terraform *Terraform `json:"terraform,omitempty"`
+	RevisionDeploymentSupported *bool      `json:"revisionDeploymentSupported,omitempty"`
+	Rum                         *Rum       `json:"rum,omitempty"`
+	Terraform                   *Terraform `json:"terraform,omitempty"`
 	// Markdown-formatted upgrade instructions shown when upgrading from a previous revision.
-	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpgradeInstructionsMd             *string `json:"upgradeInstructionsMd,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IntegrationRevision IntegrationRevision
@@ -448,7 +449,7 @@ func (o *IntegrationRevision) SetUpgradeInstructionsMd(v string) {
 }
 
 func (o IntegrationRevision) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -575,6 +576,7 @@ func (o *IntegrationRevision) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "terraform")
 		delete(additionalProperties, "upgradeInstructionsMd")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -615,4 +617,3 @@ func (v *NullableIntegrationRevision) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

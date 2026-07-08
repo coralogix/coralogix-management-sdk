@@ -22,9 +22,10 @@ var _ MappedNullable = &QuerySourceMetricsQueryOperator{}
 
 // QuerySourceMetricsQueryOperator Discriminated union of filter operators: equals or not equals.
 type QuerySourceMetricsQueryOperator struct {
-	Equals *QuerySourceMetricsQueryEquals `json:"equals,omitempty"`
-	NotEquals *QuerySourceMetricsQueryNotEquals `json:"notEquals,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Equals                            *QuerySourceMetricsQueryEquals    `json:"equals,omitempty"`
+	NotEquals                         *QuerySourceMetricsQueryNotEquals `json:"notEquals,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QuerySourceMetricsQueryOperator QuerySourceMetricsQueryOperator
@@ -111,7 +112,7 @@ func (o *QuerySourceMetricsQueryOperator) SetNotEquals(v QuerySourceMetricsQuery
 }
 
 func (o QuerySourceMetricsQueryOperator) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,6 +175,7 @@ func (o *QuerySourceMetricsQueryOperator) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "equals")
 		delete(additionalProperties, "notEquals")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -214,4 +216,3 @@ func (v *NullableQuerySourceMetricsQueryOperator) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

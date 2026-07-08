@@ -23,8 +23,9 @@ var _ MappedNullable = &ListPresetSummariesResponse{}
 // ListPresetSummariesResponse Response containing a list of notification preset summaries.
 type ListPresetSummariesResponse struct {
 	// The preset summaries.
-	PresetSummaries []PresetSummary `json:"presetSummaries,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PresetSummaries                   []PresetSummary `json:"presetSummaries,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListPresetSummariesResponse ListPresetSummariesResponse
@@ -79,7 +80,7 @@ func (o *ListPresetSummariesResponse) SetPresetSummaries(v []PresetSummary) {
 }
 
 func (o ListPresetSummariesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ListPresetSummariesResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "presetSummaries")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableListPresetSummariesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

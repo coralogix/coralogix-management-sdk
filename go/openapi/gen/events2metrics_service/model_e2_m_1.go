@@ -32,20 +32,21 @@ type E2M1 struct {
 	// Unique identifier for this E2M. Required on update requests.
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Indicates whether this E2M is for internal use only.
-	IsInternal *bool `json:"isInternal,omitempty"`
-	LogsQuery *V2LogsQuery `json:"logsQuery,omitempty"`
+	IsInternal *bool        `json:"isInternal,omitempty"`
+	LogsQuery  *V2LogsQuery `json:"logsQuery,omitempty"`
 	// Metric fields to extract and aggregate from the events.
 	MetricFields []V2MetricField `json:"metricFields,omitempty"`
 	// Metric labels to attach to the generated metrics.
 	MetricLabels []MetricLabel `json:"metricLabels,omitempty"`
 	// Human-readable name for this E2M.
-	Name string `json:"name"`
+	Name         string           `json:"name"`
 	Permutations *E2MPermutations `json:"permutations,omitempty"`
-	SpansQuery *V2SpansQuery `json:"spansQuery,omitempty"`
-	Type E2MType `json:"type"`
+	SpansQuery   *V2SpansQuery    `json:"spansQuery,omitempty"`
+	Type         E2MType          `json:"type"`
 	// RFC3339 timestamp of when this E2M was last updated.
-	UpdateTime *string `json:"updateTime,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpdateTime                        *string `json:"updateTime,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _E2M1 E2M1
@@ -470,7 +471,7 @@ func (o *E2M1) SetUpdateTime(v string) {
 }
 
 func (o E2M1) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -547,10 +548,10 @@ func (o *E2M1) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -606,6 +607,7 @@ func (o *E2M1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "updateTime")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -646,4 +648,3 @@ func (v *NullableE2M1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

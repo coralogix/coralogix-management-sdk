@@ -31,8 +31,9 @@ type PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGroupF
 	// Metadata stored with this configuration family.
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	// Remote configurations to use when creating or replacing family content.
-	RemoteConfigurations []interface{} `json:"remoteConfigurations,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RemoteConfigurations              []PublicReplaceRemoteConfigurationRequest `json:"remoteConfigurations,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGroupFamily PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGroupFamily
@@ -183,9 +184,9 @@ func (o *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGr
 }
 
 // GetRemoteConfigurations returns the RemoteConfigurations field value if set, zero value otherwise.
-func (o *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGroupFamily) GetRemoteConfigurations() []interface{} {
+func (o *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGroupFamily) GetRemoteConfigurations() []PublicReplaceRemoteConfigurationRequest {
 	if o == nil || IsNil(o.RemoteConfigurations) {
-		var ret []interface{}
+		var ret []PublicReplaceRemoteConfigurationRequest
 		return ret
 	}
 	return o.RemoteConfigurations
@@ -193,7 +194,7 @@ func (o *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGr
 
 // GetRemoteConfigurationsOk returns a tuple with the RemoteConfigurations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGroupFamily) GetRemoteConfigurationsOk() ([]interface{}, bool) {
+func (o *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGroupFamily) GetRemoteConfigurationsOk() ([]PublicReplaceRemoteConfigurationRequest, bool) {
 	if o == nil || IsNil(o.RemoteConfigurations) {
 		return nil, false
 	}
@@ -209,13 +210,13 @@ func (o *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGr
 	return false
 }
 
-// SetRemoteConfigurations gets a reference to the given []interface{} and assigns it to the RemoteConfigurations field.
-func (o *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGroupFamily) SetRemoteConfigurations(v []interface{}) {
+// SetRemoteConfigurations gets a reference to the given []PublicReplaceRemoteConfigurationRequest and assigns it to the RemoteConfigurations field.
+func (o *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGroupFamily) SetRemoteConfigurations(v []PublicReplaceRemoteConfigurationRequest) {
 	o.RemoteConfigurations = v
 }
 
 func (o PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGroupFamily) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,6 +269,7 @@ func (o *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequestGr
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "remoteConfigurations")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -308,4 +310,3 @@ func (v *NullablePublicConfigurationGroupServiceReplacePublicConfigurationGroupR
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

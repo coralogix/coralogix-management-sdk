@@ -26,8 +26,9 @@ type FilterGroup struct {
 	// Key of the filter group (e.g., service, environment)
 	Key string `json:"key" validate:"regexp=^[\\s\\S]*$"`
 	// Values associated with the filter group key
-	Values []string `json:"values"`
-	AdditionalProperties map[string]interface{}
+	Values                            []string `json:"values"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _FilterGroup FilterGroup
@@ -100,7 +101,7 @@ func (o *FilterGroup) SetValues(v []string) {
 }
 
 func (o FilterGroup) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,10 +134,10 @@ func (o *FilterGroup) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -159,6 +160,7 @@ func (o *FilterGroup) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "key")
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -199,4 +201,3 @@ func (v *NullableFilterGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

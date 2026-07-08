@@ -18,14 +18,13 @@ import (
 	"net/url"
 )
 
-
 // ConnectorSchemaServiceAPIService ConnectorSchemaServiceAPI service
 type ConnectorSchemaServiceAPIService service
 
 type ApiConnectorSchemaServiceGetConnectorSchemaRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ConnectorSchemaServiceAPIService
-	type_ *NotificationCenterConnectorType
+	type_      *NotificationCenterConnectorType
 }
 
 // Connector type whose schema to retrieve.
@@ -43,24 +42,25 @@ ConnectorSchemaServiceGetConnectorSchema Get Connector Schema
 
 Returns the schema definition for notification connectors.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiConnectorSchemaServiceGetConnectorSchemaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiConnectorSchemaServiceGetConnectorSchemaRequest
 */
 func (a *ConnectorSchemaServiceAPIService) ConnectorSchemaServiceGetConnectorSchema(ctx context.Context) ApiConnectorSchemaServiceGetConnectorSchemaRequest {
 	return ApiConnectorSchemaServiceGetConnectorSchemaRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetConnectorSchemaResponse
+//
+//	@return GetConnectorSchemaResponse
 func (a *ConnectorSchemaServiceAPIService) ConnectorSchemaServiceGetConnectorSchemaExecute(r ApiConnectorSchemaServiceGetConnectorSchemaRequest) (*GetConnectorSchemaResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetConnectorSchemaResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetConnectorSchemaResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorSchemaServiceAPIService.ConnectorSchemaServiceGetConnectorSchema")

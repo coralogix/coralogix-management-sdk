@@ -23,8 +23,9 @@ var _ MappedNullable = &ListAiEvaluationsResponse{}
 // ListAiEvaluationsResponse Response containing a page of AI evaluations.
 type ListAiEvaluationsResponse struct {
 	// The list of AI evaluations on this page.
-	AiEvaluations []AiEvaluation `json:"aiEvaluations,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AiEvaluations                     []AiEvaluation `json:"aiEvaluations,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListAiEvaluationsResponse ListAiEvaluationsResponse
@@ -79,7 +80,7 @@ func (o *ListAiEvaluationsResponse) SetAiEvaluations(v []AiEvaluation) {
 }
 
 func (o ListAiEvaluationsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ListAiEvaluationsResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "aiEvaluations")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableListAiEvaluationsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

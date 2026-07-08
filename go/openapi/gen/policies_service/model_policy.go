@@ -23,7 +23,7 @@ var _ MappedNullable = &Policy{}
 
 // Policy A policy is a set of rules that define the behavior of the Coralogix system for a specific company.
 type Policy struct {
-	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
+	ApplicationRule  *QuotaV1Rule      `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
 	// Internal Coralogix company/team identifier that owns this policy.
 	CompanyId int32 `json:"companyId"`
@@ -36,22 +36,23 @@ type Policy struct {
 	// Indicates whether the policy is actively evaluated and applied.
 	Enabled bool `json:"enabled"`
 	// Unique identifier for the policy.
-	Id string `json:"id"`
+	Id       string    `json:"id"`
 	LogRules *LogRules `json:"logRules,omitempty"`
 	// Human-readable name for the policy.
 	Name string `json:"name"`
 	// Ordering priority that determines the sequence in which policies are evaluated.
-	Order int32 `json:"order"`
-	Priority QuotaV1Priority `json:"priority"`
-	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
+	Order                  int32                   `json:"order"`
+	Priority               QuotaV1Priority         `json:"priority"`
+	PriorityOverride       *PriorityOverride       `json:"priorityOverride,omitempty"`
 	PriorityOverrideStatus *PriorityOverrideStatus `json:"priorityOverrideStatus,omitempty"`
-	SpanRules *SpanRules `json:"spanRules,omitempty"`
-	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	SpanRules              *SpanRules              `json:"spanRules,omitempty"`
+	SubsystemRule          *QuotaV1Rule            `json:"subsystemRule,omitempty"`
 	// List of data targets/destinations to which this policy routes data.
 	Targets []V1Target `json:"targets,omitempty"`
 	// Timestamp (RFC 3339) when the policy was last updated.
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpdatedAt                         *string `json:"updatedAt,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Policy Policy
@@ -601,7 +602,7 @@ func (o *Policy) SetUpdatedAt(v string) {
 }
 
 func (o Policy) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -688,10 +689,10 @@ func (o *Policy) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -752,6 +753,7 @@ func (o *Policy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "targets")
 		delete(additionalProperties, "updatedAt")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -792,4 +794,3 @@ func (v *NullablePolicy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

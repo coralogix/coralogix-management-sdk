@@ -23,9 +23,10 @@ var _ MappedNullable = &PriorityCount{}
 // PriorityCount Count for a specific alert priority
 type PriorityCount struct {
 	// The count for this alert priority
-	Count *int64 `json:"count,omitempty"`
-	Priority *AlertDefPriority `json:"priority,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Count                             *int64            `json:"count,omitempty"`
+	Priority                          *AlertDefPriority `json:"priority,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PriorityCount PriorityCount
@@ -112,7 +113,7 @@ func (o *PriorityCount) SetPriority(v AlertDefPriority) {
 }
 
 func (o PriorityCount) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *PriorityCount) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "count")
 		delete(additionalProperties, "priority")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullablePriorityCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

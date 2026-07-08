@@ -86,7 +86,9 @@
                   "requestId": {
                     "description": "Idempotency key for the replace folder request, used to prevent duplicate updates.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   }
                 }
               }
@@ -163,7 +165,9 @@
                   "requestId": {
                     "description": "The request id.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   }
                 }
               }
@@ -236,7 +240,9 @@
             "schema": {
               "description": "Optional client-supplied request identifier used to correlate the get folder request.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "form"
           }
@@ -305,7 +311,9 @@
             "schema": {
               "description": "Idempotency key for the delete folder request, used to prevent duplicate operations.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "form"
           }
@@ -365,7 +373,9 @@
           "schema": {
             "description": "The folder id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "style": "simple"
         }
@@ -386,7 +396,9 @@
           "folderId": {
             "description": "The folder id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         }
       },
@@ -398,19 +410,25 @@
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier.",
+            "description": "Unique identifier. A UUID.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           },
           "parentId": {
-            "description": "The parent id.",
+            "description": "The parent id. A UUID that must differ from this folder's own id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         }
       },
@@ -534,7 +552,8 @@
             "items": {
               "$ref": "#/components/schemas/DashboardFolder"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },

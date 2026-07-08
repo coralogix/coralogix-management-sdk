@@ -25,8 +25,9 @@ type HorizontalBarChartYAxisViewBy struct {
 	// Y axis view by category.
 	Category map[string]interface{} `json:"category,omitempty"`
 	// Y axis view by value.
-	Value map[string]interface{} `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Value                             map[string]interface{} `json:"value,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _HorizontalBarChartYAxisViewBy HorizontalBarChartYAxisViewBy
@@ -113,7 +114,7 @@ func (o *HorizontalBarChartYAxisViewBy) SetValue(v map[string]interface{}) {
 }
 
 func (o HorizontalBarChartYAxisViewBy) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -176,6 +177,7 @@ func (o *HorizontalBarChartYAxisViewBy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "category")
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -216,4 +218,3 @@ func (v *NullableHorizontalBarChartYAxisViewBy) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

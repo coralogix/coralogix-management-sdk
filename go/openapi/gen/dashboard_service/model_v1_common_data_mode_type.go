@@ -24,7 +24,7 @@ type V1CommonDataModeType string
 // List of v1.common.DataModeType
 const (
 	V1COMMONDATAMODETYPE_DATA_MODE_TYPE_HIGH_UNSPECIFIED V1CommonDataModeType = "DATA_MODE_TYPE_HIGH_UNSPECIFIED"
-	V1COMMONDATAMODETYPE_DATA_MODE_TYPE_ARCHIVE V1CommonDataModeType = "DATA_MODE_TYPE_ARCHIVE"
+	V1COMMONDATAMODETYPE_DATA_MODE_TYPE_ARCHIVE          V1CommonDataModeType = "DATA_MODE_TYPE_ARCHIVE"
 )
 
 // All allowed values of V1CommonDataModeType enum
@@ -111,4 +111,3 @@ func (v *NullableV1CommonDataModeType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

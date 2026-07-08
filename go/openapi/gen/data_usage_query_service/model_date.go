@@ -13,6 +13,7 @@ package data_usage_query_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,15 +21,16 @@ var _ = bytes.MinRead
 // checks if the Date type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Date{}
 
-// Date A whole or partial calendar date relative to the Gregorian calendar (year, month, day). A zero value in a field marks that part as unspecified.
+// Date A full calendar date (year, month, day). All three components are required.
 type Date struct {
-	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
-	Day *int32 `json:"day,omitempty"`
-	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
-	Month *int32 `json:"month,omitempty"`
-	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
-	Year *int32 `json:"year,omitempty"`
-	AdditionalProperties map[string]interface{}
+	// Day of the month. Must be from 1 to 31 and valid for the year and month.
+	Day int32 `json:"day"`
+	// Month of the year. Must be from 1 to 12.
+	Month int32 `json:"month"`
+	// Year of the date. Must be from 1 to 9999.
+	Year                              int32 `json:"year"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Date Date
@@ -37,8 +39,11 @@ type _Date Date
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDate() *Date {
+func NewDate(day int32, month int32, year int32) *Date {
 	this := Date{}
+	this.Day = day
+	this.Month = month
+	this.Year = year
 	return &this
 }
 
@@ -50,104 +55,80 @@ func NewDateWithDefaults() *Date {
 	return &this
 }
 
-// GetDay returns the Day field value if set, zero value otherwise.
+// GetDay returns the Day field value
 func (o *Date) GetDay() int32 {
-	if o == nil || IsNil(o.Day) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Day
+
+	return o.Day
 }
 
-// GetDayOk returns a tuple with the Day field value if set, nil otherwise
+// GetDayOk returns a tuple with the Day field value
 // and a boolean to check if the value has been set.
 func (o *Date) GetDayOk() (*int32, bool) {
-	if o == nil || IsNil(o.Day) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Day, true
+	return &o.Day, true
 }
 
-// HasDay returns a boolean if a field has been set.
-func (o *Date) HasDay() bool {
-	if o != nil && !IsNil(o.Day) {
-		return true
-	}
-
-	return false
-}
-
-// SetDay gets a reference to the given int32 and assigns it to the Day field.
+// SetDay sets field value
 func (o *Date) SetDay(v int32) {
-	o.Day = &v
+	o.Day = v
 }
 
-// GetMonth returns the Month field value if set, zero value otherwise.
+// GetMonth returns the Month field value
 func (o *Date) GetMonth() int32 {
-	if o == nil || IsNil(o.Month) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Month
+
+	return o.Month
 }
 
-// GetMonthOk returns a tuple with the Month field value if set, nil otherwise
+// GetMonthOk returns a tuple with the Month field value
 // and a boolean to check if the value has been set.
 func (o *Date) GetMonthOk() (*int32, bool) {
-	if o == nil || IsNil(o.Month) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Month, true
+	return &o.Month, true
 }
 
-// HasMonth returns a boolean if a field has been set.
-func (o *Date) HasMonth() bool {
-	if o != nil && !IsNil(o.Month) {
-		return true
-	}
-
-	return false
-}
-
-// SetMonth gets a reference to the given int32 and assigns it to the Month field.
+// SetMonth sets field value
 func (o *Date) SetMonth(v int32) {
-	o.Month = &v
+	o.Month = v
 }
 
-// GetYear returns the Year field value if set, zero value otherwise.
+// GetYear returns the Year field value
 func (o *Date) GetYear() int32 {
-	if o == nil || IsNil(o.Year) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Year
+
+	return o.Year
 }
 
-// GetYearOk returns a tuple with the Year field value if set, nil otherwise
+// GetYearOk returns a tuple with the Year field value
 // and a boolean to check if the value has been set.
 func (o *Date) GetYearOk() (*int32, bool) {
-	if o == nil || IsNil(o.Year) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Year, true
+	return &o.Year, true
 }
 
-// HasYear returns a boolean if a field has been set.
-func (o *Date) HasYear() bool {
-	if o != nil && !IsNil(o.Year) {
-		return true
-	}
-
-	return false
-}
-
-// SetYear gets a reference to the given int32 and assigns it to the Year field.
+// SetYear sets field value
 func (o *Date) SetYear(v int32) {
-	o.Year = &v
+	o.Year = v
 }
 
 func (o Date) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,15 +137,9 @@ func (o Date) MarshalJSON() ([]byte, error) {
 
 func (o Date) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Day) {
-		toSerialize["day"] = o.Day
-	}
-	if !IsNil(o.Month) {
-		toSerialize["month"] = o.Month
-	}
-	if !IsNil(o.Year) {
-		toSerialize["year"] = o.Year
-	}
+	toSerialize["day"] = o.Day
+	toSerialize["month"] = o.Month
+	toSerialize["year"] = o.Year
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -174,6 +149,29 @@ func (o Date) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Date) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"day",
+		"month",
+		"year",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varDate := _Date{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -192,6 +190,7 @@ func (o *Date) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "month")
 		delete(additionalProperties, "year")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +231,3 @@ func (v *NullableDate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

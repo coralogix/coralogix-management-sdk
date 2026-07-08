@@ -24,8 +24,8 @@ type PromQLQueryType string
 // List of PromQLQueryType
 const (
 	PROMQLQUERYTYPE_PROM_QL_QUERY_TYPE_UNSPECIFIED PromQLQueryType = "PROM_QL_QUERY_TYPE_UNSPECIFIED"
-	PROMQLQUERYTYPE_PROM_QL_QUERY_TYPE_RANGE PromQLQueryType = "PROM_QL_QUERY_TYPE_RANGE"
-	PROMQLQUERYTYPE_PROM_QL_QUERY_TYPE_INSTANT PromQLQueryType = "PROM_QL_QUERY_TYPE_INSTANT"
+	PROMQLQUERYTYPE_PROM_QL_QUERY_TYPE_RANGE       PromQLQueryType = "PROM_QL_QUERY_TYPE_RANGE"
+	PROMQLQUERYTYPE_PROM_QL_QUERY_TYPE_INSTANT     PromQLQueryType = "PROM_QL_QUERY_TYPE_INSTANT"
 )
 
 // All allowed values of PromQLQueryType enum
@@ -113,4 +113,3 @@ func (v *NullablePromQLQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

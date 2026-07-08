@@ -23,9 +23,10 @@ var _ MappedNullable = &NoDataPolicy{}
 // NoDataPolicy No data policy.
 type NoDataPolicy struct {
 	// The timeframe in seconds for auto retiring values that were detected as no-data. accepts only multiples of 60 seconds
-	AutoRetireSeconds *int32 `json:"autoRetireSeconds,omitempty"`
-	State *NoDataPolicyState `json:"state,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AutoRetireSeconds                 *int32             `json:"autoRetireSeconds,omitempty"`
+	State                             *NoDataPolicyState `json:"state,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _NoDataPolicy NoDataPolicy
@@ -112,7 +113,7 @@ func (o *NoDataPolicy) SetState(v NoDataPolicyState) {
 }
 
 func (o NoDataPolicy) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *NoDataPolicy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "autoRetireSeconds")
 		delete(additionalProperties, "state")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableNoDataPolicy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

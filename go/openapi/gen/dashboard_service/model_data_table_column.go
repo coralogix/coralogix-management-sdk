@@ -23,10 +23,11 @@ var _ MappedNullable = &DataTableColumn{}
 // DataTableColumn struct for DataTableColumn
 type DataTableColumn struct {
 	// Name of the field to display in the column
-	Field *string `json:"field,omitempty"`
+	Field *string `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Custom width of the column, by default it's automatically adjusted
-	Width *int32 `json:"width,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Width                             *int32 `json:"width,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DataTableColumn DataTableColumn
@@ -113,7 +114,7 @@ func (o *DataTableColumn) SetWidth(v int32) {
 }
 
 func (o DataTableColumn) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *DataTableColumn) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "field")
 		delete(additionalProperties, "width")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableDataTableColumn) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

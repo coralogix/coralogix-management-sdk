@@ -22,8 +22,9 @@ var _ MappedNullable = &TestExistingConnectorResponse{}
 
 // TestExistingConnectorResponse Response containing the results of testing an existing connector.
 type TestExistingConnectorResponse struct {
-	Result *TestResult `json:"result,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Result                            *TestResult `json:"result,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestExistingConnectorResponse TestExistingConnectorResponse
@@ -78,7 +79,7 @@ func (o *TestExistingConnectorResponse) SetResult(v TestResult) {
 }
 
 func (o TestExistingConnectorResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *TestExistingConnectorResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "result")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableTestExistingConnectorResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

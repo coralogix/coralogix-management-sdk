@@ -27,8 +27,9 @@ type TestOutgoingWebhookResponseFailure struct {
 	// The error message.
 	ErrorMessage *string `json:"errorMessage,omitempty"`
 	// The status code.
-	StatusCode *int64 `json:"statusCode,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StatusCode                        *int64 `json:"statusCode,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestOutgoingWebhookResponseFailure TestOutgoingWebhookResponseFailure
@@ -147,7 +148,7 @@ func (o *TestOutgoingWebhookResponseFailure) SetStatusCode(v int64) {
 }
 
 func (o TestOutgoingWebhookResponseFailure) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *TestOutgoingWebhookResponseFailure) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "errorMessage")
 		delete(additionalProperties, "statusCode")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableTestOutgoingWebhookResponseFailure) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

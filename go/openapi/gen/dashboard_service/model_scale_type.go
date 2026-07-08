@@ -24,7 +24,7 @@ type ScaleType string
 // List of ScaleType
 const (
 	SCALETYPE_SCALE_TYPE_UNSPECIFIED ScaleType = "SCALE_TYPE_UNSPECIFIED"
-	SCALETYPE_SCALE_TYPE_LINEAR ScaleType = "SCALE_TYPE_LINEAR"
+	SCALETYPE_SCALE_TYPE_LINEAR      ScaleType = "SCALE_TYPE_LINEAR"
 	SCALETYPE_SCALE_TYPE_LOGARITHMIC ScaleType = "SCALE_TYPE_LOGARITHMIC"
 )
 
@@ -113,4 +113,3 @@ func (v *NullableScaleType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

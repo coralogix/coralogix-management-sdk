@@ -28,20 +28,20 @@ type IncidentQueryFilter struct {
 	// Filter by assignee
 	Assignee []string `json:"assignee,omitempty"`
 	// Filter by contextual labels
-	ContextualLabels map[string]interface{} `json:"contextualLabels,omitempty"`
-	CreatedAtRange interface{} `json:"createdAtRange,omitempty"`
+	ContextualLabels *map[string]ContextualLabelValues `json:"contextualLabels,omitempty"`
+	CreatedAtRange   *V1TimeRange                      `json:"createdAtRange,omitempty"`
 	// Filter by display labels
-	DisplayLabels map[string]interface{} `json:"displayLabels,omitempty"`
+	DisplayLabels *map[string]DisplayLabelValues `json:"displayLabels,omitempty"`
 	// Filters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)
 	// Deprecated
-	EndTime *time.Time `json:"endTime,omitempty"`
-	IncidentDurationRange interface{} `json:"incidentDurationRange,omitempty"`
+	EndTime               *time.Time   `json:"endTime,omitempty"`
+	IncidentDurationRange *V1TimeRange `json:"incidentDurationRange,omitempty"`
 	// Indicates if the incident is muted
 	IsMuted *bool `json:"isMuted,omitempty"`
 	// Filters all incidents with the given meta labels
-	MetaLabels []interface{} `json:"metaLabels,omitempty"`
-	MetaLabelsOp *V1FilterOperator `json:"metaLabelsOp,omitempty"`
-	SearchQuery *IncidentSearchQuery `json:"searchQuery,omitempty"`
+	MetaLabels   []IncidentsV1MetaLabel `json:"metaLabels,omitempty"`
+	MetaLabelsOp *V1FilterOperator      `json:"metaLabelsOp,omitempty"`
+	SearchQuery  *IncidentSearchQuery   `json:"searchQuery,omitempty"`
 	// Filter by incident severity
 	Severity []IncidentSeverity `json:"severity,omitempty"`
 	// Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)
@@ -52,8 +52,9 @@ type IncidentQueryFilter struct {
 	// Filter by incident status
 	Status []IncidentStatus `json:"status,omitempty"`
 	// Filter by subsystem names
-	SubsystemName []string `json:"subsystemName,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SubsystemName                     []string `json:"subsystemName,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentQueryFilter IncidentQueryFilter
@@ -140,19 +141,19 @@ func (o *IncidentQueryFilter) SetAssignee(v []string) {
 }
 
 // GetContextualLabels returns the ContextualLabels field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetContextualLabels() map[string]interface{} {
+func (o *IncidentQueryFilter) GetContextualLabels() map[string]ContextualLabelValues {
 	if o == nil || IsNil(o.ContextualLabels) {
-		var ret map[string]interface{}
+		var ret map[string]ContextualLabelValues
 		return ret
 	}
-	return o.ContextualLabels
+	return *o.ContextualLabels
 }
 
 // GetContextualLabelsOk returns a tuple with the ContextualLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetContextualLabelsOk() (map[string]interface{}, bool) {
+func (o *IncidentQueryFilter) GetContextualLabelsOk() (*map[string]ContextualLabelValues, bool) {
 	if o == nil || IsNil(o.ContextualLabels) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.ContextualLabels, true
 }
@@ -166,28 +167,27 @@ func (o *IncidentQueryFilter) HasContextualLabels() bool {
 	return false
 }
 
-// SetContextualLabels gets a reference to the given map[string]interface{} and assigns it to the ContextualLabels field.
-func (o *IncidentQueryFilter) SetContextualLabels(v map[string]interface{}) {
-	o.ContextualLabels = v
+// SetContextualLabels gets a reference to the given map[string]ContextualLabelValues and assigns it to the ContextualLabels field.
+func (o *IncidentQueryFilter) SetContextualLabels(v map[string]ContextualLabelValues) {
+	o.ContextualLabels = &v
 }
 
-// GetCreatedAtRange returns the CreatedAtRange field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IncidentQueryFilter) GetCreatedAtRange() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetCreatedAtRange returns the CreatedAtRange field value if set, zero value otherwise.
+func (o *IncidentQueryFilter) GetCreatedAtRange() V1TimeRange {
+	if o == nil || IsNil(o.CreatedAtRange) {
+		var ret V1TimeRange
 		return ret
 	}
-	return o.CreatedAtRange
+	return *o.CreatedAtRange
 }
 
 // GetCreatedAtRangeOk returns a tuple with the CreatedAtRange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IncidentQueryFilter) GetCreatedAtRangeOk() (*interface{}, bool) {
+func (o *IncidentQueryFilter) GetCreatedAtRangeOk() (*V1TimeRange, bool) {
 	if o == nil || IsNil(o.CreatedAtRange) {
 		return nil, false
 	}
-	return &o.CreatedAtRange, true
+	return o.CreatedAtRange, true
 }
 
 // HasCreatedAtRange returns a boolean if a field has been set.
@@ -199,25 +199,25 @@ func (o *IncidentQueryFilter) HasCreatedAtRange() bool {
 	return false
 }
 
-// SetCreatedAtRange gets a reference to the given interface{} and assigns it to the CreatedAtRange field.
-func (o *IncidentQueryFilter) SetCreatedAtRange(v interface{}) {
-	o.CreatedAtRange = v
+// SetCreatedAtRange gets a reference to the given V1TimeRange and assigns it to the CreatedAtRange field.
+func (o *IncidentQueryFilter) SetCreatedAtRange(v V1TimeRange) {
+	o.CreatedAtRange = &v
 }
 
 // GetDisplayLabels returns the DisplayLabels field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetDisplayLabels() map[string]interface{} {
+func (o *IncidentQueryFilter) GetDisplayLabels() map[string]DisplayLabelValues {
 	if o == nil || IsNil(o.DisplayLabels) {
-		var ret map[string]interface{}
+		var ret map[string]DisplayLabelValues
 		return ret
 	}
-	return o.DisplayLabels
+	return *o.DisplayLabels
 }
 
 // GetDisplayLabelsOk returns a tuple with the DisplayLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetDisplayLabelsOk() (map[string]interface{}, bool) {
+func (o *IncidentQueryFilter) GetDisplayLabelsOk() (*map[string]DisplayLabelValues, bool) {
 	if o == nil || IsNil(o.DisplayLabels) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.DisplayLabels, true
 }
@@ -231,9 +231,9 @@ func (o *IncidentQueryFilter) HasDisplayLabels() bool {
 	return false
 }
 
-// SetDisplayLabels gets a reference to the given map[string]interface{} and assigns it to the DisplayLabels field.
-func (o *IncidentQueryFilter) SetDisplayLabels(v map[string]interface{}) {
-	o.DisplayLabels = v
+// SetDisplayLabels gets a reference to the given map[string]DisplayLabelValues and assigns it to the DisplayLabels field.
+func (o *IncidentQueryFilter) SetDisplayLabels(v map[string]DisplayLabelValues) {
+	o.DisplayLabels = &v
 }
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.
@@ -271,23 +271,22 @@ func (o *IncidentQueryFilter) SetEndTime(v time.Time) {
 	o.EndTime = &v
 }
 
-// GetIncidentDurationRange returns the IncidentDurationRange field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IncidentQueryFilter) GetIncidentDurationRange() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetIncidentDurationRange returns the IncidentDurationRange field value if set, zero value otherwise.
+func (o *IncidentQueryFilter) GetIncidentDurationRange() V1TimeRange {
+	if o == nil || IsNil(o.IncidentDurationRange) {
+		var ret V1TimeRange
 		return ret
 	}
-	return o.IncidentDurationRange
+	return *o.IncidentDurationRange
 }
 
 // GetIncidentDurationRangeOk returns a tuple with the IncidentDurationRange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IncidentQueryFilter) GetIncidentDurationRangeOk() (*interface{}, bool) {
+func (o *IncidentQueryFilter) GetIncidentDurationRangeOk() (*V1TimeRange, bool) {
 	if o == nil || IsNil(o.IncidentDurationRange) {
 		return nil, false
 	}
-	return &o.IncidentDurationRange, true
+	return o.IncidentDurationRange, true
 }
 
 // HasIncidentDurationRange returns a boolean if a field has been set.
@@ -299,9 +298,9 @@ func (o *IncidentQueryFilter) HasIncidentDurationRange() bool {
 	return false
 }
 
-// SetIncidentDurationRange gets a reference to the given interface{} and assigns it to the IncidentDurationRange field.
-func (o *IncidentQueryFilter) SetIncidentDurationRange(v interface{}) {
-	o.IncidentDurationRange = v
+// SetIncidentDurationRange gets a reference to the given V1TimeRange and assigns it to the IncidentDurationRange field.
+func (o *IncidentQueryFilter) SetIncidentDurationRange(v V1TimeRange) {
+	o.IncidentDurationRange = &v
 }
 
 // GetIsMuted returns the IsMuted field value if set, zero value otherwise.
@@ -337,9 +336,9 @@ func (o *IncidentQueryFilter) SetIsMuted(v bool) {
 }
 
 // GetMetaLabels returns the MetaLabels field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetMetaLabels() []interface{} {
+func (o *IncidentQueryFilter) GetMetaLabels() []IncidentsV1MetaLabel {
 	if o == nil || IsNil(o.MetaLabels) {
-		var ret []interface{}
+		var ret []IncidentsV1MetaLabel
 		return ret
 	}
 	return o.MetaLabels
@@ -347,7 +346,7 @@ func (o *IncidentQueryFilter) GetMetaLabels() []interface{} {
 
 // GetMetaLabelsOk returns a tuple with the MetaLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetMetaLabelsOk() ([]interface{}, bool) {
+func (o *IncidentQueryFilter) GetMetaLabelsOk() ([]IncidentsV1MetaLabel, bool) {
 	if o == nil || IsNil(o.MetaLabels) {
 		return nil, false
 	}
@@ -363,8 +362,8 @@ func (o *IncidentQueryFilter) HasMetaLabels() bool {
 	return false
 }
 
-// SetMetaLabels gets a reference to the given []interface{} and assigns it to the MetaLabels field.
-func (o *IncidentQueryFilter) SetMetaLabels(v []interface{}) {
+// SetMetaLabels gets a reference to the given []IncidentsV1MetaLabel and assigns it to the MetaLabels field.
+func (o *IncidentQueryFilter) SetMetaLabels(v []IncidentsV1MetaLabel) {
 	o.MetaLabels = v
 }
 
@@ -596,7 +595,7 @@ func (o *IncidentQueryFilter) SetSubsystemName(v []string) {
 }
 
 func (o IncidentQueryFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -614,7 +613,7 @@ func (o IncidentQueryFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ContextualLabels) {
 		toSerialize["contextualLabels"] = o.ContextualLabels
 	}
-	if o.CreatedAtRange != nil {
+	if !IsNil(o.CreatedAtRange) {
 		toSerialize["createdAtRange"] = o.CreatedAtRange
 	}
 	if !IsNil(o.DisplayLabels) {
@@ -623,7 +622,7 @@ func (o IncidentQueryFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EndTime) {
 		toSerialize["endTime"] = o.EndTime
 	}
-	if o.IncidentDurationRange != nil {
+	if !IsNil(o.IncidentDurationRange) {
 		toSerialize["incidentDurationRange"] = o.IncidentDurationRange
 	}
 	if !IsNil(o.IsMuted) {
@@ -693,6 +692,7 @@ func (o *IncidentQueryFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "subsystemName")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -733,4 +733,3 @@ func (v *NullableIncidentQueryFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

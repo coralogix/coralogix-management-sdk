@@ -22,11 +22,12 @@ var _ MappedNullable = &HexagonQuery{}
 
 // HexagonQuery Discriminated union of possible query types for the hexagon widget.
 type HexagonQuery struct {
-	Dataprime *HexagonDataprimeQuery `json:"dataprime,omitempty"`
-	Logs *HexagonLogsQuery `json:"logs,omitempty"`
-	Metrics *HexagonMetricsQuery `json:"metrics,omitempty"`
-	Spans *HexagonSpansQuery `json:"spans,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Dataprime                         *HexagonDataprimeQuery `json:"dataprime,omitempty"`
+	Logs                              *HexagonLogsQuery      `json:"logs,omitempty"`
+	Metrics                           *HexagonMetricsQuery   `json:"metrics,omitempty"`
+	Spans                             *HexagonSpansQuery     `json:"spans,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _HexagonQuery HexagonQuery
@@ -177,7 +178,7 @@ func (o *HexagonQuery) SetSpans(v HexagonSpansQuery) {
 }
 
 func (o HexagonQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -260,6 +261,7 @@ func (o *HexagonQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "metrics")
 		delete(additionalProperties, "spans")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -300,4 +302,3 @@ func (v *NullableHexagonQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

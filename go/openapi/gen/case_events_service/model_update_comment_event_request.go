@@ -26,8 +26,9 @@ type UpdateCommentEventRequest struct {
 	// Attachments to the comment
 	Attachments []CommentAttachment `json:"attachments,omitempty"`
 	// Comment text to update
-	Text string `json:"text"`
-	AdditionalProperties map[string]interface{}
+	Text                              string `json:"text"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UpdateCommentEventRequest UpdateCommentEventRequest
@@ -107,7 +108,7 @@ func (o *UpdateCommentEventRequest) SetText(v string) {
 }
 
 func (o UpdateCommentEventRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,10 +142,10 @@ func (o *UpdateCommentEventRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -167,6 +168,7 @@ func (o *UpdateCommentEventRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "attachments")
 		delete(additionalProperties, "text")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -207,4 +209,3 @@ func (v *NullableUpdateCommentEventRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

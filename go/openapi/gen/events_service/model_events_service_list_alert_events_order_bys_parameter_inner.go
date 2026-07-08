@@ -22,9 +22,10 @@ var _ MappedNullable = &EventsServiceListAlertEventsOrderBysParameterInner{}
 
 // EventsServiceListAlertEventsOrderBysParameterInner struct for EventsServiceListAlertEventsOrderBysParameterInner
 type EventsServiceListAlertEventsOrderBysParameterInner struct {
-	Direction *EventsV3OrderByDirection `json:"direction,omitempty"`
-	FieldName *EventsV3OrderByFields `json:"fieldName,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Direction                         *EventsV3OrderByDirection `json:"direction,omitempty"`
+	FieldName                         *EventsV3OrderByFields    `json:"fieldName,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _EventsServiceListAlertEventsOrderBysParameterInner EventsServiceListAlertEventsOrderBysParameterInner
@@ -111,7 +112,7 @@ func (o *EventsServiceListAlertEventsOrderBysParameterInner) SetFieldName(v Even
 }
 
 func (o EventsServiceListAlertEventsOrderBysParameterInner) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *EventsServiceListAlertEventsOrderBysParameterInner) UnmarshalJSON(data 
 		delete(additionalProperties, "direction")
 		delete(additionalProperties, "fieldName")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableEventsServiceListAlertEventsOrderBysParameterInner) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

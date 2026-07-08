@@ -28,9 +28,10 @@ type BarChartDataprimeQuery struct {
 	// List of field names by which results are grouped
 	GroupNames []string `json:"groupNames,omitempty"`
 	// Field name by which results in groups are divided into subgroups
-	StackedGroupName *string `json:"stackedGroupName,omitempty"`
-	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StackedGroupName                  *string          `json:"stackedGroupName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	TimeFrame                         *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _BarChartDataprimeQuery BarChartDataprimeQuery
@@ -213,7 +214,7 @@ func (o *BarChartDataprimeQuery) SetTimeFrame(v TimeFrameSelect) {
 }
 
 func (o BarChartDataprimeQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,6 +267,7 @@ func (o *BarChartDataprimeQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "stackedGroupName")
 		delete(additionalProperties, "timeFrame")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -306,4 +308,3 @@ func (v *NullableBarChartDataprimeQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

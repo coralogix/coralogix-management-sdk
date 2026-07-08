@@ -24,12 +24,13 @@ var _ MappedNullable = &LinkAction{}
 type LinkAction struct {
 	Id *UUID `json:"id,omitempty"`
 	// Name of the link action
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Defines if the link action should open in a new window or current window in the browser
 	ShouldOpenInNewWindow *bool `json:"shouldOpenInNewWindow,omitempty"`
 	// Static URL that may contain variables using {{variable_name}} syntax
-	Url *string `json:"url,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Url                               *string `json:"url,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LinkAction LinkAction
@@ -180,7 +181,7 @@ func (o *LinkAction) SetUrl(v string) {
 }
 
 func (o LinkAction) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -229,6 +230,7 @@ func (o *LinkAction) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "shouldOpenInNewWindow")
 		delete(additionalProperties, "url")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -269,4 +271,3 @@ func (v *NullableLinkAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

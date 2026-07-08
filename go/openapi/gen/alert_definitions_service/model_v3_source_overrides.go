@@ -27,8 +27,9 @@ type V3SourceOverrides struct {
 	// Notification message configuration fields
 	MessageConfigFields []V3MessageConfigField `json:"messageConfigFields,omitempty"`
 	// the payload type for the notification
-	PayloadType *string `json:"payloadType,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PayloadType                       *string `json:"payloadType,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V3SourceOverrides V3SourceOverrides
@@ -147,7 +148,7 @@ func (o *V3SourceOverrides) SetPayloadType(v string) {
 }
 
 func (o V3SourceOverrides) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *V3SourceOverrides) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "messageConfigFields")
 		delete(additionalProperties, "payloadType")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableV3SourceOverrides) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

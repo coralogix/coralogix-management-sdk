@@ -25,23 +25,24 @@ var _ MappedNullable = &Preset{}
 type Preset struct {
 	AttachmentConfig *AttachmentConfig `json:"attachmentConfig,omitempty"`
 	// The config overrides.
-	ConfigOverrides []ConfigOverrides `json:"configOverrides,omitempty"`
-	ConnectorType *NotificationCenterConnectorType `json:"connectorType,omitempty"`
+	ConfigOverrides []ConfigOverrides                `json:"configOverrides,omitempty"`
+	ConnectorType   *NotificationCenterConnectorType `json:"connectorType,omitempty"`
 	// The create time.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	Description *string                       `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	EntityType  *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The parent id.
-	ParentId *string `json:"parentId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
+	ParentId   *string     `json:"parentId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	PresetType *PresetType `json:"presetType,omitempty"`
 	// Timestamp of the last update.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpdateTime                        *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Preset Preset
@@ -416,7 +417,7 @@ func (o *Preset) SetUpdateTime(v time.Time) {
 }
 
 func (o Preset) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -493,6 +494,7 @@ func (o *Preset) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "presetType")
 		delete(additionalProperties, "updateTime")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -533,4 +535,3 @@ func (v *NullablePreset) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

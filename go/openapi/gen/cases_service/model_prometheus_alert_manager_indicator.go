@@ -13,8 +13,8 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"time"
 	"fmt"
+	"time"
 )
 
 var _ = bytes.MinRead
@@ -27,8 +27,9 @@ type PrometheusAlertManagerIndicator struct {
 	// Prometheus alert fingerprint — the stable, label-derived hash that identifies this alert across firings.
 	Fingerprint string `json:"fingerprint" validate:"regexp=^[\\s\\S]*$"`
 	// ISO-8601 timestamp of when the alert episode began (the `startsAt` field from Prometheus AlertManager).
-	StartedAt time.Time `json:"startedAt"`
-	AdditionalProperties map[string]interface{}
+	StartedAt                         time.Time `json:"startedAt"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PrometheusAlertManagerIndicator PrometheusAlertManagerIndicator
@@ -101,7 +102,7 @@ func (o *PrometheusAlertManagerIndicator) SetStartedAt(v time.Time) {
 }
 
 func (o PrometheusAlertManagerIndicator) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -134,10 +135,10 @@ func (o *PrometheusAlertManagerIndicator) UnmarshalJSON(data []byte) (err error)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -160,6 +161,7 @@ func (o *PrometheusAlertManagerIndicator) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "fingerprint")
 		delete(additionalProperties, "startedAt")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -200,4 +202,3 @@ func (v *NullablePrometheusAlertManagerIndicator) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

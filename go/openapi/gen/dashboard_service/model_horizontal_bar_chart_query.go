@@ -22,11 +22,12 @@ var _ MappedNullable = &HorizontalBarChartQuery{}
 
 // HorizontalBarChartQuery Query.
 type HorizontalBarChartQuery struct {
-	Dataprime *HorizontalBarChartDataprimeQuery `json:"dataprime,omitempty"`
-	Logs *HorizontalBarChartLogsQuery `json:"logs,omitempty"`
-	Metrics *HorizontalBarChartMetricsQuery `json:"metrics,omitempty"`
-	Spans *HorizontalBarChartSpansQuery `json:"spans,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Dataprime                         *HorizontalBarChartDataprimeQuery `json:"dataprime,omitempty"`
+	Logs                              *HorizontalBarChartLogsQuery      `json:"logs,omitempty"`
+	Metrics                           *HorizontalBarChartMetricsQuery   `json:"metrics,omitempty"`
+	Spans                             *HorizontalBarChartSpansQuery     `json:"spans,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _HorizontalBarChartQuery HorizontalBarChartQuery
@@ -177,7 +178,7 @@ func (o *HorizontalBarChartQuery) SetSpans(v HorizontalBarChartSpansQuery) {
 }
 
 func (o HorizontalBarChartQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -260,6 +261,7 @@ func (o *HorizontalBarChartQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "metrics")
 		delete(additionalProperties, "spans")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -300,4 +302,3 @@ func (v *NullableHorizontalBarChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

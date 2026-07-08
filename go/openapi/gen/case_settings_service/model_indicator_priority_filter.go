@@ -23,9 +23,10 @@ var _ MappedNullable = &IndicatorPriorityFilter{}
 // IndicatorPriorityFilter Select all priorities or a specific list of IndicatorPriority values.
 type IndicatorPriorityFilter struct {
 	// Represents selection of all items in the filter
-	All map[string]interface{} `json:"all,omitempty"`
-	Values *IndicatorPriorityFilterValues `json:"values,omitempty"`
-	AdditionalProperties map[string]interface{}
+	All                               map[string]interface{}         `json:"all,omitempty"`
+	Values                            *IndicatorPriorityFilterValues `json:"values,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IndicatorPriorityFilter IndicatorPriorityFilter
@@ -112,7 +113,7 @@ func (o *IndicatorPriorityFilter) SetValues(v IndicatorPriorityFilterValues) {
 }
 
 func (o IndicatorPriorityFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -175,6 +176,7 @@ func (o *IndicatorPriorityFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "all")
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -215,4 +217,3 @@ func (v *NullableIndicatorPriorityFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

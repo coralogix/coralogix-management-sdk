@@ -27,8 +27,9 @@ type Counts struct {
 	// The parsing themes.
 	ParsingThemes *int32 `json:"parsingThemes,omitempty"`
 	// List of rules.
-	Rules *int32 `json:"rules,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Rules                             *int32 `json:"rules,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Counts Counts
@@ -147,7 +148,7 @@ func (o *Counts) SetRules(v int32) {
 }
 
 func (o Counts) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *Counts) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "parsingThemes")
 		delete(additionalProperties, "rules")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableCounts) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

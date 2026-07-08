@@ -29,8 +29,9 @@ type RoutingTarget struct {
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The preset id.
-	PresetId *string `json:"presetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
-	AdditionalProperties map[string]interface{}
+	PresetId                          *string `json:"presetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RoutingTarget RoutingTarget
@@ -181,7 +182,7 @@ func (o *RoutingTarget) SetPresetId(v string) {
 }
 
 func (o RoutingTarget) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,6 +231,7 @@ func (o *RoutingTarget) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "presetId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -270,4 +272,3 @@ func (v *NullableRoutingTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

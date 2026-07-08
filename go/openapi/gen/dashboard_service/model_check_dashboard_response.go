@@ -23,8 +23,9 @@ var _ MappedNullable = &CheckDashboardResponse{}
 // CheckDashboardResponse Validation result containing a list of issues found in the dashboard
 type CheckDashboardResponse struct {
 	// List of validation issues; empty when the dashboard is valid
-	Issues []Issue `json:"issues,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Issues                            []Issue `json:"issues,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CheckDashboardResponse CheckDashboardResponse
@@ -79,7 +80,7 @@ func (o *CheckDashboardResponse) SetIssues(v []Issue) {
 }
 
 func (o CheckDashboardResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *CheckDashboardResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "issues")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableCheckDashboardResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

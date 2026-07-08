@@ -7,10 +7,12 @@ api_entities_service.go
 client.go
 configuration.go
 git_push.sh
+model_entity_type_attachment_type.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go
 model_filters.go
 model_list_entity_sub_types_response.go
+model_list_entity_type_attachment_types_response.go
 model_list_entity_types_response.go
 model_multiple_values.go
 model_notification_center_entity_type.go

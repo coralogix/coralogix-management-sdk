@@ -23,14 +23,15 @@ var _ MappedNullable = &CustomSectionOptions{}
 // CustomSectionOptions Custom section options.
 type CustomSectionOptions struct {
 	// Indicator if the section is collapsed
-	Collapsed *bool `json:"collapsed,omitempty"`
-	Color *SectionColor `json:"color,omitempty"`
+	Collapsed *bool         `json:"collapsed,omitempty"`
+	Color     *SectionColor `json:"color,omitempty"`
 	// Short description of a section
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Section custom name
-	Name *string `json:"name,omitempty"`
-	RepetitiveVar *RepetitiveVar `json:"repetitiveVar,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name                              *string        `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	RepetitiveVar                     *RepetitiveVar `json:"repetitiveVar,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CustomSectionOptions CustomSectionOptions
@@ -213,7 +214,7 @@ func (o *CustomSectionOptions) SetRepetitiveVar(v RepetitiveVar) {
 }
 
 func (o CustomSectionOptions) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,6 +267,7 @@ func (o *CustomSectionOptions) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "repetitiveVar")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -306,4 +308,3 @@ func (v *NullableCustomSectionOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -24,13 +24,14 @@ var _ MappedNullable = &LogsAggregation{}
 type LogsAggregation struct {
 	Average *Average `json:"average,omitempty"`
 	// Count.
-	Count map[string]interface{} `json:"count,omitempty"`
-	CountDistinct *CountDistinct `json:"countDistinct,omitempty"`
-	Max *Max `json:"max,omitempty"`
-	Min *Min `json:"min,omitempty"`
-	Percentile *Percentile `json:"percentile,omitempty"`
-	Sum *Sum `json:"sum,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Count                             map[string]interface{} `json:"count,omitempty"`
+	CountDistinct                     *CountDistinct         `json:"countDistinct,omitempty"`
+	Max                               *Max                   `json:"max,omitempty"`
+	Min                               *Min                   `json:"min,omitempty"`
+	Percentile                        *Percentile            `json:"percentile,omitempty"`
+	Sum                               *Sum                   `json:"sum,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogsAggregation LogsAggregation
@@ -277,7 +278,7 @@ func (o *LogsAggregation) SetSum(v Sum) {
 }
 
 func (o LogsAggregation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -390,6 +391,7 @@ func (o *LogsAggregation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "percentile")
 		delete(additionalProperties, "sum")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -430,4 +432,3 @@ func (v *NullableLogsAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

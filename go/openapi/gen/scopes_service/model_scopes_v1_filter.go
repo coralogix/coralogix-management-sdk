@@ -24,8 +24,9 @@ var _ MappedNullable = &ScopesV1Filter{}
 type ScopesV1Filter struct {
 	EntityType *V1EntityType `json:"entityType,omitempty"`
 	// The expression.
-	Expression *string `json:"expression,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Expression                        *string `json:"expression,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ScopesV1Filter ScopesV1Filter
@@ -112,7 +113,7 @@ func (o *ScopesV1Filter) SetExpression(v string) {
 }
 
 func (o ScopesV1Filter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *ScopesV1Filter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "entityType")
 		delete(additionalProperties, "expression")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableScopesV1Filter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

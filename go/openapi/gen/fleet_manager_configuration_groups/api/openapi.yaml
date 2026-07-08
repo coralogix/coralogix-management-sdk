@@ -254,7 +254,9 @@
                           "remoteConfigurations": {
                             "description": "Remote configurations to use when creating or replacing family content.",
                             "type": "array",
-                            "items": {},
+                            "items": {
+                              "$ref": "#/components/schemas/PublicReplaceRemoteConfigurationRequest"
+                            },
                             "minItems": 0,
                             "maxItems": 128
                           }
@@ -974,6 +976,32 @@
             "format": "date-time",
             "minLength": 0,
             "maxLength": 64
+          }
+        }
+      },
+      "PublicReplaceRemoteConfigurationRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Remote configuration content used in a family update.",
+        "type": "object",
+        "properties": {
+          "agentSelector": {
+            "$ref": "#/components/schemas/PublicAgentSelectorRequest"
+          },
+          "name": {
+            "description": "Remote configuration name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "rawConfiguration": {
+            "description": "OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
           }
         }
       },

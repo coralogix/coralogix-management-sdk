@@ -23,8 +23,9 @@ var _ MappedNullable = &PublicAgentSelectorResponse{}
 // PublicAgentSelectorResponse Agent selector returned in responses.
 type PublicAgentSelectorResponse struct {
 	// Flat agent attributes matched by the selector.
-	Attributes *map[string]string `json:"attributes,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Attributes                        *map[string]string `json:"attributes,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PublicAgentSelectorResponse PublicAgentSelectorResponse
@@ -79,7 +80,7 @@ func (o *PublicAgentSelectorResponse) SetAttributes(v map[string]string) {
 }
 
 func (o PublicAgentSelectorResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *PublicAgentSelectorResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "attributes")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullablePublicAgentSelectorResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

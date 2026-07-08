@@ -23,8 +23,9 @@ var _ MappedNullable = &UpdateUsersResponse{}
 // UpdateUsersResponse Response confirming the successful update of users. Contains the user account IDs of all users that were updated.
 type UpdateUsersResponse struct {
 	// List of user account IDs for the successfully updated users
-	UserAccountIds []int64 `json:"userAccountIds,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UserAccountIds                    []int64 `json:"userAccountIds,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UpdateUsersResponse UpdateUsersResponse
@@ -79,7 +80,7 @@ func (o *UpdateUsersResponse) SetUserAccountIds(v []int64) {
 }
 
 func (o UpdateUsersResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *UpdateUsersResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "userAccountIds")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableUpdateUsersResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

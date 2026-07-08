@@ -23,9 +23,10 @@ var _ MappedNullable = &PriorityAggregation{}
 // PriorityAggregation Count of cases grouped by case priority.
 type PriorityAggregation struct {
 	// Number of cases with this priority
-	Count *int64 `json:"count,omitempty"`
-	Priority *CasePriority `json:"priority,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Count                             *int64        `json:"count,omitempty"`
+	Priority                          *CasePriority `json:"priority,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PriorityAggregation PriorityAggregation
@@ -112,7 +113,7 @@ func (o *PriorityAggregation) SetPriority(v CasePriority) {
 }
 
 func (o PriorityAggregation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *PriorityAggregation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "count")
 		delete(additionalProperties, "priority")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullablePriorityAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

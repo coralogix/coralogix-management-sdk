@@ -27,11 +27,12 @@ type ApmSli struct {
 	// Additional label-based filters to apply to the metrics
 	Filters []ApmFilter `json:"filters,omitempty"`
 	// Labels to group SLO results by
-	GroupingKeys []string `json:"groupingKeys,omitempty"`
+	GroupingKeys  []string       `json:"groupingKeys,omitempty"`
 	LatencyConfig *ApmLatencySli `json:"latencyConfig,omitempty"`
 	// List of service names to monitor
-	Services []string `json:"services,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Services                          []string `json:"services,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ApmSli ApmSli
@@ -214,7 +215,7 @@ func (o *ApmSli) SetServices(v []string) {
 }
 
 func (o ApmSli) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -289,6 +290,7 @@ func (o *ApmSli) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "latencyConfig")
 		delete(additionalProperties, "services")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -329,4 +331,3 @@ func (v *NullableApmSli) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

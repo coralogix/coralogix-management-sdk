@@ -27,9 +27,10 @@ type Legend struct {
 	// In case of multiple queries, whether legend items should be grouped by their respective queries
 	GroupByQuery *bool `json:"groupByQuery,omitempty"`
 	// Is the legend visible in the widget
-	IsVisible *bool `json:"isVisible,omitempty"`
-	Placement *LegendPlacement `json:"placement,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IsVisible                         *bool            `json:"isVisible,omitempty"`
+	Placement                         *LegendPlacement `json:"placement,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Legend Legend
@@ -180,7 +181,7 @@ func (o *Legend) SetPlacement(v LegendPlacement) {
 }
 
 func (o Legend) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -229,6 +230,7 @@ func (o *Legend) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "isVisible")
 		delete(additionalProperties, "placement")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -269,4 +271,3 @@ func (v *NullableLegend) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

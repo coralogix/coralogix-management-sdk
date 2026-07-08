@@ -23,8 +23,9 @@ var _ MappedNullable = &SloLink{}
 // SloLink Deep link to the SLO overview for an alert indicator on a case.
 type SloLink struct {
 	// SLO overview URL with the permutation preselected.
-	Slo *string `json:"slo,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Slo                               *string `json:"slo,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SloLink SloLink
@@ -79,7 +80,7 @@ func (o *SloLink) SetSlo(v string) {
 }
 
 func (o SloLink) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *SloLink) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "slo")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableSloLink) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

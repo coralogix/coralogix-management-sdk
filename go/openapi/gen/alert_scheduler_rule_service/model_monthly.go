@@ -23,8 +23,9 @@ var _ MappedNullable = &Monthly{}
 // Monthly Monthly.
 type Monthly struct {
 	// The days of month.
-	DaysOfMonth []int32 `json:"daysOfMonth,omitempty"`
-	AdditionalProperties map[string]interface{}
+	DaysOfMonth                       []int32 `json:"daysOfMonth,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Monthly Monthly
@@ -79,7 +80,7 @@ func (o *Monthly) SetDaysOfMonth(v []int32) {
 }
 
 func (o Monthly) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *Monthly) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "daysOfMonth")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableMonthly) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

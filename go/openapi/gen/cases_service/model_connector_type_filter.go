@@ -24,8 +24,9 @@ var _ MappedNullable = &ConnectorTypeFilter{}
 type ConnectorTypeFilter struct {
 	ConnectorType *V1ConnectorType `json:"connectorType,omitempty"`
 	// No connector.
-	NoConnector map[string]interface{} `json:"noConnector,omitempty"`
-	AdditionalProperties map[string]interface{}
+	NoConnector                       map[string]interface{} `json:"noConnector,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ConnectorTypeFilter ConnectorTypeFilter
@@ -112,7 +113,7 @@ func (o *ConnectorTypeFilter) SetNoConnector(v map[string]interface{}) {
 }
 
 func (o ConnectorTypeFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -175,6 +176,7 @@ func (o *ConnectorTypeFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "connectorType")
 		delete(additionalProperties, "noConnector")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -215,4 +217,3 @@ func (v *NullableConnectorTypeFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

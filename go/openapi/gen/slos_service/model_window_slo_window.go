@@ -24,8 +24,8 @@ type WindowSloWindow string
 // List of WindowSloWindow
 const (
 	WINDOWSLOWINDOW_WINDOW_SLO_WINDOW_UNSPECIFIED WindowSloWindow = "WINDOW_SLO_WINDOW_UNSPECIFIED"
-	WINDOWSLOWINDOW_WINDOW_SLO_WINDOW_1_MINUTE WindowSloWindow = "WINDOW_SLO_WINDOW_1_MINUTE"
-	WINDOWSLOWINDOW_WINDOW_SLO_WINDOW_5_MINUTES WindowSloWindow = "WINDOW_SLO_WINDOW_5_MINUTES"
+	WINDOWSLOWINDOW_WINDOW_SLO_WINDOW_1_MINUTE    WindowSloWindow = "WINDOW_SLO_WINDOW_1_MINUTE"
+	WINDOWSLOWINDOW_WINDOW_SLO_WINDOW_5_MINUTES   WindowSloWindow = "WINDOW_SLO_WINDOW_5_MINUTES"
 )
 
 // All allowed values of WindowSloWindow enum
@@ -113,4 +113,3 @@ func (v *NullableWindowSloWindow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

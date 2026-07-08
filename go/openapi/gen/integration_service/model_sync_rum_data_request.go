@@ -23,8 +23,9 @@ var _ MappedNullable = &SyncRUMDataRequest{}
 // SyncRUMDataRequest Request for syncing RUM data.
 type SyncRUMDataRequest struct {
 	// The force.
-	Force *bool `json:"force,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Force                             *bool `json:"force,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SyncRUMDataRequest SyncRUMDataRequest
@@ -79,7 +80,7 @@ func (o *SyncRUMDataRequest) SetForce(v bool) {
 }
 
 func (o SyncRUMDataRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *SyncRUMDataRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "force")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableSyncRUMDataRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

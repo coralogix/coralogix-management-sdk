@@ -22,8 +22,9 @@ var _ MappedNullable = &GetAiEvaluationResponse{}
 
 // GetAiEvaluationResponse Response containing the requested AI evaluation.
 type GetAiEvaluationResponse struct {
-	AiEvaluation *AiEvaluation `json:"aiEvaluation,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AiEvaluation                      *AiEvaluation `json:"aiEvaluation,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetAiEvaluationResponse GetAiEvaluationResponse
@@ -78,7 +79,7 @@ func (o *GetAiEvaluationResponse) SetAiEvaluation(v AiEvaluation) {
 }
 
 func (o GetAiEvaluationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *GetAiEvaluationResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "aiEvaluation")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableGetAiEvaluationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

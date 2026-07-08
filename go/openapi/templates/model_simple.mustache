@@ -24,6 +24,7 @@ type {{classname}} struct {
 {{/vars}}
 {{#isAdditionalPropertiesTrue}}
 	AdditionalProperties map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 {{/isAdditionalPropertiesTrue}}
 }
 
@@ -363,7 +364,7 @@ func (o {{classname}}) ToMap() (map[string]interface{}, error) {
 	{{/fields}}
 	if requiredOneOfGroup{{index}}Matches == 0 {
 		{{#isAdditionalPropertiesTrue}}
-		if len(o.AdditionalProperties) == 0 {
+		if !o.additionalPropertiesFromUnmarshal {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [{{fieldList}}] must be set"}
 		}
 		{{/isAdditionalPropertiesTrue}}
@@ -572,6 +573,7 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 		}
 
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -619,6 +621,7 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "{{{baseName}}}")
 		{{/vars}}
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -667,6 +670,7 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "{{{baseName}}}")
 		{{/vars}}
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err

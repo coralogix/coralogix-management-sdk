@@ -13,8 +13,8 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"time"
 	"fmt"
+	"time"
 )
 
 var _ = bytes.MinRead
@@ -26,14 +26,15 @@ var _ MappedNullable = &BreachedKPI{}
 type BreachedKPI struct {
 	BreachStatus BreachStatus `json:"breachStatus"`
 	// When the KPI breach occurred
-	BreachedAt time.Time `json:"breachedAt"`
+	BreachedAt   time.Time   `json:"breachedAt"`
 	CasePriority KPIPriority `json:"casePriority"`
 	// When the breached KPI record was created
 	CreatedAt time.Time `json:"createdAt"`
 	// Unique identifier for the breached KPI
-	Id string `json:"id" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
-	KpiType KPIType `json:"kpiType"`
-	AdditionalProperties map[string]interface{}
+	Id                                string  `json:"id" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
+	KpiType                           KPIType `json:"kpiType"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _BreachedKPI BreachedKPI
@@ -206,7 +207,7 @@ func (o *BreachedKPI) SetKpiType(v KPIType) {
 }
 
 func (o BreachedKPI) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -247,10 +248,10 @@ func (o *BreachedKPI) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -277,6 +278,7 @@ func (o *BreachedKPI) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "kpiType")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -317,4 +319,3 @@ func (v *NullableBreachedKPI) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -25,8 +25,9 @@ type AutoResolveConfig struct {
 	// Enable/disable automatic resolution
 	Enabled *bool `json:"enabled,omitempty"`
 	// Period of inactivity after which cases are automatically resolved.
-	InactivePeriod *string `json:"inactivePeriod,omitempty"`
-	AdditionalProperties map[string]interface{}
+	InactivePeriod                    *string `json:"inactivePeriod,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AutoResolveConfig AutoResolveConfig
@@ -113,7 +114,7 @@ func (o *AutoResolveConfig) SetInactivePeriod(v string) {
 }
 
 func (o AutoResolveConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *AutoResolveConfig) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "inactivePeriod")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableAutoResolveConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

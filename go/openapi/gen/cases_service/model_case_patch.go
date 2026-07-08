@@ -25,8 +25,9 @@ type CasePatch struct {
 	// New case resolution reason
 	ResolutionReason *string `json:"resolutionReason,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// New case title
-	Title *string `json:"title,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Title                             *string `json:"title,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CasePatch CasePatch
@@ -113,7 +114,7 @@ func (o *CasePatch) SetTitle(v string) {
 }
 
 func (o CasePatch) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *CasePatch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "resolutionReason")
 		delete(additionalProperties, "title")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableCasePatch) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

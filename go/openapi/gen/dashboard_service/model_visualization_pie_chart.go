@@ -27,17 +27,17 @@ type VisualizationPieChart struct {
 	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme, one of the predefined values
-	ColorScheme *string `json:"colorScheme,omitempty"`
+	ColorScheme *string `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Custom unit (requires the unit field to be set to custom to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// Custom template name for a group, can contain variables
-	GroupNameTemplate *string `json:"groupNameTemplate,omitempty"`
+	GroupNameTemplate *string `json:"groupNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to ignore color scheme and derive colors from algorithm
-	HashColors *bool `json:"hashColors,omitempty"`
+	HashColors      *bool                                 `json:"hashColors,omitempty"`
 	LabelDefinition *VisualizationPieChartLabelDefinition `json:"labelDefinition,omitempty"`
-	Legend *Legend `json:"legend,omitempty"`
+	Legend          *Legend                               `json:"legend,omitempty"`
 	// Maximum number of slices on a chart
 	MaxSlicesPerChart *int32 `json:"maxSlicesPerChart,omitempty"`
 	// How many slices can fit in a single slice stack
@@ -47,12 +47,13 @@ type VisualizationPieChart struct {
 	// Whether to show the total amount as a title
 	ShowTotal *bool `json:"showTotal,omitempty"`
 	// Custom template name of an individual slice in the stack
-	StackNameTemplate *string `json:"stackNameTemplate,omitempty"`
+	StackNameTemplate *string `json:"stackNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The sub category fields.
-	SubCategoryFields []ObservationField `json:"subCategoryFields,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
-	ValueField *ObservationField `json:"valueField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SubCategoryFields                 []ObservationField `json:"subCategoryFields,omitempty"`
+	Unit                              *CommonUnit        `json:"unit,omitempty"`
+	ValueField                        *ObservationField  `json:"valueField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _VisualizationPieChart VisualizationPieChart
@@ -619,7 +620,7 @@ func (o *VisualizationPieChart) SetValueField(v ObservationField) {
 }
 
 func (o VisualizationPieChart) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -720,6 +721,7 @@ func (o *VisualizationPieChart) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "unit")
 		delete(additionalProperties, "valueField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -760,4 +762,3 @@ func (v *NullableVisualizationPieChart) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,8 +23,9 @@ var _ MappedNullable = &GetDashboardCatalogResponse{}
 // GetDashboardCatalogResponse Response containing the dashboard catalog.
 type GetDashboardCatalogResponse struct {
 	// List of items.
-	Items []DashboardCatalogItem `json:"items,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Items                             []DashboardCatalogItem `json:"items,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetDashboardCatalogResponse GetDashboardCatalogResponse
@@ -79,7 +80,7 @@ func (o *GetDashboardCatalogResponse) SetItems(v []DashboardCatalogItem) {
 }
 
 func (o GetDashboardCatalogResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *GetDashboardCatalogResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "items")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableGetDashboardCatalogResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

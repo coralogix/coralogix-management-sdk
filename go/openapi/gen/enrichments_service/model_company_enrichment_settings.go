@@ -33,8 +33,9 @@ type CompanyEnrichmentSettings struct {
 	// The row limit.
 	RowLimit *int64 `json:"rowLimit,omitempty"`
 	// The size limit bytes.
-	SizeLimitBytes *string `json:"sizeLimitBytes,omitempty" validate:"regexp=^[0-9]+$"`
-	AdditionalProperties map[string]interface{}
+	SizeLimitBytes                    *string `json:"sizeLimitBytes,omitempty" validate:"regexp=^[0-9]+$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CompanyEnrichmentSettings CompanyEnrichmentSettings
@@ -249,7 +250,7 @@ func (o *CompanyEnrichmentSettings) SetSizeLimitBytes(v string) {
 }
 
 func (o CompanyEnrichmentSettings) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,6 +307,7 @@ func (o *CompanyEnrichmentSettings) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "rowLimit")
 		delete(additionalProperties, "sizeLimitBytes")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -346,4 +348,3 @@ func (v *NullableCompanyEnrichmentSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

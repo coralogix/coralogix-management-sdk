@@ -40,32 +40,32 @@ func TestRecordingRuleGroups(t *testing.T) {
 		Name: &setName,
 		Groups: []recordingrules.InRuleGroup{
 			{
-				Name:     recordingrules.PtrString("foo"),
+				Name:     "foo",
 				Interval: &interval,
 				Limit:    &limit,
 				Rules: []recordingrules.InRule{
 					{
-						Record: recordingrules.PtrString("ts3db_live_ingester_write_latency:3m"),
-						Expr:   recordingrules.PtrString("sum(rate(ts3db_live_ingester_write_latency_seconds_count{CX_LEVEL=\"staging\",pod=~\"ts3db-live-ingester.*\"}[2m])) by (pod)"),
+						Record: "ts3db_live_ingester_write_latency:3m",
+						Expr:   "sum(rate(ts3db_live_ingester_write_latency_seconds_count{CX_LEVEL=\"staging\",pod=~\"ts3db-live-ingester.*\"}[2m])) by (pod)",
 					},
 					{
-						Record: recordingrules.PtrString("job:http_requests_total:sum"),
-						Expr:   recordingrules.PtrString("sum(rate(http_requests_total[5m])) by (job)"),
+						Record: "job:http_requests_total:sum",
+						Expr:   "sum(rate(http_requests_total[5m])) by (job)",
 					},
 				},
 			},
 			{
-				Name:     recordingrules.PtrString("bar"),
+				Name:     "bar",
 				Interval: &interval,
 				Limit:    &limit,
 				Rules: []recordingrules.InRule{
 					{
-						Record: recordingrules.PtrString("ts3db_live_ingester_write_latency:3m"),
-						Expr:   recordingrules.PtrString("sum(rate(ts3db_live_ingester_write_latency_seconds_count{CX_LEVEL=\"staging\",pod=~\"ts3db-live-ingester.*\"}[2m])) by (pod)"),
+						Record: "ts3db_live_ingester_write_latency:3m",
+						Expr:   "sum(rate(ts3db_live_ingester_write_latency_seconds_count{CX_LEVEL=\"staging\",pod=~\"ts3db-live-ingester.*\"}[2m])) by (pod)",
 					},
 					{
-						Record: recordingrules.PtrString("job:http_requests_total:sum"),
-						Expr:   recordingrules.PtrString("sum(rate(http_requests_total[5m])) by (job)"),
+						Record: "job:http_requests_total:sum",
+						Expr:   "sum(rate(http_requests_total[5m])) by (job)",
 					},
 				},
 			},
@@ -77,20 +77,20 @@ func TestRecordingRuleGroups(t *testing.T) {
 		CreateRuleGroupSet(req).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.NotNil(t, created.Id)
+	require.NotEmpty(t, created.Id)
 
 	updatedName := setName + "-updated"
 	updateReq := recordingrules.UpdateRuleGroupSet{
 		Name: &updatedName,
 		Groups: []recordingrules.InRuleGroup{
 			{
-				Name:     recordingrules.PtrString("baz"),
+				Name:     "baz",
 				Interval: &interval,
 				Limit:    &limit,
 				Rules: []recordingrules.InRule{
 					{
-						Record: recordingrules.PtrString("job:http_requests_total:sum"),
-						Expr:   recordingrules.PtrString("sum(rate(http_requests_total[5m])) by (job)"),
+						Record: "job:http_requests_total:sum",
+						Expr:   "sum(rate(http_requests_total[5m])) by (job)",
 					},
 				},
 			},
@@ -98,17 +98,17 @@ func TestRecordingRuleGroups(t *testing.T) {
 	}
 
 	_, httpResp, err = client.
-		RuleGroupSetsUpdate(ctx, *created.Id).
+		RuleGroupSetsUpdate(ctx, created.Id).
 		UpdateRuleGroupSet(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	got, httpResp, err := client.
-		RuleGroupSetsFetch(ctx, *created.Id).
+		RuleGroupSetsFetch(ctx, created.Id).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Len(t, got.Groups, 1)
-	require.Equal(t, updatedName, *got.Name)
+	require.Equal(t, updatedName, got.Name)
 
 	list, httpResp, err := client.
 		RuleGroupSetsList(ctx).
@@ -117,7 +117,7 @@ func TestRecordingRuleGroups(t *testing.T) {
 
 	found := false
 	for _, s := range list.Sets {
-		if s.Id != nil && *s.Id == *created.Id {
+		if s.Id == created.Id {
 			found = true
 			break
 		}
@@ -125,7 +125,7 @@ func TestRecordingRuleGroups(t *testing.T) {
 	require.True(t, found)
 
 	_, httpResp, err = client.
-		RuleGroupSetsDelete(ctx, *created.Id).
+		RuleGroupSetsDelete(ctx, created.Id).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }

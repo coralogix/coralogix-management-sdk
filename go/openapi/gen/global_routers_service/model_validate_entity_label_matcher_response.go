@@ -22,8 +22,9 @@ var _ MappedNullable = &ValidateEntityLabelMatcherResponse{}
 
 // ValidateEntityLabelMatcherResponse Response which contains whether the given entity label matcher is valid
 type ValidateEntityLabelMatcherResponse struct {
-	Result *ValidateEntityLabelMatcherResult `json:"result,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Result                            *ValidateEntityLabelMatcherResult `json:"result,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ValidateEntityLabelMatcherResponse ValidateEntityLabelMatcherResponse
@@ -78,7 +79,7 @@ func (o *ValidateEntityLabelMatcherResponse) SetResult(v ValidateEntityLabelMatc
 }
 
 func (o ValidateEntityLabelMatcherResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *ValidateEntityLabelMatcherResponse) UnmarshalJSON(data []byte) (err err
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "result")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableValidateEntityLabelMatcherResponse) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

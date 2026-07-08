@@ -23,18 +23,19 @@ var _ MappedNullable = &VariableV2{}
 // VariableV2 struct for VariableV2
 type VariableV2 struct {
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The display full row.
 	DisplayFullRow *bool `json:"displayFullRow,omitempty"`
 	// The display name.
-	DisplayName *string `json:"displayName,omitempty"`
+	DisplayName *string                `json:"displayName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	DisplayType *VariableDisplayTypeV2 `json:"displayType,omitempty"`
-	Id *UUID `json:"id,omitempty"`
+	Id          *UUID                  `json:"id,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
-	Source *VariableSourceV2 `json:"source,omitempty"`
-	Value *VariableValueV2 `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name                              *string           `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Source                            *VariableSourceV2 `json:"source,omitempty"`
+	Value                             *VariableValueV2  `json:"value,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _VariableV2 VariableV2
@@ -313,7 +314,7 @@ func (o *VariableV2) SetValue(v VariableValueV2) {
 }
 
 func (o VariableV2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -378,6 +379,7 @@ func (o *VariableV2) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "source")
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -418,4 +420,3 @@ func (v *NullableVariableV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

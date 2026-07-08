@@ -24,7 +24,7 @@ type TimeframeType string
 // List of TimeframeType
 const (
 	TIMEFRAMETYPE_TIMEFRAME_TYPE_UNSPECIFIED TimeframeType = "TIMEFRAME_TYPE_UNSPECIFIED"
-	TIMEFRAMETYPE_TIMEFRAME_TYPE_UP_TO TimeframeType = "TIMEFRAME_TYPE_UP_TO"
+	TIMEFRAMETYPE_TIMEFRAME_TYPE_UP_TO       TimeframeType = "TIMEFRAME_TYPE_UP_TO"
 )
 
 // All allowed values of TimeframeType enum
@@ -111,4 +111,3 @@ func (v *NullableTimeframeType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

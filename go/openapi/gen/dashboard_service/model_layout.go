@@ -23,8 +23,9 @@ var _ MappedNullable = &Layout{}
 // Layout Layout.
 type Layout struct {
 	// The list of sections in the dashboard
-	Sections []Section `json:"sections,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Sections                          []Section `json:"sections,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Layout Layout
@@ -79,7 +80,7 @@ func (o *Layout) SetSections(v []Section) {
 }
 
 func (o Layout) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *Layout) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "sections")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableLayout) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

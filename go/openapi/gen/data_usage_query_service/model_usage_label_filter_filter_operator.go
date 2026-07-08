@@ -24,8 +24,8 @@ type UsageLabelFilterFilterOperator string
 // List of UsageLabelFilter.FilterOperator
 const (
 	USAGELABELFILTERFILTEROPERATOR_FILTER_OPERATOR_UNSPECIFIED UsageLabelFilterFilterOperator = "FILTER_OPERATOR_UNSPECIFIED"
-	USAGELABELFILTERFILTEROPERATOR_FILTER_OPERATOR_IN UsageLabelFilterFilterOperator = "FILTER_OPERATOR_IN"
-	USAGELABELFILTERFILTEROPERATOR_FILTER_OPERATOR_NOT_IN UsageLabelFilterFilterOperator = "FILTER_OPERATOR_NOT_IN"
+	USAGELABELFILTERFILTEROPERATOR_FILTER_OPERATOR_IN          UsageLabelFilterFilterOperator = "FILTER_OPERATOR_IN"
+	USAGELABELFILTERFILTEROPERATOR_FILTER_OPERATOR_NOT_IN      UsageLabelFilterFilterOperator = "FILTER_OPERATOR_NOT_IN"
 )
 
 // All allowed values of UsageLabelFilterFilterOperator enum
@@ -113,4 +113,3 @@ func (v *NullableUsageLabelFilterFilterOperator) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

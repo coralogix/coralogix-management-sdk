@@ -31,6 +31,7 @@ model_list_slos_response.go
 model_metric.go
 model_missing_data_strategy.go
 model_multiple_values.go
+model_product_type_values.go
 model_replace_slo_alerts_validations_response.go
 model_replace_slo_request.go
 model_replace_slo_response.go
@@ -50,6 +51,8 @@ model_slo_ownership_tags.go
 model_slo_product_type.go
 model_slo_time_frame.go
 model_slo_type.go
+model_string_values.go
+model_type_values.go
 model_v1_grouping.go
 model_v1_revision.go
 model_v3_filter_operator.go

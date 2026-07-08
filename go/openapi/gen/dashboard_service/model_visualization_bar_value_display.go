@@ -24,9 +24,9 @@ type VisualizationBarValueDisplay string
 // List of Visualization.BarValueDisplay
 const (
 	VISUALIZATIONBARVALUEDISPLAY_BAR_VALUE_DISPLAY_UNSPECIFIED VisualizationBarValueDisplay = "BAR_VALUE_DISPLAY_UNSPECIFIED"
-	VISUALIZATIONBARVALUEDISPLAY_BAR_VALUE_DISPLAY_TOP VisualizationBarValueDisplay = "BAR_VALUE_DISPLAY_TOP"
-	VISUALIZATIONBARVALUEDISPLAY_BAR_VALUE_DISPLAY_INSIDE VisualizationBarValueDisplay = "BAR_VALUE_DISPLAY_INSIDE"
-	VISUALIZATIONBARVALUEDISPLAY_BAR_VALUE_DISPLAY_BOTH VisualizationBarValueDisplay = "BAR_VALUE_DISPLAY_BOTH"
+	VISUALIZATIONBARVALUEDISPLAY_BAR_VALUE_DISPLAY_TOP         VisualizationBarValueDisplay = "BAR_VALUE_DISPLAY_TOP"
+	VISUALIZATIONBARVALUEDISPLAY_BAR_VALUE_DISPLAY_INSIDE      VisualizationBarValueDisplay = "BAR_VALUE_DISPLAY_INSIDE"
+	VISUALIZATIONBARVALUEDISPLAY_BAR_VALUE_DISPLAY_BOTH        VisualizationBarValueDisplay = "BAR_VALUE_DISPLAY_BOTH"
 )
 
 // All allowed values of VisualizationBarValueDisplay enum
@@ -115,4 +115,3 @@ func (v *NullableVisualizationBarValueDisplay) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

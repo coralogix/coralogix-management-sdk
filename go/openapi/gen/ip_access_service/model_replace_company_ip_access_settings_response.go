@@ -22,8 +22,9 @@ var _ MappedNullable = &ReplaceCompanyIpAccessSettingsResponse{}
 
 // ReplaceCompanyIpAccessSettingsResponse This data structure represents the response to replace company IP access settings.
 type ReplaceCompanyIpAccessSettingsResponse struct {
-	Settings *CompanyIpAccessSettings `json:"settings,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Settings                          *CompanyIpAccessSettings `json:"settings,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ReplaceCompanyIpAccessSettingsResponse ReplaceCompanyIpAccessSettingsResponse
@@ -78,7 +79,7 @@ func (o *ReplaceCompanyIpAccessSettingsResponse) SetSettings(v CompanyIpAccessSe
 }
 
 func (o ReplaceCompanyIpAccessSettingsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *ReplaceCompanyIpAccessSettingsResponse) UnmarshalJSON(data []byte) (err
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "settings")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableReplaceCompanyIpAccessSettingsResponse) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

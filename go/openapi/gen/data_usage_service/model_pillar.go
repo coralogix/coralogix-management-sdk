@@ -24,11 +24,11 @@ type Pillar string
 // List of Pillar
 const (
 	PILLAR_PILLAR_UNSPECIFIED Pillar = "PILLAR_UNSPECIFIED"
-	PILLAR_PILLAR_METRICS Pillar = "PILLAR_METRICS"
-	PILLAR_PILLAR_LOGS Pillar = "PILLAR_LOGS"
-	PILLAR_PILLAR_SPANS Pillar = "PILLAR_SPANS"
-	PILLAR_PILLAR_BINARY Pillar = "PILLAR_BINARY"
-	PILLAR_PILLAR_PROFILES Pillar = "PILLAR_PROFILES"
+	PILLAR_PILLAR_METRICS     Pillar = "PILLAR_METRICS"
+	PILLAR_PILLAR_LOGS        Pillar = "PILLAR_LOGS"
+	PILLAR_PILLAR_SPANS       Pillar = "PILLAR_SPANS"
+	PILLAR_PILLAR_BINARY      Pillar = "PILLAR_BINARY"
+	PILLAR_PILLAR_PROFILES    Pillar = "PILLAR_PROFILES"
 )
 
 // All allowed values of Pillar enum
@@ -119,4 +119,3 @@ func (v *NullablePillar) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

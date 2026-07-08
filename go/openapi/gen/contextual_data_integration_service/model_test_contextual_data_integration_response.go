@@ -22,8 +22,9 @@ var _ MappedNullable = &TestContextualDataIntegrationResponse{}
 
 // TestContextualDataIntegrationResponse Response containing the results of a contextual data integration test.
 type TestContextualDataIntegrationResponse struct {
-	Result *TestIntegrationResult `json:"result,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Result                            *TestIntegrationResult `json:"result,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestContextualDataIntegrationResponse TestContextualDataIntegrationResponse
@@ -78,7 +79,7 @@ func (o *TestContextualDataIntegrationResponse) SetResult(v TestIntegrationResul
 }
 
 func (o TestContextualDataIntegrationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *TestContextualDataIntegrationResponse) UnmarshalJSON(data []byte) (err 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "result")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableTestContextualDataIntegrationResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

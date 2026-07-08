@@ -24,8 +24,9 @@ var _ MappedNullable = &UpdateBulkAlertSchedulerRuleResponse{}
 // UpdateBulkAlertSchedulerRuleResponse This is a response sent after updating multiple alert scheduler rules
 type UpdateBulkAlertSchedulerRuleResponse struct {
 	// The update suppression responses.
-	UpdateSuppressionResponses []UpdateAlertSchedulerRuleResponse `json:"updateSuppressionResponses"`
-	AdditionalProperties map[string]interface{}
+	UpdateSuppressionResponses        []UpdateAlertSchedulerRuleResponse `json:"updateSuppressionResponses"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UpdateBulkAlertSchedulerRuleResponse UpdateBulkAlertSchedulerRuleResponse
@@ -73,7 +74,7 @@ func (o *UpdateBulkAlertSchedulerRuleResponse) SetUpdateSuppressionResponses(v [
 }
 
 func (o UpdateBulkAlertSchedulerRuleResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +105,10 @@ func (o *UpdateBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -129,6 +130,7 @@ func (o *UpdateBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err e
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "updateSuppressionResponses")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -169,4 +171,3 @@ func (v *NullableUpdateBulkAlertSchedulerRuleResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

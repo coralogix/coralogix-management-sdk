@@ -24,9 +24,10 @@ var _ MappedNullable = &HorizontalBarsMultiQueryFieldSettings{}
 // HorizontalBarsMultiQueryFieldSettings Per-query field settings for horizontal bars multi-query visualization
 type HorizontalBarsMultiQueryFieldSettings struct {
 	// Reference to the query id from Dynamic.query_display_settings
-	QueryId string `json:"queryId"`
-	ValueField *ObservationField `json:"valueField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	QueryId                           string            `json:"queryId" validate:"regexp=^[\\s\\S]*$"`
+	ValueField                        *ObservationField `json:"valueField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _HorizontalBarsMultiQueryFieldSettings HorizontalBarsMultiQueryFieldSettings
@@ -106,7 +107,7 @@ func (o *HorizontalBarsMultiQueryFieldSettings) SetValueField(v ObservationField
 }
 
 func (o HorizontalBarsMultiQueryFieldSettings) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -140,10 +141,10 @@ func (o *HorizontalBarsMultiQueryFieldSettings) UnmarshalJSON(data []byte) (err 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -166,6 +167,7 @@ func (o *HorizontalBarsMultiQueryFieldSettings) UnmarshalJSON(data []byte) (err 
 		delete(additionalProperties, "queryId")
 		delete(additionalProperties, "valueField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -206,4 +208,3 @@ func (v *NullableHorizontalBarsMultiQueryFieldSettings) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

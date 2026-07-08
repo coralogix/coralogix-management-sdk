@@ -24,10 +24,11 @@ var _ MappedNullable = &V1OrderBy{}
 // V1OrderBy struct for V1OrderBy
 type V1OrderBy struct {
 	// A contextual label key to order by.
-	ContextualLabel *string `json:"contextualLabel,omitempty"`
-	Direction V1OrderByDirection `json:"direction"`
-	IncidentField *IncidentFields `json:"incidentField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ContextualLabel                   *string            `json:"contextualLabel,omitempty"`
+	Direction                         V1OrderByDirection `json:"direction"`
+	IncidentField                     *IncidentFields    `json:"incidentField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V1OrderBy V1OrderBy
@@ -139,7 +140,7 @@ func (o *V1OrderBy) SetIncidentField(v IncidentFields) {
 }
 
 func (o V1OrderBy) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -168,7 +169,7 @@ func (o V1OrderBy) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if len(o.AdditionalProperties) == 0 {
+		if !o.additionalPropertiesFromUnmarshal {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [incidentField, contextualLabel] must be set"}
 		}
 	}
@@ -192,10 +193,10 @@ func (o *V1OrderBy) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -241,6 +242,7 @@ func (o *V1OrderBy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "direction")
 		delete(additionalProperties, "incidentField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -281,4 +283,3 @@ func (v *NullableV1OrderBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

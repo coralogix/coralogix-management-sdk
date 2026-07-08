@@ -35,14 +35,15 @@ type ExtensionItem struct {
 	// The is mandatory.
 	IsMandatory *bool `json:"isMandatory,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name               *string             `json:"name,omitempty"`
 	PermissionResource *PermissionResource `json:"permissionResource,omitempty"`
 	// The stable id.
-	StableId *string `json:"stableId,omitempty"`
+	StableId     *string       `json:"stableId,omitempty"`
 	TargetDomain *TargetDomain `json:"targetDomain,omitempty"`
 	// The unique id.
-	UniqueId *string `json:"uniqueId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UniqueId                          *string `json:"uniqueId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ExtensionItem ExtensionItem
@@ -417,7 +418,7 @@ func (o *ExtensionItem) SetUniqueId(v string) {
 }
 
 func (o ExtensionItem) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -494,6 +495,7 @@ func (o *ExtensionItem) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "targetDomain")
 		delete(additionalProperties, "uniqueId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -534,4 +536,3 @@ func (v *NullableExtensionItem) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

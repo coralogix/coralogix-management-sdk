@@ -80,6 +80,18 @@ func TestRequiredOneOf_RequestMarshalStillRequiresExactlyOneKnownArm(t *testing.
 	}
 }
 
+func TestRequiredOneOf_RequestMarshalRejectsUnrelatedAdditionalProperties(t *testing.T) {
+	missingArm := scopes.FilterPathAndValues{
+		Path: "service.name",
+		AdditionalProperties: map[string]interface{}{
+			"unrelated": "value",
+		},
+	}
+	if _, err := json.Marshal(missingArm); err == nil {
+		t.Fatal("expected request marshal to reject required oneOf with only unrelated additional properties")
+	}
+}
+
 func TestOptionalOneOf_ResponseUnsetAndUnknownFutureArmAreForwardCompatible(t *testing.T) {
 	tests := []struct {
 		name    string

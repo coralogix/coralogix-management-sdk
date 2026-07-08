@@ -36,8 +36,9 @@ type SpansCount struct {
 	// The success span count.
 	SuccessSpanCount *string `json:"successSpanCount,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Timestamp of the event.
-	Timestamp *time.Time `json:"timestamp,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Timestamp                         *time.Time `json:"timestamp,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SpansCount SpansCount
@@ -284,7 +285,7 @@ func (o *SpansCount) SetTimestamp(v time.Time) {
 }
 
 func (o SpansCount) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -345,6 +346,7 @@ func (o *SpansCount) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "successSpanCount")
 		delete(additionalProperties, "timestamp")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -385,4 +387,3 @@ func (v *NullableSpansCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

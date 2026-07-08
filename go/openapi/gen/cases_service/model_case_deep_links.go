@@ -27,8 +27,9 @@ type CaseDeepLinks struct {
 	// Absolute URL to the case detail page.
 	Detail *string `json:"detail,omitempty"`
 	// Per-impacted-entity drilldown links.
-	ImpactedEntities []ImpactedEntityLink `json:"impactedEntities,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ImpactedEntities                  []ImpactedEntityLink `json:"impactedEntities,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CaseDeepLinks CaseDeepLinks
@@ -147,7 +148,7 @@ func (o *CaseDeepLinks) SetImpactedEntities(v []ImpactedEntityLink) {
 }
 
 func (o CaseDeepLinks) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *CaseDeepLinks) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "detail")
 		delete(additionalProperties, "impactedEntities")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableCaseDeepLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,18 +23,19 @@ var _ MappedNullable = &DashboardAction{}
 // DashboardAction Public actions that are always available within specific dashboard's context.
 type DashboardAction struct {
 	DataSource *ActionDataSourceType `json:"dataSource,omitempty"`
-	Definition *ActionDefinition `json:"definition,omitempty"`
+	Definition *ActionDefinition     `json:"definition,omitempty"`
 	// A unique identifier of the action
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// The display name of the action
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Reference to specific query within a widget, can be null if the action is dashboard wide or related to single query widget
-	QueryId *string `json:"queryId,omitempty"`
+	QueryId *string `json:"queryId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Defines if the action should open in a new window or current window in the browser
 	ShouldOpenInNewWindow *bool `json:"shouldOpenInNewWindow,omitempty"`
 	// Reference to specific widget within a dashboard, can be null if the action is dashboard wide
-	WidgetId *string `json:"widgetId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	WidgetId                          *string `json:"widgetId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DashboardAction DashboardAction
@@ -281,7 +282,7 @@ func (o *DashboardAction) SetWidgetId(v string) {
 }
 
 func (o DashboardAction) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -342,6 +343,7 @@ func (o *DashboardAction) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "shouldOpenInNewWindow")
 		delete(additionalProperties, "widgetId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -382,4 +384,3 @@ func (v *NullableDashboardAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

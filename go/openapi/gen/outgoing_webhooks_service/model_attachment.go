@@ -23,9 +23,10 @@ var _ MappedNullable = &Attachment{}
 // Attachment struct for Attachment
 type Attachment struct {
 	// Whether this resource is active.
-	IsActive *bool `json:"isActive,omitempty"`
-	Type *AttachmentType `json:"type,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IsActive                          *bool           `json:"isActive,omitempty"`
+	Type                              *AttachmentType `json:"type,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Attachment Attachment
@@ -112,7 +113,7 @@ func (o *Attachment) SetType(v AttachmentType) {
 }
 
 func (o Attachment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *Attachment) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "isActive")
 		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableAttachment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

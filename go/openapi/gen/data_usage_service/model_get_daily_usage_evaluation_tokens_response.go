@@ -23,8 +23,9 @@ var _ MappedNullable = &GetDailyUsageEvaluationTokensResponse{}
 // GetDailyUsageEvaluationTokensResponse Response containing daily evaluation token usage data.
 type GetDailyUsageEvaluationTokensResponse struct {
 	// List of tokens.
-	Tokens []DetailedDailyEvaluationTokens `json:"tokens,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Tokens                            []DetailedDailyEvaluationTokens `json:"tokens,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetDailyUsageEvaluationTokensResponse GetDailyUsageEvaluationTokensResponse
@@ -79,7 +80,7 @@ func (o *GetDailyUsageEvaluationTokensResponse) SetTokens(v []DetailedDailyEvalu
 }
 
 func (o GetDailyUsageEvaluationTokensResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *GetDailyUsageEvaluationTokensResponse) UnmarshalJSON(data []byte) (err 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "tokens")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableGetDailyUsageEvaluationTokensResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

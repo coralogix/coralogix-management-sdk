@@ -3853,7 +3853,8 @@
           "KPI_FILTER_UNSPECIFIED",
           "KPI_FILTER_TIME_TO_ACKNOWLEDGE_BREACHED",
           "KPI_FILTER_TIME_TO_RESOLVE_BREACHED",
-          "KPI_FILTER_NOT_BREACHED"
+          "KPI_FILTER_NOT_BREACHED",
+          "KPI_FILTER_TIME_TO_UPDATE_BREACHED"
         ]
       },
       "KPIPriority": {
@@ -3875,7 +3876,8 @@
         "enum": [
           "KPI_TYPE_UNSPECIFIED",
           "KPI_TYPE_TIME_TO_ACKNOWLEDGE",
-          "KPI_TYPE_TIME_TO_RESOLVE"
+          "KPI_TYPE_TIME_TO_RESOLVE",
+          "KPI_TYPE_TIME_TO_UPDATE"
         ]
       },
       "ListCasesResponse": {

@@ -26,8 +26,9 @@ type PublicRemoteConfigurationRequest struct {
 	// Remote configuration name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured.
-	RawConfiguration *string `json:"rawConfiguration,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	RawConfiguration                  *string `json:"rawConfiguration,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PublicRemoteConfigurationRequest PublicRemoteConfigurationRequest
@@ -146,7 +147,7 @@ func (o *PublicRemoteConfigurationRequest) SetRawConfiguration(v string) {
 }
 
 func (o PublicRemoteConfigurationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -191,6 +192,7 @@ func (o *PublicRemoteConfigurationRequest) UnmarshalJSON(data []byte) (err error
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "rawConfiguration")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -231,4 +233,3 @@ func (v *NullablePublicRemoteConfigurationRequest) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

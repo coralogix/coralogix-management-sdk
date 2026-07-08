@@ -24,7 +24,7 @@ type MetricAnomalyConditionType string
 // List of MetricAnomalyConditionType
 const (
 	METRICANOMALYCONDITIONTYPE_METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED MetricAnomalyConditionType = "METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED"
-	METRICANOMALYCONDITIONTYPE_METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL MetricAnomalyConditionType = "METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL"
+	METRICANOMALYCONDITIONTYPE_METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL                MetricAnomalyConditionType = "METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL"
 )
 
 // All allowed values of MetricAnomalyConditionType enum
@@ -111,4 +111,3 @@ func (v *NullableMetricAnomalyConditionType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

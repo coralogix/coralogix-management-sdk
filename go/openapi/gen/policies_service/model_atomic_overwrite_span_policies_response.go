@@ -23,8 +23,9 @@ var _ MappedNullable = &AtomicOverwriteSpanPoliciesResponse{}
 // AtomicOverwriteSpanPoliciesResponse This data structue is obtained when overwriting span policies atomically.
 type AtomicOverwriteSpanPoliciesResponse struct {
 	// The create responses.
-	CreateResponses []CreatePolicyResponse `json:"createResponses,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CreateResponses                   []CreatePolicyResponse `json:"createResponses,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AtomicOverwriteSpanPoliciesResponse AtomicOverwriteSpanPoliciesResponse
@@ -79,7 +80,7 @@ func (o *AtomicOverwriteSpanPoliciesResponse) SetCreateResponses(v []CreatePolic
 }
 
 func (o AtomicOverwriteSpanPoliciesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *AtomicOverwriteSpanPoliciesResponse) UnmarshalJSON(data []byte) (err er
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "createResponses")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableAtomicOverwriteSpanPoliciesResponse) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

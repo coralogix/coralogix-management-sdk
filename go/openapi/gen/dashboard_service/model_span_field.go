@@ -24,10 +24,11 @@ var _ MappedNullable = &SpanField{}
 type SpanField struct {
 	MetadataField *MetadataField `json:"metadataField,omitempty"`
 	// Name of a process-level tag field to use as the data source.
-	ProcessTagField *string `json:"processTagField,omitempty"`
+	ProcessTagField *string `json:"processTagField,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Name of a span tag field to use as the data source.
-	TagField *string `json:"tagField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TagField                          *string `json:"tagField,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SpanField SpanField
@@ -146,7 +147,7 @@ func (o *SpanField) SetTagField(v string) {
 }
 
 func (o SpanField) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -219,6 +220,7 @@ func (o *SpanField) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "processTagField")
 		delete(additionalProperties, "tagField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -259,4 +261,3 @@ func (v *NullableSpanField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

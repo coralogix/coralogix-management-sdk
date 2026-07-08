@@ -22,13 +22,14 @@ var _ MappedNullable = &AnnotationSource{}
 
 // AnnotationSource Source.
 type AnnotationSource struct {
-	Dataprime *DataprimeSource `json:"dataprime,omitempty"`
-	EventRecurrence *EventRecurrenceSource `json:"eventRecurrence,omitempty"`
-	Logs *LogsSource `json:"logs,omitempty"`
-	Manual *ManualSource `json:"manual,omitempty"`
-	Metrics *MetricsSource `json:"metrics,omitempty"`
-	Spans *SpansSource `json:"spans,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Dataprime                         *DataprimeSource       `json:"dataprime,omitempty"`
+	EventRecurrence                   *EventRecurrenceSource `json:"eventRecurrence,omitempty"`
+	Logs                              *LogsSource            `json:"logs,omitempty"`
+	Manual                            *ManualSource          `json:"manual,omitempty"`
+	Metrics                           *MetricsSource         `json:"metrics,omitempty"`
+	Spans                             *SpansSource           `json:"spans,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AnnotationSource AnnotationSource
@@ -243,7 +244,7 @@ func (o *AnnotationSource) SetSpans(v SpansSource) {
 }
 
 func (o AnnotationSource) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -346,6 +347,7 @@ func (o *AnnotationSource) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "metrics")
 		delete(additionalProperties, "spans")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -386,4 +388,3 @@ func (v *NullableAnnotationSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,8 +22,9 @@ var _ MappedNullable = &TracingTimeWindow{}
 
 // TracingTimeWindow Tracing time window.
 type TracingTimeWindow struct {
-	TracingTimeWindowValue *TracingTimeWindowValue `json:"tracingTimeWindowValue,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TracingTimeWindowValue            *TracingTimeWindowValue `json:"tracingTimeWindowValue,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TracingTimeWindow TracingTimeWindow
@@ -78,7 +79,7 @@ func (o *TracingTimeWindow) SetTracingTimeWindowValue(v TracingTimeWindowValue) 
 }
 
 func (o TracingTimeWindow) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *TracingTimeWindow) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "tracingTimeWindowValue")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableTracingTimeWindow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -106,6 +106,7 @@ Class | Method | HTTP request | Description
  - [PublicCreateConfigurationGroupRequest](docs/PublicCreateConfigurationGroupRequest.md)
  - [PublicRemoteConfigurationRequest](docs/PublicRemoteConfigurationRequest.md)
  - [PublicRemoteConfigurationResponse](docs/PublicRemoteConfigurationResponse.md)
+ - [PublicReplaceRemoteConfigurationRequest](docs/PublicReplaceRemoteConfigurationRequest.md)
  - [ReplacePublicConfigurationGroupResponse](docs/ReplacePublicConfigurationGroupResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
 

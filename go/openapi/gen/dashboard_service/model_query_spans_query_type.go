@@ -22,9 +22,10 @@ var _ MappedNullable = &QuerySpansQueryType{}
 
 // QuerySpansQueryType Discriminated union specifying whether to query span field names or span field values.
 type QuerySpansQueryType struct {
-	FieldName *QuerySpansQueryTypeFieldName `json:"fieldName,omitempty"`
-	FieldValue *QuerySpansQueryTypeFieldValue `json:"fieldValue,omitempty"`
-	AdditionalProperties map[string]interface{}
+	FieldName                         *QuerySpansQueryTypeFieldName  `json:"fieldName,omitempty"`
+	FieldValue                        *QuerySpansQueryTypeFieldValue `json:"fieldValue,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QuerySpansQueryType QuerySpansQueryType
@@ -111,7 +112,7 @@ func (o *QuerySpansQueryType) SetFieldValue(v QuerySpansQueryTypeFieldValue) {
 }
 
 func (o QuerySpansQueryType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,6 +175,7 @@ func (o *QuerySpansQueryType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fieldName")
 		delete(additionalProperties, "fieldValue")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -214,4 +216,3 @@ func (v *NullableQuerySpansQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

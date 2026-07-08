@@ -24,11 +24,11 @@ type RowStyle string
 // List of RowStyle
 const (
 	ROWSTYLE_ROW_STYLE_UNSPECIFIED RowStyle = "ROW_STYLE_UNSPECIFIED"
-	ROWSTYLE_ROW_STYLE_ONE_LINE RowStyle = "ROW_STYLE_ONE_LINE"
-	ROWSTYLE_ROW_STYLE_TWO_LINE RowStyle = "ROW_STYLE_TWO_LINE"
-	ROWSTYLE_ROW_STYLE_CONDENSED RowStyle = "ROW_STYLE_CONDENSED"
-	ROWSTYLE_ROW_STYLE_JSON RowStyle = "ROW_STYLE_JSON"
-	ROWSTYLE_ROW_STYLE_LIST RowStyle = "ROW_STYLE_LIST"
+	ROWSTYLE_ROW_STYLE_ONE_LINE    RowStyle = "ROW_STYLE_ONE_LINE"
+	ROWSTYLE_ROW_STYLE_TWO_LINE    RowStyle = "ROW_STYLE_TWO_LINE"
+	ROWSTYLE_ROW_STYLE_CONDENSED   RowStyle = "ROW_STYLE_CONDENSED"
+	ROWSTYLE_ROW_STYLE_JSON        RowStyle = "ROW_STYLE_JSON"
+	ROWSTYLE_ROW_STYLE_LIST        RowStyle = "ROW_STYLE_LIST"
 )
 
 // All allowed values of RowStyle enum
@@ -119,4 +119,3 @@ func (v *NullableRowStyle) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

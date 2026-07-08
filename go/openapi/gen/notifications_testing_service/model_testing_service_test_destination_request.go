@@ -27,15 +27,16 @@ type TestingServiceTestDestinationRequest struct {
 	// The connector id.
 	ConnectorId *string `json:"connectorId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Entity sub-type to use when testing the destination.
-	EntitySubType *string `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	EntitySubType *string                       `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	EntityType    *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// The message config fields.
 	MessageConfigFields []NotificationCenterMessageConfigField `json:"messageConfigFields,omitempty"`
 	// Payload type to use when testing the destination.
 	PayloadType *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The preset id.
-	PresetId *string `json:"presetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
-	AdditionalProperties map[string]interface{}
+	PresetId                          *string `json:"presetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestingServiceTestDestinationRequest TestingServiceTestDestinationRequest
@@ -282,7 +283,7 @@ func (o *TestingServiceTestDestinationRequest) SetPresetId(v string) {
 }
 
 func (o TestingServiceTestDestinationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -343,6 +344,7 @@ func (o *TestingServiceTestDestinationRequest) UnmarshalJSON(data []byte) (err e
 		delete(additionalProperties, "payloadType")
 		delete(additionalProperties, "presetId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -383,4 +385,3 @@ func (v *NullableTestingServiceTestDestinationRequest) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

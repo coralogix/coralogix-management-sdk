@@ -22,9 +22,10 @@ var _ MappedNullable = &UsageHourlyQuery{}
 
 // UsageHourlyQuery Hour-oriented query. Always returns 1-hour buckets. Max window: 14 days.
 type UsageHourlyQuery struct {
-	RelativeRange *UsageHourlyRelativeRange `json:"relativeRange,omitempty"`
-	TimeRange *UsageTimestampRange `json:"timeRange,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RelativeRange                     *UsageHourlyRelativeRange `json:"relativeRange,omitempty"`
+	TimeRange                         *UsageTimestampRange      `json:"timeRange,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UsageHourlyQuery UsageHourlyQuery
@@ -111,7 +112,7 @@ func (o *UsageHourlyQuery) SetTimeRange(v UsageTimestampRange) {
 }
 
 func (o UsageHourlyQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,6 +175,7 @@ func (o *UsageHourlyQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "relativeRange")
 		delete(additionalProperties, "timeRange")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -214,4 +216,3 @@ func (v *NullableUsageHourlyQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

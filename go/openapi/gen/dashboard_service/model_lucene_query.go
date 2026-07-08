@@ -23,8 +23,9 @@ var _ MappedNullable = &LuceneQuery{}
 // LuceneQuery Lucene query.
 type LuceneQuery struct {
 	// The value.
-	Value *string `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Value                             *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LuceneQuery LuceneQuery
@@ -79,7 +80,7 @@ func (o *LuceneQuery) SetValue(v string) {
 }
 
 func (o LuceneQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *LuceneQuery) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableLuceneQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

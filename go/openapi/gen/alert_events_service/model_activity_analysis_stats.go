@@ -25,8 +25,9 @@ type ActivityAnalysisStats struct {
 	// Number of muted items.
 	IsMutedCount *int64 `json:"isMutedCount,omitempty"`
 	// List of rules.
-	Rules []string `json:"rules,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Rules                             []string `json:"rules,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ActivityAnalysisStats ActivityAnalysisStats
@@ -113,7 +114,7 @@ func (o *ActivityAnalysisStats) SetRules(v []string) {
 }
 
 func (o ActivityAnalysisStats) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *ActivityAnalysisStats) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "isMutedCount")
 		delete(additionalProperties, "rules")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableActivityAnalysisStats) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

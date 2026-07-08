@@ -22,12 +22,12 @@ var _ MappedNullable = &OutgoingWebhookInputData{}
 
 // OutgoingWebhookInputData Outgoing webhook input data.
 type OutgoingWebhookInputData struct {
-	AwsEventBridge *AwsEventBridgeConfig `json:"awsEventBridge,omitempty"`
-	Demisto *DemistoConfig `json:"demisto,omitempty"`
-	EmailGroup *EmailGroupConfig `json:"emailGroup,omitempty"`
-	GenericWebhook *GenericWebhookConfig `json:"genericWebhook,omitempty"`
+	AwsEventBridge        *AwsEventBridgeConfig        `json:"awsEventBridge,omitempty"`
+	Demisto               *DemistoConfig               `json:"demisto,omitempty"`
+	EmailGroup            *EmailGroupConfig            `json:"emailGroup,omitempty"`
+	GenericWebhook        *GenericWebhookConfig        `json:"genericWebhook,omitempty"`
 	IbmEventNotifications *IbmEventNotificationsConfig `json:"ibmEventNotifications,omitempty"`
-	Jira *JiraConfig `json:"jira,omitempty"`
+	Jira                  *JiraConfig                  `json:"jira,omitempty"`
 	// Microsoft teams config.
 	MicrosoftTeams map[string]interface{} `json:"microsoftTeams,omitempty"`
 	// Ms teams workflow config.
@@ -35,14 +35,15 @@ type OutgoingWebhookInputData struct {
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// Opsgenie config.
-	Opsgenie map[string]interface{} `json:"opsgenie,omitempty"`
-	PagerDuty *PagerDutyConfig `json:"pagerDuty,omitempty"`
-	SendLog *SendLogConfig `json:"sendLog,omitempty"`
-	Slack *SlackConfig `json:"slack,omitempty"`
-	Type *WebhookType `json:"type,omitempty"`
+	Opsgenie  map[string]interface{} `json:"opsgenie,omitempty"`
+	PagerDuty *PagerDutyConfig       `json:"pagerDuty,omitempty"`
+	SendLog   *SendLogConfig         `json:"sendLog,omitempty"`
+	Slack     *SlackConfig           `json:"slack,omitempty"`
+	Type      *WebhookType           `json:"type,omitempty"`
 	// URL.
-	Url *string `json:"url,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Url                               *string `json:"url,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _OutgoingWebhookInputData OutgoingWebhookInputData
@@ -545,7 +546,7 @@ func (o *OutgoingWebhookInputData) SetUrl(v string) {
 }
 
 func (o OutgoingWebhookInputData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -720,6 +721,7 @@ func (o *OutgoingWebhookInputData) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "url")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -760,4 +762,3 @@ func (v *NullableOutgoingWebhookInputData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

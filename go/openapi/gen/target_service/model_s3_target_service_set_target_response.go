@@ -23,8 +23,9 @@ var _ MappedNullable = &S3TargetServiceSetTargetResponse{}
 
 // S3TargetServiceSetTargetResponse This data structure is obtained after setting a storage target for logs.
 type S3TargetServiceSetTargetResponse struct {
-	Target V2Target `json:"target"`
-	AdditionalProperties map[string]interface{}
+	Target                            V2Target `json:"target"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _S3TargetServiceSetTargetResponse S3TargetServiceSetTargetResponse
@@ -72,7 +73,7 @@ func (o *S3TargetServiceSetTargetResponse) SetTarget(v V2Target) {
 }
 
 func (o S3TargetServiceSetTargetResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -103,10 +104,10 @@ func (o *S3TargetServiceSetTargetResponse) UnmarshalJSON(data []byte) (err error
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -128,6 +129,7 @@ func (o *S3TargetServiceSetTargetResponse) UnmarshalJSON(data []byte) (err error
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "target")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -168,4 +170,3 @@ func (v *NullableS3TargetServiceSetTargetResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

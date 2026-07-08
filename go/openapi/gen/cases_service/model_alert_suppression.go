@@ -27,8 +27,9 @@ type AlertSuppression struct {
 	// Object indicating the muted state of the alert definition for an alert indicator.
 	AlertDefinitionMuted map[string]interface{} `json:"alertDefinitionMuted,omitempty"`
 	// Timestamp when the alert got suppressed.
-	SuppressedTime *time.Time `json:"suppressedTime,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SuppressedTime                    *time.Time `json:"suppressedTime,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AlertSuppression AlertSuppression
@@ -147,7 +148,7 @@ func (o *AlertSuppression) SetSuppressedTime(v time.Time) {
 }
 
 func (o AlertSuppression) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -214,6 +215,7 @@ func (o *AlertSuppression) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "alertDefinitionMuted")
 		delete(additionalProperties, "suppressedTime")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -254,4 +256,3 @@ func (v *NullableAlertSuppression) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

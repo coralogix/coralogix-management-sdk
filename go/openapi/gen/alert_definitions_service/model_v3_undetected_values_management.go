@@ -24,8 +24,9 @@ var _ MappedNullable = &V3UndetectedValuesManagement{}
 type V3UndetectedValuesManagement struct {
 	AutoRetireTimeframe *V3AutoRetireTimeframe `json:"autoRetireTimeframe,omitempty"`
 	// Should trigger the alert when undetected values are detected
-	TriggerUndetectedValues *bool `json:"triggerUndetectedValues,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TriggerUndetectedValues           *bool `json:"triggerUndetectedValues,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V3UndetectedValuesManagement V3UndetectedValuesManagement
@@ -112,7 +113,7 @@ func (o *V3UndetectedValuesManagement) SetTriggerUndetectedValues(v bool) {
 }
 
 func (o V3UndetectedValuesManagement) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *V3UndetectedValuesManagement) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "autoRetireTimeframe")
 		delete(additionalProperties, "triggerUndetectedValues")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableV3UndetectedValuesManagement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

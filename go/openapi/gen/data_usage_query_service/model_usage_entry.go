@@ -25,8 +25,9 @@ type UsageEntry struct {
 	// Label values matching the request's `groupBy` keys. Empty when the request does not group by labels.
 	Labels []UsageLabel `json:"labels,omitempty"`
 	// Raw usage measurements for this label combination.
-	Measurements []UsageMeasurement `json:"measurements,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Measurements                      []UsageMeasurement `json:"measurements,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UsageEntry UsageEntry
@@ -113,7 +114,7 @@ func (o *UsageEntry) SetMeasurements(v []UsageMeasurement) {
 }
 
 func (o UsageEntry) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *UsageEntry) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "labels")
 		delete(additionalProperties, "measurements")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableUsageEntry) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

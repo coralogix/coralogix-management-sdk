@@ -246,31 +246,36 @@
         "externalDocs": {
           "url": ""
         },
-        "description": "A whole or partial calendar date relative to the Gregorian calendar (year, month, day). A zero value in a field marks that part as unspecified.",
+        "description": "A full calendar date (year, month, day). All three components are required.",
         "type": "object",
         "properties": {
           "day": {
-            "description": "Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.",
+            "description": "Day of the month. Must be from 1 to 31 and valid for the year and month.",
             "type": "integer",
             "format": "int32",
-            "minimum": 0,
+            "minimum": 1,
             "maximum": 31
           },
           "month": {
-            "description": "Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.",
+            "description": "Month of the year. Must be from 1 to 12.",
             "type": "integer",
             "format": "int32",
-            "minimum": 0,
+            "minimum": 1,
             "maximum": 12
           },
           "year": {
-            "description": "Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.",
+            "description": "Year of the date. Must be from 1 to 9999.",
             "type": "integer",
             "format": "int32",
-            "minimum": 0,
+            "minimum": 1,
             "maximum": 9999
           }
-        }
+        },
+        "required": [
+          "year",
+          "month",
+          "day"
+        ]
       },
       "FilterPathAndValues": {
         "externalDocs": {
@@ -408,7 +413,7 @@
         "externalDocs": {
           "url": ""
         },
-        "description": "Half-open UTC calendar date interval `[start, end)`. Both bounds must be full calendar dates; partial dates are rejected.",
+        "description": "Half-open UTC calendar date interval `[start, end)`. Both bounds are required full calendar dates.",
         "type": "object",
         "properties": {
           "end": {

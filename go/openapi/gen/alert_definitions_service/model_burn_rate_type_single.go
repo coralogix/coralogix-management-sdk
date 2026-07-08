@@ -22,8 +22,9 @@ var _ MappedNullable = &BurnRateTypeSingle{}
 
 // BurnRateTypeSingle Burn rate type single definition
 type BurnRateTypeSingle struct {
-	TimeDuration *TimeDuration `json:"timeDuration,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TimeDuration                      *TimeDuration `json:"timeDuration,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _BurnRateTypeSingle BurnRateTypeSingle
@@ -78,7 +79,7 @@ func (o *BurnRateTypeSingle) SetTimeDuration(v TimeDuration) {
 }
 
 func (o BurnRateTypeSingle) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *BurnRateTypeSingle) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "timeDuration")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableBurnRateTypeSingle) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

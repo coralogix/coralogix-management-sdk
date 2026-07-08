@@ -29,16 +29,36 @@
               "description": "Filter configuration for alert defs",
               "type": "object",
               "properties": {
-                "enabledFilter": {},
-                "entityLabelsFilter": {},
-                "idFilter": {},
-                "lastTriggeredTimeRangeFilter": {},
-                "modifiedTimeRangeFilter": {},
-                "nameFilter": {},
-                "priorityFilter": {},
-                "statusFilter": {},
-                "typeFilter": {},
-                "typeSpecificFilter": {}
+                "enabledFilter": {
+                  "$ref": "#/components/schemas/AlertDefEnabledFilter"
+                },
+                "entityLabelsFilter": {
+                  "$ref": "#/components/schemas/AlertDefEntityLabelsFilter"
+                },
+                "idFilter": {
+                  "$ref": "#/components/schemas/AlertDefIdFilter"
+                },
+                "lastTriggeredTimeRangeFilter": {
+                  "$ref": "#/components/schemas/AlertDefLastTriggeredTimeFilter"
+                },
+                "modifiedTimeRangeFilter": {
+                  "$ref": "#/components/schemas/AlertDefModifiedTimeFilter"
+                },
+                "nameFilter": {
+                  "$ref": "#/components/schemas/AlertDefNameFilter"
+                },
+                "priorityFilter": {
+                  "$ref": "#/components/schemas/AlertDefPriorityFilter"
+                },
+                "statusFilter": {
+                  "$ref": "#/components/schemas/AlertDefStatusFilter"
+                },
+                "typeFilter": {
+                  "$ref": "#/components/schemas/AlertDefTypeFilter"
+                },
+                "typeSpecificFilter": {
+                  "$ref": "#/components/schemas/AlertDefTypeSpecificFilter"
+                }
               }
             },
             "style": "form"
@@ -324,12 +344,24 @@
               "description": "Filter configuration for counting filter options",
               "type": "object",
               "properties": {
-                "enabledFilter": {},
-                "entityLabelsFilter": {},
-                "nameFilter": {},
-                "priorityFilter": {},
-                "statusFilter": {},
-                "typeFilter": {}
+                "enabledFilter": {
+                  "$ref": "#/components/schemas/FilterOptionCountsEnabledFilter"
+                },
+                "entityLabelsFilter": {
+                  "$ref": "#/components/schemas/FilterOptionCountsEntityLabelsFilter"
+                },
+                "nameFilter": {
+                  "$ref": "#/components/schemas/FilterOptionCountsNameFilter"
+                },
+                "priorityFilter": {
+                  "$ref": "#/components/schemas/FilterOptionCountsPriorityFilter"
+                },
+                "statusFilter": {
+                  "$ref": "#/components/schemas/FilterOptionCountsStatusFilter"
+                },
+                "typeFilter": {
+                  "$ref": "#/components/schemas/FilterOptionCountsTypeFilter"
+                }
               }
             },
             "style": "form"
@@ -915,6 +947,75 @@
           }
         }
       },
+      "AlertDefEnabledFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef Enabled Filter",
+        "description": "Filter by alert definition enabled status",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "description": "Whether to filter for enabled (true) or disabled (false) alerts",
+            "type": "boolean"
+          }
+        }
+      },
+      "AlertDefEntityLabelsFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef Entity Labels Filter",
+        "description": "Filter by alert definition entity labels",
+        "type": "object",
+        "properties": {
+          "entityLabels": {
+            "description": "The entity label key-value pairs to filter by",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 0
+            }
+          },
+          "valuesOperator": {
+            "$ref": "#/components/schemas/FilterValuesOperator"
+          }
+        }
+      },
+      "AlertDefIdFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef ID Filter",
+        "description": "Filter by alert definition IDs",
+        "type": "object",
+        "properties": {
+          "alertId": {
+            "example": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
+            "description": "The alert definition ID(s) to filter by - multiple values are OR'd together",
+            "type": "array",
+            "items": {
+              "description": "The alert definition ID(s) to filter by - multiple values are OR'd together",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          },
+          "matchType": {
+            "$ref": "#/components/schemas/AlertDefIdFilterMatchType"
+          }
+        }
+      },
+      "AlertDefIdFilterMatchType": {
+        "type": "string",
+        "enum": [
+          "ALERT_DEF_ID_FILTER_MATCH_TYPE_UNSPECIFIED",
+          "ALERT_DEF_ID_FILTER_MATCH_TYPE_INCLUDE",
+          "ALERT_DEF_ID_FILTER_MATCH_TYPE_EXCLUDE"
+        ]
+      },
       "AlertDefIncidentSettings": {
         "externalDocs": {
           "url": ""
@@ -932,6 +1033,55 @@
           },
           "notifyOn": {
             "$ref": "#/components/schemas/NotifyOn"
+          }
+        }
+      },
+      "AlertDefLastTriggeredTimeFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef Last Triggered Time Filter",
+        "description": "Filter by alert definition last triggered times",
+        "type": "object",
+        "properties": {
+          "lastTriggeredAtRange": {
+            "$ref": "#/components/schemas/v3.TimeRange"
+          }
+        }
+      },
+      "AlertDefModifiedTimeFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef Modified Time Filter",
+        "description": "Filter by alert definition modification times",
+        "type": "object",
+        "properties": {
+          "modifiedAtRange": {
+            "$ref": "#/components/schemas/v3.TimeRange"
+          }
+        }
+      },
+      "AlertDefNameFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef Name Filter",
+        "description": "Filter by alert definition names",
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+          },
+          "name": {
+            "description": "The name(s) of the alert definition - multiple values are OR'd together",
+            "type": "array",
+            "items": {
+              "description": "The name(s) of the alert definition - multiple values are OR'd together",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1020,6 +1170,27 @@
           "ALERT_DEF_PRIORITY_P2",
           "ALERT_DEF_PRIORITY_P1"
         ]
+      },
+      "AlertDefPriorityFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef Priority Filter",
+        "description": "Filter by alert definition priorities",
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+          },
+          "priority": {
+            "description": "The priority(ies) of the alert definition - multiple values are OR'd together",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefPriority"
+            },
+            "minItems": 0
+          }
+        }
       },
       "AlertDefProperties": {
         "externalDocs": {
@@ -1345,6 +1516,32 @@
           }
         ]
       },
+      "AlertDefSloSpecificFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef SLO Specific Filter",
+        "description": "Filter SLO-based alerts by SLO-specific fields",
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+          },
+          "sloId": {
+            "example": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
+            "description": "The SLO ID(s) to filter by - multiple values are OR'd together",
+            "type": "array",
+            "items": {
+              "description": "The SLO ID(s) to filter by - multiple values are OR'd together",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
       "AlertDefStatus": {
         "description": "Alert def status.",
         "type": "string",
@@ -1354,6 +1551,27 @@
           "ALERT_DEF_STATUS_OK",
           "ALERT_DEF_STATUS_NO_DATA"
         ]
+      },
+      "AlertDefStatusFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef Status Filter",
+        "description": "Filter by alert definition status",
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+          },
+          "status": {
+            "description": "The status(es) of the alert definition - multiple values are OR'd together",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefStatus"
+            },
+            "minItems": 0
+          }
+        }
       },
       "AlertDefToReplace": {
         "externalDocs": {
@@ -1394,6 +1612,40 @@
           "ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE",
           "ALERT_DEF_TYPE_ANALYTICS_THRESHOLD"
         ]
+      },
+      "AlertDefTypeFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef Type Filter",
+        "description": "Filter by alert definition types",
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+          },
+          "type": {
+            "description": "The alert type(s) - multiple values are OR'd together",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefType"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "AlertDefTypeSpecificFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AlertDef Type Specific Filter",
+        "description": "Filter by fields specific to alert type definitions",
+        "type": "object",
+        "properties": {
+          "sloFilter": {
+            "$ref": "#/components/schemas/AlertDefSloSpecificFilter"
+          }
+        }
       },
       "AlertDefWebhooksSettings": {
         "externalDocs": {
@@ -1983,6 +2235,92 @@
           }
         }
       },
+      "FilterOptionCountsEnabledFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filter option counts enabled filter",
+        "description": "Filter by alert definition enabled status for counting options",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "example": true,
+            "description": "Whether to filter for enabled (true) or disabled (false) alerts",
+            "type": "boolean"
+          }
+        }
+      },
+      "FilterOptionCountsEntityLabelsFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filter option counts entity labels filter",
+        "description": "Filter by alert definition entity labels with And/Or options",
+        "type": "object",
+        "properties": {
+          "entityLabels": {
+            "description": "The entity label key-value pairs to filter by",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 0
+            }
+          },
+          "valuesOperator": {
+            "$ref": "#/components/schemas/FilterValuesOperator"
+          }
+        }
+      },
+      "FilterOptionCountsNameFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filter option counts name filter",
+        "description": "Filter by alert definition names for counting options",
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+          },
+          "name": {
+            "example": [
+              "My Alert",
+              "Another Alert"
+            ],
+            "description": "The name(s) of the alert definition - multiple values are OR'd together",
+            "type": "array",
+            "items": {
+              "description": "The name(s) of the alert definition - multiple values are OR'd together",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "FilterOptionCountsPriorityFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filter option counts priority filter",
+        "description": "Filter by alert definition priorities",
+        "type": "object",
+        "properties": {
+          "priority": {
+            "example": [
+              "ALERT_DEF_PRIORITY_P1",
+              "ALERT_DEF_PRIORITY_P2",
+              "ALERT_DEF_PRIORITY_P3"
+            ],
+            "description": "The alert priorities to include in the count",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefPriority"
+            },
+            "minItems": 0
+          }
+        }
+      },
       "FilterOptionCountsResponse": {
         "externalDocs": {
           "url": ""
@@ -1993,6 +2331,56 @@
         "properties": {
           "counts": {
             "$ref": "#/components/schemas/FilterOptionCounts"
+          }
+        }
+      },
+      "FilterOptionCountsStatusFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filter option counts status filter",
+        "description": "Filter by alert definition status for counting options",
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+          },
+          "status": {
+            "example": [
+              "ALERT_DEF_STATUS_ALERTING",
+              "ALERT_DEF_STATUS_OK",
+              "ALERT_DEF_STATUS_NO_DATA"
+            ],
+            "description": "The alert statuses to include in the count",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefStatus"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "FilterOptionCountsTypeFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filter option counts type filter",
+        "description": "Filter by alert definition types for counting options",
+        "type": "object",
+        "properties": {
+          "type": {
+            "example": [
+              "ALERT_DEF_TYPE_LOGS_THRESHOLD",
+              "ALERT_DEF_TYPE_LOGS_NEW_VALUE",
+              "ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT",
+              "ALERT_DEF_TYPE_TRACING_THRESHOLD"
+            ],
+            "description": "The alert types",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefType"
+            },
+            "minItems": 0
           }
         }
       },
@@ -2032,6 +2420,14 @@
               "filters"
             ]
           }
+        ]
+      },
+      "FilterValuesOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_VALUES_OPERATOR_UNSPECIFIED",
+          "FILTER_VALUES_OPERATOR_OR",
+          "FILTER_VALUES_OPERATOR_AND"
         ]
       },
       "Filters": {
@@ -3978,6 +4374,15 @@
           }
         }
       },
+      "alerts.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_UNSPECIFIED",
+          "FILTER_MATCHER_EQUALS",
+          "FILTER_MATCHER_NOT_EQUALS",
+          "FILTER_MATCHER_CONTAINS"
+        ]
+      },
       "alerts.v3.PaginationResponse": {
         "externalDocs": {
           "url": ""
@@ -4180,6 +4585,28 @@
             "example": "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default",
             "description": "the payload type for the notification",
             "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "v3.TimeRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Time range",
+        "description": "Represents a time range with start and end timestamps",
+        "type": "object",
+        "properties": {
+          "endTime": {
+            "description": "End time of the range",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
+          },
+          "startTime": {
+            "description": "Start time of the range",
+            "type": "string",
+            "format": "date-time",
             "minLength": 0
           }
         }

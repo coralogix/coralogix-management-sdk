@@ -25,13 +25,14 @@ type RoutingRule struct {
 	// Condition.
 	Condition *string `json:"condition,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The custom details.
-	CustomDetails *map[string]string `json:"customDetails,omitempty"`
-	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	CustomDetails *map[string]string            `json:"customDetails,omitempty"`
+	EntityType    *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// List of targets.
-	Targets []RoutingTarget `json:"targets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Targets                           []RoutingTarget `json:"targets,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RoutingRule RoutingRule
@@ -214,7 +215,7 @@ func (o *RoutingRule) SetTargets(v []RoutingTarget) {
 }
 
 func (o RoutingRule) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -267,6 +268,7 @@ func (o *RoutingRule) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "targets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -307,4 +309,3 @@ func (v *NullableRoutingRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

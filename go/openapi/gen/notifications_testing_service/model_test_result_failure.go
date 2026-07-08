@@ -25,8 +25,9 @@ type TestResultFailure struct {
 	// Human-readable message.
 	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The status code.
-	StatusCode *int64 `json:"statusCode,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StatusCode                        *int64 `json:"statusCode,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestResultFailure TestResultFailure
@@ -113,7 +114,7 @@ func (o *TestResultFailure) SetStatusCode(v int64) {
 }
 
 func (o TestResultFailure) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *TestResultFailure) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "message")
 		delete(additionalProperties, "statusCode")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableTestResultFailure) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

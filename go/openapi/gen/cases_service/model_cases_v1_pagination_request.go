@@ -27,8 +27,9 @@ type CasesV1PaginationRequest struct {
 	// Token for the next page of results
 	PageToken *string `json:"pageToken,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number of items to skip before starting to collect results
-	Skip *int64 `json:"skip,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Skip                              *int64 `json:"skip,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CasesV1PaginationRequest CasesV1PaginationRequest
@@ -147,7 +148,7 @@ func (o *CasesV1PaginationRequest) SetSkip(v int64) {
 }
 
 func (o CasesV1PaginationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *CasesV1PaginationRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "pageToken")
 		delete(additionalProperties, "skip")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableCasesV1PaginationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

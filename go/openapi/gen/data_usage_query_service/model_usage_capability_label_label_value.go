@@ -25,8 +25,9 @@ type UsageCapabilityLabelLabelValue struct {
 	// Short user-facing description of this value.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The label value.
-	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Value                             *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UsageCapabilityLabelLabelValue UsageCapabilityLabelLabelValue
@@ -113,7 +114,7 @@ func (o *UsageCapabilityLabelLabelValue) SetValue(v string) {
 }
 
 func (o UsageCapabilityLabelLabelValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *UsageCapabilityLabelLabelValue) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableUsageCapabilityLabelLabelValue) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

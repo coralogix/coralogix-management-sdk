@@ -22,9 +22,10 @@ var _ MappedNullable = &ListIncidentEventsOrderByRequest{}
 
 // ListIncidentEventsOrderByRequest struct for ListIncidentEventsOrderByRequest
 type ListIncidentEventsOrderByRequest struct {
-	Direction *V1OrderByDirection `json:"direction,omitempty"`
-	Field *IncidentEventOrderByFieldType `json:"field,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Direction                         *V1OrderByDirection            `json:"direction,omitempty"`
+	Field                             *IncidentEventOrderByFieldType `json:"field,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListIncidentEventsOrderByRequest ListIncidentEventsOrderByRequest
@@ -111,7 +112,7 @@ func (o *ListIncidentEventsOrderByRequest) SetField(v IncidentEventOrderByFieldT
 }
 
 func (o ListIncidentEventsOrderByRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *ListIncidentEventsOrderByRequest) UnmarshalJSON(data []byte) (err error
 		delete(additionalProperties, "direction")
 		delete(additionalProperties, "field")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableListIncidentEventsOrderByRequest) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

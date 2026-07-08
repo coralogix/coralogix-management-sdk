@@ -23,8 +23,9 @@ var _ MappedNullable = &CreateQuotaAllocationRuleSetRequest{}
 
 // CreateQuotaAllocationRuleSetRequest Request to create a new quota allocation rule set
 type CreateQuotaAllocationRuleSetRequest struct {
-	RuleSet QuotaAllocationEntityTypeRuleSet `json:"ruleSet"`
-	AdditionalProperties map[string]interface{}
+	RuleSet                           QuotaAllocationEntityTypeRuleSet `json:"ruleSet"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateQuotaAllocationRuleSetRequest CreateQuotaAllocationRuleSetRequest
@@ -72,7 +73,7 @@ func (o *CreateQuotaAllocationRuleSetRequest) SetRuleSet(v QuotaAllocationEntity
 }
 
 func (o CreateQuotaAllocationRuleSetRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -103,10 +104,10 @@ func (o *CreateQuotaAllocationRuleSetRequest) UnmarshalJSON(data []byte) (err er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -128,6 +129,7 @@ func (o *CreateQuotaAllocationRuleSetRequest) UnmarshalJSON(data []byte) (err er
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ruleSet")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -168,4 +170,3 @@ func (v *NullableCreateQuotaAllocationRuleSetRequest) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

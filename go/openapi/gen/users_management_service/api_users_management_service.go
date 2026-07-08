@@ -19,14 +19,13 @@ import (
 	"strings"
 )
 
-
 // UsersManagementServiceAPIService UsersManagementServiceAPI service
 type UsersManagementServiceAPIService service
 
 type ApiUsersMgmtServiceCreateUsersRequest struct {
-	ctx context.Context
-	ApiService *UsersManagementServiceAPIService
-	teamId int64
+	ctx                                context.Context
+	ApiService                         *UsersManagementServiceAPIService
+	teamId                             int64
 	usersMgmtServiceCreateUsersRequest *UsersMgmtServiceCreateUsersRequest
 }
 
@@ -44,26 +43,27 @@ UsersMgmtServiceCreateUsers Create Users
 
 Adds members to the specified team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId Team ID where the users will be created
- @return ApiUsersMgmtServiceCreateUsersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param teamId Team ID where the users will be created
+	@return ApiUsersMgmtServiceCreateUsersRequest
 */
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsers(ctx context.Context, teamId int64) ApiUsersMgmtServiceCreateUsersRequest {
 	return ApiUsersMgmtServiceCreateUsersRequest{
 		ApiService: a,
-		ctx: ctx,
-		teamId: teamId,
+		ctx:        ctx,
+		teamId:     teamId,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r ApiUsersMgmtServiceCreateUsersRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersManagementServiceAPIService.UsersMgmtServiceCreateUsers")
@@ -129,8 +129,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -140,8 +140,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -151,8 +151,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -162,8 +162,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -173,8 +173,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -192,9 +192,9 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r 
 }
 
 type ApiUsersMgmtServiceGetUserRequest struct {
-	ctx context.Context
-	ApiService *UsersManagementServiceAPIService
-	teamId int64
+	ctx           context.Context
+	ApiService    *UsersManagementServiceAPIService
+	teamId        int64
 	userAccountId int64
 }
 
@@ -207,28 +207,29 @@ UsersMgmtServiceGetUser Get User
 
 Returns the details of a specific team member.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId Team ID to search within
- @param userAccountId User account ID to retrieve
- @return ApiUsersMgmtServiceGetUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param teamId Team ID to search within
+	@param userAccountId User account ID to retrieve
+	@return ApiUsersMgmtServiceGetUserRequest
 */
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUser(ctx context.Context, teamId int64, userAccountId int64) ApiUsersMgmtServiceGetUserRequest {
 	return ApiUsersMgmtServiceGetUserRequest{
-		ApiService: a,
-		ctx: ctx,
-		teamId: teamId,
+		ApiService:    a,
+		ctx:           ctx,
+		teamId:        teamId,
 		userAccountId: userAccountId,
 	}
 }
 
 // Execute executes the request
-//  @return GetUserResponse
+//
+//	@return GetUserResponse
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUserExecute(r ApiUsersMgmtServiceGetUserRequest) (*GetUserResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetUserResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetUserResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersManagementServiceAPIService.UsersMgmtServiceGetUser")
@@ -296,8 +297,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUserExecute(r ApiU
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -307,8 +308,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUserExecute(r ApiU
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -318,8 +319,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUserExecute(r ApiU
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -329,8 +330,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUserExecute(r ApiU
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -348,13 +349,13 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUserExecute(r ApiU
 }
 
 type ApiUsersMgmtServiceSearchUsersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UsersManagementServiceAPIService
-	teamId int64
-	username *string
-	status *UserStatus
-	pageSize *int64
-	pageToken *int64
+	teamId     int64
+	username   *string
+	status     *UserStatus
+	pageSize   *int64
+	pageToken  *int64
 }
 
 // Optional filter by username (partial match supported)
@@ -390,26 +391,27 @@ UsersMgmtServiceSearchUsers Search Users
 
 Searches for team members by query.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId Team ID to search within
- @return ApiUsersMgmtServiceSearchUsersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param teamId Team ID to search within
+	@return ApiUsersMgmtServiceSearchUsersRequest
 */
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsers(ctx context.Context, teamId int64) ApiUsersMgmtServiceSearchUsersRequest {
 	return ApiUsersMgmtServiceSearchUsersRequest{
 		ApiService: a,
-		ctx: ctx,
-		teamId: teamId,
+		ctx:        ctx,
+		teamId:     teamId,
 	}
 }
 
 // Execute executes the request
-//  @return SearchUsersResponse
+//
+//	@return SearchUsersResponse
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsersExecute(r ApiUsersMgmtServiceSearchUsersRequest) (*SearchUsersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SearchUsersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SearchUsersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersManagementServiceAPIService.UsersMgmtServiceSearchUsers")
@@ -493,8 +495,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -504,8 +506,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -515,8 +517,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -526,8 +528,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -545,9 +547,9 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsersExecute(r 
 }
 
 type ApiUsersMgmtServiceUpdateUsersRequest struct {
-	ctx context.Context
-	ApiService *UsersManagementServiceAPIService
-	teamId int64
+	ctx                                context.Context
+	ApiService                         *UsersManagementServiceAPIService
+	teamId                             int64
 	usersMgmtServiceUpdateUsersRequest *UsersMgmtServiceUpdateUsersRequest
 }
 
@@ -565,26 +567,27 @@ UsersMgmtServiceUpdateUsers Update Users
 
 Updates team members for the specified team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId Team ID containing the users to update
- @return ApiUsersMgmtServiceUpdateUsersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param teamId Team ID containing the users to update
+	@return ApiUsersMgmtServiceUpdateUsersRequest
 */
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsers(ctx context.Context, teamId int64) ApiUsersMgmtServiceUpdateUsersRequest {
 	return ApiUsersMgmtServiceUpdateUsersRequest{
 		ApiService: a,
-		ctx: ctx,
-		teamId: teamId,
+		ctx:        ctx,
+		teamId:     teamId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateUsersResponse
+//
+//	@return UpdateUsersResponse
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersExecute(r ApiUsersMgmtServiceUpdateUsersRequest) (*UpdateUsersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateUsersResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateUsersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersManagementServiceAPIService.UsersMgmtServiceUpdateUsers")
@@ -650,8 +653,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -661,8 +664,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -672,8 +675,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -683,8 +686,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -702,9 +705,9 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersExecute(r 
 }
 
 type ApiUsersMgmtServiceUpdateUsersStatusesRequest struct {
-	ctx context.Context
-	ApiService *UsersManagementServiceAPIService
-	teamId int64
+	ctx                     context.Context
+	ApiService              *UsersManagementServiceAPIService
+	teamId                  int64
 	updateUserStatusRequest *UpdateUserStatusRequest
 }
 
@@ -722,26 +725,27 @@ UsersMgmtServiceUpdateUsersStatuses Activate/Revoke Users
 
 Updates the active status of multiple team members.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId Team ID containing the users to update
- @return ApiUsersMgmtServiceUpdateUsersStatusesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param teamId Team ID containing the users to update
+	@return ApiUsersMgmtServiceUpdateUsersStatusesRequest
 */
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatuses(ctx context.Context, teamId int64) ApiUsersMgmtServiceUpdateUsersStatusesRequest {
 	return ApiUsersMgmtServiceUpdateUsersStatusesRequest{
 		ApiService: a,
-		ctx: ctx,
-		teamId: teamId,
+		ctx:        ctx,
+		teamId:     teamId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateUsersStatusesResponse
+//
+//	@return UpdateUsersStatusesResponse
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatusesExecute(r ApiUsersMgmtServiceUpdateUsersStatusesRequest) (*UpdateUsersStatusesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateUsersStatusesResponse
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateUsersStatusesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersManagementServiceAPIService.UsersMgmtServiceUpdateUsersStatuses")
@@ -807,8 +811,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatusesEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -818,8 +822,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatusesEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -829,8 +833,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatusesEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -840,8 +844,8 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatusesEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

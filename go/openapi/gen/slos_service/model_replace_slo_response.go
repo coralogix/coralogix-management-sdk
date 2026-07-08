@@ -24,9 +24,10 @@ var _ MappedNullable = &ReplaceSloResponse{}
 // ReplaceSloResponse Response after replacing an existing SLO.
 type ReplaceSloResponse struct {
 	// The effected slo alert ids.
-	EffectedSloAlertIds []string `json:"effectedSloAlertIds,omitempty"`
-	Slo Slo `json:"slo"`
-	AdditionalProperties map[string]interface{}
+	EffectedSloAlertIds               []string `json:"effectedSloAlertIds,omitempty"`
+	Slo                               Slo      `json:"slo"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ReplaceSloResponse ReplaceSloResponse
@@ -106,7 +107,7 @@ func (o *ReplaceSloResponse) SetSlo(v Slo) {
 }
 
 func (o ReplaceSloResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -140,10 +141,10 @@ func (o *ReplaceSloResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -166,6 +167,7 @@ func (o *ReplaceSloResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "effectedSloAlertIds")
 		delete(additionalProperties, "slo")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -206,4 +208,3 @@ func (v *NullableReplaceSloResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

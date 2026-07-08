@@ -164,6 +164,7 @@ Class | Method | HTTP request | Description
  - [IncidentsV1PaginationRequest](docs/IncidentsV1PaginationRequest.md)
  - [IncidentsV1PaginationResponse](docs/IncidentsV1PaginationResponse.md)
  - [IncidentsV1UserDetails](docs/IncidentsV1UserDetails.md)
+ - [LabelsFilter](docs/LabelsFilter.md)
  - [ListIncidentAggregationsResponse](docs/ListIncidentAggregationsResponse.md)
  - [ListIncidentEventsFilterValuesResponse](docs/ListIncidentEventsFilterValuesResponse.md)
  - [ListIncidentEventsOrderByRequest](docs/ListIncidentEventsOrderByRequest.md)

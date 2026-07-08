@@ -165,7 +165,7 @@
                     "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
                     "type": "string",
                     "pattern": "^[\\s\\S]*$",
-                    "minLength": 1,
+                    "minLength": 0,
                     "maxLength": 65536
                   },
                   "dashboard": {
@@ -178,7 +178,9 @@
                   "requestId": {
                     "description": "Idempotency key for the replace request, used to prevent duplicate updates.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   }
                 },
                 "required": [
@@ -259,7 +261,7 @@
                     "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
                     "type": "string",
                     "pattern": "^[\\s\\S]*$",
-                    "minLength": 1,
+                    "minLength": 0,
                     "maxLength": 65536
                   },
                   "dashboard": {
@@ -272,7 +274,9 @@
                   "requestId": {
                     "description": "The request id.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   }
                 },
                 "required": [
@@ -409,7 +413,9 @@
             "schema": {
               "description": "The URL slug identifying the dashboard to retrieve.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$",
+              "minLength": 1,
+              "maxLength": 255
             },
             "style": "simple"
           }
@@ -536,7 +542,9 @@
             "schema": {
               "description": "Optional client-supplied request identifier used to correlate the deletion request.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "form"
           }
@@ -596,7 +604,9 @@
           "schema": {
             "description": "The dashboard id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 21,
+            "maxLength": 21
           },
           "style": "simple"
         }
@@ -622,7 +632,9 @@
             "schema": {
               "description": "The dashboard id.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 21,
+              "maxLength": 21
             },
             "style": "simple"
           }
@@ -638,7 +650,9 @@
                   "requestId": {
                     "description": "Idempotency key for the replace default dashboard request, used to prevent duplicate operations.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   }
                 },
                 "required": [
@@ -716,7 +730,9 @@
             "schema": {
               "description": "The dashboard id.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 21,
+              "maxLength": 21
             },
             "style": "simple"
           }
@@ -732,12 +748,16 @@
                   "folderId": {
                     "description": "The ID of the folder to assign the dashboard to. Set to null to assign to the root folder.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "minLength": 36,
+                    "maxLength": 36
                   },
                   "requestId": {
                     "description": "Idempotency key for the assign folder request, used to prevent duplicate operations.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   }
                 },
                 "required": [
@@ -814,7 +834,9 @@
             "schema": {
               "description": "Idempotency key for the pin request, used to prevent duplicate operations.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "form"
           }
@@ -883,7 +905,9 @@
             "schema": {
               "description": "Idempotency key for the unpin request, used to prevent duplicate operations.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "form"
           }
@@ -943,7 +967,9 @@
           "schema": {
             "description": "The dashboard id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 21,
+            "maxLength": 21
           },
           "style": "simple"
         }
@@ -1025,7 +1051,9 @@
           "label": {
             "description": "The label.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         }
       },
@@ -1046,7 +1074,9 @@
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "enabled": {
             "description": "Whether this resource is enabled.",
@@ -1055,12 +1085,16 @@
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           },
           "scope": {
             "$ref": "#/components/schemas/Annotation.WidgetScope"
@@ -1247,9 +1281,12 @@
             "items": {
               "description": "The widget ids.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -1299,12 +1336,16 @@
             "example": 500,
             "description": "Maximum number of data points to display. The calculated interval ensures this limit is not exceeded.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "minimumInterval": {
             "description": "Minimum interval duration. The calculated interval will not be smaller than this value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 2,
+            "maxLength": 30
           }
         }
       },
@@ -1358,7 +1399,9 @@
           "field": {
             "description": "The field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -1380,7 +1423,9 @@
             "example": "classic",
             "description": "Applied color scheme, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
@@ -1389,7 +1434,9 @@
             "example": "mph",
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -1398,7 +1445,9 @@
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "decimalPrecision": {
             "example": false,
@@ -1409,7 +1458,9 @@
             "example": "Result - {{ variable }}",
             "description": "Custom template name for a bar group, can contain variables",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "hashColors": {
             "example": false,
@@ -1423,7 +1474,9 @@
             "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "query": {
             "$ref": "#/components/schemas/BarChart.Query"
@@ -1477,7 +1530,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names by which results are grouped",
@@ -1485,14 +1539,19 @@
             "items": {
               "description": "List of field names by which results are grouped",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -1516,7 +1575,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names to group the query results",
@@ -1524,9 +1584,12 @@
             "items": {
               "description": "List of field names to group the query results",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNamesFields": {
             "description": "List of observation fields to group the results",
@@ -1534,7 +1597,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -1542,7 +1606,9 @@
           "stackedGroupName": {
             "description": "Field name by which results are stacked in individual group",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "stackedGroupNameField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -1572,7 +1638,8 @@
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names by which metric results are grouped",
@@ -1580,9 +1647,12 @@
             "items": {
               "description": "List of field names by which metric results are grouped",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -1593,7 +1663,9 @@
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -1695,7 +1767,8 @@
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names to group the span records",
@@ -1703,7 +1776,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNamesFields": {
             "description": "A list of observation fields definitions to group the records by",
@@ -1711,7 +1785,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -1737,12 +1812,16 @@
           "maxSlicesPerBar": {
             "description": "How many slices can fit in a single bar",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual stack",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -1872,7 +1951,8 @@
             "items": {
               "$ref": "#/components/schemas/MappingSection"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -2030,12 +2110,16 @@
           "columnName": {
             "description": "The column name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "width": {
             "description": "The width.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           }
         }
       },
@@ -2049,7 +2133,9 @@
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -2066,9 +2152,12 @@
             "items": {
               "description": "List of values.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -2090,7 +2179,9 @@
           "field": {
             "description": "The field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -2109,7 +2200,9 @@
           "dashboardId": {
             "description": "The dashboard id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 21,
+            "maxLength": 21
           }
         }
       },
@@ -2123,7 +2216,9 @@
           "url": {
             "description": "Static URL that may contain variables using {{variable_name}} syntax",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -2145,12 +2240,16 @@
           "description": {
             "description": "Short description of a section",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "name": {
             "description": "Section custom name",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "repetitiveVar": {
             "$ref": "#/components/schemas/RepetitiveVar"
@@ -2175,7 +2274,8 @@
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
@@ -2183,13 +2283,16 @@
             "items": {
               "$ref": "#/components/schemas/Annotation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "fifteenMinutes": {
             "$ref": "#/components/schemas/AutoRefreshFifteenMinutes"
@@ -2200,7 +2303,8 @@
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "fiveMinutes": {
             "$ref": "#/components/schemas/AutoRefreshFiveMinutes"
@@ -2215,7 +2319,9 @@
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 21,
+            "maxLength": 21
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2224,7 +2330,9 @@
             "example": "Example Name",
             "description": "The display name of the dashboard",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "off": {
             "$ref": "#/components/schemas/AutoRefreshOff"
@@ -2235,13 +2343,17 @@
           "relativeTimeFrame": {
             "description": "Relative time frame specifying a duration from the current time",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 2,
+            "maxLength": 64
           },
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "twoMinutes": {
             "$ref": "#/components/schemas/AutoRefreshTwoMinutes"
@@ -2252,7 +2364,8 @@
             "items": {
               "$ref": "#/components/schemas/Variable"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
@@ -2260,7 +2373,8 @@
             "items": {
               "$ref": "#/components/schemas/VariableV2"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "required": [
@@ -2394,17 +2508,23 @@
           "id": {
             "description": "A unique identifier of the action",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "name": {
             "description": "The display name of the action",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           },
           "queryId": {
             "description": "Reference to specific query within a widget, can be null if the action is dashboard wide or related to single query widget",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "shouldOpenInNewWindow": {
             "description": "Defines if the action should open in a new window or current window in the browser",
@@ -2413,7 +2533,9 @@
           "widgetId": {
             "description": "Reference to specific widget within a dashboard, can be null if the action is dashboard wide",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         }
       },
@@ -2427,18 +2549,23 @@
           "authorId": {
             "description": "The author id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "createTime": {
             "description": "The create time.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "folder": {
             "$ref": "#/components/schemas/DashboardFolder"
@@ -2447,7 +2574,9 @@
             "example": "6U1Q8Hpa263Se8PkRKaiE",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 21,
+            "maxLength": 21
           },
           "isDefault": {
             "description": "The is default.",
@@ -2464,23 +2593,30 @@
           "lockerAuthorId": {
             "description": "The locker author id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "slugName": {
             "description": "The slug name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           }
         }
       },
@@ -2492,19 +2628,25 @@
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier.",
+            "description": "Unique identifier. A UUID.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           },
           "parentId": {
-            "description": "The parent id.",
+            "description": "The parent id. A UUID that must differ from this folder's own id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         }
       },
@@ -2516,12 +2658,13 @@
         "type": "object",
         "properties": {
           "columns": {
-            "description": "List of column definitions",
+            "description": "List of column definitions. At least one column is required when the query is a logs query.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DataTable.Column"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -2536,7 +2679,9 @@
             "example": 10,
             "description": "How many results are displayed per table page",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "rowStyle": {
             "$ref": "#/components/schemas/RowStyle"
@@ -2549,12 +2694,16 @@
           "field": {
             "description": "Name of the field to display in the column",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "width": {
             "description": "Custom width of the column, by default it's automatically adjusted",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
           }
         }
       },
@@ -2575,7 +2724,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -2596,7 +2746,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "grouping": {
             "$ref": "#/components/schemas/LogsQuery.Grouping"
@@ -2626,7 +2777,8 @@
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -2731,7 +2883,8 @@
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "grouping": {
             "$ref": "#/components/schemas/SpansQuery.Grouping"
@@ -2788,12 +2941,15 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "messageTemplate": {
             "description": "The message template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1000
           },
           "orientation": {
             "$ref": "#/components/schemas/AnnotationOrientation"
@@ -3101,12 +3257,16 @@
           "id": {
             "description": "Unique id of the query definition",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "name": {
             "description": "Custom name of the query",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "query": {
             "$ref": "#/components/schemas/Dynamic.Query"
@@ -3189,9 +3349,12 @@
             "items": {
               "description": "A list of selected values.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -3225,7 +3388,9 @@
           "messageTemplate": {
             "description": "The message template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1000
           },
           "recurrence": {
             "$ref": "#/components/schemas/Recurrence"
@@ -3293,12 +3458,16 @@
           "duration": {
             "description": "Duration.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^\\d+(\\.\\d+)?s$",
+            "minLength": 2,
+            "maxLength": 30
           },
           "startTimeHour": {
             "description": "The start time hour.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 23
           }
         }
       },
@@ -3312,7 +3481,9 @@
           "startTimeHour": {
             "description": "The start time hour.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 23
           }
         }
       },
@@ -3356,7 +3527,9 @@
           "field": {
             "description": "The log field to which the filter is applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -3528,7 +3701,8 @@
             "items": {
               "$ref": "#/components/schemas/UUID"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -3606,9 +3780,12 @@
             "items": {
               "description": "The segments.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 100
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 2
           }
         }
       },
@@ -3641,7 +3818,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -3665,7 +3843,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBy": {
             "description": "A list of observation fields by which to group the results",
@@ -3673,7 +3852,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "logsAggregation": {
             "$ref": "#/components/schemas/LogsAggregation"
@@ -3706,7 +3886,8 @@
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -3814,7 +3995,8 @@
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBy": {
             "description": "List of field names to group the span records",
@@ -3822,7 +4004,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBys": {
             "description": "A list of observation fields to group the records by",
@@ -3830,7 +4013,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -3854,7 +4038,9 @@
           "color": {
             "description": "Color of the threshold",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "from": {
             "description": "Minimum bound value of the threshold",
@@ -3864,7 +4050,9 @@
           "label": {
             "description": "Optional label of the threshold",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         }
       },
@@ -3930,13 +4118,17 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "minMax": {
             "$ref": "#/components/schemas/MinMax"
@@ -4198,12 +4390,15 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "messageTemplate": {
             "description": "Custom template for the geomap tooltip",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -4221,24 +4416,29 @@
             "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
+            "minLength": 0,
             "maxLength": 65536
           },
           "authorId": {
             "description": "The author id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "authorName": {
             "description": "The author name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "createdOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
@@ -4253,18 +4453,23 @@
           "lockerAuthorId": {
             "description": "The locker author id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "lockerName": {
             "description": "The locker name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "updatedOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
@@ -4272,12 +4477,16 @@
           "updaterAuthorId": {
             "description": "The updater author id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "updaterName": {
             "description": "The updater name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         }
       },
@@ -4295,7 +4504,8 @@
             "items": {
               "$ref": "#/components/schemas/DashboardCatalogItem"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100000
           }
         }
       },
@@ -4313,24 +4523,29 @@
             "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
+            "minLength": 0,
             "maxLength": 65536
           },
           "authorId": {
             "description": "The author id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "authorName": {
             "description": "The author name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "createdOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
@@ -4345,12 +4560,16 @@
           "lockerAuthorId": {
             "description": "The locker author id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "lockerName": {
             "description": "The locker name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "resolvedWidgets": {
             "description": "Map of resolved widget references for widgets with references in the dashboard",
@@ -4363,7 +4582,8 @@
             "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "updatedOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
@@ -4371,12 +4591,16 @@
           "updaterAuthorId": {
             "description": "The updater author id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "updaterName": {
             "description": "The updater name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         }
       },
@@ -4390,7 +4614,9 @@
           "dashboardId": {
             "description": "Reference to specific dashboard",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 21,
+            "maxLength": 21
           }
         }
       },
@@ -4424,13 +4650,20 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
+          },
+          "histogramBucketUnit": {
+            "$ref": "#/components/schemas/HeatmapHistogramBucketUnit"
           },
           "preset": {
             "$ref": "#/components/schemas/HeatmapColorPreset"
@@ -4457,7 +4690,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "xAxisTimeFormat": {
             "$ref": "#/components/schemas/XAxisTimeFormat"
@@ -4468,7 +4702,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "oneOf": [
@@ -4520,6 +4755,25 @@
           "HEATMAP_COLOR_PRESET_THRESHOLD_REVERSED"
         ]
       },
+      "HeatmapHistogramBucketUnit": {
+        "description": "Heatmap histogram bucket unit.",
+        "type": "string",
+        "enum": [
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_UNSPECIFIED",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_NANOSECONDS",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_MICROSECONDS",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_MILLISECONDS",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_SECONDS",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_BYTES_IEC",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_KIBYTES",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_MIBYTES",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_GIBYTES",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_BYTES",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_KBYTES",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_MBYTES",
+          "HEATMAP_HISTOGRAM_BUCKET_UNIT_GBYTES"
+        ]
+      },
       "HeatmapTooltip": {
         "externalDocs": {
           "url": ""
@@ -4533,12 +4787,15 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "messageTemplate": {
             "description": "Custom template for the heatmap tooltip",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -4552,7 +4809,9 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -4561,7 +4820,9 @@
             "example": 2,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "decimalPrecision": {
             "example": false,
@@ -4598,7 +4859,8 @@
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -4622,7 +4884,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -4643,7 +4906,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBy": {
             "description": "A list of observation fields by which to group the results",
@@ -4651,7 +4915,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "logsAggregation": {
             "$ref": "#/components/schemas/LogsAggregation"
@@ -4684,7 +4949,8 @@
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -4789,7 +5055,8 @@
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBy": {
             "description": "List of field names to group the span records",
@@ -4797,7 +5064,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBys": {
             "description": "A list of observation fields to group the records by",
@@ -4805,7 +5073,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -4836,18 +5105,23 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 2,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "legend": {
             "$ref": "#/components/schemas/Legend"
@@ -4876,7 +5150,8 @@
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -4896,7 +5171,9 @@
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
@@ -4904,7 +5181,9 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -4913,7 +5192,9 @@
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "decimalPrecision": {
             "example": false,
@@ -4927,7 +5208,9 @@
           "groupNameTemplate": {
             "description": "Custom template name for a bar group, can contain variables",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "hashColors": {
             "example": false,
@@ -4941,7 +5224,9 @@
             "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "query": {
             "$ref": "#/components/schemas/HorizontalBarChart.Query"
@@ -4992,7 +5277,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names by which results are grouped",
@@ -5000,14 +5286,19 @@
             "items": {
               "description": "List of field names by which results are grouped",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -5031,7 +5322,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names to group the query results",
@@ -5039,9 +5331,12 @@
             "items": {
               "description": "List of field names to group the query results",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNamesFields": {
             "description": "List of observation fields to group the results",
@@ -5049,7 +5344,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -5057,7 +5353,9 @@
           "stackedGroupName": {
             "description": "Field name by which results are stacked in individual group",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "stackedGroupNameField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -5087,7 +5385,8 @@
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names by which metric results are grouped",
@@ -5095,9 +5394,12 @@
             "items": {
               "description": "List of field names by which metric results are grouped",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -5108,7 +5410,9 @@
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -5210,7 +5514,8 @@
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names to group the span records",
@@ -5218,7 +5523,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNamesFields": {
             "description": "A list of observation fields definitions to group the records by",
@@ -5226,7 +5532,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -5252,12 +5559,16 @@
           "maxSlicesPerBar": {
             "description": "How many slices can fit in a single bar",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual stack",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -5327,12 +5638,15 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
@@ -5340,13 +5654,17 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "displayOnBar": {
             "description": "Specifies where to display the bar value",
@@ -5355,7 +5673,9 @@
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "hashColors": {
             "example": false,
@@ -5369,12 +5689,16 @@
             "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "maxSlicesPerBar": {
             "description": "How many slices can fit in a single bar",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "scaleType": {
             "$ref": "#/components/schemas/ScaleType"
@@ -5385,7 +5709,9 @@
           "stackNameTemplate": {
             "description": "Custom template name of an individual stack",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "subCategoryFields": {
             "description": "The sub category fields.",
@@ -5393,7 +5719,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -5445,12 +5772,15 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
@@ -5458,13 +5788,17 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "displayOnBar": {
             "description": "Specifies where to display the bar value",
@@ -5473,7 +5807,9 @@
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "hashColors": {
             "example": false,
@@ -5487,7 +5823,9 @@
             "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "queryFieldSettings": {
             "description": "Per-query field settings",
@@ -5495,7 +5833,8 @@
             "items": {
               "$ref": "#/components/schemas/HorizontalBarsMulti.QueryFieldSettings"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "scaleType": {
             "$ref": "#/components/schemas/ScaleType"
@@ -5534,7 +5873,9 @@
           "queryId": {
             "description": "Reference to the query id from Dynamic.query_display_settings",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -5692,7 +6033,8 @@
             "items": {
               "$ref": "#/components/schemas/Section"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -5714,7 +6056,8 @@
             "items": {
               "$ref": "#/components/schemas/LegendColumn"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           },
           "groupByQuery": {
             "description": "In case of multiple queries, whether legend items should be grouped by their respective queries",
@@ -5784,7 +6127,8 @@
             "items": {
               "$ref": "#/components/schemas/LineChart.QueryDefinition"
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 1000
           },
           "stackedLine": {
             "$ref": "#/components/schemas/LineChart.StackedLine"
@@ -5822,7 +6166,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -5842,7 +6187,8 @@
             "items": {
               "$ref": "#/components/schemas/LogsAggregation"
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 1
           },
           "filters": {
             "description": "List of filters that narrow down query results",
@@ -5850,7 +6196,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBy": {
             "description": "List of field names to group the query results",
@@ -5858,9 +6205,12 @@
             "items": {
               "description": "List of field names to group the query results",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBys": {
             "description": "A list of observation fields to group the query results",
@@ -5868,7 +6218,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -5894,7 +6245,8 @@
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -5996,12 +6348,16 @@
           "colorScheme": {
             "description": "Applied color scheme for this query, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -6010,7 +6366,9 @@
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "decimalPrecision": {
             "example": false,
@@ -6023,9 +6381,11 @@
             "type": "boolean"
           },
           "id": {
-            "description": "Unique id of the query definition",
+            "description": "Unique id of the query definition. If empty or omitted, it is auto-replaced with a generated UUID.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "intervalResolution": {
             "$ref": "#/components/schemas/IntervalResolution"
@@ -6038,7 +6398,9 @@
           "name": {
             "description": "Custom name of the query",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "query": {
             "$ref": "#/components/schemas/LineChart.Query"
@@ -6059,7 +6421,9 @@
           "seriesNameTemplate": {
             "description": "Custom template for the series name",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -6093,12 +6457,16 @@
           "bucketsPresented": {
             "description": "How many buckets to present in the selected timeframe (deprecated)",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
           },
           "interval": {
             "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 2,
+            "maxLength": 30
           }
         }
       },
@@ -6115,7 +6483,8 @@
             "items": {
               "$ref": "#/components/schemas/SpansAggregation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "filters": {
             "description": "List of span query filters",
@@ -6123,7 +6492,8 @@
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBy": {
             "description": "List of field names to group the span records",
@@ -6131,7 +6501,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBys": {
             "description": "A list of observation fields to group the records by",
@@ -6139,7 +6510,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -6167,7 +6539,9 @@
           "name": {
             "description": "Name of the link action",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "shouldOpenInNewWindow": {
             "description": "Defines if the link action should open in a new window or current window in the browser",
@@ -6176,7 +6550,9 @@
           "url": {
             "description": "Static URL that may contain variables using {{variable_name}} syntax",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -6193,7 +6569,8 @@
             "items": {
               "$ref": "#/components/schemas/SingleStringValue"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -6211,7 +6588,8 @@
             "items": {
               "$ref": "#/components/schemas/LogsAggregation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -6222,7 +6600,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBy": {
             "description": "A list of observation fields by which to group the results",
@@ -6230,7 +6609,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -6373,7 +6753,9 @@
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -6390,7 +6772,9 @@
           "id": {
             "description": "Aggregation unique identifier",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "isVisible": {
             "description": "Whether the aggregation is visible in the table",
@@ -6399,7 +6783,9 @@
           "name": {
             "description": "Aggregation name",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         }
       },
@@ -6416,7 +6802,8 @@
             "items": {
               "$ref": "#/components/schemas/LogsQuery.Aggregation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBy": {
             "description": "List of field names to group the query results",
@@ -6424,9 +6811,12 @@
             "items": {
               "description": "List of field names to group the query results",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBys": {
             "description": "List of observation fields to group the results",
@@ -6434,7 +6824,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -6454,7 +6845,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -6462,7 +6854,9 @@
           "messageTemplate": {
             "description": "The message template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1000
           },
           "strategy": {
             "$ref": "#/components/schemas/LogsSource.Strategy"
@@ -6584,7 +6978,9 @@
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 10000
           }
         }
       },
@@ -6611,18 +7007,24 @@
           "interval": {
             "description": "Fixed interval duration for time buckets, specified by the user.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 2,
+            "maxLength": 30
           },
           "maximumDataPoints": {
             "example": 500,
             "description": "Maximum number of data points constraint.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "minimumInterval": {
             "description": "Minimum interval duration constraint. The selected interval will not be smaller than this value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 2,
+            "maxLength": 30
           }
         },
         "required": [
@@ -6639,7 +7041,9 @@
           "messageTemplate": {
             "description": "The message template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1000
           },
           "orientation": {
             "$ref": "#/components/schemas/AnnotationOrientation"
@@ -6707,7 +7111,9 @@
           "customUnit": {
             "description": "The custom unit.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -6729,7 +7135,9 @@
           "customUnit": {
             "description": "The custom unit.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "endValue": {
             "description": "The end value.",
@@ -6768,12 +7176,16 @@
           "mapTo": {
             "description": "Display text to map the matched value to",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "value": {
             "description": "Value to match (exact string for value mapping, regex pattern for regex mapping)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           }
         }
       },
@@ -6787,12 +7199,16 @@
           "markdownText": {
             "description": "Markdown text",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65536
           },
           "tooltipText": {
             "description": "Tooltip text to display on widget hover",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           }
         }
       },
@@ -6806,7 +7222,9 @@
           "field": {
             "description": "The field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -6871,12 +7289,16 @@
           "label": {
             "description": "The label.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "metricName": {
             "description": "The metric name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -6913,12 +7335,16 @@
           "label": {
             "description": "The label associated with the metric.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "metric": {
             "description": "The name of the metric to which the filter is applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "operator": {
             "$ref": "#/components/schemas/Filter.Operator"
@@ -6959,14 +7385,19 @@
             "items": {
               "description": "List of labels.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 255
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           },
           "messageTemplate": {
             "description": "The message template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1000
           },
           "orientation": {
             "$ref": "#/components/schemas/AnnotationOrientation"
@@ -7001,7 +7432,9 @@
           "field": {
             "description": "The field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -7098,9 +7531,12 @@
               "deprecated": true,
               "description": "The selected values.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "selection": {
             "$ref": "#/components/schemas/MultiSelect.Selection"
@@ -7275,9 +7711,12 @@
             "items": {
               "description": "List of labels.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "values": {
             "description": "List of values.",
@@ -7285,9 +7724,12 @@
             "items": {
               "description": "List of values.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -7394,12 +7836,16 @@
           "labelRegex": {
             "description": "The label regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "valueRegex": {
             "description": "The value regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -7509,9 +7955,12 @@
             "items": {
               "description": "A list of values for the selection.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -7525,7 +7974,9 @@
           "label": {
             "description": "The label.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "value": {
             "description": "The value.",
@@ -7547,9 +7998,12 @@
             "items": {
               "description": "The keypath.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 1000
           },
           "scope": {
             "$ref": "#/components/schemas/DatasetScope"
@@ -7576,7 +8030,9 @@
           "field": {
             "description": "Field name to order by",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "orderDirection": {
             "$ref": "#/components/schemas/OrderDirection"
@@ -7593,7 +8049,9 @@
           "field": {
             "description": "The field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -7622,7 +8080,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names by which results are grouped",
@@ -7630,14 +8089,19 @@
             "items": {
               "description": "List of field names by which results are grouped",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 1000
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -7661,7 +8125,8 @@
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names to group the query results",
@@ -7669,9 +8134,12 @@
             "items": {
               "description": "List of field names to group the query results",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNamesFields": {
             "description": "List of observation fields to group the results",
@@ -7679,7 +8147,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -7687,7 +8156,9 @@
           "stackedGroupName": {
             "description": "Field name by which results are stacked in individual group",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "stackedGroupNameField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -7717,7 +8188,8 @@
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names by which metric results are grouped",
@@ -7725,9 +8197,12 @@
             "items": {
               "description": "List of field names by which metric results are grouped",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 1000
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -7738,7 +8213,9 @@
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -7840,7 +8317,8 @@
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNames": {
             "description": "List of field names to group the span records",
@@ -7848,7 +8326,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupNamesFields": {
             "description": "A list of observation fields definitions to group the records by",
@@ -7856,7 +8335,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -7882,12 +8362,16 @@
           "maxSlicesPerStack": {
             "description": "How many slices can fit in a single slice stack",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual slice in the stack",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -7920,7 +8404,9 @@
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
           }
         }
       },
@@ -7968,7 +8454,9 @@
             "example": "Renamed header",
             "description": "Column display name property, allows renaming the column header name",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "link": {
             "$ref": "#/components/schemas/PropertyLinks"
@@ -7977,7 +8465,9 @@
             "example": "gr[ae]y",
             "description": "Value of Regex Extract property, a regex string",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "thresholds": {
             "$ref": "#/components/schemas/PropertyThresholds"
@@ -7989,7 +8479,9 @@
             "example": "Pod: {{$d.pod}}",
             "description": "Value alias property, used to give alias names to selected fields",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "valuesMapping": {
             "$ref": "#/components/schemas/PropertyValuesMapping"
@@ -8114,7 +8606,8 @@
             "items": {
               "$ref": "#/components/schemas/LinkAction"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -8144,7 +8637,8 @@
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -8163,12 +8657,16 @@
           "customUnit": {
             "description": "Custom unit (requires to set unit field as 'custom' to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "max": {
             "description": "A maximum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value",
@@ -8198,7 +8696,8 @@
             "items": {
               "$ref": "#/components/schemas/PropertyValuesMapping.ValueMapping"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -8208,12 +8707,16 @@
           "inputValue": {
             "description": "The input value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "replaceValue": {
             "description": "The replace value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "type": {
             "$ref": "#/components/schemas/ValuesMappingType"
@@ -8290,7 +8793,9 @@
           "logRegex": {
             "description": "The log regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -8429,7 +8934,8 @@
             "items": {
               "$ref": "#/components/schemas/Query.MetricsQuery.StringOrVariable"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -8443,12 +8949,16 @@
           "stringValue": {
             "description": "A literal string value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "variableName": {
             "description": "The name of a dashboard variable whose current value will be substituted.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         },
         "oneOf": [
@@ -8558,7 +9068,9 @@
           "metricRegex": {
             "description": "The metric regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -8575,7 +9087,8 @@
             "items": {
               "$ref": "#/components/schemas/Query.MetricsQuery.MetricsLabelFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "labelName": {
             "$ref": "#/components/schemas/Query.MetricsQuery.StringOrVariable"
@@ -8595,7 +9108,9 @@
           "metricRegex": {
             "description": "The metric regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -8669,7 +9184,9 @@
           "spanRegex": {
             "description": "The span regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -8707,23 +9224,30 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "colorScheme": {
             "description": "Applied color scheme for this query, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "hashColors": {
             "example": false,
@@ -8733,7 +9257,9 @@
           "queryId": {
             "description": "Reference to the query id from Dynamic.query_display_settings",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "scaleType": {
             "$ref": "#/components/schemas/ScaleType"
@@ -8748,7 +9274,9 @@
           "seriesNameTemplate": {
             "description": "Custom template for the series name",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "temporalField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -8762,7 +9290,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "yAxisMax": {
             "example": 1000,
@@ -8863,7 +9392,9 @@
           "logRegex": {
             "description": "The log regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -9002,7 +9533,8 @@
             "items": {
               "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -9016,12 +9548,16 @@
           "stringValue": {
             "description": "A literal string value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "variableName": {
             "description": "The name of a dashboard variable whose current value will be substituted.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         },
         "oneOf": [
@@ -9146,7 +9682,9 @@
           "metricRegex": {
             "description": "The metric regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -9163,7 +9701,8 @@
             "items": {
               "$ref": "#/components/schemas/QuerySource.MetricsQuery.MetricsLabelFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "labelName": {
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
@@ -9183,7 +9722,9 @@
           "metricRegex": {
             "description": "The metric regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -9257,7 +9798,9 @@
           "spanRegex": {
             "description": "The span regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -9311,7 +9854,8 @@
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -9341,7 +9885,8 @@
             "items": {
               "$ref": "#/components/schemas/MappingSection"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -9368,7 +9913,9 @@
             "example": "pod_name",
             "description": "Variable name that can be applied on section making it repetitive section",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         }
       },
@@ -9407,7 +9954,8 @@
             "items": {
               "$ref": "#/components/schemas/Widget"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -9421,7 +9969,9 @@
           "height": {
             "description": "Height of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etc",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           }
         }
       },
@@ -9453,7 +10003,9 @@
           "regex": {
             "description": "Regular expression pattern used to scope the rule.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         },
         "oneOf": [
@@ -9526,7 +10078,8 @@
             "items": {
               "$ref": "#/components/schemas/Row"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -9652,7 +10205,9 @@
           "queryId": {
             "description": "Reference to the query id from Dynamic.query_display_settings",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         }
       },
@@ -9672,11 +10227,7 @@
         "title": "SortStrategy",
         "description": "Strategy for determining sort key",
         "discriminator": {
-          "propertyName": "strategy_type",
-          "mapping": {
-            "STRATEGY_TYPE_CATEGORY": "#/components/schemas/SortByCategory",
-            "STRATEGY_TYPE_QUERY_VALUE": "#/components/schemas/SortByQueryValue"
-          }
+          "propertyName": "strategyType"
         },
         "type": "object",
         "properties": {
@@ -9690,7 +10241,9 @@
             "example": "STRATEGY_TYPE_CATEGORY",
             "description": "Discriminator field - STRATEGY_TYPE_CATEGORY or STRATEGY_TYPE_QUERY_VALUE",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           }
         },
         "oneOf": [
@@ -9740,12 +10293,16 @@
           "processTagField": {
             "description": "Name of a process-level tag field to use as the data source.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 255
           },
           "tagField": {
             "description": "Name of a span tag field to use as the data source.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 255
           }
         },
         "oneOf": [
@@ -9819,9 +10376,12 @@
             "items": {
               "description": "The keypath.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 1000
           },
           "relationType": {
             "$ref": "#/components/schemas/SpanRelationType"
@@ -9855,7 +10415,8 @@
             "items": {
               "$ref": "#/components/schemas/LogsAggregation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -9866,7 +10427,8 @@
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBy": {
             "description": "A list of fields to group the records by",
@@ -9874,7 +10436,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -9957,7 +10520,9 @@
           "id": {
             "description": "Aggregation unique identifier",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "isVisible": {
             "description": "Whether the aggregation is visible in the table",
@@ -9966,7 +10531,9 @@
           "name": {
             "description": "Aggregation name",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         }
       },
@@ -9983,7 +10550,8 @@
             "items": {
               "$ref": "#/components/schemas/SpansQuery.Aggregation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBy": {
             "description": "List of field names to group the span records",
@@ -9991,7 +10559,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "groupBys": {
             "description": "A list of observation fields definitions to group the records by",
@@ -9999,7 +10568,8 @@
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -10019,7 +10589,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -10027,7 +10598,9 @@
           "messageTemplate": {
             "description": "The message template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1000
           },
           "strategy": {
             "$ref": "#/components/schemas/SpansSource.Strategy"
@@ -10165,18 +10738,23 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 2,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "displaySeriesName": {
             "description": "(multi-stat display only) Whether to show the series names above the value",
@@ -10212,7 +10790,8 @@
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -10226,7 +10805,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -10249,7 +10829,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "colorLabelMapping": {
             "$ref": "#/components/schemas/ColorLabelMapping"
@@ -10257,13 +10838,17 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 2,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "label": {
             "$ref": "#/components/schemas/StatVisualElement"
@@ -10289,7 +10874,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -10310,7 +10896,9 @@
           "templateText": {
             "description": "Optional display name template with variable support, e.g. 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "templateVariables": {
             "description": "Variables available for use in the display name template, each referencing either a datashape field or mapped values",
@@ -10318,7 +10906,8 @@
             "items": {
               "$ref": "#/components/schemas/DisplayNameTemplateVariable"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "oneOf": [
@@ -10371,7 +10960,8 @@
             "items": {
               "$ref": "#/components/schemas/ValueLabel"
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 1000
           },
           "valuesOrderDirection": {
             "$ref": "#/components/schemas/OrderDirection"
@@ -10388,12 +10978,16 @@
           "label": {
             "description": "The label.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -10407,7 +11001,9 @@
           "field": {
             "description": "The field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -10427,7 +11023,8 @@
             "items": {
               "$ref": "#/components/schemas/Table.Column"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "rules": {
             "description": "List of rules.",
@@ -10435,7 +11032,8 @@
             "items": {
               "$ref": "#/components/schemas/Table.Rule"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "settings": {
             "$ref": "#/components/schemas/TableSettings"
@@ -10460,7 +11058,9 @@
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "id": {
             "$ref": "#/components/schemas/UUID"
@@ -10468,7 +11068,9 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "properties": {
             "description": "The properties.",
@@ -10476,7 +11078,8 @@
             "items": {
               "$ref": "#/components/schemas/Property"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "ruleScope": {
             "$ref": "#/components/schemas/RuleScope"
@@ -10496,7 +11099,8 @@
             "items": {
               "$ref": "#/components/schemas/ColumnWidthEntry"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "rowStyle": {
             "$ref": "#/components/schemas/RowStyle"
@@ -10523,7 +11127,9 @@
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           }
         }
       },
@@ -10540,7 +11146,9 @@
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -10582,7 +11190,9 @@
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -10596,7 +11206,9 @@
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           }
         }
       },
@@ -10632,7 +11244,9 @@
             "deprecated": true,
             "description": "Deprecated. Default string value for the textbox variable.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         },
         "oneOf": [
@@ -10761,13 +11375,15 @@
             "description": "The from.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 35
           },
           "to": {
             "description": "The to.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 35
           }
         }
       },
@@ -10784,7 +11400,9 @@
           "relativeTimeFrame": {
             "description": "Relative time frame expressed as a duration offset from the current time (e.g., last 15 minutes).",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 2,
+            "maxLength": 64
           }
         },
         "oneOf": [
@@ -10842,23 +11460,30 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "colorScheme": {
             "description": "Applied color scheme for this query, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "hashColors": {
             "example": false,
@@ -10871,7 +11496,9 @@
           "maxSlicesPerBar": {
             "description": "How many slices can fit in a single bar",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "scaleType": {
             "$ref": "#/components/schemas/ScaleType"
@@ -10879,7 +11506,9 @@
           "seriesNameTemplate": {
             "description": "Custom template for the series name",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "sortBy": {
             "$ref": "#/components/schemas/SortByType"
@@ -10899,7 +11528,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "xAxisTimeFormat": {
             "$ref": "#/components/schemas/XAxisTimeFormat"
@@ -10936,12 +11566,15 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "colorScheme": {
             "description": "Applied color scheme for this query, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "connectNulls": {
             "example": false,
@@ -10951,13 +11584,17 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "hashColors": {
             "example": false,
@@ -10980,7 +11617,9 @@
           "seriesNameTemplate": {
             "description": "Custom template for the series name",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "stackedLine": {
             "$ref": "#/components/schemas/Visualization.StackedLine"
@@ -11005,7 +11644,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "xAxisTimeFormat": {
             "$ref": "#/components/schemas/XAxisTimeFormat"
@@ -11045,7 +11685,8 @@
             "items": {
               "$ref": "#/components/schemas/QueryDisplaySettings"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "stackedLine": {
             "$ref": "#/components/schemas/Visualization.StackedLine"
@@ -11127,7 +11768,9 @@
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         }
       },
@@ -11151,12 +11794,16 @@
           "label": {
             "description": "The label.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -11178,12 +11825,16 @@
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "displayName": {
             "description": "The display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           },
           "displayType": {
             "$ref": "#/components/schemas/VariableDisplayType"
@@ -11191,7 +11842,9 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           }
         }
       },
@@ -11447,12 +12100,16 @@
           "labelRegex": {
             "description": "The label regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "valueRegex": {
             "description": "The value regex.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -11462,7 +12119,9 @@
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "displayFullRow": {
             "description": "The display full row.",
@@ -11471,7 +12130,9 @@
           "displayName": {
             "description": "The display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           },
           "displayType": {
             "$ref": "#/components/schemas/VariableDisplayTypeV2"
@@ -11482,7 +12143,9 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           },
           "source": {
             "$ref": "#/components/schemas/VariableSourceV2"
@@ -11633,12 +12296,15 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
@@ -11646,18 +12312,24 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "hashColors": {
             "example": false,
@@ -11671,12 +12343,16 @@
             "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "maxSlicesPerBar": {
             "description": "How many slices can fit in a single bar",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "scaleType": {
             "$ref": "#/components/schemas/ScaleType"
@@ -11687,7 +12363,9 @@
           "stackNameTemplate": {
             "description": "Custom template name of an individual stack",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "subCategoryFields": {
             "description": "The sub category fields.",
@@ -11695,7 +12373,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -11738,12 +12417,15 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
@@ -11751,18 +12433,24 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "hashColors": {
             "example": false,
@@ -11776,7 +12464,9 @@
             "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "queryFieldSettings": {
             "description": "Per-query field settings",
@@ -11784,7 +12474,8 @@
             "items": {
               "$ref": "#/components/schemas/VerticalBarsMulti.QueryFieldSettings"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "scaleType": {
             "$ref": "#/components/schemas/ScaleType"
@@ -11820,7 +12511,9 @@
           "queryId": {
             "description": "Reference to the query id from Dynamic.query_display_settings",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -12101,18 +12794,23 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 2,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "displaySeriesName": {
             "description": "(multigauge display only) Whether to show the series names above the value",
@@ -12155,7 +12853,8 @@
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -12169,7 +12868,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -12191,28 +12891,37 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "customUnit": {
             "description": "Custom unit (requires the unit field to be set to custom to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "decimalPrecision": {
             "example": 5,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "hashColors": {
             "example": false,
@@ -12229,18 +12938,24 @@
             "example": 24,
             "description": "Maximum number of slices on a chart",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "maxSlicesPerStack": {
             "description": "How many slices can fit in a single slice stack",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "minSlicePercentage": {
             "example": 5,
             "description": "Minimum percentage threshold for slices to be displayed",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 100
           },
           "showTotal": {
             "example": false,
@@ -12250,7 +12965,9 @@
           "stackNameTemplate": {
             "description": "Custom template name of an individual slice in the stack",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "subCategoryFields": {
             "description": "The sub category fields.",
@@ -12258,7 +12975,8 @@
             "items": {
               "$ref": "#/components/schemas/ObservationField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -12356,7 +13074,8 @@
             "items": {
               "$ref": "#/components/schemas/Weekday"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 7
           }
         }
       },
@@ -12376,7 +13095,8 @@
             "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "definition": {
             "$ref": "#/components/schemas/Widget.Definition"
@@ -12384,7 +13104,9 @@
           "description": {
             "description": "Short description of the widget",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "id": {
             "$ref": "#/components/schemas/UUID"
@@ -12402,13 +13124,16 @@
           "title": {
             "description": "Name of the widget",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           }
         }
       },
@@ -12422,7 +13147,9 @@
           "width": {
             "description": "The width.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
           }
         }
       },
@@ -12588,9 +13315,11 @@
         "type": "object",
         "properties": {
           "dashboardId": {
-            "description": "Dashboard ID containing the referenced widget",
+            "description": "Dashboard ID containing the referenced widget (21-char NanoIds)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 21,
+            "maxLength": 21
           },
           "widgetId": {
             "$ref": "#/components/schemas/UUID"
@@ -12671,12 +13400,16 @@
           "bucketsPresented": {
             "description": "How many buckets to present in the selected timeframe (deprecated)",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "interval": {
             "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 2,
+            "maxLength": 30
           }
         }
       },
@@ -12741,7 +13474,9 @@
           "text": {
             "description": "The text.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 10000
           }
         }
       },
@@ -12756,7 +13491,9 @@
           "color": {
             "description": "Color of the threshold",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "from": {
             "description": "Minimum bound value of the threshold",
@@ -12766,7 +13503,9 @@
           "label": {
             "description": "Optional label of the threshold",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 255
           }
         }
       },
@@ -12830,7 +13569,9 @@
           "displayName": {
             "description": "A display name for the filter",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "enabled": {
             "description": "Indicates if the filter is currently enabled or not.",
@@ -12887,12 +13628,13 @@
             "$ref": "#/components/schemas/Dynamic.Query"
           },
           "queryDefinitions": {
-            "description": "Definitions of widget queries",
+            "description": "Definitions of widget queries. At least one query definition is required unless the deprecated query field is set.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Dynamic.QueryDefinition"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -12912,7 +13654,9 @@
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as 'custom' to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -12921,7 +13665,9 @@
             "example": 3,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "decimalPrecision": {
             "example": false,
@@ -12975,7 +13721,8 @@
             "items": {
               "$ref": "#/components/schemas/Gauge.Threshold"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "unit": {
             "$ref": "#/components/schemas/Gauge.Unit"
@@ -12992,12 +13739,16 @@
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "customUnit": {
             "description": "Custom unit (requires the unit field to be set to custom to take effect)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -13006,7 +13757,9 @@
             "example": 5,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 15
           },
           "decimalPrecision": {
             "example": false,
@@ -13016,7 +13769,9 @@
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "hashColors": {
             "example": false,
@@ -13033,13 +13788,17 @@
             "example": 24,
             "description": "Maximum number of slices on a chart",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "minSlicePercentage": {
             "example": 5,
             "description": "Minimum percentage threshold for slices to be displayed",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 100
           },
           "query": {
             "$ref": "#/components/schemas/PieChart.Query"

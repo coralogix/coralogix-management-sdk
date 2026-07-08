@@ -24,8 +24,8 @@ type SyntaxType string
 // List of SyntaxType
 const (
 	SYNTAXTYPE_SYNTAX_TYPE_UNSPECIFIED SyntaxType = "SYNTAX_TYPE_UNSPECIFIED"
-	SYNTAXTYPE_SYNTAX_TYPE_LUCENE SyntaxType = "SYNTAX_TYPE_LUCENE"
-	SYNTAXTYPE_SYNTAX_TYPE_DATAPRIME SyntaxType = "SYNTAX_TYPE_DATAPRIME"
+	SYNTAXTYPE_SYNTAX_TYPE_LUCENE      SyntaxType = "SYNTAX_TYPE_LUCENE"
+	SYNTAXTYPE_SYNTAX_TYPE_DATAPRIME   SyntaxType = "SYNTAX_TYPE_DATAPRIME"
 )
 
 // All allowed values of SyntaxType enum
@@ -113,4 +113,3 @@ func (v *NullableSyntaxType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

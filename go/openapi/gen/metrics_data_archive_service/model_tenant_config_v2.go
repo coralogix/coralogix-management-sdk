@@ -23,16 +23,17 @@ var _ MappedNullable = &TenantConfigV2{}
 // TenantConfigV2 Tenant config v2.
 type TenantConfigV2 struct {
 	// Whether metrics archiving is disabled for this tenant.
-	Disabled *bool `json:"disabled,omitempty"`
-	Gcs *GcsConfig `json:"gcs,omitempty"`
-	Ibm *IbmConfigV2 `json:"ibm,omitempty"`
+	Disabled *bool        `json:"disabled,omitempty"`
+	Gcs      *GcsConfig   `json:"gcs,omitempty"`
+	Ibm      *IbmConfigV2 `json:"ibm,omitempty"`
 	// Storage path prefix applied to all archived objects.
-	Prefix *string `json:"prefix,omitempty"`
+	Prefix          *string                 `json:"prefix,omitempty"`
 	RetentionPolicy *RetentionPolicyRequest `json:"retentionPolicy,omitempty"`
-	S3 *S3Config `json:"s3,omitempty"`
+	S3              *S3Config               `json:"s3,omitempty"`
 	// Tenant identifier.
-	TenantId *int64 `json:"tenantId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TenantId                          *int64 `json:"tenantId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TenantConfigV2 TenantConfigV2
@@ -279,7 +280,7 @@ func (o *TenantConfigV2) SetTenantId(v int64) {
 }
 
 func (o TenantConfigV2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -368,6 +369,7 @@ func (o *TenantConfigV2) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "s3")
 		delete(additionalProperties, "tenantId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -408,4 +410,3 @@ func (v *NullableTenantConfigV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

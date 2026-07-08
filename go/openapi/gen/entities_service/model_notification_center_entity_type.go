@@ -24,9 +24,9 @@ type NotificationCenterEntityType string
 // List of notification_center.EntityType
 const (
 	NOTIFICATIONCENTERENTITYTYPE_ENTITY_TYPE_UNSPECIFIED NotificationCenterEntityType = "ENTITY_TYPE_UNSPECIFIED"
-	NOTIFICATIONCENTERENTITYTYPE_ALERTS NotificationCenterEntityType = "ALERTS"
-	NOTIFICATIONCENTERENTITYTYPE_TEST_NOTIFICATIONS NotificationCenterEntityType = "TEST_NOTIFICATIONS"
-	NOTIFICATIONCENTERENTITYTYPE_CASES NotificationCenterEntityType = "CASES"
+	NOTIFICATIONCENTERENTITYTYPE_ALERTS                  NotificationCenterEntityType = "ALERTS"
+	NOTIFICATIONCENTERENTITYTYPE_TEST_NOTIFICATIONS      NotificationCenterEntityType = "TEST_NOTIFICATIONS"
+	NOTIFICATIONCENTERENTITYTYPE_CASES                   NotificationCenterEntityType = "CASES"
 )
 
 // All allowed values of NotificationCenterEntityType enum
@@ -115,4 +115,3 @@ func (v *NullableNotificationCenterEntityType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

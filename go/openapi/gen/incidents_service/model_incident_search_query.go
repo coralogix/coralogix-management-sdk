@@ -24,11 +24,12 @@ var _ MappedNullable = &IncidentSearchQuery{}
 // IncidentSearchQuery Incident search query.
 type IncidentSearchQuery struct {
 	// The contextual label to search in.
-	ContextualLabel *string `json:"contextualLabel,omitempty"`
-	IncidentField *IncidentFields `json:"incidentField,omitempty"`
+	ContextualLabel *string         `json:"contextualLabel,omitempty"`
+	IncidentField   *IncidentFields `json:"incidentField,omitempty"`
 	// The search query
-	Query string `json:"query"`
-	AdditionalProperties map[string]interface{}
+	Query                             string `json:"query"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentSearchQuery IncidentSearchQuery
@@ -140,7 +141,7 @@ func (o *IncidentSearchQuery) SetQuery(v string) {
 }
 
 func (o IncidentSearchQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,7 +170,7 @@ func (o IncidentSearchQuery) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if len(o.AdditionalProperties) == 0 {
+		if !o.additionalPropertiesFromUnmarshal {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [incidentField, contextualLabel] must be set"}
 		}
 	}
@@ -193,10 +194,10 @@ func (o *IncidentSearchQuery) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -242,6 +243,7 @@ func (o *IncidentSearchQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "incidentField")
 		delete(additionalProperties, "query")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -282,4 +284,3 @@ func (v *NullableIncidentSearchQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

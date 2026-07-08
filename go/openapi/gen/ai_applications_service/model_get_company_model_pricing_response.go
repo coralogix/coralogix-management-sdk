@@ -22,8 +22,9 @@ var _ MappedNullable = &GetCompanyModelPricingResponse{}
 
 // GetCompanyModelPricingResponse Response containing the company's custom model pricing.
 type GetCompanyModelPricingResponse struct {
-	Pricing *CompanyModelPricing `json:"pricing,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Pricing                           *CompanyModelPricing `json:"pricing,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetCompanyModelPricingResponse GetCompanyModelPricingResponse
@@ -78,7 +79,7 @@ func (o *GetCompanyModelPricingResponse) SetPricing(v CompanyModelPricing) {
 }
 
 func (o GetCompanyModelPricingResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *GetCompanyModelPricingResponse) UnmarshalJSON(data []byte) (err error) 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "pricing")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableGetCompanyModelPricingResponse) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

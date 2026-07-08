@@ -24,9 +24,10 @@ var _ MappedNullable = &BurnRateThreshold{}
 type BurnRateThreshold struct {
 	Dual *BurnRateTypeDual `json:"dual,omitempty"`
 	// The rules for the burn rate threshold
-	Rules []SloThresholdRule `json:"rules,omitempty"`
-	Single *BurnRateTypeSingle `json:"single,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Rules                             []SloThresholdRule  `json:"rules,omitempty"`
+	Single                            *BurnRateTypeSingle `json:"single,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _BurnRateThreshold BurnRateThreshold
@@ -145,7 +146,7 @@ func (o *BurnRateThreshold) SetSingle(v BurnRateTypeSingle) {
 }
 
 func (o BurnRateThreshold) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -212,6 +213,7 @@ func (o *BurnRateThreshold) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "rules")
 		delete(additionalProperties, "single")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -252,4 +254,3 @@ func (v *NullableBurnRateThreshold) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

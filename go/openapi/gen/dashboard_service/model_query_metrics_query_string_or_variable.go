@@ -23,10 +23,11 @@ var _ MappedNullable = &QueryMetricsQueryStringOrVariable{}
 // QueryMetricsQueryStringOrVariable String or variable.
 type QueryMetricsQueryStringOrVariable struct {
 	// A literal string value.
-	StringValue *string `json:"stringValue,omitempty"`
+	StringValue *string `json:"stringValue,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The name of a dashboard variable whose current value will be substituted.
-	VariableName *string `json:"variableName,omitempty"`
-	AdditionalProperties map[string]interface{}
+	VariableName                      *string `json:"variableName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QueryMetricsQueryStringOrVariable QueryMetricsQueryStringOrVariable
@@ -113,7 +114,7 @@ func (o *QueryMetricsQueryStringOrVariable) SetVariableName(v string) {
 }
 
 func (o QueryMetricsQueryStringOrVariable) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -176,6 +177,7 @@ func (o *QueryMetricsQueryStringOrVariable) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "stringValue")
 		delete(additionalProperties, "variableName")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -216,4 +218,3 @@ func (v *NullableQueryMetricsQueryStringOrVariable) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -18,12 +18,11 @@ import (
 	"net/url"
 )
 
-
 // TargetServiceAPIService TargetServiceAPI service
 type TargetServiceAPIService service
 
 type ApiS3TargetServiceGetTargetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TargetServiceAPIService
 }
 
@@ -36,24 +35,25 @@ S3TargetServiceGetTarget Get target
 
 Returns the current log archive target configuration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiS3TargetServiceGetTargetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiS3TargetServiceGetTargetRequest
 */
 func (a *TargetServiceAPIService) S3TargetServiceGetTarget(ctx context.Context) ApiS3TargetServiceGetTargetRequest {
 	return ApiS3TargetServiceGetTargetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return S3TargetServiceGetTargetResponse
+//
+//	@return S3TargetServiceGetTargetResponse
 func (a *TargetServiceAPIService) S3TargetServiceGetTargetExecute(r ApiS3TargetServiceGetTargetRequest) (*S3TargetServiceGetTargetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *S3TargetServiceGetTargetResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *S3TargetServiceGetTargetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TargetServiceAPIService.S3TargetServiceGetTarget")
@@ -113,8 +113,8 @@ func (a *TargetServiceAPIService) S3TargetServiceGetTargetExecute(r ApiS3TargetS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -124,8 +124,8 @@ func (a *TargetServiceAPIService) S3TargetServiceGetTargetExecute(r ApiS3TargetS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -135,8 +135,8 @@ func (a *TargetServiceAPIService) S3TargetServiceGetTargetExecute(r ApiS3TargetS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -154,8 +154,8 @@ func (a *TargetServiceAPIService) S3TargetServiceGetTargetExecute(r ApiS3TargetS
 }
 
 type ApiS3TargetServiceSetTargetRequest struct {
-	ctx context.Context
-	ApiService *TargetServiceAPIService
+	ctx               context.Context
+	ApiService        *TargetServiceAPIService
 	setTargetResponse *SetTargetResponse
 }
 
@@ -173,24 +173,25 @@ S3TargetServiceSetTarget Set target
 
 Sets the log archive target configuration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiS3TargetServiceSetTargetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiS3TargetServiceSetTargetRequest
 */
 func (a *TargetServiceAPIService) S3TargetServiceSetTarget(ctx context.Context) ApiS3TargetServiceSetTargetRequest {
 	return ApiS3TargetServiceSetTargetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return S3TargetServiceSetTargetResponse
+//
+//	@return S3TargetServiceSetTargetResponse
 func (a *TargetServiceAPIService) S3TargetServiceSetTargetExecute(r ApiS3TargetServiceSetTargetRequest) (*S3TargetServiceSetTargetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *S3TargetServiceSetTargetResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *S3TargetServiceSetTargetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TargetServiceAPIService.S3TargetServiceSetTarget")
@@ -255,8 +256,8 @@ func (a *TargetServiceAPIService) S3TargetServiceSetTargetExecute(r ApiS3TargetS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -266,8 +267,8 @@ func (a *TargetServiceAPIService) S3TargetServiceSetTargetExecute(r ApiS3TargetS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -277,8 +278,8 @@ func (a *TargetServiceAPIService) S3TargetServiceSetTargetExecute(r ApiS3TargetS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

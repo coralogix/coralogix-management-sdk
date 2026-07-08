@@ -26,8 +26,9 @@ type CheckDashboardRequestDataStructure struct {
 	// Id of an existing dashboard to load and validate
 	DashboardId *string `json:"dashboardId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Optional idempotency key for the check request
-	RequestId *string `json:"requestId,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	RequestId                         *string `json:"requestId,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CheckDashboardRequestDataStructure CheckDashboardRequestDataStructure
@@ -146,7 +147,7 @@ func (o *CheckDashboardRequestDataStructure) SetRequestId(v string) {
 }
 
 func (o CheckDashboardRequestDataStructure) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -213,6 +214,7 @@ func (o *CheckDashboardRequestDataStructure) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "dashboardId")
 		delete(additionalProperties, "requestId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -253,4 +255,3 @@ func (v *NullableCheckDashboardRequestDataStructure) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

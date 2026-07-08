@@ -22,9 +22,10 @@ var _ MappedNullable = &VisualizationSortOrder{}
 
 // VisualizationSortOrder Sort order with direction and strategy - either by category or by query value
 type VisualizationSortOrder struct {
-	OrderDirection *OrderDirection `json:"orderDirection,omitempty"`
-	Strategy *SortStrategy `json:"strategy,omitempty"`
-	AdditionalProperties map[string]interface{}
+	OrderDirection                    *OrderDirection `json:"orderDirection,omitempty"`
+	Strategy                          *SortStrategy   `json:"strategy,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _VisualizationSortOrder VisualizationSortOrder
@@ -111,7 +112,7 @@ func (o *VisualizationSortOrder) SetStrategy(v SortStrategy) {
 }
 
 func (o VisualizationSortOrder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *VisualizationSortOrder) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "orderDirection")
 		delete(additionalProperties, "strategy")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableVisualizationSortOrder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

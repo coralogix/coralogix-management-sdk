@@ -23,10 +23,11 @@ var _ MappedNullable = &MultiSelectValueDisplayOptions{}
 // MultiSelectValueDisplayOptions Value display options.
 type MultiSelectValueDisplayOptions struct {
 	// The label regex.
-	LabelRegex *string `json:"labelRegex,omitempty"`
+	LabelRegex *string `json:"labelRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The value regex.
-	ValueRegex *string `json:"valueRegex,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ValueRegex                        *string `json:"valueRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MultiSelectValueDisplayOptions MultiSelectValueDisplayOptions
@@ -113,7 +114,7 @@ func (o *MultiSelectValueDisplayOptions) SetValueRegex(v string) {
 }
 
 func (o MultiSelectValueDisplayOptions) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *MultiSelectValueDisplayOptions) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "labelRegex")
 		delete(additionalProperties, "valueRegex")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableMultiSelectValueDisplayOptions) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

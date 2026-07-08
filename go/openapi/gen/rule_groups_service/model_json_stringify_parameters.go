@@ -25,8 +25,9 @@ type JsonStringifyParameters struct {
 	// The delete source.
 	DeleteSource *bool `json:"deleteSource,omitempty"`
 	// The destination field.
-	DestinationField *string `json:"destinationField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	DestinationField                  *string `json:"destinationField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _JsonStringifyParameters JsonStringifyParameters
@@ -113,7 +114,7 @@ func (o *JsonStringifyParameters) SetDestinationField(v string) {
 }
 
 func (o JsonStringifyParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *JsonStringifyParameters) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "deleteSource")
 		delete(additionalProperties, "destinationField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableJsonStringifyParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

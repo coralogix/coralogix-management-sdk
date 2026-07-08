@@ -13,8 +13,8 @@ package case_events_service
 import (
 	"bytes"
 	"encoding/json"
-	"time"
 	"fmt"
+	"time"
 )
 
 var _ = bytes.MinRead
@@ -26,15 +26,16 @@ var _ MappedNullable = &CaseEvent{}
 type CaseEvent struct {
 	Actor EventActor `json:"actor"`
 	// Server-side insertion time
-	CreateTime time.Time `json:"createTime"`
-	EventData CaseEventData `json:"eventData"`
+	CreateTime time.Time     `json:"createTime"`
+	EventData  CaseEventData `json:"eventData"`
 	// Unique identifier of the event
 	EventId string `json:"eventId"`
 	// Logical occurrence time of the event
 	EventTime time.Time `json:"eventTime"`
 	// If edited, last modification time of the event
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpdateTime                        *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CaseEvent CaseEvent
@@ -214,7 +215,7 @@ func (o *CaseEvent) SetUpdateTime(v time.Time) {
 }
 
 func (o CaseEvent) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -256,10 +257,10 @@ func (o *CaseEvent) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -286,6 +287,7 @@ func (o *CaseEvent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "eventTime")
 		delete(additionalProperties, "updateTime")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -326,4 +328,3 @@ func (v *NullableCaseEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

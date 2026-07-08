@@ -23,8 +23,9 @@ var _ MappedNullable = &TestRoutingConditionValidResponseFailure{}
 // TestRoutingConditionValidResponseFailure Indicates the routing condition is invalid, with a human-readable error message.
 type TestRoutingConditionValidResponseFailure struct {
 	// Human-readable message.
-	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Message                           *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestRoutingConditionValidResponseFailure TestRoutingConditionValidResponseFailure
@@ -79,7 +80,7 @@ func (o *TestRoutingConditionValidResponseFailure) SetMessage(v string) {
 }
 
 func (o TestRoutingConditionValidResponseFailure) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *TestRoutingConditionValidResponseFailure) UnmarshalJSON(data []byte) (e
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "message")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableTestRoutingConditionValidResponseFailure) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

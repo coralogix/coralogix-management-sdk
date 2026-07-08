@@ -25,15 +25,16 @@ type GetContextualDataIntegrationsResponseIntegrationWithCounts struct {
 	// The amount integrations.
 	AmountIntegrations *int64 `json:"amountIntegrations,omitempty"`
 	// List of errors.
-	Errors []string `json:"errors,omitempty"`
+	Errors      []string     `json:"errors,omitempty"`
 	Integration *Integration `json:"integration,omitempty"`
 	// The is deprecated.
 	IsDeprecated *bool `json:"isDeprecated,omitempty"`
 	// The is new.
 	IsNew *bool `json:"isNew,omitempty"`
 	// The upgrade available.
-	UpgradeAvailable *bool `json:"upgradeAvailable,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpgradeAvailable                  *bool `json:"upgradeAvailable,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetContextualDataIntegrationsResponseIntegrationWithCounts GetContextualDataIntegrationsResponseIntegrationWithCounts
@@ -248,7 +249,7 @@ func (o *GetContextualDataIntegrationsResponseIntegrationWithCounts) SetUpgradeA
 }
 
 func (o GetContextualDataIntegrationsResponseIntegrationWithCounts) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -305,6 +306,7 @@ func (o *GetContextualDataIntegrationsResponseIntegrationWithCounts) UnmarshalJS
 		delete(additionalProperties, "isNew")
 		delete(additionalProperties, "upgradeAvailable")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -345,4 +347,3 @@ func (v *NullableGetContextualDataIntegrationsResponseIntegrationWithCounts) Unm
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

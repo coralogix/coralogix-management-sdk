@@ -24,11 +24,12 @@ var _ MappedNullable = &GeomapAggregation{}
 type GeomapAggregation struct {
 	Avg *GeomapAggregationFieldBased `json:"avg,omitempty"`
 	// Geomap aggregation simple.
-	Count map[string]interface{} `json:"count,omitempty"`
-	Max *GeomapAggregationFieldBased `json:"max,omitempty"`
-	Min *GeomapAggregationFieldBased `json:"min,omitempty"`
-	Sum *GeomapAggregationFieldBased `json:"sum,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Count                             map[string]interface{}       `json:"count,omitempty"`
+	Max                               *GeomapAggregationFieldBased `json:"max,omitempty"`
+	Min                               *GeomapAggregationFieldBased `json:"min,omitempty"`
+	Sum                               *GeomapAggregationFieldBased `json:"sum,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GeomapAggregation GeomapAggregation
@@ -211,7 +212,7 @@ func (o *GeomapAggregation) SetSum(v GeomapAggregationFieldBased) {
 }
 
 func (o GeomapAggregation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -304,6 +305,7 @@ func (o *GeomapAggregation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "min")
 		delete(additionalProperties, "sum")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -344,4 +346,3 @@ func (v *NullableGeomapAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

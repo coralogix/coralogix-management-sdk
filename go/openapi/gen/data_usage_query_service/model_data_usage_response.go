@@ -23,9 +23,10 @@ var _ MappedNullable = &DataUsageResponse{}
 // DataUsageResponse Bucket-first usage results for the resolved query interval.
 type DataUsageResponse struct {
 	// Bucket-first usage results. Daily queries yield one bucket per UTC calendar day; hourly queries yield one bucket per UTC hour.
-	Buckets []Bucket `json:"buckets,omitempty"`
-	QueryRange *UsageTimestampRange `json:"queryRange,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Buckets                           []Bucket             `json:"buckets,omitempty"`
+	QueryRange                        *UsageTimestampRange `json:"queryRange,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DataUsageResponse DataUsageResponse
@@ -112,7 +113,7 @@ func (o *DataUsageResponse) SetQueryRange(v UsageTimestampRange) {
 }
 
 func (o DataUsageResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *DataUsageResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "buckets")
 		delete(additionalProperties, "queryRange")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableDataUsageResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

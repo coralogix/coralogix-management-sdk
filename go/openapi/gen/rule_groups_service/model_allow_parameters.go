@@ -25,8 +25,9 @@ type AllowParameters struct {
 	// The keep blocked logs.
 	KeepBlockedLogs *bool `json:"keepBlockedLogs,omitempty"`
 	// Rule.
-	Rule *string `json:"rule,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Rule                              *string `json:"rule,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AllowParameters AllowParameters
@@ -113,7 +114,7 @@ func (o *AllowParameters) SetRule(v string) {
 }
 
 func (o AllowParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *AllowParameters) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "keepBlockedLogs")
 		delete(additionalProperties, "rule")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableAllowParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

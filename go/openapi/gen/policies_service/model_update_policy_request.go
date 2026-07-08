@@ -23,24 +23,25 @@ var _ MappedNullable = &UpdatePolicyRequest{}
 
 // UpdatePolicyRequest This data structue is used to update an existing policy.
 type UpdatePolicyRequest struct {
-	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
+	ApplicationRule  *QuotaV1Rule      `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
 	// Optional free-text description of the policy's purpose.
 	Description *string `json:"description,omitempty"`
 	// Indicates whether the policy should be actively evaluated and applied.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Unique identifier of the policy to update.
-	Id string `json:"id"`
+	Id       string    `json:"id"`
 	LogRules *LogRules `json:"logRules,omitempty"`
 	// Human-readable name for the policy.
-	Name *string `json:"name,omitempty"`
-	Priority *QuotaV1Priority `json:"priority,omitempty"`
+	Name             *string           `json:"name,omitempty"`
+	Priority         *QuotaV1Priority  `json:"priority,omitempty"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
-	SpanRules *SpanRules `json:"spanRules,omitempty"`
-	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	SpanRules        *SpanRules        `json:"spanRules,omitempty"`
+	SubsystemRule    *QuotaV1Rule      `json:"subsystemRule,omitempty"`
 	// List of data targets/destinations to which this policy routes data.
-	Targets []V1Target `json:"targets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Targets                           []V1Target `json:"targets,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UpdatePolicyRequest UpdatePolicyRequest
@@ -440,7 +441,7 @@ func (o *UpdatePolicyRequest) SetTargets(v []V1Target) {
 }
 
 func (o UpdatePolicyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -515,10 +516,10 @@ func (o *UpdatePolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -573,6 +574,7 @@ func (o *UpdatePolicyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "subsystemRule")
 		delete(additionalProperties, "targets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -613,4 +615,3 @@ func (v *NullableUpdatePolicyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

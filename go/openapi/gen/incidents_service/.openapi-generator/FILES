@@ -72,6 +72,7 @@ model_incidents_v1_meta_label.go
 model_incidents_v1_pagination_request.go
 model_incidents_v1_pagination_response.go
 model_incidents_v1_user_details.go
+model_labels_filter.go
 model_list_incident_aggregations_response.go
 model_list_incident_events_filter_values_response.go
 model_list_incident_events_order_by_request.go

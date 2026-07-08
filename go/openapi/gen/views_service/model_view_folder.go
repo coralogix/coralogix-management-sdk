@@ -27,11 +27,12 @@ type ViewFolder struct {
 	// Unique identifier for folders
 	FolderId *string `json:"folderId,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// View name
-	Name string `json:"name"`
-	SearchQuery *SearchQuery `json:"searchQuery,omitempty"`
-	TimeSelection TimeSelection `json:"timeSelection"`
-	ViewType *ViewType `json:"viewType,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name                              string        `json:"name"`
+	SearchQuery                       *SearchQuery  `json:"searchQuery,omitempty"`
+	TimeSelection                     TimeSelection `json:"timeSelection"`
+	ViewType                          *ViewType     `json:"viewType,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ViewFolder ViewFolder
@@ -232,7 +233,7 @@ func (o *ViewFolder) SetViewType(v ViewType) {
 }
 
 func (o ViewFolder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -277,10 +278,10 @@ func (o *ViewFolder) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -307,6 +308,7 @@ func (o *ViewFolder) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "timeSelection")
 		delete(additionalProperties, "viewType")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -347,4 +349,3 @@ func (v *NullableViewFolder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

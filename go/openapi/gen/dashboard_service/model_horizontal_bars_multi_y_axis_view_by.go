@@ -24,8 +24,8 @@ type HorizontalBarsMultiYAxisViewBy string
 // List of HorizontalBarsMulti.YAxisViewBy
 const (
 	HORIZONTALBARSMULTIYAXISVIEWBY_Y_AXIS_VIEW_BY_UNSPECIFIED HorizontalBarsMultiYAxisViewBy = "Y_AXIS_VIEW_BY_UNSPECIFIED"
-	HORIZONTALBARSMULTIYAXISVIEWBY_Y_AXIS_VIEW_BY_CATEGORY HorizontalBarsMultiYAxisViewBy = "Y_AXIS_VIEW_BY_CATEGORY"
-	HORIZONTALBARSMULTIYAXISVIEWBY_Y_AXIS_VIEW_BY_VALUE HorizontalBarsMultiYAxisViewBy = "Y_AXIS_VIEW_BY_VALUE"
+	HORIZONTALBARSMULTIYAXISVIEWBY_Y_AXIS_VIEW_BY_CATEGORY    HorizontalBarsMultiYAxisViewBy = "Y_AXIS_VIEW_BY_CATEGORY"
+	HORIZONTALBARSMULTIYAXISVIEWBY_Y_AXIS_VIEW_BY_VALUE       HorizontalBarsMultiYAxisViewBy = "Y_AXIS_VIEW_BY_VALUE"
 )
 
 // All allowed values of HorizontalBarsMultiYAxisViewBy enum
@@ -113,4 +113,3 @@ func (v *NullableHorizontalBarsMultiYAxisViewBy) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

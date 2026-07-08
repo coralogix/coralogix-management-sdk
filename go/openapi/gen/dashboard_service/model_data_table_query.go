@@ -22,11 +22,12 @@ var _ MappedNullable = &DataTableQuery{}
 
 // DataTableQuery Discriminated union of possible query types for the data table widget.
 type DataTableQuery struct {
-	Dataprime *DataTableDataprimeQuery `json:"dataprime,omitempty"`
-	Logs *DataTableLogsQuery `json:"logs,omitempty"`
-	Metrics *DataTableMetricsQuery `json:"metrics,omitempty"`
-	Spans *DataTableSpansQuery `json:"spans,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Dataprime                         *DataTableDataprimeQuery `json:"dataprime,omitempty"`
+	Logs                              *DataTableLogsQuery      `json:"logs,omitempty"`
+	Metrics                           *DataTableMetricsQuery   `json:"metrics,omitempty"`
+	Spans                             *DataTableSpansQuery     `json:"spans,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DataTableQuery DataTableQuery
@@ -177,7 +178,7 @@ func (o *DataTableQuery) SetSpans(v DataTableSpansQuery) {
 }
 
 func (o DataTableQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -260,6 +261,7 @@ func (o *DataTableQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "metrics")
 		delete(additionalProperties, "spans")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -300,4 +302,3 @@ func (v *NullableDataTableQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

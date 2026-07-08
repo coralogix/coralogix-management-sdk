@@ -29,12 +29,13 @@ type HorizontalBarChartLogsQuery struct {
 	GroupNames []string `json:"groupNames,omitempty"`
 	// List of observation fields to group the results
 	GroupNamesFields []ObservationField `json:"groupNamesFields,omitempty"`
-	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	LuceneQuery      *LuceneQuery       `json:"luceneQuery,omitempty"`
 	// Field name by which results are stacked in individual group
-	StackedGroupName *string `json:"stackedGroupName,omitempty"`
-	StackedGroupNameField *ObservationField `json:"stackedGroupNameField,omitempty"`
-	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StackedGroupName                  *string           `json:"stackedGroupName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	StackedGroupNameField             *ObservationField `json:"stackedGroupNameField,omitempty"`
+	TimeFrame                         *TimeFrameSelect  `json:"timeFrame,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _HorizontalBarChartLogsQuery HorizontalBarChartLogsQuery
@@ -313,7 +314,7 @@ func (o *HorizontalBarChartLogsQuery) SetTimeFrame(v TimeFrameSelect) {
 }
 
 func (o HorizontalBarChartLogsQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -378,6 +379,7 @@ func (o *HorizontalBarChartLogsQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "stackedGroupNameField")
 		delete(additionalProperties, "timeFrame")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -418,4 +420,3 @@ func (v *NullableHorizontalBarChartLogsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

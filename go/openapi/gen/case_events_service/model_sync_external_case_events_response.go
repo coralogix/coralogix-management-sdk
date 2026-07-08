@@ -24,8 +24,9 @@ var _ MappedNullable = &SyncExternalCaseEventsResponse{}
 // SyncExternalCaseEventsResponse Response returned after syncing external case events.
 type SyncExternalCaseEventsResponse struct {
 	// Indicates whether the sync was successfully registered
-	SyncRegistered bool `json:"syncRegistered"`
-	AdditionalProperties map[string]interface{}
+	SyncRegistered                    bool `json:"syncRegistered"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SyncExternalCaseEventsResponse SyncExternalCaseEventsResponse
@@ -73,7 +74,7 @@ func (o *SyncExternalCaseEventsResponse) SetSyncRegistered(v bool) {
 }
 
 func (o SyncExternalCaseEventsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +105,10 @@ func (o *SyncExternalCaseEventsResponse) UnmarshalJSON(data []byte) (err error) 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -129,6 +130,7 @@ func (o *SyncExternalCaseEventsResponse) UnmarshalJSON(data []byte) (err error) 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "syncRegistered")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -169,4 +171,3 @@ func (v *NullableSyncExternalCaseEventsResponse) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

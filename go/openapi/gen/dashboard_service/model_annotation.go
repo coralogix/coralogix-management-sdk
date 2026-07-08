@@ -24,16 +24,17 @@ var _ MappedNullable = &Annotation{}
 type Annotation struct {
 	Color *AnnotationColor `json:"color,omitempty"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
-	Scope *AnnotationWidgetScope `json:"scope,omitempty"`
-	Source *AnnotationSource `json:"source,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name                              *string                `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Scope                             *AnnotationWidgetScope `json:"scope,omitempty"`
+	Source                            *AnnotationSource      `json:"source,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Annotation Annotation
@@ -280,7 +281,7 @@ func (o *Annotation) SetSource(v AnnotationSource) {
 }
 
 func (o Annotation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -341,6 +342,7 @@ func (o *Annotation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "source")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -381,4 +383,3 @@ func (v *NullableAnnotation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

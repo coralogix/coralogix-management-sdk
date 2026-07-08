@@ -22,10 +22,11 @@ var _ MappedNullable = &SloThresholdType{}
 
 // SloThresholdType SLO threshold type definition
 type SloThresholdType struct {
-	BurnRate *BurnRateThreshold `json:"burnRate,omitempty"`
-	ErrorBudget *ErrorBudgetThreshold `json:"errorBudget,omitempty"`
-	SloDefinition *V3SloDefinition `json:"sloDefinition,omitempty"`
-	AdditionalProperties map[string]interface{}
+	BurnRate                          *BurnRateThreshold    `json:"burnRate,omitempty"`
+	ErrorBudget                       *ErrorBudgetThreshold `json:"errorBudget,omitempty"`
+	SloDefinition                     *V3SloDefinition      `json:"sloDefinition,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SloThresholdType SloThresholdType
@@ -144,7 +145,7 @@ func (o *SloThresholdType) SetSloDefinition(v V3SloDefinition) {
 }
 
 func (o SloThresholdType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -211,6 +212,7 @@ func (o *SloThresholdType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "errorBudget")
 		delete(additionalProperties, "sloDefinition")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -251,4 +253,3 @@ func (v *NullableSloThresholdType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

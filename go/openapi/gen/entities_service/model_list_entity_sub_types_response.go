@@ -23,8 +23,9 @@ var _ MappedNullable = &ListEntitySubTypesResponse{}
 // ListEntitySubTypesResponse Response containing a list of notification entity sub-types.
 type ListEntitySubTypesResponse struct {
 	// The entity sub types.
-	EntitySubTypes []string `json:"entitySubTypes,omitempty"`
-	AdditionalProperties map[string]interface{}
+	EntitySubTypes                    []string `json:"entitySubTypes,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListEntitySubTypesResponse ListEntitySubTypesResponse
@@ -79,7 +80,7 @@ func (o *ListEntitySubTypesResponse) SetEntitySubTypes(v []string) {
 }
 
 func (o ListEntitySubTypesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ListEntitySubTypesResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "entitySubTypes")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableListEntitySubTypesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

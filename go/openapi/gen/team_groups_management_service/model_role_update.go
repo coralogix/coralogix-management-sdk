@@ -22,8 +22,9 @@ var _ MappedNullable = &RoleUpdate{}
 
 // RoleUpdate Update the role assigned to the group. Either set a new role or clear the existing one.
 type RoleUpdate struct {
-	Action *RoleUpdateAction `json:"action,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Action                            *RoleUpdateAction `json:"action,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RoleUpdate RoleUpdate
@@ -78,7 +79,7 @@ func (o *RoleUpdate) SetAction(v RoleUpdateAction) {
 }
 
 func (o RoleUpdate) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *RoleUpdate) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "action")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableRoleUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -24,8 +24,9 @@ var _ MappedNullable = &TestRoutingConditionValidRequest{}
 type TestRoutingConditionValidRequest struct {
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// Routing condition expression to validate.
-	Template *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]+$"`
-	AdditionalProperties map[string]interface{}
+	Template                          *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestRoutingConditionValidRequest TestRoutingConditionValidRequest
@@ -112,7 +113,7 @@ func (o *TestRoutingConditionValidRequest) SetTemplate(v string) {
 }
 
 func (o TestRoutingConditionValidRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *TestRoutingConditionValidRequest) UnmarshalJSON(data []byte) (err error
 		delete(additionalProperties, "entityType")
 		delete(additionalProperties, "template")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableTestRoutingConditionValidRequest) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

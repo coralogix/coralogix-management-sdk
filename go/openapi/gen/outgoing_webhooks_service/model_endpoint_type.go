@@ -24,7 +24,7 @@ type EndpointType string
 // List of EndpointType
 const (
 	ENDPOINTTYPE_ENDPOINT_TYPE_DEFAULT_OR_PUBLIC EndpointType = "ENDPOINT_TYPE_DEFAULT_OR_PUBLIC"
-	ENDPOINTTYPE_ENDPOINT_TYPE_PRIVATE EndpointType = "ENDPOINT_TYPE_PRIVATE"
+	ENDPOINTTYPE_ENDPOINT_TYPE_PRIVATE           EndpointType = "ENDPOINT_TYPE_PRIVATE"
 )
 
 // All allowed values of EndpointType enum
@@ -111,4 +111,3 @@ func (v *NullableEndpointType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

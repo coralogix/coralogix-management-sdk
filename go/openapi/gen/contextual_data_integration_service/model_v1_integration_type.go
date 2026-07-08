@@ -30,12 +30,13 @@ type V1IntegrationType struct {
 	ContextualData map[string]interface{} `json:"contextualData,omitempty"`
 	// This data structure represents a generic webhook integration.
 	GenericWebhook map[string]interface{} `json:"genericWebhook,omitempty"`
-	Managed *Managed `json:"managed,omitempty"`
+	Managed        *Managed               `json:"managed,omitempty"`
 	// This data structure represents a push based contextual data integration.
 	PushBasedContextualData map[string]interface{} `json:"pushBasedContextualData,omitempty"`
 	// This data structure represents an untracked integration.
-	Untracked map[string]interface{} `json:"untracked,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Untracked                         map[string]interface{} `json:"untracked,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V1IntegrationType V1IntegrationType
@@ -282,7 +283,7 @@ func (o *V1IntegrationType) SetUntracked(v map[string]interface{}) {
 }
 
 func (o V1IntegrationType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -395,6 +396,7 @@ func (o *V1IntegrationType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "pushBasedContextualData")
 		delete(additionalProperties, "untracked")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -435,4 +437,3 @@ func (v *NullableV1IntegrationType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

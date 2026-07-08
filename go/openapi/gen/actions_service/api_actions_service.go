@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // ActionsServiceAPIService ActionsServiceAPI service
 type ActionsServiceAPIService service
 
 type ApiActionsServiceAtomicBatchExecuteActionsRequest struct {
-	ctx context.Context
-	ApiService *ActionsServiceAPIService
+	ctx                                            context.Context
+	ApiService                                     *ActionsServiceAPIService
 	actionsServiceAtomicBatchExecuteActionsRequest *ActionsServiceAtomicBatchExecuteActionsRequest
 }
 
@@ -43,24 +42,25 @@ ActionsServiceAtomicBatchExecuteActions Atomic Batch Execute Actions
 
 Creates multiple actions in a single request.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiActionsServiceAtomicBatchExecuteActionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiActionsServiceAtomicBatchExecuteActionsRequest
 */
 func (a *ActionsServiceAPIService) ActionsServiceAtomicBatchExecuteActions(ctx context.Context) ApiActionsServiceAtomicBatchExecuteActionsRequest {
 	return ApiActionsServiceAtomicBatchExecuteActionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AtomicBatchExecuteActionsResponse
+//
+//	@return AtomicBatchExecuteActionsResponse
 func (a *ActionsServiceAPIService) ActionsServiceAtomicBatchExecuteActionsExecute(r ApiActionsServiceAtomicBatchExecuteActionsRequest) (*AtomicBatchExecuteActionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AtomicBatchExecuteActionsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AtomicBatchExecuteActionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionsServiceAPIService.ActionsServiceAtomicBatchExecuteActions")
@@ -122,8 +122,8 @@ func (a *ActionsServiceAPIService) ActionsServiceAtomicBatchExecuteActionsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -133,8 +133,8 @@ func (a *ActionsServiceAPIService) ActionsServiceAtomicBatchExecuteActionsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -144,8 +144,8 @@ func (a *ActionsServiceAPIService) ActionsServiceAtomicBatchExecuteActionsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -163,8 +163,8 @@ func (a *ActionsServiceAPIService) ActionsServiceAtomicBatchExecuteActionsExecut
 }
 
 type ApiActionsServiceCreateActionRequest struct {
-	ctx context.Context
-	ApiService *ActionsServiceAPIService
+	ctx                               context.Context
+	ApiService                        *ActionsServiceAPIService
 	actionsServiceCreateActionRequest *ActionsServiceCreateActionRequest
 }
 
@@ -182,24 +182,25 @@ ActionsServiceCreateAction Create Action
 
 Creates a new action.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiActionsServiceCreateActionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiActionsServiceCreateActionRequest
 */
 func (a *ActionsServiceAPIService) ActionsServiceCreateAction(ctx context.Context) ApiActionsServiceCreateActionRequest {
 	return ApiActionsServiceCreateActionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateActionResponse
+//
+//	@return CreateActionResponse
 func (a *ActionsServiceAPIService) ActionsServiceCreateActionExecute(r ApiActionsServiceCreateActionRequest) (*CreateActionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateActionResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateActionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionsServiceAPIService.ActionsServiceCreateAction")
@@ -261,8 +262,8 @@ func (a *ActionsServiceAPIService) ActionsServiceCreateActionExecute(r ApiAction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -272,8 +273,8 @@ func (a *ActionsServiceAPIService) ActionsServiceCreateActionExecute(r ApiAction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -283,8 +284,8 @@ func (a *ActionsServiceAPIService) ActionsServiceCreateActionExecute(r ApiAction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -302,9 +303,9 @@ func (a *ActionsServiceAPIService) ActionsServiceCreateActionExecute(r ApiAction
 }
 
 type ApiActionsServiceDeleteActionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ActionsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiActionsServiceDeleteActionRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -316,26 +317,27 @@ ActionsServiceDeleteAction Delete Action
 
 Deletes the action with the specified ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiActionsServiceDeleteActionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiActionsServiceDeleteActionRequest
 */
 func (a *ActionsServiceAPIService) ActionsServiceDeleteAction(ctx context.Context, id string) ApiActionsServiceDeleteActionRequest {
 	return ApiActionsServiceDeleteActionRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *ActionsServiceAPIService) ActionsServiceDeleteActionExecute(r ApiActionsServiceDeleteActionRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionsServiceAPIService.ActionsServiceDeleteAction")
@@ -399,8 +401,8 @@ func (a *ActionsServiceAPIService) ActionsServiceDeleteActionExecute(r ApiAction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -410,8 +412,8 @@ func (a *ActionsServiceAPIService) ActionsServiceDeleteActionExecute(r ApiAction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -421,8 +423,8 @@ func (a *ActionsServiceAPIService) ActionsServiceDeleteActionExecute(r ApiAction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -440,9 +442,9 @@ func (a *ActionsServiceAPIService) ActionsServiceDeleteActionExecute(r ApiAction
 }
 
 type ApiActionsServiceGetActionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ActionsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiActionsServiceGetActionRequest) Execute() (*GetActionResponse, *http.Response, error) {
@@ -454,26 +456,27 @@ ActionsServiceGetAction Get Action
 
 Returns the details of a specific action.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiActionsServiceGetActionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiActionsServiceGetActionRequest
 */
 func (a *ActionsServiceAPIService) ActionsServiceGetAction(ctx context.Context, id string) ApiActionsServiceGetActionRequest {
 	return ApiActionsServiceGetActionRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetActionResponse
+//
+//	@return GetActionResponse
 func (a *ActionsServiceAPIService) ActionsServiceGetActionExecute(r ApiActionsServiceGetActionRequest) (*GetActionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetActionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetActionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionsServiceAPIService.ActionsServiceGetAction")
@@ -537,8 +540,8 @@ func (a *ActionsServiceAPIService) ActionsServiceGetActionExecute(r ApiActionsSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -548,8 +551,8 @@ func (a *ActionsServiceAPIService) ActionsServiceGetActionExecute(r ApiActionsSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -559,8 +562,8 @@ func (a *ActionsServiceAPIService) ActionsServiceGetActionExecute(r ApiActionsSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -578,7 +581,7 @@ func (a *ActionsServiceAPIService) ActionsServiceGetActionExecute(r ApiActionsSe
 }
 
 type ApiActionsServiceListActionsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ActionsServiceAPIService
 }
 
@@ -591,24 +594,25 @@ ActionsServiceListActions List Actions
 
 Returns all actions for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiActionsServiceListActionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiActionsServiceListActionsRequest
 */
 func (a *ActionsServiceAPIService) ActionsServiceListActions(ctx context.Context) ApiActionsServiceListActionsRequest {
 	return ApiActionsServiceListActionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListActionsResponse
+//
+//	@return ListActionsResponse
 func (a *ActionsServiceAPIService) ActionsServiceListActionsExecute(r ApiActionsServiceListActionsRequest) (*ListActionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListActionsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListActionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionsServiceAPIService.ActionsServiceListActions")
@@ -668,8 +672,8 @@ func (a *ActionsServiceAPIService) ActionsServiceListActionsExecute(r ApiActions
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -679,8 +683,8 @@ func (a *ActionsServiceAPIService) ActionsServiceListActionsExecute(r ApiActions
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -690,8 +694,8 @@ func (a *ActionsServiceAPIService) ActionsServiceListActionsExecute(r ApiActions
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -709,8 +713,8 @@ func (a *ActionsServiceAPIService) ActionsServiceListActionsExecute(r ApiActions
 }
 
 type ApiActionsServiceOrderActionsRequest struct {
-	ctx context.Context
-	ApiService *ActionsServiceAPIService
+	ctx                               context.Context
+	ApiService                        *ActionsServiceAPIService
 	actionsServiceOrderActionsRequest *ActionsServiceOrderActionsRequest
 }
 
@@ -728,24 +732,25 @@ ActionsServiceOrderActions Order Actions
 
 Updates the display order of actions.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiActionsServiceOrderActionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiActionsServiceOrderActionsRequest
 */
 func (a *ActionsServiceAPIService) ActionsServiceOrderActions(ctx context.Context) ApiActionsServiceOrderActionsRequest {
 	return ApiActionsServiceOrderActionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *ActionsServiceAPIService) ActionsServiceOrderActionsExecute(r ApiActionsServiceOrderActionsRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionsServiceAPIService.ActionsServiceOrderActions")
@@ -807,8 +812,8 @@ func (a *ActionsServiceAPIService) ActionsServiceOrderActionsExecute(r ApiAction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -818,8 +823,8 @@ func (a *ActionsServiceAPIService) ActionsServiceOrderActionsExecute(r ApiAction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -829,8 +834,8 @@ func (a *ActionsServiceAPIService) ActionsServiceOrderActionsExecute(r ApiAction
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -848,8 +853,8 @@ func (a *ActionsServiceAPIService) ActionsServiceOrderActionsExecute(r ApiAction
 }
 
 type ApiActionsServiceReplaceActionRequest struct {
-	ctx context.Context
-	ApiService *ActionsServiceAPIService
+	ctx                                context.Context
+	ApiService                         *ActionsServiceAPIService
 	actionsServiceReplaceActionRequest *ActionsServiceReplaceActionRequest
 }
 
@@ -867,24 +872,25 @@ ActionsServiceReplaceAction Replace Action
 
 Replaces all actions with the provided set.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiActionsServiceReplaceActionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiActionsServiceReplaceActionRequest
 */
 func (a *ActionsServiceAPIService) ActionsServiceReplaceAction(ctx context.Context) ApiActionsServiceReplaceActionRequest {
 	return ApiActionsServiceReplaceActionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReplaceActionResponse
+//
+//	@return ReplaceActionResponse
 func (a *ActionsServiceAPIService) ActionsServiceReplaceActionExecute(r ApiActionsServiceReplaceActionRequest) (*ReplaceActionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceActionResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplaceActionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ActionsServiceAPIService.ActionsServiceReplaceAction")
@@ -946,8 +952,8 @@ func (a *ActionsServiceAPIService) ActionsServiceReplaceActionExecute(r ApiActio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -957,8 +963,8 @@ func (a *ActionsServiceAPIService) ActionsServiceReplaceActionExecute(r ApiActio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -968,8 +974,8 @@ func (a *ActionsServiceAPIService) ActionsServiceReplaceActionExecute(r ApiActio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

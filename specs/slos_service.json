@@ -49,9 +49,15 @@
                         "type": "string",
                         "minLength": 0
                       },
-                      "ownershipEnvironmentValues": {},
-                      "ownershipServiceValues": {},
-                      "ownershipTeamValues": {},
+                      "ownershipEnvironmentValues": {
+                        "$ref": "#/components/schemas/StringValues"
+                      },
+                      "ownershipServiceValues": {
+                        "$ref": "#/components/schemas/StringValues"
+                      },
+                      "ownershipTeamValues": {
+                        "$ref": "#/components/schemas/StringValues"
+                      },
                       "productType": {
                         "description": "Filter discriminator for SLO product type values.",
                         "type": "boolean"
@@ -189,9 +195,15 @@
                         "description": "Predicate for SLO filters that checks if a field is equal to one of multiple values",
                         "type": "object",
                         "properties": {
-                          "productTypeValues": {},
-                          "stringValues": {},
-                          "typeValues": {}
+                          "productTypeValues": {
+                            "$ref": "#/components/schemas/ProductTypeValues"
+                          },
+                          "stringValues": {
+                            "$ref": "#/components/schemas/StringValues"
+                          },
+                          "typeValues": {
+                            "$ref": "#/components/schemas/TypeValues"
+                          }
                         },
                         "oneOf": [
                           {
@@ -1800,6 +1812,23 @@
           }
         }
       },
+      "ProductTypeValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Product type values.",
+        "type": "object",
+        "properties": {
+          "values": {
+            "description": "The values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SloProductType"
+            },
+            "minItems": 0
+          }
+        }
+      },
       "ReplaceSloAlertsValidationsResponse": {
         "externalDocs": {
           "url": ""
@@ -2290,6 +2319,42 @@
           "SLO_TYPE_REQUEST",
           "SLO_TYPE_WINDOW"
         ]
+      },
+      "StringValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "String values.",
+        "type": "object",
+        "properties": {
+          "values": {
+            "description": "The values.",
+            "type": "array",
+            "items": {
+              "description": "The values.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "TypeValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Type values.",
+        "type": "object",
+        "properties": {
+          "values": {
+            "description": "The values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SloType"
+            },
+            "minItems": 0
+          }
+        }
       },
       "WindowBasedMetricSli": {
         "externalDocs": {

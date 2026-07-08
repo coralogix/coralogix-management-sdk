@@ -24,8 +24,9 @@ var _ MappedNullable = &Evaluation{}
 type Evaluation struct {
 	EvaluationTokens *Token `json:"evaluationTokens,omitempty"`
 	// The evaluator name.
-	EvaluatorName *string `json:"evaluatorName,omitempty"`
-	AdditionalProperties map[string]interface{}
+	EvaluatorName                     *string `json:"evaluatorName,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Evaluation Evaluation
@@ -112,7 +113,7 @@ func (o *Evaluation) SetEvaluatorName(v string) {
 }
 
 func (o Evaluation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *Evaluation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "evaluationTokens")
 		delete(additionalProperties, "evaluatorName")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableEvaluation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,24 +23,25 @@ var _ MappedNullable = &Hexagon{}
 // Hexagon Hexagon.
 type Hexagon struct {
 	// Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit   *string                    `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	Decimal *int32 `json:"decimal,omitempty"`
 	// Whether to render numeric value without abbreviation
-	DecimalPrecision *bool `json:"decimalPrecision,omitempty"`
-	Legend *Legend `json:"legend,omitempty"`
-	LegendBy *LegendBy `json:"legendBy,omitempty"`
+	DecimalPrecision *bool     `json:"decimalPrecision,omitempty"`
+	Legend           *Legend   `json:"legend,omitempty"`
+	LegendBy         *LegendBy `json:"legendBy,omitempty"`
 	// A maximum value used in percentage threshold calculation and for visual value representation
 	Max *float64 `json:"max,omitempty"`
 	// A minimum value used in percentage threshold calculation and for visual value representation
-	Min *float64 `json:"min,omitempty"`
-	Query *HexagonQuery `json:"query,omitempty"`
+	Min           *float64       `json:"min,omitempty"`
+	Query         *HexagonQuery  `json:"query,omitempty"`
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	// List of value thresholds, each with a certain color and an optional name label
-	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Thresholds                        []CommonThreshold `json:"thresholds,omitempty"`
+	Unit                              *CommonUnit       `json:"unit,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Hexagon Hexagon
@@ -447,7 +448,7 @@ func (o *Hexagon) SetUnit(v CommonUnit) {
 }
 
 func (o Hexagon) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -528,6 +529,7 @@ func (o *Hexagon) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "thresholds")
 		delete(additionalProperties, "unit")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -568,4 +570,3 @@ func (v *NullableHexagon) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

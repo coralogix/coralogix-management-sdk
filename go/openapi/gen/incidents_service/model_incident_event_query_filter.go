@@ -23,20 +23,21 @@ var _ MappedNullable = &IncidentEventQueryFilter{}
 // IncidentEventQueryFilter Filter configuration for incident events
 type IncidentEventQueryFilter struct {
 	// The contextual labels of the incident
-	ContextualLabels map[string]interface{} `json:"contextualLabels,omitempty"`
+	ContextualLabels *map[string]ContextualLabelValues `json:"contextualLabels,omitempty"`
 	// The display labels of the incident
-	DisplayLabels map[string]interface{} `json:"displayLabels,omitempty"`
+	DisplayLabels *map[string]DisplayLabelValues `json:"displayLabels,omitempty"`
 	// Indicates if the incident is muted
-	IsMuted *bool `json:"isMuted,omitempty"`
-	Labels interface{} `json:"labels,omitempty"`
+	IsMuted *bool         `json:"isMuted,omitempty"`
+	Labels  *LabelsFilter `json:"labels,omitempty"`
 	// The name of the incident
 	Name *string `json:"name,omitempty"`
 	// The severity of the incident
 	Severity []IncidentSeverity `json:"severity,omitempty"`
 	// The status of the incident
-	Status []IncidentStatus `json:"status,omitempty"`
-	Timestamp interface{} `json:"timestamp,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Status                            []IncidentStatus `json:"status,omitempty"`
+	Timestamp                         *V1TimeRange     `json:"timestamp,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentEventQueryFilter IncidentEventQueryFilter
@@ -59,19 +60,19 @@ func NewIncidentEventQueryFilterWithDefaults() *IncidentEventQueryFilter {
 }
 
 // GetContextualLabels returns the ContextualLabels field value if set, zero value otherwise.
-func (o *IncidentEventQueryFilter) GetContextualLabels() map[string]interface{} {
+func (o *IncidentEventQueryFilter) GetContextualLabels() map[string]ContextualLabelValues {
 	if o == nil || IsNil(o.ContextualLabels) {
-		var ret map[string]interface{}
+		var ret map[string]ContextualLabelValues
 		return ret
 	}
-	return o.ContextualLabels
+	return *o.ContextualLabels
 }
 
 // GetContextualLabelsOk returns a tuple with the ContextualLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentEventQueryFilter) GetContextualLabelsOk() (map[string]interface{}, bool) {
+func (o *IncidentEventQueryFilter) GetContextualLabelsOk() (*map[string]ContextualLabelValues, bool) {
 	if o == nil || IsNil(o.ContextualLabels) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.ContextualLabels, true
 }
@@ -85,25 +86,25 @@ func (o *IncidentEventQueryFilter) HasContextualLabels() bool {
 	return false
 }
 
-// SetContextualLabels gets a reference to the given map[string]interface{} and assigns it to the ContextualLabels field.
-func (o *IncidentEventQueryFilter) SetContextualLabels(v map[string]interface{}) {
-	o.ContextualLabels = v
+// SetContextualLabels gets a reference to the given map[string]ContextualLabelValues and assigns it to the ContextualLabels field.
+func (o *IncidentEventQueryFilter) SetContextualLabels(v map[string]ContextualLabelValues) {
+	o.ContextualLabels = &v
 }
 
 // GetDisplayLabels returns the DisplayLabels field value if set, zero value otherwise.
-func (o *IncidentEventQueryFilter) GetDisplayLabels() map[string]interface{} {
+func (o *IncidentEventQueryFilter) GetDisplayLabels() map[string]DisplayLabelValues {
 	if o == nil || IsNil(o.DisplayLabels) {
-		var ret map[string]interface{}
+		var ret map[string]DisplayLabelValues
 		return ret
 	}
-	return o.DisplayLabels
+	return *o.DisplayLabels
 }
 
 // GetDisplayLabelsOk returns a tuple with the DisplayLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentEventQueryFilter) GetDisplayLabelsOk() (map[string]interface{}, bool) {
+func (o *IncidentEventQueryFilter) GetDisplayLabelsOk() (*map[string]DisplayLabelValues, bool) {
 	if o == nil || IsNil(o.DisplayLabels) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.DisplayLabels, true
 }
@@ -117,9 +118,9 @@ func (o *IncidentEventQueryFilter) HasDisplayLabels() bool {
 	return false
 }
 
-// SetDisplayLabels gets a reference to the given map[string]interface{} and assigns it to the DisplayLabels field.
-func (o *IncidentEventQueryFilter) SetDisplayLabels(v map[string]interface{}) {
-	o.DisplayLabels = v
+// SetDisplayLabels gets a reference to the given map[string]DisplayLabelValues and assigns it to the DisplayLabels field.
+func (o *IncidentEventQueryFilter) SetDisplayLabels(v map[string]DisplayLabelValues) {
+	o.DisplayLabels = &v
 }
 
 // GetIsMuted returns the IsMuted field value if set, zero value otherwise.
@@ -154,23 +155,22 @@ func (o *IncidentEventQueryFilter) SetIsMuted(v bool) {
 	o.IsMuted = &v
 }
 
-// GetLabels returns the Labels field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IncidentEventQueryFilter) GetLabels() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *IncidentEventQueryFilter) GetLabels() LabelsFilter {
+	if o == nil || IsNil(o.Labels) {
+		var ret LabelsFilter
 		return ret
 	}
-	return o.Labels
+	return *o.Labels
 }
 
 // GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IncidentEventQueryFilter) GetLabelsOk() (*interface{}, bool) {
+func (o *IncidentEventQueryFilter) GetLabelsOk() (*LabelsFilter, bool) {
 	if o == nil || IsNil(o.Labels) {
 		return nil, false
 	}
-	return &o.Labels, true
+	return o.Labels, true
 }
 
 // HasLabels returns a boolean if a field has been set.
@@ -182,9 +182,9 @@ func (o *IncidentEventQueryFilter) HasLabels() bool {
 	return false
 }
 
-// SetLabels gets a reference to the given interface{} and assigns it to the Labels field.
-func (o *IncidentEventQueryFilter) SetLabels(v interface{}) {
-	o.Labels = v
+// SetLabels gets a reference to the given LabelsFilter and assigns it to the Labels field.
+func (o *IncidentEventQueryFilter) SetLabels(v LabelsFilter) {
+	o.Labels = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -283,23 +283,22 @@ func (o *IncidentEventQueryFilter) SetStatus(v []IncidentStatus) {
 	o.Status = v
 }
 
-// GetTimestamp returns the Timestamp field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IncidentEventQueryFilter) GetTimestamp() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+func (o *IncidentEventQueryFilter) GetTimestamp() V1TimeRange {
+	if o == nil || IsNil(o.Timestamp) {
+		var ret V1TimeRange
 		return ret
 	}
-	return o.Timestamp
+	return *o.Timestamp
 }
 
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IncidentEventQueryFilter) GetTimestampOk() (*interface{}, bool) {
+func (o *IncidentEventQueryFilter) GetTimestampOk() (*V1TimeRange, bool) {
 	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
-	return &o.Timestamp, true
+	return o.Timestamp, true
 }
 
 // HasTimestamp returns a boolean if a field has been set.
@@ -311,13 +310,13 @@ func (o *IncidentEventQueryFilter) HasTimestamp() bool {
 	return false
 }
 
-// SetTimestamp gets a reference to the given interface{} and assigns it to the Timestamp field.
-func (o *IncidentEventQueryFilter) SetTimestamp(v interface{}) {
-	o.Timestamp = v
+// SetTimestamp gets a reference to the given V1TimeRange and assigns it to the Timestamp field.
+func (o *IncidentEventQueryFilter) SetTimestamp(v V1TimeRange) {
+	o.Timestamp = &v
 }
 
 func (o IncidentEventQueryFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -335,7 +334,7 @@ func (o IncidentEventQueryFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsMuted) {
 		toSerialize["isMuted"] = o.IsMuted
 	}
-	if o.Labels != nil {
+	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
 	if !IsNil(o.Name) {
@@ -347,7 +346,7 @@ func (o IncidentEventQueryFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if o.Timestamp != nil {
+	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
 
@@ -382,6 +381,7 @@ func (o *IncidentEventQueryFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "timestamp")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -422,4 +422,3 @@ func (v *NullableIncidentEventQueryFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

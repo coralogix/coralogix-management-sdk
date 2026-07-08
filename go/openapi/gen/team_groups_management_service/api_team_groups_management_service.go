@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // TeamGroupsManagementServiceAPIService TeamGroupsManagementServiceAPI service
 type TeamGroupsManagementServiceAPIService service
 
 type ApiGroupsMgmtServiceCreateTeamGroupRequest struct {
-	ctx context.Context
-	ApiService *TeamGroupsManagementServiceAPIService
+	ctx                    context.Context
+	ApiService             *TeamGroupsManagementServiceAPIService
 	createTeamGroupRequest *CreateTeamGroupRequest
 }
 
@@ -43,24 +42,25 @@ GroupsMgmtServiceCreateTeamGroup Create Team Group
 
 Creates a new team group.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGroupsMgmtServiceCreateTeamGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGroupsMgmtServiceCreateTeamGroupRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceCreateTeamGroup(ctx context.Context) ApiGroupsMgmtServiceCreateTeamGroupRequest {
 	return ApiGroupsMgmtServiceCreateTeamGroupRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateTeamGroupResponse
+//
+//	@return CreateTeamGroupResponse
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceCreateTeamGroupExecute(r ApiGroupsMgmtServiceCreateTeamGroupRequest) (*CreateTeamGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateTeamGroupResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateTeamGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TeamGroupsManagementServiceAPIService.GroupsMgmtServiceCreateTeamGroup")
@@ -122,8 +122,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceCreateTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -133,8 +133,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceCreateTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -144,8 +144,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceCreateTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -155,8 +155,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceCreateTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -174,9 +174,9 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceCreateTeamGroup
 }
 
 type ApiGroupsMgmtServiceDeleteTeamGroupRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TeamGroupsManagementServiceAPIService
-	groupId int64
+	groupId    int64
 }
 
 func (r ApiGroupsMgmtServiceDeleteTeamGroupRequest) Execute() (*DeleteTeamGroupResponse, *http.Response, error) {
@@ -188,26 +188,27 @@ GroupsMgmtServiceDeleteTeamGroup Delete Team Group
 
 Deletes the team group with the specified ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId The unique identifier of the team group to delete.
- @return ApiGroupsMgmtServiceDeleteTeamGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param groupId The unique identifier of the team group to delete.
+	@return ApiGroupsMgmtServiceDeleteTeamGroupRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceDeleteTeamGroup(ctx context.Context, groupId int64) ApiGroupsMgmtServiceDeleteTeamGroupRequest {
 	return ApiGroupsMgmtServiceDeleteTeamGroupRequest{
 		ApiService: a,
-		ctx: ctx,
-		groupId: groupId,
+		ctx:        ctx,
+		groupId:    groupId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteTeamGroupResponse
+//
+//	@return DeleteTeamGroupResponse
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceDeleteTeamGroupExecute(r ApiGroupsMgmtServiceDeleteTeamGroupRequest) (*DeleteTeamGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteTeamGroupResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteTeamGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TeamGroupsManagementServiceAPIService.GroupsMgmtServiceDeleteTeamGroup")
@@ -271,8 +272,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceDeleteTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -282,8 +283,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceDeleteTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -293,8 +294,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceDeleteTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -304,8 +305,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceDeleteTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -323,11 +324,11 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceDeleteTeamGroup
 }
 
 type ApiGroupsMgmtServiceGetGroupUsersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TeamGroupsManagementServiceAPIService
-	groupId int64
-	pageSize *int64
-	pageToken *string
+	groupId    int64
+	pageSize   *int64
+	pageToken  *string
 }
 
 // Pagination size. Defaults to 100 if empty.
@@ -351,26 +352,27 @@ GroupsMgmtServiceGetGroupUsers Get Group Users
 
 Returns all users in the specified team group.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId The unique identifier of the team group whose users to list.
- @return ApiGroupsMgmtServiceGetGroupUsersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param groupId The unique identifier of the team group whose users to list.
+	@return ApiGroupsMgmtServiceGetGroupUsersRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsers(ctx context.Context, groupId int64) ApiGroupsMgmtServiceGetGroupUsersRequest {
 	return ApiGroupsMgmtServiceGetGroupUsersRequest{
 		ApiService: a,
-		ctx: ctx,
-		groupId: groupId,
+		ctx:        ctx,
+		groupId:    groupId,
 	}
 }
 
 // Execute executes the request
-//  @return GetGroupUsersResponse
+//
+//	@return GetGroupUsersResponse
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsersExecute(r ApiGroupsMgmtServiceGetGroupUsersRequest) (*GetGroupUsersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetGroupUsersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGroupUsersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TeamGroupsManagementServiceAPIService.GroupsMgmtServiceGetGroupUsers")
@@ -444,8 +446,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsersEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -455,8 +457,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsersEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -466,8 +468,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsersEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -477,8 +479,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsersEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -496,9 +498,9 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsersEx
 }
 
 type ApiGroupsMgmtServiceGetTeamGroupRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TeamGroupsManagementServiceAPIService
-	groupId int64
+	groupId    int64
 }
 
 func (r ApiGroupsMgmtServiceGetTeamGroupRequest) Execute() (*GetTeamGroupResponse, *http.Response, error) {
@@ -510,26 +512,27 @@ GroupsMgmtServiceGetTeamGroup Get Team Group
 
 Returns the team group with the specified ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId The unique identifier of the team group.
- @return ApiGroupsMgmtServiceGetTeamGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param groupId The unique identifier of the team group.
+	@return ApiGroupsMgmtServiceGetTeamGroupRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroup(ctx context.Context, groupId int64) ApiGroupsMgmtServiceGetTeamGroupRequest {
 	return ApiGroupsMgmtServiceGetTeamGroupRequest{
 		ApiService: a,
-		ctx: ctx,
-		groupId: groupId,
+		ctx:        ctx,
+		groupId:    groupId,
 	}
 }
 
 // Execute executes the request
-//  @return GetTeamGroupResponse
+//
+//	@return GetTeamGroupResponse
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupExecute(r ApiGroupsMgmtServiceGetTeamGroupRequest) (*GetTeamGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetTeamGroupResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetTeamGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TeamGroupsManagementServiceAPIService.GroupsMgmtServiceGetTeamGroup")
@@ -593,8 +596,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -604,8 +607,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -615,8 +618,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -626,8 +629,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -645,9 +648,9 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupExe
 }
 
 type ApiGroupsMgmtServiceGetTeamGroupByNameRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TeamGroupsManagementServiceAPIService
-	name string
+	name       string
 }
 
 func (r ApiGroupsMgmtServiceGetTeamGroupByNameRequest) Execute() (*GetTeamGroupByNameResponse, *http.Response, error) {
@@ -659,26 +662,27 @@ GroupsMgmtServiceGetTeamGroupByName Get Team Group By Name
 
 Returns the team group with the specified name.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name The name of the team group to retrieve.
- @return ApiGroupsMgmtServiceGetTeamGroupByNameRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name The name of the team group to retrieve.
+	@return ApiGroupsMgmtServiceGetTeamGroupByNameRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupByName(ctx context.Context, name string) ApiGroupsMgmtServiceGetTeamGroupByNameRequest {
 	return ApiGroupsMgmtServiceGetTeamGroupByNameRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return GetTeamGroupByNameResponse
+//
+//	@return GetTeamGroupByNameResponse
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupByNameExecute(r ApiGroupsMgmtServiceGetTeamGroupByNameRequest) (*GetTeamGroupByNameResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetTeamGroupByNameResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetTeamGroupByNameResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TeamGroupsManagementServiceAPIService.GroupsMgmtServiceGetTeamGroupByName")
@@ -742,8 +746,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupByN
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -753,8 +757,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupByN
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -764,8 +768,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupByN
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -775,8 +779,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupByN
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -794,11 +798,11 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupByN
 }
 
 type ApiGroupsMgmtServiceGetTeamGroupsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TeamGroupsManagementServiceAPIService
-	teamId *int64
-	pageSize *int64
-	pageToken *string
+	teamId     *int64
+	pageSize   *int64
+	pageToken  *string
 }
 
 // Team to fetch team groups for. If not set, fetches groups associated with the logged in team.
@@ -828,24 +832,25 @@ GroupsMgmtServiceGetTeamGroups Get Team Groups
 
 Returns all team groups.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGroupsMgmtServiceGetTeamGroupsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGroupsMgmtServiceGetTeamGroupsRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroups(ctx context.Context) ApiGroupsMgmtServiceGetTeamGroupsRequest {
 	return ApiGroupsMgmtServiceGetTeamGroupsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetTeamGroupsResponse
+//
+//	@return GetTeamGroupsResponse
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupsExecute(r ApiGroupsMgmtServiceGetTeamGroupsRequest) (*GetTeamGroupsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetTeamGroupsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetTeamGroupsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TeamGroupsManagementServiceAPIService.GroupsMgmtServiceGetTeamGroups")
@@ -920,8 +925,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupsEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -931,8 +936,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupsEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -942,8 +947,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupsEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -961,9 +966,9 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupsEx
 }
 
 type ApiGroupsMgmtServiceUpdateTeamGroupRequest struct {
-	ctx context.Context
-	ApiService *TeamGroupsManagementServiceAPIService
-	groupId int64
+	ctx                    context.Context
+	ApiService             *TeamGroupsManagementServiceAPIService
+	groupId                int64
 	updateTeamGroupRequest *UpdateTeamGroupRequest
 }
 
@@ -981,26 +986,27 @@ GroupsMgmtServiceUpdateTeamGroup Update Team Group
 
 Updates the specified team group.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId Unique identifier of the team group to update.
- @return ApiGroupsMgmtServiceUpdateTeamGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param groupId Unique identifier of the team group to update.
+	@return ApiGroupsMgmtServiceUpdateTeamGroupRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceUpdateTeamGroup(ctx context.Context, groupId int64) ApiGroupsMgmtServiceUpdateTeamGroupRequest {
 	return ApiGroupsMgmtServiceUpdateTeamGroupRequest{
 		ApiService: a,
-		ctx: ctx,
-		groupId: groupId,
+		ctx:        ctx,
+		groupId:    groupId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateTeamGroupResponse
+//
+//	@return UpdateTeamGroupResponse
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceUpdateTeamGroupExecute(r ApiGroupsMgmtServiceUpdateTeamGroupRequest) (*UpdateTeamGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateTeamGroupResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateTeamGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TeamGroupsManagementServiceAPIService.GroupsMgmtServiceUpdateTeamGroup")
@@ -1066,8 +1072,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceUpdateTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1077,8 +1083,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceUpdateTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1088,8 +1094,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceUpdateTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1099,8 +1105,8 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceUpdateTeamGroup
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

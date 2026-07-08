@@ -24,13 +24,14 @@ var _ MappedNullable = &AnalyticsImmediateType{}
 type AnalyticsImmediateType struct {
 	DataprimeQuery *DataprimeAlertQuery `json:"dataprimeQuery,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
-	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
-	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
+	EvaluationDelayMs *int32        `json:"evaluationDelayMs,omitempty"`
+	NoDataPolicy      *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	// The evaluation window duration in minutes
 	TimeframeMinutes *int32 `json:"timeframeMinutes,omitempty"`
 	// Whether each result row is treated as a separate permutation. Defaults to false for immediate alerts to avoid high-cardinality alerts by mistake.
-	UseRowsAsPermutations *bool `json:"useRowsAsPermutations,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UseRowsAsPermutations             *bool `json:"useRowsAsPermutations,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AnalyticsImmediateType AnalyticsImmediateType
@@ -213,7 +214,7 @@ func (o *AnalyticsImmediateType) SetUseRowsAsPermutations(v bool) {
 }
 
 func (o AnalyticsImmediateType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,6 +267,7 @@ func (o *AnalyticsImmediateType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "timeframeMinutes")
 		delete(additionalProperties, "useRowsAsPermutations")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -306,4 +308,3 @@ func (v *NullableAnalyticsImmediateType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

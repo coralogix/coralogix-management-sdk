@@ -23,8 +23,9 @@ var _ MappedNullable = &E2MAggHistogram{}
 // E2MAggHistogram This data structure represents the e2m aggregate histogram
 type E2MAggHistogram struct {
 	// The buckets.
-	Buckets []float32 `json:"buckets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Buckets                           []float32 `json:"buckets,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _E2MAggHistogram E2MAggHistogram
@@ -79,7 +80,7 @@ func (o *E2MAggHistogram) SetBuckets(v []float32) {
 }
 
 func (o E2MAggHistogram) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *E2MAggHistogram) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "buckets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableE2MAggHistogram) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

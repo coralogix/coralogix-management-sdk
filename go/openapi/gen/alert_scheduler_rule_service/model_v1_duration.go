@@ -23,9 +23,10 @@ var _ MappedNullable = &V1Duration{}
 // V1Duration Duration.
 type V1Duration struct {
 	// The for over.
-	ForOver *int32 `json:"forOver,omitempty"`
-	Frequency *DurationFrequency `json:"frequency,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ForOver                           *int32             `json:"forOver,omitempty"`
+	Frequency                         *DurationFrequency `json:"frequency,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V1Duration V1Duration
@@ -112,7 +113,7 @@ func (o *V1Duration) SetFrequency(v DurationFrequency) {
 }
 
 func (o V1Duration) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *V1Duration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "forOver")
 		delete(additionalProperties, "frequency")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableV1Duration) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

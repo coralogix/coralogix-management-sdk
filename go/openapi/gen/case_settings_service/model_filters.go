@@ -23,9 +23,10 @@ var _ MappedNullable = &Filters{}
 
 // Filters This data structure represents a filter
 type Filters struct {
-	Operator *V3FilterOperator `json:"operator,omitempty"`
-	PathAndValues []FilterPathAndValues `json:"pathAndValues"`
-	AdditionalProperties map[string]interface{}
+	Operator                          *V3FilterOperator     `json:"operator,omitempty"`
+	PathAndValues                     []FilterPathAndValues `json:"pathAndValues"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Filters Filters
@@ -105,7 +106,7 @@ func (o *Filters) SetPathAndValues(v []FilterPathAndValues) {
 }
 
 func (o Filters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -139,10 +140,10 @@ func (o *Filters) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -165,6 +166,7 @@ func (o *Filters) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "operator")
 		delete(additionalProperties, "pathAndValues")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -205,4 +207,3 @@ func (v *NullableFilters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

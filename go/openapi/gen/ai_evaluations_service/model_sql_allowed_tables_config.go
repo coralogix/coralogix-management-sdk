@@ -23,8 +23,9 @@ var _ MappedNullable = &SqlAllowedTablesConfig{}
 // SqlAllowedTablesConfig Configuration for the SqlAllowedTables evaluation.
 type SqlAllowedTablesConfig struct {
 	// SQL table names that are allowed.
-	Tables []string `json:"tables,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Tables                            []string `json:"tables,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SqlAllowedTablesConfig SqlAllowedTablesConfig
@@ -79,7 +80,7 @@ func (o *SqlAllowedTablesConfig) SetTables(v []string) {
 }
 
 func (o SqlAllowedTablesConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *SqlAllowedTablesConfig) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "tables")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableSqlAllowedTablesConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

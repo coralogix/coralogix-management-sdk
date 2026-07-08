@@ -23,9 +23,10 @@ var _ MappedNullable = &CreateLogPolicyRequest{}
 
 // CreateLogPolicyRequest This data structue is used to create a new log policy.
 type CreateLogPolicyRequest struct {
-	LogRules LogRules `json:"logRules"`
-	Policy CreateGenericPolicyRequest `json:"policy"`
-	AdditionalProperties map[string]interface{}
+	LogRules                          LogRules                   `json:"logRules"`
+	Policy                            CreateGenericPolicyRequest `json:"policy"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateLogPolicyRequest CreateLogPolicyRequest
@@ -98,7 +99,7 @@ func (o *CreateLogPolicyRequest) SetPolicy(v CreateGenericPolicyRequest) {
 }
 
 func (o CreateLogPolicyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -131,10 +132,10 @@ func (o *CreateLogPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -157,6 +158,7 @@ func (o *CreateLogPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "logRules")
 		delete(additionalProperties, "policy")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -197,4 +199,3 @@ func (v *NullableCreateLogPolicyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -25,8 +25,9 @@ type FlowStagesGroupsAlertDefs struct {
 	// The alert definition ID
 	Id *string `json:"id,omitempty"`
 	// Whether to negate the alert definition or not.
-	Not *bool `json:"not,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Not                               *bool `json:"not,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _FlowStagesGroupsAlertDefs FlowStagesGroupsAlertDefs
@@ -113,7 +114,7 @@ func (o *FlowStagesGroupsAlertDefs) SetNot(v bool) {
 }
 
 func (o FlowStagesGroupsAlertDefs) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *FlowStagesGroupsAlertDefs) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "not")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableFlowStagesGroupsAlertDefs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

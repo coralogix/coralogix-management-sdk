@@ -24,9 +24,9 @@ type GroupType string
 // List of GroupType
 const (
 	GROUPTYPE_GROUP_TYPE_UNSPECIFIED GroupType = "GROUP_TYPE_UNSPECIFIED"
-	GROUPTYPE_GROUP_TYPE_OPEN GroupType = "GROUP_TYPE_OPEN"
-	GROUPTYPE_GROUP_TYPE_CLOSED GroupType = "GROUP_TYPE_CLOSED"
-	GROUPTYPE_GROUP_TYPE_RESTRICTED GroupType = "GROUP_TYPE_RESTRICTED"
+	GROUPTYPE_GROUP_TYPE_OPEN        GroupType = "GROUP_TYPE_OPEN"
+	GROUPTYPE_GROUP_TYPE_CLOSED      GroupType = "GROUP_TYPE_CLOSED"
+	GROUPTYPE_GROUP_TYPE_RESTRICTED  GroupType = "GROUP_TYPE_RESTRICTED"
 )
 
 // All allowed values of GroupType enum
@@ -115,4 +115,3 @@ func (v *NullableGroupType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

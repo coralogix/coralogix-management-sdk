@@ -23,13 +23,14 @@ var _ MappedNullable = &AlertIndicatorDeepLink{}
 // AlertIndicatorDeepLink Deep links derived from a single alert indicator on a case.
 type AlertIndicatorDeepLink struct {
 	// URL to the alert definition that triggered the indicator. Empty when not available.
-	AlertDef *string `json:"alertDef,omitempty"`
-	Logs *LogsLink `json:"logs,omitempty"`
-	Metric *MetricLink `json:"metric,omitempty"`
-	Rum *RumLink `json:"rum,omitempty"`
-	Slo *SloLink `json:"slo,omitempty"`
-	Tracing *TracingLink `json:"tracing,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AlertDef                          *string      `json:"alertDef,omitempty"`
+	Logs                              *LogsLink    `json:"logs,omitempty"`
+	Metric                            *MetricLink  `json:"metric,omitempty"`
+	Rum                               *RumLink     `json:"rum,omitempty"`
+	Slo                               *SloLink     `json:"slo,omitempty"`
+	Tracing                           *TracingLink `json:"tracing,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AlertIndicatorDeepLink AlertIndicatorDeepLink
@@ -244,7 +245,7 @@ func (o *AlertIndicatorDeepLink) SetTracing(v TracingLink) {
 }
 
 func (o AlertIndicatorDeepLink) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -341,6 +342,7 @@ func (o *AlertIndicatorDeepLink) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "slo")
 		delete(additionalProperties, "tracing")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -381,4 +383,3 @@ func (v *NullableAlertIndicatorDeepLink) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -19,14 +19,13 @@ import (
 	"strings"
 )
 
-
 // CaseEventsServiceAPIService CaseEventsServiceAPI service
 type CaseEventsServiceAPIService service
 
 type ApiCaseEventsServiceCreateCommentRequest struct {
-	ctx context.Context
-	ApiService *CaseEventsServiceAPIService
-	caseId string
+	ctx                       context.Context
+	ApiService                *CaseEventsServiceAPIService
+	caseId                    string
 	createCommentEventRequest *CreateCommentEventRequest
 }
 
@@ -44,26 +43,27 @@ CaseEventsServiceCreateComment Create a comment event
 
 Create a new comment event for a case.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param caseId ID of the case to add the event to. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCaseEventsServiceCreateCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param caseId ID of the case to add the event to. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCaseEventsServiceCreateCommentRequest
 */
 func (a *CaseEventsServiceAPIService) CaseEventsServiceCreateComment(ctx context.Context, caseId string) ApiCaseEventsServiceCreateCommentRequest {
 	return ApiCaseEventsServiceCreateCommentRequest{
 		ApiService: a,
-		ctx: ctx,
-		caseId: caseId,
+		ctx:        ctx,
+		caseId:     caseId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateCommentResponse
+//
+//	@return CreateCommentResponse
 func (a *CaseEventsServiceAPIService) CaseEventsServiceCreateCommentExecute(r ApiCaseEventsServiceCreateCommentRequest) (*CreateCommentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateCommentResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateCommentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseEventsServiceAPIService.CaseEventsServiceCreateComment")
@@ -135,8 +135,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceCreateCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -146,8 +146,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceCreateCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -157,8 +157,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceCreateCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -168,8 +168,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceCreateCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -187,9 +187,9 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceCreateCommentExecute(r Ap
 }
 
 type ApiCaseEventsServiceDeleteCommentRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CaseEventsServiceAPIService
-	eventId string
+	eventId    string
 }
 
 func (r ApiCaseEventsServiceDeleteCommentRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -201,26 +201,27 @@ CaseEventsServiceDeleteComment Delete a comment event
 
 Delete an existing comment event from a case.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param eventId ID of the comment event to delete
- @return ApiCaseEventsServiceDeleteCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param eventId ID of the comment event to delete
+	@return ApiCaseEventsServiceDeleteCommentRequest
 */
 func (a *CaseEventsServiceAPIService) CaseEventsServiceDeleteComment(ctx context.Context, eventId string) ApiCaseEventsServiceDeleteCommentRequest {
 	return ApiCaseEventsServiceDeleteCommentRequest{
 		ApiService: a,
-		ctx: ctx,
-		eventId: eventId,
+		ctx:        ctx,
+		eventId:    eventId,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *CaseEventsServiceAPIService) CaseEventsServiceDeleteCommentExecute(r ApiCaseEventsServiceDeleteCommentRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseEventsServiceAPIService.CaseEventsServiceDeleteComment")
@@ -284,8 +285,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceDeleteCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -295,8 +296,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceDeleteCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -306,8 +307,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceDeleteCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -317,8 +318,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceDeleteCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -328,8 +329,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceDeleteCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -347,9 +348,9 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceDeleteCommentExecute(r Ap
 }
 
 type ApiCaseEventsServiceGetEventRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CaseEventsServiceAPIService
-	eventId string
+	eventId    string
 }
 
 func (r ApiCaseEventsServiceGetEventRequest) Execute() (*V1GetEventResponse, *http.Response, error) {
@@ -361,26 +362,27 @@ CaseEventsServiceGetEvent Get an event by ID
 
 Retrieve a single event by its unique identifier.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param eventId ID of the event to fetch
- @return ApiCaseEventsServiceGetEventRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param eventId ID of the event to fetch
+	@return ApiCaseEventsServiceGetEventRequest
 */
 func (a *CaseEventsServiceAPIService) CaseEventsServiceGetEvent(ctx context.Context, eventId string) ApiCaseEventsServiceGetEventRequest {
 	return ApiCaseEventsServiceGetEventRequest{
 		ApiService: a,
-		ctx: ctx,
-		eventId: eventId,
+		ctx:        ctx,
+		eventId:    eventId,
 	}
 }
 
 // Execute executes the request
-//  @return V1GetEventResponse
+//
+//	@return V1GetEventResponse
 func (a *CaseEventsServiceAPIService) CaseEventsServiceGetEventExecute(r ApiCaseEventsServiceGetEventRequest) (*V1GetEventResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *V1GetEventResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *V1GetEventResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseEventsServiceAPIService.CaseEventsServiceGetEvent")
@@ -444,8 +446,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceGetEventExecute(r ApiCase
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -455,8 +457,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceGetEventExecute(r ApiCase
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -466,8 +468,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceGetEventExecute(r ApiCase
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -477,8 +479,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceGetEventExecute(r ApiCase
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -488,8 +490,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceGetEventExecute(r ApiCase
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -507,9 +509,9 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceGetEventExecute(r ApiCase
 }
 
 type ApiCaseEventsServiceListEventsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CaseEventsServiceAPIService
-	caseId string
+	caseId     string
 }
 
 func (r ApiCaseEventsServiceListEventsRequest) Execute() (*V1ListEventsResponse, *http.Response, error) {
@@ -521,26 +523,27 @@ CaseEventsServiceListEvents List events for a case
 
 Retrieve all events associated with a specific case.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param caseId ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCaseEventsServiceListEventsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param caseId ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCaseEventsServiceListEventsRequest
 */
 func (a *CaseEventsServiceAPIService) CaseEventsServiceListEvents(ctx context.Context, caseId string) ApiCaseEventsServiceListEventsRequest {
 	return ApiCaseEventsServiceListEventsRequest{
 		ApiService: a,
-		ctx: ctx,
-		caseId: caseId,
+		ctx:        ctx,
+		caseId:     caseId,
 	}
 }
 
 // Execute executes the request
-//  @return V1ListEventsResponse
+//
+//	@return V1ListEventsResponse
 func (a *CaseEventsServiceAPIService) CaseEventsServiceListEventsExecute(r ApiCaseEventsServiceListEventsRequest) (*V1ListEventsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *V1ListEventsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *V1ListEventsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseEventsServiceAPIService.CaseEventsServiceListEvents")
@@ -607,8 +610,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceListEventsExecute(r ApiCa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -618,8 +621,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceListEventsExecute(r ApiCa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -629,8 +632,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceListEventsExecute(r ApiCa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -640,8 +643,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceListEventsExecute(r ApiCa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -659,9 +662,9 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceListEventsExecute(r ApiCa
 }
 
 type ApiCaseEventsServiceSyncExternalCaseEventsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CaseEventsServiceAPIService
-	caseId string
+	caseId     string
 }
 
 func (r ApiCaseEventsServiceSyncExternalCaseEventsRequest) Execute() (*SyncExternalCaseEventsResponse, *http.Response, error) {
@@ -673,26 +676,27 @@ CaseEventsServiceSyncExternalCaseEvents Sync external Case events
 
 Synchronize events from an external source (e.g. Slack) into the case.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param caseId ID of the case to sync external case events for. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCaseEventsServiceSyncExternalCaseEventsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param caseId ID of the case to sync external case events for. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCaseEventsServiceSyncExternalCaseEventsRequest
 */
 func (a *CaseEventsServiceAPIService) CaseEventsServiceSyncExternalCaseEvents(ctx context.Context, caseId string) ApiCaseEventsServiceSyncExternalCaseEventsRequest {
 	return ApiCaseEventsServiceSyncExternalCaseEventsRequest{
 		ApiService: a,
-		ctx: ctx,
-		caseId: caseId,
+		ctx:        ctx,
+		caseId:     caseId,
 	}
 }
 
 // Execute executes the request
-//  @return SyncExternalCaseEventsResponse
+//
+//	@return SyncExternalCaseEventsResponse
 func (a *CaseEventsServiceAPIService) CaseEventsServiceSyncExternalCaseEventsExecute(r ApiCaseEventsServiceSyncExternalCaseEventsRequest) (*SyncExternalCaseEventsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SyncExternalCaseEventsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SyncExternalCaseEventsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseEventsServiceAPIService.CaseEventsServiceSyncExternalCaseEvents")
@@ -759,8 +763,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceSyncExternalCaseEventsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -770,8 +774,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceSyncExternalCaseEventsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -781,8 +785,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceSyncExternalCaseEventsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -792,8 +796,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceSyncExternalCaseEventsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -803,8 +807,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceSyncExternalCaseEventsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -822,9 +826,9 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceSyncExternalCaseEventsExe
 }
 
 type ApiCaseEventsServiceUpdateCommentRequest struct {
-	ctx context.Context
-	ApiService *CaseEventsServiceAPIService
-	eventId string
+	ctx                       context.Context
+	ApiService                *CaseEventsServiceAPIService
+	eventId                   string
 	updateCommentEventRequest *UpdateCommentEventRequest
 }
 
@@ -842,26 +846,27 @@ CaseEventsServiceUpdateComment Update a comment event
 
 Modify the content of an existing comment event.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param eventId ID of the comment event to update
- @return ApiCaseEventsServiceUpdateCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param eventId ID of the comment event to update
+	@return ApiCaseEventsServiceUpdateCommentRequest
 */
 func (a *CaseEventsServiceAPIService) CaseEventsServiceUpdateComment(ctx context.Context, eventId string) ApiCaseEventsServiceUpdateCommentRequest {
 	return ApiCaseEventsServiceUpdateCommentRequest{
 		ApiService: a,
-		ctx: ctx,
-		eventId: eventId,
+		ctx:        ctx,
+		eventId:    eventId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateCommentResponse
+//
+//	@return UpdateCommentResponse
 func (a *CaseEventsServiceAPIService) CaseEventsServiceUpdateCommentExecute(r ApiCaseEventsServiceUpdateCommentRequest) (*UpdateCommentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateCommentResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateCommentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseEventsServiceAPIService.CaseEventsServiceUpdateComment")
@@ -930,8 +935,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceUpdateCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -941,8 +946,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceUpdateCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -952,8 +957,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceUpdateCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -963,8 +968,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceUpdateCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -974,8 +979,8 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceUpdateCommentExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

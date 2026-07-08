@@ -22,10 +22,11 @@ var _ MappedNullable = &V2Target{}
 
 // V2Target This data structure represents a target to archive logs.
 type V2Target struct {
-	ArchiveSpec *ArchiveSpec `json:"archiveSpec,omitempty"`
-	IbmCos *IBMCosTargetSpec `json:"ibmCos,omitempty"`
-	S3 *S3TargetSpec `json:"s3,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ArchiveSpec                       *ArchiveSpec      `json:"archiveSpec,omitempty"`
+	IbmCos                            *IBMCosTargetSpec `json:"ibmCos,omitempty"`
+	S3                                *S3TargetSpec     `json:"s3,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V2Target V2Target
@@ -144,7 +145,7 @@ func (o *V2Target) SetS3(v S3TargetSpec) {
 }
 
 func (o V2Target) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -211,6 +212,7 @@ func (o *V2Target) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ibmCos")
 		delete(additionalProperties, "s3")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -251,4 +253,3 @@ func (v *NullableV2Target) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,9 +22,10 @@ var _ MappedNullable = &QueryLogsQueryType{}
 
 // QueryLogsQueryType Type.
 type QueryLogsQueryType struct {
-	FieldName *QueryLogsQueryTypeFieldName `json:"fieldName,omitempty"`
-	FieldValue *QueryLogsQueryTypeFieldValue `json:"fieldValue,omitempty"`
-	AdditionalProperties map[string]interface{}
+	FieldName                         *QueryLogsQueryTypeFieldName  `json:"fieldName,omitempty"`
+	FieldValue                        *QueryLogsQueryTypeFieldValue `json:"fieldValue,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QueryLogsQueryType QueryLogsQueryType
@@ -111,7 +112,7 @@ func (o *QueryLogsQueryType) SetFieldValue(v QueryLogsQueryTypeFieldValue) {
 }
 
 func (o QueryLogsQueryType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,6 +175,7 @@ func (o *QueryLogsQueryType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fieldName")
 		delete(additionalProperties, "fieldValue")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -214,4 +216,3 @@ func (v *NullableQueryLogsQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

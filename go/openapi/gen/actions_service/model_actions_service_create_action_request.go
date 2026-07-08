@@ -31,15 +31,16 @@ type ActionsServiceCreateActionRequest struct {
 	// The is private.
 	IsPrivate *bool `json:"isPrivate,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name       *string       `json:"name,omitempty"`
 	SourceType *V2SourceType `json:"sourceType,omitempty"`
 	// The subsystem names.
 	SubsystemNames []string `json:"subsystemNames,omitempty"`
 	// URL.
 	Url *string `json:"url,omitempty"`
 	// The url fields.
-	UrlFields []UrlField `json:"urlFields,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UrlFields                         []UrlField `json:"urlFields,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ActionsServiceCreateActionRequest ActionsServiceCreateActionRequest
@@ -350,7 +351,7 @@ func (o *ActionsServiceCreateActionRequest) SetUrlFields(v []UrlField) {
 }
 
 func (o ActionsServiceCreateActionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -419,6 +420,7 @@ func (o *ActionsServiceCreateActionRequest) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "urlFields")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -459,4 +461,3 @@ func (v *NullableActionsServiceCreateActionRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

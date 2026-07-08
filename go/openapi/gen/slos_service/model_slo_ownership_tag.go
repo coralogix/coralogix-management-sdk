@@ -27,8 +27,9 @@ type SloOwnershipTag struct {
 	// Flat, deduplicated union of static_values and the values resolved from label_keys across observed permutations (empties excluded). Empty when neither source yields any value. Provides a single searchable list of values for this ownership tag, regardless of source.
 	ResolvedValues []string `json:"resolvedValues,omitempty"`
 	// Group-wide static values (broad). Empty if not using broad for this dimension.
-	StaticValues []string `json:"staticValues,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StaticValues                      []string `json:"staticValues,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SloOwnershipTag SloOwnershipTag
@@ -147,7 +148,7 @@ func (o *SloOwnershipTag) SetStaticValues(v []string) {
 }
 
 func (o SloOwnershipTag) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *SloOwnershipTag) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "resolvedValues")
 		delete(additionalProperties, "staticValues")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableSloOwnershipTag) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

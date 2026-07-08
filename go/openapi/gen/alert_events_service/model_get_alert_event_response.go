@@ -23,11 +23,12 @@ var _ MappedNullable = &GetAlertEventResponse{}
 // GetAlertEventResponse Response containing the details of an alert event.
 type GetAlertEventResponse struct {
 	// Unique identifier of the alert event.
-	Id *string `json:"id,omitempty"`
-	MultiplePermutation *AlertEventMultiplePermutation `json:"multiplePermutation,omitempty"`
-	Pagination *AlertsV3PaginationResponse `json:"pagination,omitempty"`
-	SinglePermutation *AlertEvent `json:"singlePermutation,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Id                                *string                        `json:"id,omitempty"`
+	MultiplePermutation               *AlertEventMultiplePermutation `json:"multiplePermutation,omitempty"`
+	Pagination                        *AlertsV3PaginationResponse    `json:"pagination,omitempty"`
+	SinglePermutation                 *AlertEvent                    `json:"singlePermutation,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetAlertEventResponse GetAlertEventResponse
@@ -178,7 +179,7 @@ func (o *GetAlertEventResponse) SetSinglePermutation(v AlertEvent) {
 }
 
 func (o GetAlertEventResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -249,6 +250,7 @@ func (o *GetAlertEventResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "pagination")
 		delete(additionalProperties, "singlePermutation")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -289,4 +291,3 @@ func (v *NullableGetAlertEventResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

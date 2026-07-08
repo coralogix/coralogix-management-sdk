@@ -24,8 +24,9 @@ var _ MappedNullable = &V1ListEventsResponse{}
 // V1ListEventsResponse Response containing a list of case events.
 type V1ListEventsResponse struct {
 	// Events for the case
-	Events []CaseEvent `json:"events"`
-	AdditionalProperties map[string]interface{}
+	Events                            []CaseEvent `json:"events"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V1ListEventsResponse V1ListEventsResponse
@@ -73,7 +74,7 @@ func (o *V1ListEventsResponse) SetEvents(v []CaseEvent) {
 }
 
 func (o V1ListEventsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +105,10 @@ func (o *V1ListEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -129,6 +130,7 @@ func (o *V1ListEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "events")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -169,4 +171,3 @@ func (v *NullableV1ListEventsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

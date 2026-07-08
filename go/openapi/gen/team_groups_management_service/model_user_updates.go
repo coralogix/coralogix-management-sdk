@@ -22,8 +22,9 @@ var _ MappedNullable = &UserUpdates{}
 
 // UserUpdates Patch object for updating group user membership. Choose one operation: add, remove, or replace all users.
 type UserUpdates struct {
-	Operation *UserUpdatesOperation `json:"operation,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Operation                         *UserUpdatesOperation `json:"operation,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UserUpdates UserUpdates
@@ -78,7 +79,7 @@ func (o *UserUpdates) SetOperation(v UserUpdatesOperation) {
 }
 
 func (o UserUpdates) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *UserUpdates) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "operation")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableUserUpdates) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

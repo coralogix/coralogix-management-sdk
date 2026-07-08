@@ -23,18 +23,19 @@ var _ MappedNullable = &AiEvaluationsServiceUpdateAiEvaluationRequest{}
 // AiEvaluationsServiceUpdateAiEvaluationRequest Request to update an existing AI evaluation.
 type AiEvaluationsServiceUpdateAiEvaluationRequest struct {
 	// Name of the AI application this evaluation belongs to.
-	Application *string `json:"application,omitempty" validate:"regexp=^[\\s\\S]+$"`
-	Config *EvaluationConfig `json:"config,omitempty"`
+	Application *string           `json:"application,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	Config      *EvaluationConfig `json:"config,omitempty"`
 	// Whether the evaluation is active.
 	IsEnabled *bool `json:"isEnabled,omitempty"`
 	// Subsystem within the application.
-	Subsystem *string `json:"subsystem,omitempty" validate:"regexp=^[\\s\\S]+$"`
-	Target *EvaluationTarget `json:"target,omitempty"`
+	Subsystem *string           `json:"subsystem,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	Target    *EvaluationTarget `json:"target,omitempty"`
 	// Score threshold. Must be between 0.0 and 1.0 inclusive.
 	Threshold *float64 `json:"threshold,omitempty"`
 	// Comma-separated list of field paths to update. When provided, only the listed fields are touched; a listed field that is absent from the request body is cleared. When omitted, only fields present in the body are updated.
-	UpdateMask *string `json:"updateMask,omitempty" validate:"regexp=^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$"`
-	AdditionalProperties map[string]interface{}
+	UpdateMask                        *string `json:"updateMask,omitempty" validate:"regexp=^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AiEvaluationsServiceUpdateAiEvaluationRequest AiEvaluationsServiceUpdateAiEvaluationRequest
@@ -281,7 +282,7 @@ func (o *AiEvaluationsServiceUpdateAiEvaluationRequest) SetUpdateMask(v string) 
 }
 
 func (o AiEvaluationsServiceUpdateAiEvaluationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -342,6 +343,7 @@ func (o *AiEvaluationsServiceUpdateAiEvaluationRequest) UnmarshalJSON(data []byt
 		delete(additionalProperties, "threshold")
 		delete(additionalProperties, "updateMask")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -382,4 +384,3 @@ func (v *NullableAiEvaluationsServiceUpdateAiEvaluationRequest) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

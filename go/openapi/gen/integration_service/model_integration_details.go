@@ -26,11 +26,12 @@ type IntegrationDetails struct {
 	// Documentation links associated with this integration.
 	Docs []IntegrationDoc `json:"docs,omitempty"`
 	// Extensions bundled with this integration for pre-built dashboards and alerts.
-	Extensions []V1Extension `json:"extensions,omitempty"`
-	External *ExternalUrl `json:"external,omitempty"`
-	Integration *Integration `json:"integration,omitempty"`
-	Local *LocalChangelog `json:"local,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Extensions                        []V1Extension   `json:"extensions,omitempty"`
+	External                          *ExternalUrl    `json:"external,omitempty"`
+	Integration                       *Integration    `json:"integration,omitempty"`
+	Local                             *LocalChangelog `json:"local,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IntegrationDetails IntegrationDetails
@@ -245,7 +246,7 @@ func (o *IntegrationDetails) SetLocal(v LocalChangelog) {
 }
 
 func (o IntegrationDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -324,6 +325,7 @@ func (o *IntegrationDetails) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "integration")
 		delete(additionalProperties, "local")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -364,4 +366,3 @@ func (v *NullableIntegrationDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

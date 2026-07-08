@@ -22,8 +22,9 @@ var _ MappedNullable = &CreateConnectorResponse{}
 
 // CreateConnectorResponse Response containing the created connector
 type CreateConnectorResponse struct {
-	Connector *Connector `json:"connector,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Connector                         *Connector `json:"connector,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateConnectorResponse CreateConnectorResponse
@@ -78,7 +79,7 @@ func (o *CreateConnectorResponse) SetConnector(v Connector) {
 }
 
 func (o CreateConnectorResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *CreateConnectorResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "connector")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableCreateConnectorResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

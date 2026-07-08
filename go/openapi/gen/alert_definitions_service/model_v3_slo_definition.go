@@ -23,8 +23,9 @@ var _ MappedNullable = &V3SloDefinition{}
 // V3SloDefinition Configuration for SLO definition
 type V3SloDefinition struct {
 	// The SLO ID
-	SloId *string `json:"sloId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SloId                             *string `json:"sloId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V3SloDefinition V3SloDefinition
@@ -79,7 +80,7 @@ func (o *V3SloDefinition) SetSloId(v string) {
 }
 
 func (o V3SloDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *V3SloDefinition) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "sloId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableV3SloDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -28,8 +28,9 @@ type IncidentEventSnoozeIndicator struct {
 	// Start time.
 	StartTime *time.Time `json:"startTime,omitempty"`
 	// The user id.
-	UserId *string `json:"userId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UserId                            *string `json:"userId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentEventSnoozeIndicator IncidentEventSnoozeIndicator
@@ -148,7 +149,7 @@ func (o *IncidentEventSnoozeIndicator) SetUserId(v string) {
 }
 
 func (o IncidentEventSnoozeIndicator) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -193,6 +194,7 @@ func (o *IncidentEventSnoozeIndicator) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "startTime")
 		delete(additionalProperties, "userId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -233,4 +235,3 @@ func (v *NullableIncidentEventSnoozeIndicator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

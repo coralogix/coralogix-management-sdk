@@ -23,11 +23,12 @@ var _ MappedNullable = &DataTableSpansQuery{}
 // DataTableSpansQuery A spans variant of the query
 type DataTableSpansQuery struct {
 	// List of span query filters
-	Filters []SpansFilter `json:"filters,omitempty"`
-	Grouping *SpansQueryGrouping `json:"grouping,omitempty"`
-	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
-	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Filters                           []SpansFilter       `json:"filters,omitempty"`
+	Grouping                          *SpansQueryGrouping `json:"grouping,omitempty"`
+	LuceneQuery                       *LuceneQuery        `json:"luceneQuery,omitempty"`
+	TimeFrame                         *TimeFrameSelect    `json:"timeFrame,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DataTableSpansQuery DataTableSpansQuery
@@ -178,7 +179,7 @@ func (o *DataTableSpansQuery) SetTimeFrame(v TimeFrameSelect) {
 }
 
 func (o DataTableSpansQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -227,6 +228,7 @@ func (o *DataTableSpansQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "luceneQuery")
 		delete(additionalProperties, "timeFrame")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -267,4 +269,3 @@ func (v *NullableDataTableSpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

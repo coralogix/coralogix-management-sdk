@@ -24,10 +24,11 @@ var _ MappedNullable = &MappingSection{}
 type MappingSection struct {
 	Color *ColorSolidType `json:"color,omitempty"`
 	// Display text to map the matched value to
-	MapTo *string `json:"mapTo,omitempty"`
+	MapTo *string `json:"mapTo,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Value to match (exact string for value mapping, regex pattern for regex mapping)
-	Value *string `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Value                             *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MappingSection MappingSection
@@ -146,7 +147,7 @@ func (o *MappingSection) SetValue(v string) {
 }
 
 func (o MappingSection) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -191,6 +192,7 @@ func (o *MappingSection) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "mapTo")
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -231,4 +233,3 @@ func (v *NullableMappingSection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

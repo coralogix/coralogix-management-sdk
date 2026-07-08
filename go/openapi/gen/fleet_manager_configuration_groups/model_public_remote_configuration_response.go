@@ -35,8 +35,9 @@ type PublicRemoteConfigurationResponse struct {
 	// Normalized OpenTelemetry Collector configuration YAML.
 	RawConfiguration *string `json:"rawConfiguration,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Time when this remote configuration was last updated.
-	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpdatedAt                         *time.Time `json:"updatedAt,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PublicRemoteConfigurationResponse PublicRemoteConfigurationResponse
@@ -283,7 +284,7 @@ func (o *PublicRemoteConfigurationResponse) SetUpdatedAt(v time.Time) {
 }
 
 func (o PublicRemoteConfigurationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -344,6 +345,7 @@ func (o *PublicRemoteConfigurationResponse) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "rawConfiguration")
 		delete(additionalProperties, "updatedAt")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -384,4 +386,3 @@ func (v *NullablePublicRemoteConfigurationResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

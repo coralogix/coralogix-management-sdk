@@ -23,9 +23,10 @@ var _ MappedNullable = &LogsNewValueCondition{}
 // LogsNewValueCondition Defines conditions for detecting new values in logs
 type LogsNewValueCondition struct {
 	// The keypath to track for new values
-	KeypathToTrack *string `json:"keypathToTrack,omitempty"`
-	TimeWindow *LogsNewValueTimeWindow `json:"timeWindow,omitempty"`
-	AdditionalProperties map[string]interface{}
+	KeypathToTrack                    *string                 `json:"keypathToTrack,omitempty"`
+	TimeWindow                        *LogsNewValueTimeWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogsNewValueCondition LogsNewValueCondition
@@ -112,7 +113,7 @@ func (o *LogsNewValueCondition) SetTimeWindow(v LogsNewValueTimeWindow) {
 }
 
 func (o LogsNewValueCondition) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *LogsNewValueCondition) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "keypathToTrack")
 		delete(additionalProperties, "timeWindow")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableLogsNewValueCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

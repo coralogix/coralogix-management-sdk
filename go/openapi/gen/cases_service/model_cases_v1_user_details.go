@@ -23,8 +23,9 @@ var _ MappedNullable = &CasesV1UserDetails{}
 // CasesV1UserDetails Minimal user identity information used in case assignments.
 type CasesV1UserDetails struct {
 	// Unique user identifier
-	UserId *string `json:"userId,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
-	AdditionalProperties map[string]interface{}
+	UserId                            *string `json:"userId,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CasesV1UserDetails CasesV1UserDetails
@@ -79,7 +80,7 @@ func (o *CasesV1UserDetails) SetUserId(v string) {
 }
 
 func (o CasesV1UserDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *CasesV1UserDetails) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "userId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableCasesV1UserDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

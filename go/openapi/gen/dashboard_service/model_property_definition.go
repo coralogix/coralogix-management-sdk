@@ -24,16 +24,17 @@ var _ MappedNullable = &PropertyDefinition{}
 type PropertyDefinition struct {
 	Alignment *TextAlignment `json:"alignment,omitempty"`
 	// Column display name property, allows renaming the column header name
-	ColumnDisplayName *string `json:"columnDisplayName,omitempty"`
-	Link *PropertyLinks `json:"link,omitempty"`
+	ColumnDisplayName *string        `json:"columnDisplayName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Link              *PropertyLinks `json:"link,omitempty"`
 	// Value of Regex Extract property, a regex string
-	RegexExtract *string `json:"regexExtract,omitempty"`
-	Thresholds *PropertyThresholds `json:"thresholds,omitempty"`
-	Units *PropertyUnits `json:"units,omitempty"`
+	RegexExtract *string             `json:"regexExtract,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Thresholds   *PropertyThresholds `json:"thresholds,omitempty"`
+	Units        *PropertyUnits      `json:"units,omitempty"`
 	// Value alias property, used to give alias names to selected fields
-	ValuesAlias *string `json:"valuesAlias,omitempty"`
-	ValuesMapping *PropertyValuesMapping `json:"valuesMapping,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ValuesAlias                       *string                `json:"valuesAlias,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	ValuesMapping                     *PropertyValuesMapping `json:"valuesMapping,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PropertyDefinition PropertyDefinition
@@ -312,7 +313,7 @@ func (o *PropertyDefinition) SetValuesMapping(v PropertyValuesMapping) {
 }
 
 func (o PropertyDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -435,6 +436,7 @@ func (o *PropertyDefinition) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "valuesAlias")
 		delete(additionalProperties, "valuesMapping")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -475,4 +477,3 @@ func (v *NullablePropertyDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

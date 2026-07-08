@@ -22,11 +22,12 @@ var _ MappedNullable = &ConfigureTenantRequest{}
 
 // ConfigureTenantRequest This data structure is used to configure a tenant.
 type ConfigureTenantRequest struct {
-	Gcs *GcsConfig `json:"gcs,omitempty"`
-	Ibm *IbmConfigV2 `json:"ibm,omitempty"`
-	RetentionPolicy *RetentionPolicyRequest `json:"retentionPolicy,omitempty"`
-	S3 *S3Config `json:"s3,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Gcs                               *GcsConfig              `json:"gcs,omitempty"`
+	Ibm                               *IbmConfigV2            `json:"ibm,omitempty"`
+	RetentionPolicy                   *RetentionPolicyRequest `json:"retentionPolicy,omitempty"`
+	S3                                *S3Config               `json:"s3,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ConfigureTenantRequest ConfigureTenantRequest
@@ -177,7 +178,7 @@ func (o *ConfigureTenantRequest) SetS3(v S3Config) {
 }
 
 func (o ConfigureTenantRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -254,6 +255,7 @@ func (o *ConfigureTenantRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "retentionPolicy")
 		delete(additionalProperties, "s3")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -294,4 +296,3 @@ func (v *NullableConfigureTenantRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

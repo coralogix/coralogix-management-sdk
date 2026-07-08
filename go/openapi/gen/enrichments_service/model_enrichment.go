@@ -24,8 +24,8 @@ var _ MappedNullable = &Enrichment{}
 // Enrichment This data structure represents an enrichment
 type Enrichment struct {
 	// The enriched field name.
-	EnrichedFieldName *string `json:"enrichedFieldName,omitempty"`
-	EnrichmentType EnrichmentType `json:"enrichmentType"`
+	EnrichedFieldName *string        `json:"enrichedFieldName,omitempty"`
+	EnrichmentType    EnrichmentType `json:"enrichmentType"`
 	// The field name.
 	FieldName string `json:"fieldName"`
 	// Unique identifier.
@@ -33,8 +33,9 @@ type Enrichment struct {
 	// The selected columns.
 	SelectedColumns []string `json:"selectedColumns,omitempty"`
 	// The targets for the enrichment
-	Targets []DatasetTarget `json:"targets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Targets                           []DatasetTarget `json:"targets,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Enrichment Enrichment
@@ -228,7 +229,7 @@ func (o *Enrichment) SetTargets(v []DatasetTarget) {
 }
 
 func (o Enrichment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -272,10 +273,10 @@ func (o *Enrichment) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -302,6 +303,7 @@ func (o *Enrichment) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "selectedColumns")
 		delete(additionalProperties, "targets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -342,4 +344,3 @@ func (v *NullableEnrichment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

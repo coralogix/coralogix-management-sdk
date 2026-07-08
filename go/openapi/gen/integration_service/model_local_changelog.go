@@ -23,8 +23,9 @@ var _ MappedNullable = &LocalChangelog{}
 // LocalChangelog Local changelog.
 type LocalChangelog struct {
 	// The changes.
-	Changes []RevisionRef `json:"changes,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Changes                           []RevisionRef `json:"changes,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LocalChangelog LocalChangelog
@@ -79,7 +80,7 @@ func (o *LocalChangelog) SetChanges(v []RevisionRef) {
 }
 
 func (o LocalChangelog) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *LocalChangelog) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "changes")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableLocalChangelog) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,8 +22,9 @@ var _ MappedNullable = &GetOutgoingWebhookTypeDetailsResponse{}
 
 // GetOutgoingWebhookTypeDetailsResponse Response containing the details of an outgoing webhook type.
 type GetOutgoingWebhookTypeDetailsResponse struct {
-	Details *OutgoingWebhookDetails `json:"details,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Details                           *OutgoingWebhookDetails `json:"details,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetOutgoingWebhookTypeDetailsResponse GetOutgoingWebhookTypeDetailsResponse
@@ -78,7 +79,7 @@ func (o *GetOutgoingWebhookTypeDetailsResponse) SetDetails(v OutgoingWebhookDeta
 }
 
 func (o GetOutgoingWebhookTypeDetailsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *GetOutgoingWebhookTypeDetailsResponse) UnmarshalJSON(data []byte) (err 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "details")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableGetOutgoingWebhookTypeDetailsResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

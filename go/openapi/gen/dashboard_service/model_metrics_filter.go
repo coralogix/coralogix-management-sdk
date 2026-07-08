@@ -23,11 +23,12 @@ var _ MappedNullable = &MetricsFilter{}
 // MetricsFilter This data structure represents the filter criteria for metrics.
 type MetricsFilter struct {
 	// The label associated with the metric.
-	Label *string `json:"label,omitempty"`
+	Label *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The name of the metric to which the filter is applied.
-	Metric *string `json:"metric,omitempty"`
-	Operator *FilterOperator `json:"operator,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Metric                            *string         `json:"metric,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Operator                          *FilterOperator `json:"operator,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MetricsFilter MetricsFilter
@@ -146,7 +147,7 @@ func (o *MetricsFilter) SetOperator(v FilterOperator) {
 }
 
 func (o MetricsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -191,6 +192,7 @@ func (o *MetricsFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "metric")
 		delete(additionalProperties, "operator")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -231,4 +233,3 @@ func (v *NullableMetricsFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

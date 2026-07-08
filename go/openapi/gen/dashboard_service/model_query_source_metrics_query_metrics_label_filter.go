@@ -22,10 +22,11 @@ var _ MappedNullable = &QuerySourceMetricsQueryMetricsLabelFilter{}
 
 // QuerySourceMetricsQueryMetricsLabelFilter struct for QuerySourceMetricsQueryMetricsLabelFilter
 type QuerySourceMetricsQueryMetricsLabelFilter struct {
-	Label *QuerySourceMetricsQueryStringOrVariable `json:"label,omitempty"`
-	Metric *QuerySourceMetricsQueryStringOrVariable `json:"metric,omitempty"`
-	Operator *QuerySourceMetricsQueryOperator `json:"operator,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Label                             *QuerySourceMetricsQueryStringOrVariable `json:"label,omitempty"`
+	Metric                            *QuerySourceMetricsQueryStringOrVariable `json:"metric,omitempty"`
+	Operator                          *QuerySourceMetricsQueryOperator         `json:"operator,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QuerySourceMetricsQueryMetricsLabelFilter QuerySourceMetricsQueryMetricsLabelFilter
@@ -144,7 +145,7 @@ func (o *QuerySourceMetricsQueryMetricsLabelFilter) SetOperator(v QuerySourceMet
 }
 
 func (o QuerySourceMetricsQueryMetricsLabelFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -189,6 +190,7 @@ func (o *QuerySourceMetricsQueryMetricsLabelFilter) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "metric")
 		delete(additionalProperties, "operator")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -229,4 +231,3 @@ func (v *NullableQuerySourceMetricsQueryMetricsLabelFilter) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

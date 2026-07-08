@@ -23,15 +23,16 @@ var _ MappedNullable = &RecurringDynamic{}
 // RecurringDynamic Dynamic.
 type RecurringDynamic struct {
 	// Daily.
-	Daily map[string]interface{} `json:"daily,omitempty"`
-	Monthly *Monthly `json:"monthly,omitempty"`
+	Daily   map[string]interface{} `json:"daily,omitempty"`
+	Monthly *Monthly               `json:"monthly,omitempty"`
 	// Interval multiplier controlling how often the rule recurs (e.g., every N days, weeks, or months).
 	RepeatEvery *int32 `json:"repeatEvery,omitempty"`
 	// ISO 8601 date after which the recurring rule stops being applied.
-	TerminationDate *string `json:"terminationDate,omitempty"`
-	Timeframe *Timeframe `json:"timeframe,omitempty"`
-	Weekly *Weekly `json:"weekly,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TerminationDate                   *string    `json:"terminationDate,omitempty"`
+	Timeframe                         *Timeframe `json:"timeframe,omitempty"`
+	Weekly                            *Weekly    `json:"weekly,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RecurringDynamic RecurringDynamic
@@ -246,7 +247,7 @@ func (o *RecurringDynamic) SetWeekly(v Weekly) {
 }
 
 func (o RecurringDynamic) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -331,6 +332,7 @@ func (o *RecurringDynamic) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "timeframe")
 		delete(additionalProperties, "weekly")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -371,4 +373,3 @@ func (v *NullableRecurringDynamic) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

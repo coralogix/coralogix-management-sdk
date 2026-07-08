@@ -23,8 +23,8 @@ type GroupOrigin string
 
 // List of GroupOrigin
 const (
-	GROUPORIGIN_GROUP_ORIGIN_UNSPECIFIED GroupOrigin = "GROUP_ORIGIN_UNSPECIFIED"
-	GROUPORIGIN_GROUP_ORIGIN_BUILT_IN GroupOrigin = "GROUP_ORIGIN_BUILT_IN"
+	GROUPORIGIN_GROUP_ORIGIN_UNSPECIFIED  GroupOrigin = "GROUP_ORIGIN_UNSPECIFIED"
+	GROUPORIGIN_GROUP_ORIGIN_BUILT_IN     GroupOrigin = "GROUP_ORIGIN_BUILT_IN"
 	GROUPORIGIN_GROUP_ORIGIN_USER_DEFINED GroupOrigin = "GROUP_ORIGIN_USER_DEFINED"
 )
 
@@ -113,4 +113,3 @@ func (v *NullableGroupOrigin) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

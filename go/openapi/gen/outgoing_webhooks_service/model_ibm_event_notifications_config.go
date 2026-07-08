@@ -30,8 +30,9 @@ type IbmEventNotificationsConfig struct {
 	// The source id.
 	SourceId *string `json:"sourceId,omitempty"`
 	// The source name.
-	SourceName *string `json:"sourceName,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SourceName                        *string `json:"sourceName,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IbmEventNotificationsConfig IbmEventNotificationsConfig
@@ -214,7 +215,7 @@ func (o *IbmEventNotificationsConfig) SetSourceName(v string) {
 }
 
 func (o IbmEventNotificationsConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -267,6 +268,7 @@ func (o *IbmEventNotificationsConfig) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sourceId")
 		delete(additionalProperties, "sourceName")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -307,4 +309,3 @@ func (v *NullableIbmEventNotificationsConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

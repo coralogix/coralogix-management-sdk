@@ -985,6 +985,9 @@
           "url": ""
         },
         "description": "Clear role.",
+        "discriminator": {
+          "propertyName": "actionType"
+        },
         "type": "object",
         "properties": {
           "actionType": {
@@ -1055,6 +1058,9 @@
           "url": ""
         },
         "description": "Set scope id.",
+        "discriminator": {
+          "propertyName": "actionType"
+        },
         "type": "object",
         "properties": {
           "actionType": {
@@ -1257,6 +1263,9 @@
           "url": ""
         },
         "description": "User id list.",
+        "discriminator": {
+          "propertyName": "operationType"
+        },
         "type": "object",
         "properties": {
           "add": {

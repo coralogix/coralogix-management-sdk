@@ -23,9 +23,9 @@ type DateRangeMode string
 
 // List of DateRangeMode
 const (
-	DATERANGEMODE_DATE_RANGE_MODE_UNSPECIFIED DateRangeMode = "DATE_RANGE_MODE_UNSPECIFIED"
+	DATERANGEMODE_DATE_RANGE_MODE_UNSPECIFIED   DateRangeMode = "DATE_RANGE_MODE_UNSPECIFIED"
 	DATERANGEMODE_DATE_RANGE_MODE_ACTIVE_WINDOW DateRangeMode = "DATE_RANGE_MODE_ACTIVE_WINDOW"
-	DATERANGEMODE_DATE_RANGE_MODE_CREATED_AT DateRangeMode = "DATE_RANGE_MODE_CREATED_AT"
+	DATERANGEMODE_DATE_RANGE_MODE_CREATED_AT    DateRangeMode = "DATE_RANGE_MODE_CREATED_AT"
 )
 
 // All allowed values of DateRangeMode enum
@@ -113,4 +113,3 @@ func (v *NullableDateRangeMode) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

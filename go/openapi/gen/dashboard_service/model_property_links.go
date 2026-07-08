@@ -23,8 +23,9 @@ var _ MappedNullable = &PropertyLinks{}
 // PropertyLinks Property links.
 type PropertyLinks struct {
 	// Collection of link actions
-	Actions []LinkAction `json:"actions,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Actions                           []LinkAction `json:"actions,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PropertyLinks PropertyLinks
@@ -79,7 +80,7 @@ func (o *PropertyLinks) SetActions(v []LinkAction) {
 }
 
 func (o PropertyLinks) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *PropertyLinks) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "actions")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullablePropertyLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

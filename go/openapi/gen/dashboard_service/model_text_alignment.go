@@ -24,9 +24,9 @@ type TextAlignment string
 // List of TextAlignment
 const (
 	TEXTALIGNMENT_TEXT_ALIGNMENT_UNSPECIFIED TextAlignment = "TEXT_ALIGNMENT_UNSPECIFIED"
-	TEXTALIGNMENT_TEXT_ALIGNMENT_LEFT TextAlignment = "TEXT_ALIGNMENT_LEFT"
-	TEXTALIGNMENT_TEXT_ALIGNMENT_CENTER TextAlignment = "TEXT_ALIGNMENT_CENTER"
-	TEXTALIGNMENT_TEXT_ALIGNMENT_RIGHT TextAlignment = "TEXT_ALIGNMENT_RIGHT"
+	TEXTALIGNMENT_TEXT_ALIGNMENT_LEFT        TextAlignment = "TEXT_ALIGNMENT_LEFT"
+	TEXTALIGNMENT_TEXT_ALIGNMENT_CENTER      TextAlignment = "TEXT_ALIGNMENT_CENTER"
+	TEXTALIGNMENT_TEXT_ALIGNMENT_RIGHT       TextAlignment = "TEXT_ALIGNMENT_RIGHT"
 )
 
 // All allowed values of TextAlignment enum
@@ -115,4 +115,3 @@ func (v *NullableTextAlignment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

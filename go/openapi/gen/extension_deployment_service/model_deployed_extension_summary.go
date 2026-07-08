@@ -22,8 +22,9 @@ var _ MappedNullable = &DeployedExtensionSummary{}
 
 // DeployedExtensionSummary Deployed extension summary.
 type DeployedExtensionSummary struct {
-	DeployedItemCounts *ItemCounts `json:"deployedItemCounts,omitempty"`
-	AdditionalProperties map[string]interface{}
+	DeployedItemCounts                *ItemCounts `json:"deployedItemCounts,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DeployedExtensionSummary DeployedExtensionSummary
@@ -78,7 +79,7 @@ func (o *DeployedExtensionSummary) SetDeployedItemCounts(v ItemCounts) {
 }
 
 func (o DeployedExtensionSummary) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *DeployedExtensionSummary) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "deployedItemCounts")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableDeployedExtensionSummary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

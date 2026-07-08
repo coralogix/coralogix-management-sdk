@@ -544,11 +544,7 @@
         "title": "AccessType",
         "description": "Defines the access duration for a user. Can be either permanent (indefinite) or temporary (expires at a specific time).",
         "discriminator": {
-          "propertyName": "access_type",
-          "mapping": {
-            "permanent": "#/components/schemas/PermanentAccess",
-            "temporary": "#/components/schemas/TemporaryAccess"
-          }
+          "propertyName": "accessType"
         },
         "type": "object",
         "properties": {

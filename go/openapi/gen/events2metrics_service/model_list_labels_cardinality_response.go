@@ -23,8 +23,9 @@ var _ MappedNullable = &ListLabelsCardinalityResponse{}
 // ListLabelsCardinalityResponse Response containing label cardinality data for events-to-metrics rules.
 type ListLabelsCardinalityResponse struct {
 	// List of permutations.
-	Permutations []LabelsPermutationsCardinalityDay `json:"permutations,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Permutations                      []LabelsPermutationsCardinalityDay `json:"permutations,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListLabelsCardinalityResponse ListLabelsCardinalityResponse
@@ -79,7 +80,7 @@ func (o *ListLabelsCardinalityResponse) SetPermutations(v []LabelsPermutationsCa
 }
 
 func (o ListLabelsCardinalityResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ListLabelsCardinalityResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "permutations")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableListLabelsCardinalityResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

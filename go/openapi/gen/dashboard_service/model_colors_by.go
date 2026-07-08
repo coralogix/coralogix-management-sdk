@@ -31,8 +31,9 @@ type ColorsBy struct {
 	// Colors by query.
 	Query map[string]interface{} `json:"query,omitempty"`
 	// Colors by stack.
-	Stack map[string]interface{} `json:"stack,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Stack                             map[string]interface{} `json:"stack,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ColorsBy ColorsBy
@@ -215,7 +216,7 @@ func (o *ColorsBy) SetStack(v map[string]interface{}) {
 }
 
 func (o ColorsBy) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -308,6 +309,7 @@ func (o *ColorsBy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "query")
 		delete(additionalProperties, "stack")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -348,4 +350,3 @@ func (v *NullableColorsBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

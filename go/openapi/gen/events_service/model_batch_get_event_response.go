@@ -25,9 +25,10 @@ type BatchGetEventResponse struct {
 	// List of events.
 	Events *map[string]CxEventSingleOrMultiple `json:"events,omitempty"`
 	// The not found ids.
-	NotFoundIds []string `json:"notFoundIds,omitempty"`
-	Pagination *EventsV3PaginationResponse `json:"pagination,omitempty"`
-	AdditionalProperties map[string]interface{}
+	NotFoundIds                       []string                    `json:"notFoundIds,omitempty"`
+	Pagination                        *EventsV3PaginationResponse `json:"pagination,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _BatchGetEventResponse BatchGetEventResponse
@@ -146,7 +147,7 @@ func (o *BatchGetEventResponse) SetPagination(v EventsV3PaginationResponse) {
 }
 
 func (o BatchGetEventResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -191,6 +192,7 @@ func (o *BatchGetEventResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "notFoundIds")
 		delete(additionalProperties, "pagination")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -231,4 +233,3 @@ func (v *NullableBatchGetEventResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

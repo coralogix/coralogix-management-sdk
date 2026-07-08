@@ -24,11 +24,12 @@ var _ MappedNullable = &UsageLabelFilter{}
 // UsageLabelFilter Predicate applied to a single label before aggregation. A complete predicate requires `key`, `operator`, and a non-empty `values` list.
 type UsageLabelFilter struct {
 	// Label key to filter on. Supported keys are listed by the capabilities endpoint.
-	Key string `json:"key" validate:"regexp=^[A-Za-z][A-Za-z0-9_]*$"`
+	Key      string                         `json:"key" validate:"regexp=^[A-Za-z][A-Za-z0-9_]*$"`
 	Operator UsageLabelFilterFilterOperator `json:"operator"`
 	// Values to match against `key`. Required and must be non-empty when an `operator` is set.
-	Values []string `json:"values"`
-	AdditionalProperties map[string]interface{}
+	Values                            []string `json:"values"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UsageLabelFilter UsageLabelFilter
@@ -126,7 +127,7 @@ func (o *UsageLabelFilter) SetValues(v []string) {
 }
 
 func (o UsageLabelFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -161,10 +162,10 @@ func (o *UsageLabelFilter) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -188,6 +189,7 @@ func (o *UsageLabelFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "operator")
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -228,4 +230,3 @@ func (v *NullableUsageLabelFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

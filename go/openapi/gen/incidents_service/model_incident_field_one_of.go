@@ -36,13 +36,14 @@ type IncidentFieldOneOf struct {
 	// Timestamp of the most recent state change.
 	LastStateUpdateTime *time.Time `json:"lastStateUpdateTime,omitempty"`
 	// Display name of the incident.
-	Name *string `json:"name,omitempty"`
+	Name     *string           `json:"name,omitempty"`
 	Severity *IncidentSeverity `json:"severity,omitempty"`
-	State *IncidentState `json:"state,omitempty"`
-	Status *IncidentStatus `json:"status,omitempty"`
+	State    *IncidentState    `json:"state,omitempty"`
+	Status   *IncidentStatus   `json:"status,omitempty"`
 	// Subsystem associated with the incident.
-	SubsystemName *string `json:"subsystemName,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SubsystemName                     *string `json:"subsystemName,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentFieldOneOf IncidentFieldOneOf
@@ -417,7 +418,7 @@ func (o *IncidentFieldOneOf) SetSubsystemName(v string) {
 }
 
 func (o IncidentFieldOneOf) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -570,6 +571,7 @@ func (o *IncidentFieldOneOf) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "subsystemName")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -610,4 +612,3 @@ func (v *NullableIncidentFieldOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

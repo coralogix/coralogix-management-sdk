@@ -25,8 +25,9 @@ type AssigneeOption struct {
 	// User identifier of the assignee to filter by
 	Assignee *string `json:"assignee,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Marker selecting cases that have no assignee.
-	Unassigned map[string]interface{} `json:"unassigned,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Unassigned                        map[string]interface{} `json:"unassigned,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AssigneeOption AssigneeOption
@@ -113,7 +114,7 @@ func (o *AssigneeOption) SetUnassigned(v map[string]interface{}) {
 }
 
 func (o AssigneeOption) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -176,6 +177,7 @@ func (o *AssigneeOption) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "assignee")
 		delete(additionalProperties, "unassigned")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -216,4 +218,3 @@ func (v *NullableAssigneeOption) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

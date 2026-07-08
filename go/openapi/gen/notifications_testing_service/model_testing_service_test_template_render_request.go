@@ -23,11 +23,12 @@ var _ MappedNullable = &TestingServiceTestTemplateRenderRequest{}
 // TestingServiceTestTemplateRenderRequest Request for testing notification template rendering.
 type TestingServiceTestTemplateRenderRequest struct {
 	// Entity sub-type to use when testing template rendering.
-	EntitySubType *string `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	EntitySubType *string                       `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	EntityType    *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// Template string to test rendering for.
-	Template *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Template                          *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestingServiceTestTemplateRenderRequest TestingServiceTestTemplateRenderRequest
@@ -146,7 +147,7 @@ func (o *TestingServiceTestTemplateRenderRequest) SetTemplate(v string) {
 }
 
 func (o TestingServiceTestTemplateRenderRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -191,6 +192,7 @@ func (o *TestingServiceTestTemplateRenderRequest) UnmarshalJSON(data []byte) (er
 		delete(additionalProperties, "entityType")
 		delete(additionalProperties, "template")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -231,4 +233,3 @@ func (v *NullableTestingServiceTestTemplateRenderRequest) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1074,7 +1074,8 @@
         "enum": [
           "KPI_TYPE_UNSPECIFIED",
           "KPI_TYPE_TIME_TO_ACKNOWLEDGE",
-          "KPI_TYPE_TIME_TO_RESOLVE"
+          "KPI_TYPE_TIME_TO_RESOLVE",
+          "KPI_TYPE_TIME_TO_UPDATE"
         ]
       },
       "MultipleValues": {

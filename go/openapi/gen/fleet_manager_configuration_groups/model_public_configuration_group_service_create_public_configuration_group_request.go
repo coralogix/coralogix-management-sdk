@@ -22,8 +22,9 @@ var _ MappedNullable = &PublicConfigurationGroupServiceCreatePublicConfiguration
 
 // PublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest Request to create a fleet-manager configuration group.
 type PublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest struct {
-	Group *PublicCreateConfigurationGroupRequest `json:"group,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Group                             *PublicCreateConfigurationGroupRequest `json:"group,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest PublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest
@@ -78,7 +79,7 @@ func (o *PublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest) S
 }
 
 func (o PublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *PublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest) U
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "group")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullablePublicConfigurationGroupServiceCreatePublicConfigurationGroupRe
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

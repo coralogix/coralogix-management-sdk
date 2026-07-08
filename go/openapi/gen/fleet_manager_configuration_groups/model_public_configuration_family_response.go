@@ -26,8 +26,8 @@ type PublicConfigurationFamilyResponse struct {
 	// Whether this family is active.
 	Active *bool `json:"active,omitempty"`
 	// Configuration family UUID v7 this family is based on.
-	BasedOnConfigurationFamilyId *string `json:"basedOnConfigurationFamilyId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	ChartName *PublicChartName `json:"chartName,omitempty"`
+	BasedOnConfigurationFamilyId *string          `json:"basedOnConfigurationFamilyId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
+	ChartName                    *PublicChartName `json:"chartName,omitempty"`
 	// Helm chart or template version used by this family.
 	ChartVersion *string `json:"chartVersion,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Collector semantic version this configuration family targets, without a leading v prefix.
@@ -45,8 +45,9 @@ type PublicConfigurationFamilyResponse struct {
 	// Remote configurations in this family.
 	RemoteConfigurations []PublicRemoteConfigurationResponse `json:"remoteConfigurations,omitempty"`
 	// Monotonic version number of this configuration family within its group.
-	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Version                           *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PublicConfigurationFamilyResponse PublicConfigurationFamilyResponse
@@ -453,7 +454,7 @@ func (o *PublicConfigurationFamilyResponse) SetVersion(v string) {
 }
 
 func (o PublicConfigurationFamilyResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -534,6 +535,7 @@ func (o *PublicConfigurationFamilyResponse) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "remoteConfigurations")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -574,4 +576,3 @@ func (v *NullablePublicConfigurationFamilyResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

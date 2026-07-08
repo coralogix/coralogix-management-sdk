@@ -23,8 +23,9 @@ var _ MappedNullable = &ActivateRetentionsResponse{}
 // ActivateRetentionsResponse This data structure is obtained after setting the active status of retentions
 type ActivateRetentionsResponse struct {
 	// List of retentions to activate.
-	ActivateRetentions *bool `json:"activateRetentions,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ActivateRetentions                *bool `json:"activateRetentions,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ActivateRetentionsResponse ActivateRetentionsResponse
@@ -79,7 +80,7 @@ func (o *ActivateRetentionsResponse) SetActivateRetentions(v bool) {
 }
 
 func (o ActivateRetentionsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ActivateRetentionsResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "activateRetentions")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableActivateRetentionsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

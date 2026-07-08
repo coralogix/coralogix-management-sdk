@@ -23,8 +23,9 @@ var _ MappedNullable = &ValidateEntityLabelMatcherResultFailure{}
 // ValidateEntityLabelMatcherResultFailure Test outgoing webhook response.failure.
 type ValidateEntityLabelMatcherResultFailure struct {
 	// Human-readable message.
-	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Message                           *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ValidateEntityLabelMatcherResultFailure ValidateEntityLabelMatcherResultFailure
@@ -79,7 +80,7 @@ func (o *ValidateEntityLabelMatcherResultFailure) SetMessage(v string) {
 }
 
 func (o ValidateEntityLabelMatcherResultFailure) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ValidateEntityLabelMatcherResultFailure) UnmarshalJSON(data []byte) (er
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "message")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableValidateEntityLabelMatcherResultFailure) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

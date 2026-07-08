@@ -23,14 +23,15 @@ var _ MappedNullable = &Spans{}
 // Spans A spans variant of the query
 type Spans struct {
 	// Span query aggregation function
-	Aggregation []LogsAggregation `json:"aggregation,omitempty"`
+	Aggregation  []LogsAggregation          `json:"aggregation,omitempty"`
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// List of span query filters
 	Filters []SpansFilter `json:"filters,omitempty"`
 	// A list of fields to group the records by
-	GroupBy []SpanObservationField `json:"groupBy,omitempty"`
-	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
-	AdditionalProperties map[string]interface{}
+	GroupBy                           []SpanObservationField `json:"groupBy,omitempty"`
+	LuceneQuery                       *LuceneQuery           `json:"luceneQuery,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Spans Spans
@@ -213,7 +214,7 @@ func (o *Spans) SetLuceneQuery(v LuceneQuery) {
 }
 
 func (o Spans) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,6 +267,7 @@ func (o *Spans) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "groupBy")
 		delete(additionalProperties, "luceneQuery")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -306,4 +308,3 @@ func (v *NullableSpans) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

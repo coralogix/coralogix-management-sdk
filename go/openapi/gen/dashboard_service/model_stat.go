@@ -27,26 +27,27 @@ type Stat struct {
 	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// (multi-stat display only) Whether to show the series names above the value
-	DisplaySeriesName *bool `json:"displaySeriesName,omitempty"`
-	Legend *Legend `json:"legend,omitempty"`
-	LegendBy *LegendBy `json:"legendBy,omitempty"`
+	DisplaySeriesName *bool     `json:"displaySeriesName,omitempty"`
+	Legend            *Legend   `json:"legend,omitempty"`
+	LegendBy          *LegendBy `json:"legendBy,omitempty"`
 	// A maximum gauge value used in percentage threshold calculation and for visual value representation
 	Max *float64 `json:"max,omitempty"`
 	// A minimum gauge value used in percentage threshold calculation and for visual value representation
-	Min *float64 `json:"min,omitempty"`
-	ThresholdBy *CommonThresholdBy `json:"thresholdBy,omitempty"`
-	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
+	Min           *float64           `json:"min,omitempty"`
+	ThresholdBy   *CommonThresholdBy `json:"thresholdBy,omitempty"`
+	ThresholdType *ThresholdType     `json:"thresholdType,omitempty"`
 	// List of value thresholds, each with a certain color and an optional name label
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
+	Unit       *CommonUnit       `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	// The value fields.
-	ValueFields []ObservationField `json:"valueFields,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ValueFields                       []ObservationField `json:"valueFields,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Stat Stat
@@ -549,7 +550,7 @@ func (o *Stat) SetValueFields(v []ObservationField) {
 }
 
 func (o Stat) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -642,6 +643,7 @@ func (o *Stat) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "valueField")
 		delete(additionalProperties, "valueFields")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -682,4 +684,3 @@ func (v *NullableStat) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

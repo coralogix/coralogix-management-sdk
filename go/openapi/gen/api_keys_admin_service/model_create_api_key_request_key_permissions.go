@@ -25,8 +25,9 @@ type CreateApiKeyRequestKeyPermissions struct {
 	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
 	// List of permission presets.
-	Presets []string `json:"presets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Presets                           []string `json:"presets,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateApiKeyRequestKeyPermissions CreateApiKeyRequestKeyPermissions
@@ -113,7 +114,7 @@ func (o *CreateApiKeyRequestKeyPermissions) SetPresets(v []string) {
 }
 
 func (o CreateApiKeyRequestKeyPermissions) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *CreateApiKeyRequestKeyPermissions) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "permissions")
 		delete(additionalProperties, "presets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableCreateApiKeyRequestKeyPermissions) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

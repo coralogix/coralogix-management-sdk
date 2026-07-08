@@ -25,8 +25,9 @@ type GenericDimension struct {
 	// The key.
 	Key *string `json:"key,omitempty"`
 	// The value.
-	Value *string `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Value                             *string `json:"value,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GenericDimension GenericDimension
@@ -113,7 +114,7 @@ func (o *GenericDimension) SetValue(v string) {
 }
 
 func (o GenericDimension) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *GenericDimension) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "key")
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableGenericDimension) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

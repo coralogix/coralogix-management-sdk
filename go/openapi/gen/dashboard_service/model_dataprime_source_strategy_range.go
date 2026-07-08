@@ -22,9 +22,10 @@ var _ MappedNullable = &DataprimeSourceStrategyRange{}
 
 // DataprimeSourceStrategyRange Range strategy: uses start and end timestamp fields to define the annotation span.
 type DataprimeSourceStrategyRange struct {
-	EndTimestampField *ObservationField `json:"endTimestampField,omitempty"`
-	StartTimestampField *ObservationField `json:"startTimestampField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	EndTimestampField                 *ObservationField `json:"endTimestampField,omitempty"`
+	StartTimestampField               *ObservationField `json:"startTimestampField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DataprimeSourceStrategyRange DataprimeSourceStrategyRange
@@ -111,7 +112,7 @@ func (o *DataprimeSourceStrategyRange) SetStartTimestampField(v ObservationField
 }
 
 func (o DataprimeSourceStrategyRange) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *DataprimeSourceStrategyRange) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "endTimestampField")
 		delete(additionalProperties, "startTimestampField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableDataprimeSourceStrategyRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

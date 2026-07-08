@@ -52,13 +52,19 @@
                 "contextualLabels": {
                   "description": "Filter by contextual labels",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ContextualLabelValues"
+                  }
                 },
-                "createdAtRange": {},
+                "createdAtRange": {
+                  "$ref": "#/components/schemas/v1.TimeRange"
+                },
                 "displayLabels": {
                   "description": "Filter by display labels",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/DisplayLabelValues"
+                  }
                 },
                 "endTime": {
                   "deprecated": true,
@@ -67,7 +73,9 @@
                   "format": "date-time",
                   "minLength": 0
                 },
-                "incidentDurationRange": {},
+                "incidentDurationRange": {
+                  "$ref": "#/components/schemas/v1.TimeRange"
+                },
                 "isMuted": {
                   "description": "Indicates if the incident is muted",
                   "type": "boolean"
@@ -75,7 +83,9 @@
                 "metaLabels": {
                   "description": "Filters all incidents with the given meta labels",
                   "type": "array",
-                  "items": {},
+                  "items": {
+                    "$ref": "#/components/schemas/incidents.v1.MetaLabel"
+                  },
                   "minItems": 0
                 },
                 "metaLabelsOp": {
@@ -319,18 +329,24 @@
                 "contextualLabels": {
                   "description": "The contextual labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ContextualLabelValues"
+                  }
                 },
                 "displayLabels": {
                   "description": "The display labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/DisplayLabelValues"
+                  }
                 },
                 "isMuted": {
                   "description": "Indicates if the incident is muted",
                   "type": "boolean"
                 },
-                "labels": {},
+                "labels": {
+                  "$ref": "#/components/schemas/LabelsFilter"
+                },
                 "name": {
                   "description": "The name of the incident",
                   "type": "string",
@@ -352,7 +368,9 @@
                   },
                   "minItems": 0
                 },
-                "timestamp": {}
+                "timestamp": {
+                  "$ref": "#/components/schemas/v1.TimeRange"
+                }
               }
             },
             "style": "form"
@@ -485,18 +503,24 @@
                 "contextualLabels": {
                   "description": "The contextual labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ContextualLabelValues"
+                  }
                 },
                 "displayLabels": {
                   "description": "The display labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/DisplayLabelValues"
+                  }
                 },
                 "isMuted": {
                   "description": "Indicates if the incident is muted",
                   "type": "boolean"
                 },
-                "labels": {},
+                "labels": {
+                  "$ref": "#/components/schemas/LabelsFilter"
+                },
                 "name": {
                   "description": "The name of the incident",
                   "type": "string",
@@ -518,7 +542,9 @@
                   },
                   "minItems": 0
                 },
-                "timestamp": {}
+                "timestamp": {
+                  "$ref": "#/components/schemas/v1.TimeRange"
+                }
               }
             },
             "style": "form"
@@ -891,18 +917,24 @@
                 "contextualLabels": {
                   "description": "The contextual labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ContextualLabelValues"
+                  }
                 },
                 "displayLabels": {
                   "description": "The display labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/DisplayLabelValues"
+                  }
                 },
                 "isMuted": {
                   "description": "Indicates if the incident is muted",
                   "type": "boolean"
                 },
-                "labels": {},
+                "labels": {
+                  "$ref": "#/components/schemas/LabelsFilter"
+                },
                 "name": {
                   "description": "The name of the incident",
                   "type": "string",
@@ -924,7 +956,9 @@
                   },
                   "minItems": 0
                 },
-                "timestamp": {}
+                "timestamp": {
+                  "$ref": "#/components/schemas/v1.TimeRange"
+                }
               }
             },
             "style": "form"
@@ -3497,6 +3531,30 @@
         "required": [
           "status",
           "count"
+        ]
+      },
+      "LabelsFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Label filter configuration",
+        "description": "Filter configuration for incident events based on meta labels and their combination operator.",
+        "type": "object",
+        "properties": {
+          "metaLabels": {
+            "description": "The meta labels of the incident",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/incidents.v1.MetaLabel"
+            },
+            "minItems": 0
+          },
+          "operator": {
+            "$ref": "#/components/schemas/v1.FilterOperator"
+          }
+        },
+        "required": [
+          "metaLabels"
         ]
       },
       "ListIncidentAggregationsResponse": {

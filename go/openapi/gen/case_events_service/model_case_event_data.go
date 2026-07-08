@@ -22,19 +22,20 @@ var _ MappedNullable = &CaseEventData{}
 
 // CaseEventData One-of wrapper for concrete case event types.
 type CaseEventData struct {
-	Assigned *AssignedCaseEvent `json:"assigned,omitempty"`
-	ChangeAssigneeFailed *ChangeAssigneeFailedEvent `json:"changeAssigneeFailed,omitempty"`
-	Comment *CommentCaseEvent `json:"comment,omitempty"`
-	Created *CreatedCaseEvent `json:"created,omitempty"`
-	KpiBreached *KPIBreachedCaseEvent `json:"kpiBreached,omitempty"`
-	NotificationFailed *NotificationFailedCaseEvent `json:"notificationFailed,omitempty"`
-	NotificationSent *NotificationSentCaseEvent `json:"notificationSent,omitempty"`
-	PriorityDetailsChanged *PriorityDetailsChangedCaseEvent `json:"priorityDetailsChanged,omitempty"`
-	ResolutionReasonChangedEvent *ResolutionReasonChangedCaseEvent `json:"resolutionReasonChangedEvent,omitempty"`
-	StatusChanged *StatusChangedCaseEvent `json:"statusChanged,omitempty"`
-	TitleChangedEvent *TitleChangedCaseEvent `json:"titleChangedEvent,omitempty"`
-	Unassigned *UnassignedCaseEvent `json:"unassigned,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Assigned                          *AssignedCaseEvent                `json:"assigned,omitempty"`
+	ChangeAssigneeFailed              *ChangeAssigneeFailedEvent        `json:"changeAssigneeFailed,omitempty"`
+	Comment                           *CommentCaseEvent                 `json:"comment,omitempty"`
+	Created                           *CreatedCaseEvent                 `json:"created,omitempty"`
+	KpiBreached                       *KPIBreachedCaseEvent             `json:"kpiBreached,omitempty"`
+	NotificationFailed                *NotificationFailedCaseEvent      `json:"notificationFailed,omitempty"`
+	NotificationSent                  *NotificationSentCaseEvent        `json:"notificationSent,omitempty"`
+	PriorityDetailsChanged            *PriorityDetailsChangedCaseEvent  `json:"priorityDetailsChanged,omitempty"`
+	ResolutionReasonChangedEvent      *ResolutionReasonChangedCaseEvent `json:"resolutionReasonChangedEvent,omitempty"`
+	StatusChanged                     *StatusChangedCaseEvent           `json:"statusChanged,omitempty"`
+	TitleChangedEvent                 *TitleChangedCaseEvent            `json:"titleChangedEvent,omitempty"`
+	Unassigned                        *UnassignedCaseEvent              `json:"unassigned,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CaseEventData CaseEventData
@@ -441,7 +442,7 @@ func (o *CaseEventData) SetUnassigned(v UnassignedCaseEvent) {
 }
 
 func (o CaseEventData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -604,6 +605,7 @@ func (o *CaseEventData) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "titleChangedEvent")
 		delete(additionalProperties, "unassigned")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -644,4 +646,3 @@ func (v *NullableCaseEventData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

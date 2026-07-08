@@ -23,12 +23,13 @@ var _ MappedNullable = &WidgetsDynamic{}
 // WidgetsDynamic Dynamic.
 type WidgetsDynamic struct {
 	Interpretation *Interpretation `json:"interpretation,omitempty"`
-	Query *DynamicQuery `json:"query,omitempty"`
-	// Definitions of widget queries
-	QueryDefinitions []DynamicQueryDefinition `json:"queryDefinitions,omitempty"`
-	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
-	Visualization *Visualization `json:"visualization,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Query          *DynamicQuery   `json:"query,omitempty"`
+	// Definitions of widget queries. At least one query definition is required unless the deprecated query field is set.
+	QueryDefinitions                  []DynamicQueryDefinition `json:"queryDefinitions,omitempty"`
+	TimeFrame                         *TimeFrameSelect         `json:"timeFrame,omitempty"`
+	Visualization                     *Visualization           `json:"visualization,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _WidgetsDynamic WidgetsDynamic
@@ -211,7 +212,7 @@ func (o *WidgetsDynamic) SetVisualization(v Visualization) {
 }
 
 func (o WidgetsDynamic) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -264,6 +265,7 @@ func (o *WidgetsDynamic) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "timeFrame")
 		delete(additionalProperties, "visualization")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -304,4 +306,3 @@ func (v *NullableWidgetsDynamic) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,8 +23,9 @@ var _ MappedNullable = &UpdateAPIKeysStatusRequest{}
 // UpdateAPIKeysStatusRequest This data structure is used to update the status of specified API keys.
 type UpdateAPIKeysStatusRequest struct {
 	// The updates.
-	Updates []ApiKeyStatusUpdate `json:"updates,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Updates                           []ApiKeyStatusUpdate `json:"updates,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UpdateAPIKeysStatusRequest UpdateAPIKeysStatusRequest
@@ -79,7 +80,7 @@ func (o *UpdateAPIKeysStatusRequest) SetUpdates(v []ApiKeyStatusUpdate) {
 }
 
 func (o UpdateAPIKeysStatusRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *UpdateAPIKeysStatusRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "updates")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableUpdateAPIKeysStatusRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

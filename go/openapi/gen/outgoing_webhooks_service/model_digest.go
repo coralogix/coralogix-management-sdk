@@ -23,9 +23,10 @@ var _ MappedNullable = &Digest{}
 // Digest struct for Digest
 type Digest struct {
 	// Whether this resource is active.
-	IsActive *bool `json:"isActive,omitempty"`
-	Type *DigestType `json:"type,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IsActive                          *bool       `json:"isActive,omitempty"`
+	Type                              *DigestType `json:"type,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Digest Digest
@@ -112,7 +113,7 @@ func (o *Digest) SetType(v DigestType) {
 }
 
 func (o Digest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *Digest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "isActive")
 		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableDigest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

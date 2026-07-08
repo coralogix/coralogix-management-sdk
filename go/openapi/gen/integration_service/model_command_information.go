@@ -25,15 +25,16 @@ type CommandInformation struct {
 	// The command.
 	Command *string `json:"command,omitempty"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
-	Language *Language `json:"language,omitempty"`
+	Description *string   `json:"description,omitempty"`
+	Language    *Language `json:"language,omitempty"`
 	// List of links.
 	Links []Link `json:"links,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// The tooltip text.
-	TooltipText *string `json:"tooltipText,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TooltipText                       *string `json:"tooltipText,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CommandInformation CommandInformation
@@ -248,7 +249,7 @@ func (o *CommandInformation) SetTooltipText(v string) {
 }
 
 func (o CommandInformation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -305,6 +306,7 @@ func (o *CommandInformation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "tooltipText")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -345,4 +347,3 @@ func (v *NullableCommandInformation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

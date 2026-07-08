@@ -24,8 +24,8 @@ type ValuesMappingType string
 // List of ValuesMappingType
 const (
 	VALUESMAPPINGTYPE_VALUES_MAPPING_TYPE_UNSPECIFIED ValuesMappingType = "VALUES_MAPPING_TYPE_UNSPECIFIED"
-	VALUESMAPPINGTYPE_VALUES_MAPPING_TYPE_VALUE ValuesMappingType = "VALUES_MAPPING_TYPE_VALUE"
-	VALUESMAPPINGTYPE_VALUES_MAPPING_TYPE_REGEX ValuesMappingType = "VALUES_MAPPING_TYPE_REGEX"
+	VALUESMAPPINGTYPE_VALUES_MAPPING_TYPE_VALUE       ValuesMappingType = "VALUES_MAPPING_TYPE_VALUE"
+	VALUESMAPPINGTYPE_VALUES_MAPPING_TYPE_REGEX       ValuesMappingType = "VALUES_MAPPING_TYPE_REGEX"
 )
 
 // All allowed values of ValuesMappingType enum
@@ -113,4 +113,3 @@ func (v *NullableValuesMappingType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

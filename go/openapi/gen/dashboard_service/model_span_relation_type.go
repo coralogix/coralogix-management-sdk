@@ -24,9 +24,9 @@ type SpanRelationType string
 // List of SpanRelationType
 const (
 	SPANRELATIONTYPE_SPAN_RELATION_TYPE_NONE_UNSPECIFIED SpanRelationType = "SPAN_RELATION_TYPE_NONE_UNSPECIFIED"
-	SPANRELATIONTYPE_SPAN_RELATION_TYPE_OTHER SpanRelationType = "SPAN_RELATION_TYPE_OTHER"
-	SPANRELATIONTYPE_SPAN_RELATION_TYPE_PARENT SpanRelationType = "SPAN_RELATION_TYPE_PARENT"
-	SPANRELATIONTYPE_SPAN_RELATION_TYPE_ROOT SpanRelationType = "SPAN_RELATION_TYPE_ROOT"
+	SPANRELATIONTYPE_SPAN_RELATION_TYPE_OTHER            SpanRelationType = "SPAN_RELATION_TYPE_OTHER"
+	SPANRELATIONTYPE_SPAN_RELATION_TYPE_PARENT           SpanRelationType = "SPAN_RELATION_TYPE_PARENT"
+	SPANRELATIONTYPE_SPAN_RELATION_TYPE_ROOT             SpanRelationType = "SPAN_RELATION_TYPE_ROOT"
 )
 
 // All allowed values of SpanRelationType enum
@@ -115,4 +115,3 @@ func (v *NullableSpanRelationType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

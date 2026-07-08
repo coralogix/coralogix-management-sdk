@@ -24,15 +24,16 @@ var _ MappedNullable = &ForecastPolicyUsageRequest{}
 type ForecastPolicyUsageRequest struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	// Marker selecting a one-day forecast window.
-	Day map[string]interface{} `json:"day,omitempty"`
-	LogRules *LogRules `json:"logRules,omitempty"`
-	SpanRules *SpanRules `json:"spanRules,omitempty"`
-	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	Day           map[string]interface{} `json:"day,omitempty"`
+	LogRules      *LogRules              `json:"logRules,omitempty"`
+	SpanRules     *SpanRules             `json:"spanRules,omitempty"`
+	SubsystemRule *QuotaV1Rule           `json:"subsystemRule,omitempty"`
 	// Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.
 	TimeBucketMs *string `json:"timeBucketMs,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Marker selecting a one-week forecast window.
-	Week map[string]interface{} `json:"week,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Week                              map[string]interface{} `json:"week,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ForecastPolicyUsageRequest ForecastPolicyUsageRequest
@@ -279,7 +280,7 @@ func (o *ForecastPolicyUsageRequest) SetWeek(v map[string]interface{}) {
 }
 
 func (o ForecastPolicyUsageRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -384,6 +385,7 @@ func (o *ForecastPolicyUsageRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "timeBucketMs")
 		delete(additionalProperties, "week")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -424,4 +426,3 @@ func (v *NullableForecastPolicyUsageRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

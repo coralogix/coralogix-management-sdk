@@ -23,9 +23,10 @@ var _ MappedNullable = &AlertDefIncidentSettings{}
 // AlertDefIncidentSettings Alert def incident settings.
 type AlertDefIncidentSettings struct {
 	// The time in minutes before the alert can be retriggered
-	Minutes *int64 `json:"minutes,omitempty"`
-	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Minutes                           *int64    `json:"minutes,omitempty"`
+	NotifyOn                          *NotifyOn `json:"notifyOn,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AlertDefIncidentSettings AlertDefIncidentSettings
@@ -112,7 +113,7 @@ func (o *AlertDefIncidentSettings) SetNotifyOn(v NotifyOn) {
 }
 
 func (o AlertDefIncidentSettings) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *AlertDefIncidentSettings) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "minutes")
 		delete(additionalProperties, "notifyOn")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableAlertDefIncidentSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,8 +22,9 @@ var _ MappedNullable = &GetPolicyResponse{}
 
 // GetPolicyResponse This data structue is obtained when retrieving a policy by its ID.
 type GetPolicyResponse struct {
-	Policy *Policy `json:"policy,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Policy                            *Policy `json:"policy,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetPolicyResponse GetPolicyResponse
@@ -78,7 +79,7 @@ func (o *GetPolicyResponse) SetPolicy(v Policy) {
 }
 
 func (o GetPolicyResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *GetPolicyResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "policy")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableGetPolicyResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

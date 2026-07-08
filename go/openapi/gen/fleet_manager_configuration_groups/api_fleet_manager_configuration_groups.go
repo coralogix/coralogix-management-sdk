@@ -19,14 +19,13 @@ import (
 	"strings"
 )
 
-
 // FleetManagerConfigurationGroupsAPIService FleetManagerConfigurationGroupsAPI service
 type FleetManagerConfigurationGroupsAPIService service
 
 type ApiPublicConfigurationGroupServiceArchivePublicConfigurationGroupRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *FleetManagerConfigurationGroupsAPIService
-	id string
+	id         string
 }
 
 func (r ApiPublicConfigurationGroupServiceArchivePublicConfigurationGroupRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -38,26 +37,27 @@ PublicConfigurationGroupServiceArchivePublicConfigurationGroup Archive configura
 
 Archives a fleet-manager configuration group.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Configuration group UUID v7.
- @return ApiPublicConfigurationGroupServiceArchivePublicConfigurationGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Configuration group UUID v7.
+	@return ApiPublicConfigurationGroupServiceArchivePublicConfigurationGroupRequest
 */
 func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServiceArchivePublicConfigurationGroup(ctx context.Context, id string) ApiPublicConfigurationGroupServiceArchivePublicConfigurationGroupRequest {
 	return ApiPublicConfigurationGroupServiceArchivePublicConfigurationGroupRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServiceArchivePublicConfigurationGroupExecute(r ApiPublicConfigurationGroupServiceArchivePublicConfigurationGroupRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.PublicConfigurationGroupServiceArchivePublicConfigurationGroup")
@@ -124,8 +124,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -135,8 +135,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -146,8 +146,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -157,8 +157,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -176,8 +176,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 }
 
 type ApiPublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest struct {
-	ctx context.Context
-	ApiService *FleetManagerConfigurationGroupsAPIService
+	ctx                                                                  context.Context
+	ApiService                                                           *FleetManagerConfigurationGroupsAPIService
 	publicConfigurationGroupServiceCreatePublicConfigurationGroupRequest *PublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest
 }
 
@@ -195,24 +195,25 @@ PublicConfigurationGroupServiceCreatePublicConfigurationGroup Create configurati
 
 Creates a fleet-manager configuration group.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest
 */
 func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServiceCreatePublicConfigurationGroup(ctx context.Context) ApiPublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest {
 	return ApiPublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreatePublicConfigurationGroupResponse
+//
+//	@return CreatePublicConfigurationGroupResponse
 func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServiceCreatePublicConfigurationGroupExecute(r ApiPublicConfigurationGroupServiceCreatePublicConfigurationGroupRequest) (*CreatePublicConfigurationGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreatePublicConfigurationGroupResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreatePublicConfigurationGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.PublicConfigurationGroupServiceCreatePublicConfigurationGroup")
@@ -274,8 +275,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -285,8 +286,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -296,8 +297,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -307,8 +308,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -326,9 +327,9 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 }
 
 type ApiPublicConfigurationGroupServiceGetPublicConfigurationGroupRequest struct {
-	ctx context.Context
-	ApiService *FleetManagerConfigurationGroupsAPIService
-	id string
+	ctx              context.Context
+	ApiService       *FleetManagerConfigurationGroupsAPIService
+	id               string
 	latestFamilyOnly *bool
 }
 
@@ -347,26 +348,27 @@ PublicConfigurationGroupServiceGetPublicConfigurationGroup Get configuration gro
 
 Gets a fleet-manager configuration group by ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Configuration group UUID v7.
- @return ApiPublicConfigurationGroupServiceGetPublicConfigurationGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Configuration group UUID v7.
+	@return ApiPublicConfigurationGroupServiceGetPublicConfigurationGroupRequest
 */
 func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServiceGetPublicConfigurationGroup(ctx context.Context, id string) ApiPublicConfigurationGroupServiceGetPublicConfigurationGroupRequest {
 	return ApiPublicConfigurationGroupServiceGetPublicConfigurationGroupRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetPublicConfigurationGroupResponse
+//
+//	@return GetPublicConfigurationGroupResponse
 func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServiceGetPublicConfigurationGroupExecute(r ApiPublicConfigurationGroupServiceGetPublicConfigurationGroupRequest) (*GetPublicConfigurationGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPublicConfigurationGroupResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPublicConfigurationGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.PublicConfigurationGroupServiceGetPublicConfigurationGroup")
@@ -438,8 +440,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -449,8 +451,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -460,8 +462,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -471,8 +473,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -490,9 +492,9 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 }
 
 type ApiPublicConfigurationGroupServiceReplacePublicConfigurationGroupRequest struct {
-	ctx context.Context
-	ApiService *FleetManagerConfigurationGroupsAPIService
-	id string
+	ctx                                                                   context.Context
+	ApiService                                                            *FleetManagerConfigurationGroupsAPIService
+	id                                                                    string
 	publicConfigurationGroupServiceReplacePublicConfigurationGroupRequest *PublicConfigurationGroupServiceReplacePublicConfigurationGroupRequest
 }
 
@@ -510,26 +512,27 @@ PublicConfigurationGroupServiceReplacePublicConfigurationGroup Update configurat
 
 Updates provided fleet-manager configuration group fields and optionally updates the latest family.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Configuration group UUID v7.
- @return ApiPublicConfigurationGroupServiceReplacePublicConfigurationGroupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Configuration group UUID v7.
+	@return ApiPublicConfigurationGroupServiceReplacePublicConfigurationGroupRequest
 */
 func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServiceReplacePublicConfigurationGroup(ctx context.Context, id string) ApiPublicConfigurationGroupServiceReplacePublicConfigurationGroupRequest {
 	return ApiPublicConfigurationGroupServiceReplacePublicConfigurationGroupRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return ReplacePublicConfigurationGroupResponse
+//
+//	@return ReplacePublicConfigurationGroupResponse
 func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServiceReplacePublicConfigurationGroupExecute(r ApiPublicConfigurationGroupServiceReplacePublicConfigurationGroupRequest) (*ReplacePublicConfigurationGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplacePublicConfigurationGroupResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplacePublicConfigurationGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.PublicConfigurationGroupServiceReplacePublicConfigurationGroup")
@@ -598,8 +601,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -609,8 +612,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -620,8 +623,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -631,8 +634,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) PublicConfigurationGroupServ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

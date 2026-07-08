@@ -22,12 +22,13 @@ var _ MappedNullable = &EnrichmentType{}
 
 // EnrichmentType Enrichment type.
 type EnrichmentType struct {
-	Aws *AwsType `json:"aws,omitempty"`
+	Aws              *AwsType              `json:"aws,omitempty"`
 	CustomEnrichment *CustomEnrichmentType `json:"customEnrichment,omitempty"`
-	GeoIp *GeoIpType `json:"geoIp,omitempty"`
+	GeoIp            *GeoIpType            `json:"geoIp,omitempty"`
 	// Suspicious ip type.
-	SuspiciousIp map[string]interface{} `json:"suspiciousIp,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SuspiciousIp                      map[string]interface{} `json:"suspiciousIp,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _EnrichmentType EnrichmentType
@@ -178,7 +179,7 @@ func (o *EnrichmentType) SetSuspiciousIp(v map[string]interface{}) {
 }
 
 func (o EnrichmentType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -261,6 +262,7 @@ func (o *EnrichmentType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "geoIp")
 		delete(additionalProperties, "suspiciousIp")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -301,4 +303,3 @@ func (v *NullableEnrichmentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

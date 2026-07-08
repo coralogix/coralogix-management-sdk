@@ -24,8 +24,9 @@ var _ MappedNullable = &CreateCustomEnrichmentResponse{}
 type CreateCustomEnrichmentResponse struct {
 	CustomEnrichment *CustomEnrichment `json:"customEnrichment,omitempty"`
 	// Human-readable message.
-	Message *string `json:"message,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Message                           *string `json:"message,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateCustomEnrichmentResponse CreateCustomEnrichmentResponse
@@ -112,7 +113,7 @@ func (o *CreateCustomEnrichmentResponse) SetMessage(v string) {
 }
 
 func (o CreateCustomEnrichmentResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *CreateCustomEnrichmentResponse) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "customEnrichment")
 		delete(additionalProperties, "message")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableCreateCustomEnrichmentResponse) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

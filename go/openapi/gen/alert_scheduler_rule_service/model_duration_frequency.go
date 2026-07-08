@@ -24,9 +24,9 @@ type DurationFrequency string
 // List of DurationFrequency
 const (
 	DURATIONFREQUENCY_DURATION_FREQUENCY_UNSPECIFIED DurationFrequency = "DURATION_FREQUENCY_UNSPECIFIED"
-	DURATIONFREQUENCY_DURATION_FREQUENCY_MINUTE DurationFrequency = "DURATION_FREQUENCY_MINUTE"
-	DURATIONFREQUENCY_DURATION_FREQUENCY_HOUR DurationFrequency = "DURATION_FREQUENCY_HOUR"
-	DURATIONFREQUENCY_DURATION_FREQUENCY_DAY DurationFrequency = "DURATION_FREQUENCY_DAY"
+	DURATIONFREQUENCY_DURATION_FREQUENCY_MINUTE      DurationFrequency = "DURATION_FREQUENCY_MINUTE"
+	DURATIONFREQUENCY_DURATION_FREQUENCY_HOUR        DurationFrequency = "DURATION_FREQUENCY_HOUR"
+	DURATIONFREQUENCY_DURATION_FREQUENCY_DAY         DurationFrequency = "DURATION_FREQUENCY_DAY"
 )
 
 // All allowed values of DurationFrequency enum
@@ -115,4 +115,3 @@ func (v *NullableDurationFrequency) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

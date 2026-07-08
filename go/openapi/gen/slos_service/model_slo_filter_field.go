@@ -24,17 +24,18 @@ var _ MappedNullable = &SloFilterField{}
 type SloFilterField struct {
 	ConstFilter *SloConstantFilterField `json:"constFilter,omitempty"`
 	// Filter by a specific SLO label key.
-	LabelName *string `json:"labelName,omitempty"`
-	OwnershipEnvironmentValues interface{} `json:"ownershipEnvironmentValues,omitempty"`
-	OwnershipServiceValues interface{} `json:"ownershipServiceValues,omitempty"`
-	OwnershipTeamValues interface{} `json:"ownershipTeamValues,omitempty"`
+	LabelName                  *string       `json:"labelName,omitempty"`
+	OwnershipEnvironmentValues *StringValues `json:"ownershipEnvironmentValues,omitempty"`
+	OwnershipServiceValues     *StringValues `json:"ownershipServiceValues,omitempty"`
+	OwnershipTeamValues        *StringValues `json:"ownershipTeamValues,omitempty"`
 	// Filter discriminator for SLO product type values.
 	ProductType *bool `json:"productType,omitempty"`
 	// Filter by service name from the APM SLI services list (not ownership tags). Only valid for APM product SLOs. MUST be used together with a product_type filter that includes APM; the server may reject the request otherwise. To filter by configured ownership service on any SLO type, use ownership_service_values instead.
 	ServiceName *string `json:"serviceName,omitempty"`
 	// Filter discriminator for SLO type values.
-	SloType *bool `json:"sloType,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SloType                           *bool `json:"sloType,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SloFilterField SloFilterField
@@ -120,23 +121,22 @@ func (o *SloFilterField) SetLabelName(v string) {
 	o.LabelName = &v
 }
 
-// GetOwnershipEnvironmentValues returns the OwnershipEnvironmentValues field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SloFilterField) GetOwnershipEnvironmentValues() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetOwnershipEnvironmentValues returns the OwnershipEnvironmentValues field value if set, zero value otherwise.
+func (o *SloFilterField) GetOwnershipEnvironmentValues() StringValues {
+	if o == nil || IsNil(o.OwnershipEnvironmentValues) {
+		var ret StringValues
 		return ret
 	}
-	return o.OwnershipEnvironmentValues
+	return *o.OwnershipEnvironmentValues
 }
 
 // GetOwnershipEnvironmentValuesOk returns a tuple with the OwnershipEnvironmentValues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SloFilterField) GetOwnershipEnvironmentValuesOk() (*interface{}, bool) {
+func (o *SloFilterField) GetOwnershipEnvironmentValuesOk() (*StringValues, bool) {
 	if o == nil || IsNil(o.OwnershipEnvironmentValues) {
 		return nil, false
 	}
-	return &o.OwnershipEnvironmentValues, true
+	return o.OwnershipEnvironmentValues, true
 }
 
 // HasOwnershipEnvironmentValues returns a boolean if a field has been set.
@@ -148,28 +148,27 @@ func (o *SloFilterField) HasOwnershipEnvironmentValues() bool {
 	return false
 }
 
-// SetOwnershipEnvironmentValues gets a reference to the given interface{} and assigns it to the OwnershipEnvironmentValues field.
-func (o *SloFilterField) SetOwnershipEnvironmentValues(v interface{}) {
-	o.OwnershipEnvironmentValues = v
+// SetOwnershipEnvironmentValues gets a reference to the given StringValues and assigns it to the OwnershipEnvironmentValues field.
+func (o *SloFilterField) SetOwnershipEnvironmentValues(v StringValues) {
+	o.OwnershipEnvironmentValues = &v
 }
 
-// GetOwnershipServiceValues returns the OwnershipServiceValues field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SloFilterField) GetOwnershipServiceValues() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetOwnershipServiceValues returns the OwnershipServiceValues field value if set, zero value otherwise.
+func (o *SloFilterField) GetOwnershipServiceValues() StringValues {
+	if o == nil || IsNil(o.OwnershipServiceValues) {
+		var ret StringValues
 		return ret
 	}
-	return o.OwnershipServiceValues
+	return *o.OwnershipServiceValues
 }
 
 // GetOwnershipServiceValuesOk returns a tuple with the OwnershipServiceValues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SloFilterField) GetOwnershipServiceValuesOk() (*interface{}, bool) {
+func (o *SloFilterField) GetOwnershipServiceValuesOk() (*StringValues, bool) {
 	if o == nil || IsNil(o.OwnershipServiceValues) {
 		return nil, false
 	}
-	return &o.OwnershipServiceValues, true
+	return o.OwnershipServiceValues, true
 }
 
 // HasOwnershipServiceValues returns a boolean if a field has been set.
@@ -181,28 +180,27 @@ func (o *SloFilterField) HasOwnershipServiceValues() bool {
 	return false
 }
 
-// SetOwnershipServiceValues gets a reference to the given interface{} and assigns it to the OwnershipServiceValues field.
-func (o *SloFilterField) SetOwnershipServiceValues(v interface{}) {
-	o.OwnershipServiceValues = v
+// SetOwnershipServiceValues gets a reference to the given StringValues and assigns it to the OwnershipServiceValues field.
+func (o *SloFilterField) SetOwnershipServiceValues(v StringValues) {
+	o.OwnershipServiceValues = &v
 }
 
-// GetOwnershipTeamValues returns the OwnershipTeamValues field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SloFilterField) GetOwnershipTeamValues() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetOwnershipTeamValues returns the OwnershipTeamValues field value if set, zero value otherwise.
+func (o *SloFilterField) GetOwnershipTeamValues() StringValues {
+	if o == nil || IsNil(o.OwnershipTeamValues) {
+		var ret StringValues
 		return ret
 	}
-	return o.OwnershipTeamValues
+	return *o.OwnershipTeamValues
 }
 
 // GetOwnershipTeamValuesOk returns a tuple with the OwnershipTeamValues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SloFilterField) GetOwnershipTeamValuesOk() (*interface{}, bool) {
+func (o *SloFilterField) GetOwnershipTeamValuesOk() (*StringValues, bool) {
 	if o == nil || IsNil(o.OwnershipTeamValues) {
 		return nil, false
 	}
-	return &o.OwnershipTeamValues, true
+	return o.OwnershipTeamValues, true
 }
 
 // HasOwnershipTeamValues returns a boolean if a field has been set.
@@ -214,9 +212,9 @@ func (o *SloFilterField) HasOwnershipTeamValues() bool {
 	return false
 }
 
-// SetOwnershipTeamValues gets a reference to the given interface{} and assigns it to the OwnershipTeamValues field.
-func (o *SloFilterField) SetOwnershipTeamValues(v interface{}) {
-	o.OwnershipTeamValues = v
+// SetOwnershipTeamValues gets a reference to the given StringValues and assigns it to the OwnershipTeamValues field.
+func (o *SloFilterField) SetOwnershipTeamValues(v StringValues) {
+	o.OwnershipTeamValues = &v
 }
 
 // GetProductType returns the ProductType field value if set, zero value otherwise.
@@ -316,7 +314,7 @@ func (o *SloFilterField) SetSloType(v bool) {
 }
 
 func (o SloFilterField) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -331,13 +329,13 @@ func (o SloFilterField) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LabelName) {
 		toSerialize["labelName"] = o.LabelName
 	}
-	if o.OwnershipEnvironmentValues != nil {
+	if !IsNil(o.OwnershipEnvironmentValues) {
 		toSerialize["ownershipEnvironmentValues"] = o.OwnershipEnvironmentValues
 	}
-	if o.OwnershipServiceValues != nil {
+	if !IsNil(o.OwnershipServiceValues) {
 		toSerialize["ownershipServiceValues"] = o.OwnershipServiceValues
 	}
-	if o.OwnershipTeamValues != nil {
+	if !IsNil(o.OwnershipTeamValues) {
 		toSerialize["ownershipTeamValues"] = o.OwnershipTeamValues
 	}
 	if !IsNil(o.ProductType) {
@@ -439,6 +437,7 @@ func (o *SloFilterField) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "serviceName")
 		delete(additionalProperties, "sloType")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -479,4 +478,3 @@ func (v *NullableSloFilterField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

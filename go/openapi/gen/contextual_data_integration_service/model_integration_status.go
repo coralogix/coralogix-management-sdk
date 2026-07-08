@@ -26,8 +26,9 @@ type IntegrationStatus struct {
 	// List of details.
 	Details *map[string]string `json:"details,omitempty"`
 	// The messages.
-	Messages []string `json:"messages,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Messages                          []string `json:"messages,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IntegrationStatus IntegrationStatus
@@ -146,7 +147,7 @@ func (o *IntegrationStatus) SetMessages(v []string) {
 }
 
 func (o IntegrationStatus) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -191,6 +192,7 @@ func (o *IntegrationStatus) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "details")
 		delete(additionalProperties, "messages")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -231,4 +233,3 @@ func (v *NullableIntegrationStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

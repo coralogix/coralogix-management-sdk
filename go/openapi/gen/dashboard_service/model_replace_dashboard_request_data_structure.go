@@ -24,13 +24,14 @@ var _ MappedNullable = &ReplaceDashboardRequestDataStructure{}
 // ReplaceDashboardRequestDataStructure This is a request sent to update an existing dashboard with new information
 type ReplaceDashboardRequestDataStructure struct {
 	// JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.
-	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Dashboard Dashboard `json:"dashboard"`
+	AccessPolicy *string   `json:"accessPolicy,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Dashboard    Dashboard `json:"dashboard"`
 	// The is locked.
 	IsLocked *bool `json:"isLocked,omitempty"`
 	// Idempotency key for the replace request, used to prevent duplicate updates.
-	RequestId string `json:"requestId"`
-	AdditionalProperties map[string]interface{}
+	RequestId                         string `json:"requestId" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ReplaceDashboardRequestDataStructure ReplaceDashboardRequestDataStructure
@@ -167,7 +168,7 @@ func (o *ReplaceDashboardRequestDataStructure) SetRequestId(v string) {
 }
 
 func (o ReplaceDashboardRequestDataStructure) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -206,10 +207,10 @@ func (o *ReplaceDashboardRequestDataStructure) UnmarshalJSON(data []byte) (err e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -234,6 +235,7 @@ func (o *ReplaceDashboardRequestDataStructure) UnmarshalJSON(data []byte) (err e
 		delete(additionalProperties, "isLocked")
 		delete(additionalProperties, "requestId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -274,4 +276,3 @@ func (v *NullableReplaceDashboardRequestDataStructure) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

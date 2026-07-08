@@ -23,15 +23,16 @@ var _ MappedNullable = &LogsThresholdType{}
 // LogsThresholdType Configuration for alerts triggered when log counts exceed or fall below specified thresholds
 type LogsThresholdType struct {
 	// The delay in milliseconds before evaluating the alert condition
-	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
-	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
-	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
+	EvaluationDelayMs *int32        `json:"evaluationDelayMs,omitempty"`
+	LogsFilter        *V3LogsFilter `json:"logsFilter,omitempty"`
+	NoDataPolicy      *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	// The filter to specify which fields to include in the notification payload
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	// The rules for the threshold alert
-	Rules []LogsThresholdRule `json:"rules,omitempty"`
-	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Rules                             []LogsThresholdRule           `json:"rules,omitempty"`
+	UndetectedValuesManagement        *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogsThresholdType LogsThresholdType
@@ -246,7 +247,7 @@ func (o *LogsThresholdType) SetUndetectedValuesManagement(v V3UndetectedValuesMa
 }
 
 func (o LogsThresholdType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -303,6 +304,7 @@ func (o *LogsThresholdType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "rules")
 		delete(additionalProperties, "undetectedValuesManagement")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -343,4 +345,3 @@ func (v *NullableLogsThresholdType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

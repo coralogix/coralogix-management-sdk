@@ -22,8 +22,9 @@ var _ MappedNullable = &CreateQuotaAllocationRuleSetResponse{}
 
 // CreateQuotaAllocationRuleSetResponse Response confirming quota allocation rule set has been successfully created
 type CreateQuotaAllocationRuleSetResponse struct {
-	RuleSet *QuotaAllocationEntityTypeRuleSet `json:"ruleSet,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RuleSet                           *QuotaAllocationEntityTypeRuleSet `json:"ruleSet,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateQuotaAllocationRuleSetResponse CreateQuotaAllocationRuleSetResponse
@@ -78,7 +79,7 @@ func (o *CreateQuotaAllocationRuleSetResponse) SetRuleSet(v QuotaAllocationEntit
 }
 
 func (o CreateQuotaAllocationRuleSetResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *CreateQuotaAllocationRuleSetResponse) UnmarshalJSON(data []byte) (err e
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ruleSet")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableCreateQuotaAllocationRuleSetResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

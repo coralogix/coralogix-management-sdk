@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // AlertSchedulerRuleServiceAPIService AlertSchedulerRuleServiceAPI service
 type AlertSchedulerRuleServiceAPIService service
 
 type ApiAlertSchedulerRuleServiceCreateAlertSchedulerRuleRequest struct {
-	ctx context.Context
-	ApiService *AlertSchedulerRuleServiceAPIService
+	ctx                                          context.Context
+	ApiService                                   *AlertSchedulerRuleServiceAPIService
 	createAlertSchedulerRuleRequestDataStructure *CreateAlertSchedulerRuleRequestDataStructure
 }
 
@@ -43,24 +42,25 @@ AlertSchedulerRuleServiceCreateAlertSchedulerRule Create an alert scheduler rule
 
 Creates a new alert suppression rule.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAlertSchedulerRuleServiceCreateAlertSchedulerRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAlertSchedulerRuleServiceCreateAlertSchedulerRuleRequest
 */
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateAlertSchedulerRule(ctx context.Context) ApiAlertSchedulerRuleServiceCreateAlertSchedulerRuleRequest {
 	return ApiAlertSchedulerRuleServiceCreateAlertSchedulerRuleRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateAlertSchedulerRuleResponse
+//
+//	@return CreateAlertSchedulerRuleResponse
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateAlertSchedulerRuleExecute(r ApiAlertSchedulerRuleServiceCreateAlertSchedulerRuleRequest) (*CreateAlertSchedulerRuleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateAlertSchedulerRuleResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateAlertSchedulerRuleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertSchedulerRuleServiceAPIService.AlertSchedulerRuleServiceCreateAlertSchedulerRule")
@@ -125,8 +125,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateAle
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -136,8 +136,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateAle
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -147,8 +147,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateAle
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -166,8 +166,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateAle
 }
 
 type ApiAlertSchedulerRuleServiceCreateBulkAlertSchedulerRuleRequest struct {
-	ctx context.Context
-	ApiService *AlertSchedulerRuleServiceAPIService
+	ctx                                              context.Context
+	ApiService                                       *AlertSchedulerRuleServiceAPIService
 	createBulkAlertSchedulerRuleRequestDataStructure *CreateBulkAlertSchedulerRuleRequestDataStructure
 }
 
@@ -185,24 +185,25 @@ AlertSchedulerRuleServiceCreateBulkAlertSchedulerRule Create multiple alert sche
 
 Returns all alert suppression rules matching the given criteria.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAlertSchedulerRuleServiceCreateBulkAlertSchedulerRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAlertSchedulerRuleServiceCreateBulkAlertSchedulerRuleRequest
 */
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateBulkAlertSchedulerRule(ctx context.Context) ApiAlertSchedulerRuleServiceCreateBulkAlertSchedulerRuleRequest {
 	return ApiAlertSchedulerRuleServiceCreateBulkAlertSchedulerRuleRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateBulkAlertSchedulerRuleResponse
+//
+//	@return CreateBulkAlertSchedulerRuleResponse
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateBulkAlertSchedulerRuleExecute(r ApiAlertSchedulerRuleServiceCreateBulkAlertSchedulerRuleRequest) (*CreateBulkAlertSchedulerRuleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateBulkAlertSchedulerRuleResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateBulkAlertSchedulerRuleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertSchedulerRuleServiceAPIService.AlertSchedulerRuleServiceCreateBulkAlertSchedulerRule")
@@ -267,8 +268,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateBul
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -278,8 +279,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateBul
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -289,8 +290,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateBul
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -308,8 +309,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateBul
 }
 
 type ApiAlertSchedulerRuleServiceDeleteAlertSchedulerRuleRequest struct {
-	ctx context.Context
-	ApiService *AlertSchedulerRuleServiceAPIService
+	ctx                  context.Context
+	ApiService           *AlertSchedulerRuleServiceAPIService
 	alertSchedulerRuleId string
 }
 
@@ -322,26 +323,27 @@ AlertSchedulerRuleServiceDeleteAlertSchedulerRule Delete an alert scheduler rule
 
 Deletes the alert suppression rule with the specified ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param alertSchedulerRuleId The unique identifier of the alert scheduler (suppression) rule to delete.
- @return ApiAlertSchedulerRuleServiceDeleteAlertSchedulerRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param alertSchedulerRuleId The unique identifier of the alert scheduler (suppression) rule to delete.
+	@return ApiAlertSchedulerRuleServiceDeleteAlertSchedulerRuleRequest
 */
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceDeleteAlertSchedulerRule(ctx context.Context, alertSchedulerRuleId string) ApiAlertSchedulerRuleServiceDeleteAlertSchedulerRuleRequest {
 	return ApiAlertSchedulerRuleServiceDeleteAlertSchedulerRuleRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:           a,
+		ctx:                  ctx,
 		alertSchedulerRuleId: alertSchedulerRuleId,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceDeleteAlertSchedulerRuleExecute(r ApiAlertSchedulerRuleServiceDeleteAlertSchedulerRuleRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertSchedulerRuleServiceAPIService.AlertSchedulerRuleServiceDeleteAlertSchedulerRule")
@@ -405,8 +407,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceDeleteAle
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -416,8 +418,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceDeleteAle
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -427,8 +429,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceDeleteAle
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -446,8 +448,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceDeleteAle
 }
 
 type ApiAlertSchedulerRuleServiceGetAlertSchedulerRuleRequest struct {
-	ctx context.Context
-	ApiService *AlertSchedulerRuleServiceAPIService
+	ctx                  context.Context
+	ApiService           *AlertSchedulerRuleServiceAPIService
 	alertSchedulerRuleId string
 }
 
@@ -460,26 +462,27 @@ AlertSchedulerRuleServiceGetAlertSchedulerRule Get an alert scheduler rule
 
 Returns the details of the specified alert suppression rule.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param alertSchedulerRuleId The unique identifier of the alert scheduler (suppression) rule.
- @return ApiAlertSchedulerRuleServiceGetAlertSchedulerRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param alertSchedulerRuleId The unique identifier of the alert scheduler (suppression) rule.
+	@return ApiAlertSchedulerRuleServiceGetAlertSchedulerRuleRequest
 */
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetAlertSchedulerRule(ctx context.Context, alertSchedulerRuleId string) ApiAlertSchedulerRuleServiceGetAlertSchedulerRuleRequest {
 	return ApiAlertSchedulerRuleServiceGetAlertSchedulerRuleRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:           a,
+		ctx:                  ctx,
 		alertSchedulerRuleId: alertSchedulerRuleId,
 	}
 }
 
 // Execute executes the request
-//  @return GetAlertSchedulerRuleResponse
+//
+//	@return GetAlertSchedulerRuleResponse
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetAlertSchedulerRuleExecute(r ApiAlertSchedulerRuleServiceGetAlertSchedulerRuleRequest) (*GetAlertSchedulerRuleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetAlertSchedulerRuleResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetAlertSchedulerRuleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertSchedulerRuleServiceAPIService.AlertSchedulerRuleServiceGetAlertSchedulerRule")
@@ -543,8 +546,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetAlertS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -554,8 +557,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetAlertS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -565,8 +568,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetAlertS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -584,12 +587,12 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetAlertS
 }
 
 type ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest struct {
-	ctx context.Context
-	ApiService *AlertSchedulerRuleServiceAPIService
-	activeTimeframe *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter
-	enabled *bool
+	ctx                    context.Context
+	ApiService             *AlertSchedulerRuleServiceAPIService
+	activeTimeframe        *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter
+	enabled                *bool
 	alertSchedulerRulesIds *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
-	nextPageToken *string
+	nextPageToken          *string
 }
 
 // Active timeframe filter to limit results to rules active in the given window.
@@ -625,24 +628,25 @@ AlertSchedulerRuleServiceGetBulkAlertSchedulerRule Get multiple alert scheduler 
 
 Returns alert suppression rules with optional pagination.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest
 */
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetBulkAlertSchedulerRule(ctx context.Context) ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest {
 	return ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetBulkAlertSchedulerRuleResponse
+//
+//	@return GetBulkAlertSchedulerRuleResponse
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleExecute(r ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest) (*GetBulkAlertSchedulerRuleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBulkAlertSchedulerRuleResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBulkAlertSchedulerRuleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertSchedulerRuleServiceAPIService.AlertSchedulerRuleServiceGetBulkAlertSchedulerRule")
@@ -722,8 +726,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetBulkAl
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -733,8 +737,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetBulkAl
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -744,8 +748,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetBulkAl
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -763,8 +767,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetBulkAl
 }
 
 type ApiAlertSchedulerRuleServiceUpdateAlertSchedulerRuleRequest struct {
-	ctx context.Context
-	ApiService *AlertSchedulerRuleServiceAPIService
+	ctx                                          context.Context
+	ApiService                                   *AlertSchedulerRuleServiceAPIService
 	updateAlertSchedulerRuleRequestDataStructure *UpdateAlertSchedulerRuleRequestDataStructure
 }
 
@@ -782,24 +786,25 @@ AlertSchedulerRuleServiceUpdateAlertSchedulerRule Update an alert scheduler rule
 
 Updates an existing alert suppression rule.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAlertSchedulerRuleServiceUpdateAlertSchedulerRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAlertSchedulerRuleServiceUpdateAlertSchedulerRuleRequest
 */
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateAlertSchedulerRule(ctx context.Context) ApiAlertSchedulerRuleServiceUpdateAlertSchedulerRuleRequest {
 	return ApiAlertSchedulerRuleServiceUpdateAlertSchedulerRuleRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateAlertSchedulerRuleResponse
+//
+//	@return UpdateAlertSchedulerRuleResponse
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateAlertSchedulerRuleExecute(r ApiAlertSchedulerRuleServiceUpdateAlertSchedulerRuleRequest) (*UpdateAlertSchedulerRuleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateAlertSchedulerRuleResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateAlertSchedulerRuleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertSchedulerRuleServiceAPIService.AlertSchedulerRuleServiceUpdateAlertSchedulerRule")
@@ -864,8 +869,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateAle
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -875,8 +880,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateAle
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -886,8 +891,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateAle
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -905,8 +910,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateAle
 }
 
 type ApiAlertSchedulerRuleServiceUpdateBulkAlertSchedulerRuleRequest struct {
-	ctx context.Context
-	ApiService *AlertSchedulerRuleServiceAPIService
+	ctx                                              context.Context
+	ApiService                                       *AlertSchedulerRuleServiceAPIService
 	updateBulkAlertSchedulerRuleRequestDataStructure *UpdateBulkAlertSchedulerRuleRequestDataStructure
 }
 
@@ -924,24 +929,25 @@ AlertSchedulerRuleServiceUpdateBulkAlertSchedulerRule Update multiple alert sche
 
 Replaces all alert suppression rules with the provided set.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAlertSchedulerRuleServiceUpdateBulkAlertSchedulerRuleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAlertSchedulerRuleServiceUpdateBulkAlertSchedulerRuleRequest
 */
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateBulkAlertSchedulerRule(ctx context.Context) ApiAlertSchedulerRuleServiceUpdateBulkAlertSchedulerRuleRequest {
 	return ApiAlertSchedulerRuleServiceUpdateBulkAlertSchedulerRuleRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateBulkAlertSchedulerRuleResponse
+//
+//	@return UpdateBulkAlertSchedulerRuleResponse
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateBulkAlertSchedulerRuleExecute(r ApiAlertSchedulerRuleServiceUpdateBulkAlertSchedulerRuleRequest) (*UpdateBulkAlertSchedulerRuleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateBulkAlertSchedulerRuleResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateBulkAlertSchedulerRuleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertSchedulerRuleServiceAPIService.AlertSchedulerRuleServiceUpdateBulkAlertSchedulerRule")
@@ -1006,8 +1012,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateBul
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1017,8 +1023,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateBul
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1028,8 +1034,8 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateBul
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

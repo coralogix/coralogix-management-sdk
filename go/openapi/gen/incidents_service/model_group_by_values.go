@@ -22,9 +22,10 @@ var _ MappedNullable = &GroupByValues{}
 
 // GroupByValues struct for GroupByValues
 type GroupByValues struct {
-	ContextualLabels *ContextualLabels `json:"contextualLabels,omitempty"`
-	IncidentField *IncidentFieldOneOf `json:"incidentField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ContextualLabels                  *ContextualLabels   `json:"contextualLabels,omitempty"`
+	IncidentField                     *IncidentFieldOneOf `json:"incidentField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GroupByValues GroupByValues
@@ -111,7 +112,7 @@ func (o *GroupByValues) SetIncidentField(v IncidentFieldOneOf) {
 }
 
 func (o GroupByValues) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,6 +175,7 @@ func (o *GroupByValues) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "contextualLabels")
 		delete(additionalProperties, "incidentField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -214,4 +216,3 @@ func (v *NullableGroupByValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,9 +22,10 @@ var _ MappedNullable = &FilterOperator{}
 
 // FilterOperator This data structure defines the comparison operation for the filter.
 type FilterOperator struct {
-	Equals *FilterEquals `json:"equals,omitempty"`
-	NotEquals *FilterNotEquals `json:"notEquals,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Equals                            *FilterEquals    `json:"equals,omitempty"`
+	NotEquals                         *FilterNotEquals `json:"notEquals,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _FilterOperator FilterOperator
@@ -111,7 +112,7 @@ func (o *FilterOperator) SetNotEquals(v FilterNotEquals) {
 }
 
 func (o FilterOperator) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,6 +175,7 @@ func (o *FilterOperator) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "equals")
 		delete(additionalProperties, "notEquals")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -214,4 +216,3 @@ func (v *NullableFilterOperator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

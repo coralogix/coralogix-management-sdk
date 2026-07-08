@@ -23,8 +23,9 @@ var _ MappedNullable = &V2Scope{}
 // V2Scope Scope assignment for a group. References an existing scope by ID. Scopes can be created via the Scopes API.
 type V2Scope struct {
 	// Reference to an existing scope by ID
-	ScopeId *string `json:"scopeId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ScopeId                           *string `json:"scopeId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V2Scope V2Scope
@@ -79,7 +80,7 @@ func (o *V2Scope) SetScopeId(v string) {
 }
 
 func (o V2Scope) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *V2Scope) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "scopeId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableV2Scope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,8 +23,9 @@ var _ MappedNullable = &AtomicBatchExecuteActionsResponse{}
 // AtomicBatchExecuteActionsResponse This data structure represents the response to a batch Action execution request.
 type AtomicBatchExecuteActionsResponse struct {
 	// The matching responses.
-	MatchingResponses []ActionExecutionResponse `json:"matchingResponses,omitempty"`
-	AdditionalProperties map[string]interface{}
+	MatchingResponses                 []ActionExecutionResponse `json:"matchingResponses,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AtomicBatchExecuteActionsResponse AtomicBatchExecuteActionsResponse
@@ -79,7 +80,7 @@ func (o *AtomicBatchExecuteActionsResponse) SetMatchingResponses(v []ActionExecu
 }
 
 func (o AtomicBatchExecuteActionsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *AtomicBatchExecuteActionsResponse) UnmarshalJSON(data []byte) (err erro
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "matchingResponses")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableAtomicBatchExecuteActionsResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

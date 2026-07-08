@@ -30,9 +30,10 @@ type OllyAnalysisPayload struct {
 	// Ordered list of remediation steps, one recommendation per element.
 	RemediationRecommendations []string `json:"remediationRecommendations,omitempty"`
 	// Olly's hypothesised root cause for the case.
-	RootCause *string `json:"rootCause,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	RootCauseConfidence *OllyAnalysisRootCauseConfidence `json:"rootCauseConfidence,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RootCause                         *string                          `json:"rootCause,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	RootCauseConfidence               *OllyAnalysisRootCauseConfidence `json:"rootCauseConfidence,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _OllyAnalysisPayload OllyAnalysisPayload
@@ -215,7 +216,7 @@ func (o *OllyAnalysisPayload) SetRootCauseConfidence(v OllyAnalysisRootCauseConf
 }
 
 func (o OllyAnalysisPayload) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,6 +269,7 @@ func (o *OllyAnalysisPayload) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "rootCause")
 		delete(additionalProperties, "rootCauseConfidence")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -308,4 +310,3 @@ func (v *NullableOllyAnalysisPayload) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

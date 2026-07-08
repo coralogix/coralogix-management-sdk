@@ -23,8 +23,8 @@ type Language string
 
 // List of Language
 const (
-	LANGUAGE_UNKNOWN Language = "UNKNOWN"
-	LANGUAGE_BASH Language = "BASH"
+	LANGUAGE_UNKNOWN    Language = "UNKNOWN"
+	LANGUAGE_BASH       Language = "BASH"
 	LANGUAGE_JAVASCRIPT Language = "JAVASCRIPT"
 )
 
@@ -113,4 +113,3 @@ func (v *NullableLanguage) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

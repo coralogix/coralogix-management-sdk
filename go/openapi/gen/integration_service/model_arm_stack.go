@@ -25,8 +25,9 @@ type ARMStack struct {
 	// The resource group name.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
 	// The subscription id.
-	SubscriptionId *string `json:"subscriptionId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SubscriptionId                    *string `json:"subscriptionId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ARMStack ARMStack
@@ -113,7 +114,7 @@ func (o *ARMStack) SetSubscriptionId(v string) {
 }
 
 func (o ARMStack) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *ARMStack) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "resourceGroupName")
 		delete(additionalProperties, "subscriptionId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableARMStack) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

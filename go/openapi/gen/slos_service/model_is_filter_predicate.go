@@ -22,10 +22,11 @@ var _ MappedNullable = &IsFilterPredicate{}
 
 // IsFilterPredicate Predicate for SLO filters that checks if a field is equal to one of multiple values
 type IsFilterPredicate struct {
-	ProductTypeValues interface{} `json:"productTypeValues,omitempty"`
-	StringValues interface{} `json:"stringValues,omitempty"`
-	TypeValues interface{} `json:"typeValues,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ProductTypeValues                 *ProductTypeValues `json:"productTypeValues,omitempty"`
+	StringValues                      *StringValues      `json:"stringValues,omitempty"`
+	TypeValues                        *TypeValues        `json:"typeValues,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IsFilterPredicate IsFilterPredicate
@@ -47,23 +48,22 @@ func NewIsFilterPredicateWithDefaults() *IsFilterPredicate {
 	return &this
 }
 
-// GetProductTypeValues returns the ProductTypeValues field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IsFilterPredicate) GetProductTypeValues() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetProductTypeValues returns the ProductTypeValues field value if set, zero value otherwise.
+func (o *IsFilterPredicate) GetProductTypeValues() ProductTypeValues {
+	if o == nil || IsNil(o.ProductTypeValues) {
+		var ret ProductTypeValues
 		return ret
 	}
-	return o.ProductTypeValues
+	return *o.ProductTypeValues
 }
 
 // GetProductTypeValuesOk returns a tuple with the ProductTypeValues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IsFilterPredicate) GetProductTypeValuesOk() (*interface{}, bool) {
+func (o *IsFilterPredicate) GetProductTypeValuesOk() (*ProductTypeValues, bool) {
 	if o == nil || IsNil(o.ProductTypeValues) {
 		return nil, false
 	}
-	return &o.ProductTypeValues, true
+	return o.ProductTypeValues, true
 }
 
 // HasProductTypeValues returns a boolean if a field has been set.
@@ -75,28 +75,27 @@ func (o *IsFilterPredicate) HasProductTypeValues() bool {
 	return false
 }
 
-// SetProductTypeValues gets a reference to the given interface{} and assigns it to the ProductTypeValues field.
-func (o *IsFilterPredicate) SetProductTypeValues(v interface{}) {
-	o.ProductTypeValues = v
+// SetProductTypeValues gets a reference to the given ProductTypeValues and assigns it to the ProductTypeValues field.
+func (o *IsFilterPredicate) SetProductTypeValues(v ProductTypeValues) {
+	o.ProductTypeValues = &v
 }
 
-// GetStringValues returns the StringValues field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IsFilterPredicate) GetStringValues() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetStringValues returns the StringValues field value if set, zero value otherwise.
+func (o *IsFilterPredicate) GetStringValues() StringValues {
+	if o == nil || IsNil(o.StringValues) {
+		var ret StringValues
 		return ret
 	}
-	return o.StringValues
+	return *o.StringValues
 }
 
 // GetStringValuesOk returns a tuple with the StringValues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IsFilterPredicate) GetStringValuesOk() (*interface{}, bool) {
+func (o *IsFilterPredicate) GetStringValuesOk() (*StringValues, bool) {
 	if o == nil || IsNil(o.StringValues) {
 		return nil, false
 	}
-	return &o.StringValues, true
+	return o.StringValues, true
 }
 
 // HasStringValues returns a boolean if a field has been set.
@@ -108,28 +107,27 @@ func (o *IsFilterPredicate) HasStringValues() bool {
 	return false
 }
 
-// SetStringValues gets a reference to the given interface{} and assigns it to the StringValues field.
-func (o *IsFilterPredicate) SetStringValues(v interface{}) {
-	o.StringValues = v
+// SetStringValues gets a reference to the given StringValues and assigns it to the StringValues field.
+func (o *IsFilterPredicate) SetStringValues(v StringValues) {
+	o.StringValues = &v
 }
 
-// GetTypeValues returns the TypeValues field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IsFilterPredicate) GetTypeValues() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetTypeValues returns the TypeValues field value if set, zero value otherwise.
+func (o *IsFilterPredicate) GetTypeValues() TypeValues {
+	if o == nil || IsNil(o.TypeValues) {
+		var ret TypeValues
 		return ret
 	}
-	return o.TypeValues
+	return *o.TypeValues
 }
 
 // GetTypeValuesOk returns a tuple with the TypeValues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IsFilterPredicate) GetTypeValuesOk() (*interface{}, bool) {
+func (o *IsFilterPredicate) GetTypeValuesOk() (*TypeValues, bool) {
 	if o == nil || IsNil(o.TypeValues) {
 		return nil, false
 	}
-	return &o.TypeValues, true
+	return o.TypeValues, true
 }
 
 // HasTypeValues returns a boolean if a field has been set.
@@ -141,13 +139,13 @@ func (o *IsFilterPredicate) HasTypeValues() bool {
 	return false
 }
 
-// SetTypeValues gets a reference to the given interface{} and assigns it to the TypeValues field.
-func (o *IsFilterPredicate) SetTypeValues(v interface{}) {
-	o.TypeValues = v
+// SetTypeValues gets a reference to the given TypeValues and assigns it to the TypeValues field.
+func (o *IsFilterPredicate) SetTypeValues(v TypeValues) {
+	o.TypeValues = &v
 }
 
 func (o IsFilterPredicate) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,13 +154,13 @@ func (o IsFilterPredicate) MarshalJSON() ([]byte, error) {
 
 func (o IsFilterPredicate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ProductTypeValues != nil {
+	if !IsNil(o.ProductTypeValues) {
 		toSerialize["productTypeValues"] = o.ProductTypeValues
 	}
-	if o.StringValues != nil {
+	if !IsNil(o.StringValues) {
 		toSerialize["stringValues"] = o.StringValues
 	}
-	if o.TypeValues != nil {
+	if !IsNil(o.TypeValues) {
 		toSerialize["typeValues"] = o.TypeValues
 	}
 
@@ -220,6 +218,7 @@ func (o *IsFilterPredicate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "stringValues")
 		delete(additionalProperties, "typeValues")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -260,4 +259,3 @@ func (v *NullableIsFilterPredicate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

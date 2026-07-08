@@ -19,12 +19,11 @@ import (
 	"strings"
 )
 
-
 // ViewsServiceAPIService ViewsServiceAPI service
 type ViewsServiceAPIService service
 
 type ApiViewsServiceCreateViewRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ViewsServiceAPIService
 	viewFolder *ViewFolder
 }
@@ -43,24 +42,25 @@ ViewsServiceCreateView Create a view service
 
 Creates a new view
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiViewsServiceCreateViewRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiViewsServiceCreateViewRequest
 */
 func (a *ViewsServiceAPIService) ViewsServiceCreateView(ctx context.Context) ApiViewsServiceCreateViewRequest {
 	return ApiViewsServiceCreateViewRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return View
+//
+//	@return View
 func (a *ViewsServiceAPIService) ViewsServiceCreateViewExecute(r ApiViewsServiceCreateViewRequest) (*View, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *View
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *View
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ViewsServiceAPIService.ViewsServiceCreateView")
@@ -134,9 +134,9 @@ func (a *ViewsServiceAPIService) ViewsServiceCreateViewExecute(r ApiViewsService
 }
 
 type ApiViewsServiceDeleteViewRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ViewsServiceAPIService
-	id int32
+	id         int32
 }
 
 func (r ApiViewsServiceDeleteViewRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -148,26 +148,27 @@ ViewsServiceDeleteView Delete view service
 
 Deletes a view by ID
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id id
- @return ApiViewsServiceDeleteViewRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id id
+	@return ApiViewsServiceDeleteViewRequest
 */
 func (a *ViewsServiceAPIService) ViewsServiceDeleteView(ctx context.Context, id int32) ApiViewsServiceDeleteViewRequest {
 	return ApiViewsServiceDeleteViewRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *ViewsServiceAPIService) ViewsServiceDeleteViewExecute(r ApiViewsServiceDeleteViewRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ViewsServiceAPIService.ViewsServiceDeleteView")
@@ -237,9 +238,9 @@ func (a *ViewsServiceAPIService) ViewsServiceDeleteViewExecute(r ApiViewsService
 }
 
 type ApiViewsServiceGetViewRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ViewsServiceAPIService
-	id int32
+	id         int32
 }
 
 func (r ApiViewsServiceGetViewRequest) Execute() (*View, *http.Response, error) {
@@ -251,26 +252,27 @@ ViewsServiceGetView Get view service
 
 Gets a view by ID
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id id
- @return ApiViewsServiceGetViewRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id id
+	@return ApiViewsServiceGetViewRequest
 */
 func (a *ViewsServiceAPIService) ViewsServiceGetView(ctx context.Context, id int32) ApiViewsServiceGetViewRequest {
 	return ApiViewsServiceGetViewRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return View
+//
+//	@return View
 func (a *ViewsServiceAPIService) ViewsServiceGetViewExecute(r ApiViewsServiceGetViewRequest) (*View, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *View
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *View
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ViewsServiceAPIService.ViewsServiceGetView")
@@ -340,7 +342,7 @@ func (a *ViewsServiceAPIService) ViewsServiceGetViewExecute(r ApiViewsServiceGet
 }
 
 type ApiViewsServiceListViewsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ViewsServiceAPIService
 }
 
@@ -353,24 +355,25 @@ ViewsServiceListViews List views service
 
 Lists all company public views
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiViewsServiceListViewsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiViewsServiceListViewsRequest
 */
 func (a *ViewsServiceAPIService) ViewsServiceListViews(ctx context.Context) ApiViewsServiceListViewsRequest {
 	return ApiViewsServiceListViewsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListViewsResponse
+//
+//	@return ListViewsResponse
 func (a *ViewsServiceAPIService) ViewsServiceListViewsExecute(r ApiViewsServiceListViewsRequest) (*ListViewsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListViewsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListViewsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ViewsServiceAPIService.ViewsServiceListViews")
@@ -439,10 +442,10 @@ func (a *ViewsServiceAPIService) ViewsServiceListViewsExecute(r ApiViewsServiceL
 }
 
 type ApiViewsServiceReplaceViewRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ViewsServiceAPIService
-	id int32
-	view1 *View1
+	id         int32
+	view1      *View1
 }
 
 func (r ApiViewsServiceReplaceViewRequest) View1(view1 View1) ApiViewsServiceReplaceViewRequest {
@@ -459,26 +462,27 @@ ViewsServiceReplaceView Replace a view service
 
 Replaces an existing view
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id id
- @return ApiViewsServiceReplaceViewRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id id
+	@return ApiViewsServiceReplaceViewRequest
 */
 func (a *ViewsServiceAPIService) ViewsServiceReplaceView(ctx context.Context, id int32) ApiViewsServiceReplaceViewRequest {
 	return ApiViewsServiceReplaceViewRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return View
+//
+//	@return View
 func (a *ViewsServiceAPIService) ViewsServiceReplaceViewExecute(r ApiViewsServiceReplaceViewRequest) (*View, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *View
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *View
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ViewsServiceAPIService.ViewsServiceReplaceView")

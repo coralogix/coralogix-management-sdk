@@ -29,35 +29,36 @@ type Dashboard struct {
 	// A list of annotations that can be used within the dashboard's visualizations
 	Annotations []Annotation `json:"annotations,omitempty"`
 	// A brief description or summary of the dashboard's purpose or content
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Auto refresh fifteen minutes.
 	FifteenMinutes map[string]interface{} `json:"fifteenMinutes,omitempty"`
 	// A list of filters that can be applied to the dashboard's data
 	Filters []FiltersFilter `json:"filters,omitempty"`
 	// Auto refresh five minutes.
 	FiveMinutes map[string]interface{} `json:"fiveMinutes,omitempty"`
-	FolderId *UUID `json:"folderId,omitempty"`
-	FolderPath *FolderPath `json:"folderPath,omitempty"`
+	FolderId    *UUID                  `json:"folderId,omitempty"`
+	FolderPath  *FolderPath            `json:"folderPath,omitempty"`
 	// A unique identifier of the dashboard
-	Id *string `json:"id,omitempty"`
-	Layout Layout `json:"layout"`
+	Id     *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Layout Layout  `json:"layout"`
 	// The display name of the dashboard
-	Name string `json:"name"`
+	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	// Auto refresh off.
 	Off map[string]interface{} `json:"off,omitempty"`
 	// Auto refresh one minute.
 	OneMinute map[string]interface{} `json:"oneMinute,omitempty"`
 	// Relative time frame specifying a duration from the current time
-	RelativeTimeFrame *string `json:"relativeTimeFrame,omitempty"`
+	RelativeTimeFrame *string `json:"relativeTimeFrame,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// A unique slug name serving as an alias for accessing the dashboard
-	SlugName *string `json:"slugName,omitempty"`
+	SlugName *string `json:"slugName,omitempty" validate:"regexp=^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$"`
 	// Auto refresh two minutes.
 	TwoMinutes map[string]interface{} `json:"twoMinutes,omitempty"`
 	// A list of variables that can be used within the dashboard for dynamic content
 	Variables []Variable `json:"variables,omitempty"`
 	// A list of variables that can be used within the dashboard for dynamic content
-	VariablesV2 []VariableV2 `json:"variablesV2,omitempty"`
-	AdditionalProperties map[string]interface{}
+	VariablesV2                       []VariableV2 `json:"variablesV2,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Dashboard Dashboard
@@ -674,7 +675,7 @@ func (o *Dashboard) SetVariablesV2(v []VariableV2) {
 }
 
 func (o Dashboard) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -789,10 +790,10 @@ func (o *Dashboard) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -894,6 +895,7 @@ func (o *Dashboard) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "variables")
 		delete(additionalProperties, "variablesV2")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -934,4 +936,3 @@ func (v *NullableDashboard) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

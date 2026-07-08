@@ -22,10 +22,11 @@ var _ MappedNullable = &QueryMetricsQueryType{}
 
 // QueryMetricsQueryType Discriminated union specifying what kind of metric data to fetch: metric names, label names, or label values.
 type QueryMetricsQueryType struct {
-	LabelName *QueryMetricsQueryTypeLabelName `json:"labelName,omitempty"`
-	LabelValue *QueryMetricsQueryTypeLabelValue `json:"labelValue,omitempty"`
-	MetricName *QueryMetricsQueryTypeMetricName `json:"metricName,omitempty"`
-	AdditionalProperties map[string]interface{}
+	LabelName                         *QueryMetricsQueryTypeLabelName  `json:"labelName,omitempty"`
+	LabelValue                        *QueryMetricsQueryTypeLabelValue `json:"labelValue,omitempty"`
+	MetricName                        *QueryMetricsQueryTypeMetricName `json:"metricName,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QueryMetricsQueryType QueryMetricsQueryType
@@ -144,7 +145,7 @@ func (o *QueryMetricsQueryType) SetMetricName(v QueryMetricsQueryTypeMetricName)
 }
 
 func (o QueryMetricsQueryType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -217,6 +218,7 @@ func (o *QueryMetricsQueryType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "labelValue")
 		delete(additionalProperties, "metricName")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -257,4 +259,3 @@ func (v *NullableQueryMetricsQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

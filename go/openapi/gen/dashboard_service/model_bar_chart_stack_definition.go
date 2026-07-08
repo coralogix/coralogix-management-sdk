@@ -25,8 +25,9 @@ type BarChartStackDefinition struct {
 	// How many slices can fit in a single bar
 	MaxSlicesPerBar *int32 `json:"maxSlicesPerBar,omitempty"`
 	// Custom template name of an individual stack
-	StackNameTemplate *string `json:"stackNameTemplate,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StackNameTemplate                 *string `json:"stackNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _BarChartStackDefinition BarChartStackDefinition
@@ -113,7 +114,7 @@ func (o *BarChartStackDefinition) SetStackNameTemplate(v string) {
 }
 
 func (o BarChartStackDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *BarChartStackDefinition) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "maxSlicesPerBar")
 		delete(additionalProperties, "stackNameTemplate")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableBarChartStackDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

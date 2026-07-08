@@ -24,16 +24,17 @@ var _ MappedNullable = &LineChart{}
 // LineChart LineChart represents the configuration of a line chart widget.
 type LineChart struct {
 	// Whether the line should remain connected instead of producing scattered points when null values are present in between
-	ConnectNulls *bool `json:"connectNulls,omitempty"`
-	Legend *Legend `json:"legend,omitempty"`
+	ConnectNulls *bool   `json:"connectNulls,omitempty"`
+	Legend       *Legend `json:"legend,omitempty"`
 	// Definitions of widget queries
 	QueryDefinitions []LineChartQueryDefinition `json:"queryDefinitions"`
-	StackedLine *LineChartStackedLine `json:"stackedLine,omitempty"`
-	Tooltip *Tooltip `json:"tooltip,omitempty"`
+	StackedLine      *LineChartStackedLine      `json:"stackedLine,omitempty"`
+	Tooltip          *Tooltip                   `json:"tooltip,omitempty"`
 	// When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.
-	UseDataTimeRange *bool `json:"useDataTimeRange,omitempty"`
-	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UseDataTimeRange                  *bool            `json:"useDataTimeRange,omitempty"`
+	XAxisTimeFormat                   *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LineChart LineChart
@@ -273,7 +274,7 @@ func (o *LineChart) SetXAxisTimeFormat(v XAxisTimeFormat) {
 }
 
 func (o LineChart) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -322,10 +323,10 @@ func (o *LineChart) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -353,6 +354,7 @@ func (o *LineChart) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "useDataTimeRange")
 		delete(additionalProperties, "xAxisTimeFormat")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -393,4 +395,3 @@ func (v *NullableLineChart) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

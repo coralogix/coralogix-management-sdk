@@ -23,8 +23,9 @@ var _ MappedNullable = &ListOutgoingWebhookTypesResponse{}
 // ListOutgoingWebhookTypesResponse Response containing a list of available outgoing webhook types.
 type ListOutgoingWebhookTypesResponse struct {
 	// List of webhooks.
-	Webhooks []OutgoingWebhookType `json:"webhooks,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Webhooks                          []OutgoingWebhookType `json:"webhooks,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListOutgoingWebhookTypesResponse ListOutgoingWebhookTypesResponse
@@ -79,7 +80,7 @@ func (o *ListOutgoingWebhookTypesResponse) SetWebhooks(v []OutgoingWebhookType) 
 }
 
 func (o ListOutgoingWebhookTypesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ListOutgoingWebhookTypesResponse) UnmarshalJSON(data []byte) (err error
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "webhooks")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableListOutgoingWebhookTypesResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -26,8 +26,9 @@ type LogRules struct {
 	// The dpxl expression.
 	DpxlExpression *string `json:"dpxlExpression,omitempty"`
 	// The severities.
-	Severities []QuotaV1Severity `json:"severities"`
-	AdditionalProperties map[string]interface{}
+	Severities                        []QuotaV1Severity `json:"severities"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogRules LogRules
@@ -107,7 +108,7 @@ func (o *LogRules) SetSeverities(v []QuotaV1Severity) {
 }
 
 func (o LogRules) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,10 +142,10 @@ func (o *LogRules) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -167,6 +168,7 @@ func (o *LogRules) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "dpxlExpression")
 		delete(additionalProperties, "severities")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -207,4 +209,3 @@ func (v *NullableLogRules) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

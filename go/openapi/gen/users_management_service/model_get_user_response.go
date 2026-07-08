@@ -22,8 +22,9 @@ var _ MappedNullable = &GetUserResponse{}
 
 // GetUserResponse Response containing the complete details of the requested user, including account information, status, login modes, and access configuration.
 type GetUserResponse struct {
-	User *RbacV2User `json:"user,omitempty"`
-	AdditionalProperties map[string]interface{}
+	User                              *RbacV2User `json:"user,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetUserResponse GetUserResponse
@@ -78,7 +79,7 @@ func (o *GetUserResponse) SetUser(v RbacV2User) {
 }
 
 func (o GetUserResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *GetUserResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "user")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableGetUserResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

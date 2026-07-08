@@ -31,8 +31,9 @@ type V2LogsQuery struct {
 	// The severity filters.
 	SeverityFilters []Logs2metricsV2Severity `json:"severityFilters,omitempty"`
 	// The subsystemname filters.
-	SubsystemnameFilters []string `json:"subsystemnameFilters,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SubsystemnameFilters              []string `json:"subsystemnameFilters,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V2LogsQuery V2LogsQuery
@@ -215,7 +216,7 @@ func (o *V2LogsQuery) SetSubsystemnameFilters(v []string) {
 }
 
 func (o V2LogsQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,6 +269,7 @@ func (o *V2LogsQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "severityFilters")
 		delete(additionalProperties, "subsystemnameFilters")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -308,4 +310,3 @@ func (v *NullableV2LogsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

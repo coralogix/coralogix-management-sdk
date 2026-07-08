@@ -24,8 +24,9 @@ var _ MappedNullable = &CreateBulkAlertSchedulerRuleRequestDataStructure{}
 // CreateBulkAlertSchedulerRuleRequestDataStructure This is a request sent to create multiple alert scheduler rules
 type CreateBulkAlertSchedulerRuleRequestDataStructure struct {
 	// The create alert scheduler rule requests.
-	CreateAlertSchedulerRuleRequests []CreateAlertSchedulerRuleRequest `json:"createAlertSchedulerRuleRequests"`
-	AdditionalProperties map[string]interface{}
+	CreateAlertSchedulerRuleRequests  []CreateAlertSchedulerRuleRequest `json:"createAlertSchedulerRuleRequests"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateBulkAlertSchedulerRuleRequestDataStructure CreateBulkAlertSchedulerRuleRequestDataStructure
@@ -73,7 +74,7 @@ func (o *CreateBulkAlertSchedulerRuleRequestDataStructure) SetCreateAlertSchedul
 }
 
 func (o CreateBulkAlertSchedulerRuleRequestDataStructure) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +105,10 @@ func (o *CreateBulkAlertSchedulerRuleRequestDataStructure) UnmarshalJSON(data []
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -129,6 +130,7 @@ func (o *CreateBulkAlertSchedulerRuleRequestDataStructure) UnmarshalJSON(data []
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "createAlertSchedulerRuleRequests")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -169,4 +171,3 @@ func (v *NullableCreateBulkAlertSchedulerRuleRequestDataStructure) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

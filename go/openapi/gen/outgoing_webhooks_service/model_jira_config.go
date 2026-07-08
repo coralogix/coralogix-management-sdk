@@ -27,8 +27,9 @@ type JiraConfig struct {
 	// Email address.
 	Email *string `json:"email,omitempty"`
 	// The project key.
-	ProjectKey *string `json:"projectKey,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ProjectKey                        *string `json:"projectKey,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _JiraConfig JiraConfig
@@ -147,7 +148,7 @@ func (o *JiraConfig) SetProjectKey(v string) {
 }
 
 func (o JiraConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *JiraConfig) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "projectKey")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableJiraConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

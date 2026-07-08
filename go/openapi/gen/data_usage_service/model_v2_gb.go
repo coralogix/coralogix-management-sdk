@@ -23,8 +23,9 @@ var _ MappedNullable = &V2GB{}
 // V2GB A quantity expressed in gigabytes.
 type V2GB struct {
 	// Numeric value representing the amount in gigabytes.
-	Value *float32 `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Value                             *float32 `json:"value,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V2GB V2GB
@@ -79,7 +80,7 @@ func (o *V2GB) SetValue(v float32) {
 }
 
 func (o V2GB) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *V2GB) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableV2GB) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

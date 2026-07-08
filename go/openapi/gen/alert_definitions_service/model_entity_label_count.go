@@ -27,8 +27,9 @@ type EntityLabelCount struct {
 	// The entity label key
 	LabelKey *string `json:"labelKey,omitempty"`
 	// The entity label value
-	LabelValue *string `json:"labelValue,omitempty"`
-	AdditionalProperties map[string]interface{}
+	LabelValue                        *string `json:"labelValue,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _EntityLabelCount EntityLabelCount
@@ -147,7 +148,7 @@ func (o *EntityLabelCount) SetLabelValue(v string) {
 }
 
 func (o EntityLabelCount) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *EntityLabelCount) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "labelKey")
 		delete(additionalProperties, "labelValue")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableEntityLabelCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,16 +23,17 @@ var _ MappedNullable = &TimeSeriesLinesMulti{}
 // TimeSeriesLinesMulti Time series lines multi.
 type TimeSeriesLinesMulti struct {
 	// Whether the line should remain connected instead of producing scattered points when null values are present in between
-	ConnectNulls *bool `json:"connectNulls,omitempty"`
-	Legend *Legend `json:"legend,omitempty"`
+	ConnectNulls *bool   `json:"connectNulls,omitempty"`
+	Legend       *Legend `json:"legend,omitempty"`
 	// Definitions of widget queries
-	QueryDisplaySettings []QueryDisplaySettings `json:"queryDisplaySettings,omitempty"`
-	StackedLine *VisualizationStackedLine `json:"stackedLine,omitempty"`
-	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
+	QueryDisplaySettings []QueryDisplaySettings    `json:"queryDisplaySettings,omitempty"`
+	StackedLine          *VisualizationStackedLine `json:"stackedLine,omitempty"`
+	Tooltip              *TimeSeriesTooltip        `json:"tooltip,omitempty"`
 	// When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.
-	UseDataTimeRange *bool `json:"useDataTimeRange,omitempty"`
-	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UseDataTimeRange                  *bool            `json:"useDataTimeRange,omitempty"`
+	XAxisTimeFormat                   *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TimeSeriesLinesMulti TimeSeriesLinesMulti
@@ -279,7 +280,7 @@ func (o *TimeSeriesLinesMulti) SetXAxisTimeFormat(v XAxisTimeFormat) {
 }
 
 func (o TimeSeriesLinesMulti) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -340,6 +341,7 @@ func (o *TimeSeriesLinesMulti) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "useDataTimeRange")
 		delete(additionalProperties, "xAxisTimeFormat")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -380,4 +382,3 @@ func (v *NullableTimeSeriesLinesMulti) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

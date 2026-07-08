@@ -23,10 +23,11 @@ var _ MappedNullable = &GetCompanyUsageLimitsResponse{}
 // GetCompanyUsageLimitsResponse Response containing the company-level rule usage limits.
 type GetCompanyUsageLimitsResponse struct {
 	// The company id.
-	CompanyId *string `json:"companyId,omitempty"`
-	Limits *Counts `json:"limits,omitempty"`
-	Usage *Counts `json:"usage,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CompanyId                         *string `json:"companyId,omitempty"`
+	Limits                            *Counts `json:"limits,omitempty"`
+	Usage                             *Counts `json:"usage,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetCompanyUsageLimitsResponse GetCompanyUsageLimitsResponse
@@ -145,7 +146,7 @@ func (o *GetCompanyUsageLimitsResponse) SetUsage(v Counts) {
 }
 
 func (o GetCompanyUsageLimitsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -190,6 +191,7 @@ func (o *GetCompanyUsageLimitsResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "limits")
 		delete(additionalProperties, "usage")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -230,4 +232,3 @@ func (v *NullableGetCompanyUsageLimitsResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,8 +22,9 @@ var _ MappedNullable = &TestPresetConfigResponse{}
 
 // TestPresetConfigResponse Response containing the results of a notification preset configuration test.
 type TestPresetConfigResponse struct {
-	Result *TestResult `json:"result,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Result                            *TestResult `json:"result,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestPresetConfigResponse TestPresetConfigResponse
@@ -78,7 +79,7 @@ func (o *TestPresetConfigResponse) SetResult(v TestResult) {
 }
 
 func (o TestPresetConfigResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *TestPresetConfigResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "result")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableTestPresetConfigResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

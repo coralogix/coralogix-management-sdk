@@ -33,8 +33,9 @@ type RoleManagementServiceCreateRoleRequest struct {
 	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
 	// Team identifier.
-	TeamId *int64 `json:"teamId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TeamId                            *int64 `json:"teamId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RoleManagementServiceCreateRoleRequest RoleManagementServiceCreateRoleRequest
@@ -249,7 +250,7 @@ func (o *RoleManagementServiceCreateRoleRequest) SetTeamId(v int64) {
 }
 
 func (o RoleManagementServiceCreateRoleRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -328,6 +329,7 @@ func (o *RoleManagementServiceCreateRoleRequest) UnmarshalJSON(data []byte) (err
 		delete(additionalProperties, "permissions")
 		delete(additionalProperties, "teamId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -368,4 +370,3 @@ func (v *NullableRoleManagementServiceCreateRoleRequest) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

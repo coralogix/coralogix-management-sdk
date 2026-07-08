@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // RecordingRulesServiceAPIService RecordingRulesServiceAPI service
 type RecordingRulesServiceAPIService service
 
 type ApiRuleGroupSetsCreateRequest struct {
-	ctx context.Context
-	ApiService *RecordingRulesServiceAPIService
+	ctx                context.Context
+	ApiService         *RecordingRulesServiceAPIService
 	createRuleGroupSet *CreateRuleGroupSet
 }
 
@@ -43,24 +42,25 @@ RuleGroupSetsCreate Create Recording Rules
 
 Creates a new recording rule group.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiRuleGroupSetsCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiRuleGroupSetsCreateRequest
 */
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsCreate(ctx context.Context) ApiRuleGroupSetsCreateRequest {
 	return ApiRuleGroupSetsCreateRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateRuleGroupSetResult
+//
+//	@return CreateRuleGroupSetResult
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsCreateExecute(r ApiRuleGroupSetsCreateRequest) (*CreateRuleGroupSetResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateRuleGroupSetResult
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateRuleGroupSetResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecordingRulesServiceAPIService.RuleGroupSetsCreate")
@@ -122,8 +122,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsCreateExecute(r ApiRuleGr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -133,8 +133,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsCreateExecute(r ApiRuleGr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -144,8 +144,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsCreateExecute(r ApiRuleGr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -163,9 +163,9 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsCreateExecute(r ApiRuleGr
 }
 
 type ApiRuleGroupSetsDeleteRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RecordingRulesServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiRuleGroupSetsDeleteRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -177,26 +177,27 @@ RuleGroupSetsDelete Delete Recording Rules
 
 Deletes the recording rule group with the specified ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiRuleGroupSetsDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiRuleGroupSetsDeleteRequest
 */
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsDelete(ctx context.Context, id string) ApiRuleGroupSetsDeleteRequest {
 	return ApiRuleGroupSetsDeleteRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsDeleteExecute(r ApiRuleGroupSetsDeleteRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecordingRulesServiceAPIService.RuleGroupSetsDelete")
@@ -210,8 +211,11 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsDeleteExecute(r ApiRuleGr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 0 {
-		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	if strlen(r.id) < 1 {
+		return localVarReturnValue, nil, reportError("id must have at least 1 elements")
+	}
+	if strlen(r.id) > 128 {
+		return localVarReturnValue, nil, reportError("id must have less than 128 elements")
 	}
 
 	// to determine the Content-Type header
@@ -260,8 +264,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsDeleteExecute(r ApiRuleGr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -271,8 +275,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsDeleteExecute(r ApiRuleGr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -282,8 +286,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsDeleteExecute(r ApiRuleGr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -301,9 +305,9 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsDeleteExecute(r ApiRuleGr
 }
 
 type ApiRuleGroupSetsFetchRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RecordingRulesServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiRuleGroupSetsFetchRequest) Execute() (*OutRuleGroupSet, *http.Response, error) {
@@ -315,26 +319,27 @@ RuleGroupSetsFetch Get Recording Rules
 
 Returns the details of the specified recording rule group.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiRuleGroupSetsFetchRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiRuleGroupSetsFetchRequest
 */
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsFetch(ctx context.Context, id string) ApiRuleGroupSetsFetchRequest {
 	return ApiRuleGroupSetsFetchRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return OutRuleGroupSet
+//
+//	@return OutRuleGroupSet
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsFetchExecute(r ApiRuleGroupSetsFetchRequest) (*OutRuleGroupSet, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OutRuleGroupSet
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OutRuleGroupSet
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecordingRulesServiceAPIService.RuleGroupSetsFetch")
@@ -348,8 +353,11 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsFetchExecute(r ApiRuleGro
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 0 {
-		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	if strlen(r.id) < 1 {
+		return localVarReturnValue, nil, reportError("id must have at least 1 elements")
+	}
+	if strlen(r.id) > 128 {
+		return localVarReturnValue, nil, reportError("id must have less than 128 elements")
 	}
 
 	// to determine the Content-Type header
@@ -398,8 +406,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsFetchExecute(r ApiRuleGro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -409,8 +417,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsFetchExecute(r ApiRuleGro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -420,8 +428,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsFetchExecute(r ApiRuleGro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -439,7 +447,7 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsFetchExecute(r ApiRuleGro
 }
 
 type ApiRuleGroupSetsListRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RecordingRulesServiceAPIService
 }
 
@@ -452,24 +460,25 @@ RuleGroupSetsList List Recording Rules
 
 Returns all recording rule groups for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiRuleGroupSetsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiRuleGroupSetsListRequest
 */
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsList(ctx context.Context) ApiRuleGroupSetsListRequest {
 	return ApiRuleGroupSetsListRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return RuleGroupSetListing
+//
+//	@return RuleGroupSetListing
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsListExecute(r ApiRuleGroupSetsListRequest) (*RuleGroupSetListing, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RuleGroupSetListing
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RuleGroupSetListing
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecordingRulesServiceAPIService.RuleGroupSetsList")
@@ -529,8 +538,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsListExecute(r ApiRuleGrou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -540,8 +549,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsListExecute(r ApiRuleGrou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -551,8 +560,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsListExecute(r ApiRuleGrou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -570,9 +579,9 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsListExecute(r ApiRuleGrou
 }
 
 type ApiRuleGroupSetsUpdateRequest struct {
-	ctx context.Context
-	ApiService *RecordingRulesServiceAPIService
-	id string
+	ctx                context.Context
+	ApiService         *RecordingRulesServiceAPIService
+	id                 string
 	updateRuleGroupSet *UpdateRuleGroupSet
 }
 
@@ -590,26 +599,27 @@ RuleGroupSetsUpdate Update Recording Rules
 
 Updates the specified recording rule group.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiRuleGroupSetsUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiRuleGroupSetsUpdateRequest
 */
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsUpdate(ctx context.Context, id string) ApiRuleGroupSetsUpdateRequest {
 	return ApiRuleGroupSetsUpdateRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsUpdateExecute(r ApiRuleGroupSetsUpdateRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecordingRulesServiceAPIService.RuleGroupSetsUpdate")
@@ -623,8 +633,11 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsUpdateExecute(r ApiRuleGr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 0 {
-		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	if strlen(r.id) < 1 {
+		return localVarReturnValue, nil, reportError("id must have at least 1 elements")
+	}
+	if strlen(r.id) > 128 {
+		return localVarReturnValue, nil, reportError("id must have less than 128 elements")
 	}
 
 	// to determine the Content-Type header
@@ -675,8 +688,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsUpdateExecute(r ApiRuleGr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -686,8 +699,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsUpdateExecute(r ApiRuleGr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -697,8 +710,8 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsUpdateExecute(r ApiRuleGr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

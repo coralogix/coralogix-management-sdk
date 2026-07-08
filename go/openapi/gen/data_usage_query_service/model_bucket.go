@@ -23,9 +23,10 @@ var _ MappedNullable = &Bucket{}
 // Bucket A single time bucket of grouped usage entries.
 type Bucket struct {
 	// Usage entries inside this bucket, one per unique combination of `groupBy` values.
-	Entries []UsageEntry `json:"entries,omitempty"`
-	Range *UsageTimestampRange `json:"range,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Entries                           []UsageEntry         `json:"entries,omitempty"`
+	Range                             *UsageTimestampRange `json:"range,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Bucket Bucket
@@ -112,7 +113,7 @@ func (o *Bucket) SetRange(v UsageTimestampRange) {
 }
 
 func (o Bucket) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *Bucket) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "entries")
 		delete(additionalProperties, "range")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableBucket) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

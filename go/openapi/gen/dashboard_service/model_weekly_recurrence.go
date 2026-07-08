@@ -23,8 +23,9 @@ var _ MappedNullable = &WeeklyRecurrence{}
 // WeeklyRecurrence Weekly recurrence.
 type WeeklyRecurrence struct {
 	// The days of week.
-	DaysOfWeek []Weekday `json:"daysOfWeek,omitempty"`
-	AdditionalProperties map[string]interface{}
+	DaysOfWeek                        []Weekday `json:"daysOfWeek,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _WeeklyRecurrence WeeklyRecurrence
@@ -79,7 +80,7 @@ func (o *WeeklyRecurrence) SetDaysOfWeek(v []Weekday) {
 }
 
 func (o WeeklyRecurrence) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *WeeklyRecurrence) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "daysOfWeek")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableWeeklyRecurrence) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

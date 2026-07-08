@@ -25,8 +25,9 @@ type S3Config struct {
 	// Bucket name.
 	Bucket *string `json:"bucket,omitempty"`
 	// Region.
-	Region *string `json:"region,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Region                            *string `json:"region,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _S3Config S3Config
@@ -113,7 +114,7 @@ func (o *S3Config) SetRegion(v string) {
 }
 
 func (o S3Config) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *S3Config) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "bucket")
 		delete(additionalProperties, "region")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableS3Config) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

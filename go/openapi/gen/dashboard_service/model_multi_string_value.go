@@ -23,11 +23,12 @@ var _ MappedNullable = &MultiStringValue{}
 // MultiStringValue A variable value representing multiple selected string values: all, a specific list, or selected-all.
 type MultiStringValue struct {
 	// All value.
-	All map[string]interface{} `json:"all,omitempty"`
-	List *ListValue `json:"list,omitempty"`
+	All  map[string]interface{} `json:"all,omitempty"`
+	List *ListValue             `json:"list,omitempty"`
 	// Selected all value.
-	SelectedAll map[string]interface{} `json:"selectedAll,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SelectedAll                       map[string]interface{} `json:"selectedAll,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MultiStringValue MultiStringValue
@@ -146,7 +147,7 @@ func (o *MultiStringValue) SetSelectedAll(v map[string]interface{}) {
 }
 
 func (o MultiStringValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -219,6 +220,7 @@ func (o *MultiStringValue) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "list")
 		delete(additionalProperties, "selectedAll")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -259,4 +261,3 @@ func (v *NullableMultiStringValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

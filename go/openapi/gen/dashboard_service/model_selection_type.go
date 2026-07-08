@@ -24,9 +24,9 @@ type SelectionType string
 // List of SelectionType
 const (
 	SELECTIONTYPE_SELECTION_TYPE_UNSPECIFIED SelectionType = "SELECTION_TYPE_UNSPECIFIED"
-	SELECTIONTYPE_SELECTION_TYPE_MULTI_ALL SelectionType = "SELECTION_TYPE_MULTI_ALL"
-	SELECTIONTYPE_SELECTION_TYPE_MULTI SelectionType = "SELECTION_TYPE_MULTI"
-	SELECTIONTYPE_SELECTION_TYPE_SINGLE SelectionType = "SELECTION_TYPE_SINGLE"
+	SELECTIONTYPE_SELECTION_TYPE_MULTI_ALL   SelectionType = "SELECTION_TYPE_MULTI_ALL"
+	SELECTIONTYPE_SELECTION_TYPE_MULTI       SelectionType = "SELECTION_TYPE_MULTI"
+	SELECTIONTYPE_SELECTION_TYPE_SINGLE      SelectionType = "SELECTION_TYPE_SINGLE"
 )
 
 // All allowed values of SelectionType enum
@@ -115,4 +115,3 @@ func (v *NullableSelectionType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

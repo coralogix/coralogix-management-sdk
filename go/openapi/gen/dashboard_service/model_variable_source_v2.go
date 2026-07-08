@@ -22,10 +22,11 @@ var _ MappedNullable = &VariableSourceV2{}
 
 // VariableSourceV2 Variable source v2.
 type VariableSourceV2 struct {
-	Query *VariableSourceV2QuerySource `json:"query,omitempty"`
-	Static *StaticSource `json:"static,omitempty"`
-	Textbox *TextboxSource `json:"textbox,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Query                             *VariableSourceV2QuerySource `json:"query,omitempty"`
+	Static                            *StaticSource                `json:"static,omitempty"`
+	Textbox                           *TextboxSource               `json:"textbox,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _VariableSourceV2 VariableSourceV2
@@ -144,7 +145,7 @@ func (o *VariableSourceV2) SetTextbox(v TextboxSource) {
 }
 
 func (o VariableSourceV2) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -217,6 +218,7 @@ func (o *VariableSourceV2) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "static")
 		delete(additionalProperties, "textbox")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -257,4 +259,3 @@ func (v *NullableVariableSourceV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

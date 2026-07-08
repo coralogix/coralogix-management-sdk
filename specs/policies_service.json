@@ -1974,6 +1974,13 @@
           "actionRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
+          "dpxlExpression": {
+            "description": "The dpxl expression.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
+          },
           "serviceRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
           },

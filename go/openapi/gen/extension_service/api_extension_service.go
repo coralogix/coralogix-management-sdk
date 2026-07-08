@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // ExtensionServiceAPIService ExtensionServiceAPI service
 type ExtensionServiceAPIService service
 
 type ApiExtensionServiceGetAllExtensionsRequest struct {
-	ctx context.Context
-	ApiService *ExtensionServiceAPIService
+	ctx                     context.Context
+	ApiService              *ExtensionServiceAPIService
 	getAllExtensionsRequest *GetAllExtensionsRequest
 }
 
@@ -43,24 +42,25 @@ ExtensionServiceGetAllExtensions Get all extensions
 
 Creates a new extension.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiExtensionServiceGetAllExtensionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiExtensionServiceGetAllExtensionsRequest
 */
 func (a *ExtensionServiceAPIService) ExtensionServiceGetAllExtensions(ctx context.Context) ApiExtensionServiceGetAllExtensionsRequest {
 	return ApiExtensionServiceGetAllExtensionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetAllExtensionsResponse
+//
+//	@return GetAllExtensionsResponse
 func (a *ExtensionServiceAPIService) ExtensionServiceGetAllExtensionsExecute(r ApiExtensionServiceGetAllExtensionsRequest) (*GetAllExtensionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetAllExtensionsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetAllExtensionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExtensionServiceAPIService.ExtensionServiceGetAllExtensions")
@@ -122,8 +122,8 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetAllExtensionsExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -133,8 +133,8 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetAllExtensionsExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -144,8 +144,8 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetAllExtensionsExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -163,11 +163,11 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetAllExtensionsExecute(r A
 }
 
 type ApiExtensionServiceGetExtensionRequest struct {
-	ctx context.Context
-	ApiService *ExtensionServiceAPIService
-	id string
+	ctx                      context.Context
+	ApiService               *ExtensionServiceAPIService
+	id                       string
 	includeDashboardBinaries *bool
-	includeTestingRevision *bool
+	includeTestingRevision   *bool
 }
 
 // Whether to include dashboard binaries in the response.
@@ -191,26 +191,27 @@ ExtensionServiceGetExtension Get extension by ID
 
 Returns the details of the specified extension.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiExtensionServiceGetExtensionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiExtensionServiceGetExtensionRequest
 */
 func (a *ExtensionServiceAPIService) ExtensionServiceGetExtension(ctx context.Context, id string) ApiExtensionServiceGetExtensionRequest {
 	return ApiExtensionServiceGetExtensionRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return V1Extension
+//
+//	@return V1Extension
 func (a *ExtensionServiceAPIService) ExtensionServiceGetExtensionExecute(r ApiExtensionServiceGetExtensionRequest) (*V1Extension, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *V1Extension
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *V1Extension
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExtensionServiceAPIService.ExtensionServiceGetExtension")
@@ -284,8 +285,8 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetExtensionExecute(r ApiEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -295,8 +296,8 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetExtensionExecute(r ApiEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -306,8 +307,8 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetExtensionExecute(r ApiEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

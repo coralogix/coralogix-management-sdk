@@ -23,8 +23,9 @@ var _ MappedNullable = &AssignCaseRequest{}
 
 // AssignCaseRequest Request to assign a case to a specific user.
 type AssignCaseRequest struct {
-	Assignee CasesV1UserDetails `json:"assignee"`
-	AdditionalProperties map[string]interface{}
+	Assignee                          CasesV1UserDetails `json:"assignee"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AssignCaseRequest AssignCaseRequest
@@ -72,7 +73,7 @@ func (o *AssignCaseRequest) SetAssignee(v CasesV1UserDetails) {
 }
 
 func (o AssignCaseRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -103,10 +104,10 @@ func (o *AssignCaseRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -128,6 +129,7 @@ func (o *AssignCaseRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "assignee")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -168,4 +170,3 @@ func (v *NullableAssignCaseRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

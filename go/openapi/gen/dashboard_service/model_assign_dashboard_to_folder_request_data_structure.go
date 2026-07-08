@@ -24,10 +24,11 @@ var _ MappedNullable = &AssignDashboardToFolderRequestDataStructure{}
 // AssignDashboardToFolderRequestDataStructure This is a request for assigning a folder to a dashboard
 type AssignDashboardToFolderRequestDataStructure struct {
 	// The ID of the folder to assign the dashboard to. Set to null to assign to the root folder.
-	FolderId *string `json:"folderId,omitempty"`
+	FolderId *string `json:"folderId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Idempotency key for the assign folder request, used to prevent duplicate operations.
-	RequestId string `json:"requestId"`
-	AdditionalProperties map[string]interface{}
+	RequestId                         string `json:"requestId" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AssignDashboardToFolderRequestDataStructure AssignDashboardToFolderRequestDataStructure
@@ -107,7 +108,7 @@ func (o *AssignDashboardToFolderRequestDataStructure) SetRequestId(v string) {
 }
 
 func (o AssignDashboardToFolderRequestDataStructure) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,10 +142,10 @@ func (o *AssignDashboardToFolderRequestDataStructure) UnmarshalJSON(data []byte)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -167,6 +168,7 @@ func (o *AssignDashboardToFolderRequestDataStructure) UnmarshalJSON(data []byte)
 		delete(additionalProperties, "folderId")
 		delete(additionalProperties, "requestId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -207,4 +209,3 @@ func (v *NullableAssignDashboardToFolderRequestDataStructure) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

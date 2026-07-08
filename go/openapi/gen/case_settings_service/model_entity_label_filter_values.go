@@ -23,8 +23,9 @@ var _ MappedNullable = &EntityLabelFilterValues{}
 // EntityLabelFilterValues An explicit list of entity label key-value pairs to include in the filter.
 type EntityLabelFilterValues struct {
 	// List of EntityLabels (Key/Value) to filter to. Passing empty list here means no alerts will be processed.
-	Items []V1KeyValue `json:"items,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Items                             []V1KeyValue `json:"items,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _EntityLabelFilterValues EntityLabelFilterValues
@@ -79,7 +80,7 @@ func (o *EntityLabelFilterValues) SetItems(v []V1KeyValue) {
 }
 
 func (o EntityLabelFilterValues) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *EntityLabelFilterValues) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "items")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableEntityLabelFilterValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

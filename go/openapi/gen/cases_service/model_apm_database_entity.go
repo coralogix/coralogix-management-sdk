@@ -25,8 +25,9 @@ type ApmDatabaseEntity struct {
 	// Name of the impacted database
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Database system (e.g., postgresql, mysql)
-	System *string `json:"system,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	System                            *string `json:"system,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ApmDatabaseEntity ApmDatabaseEntity
@@ -113,7 +114,7 @@ func (o *ApmDatabaseEntity) SetSystem(v string) {
 }
 
 func (o ApmDatabaseEntity) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *ApmDatabaseEntity) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "system")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableApmDatabaseEntity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

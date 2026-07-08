@@ -23,8 +23,9 @@ var _ MappedNullable = &FlowStagesGroups{}
 // FlowStagesGroups Groups of stages in a flow alert
 type FlowStagesGroups struct {
 	// List of groups.
-	Groups []FlowStagesGroup `json:"groups,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Groups                            []FlowStagesGroup `json:"groups,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _FlowStagesGroups FlowStagesGroups
@@ -79,7 +80,7 @@ func (o *FlowStagesGroups) SetGroups(v []FlowStagesGroup) {
 }
 
 func (o FlowStagesGroups) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *FlowStagesGroups) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "groups")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableFlowStagesGroups) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -24,13 +24,14 @@ var _ MappedNullable = &EventsFilter{}
 // EventsFilter This data structure represents an events filter
 type EventsFilter struct {
 	// List of event attribute keys to include when retrieving event data.
-	CxEventKeys []string `json:"cxEventKeys"`
-	CxEventLabelsFilters interface{} `json:"cxEventLabelsFilters,omitempty"`
-	CxEventMetadataFilters interface{} `json:"cxEventMetadataFilters,omitempty"`
+	CxEventKeys            []string `json:"cxEventKeys"`
+	CxEventLabelsFilters   *Filters `json:"cxEventLabelsFilters,omitempty"`
+	CxEventMetadataFilters *Filters `json:"cxEventMetadataFilters,omitempty"`
 	// List of event type identifiers to include in the results.
-	CxEventTypes []string `json:"cxEventTypes"`
-	Timestamp interface{} `json:"timestamp"`
-	AdditionalProperties map[string]interface{}
+	CxEventTypes                      []string       `json:"cxEventTypes"`
+	Timestamp                         TimestampRange `json:"timestamp"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _EventsFilter EventsFilter
@@ -39,7 +40,7 @@ type _EventsFilter EventsFilter
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEventsFilter(cxEventKeys []string, cxEventTypes []string, timestamp interface{}) *EventsFilter {
+func NewEventsFilter(cxEventKeys []string, cxEventTypes []string, timestamp TimestampRange) *EventsFilter {
 	this := EventsFilter{}
 	this.CxEventKeys = cxEventKeys
 	this.CxEventTypes = cxEventTypes
@@ -79,23 +80,22 @@ func (o *EventsFilter) SetCxEventKeys(v []string) {
 	o.CxEventKeys = v
 }
 
-// GetCxEventLabelsFilters returns the CxEventLabelsFilters field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EventsFilter) GetCxEventLabelsFilters() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetCxEventLabelsFilters returns the CxEventLabelsFilters field value if set, zero value otherwise.
+func (o *EventsFilter) GetCxEventLabelsFilters() Filters {
+	if o == nil || IsNil(o.CxEventLabelsFilters) {
+		var ret Filters
 		return ret
 	}
-	return o.CxEventLabelsFilters
+	return *o.CxEventLabelsFilters
 }
 
 // GetCxEventLabelsFiltersOk returns a tuple with the CxEventLabelsFilters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EventsFilter) GetCxEventLabelsFiltersOk() (*interface{}, bool) {
+func (o *EventsFilter) GetCxEventLabelsFiltersOk() (*Filters, bool) {
 	if o == nil || IsNil(o.CxEventLabelsFilters) {
 		return nil, false
 	}
-	return &o.CxEventLabelsFilters, true
+	return o.CxEventLabelsFilters, true
 }
 
 // HasCxEventLabelsFilters returns a boolean if a field has been set.
@@ -107,28 +107,27 @@ func (o *EventsFilter) HasCxEventLabelsFilters() bool {
 	return false
 }
 
-// SetCxEventLabelsFilters gets a reference to the given interface{} and assigns it to the CxEventLabelsFilters field.
-func (o *EventsFilter) SetCxEventLabelsFilters(v interface{}) {
-	o.CxEventLabelsFilters = v
+// SetCxEventLabelsFilters gets a reference to the given Filters and assigns it to the CxEventLabelsFilters field.
+func (o *EventsFilter) SetCxEventLabelsFilters(v Filters) {
+	o.CxEventLabelsFilters = &v
 }
 
-// GetCxEventMetadataFilters returns the CxEventMetadataFilters field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EventsFilter) GetCxEventMetadataFilters() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetCxEventMetadataFilters returns the CxEventMetadataFilters field value if set, zero value otherwise.
+func (o *EventsFilter) GetCxEventMetadataFilters() Filters {
+	if o == nil || IsNil(o.CxEventMetadataFilters) {
+		var ret Filters
 		return ret
 	}
-	return o.CxEventMetadataFilters
+	return *o.CxEventMetadataFilters
 }
 
 // GetCxEventMetadataFiltersOk returns a tuple with the CxEventMetadataFilters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EventsFilter) GetCxEventMetadataFiltersOk() (*interface{}, bool) {
+func (o *EventsFilter) GetCxEventMetadataFiltersOk() (*Filters, bool) {
 	if o == nil || IsNil(o.CxEventMetadataFilters) {
 		return nil, false
 	}
-	return &o.CxEventMetadataFilters, true
+	return o.CxEventMetadataFilters, true
 }
 
 // HasCxEventMetadataFilters returns a boolean if a field has been set.
@@ -140,9 +139,9 @@ func (o *EventsFilter) HasCxEventMetadataFilters() bool {
 	return false
 }
 
-// SetCxEventMetadataFilters gets a reference to the given interface{} and assigns it to the CxEventMetadataFilters field.
-func (o *EventsFilter) SetCxEventMetadataFilters(v interface{}) {
-	o.CxEventMetadataFilters = v
+// SetCxEventMetadataFilters gets a reference to the given Filters and assigns it to the CxEventMetadataFilters field.
+func (o *EventsFilter) SetCxEventMetadataFilters(v Filters) {
+	o.CxEventMetadataFilters = &v
 }
 
 // GetCxEventTypes returns the CxEventTypes field value
@@ -170,10 +169,9 @@ func (o *EventsFilter) SetCxEventTypes(v []string) {
 }
 
 // GetTimestamp returns the Timestamp field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *EventsFilter) GetTimestamp() interface{} {
+func (o *EventsFilter) GetTimestamp() TimestampRange {
 	if o == nil {
-		var ret interface{}
+		var ret TimestampRange
 		return ret
 	}
 
@@ -182,21 +180,20 @@ func (o *EventsFilter) GetTimestamp() interface{} {
 
 // GetTimestampOk returns a tuple with the Timestamp field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EventsFilter) GetTimestampOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Timestamp) {
+func (o *EventsFilter) GetTimestampOk() (*TimestampRange, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Timestamp, true
 }
 
 // SetTimestamp sets field value
-func (o *EventsFilter) SetTimestamp(v interface{}) {
+func (o *EventsFilter) SetTimestamp(v TimestampRange) {
 	o.Timestamp = v
 }
 
 func (o EventsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -206,16 +203,14 @@ func (o EventsFilter) MarshalJSON() ([]byte, error) {
 func (o EventsFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cxEventKeys"] = o.CxEventKeys
-	if o.CxEventLabelsFilters != nil {
+	if !IsNil(o.CxEventLabelsFilters) {
 		toSerialize["cxEventLabelsFilters"] = o.CxEventLabelsFilters
 	}
-	if o.CxEventMetadataFilters != nil {
+	if !IsNil(o.CxEventMetadataFilters) {
 		toSerialize["cxEventMetadataFilters"] = o.CxEventMetadataFilters
 	}
 	toSerialize["cxEventTypes"] = o.CxEventTypes
-	if o.Timestamp != nil {
-		toSerialize["timestamp"] = o.Timestamp
-	}
+	toSerialize["timestamp"] = o.Timestamp
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -239,10 +234,10 @@ func (o *EventsFilter) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -268,6 +263,7 @@ func (o *EventsFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "cxEventTypes")
 		delete(additionalProperties, "timestamp")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -308,4 +304,3 @@ func (v *NullableEventsFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

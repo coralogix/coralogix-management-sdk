@@ -16,18 +16,17 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"reflect"
+	"strings"
 )
-
 
 // AIApplicationsServiceAPIService AIApplicationsServiceAPI service
 type AIApplicationsServiceAPIService service
 
 type ApiAiApplicationsServiceDeleteAiApplicationRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AIApplicationsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiAiApplicationsServiceDeleteAiApplicationRequest) Execute() (*DeleteAiApplicationResponse, *http.Response, error) {
@@ -39,26 +38,27 @@ AiApplicationsServiceDeleteAiApplication Delete AI application
 
 Deletes an AI application by its unique identifier.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier of the AI application to delete.
- @return ApiAiApplicationsServiceDeleteAiApplicationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier of the AI application to delete.
+	@return ApiAiApplicationsServiceDeleteAiApplicationRequest
 */
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceDeleteAiApplication(ctx context.Context, id string) ApiAiApplicationsServiceDeleteAiApplicationRequest {
 	return ApiAiApplicationsServiceDeleteAiApplicationRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteAiApplicationResponse
+//
+//	@return DeleteAiApplicationResponse
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceDeleteAiApplicationExecute(r ApiAiApplicationsServiceDeleteAiApplicationRequest) (*DeleteAiApplicationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteAiApplicationResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteAiApplicationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIApplicationsServiceAPIService.AiApplicationsServiceDeleteAiApplication")
@@ -134,7 +134,7 @@ func (a *AIApplicationsServiceAPIService) AiApplicationsServiceDeleteAiApplicati
 }
 
 type ApiAiApplicationsServiceDeleteCompanyModelPricingRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AIApplicationsServiceAPIService
 }
 
@@ -147,24 +147,25 @@ AiApplicationsServiceDeleteCompanyModelPricing Delete company model pricing
 
 Deletes the company-wide custom model pricing configuration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAiApplicationsServiceDeleteCompanyModelPricingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAiApplicationsServiceDeleteCompanyModelPricingRequest
 */
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceDeleteCompanyModelPricing(ctx context.Context) ApiAiApplicationsServiceDeleteCompanyModelPricingRequest {
 	return ApiAiApplicationsServiceDeleteCompanyModelPricingRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteCompanyModelPricingResponse
+//
+//	@return DeleteCompanyModelPricingResponse
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceDeleteCompanyModelPricingExecute(r ApiAiApplicationsServiceDeleteCompanyModelPricingRequest) (*DeleteCompanyModelPricingResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteCompanyModelPricingResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteCompanyModelPricingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIApplicationsServiceAPIService.AiApplicationsServiceDeleteCompanyModelPricing")
@@ -233,9 +234,9 @@ func (a *AIApplicationsServiceAPIService) AiApplicationsServiceDeleteCompanyMode
 }
 
 type ApiAiApplicationsServiceGetAiApplicationByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AIApplicationsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiAiApplicationsServiceGetAiApplicationByIdRequest) Execute() (*GetAiApplicationByIdResponse, *http.Response, error) {
@@ -247,26 +248,27 @@ AiApplicationsServiceGetAiApplicationById Get AI application
 
 Gets an AI application by its unique identifier.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier of the AI application.
- @return ApiAiApplicationsServiceGetAiApplicationByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier of the AI application.
+	@return ApiAiApplicationsServiceGetAiApplicationByIdRequest
 */
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceGetAiApplicationById(ctx context.Context, id string) ApiAiApplicationsServiceGetAiApplicationByIdRequest {
 	return ApiAiApplicationsServiceGetAiApplicationByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetAiApplicationByIdResponse
+//
+//	@return GetAiApplicationByIdResponse
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceGetAiApplicationByIdExecute(r ApiAiApplicationsServiceGetAiApplicationByIdRequest) (*GetAiApplicationByIdResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetAiApplicationByIdResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetAiApplicationByIdResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIApplicationsServiceAPIService.AiApplicationsServiceGetAiApplicationById")
@@ -342,7 +344,7 @@ func (a *AIApplicationsServiceAPIService) AiApplicationsServiceGetAiApplicationB
 }
 
 type ApiAiApplicationsServiceGetCompanyModelPricingRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AIApplicationsServiceAPIService
 }
 
@@ -355,24 +357,25 @@ AiApplicationsServiceGetCompanyModelPricing Get company model pricing
 
 Returns the company-wide custom model pricing configuration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAiApplicationsServiceGetCompanyModelPricingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAiApplicationsServiceGetCompanyModelPricingRequest
 */
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceGetCompanyModelPricing(ctx context.Context) ApiAiApplicationsServiceGetCompanyModelPricingRequest {
 	return ApiAiApplicationsServiceGetCompanyModelPricingRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetCompanyModelPricingResponse
+//
+//	@return GetCompanyModelPricingResponse
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceGetCompanyModelPricingExecute(r ApiAiApplicationsServiceGetCompanyModelPricingRequest) (*GetCompanyModelPricingResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCompanyModelPricingResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCompanyModelPricingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIApplicationsServiceAPIService.AiApplicationsServiceGetCompanyModelPricing")
@@ -441,10 +444,10 @@ func (a *AIApplicationsServiceAPIService) AiApplicationsServiceGetCompanyModelPr
 }
 
 type ApiAiApplicationsServiceListAiApplicationsRequest struct {
-	ctx context.Context
-	ApiService *AIApplicationsServiceAPIService
-	pageSize *int32
-	pageOffset *int64
+	ctx             context.Context
+	ApiService      *AIApplicationsServiceAPIService
+	pageSize        *int32
+	pageOffset      *int64
 	evaluationTypes *[]EvaluationType
 }
 
@@ -475,24 +478,25 @@ AiApplicationsServiceListAiApplications List AI applications
 
 Lists AI applications, optionally filtered by evaluation type.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAiApplicationsServiceListAiApplicationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAiApplicationsServiceListAiApplicationsRequest
 */
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceListAiApplications(ctx context.Context) ApiAiApplicationsServiceListAiApplicationsRequest {
 	return ApiAiApplicationsServiceListAiApplicationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListAiApplicationsResponse
+//
+//	@return ListAiApplicationsResponse
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceListAiApplicationsExecute(r ApiAiApplicationsServiceListAiApplicationsRequest) (*ListAiApplicationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListAiApplicationsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListAiApplicationsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIApplicationsServiceAPIService.AiApplicationsServiceListAiApplications")
@@ -586,8 +590,8 @@ func (a *AIApplicationsServiceAPIService) AiApplicationsServiceListAiApplication
 }
 
 type ApiAiApplicationsServiceSetCompanyModelPricingRequest struct {
-	ctx context.Context
-	ApiService *AIApplicationsServiceAPIService
+	ctx                                                context.Context
+	ApiService                                         *AIApplicationsServiceAPIService
 	aiApplicationsServiceSetCompanyModelPricingRequest *AiApplicationsServiceSetCompanyModelPricingRequest
 }
 
@@ -605,24 +609,25 @@ AiApplicationsServiceSetCompanyModelPricing Set company model pricing
 
 Replaces the company-wide custom model pricing configuration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAiApplicationsServiceSetCompanyModelPricingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAiApplicationsServiceSetCompanyModelPricingRequest
 */
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceSetCompanyModelPricing(ctx context.Context) ApiAiApplicationsServiceSetCompanyModelPricingRequest {
 	return ApiAiApplicationsServiceSetCompanyModelPricingRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SetCompanyModelPricingResponse
+//
+//	@return SetCompanyModelPricingResponse
 func (a *AIApplicationsServiceAPIService) AiApplicationsServiceSetCompanyModelPricingExecute(r ApiAiApplicationsServiceSetCompanyModelPricingRequest) (*SetCompanyModelPricingResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SetCompanyModelPricingResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SetCompanyModelPricingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIApplicationsServiceAPIService.AiApplicationsServiceSetCompanyModelPricing")

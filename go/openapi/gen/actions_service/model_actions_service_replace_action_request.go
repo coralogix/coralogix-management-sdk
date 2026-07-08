@@ -22,8 +22,9 @@ var _ MappedNullable = &ActionsServiceReplaceActionRequest{}
 
 // ActionsServiceReplaceActionRequest This data structure represents the request to replace an Action.
 type ActionsServiceReplaceActionRequest struct {
-	Action *V2Action `json:"action,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Action                            *V2Action `json:"action,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ActionsServiceReplaceActionRequest ActionsServiceReplaceActionRequest
@@ -78,7 +79,7 @@ func (o *ActionsServiceReplaceActionRequest) SetAction(v V2Action) {
 }
 
 func (o ActionsServiceReplaceActionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *ActionsServiceReplaceActionRequest) UnmarshalJSON(data []byte) (err err
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "action")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableActionsServiceReplaceActionRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // CaseSettingsServiceAPIService CaseSettingsServiceAPI service
 type CaseSettingsServiceAPIService service
 
 type ApiCaseSettingsServiceCreateCaseSettingsRequest struct {
-	ctx context.Context
-	ApiService *CaseSettingsServiceAPIService
+	ctx                       context.Context
+	ApiService                *CaseSettingsServiceAPIService
 	createCaseSettingsRequest *CreateCaseSettingsRequest
 }
 
@@ -43,24 +42,25 @@ CaseSettingsServiceCreateCaseSettings Create a case settings team configuration
 
 Create a new case settings team configuration with an optional display name and settings.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCaseSettingsServiceCreateCaseSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCaseSettingsServiceCreateCaseSettingsRequest
 */
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceCreateCaseSettings(ctx context.Context) ApiCaseSettingsServiceCreateCaseSettingsRequest {
 	return ApiCaseSettingsServiceCreateCaseSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateCaseSettingsResponse
+//
+//	@return CreateCaseSettingsResponse
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceCreateCaseSettingsExecute(r ApiCaseSettingsServiceCreateCaseSettingsRequest) (*CreateCaseSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateCaseSettingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateCaseSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseSettingsServiceAPIService.CaseSettingsServiceCreateCaseSettings")
@@ -125,8 +125,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceCreateCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -136,8 +136,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceCreateCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -147,8 +147,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceCreateCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -158,8 +158,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceCreateCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -169,8 +169,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceCreateCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -188,9 +188,9 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceCreateCaseSettingsExe
 }
 
 type ApiCaseSettingsServiceDeleteCaseSettingsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CaseSettingsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiCaseSettingsServiceDeleteCaseSettingsRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -202,26 +202,27 @@ CaseSettingsServiceDeleteCaseSettings Delete a case settings team configuration
 
 Delete a case settings team configuration by its identifier.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case settings team configuration to delete
- @return ApiCaseSettingsServiceDeleteCaseSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case settings team configuration to delete
+	@return ApiCaseSettingsServiceDeleteCaseSettingsRequest
 */
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceDeleteCaseSettings(ctx context.Context, id string) ApiCaseSettingsServiceDeleteCaseSettingsRequest {
 	return ApiCaseSettingsServiceDeleteCaseSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceDeleteCaseSettingsExecute(r ApiCaseSettingsServiceDeleteCaseSettingsRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseSettingsServiceAPIService.CaseSettingsServiceDeleteCaseSettings")
@@ -288,8 +289,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceDeleteCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -299,8 +300,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceDeleteCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -310,8 +311,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceDeleteCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -321,8 +322,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceDeleteCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -332,8 +333,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceDeleteCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -351,7 +352,7 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceDeleteCaseSettingsExe
 }
 
 type ApiCaseSettingsServiceGetActiveCaseSettingsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CaseSettingsServiceAPIService
 }
 
@@ -364,24 +365,25 @@ CaseSettingsServiceGetActiveCaseSettings Get the active case settings team confi
 
 Retrieve the currently active case settings team configuration (after any org- or user-level precedence resolution).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCaseSettingsServiceGetActiveCaseSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCaseSettingsServiceGetActiveCaseSettingsRequest
 */
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetActiveCaseSettings(ctx context.Context) ApiCaseSettingsServiceGetActiveCaseSettingsRequest {
 	return ApiCaseSettingsServiceGetActiveCaseSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetActiveCaseSettingsResponse
+//
+//	@return GetActiveCaseSettingsResponse
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetActiveCaseSettingsExecute(r ApiCaseSettingsServiceGetActiveCaseSettingsRequest) (*GetActiveCaseSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetActiveCaseSettingsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetActiveCaseSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseSettingsServiceAPIService.CaseSettingsServiceGetActiveCaseSettings")
@@ -441,8 +443,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetActiveCaseSettings
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -452,8 +454,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetActiveCaseSettings
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -463,8 +465,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetActiveCaseSettings
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -474,8 +476,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetActiveCaseSettings
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -493,9 +495,9 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetActiveCaseSettings
 }
 
 type ApiCaseSettingsServiceGetCaseSettingsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CaseSettingsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiCaseSettingsServiceGetCaseSettingsRequest) Execute() (*GetCaseSettingsResponse, *http.Response, error) {
@@ -507,26 +509,27 @@ CaseSettingsServiceGetCaseSettings Get a case settings team configuration
 
 Retrieve a single case settings team configuration by its identifier.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case settings team configuration
- @return ApiCaseSettingsServiceGetCaseSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case settings team configuration
+	@return ApiCaseSettingsServiceGetCaseSettingsRequest
 */
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetCaseSettings(ctx context.Context, id string) ApiCaseSettingsServiceGetCaseSettingsRequest {
 	return ApiCaseSettingsServiceGetCaseSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetCaseSettingsResponse
+//
+//	@return GetCaseSettingsResponse
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetCaseSettingsExecute(r ApiCaseSettingsServiceGetCaseSettingsRequest) (*GetCaseSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCaseSettingsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCaseSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseSettingsServiceAPIService.CaseSettingsServiceGetCaseSettings")
@@ -593,8 +596,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetCaseSettingsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -604,8 +607,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetCaseSettingsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -615,8 +618,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetCaseSettingsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -626,8 +629,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetCaseSettingsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -637,8 +640,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetCaseSettingsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -656,7 +659,7 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetCaseSettingsExecut
 }
 
 type ApiCaseSettingsServiceGetSystemDefaultCaseSettingsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CaseSettingsServiceAPIService
 }
 
@@ -669,24 +672,25 @@ CaseSettingsServiceGetSystemDefaultCaseSettings Get system default case settings
 
 Retrieve the platform-wide default settings for case settings team configurations.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCaseSettingsServiceGetSystemDefaultCaseSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCaseSettingsServiceGetSystemDefaultCaseSettingsRequest
 */
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetSystemDefaultCaseSettings(ctx context.Context) ApiCaseSettingsServiceGetSystemDefaultCaseSettingsRequest {
 	return ApiCaseSettingsServiceGetSystemDefaultCaseSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetSystemDefaultCaseSettingsResponse
+//
+//	@return GetSystemDefaultCaseSettingsResponse
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetSystemDefaultCaseSettingsExecute(r ApiCaseSettingsServiceGetSystemDefaultCaseSettingsRequest) (*GetSystemDefaultCaseSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSystemDefaultCaseSettingsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSystemDefaultCaseSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseSettingsServiceAPIService.CaseSettingsServiceGetSystemDefaultCaseSettings")
@@ -746,8 +750,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetSystemDefaultCaseS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -757,8 +761,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetSystemDefaultCaseS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -768,8 +772,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetSystemDefaultCaseS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -787,9 +791,9 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceGetSystemDefaultCaseS
 }
 
 type ApiCaseSettingsServiceUpdateCaseSettingsRequest struct {
-	ctx context.Context
-	ApiService *CaseSettingsServiceAPIService
-	id string
+	ctx                       context.Context
+	ApiService                *CaseSettingsServiceAPIService
+	id                        string
 	updateCaseSettingsRequest *UpdateCaseSettingsRequest
 }
 
@@ -807,26 +811,27 @@ CaseSettingsServiceUpdateCaseSettings Update a case settings team configuration
 
 Update the display name and/or settings of an existing case settings team configuration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case settings team configuration to update
- @return ApiCaseSettingsServiceUpdateCaseSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case settings team configuration to update
+	@return ApiCaseSettingsServiceUpdateCaseSettingsRequest
 */
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceUpdateCaseSettings(ctx context.Context, id string) ApiCaseSettingsServiceUpdateCaseSettingsRequest {
 	return ApiCaseSettingsServiceUpdateCaseSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateCaseSettingsResponse
+//
+//	@return UpdateCaseSettingsResponse
 func (a *CaseSettingsServiceAPIService) CaseSettingsServiceUpdateCaseSettingsExecute(r ApiCaseSettingsServiceUpdateCaseSettingsRequest) (*UpdateCaseSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateCaseSettingsResponse
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateCaseSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CaseSettingsServiceAPIService.CaseSettingsServiceUpdateCaseSettings")
@@ -895,8 +900,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceUpdateCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -906,8 +911,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceUpdateCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -917,8 +922,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceUpdateCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -928,8 +933,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceUpdateCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -939,8 +944,8 @@ func (a *CaseSettingsServiceAPIService) CaseSettingsServiceUpdateCaseSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

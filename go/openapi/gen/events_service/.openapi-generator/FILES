@@ -28,6 +28,7 @@ model_list_alert_events_response.go
 model_list_events_count_response.go
 model_multiple_values.go
 model_timestamp_range.go
+model_timestamp_range_1.go
 model_v3_filter_operator.go
 model_v3_get_event_response.go
 model_v3_list_events_response.go

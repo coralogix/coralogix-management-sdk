@@ -22,10 +22,11 @@ var _ MappedNullable = &SloExecutionResponse{}
 
 // SloExecutionResponse Response for an executed SLO operation.
 type SloExecutionResponse struct {
-	CreateSloResponse *CreateSloResponse `json:"createSloResponse,omitempty"`
-	DeleteSloResponse *DeleteSloResponse `json:"deleteSloResponse,omitempty"`
-	ReplaceSloResponse *ReplaceSloResponse `json:"replaceSloResponse,omitempty"`
-	AdditionalProperties map[string]interface{}
+	CreateSloResponse                 *CreateSloResponse  `json:"createSloResponse,omitempty"`
+	DeleteSloResponse                 *DeleteSloResponse  `json:"deleteSloResponse,omitempty"`
+	ReplaceSloResponse                *ReplaceSloResponse `json:"replaceSloResponse,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SloExecutionResponse SloExecutionResponse
@@ -144,7 +145,7 @@ func (o *SloExecutionResponse) SetReplaceSloResponse(v ReplaceSloResponse) {
 }
 
 func (o SloExecutionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -217,6 +218,7 @@ func (o *SloExecutionResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "deleteSloResponse")
 		delete(additionalProperties, "replaceSloResponse")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -257,4 +259,3 @@ func (v *NullableSloExecutionResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

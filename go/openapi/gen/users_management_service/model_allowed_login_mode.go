@@ -24,8 +24,8 @@ type AllowedLoginMode string
 // List of AllowedLoginMode
 const (
 	ALLOWEDLOGINMODE_ALLOWED_LOGIN_MODE_UNSPECIFIED AllowedLoginMode = "ALLOWED_LOGIN_MODE_UNSPECIFIED"
-	ALLOWEDLOGINMODE_ALLOWED_LOGIN_MODE_SSO AllowedLoginMode = "ALLOWED_LOGIN_MODE_SSO"
-	ALLOWEDLOGINMODE_ALLOWED_LOGIN_MODE_LOCAL AllowedLoginMode = "ALLOWED_LOGIN_MODE_LOCAL"
+	ALLOWEDLOGINMODE_ALLOWED_LOGIN_MODE_SSO         AllowedLoginMode = "ALLOWED_LOGIN_MODE_SSO"
+	ALLOWEDLOGINMODE_ALLOWED_LOGIN_MODE_LOCAL       AllowedLoginMode = "ALLOWED_LOGIN_MODE_LOCAL"
 )
 
 // All allowed values of AllowedLoginMode enum
@@ -113,4 +113,3 @@ func (v *NullableAllowedLoginMode) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

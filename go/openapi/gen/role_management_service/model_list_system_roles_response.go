@@ -23,8 +23,9 @@ var _ MappedNullable = &ListSystemRolesResponse{}
 // ListSystemRolesResponse Response containing a list of system roles.
 type ListSystemRolesResponse struct {
 	// List of roles.
-	Roles []SystemRole `json:"roles,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Roles                             []SystemRole `json:"roles,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListSystemRolesResponse ListSystemRolesResponse
@@ -79,7 +80,7 @@ func (o *ListSystemRolesResponse) SetRoles(v []SystemRole) {
 }
 
 func (o ListSystemRolesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ListSystemRolesResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "roles")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableListSystemRolesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

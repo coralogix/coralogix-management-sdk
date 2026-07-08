@@ -22,11 +22,12 @@ var _ MappedNullable = &XAxis{}
 
 // XAxis X axis.
 type XAxis struct {
-	Time *XAxisByTime `json:"time,omitempty"`
+	Time        *XAxisByTime        `json:"time,omitempty"`
 	TimeBuckets *IntervalResolution `json:"timeBuckets,omitempty"`
 	// X axis by value.
-	Value map[string]interface{} `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Value                             map[string]interface{} `json:"value,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _XAxis XAxis
@@ -145,7 +146,7 @@ func (o *XAxis) SetValue(v map[string]interface{}) {
 }
 
 func (o XAxis) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -218,6 +219,7 @@ func (o *XAxis) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "timeBuckets")
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -258,4 +260,3 @@ func (v *NullableXAxis) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

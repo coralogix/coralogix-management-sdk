@@ -26,8 +26,9 @@ type ViewsV1Filter struct {
 	// Filter name
 	Name string `json:"name"`
 	// Filter selected values
-	SelectedValues map[string]bool `json:"selectedValues"`
-	AdditionalProperties map[string]interface{}
+	SelectedValues                    map[string]bool `json:"selectedValues"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ViewsV1Filter ViewsV1Filter
@@ -100,7 +101,7 @@ func (o *ViewsV1Filter) SetSelectedValues(v map[string]bool) {
 }
 
 func (o ViewsV1Filter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,10 +134,10 @@ func (o *ViewsV1Filter) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -159,6 +160,7 @@ func (o *ViewsV1Filter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "selectedValues")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -199,4 +201,3 @@ func (v *NullableViewsV1Filter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

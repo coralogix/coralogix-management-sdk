@@ -28,8 +28,9 @@ type CaseIndicators struct {
 	// List of generic indicators contributing to the case
 	GenericIndicators []GenericIndicator `json:"genericIndicators,omitempty"`
 	// List of Prometheus alert indicators contributing to the case
-	PrometheusAlertIndicators []PrometheusAlertIndicator `json:"prometheusAlertIndicators,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PrometheusAlertIndicators         []PrometheusAlertIndicator `json:"prometheusAlertIndicators,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CaseIndicators CaseIndicators
@@ -141,7 +142,7 @@ func (o *CaseIndicators) SetPrometheusAlertIndicators(v []PrometheusAlertIndicat
 }
 
 func (o CaseIndicators) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -178,10 +179,10 @@ func (o *CaseIndicators) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -205,6 +206,7 @@ func (o *CaseIndicators) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "genericIndicators")
 		delete(additionalProperties, "prometheusAlertIndicators")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -245,4 +247,3 @@ func (v *NullableCaseIndicators) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -19,14 +19,13 @@ import (
 	"strings"
 )
 
-
 // ContextualDataIntegrationServiceAPIService ContextualDataIntegrationServiceAPI service
 type ContextualDataIntegrationServiceAPIService service
 
 type ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ContextualDataIntegrationServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -38,26 +37,27 @@ ContextualDataIntegrationServiceDeleteContextualDataIntegration Delete contextua
 
 Deletes the specified contextual data integration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The integration id.
- @return ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The integration id.
+	@return ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceDeleteContextualDataIntegration(ctx context.Context, id string) ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest {
 	return ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceDeleteContextualDataIntegrationExecute(r ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContextualDataIntegrationServiceAPIService.ContextualDataIntegrationServiceDeleteContextualDataIntegration")
@@ -121,8 +121,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -132,8 +132,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -143,8 +143,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -162,9 +162,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 }
 
 type ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRequest struct {
-	ctx context.Context
-	ApiService *ContextualDataIntegrationServiceAPIService
-	id string
+	ctx                        context.Context
+	ApiService                 *ContextualDataIntegrationServiceAPIService
+	id                         string
 	includeTestingIntegrations *bool
 }
 
@@ -183,26 +183,27 @@ ContextualDataIntegrationServiceGetContextualDataIntegrationDefinition Get conte
 
 Returns the definition for the specified contextual data integration type.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the contextual data integration definition.
- @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier of the contextual data integration definition.
+	@return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceGetContextualDataIntegrationDefinition(ctx context.Context, id string) ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRequest {
 	return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetContextualDataIntegrationDefinitionResponse
+//
+//	@return GetContextualDataIntegrationDefinitionResponse
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionExecute(r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRequest) (*GetContextualDataIntegrationDefinitionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetContextualDataIntegrationDefinitionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetContextualDataIntegrationDefinitionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContextualDataIntegrationServiceAPIService.ContextualDataIntegrationServiceGetContextualDataIntegrationDefinition")
@@ -271,8 +272,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -282,8 +283,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -293,8 +294,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -312,9 +313,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 }
 
 type ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest struct {
-	ctx context.Context
-	ApiService *ContextualDataIntegrationServiceAPIService
-	id string
+	ctx                     context.Context
+	ApiService              *ContextualDataIntegrationServiceAPIService
+	id                      string
 	includeTestingRevisions *bool
 }
 
@@ -333,26 +334,27 @@ ContextualDataIntegrationServiceGetContextualDataIntegrationDetails Get contextu
 
 Returns the details of the specified contextual data integration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the contextual data integration.
- @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier of the contextual data integration.
+	@return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceGetContextualDataIntegrationDetails(ctx context.Context, id string) ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest {
 	return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetContextualDataIntegrationDetailsResponse
+//
+//	@return GetContextualDataIntegrationDetailsResponse
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceGetContextualDataIntegrationDetailsExecute(r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest) (*GetContextualDataIntegrationDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetContextualDataIntegrationDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetContextualDataIntegrationDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContextualDataIntegrationServiceAPIService.ContextualDataIntegrationServiceGetContextualDataIntegrationDetails")
@@ -421,8 +423,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -432,8 +434,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -443,8 +445,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -462,8 +464,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 }
 
 type ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest struct {
-	ctx context.Context
-	ApiService *ContextualDataIntegrationServiceAPIService
+	ctx                        context.Context
+	ApiService                 *ContextualDataIntegrationServiceAPIService
 	includeTestingIntegrations *bool
 }
 
@@ -482,24 +484,25 @@ ContextualDataIntegrationServiceGetContextualDataIntegrations Get all contextual
 
 Returns all contextual data integrations for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceGetContextualDataIntegrations(ctx context.Context) ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest {
 	return ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetContextualDataIntegrationsResponse
+//
+//	@return GetContextualDataIntegrationsResponse
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceGetContextualDataIntegrationsExecute(r ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest) (*GetContextualDataIntegrationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetContextualDataIntegrationsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetContextualDataIntegrationsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContextualDataIntegrationServiceAPIService.ContextualDataIntegrationServiceGetContextualDataIntegrations")
@@ -564,8 +567,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -575,8 +578,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -586,8 +589,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -605,8 +608,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 }
 
 type ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest struct {
-	ctx context.Context
-	ApiService *ContextualDataIntegrationServiceAPIService
+	ctx                                  context.Context
+	ApiService                           *ContextualDataIntegrationServiceAPIService
 	saveContextualDataIntegrationRequest *SaveContextualDataIntegrationRequest
 }
 
@@ -624,24 +627,25 @@ ContextualDataIntegrationServiceSaveContextualDataIntegration Save contextual da
 
 Creates a new contextual data integration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceSaveContextualDataIntegration(ctx context.Context) ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest {
 	return ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SaveContextualDataIntegrationResponse
+//
+//	@return SaveContextualDataIntegrationResponse
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceSaveContextualDataIntegrationExecute(r ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest) (*SaveContextualDataIntegrationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SaveContextualDataIntegrationResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SaveContextualDataIntegrationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContextualDataIntegrationServiceAPIService.ContextualDataIntegrationServiceSaveContextualDataIntegration")
@@ -703,8 +707,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -714,8 +718,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -725,8 +729,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -744,9 +748,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 }
 
 type ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest struct {
-	ctx context.Context
-	ApiService *ContextualDataIntegrationServiceAPIService
-	integrationId string
+	ctx                                  context.Context
+	ApiService                           *ContextualDataIntegrationServiceAPIService
+	integrationId                        string
 	testContextualDataIntegrationRequest *TestContextualDataIntegrationRequest
 }
 
@@ -764,26 +768,27 @@ ContextualDataIntegrationServiceTestContextualDataIntegration Test contextual da
 
 Tests the specified contextual data integration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param integrationId The unique identifier of the contextual data integration to test.
- @return ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param integrationId The unique identifier of the contextual data integration to test.
+	@return ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceTestContextualDataIntegration(ctx context.Context, integrationId string) ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest {
 	return ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		integrationId: integrationId,
 	}
 }
 
 // Execute executes the request
-//  @return TestContextualDataIntegrationResponse
+//
+//	@return TestContextualDataIntegrationResponse
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceTestContextualDataIntegrationExecute(r ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest) (*TestContextualDataIntegrationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TestContextualDataIntegrationResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TestContextualDataIntegrationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContextualDataIntegrationServiceAPIService.ContextualDataIntegrationServiceTestContextualDataIntegration")
@@ -849,8 +854,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -860,8 +865,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -871,8 +876,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -890,8 +895,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 }
 
 type ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationRequest struct {
-	ctx context.Context
-	ApiService *ContextualDataIntegrationServiceAPIService
+	ctx                                    context.Context
+	ApiService                             *ContextualDataIntegrationServiceAPIService
 	updateContextualDataIntegrationRequest *UpdateContextualDataIntegrationRequest
 }
 
@@ -909,24 +914,25 @@ ContextualDataIntegrationServiceUpdateContextualDataIntegration Update contextua
 
 Updates an existing contextual data integration.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceUpdateContextualDataIntegration(ctx context.Context) ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationRequest {
 	return ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceUpdateContextualDataIntegrationExecute(r ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContextualDataIntegrationServiceAPIService.ContextualDataIntegrationServiceUpdateContextualDataIntegration")
@@ -988,8 +994,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -999,8 +1005,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1010,8 +1016,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

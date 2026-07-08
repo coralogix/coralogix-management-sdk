@@ -28,9 +28,10 @@ type CustomDashboardWidgetAttachment struct {
 	// URL suffix for accessing the widget (not including the Coralogix domain part)
 	QueryLinkSuffix *string `json:"queryLinkSuffix,omitempty"`
 	// Unique identifier of the widget within the dashboard
-	WidgetId string `json:"widgetId"`
-	WidgetScreenshot FileAttachment `json:"widgetScreenshot"`
-	AdditionalProperties map[string]interface{}
+	WidgetId                          string         `json:"widgetId"`
+	WidgetScreenshot                  FileAttachment `json:"widgetScreenshot"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CustomDashboardWidgetAttachment CustomDashboardWidgetAttachment
@@ -160,7 +161,7 @@ func (o *CustomDashboardWidgetAttachment) SetWidgetScreenshot(v FileAttachment) 
 }
 
 func (o CustomDashboardWidgetAttachment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,10 +199,10 @@ func (o *CustomDashboardWidgetAttachment) UnmarshalJSON(data []byte) (err error)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -226,6 +227,7 @@ func (o *CustomDashboardWidgetAttachment) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "widgetId")
 		delete(additionalProperties, "widgetScreenshot")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -266,4 +268,3 @@ func (v *NullableCustomDashboardWidgetAttachment) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

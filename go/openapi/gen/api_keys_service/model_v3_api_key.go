@@ -32,9 +32,10 @@ type V3ApiKey struct {
 	// The key name.
 	KeyName *string `json:"keyName,omitempty"`
 	// The timestamp when the API key was last activated.
-	LastActivated *time.Time `json:"lastActivated,omitempty"`
-	Owner *ApiKeyOwner `json:"owner,omitempty"`
-	AdditionalProperties map[string]interface{}
+	LastActivated                     *time.Time   `json:"lastActivated,omitempty"`
+	Owner                             *ApiKeyOwner `json:"owner,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V3ApiKey V3ApiKey
@@ -249,7 +250,7 @@ func (o *V3ApiKey) SetOwner(v ApiKeyOwner) {
 }
 
 func (o V3ApiKey) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,6 +307,7 @@ func (o *V3ApiKey) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "lastActivated")
 		delete(additionalProperties, "owner")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -346,4 +348,3 @@ func (v *NullableV3ApiKey) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
