@@ -163,8 +163,8 @@ func TestPagerdutyConnector(t *testing.T) {
 }
 
 // TestPagerdutyIncidentsConnector exercises the PAGERDUTY_INCIDENTS connector type.
-// Its config schema requires integrationId and service (see the connector schema service);
-// service supports per-entity-type overrides.
+// Its config schema requires integrationId and service (see the connector schema service).
+// Note: PAGERDUTY_INCIDENTS does not support per-entity-type config overrides.
 func TestPagerdutyIncidentsConnector(t *testing.T) {
 	cfg := newTestConfig()
 	client := cxsdk.NewConnectorsClient(cfg)
