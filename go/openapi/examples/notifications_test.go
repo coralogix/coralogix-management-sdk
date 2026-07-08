@@ -162,6 +162,123 @@ func TestPagerdutyConnector(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
+// TestPagerdutyIncidentsConnector exercises the PAGERDUTY_INCIDENTS connector type.
+// Its config schema requires integrationId and service (see the connector schema service).
+// Note: PAGERDUTY_INCIDENTS does not support per-entity-type config overrides.
+func TestPagerdutyIncidentsConnector(t *testing.T) {
+	cfg := newTestConfig()
+	client := cxsdk.NewConnectorsClient(cfg)
+
+	name := fmt.Sprintf("TestPagerdutyIncidentsConnector-%v", uuid.NewString())
+
+	connector := connectors.Connector{
+		Name:        &name,
+		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY_INCIDENTS.Ptr(),
+		Description: connectors.PtrString("This is the PagerDuty Incidents connector to use for Notification Center testing."),
+		// PAGERDUTY_INCIDENTS does not support per-entity-type config overrides.
+		ConnectorConfig: &connectors.ConnectorConfig{
+			Fields: []connectors.NotificationCenterConnectorConfigField{
+				{FieldName: connectors.PtrString("integrationId"), Value: connectors.PtrString("test-integration")},
+				{FieldName: connectors.PtrString("service"), Value: connectors.PtrString("PXXXXXX")},
+			},
+		},
+	}
+
+	createConnectorRequest := connectors.CreateConnectorRequest{Connector: &connector}
+
+	created, httpResp, err := client.
+		ConnectorsServiceCreateConnector(context.Background()).
+		CreateConnectorRequest(createConnectorRequest).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+
+	connectorID := created.Connector.Id
+	require.NotNil(t, connectorID)
+
+	got, httpResp, err := client.
+		ConnectorsServiceGetConnector(context.Background(), *connectorID).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.Equal(t, name, *got.Connector.Name)
+	require.Equal(t, connectors.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY_INCIDENTS, *got.Connector.Type)
+
+	_, httpResp, err = client.
+		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+}
+
+// TestConnectorCasesConfigOverride exercises a connector config override scoped to the
+// CASES entity type (in addition to ALERTS).
+func TestConnectorCasesConfigOverride(t *testing.T) {
+	cfg := newTestConfig()
+	client := cxsdk.NewConnectorsClient(cfg)
+
+	name := fmt.Sprintf("TestConnectorCases-%v", uuid.NewString())
+
+	connector := connectors.Connector{
+		Name:        &name,
+		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS.Ptr(),
+		Description: connectors.PtrString("This is the connector to use for Notification Center CASES testing."),
+		ConnectorConfig: &connectors.ConnectorConfig{
+			Fields: []connectors.NotificationCenterConnectorConfigField{
+				{FieldName: connectors.PtrString("url"), Value: connectors.PtrString("https://httpbun.org/post")},
+				{FieldName: connectors.PtrString("method"), Value: connectors.PtrString("post")},
+			},
+		},
+		ConfigOverrides: []connectors.EntityTypeConfigOverrides{
+			{
+				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+				Fields: []connectors.TemplatedConnectorConfigField{
+					{
+						FieldName: connectors.PtrString("additionalBodyFields"),
+						Template:  connectors.PtrString("{\"priority\": \"{{alertDef.priority}}\"}"),
+					},
+				},
+			},
+			{
+				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_CASES.Ptr(),
+				Fields: []connectors.TemplatedConnectorConfigField{
+					{
+						FieldName: connectors.PtrString("additionalBodyFields"),
+						Template:  connectors.PtrString("{\"source\": \"cases\"}"),
+					},
+				},
+			},
+		},
+	}
+
+	createConnectorRequest := connectors.CreateConnectorRequest{Connector: &connector}
+
+	created, httpResp, err := client.
+		ConnectorsServiceCreateConnector(context.Background()).
+		CreateConnectorRequest(createConnectorRequest).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+
+	connectorID := created.Connector.Id
+	require.NotNil(t, connectorID)
+
+	got, httpResp, err := client.
+		ConnectorsServiceGetConnector(context.Background(), *connectorID).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+
+	foundCases := false
+	for _, o := range got.Connector.ConfigOverrides {
+		if o.EntityType != nil && *o.EntityType == connectors.NOTIFICATIONCENTERENTITYTYPE_CASES {
+			foundCases = true
+			break
+		}
+	}
+	require.True(t, foundCases, "CASES config override not found on connector")
+
+	_, httpResp, err = client.
+		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+}
+
 func TestHttpsPreset(t *testing.T) {
 	cfg := newTestConfig()
 	client := cxsdk.NewPresetsClient(cfg)
@@ -184,6 +301,7 @@ func TestHttpsPreset(t *testing.T) {
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Equal(t, name, *got.Preset.Name)
+	require.Equal(t, presets.ATTACHMENTCONFIGPOLICY_ENABLED, *got.Preset.AttachmentConfig.Policy)
 
 	_, httpResp, err = client.
 		PresetsServiceSetPresetAsDefault(context.Background(), *presetID).
@@ -468,6 +586,100 @@ func TestGlobalRouter(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
+// TestGlobalRouterDisabledAndFallbackTargets exercises the router `disabled` flag,
+// the per-entity-type `fallbackTargets`, and a routing rule `entityType`.
+func TestGlobalRouterDisabledAndFallbackTargets(t *testing.T) {
+	cfg := newTestConfig()
+	clientSet := cxsdk.NewClientSet(cfg)
+
+	routersClient := clientSet.GlobalRouters()
+	connectorsClient := clientSet.Connectors()
+	presetsClient := clientSet.Presets()
+
+	createdConnector, httpResp, err := connectorsClient.
+		ConnectorsServiceCreateConnector(context.Background()).
+		CreateConnectorRequest(*getHttpsConnector(fmt.Sprintf("TestConnector-%v", uuid.NewString()))).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	connectorId := createdConnector.Connector.Id
+
+	createdPreset, httpResp, err := presetsClient.
+		PresetsServiceCreateCustomPreset(context.Background()).
+		CreateCustomPresetRequest(*getHttpsPreset(fmt.Sprintf("TestGoHttpsPreset-%v", uuid.NewString()))).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	presetId := createdPreset.Preset.Id
+
+	// Note: the top-level GlobalRouter.EntityType is reserved for the default router
+	// ("router_default"); it cannot be set on a regular (labeled) router. The per-rule
+	// and per-fallback-target entityType, plus `disabled`, are set on regular routers.
+	router := globalrouters.GlobalRouter{
+		Name:        globalrouters.PtrString("global router" + uuid.NewString()),
+		Description: globalrouters.PtrString("global router with disabled + fallbackTargets"),
+		RoutingLabels: &globalrouters.RoutingLabels{
+			Environment: globalrouters.PtrString(uuid.NewString()),
+			Service:     globalrouters.PtrString(uuid.NewString()),
+			Team:        globalrouters.PtrString(uuid.NewString()),
+		},
+		Disabled: globalrouters.PtrBool(true),
+		Rules: []globalrouters.RoutingRule{
+			{
+				Name:       globalrouters.PtrString("TestRoutingRule"),
+				EntityType: globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+				Condition:  globalrouters.PtrString("alertDef.priority == \"P1\""),
+				Targets: []globalrouters.RoutingTarget{
+					{
+						ConnectorId: connectorId,
+						PresetId:    presetId,
+					},
+				},
+			},
+		},
+		// A preset in a fallback target is only supported on the default router, so a
+		// regular router's fallback target references a connector only.
+		FallbackTargets: []globalrouters.FallbackTarget{
+			{
+				EntityType: globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+				Target: &globalrouters.RoutingTarget{
+					ConnectorId: connectorId,
+				},
+			},
+		},
+	}
+
+	createRouterRequest := globalrouters.CreateGlobalRouterRequest{Router: &router}
+	createdRouter, httpResp, err := routersClient.
+		GlobalRoutersServiceCreateGlobalRouter(context.Background()).
+		CreateGlobalRouterRequest(createRouterRequest).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+
+	got, httpResp, err := routersClient.
+		GlobalRoutersServiceGetGlobalRouter(context.Background(), *createdRouter.Router.Id).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.True(t, got.Router.GetDisabled(), "router should be disabled")
+	require.Len(t, got.Router.FallbackTargets, 1)
+	require.Equal(t, globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS, *got.Router.FallbackTargets[0].EntityType)
+	require.NotEmpty(t, got.Router.Rules)
+	require.Equal(t, globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS, *got.Router.Rules[0].EntityType)
+
+	_, httpResp, err = routersClient.
+		GlobalRoutersServiceDeleteGlobalRouter(context.Background(), *createdRouter.Router.Id).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+
+	_, httpResp, err = connectorsClient.
+		ConnectorsServiceDeleteConnector(context.Background(), *connectorId).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+
+	_, httpResp, err = presetsClient.
+		PresetsServiceDeleteCustomPreset(context.Background(), *presetId).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+}
+
 func getHttpsConnector(name string) *connectors.CreateConnectorRequest {
 	return &connectors.CreateConnectorRequest{
 		Connector: &connectors.Connector{
@@ -505,6 +717,11 @@ func getHttpsPreset(name string) *presets.CreateCustomPresetRequest {
 			EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
 			ParentId:      presets.PtrString("preset_system_generic_https_alerts_empty"),
 			ConnectorType: presets.NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS.Ptr(),
+			// AttachmentConfig controls whether notification payloads include attachments
+			// (AUTO by default). Values: AUTO, ENABLED, DISABLED.
+			AttachmentConfig: &presets.AttachmentConfig{
+				Policy: presets.ATTACHMENTCONFIGPOLICY_ENABLED.Ptr(),
+			},
 			ConfigOverrides: []presets.ConfigOverrides{
 				{
 					PayloadType: presets.PtrString("generic_https_default"),
@@ -520,15 +737,15 @@ func getHttpsPreset(name string) *presets.CreateCustomPresetRequest {
 							},
 						},
 					},
-				ConditionType: &presets.NotificationCenterConditionType{
-					NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
-						MatchEntityTypeAndSubType: presets.MatchEntityTypeAndSubTypeCondition{
-							EntitySubType: presets.PtrString("logsImmediateResolved"),
+					ConditionType: &presets.NotificationCenterConditionType{
+						NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
+							MatchEntityTypeAndSubType: presets.MatchEntityTypeAndSubTypeCondition{
+								EntitySubType: presets.PtrString("logsImmediateResolved"),
+							},
 						},
 					},
 				},
 			},
 		},
-	},
-}
+	}
 }
