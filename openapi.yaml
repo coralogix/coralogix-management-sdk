@@ -85022,6 +85022,9 @@
       },
       "v2.Target": {
         "title": "Target",
+        "required": [
+          "archiveSpec"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -85035,25 +85038,6 @@
               "ibmCos"
             ],
             "type": "object"
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "required": [
-                    "s3"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "ibmCos"
-                  ],
-                  "type": "object"
-                }
-              ]
-            }
           }
         ],
         "properties": {

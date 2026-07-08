@@ -13,6 +13,7 @@ package target_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,7 +23,7 @@ var _ MappedNullable = &V2Target{}
 
 // V2Target This data structure represents a target to archive logs.
 type V2Target struct {
-	ArchiveSpec                       *ArchiveSpec      `json:"archiveSpec,omitempty"`
+	ArchiveSpec                       ArchiveSpec       `json:"archiveSpec"`
 	IbmCos                            *IBMCosTargetSpec `json:"ibmCos,omitempty"`
 	S3                                *S3TargetSpec     `json:"s3,omitempty"`
 	AdditionalProperties              map[string]interface{}
@@ -35,8 +36,9 @@ type _V2Target V2Target
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2Target() *V2Target {
+func NewV2Target(archiveSpec ArchiveSpec) *V2Target {
 	this := V2Target{}
+	this.ArchiveSpec = archiveSpec
 	return &this
 }
 
@@ -48,36 +50,28 @@ func NewV2TargetWithDefaults() *V2Target {
 	return &this
 }
 
-// GetArchiveSpec returns the ArchiveSpec field value if set, zero value otherwise.
+// GetArchiveSpec returns the ArchiveSpec field value
 func (o *V2Target) GetArchiveSpec() ArchiveSpec {
-	if o == nil || IsNil(o.ArchiveSpec) {
+	if o == nil {
 		var ret ArchiveSpec
 		return ret
 	}
-	return *o.ArchiveSpec
+
+	return o.ArchiveSpec
 }
 
-// GetArchiveSpecOk returns a tuple with the ArchiveSpec field value if set, nil otherwise
+// GetArchiveSpecOk returns a tuple with the ArchiveSpec field value
 // and a boolean to check if the value has been set.
 func (o *V2Target) GetArchiveSpecOk() (*ArchiveSpec, bool) {
-	if o == nil || IsNil(o.ArchiveSpec) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ArchiveSpec, true
+	return &o.ArchiveSpec, true
 }
 
-// HasArchiveSpec returns a boolean if a field has been set.
-func (o *V2Target) HasArchiveSpec() bool {
-	if o != nil && !IsNil(o.ArchiveSpec) {
-		return true
-	}
-
-	return false
-}
-
-// SetArchiveSpec gets a reference to the given ArchiveSpec and assigns it to the ArchiveSpec field.
+// SetArchiveSpec sets field value
 func (o *V2Target) SetArchiveSpec(v ArchiveSpec) {
-	o.ArchiveSpec = &v
+	o.ArchiveSpec = v
 }
 
 // GetIbmCos returns the IbmCos field value if set, zero value otherwise.
@@ -154,9 +148,7 @@ func (o V2Target) MarshalJSON() ([]byte, error) {
 
 func (o V2Target) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ArchiveSpec) {
-		toSerialize["archiveSpec"] = o.ArchiveSpec
-	}
+	toSerialize["archiveSpec"] = o.ArchiveSpec
 	if !IsNil(o.IbmCos) {
 		toSerialize["ibmCos"] = o.IbmCos
 	}
@@ -168,21 +160,58 @@ func (o V2Target) ToMap() (map[string]interface{}, error) {
 		toSerialize[key] = value
 	}
 
-	optionalOneOfGroup0Matches := 0
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["s3"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["ibmCos"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [s3, ibmCos] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.additionalPropertiesFromUnmarshal {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [s3, ibmCos] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [s3, ibmCos] must be set"}
 	}
 
 	return toSerialize, nil
 }
 
 func (o *V2Target) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"archiveSpec",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["s3"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["ibmCos"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [s3, ibmCos] may be set"}
+	}
+
 	varV2Target := _V2Target{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -197,14 +226,14 @@ func (o *V2Target) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["s3"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["ibmCos"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [s3, ibmCos] may be set"}
 		}
 

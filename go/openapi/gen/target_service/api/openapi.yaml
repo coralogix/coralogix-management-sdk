@@ -424,6 +424,9 @@
             "$ref": "#/components/schemas/S3TargetSpec"
           }
         },
+        "required": [
+          "archiveSpec"
+        ],
         "oneOf": [
           {
             "type": "object",
@@ -436,25 +439,6 @@
             "required": [
               "ibmCos"
             ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "s3"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "ibmCos"
-                  ]
-                }
-              ]
-            }
           }
         ]
       },
