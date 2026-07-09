@@ -288,13 +288,25 @@ func convertToTerraformResourceName(input string) string {
 	return input
 }
 
+// ensureTerraformResourceName returns a valid Terraform resource name, falling back to the
+// resource ID when the display name sanitizes to an empty string (e.g. empty dashboard name).
+func ensureTerraformResourceName(name, id string) string {
+	if name != "" {
+		return name
+	}
+	if sanitizedID := convertToTerraformResourceName(id); sanitizedID != "" {
+		return sanitizedID
+	}
+	return "unnamed"
+}
+
 func generateImportsFromIds(resourceType, outputFilePath string, idsAndNames []IdAndName) error {
 	importsContent := ""
 	nameCounts := make(map[string]int)
 	uniqueNames := make(map[string]string)
 
 	for _, idAndName := range idsAndNames {
-		originalName := idAndName.Name
+		originalName := ensureTerraformResourceName(idAndName.Name, idAndName.Id)
 		name := originalName
 
 		for {
