@@ -88,8 +88,6 @@ Class | Method | HTTP request | Description
  - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [IBMCosTargetSpec](docs/IBMCosTargetSpec.md)
  - [IbmBucketType](docs/IbmBucketType.md)
@@ -100,8 +98,6 @@ Class | Method | HTTP request | Description
  - [SetTargetResponse](docs/SetTargetResponse.md)
  - [TargetFormat](docs/TargetFormat.md)
  - [V2Target](docs/V2Target.md)
- - [V2TargetIbmCos](docs/V2TargetIbmCos.md)
- - [V2TargetS3](docs/V2TargetS3.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
 
 

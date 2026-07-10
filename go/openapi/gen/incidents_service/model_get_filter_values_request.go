@@ -22,8 +22,9 @@ var _ MappedNullable = &GetFilterValuesRequest{}
 
 // GetFilterValuesRequest Request to get available filter values for incidents
 type GetFilterValuesRequest struct {
-	Filter *IncidentQueryFilter `json:"filter,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Filter                            *IncidentQueryFilter `json:"filter,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetFilterValuesRequest GetFilterValuesRequest
@@ -78,7 +79,7 @@ func (o *GetFilterValuesRequest) SetFilter(v IncidentQueryFilter) {
 }
 
 func (o GetFilterValuesRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *GetFilterValuesRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "filter")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableGetFilterValuesRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

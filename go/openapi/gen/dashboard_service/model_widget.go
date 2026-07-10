@@ -25,19 +25,20 @@ var _ MappedNullable = &Widget{}
 type Widget struct {
 	Appearance *WidgetAppearance `json:"appearance,omitempty"`
 	// Creation timestamp.
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	CreatedAt  *time.Time        `json:"createdAt,omitempty"`
 	Definition *WidgetDefinition `json:"definition,omitempty"`
 	// Short description of the widget
-	Description *string `json:"description,omitempty"`
-	Id *UUID `json:"id,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Id          *UUID   `json:"id,omitempty"`
 	// Number of columns occupied by the widget in the dashboard layout
-	LayoutColumns *int32 `json:"layoutColumns,omitempty"`
-	Reference *WidgetReference `json:"reference,omitempty"`
+	LayoutColumns *int32           `json:"layoutColumns,omitempty"`
+	Reference     *WidgetReference `json:"reference,omitempty"`
 	// Name of the widget
-	Title *string `json:"title,omitempty"`
+	Title *string `json:"title,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Last-updated timestamp.
-	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpdatedAt                         *time.Time `json:"updatedAt,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Widget Widget
@@ -348,7 +349,7 @@ func (o *Widget) SetUpdatedAt(v time.Time) {
 }
 
 func (o Widget) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -417,6 +418,7 @@ func (o *Widget) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "title")
 		delete(additionalProperties, "updatedAt")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -457,4 +459,3 @@ func (v *NullableWidget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

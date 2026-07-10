@@ -23,8 +23,9 @@ var _ MappedNullable = &Constant{}
 // Constant Constant.
 type Constant struct {
 	// The value.
-	Value *string `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Value                             *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Constant Constant
@@ -79,7 +80,7 @@ func (o *Constant) SetValue(v string) {
 }
 
 func (o Constant) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *Constant) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableConstant) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,22 +23,23 @@ var _ MappedNullable = &DetailedDailyUnits{}
 
 // DetailedDailyUnits struct for DetailedDailyUnits
 type DetailedDailyUnits struct {
-	BlockedMetricsUnits *V2Unit `json:"blockedMetricsUnits,omitempty"`
-	BlockedUnits *V2Unit `json:"blockedUnits,omitempty"`
-	CpuProfilesUnits *V2Unit `json:"cpuProfilesUnits,omitempty"`
-	EvaluationUnits *V2Unit `json:"evaluationUnits,omitempty"`
-	HighLogsUnits *V2Unit `json:"highLogsUnits,omitempty"`
-	HighMetricsUnits *V2Unit `json:"highMetricsUnits,omitempty"`
-	HighTracingUnits *V2Unit `json:"highTracingUnits,omitempty"`
-	LowLogsUnits *V2Unit `json:"lowLogsUnits,omitempty"`
+	BlockedMetricsUnits      *V2Unit `json:"blockedMetricsUnits,omitempty"`
+	BlockedUnits             *V2Unit `json:"blockedUnits,omitempty"`
+	CpuProfilesUnits         *V2Unit `json:"cpuProfilesUnits,omitempty"`
+	EvaluationUnits          *V2Unit `json:"evaluationUnits,omitempty"`
+	HighLogsUnits            *V2Unit `json:"highLogsUnits,omitempty"`
+	HighMetricsUnits         *V2Unit `json:"highMetricsUnits,omitempty"`
+	HighTracingUnits         *V2Unit `json:"highTracingUnits,omitempty"`
+	LowLogsUnits             *V2Unit `json:"lowLogsUnits,omitempty"`
 	LowSessionRecordingUnits *V2Unit `json:"lowSessionRecordingUnits,omitempty"`
-	LowTracingUnits *V2Unit `json:"lowTracingUnits,omitempty"`
-	MediumLogsUnits *V2Unit `json:"mediumLogsUnits,omitempty"`
-	MediumTracingUnits *V2Unit `json:"mediumTracingUnits,omitempty"`
+	LowTracingUnits          *V2Unit `json:"lowTracingUnits,omitempty"`
+	MediumLogsUnits          *V2Unit `json:"mediumLogsUnits,omitempty"`
+	MediumTracingUnits       *V2Unit `json:"mediumTracingUnits,omitempty"`
 	// The stats date.
-	StatsDate *time.Time `json:"statsDate,omitempty"`
-	TotalUnits *V2Unit `json:"totalUnits,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StatsDate                         *time.Time `json:"statsDate,omitempty"`
+	TotalUnits                        *V2Unit    `json:"totalUnits,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DetailedDailyUnits DetailedDailyUnits
@@ -509,7 +510,7 @@ func (o *DetailedDailyUnits) SetTotalUnits(v V2Unit) {
 }
 
 func (o DetailedDailyUnits) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -598,6 +599,7 @@ func (o *DetailedDailyUnits) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "statsDate")
 		delete(additionalProperties, "totalUnits")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -638,4 +640,3 @@ func (v *NullableDetailedDailyUnits) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -24,8 +24,8 @@ type TooltipType string
 // List of TooltipType
 const (
 	TOOLTIPTYPE_TOOLTIP_TYPE_UNSPECIFIED TooltipType = "TOOLTIP_TYPE_UNSPECIFIED"
-	TOOLTIPTYPE_TOOLTIP_TYPE_ALL TooltipType = "TOOLTIP_TYPE_ALL"
-	TOOLTIPTYPE_TOOLTIP_TYPE_SINGLE TooltipType = "TOOLTIP_TYPE_SINGLE"
+	TOOLTIPTYPE_TOOLTIP_TYPE_ALL         TooltipType = "TOOLTIP_TYPE_ALL"
+	TOOLTIPTYPE_TOOLTIP_TYPE_SINGLE      TooltipType = "TOOLTIP_TYPE_SINGLE"
 )
 
 // All allowed values of TooltipType enum
@@ -113,4 +113,3 @@ func (v *NullableTooltipType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

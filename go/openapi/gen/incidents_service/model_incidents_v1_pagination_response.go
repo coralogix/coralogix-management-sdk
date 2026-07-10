@@ -26,8 +26,9 @@ type IncidentsV1PaginationResponse struct {
 	// Token for the next page of results
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 	// Total number of items available
-	TotalSize int64 `json:"totalSize"`
-	AdditionalProperties map[string]interface{}
+	TotalSize                         int64 `json:"totalSize"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentsV1PaginationResponse IncidentsV1PaginationResponse
@@ -107,7 +108,7 @@ func (o *IncidentsV1PaginationResponse) SetTotalSize(v int64) {
 }
 
 func (o IncidentsV1PaginationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,10 +142,10 @@ func (o *IncidentsV1PaginationResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -167,6 +168,7 @@ func (o *IncidentsV1PaginationResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "nextPageToken")
 		delete(additionalProperties, "totalSize")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -207,4 +209,3 @@ func (v *NullableIncidentsV1PaginationResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

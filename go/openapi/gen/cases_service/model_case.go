@@ -13,8 +13,8 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"time"
 	"fmt"
+	"time"
 )
 
 var _ = bytes.MinRead
@@ -27,10 +27,10 @@ type Case struct {
 	// When the case was acknowledged
 	AcknowledgeTime *time.Time `json:"acknowledgeTime,omitempty"`
 	// AI summary of the case
-	AiSummary *string `json:"aiSummary,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Assignee *CasesV1UserDetails `json:"assignee,omitempty"`
-	CaseIndicators *CaseIndicators `json:"caseIndicators,omitempty"`
-	Category CaseCategory `json:"category"`
+	AiSummary      *string             `json:"aiSummary,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Assignee       *CasesV1UserDetails `json:"assignee,omitempty"`
+	CaseIndicators *CaseIndicators     `json:"caseIndicators,omitempty"`
+	Category       CaseCategory        `json:"category"`
 	// When the case was created
 	CreateTime time.Time `json:"createTime"`
 	// Measures how long the Case is/was opened in milliseconds
@@ -41,21 +41,22 @@ type Case struct {
 	Id string `json:"id" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Impacted entities (e.g., service, database)
 	ImpactedEntities []ImpactedEntity `json:"impactedEntities"`
-	KpiBreaches *KPIBreaches `json:"kpiBreaches,omitempty"`
+	KpiBreaches      *KPIBreaches     `json:"kpiBreaches,omitempty"`
 	// User-defined labels for the case
-	Labels []V1KeyValue `json:"labels"`
-	OllyAnalysis *OllyAnalysis `json:"ollyAnalysis,omitempty"`
-	Priority CasePriority `json:"priority"`
+	Labels          []V1KeyValue     `json:"labels"`
+	OllyAnalysis    *OllyAnalysis    `json:"ollyAnalysis,omitempty"`
+	Priority        CasePriority     `json:"priority"`
 	PriorityDetails *PriorityDetails `json:"priorityDetails,omitempty"`
 	// Readable identifier of the case, available only for the cases that became Active. May be used interchangeably with `id` when calling Cases APIs that target a specific case.
-	ReadableId *string `json:"readableId,omitempty" validate:"regexp=^[A-Z]+-[0-9]+$"`
+	ReadableId        *string            `json:"readableId,omitempty" validate:"regexp=^[A-Z]+-[0-9]+$"`
 	ResolutionDetails *ResolutionDetails `json:"resolutionDetails,omitempty"`
-	Status CaseStatus `json:"status"`
+	Status            CaseStatus         `json:"status"`
 	// Case title
 	Title string `json:"title" validate:"regexp=^[\\s\\S]*$"`
 	// When the case was last updated
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpdateTime                        *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Case Case
@@ -655,7 +656,7 @@ func (o *Case) SetUpdateTime(v time.Time) {
 }
 
 func (o Case) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -735,10 +736,10 @@ func (o *Case) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -779,6 +780,7 @@ func (o *Case) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "title")
 		delete(additionalProperties, "updateTime")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -819,4 +821,3 @@ func (v *NullableCase) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

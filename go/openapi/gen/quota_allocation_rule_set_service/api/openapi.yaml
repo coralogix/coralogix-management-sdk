@@ -1,501 +1,576 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /dataplan/quota-rules/v1:
-    delete:
-      description: |-
-        Deletes the quota allocation rules.
-
-        Requires the following permissions:
-        - `team-quota-rules:Manage`
-      externalDocs:
-        url: ""
-      operationId: QuotaAllocationRuleSetService_DeleteQuotaAllocationRuleSet
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteQuotaAllocationRuleSetResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Rule set not found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Delete quota allocation rule set
-      tags:
-      - Quota Allocation Rule Set service
-      x-coralogixPermissions:
-      - team-quota-rules:Manage
-    get:
-      description: |-
-        Returns the current quota allocation rules.
-
-        Requires the following permissions:
-        - `team-quota-rules:Read`
-      externalDocs:
-        url: ""
-      operationId: QuotaAllocationRuleSetService_GetQuotaAllocationRuleSet
-      parameters:
-      - description: Unique identifier.
-        explode: true
-        in: query
-        name: id
-        required: false
-        schema:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetQuotaAllocationRuleSetResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Rule set not found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Get quota allocation rule set
-      tags:
-      - Quota Allocation Rule Set service
-      x-coralogixPermissions:
-      - team-quota-rules:Read
-    post:
-      description: |-
-        Creates new quota allocation rules.
-
-        Requires the following permissions:
-        - `team-quota-rules:Manage`
-      externalDocs:
-        url: ""
-      operationId: QuotaAllocationRuleSetService_CreateQuotaAllocationRuleSet
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Create_quota_allocation_rule_set_request"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateQuotaAllocationRuleSetResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Rule set already exists
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Create quota allocation rule set
-      tags:
-      - Quota Allocation Rule Set service
-      x-coralogixPermissions:
-      - team-quota-rules:Manage
-    put:
-      description: |-
-        Updates the quota allocation rules.
-
-        Requires the following permissions:
-        - `team-quota-rules:Manage`
-      externalDocs:
-        url: ""
-      operationId: QuotaAllocationRuleSetService_ReplaceQuotaAllocationRuleSet
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Replace_quota_allocation_rule_set_request"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReplaceQuotaAllocationRuleSetResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Rule set not found
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Replace quota allocation rule set
-      tags:
-      - Quota Allocation Rule Set service
-      x-coralogixPermissions:
-      - team-quota-rules:Manage
-components:
-  schemas:
-    CreateQuotaAllocationRuleSetResponse:
-      description: Response confirming quota allocation rule set has been successfully
-        created
-      example:
-        ruleSet:
-          rules:
-          - allocation: 0.8008282
-            entityType: entityType
-            canOverflow: true
-            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
-            enabled: true
-            cxManaged: true
-          - allocation: 0.8008282
-            entityType: entityType
-            canOverflow: true
-            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
-            enabled: true
-            cxManaged: true
-          id: id
-      externalDocs:
-        url: ""
-      properties:
-        ruleSet:
-          $ref: "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
-      title: Create quota allocation rule set response
-      type: object
-    DeleteQuotaAllocationRuleSetResponse:
-      description: Response confirming quota allocation rule set has been successfully
-        deleted
-      example:
-        id: id
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-      title: Delete quota allocation rule set response
-      type: object
-    Error:
-      description: Standard error response body returned for a failed request.
-      example:
-        code: 400
-        message: message
-      properties:
-        code:
-          description: "HTTP status code of the error (for example 400, 404, 500)."
-          format: int32
-          maximum: 599
-          minimum: 100
-          type: integer
-        message:
-          description: Human-readable description of the error.
-          maxLength: 4096
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    GetQuotaAllocationRuleSetResponse:
-      description: Response containing quota allocation rule set
-      example:
-        ruleSet:
-          rules:
-          - allocation: 0.8008282
-            entityType: entityType
-            canOverflow: true
-            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
-            enabled: true
-            cxManaged: true
-          - allocation: 0.8008282
-            entityType: entityType
-            canOverflow: true
-            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
-            enabled: true
-            cxManaged: true
-          id: id
-      externalDocs:
-        url: ""
-      properties:
-        ruleSet:
-          $ref: "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
-      title: Get quota allocation rule set response
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    QuotaAllocationEntityTypeRule:
-      description: Defines quota allocation rule for a specific entity type
-      example:
-        allocation: 0.8008282
-        entityType: entityType
-        canOverflow: true
-        allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
-        enabled: true
-        cxManaged: true
-      externalDocs:
-        url: ""
-      properties:
-        allocation:
-          description: The allocation.
-          format: float
-          type: number
-        allocationType:
-          $ref: "#/components/schemas/QuotaAllocationType"
-        canOverflow:
-          description: The can overflow.
-          type: boolean
-        cxManaged:
-          description: Indicates whether the quota allocation rule is managed by Coralogix.
-            This field is returned by the service and must not be sent in Create or
-            Replace requests.
-          readOnly: true
-          type: boolean
-        enabled:
-          description: Whether this resource is enabled.
-          type: boolean
-        entityType:
-          description: The entity type.
-          minLength: 0
-          type: string
-      required:
-      - allocation
-      - canOverflow
-      - enabled
-      - entityType
-      title: Quota allocation entity type rule
-      type: object
-    QuotaAllocationEntityTypeRuleSet:
-      description: Contains a collection of quota allocation rules for entity types
-      example:
-        rules:
-        - allocation: 0.8008282
-          entityType: entityType
-          canOverflow: true
-          allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
-          enabled: true
-          cxManaged: true
-        - allocation: 0.8008282
-          entityType: entityType
-          canOverflow: true
-          allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
-          enabled: true
-          cxManaged: true
-        id: id
-      externalDocs:
-        url: ""
-      properties:
-        id:
-          description: Unique identifier.
-          minLength: 0
-          type: string
-        rules:
-          description: List of rules.
-          items:
-            $ref: "#/components/schemas/QuotaAllocationEntityTypeRule"
-          minItems: 0
-          type: array
-      required:
-      - rules
-      title: Quota allocation entity type rule set
-      type: object
-    QuotaAllocationType:
-      description: Specifies whether the allocation value is interpreted as a percentage
-        or as locked units.
-      enum:
-      - QUOTA_ALLOCATION_TYPE_UNSPECIFIED
-      - QUOTA_ALLOCATION_TYPE_PERCENTAGE
-      - QUOTA_ALLOCATION_TYPE_LOCKED_UNITS
-      title: Quota allocation type
-      type: string
-    ReplaceQuotaAllocationRuleSetResponse:
-      description: Response confirming quota allocation rule set has been successfully
-        replaced
-      example:
-        ruleSet:
-          rules:
-          - allocation: 0.8008282
-            entityType: entityType
-            canOverflow: true
-            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
-            enabled: true
-            cxManaged: true
-          - allocation: 0.8008282
-            entityType: entityType
-            canOverflow: true
-            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
-            enabled: true
-            cxManaged: true
-          id: id
-      externalDocs:
-        url: ""
-      properties:
-        ruleSet:
-          $ref: "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
-      title: Replace quota allocation rule set response
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    Replace_quota_allocation_rule_set_request:
-      description: Request to replace quota allocation rule set
-      properties:
-        ruleSet:
-          $ref: "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
-      required:
-      - ruleSet
-      title: Replace quota allocation rule set request
-      type: object
-    Create_quota_allocation_rule_set_request:
-      description: Request to create a new quota allocation rule set
-      properties:
-        ruleSet:
-          $ref: "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
-      required:
-      - ruleSet
-      title: Create quota allocation rule set request
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/dataplan/quota-rules/v1": {
+      "get": {
+        "tags": [
+          "Quota Allocation Rule Set service"
+        ],
+        "summary": "Get quota allocation rule set",
+        "description": "Returns the current quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Read`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "QuotaAllocationRuleSetService_GetQuotaAllocationRuleSet",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "Unique identifier.",
+            "schema": {
+              "description": "Unique identifier.",
+              "type": "string",
+              "minLength": 0
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetQuotaAllocationRuleSetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Rule set not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-quota-rules:Read"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Quota Allocation Rule Set service"
+        ],
+        "summary": "Replace quota allocation rule set",
+        "description": "Updates the quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "QuotaAllocationRuleSetService_ReplaceQuotaAllocationRuleSet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Replace quota allocation rule set request",
+                "description": "Request to replace quota allocation rule set",
+                "type": "object",
+                "properties": {
+                  "ruleSet": {
+                    "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
+                  }
+                },
+                "required": [
+                  "ruleSet"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceQuotaAllocationRuleSetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Rule set not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-quota-rules:Manage"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Quota Allocation Rule Set service"
+        ],
+        "summary": "Create quota allocation rule set",
+        "description": "Creates new quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "QuotaAllocationRuleSetService_CreateQuotaAllocationRuleSet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create quota allocation rule set request",
+                "description": "Request to create a new quota allocation rule set",
+                "type": "object",
+                "properties": {
+                  "ruleSet": {
+                    "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
+                  }
+                },
+                "required": [
+                  "ruleSet"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateQuotaAllocationRuleSetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Rule set already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-quota-rules:Manage"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Quota Allocation Rule Set service"
+        ],
+        "summary": "Delete quota allocation rule set",
+        "description": "Deletes the quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "QuotaAllocationRuleSetService_DeleteQuotaAllocationRuleSet",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteQuotaAllocationRuleSetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Rule set not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-quota-rules:Manage"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateQuotaAllocationRuleSetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Create quota allocation rule set response",
+        "description": "Response confirming quota allocation rule set has been successfully created",
+        "type": "object",
+        "properties": {
+          "ruleSet": {
+            "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
+          }
+        }
+      },
+      "DeleteQuotaAllocationRuleSetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Delete quota allocation rule set response",
+        "description": "Response confirming quota allocation rule set has been successfully deleted",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetQuotaAllocationRuleSetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get quota allocation rule set response",
+        "description": "Response containing quota allocation rule set",
+        "type": "object",
+        "properties": {
+          "ruleSet": {
+            "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "QuotaAllocationEntityTypeRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Quota allocation entity type rule",
+        "description": "Defines quota allocation rule for a specific entity type",
+        "type": "object",
+        "properties": {
+          "allocation": {
+            "description": "The allocation.",
+            "type": "number",
+            "format": "float"
+          },
+          "allocationType": {
+            "$ref": "#/components/schemas/QuotaAllocationType"
+          },
+          "canOverflow": {
+            "description": "The can overflow.",
+            "type": "boolean"
+          },
+          "cxManaged": {
+            "readOnly": true,
+            "description": "Indicates whether the quota allocation rule is managed by Coralogix. This field is returned by the service and must not be sent in Create or Replace requests.",
+            "type": "boolean"
+          },
+          "enabled": {
+            "description": "Whether this resource is enabled.",
+            "type": "boolean"
+          },
+          "entityType": {
+            "description": "The entity type.",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "entityType",
+          "allocation",
+          "enabled",
+          "canOverflow"
+        ]
+      },
+      "QuotaAllocationEntityTypeRuleSet": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Quota allocation entity type rule set",
+        "description": "Contains a collection of quota allocation rules for entity types",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "rules": {
+            "description": "List of rules.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuotaAllocationEntityTypeRule"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "rules"
+        ]
+      },
+      "QuotaAllocationType": {
+        "title": "Quota allocation type",
+        "description": "Specifies whether the allocation value is interpreted as a percentage or as locked units.",
+        "type": "string",
+        "enum": [
+          "QUOTA_ALLOCATION_TYPE_UNSPECIFIED",
+          "QUOTA_ALLOCATION_TYPE_PERCENTAGE",
+          "QUOTA_ALLOCATION_TYPE_LOCKED_UNITS"
+        ]
+      },
+      "ReplaceQuotaAllocationRuleSetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Replace quota allocation rule set response",
+        "description": "Response confirming quota allocation rule set has been successfully replaced",
+        "type": "object",
+        "properties": {
+          "ruleSet": {
+            "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

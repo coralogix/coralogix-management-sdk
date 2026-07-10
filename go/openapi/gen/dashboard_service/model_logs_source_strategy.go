@@ -13,164 +13,224 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// LogsSourceStrategy - struct for LogsSourceStrategy
+// checks if the LogsSourceStrategy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LogsSourceStrategy{}
+
+// LogsSourceStrategy Determines the time strategy for fetching logs (instant snapshot, fixed range, or sliding window).
 type LogsSourceStrategy struct {
-	LogsSourceStrategyDurationVariant *LogsSourceStrategyDurationVariant
-	LogsSourceStrategyInstantVariant *LogsSourceStrategyInstantVariant
-	LogsSourceStrategyRangeVariant *LogsSourceStrategyRangeVariant
+	Duration                          *LogsSourceStrategyDuration `json:"duration,omitempty"`
+	Instant                           *LogsSourceStrategyInstant  `json:"instant,omitempty"`
+	Range                             *LogsSourceStrategyRange    `json:"range,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// LogsSourceStrategyDurationVariantAsLogsSourceStrategy is a convenience function that returns LogsSourceStrategyDurationVariant wrapped in LogsSourceStrategy
-func LogsSourceStrategyDurationVariantAsLogsSourceStrategy(v *LogsSourceStrategyDurationVariant) LogsSourceStrategy {
-	return LogsSourceStrategy{
-		LogsSourceStrategyDurationVariant: v,
+type _LogsSourceStrategy LogsSourceStrategy
+
+// NewLogsSourceStrategy instantiates a new LogsSourceStrategy object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewLogsSourceStrategy() *LogsSourceStrategy {
+	this := LogsSourceStrategy{}
+	return &this
+}
+
+// NewLogsSourceStrategyWithDefaults instantiates a new LogsSourceStrategy object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewLogsSourceStrategyWithDefaults() *LogsSourceStrategy {
+	this := LogsSourceStrategy{}
+	return &this
+}
+
+// GetDuration returns the Duration field value if set, zero value otherwise.
+func (o *LogsSourceStrategy) GetDuration() LogsSourceStrategyDuration {
+	if o == nil || IsNil(o.Duration) {
+		var ret LogsSourceStrategyDuration
+		return ret
 	}
+	return *o.Duration
 }
 
-// LogsSourceStrategyInstantVariantAsLogsSourceStrategy is a convenience function that returns LogsSourceStrategyInstantVariant wrapped in LogsSourceStrategy
-func LogsSourceStrategyInstantVariantAsLogsSourceStrategy(v *LogsSourceStrategyInstantVariant) LogsSourceStrategy {
-	return LogsSourceStrategy{
-		LogsSourceStrategyInstantVariant: v,
+// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsSourceStrategy) GetDurationOk() (*LogsSourceStrategyDuration, bool) {
+	if o == nil || IsNil(o.Duration) {
+		return nil, false
 	}
+	return o.Duration, true
 }
 
-// LogsSourceStrategyRangeVariantAsLogsSourceStrategy is a convenience function that returns LogsSourceStrategyRangeVariant wrapped in LogsSourceStrategy
-func LogsSourceStrategyRangeVariantAsLogsSourceStrategy(v *LogsSourceStrategyRangeVariant) LogsSourceStrategy {
-	return LogsSourceStrategy{
-		LogsSourceStrategyRangeVariant: v,
+// HasDuration returns a boolean if a field has been set.
+func (o *LogsSourceStrategy) HasDuration() bool {
+	if o != nil && !IsNil(o.Duration) {
+		return true
 	}
+
+	return false
 }
 
+// SetDuration gets a reference to the given LogsSourceStrategyDuration and assigns it to the Duration field.
+func (o *LogsSourceStrategy) SetDuration(v LogsSourceStrategyDuration) {
+	o.Duration = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *LogsSourceStrategy) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into LogsSourceStrategyDurationVariant
-	err = json.Unmarshal(data, &dst.LogsSourceStrategyDurationVariant)
-	if err == nil {
-		jsonLogsSourceStrategyDurationVariant, _ := json.Marshal(dst.LogsSourceStrategyDurationVariant)
-		if string(jsonLogsSourceStrategyDurationVariant) == "{}" { // empty struct
-			dst.LogsSourceStrategyDurationVariant = nil
-		} else {
-			if err = validator.Validate(dst.LogsSourceStrategyDurationVariant); err != nil {
-				dst.LogsSourceStrategyDurationVariant = nil
-			} else {
-				match++
-			}
+// GetInstant returns the Instant field value if set, zero value otherwise.
+func (o *LogsSourceStrategy) GetInstant() LogsSourceStrategyInstant {
+	if o == nil || IsNil(o.Instant) {
+		var ret LogsSourceStrategyInstant
+		return ret
+	}
+	return *o.Instant
+}
+
+// GetInstantOk returns a tuple with the Instant field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsSourceStrategy) GetInstantOk() (*LogsSourceStrategyInstant, bool) {
+	if o == nil || IsNil(o.Instant) {
+		return nil, false
+	}
+	return o.Instant, true
+}
+
+// HasInstant returns a boolean if a field has been set.
+func (o *LogsSourceStrategy) HasInstant() bool {
+	if o != nil && !IsNil(o.Instant) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstant gets a reference to the given LogsSourceStrategyInstant and assigns it to the Instant field.
+func (o *LogsSourceStrategy) SetInstant(v LogsSourceStrategyInstant) {
+	o.Instant = &v
+}
+
+// GetRange returns the Range field value if set, zero value otherwise.
+func (o *LogsSourceStrategy) GetRange() LogsSourceStrategyRange {
+	if o == nil || IsNil(o.Range) {
+		var ret LogsSourceStrategyRange
+		return ret
+	}
+	return *o.Range
+}
+
+// GetRangeOk returns a tuple with the Range field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogsSourceStrategy) GetRangeOk() (*LogsSourceStrategyRange, bool) {
+	if o == nil || IsNil(o.Range) {
+		return nil, false
+	}
+	return o.Range, true
+}
+
+// HasRange returns a boolean if a field has been set.
+func (o *LogsSourceStrategy) HasRange() bool {
+	if o != nil && !IsNil(o.Range) {
+		return true
+	}
+
+	return false
+}
+
+// SetRange gets a reference to the given LogsSourceStrategyRange and assigns it to the Range field.
+func (o *LogsSourceStrategy) SetRange(v LogsSourceStrategyRange) {
+	o.Range = &v
+}
+
+func (o LogsSourceStrategy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o LogsSourceStrategy) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Duration) {
+		toSerialize["duration"] = o.Duration
+	}
+	if !IsNil(o.Instant) {
+		toSerialize["instant"] = o.Instant
+	}
+	if !IsNil(o.Range) {
+		toSerialize["range"] = o.Range
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["instant"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["range"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["duration"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [instant, range, duration] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["instant"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field instant must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["range"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field range must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["duration"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field duration must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *LogsSourceStrategy) UnmarshalJSON(data []byte) (err error) {
+	varLogsSourceStrategy := _LogsSourceStrategy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsSourceStrategy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsSourceStrategy(varLogsSourceStrategy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["instant"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LogsSourceStrategyDurationVariant = nil
-	}
-
-	// try to unmarshal data into LogsSourceStrategyInstantVariant
-	err = json.Unmarshal(data, &dst.LogsSourceStrategyInstantVariant)
-	if err == nil {
-		jsonLogsSourceStrategyInstantVariant, _ := json.Marshal(dst.LogsSourceStrategyInstantVariant)
-		if string(jsonLogsSourceStrategyInstantVariant) == "{}" { // empty struct
-			dst.LogsSourceStrategyInstantVariant = nil
-		} else {
-			if err = validator.Validate(dst.LogsSourceStrategyInstantVariant); err != nil {
-				dst.LogsSourceStrategyInstantVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["range"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LogsSourceStrategyInstantVariant = nil
-	}
-
-	// try to unmarshal data into LogsSourceStrategyRangeVariant
-	err = json.Unmarshal(data, &dst.LogsSourceStrategyRangeVariant)
-	if err == nil {
-		jsonLogsSourceStrategyRangeVariant, _ := json.Marshal(dst.LogsSourceStrategyRangeVariant)
-		if string(jsonLogsSourceStrategyRangeVariant) == "{}" { // empty struct
-			dst.LogsSourceStrategyRangeVariant = nil
-		} else {
-			if err = validator.Validate(dst.LogsSourceStrategyRangeVariant); err != nil {
-				dst.LogsSourceStrategyRangeVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["duration"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LogsSourceStrategyRangeVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [instant, range, duration] may be set"}
+		}
+
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "instant")
+		delete(additionalProperties, "range")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.LogsSourceStrategyDurationVariant = nil
-		dst.LogsSourceStrategyInstantVariant = nil
-		dst.LogsSourceStrategyRangeVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(LogsSourceStrategy)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src LogsSourceStrategy) MarshalJSON() ([]byte, error) {
-	if src.LogsSourceStrategyDurationVariant != nil {
-		return json.Marshal(&src.LogsSourceStrategyDurationVariant)
-	}
-
-	if src.LogsSourceStrategyInstantVariant != nil {
-		return json.Marshal(&src.LogsSourceStrategyInstantVariant)
-	}
-
-	if src.LogsSourceStrategyRangeVariant != nil {
-		return json.Marshal(&src.LogsSourceStrategyRangeVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *LogsSourceStrategy) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.LogsSourceStrategyDurationVariant != nil {
-		return obj.LogsSourceStrategyDurationVariant
-	}
-
-	if obj.LogsSourceStrategyInstantVariant != nil {
-		return obj.LogsSourceStrategyInstantVariant
-	}
-
-	if obj.LogsSourceStrategyRangeVariant != nil {
-		return obj.LogsSourceStrategyRangeVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj LogsSourceStrategy) GetActualInstanceValue() (interface{}) {
-	if obj.LogsSourceStrategyDurationVariant != nil {
-		return *obj.LogsSourceStrategyDurationVariant
-	}
-
-	if obj.LogsSourceStrategyInstantVariant != nil {
-		return *obj.LogsSourceStrategyInstantVariant
-	}
-
-	if obj.LogsSourceStrategyRangeVariant != nil {
-		return *obj.LogsSourceStrategyRangeVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableLogsSourceStrategy struct {
@@ -208,4 +268,3 @@ func (v *NullableLogsSourceStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

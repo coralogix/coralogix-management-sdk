@@ -13,278 +13,404 @@ package integration_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Parameter - struct for Parameter
+// checks if the Parameter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Parameter{}
+
+// Parameter struct for Parameter
 type Parameter struct {
-	ParameterApiKey *ParameterApiKey
-	ParameterBooleanValue *ParameterBooleanValue
-	ParameterNumericValue *ParameterNumericValue
-	ParameterSensitiveData *ParameterSensitiveData
-	ParameterStringList *ParameterStringList
-	ParameterStringValue *ParameterStringValue
+	ApiKey *ApiKeyData `json:"apiKey,omitempty"`
+	// Boolean value for this integration parameter.
+	BooleanValue *bool `json:"booleanValue,omitempty"`
+	// The key.
+	Key *string `json:"key,omitempty"`
+	// Numeric value for this integration parameter.
+	NumericValue *float64 `json:"numericValue,omitempty"`
+	// Sensitive data placeholder.
+	SensitiveData map[string]interface{} `json:"sensitiveData,omitempty"`
+	StringList    *StringList            `json:"stringList,omitempty"`
+	// String value for this integration parameter.
+	StringValue                       *string `json:"stringValue,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// ParameterApiKeyAsParameter is a convenience function that returns ParameterApiKey wrapped in Parameter
-func ParameterApiKeyAsParameter(v *ParameterApiKey) Parameter {
-	return Parameter{
-		ParameterApiKey: v,
+type _Parameter Parameter
+
+// NewParameter instantiates a new Parameter object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewParameter() *Parameter {
+	this := Parameter{}
+	return &this
+}
+
+// NewParameterWithDefaults instantiates a new Parameter object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewParameterWithDefaults() *Parameter {
+	this := Parameter{}
+	return &this
+}
+
+// GetApiKey returns the ApiKey field value if set, zero value otherwise.
+func (o *Parameter) GetApiKey() ApiKeyData {
+	if o == nil || IsNil(o.ApiKey) {
+		var ret ApiKeyData
+		return ret
 	}
+	return *o.ApiKey
 }
 
-// ParameterBooleanValueAsParameter is a convenience function that returns ParameterBooleanValue wrapped in Parameter
-func ParameterBooleanValueAsParameter(v *ParameterBooleanValue) Parameter {
-	return Parameter{
-		ParameterBooleanValue: v,
+// GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Parameter) GetApiKeyOk() (*ApiKeyData, bool) {
+	if o == nil || IsNil(o.ApiKey) {
+		return nil, false
 	}
+	return o.ApiKey, true
 }
 
-// ParameterNumericValueAsParameter is a convenience function that returns ParameterNumericValue wrapped in Parameter
-func ParameterNumericValueAsParameter(v *ParameterNumericValue) Parameter {
-	return Parameter{
-		ParameterNumericValue: v,
+// HasApiKey returns a boolean if a field has been set.
+func (o *Parameter) HasApiKey() bool {
+	if o != nil && !IsNil(o.ApiKey) {
+		return true
 	}
+
+	return false
 }
 
-// ParameterSensitiveDataAsParameter is a convenience function that returns ParameterSensitiveData wrapped in Parameter
-func ParameterSensitiveDataAsParameter(v *ParameterSensitiveData) Parameter {
-	return Parameter{
-		ParameterSensitiveData: v,
+// SetApiKey gets a reference to the given ApiKeyData and assigns it to the ApiKey field.
+func (o *Parameter) SetApiKey(v ApiKeyData) {
+	o.ApiKey = &v
+}
+
+// GetBooleanValue returns the BooleanValue field value if set, zero value otherwise.
+func (o *Parameter) GetBooleanValue() bool {
+	if o == nil || IsNil(o.BooleanValue) {
+		var ret bool
+		return ret
 	}
+	return *o.BooleanValue
 }
 
-// ParameterStringListAsParameter is a convenience function that returns ParameterStringList wrapped in Parameter
-func ParameterStringListAsParameter(v *ParameterStringList) Parameter {
-	return Parameter{
-		ParameterStringList: v,
+// GetBooleanValueOk returns a tuple with the BooleanValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Parameter) GetBooleanValueOk() (*bool, bool) {
+	if o == nil || IsNil(o.BooleanValue) {
+		return nil, false
 	}
+	return o.BooleanValue, true
 }
 
-// ParameterStringValueAsParameter is a convenience function that returns ParameterStringValue wrapped in Parameter
-func ParameterStringValueAsParameter(v *ParameterStringValue) Parameter {
-	return Parameter{
-		ParameterStringValue: v,
+// HasBooleanValue returns a boolean if a field has been set.
+func (o *Parameter) HasBooleanValue() bool {
+	if o != nil && !IsNil(o.BooleanValue) {
+		return true
 	}
+
+	return false
 }
 
+// SetBooleanValue gets a reference to the given bool and assigns it to the BooleanValue field.
+func (o *Parameter) SetBooleanValue(v bool) {
+	o.BooleanValue = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Parameter) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ParameterApiKey
-	err = json.Unmarshal(data, &dst.ParameterApiKey)
-	if err == nil {
-		jsonParameterApiKey, _ := json.Marshal(dst.ParameterApiKey)
-		if string(jsonParameterApiKey) == "{}" { // empty struct
-			dst.ParameterApiKey = nil
-		} else {
-			if err = validator.Validate(dst.ParameterApiKey); err != nil {
-				dst.ParameterApiKey = nil
-			} else {
-				match++
-			}
+// GetKey returns the Key field value if set, zero value otherwise.
+func (o *Parameter) GetKey() string {
+	if o == nil || IsNil(o.Key) {
+		var ret string
+		return ret
+	}
+	return *o.Key
+}
+
+// GetKeyOk returns a tuple with the Key field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Parameter) GetKeyOk() (*string, bool) {
+	if o == nil || IsNil(o.Key) {
+		return nil, false
+	}
+	return o.Key, true
+}
+
+// HasKey returns a boolean if a field has been set.
+func (o *Parameter) HasKey() bool {
+	if o != nil && !IsNil(o.Key) {
+		return true
+	}
+
+	return false
+}
+
+// SetKey gets a reference to the given string and assigns it to the Key field.
+func (o *Parameter) SetKey(v string) {
+	o.Key = &v
+}
+
+// GetNumericValue returns the NumericValue field value if set, zero value otherwise.
+func (o *Parameter) GetNumericValue() float64 {
+	if o == nil || IsNil(o.NumericValue) {
+		var ret float64
+		return ret
+	}
+	return *o.NumericValue
+}
+
+// GetNumericValueOk returns a tuple with the NumericValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Parameter) GetNumericValueOk() (*float64, bool) {
+	if o == nil || IsNil(o.NumericValue) {
+		return nil, false
+	}
+	return o.NumericValue, true
+}
+
+// HasNumericValue returns a boolean if a field has been set.
+func (o *Parameter) HasNumericValue() bool {
+	if o != nil && !IsNil(o.NumericValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetNumericValue gets a reference to the given float64 and assigns it to the NumericValue field.
+func (o *Parameter) SetNumericValue(v float64) {
+	o.NumericValue = &v
+}
+
+// GetSensitiveData returns the SensitiveData field value if set, zero value otherwise.
+func (o *Parameter) GetSensitiveData() map[string]interface{} {
+	if o == nil || IsNil(o.SensitiveData) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.SensitiveData
+}
+
+// GetSensitiveDataOk returns a tuple with the SensitiveData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Parameter) GetSensitiveDataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.SensitiveData) {
+		return map[string]interface{}{}, false
+	}
+	return o.SensitiveData, true
+}
+
+// HasSensitiveData returns a boolean if a field has been set.
+func (o *Parameter) HasSensitiveData() bool {
+	if o != nil && !IsNil(o.SensitiveData) {
+		return true
+	}
+
+	return false
+}
+
+// SetSensitiveData gets a reference to the given map[string]interface{} and assigns it to the SensitiveData field.
+func (o *Parameter) SetSensitiveData(v map[string]interface{}) {
+	o.SensitiveData = v
+}
+
+// GetStringList returns the StringList field value if set, zero value otherwise.
+func (o *Parameter) GetStringList() StringList {
+	if o == nil || IsNil(o.StringList) {
+		var ret StringList
+		return ret
+	}
+	return *o.StringList
+}
+
+// GetStringListOk returns a tuple with the StringList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Parameter) GetStringListOk() (*StringList, bool) {
+	if o == nil || IsNil(o.StringList) {
+		return nil, false
+	}
+	return o.StringList, true
+}
+
+// HasStringList returns a boolean if a field has been set.
+func (o *Parameter) HasStringList() bool {
+	if o != nil && !IsNil(o.StringList) {
+		return true
+	}
+
+	return false
+}
+
+// SetStringList gets a reference to the given StringList and assigns it to the StringList field.
+func (o *Parameter) SetStringList(v StringList) {
+	o.StringList = &v
+}
+
+// GetStringValue returns the StringValue field value if set, zero value otherwise.
+func (o *Parameter) GetStringValue() string {
+	if o == nil || IsNil(o.StringValue) {
+		var ret string
+		return ret
+	}
+	return *o.StringValue
+}
+
+// GetStringValueOk returns a tuple with the StringValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Parameter) GetStringValueOk() (*string, bool) {
+	if o == nil || IsNil(o.StringValue) {
+		return nil, false
+	}
+	return o.StringValue, true
+}
+
+// HasStringValue returns a boolean if a field has been set.
+func (o *Parameter) HasStringValue() bool {
+	if o != nil && !IsNil(o.StringValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetStringValue gets a reference to the given string and assigns it to the StringValue field.
+func (o *Parameter) SetStringValue(v string) {
+	o.StringValue = &v
+}
+
+func (o Parameter) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Parameter) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApiKey) {
+		toSerialize["apiKey"] = o.ApiKey
+	}
+	if !IsNil(o.BooleanValue) {
+		toSerialize["booleanValue"] = o.BooleanValue
+	}
+	if !IsNil(o.Key) {
+		toSerialize["key"] = o.Key
+	}
+	if !IsNil(o.NumericValue) {
+		toSerialize["numericValue"] = o.NumericValue
+	}
+	if !IsNil(o.SensitiveData) {
+		toSerialize["sensitiveData"] = o.SensitiveData
+	}
+	if !IsNil(o.StringList) {
+		toSerialize["stringList"] = o.StringList
+	}
+	if !IsNil(o.StringValue) {
+		toSerialize["stringValue"] = o.StringValue
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["stringValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["booleanValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["stringList"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["apiKey"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["numericValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sensitiveData"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [stringValue, booleanValue, stringList, apiKey, numericValue, sensitiveData] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["stringValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field stringValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["booleanValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field booleanValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["stringList"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field stringList must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["apiKey"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field apiKey must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["numericValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field numericValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sensitiveData"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sensitiveData must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Parameter) UnmarshalJSON(data []byte) (err error) {
+	varParameter := _Parameter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varParameter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Parameter(varParameter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["stringValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ParameterApiKey = nil
-	}
-
-	// try to unmarshal data into ParameterBooleanValue
-	err = json.Unmarshal(data, &dst.ParameterBooleanValue)
-	if err == nil {
-		jsonParameterBooleanValue, _ := json.Marshal(dst.ParameterBooleanValue)
-		if string(jsonParameterBooleanValue) == "{}" { // empty struct
-			dst.ParameterBooleanValue = nil
-		} else {
-			if err = validator.Validate(dst.ParameterBooleanValue); err != nil {
-				dst.ParameterBooleanValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["booleanValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ParameterBooleanValue = nil
-	}
-
-	// try to unmarshal data into ParameterNumericValue
-	err = json.Unmarshal(data, &dst.ParameterNumericValue)
-	if err == nil {
-		jsonParameterNumericValue, _ := json.Marshal(dst.ParameterNumericValue)
-		if string(jsonParameterNumericValue) == "{}" { // empty struct
-			dst.ParameterNumericValue = nil
-		} else {
-			if err = validator.Validate(dst.ParameterNumericValue); err != nil {
-				dst.ParameterNumericValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["stringList"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ParameterNumericValue = nil
-	}
-
-	// try to unmarshal data into ParameterSensitiveData
-	err = json.Unmarshal(data, &dst.ParameterSensitiveData)
-	if err == nil {
-		jsonParameterSensitiveData, _ := json.Marshal(dst.ParameterSensitiveData)
-		if string(jsonParameterSensitiveData) == "{}" { // empty struct
-			dst.ParameterSensitiveData = nil
-		} else {
-			if err = validator.Validate(dst.ParameterSensitiveData); err != nil {
-				dst.ParameterSensitiveData = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["apiKey"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ParameterSensitiveData = nil
-	}
-
-	// try to unmarshal data into ParameterStringList
-	err = json.Unmarshal(data, &dst.ParameterStringList)
-	if err == nil {
-		jsonParameterStringList, _ := json.Marshal(dst.ParameterStringList)
-		if string(jsonParameterStringList) == "{}" { // empty struct
-			dst.ParameterStringList = nil
-		} else {
-			if err = validator.Validate(dst.ParameterStringList); err != nil {
-				dst.ParameterStringList = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["numericValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ParameterStringList = nil
-	}
-
-	// try to unmarshal data into ParameterStringValue
-	err = json.Unmarshal(data, &dst.ParameterStringValue)
-	if err == nil {
-		jsonParameterStringValue, _ := json.Marshal(dst.ParameterStringValue)
-		if string(jsonParameterStringValue) == "{}" { // empty struct
-			dst.ParameterStringValue = nil
-		} else {
-			if err = validator.Validate(dst.ParameterStringValue); err != nil {
-				dst.ParameterStringValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sensitiveData"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ParameterStringValue = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [stringValue, booleanValue, stringList, apiKey, numericValue, sensitiveData] may be set"}
+		}
+
+		delete(additionalProperties, "apiKey")
+		delete(additionalProperties, "booleanValue")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "numericValue")
+		delete(additionalProperties, "sensitiveData")
+		delete(additionalProperties, "stringList")
+		delete(additionalProperties, "stringValue")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ParameterApiKey = nil
-		dst.ParameterBooleanValue = nil
-		dst.ParameterNumericValue = nil
-		dst.ParameterSensitiveData = nil
-		dst.ParameterStringList = nil
-		dst.ParameterStringValue = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Parameter)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Parameter) MarshalJSON() ([]byte, error) {
-	if src.ParameterApiKey != nil {
-		return json.Marshal(&src.ParameterApiKey)
-	}
-
-	if src.ParameterBooleanValue != nil {
-		return json.Marshal(&src.ParameterBooleanValue)
-	}
-
-	if src.ParameterNumericValue != nil {
-		return json.Marshal(&src.ParameterNumericValue)
-	}
-
-	if src.ParameterSensitiveData != nil {
-		return json.Marshal(&src.ParameterSensitiveData)
-	}
-
-	if src.ParameterStringList != nil {
-		return json.Marshal(&src.ParameterStringList)
-	}
-
-	if src.ParameterStringValue != nil {
-		return json.Marshal(&src.ParameterStringValue)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Parameter) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ParameterApiKey != nil {
-		return obj.ParameterApiKey
-	}
-
-	if obj.ParameterBooleanValue != nil {
-		return obj.ParameterBooleanValue
-	}
-
-	if obj.ParameterNumericValue != nil {
-		return obj.ParameterNumericValue
-	}
-
-	if obj.ParameterSensitiveData != nil {
-		return obj.ParameterSensitiveData
-	}
-
-	if obj.ParameterStringList != nil {
-		return obj.ParameterStringList
-	}
-
-	if obj.ParameterStringValue != nil {
-		return obj.ParameterStringValue
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Parameter) GetActualInstanceValue() (interface{}) {
-	if obj.ParameterApiKey != nil {
-		return *obj.ParameterApiKey
-	}
-
-	if obj.ParameterBooleanValue != nil {
-		return *obj.ParameterBooleanValue
-	}
-
-	if obj.ParameterNumericValue != nil {
-		return *obj.ParameterNumericValue
-	}
-
-	if obj.ParameterSensitiveData != nil {
-		return *obj.ParameterSensitiveData
-	}
-
-	if obj.ParameterStringList != nil {
-		return *obj.ParameterStringList
-	}
-
-	if obj.ParameterStringValue != nil {
-		return *obj.ParameterStringValue
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableParameter struct {
@@ -322,4 +448,3 @@ func (v *NullableParameter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

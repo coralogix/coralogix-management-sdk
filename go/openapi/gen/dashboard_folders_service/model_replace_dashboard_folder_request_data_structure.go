@@ -24,8 +24,9 @@ var _ MappedNullable = &ReplaceDashboardFolderRequestDataStructure{}
 type ReplaceDashboardFolderRequestDataStructure struct {
 	Folder *DashboardFolder `json:"folder,omitempty"`
 	// Idempotency key for the replace folder request, used to prevent duplicate updates.
-	RequestId *string `json:"requestId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RequestId                         *string `json:"requestId,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ReplaceDashboardFolderRequestDataStructure ReplaceDashboardFolderRequestDataStructure
@@ -112,7 +113,7 @@ func (o *ReplaceDashboardFolderRequestDataStructure) SetRequestId(v string) {
 }
 
 func (o ReplaceDashboardFolderRequestDataStructure) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *ReplaceDashboardFolderRequestDataStructure) UnmarshalJSON(data []byte) 
 		delete(additionalProperties, "folder")
 		delete(additionalProperties, "requestId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableReplaceDashboardFolderRequestDataStructure) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

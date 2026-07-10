@@ -25,8 +25,9 @@ type RevertDeploymentOfExtensionRequest struct {
 	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	// List of extension item IDs to retain after undeploying; all other items will be removed.
-	KeptExtensionItems []string `json:"keptExtensionItems,omitempty"`
-	AdditionalProperties map[string]interface{}
+	KeptExtensionItems                []string `json:"keptExtensionItems,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RevertDeploymentOfExtensionRequest RevertDeploymentOfExtensionRequest
@@ -113,7 +114,7 @@ func (o *RevertDeploymentOfExtensionRequest) SetKeptExtensionItems(v []string) {
 }
 
 func (o RevertDeploymentOfExtensionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *RevertDeploymentOfExtensionRequest) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "keptExtensionItems")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableRevertDeploymentOfExtensionRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

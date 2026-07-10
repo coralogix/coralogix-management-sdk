@@ -24,7 +24,7 @@ type AnnotationOrientation string
 // List of AnnotationOrientation
 const (
 	ANNOTATIONORIENTATION_ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED AnnotationOrientation = "ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED"
-	ANNOTATIONORIENTATION_ANNOTATION_ORIENTATION_HORIZONTAL AnnotationOrientation = "ANNOTATION_ORIENTATION_HORIZONTAL"
+	ANNOTATIONORIENTATION_ANNOTATION_ORIENTATION_HORIZONTAL           AnnotationOrientation = "ANNOTATION_ORIENTATION_HORIZONTAL"
 )
 
 // All allowed values of AnnotationOrientation enum
@@ -111,4 +111,3 @@ func (v *NullableAnnotationOrientation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,660 +1,855 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /metrics/data-setup/v1:
-    get:
-      description: Returns the current metrics storage configuration.
-      externalDocs:
-        url: ""
-      operationId: MetricsConfiguratorPublicService_GetTenantConfig
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetTenantConfigResponseV2"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Get Metrics Storage Configuration
-      tags:
-      - Metrics Data Archive Service
-    post:
-      description: Creates the metrics storage configuration.
-      externalDocs:
-        url: ""
-      operationId: MetricsConfiguratorPublicService_ConfigureTenant
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MetricsConfiguratorPublicService_ConfigureTenant_request"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Configure Tenant
-      tags:
-      - Metrics Data Archive Service
-    put:
-      description: Updates the metrics storage configuration.
-      externalDocs:
-        url: ""
-      operationId: MetricsConfiguratorPublicService_Update
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MetricsConfiguratorPublicService_Update_request"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Update Metrics Storage Configuration
-      tags:
-      - Metrics Data Archive Service
-  /metrics/data-setup/v1/disable:
-    post:
-      description: Disables the metrics storage configuration.
-      externalDocs:
-        url: ""
-      operationId: MetricsConfiguratorPublicService_DisableArchive
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Disable Metrics Archive
-      tags:
-      - Metrics Data Archive Service
-  /metrics/data-setup/v1/enable:
-    post:
-      description: Enables the metrics storage configuration.
-      externalDocs:
-        url: ""
-      operationId: MetricsConfiguratorPublicService_EnableArchive
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Enable Metrics Archive
-      tags:
-      - Metrics Data Archive Service
-  /metrics/data-setup/v1/validate:
-    post:
-      description: Validates the provided metrics storage configuration.
-      externalDocs:
-        url: ""
-      operationId: MetricsConfiguratorPublicService_ValidateBucket
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MetricsConfiguratorPublicService_ValidateBucket_request"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: object
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: Validate Metrics Storage Bucket
-      tags:
-      - Metrics Data Archive Service
-components:
-  schemas:
-    ConfigureTenantRequestGcs:
-      description: This data structure is used to configure a tenant.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        gcs:
-          $ref: "#/components/schemas/GcsConfig"
-        retentionPolicy:
-          $ref: "#/components/schemas/RetentionPolicyRequest"
-      required:
-      - gcs
-      title: Configure Tenant Request
-      type: object
-    ConfigureTenantRequestIbm:
-      description: This data structure is used to configure a tenant.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        ibm:
-          $ref: "#/components/schemas/IbmConfigV2"
-        retentionPolicy:
-          $ref: "#/components/schemas/RetentionPolicyRequest"
-      required:
-      - ibm
-      title: Configure Tenant Request
-      type: object
-    ConfigureTenantRequestS3:
-      description: This data structure is used to configure a tenant.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        retentionPolicy:
-          $ref: "#/components/schemas/RetentionPolicyRequest"
-        s3:
-          $ref: "#/components/schemas/S3Config"
-      required:
-      - s3
-      title: Configure Tenant Request
-      type: object
-    Error:
-      description: Standard error response body returned for a failed request.
-      example:
-        code: 400
-        message: message
-      properties:
-        code:
-          description: "HTTP status code of the error (for example 400, 404, 500)."
-          format: int32
-          maximum: 599
-          minimum: 100
-          type: integer
-        message:
-          description: Human-readable description of the error.
-          maxLength: 4096
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    GcsConfig:
-      description: This data structure represents the GCS configuration for a tenant.
-      example:
-        bucket: bucket
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        bucket:
-          description: Bucket name.
-          minLength: 0
-          type: string
-      title: GCS Configuration
-      type: object
-    GetTenantConfigResponseV2:
-      description: Response containing the current metrics tenant configuration.
-      example:
-        tenantConfig:
-          gcs:
-            bucket: bucket
-          prefix: prefix
-          tenantId: 0
-          disabled: true
-          retentionPolicy:
-            fiveMinutesResolution: 2
-            oneHourResolution: 3
-            rawResolution: 1
-      externalDocs:
-        url: ""
-      properties:
-        tenantConfig:
-          $ref: "#/components/schemas/TenantConfigV2"
-      type: object
-    IbmConfigV2:
-      description: This data structure is used to configure an IBM bucket.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        crn:
-          description: The crn.
-          example: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
-          minLength: 0
-          type: string
-        endpoint:
-          description: Endpoint.
-          example: s3.us-south.cloud-object-storage.appdomain.cloud
-          minLength: 0
-          type: string
-        serviceCrn:
-          description: The service crn.
-          example: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
-          minLength: 0
-          type: string
-      title: IBM Bucket Configuration
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    RetentionPolicyRequest:
-      description: This data structure is used to set the retention policy for a tenant.
-      example:
-        fiveMinutesResolution: 2
-        oneHourResolution: 3
-        rawResolution: 1
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        fiveMinutesResolution:
-          description: The five minutes resolution.
-          example: 2
-          format: int64
-          minimum: 0
-          type: integer
-        oneHourResolution:
-          description: The one hour resolution.
-          example: 3
-          format: int64
-          minimum: 0
-          type: integer
-        rawResolution:
-          description: The raw resolution.
-          example: 1
-          format: int64
-          minimum: 0
-          type: integer
-      title: Retenion Policy Request
-      type: object
-    S3Config:
-      description: This data structure represents the S3 configuration for a tenant.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        bucket:
-          description: Bucket name.
-          minLength: 0
-          type: string
-        region:
-          description: Region.
-          minLength: 0
-          type: string
-      title: S3 Configuration
-      type: object
-    TenantConfigV2:
-      oneOf:
-      - $ref: "#/components/schemas/TenantConfigV2Gcs"
-      - $ref: "#/components/schemas/TenantConfigV2Ibm"
-      - $ref: "#/components/schemas/TenantConfigV2S3"
-    TenantConfigV2Gcs:
-      description: Tenant config v2.
-      example:
-        gcs:
-          bucket: bucket
-        prefix: prefix
-        tenantId: 0
-        disabled: true
-        retentionPolicy:
-          fiveMinutesResolution: 2
-          oneHourResolution: 3
-          rawResolution: 1
-      externalDocs:
-        url: ""
-      properties:
-        disabled:
-          description: Whether metrics archiving is disabled for this tenant.
-          type: boolean
-        gcs:
-          $ref: "#/components/schemas/GcsConfig"
-        prefix:
-          description: Storage path prefix applied to all archived objects.
-          minLength: 0
-          type: string
-        retentionPolicy:
-          $ref: "#/components/schemas/RetentionPolicyRequest"
-        tenantId:
-          description: Tenant identifier.
-          format: int64
-          minimum: 0
-          type: integer
-      required:
-      - gcs
-      type: object
-    TenantConfigV2Ibm:
-      description: Tenant config v2.
-      externalDocs:
-        url: ""
-      properties:
-        disabled:
-          description: Whether metrics archiving is disabled for this tenant.
-          type: boolean
-        ibm:
-          $ref: "#/components/schemas/IbmConfigV2"
-        prefix:
-          description: Storage path prefix applied to all archived objects.
-          minLength: 0
-          type: string
-        retentionPolicy:
-          $ref: "#/components/schemas/RetentionPolicyRequest"
-        tenantId:
-          description: Tenant identifier.
-          format: int64
-          minimum: 0
-          type: integer
-      required:
-      - ibm
-      type: object
-    TenantConfigV2S3:
-      description: Tenant config v2.
-      externalDocs:
-        url: ""
-      properties:
-        disabled:
-          description: Whether metrics archiving is disabled for this tenant.
-          type: boolean
-        prefix:
-          description: Storage path prefix applied to all archived objects.
-          minLength: 0
-          type: string
-        retentionPolicy:
-          $ref: "#/components/schemas/RetentionPolicyRequest"
-        s3:
-          $ref: "#/components/schemas/S3Config"
-        tenantId:
-          description: Tenant identifier.
-          format: int64
-          minimum: 0
-          type: integer
-      required:
-      - s3
-      type: object
-    UpdateRequestGcs:
-      description: This data structure is used to update the configuration of a tenant.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        gcs:
-          $ref: "#/components/schemas/GcsConfig"
-        retentionDays:
-          description: Archive retention period in days.
-          format: int64
-          minimum: 0
-          type: integer
-      required:
-      - gcs
-      title: Update Tenant Request
-      type: object
-    UpdateRequestIbm:
-      description: This data structure is used to update the configuration of a tenant.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        ibm:
-          $ref: "#/components/schemas/IbmConfigV2"
-        retentionDays:
-          description: Archive retention period in days.
-          format: int64
-          minimum: 0
-          type: integer
-      required:
-      - ibm
-      title: Update Tenant Request
-      type: object
-    UpdateRequestS3:
-      description: This data structure is used to update the configuration of a tenant.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        retentionDays:
-          description: Archive retention period in days.
-          format: int64
-          minimum: 0
-          type: integer
-        s3:
-          $ref: "#/components/schemas/S3Config"
-      required:
-      - s3
-      title: Update Tenant Request
-      type: object
-    ValidateBucketRequestGcs:
-      description: This data structure is used to validate a bucket.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        gcs:
-          $ref: "#/components/schemas/GcsConfig"
-      required:
-      - gcs
-      title: Bucket Validation Request
-      type: object
-    ValidateBucketRequestIbm:
-      description: This data structure is used to validate a bucket.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        ibm:
-          $ref: "#/components/schemas/IbmConfigV2"
-      required:
-      - ibm
-      title: Bucket Validation Request
-      type: object
-    ValidateBucketRequestS3:
-      description: This data structure is used to validate a bucket.
-      externalDocs:
-        description: Find out more about metrics cost optimization
-        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
-      properties:
-        s3:
-          $ref: "#/components/schemas/S3Config"
-      required:
-      - s3
-      title: Bucket Validation Request
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    MetricsConfiguratorPublicService_Update_request:
-      oneOf:
-      - $ref: "#/components/schemas/UpdateRequestGcs"
-      - $ref: "#/components/schemas/UpdateRequestIbm"
-      - $ref: "#/components/schemas/UpdateRequestS3"
-      type: object
-    MetricsConfiguratorPublicService_ConfigureTenant_request:
-      oneOf:
-      - $ref: "#/components/schemas/ConfigureTenantRequestGcs"
-      - $ref: "#/components/schemas/ConfigureTenantRequestIbm"
-      - $ref: "#/components/schemas/ConfigureTenantRequestS3"
-      type: object
-    MetricsConfiguratorPublicService_ValidateBucket_request:
-      oneOf:
-      - $ref: "#/components/schemas/ValidateBucketRequestGcs"
-      - $ref: "#/components/schemas/ValidateBucketRequestIbm"
-      - $ref: "#/components/schemas/ValidateBucketRequestS3"
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/metrics/data-setup/v1": {
+      "get": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "Get Metrics Storage Configuration",
+        "description": "Returns the current metrics storage configuration.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_GetTenantConfig",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTenantConfigResponseV2"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "Update Metrics Storage Configuration",
+        "description": "Updates the metrics storage configuration.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_Update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Update Tenant Request",
+                "description": "This data structure is used to update the configuration of a tenant.",
+                "type": "object",
+                "properties": {
+                  "gcs": {
+                    "$ref": "#/components/schemas/GcsConfig"
+                  },
+                  "ibm": {
+                    "$ref": "#/components/schemas/IbmConfigV2"
+                  },
+                  "retentionDays": {
+                    "description": "Archive retention period in days.",
+                    "type": "integer",
+                    "format": "int64",
+                    "minimum": 0
+                  },
+                  "s3": {
+                    "$ref": "#/components/schemas/S3Config"
+                  }
+                },
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "ibm"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "s3"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "gcs"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "ibm"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "s3"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "gcs"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "Configure Tenant",
+        "description": "Creates the metrics storage configuration.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_ConfigureTenant",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Configure Tenant Request",
+                "description": "This data structure is used to configure a tenant.",
+                "type": "object",
+                "properties": {
+                  "gcs": {
+                    "$ref": "#/components/schemas/GcsConfig"
+                  },
+                  "ibm": {
+                    "$ref": "#/components/schemas/IbmConfigV2"
+                  },
+                  "retentionPolicy": {
+                    "$ref": "#/components/schemas/RetentionPolicyRequest"
+                  },
+                  "s3": {
+                    "$ref": "#/components/schemas/S3Config"
+                  }
+                },
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "ibm"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "s3"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "gcs"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "ibm"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "s3"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "gcs"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/data-setup/v1/disable": {
+      "post": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "Disable Metrics Archive",
+        "description": "Disables the metrics storage configuration.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_DisableArchive",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/data-setup/v1/enable": {
+      "post": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "Enable Metrics Archive",
+        "description": "Enables the metrics storage configuration.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_EnableArchive",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics/data-setup/v1/validate": {
+      "post": {
+        "tags": [
+          "Metrics Data Archive Service"
+        ],
+        "summary": "Validate Metrics Storage Bucket",
+        "description": "Validates the provided metrics storage configuration.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "MetricsConfiguratorPublicService_ValidateBucket",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bucket Validation Request",
+                "description": "This data structure is used to validate a bucket.",
+                "type": "object",
+                "properties": {
+                  "gcs": {
+                    "$ref": "#/components/schemas/GcsConfig"
+                  },
+                  "ibm": {
+                    "$ref": "#/components/schemas/IbmConfigV2"
+                  },
+                  "s3": {
+                    "$ref": "#/components/schemas/S3Config"
+                  }
+                },
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "ibm"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "s3"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "gcs"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "ibm"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "s3"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "gcs"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GcsConfig": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "GCS Configuration",
+        "description": "This data structure represents the GCS configuration for a tenant.",
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "description": "Bucket name.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "GetTenantConfigResponseV2": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the current metrics tenant configuration.",
+        "type": "object",
+        "properties": {
+          "tenantConfig": {
+            "$ref": "#/components/schemas/TenantConfigV2"
+          }
+        }
+      },
+      "IbmConfigV2": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "IBM Bucket Configuration",
+        "description": "This data structure is used to configure an IBM bucket.",
+        "type": "object",
+        "properties": {
+          "crn": {
+            "example": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::",
+            "description": "The crn.",
+            "type": "string",
+            "minLength": 0
+          },
+          "endpoint": {
+            "example": "s3.us-south.cloud-object-storage.appdomain.cloud",
+            "description": "Endpoint.",
+            "type": "string",
+            "minLength": 0
+          },
+          "serviceCrn": {
+            "example": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::",
+            "description": "The service crn.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "RetentionPolicyRequest": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Retenion Policy Request",
+        "description": "This data structure is used to set the retention policy for a tenant.",
+        "type": "object",
+        "properties": {
+          "fiveMinutesResolution": {
+            "example": 2,
+            "description": "The five minutes resolution.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "oneHourResolution": {
+            "example": 3,
+            "description": "The one hour resolution.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "rawResolution": {
+            "example": 1,
+            "description": "The raw resolution.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          }
+        }
+      },
+      "S3Config": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "S3 Configuration",
+        "description": "This data structure represents the S3 configuration for a tenant.",
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "description": "Bucket name.",
+            "type": "string",
+            "minLength": 0
+          },
+          "region": {
+            "description": "Region.",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "TenantConfigV2": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Tenant config v2.",
+        "type": "object",
+        "properties": {
+          "disabled": {
+            "description": "Whether metrics archiving is disabled for this tenant.",
+            "type": "boolean"
+          },
+          "gcs": {
+            "$ref": "#/components/schemas/GcsConfig"
+          },
+          "ibm": {
+            "$ref": "#/components/schemas/IbmConfigV2"
+          },
+          "prefix": {
+            "description": "Storage path prefix applied to all archived objects.",
+            "type": "string",
+            "minLength": 0
+          },
+          "retentionPolicy": {
+            "$ref": "#/components/schemas/RetentionPolicyRequest"
+          },
+          "s3": {
+            "$ref": "#/components/schemas/S3Config"
+          },
+          "tenantId": {
+            "description": "Tenant identifier.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "ibm"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "s3"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "gcs"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "ibm"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "s3"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "gcs"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

@@ -13,6 +13,7 @@ package recording_rules_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,18 +24,19 @@ var _ MappedNullable = &InRuleGroup{}
 // InRuleGroup A group of recording rules.
 type InRuleGroup struct {
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Interval.
 	Interval *int64 `json:"interval,omitempty"`
 	// Limit.
 	Limit *string `json:"limit,omitempty" validate:"regexp=^[0-9]+$"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	// List of rules.
 	Rules []InRule `json:"rules,omitempty"`
 	// Version number.
-	Version *int64 `json:"version,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Version                           *int64 `json:"version,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _InRuleGroup InRuleGroup
@@ -43,8 +45,9 @@ type _InRuleGroup InRuleGroup
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInRuleGroup() *InRuleGroup {
+func NewInRuleGroup(name string) *InRuleGroup {
 	this := InRuleGroup{}
+	this.Name = name
 	return &this
 }
 
@@ -152,36 +155,28 @@ func (o *InRuleGroup) SetLimit(v string) {
 	o.Limit = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *InRuleGroup) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *InRuleGroup) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *InRuleGroup) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *InRuleGroup) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetRules returns the Rules field value if set, zero value otherwise.
@@ -249,7 +244,7 @@ func (o *InRuleGroup) SetVersion(v int64) {
 }
 
 func (o InRuleGroup) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -267,9 +262,7 @@ func (o InRuleGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
 	}
@@ -285,6 +278,27 @@ func (o InRuleGroup) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *InRuleGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varInRuleGroup := _InRuleGroup{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -306,6 +320,7 @@ func (o *InRuleGroup) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "rules")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -346,4 +361,3 @@ func (v *NullableInRuleGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

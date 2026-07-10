@@ -23,9 +23,10 @@ var _ MappedNullable = &ExtractTimestampParameters{}
 // ExtractTimestampParameters Extract timestamp parameters.
 type ExtractTimestampParameters struct {
 	// The format.
-	Format *string `json:"format,omitempty"`
-	Standard *FormatStandard `json:"standard,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Format                            *string         `json:"format,omitempty"`
+	Standard                          *FormatStandard `json:"standard,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ExtractTimestampParameters ExtractTimestampParameters
@@ -112,7 +113,7 @@ func (o *ExtractTimestampParameters) SetStandard(v FormatStandard) {
 }
 
 func (o ExtractTimestampParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *ExtractTimestampParameters) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "format")
 		delete(additionalProperties, "standard")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableExtractTimestampParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

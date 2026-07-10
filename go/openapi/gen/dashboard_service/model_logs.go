@@ -23,14 +23,15 @@ var _ MappedNullable = &Logs{}
 // Logs A logs variant of the query
 type Logs struct {
 	// Aggregation function
-	Aggregation []LogsAggregation `json:"aggregation,omitempty"`
+	Aggregation  []LogsAggregation          `json:"aggregation,omitempty"`
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// List of filters that narrow down query results
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
 	// A list of observation fields by which to group the results
-	GroupBy []ObservationField `json:"groupBy,omitempty"`
-	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
-	AdditionalProperties map[string]interface{}
+	GroupBy                           []ObservationField `json:"groupBy,omitempty"`
+	LuceneQuery                       *LuceneQuery       `json:"luceneQuery,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Logs Logs
@@ -213,7 +214,7 @@ func (o *Logs) SetLuceneQuery(v LuceneQuery) {
 }
 
 func (o Logs) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,6 +267,7 @@ func (o *Logs) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "groupBy")
 		delete(additionalProperties, "luceneQuery")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -306,4 +308,3 @@ func (v *NullableLogs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

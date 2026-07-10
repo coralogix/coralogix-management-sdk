@@ -25,8 +25,9 @@ type DemistoConfig struct {
 	// Raw payload data.
 	Payload *string `json:"payload,omitempty"`
 	// The uuid.
-	Uuid *string `json:"uuid,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Uuid                              *string `json:"uuid,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DemistoConfig DemistoConfig
@@ -113,7 +114,7 @@ func (o *DemistoConfig) SetUuid(v string) {
 }
 
 func (o DemistoConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *DemistoConfig) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "payload")
 		delete(additionalProperties, "uuid")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableDemistoConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

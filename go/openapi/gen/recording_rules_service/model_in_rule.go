@@ -13,6 +13,7 @@ package recording_rules_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -25,12 +26,13 @@ type InRule struct {
 	// The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.
 	EvaluationDelayMs *int64 `json:"evaluationDelayMs,omitempty"`
 	// The expr.
-	Expr *string `json:"expr,omitempty"`
+	Expr string `json:"expr" validate:"regexp=^[\\s\\S]*$"`
 	// List of labels.
 	Labels *map[string]string `json:"labels,omitempty"`
 	// Record.
-	Record *string `json:"record,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Record                            string `json:"record" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _InRule InRule
@@ -39,8 +41,10 @@ type _InRule InRule
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInRule() *InRule {
+func NewInRule(expr string, record string) *InRule {
 	this := InRule{}
+	this.Expr = expr
+	this.Record = record
 	return &this
 }
 
@@ -84,36 +88,28 @@ func (o *InRule) SetEvaluationDelayMs(v int64) {
 	o.EvaluationDelayMs = &v
 }
 
-// GetExpr returns the Expr field value if set, zero value otherwise.
+// GetExpr returns the Expr field value
 func (o *InRule) GetExpr() string {
-	if o == nil || IsNil(o.Expr) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Expr
+
+	return o.Expr
 }
 
-// GetExprOk returns a tuple with the Expr field value if set, nil otherwise
+// GetExprOk returns a tuple with the Expr field value
 // and a boolean to check if the value has been set.
 func (o *InRule) GetExprOk() (*string, bool) {
-	if o == nil || IsNil(o.Expr) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Expr, true
+	return &o.Expr, true
 }
 
-// HasExpr returns a boolean if a field has been set.
-func (o *InRule) HasExpr() bool {
-	if o != nil && !IsNil(o.Expr) {
-		return true
-	}
-
-	return false
-}
-
-// SetExpr gets a reference to the given string and assigns it to the Expr field.
+// SetExpr sets field value
 func (o *InRule) SetExpr(v string) {
-	o.Expr = &v
+	o.Expr = v
 }
 
 // GetLabels returns the Labels field value if set, zero value otherwise.
@@ -148,40 +144,32 @@ func (o *InRule) SetLabels(v map[string]string) {
 	o.Labels = &v
 }
 
-// GetRecord returns the Record field value if set, zero value otherwise.
+// GetRecord returns the Record field value
 func (o *InRule) GetRecord() string {
-	if o == nil || IsNil(o.Record) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Record
+
+	return o.Record
 }
 
-// GetRecordOk returns a tuple with the Record field value if set, nil otherwise
+// GetRecordOk returns a tuple with the Record field value
 // and a boolean to check if the value has been set.
 func (o *InRule) GetRecordOk() (*string, bool) {
-	if o == nil || IsNil(o.Record) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Record, true
+	return &o.Record, true
 }
 
-// HasRecord returns a boolean if a field has been set.
-func (o *InRule) HasRecord() bool {
-	if o != nil && !IsNil(o.Record) {
-		return true
-	}
-
-	return false
-}
-
-// SetRecord gets a reference to the given string and assigns it to the Record field.
+// SetRecord sets field value
 func (o *InRule) SetRecord(v string) {
-	o.Record = &v
+	o.Record = v
 }
 
 func (o InRule) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -193,15 +181,11 @@ func (o InRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EvaluationDelayMs) {
 		toSerialize["evaluationDelayMs"] = o.EvaluationDelayMs
 	}
-	if !IsNil(o.Expr) {
-		toSerialize["expr"] = o.Expr
-	}
+	toSerialize["expr"] = o.Expr
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
-	if !IsNil(o.Record) {
-		toSerialize["record"] = o.Record
-	}
+	toSerialize["record"] = o.Record
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -211,6 +195,28 @@ func (o InRule) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *InRule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"expr",
+		"record",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varInRule := _InRule{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -230,6 +236,7 @@ func (o *InRule) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "labels")
 		delete(additionalProperties, "record")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -270,4 +277,3 @@ func (v *NullableInRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

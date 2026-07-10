@@ -69,14 +69,14 @@ func TestAIEvaluations(t *testing.T) {
 	}
 
 	createdThreshold := 0.8
-	config := aievaluations.EvaluationConfigPiiAsEvaluationConfig(
-		aievaluations.NewEvaluationConfigPii(aievaluations.PiiConfig{
+	config := aievaluations.EvaluationConfig{
+		Pii: &aievaluations.PiiConfig{
 			Categories: []aievaluations.PiiCategory{
 				aievaluations.PIICATEGORY_EMAIL_ADDRESS,
 				aievaluations.PIICATEGORY_CREDIT_CARD,
 			},
-		}),
-	)
+		},
+	}
 
 	createReq := aievaluations.AiEvaluationsServiceCreateAiEvaluationRequest{
 		Application: aievaluations.PtrString(app.application),
@@ -121,14 +121,14 @@ func TestAIEvaluations(t *testing.T) {
 	gotEvaluation := getResp.GetAiEvaluation()
 	require.Equal(t, evaluationID, gotEvaluation.GetId())
 
-	updatedConfig := aievaluations.EvaluationConfigPiiAsEvaluationConfig(
-		aievaluations.NewEvaluationConfigPii(aievaluations.PiiConfig{
+	updatedConfig := aievaluations.EvaluationConfig{
+		Pii: &aievaluations.PiiConfig{
 			Categories: []aievaluations.PiiCategory{
 				aievaluations.PIICATEGORY_PHONE_NUMBER,
 				aievaluations.PIICATEGORY_US_SSN,
 			},
-		}),
-	)
+		},
+	}
 	updateReq := aievaluations.AiEvaluationsServiceUpdateAiEvaluationRequest{
 		Config:     &updatedConfig,
 		UpdateMask: aievaluations.PtrString("config"),
@@ -292,9 +292,7 @@ func TestAIEvaluationConfigDecodesPromptInjection(t *testing.T) {
 	var config aievaluations.EvaluationConfig
 	require.NoError(t, json.Unmarshal(payload, &config))
 
-	promptInjection, ok := config.GetActualInstance().(*aievaluations.EvaluationConfigPromptInjection)
-	require.Truef(t, ok, "expected promptInjection config, got %T", config.GetActualInstance())
-	promptInjectionConfig, ok := promptInjection.GetPromptInjectionOk()
+	promptInjectionConfig, ok := config.GetPromptInjectionOk()
 	require.True(t, ok)
 	require.Equal(t, "Only inspect the user prompt.", promptInjectionConfig.GetAdditionalContext())
 }
@@ -319,9 +317,7 @@ func TestAIEvaluationConfigDecodesCustomEvaluation(t *testing.T) {
 	var config aievaluations.EvaluationConfig
 	require.NoError(t, json.Unmarshal(payload, &config))
 
-	customEvaluation, ok := config.GetActualInstance().(*aievaluations.EvaluationConfigCustomEvaluation)
-	require.Truef(t, ok, "expected customEvaluation config, got %T", config.GetActualInstance())
-	customEvaluationConfig, ok := customEvaluation.GetCustomEvaluationOk()
+	customEvaluationConfig, ok := config.GetCustomEvaluationOk()
 	require.True(t, ok)
 	require.Equal(t, "competition", customEvaluationConfig.GetPolicyType())
 	require.Len(t, customEvaluationConfig.GetExamples(), 1)
@@ -358,9 +354,8 @@ func requirePIICategories(t *testing.T, evaluation aievaluations.AiEvaluation, e
 	t.Helper()
 
 	config := evaluation.GetConfig()
-	piiConfig, ok := config.GetActualInstance().(*aievaluations.EvaluationConfigPii)
-	require.Truef(t, ok, "expected PII config, got %T", config.GetActualInstance())
-	pii := piiConfig.GetPii()
+	pii, ok := config.GetPiiOk()
+	require.True(t, ok)
 	require.ElementsMatch(t, expected, pii.GetCategories())
 }
 

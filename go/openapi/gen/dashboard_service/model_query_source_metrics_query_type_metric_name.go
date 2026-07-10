@@ -23,8 +23,9 @@ var _ MappedNullable = &QuerySourceMetricsQueryTypeMetricName{}
 // QuerySourceMetricsQueryTypeMetricName Query.metrics query.type.metric name.
 type QuerySourceMetricsQueryTypeMetricName struct {
 	// The metric regex.
-	MetricRegex *string `json:"metricRegex,omitempty"`
-	AdditionalProperties map[string]interface{}
+	MetricRegex                       *string `json:"metricRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QuerySourceMetricsQueryTypeMetricName QuerySourceMetricsQueryTypeMetricName
@@ -79,7 +80,7 @@ func (o *QuerySourceMetricsQueryTypeMetricName) SetMetricRegex(v string) {
 }
 
 func (o QuerySourceMetricsQueryTypeMetricName) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *QuerySourceMetricsQueryTypeMetricName) UnmarshalJSON(data []byte) (err 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "metricRegex")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableQuerySourceMetricsQueryTypeMetricName) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

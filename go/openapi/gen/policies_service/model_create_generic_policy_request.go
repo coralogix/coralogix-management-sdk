@@ -23,20 +23,21 @@ var _ MappedNullable = &CreateGenericPolicyRequest{}
 
 // CreateGenericPolicyRequest This data structue is used to create a new policy.
 type CreateGenericPolicyRequest struct {
-	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
+	ApplicationRule  *QuotaV1Rule      `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
 	// Human-readable description.
 	Description string `json:"description"`
 	// The disabled.
 	Disabled *bool `json:"disabled,omitempty"`
 	// Display name.
-	Name string `json:"name"`
-	Priority QuotaV1Priority `json:"priority"`
+	Name             string            `json:"name"`
+	Priority         QuotaV1Priority   `json:"priority"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
-	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	SubsystemRule    *QuotaV1Rule      `json:"subsystemRule,omitempty"`
 	// List of targets.
-	Targets []V1Target `json:"targets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Targets                           []V1Target `json:"targets,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateGenericPolicyRequest CreateGenericPolicyRequest
@@ -326,7 +327,7 @@ func (o *CreateGenericPolicyRequest) SetTargets(v []V1Target) {
 }
 
 func (o CreateGenericPolicyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -379,10 +380,10 @@ func (o *CreateGenericPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -412,6 +413,7 @@ func (o *CreateGenericPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "subsystemRule")
 		delete(additionalProperties, "targets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -452,4 +454,3 @@ func (v *NullableCreateGenericPolicyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -31,11 +31,12 @@ type RulesV1Rule struct {
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// Sort order.
-	Order *int64 `json:"order,omitempty"`
+	Order      *int64          `json:"order,omitempty"`
 	Parameters *RuleParameters `json:"parameters,omitempty"`
 	// The source field.
-	SourceField *string `json:"sourceField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SourceField                       *string `json:"sourceField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RulesV1Rule RulesV1Rule
@@ -282,7 +283,7 @@ func (o *RulesV1Rule) SetSourceField(v string) {
 }
 
 func (o RulesV1Rule) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -343,6 +344,7 @@ func (o *RulesV1Rule) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "parameters")
 		delete(additionalProperties, "sourceField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -383,4 +385,3 @@ func (v *NullableRulesV1Rule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,8 +22,9 @@ var _ MappedNullable = &QueryMetricsQueryNotEquals{}
 
 // QueryMetricsQueryNotEquals Non-equality filter operator: includes metrics whose label does not match the selection.
 type QueryMetricsQueryNotEquals struct {
-	Selection *QueryMetricsQuerySelection `json:"selection,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Selection                         *QueryMetricsQuerySelection `json:"selection,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QueryMetricsQueryNotEquals QueryMetricsQueryNotEquals
@@ -78,7 +79,7 @@ func (o *QueryMetricsQueryNotEquals) SetSelection(v QueryMetricsQuerySelection) 
 }
 
 func (o QueryMetricsQueryNotEquals) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *QueryMetricsQueryNotEquals) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "selection")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableQueryMetricsQueryNotEquals) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -13,6 +13,7 @@ package recording_rules_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,12 +24,13 @@ var _ MappedNullable = &OutRuleGroupSet{}
 // OutRuleGroupSet An output set of rule groups.
 type OutRuleGroupSet struct {
 	// List of groups.
-	Groups []OutRuleGroup `json:"groups,omitempty"`
+	Groups []OutRuleGroup `json:"groups"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id" validate:"regexp=^[\\s\\S]*$"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name                              string `json:"name" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _OutRuleGroupSet OutRuleGroupSet
@@ -37,8 +39,11 @@ type _OutRuleGroupSet OutRuleGroupSet
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutRuleGroupSet() *OutRuleGroupSet {
+func NewOutRuleGroupSet(groups []OutRuleGroup, id string, name string) *OutRuleGroupSet {
 	this := OutRuleGroupSet{}
+	this.Groups = groups
+	this.Id = id
+	this.Name = name
 	return &this
 }
 
@@ -50,104 +55,80 @@ func NewOutRuleGroupSetWithDefaults() *OutRuleGroupSet {
 	return &this
 }
 
-// GetGroups returns the Groups field value if set, zero value otherwise.
+// GetGroups returns the Groups field value
 func (o *OutRuleGroupSet) GetGroups() []OutRuleGroup {
-	if o == nil || IsNil(o.Groups) {
+	if o == nil {
 		var ret []OutRuleGroup
 		return ret
 	}
+
 	return o.Groups
 }
 
-// GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
+// GetGroupsOk returns a tuple with the Groups field value
 // and a boolean to check if the value has been set.
 func (o *OutRuleGroupSet) GetGroupsOk() ([]OutRuleGroup, bool) {
-	if o == nil || IsNil(o.Groups) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Groups, true
 }
 
-// HasGroups returns a boolean if a field has been set.
-func (o *OutRuleGroupSet) HasGroups() bool {
-	if o != nil && !IsNil(o.Groups) {
-		return true
-	}
-
-	return false
-}
-
-// SetGroups gets a reference to the given []OutRuleGroup and assigns it to the Groups field.
+// SetGroups sets field value
 func (o *OutRuleGroupSet) SetGroups(v []OutRuleGroup) {
 	o.Groups = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *OutRuleGroupSet) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *OutRuleGroupSet) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *OutRuleGroupSet) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *OutRuleGroupSet) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *OutRuleGroupSet) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *OutRuleGroupSet) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *OutRuleGroupSet) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *OutRuleGroupSet) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 func (o OutRuleGroupSet) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,15 +137,9 @@ func (o OutRuleGroupSet) MarshalJSON() ([]byte, error) {
 
 func (o OutRuleGroupSet) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Groups) {
-		toSerialize["groups"] = o.Groups
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["groups"] = o.Groups
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -174,6 +149,29 @@ func (o OutRuleGroupSet) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *OutRuleGroupSet) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"groups",
+		"id",
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varOutRuleGroupSet := _OutRuleGroupSet{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -192,6 +190,7 @@ func (o *OutRuleGroupSet) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +231,3 @@ func (v *NullableOutRuleGroupSet) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

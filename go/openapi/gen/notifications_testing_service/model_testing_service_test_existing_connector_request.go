@@ -25,8 +25,9 @@ type TestingServiceTestExistingConnectorRequest struct {
 	// The connector id.
 	ConnectorId *string `json:"connectorId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Payload type to use when testing the connector.
-	PayloadType *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	PayloadType                       *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestingServiceTestExistingConnectorRequest TestingServiceTestExistingConnectorRequest
@@ -113,7 +114,7 @@ func (o *TestingServiceTestExistingConnectorRequest) SetPayloadType(v string) {
 }
 
 func (o TestingServiceTestExistingConnectorRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *TestingServiceTestExistingConnectorRequest) UnmarshalJSON(data []byte) 
 		delete(additionalProperties, "connectorId")
 		delete(additionalProperties, "payloadType")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableTestingServiceTestExistingConnectorRequest) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

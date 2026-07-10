@@ -31,11 +31,12 @@ type AlertDef struct {
 	// The alert definition's persistent ID
 	Id *string `json:"id,omitempty"`
 	// The last time the alert definition was triggered
-	LastTriggeredTime *time.Time `json:"lastTriggeredTime,omitempty"`
-	Status *AlertDefStatus `json:"status,omitempty"`
+	LastTriggeredTime *time.Time      `json:"lastTriggeredTime,omitempty"`
+	Status            *AlertDefStatus `json:"status,omitempty"`
 	// The time when the alert definition was last updated
-	UpdatedTime *time.Time `json:"updatedTime,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpdatedTime                       *time.Time `json:"updatedTime,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AlertDef AlertDef
@@ -282,7 +283,7 @@ func (o *AlertDef) SetUpdatedTime(v time.Time) {
 }
 
 func (o AlertDef) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -343,6 +344,7 @@ func (o *AlertDef) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "updatedTime")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -383,4 +385,3 @@ func (v *NullableAlertDef) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

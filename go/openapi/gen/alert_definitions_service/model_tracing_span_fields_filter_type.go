@@ -24,8 +24,9 @@ var _ MappedNullable = &TracingSpanFieldsFilterType{}
 type TracingSpanFieldsFilterType struct {
 	FilterType *TracingFilterType `json:"filterType,omitempty"`
 	// The key of the span field to filter by
-	Key *string `json:"key,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Key                               *string `json:"key,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TracingSpanFieldsFilterType TracingSpanFieldsFilterType
@@ -112,7 +113,7 @@ func (o *TracingSpanFieldsFilterType) SetKey(v string) {
 }
 
 func (o TracingSpanFieldsFilterType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *TracingSpanFieldsFilterType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "filterType")
 		delete(additionalProperties, "key")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableTracingSpanFieldsFilterType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

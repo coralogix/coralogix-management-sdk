@@ -88,14 +88,10 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [AccessType](docs/AccessType.md)
- - [AccessTypePermanentAccess](docs/AccessTypePermanentAccess.md)
- - [AccessTypeTemporaryAccess](docs/AccessTypeTemporaryAccess.md)
  - [AllowedLoginMode](docs/AllowedLoginMode.md)
  - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetUserResponse](docs/GetUserResponse.md)
  - [MultipleValues](docs/MultipleValues.md)

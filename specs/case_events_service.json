@@ -705,46 +705,6 @@
         ]
       },
       "CaseEventData": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/CaseEventDataAssigned"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataChangeAssigneeFailed"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataComment"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataCreated"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataKpiBreached"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataNotificationFailed"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataNotificationSent"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataPriorityDetailsChanged"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataResolutionReasonChangedEvent"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataStatusChanged"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataTitleChangedEvent"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataUnassigned"
-          }
-        ]
-      },
-      "CaseEventDataAssigned": {
         "externalDocs": {
           "url": ""
         },
@@ -754,186 +714,193 @@
         "properties": {
           "assigned": {
             "$ref": "#/components/schemas/AssignedCaseEvent"
-          }
-        },
-        "required": [
-          "assigned"
-        ]
-      },
-      "CaseEventDataChangeAssigneeFailed": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "changeAssigneeFailed": {
             "$ref": "#/components/schemas/ChangeAssigneeFailedEvent"
-          }
-        },
-        "required": [
-          "changeAssigneeFailed"
-        ]
-      },
-      "CaseEventDataComment": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "comment": {
             "$ref": "#/components/schemas/CommentCaseEvent"
-          }
-        },
-        "required": [
-          "comment"
-        ]
-      },
-      "CaseEventDataCreated": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "created": {
             "$ref": "#/components/schemas/CreatedCaseEvent"
-          }
-        },
-        "required": [
-          "created"
-        ]
-      },
-      "CaseEventDataKpiBreached": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "kpiBreached": {
             "$ref": "#/components/schemas/KPIBreachedCaseEvent"
-          }
-        },
-        "required": [
-          "kpiBreached"
-        ]
-      },
-      "CaseEventDataNotificationFailed": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "notificationFailed": {
             "$ref": "#/components/schemas/NotificationFailedCaseEvent"
-          }
-        },
-        "required": [
-          "notificationFailed"
-        ]
-      },
-      "CaseEventDataNotificationSent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "notificationSent": {
             "$ref": "#/components/schemas/NotificationSentCaseEvent"
-          }
-        },
-        "required": [
-          "notificationSent"
-        ]
-      },
-      "CaseEventDataPriorityDetailsChanged": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "priorityDetailsChanged": {
             "$ref": "#/components/schemas/PriorityDetailsChangedCaseEvent"
-          }
-        },
-        "required": [
-          "priorityDetailsChanged"
-        ]
-      },
-      "CaseEventDataResolutionReasonChangedEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "resolutionReasonChangedEvent": {
             "$ref": "#/components/schemas/ResolutionReasonChangedCaseEvent"
-          }
-        },
-        "required": [
-          "resolutionReasonChangedEvent"
-        ]
-      },
-      "CaseEventDataStatusChanged": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "statusChanged": {
             "$ref": "#/components/schemas/StatusChangedCaseEvent"
-          }
-        },
-        "required": [
-          "statusChanged"
-        ]
-      },
-      "CaseEventDataTitleChangedEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "titleChangedEvent": {
             "$ref": "#/components/schemas/TitleChangedCaseEvent"
-          }
-        },
-        "required": [
-          "titleChangedEvent"
-        ]
-      },
-      "CaseEventDataUnassigned": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
-        "type": "object",
-        "properties": {
+          },
           "unassigned": {
             "$ref": "#/components/schemas/UnassignedCaseEvent"
           }
         },
-        "required": [
-          "unassigned"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "assigned"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "unassigned"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "comment"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "statusChanged"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "notificationSent"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "notificationFailed"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "created"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "priorityDetailsChanged"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "titleChangedEvent"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "resolutionReasonChangedEvent"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "changeAssigneeFailed"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "kpiBreached"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "assigned"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "unassigned"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "comment"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "statusChanged"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "notificationSent"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "notificationFailed"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "created"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "priorityDetailsChanged"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "titleChangedEvent"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "resolutionReasonChangedEvent"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "changeAssigneeFailed"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "kpiBreached"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "CasePriority": {
@@ -974,19 +941,6 @@
         }
       },
       "CommentAttachment": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/CommentAttachmentCustomWidget"
-          },
-          {
-            "$ref": "#/components/schemas/CommentAttachmentFile"
-          },
-          {
-            "$ref": "#/components/schemas/CommentAttachmentLog"
-          }
-        ]
-      },
-      "CommentAttachmentCustomWidget": {
         "externalDocs": {
           "url": ""
         },
@@ -995,43 +949,33 @@
         "properties": {
           "customWidget": {
             "$ref": "#/components/schemas/CustomDashboardWidgetAttachment"
-          }
-        },
-        "required": [
-          "attachment",
-          "customWidget"
-        ]
-      },
-      "CommentAttachmentFile": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Comment attachment",
-        "type": "object",
-        "properties": {
+          },
           "file": {
             "$ref": "#/components/schemas/FileAttachment"
-          }
-        },
-        "required": [
-          "attachment",
-          "file"
-        ]
-      },
-      "CommentAttachmentLog": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Comment attachment",
-        "type": "object",
-        "properties": {
+          },
           "log": {
             "$ref": "#/components/schemas/LogAttachment"
           }
         },
-        "required": [
-          "attachment",
-          "log"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "log"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "customWidget"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "file"
+            ]
+          }
         ]
       },
       "CommentCaseEvent": {
@@ -1156,34 +1100,6 @@
         }
       },
       "EventActor": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/EventActorApiKey"
-          },
-          {
-            "$ref": "#/components/schemas/EventActorMicrosoftTeams"
-          },
-          {
-            "$ref": "#/components/schemas/EventActorPagerDuty"
-          },
-          {
-            "$ref": "#/components/schemas/EventActorPrometheusAlertManager"
-          },
-          {
-            "$ref": "#/components/schemas/EventActorServiceNow"
-          },
-          {
-            "$ref": "#/components/schemas/EventActorSlack"
-          },
-          {
-            "$ref": "#/components/schemas/EventActorSystem"
-          },
-          {
-            "$ref": "#/components/schemas/EventActorUser"
-          }
-        ]
-      },
-      "EventActorApiKey": {
         "externalDocs": {
           "url": ""
         },
@@ -1193,122 +1109,133 @@
         "properties": {
           "apiKey": {
             "$ref": "#/components/schemas/ApiKeyActor"
-          }
-        },
-        "required": [
-          "apiKey"
-        ]
-      },
-      "EventActorMicrosoftTeams": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Event actor",
-        "description": "Actor that initiated the event.",
-        "type": "object",
-        "properties": {
+          },
           "microsoftTeams": {
             "$ref": "#/components/schemas/MicrosoftTeamsActor"
-          }
-        },
-        "required": [
-          "microsoftTeams"
-        ]
-      },
-      "EventActorPagerDuty": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Event actor",
-        "description": "Actor that initiated the event.",
-        "type": "object",
-        "properties": {
+          },
           "pagerDuty": {
             "$ref": "#/components/schemas/PagerDutyActor"
-          }
-        },
-        "required": [
-          "pagerDuty"
-        ]
-      },
-      "EventActorPrometheusAlertManager": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Event actor",
-        "description": "Actor that initiated the event.",
-        "type": "object",
-        "properties": {
+          },
           "prometheusAlertManager": {
             "$ref": "#/components/schemas/PrometheusAlertManagerActor"
-          }
-        },
-        "required": [
-          "prometheusAlertManager"
-        ]
-      },
-      "EventActorServiceNow": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Event actor",
-        "description": "Actor that initiated the event.",
-        "type": "object",
-        "properties": {
+          },
           "serviceNow": {
             "$ref": "#/components/schemas/ServiceNowActor"
-          }
-        },
-        "required": [
-          "serviceNow"
-        ]
-      },
-      "EventActorSlack": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Event actor",
-        "description": "Actor that initiated the event.",
-        "type": "object",
-        "properties": {
+          },
           "slack": {
             "$ref": "#/components/schemas/SlackActor"
-          }
-        },
-        "required": [
-          "slack"
-        ]
-      },
-      "EventActorSystem": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Event actor",
-        "description": "Actor that initiated the event.",
-        "type": "object",
-        "properties": {
+          },
           "system": {
             "$ref": "#/components/schemas/SystemActor"
-          }
-        },
-        "required": [
-          "system"
-        ]
-      },
-      "EventActorUser": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Event actor",
-        "description": "Actor that initiated the event.",
-        "type": "object",
-        "properties": {
+          },
           "user": {
             "$ref": "#/components/schemas/UserActor"
           }
         },
-        "required": [
-          "user"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "system"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "user"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "serviceNow"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "apiKey"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "slack"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "prometheusAlertManager"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "pagerDuty"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "microsoftTeams"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "system"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "user"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "serviceNow"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "apiKey"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "slack"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "prometheusAlertManager"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "pagerDuty"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "microsoftTeams"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "FileAttachment": {
@@ -1344,16 +1271,6 @@
         ]
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -1364,26 +1281,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -1394,9 +1291,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -1450,7 +1359,8 @@
         "enum": [
           "KPI_TYPE_UNSPECIFIED",
           "KPI_TYPE_TIME_TO_ACKNOWLEDGE",
-          "KPI_TYPE_TIME_TO_RESOLVE"
+          "KPI_TYPE_TIME_TO_RESOLVE",
+          "KPI_TYPE_TIME_TO_UPDATE"
         ]
       },
       "LogAttachment": {

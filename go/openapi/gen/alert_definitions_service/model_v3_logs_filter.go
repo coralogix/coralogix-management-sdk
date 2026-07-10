@@ -22,8 +22,9 @@ var _ MappedNullable = &V3LogsFilter{}
 
 // V3LogsFilter Filter configuration for log-based alerts
 type V3LogsFilter struct {
-	SimpleFilter *LogsSimpleFilter `json:"simpleFilter,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SimpleFilter                      *LogsSimpleFilter `json:"simpleFilter,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V3LogsFilter V3LogsFilter
@@ -78,7 +79,7 @@ func (o *V3LogsFilter) SetSimpleFilter(v LogsSimpleFilter) {
 }
 
 func (o V3LogsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *V3LogsFilter) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "simpleFilter")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableV3LogsFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

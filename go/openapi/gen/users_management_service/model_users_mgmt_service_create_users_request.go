@@ -22,9 +22,10 @@ var _ MappedNullable = &UsersMgmtServiceCreateUsersRequest{}
 
 // UsersMgmtServiceCreateUsersRequest struct for UsersMgmtServiceCreateUsersRequest
 type UsersMgmtServiceCreateUsersRequest struct {
-	OnboardingMode *OnboardingMode `json:"onboardingMode,omitempty"`
-	UserTemplate *UserTemplate `json:"userTemplate,omitempty"`
-	AdditionalProperties map[string]interface{}
+	OnboardingMode                    *OnboardingMode `json:"onboardingMode,omitempty"`
+	UserTemplate                      *UserTemplate   `json:"userTemplate,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UsersMgmtServiceCreateUsersRequest UsersMgmtServiceCreateUsersRequest
@@ -111,7 +112,7 @@ func (o *UsersMgmtServiceCreateUsersRequest) SetUserTemplate(v UserTemplate) {
 }
 
 func (o UsersMgmtServiceCreateUsersRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *UsersMgmtServiceCreateUsersRequest) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "onboardingMode")
 		delete(additionalProperties, "userTemplate")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableUsersMgmtServiceCreateUsersRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

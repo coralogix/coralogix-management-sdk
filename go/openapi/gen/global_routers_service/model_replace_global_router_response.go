@@ -22,8 +22,9 @@ var _ MappedNullable = &ReplaceGlobalRouterResponse{}
 
 // ReplaceGlobalRouterResponse Response which contains an updated global router
 type ReplaceGlobalRouterResponse struct {
-	Router *GlobalRouter `json:"router,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Router                            *GlobalRouter `json:"router,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ReplaceGlobalRouterResponse ReplaceGlobalRouterResponse
@@ -78,7 +79,7 @@ func (o *ReplaceGlobalRouterResponse) SetRouter(v GlobalRouter) {
 }
 
 func (o ReplaceGlobalRouterResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *ReplaceGlobalRouterResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "router")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableReplaceGlobalRouterResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

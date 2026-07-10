@@ -13,126 +13,218 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
+	"time"
 )
 
 var _ = bytes.MinRead
 
-// AlertSuppression - struct for AlertSuppression
+// checks if the AlertSuppression type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AlertSuppression{}
+
+// AlertSuppression Data describing the suppression status of an alert indicator, including active suppression rules and muted state.
 type AlertSuppression struct {
-	AlertSuppressionActiveSuppressionRules *AlertSuppressionActiveSuppressionRules
-	AlertSuppressionAlertDefinitionMuted *AlertSuppressionAlertDefinitionMuted
+	ActiveSuppressionRules *ActiveSuppressionRules `json:"activeSuppressionRules,omitempty"`
+	// Object indicating the muted state of the alert definition for an alert indicator.
+	AlertDefinitionMuted map[string]interface{} `json:"alertDefinitionMuted,omitempty"`
+	// Timestamp when the alert got suppressed.
+	SuppressedTime                    *time.Time `json:"suppressedTime,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// AlertSuppressionActiveSuppressionRulesAsAlertSuppression is a convenience function that returns AlertSuppressionActiveSuppressionRules wrapped in AlertSuppression
-func AlertSuppressionActiveSuppressionRulesAsAlertSuppression(v *AlertSuppressionActiveSuppressionRules) AlertSuppression {
-	return AlertSuppression{
-		AlertSuppressionActiveSuppressionRules: v,
+type _AlertSuppression AlertSuppression
+
+// NewAlertSuppression instantiates a new AlertSuppression object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAlertSuppression() *AlertSuppression {
+	this := AlertSuppression{}
+	return &this
+}
+
+// NewAlertSuppressionWithDefaults instantiates a new AlertSuppression object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAlertSuppressionWithDefaults() *AlertSuppression {
+	this := AlertSuppression{}
+	return &this
+}
+
+// GetActiveSuppressionRules returns the ActiveSuppressionRules field value if set, zero value otherwise.
+func (o *AlertSuppression) GetActiveSuppressionRules() ActiveSuppressionRules {
+	if o == nil || IsNil(o.ActiveSuppressionRules) {
+		var ret ActiveSuppressionRules
+		return ret
 	}
+	return *o.ActiveSuppressionRules
 }
 
-// AlertSuppressionAlertDefinitionMutedAsAlertSuppression is a convenience function that returns AlertSuppressionAlertDefinitionMuted wrapped in AlertSuppression
-func AlertSuppressionAlertDefinitionMutedAsAlertSuppression(v *AlertSuppressionAlertDefinitionMuted) AlertSuppression {
-	return AlertSuppression{
-		AlertSuppressionAlertDefinitionMuted: v,
+// GetActiveSuppressionRulesOk returns a tuple with the ActiveSuppressionRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertSuppression) GetActiveSuppressionRulesOk() (*ActiveSuppressionRules, bool) {
+	if o == nil || IsNil(o.ActiveSuppressionRules) {
+		return nil, false
 	}
+	return o.ActiveSuppressionRules, true
 }
 
+// HasActiveSuppressionRules returns a boolean if a field has been set.
+func (o *AlertSuppression) HasActiveSuppressionRules() bool {
+	if o != nil && !IsNil(o.ActiveSuppressionRules) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *AlertSuppression) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into AlertSuppressionActiveSuppressionRules
-	err = json.Unmarshal(data, &dst.AlertSuppressionActiveSuppressionRules)
-	if err == nil {
-		jsonAlertSuppressionActiveSuppressionRules, _ := json.Marshal(dst.AlertSuppressionActiveSuppressionRules)
-		if string(jsonAlertSuppressionActiveSuppressionRules) == "{}" { // empty struct
-			dst.AlertSuppressionActiveSuppressionRules = nil
-		} else {
-			if err = validator.Validate(dst.AlertSuppressionActiveSuppressionRules); err != nil {
-				dst.AlertSuppressionActiveSuppressionRules = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetActiveSuppressionRules gets a reference to the given ActiveSuppressionRules and assigns it to the ActiveSuppressionRules field.
+func (o *AlertSuppression) SetActiveSuppressionRules(v ActiveSuppressionRules) {
+	o.ActiveSuppressionRules = &v
+}
+
+// GetAlertDefinitionMuted returns the AlertDefinitionMuted field value if set, zero value otherwise.
+func (o *AlertSuppression) GetAlertDefinitionMuted() map[string]interface{} {
+	if o == nil || IsNil(o.AlertDefinitionMuted) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.AlertDefinitionMuted
+}
+
+// GetAlertDefinitionMutedOk returns a tuple with the AlertDefinitionMuted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertSuppression) GetAlertDefinitionMutedOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.AlertDefinitionMuted) {
+		return map[string]interface{}{}, false
+	}
+	return o.AlertDefinitionMuted, true
+}
+
+// HasAlertDefinitionMuted returns a boolean if a field has been set.
+func (o *AlertSuppression) HasAlertDefinitionMuted() bool {
+	if o != nil && !IsNil(o.AlertDefinitionMuted) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertDefinitionMuted gets a reference to the given map[string]interface{} and assigns it to the AlertDefinitionMuted field.
+func (o *AlertSuppression) SetAlertDefinitionMuted(v map[string]interface{}) {
+	o.AlertDefinitionMuted = v
+}
+
+// GetSuppressedTime returns the SuppressedTime field value if set, zero value otherwise.
+func (o *AlertSuppression) GetSuppressedTime() time.Time {
+	if o == nil || IsNil(o.SuppressedTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.SuppressedTime
+}
+
+// GetSuppressedTimeOk returns a tuple with the SuppressedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertSuppression) GetSuppressedTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.SuppressedTime) {
+		return nil, false
+	}
+	return o.SuppressedTime, true
+}
+
+// HasSuppressedTime returns a boolean if a field has been set.
+func (o *AlertSuppression) HasSuppressedTime() bool {
+	if o != nil && !IsNil(o.SuppressedTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuppressedTime gets a reference to the given time.Time and assigns it to the SuppressedTime field.
+func (o *AlertSuppression) SetSuppressedTime(v time.Time) {
+	o.SuppressedTime = &v
+}
+
+func (o AlertSuppression) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AlertSuppression) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ActiveSuppressionRules) {
+		toSerialize["activeSuppressionRules"] = o.ActiveSuppressionRules
+	}
+	if !IsNil(o.AlertDefinitionMuted) {
+		toSerialize["alertDefinitionMuted"] = o.AlertDefinitionMuted
+	}
+	if !IsNil(o.SuppressedTime) {
+		toSerialize["suppressedTime"] = o.SuppressedTime
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["activeSuppressionRules"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["alertDefinitionMuted"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [activeSuppressionRules, alertDefinitionMuted] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["activeSuppressionRules"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field activeSuppressionRules must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["alertDefinitionMuted"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field alertDefinitionMuted must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *AlertSuppression) UnmarshalJSON(data []byte) (err error) {
+	varAlertSuppression := _AlertSuppression{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertSuppression)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertSuppression(varAlertSuppression)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["activeSuppressionRules"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertSuppressionActiveSuppressionRules = nil
-	}
-
-	// try to unmarshal data into AlertSuppressionAlertDefinitionMuted
-	err = json.Unmarshal(data, &dst.AlertSuppressionAlertDefinitionMuted)
-	if err == nil {
-		jsonAlertSuppressionAlertDefinitionMuted, _ := json.Marshal(dst.AlertSuppressionAlertDefinitionMuted)
-		if string(jsonAlertSuppressionAlertDefinitionMuted) == "{}" { // empty struct
-			dst.AlertSuppressionAlertDefinitionMuted = nil
-		} else {
-			if err = validator.Validate(dst.AlertSuppressionAlertDefinitionMuted); err != nil {
-				dst.AlertSuppressionAlertDefinitionMuted = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["alertDefinitionMuted"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertSuppressionAlertDefinitionMuted = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [activeSuppressionRules, alertDefinitionMuted] may be set"}
+		}
+
+		delete(additionalProperties, "activeSuppressionRules")
+		delete(additionalProperties, "alertDefinitionMuted")
+		delete(additionalProperties, "suppressedTime")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AlertSuppressionActiveSuppressionRules = nil
-		dst.AlertSuppressionAlertDefinitionMuted = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(AlertSuppression)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src AlertSuppression) MarshalJSON() ([]byte, error) {
-	if src.AlertSuppressionActiveSuppressionRules != nil {
-		return json.Marshal(&src.AlertSuppressionActiveSuppressionRules)
-	}
-
-	if src.AlertSuppressionAlertDefinitionMuted != nil {
-		return json.Marshal(&src.AlertSuppressionAlertDefinitionMuted)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *AlertSuppression) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.AlertSuppressionActiveSuppressionRules != nil {
-		return obj.AlertSuppressionActiveSuppressionRules
-	}
-
-	if obj.AlertSuppressionAlertDefinitionMuted != nil {
-		return obj.AlertSuppressionAlertDefinitionMuted
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj AlertSuppression) GetActualInstanceValue() (interface{}) {
-	if obj.AlertSuppressionActiveSuppressionRules != nil {
-		return *obj.AlertSuppressionActiveSuppressionRules
-	}
-
-	if obj.AlertSuppressionAlertDefinitionMuted != nil {
-		return *obj.AlertSuppressionAlertDefinitionMuted
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableAlertSuppression struct {
@@ -170,4 +262,3 @@ func (v *NullableAlertSuppression) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

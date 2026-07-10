@@ -26,8 +26,9 @@ type ApiKeySummary struct {
 	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
 	// List of permission presets.
-	Presets []PermissionsPreset `json:"presets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Presets                           []PermissionsPreset `json:"presets,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ApiKeySummary ApiKeySummary
@@ -146,7 +147,7 @@ func (o *ApiKeySummary) SetPresets(v []PermissionsPreset) {
 }
 
 func (o ApiKeySummary) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -191,6 +192,7 @@ func (o *ApiKeySummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "permissions")
 		delete(additionalProperties, "presets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -231,4 +233,3 @@ func (v *NullableApiKeySummary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

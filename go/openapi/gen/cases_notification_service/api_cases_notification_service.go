@@ -18,13 +18,12 @@ import (
 	"net/url"
 )
 
-
 // CasesNotificationServiceAPIService CasesNotificationServiceAPI service
 type CasesNotificationServiceAPIService service
 
 type ApiCasesNotificationServiceListNotificationDeliveriesRequest struct {
-	ctx context.Context
-	ApiService *CasesNotificationServiceAPIService
+	ctx                               context.Context
+	ApiService                        *CasesNotificationServiceAPIService
 	listNotificationDeliveriesRequest *ListNotificationDeliveriesRequest
 }
 
@@ -45,24 +44,25 @@ Retrieve notification delivery records for one or more cases, including routing,
 Requires the following permissions:
 - `case:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesNotificationServiceListNotificationDeliveriesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesNotificationServiceListNotificationDeliveriesRequest
 */
 func (a *CasesNotificationServiceAPIService) CasesNotificationServiceListNotificationDeliveries(ctx context.Context) ApiCasesNotificationServiceListNotificationDeliveriesRequest {
 	return ApiCasesNotificationServiceListNotificationDeliveriesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListNotificationDeliveriesResponse
+//
+//	@return ListNotificationDeliveriesResponse
 func (a *CasesNotificationServiceAPIService) CasesNotificationServiceListNotificationDeliveriesExecute(r ApiCasesNotificationServiceListNotificationDeliveriesRequest) (*ListNotificationDeliveriesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListNotificationDeliveriesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListNotificationDeliveriesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesNotificationServiceAPIService.CasesNotificationServiceListNotificationDeliveries")
@@ -127,8 +127,8 @@ func (a *CasesNotificationServiceAPIService) CasesNotificationServiceListNotific
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -138,8 +138,8 @@ func (a *CasesNotificationServiceAPIService) CasesNotificationServiceListNotific
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -149,8 +149,8 @@ func (a *CasesNotificationServiceAPIService) CasesNotificationServiceListNotific
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

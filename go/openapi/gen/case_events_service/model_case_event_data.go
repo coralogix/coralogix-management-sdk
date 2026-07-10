@@ -13,506 +13,638 @@ package case_events_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// CaseEventData - struct for CaseEventData
+// checks if the CaseEventData type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CaseEventData{}
+
+// CaseEventData One-of wrapper for concrete case event types.
 type CaseEventData struct {
-	CaseEventDataAssigned *CaseEventDataAssigned
-	CaseEventDataChangeAssigneeFailed *CaseEventDataChangeAssigneeFailed
-	CaseEventDataComment *CaseEventDataComment
-	CaseEventDataCreated *CaseEventDataCreated
-	CaseEventDataKpiBreached *CaseEventDataKpiBreached
-	CaseEventDataNotificationFailed *CaseEventDataNotificationFailed
-	CaseEventDataNotificationSent *CaseEventDataNotificationSent
-	CaseEventDataPriorityDetailsChanged *CaseEventDataPriorityDetailsChanged
-	CaseEventDataResolutionReasonChangedEvent *CaseEventDataResolutionReasonChangedEvent
-	CaseEventDataStatusChanged *CaseEventDataStatusChanged
-	CaseEventDataTitleChangedEvent *CaseEventDataTitleChangedEvent
-	CaseEventDataUnassigned *CaseEventDataUnassigned
+	Assigned                          *AssignedCaseEvent                `json:"assigned,omitempty"`
+	ChangeAssigneeFailed              *ChangeAssigneeFailedEvent        `json:"changeAssigneeFailed,omitempty"`
+	Comment                           *CommentCaseEvent                 `json:"comment,omitempty"`
+	Created                           *CreatedCaseEvent                 `json:"created,omitempty"`
+	KpiBreached                       *KPIBreachedCaseEvent             `json:"kpiBreached,omitempty"`
+	NotificationFailed                *NotificationFailedCaseEvent      `json:"notificationFailed,omitempty"`
+	NotificationSent                  *NotificationSentCaseEvent        `json:"notificationSent,omitempty"`
+	PriorityDetailsChanged            *PriorityDetailsChangedCaseEvent  `json:"priorityDetailsChanged,omitempty"`
+	ResolutionReasonChangedEvent      *ResolutionReasonChangedCaseEvent `json:"resolutionReasonChangedEvent,omitempty"`
+	StatusChanged                     *StatusChangedCaseEvent           `json:"statusChanged,omitempty"`
+	TitleChangedEvent                 *TitleChangedCaseEvent            `json:"titleChangedEvent,omitempty"`
+	Unassigned                        *UnassignedCaseEvent              `json:"unassigned,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// CaseEventDataAssignedAsCaseEventData is a convenience function that returns CaseEventDataAssigned wrapped in CaseEventData
-func CaseEventDataAssignedAsCaseEventData(v *CaseEventDataAssigned) CaseEventData {
-	return CaseEventData{
-		CaseEventDataAssigned: v,
+type _CaseEventData CaseEventData
+
+// NewCaseEventData instantiates a new CaseEventData object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewCaseEventData() *CaseEventData {
+	this := CaseEventData{}
+	return &this
+}
+
+// NewCaseEventDataWithDefaults instantiates a new CaseEventData object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewCaseEventDataWithDefaults() *CaseEventData {
+	this := CaseEventData{}
+	return &this
+}
+
+// GetAssigned returns the Assigned field value if set, zero value otherwise.
+func (o *CaseEventData) GetAssigned() AssignedCaseEvent {
+	if o == nil || IsNil(o.Assigned) {
+		var ret AssignedCaseEvent
+		return ret
 	}
+	return *o.Assigned
 }
 
-// CaseEventDataChangeAssigneeFailedAsCaseEventData is a convenience function that returns CaseEventDataChangeAssigneeFailed wrapped in CaseEventData
-func CaseEventDataChangeAssigneeFailedAsCaseEventData(v *CaseEventDataChangeAssigneeFailed) CaseEventData {
-	return CaseEventData{
-		CaseEventDataChangeAssigneeFailed: v,
+// GetAssignedOk returns a tuple with the Assigned field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetAssignedOk() (*AssignedCaseEvent, bool) {
+	if o == nil || IsNil(o.Assigned) {
+		return nil, false
 	}
+	return o.Assigned, true
 }
 
-// CaseEventDataCommentAsCaseEventData is a convenience function that returns CaseEventDataComment wrapped in CaseEventData
-func CaseEventDataCommentAsCaseEventData(v *CaseEventDataComment) CaseEventData {
-	return CaseEventData{
-		CaseEventDataComment: v,
+// HasAssigned returns a boolean if a field has been set.
+func (o *CaseEventData) HasAssigned() bool {
+	if o != nil && !IsNil(o.Assigned) {
+		return true
 	}
+
+	return false
 }
 
-// CaseEventDataCreatedAsCaseEventData is a convenience function that returns CaseEventDataCreated wrapped in CaseEventData
-func CaseEventDataCreatedAsCaseEventData(v *CaseEventDataCreated) CaseEventData {
-	return CaseEventData{
-		CaseEventDataCreated: v,
+// SetAssigned gets a reference to the given AssignedCaseEvent and assigns it to the Assigned field.
+func (o *CaseEventData) SetAssigned(v AssignedCaseEvent) {
+	o.Assigned = &v
+}
+
+// GetChangeAssigneeFailed returns the ChangeAssigneeFailed field value if set, zero value otherwise.
+func (o *CaseEventData) GetChangeAssigneeFailed() ChangeAssigneeFailedEvent {
+	if o == nil || IsNil(o.ChangeAssigneeFailed) {
+		var ret ChangeAssigneeFailedEvent
+		return ret
 	}
+	return *o.ChangeAssigneeFailed
 }
 
-// CaseEventDataKpiBreachedAsCaseEventData is a convenience function that returns CaseEventDataKpiBreached wrapped in CaseEventData
-func CaseEventDataKpiBreachedAsCaseEventData(v *CaseEventDataKpiBreached) CaseEventData {
-	return CaseEventData{
-		CaseEventDataKpiBreached: v,
+// GetChangeAssigneeFailedOk returns a tuple with the ChangeAssigneeFailed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetChangeAssigneeFailedOk() (*ChangeAssigneeFailedEvent, bool) {
+	if o == nil || IsNil(o.ChangeAssigneeFailed) {
+		return nil, false
 	}
+	return o.ChangeAssigneeFailed, true
 }
 
-// CaseEventDataNotificationFailedAsCaseEventData is a convenience function that returns CaseEventDataNotificationFailed wrapped in CaseEventData
-func CaseEventDataNotificationFailedAsCaseEventData(v *CaseEventDataNotificationFailed) CaseEventData {
-	return CaseEventData{
-		CaseEventDataNotificationFailed: v,
+// HasChangeAssigneeFailed returns a boolean if a field has been set.
+func (o *CaseEventData) HasChangeAssigneeFailed() bool {
+	if o != nil && !IsNil(o.ChangeAssigneeFailed) {
+		return true
 	}
+
+	return false
 }
 
-// CaseEventDataNotificationSentAsCaseEventData is a convenience function that returns CaseEventDataNotificationSent wrapped in CaseEventData
-func CaseEventDataNotificationSentAsCaseEventData(v *CaseEventDataNotificationSent) CaseEventData {
-	return CaseEventData{
-		CaseEventDataNotificationSent: v,
+// SetChangeAssigneeFailed gets a reference to the given ChangeAssigneeFailedEvent and assigns it to the ChangeAssigneeFailed field.
+func (o *CaseEventData) SetChangeAssigneeFailed(v ChangeAssigneeFailedEvent) {
+	o.ChangeAssigneeFailed = &v
+}
+
+// GetComment returns the Comment field value if set, zero value otherwise.
+func (o *CaseEventData) GetComment() CommentCaseEvent {
+	if o == nil || IsNil(o.Comment) {
+		var ret CommentCaseEvent
+		return ret
 	}
+	return *o.Comment
 }
 
-// CaseEventDataPriorityDetailsChangedAsCaseEventData is a convenience function that returns CaseEventDataPriorityDetailsChanged wrapped in CaseEventData
-func CaseEventDataPriorityDetailsChangedAsCaseEventData(v *CaseEventDataPriorityDetailsChanged) CaseEventData {
-	return CaseEventData{
-		CaseEventDataPriorityDetailsChanged: v,
+// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetCommentOk() (*CommentCaseEvent, bool) {
+	if o == nil || IsNil(o.Comment) {
+		return nil, false
 	}
+	return o.Comment, true
 }
 
-// CaseEventDataResolutionReasonChangedEventAsCaseEventData is a convenience function that returns CaseEventDataResolutionReasonChangedEvent wrapped in CaseEventData
-func CaseEventDataResolutionReasonChangedEventAsCaseEventData(v *CaseEventDataResolutionReasonChangedEvent) CaseEventData {
-	return CaseEventData{
-		CaseEventDataResolutionReasonChangedEvent: v,
+// HasComment returns a boolean if a field has been set.
+func (o *CaseEventData) HasComment() bool {
+	if o != nil && !IsNil(o.Comment) {
+		return true
 	}
+
+	return false
 }
 
-// CaseEventDataStatusChangedAsCaseEventData is a convenience function that returns CaseEventDataStatusChanged wrapped in CaseEventData
-func CaseEventDataStatusChangedAsCaseEventData(v *CaseEventDataStatusChanged) CaseEventData {
-	return CaseEventData{
-		CaseEventDataStatusChanged: v,
+// SetComment gets a reference to the given CommentCaseEvent and assigns it to the Comment field.
+func (o *CaseEventData) SetComment(v CommentCaseEvent) {
+	o.Comment = &v
+}
+
+// GetCreated returns the Created field value if set, zero value otherwise.
+func (o *CaseEventData) GetCreated() CreatedCaseEvent {
+	if o == nil || IsNil(o.Created) {
+		var ret CreatedCaseEvent
+		return ret
 	}
+	return *o.Created
 }
 
-// CaseEventDataTitleChangedEventAsCaseEventData is a convenience function that returns CaseEventDataTitleChangedEvent wrapped in CaseEventData
-func CaseEventDataTitleChangedEventAsCaseEventData(v *CaseEventDataTitleChangedEvent) CaseEventData {
-	return CaseEventData{
-		CaseEventDataTitleChangedEvent: v,
+// GetCreatedOk returns a tuple with the Created field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetCreatedOk() (*CreatedCaseEvent, bool) {
+	if o == nil || IsNil(o.Created) {
+		return nil, false
 	}
+	return o.Created, true
 }
 
-// CaseEventDataUnassignedAsCaseEventData is a convenience function that returns CaseEventDataUnassigned wrapped in CaseEventData
-func CaseEventDataUnassignedAsCaseEventData(v *CaseEventDataUnassigned) CaseEventData {
-	return CaseEventData{
-		CaseEventDataUnassigned: v,
+// HasCreated returns a boolean if a field has been set.
+func (o *CaseEventData) HasCreated() bool {
+	if o != nil && !IsNil(o.Created) {
+		return true
 	}
+
+	return false
 }
 
+// SetCreated gets a reference to the given CreatedCaseEvent and assigns it to the Created field.
+func (o *CaseEventData) SetCreated(v CreatedCaseEvent) {
+	o.Created = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *CaseEventData) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into CaseEventDataAssigned
-	err = json.Unmarshal(data, &dst.CaseEventDataAssigned)
-	if err == nil {
-		jsonCaseEventDataAssigned, _ := json.Marshal(dst.CaseEventDataAssigned)
-		if string(jsonCaseEventDataAssigned) == "{}" { // empty struct
-			dst.CaseEventDataAssigned = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataAssigned); err != nil {
-				dst.CaseEventDataAssigned = nil
-			} else {
-				match++
-			}
+// GetKpiBreached returns the KpiBreached field value if set, zero value otherwise.
+func (o *CaseEventData) GetKpiBreached() KPIBreachedCaseEvent {
+	if o == nil || IsNil(o.KpiBreached) {
+		var ret KPIBreachedCaseEvent
+		return ret
+	}
+	return *o.KpiBreached
+}
+
+// GetKpiBreachedOk returns a tuple with the KpiBreached field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetKpiBreachedOk() (*KPIBreachedCaseEvent, bool) {
+	if o == nil || IsNil(o.KpiBreached) {
+		return nil, false
+	}
+	return o.KpiBreached, true
+}
+
+// HasKpiBreached returns a boolean if a field has been set.
+func (o *CaseEventData) HasKpiBreached() bool {
+	if o != nil && !IsNil(o.KpiBreached) {
+		return true
+	}
+
+	return false
+}
+
+// SetKpiBreached gets a reference to the given KPIBreachedCaseEvent and assigns it to the KpiBreached field.
+func (o *CaseEventData) SetKpiBreached(v KPIBreachedCaseEvent) {
+	o.KpiBreached = &v
+}
+
+// GetNotificationFailed returns the NotificationFailed field value if set, zero value otherwise.
+func (o *CaseEventData) GetNotificationFailed() NotificationFailedCaseEvent {
+	if o == nil || IsNil(o.NotificationFailed) {
+		var ret NotificationFailedCaseEvent
+		return ret
+	}
+	return *o.NotificationFailed
+}
+
+// GetNotificationFailedOk returns a tuple with the NotificationFailed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetNotificationFailedOk() (*NotificationFailedCaseEvent, bool) {
+	if o == nil || IsNil(o.NotificationFailed) {
+		return nil, false
+	}
+	return o.NotificationFailed, true
+}
+
+// HasNotificationFailed returns a boolean if a field has been set.
+func (o *CaseEventData) HasNotificationFailed() bool {
+	if o != nil && !IsNil(o.NotificationFailed) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotificationFailed gets a reference to the given NotificationFailedCaseEvent and assigns it to the NotificationFailed field.
+func (o *CaseEventData) SetNotificationFailed(v NotificationFailedCaseEvent) {
+	o.NotificationFailed = &v
+}
+
+// GetNotificationSent returns the NotificationSent field value if set, zero value otherwise.
+func (o *CaseEventData) GetNotificationSent() NotificationSentCaseEvent {
+	if o == nil || IsNil(o.NotificationSent) {
+		var ret NotificationSentCaseEvent
+		return ret
+	}
+	return *o.NotificationSent
+}
+
+// GetNotificationSentOk returns a tuple with the NotificationSent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetNotificationSentOk() (*NotificationSentCaseEvent, bool) {
+	if o == nil || IsNil(o.NotificationSent) {
+		return nil, false
+	}
+	return o.NotificationSent, true
+}
+
+// HasNotificationSent returns a boolean if a field has been set.
+func (o *CaseEventData) HasNotificationSent() bool {
+	if o != nil && !IsNil(o.NotificationSent) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotificationSent gets a reference to the given NotificationSentCaseEvent and assigns it to the NotificationSent field.
+func (o *CaseEventData) SetNotificationSent(v NotificationSentCaseEvent) {
+	o.NotificationSent = &v
+}
+
+// GetPriorityDetailsChanged returns the PriorityDetailsChanged field value if set, zero value otherwise.
+func (o *CaseEventData) GetPriorityDetailsChanged() PriorityDetailsChangedCaseEvent {
+	if o == nil || IsNil(o.PriorityDetailsChanged) {
+		var ret PriorityDetailsChangedCaseEvent
+		return ret
+	}
+	return *o.PriorityDetailsChanged
+}
+
+// GetPriorityDetailsChangedOk returns a tuple with the PriorityDetailsChanged field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetPriorityDetailsChangedOk() (*PriorityDetailsChangedCaseEvent, bool) {
+	if o == nil || IsNil(o.PriorityDetailsChanged) {
+		return nil, false
+	}
+	return o.PriorityDetailsChanged, true
+}
+
+// HasPriorityDetailsChanged returns a boolean if a field has been set.
+func (o *CaseEventData) HasPriorityDetailsChanged() bool {
+	if o != nil && !IsNil(o.PriorityDetailsChanged) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorityDetailsChanged gets a reference to the given PriorityDetailsChangedCaseEvent and assigns it to the PriorityDetailsChanged field.
+func (o *CaseEventData) SetPriorityDetailsChanged(v PriorityDetailsChangedCaseEvent) {
+	o.PriorityDetailsChanged = &v
+}
+
+// GetResolutionReasonChangedEvent returns the ResolutionReasonChangedEvent field value if set, zero value otherwise.
+func (o *CaseEventData) GetResolutionReasonChangedEvent() ResolutionReasonChangedCaseEvent {
+	if o == nil || IsNil(o.ResolutionReasonChangedEvent) {
+		var ret ResolutionReasonChangedCaseEvent
+		return ret
+	}
+	return *o.ResolutionReasonChangedEvent
+}
+
+// GetResolutionReasonChangedEventOk returns a tuple with the ResolutionReasonChangedEvent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetResolutionReasonChangedEventOk() (*ResolutionReasonChangedCaseEvent, bool) {
+	if o == nil || IsNil(o.ResolutionReasonChangedEvent) {
+		return nil, false
+	}
+	return o.ResolutionReasonChangedEvent, true
+}
+
+// HasResolutionReasonChangedEvent returns a boolean if a field has been set.
+func (o *CaseEventData) HasResolutionReasonChangedEvent() bool {
+	if o != nil && !IsNil(o.ResolutionReasonChangedEvent) {
+		return true
+	}
+
+	return false
+}
+
+// SetResolutionReasonChangedEvent gets a reference to the given ResolutionReasonChangedCaseEvent and assigns it to the ResolutionReasonChangedEvent field.
+func (o *CaseEventData) SetResolutionReasonChangedEvent(v ResolutionReasonChangedCaseEvent) {
+	o.ResolutionReasonChangedEvent = &v
+}
+
+// GetStatusChanged returns the StatusChanged field value if set, zero value otherwise.
+func (o *CaseEventData) GetStatusChanged() StatusChangedCaseEvent {
+	if o == nil || IsNil(o.StatusChanged) {
+		var ret StatusChangedCaseEvent
+		return ret
+	}
+	return *o.StatusChanged
+}
+
+// GetStatusChangedOk returns a tuple with the StatusChanged field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetStatusChangedOk() (*StatusChangedCaseEvent, bool) {
+	if o == nil || IsNil(o.StatusChanged) {
+		return nil, false
+	}
+	return o.StatusChanged, true
+}
+
+// HasStatusChanged returns a boolean if a field has been set.
+func (o *CaseEventData) HasStatusChanged() bool {
+	if o != nil && !IsNil(o.StatusChanged) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatusChanged gets a reference to the given StatusChangedCaseEvent and assigns it to the StatusChanged field.
+func (o *CaseEventData) SetStatusChanged(v StatusChangedCaseEvent) {
+	o.StatusChanged = &v
+}
+
+// GetTitleChangedEvent returns the TitleChangedEvent field value if set, zero value otherwise.
+func (o *CaseEventData) GetTitleChangedEvent() TitleChangedCaseEvent {
+	if o == nil || IsNil(o.TitleChangedEvent) {
+		var ret TitleChangedCaseEvent
+		return ret
+	}
+	return *o.TitleChangedEvent
+}
+
+// GetTitleChangedEventOk returns a tuple with the TitleChangedEvent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetTitleChangedEventOk() (*TitleChangedCaseEvent, bool) {
+	if o == nil || IsNil(o.TitleChangedEvent) {
+		return nil, false
+	}
+	return o.TitleChangedEvent, true
+}
+
+// HasTitleChangedEvent returns a boolean if a field has been set.
+func (o *CaseEventData) HasTitleChangedEvent() bool {
+	if o != nil && !IsNil(o.TitleChangedEvent) {
+		return true
+	}
+
+	return false
+}
+
+// SetTitleChangedEvent gets a reference to the given TitleChangedCaseEvent and assigns it to the TitleChangedEvent field.
+func (o *CaseEventData) SetTitleChangedEvent(v TitleChangedCaseEvent) {
+	o.TitleChangedEvent = &v
+}
+
+// GetUnassigned returns the Unassigned field value if set, zero value otherwise.
+func (o *CaseEventData) GetUnassigned() UnassignedCaseEvent {
+	if o == nil || IsNil(o.Unassigned) {
+		var ret UnassignedCaseEvent
+		return ret
+	}
+	return *o.Unassigned
+}
+
+// GetUnassignedOk returns a tuple with the Unassigned field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseEventData) GetUnassignedOk() (*UnassignedCaseEvent, bool) {
+	if o == nil || IsNil(o.Unassigned) {
+		return nil, false
+	}
+	return o.Unassigned, true
+}
+
+// HasUnassigned returns a boolean if a field has been set.
+func (o *CaseEventData) HasUnassigned() bool {
+	if o != nil && !IsNil(o.Unassigned) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnassigned gets a reference to the given UnassignedCaseEvent and assigns it to the Unassigned field.
+func (o *CaseEventData) SetUnassigned(v UnassignedCaseEvent) {
+	o.Unassigned = &v
+}
+
+func (o CaseEventData) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CaseEventData) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Assigned) {
+		toSerialize["assigned"] = o.Assigned
+	}
+	if !IsNil(o.ChangeAssigneeFailed) {
+		toSerialize["changeAssigneeFailed"] = o.ChangeAssigneeFailed
+	}
+	if !IsNil(o.Comment) {
+		toSerialize["comment"] = o.Comment
+	}
+	if !IsNil(o.Created) {
+		toSerialize["created"] = o.Created
+	}
+	if !IsNil(o.KpiBreached) {
+		toSerialize["kpiBreached"] = o.KpiBreached
+	}
+	if !IsNil(o.NotificationFailed) {
+		toSerialize["notificationFailed"] = o.NotificationFailed
+	}
+	if !IsNil(o.NotificationSent) {
+		toSerialize["notificationSent"] = o.NotificationSent
+	}
+	if !IsNil(o.PriorityDetailsChanged) {
+		toSerialize["priorityDetailsChanged"] = o.PriorityDetailsChanged
+	}
+	if !IsNil(o.ResolutionReasonChangedEvent) {
+		toSerialize["resolutionReasonChangedEvent"] = o.ResolutionReasonChangedEvent
+	}
+	if !IsNil(o.StatusChanged) {
+		toSerialize["statusChanged"] = o.StatusChanged
+	}
+	if !IsNil(o.TitleChangedEvent) {
+		toSerialize["titleChangedEvent"] = o.TitleChangedEvent
+	}
+	if !IsNil(o.Unassigned) {
+		toSerialize["unassigned"] = o.Unassigned
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["assigned"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["unassigned"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["comment"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["statusChanged"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["notificationSent"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["notificationFailed"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["created"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["priorityDetailsChanged"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["titleChangedEvent"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["resolutionReasonChangedEvent"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["changeAssigneeFailed"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["kpiBreached"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [assigned, unassigned, comment, statusChanged, notificationSent, notificationFailed, created, priorityDetailsChanged, titleChangedEvent, resolutionReasonChangedEvent, changeAssigneeFailed, kpiBreached] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["assigned"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field assigned must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["unassigned"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field unassigned must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["comment"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field comment must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["statusChanged"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field statusChanged must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["notificationSent"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field notificationSent must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["notificationFailed"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field notificationFailed must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["created"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field created must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["priorityDetailsChanged"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field priorityDetailsChanged must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["titleChangedEvent"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field titleChangedEvent must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["resolutionReasonChangedEvent"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field resolutionReasonChangedEvent must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["changeAssigneeFailed"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field changeAssigneeFailed must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["kpiBreached"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field kpiBreached must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *CaseEventData) UnmarshalJSON(data []byte) (err error) {
+	varCaseEventData := _CaseEventData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCaseEventData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CaseEventData(varCaseEventData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["assigned"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataAssigned = nil
-	}
-
-	// try to unmarshal data into CaseEventDataChangeAssigneeFailed
-	err = json.Unmarshal(data, &dst.CaseEventDataChangeAssigneeFailed)
-	if err == nil {
-		jsonCaseEventDataChangeAssigneeFailed, _ := json.Marshal(dst.CaseEventDataChangeAssigneeFailed)
-		if string(jsonCaseEventDataChangeAssigneeFailed) == "{}" { // empty struct
-			dst.CaseEventDataChangeAssigneeFailed = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataChangeAssigneeFailed); err != nil {
-				dst.CaseEventDataChangeAssigneeFailed = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["unassigned"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataChangeAssigneeFailed = nil
-	}
-
-	// try to unmarshal data into CaseEventDataComment
-	err = json.Unmarshal(data, &dst.CaseEventDataComment)
-	if err == nil {
-		jsonCaseEventDataComment, _ := json.Marshal(dst.CaseEventDataComment)
-		if string(jsonCaseEventDataComment) == "{}" { // empty struct
-			dst.CaseEventDataComment = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataComment); err != nil {
-				dst.CaseEventDataComment = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["comment"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataComment = nil
-	}
-
-	// try to unmarshal data into CaseEventDataCreated
-	err = json.Unmarshal(data, &dst.CaseEventDataCreated)
-	if err == nil {
-		jsonCaseEventDataCreated, _ := json.Marshal(dst.CaseEventDataCreated)
-		if string(jsonCaseEventDataCreated) == "{}" { // empty struct
-			dst.CaseEventDataCreated = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataCreated); err != nil {
-				dst.CaseEventDataCreated = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["statusChanged"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataCreated = nil
-	}
-
-	// try to unmarshal data into CaseEventDataKpiBreached
-	err = json.Unmarshal(data, &dst.CaseEventDataKpiBreached)
-	if err == nil {
-		jsonCaseEventDataKpiBreached, _ := json.Marshal(dst.CaseEventDataKpiBreached)
-		if string(jsonCaseEventDataKpiBreached) == "{}" { // empty struct
-			dst.CaseEventDataKpiBreached = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataKpiBreached); err != nil {
-				dst.CaseEventDataKpiBreached = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["notificationSent"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataKpiBreached = nil
-	}
-
-	// try to unmarshal data into CaseEventDataNotificationFailed
-	err = json.Unmarshal(data, &dst.CaseEventDataNotificationFailed)
-	if err == nil {
-		jsonCaseEventDataNotificationFailed, _ := json.Marshal(dst.CaseEventDataNotificationFailed)
-		if string(jsonCaseEventDataNotificationFailed) == "{}" { // empty struct
-			dst.CaseEventDataNotificationFailed = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataNotificationFailed); err != nil {
-				dst.CaseEventDataNotificationFailed = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["notificationFailed"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataNotificationFailed = nil
-	}
-
-	// try to unmarshal data into CaseEventDataNotificationSent
-	err = json.Unmarshal(data, &dst.CaseEventDataNotificationSent)
-	if err == nil {
-		jsonCaseEventDataNotificationSent, _ := json.Marshal(dst.CaseEventDataNotificationSent)
-		if string(jsonCaseEventDataNotificationSent) == "{}" { // empty struct
-			dst.CaseEventDataNotificationSent = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataNotificationSent); err != nil {
-				dst.CaseEventDataNotificationSent = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["created"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataNotificationSent = nil
-	}
-
-	// try to unmarshal data into CaseEventDataPriorityDetailsChanged
-	err = json.Unmarshal(data, &dst.CaseEventDataPriorityDetailsChanged)
-	if err == nil {
-		jsonCaseEventDataPriorityDetailsChanged, _ := json.Marshal(dst.CaseEventDataPriorityDetailsChanged)
-		if string(jsonCaseEventDataPriorityDetailsChanged) == "{}" { // empty struct
-			dst.CaseEventDataPriorityDetailsChanged = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataPriorityDetailsChanged); err != nil {
-				dst.CaseEventDataPriorityDetailsChanged = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["priorityDetailsChanged"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataPriorityDetailsChanged = nil
-	}
-
-	// try to unmarshal data into CaseEventDataResolutionReasonChangedEvent
-	err = json.Unmarshal(data, &dst.CaseEventDataResolutionReasonChangedEvent)
-	if err == nil {
-		jsonCaseEventDataResolutionReasonChangedEvent, _ := json.Marshal(dst.CaseEventDataResolutionReasonChangedEvent)
-		if string(jsonCaseEventDataResolutionReasonChangedEvent) == "{}" { // empty struct
-			dst.CaseEventDataResolutionReasonChangedEvent = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataResolutionReasonChangedEvent); err != nil {
-				dst.CaseEventDataResolutionReasonChangedEvent = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["titleChangedEvent"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataResolutionReasonChangedEvent = nil
-	}
-
-	// try to unmarshal data into CaseEventDataStatusChanged
-	err = json.Unmarshal(data, &dst.CaseEventDataStatusChanged)
-	if err == nil {
-		jsonCaseEventDataStatusChanged, _ := json.Marshal(dst.CaseEventDataStatusChanged)
-		if string(jsonCaseEventDataStatusChanged) == "{}" { // empty struct
-			dst.CaseEventDataStatusChanged = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataStatusChanged); err != nil {
-				dst.CaseEventDataStatusChanged = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["resolutionReasonChangedEvent"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataStatusChanged = nil
-	}
-
-	// try to unmarshal data into CaseEventDataTitleChangedEvent
-	err = json.Unmarshal(data, &dst.CaseEventDataTitleChangedEvent)
-	if err == nil {
-		jsonCaseEventDataTitleChangedEvent, _ := json.Marshal(dst.CaseEventDataTitleChangedEvent)
-		if string(jsonCaseEventDataTitleChangedEvent) == "{}" { // empty struct
-			dst.CaseEventDataTitleChangedEvent = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataTitleChangedEvent); err != nil {
-				dst.CaseEventDataTitleChangedEvent = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["changeAssigneeFailed"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataTitleChangedEvent = nil
-	}
-
-	// try to unmarshal data into CaseEventDataUnassigned
-	err = json.Unmarshal(data, &dst.CaseEventDataUnassigned)
-	if err == nil {
-		jsonCaseEventDataUnassigned, _ := json.Marshal(dst.CaseEventDataUnassigned)
-		if string(jsonCaseEventDataUnassigned) == "{}" { // empty struct
-			dst.CaseEventDataUnassigned = nil
-		} else {
-			if err = validator.Validate(dst.CaseEventDataUnassigned); err != nil {
-				dst.CaseEventDataUnassigned = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["kpiBreached"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseEventDataUnassigned = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [assigned, unassigned, comment, statusChanged, notificationSent, notificationFailed, created, priorityDetailsChanged, titleChangedEvent, resolutionReasonChangedEvent, changeAssigneeFailed, kpiBreached] may be set"}
+		}
+
+		delete(additionalProperties, "assigned")
+		delete(additionalProperties, "changeAssigneeFailed")
+		delete(additionalProperties, "comment")
+		delete(additionalProperties, "created")
+		delete(additionalProperties, "kpiBreached")
+		delete(additionalProperties, "notificationFailed")
+		delete(additionalProperties, "notificationSent")
+		delete(additionalProperties, "priorityDetailsChanged")
+		delete(additionalProperties, "resolutionReasonChangedEvent")
+		delete(additionalProperties, "statusChanged")
+		delete(additionalProperties, "titleChangedEvent")
+		delete(additionalProperties, "unassigned")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.CaseEventDataAssigned = nil
-		dst.CaseEventDataChangeAssigneeFailed = nil
-		dst.CaseEventDataComment = nil
-		dst.CaseEventDataCreated = nil
-		dst.CaseEventDataKpiBreached = nil
-		dst.CaseEventDataNotificationFailed = nil
-		dst.CaseEventDataNotificationSent = nil
-		dst.CaseEventDataPriorityDetailsChanged = nil
-		dst.CaseEventDataResolutionReasonChangedEvent = nil
-		dst.CaseEventDataStatusChanged = nil
-		dst.CaseEventDataTitleChangedEvent = nil
-		dst.CaseEventDataUnassigned = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(CaseEventData)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src CaseEventData) MarshalJSON() ([]byte, error) {
-	if src.CaseEventDataAssigned != nil {
-		return json.Marshal(&src.CaseEventDataAssigned)
-	}
-
-	if src.CaseEventDataChangeAssigneeFailed != nil {
-		return json.Marshal(&src.CaseEventDataChangeAssigneeFailed)
-	}
-
-	if src.CaseEventDataComment != nil {
-		return json.Marshal(&src.CaseEventDataComment)
-	}
-
-	if src.CaseEventDataCreated != nil {
-		return json.Marshal(&src.CaseEventDataCreated)
-	}
-
-	if src.CaseEventDataKpiBreached != nil {
-		return json.Marshal(&src.CaseEventDataKpiBreached)
-	}
-
-	if src.CaseEventDataNotificationFailed != nil {
-		return json.Marshal(&src.CaseEventDataNotificationFailed)
-	}
-
-	if src.CaseEventDataNotificationSent != nil {
-		return json.Marshal(&src.CaseEventDataNotificationSent)
-	}
-
-	if src.CaseEventDataPriorityDetailsChanged != nil {
-		return json.Marshal(&src.CaseEventDataPriorityDetailsChanged)
-	}
-
-	if src.CaseEventDataResolutionReasonChangedEvent != nil {
-		return json.Marshal(&src.CaseEventDataResolutionReasonChangedEvent)
-	}
-
-	if src.CaseEventDataStatusChanged != nil {
-		return json.Marshal(&src.CaseEventDataStatusChanged)
-	}
-
-	if src.CaseEventDataTitleChangedEvent != nil {
-		return json.Marshal(&src.CaseEventDataTitleChangedEvent)
-	}
-
-	if src.CaseEventDataUnassigned != nil {
-		return json.Marshal(&src.CaseEventDataUnassigned)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *CaseEventData) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.CaseEventDataAssigned != nil {
-		return obj.CaseEventDataAssigned
-	}
-
-	if obj.CaseEventDataChangeAssigneeFailed != nil {
-		return obj.CaseEventDataChangeAssigneeFailed
-	}
-
-	if obj.CaseEventDataComment != nil {
-		return obj.CaseEventDataComment
-	}
-
-	if obj.CaseEventDataCreated != nil {
-		return obj.CaseEventDataCreated
-	}
-
-	if obj.CaseEventDataKpiBreached != nil {
-		return obj.CaseEventDataKpiBreached
-	}
-
-	if obj.CaseEventDataNotificationFailed != nil {
-		return obj.CaseEventDataNotificationFailed
-	}
-
-	if obj.CaseEventDataNotificationSent != nil {
-		return obj.CaseEventDataNotificationSent
-	}
-
-	if obj.CaseEventDataPriorityDetailsChanged != nil {
-		return obj.CaseEventDataPriorityDetailsChanged
-	}
-
-	if obj.CaseEventDataResolutionReasonChangedEvent != nil {
-		return obj.CaseEventDataResolutionReasonChangedEvent
-	}
-
-	if obj.CaseEventDataStatusChanged != nil {
-		return obj.CaseEventDataStatusChanged
-	}
-
-	if obj.CaseEventDataTitleChangedEvent != nil {
-		return obj.CaseEventDataTitleChangedEvent
-	}
-
-	if obj.CaseEventDataUnassigned != nil {
-		return obj.CaseEventDataUnassigned
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj CaseEventData) GetActualInstanceValue() (interface{}) {
-	if obj.CaseEventDataAssigned != nil {
-		return *obj.CaseEventDataAssigned
-	}
-
-	if obj.CaseEventDataChangeAssigneeFailed != nil {
-		return *obj.CaseEventDataChangeAssigneeFailed
-	}
-
-	if obj.CaseEventDataComment != nil {
-		return *obj.CaseEventDataComment
-	}
-
-	if obj.CaseEventDataCreated != nil {
-		return *obj.CaseEventDataCreated
-	}
-
-	if obj.CaseEventDataKpiBreached != nil {
-		return *obj.CaseEventDataKpiBreached
-	}
-
-	if obj.CaseEventDataNotificationFailed != nil {
-		return *obj.CaseEventDataNotificationFailed
-	}
-
-	if obj.CaseEventDataNotificationSent != nil {
-		return *obj.CaseEventDataNotificationSent
-	}
-
-	if obj.CaseEventDataPriorityDetailsChanged != nil {
-		return *obj.CaseEventDataPriorityDetailsChanged
-	}
-
-	if obj.CaseEventDataResolutionReasonChangedEvent != nil {
-		return *obj.CaseEventDataResolutionReasonChangedEvent
-	}
-
-	if obj.CaseEventDataStatusChanged != nil {
-		return *obj.CaseEventDataStatusChanged
-	}
-
-	if obj.CaseEventDataTitleChangedEvent != nil {
-		return *obj.CaseEventDataTitleChangedEvent
-	}
-
-	if obj.CaseEventDataUnassigned != nil {
-		return *obj.CaseEventDataUnassigned
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableCaseEventData struct {
@@ -550,4 +682,3 @@ func (v *NullableCaseEventData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,8 +23,9 @@ var _ MappedNullable = &RemoveEnrichmentsResponse{}
 // RemoveEnrichmentsResponse Response data structure for enrichments deletion
 type RemoveEnrichmentsResponse struct {
 	// The remaining enrichments.
-	RemainingEnrichments []Enrichment `json:"remainingEnrichments,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RemainingEnrichments              []Enrichment `json:"remainingEnrichments,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RemoveEnrichmentsResponse RemoveEnrichmentsResponse
@@ -79,7 +80,7 @@ func (o *RemoveEnrichmentsResponse) SetRemainingEnrichments(v []Enrichment) {
 }
 
 func (o RemoveEnrichmentsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *RemoveEnrichmentsResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "remainingEnrichments")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableRemoveEnrichmentsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,8 +22,9 @@ var _ MappedNullable = &TestDestinationResponse{}
 
 // TestDestinationResponse Response containing the results of a notification destination test.
 type TestDestinationResponse struct {
-	Result *TestResult `json:"result,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Result                            *TestResult `json:"result,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestDestinationResponse TestDestinationResponse
@@ -78,7 +79,7 @@ func (o *TestDestinationResponse) SetResult(v TestResult) {
 }
 
 func (o TestDestinationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *TestDestinationResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "result")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableTestDestinationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

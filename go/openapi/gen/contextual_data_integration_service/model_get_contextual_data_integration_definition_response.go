@@ -22,8 +22,9 @@ var _ MappedNullable = &GetContextualDataIntegrationDefinitionResponse{}
 
 // GetContextualDataIntegrationDefinitionResponse Response containing the definition of a contextual data integration type.
 type GetContextualDataIntegrationDefinitionResponse struct {
-	IntegrationDefinition *IntegrationDefinition `json:"integrationDefinition,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IntegrationDefinition             *IntegrationDefinition `json:"integrationDefinition,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetContextualDataIntegrationDefinitionResponse GetContextualDataIntegrationDefinitionResponse
@@ -78,7 +79,7 @@ func (o *GetContextualDataIntegrationDefinitionResponse) SetIntegrationDefinitio
 }
 
 func (o GetContextualDataIntegrationDefinitionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *GetContextualDataIntegrationDefinitionResponse) UnmarshalJSON(data []by
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "integrationDefinition")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableGetContextualDataIntegrationDefinitionResponse) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

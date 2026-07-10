@@ -1,595 +1,563 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /cases/notifications/v1/deliveries:
-    post:
-      description: |-
-        Retrieve notification delivery records for one or more cases, including routing, target, and outcome information.
-
-        Requires the following permissions:
-        - `case:Read`
-      externalDocs:
-        url: ""
-      operationId: CasesNotificationService_ListNotificationDeliveries
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/List_notification_deliveries_request"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListNotificationDeliveriesResponse"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Unauthorized request
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-          description: Internal server error
-      summary: List notification deliveries for cases
-      tags:
-      - Cases notification service
-      x-coralogixPermissions:
-      - case:Read
-components:
-  schemas:
-    CaseNotificationDeliveries:
-      description: Notification deliveries for a single case.
-      example:
-        notificationDeliveries:
-        - requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
-          attempted:
-            router:
-              routerName: Production alerts router
-              routerId: d4e5f678-90ab-cdef-1234-567890abcdef
-            attempts:
-            - connector:
-                connectorType: CONNECTOR_TYPE_UNSPECIFIED
-                connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-                connectorName: Production Slack
-              outcome:
-                failure:
-                  errorMessage: Connection timeout after 30s
-            - connector:
-                connectorType: CONNECTOR_TYPE_UNSPECIFIED
-                connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-                connectorName: Production Slack
-              outcome:
-                failure:
-                  errorMessage: Connection timeout after 30s
-          timestamp: 2025-09-22T10:30:00Z
-        - requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
-          attempted:
-            router:
-              routerName: Production alerts router
-              routerId: d4e5f678-90ab-cdef-1234-567890abcdef
-            attempts:
-            - connector:
-                connectorType: CONNECTOR_TYPE_UNSPECIFIED
-                connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-                connectorName: Production Slack
-              outcome:
-                failure:
-                  errorMessage: Connection timeout after 30s
-            - connector:
-                connectorType: CONNECTOR_TYPE_UNSPECIFIED
-                connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-                connectorName: Production Slack
-              outcome:
-                failure:
-                  errorMessage: Connection timeout after 30s
-          timestamp: 2025-09-22T10:30:00Z
-      externalDocs:
-        url: ""
-      properties:
-        notificationDeliveries:
-          description: Notification deliveries for the case
-          items:
-            $ref: "#/components/schemas/NotificationDelivery"
-          minItems: 0
-          type: array
-      required:
-      - notificationDeliveries
-      title: Case notification deliveries
-      type: object
-    ConnectorDetails:
-      description: Details of a notification connector.
-      example:
-        connectorType: CONNECTOR_TYPE_UNSPECIFIED
-        connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-        connectorName: Production Slack
-      externalDocs:
-        url: ""
-      properties:
-        connectorId:
-          description: Unique identifier of the connector
-          example: c1d2e3f4-5678-90ab-cdef-1234567890ab
-          minLength: 0
-          type: string
-        connectorName:
-          description: Display name of the connector
-          example: Production Slack
-          minLength: 0
-          type: string
-        connectorType:
-          $ref: "#/components/schemas/v1.ConnectorType"
-      required:
-      - connectorId
-      - connectorName
-      - connectorType
-      title: Connector details
-      type: object
-    DeliveryAttempt:
-      description: A single delivery attempt to a specific connector.
-      example:
-        connector:
-          connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-          connectorName: Production Slack
-        outcome:
-          failure:
-            errorMessage: Connection timeout after 30s
-      externalDocs:
-        url: ""
-      properties:
-        connector:
-          $ref: "#/components/schemas/ConnectorDetails"
-        outcome:
-          $ref: "#/components/schemas/DeliveryOutcome"
-      required:
-      - connector
-      - outcome
-      title: Delivery attempt
-      type: object
-    DeliveryFailure:
-      description: Failed delivery outcome with error details.
-      example:
-        errorMessage: Connection timeout after 30s
-      externalDocs:
-        url: ""
-      properties:
-        errorMessage:
-          description: Error message describing the failure
-          example: Connection timeout after 30s
-          minLength: 0
-          type: string
-      required:
-      - errorMessage
-      title: Delivery failure
-      type: object
-    DeliveryOutcome:
-      oneOf:
-      - $ref: "#/components/schemas/DeliveryOutcomeFailure"
-      - $ref: "#/components/schemas/DeliveryOutcomeSuccess"
-    DeliveryOutcomeFailure:
-      description: Outcome of a notification delivery attempt.
-      example:
-        failure:
-          errorMessage: Connection timeout after 30s
-      externalDocs:
-        url: ""
-      properties:
-        failure:
-          $ref: "#/components/schemas/DeliveryFailure"
-      required:
-      - failure
-      title: Delivery outcome
-      type: object
-    DeliveryOutcomeSuccess:
-      description: Outcome of a notification delivery attempt.
-      externalDocs:
-        url: ""
-      properties:
-        success:
-          $ref: "#/components/schemas/DeliverySuccess"
-      required:
-      - success
-      title: Delivery outcome
-      type: object
-    DeliverySuccess:
-      description: Successful delivery outcome with an optional evidence URL.
-      externalDocs:
-        url: ""
-      properties:
-        evidenceUrl:
-          description: "URL to the delivered notification, if available (e.g. Slack\
-            \ message, ServiceNow record)"
-          example: https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456
-          minLength: 0
-          type: string
-      title: Delivery success
-      type: object
-    Error:
-      description: Standard error response body returned for a failed request.
-      example:
-        code: 139
-        message: message
-      properties:
-        code:
-          description: "HTTP status code of the error (for example 400, 404, 500)."
-          format: int32
-          maximum: 599
-          minimum: 100
-          type: integer
-        message:
-          description: Human-readable description of the error.
-          maxLength: 4096
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    ListNotificationDeliveriesResponse:
-      description: Response containing a list of notification delivery records for
-        cases.
-      example:
-        deliveriesByCase:
-          key:
-            notificationDeliveries:
-            - requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
-              attempted:
-                router:
-                  routerName: Production alerts router
-                  routerId: d4e5f678-90ab-cdef-1234-567890abcdef
-                attempts:
-                - connector:
-                    connectorType: CONNECTOR_TYPE_UNSPECIFIED
-                    connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-                    connectorName: Production Slack
-                  outcome:
-                    failure:
-                      errorMessage: Connection timeout after 30s
-                - connector:
-                    connectorType: CONNECTOR_TYPE_UNSPECIFIED
-                    connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-                    connectorName: Production Slack
-                  outcome:
-                    failure:
-                      errorMessage: Connection timeout after 30s
-              timestamp: 2025-09-22T10:30:00Z
-            - requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
-              attempted:
-                router:
-                  routerName: Production alerts router
-                  routerId: d4e5f678-90ab-cdef-1234-567890abcdef
-                attempts:
-                - connector:
-                    connectorType: CONNECTOR_TYPE_UNSPECIFIED
-                    connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-                    connectorName: Production Slack
-                  outcome:
-                    failure:
-                      errorMessage: Connection timeout after 30s
-                - connector:
-                    connectorType: CONNECTOR_TYPE_UNSPECIFIED
-                    connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-                    connectorName: Production Slack
-                  outcome:
-                    failure:
-                      errorMessage: Connection timeout after 30s
-              timestamp: 2025-09-22T10:30:00Z
-      externalDocs:
-        url: ""
-      properties:
-        deliveriesByCase:
-          additionalProperties:
-            $ref: "#/components/schemas/CaseNotificationDeliveries"
-          description: Notification deliveries keyed by case ID
-          type: object
-      required:
-      - deliveriesByCase
-      title: List notification deliveries response
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    NoNotificationCreatedResult:
-      description: Indicates that routers matched but no notification was ultimately
-        created.
-      externalDocs:
-        url: ""
-      properties:
-        matchedRouters:
-          description: Routers that matched the notification request
-          items:
-            $ref: "#/components/schemas/RouterInfo"
-          minItems: 0
-          type: array
-      required:
-      - matchedRouters
-      title: No notification created result
-      type: object
-    NoRouterMatchedResult:
-      additionalProperties: false
-      description: Indicates that no router matched the notification request.
-      externalDocs:
-        url: ""
-      title: No router matched result
-      type: object
-    NotificationDelivery:
-      oneOf:
-      - $ref: "#/components/schemas/NotificationDeliveryAttempted"
-      - $ref: "#/components/schemas/NotificationDeliveryNoNotificationCreated"
-      - $ref: "#/components/schemas/NotificationDeliveryNoRouterMatched"
-    NotificationDeliveryAttempted:
-      description: Delivery results for a single notification.
-      example:
-        requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
-        attempted:
-          router:
-            routerName: Production alerts router
-            routerId: d4e5f678-90ab-cdef-1234-567890abcdef
-          attempts:
-          - connector:
-              connectorType: CONNECTOR_TYPE_UNSPECIFIED
-              connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-              connectorName: Production Slack
-            outcome:
-              failure:
-                errorMessage: Connection timeout after 30s
-          - connector:
-              connectorType: CONNECTOR_TYPE_UNSPECIFIED
-              connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-              connectorName: Production Slack
-            outcome:
-              failure:
-                errorMessage: Connection timeout after 30s
-        timestamp: 2025-09-22T10:30:00Z
-      externalDocs:
-        url: ""
-      properties:
-        attempted:
-          $ref: "#/components/schemas/RoutedDelivery"
-        requestNotificationId:
-          description: "The notification request ID that triggered this delivery,\
-            \ used to correlate delivery outcomes with their originating requests"
-          example: a1b2c3d4-5678-90ab-cdef-1234567890ab
-          minLength: 0
-          type: string
-        timestamp:
-          description: When the notification was triggered
-          example: 2025-09-22T10:30:00Z
-          format: date-time
-          minLength: 0
-          type: string
-      required:
-      - attempted
-      - timestamp
-      title: Notification delivery
-      type: object
-    NotificationDeliveryNoNotificationCreated:
-      description: Delivery results for a single notification.
-      externalDocs:
-        url: ""
-      properties:
-        noNotificationCreated:
-          $ref: "#/components/schemas/NoNotificationCreatedResult"
-        requestNotificationId:
-          description: "The notification request ID that triggered this delivery,\
-            \ used to correlate delivery outcomes with their originating requests"
-          example: a1b2c3d4-5678-90ab-cdef-1234567890ab
-          minLength: 0
-          type: string
-        timestamp:
-          description: When the notification was triggered
-          example: 2025-09-22T10:30:00Z
-          format: date-time
-          minLength: 0
-          type: string
-      required:
-      - noNotificationCreated
-      - timestamp
-      title: Notification delivery
-      type: object
-    NotificationDeliveryNoRouterMatched:
-      description: Delivery results for a single notification.
-      externalDocs:
-        url: ""
-      properties:
-        noRouterMatched:
-          additionalProperties: false
-          description: Indicates that no router matched the notification request.
-          externalDocs:
-            url: ""
-          title: No router matched result
-          type: object
-        requestNotificationId:
-          description: "The notification request ID that triggered this delivery,\
-            \ used to correlate delivery outcomes with their originating requests"
-          example: a1b2c3d4-5678-90ab-cdef-1234567890ab
-          minLength: 0
-          type: string
-        timestamp:
-          description: When the notification was triggered
-          example: 2025-09-22T10:30:00Z
-          format: date-time
-          minLength: 0
-          type: string
-      required:
-      - noRouterMatched
-      - timestamp
-      title: Notification delivery
-      type: object
-    RoutedDelivery:
-      description: Delivery attempts routed through a single router to one or more
-        connectors.
-      example:
-        router:
-          routerName: Production alerts router
-          routerId: d4e5f678-90ab-cdef-1234-567890abcdef
-        attempts:
-        - connector:
-            connectorType: CONNECTOR_TYPE_UNSPECIFIED
-            connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-            connectorName: Production Slack
-          outcome:
-            failure:
-              errorMessage: Connection timeout after 30s
-        - connector:
-            connectorType: CONNECTOR_TYPE_UNSPECIFIED
-            connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
-            connectorName: Production Slack
-          outcome:
-            failure:
-              errorMessage: Connection timeout after 30s
-      externalDocs:
-        url: ""
-      properties:
-        attempts:
-          description: Individual delivery attempts to connectors
-          items:
-            $ref: "#/components/schemas/DeliveryAttempt"
-          minItems: 0
-          type: array
-        router:
-          $ref: "#/components/schemas/RouterInfo"
-      required:
-      - attempts
-      - router
-      title: Routed delivery
-      type: object
-    RouterInfo:
-      description: Information about a notification router.
-      example:
-        routerName: Production alerts router
-        routerId: d4e5f678-90ab-cdef-1234-567890abcdef
-      externalDocs:
-        url: ""
-      properties:
-        routerId:
-          description: Unique identifier of the router
-          example: d4e5f678-90ab-cdef-1234-567890abcdef
-          minLength: 0
-          type: string
-        routerName:
-          description: Display name of the router
-          example: Production alerts router
-          minLength: 0
-          type: string
-      required:
-      - routerId
-      - routerName
-      title: Router info
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    v1.ConnectorType:
-      description: Connector type.
-      enum:
-      - CONNECTOR_TYPE_UNSPECIFIED
-      - CONNECTOR_TYPE_SLACK
-      - CONNECTOR_TYPE_SERVICE_NOW
-      - CONNECTOR_TYPE_PAGER_DUTY
-      - CONNECTOR_TYPE_EMAIL
-      - CONNECTOR_TYPE_GENERIC_HTTPS
-      - CONNECTOR_TYPE_MICROSOFT_TEAMS
-      type: string
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    List_notification_deliveries_request:
-      description: Request to retrieve notification delivery records for one or more
-        cases.
-      properties:
-        caseIds:
-          description: Case IDs to retrieve notification deliveries for
-          example:
-          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
-          - a1b2c3d4-e5f6-7890-abcd-ef1234567890
-          items:
-            description: Case IDs to retrieve notification deliveries for
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      required:
-      - caseIds
-      title: List notification deliveries request
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/cases/notifications/v1/deliveries": {
+      "post": {
+        "tags": [
+          "Cases notification service"
+        ],
+        "summary": "List notification deliveries for cases",
+        "description": "Retrieve notification delivery records for one or more cases, including routing, target, and outcome information.\n\nRequires the following permissions:\n- `case:Read`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesNotificationService_ListNotificationDeliveries",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "List notification deliveries request",
+                "description": "Request to retrieve notification delivery records for one or more cases.",
+                "type": "object",
+                "properties": {
+                  "caseIds": {
+                    "example": [
+                      "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+                      "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                    ],
+                    "description": "Case IDs to retrieve notification deliveries for",
+                    "type": "array",
+                    "items": {
+                      "description": "Case IDs to retrieve notification deliveries for",
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
+                  }
+                },
+                "required": [
+                  "caseIds"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListNotificationDeliveriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Read"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CaseNotificationDeliveries": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Case notification deliveries",
+        "description": "Notification deliveries for a single case.",
+        "type": "object",
+        "properties": {
+          "notificationDeliveries": {
+            "description": "Notification deliveries for the case",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NotificationDelivery"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "notificationDeliveries"
+        ]
+      },
+      "ConnectorDetails": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Connector details",
+        "description": "Details of a notification connector.",
+        "type": "object",
+        "properties": {
+          "connectorId": {
+            "example": "c1d2e3f4-5678-90ab-cdef-1234567890ab",
+            "description": "Unique identifier of the connector",
+            "type": "string",
+            "minLength": 0
+          },
+          "connectorName": {
+            "example": "Production Slack",
+            "description": "Display name of the connector",
+            "type": "string",
+            "minLength": 0
+          },
+          "connectorType": {
+            "$ref": "#/components/schemas/v1.ConnectorType"
+          }
+        },
+        "required": [
+          "connectorId",
+          "connectorType",
+          "connectorName"
+        ]
+      },
+      "DeliveryAttempt": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Delivery attempt",
+        "description": "A single delivery attempt to a specific connector.",
+        "type": "object",
+        "properties": {
+          "connector": {
+            "$ref": "#/components/schemas/ConnectorDetails"
+          },
+          "outcome": {
+            "$ref": "#/components/schemas/DeliveryOutcome"
+          }
+        },
+        "required": [
+          "connector",
+          "outcome"
+        ]
+      },
+      "DeliveryFailure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Delivery failure",
+        "description": "Failed delivery outcome with error details.",
+        "type": "object",
+        "properties": {
+          "errorMessage": {
+            "example": "Connection timeout after 30s",
+            "description": "Error message describing the failure",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "errorMessage"
+        ]
+      },
+      "DeliveryOutcome": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Delivery outcome",
+        "description": "Outcome of a notification delivery attempt.",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/DeliveryFailure"
+          },
+          "success": {
+            "$ref": "#/components/schemas/DeliverySuccess"
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "success"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "failure"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "success"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "failure"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "DeliverySuccess": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Delivery success",
+        "description": "Successful delivery outcome with an optional evidence URL.",
+        "type": "object",
+        "properties": {
+          "evidenceUrl": {
+            "example": "https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456",
+            "description": "URL to the delivered notification, if available (e.g. Slack message, ServiceNow record)",
+            "type": "string",
+            "minLength": 0
+          }
+        }
+      },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "ListNotificationDeliveriesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "List notification deliveries response",
+        "description": "Response containing a list of notification delivery records for cases.",
+        "type": "object",
+        "properties": {
+          "deliveriesByCase": {
+            "description": "Notification deliveries keyed by case ID",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CaseNotificationDeliveries"
+            }
+          }
+        },
+        "required": [
+          "deliveriesByCase"
+        ]
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "NoNotificationCreatedResult": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "No notification created result",
+        "description": "Indicates that routers matched but no notification was ultimately created.",
+        "type": "object",
+        "properties": {
+          "matchedRouters": {
+            "description": "Routers that matched the notification request",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RouterInfo"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "matchedRouters"
+        ]
+      },
+      "NoRouterMatchedResult": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "No router matched result",
+        "description": "Indicates that no router matched the notification request.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "NotificationDelivery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Notification delivery",
+        "description": "Delivery results for a single notification.",
+        "type": "object",
+        "properties": {
+          "attempted": {
+            "$ref": "#/components/schemas/RoutedDelivery"
+          },
+          "noNotificationCreated": {
+            "$ref": "#/components/schemas/NoNotificationCreatedResult"
+          },
+          "noRouterMatched": {
+            "$ref": "#/components/schemas/NoRouterMatchedResult"
+          },
+          "requestNotificationId": {
+            "example": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+            "description": "The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests",
+            "type": "string",
+            "minLength": 0
+          },
+          "timestamp": {
+            "example": "2025-09-22T10:30:00.000Z",
+            "description": "When the notification was triggered",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "timestamp"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "noRouterMatched"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "noNotificationCreated"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "attempted"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "noRouterMatched"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "noNotificationCreated"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "attempted"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "RoutedDelivery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Routed delivery",
+        "description": "Delivery attempts routed through a single router to one or more connectors.",
+        "type": "object",
+        "properties": {
+          "attempts": {
+            "description": "Individual delivery attempts to connectors",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeliveryAttempt"
+            },
+            "minItems": 0
+          },
+          "router": {
+            "$ref": "#/components/schemas/RouterInfo"
+          }
+        },
+        "required": [
+          "router",
+          "attempts"
+        ]
+      },
+      "RouterInfo": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Router info",
+        "description": "Information about a notification router.",
+        "type": "object",
+        "properties": {
+          "routerId": {
+            "example": "d4e5f678-90ab-cdef-1234-567890abcdef",
+            "description": "Unique identifier of the router",
+            "type": "string",
+            "minLength": 0
+          },
+          "routerName": {
+            "example": "Production alerts router",
+            "description": "Display name of the router",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "routerId",
+          "routerName"
+        ]
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v1.ConnectorType": {
+        "description": "Connector type.",
+        "type": "string",
+        "enum": [
+          "CONNECTOR_TYPE_UNSPECIFIED",
+          "CONNECTOR_TYPE_SLACK",
+          "CONNECTOR_TYPE_SERVICE_NOW",
+          "CONNECTOR_TYPE_PAGER_DUTY",
+          "CONNECTOR_TYPE_EMAIL",
+          "CONNECTOR_TYPE_GENERIC_HTTPS",
+          "CONNECTOR_TYPE_MICROSOFT_TEAMS"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

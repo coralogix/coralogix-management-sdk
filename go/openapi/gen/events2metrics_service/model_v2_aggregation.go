@@ -13,164 +13,338 @@ package events2metrics_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// V2Aggregation - struct for V2Aggregation
+// checks if the V2Aggregation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V2Aggregation{}
+
+// V2Aggregation This data structure represents an aggregation
 type V2Aggregation struct {
-	V2AggregationHistogram *V2AggregationHistogram
-	V2AggregationNone *V2AggregationNone
-	V2AggregationSamples *V2AggregationSamples
+	AggType *AggType `json:"aggType,omitempty"`
+	// Whether this resource is enabled.
+	Enabled   *bool            `json:"enabled,omitempty"`
+	Histogram *E2MAggHistogram `json:"histogram,omitempty"`
+	// Marker indicating no additional metadata is needed for this aggregation type.
+	None    map[string]interface{} `json:"none,omitempty"`
+	Samples *E2MAggSamples         `json:"samples,omitempty"`
+	// Name of the target metric produced by this aggregation.
+	TargetMetricName                  *string `json:"targetMetricName,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// V2AggregationHistogramAsV2Aggregation is a convenience function that returns V2AggregationHistogram wrapped in V2Aggregation
-func V2AggregationHistogramAsV2Aggregation(v *V2AggregationHistogram) V2Aggregation {
-	return V2Aggregation{
-		V2AggregationHistogram: v,
+type _V2Aggregation V2Aggregation
+
+// NewV2Aggregation instantiates a new V2Aggregation object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewV2Aggregation() *V2Aggregation {
+	this := V2Aggregation{}
+	return &this
+}
+
+// NewV2AggregationWithDefaults instantiates a new V2Aggregation object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewV2AggregationWithDefaults() *V2Aggregation {
+	this := V2Aggregation{}
+	return &this
+}
+
+// GetAggType returns the AggType field value if set, zero value otherwise.
+func (o *V2Aggregation) GetAggType() AggType {
+	if o == nil || IsNil(o.AggType) {
+		var ret AggType
+		return ret
 	}
+	return *o.AggType
 }
 
-// V2AggregationNoneAsV2Aggregation is a convenience function that returns V2AggregationNone wrapped in V2Aggregation
-func V2AggregationNoneAsV2Aggregation(v *V2AggregationNone) V2Aggregation {
-	return V2Aggregation{
-		V2AggregationNone: v,
+// GetAggTypeOk returns a tuple with the AggType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Aggregation) GetAggTypeOk() (*AggType, bool) {
+	if o == nil || IsNil(o.AggType) {
+		return nil, false
 	}
+	return o.AggType, true
 }
 
-// V2AggregationSamplesAsV2Aggregation is a convenience function that returns V2AggregationSamples wrapped in V2Aggregation
-func V2AggregationSamplesAsV2Aggregation(v *V2AggregationSamples) V2Aggregation {
-	return V2Aggregation{
-		V2AggregationSamples: v,
+// HasAggType returns a boolean if a field has been set.
+func (o *V2Aggregation) HasAggType() bool {
+	if o != nil && !IsNil(o.AggType) {
+		return true
 	}
+
+	return false
 }
 
+// SetAggType gets a reference to the given AggType and assigns it to the AggType field.
+func (o *V2Aggregation) SetAggType(v AggType) {
+	o.AggType = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *V2Aggregation) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into V2AggregationHistogram
-	err = json.Unmarshal(data, &dst.V2AggregationHistogram)
-	if err == nil {
-		jsonV2AggregationHistogram, _ := json.Marshal(dst.V2AggregationHistogram)
-		if string(jsonV2AggregationHistogram) == "{}" { // empty struct
-			dst.V2AggregationHistogram = nil
-		} else {
-			if err = validator.Validate(dst.V2AggregationHistogram); err != nil {
-				dst.V2AggregationHistogram = nil
-			} else {
-				match++
-			}
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
+func (o *V2Aggregation) GetEnabled() bool {
+	if o == nil || IsNil(o.Enabled) {
+		var ret bool
+		return ret
+	}
+	return *o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Aggregation) GetEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Enabled) {
+		return nil, false
+	}
+	return o.Enabled, true
+}
+
+// HasEnabled returns a boolean if a field has been set.
+func (o *V2Aggregation) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+func (o *V2Aggregation) SetEnabled(v bool) {
+	o.Enabled = &v
+}
+
+// GetHistogram returns the Histogram field value if set, zero value otherwise.
+func (o *V2Aggregation) GetHistogram() E2MAggHistogram {
+	if o == nil || IsNil(o.Histogram) {
+		var ret E2MAggHistogram
+		return ret
+	}
+	return *o.Histogram
+}
+
+// GetHistogramOk returns a tuple with the Histogram field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Aggregation) GetHistogramOk() (*E2MAggHistogram, bool) {
+	if o == nil || IsNil(o.Histogram) {
+		return nil, false
+	}
+	return o.Histogram, true
+}
+
+// HasHistogram returns a boolean if a field has been set.
+func (o *V2Aggregation) HasHistogram() bool {
+	if o != nil && !IsNil(o.Histogram) {
+		return true
+	}
+
+	return false
+}
+
+// SetHistogram gets a reference to the given E2MAggHistogram and assigns it to the Histogram field.
+func (o *V2Aggregation) SetHistogram(v E2MAggHistogram) {
+	o.Histogram = &v
+}
+
+// GetNone returns the None field value if set, zero value otherwise.
+func (o *V2Aggregation) GetNone() map[string]interface{} {
+	if o == nil || IsNil(o.None) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.None
+}
+
+// GetNoneOk returns a tuple with the None field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Aggregation) GetNoneOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.None) {
+		return map[string]interface{}{}, false
+	}
+	return o.None, true
+}
+
+// HasNone returns a boolean if a field has been set.
+func (o *V2Aggregation) HasNone() bool {
+	if o != nil && !IsNil(o.None) {
+		return true
+	}
+
+	return false
+}
+
+// SetNone gets a reference to the given map[string]interface{} and assigns it to the None field.
+func (o *V2Aggregation) SetNone(v map[string]interface{}) {
+	o.None = v
+}
+
+// GetSamples returns the Samples field value if set, zero value otherwise.
+func (o *V2Aggregation) GetSamples() E2MAggSamples {
+	if o == nil || IsNil(o.Samples) {
+		var ret E2MAggSamples
+		return ret
+	}
+	return *o.Samples
+}
+
+// GetSamplesOk returns a tuple with the Samples field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Aggregation) GetSamplesOk() (*E2MAggSamples, bool) {
+	if o == nil || IsNil(o.Samples) {
+		return nil, false
+	}
+	return o.Samples, true
+}
+
+// HasSamples returns a boolean if a field has been set.
+func (o *V2Aggregation) HasSamples() bool {
+	if o != nil && !IsNil(o.Samples) {
+		return true
+	}
+
+	return false
+}
+
+// SetSamples gets a reference to the given E2MAggSamples and assigns it to the Samples field.
+func (o *V2Aggregation) SetSamples(v E2MAggSamples) {
+	o.Samples = &v
+}
+
+// GetTargetMetricName returns the TargetMetricName field value if set, zero value otherwise.
+func (o *V2Aggregation) GetTargetMetricName() string {
+	if o == nil || IsNil(o.TargetMetricName) {
+		var ret string
+		return ret
+	}
+	return *o.TargetMetricName
+}
+
+// GetTargetMetricNameOk returns a tuple with the TargetMetricName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Aggregation) GetTargetMetricNameOk() (*string, bool) {
+	if o == nil || IsNil(o.TargetMetricName) {
+		return nil, false
+	}
+	return o.TargetMetricName, true
+}
+
+// HasTargetMetricName returns a boolean if a field has been set.
+func (o *V2Aggregation) HasTargetMetricName() bool {
+	if o != nil && !IsNil(o.TargetMetricName) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetMetricName gets a reference to the given string and assigns it to the TargetMetricName field.
+func (o *V2Aggregation) SetTargetMetricName(v string) {
+	o.TargetMetricName = &v
+}
+
+func (o V2Aggregation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o V2Aggregation) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AggType) {
+		toSerialize["aggType"] = o.AggType
+	}
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if !IsNil(o.Histogram) {
+		toSerialize["histogram"] = o.Histogram
+	}
+	if !IsNil(o.None) {
+		toSerialize["none"] = o.None
+	}
+	if !IsNil(o.Samples) {
+		toSerialize["samples"] = o.Samples
+	}
+	if !IsNil(o.TargetMetricName) {
+		toSerialize["targetMetricName"] = o.TargetMetricName
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["none"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["samples"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["histogram"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [none, samples, histogram] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["none"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field none must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["samples"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field samples must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["histogram"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field histogram must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *V2Aggregation) UnmarshalJSON(data []byte) (err error) {
+	varV2Aggregation := _V2Aggregation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2Aggregation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V2Aggregation(varV2Aggregation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["none"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V2AggregationHistogram = nil
-	}
-
-	// try to unmarshal data into V2AggregationNone
-	err = json.Unmarshal(data, &dst.V2AggregationNone)
-	if err == nil {
-		jsonV2AggregationNone, _ := json.Marshal(dst.V2AggregationNone)
-		if string(jsonV2AggregationNone) == "{}" { // empty struct
-			dst.V2AggregationNone = nil
-		} else {
-			if err = validator.Validate(dst.V2AggregationNone); err != nil {
-				dst.V2AggregationNone = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["samples"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V2AggregationNone = nil
-	}
-
-	// try to unmarshal data into V2AggregationSamples
-	err = json.Unmarshal(data, &dst.V2AggregationSamples)
-	if err == nil {
-		jsonV2AggregationSamples, _ := json.Marshal(dst.V2AggregationSamples)
-		if string(jsonV2AggregationSamples) == "{}" { // empty struct
-			dst.V2AggregationSamples = nil
-		} else {
-			if err = validator.Validate(dst.V2AggregationSamples); err != nil {
-				dst.V2AggregationSamples = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["histogram"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V2AggregationSamples = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [none, samples, histogram] may be set"}
+		}
+
+		delete(additionalProperties, "aggType")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "histogram")
+		delete(additionalProperties, "none")
+		delete(additionalProperties, "samples")
+		delete(additionalProperties, "targetMetricName")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.V2AggregationHistogram = nil
-		dst.V2AggregationNone = nil
-		dst.V2AggregationSamples = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(V2Aggregation)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src V2Aggregation) MarshalJSON() ([]byte, error) {
-	if src.V2AggregationHistogram != nil {
-		return json.Marshal(&src.V2AggregationHistogram)
-	}
-
-	if src.V2AggregationNone != nil {
-		return json.Marshal(&src.V2AggregationNone)
-	}
-
-	if src.V2AggregationSamples != nil {
-		return json.Marshal(&src.V2AggregationSamples)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *V2Aggregation) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.V2AggregationHistogram != nil {
-		return obj.V2AggregationHistogram
-	}
-
-	if obj.V2AggregationNone != nil {
-		return obj.V2AggregationNone
-	}
-
-	if obj.V2AggregationSamples != nil {
-		return obj.V2AggregationSamples
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj V2Aggregation) GetActualInstanceValue() (interface{}) {
-	if obj.V2AggregationHistogram != nil {
-		return *obj.V2AggregationHistogram
-	}
-
-	if obj.V2AggregationNone != nil {
-		return *obj.V2AggregationNone
-	}
-
-	if obj.V2AggregationSamples != nil {
-		return *obj.V2AggregationSamples
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableV2Aggregation struct {
@@ -208,4 +382,3 @@ func (v *NullableV2Aggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

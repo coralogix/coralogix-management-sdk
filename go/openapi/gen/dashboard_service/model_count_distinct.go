@@ -23,9 +23,10 @@ var _ MappedNullable = &CountDistinct{}
 // CountDistinct Count distinct.
 type CountDistinct struct {
 	// The field.
-	Field *string `json:"field,omitempty"`
-	ObservationField *ObservationField `json:"observationField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Field                             *string           `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	ObservationField                  *ObservationField `json:"observationField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CountDistinct CountDistinct
@@ -112,7 +113,7 @@ func (o *CountDistinct) SetObservationField(v ObservationField) {
 }
 
 func (o CountDistinct) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *CountDistinct) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "field")
 		delete(additionalProperties, "observationField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableCountDistinct) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

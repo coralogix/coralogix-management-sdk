@@ -31,8 +31,9 @@ type ExtensionDeployment struct {
 	// The subsystems.
 	Subsystems []string `json:"subsystems,omitempty"`
 	// Version number.
-	Version *string `json:"version,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Version                           *string `json:"version,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ExtensionDeployment ExtensionDeployment
@@ -215,7 +216,7 @@ func (o *ExtensionDeployment) SetVersion(v string) {
 }
 
 func (o ExtensionDeployment) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,6 +269,7 @@ func (o *ExtensionDeployment) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "subsystems")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -308,4 +310,3 @@ func (v *NullableExtensionDeployment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

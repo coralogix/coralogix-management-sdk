@@ -25,8 +25,9 @@ type CloudFormationStack struct {
 	// The arn.
 	Arn *string `json:"arn,omitempty"`
 	// Region.
-	Region *string `json:"region,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Region                            *string `json:"region,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CloudFormationStack CloudFormationStack
@@ -113,7 +114,7 @@ func (o *CloudFormationStack) SetRegion(v string) {
 }
 
 func (o CloudFormationStack) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *CloudFormationStack) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "arn")
 		delete(additionalProperties, "region")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableCloudFormationStack) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,10 +22,11 @@ var _ MappedNullable = &SpansFilter{}
 
 // SpansFilter This data structure represents the filter criteria for spans.
 type SpansFilter struct {
-	Field *SpanField `json:"field,omitempty"`
-	ObservationField *SpanObservationField `json:"observationField,omitempty"`
-	Operator *FilterOperator `json:"operator,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Field                             *SpanField            `json:"field,omitempty"`
+	ObservationField                  *SpanObservationField `json:"observationField,omitempty"`
+	Operator                          *FilterOperator       `json:"operator,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SpansFilter SpansFilter
@@ -144,7 +145,7 @@ func (o *SpansFilter) SetOperator(v FilterOperator) {
 }
 
 func (o SpansFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -189,6 +190,7 @@ func (o *SpansFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "observationField")
 		delete(additionalProperties, "operator")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -229,4 +231,3 @@ func (v *NullableSpansFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

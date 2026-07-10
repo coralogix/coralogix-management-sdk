@@ -24,8 +24,8 @@ type UserStatus string
 // List of UserStatus
 const (
 	USERSTATUS_USER_STATUS_UNSPECIFIED UserStatus = "USER_STATUS_UNSPECIFIED"
-	USERSTATUS_USER_STATUS_ACTIVE UserStatus = "USER_STATUS_ACTIVE"
-	USERSTATUS_USER_STATUS_INACTIVE UserStatus = "USER_STATUS_INACTIVE"
+	USERSTATUS_USER_STATUS_ACTIVE      UserStatus = "USER_STATUS_ACTIVE"
+	USERSTATUS_USER_STATUS_INACTIVE    UserStatus = "USER_STATUS_INACTIVE"
 )
 
 // All allowed values of UserStatus enum
@@ -113,4 +113,3 @@ func (v *NullableUserStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

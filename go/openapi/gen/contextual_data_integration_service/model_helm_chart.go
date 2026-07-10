@@ -24,10 +24,11 @@ var _ MappedNullable = &HelmChart{}
 type HelmChart struct {
 	// The commands.
 	Commands []CommandInformation `json:"commands,omitempty"`
-	Guide *IntegrationGuide `json:"guide,omitempty"`
+	Guide    *IntegrationGuide    `json:"guide,omitempty"`
 	// The template.
-	Template *string `json:"template,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Template                          *string `json:"template,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _HelmChart HelmChart
@@ -146,7 +147,7 @@ func (o *HelmChart) SetTemplate(v string) {
 }
 
 func (o HelmChart) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -191,6 +192,7 @@ func (o *HelmChart) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "guide")
 		delete(additionalProperties, "template")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -231,4 +233,3 @@ func (v *NullableHelmChart) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

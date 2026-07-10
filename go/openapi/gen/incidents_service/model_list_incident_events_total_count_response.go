@@ -25,8 +25,9 @@ type ListIncidentEventsTotalCountResponse struct {
 	// Total number of incident events matching the filter
 	Count *string `json:"count,omitempty" validate:"regexp=^[0-9]+$"`
 	// Indicates if the count reached the system limit
-	ReachedLimit *bool `json:"reachedLimit,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ReachedLimit                      *bool `json:"reachedLimit,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListIncidentEventsTotalCountResponse ListIncidentEventsTotalCountResponse
@@ -113,7 +114,7 @@ func (o *ListIncidentEventsTotalCountResponse) SetReachedLimit(v bool) {
 }
 
 func (o ListIncidentEventsTotalCountResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *ListIncidentEventsTotalCountResponse) UnmarshalJSON(data []byte) (err e
 		delete(additionalProperties, "count")
 		delete(additionalProperties, "reachedLimit")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableListIncidentEventsTotalCountResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

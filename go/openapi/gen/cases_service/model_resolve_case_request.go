@@ -23,8 +23,9 @@ var _ MappedNullable = &ResolveCaseRequest{}
 // ResolveCaseRequest Request to mark a case as resolved.
 type ResolveCaseRequest struct {
 	// Reason to resolve
-	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Reason                            *string `json:"reason,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ResolveCaseRequest ResolveCaseRequest
@@ -79,7 +80,7 @@ func (o *ResolveCaseRequest) SetReason(v string) {
 }
 
 func (o ResolveCaseRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ResolveCaseRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "reason")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableResolveCaseRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

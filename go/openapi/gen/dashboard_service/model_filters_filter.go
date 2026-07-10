@@ -25,13 +25,14 @@ type FiltersFilter struct {
 	// Indicates if the filter's UI representation should be collapsed or expanded.
 	Collapsed *bool `json:"collapsed,omitempty"`
 	// A display name for the filter
-	DisplayName *string `json:"displayName,omitempty"`
+	DisplayName *string `json:"displayName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Indicates if the filter is currently enabled or not.
-	Enabled *bool `json:"enabled,omitempty"`
-	Id *UUID `json:"id,omitempty"`
-	Scope *FilterWidgetScope `json:"scope,omitempty"`
-	Source *FilterSource `json:"source,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Enabled                           *bool              `json:"enabled,omitempty"`
+	Id                                *UUID              `json:"id,omitempty"`
+	Scope                             *FilterWidgetScope `json:"scope,omitempty"`
+	Source                            *FilterSource      `json:"source,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _FiltersFilter FiltersFilter
@@ -246,7 +247,7 @@ func (o *FiltersFilter) SetSource(v FilterSource) {
 }
 
 func (o FiltersFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -303,6 +304,7 @@ func (o *FiltersFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "source")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -343,4 +345,3 @@ func (v *NullableFiltersFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

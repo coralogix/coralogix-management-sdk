@@ -13,126 +13,179 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// MinMax - struct for MinMax
+// checks if the MinMax type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MinMax{}
+
+// MinMax Definition of min/max value configuration, can be automatically derived from data or custom
 type MinMax struct {
-	MinMaxAutoVariant *MinMaxAutoVariant
-	MinMaxCustomVariant *MinMaxCustomVariant
+	// Min max auto.
+	Auto                              map[string]interface{} `json:"auto,omitempty"`
+	Custom                            *MinMaxCustom          `json:"custom,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// MinMaxAutoVariantAsMinMax is a convenience function that returns MinMaxAutoVariant wrapped in MinMax
-func MinMaxAutoVariantAsMinMax(v *MinMaxAutoVariant) MinMax {
-	return MinMax{
-		MinMaxAutoVariant: v,
+type _MinMax MinMax
+
+// NewMinMax instantiates a new MinMax object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewMinMax() *MinMax {
+	this := MinMax{}
+	return &this
+}
+
+// NewMinMaxWithDefaults instantiates a new MinMax object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewMinMaxWithDefaults() *MinMax {
+	this := MinMax{}
+	return &this
+}
+
+// GetAuto returns the Auto field value if set, zero value otherwise.
+func (o *MinMax) GetAuto() map[string]interface{} {
+	if o == nil || IsNil(o.Auto) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.Auto
 }
 
-// MinMaxCustomVariantAsMinMax is a convenience function that returns MinMaxCustomVariant wrapped in MinMax
-func MinMaxCustomVariantAsMinMax(v *MinMaxCustomVariant) MinMax {
-	return MinMax{
-		MinMaxCustomVariant: v,
+// GetAutoOk returns a tuple with the Auto field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MinMax) GetAutoOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Auto) {
+		return map[string]interface{}{}, false
 	}
+	return o.Auto, true
 }
 
+// HasAuto returns a boolean if a field has been set.
+func (o *MinMax) HasAuto() bool {
+	if o != nil && !IsNil(o.Auto) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *MinMax) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into MinMaxAutoVariant
-	err = json.Unmarshal(data, &dst.MinMaxAutoVariant)
-	if err == nil {
-		jsonMinMaxAutoVariant, _ := json.Marshal(dst.MinMaxAutoVariant)
-		if string(jsonMinMaxAutoVariant) == "{}" { // empty struct
-			dst.MinMaxAutoVariant = nil
-		} else {
-			if err = validator.Validate(dst.MinMaxAutoVariant); err != nil {
-				dst.MinMaxAutoVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAuto gets a reference to the given map[string]interface{} and assigns it to the Auto field.
+func (o *MinMax) SetAuto(v map[string]interface{}) {
+	o.Auto = v
+}
+
+// GetCustom returns the Custom field value if set, zero value otherwise.
+func (o *MinMax) GetCustom() MinMaxCustom {
+	if o == nil || IsNil(o.Custom) {
+		var ret MinMaxCustom
+		return ret
+	}
+	return *o.Custom
+}
+
+// GetCustomOk returns a tuple with the Custom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MinMax) GetCustomOk() (*MinMaxCustom, bool) {
+	if o == nil || IsNil(o.Custom) {
+		return nil, false
+	}
+	return o.Custom, true
+}
+
+// HasCustom returns a boolean if a field has been set.
+func (o *MinMax) HasCustom() bool {
+	if o != nil && !IsNil(o.Custom) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustom gets a reference to the given MinMaxCustom and assigns it to the Custom field.
+func (o *MinMax) SetCustom(v MinMaxCustom) {
+	o.Custom = &v
+}
+
+func (o MinMax) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MinMax) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Auto) {
+		toSerialize["auto"] = o.Auto
+	}
+	if !IsNil(o.Custom) {
+		toSerialize["custom"] = o.Custom
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["auto"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["custom"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [auto, custom] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["auto"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field auto must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["custom"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field custom must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *MinMax) UnmarshalJSON(data []byte) (err error) {
+	varMinMax := _MinMax{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMinMax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MinMax(varMinMax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["auto"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MinMaxAutoVariant = nil
-	}
-
-	// try to unmarshal data into MinMaxCustomVariant
-	err = json.Unmarshal(data, &dst.MinMaxCustomVariant)
-	if err == nil {
-		jsonMinMaxCustomVariant, _ := json.Marshal(dst.MinMaxCustomVariant)
-		if string(jsonMinMaxCustomVariant) == "{}" { // empty struct
-			dst.MinMaxCustomVariant = nil
-		} else {
-			if err = validator.Validate(dst.MinMaxCustomVariant); err != nil {
-				dst.MinMaxCustomVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["custom"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MinMaxCustomVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [auto, custom] may be set"}
+		}
+
+		delete(additionalProperties, "auto")
+		delete(additionalProperties, "custom")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.MinMaxAutoVariant = nil
-		dst.MinMaxCustomVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(MinMax)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src MinMax) MarshalJSON() ([]byte, error) {
-	if src.MinMaxAutoVariant != nil {
-		return json.Marshal(&src.MinMaxAutoVariant)
-	}
-
-	if src.MinMaxCustomVariant != nil {
-		return json.Marshal(&src.MinMaxCustomVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *MinMax) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.MinMaxAutoVariant != nil {
-		return obj.MinMaxAutoVariant
-	}
-
-	if obj.MinMaxCustomVariant != nil {
-		return obj.MinMaxCustomVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj MinMax) GetActualInstanceValue() (interface{}) {
-	if obj.MinMaxAutoVariant != nil {
-		return *obj.MinMaxAutoVariant
-	}
-
-	if obj.MinMaxCustomVariant != nil {
-		return *obj.MinMaxCustomVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableMinMax struct {
@@ -170,4 +223,3 @@ func (v *NullableMinMax) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

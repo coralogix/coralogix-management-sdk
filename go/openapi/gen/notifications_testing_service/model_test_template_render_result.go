@@ -13,126 +13,178 @@ package notifications_testing_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// TestTemplateRenderResult - struct for TestTemplateRenderResult
+// checks if the TestTemplateRenderResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TestTemplateRenderResult{}
+
+// TestTemplateRenderResult Result of a template render test, either a success with rendered output or a failure with reason.
 type TestTemplateRenderResult struct {
-	TestTemplateRenderResultFailureVariant *TestTemplateRenderResultFailureVariant
-	TestTemplateRenderResultSuccessVariant *TestTemplateRenderResultSuccessVariant
+	Failure                           *TestTemplateRenderResultFailure `json:"failure,omitempty"`
+	Success                           *TestTemplateRenderResultSuccess `json:"success,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// TestTemplateRenderResultFailureVariantAsTestTemplateRenderResult is a convenience function that returns TestTemplateRenderResultFailureVariant wrapped in TestTemplateRenderResult
-func TestTemplateRenderResultFailureVariantAsTestTemplateRenderResult(v *TestTemplateRenderResultFailureVariant) TestTemplateRenderResult {
-	return TestTemplateRenderResult{
-		TestTemplateRenderResultFailureVariant: v,
+type _TestTemplateRenderResult TestTemplateRenderResult
+
+// NewTestTemplateRenderResult instantiates a new TestTemplateRenderResult object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewTestTemplateRenderResult() *TestTemplateRenderResult {
+	this := TestTemplateRenderResult{}
+	return &this
+}
+
+// NewTestTemplateRenderResultWithDefaults instantiates a new TestTemplateRenderResult object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewTestTemplateRenderResultWithDefaults() *TestTemplateRenderResult {
+	this := TestTemplateRenderResult{}
+	return &this
+}
+
+// GetFailure returns the Failure field value if set, zero value otherwise.
+func (o *TestTemplateRenderResult) GetFailure() TestTemplateRenderResultFailure {
+	if o == nil || IsNil(o.Failure) {
+		var ret TestTemplateRenderResultFailure
+		return ret
 	}
+	return *o.Failure
 }
 
-// TestTemplateRenderResultSuccessVariantAsTestTemplateRenderResult is a convenience function that returns TestTemplateRenderResultSuccessVariant wrapped in TestTemplateRenderResult
-func TestTemplateRenderResultSuccessVariantAsTestTemplateRenderResult(v *TestTemplateRenderResultSuccessVariant) TestTemplateRenderResult {
-	return TestTemplateRenderResult{
-		TestTemplateRenderResultSuccessVariant: v,
+// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestTemplateRenderResult) GetFailureOk() (*TestTemplateRenderResultFailure, bool) {
+	if o == nil || IsNil(o.Failure) {
+		return nil, false
 	}
+	return o.Failure, true
 }
 
+// HasFailure returns a boolean if a field has been set.
+func (o *TestTemplateRenderResult) HasFailure() bool {
+	if o != nil && !IsNil(o.Failure) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *TestTemplateRenderResult) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into TestTemplateRenderResultFailureVariant
-	err = json.Unmarshal(data, &dst.TestTemplateRenderResultFailureVariant)
-	if err == nil {
-		jsonTestTemplateRenderResultFailureVariant, _ := json.Marshal(dst.TestTemplateRenderResultFailureVariant)
-		if string(jsonTestTemplateRenderResultFailureVariant) == "{}" { // empty struct
-			dst.TestTemplateRenderResultFailureVariant = nil
-		} else {
-			if err = validator.Validate(dst.TestTemplateRenderResultFailureVariant); err != nil {
-				dst.TestTemplateRenderResultFailureVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetFailure gets a reference to the given TestTemplateRenderResultFailure and assigns it to the Failure field.
+func (o *TestTemplateRenderResult) SetFailure(v TestTemplateRenderResultFailure) {
+	o.Failure = &v
+}
+
+// GetSuccess returns the Success field value if set, zero value otherwise.
+func (o *TestTemplateRenderResult) GetSuccess() TestTemplateRenderResultSuccess {
+	if o == nil || IsNil(o.Success) {
+		var ret TestTemplateRenderResultSuccess
+		return ret
+	}
+	return *o.Success
+}
+
+// GetSuccessOk returns a tuple with the Success field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestTemplateRenderResult) GetSuccessOk() (*TestTemplateRenderResultSuccess, bool) {
+	if o == nil || IsNil(o.Success) {
+		return nil, false
+	}
+	return o.Success, true
+}
+
+// HasSuccess returns a boolean if a field has been set.
+func (o *TestTemplateRenderResult) HasSuccess() bool {
+	if o != nil && !IsNil(o.Success) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuccess gets a reference to the given TestTemplateRenderResultSuccess and assigns it to the Success field.
+func (o *TestTemplateRenderResult) SetSuccess(v TestTemplateRenderResultSuccess) {
+	o.Success = &v
+}
+
+func (o TestTemplateRenderResult) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TestTemplateRenderResult) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Failure) {
+		toSerialize["failure"] = o.Failure
+	}
+	if !IsNil(o.Success) {
+		toSerialize["success"] = o.Success
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["success"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["failure"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["success"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field success must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["failure"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field failure must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *TestTemplateRenderResult) UnmarshalJSON(data []byte) (err error) {
+	varTestTemplateRenderResult := _TestTemplateRenderResult{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestTemplateRenderResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestTemplateRenderResult(varTestTemplateRenderResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["success"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TestTemplateRenderResultFailureVariant = nil
-	}
-
-	// try to unmarshal data into TestTemplateRenderResultSuccessVariant
-	err = json.Unmarshal(data, &dst.TestTemplateRenderResultSuccessVariant)
-	if err == nil {
-		jsonTestTemplateRenderResultSuccessVariant, _ := json.Marshal(dst.TestTemplateRenderResultSuccessVariant)
-		if string(jsonTestTemplateRenderResultSuccessVariant) == "{}" { // empty struct
-			dst.TestTemplateRenderResultSuccessVariant = nil
-		} else {
-			if err = validator.Validate(dst.TestTemplateRenderResultSuccessVariant); err != nil {
-				dst.TestTemplateRenderResultSuccessVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["failure"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TestTemplateRenderResultSuccessVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+		}
+
+		delete(additionalProperties, "failure")
+		delete(additionalProperties, "success")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TestTemplateRenderResultFailureVariant = nil
-		dst.TestTemplateRenderResultSuccessVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TestTemplateRenderResult)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src TestTemplateRenderResult) MarshalJSON() ([]byte, error) {
-	if src.TestTemplateRenderResultFailureVariant != nil {
-		return json.Marshal(&src.TestTemplateRenderResultFailureVariant)
-	}
-
-	if src.TestTemplateRenderResultSuccessVariant != nil {
-		return json.Marshal(&src.TestTemplateRenderResultSuccessVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *TestTemplateRenderResult) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.TestTemplateRenderResultFailureVariant != nil {
-		return obj.TestTemplateRenderResultFailureVariant
-	}
-
-	if obj.TestTemplateRenderResultSuccessVariant != nil {
-		return obj.TestTemplateRenderResultSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj TestTemplateRenderResult) GetActualInstanceValue() (interface{}) {
-	if obj.TestTemplateRenderResultFailureVariant != nil {
-		return *obj.TestTemplateRenderResultFailureVariant
-	}
-
-	if obj.TestTemplateRenderResultSuccessVariant != nil {
-		return *obj.TestTemplateRenderResultSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableTestTemplateRenderResult struct {
@@ -170,4 +222,3 @@ func (v *NullableTestTemplateRenderResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

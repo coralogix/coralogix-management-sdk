@@ -24,11 +24,12 @@ var _ MappedNullable = &DynamicQueryDefinition{}
 // DynamicQueryDefinition Query definition for dynamic widget
 type DynamicQueryDefinition struct {
 	// Unique id of the query definition
-	Id string `json:"id"`
+	Id string `json:"id" validate:"regexp=^[\\s\\S]*$"`
 	// Custom name of the query
-	Name *string `json:"name,omitempty"`
-	Query DynamicQuery `json:"query"`
-	AdditionalProperties map[string]interface{}
+	Name                              *string      `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Query                             DynamicQuery `json:"query"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DynamicQueryDefinition DynamicQueryDefinition
@@ -133,7 +134,7 @@ func (o *DynamicQueryDefinition) SetQuery(v DynamicQuery) {
 }
 
 func (o DynamicQueryDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -169,10 +170,10 @@ func (o *DynamicQueryDefinition) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -196,6 +197,7 @@ func (o *DynamicQueryDefinition) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "query")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -236,4 +238,3 @@ func (v *NullableDynamicQueryDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

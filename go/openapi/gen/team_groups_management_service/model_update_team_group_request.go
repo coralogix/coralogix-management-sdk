@@ -25,14 +25,15 @@ type UpdateTeamGroupRequest struct {
 	// New human-readable description for the team group.
 	Description *string `json:"description,omitempty"`
 	// New external identifier for the group.
-	ExternalId *string `json:"externalId,omitempty"`
-	GroupType *GroupType `json:"groupType,omitempty"`
+	ExternalId *string    `json:"externalId,omitempty"`
+	GroupType  *GroupType `json:"groupType,omitempty"`
 	// New display name for the team group.
-	Name *string `json:"name,omitempty"`
-	RoleUpdate *RoleUpdate `json:"roleUpdate,omitempty"`
-	ScopeUpdate *ScopeUpdate `json:"scopeUpdate,omitempty"`
-	UserUpdates *UserUpdates `json:"userUpdates,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name                              *string      `json:"name,omitempty"`
+	RoleUpdate                        *RoleUpdate  `json:"roleUpdate,omitempty"`
+	ScopeUpdate                       *ScopeUpdate `json:"scopeUpdate,omitempty"`
+	UserUpdates                       *UserUpdates `json:"userUpdates,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UpdateTeamGroupRequest UpdateTeamGroupRequest
@@ -279,7 +280,7 @@ func (o *UpdateTeamGroupRequest) SetUserUpdates(v UserUpdates) {
 }
 
 func (o UpdateTeamGroupRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -340,6 +341,7 @@ func (o *UpdateTeamGroupRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scopeUpdate")
 		delete(additionalProperties, "userUpdates")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -380,4 +382,3 @@ func (v *NullableUpdateTeamGroupRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -210,8 +210,12 @@
                   },
                   "minItems": 0
                 },
-                "cxEventLabelsFilters": {},
-                "cxEventMetadataFilters": {},
+                "cxEventLabelsFilters": {
+                  "$ref": "#/components/schemas/Filters"
+                },
+                "cxEventMetadataFilters": {
+                  "$ref": "#/components/schemas/Filters"
+                },
                 "cxEventTypes": {
                   "example": [
                     "test_type"
@@ -225,7 +229,9 @@
                   },
                   "minItems": 0
                 },
-                "timestamp": {}
+                "timestamp": {
+                  "$ref": "#/components/schemas/TimestampRange"
+                }
               },
               "required": [
                 "timestamp",
@@ -363,8 +369,12 @@
                   },
                   "minItems": 0
                 },
-                "cxEventLabelsFilters": {},
-                "cxEventMetadataFilters": {},
+                "cxEventLabelsFilters": {
+                  "$ref": "#/components/schemas/Filters"
+                },
+                "cxEventMetadataFilters": {
+                  "$ref": "#/components/schemas/Filters"
+                },
                 "cxEventTypes": {
                   "example": [
                     "test_type"
@@ -378,7 +388,9 @@
                   },
                   "minItems": 0
                 },
-                "timestamp": {}
+                "timestamp": {
+                  "$ref": "#/components/schemas/TimestampRange"
+                }
               },
               "required": [
                 "timestamp",
@@ -514,7 +526,9 @@
             "schema": {
               "type": "object",
               "properties": {
-                "timestamp": {}
+                "timestamp": {
+                  "$ref": "#/components/schemas/TimestampRange"
+                }
               }
             },
             "style": "form"
@@ -601,8 +615,12 @@
                   },
                   "minItems": 0
                 },
-                "cxEventLabelsFilters": {},
-                "cxEventMetadataFilters": {},
+                "cxEventLabelsFilters": {
+                  "$ref": "#/components/schemas/Filters"
+                },
+                "cxEventMetadataFilters": {
+                  "$ref": "#/components/schemas/Filters"
+                },
                 "cxEventTypes": {
                   "example": [
                     "test_type"
@@ -616,7 +634,9 @@
                   },
                   "minItems": 0
                 },
-                "timestamp": {}
+                "timestamp": {
+                  "$ref": "#/components/schemas/TimestampRange"
+                }
               },
               "required": [
                 "timestamp",
@@ -919,16 +939,6 @@
         ]
       },
       "CxEventSingleOrMultiple": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
-          },
-          {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
-          }
-        ]
-      },
-      "CxEventSingleOrMultipleMultipleEvents": {
         "externalDocs": {
           "url": ""
         },
@@ -938,26 +948,43 @@
         "properties": {
           "multipleEvents": {
             "$ref": "#/components/schemas/CxEventArray"
-          }
-        },
-        "required": [
-          "multipleEvents"
-        ]
-      },
-      "CxEventSingleOrMultipleSingleEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "CxEventSingleOrMultiple",
-        "description": "This data structure represents a single or multiple events",
-        "type": "object",
-        "properties": {
+          },
           "singleEvent": {
             "$ref": "#/components/schemas/CxEvent"
           }
         },
-        "required": [
-          "singleEvent"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "singleEvent"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "multipleEvents"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "singleEvent"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "multipleEvents"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "Error": {
@@ -996,16 +1023,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -1016,26 +1033,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -1046,9 +1043,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -1096,10 +1105,7 @@
               "$ref": "#/components/schemas/FieldStatistics"
             }
           }
-        },
-        "required": [
-          "cxEventMetadataFieldStatisticscxEventLabelsFieldStatistics"
-        ]
+        }
       },
       "ListAlertEventsResponse": {
         "externalDocs": {
@@ -1167,6 +1173,32 @@
             "minItems": 0
           }
         }
+      },
+      "TimestampRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "TimestampRange",
+        "description": "This data structure represents a timestamp range",
+        "type": "object",
+        "properties": {
+          "from": {
+            "description": "Inclusive start of the time range.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
+          },
+          "to": {
+            "description": "Inclusive end of the time range.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ]
       },
       "events.v3.FilterMatcher": {
         "type": "string",

@@ -13,202 +13,270 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// PieChartQuery - struct for PieChartQuery
+// checks if the PieChartQuery type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PieChartQuery{}
+
+// PieChartQuery Discriminated union of possible query types for the pie chart widget.
 type PieChartQuery struct {
-	PieChartQueryDataprime *PieChartQueryDataprime
-	PieChartQueryLogs *PieChartQueryLogs
-	PieChartQueryMetrics *PieChartQueryMetrics
-	PieChartQuerySpans *PieChartQuerySpans
+	Dataprime                         *PieChartDataprimeQuery `json:"dataprime,omitempty"`
+	Logs                              *PieChartLogsQuery      `json:"logs,omitempty"`
+	Metrics                           *PieChartMetricsQuery   `json:"metrics,omitempty"`
+	Spans                             *PieChartSpansQuery     `json:"spans,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// PieChartQueryDataprimeAsPieChartQuery is a convenience function that returns PieChartQueryDataprime wrapped in PieChartQuery
-func PieChartQueryDataprimeAsPieChartQuery(v *PieChartQueryDataprime) PieChartQuery {
-	return PieChartQuery{
-		PieChartQueryDataprime: v,
+type _PieChartQuery PieChartQuery
+
+// NewPieChartQuery instantiates a new PieChartQuery object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewPieChartQuery() *PieChartQuery {
+	this := PieChartQuery{}
+	return &this
+}
+
+// NewPieChartQueryWithDefaults instantiates a new PieChartQuery object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewPieChartQueryWithDefaults() *PieChartQuery {
+	this := PieChartQuery{}
+	return &this
+}
+
+// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+func (o *PieChartQuery) GetDataprime() PieChartDataprimeQuery {
+	if o == nil || IsNil(o.Dataprime) {
+		var ret PieChartDataprimeQuery
+		return ret
 	}
+	return *o.Dataprime
 }
 
-// PieChartQueryLogsAsPieChartQuery is a convenience function that returns PieChartQueryLogs wrapped in PieChartQuery
-func PieChartQueryLogsAsPieChartQuery(v *PieChartQueryLogs) PieChartQuery {
-	return PieChartQuery{
-		PieChartQueryLogs: v,
+// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PieChartQuery) GetDataprimeOk() (*PieChartDataprimeQuery, bool) {
+	if o == nil || IsNil(o.Dataprime) {
+		return nil, false
 	}
+	return o.Dataprime, true
 }
 
-// PieChartQueryMetricsAsPieChartQuery is a convenience function that returns PieChartQueryMetrics wrapped in PieChartQuery
-func PieChartQueryMetricsAsPieChartQuery(v *PieChartQueryMetrics) PieChartQuery {
-	return PieChartQuery{
-		PieChartQueryMetrics: v,
+// HasDataprime returns a boolean if a field has been set.
+func (o *PieChartQuery) HasDataprime() bool {
+	if o != nil && !IsNil(o.Dataprime) {
+		return true
 	}
+
+	return false
 }
 
-// PieChartQuerySpansAsPieChartQuery is a convenience function that returns PieChartQuerySpans wrapped in PieChartQuery
-func PieChartQuerySpansAsPieChartQuery(v *PieChartQuerySpans) PieChartQuery {
-	return PieChartQuery{
-		PieChartQuerySpans: v,
+// SetDataprime gets a reference to the given PieChartDataprimeQuery and assigns it to the Dataprime field.
+func (o *PieChartQuery) SetDataprime(v PieChartDataprimeQuery) {
+	o.Dataprime = &v
+}
+
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *PieChartQuery) GetLogs() PieChartLogsQuery {
+	if o == nil || IsNil(o.Logs) {
+		var ret PieChartLogsQuery
+		return ret
 	}
+	return *o.Logs
 }
 
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PieChartQuery) GetLogsOk() (*PieChartLogsQuery, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
+	}
+	return o.Logs, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *PieChartQuery) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into PieChartQueryDataprime
-	err = json.Unmarshal(data, &dst.PieChartQueryDataprime)
-	if err == nil {
-		jsonPieChartQueryDataprime, _ := json.Marshal(dst.PieChartQueryDataprime)
-		if string(jsonPieChartQueryDataprime) == "{}" { // empty struct
-			dst.PieChartQueryDataprime = nil
-		} else {
-			if err = validator.Validate(dst.PieChartQueryDataprime); err != nil {
-				dst.PieChartQueryDataprime = nil
-			} else {
-				match++
-			}
+// HasLogs returns a boolean if a field has been set.
+func (o *PieChartQuery) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogs gets a reference to the given PieChartLogsQuery and assigns it to the Logs field.
+func (o *PieChartQuery) SetLogs(v PieChartLogsQuery) {
+	o.Logs = &v
+}
+
+// GetMetrics returns the Metrics field value if set, zero value otherwise.
+func (o *PieChartQuery) GetMetrics() PieChartMetricsQuery {
+	if o == nil || IsNil(o.Metrics) {
+		var ret PieChartMetricsQuery
+		return ret
+	}
+	return *o.Metrics
+}
+
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PieChartQuery) GetMetricsOk() (*PieChartMetricsQuery, bool) {
+	if o == nil || IsNil(o.Metrics) {
+		return nil, false
+	}
+	return o.Metrics, true
+}
+
+// HasMetrics returns a boolean if a field has been set.
+func (o *PieChartQuery) HasMetrics() bool {
+	if o != nil && !IsNil(o.Metrics) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetrics gets a reference to the given PieChartMetricsQuery and assigns it to the Metrics field.
+func (o *PieChartQuery) SetMetrics(v PieChartMetricsQuery) {
+	o.Metrics = &v
+}
+
+// GetSpans returns the Spans field value if set, zero value otherwise.
+func (o *PieChartQuery) GetSpans() PieChartSpansQuery {
+	if o == nil || IsNil(o.Spans) {
+		var ret PieChartSpansQuery
+		return ret
+	}
+	return *o.Spans
+}
+
+// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PieChartQuery) GetSpansOk() (*PieChartSpansQuery, bool) {
+	if o == nil || IsNil(o.Spans) {
+		return nil, false
+	}
+	return o.Spans, true
+}
+
+// HasSpans returns a boolean if a field has been set.
+func (o *PieChartQuery) HasSpans() bool {
+	if o != nil && !IsNil(o.Spans) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpans gets a reference to the given PieChartSpansQuery and assigns it to the Spans field.
+func (o *PieChartQuery) SetSpans(v PieChartSpansQuery) {
+	o.Spans = &v
+}
+
+func (o PieChartQuery) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PieChartQuery) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dataprime) {
+		toSerialize["dataprime"] = o.Dataprime
+	}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Metrics) {
+		toSerialize["metrics"] = o.Metrics
+	}
+	if !IsNil(o.Spans) {
+		toSerialize["spans"] = o.Spans
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spans"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metrics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dataprime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logs, spans, metrics, dataprime] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["logs"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logs must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["spans"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spans must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metrics"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metrics must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dataprime"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dataprime must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *PieChartQuery) UnmarshalJSON(data []byte) (err error) {
+	varPieChartQuery := _PieChartQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPieChartQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PieChartQuery(varPieChartQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PieChartQueryDataprime = nil
-	}
-
-	// try to unmarshal data into PieChartQueryLogs
-	err = json.Unmarshal(data, &dst.PieChartQueryLogs)
-	if err == nil {
-		jsonPieChartQueryLogs, _ := json.Marshal(dst.PieChartQueryLogs)
-		if string(jsonPieChartQueryLogs) == "{}" { // empty struct
-			dst.PieChartQueryLogs = nil
-		} else {
-			if err = validator.Validate(dst.PieChartQueryLogs); err != nil {
-				dst.PieChartQueryLogs = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spans"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PieChartQueryLogs = nil
-	}
-
-	// try to unmarshal data into PieChartQueryMetrics
-	err = json.Unmarshal(data, &dst.PieChartQueryMetrics)
-	if err == nil {
-		jsonPieChartQueryMetrics, _ := json.Marshal(dst.PieChartQueryMetrics)
-		if string(jsonPieChartQueryMetrics) == "{}" { // empty struct
-			dst.PieChartQueryMetrics = nil
-		} else {
-			if err = validator.Validate(dst.PieChartQueryMetrics); err != nil {
-				dst.PieChartQueryMetrics = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metrics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PieChartQueryMetrics = nil
-	}
-
-	// try to unmarshal data into PieChartQuerySpans
-	err = json.Unmarshal(data, &dst.PieChartQuerySpans)
-	if err == nil {
-		jsonPieChartQuerySpans, _ := json.Marshal(dst.PieChartQuerySpans)
-		if string(jsonPieChartQuerySpans) == "{}" { // empty struct
-			dst.PieChartQuerySpans = nil
-		} else {
-			if err = validator.Validate(dst.PieChartQuerySpans); err != nil {
-				dst.PieChartQuerySpans = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dataprime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PieChartQuerySpans = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logs, spans, metrics, dataprime] may be set"}
+		}
+
+		delete(additionalProperties, "dataprime")
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.PieChartQueryDataprime = nil
-		dst.PieChartQueryLogs = nil
-		dst.PieChartQueryMetrics = nil
-		dst.PieChartQuerySpans = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(PieChartQuery)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src PieChartQuery) MarshalJSON() ([]byte, error) {
-	if src.PieChartQueryDataprime != nil {
-		return json.Marshal(&src.PieChartQueryDataprime)
-	}
-
-	if src.PieChartQueryLogs != nil {
-		return json.Marshal(&src.PieChartQueryLogs)
-	}
-
-	if src.PieChartQueryMetrics != nil {
-		return json.Marshal(&src.PieChartQueryMetrics)
-	}
-
-	if src.PieChartQuerySpans != nil {
-		return json.Marshal(&src.PieChartQuerySpans)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *PieChartQuery) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.PieChartQueryDataprime != nil {
-		return obj.PieChartQueryDataprime
-	}
-
-	if obj.PieChartQueryLogs != nil {
-		return obj.PieChartQueryLogs
-	}
-
-	if obj.PieChartQueryMetrics != nil {
-		return obj.PieChartQueryMetrics
-	}
-
-	if obj.PieChartQuerySpans != nil {
-		return obj.PieChartQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj PieChartQuery) GetActualInstanceValue() (interface{}) {
-	if obj.PieChartQueryDataprime != nil {
-		return *obj.PieChartQueryDataprime
-	}
-
-	if obj.PieChartQueryLogs != nil {
-		return *obj.PieChartQueryLogs
-	}
-
-	if obj.PieChartQueryMetrics != nil {
-		return *obj.PieChartQueryMetrics
-	}
-
-	if obj.PieChartQuerySpans != nil {
-		return *obj.PieChartQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullablePieChartQuery struct {
@@ -246,4 +314,3 @@ func (v *NullablePieChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

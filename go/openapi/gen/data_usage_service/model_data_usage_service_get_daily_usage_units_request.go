@@ -13,126 +13,178 @@ package data_usage_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// DataUsageServiceGetDailyUsageUnitsRequest - struct for DataUsageServiceGetDailyUsageUnitsRequest
+// checks if the DataUsageServiceGetDailyUsageUnitsRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DataUsageServiceGetDailyUsageUnitsRequest{}
+
+// DataUsageServiceGetDailyUsageUnitsRequest Request for daily units usage data for the specified period.
 type DataUsageServiceGetDailyUsageUnitsRequest struct {
-	GetDailyUsageUnitsRequestDateRange *GetDailyUsageUnitsRequestDateRange
-	GetDailyUsageUnitsRequestRange *GetDailyUsageUnitsRequestRange
+	DateRange                         *V2DateRange `json:"dateRange,omitempty"`
+	Range                             *V2Range     `json:"range,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// GetDailyUsageUnitsRequestDateRangeAsDataUsageServiceGetDailyUsageUnitsRequest is a convenience function that returns GetDailyUsageUnitsRequestDateRange wrapped in DataUsageServiceGetDailyUsageUnitsRequest
-func GetDailyUsageUnitsRequestDateRangeAsDataUsageServiceGetDailyUsageUnitsRequest(v *GetDailyUsageUnitsRequestDateRange) DataUsageServiceGetDailyUsageUnitsRequest {
-	return DataUsageServiceGetDailyUsageUnitsRequest{
-		GetDailyUsageUnitsRequestDateRange: v,
+type _DataUsageServiceGetDailyUsageUnitsRequest DataUsageServiceGetDailyUsageUnitsRequest
+
+// NewDataUsageServiceGetDailyUsageUnitsRequest instantiates a new DataUsageServiceGetDailyUsageUnitsRequest object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDataUsageServiceGetDailyUsageUnitsRequest() *DataUsageServiceGetDailyUsageUnitsRequest {
+	this := DataUsageServiceGetDailyUsageUnitsRequest{}
+	return &this
+}
+
+// NewDataUsageServiceGetDailyUsageUnitsRequestWithDefaults instantiates a new DataUsageServiceGetDailyUsageUnitsRequest object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDataUsageServiceGetDailyUsageUnitsRequestWithDefaults() *DataUsageServiceGetDailyUsageUnitsRequest {
+	this := DataUsageServiceGetDailyUsageUnitsRequest{}
+	return &this
+}
+
+// GetDateRange returns the DateRange field value if set, zero value otherwise.
+func (o *DataUsageServiceGetDailyUsageUnitsRequest) GetDateRange() V2DateRange {
+	if o == nil || IsNil(o.DateRange) {
+		var ret V2DateRange
+		return ret
 	}
+	return *o.DateRange
 }
 
-// GetDailyUsageUnitsRequestRangeAsDataUsageServiceGetDailyUsageUnitsRequest is a convenience function that returns GetDailyUsageUnitsRequestRange wrapped in DataUsageServiceGetDailyUsageUnitsRequest
-func GetDailyUsageUnitsRequestRangeAsDataUsageServiceGetDailyUsageUnitsRequest(v *GetDailyUsageUnitsRequestRange) DataUsageServiceGetDailyUsageUnitsRequest {
-	return DataUsageServiceGetDailyUsageUnitsRequest{
-		GetDailyUsageUnitsRequestRange: v,
+// GetDateRangeOk returns a tuple with the DateRange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataUsageServiceGetDailyUsageUnitsRequest) GetDateRangeOk() (*V2DateRange, bool) {
+	if o == nil || IsNil(o.DateRange) {
+		return nil, false
 	}
+	return o.DateRange, true
 }
 
+// HasDateRange returns a boolean if a field has been set.
+func (o *DataUsageServiceGetDailyUsageUnitsRequest) HasDateRange() bool {
+	if o != nil && !IsNil(o.DateRange) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *DataUsageServiceGetDailyUsageUnitsRequest) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into GetDailyUsageUnitsRequestDateRange
-	err = json.Unmarshal(data, &dst.GetDailyUsageUnitsRequestDateRange)
-	if err == nil {
-		jsonGetDailyUsageUnitsRequestDateRange, _ := json.Marshal(dst.GetDailyUsageUnitsRequestDateRange)
-		if string(jsonGetDailyUsageUnitsRequestDateRange) == "{}" { // empty struct
-			dst.GetDailyUsageUnitsRequestDateRange = nil
-		} else {
-			if err = validator.Validate(dst.GetDailyUsageUnitsRequestDateRange); err != nil {
-				dst.GetDailyUsageUnitsRequestDateRange = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetDateRange gets a reference to the given V2DateRange and assigns it to the DateRange field.
+func (o *DataUsageServiceGetDailyUsageUnitsRequest) SetDateRange(v V2DateRange) {
+	o.DateRange = &v
+}
+
+// GetRange returns the Range field value if set, zero value otherwise.
+func (o *DataUsageServiceGetDailyUsageUnitsRequest) GetRange() V2Range {
+	if o == nil || IsNil(o.Range) {
+		var ret V2Range
+		return ret
+	}
+	return *o.Range
+}
+
+// GetRangeOk returns a tuple with the Range field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataUsageServiceGetDailyUsageUnitsRequest) GetRangeOk() (*V2Range, bool) {
+	if o == nil || IsNil(o.Range) {
+		return nil, false
+	}
+	return o.Range, true
+}
+
+// HasRange returns a boolean if a field has been set.
+func (o *DataUsageServiceGetDailyUsageUnitsRequest) HasRange() bool {
+	if o != nil && !IsNil(o.Range) {
+		return true
+	}
+
+	return false
+}
+
+// SetRange gets a reference to the given V2Range and assigns it to the Range field.
+func (o *DataUsageServiceGetDailyUsageUnitsRequest) SetRange(v V2Range) {
+	o.Range = &v
+}
+
+func (o DataUsageServiceGetDailyUsageUnitsRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DataUsageServiceGetDailyUsageUnitsRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.DateRange) {
+		toSerialize["dateRange"] = o.DateRange
+	}
+	if !IsNil(o.Range) {
+		toSerialize["range"] = o.Range
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["range"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dateRange"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [range, dateRange] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["range"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field range must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dateRange"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dateRange must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *DataUsageServiceGetDailyUsageUnitsRequest) UnmarshalJSON(data []byte) (err error) {
+	varDataUsageServiceGetDailyUsageUnitsRequest := _DataUsageServiceGetDailyUsageUnitsRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataUsageServiceGetDailyUsageUnitsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataUsageServiceGetDailyUsageUnitsRequest(varDataUsageServiceGetDailyUsageUnitsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["range"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GetDailyUsageUnitsRequestDateRange = nil
-	}
-
-	// try to unmarshal data into GetDailyUsageUnitsRequestRange
-	err = json.Unmarshal(data, &dst.GetDailyUsageUnitsRequestRange)
-	if err == nil {
-		jsonGetDailyUsageUnitsRequestRange, _ := json.Marshal(dst.GetDailyUsageUnitsRequestRange)
-		if string(jsonGetDailyUsageUnitsRequestRange) == "{}" { // empty struct
-			dst.GetDailyUsageUnitsRequestRange = nil
-		} else {
-			if err = validator.Validate(dst.GetDailyUsageUnitsRequestRange); err != nil {
-				dst.GetDailyUsageUnitsRequestRange = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dateRange"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GetDailyUsageUnitsRequestRange = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [range, dateRange] may be set"}
+		}
+
+		delete(additionalProperties, "dateRange")
+		delete(additionalProperties, "range")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.GetDailyUsageUnitsRequestDateRange = nil
-		dst.GetDailyUsageUnitsRequestRange = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(DataUsageServiceGetDailyUsageUnitsRequest)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src DataUsageServiceGetDailyUsageUnitsRequest) MarshalJSON() ([]byte, error) {
-	if src.GetDailyUsageUnitsRequestDateRange != nil {
-		return json.Marshal(&src.GetDailyUsageUnitsRequestDateRange)
-	}
-
-	if src.GetDailyUsageUnitsRequestRange != nil {
-		return json.Marshal(&src.GetDailyUsageUnitsRequestRange)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *DataUsageServiceGetDailyUsageUnitsRequest) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.GetDailyUsageUnitsRequestDateRange != nil {
-		return obj.GetDailyUsageUnitsRequestDateRange
-	}
-
-	if obj.GetDailyUsageUnitsRequestRange != nil {
-		return obj.GetDailyUsageUnitsRequestRange
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj DataUsageServiceGetDailyUsageUnitsRequest) GetActualInstanceValue() (interface{}) {
-	if obj.GetDailyUsageUnitsRequestDateRange != nil {
-		return *obj.GetDailyUsageUnitsRequestDateRange
-	}
-
-	if obj.GetDailyUsageUnitsRequestRange != nil {
-		return *obj.GetDailyUsageUnitsRequestRange
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableDataUsageServiceGetDailyUsageUnitsRequest struct {
@@ -170,4 +222,3 @@ func (v *NullableDataUsageServiceGetDailyUsageUnitsRequest) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -29,16 +29,17 @@ type IncidentEventExtendedMetadata struct {
 	// The alert labels.
 	AlertLabels []IncidentsV1MetaLabel `json:"alertLabels,omitempty"`
 	// The alert name.
-	AlertName *string `json:"alertName,omitempty"`
+	AlertName *string                 `json:"alertName,omitempty"`
 	AlertType *IncidentEventAlertType `json:"alertType,omitempty"`
 	// The incident permutation.
 	IncidentPermutation *map[string]string `json:"incidentPermutation,omitempty"`
-	IncidentSeverity *IncidentSeverity `json:"incidentSeverity,omitempty"`
-	IncidentState *IncidentState `json:"incidentState,omitempty"`
-	IncidentStatus *IncidentStatus `json:"incidentStatus,omitempty"`
+	IncidentSeverity    *IncidentSeverity  `json:"incidentSeverity,omitempty"`
+	IncidentState       *IncidentState     `json:"incidentState,omitempty"`
+	IncidentStatus      *IncidentStatus    `json:"incidentStatus,omitempty"`
 	// The is muted.
-	IsMuted *bool `json:"isMuted,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IsMuted                           *bool `json:"isMuted,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentEventExtendedMetadata IncidentEventExtendedMetadata
@@ -381,7 +382,7 @@ func (o *IncidentEventExtendedMetadata) SetIsMuted(v bool) {
 }
 
 func (o IncidentEventExtendedMetadata) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -454,6 +455,7 @@ func (o *IncidentEventExtendedMetadata) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "incidentStatus")
 		delete(additionalProperties, "isMuted")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -494,4 +496,3 @@ func (v *NullableIncidentEventExtendedMetadata) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

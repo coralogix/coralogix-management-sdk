@@ -22,9 +22,10 @@ var _ MappedNullable = &ReplacePolicySettingsRequest{}
 
 // ReplacePolicySettingsRequest This data structure is used to replace default policy priority settings for logs and/or spans. Server-generated fields (created_at, updated_at) will be ignored if provided.
 type ReplacePolicySettingsRequest struct {
-	LogsPolicySettings *LogsPolicySettings `json:"logsPolicySettings,omitempty"`
-	SpansPolicySettings *SpansPolicySettings `json:"spansPolicySettings,omitempty"`
-	AdditionalProperties map[string]interface{}
+	LogsPolicySettings                *LogsPolicySettings  `json:"logsPolicySettings,omitempty"`
+	SpansPolicySettings               *SpansPolicySettings `json:"spansPolicySettings,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ReplacePolicySettingsRequest ReplacePolicySettingsRequest
@@ -111,7 +112,7 @@ func (o *ReplacePolicySettingsRequest) SetSpansPolicySettings(v SpansPolicySetti
 }
 
 func (o ReplacePolicySettingsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *ReplacePolicySettingsRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "logsPolicySettings")
 		delete(additionalProperties, "spansPolicySettings")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableReplacePolicySettingsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,8 +23,9 @@ var _ MappedNullable = &CreateAlertSchedulerRuleResponse{}
 
 // CreateAlertSchedulerRuleResponse This is a response sent after creating an alert scheduler rule
 type CreateAlertSchedulerRuleResponse struct {
-	AlertSchedulerRule AlertSchedulerRule `json:"alertSchedulerRule"`
-	AdditionalProperties map[string]interface{}
+	AlertSchedulerRule                AlertSchedulerRule `json:"alertSchedulerRule"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateAlertSchedulerRuleResponse CreateAlertSchedulerRuleResponse
@@ -72,7 +73,7 @@ func (o *CreateAlertSchedulerRuleResponse) SetAlertSchedulerRule(v AlertSchedule
 }
 
 func (o CreateAlertSchedulerRuleResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -103,10 +104,10 @@ func (o *CreateAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err error
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -128,6 +129,7 @@ func (o *CreateAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err error
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "alertSchedulerRule")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -168,4 +170,3 @@ func (v *NullableCreateAlertSchedulerRuleResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

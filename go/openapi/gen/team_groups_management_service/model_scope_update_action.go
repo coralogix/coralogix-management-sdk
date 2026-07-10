@@ -14,125 +14,239 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ScopeUpdateAction - struct for ScopeUpdateAction
+// checks if the ScopeUpdateAction type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ScopeUpdateAction{}
+
+// ScopeUpdateAction Set scope id.
 type ScopeUpdateAction struct {
-	ScopeUpdateActionClear *ScopeUpdateActionClear
-	ScopeUpdateActionSetScopeId *ScopeUpdateActionSetScopeId
+	// Discriminator indicating the scope update action type (set_scope_id or clear).
+	ActionType                        string      `json:"actionType"`
+	Clear                             *ClearScope `json:"clear,omitempty"`
+	SetScopeId                        *SetScopeId `json:"setScopeId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// ScopeUpdateActionClearAsScopeUpdateAction is a convenience function that returns ScopeUpdateActionClear wrapped in ScopeUpdateAction
-func ScopeUpdateActionClearAsScopeUpdateAction(v *ScopeUpdateActionClear) ScopeUpdateAction {
-	return ScopeUpdateAction{
-		ScopeUpdateActionClear: v,
+type _ScopeUpdateAction ScopeUpdateAction
+
+// NewScopeUpdateAction instantiates a new ScopeUpdateAction object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewScopeUpdateAction(actionType string) *ScopeUpdateAction {
+	this := ScopeUpdateAction{}
+	this.ActionType = actionType
+	return &this
+}
+
+// NewScopeUpdateActionWithDefaults instantiates a new ScopeUpdateAction object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewScopeUpdateActionWithDefaults() *ScopeUpdateAction {
+	this := ScopeUpdateAction{}
+	return &this
+}
+
+// GetActionType returns the ActionType field value
+func (o *ScopeUpdateAction) GetActionType() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
+
+	return o.ActionType
 }
 
-// ScopeUpdateActionSetScopeIdAsScopeUpdateAction is a convenience function that returns ScopeUpdateActionSetScopeId wrapped in ScopeUpdateAction
-func ScopeUpdateActionSetScopeIdAsScopeUpdateAction(v *ScopeUpdateActionSetScopeId) ScopeUpdateAction {
-	return ScopeUpdateAction{
-		ScopeUpdateActionSetScopeId: v,
+// GetActionTypeOk returns a tuple with the ActionType field value
+// and a boolean to check if the value has been set.
+func (o *ScopeUpdateAction) GetActionTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
 	}
+	return &o.ActionType, true
 }
 
+// SetActionType sets field value
+func (o *ScopeUpdateAction) SetActionType(v string) {
+	o.ActionType = v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ScopeUpdateAction) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ScopeUpdateActionClear
-	err = json.Unmarshal(data, &dst.ScopeUpdateActionClear)
-	if err == nil {
-		jsonScopeUpdateActionClear, _ := json.Marshal(dst.ScopeUpdateActionClear)
-		if string(jsonScopeUpdateActionClear) == "{}" { // empty struct
-			dst.ScopeUpdateActionClear = nil
-		} else {
-			if err = validator.Validate(dst.ScopeUpdateActionClear); err != nil {
-				dst.ScopeUpdateActionClear = nil
-			} else {
-				match++
-			}
+// GetClear returns the Clear field value if set, zero value otherwise.
+func (o *ScopeUpdateAction) GetClear() ClearScope {
+	if o == nil || IsNil(o.Clear) {
+		var ret ClearScope
+		return ret
+	}
+	return *o.Clear
+}
+
+// GetClearOk returns a tuple with the Clear field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScopeUpdateAction) GetClearOk() (*ClearScope, bool) {
+	if o == nil || IsNil(o.Clear) {
+		return nil, false
+	}
+	return o.Clear, true
+}
+
+// HasClear returns a boolean if a field has been set.
+func (o *ScopeUpdateAction) HasClear() bool {
+	if o != nil && !IsNil(o.Clear) {
+		return true
+	}
+
+	return false
+}
+
+// SetClear gets a reference to the given ClearScope and assigns it to the Clear field.
+func (o *ScopeUpdateAction) SetClear(v ClearScope) {
+	o.Clear = &v
+}
+
+// GetSetScopeId returns the SetScopeId field value if set, zero value otherwise.
+func (o *ScopeUpdateAction) GetSetScopeId() SetScopeId {
+	if o == nil || IsNil(o.SetScopeId) {
+		var ret SetScopeId
+		return ret
+	}
+	return *o.SetScopeId
+}
+
+// GetSetScopeIdOk returns a tuple with the SetScopeId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScopeUpdateAction) GetSetScopeIdOk() (*SetScopeId, bool) {
+	if o == nil || IsNil(o.SetScopeId) {
+		return nil, false
+	}
+	return o.SetScopeId, true
+}
+
+// HasSetScopeId returns a boolean if a field has been set.
+func (o *ScopeUpdateAction) HasSetScopeId() bool {
+	if o != nil && !IsNil(o.SetScopeId) {
+		return true
+	}
+
+	return false
+}
+
+// SetSetScopeId gets a reference to the given SetScopeId and assigns it to the SetScopeId field.
+func (o *ScopeUpdateAction) SetSetScopeId(v SetScopeId) {
+	o.SetScopeId = &v
+}
+
+func (o ScopeUpdateAction) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ScopeUpdateAction) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["actionType"] = o.ActionType
+	if !IsNil(o.Clear) {
+		toSerialize["clear"] = o.Clear
+	}
+	if !IsNil(o.SetScopeId) {
+		toSerialize["setScopeId"] = o.SetScopeId
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["setScopeId"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["clear"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [setScopeId, clear] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["setScopeId"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field setScopeId must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["clear"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field clear must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ScopeUpdateAction) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"actionType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.ScopeUpdateActionClear = nil
 	}
 
-	// try to unmarshal data into ScopeUpdateActionSetScopeId
-	err = json.Unmarshal(data, &dst.ScopeUpdateActionSetScopeId)
-	if err == nil {
-		jsonScopeUpdateActionSetScopeId, _ := json.Marshal(dst.ScopeUpdateActionSetScopeId)
-		if string(jsonScopeUpdateActionSetScopeId) == "{}" { // empty struct
-			dst.ScopeUpdateActionSetScopeId = nil
-		} else {
-			if err = validator.Validate(dst.ScopeUpdateActionSetScopeId); err != nil {
-				dst.ScopeUpdateActionSetScopeId = nil
-			} else {
-				match++
-			}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["setScopeId"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["clear"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [setScopeId, clear] may be set"}
+	}
+
+	varScopeUpdateAction := _ScopeUpdateAction{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varScopeUpdateAction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScopeUpdateAction(varScopeUpdateAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["setScopeId"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ScopeUpdateActionSetScopeId = nil
+		if _, exists := additionalProperties["clear"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [setScopeId, clear] may be set"}
+		}
+
+		delete(additionalProperties, "actionType")
+		delete(additionalProperties, "clear")
+		delete(additionalProperties, "setScopeId")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ScopeUpdateActionClear = nil
-		dst.ScopeUpdateActionSetScopeId = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ScopeUpdateAction)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ScopeUpdateAction) MarshalJSON() ([]byte, error) {
-	if src.ScopeUpdateActionClear != nil {
-		return json.Marshal(&src.ScopeUpdateActionClear)
-	}
-
-	if src.ScopeUpdateActionSetScopeId != nil {
-		return json.Marshal(&src.ScopeUpdateActionSetScopeId)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ScopeUpdateAction) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ScopeUpdateActionClear != nil {
-		return obj.ScopeUpdateActionClear
-	}
-
-	if obj.ScopeUpdateActionSetScopeId != nil {
-		return obj.ScopeUpdateActionSetScopeId
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ScopeUpdateAction) GetActualInstanceValue() (interface{}) {
-	if obj.ScopeUpdateActionClear != nil {
-		return *obj.ScopeUpdateActionClear
-	}
-
-	if obj.ScopeUpdateActionSetScopeId != nil {
-		return *obj.ScopeUpdateActionSetScopeId
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableScopeUpdateAction struct {
@@ -170,4 +284,3 @@ func (v *NullableScopeUpdateAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

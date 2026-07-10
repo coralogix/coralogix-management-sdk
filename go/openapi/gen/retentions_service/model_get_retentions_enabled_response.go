@@ -23,8 +23,9 @@ var _ MappedNullable = &GetRetentionsEnabledResponse{}
 // GetRetentionsEnabledResponse This data structure is obtained when retrieving the active status of retentions
 type GetRetentionsEnabledResponse struct {
 	// The enable tags.
-	EnableTags *bool `json:"enableTags,omitempty"`
-	AdditionalProperties map[string]interface{}
+	EnableTags                        *bool `json:"enableTags,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetRetentionsEnabledResponse GetRetentionsEnabledResponse
@@ -79,7 +80,7 @@ func (o *GetRetentionsEnabledResponse) SetEnableTags(v bool) {
 }
 
 func (o GetRetentionsEnabledResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *GetRetentionsEnabledResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "enableTags")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableGetRetentionsEnabledResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

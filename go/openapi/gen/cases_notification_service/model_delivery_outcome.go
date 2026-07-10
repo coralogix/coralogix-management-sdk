@@ -13,126 +13,178 @@ package cases_notification_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// DeliveryOutcome - struct for DeliveryOutcome
+// checks if the DeliveryOutcome type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DeliveryOutcome{}
+
+// DeliveryOutcome Outcome of a notification delivery attempt.
 type DeliveryOutcome struct {
-	DeliveryOutcomeFailure *DeliveryOutcomeFailure
-	DeliveryOutcomeSuccess *DeliveryOutcomeSuccess
+	Failure                           *DeliveryFailure `json:"failure,omitempty"`
+	Success                           *DeliverySuccess `json:"success,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// DeliveryOutcomeFailureAsDeliveryOutcome is a convenience function that returns DeliveryOutcomeFailure wrapped in DeliveryOutcome
-func DeliveryOutcomeFailureAsDeliveryOutcome(v *DeliveryOutcomeFailure) DeliveryOutcome {
-	return DeliveryOutcome{
-		DeliveryOutcomeFailure: v,
+type _DeliveryOutcome DeliveryOutcome
+
+// NewDeliveryOutcome instantiates a new DeliveryOutcome object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDeliveryOutcome() *DeliveryOutcome {
+	this := DeliveryOutcome{}
+	return &this
+}
+
+// NewDeliveryOutcomeWithDefaults instantiates a new DeliveryOutcome object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDeliveryOutcomeWithDefaults() *DeliveryOutcome {
+	this := DeliveryOutcome{}
+	return &this
+}
+
+// GetFailure returns the Failure field value if set, zero value otherwise.
+func (o *DeliveryOutcome) GetFailure() DeliveryFailure {
+	if o == nil || IsNil(o.Failure) {
+		var ret DeliveryFailure
+		return ret
 	}
+	return *o.Failure
 }
 
-// DeliveryOutcomeSuccessAsDeliveryOutcome is a convenience function that returns DeliveryOutcomeSuccess wrapped in DeliveryOutcome
-func DeliveryOutcomeSuccessAsDeliveryOutcome(v *DeliveryOutcomeSuccess) DeliveryOutcome {
-	return DeliveryOutcome{
-		DeliveryOutcomeSuccess: v,
+// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DeliveryOutcome) GetFailureOk() (*DeliveryFailure, bool) {
+	if o == nil || IsNil(o.Failure) {
+		return nil, false
 	}
+	return o.Failure, true
 }
 
+// HasFailure returns a boolean if a field has been set.
+func (o *DeliveryOutcome) HasFailure() bool {
+	if o != nil && !IsNil(o.Failure) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *DeliveryOutcome) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into DeliveryOutcomeFailure
-	err = json.Unmarshal(data, &dst.DeliveryOutcomeFailure)
-	if err == nil {
-		jsonDeliveryOutcomeFailure, _ := json.Marshal(dst.DeliveryOutcomeFailure)
-		if string(jsonDeliveryOutcomeFailure) == "{}" { // empty struct
-			dst.DeliveryOutcomeFailure = nil
-		} else {
-			if err = validator.Validate(dst.DeliveryOutcomeFailure); err != nil {
-				dst.DeliveryOutcomeFailure = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetFailure gets a reference to the given DeliveryFailure and assigns it to the Failure field.
+func (o *DeliveryOutcome) SetFailure(v DeliveryFailure) {
+	o.Failure = &v
+}
+
+// GetSuccess returns the Success field value if set, zero value otherwise.
+func (o *DeliveryOutcome) GetSuccess() DeliverySuccess {
+	if o == nil || IsNil(o.Success) {
+		var ret DeliverySuccess
+		return ret
+	}
+	return *o.Success
+}
+
+// GetSuccessOk returns a tuple with the Success field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DeliveryOutcome) GetSuccessOk() (*DeliverySuccess, bool) {
+	if o == nil || IsNil(o.Success) {
+		return nil, false
+	}
+	return o.Success, true
+}
+
+// HasSuccess returns a boolean if a field has been set.
+func (o *DeliveryOutcome) HasSuccess() bool {
+	if o != nil && !IsNil(o.Success) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuccess gets a reference to the given DeliverySuccess and assigns it to the Success field.
+func (o *DeliveryOutcome) SetSuccess(v DeliverySuccess) {
+	o.Success = &v
+}
+
+func (o DeliveryOutcome) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DeliveryOutcome) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Failure) {
+		toSerialize["failure"] = o.Failure
+	}
+	if !IsNil(o.Success) {
+		toSerialize["success"] = o.Success
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["success"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["failure"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["success"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field success must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["failure"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field failure must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *DeliveryOutcome) UnmarshalJSON(data []byte) (err error) {
+	varDeliveryOutcome := _DeliveryOutcome{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDeliveryOutcome)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DeliveryOutcome(varDeliveryOutcome)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["success"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DeliveryOutcomeFailure = nil
-	}
-
-	// try to unmarshal data into DeliveryOutcomeSuccess
-	err = json.Unmarshal(data, &dst.DeliveryOutcomeSuccess)
-	if err == nil {
-		jsonDeliveryOutcomeSuccess, _ := json.Marshal(dst.DeliveryOutcomeSuccess)
-		if string(jsonDeliveryOutcomeSuccess) == "{}" { // empty struct
-			dst.DeliveryOutcomeSuccess = nil
-		} else {
-			if err = validator.Validate(dst.DeliveryOutcomeSuccess); err != nil {
-				dst.DeliveryOutcomeSuccess = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["failure"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DeliveryOutcomeSuccess = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+		}
+
+		delete(additionalProperties, "failure")
+		delete(additionalProperties, "success")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.DeliveryOutcomeFailure = nil
-		dst.DeliveryOutcomeSuccess = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(DeliveryOutcome)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src DeliveryOutcome) MarshalJSON() ([]byte, error) {
-	if src.DeliveryOutcomeFailure != nil {
-		return json.Marshal(&src.DeliveryOutcomeFailure)
-	}
-
-	if src.DeliveryOutcomeSuccess != nil {
-		return json.Marshal(&src.DeliveryOutcomeSuccess)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *DeliveryOutcome) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.DeliveryOutcomeFailure != nil {
-		return obj.DeliveryOutcomeFailure
-	}
-
-	if obj.DeliveryOutcomeSuccess != nil {
-		return obj.DeliveryOutcomeSuccess
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj DeliveryOutcome) GetActualInstanceValue() (interface{}) {
-	if obj.DeliveryOutcomeFailure != nil {
-		return *obj.DeliveryOutcomeFailure
-	}
-
-	if obj.DeliveryOutcomeSuccess != nil {
-		return *obj.DeliveryOutcomeSuccess
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableDeliveryOutcome struct {
@@ -170,4 +222,3 @@ func (v *NullableDeliveryOutcome) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

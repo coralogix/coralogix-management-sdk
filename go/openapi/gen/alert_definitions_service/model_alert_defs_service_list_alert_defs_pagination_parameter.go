@@ -25,8 +25,9 @@ type AlertDefsServiceListAlertDefsPaginationParameter struct {
 	// Page size.
 	PageSize *int64 `json:"pageSize,omitempty"`
 	// The page token.
-	PageToken *string `json:"pageToken,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PageToken                         *string `json:"pageToken,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AlertDefsServiceListAlertDefsPaginationParameter AlertDefsServiceListAlertDefsPaginationParameter
@@ -113,7 +114,7 @@ func (o *AlertDefsServiceListAlertDefsPaginationParameter) SetPageToken(v string
 }
 
 func (o AlertDefsServiceListAlertDefsPaginationParameter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *AlertDefsServiceListAlertDefsPaginationParameter) UnmarshalJSON(data []
 		delete(additionalProperties, "pageSize")
 		delete(additionalProperties, "pageToken")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableAlertDefsServiceListAlertDefsPaginationParameter) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

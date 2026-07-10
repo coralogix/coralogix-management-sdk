@@ -31,8 +31,9 @@ type AwsEventBridgeConfig struct {
 	// The role name.
 	RoleName *string `json:"roleName,omitempty"`
 	// Source.
-	Source *string `json:"source,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Source                            *string `json:"source,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AwsEventBridgeConfig AwsEventBridgeConfig
@@ -215,7 +216,7 @@ func (o *AwsEventBridgeConfig) SetSource(v string) {
 }
 
 func (o AwsEventBridgeConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,6 +269,7 @@ func (o *AwsEventBridgeConfig) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "roleName")
 		delete(additionalProperties, "source")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -308,4 +310,3 @@ func (v *NullableAwsEventBridgeConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

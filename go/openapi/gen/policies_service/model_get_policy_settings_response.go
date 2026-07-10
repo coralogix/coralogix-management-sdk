@@ -22,9 +22,10 @@ var _ MappedNullable = &GetPolicySettingsResponse{}
 
 // GetPolicySettingsResponse This data structure is returned when getting policy priority settings.
 type GetPolicySettingsResponse struct {
-	LogsPolicySettings *LogsPolicySettings `json:"logsPolicySettings,omitempty"`
-	SpansPolicySettings *SpansPolicySettings `json:"spansPolicySettings,omitempty"`
-	AdditionalProperties map[string]interface{}
+	LogsPolicySettings                *LogsPolicySettings  `json:"logsPolicySettings,omitempty"`
+	SpansPolicySettings               *SpansPolicySettings `json:"spansPolicySettings,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetPolicySettingsResponse GetPolicySettingsResponse
@@ -111,7 +112,7 @@ func (o *GetPolicySettingsResponse) SetSpansPolicySettings(v SpansPolicySettings
 }
 
 func (o GetPolicySettingsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *GetPolicySettingsResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "logsPolicySettings")
 		delete(additionalProperties, "spansPolicySettings")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableGetPolicySettingsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

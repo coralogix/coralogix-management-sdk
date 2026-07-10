@@ -13,126 +13,216 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// AlertSchedulerRuleProtobufV1Filter - struct for AlertSchedulerRuleProtobufV1Filter
+// checks if the AlertSchedulerRuleProtobufV1Filter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AlertSchedulerRuleProtobufV1Filter{}
+
+// AlertSchedulerRuleProtobufV1Filter Alert scheduler rule protobuf.v1.filter.
 type AlertSchedulerRuleProtobufV1Filter struct {
-	AlertSchedulerRuleProtobufV1FilterAlertMetaLabels *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
-	AlertSchedulerRuleProtobufV1FilterAlertUniqueIds *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
+	AlertMetaLabels *MetaLabels     `json:"alertMetaLabels,omitempty"`
+	AlertUniqueIds  *AlertUniqueIds `json:"alertUniqueIds,omitempty"`
+	// Dataprime expression that filters the alerts by group-by values.
+	WhatExpression                    *string `json:"whatExpression,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// AlertSchedulerRuleProtobufV1FilterAlertMetaLabelsAsAlertSchedulerRuleProtobufV1Filter is a convenience function that returns AlertSchedulerRuleProtobufV1FilterAlertMetaLabels wrapped in AlertSchedulerRuleProtobufV1Filter
-func AlertSchedulerRuleProtobufV1FilterAlertMetaLabelsAsAlertSchedulerRuleProtobufV1Filter(v *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels) AlertSchedulerRuleProtobufV1Filter {
-	return AlertSchedulerRuleProtobufV1Filter{
-		AlertSchedulerRuleProtobufV1FilterAlertMetaLabels: v,
+type _AlertSchedulerRuleProtobufV1Filter AlertSchedulerRuleProtobufV1Filter
+
+// NewAlertSchedulerRuleProtobufV1Filter instantiates a new AlertSchedulerRuleProtobufV1Filter object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAlertSchedulerRuleProtobufV1Filter() *AlertSchedulerRuleProtobufV1Filter {
+	this := AlertSchedulerRuleProtobufV1Filter{}
+	return &this
+}
+
+// NewAlertSchedulerRuleProtobufV1FilterWithDefaults instantiates a new AlertSchedulerRuleProtobufV1Filter object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAlertSchedulerRuleProtobufV1FilterWithDefaults() *AlertSchedulerRuleProtobufV1Filter {
+	this := AlertSchedulerRuleProtobufV1Filter{}
+	return &this
+}
+
+// GetAlertMetaLabels returns the AlertMetaLabels field value if set, zero value otherwise.
+func (o *AlertSchedulerRuleProtobufV1Filter) GetAlertMetaLabels() MetaLabels {
+	if o == nil || IsNil(o.AlertMetaLabels) {
+		var ret MetaLabels
+		return ret
 	}
+	return *o.AlertMetaLabels
 }
 
-// AlertSchedulerRuleProtobufV1FilterAlertUniqueIdsAsAlertSchedulerRuleProtobufV1Filter is a convenience function that returns AlertSchedulerRuleProtobufV1FilterAlertUniqueIds wrapped in AlertSchedulerRuleProtobufV1Filter
-func AlertSchedulerRuleProtobufV1FilterAlertUniqueIdsAsAlertSchedulerRuleProtobufV1Filter(v *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds) AlertSchedulerRuleProtobufV1Filter {
-	return AlertSchedulerRuleProtobufV1Filter{
-		AlertSchedulerRuleProtobufV1FilterAlertUniqueIds: v,
+// GetAlertMetaLabelsOk returns a tuple with the AlertMetaLabels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertSchedulerRuleProtobufV1Filter) GetAlertMetaLabelsOk() (*MetaLabels, bool) {
+	if o == nil || IsNil(o.AlertMetaLabels) {
+		return nil, false
 	}
+	return o.AlertMetaLabels, true
 }
 
+// HasAlertMetaLabels returns a boolean if a field has been set.
+func (o *AlertSchedulerRuleProtobufV1Filter) HasAlertMetaLabels() bool {
+	if o != nil && !IsNil(o.AlertMetaLabels) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
-	err = json.Unmarshal(data, &dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
-	if err == nil {
-		jsonAlertSchedulerRuleProtobufV1FilterAlertMetaLabels, _ := json.Marshal(dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
-		if string(jsonAlertSchedulerRuleProtobufV1FilterAlertMetaLabels) == "{}" { // empty struct
-			dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels = nil
-		} else {
-			if err = validator.Validate(dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels); err != nil {
-				dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAlertMetaLabels gets a reference to the given MetaLabels and assigns it to the AlertMetaLabels field.
+func (o *AlertSchedulerRuleProtobufV1Filter) SetAlertMetaLabels(v MetaLabels) {
+	o.AlertMetaLabels = &v
+}
+
+// GetAlertUniqueIds returns the AlertUniqueIds field value if set, zero value otherwise.
+func (o *AlertSchedulerRuleProtobufV1Filter) GetAlertUniqueIds() AlertUniqueIds {
+	if o == nil || IsNil(o.AlertUniqueIds) {
+		var ret AlertUniqueIds
+		return ret
+	}
+	return *o.AlertUniqueIds
+}
+
+// GetAlertUniqueIdsOk returns a tuple with the AlertUniqueIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertSchedulerRuleProtobufV1Filter) GetAlertUniqueIdsOk() (*AlertUniqueIds, bool) {
+	if o == nil || IsNil(o.AlertUniqueIds) {
+		return nil, false
+	}
+	return o.AlertUniqueIds, true
+}
+
+// HasAlertUniqueIds returns a boolean if a field has been set.
+func (o *AlertSchedulerRuleProtobufV1Filter) HasAlertUniqueIds() bool {
+	if o != nil && !IsNil(o.AlertUniqueIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetAlertUniqueIds gets a reference to the given AlertUniqueIds and assigns it to the AlertUniqueIds field.
+func (o *AlertSchedulerRuleProtobufV1Filter) SetAlertUniqueIds(v AlertUniqueIds) {
+	o.AlertUniqueIds = &v
+}
+
+// GetWhatExpression returns the WhatExpression field value if set, zero value otherwise.
+func (o *AlertSchedulerRuleProtobufV1Filter) GetWhatExpression() string {
+	if o == nil || IsNil(o.WhatExpression) {
+		var ret string
+		return ret
+	}
+	return *o.WhatExpression
+}
+
+// GetWhatExpressionOk returns a tuple with the WhatExpression field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertSchedulerRuleProtobufV1Filter) GetWhatExpressionOk() (*string, bool) {
+	if o == nil || IsNil(o.WhatExpression) {
+		return nil, false
+	}
+	return o.WhatExpression, true
+}
+
+// HasWhatExpression returns a boolean if a field has been set.
+func (o *AlertSchedulerRuleProtobufV1Filter) HasWhatExpression() bool {
+	if o != nil && !IsNil(o.WhatExpression) {
+		return true
+	}
+
+	return false
+}
+
+// SetWhatExpression gets a reference to the given string and assigns it to the WhatExpression field.
+func (o *AlertSchedulerRuleProtobufV1Filter) SetWhatExpression(v string) {
+	o.WhatExpression = &v
+}
+
+func (o AlertSchedulerRuleProtobufV1Filter) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AlertSchedulerRuleProtobufV1Filter) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AlertMetaLabels) {
+		toSerialize["alertMetaLabels"] = o.AlertMetaLabels
+	}
+	if !IsNil(o.AlertUniqueIds) {
+		toSerialize["alertUniqueIds"] = o.AlertUniqueIds
+	}
+	if !IsNil(o.WhatExpression) {
+		toSerialize["whatExpression"] = o.WhatExpression
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["alertMetaLabels"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["alertUniqueIds"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [alertMetaLabels, alertUniqueIds] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["alertMetaLabels"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field alertMetaLabels must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["alertUniqueIds"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field alertUniqueIds must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) (err error) {
+	varAlertSchedulerRuleProtobufV1Filter := _AlertSchedulerRuleProtobufV1Filter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertSchedulerRuleProtobufV1Filter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertSchedulerRuleProtobufV1Filter(varAlertSchedulerRuleProtobufV1Filter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["alertMetaLabels"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels = nil
-	}
-
-	// try to unmarshal data into AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
-	err = json.Unmarshal(data, &dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
-	if err == nil {
-		jsonAlertSchedulerRuleProtobufV1FilterAlertUniqueIds, _ := json.Marshal(dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
-		if string(jsonAlertSchedulerRuleProtobufV1FilterAlertUniqueIds) == "{}" { // empty struct
-			dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds = nil
-		} else {
-			if err = validator.Validate(dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds); err != nil {
-				dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["alertUniqueIds"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [alertMetaLabels, alertUniqueIds] may be set"}
+		}
+
+		delete(additionalProperties, "alertMetaLabels")
+		delete(additionalProperties, "alertUniqueIds")
+		delete(additionalProperties, "whatExpression")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels = nil
-		dst.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(AlertSchedulerRuleProtobufV1Filter)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src AlertSchedulerRuleProtobufV1Filter) MarshalJSON() ([]byte, error) {
-	if src.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels != nil {
-		return json.Marshal(&src.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
-	}
-
-	if src.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds != nil {
-		return json.Marshal(&src.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *AlertSchedulerRuleProtobufV1Filter) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels != nil {
-		return obj.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
-	}
-
-	if obj.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds != nil {
-		return obj.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj AlertSchedulerRuleProtobufV1Filter) GetActualInstanceValue() (interface{}) {
-	if obj.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels != nil {
-		return *obj.AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
-	}
-
-	if obj.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds != nil {
-		return *obj.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableAlertSchedulerRuleProtobufV1Filter struct {
@@ -170,4 +260,3 @@ func (v *NullableAlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

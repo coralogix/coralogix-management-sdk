@@ -13,126 +13,217 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// SortStrategy - struct for SortStrategy
+// checks if the SortStrategy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SortStrategy{}
+
+// SortStrategy Strategy for determining sort key
 type SortStrategy struct {
-	SortStrategyCategory *SortStrategyCategory
-	SortStrategyQueryValue *SortStrategyQueryValue
+	// Sort by category.
+	Category   map[string]interface{} `json:"category,omitempty"`
+	QueryValue *SortByQueryValue      `json:"queryValue,omitempty"`
+	// Discriminator field - STRATEGY_TYPE_CATEGORY or STRATEGY_TYPE_QUERY_VALUE
+	StrategyType                      *string `json:"strategyType,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// SortStrategyCategoryAsSortStrategy is a convenience function that returns SortStrategyCategory wrapped in SortStrategy
-func SortStrategyCategoryAsSortStrategy(v *SortStrategyCategory) SortStrategy {
-	return SortStrategy{
-		SortStrategyCategory: v,
+type _SortStrategy SortStrategy
+
+// NewSortStrategy instantiates a new SortStrategy object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSortStrategy() *SortStrategy {
+	this := SortStrategy{}
+	return &this
+}
+
+// NewSortStrategyWithDefaults instantiates a new SortStrategy object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewSortStrategyWithDefaults() *SortStrategy {
+	this := SortStrategy{}
+	return &this
+}
+
+// GetCategory returns the Category field value if set, zero value otherwise.
+func (o *SortStrategy) GetCategory() map[string]interface{} {
+	if o == nil || IsNil(o.Category) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.Category
 }
 
-// SortStrategyQueryValueAsSortStrategy is a convenience function that returns SortStrategyQueryValue wrapped in SortStrategy
-func SortStrategyQueryValueAsSortStrategy(v *SortStrategyQueryValue) SortStrategy {
-	return SortStrategy{
-		SortStrategyQueryValue: v,
+// GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SortStrategy) GetCategoryOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Category) {
+		return map[string]interface{}{}, false
 	}
+	return o.Category, true
 }
 
+// HasCategory returns a boolean if a field has been set.
+func (o *SortStrategy) HasCategory() bool {
+	if o != nil && !IsNil(o.Category) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *SortStrategy) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into SortStrategyCategory
-	err = json.Unmarshal(data, &dst.SortStrategyCategory)
-	if err == nil {
-		jsonSortStrategyCategory, _ := json.Marshal(dst.SortStrategyCategory)
-		if string(jsonSortStrategyCategory) == "{}" { // empty struct
-			dst.SortStrategyCategory = nil
-		} else {
-			if err = validator.Validate(dst.SortStrategyCategory); err != nil {
-				dst.SortStrategyCategory = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetCategory gets a reference to the given map[string]interface{} and assigns it to the Category field.
+func (o *SortStrategy) SetCategory(v map[string]interface{}) {
+	o.Category = v
+}
+
+// GetQueryValue returns the QueryValue field value if set, zero value otherwise.
+func (o *SortStrategy) GetQueryValue() SortByQueryValue {
+	if o == nil || IsNil(o.QueryValue) {
+		var ret SortByQueryValue
+		return ret
+	}
+	return *o.QueryValue
+}
+
+// GetQueryValueOk returns a tuple with the QueryValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SortStrategy) GetQueryValueOk() (*SortByQueryValue, bool) {
+	if o == nil || IsNil(o.QueryValue) {
+		return nil, false
+	}
+	return o.QueryValue, true
+}
+
+// HasQueryValue returns a boolean if a field has been set.
+func (o *SortStrategy) HasQueryValue() bool {
+	if o != nil && !IsNil(o.QueryValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetQueryValue gets a reference to the given SortByQueryValue and assigns it to the QueryValue field.
+func (o *SortStrategy) SetQueryValue(v SortByQueryValue) {
+	o.QueryValue = &v
+}
+
+// GetStrategyType returns the StrategyType field value if set, zero value otherwise.
+func (o *SortStrategy) GetStrategyType() string {
+	if o == nil || IsNil(o.StrategyType) {
+		var ret string
+		return ret
+	}
+	return *o.StrategyType
+}
+
+// GetStrategyTypeOk returns a tuple with the StrategyType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SortStrategy) GetStrategyTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.StrategyType) {
+		return nil, false
+	}
+	return o.StrategyType, true
+}
+
+// HasStrategyType returns a boolean if a field has been set.
+func (o *SortStrategy) HasStrategyType() bool {
+	if o != nil && !IsNil(o.StrategyType) {
+		return true
+	}
+
+	return false
+}
+
+// SetStrategyType gets a reference to the given string and assigns it to the StrategyType field.
+func (o *SortStrategy) SetStrategyType(v string) {
+	o.StrategyType = &v
+}
+
+func (o SortStrategy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SortStrategy) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Category) {
+		toSerialize["category"] = o.Category
+	}
+	if !IsNil(o.QueryValue) {
+		toSerialize["queryValue"] = o.QueryValue
+	}
+	if !IsNil(o.StrategyType) {
+		toSerialize["strategyType"] = o.StrategyType
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["category"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["queryValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [category, queryValue] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["category"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field category must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["queryValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field queryValue must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *SortStrategy) UnmarshalJSON(data []byte) (err error) {
+	varSortStrategy := _SortStrategy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSortStrategy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SortStrategy(varSortStrategy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["category"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SortStrategyCategory = nil
-	}
-
-	// try to unmarshal data into SortStrategyQueryValue
-	err = json.Unmarshal(data, &dst.SortStrategyQueryValue)
-	if err == nil {
-		jsonSortStrategyQueryValue, _ := json.Marshal(dst.SortStrategyQueryValue)
-		if string(jsonSortStrategyQueryValue) == "{}" { // empty struct
-			dst.SortStrategyQueryValue = nil
-		} else {
-			if err = validator.Validate(dst.SortStrategyQueryValue); err != nil {
-				dst.SortStrategyQueryValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["queryValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SortStrategyQueryValue = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [category, queryValue] may be set"}
+		}
+
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "queryValue")
+		delete(additionalProperties, "strategyType")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.SortStrategyCategory = nil
-		dst.SortStrategyQueryValue = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(SortStrategy)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src SortStrategy) MarshalJSON() ([]byte, error) {
-	if src.SortStrategyCategory != nil {
-		return json.Marshal(&src.SortStrategyCategory)
-	}
-
-	if src.SortStrategyQueryValue != nil {
-		return json.Marshal(&src.SortStrategyQueryValue)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *SortStrategy) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.SortStrategyCategory != nil {
-		return obj.SortStrategyCategory
-	}
-
-	if obj.SortStrategyQueryValue != nil {
-		return obj.SortStrategyQueryValue
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj SortStrategy) GetActualInstanceValue() (interface{}) {
-	if obj.SortStrategyCategory != nil {
-		return *obj.SortStrategyCategory
-	}
-
-	if obj.SortStrategyQueryValue != nil {
-		return *obj.SortStrategyQueryValue
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSortStrategy struct {
@@ -170,4 +261,3 @@ func (v *NullableSortStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

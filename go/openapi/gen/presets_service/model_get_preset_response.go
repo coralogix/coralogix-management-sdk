@@ -22,8 +22,9 @@ var _ MappedNullable = &GetPresetResponse{}
 
 // GetPresetResponse Response containing the details of a notification preset.
 type GetPresetResponse struct {
-	Preset *Preset `json:"preset,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Preset                            *Preset `json:"preset,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetPresetResponse GetPresetResponse
@@ -78,7 +79,7 @@ func (o *GetPresetResponse) SetPreset(v Preset) {
 }
 
 func (o GetPresetResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *GetPresetResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "preset")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableGetPresetResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

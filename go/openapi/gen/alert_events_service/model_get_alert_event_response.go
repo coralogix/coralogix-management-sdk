@@ -13,126 +13,253 @@ package alert_events_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// GetAlertEventResponse - struct for GetAlertEventResponse
+// checks if the GetAlertEventResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetAlertEventResponse{}
+
+// GetAlertEventResponse Response containing the details of an alert event.
 type GetAlertEventResponse struct {
-	GetAlertEventResponseMultiplePermutation *GetAlertEventResponseMultiplePermutation
-	GetAlertEventResponseSinglePermutation *GetAlertEventResponseSinglePermutation
+	// Unique identifier of the alert event.
+	Id                                *string                        `json:"id,omitempty"`
+	MultiplePermutation               *AlertEventMultiplePermutation `json:"multiplePermutation,omitempty"`
+	Pagination                        *AlertsV3PaginationResponse    `json:"pagination,omitempty"`
+	SinglePermutation                 *AlertEvent                    `json:"singlePermutation,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// GetAlertEventResponseMultiplePermutationAsGetAlertEventResponse is a convenience function that returns GetAlertEventResponseMultiplePermutation wrapped in GetAlertEventResponse
-func GetAlertEventResponseMultiplePermutationAsGetAlertEventResponse(v *GetAlertEventResponseMultiplePermutation) GetAlertEventResponse {
-	return GetAlertEventResponse{
-		GetAlertEventResponseMultiplePermutation: v,
+type _GetAlertEventResponse GetAlertEventResponse
+
+// NewGetAlertEventResponse instantiates a new GetAlertEventResponse object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewGetAlertEventResponse() *GetAlertEventResponse {
+	this := GetAlertEventResponse{}
+	return &this
+}
+
+// NewGetAlertEventResponseWithDefaults instantiates a new GetAlertEventResponse object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewGetAlertEventResponseWithDefaults() *GetAlertEventResponse {
+	this := GetAlertEventResponse{}
+	return &this
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *GetAlertEventResponse) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
 	}
+	return *o.Id
 }
 
-// GetAlertEventResponseSinglePermutationAsGetAlertEventResponse is a convenience function that returns GetAlertEventResponseSinglePermutation wrapped in GetAlertEventResponse
-func GetAlertEventResponseSinglePermutationAsGetAlertEventResponse(v *GetAlertEventResponseSinglePermutation) GetAlertEventResponse {
-	return GetAlertEventResponse{
-		GetAlertEventResponseSinglePermutation: v,
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetAlertEventResponse) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
 	}
+	return o.Id, true
 }
 
+// HasId returns a boolean if a field has been set.
+func (o *GetAlertEventResponse) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *GetAlertEventResponse) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into GetAlertEventResponseMultiplePermutation
-	err = json.Unmarshal(data, &dst.GetAlertEventResponseMultiplePermutation)
-	if err == nil {
-		jsonGetAlertEventResponseMultiplePermutation, _ := json.Marshal(dst.GetAlertEventResponseMultiplePermutation)
-		if string(jsonGetAlertEventResponseMultiplePermutation) == "{}" { // empty struct
-			dst.GetAlertEventResponseMultiplePermutation = nil
-		} else {
-			if err = validator.Validate(dst.GetAlertEventResponseMultiplePermutation); err != nil {
-				dst.GetAlertEventResponseMultiplePermutation = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *GetAlertEventResponse) SetId(v string) {
+	o.Id = &v
+}
+
+// GetMultiplePermutation returns the MultiplePermutation field value if set, zero value otherwise.
+func (o *GetAlertEventResponse) GetMultiplePermutation() AlertEventMultiplePermutation {
+	if o == nil || IsNil(o.MultiplePermutation) {
+		var ret AlertEventMultiplePermutation
+		return ret
+	}
+	return *o.MultiplePermutation
+}
+
+// GetMultiplePermutationOk returns a tuple with the MultiplePermutation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetAlertEventResponse) GetMultiplePermutationOk() (*AlertEventMultiplePermutation, bool) {
+	if o == nil || IsNil(o.MultiplePermutation) {
+		return nil, false
+	}
+	return o.MultiplePermutation, true
+}
+
+// HasMultiplePermutation returns a boolean if a field has been set.
+func (o *GetAlertEventResponse) HasMultiplePermutation() bool {
+	if o != nil && !IsNil(o.MultiplePermutation) {
+		return true
+	}
+
+	return false
+}
+
+// SetMultiplePermutation gets a reference to the given AlertEventMultiplePermutation and assigns it to the MultiplePermutation field.
+func (o *GetAlertEventResponse) SetMultiplePermutation(v AlertEventMultiplePermutation) {
+	o.MultiplePermutation = &v
+}
+
+// GetPagination returns the Pagination field value if set, zero value otherwise.
+func (o *GetAlertEventResponse) GetPagination() AlertsV3PaginationResponse {
+	if o == nil || IsNil(o.Pagination) {
+		var ret AlertsV3PaginationResponse
+		return ret
+	}
+	return *o.Pagination
+}
+
+// GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetAlertEventResponse) GetPaginationOk() (*AlertsV3PaginationResponse, bool) {
+	if o == nil || IsNil(o.Pagination) {
+		return nil, false
+	}
+	return o.Pagination, true
+}
+
+// HasPagination returns a boolean if a field has been set.
+func (o *GetAlertEventResponse) HasPagination() bool {
+	if o != nil && !IsNil(o.Pagination) {
+		return true
+	}
+
+	return false
+}
+
+// SetPagination gets a reference to the given AlertsV3PaginationResponse and assigns it to the Pagination field.
+func (o *GetAlertEventResponse) SetPagination(v AlertsV3PaginationResponse) {
+	o.Pagination = &v
+}
+
+// GetSinglePermutation returns the SinglePermutation field value if set, zero value otherwise.
+func (o *GetAlertEventResponse) GetSinglePermutation() AlertEvent {
+	if o == nil || IsNil(o.SinglePermutation) {
+		var ret AlertEvent
+		return ret
+	}
+	return *o.SinglePermutation
+}
+
+// GetSinglePermutationOk returns a tuple with the SinglePermutation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetAlertEventResponse) GetSinglePermutationOk() (*AlertEvent, bool) {
+	if o == nil || IsNil(o.SinglePermutation) {
+		return nil, false
+	}
+	return o.SinglePermutation, true
+}
+
+// HasSinglePermutation returns a boolean if a field has been set.
+func (o *GetAlertEventResponse) HasSinglePermutation() bool {
+	if o != nil && !IsNil(o.SinglePermutation) {
+		return true
+	}
+
+	return false
+}
+
+// SetSinglePermutation gets a reference to the given AlertEvent and assigns it to the SinglePermutation field.
+func (o *GetAlertEventResponse) SetSinglePermutation(v AlertEvent) {
+	o.SinglePermutation = &v
+}
+
+func (o GetAlertEventResponse) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o GetAlertEventResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.MultiplePermutation) {
+		toSerialize["multiplePermutation"] = o.MultiplePermutation
+	}
+	if !IsNil(o.Pagination) {
+		toSerialize["pagination"] = o.Pagination
+	}
+	if !IsNil(o.SinglePermutation) {
+		toSerialize["singlePermutation"] = o.SinglePermutation
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["singlePermutation"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["multiplePermutation"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [singlePermutation, multiplePermutation] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["singlePermutation"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singlePermutation must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["multiplePermutation"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multiplePermutation must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *GetAlertEventResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetAlertEventResponse := _GetAlertEventResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetAlertEventResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAlertEventResponse(varGetAlertEventResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["singlePermutation"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GetAlertEventResponseMultiplePermutation = nil
-	}
-
-	// try to unmarshal data into GetAlertEventResponseSinglePermutation
-	err = json.Unmarshal(data, &dst.GetAlertEventResponseSinglePermutation)
-	if err == nil {
-		jsonGetAlertEventResponseSinglePermutation, _ := json.Marshal(dst.GetAlertEventResponseSinglePermutation)
-		if string(jsonGetAlertEventResponseSinglePermutation) == "{}" { // empty struct
-			dst.GetAlertEventResponseSinglePermutation = nil
-		} else {
-			if err = validator.Validate(dst.GetAlertEventResponseSinglePermutation); err != nil {
-				dst.GetAlertEventResponseSinglePermutation = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["multiplePermutation"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GetAlertEventResponseSinglePermutation = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [singlePermutation, multiplePermutation] may be set"}
+		}
+
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "multiplePermutation")
+		delete(additionalProperties, "pagination")
+		delete(additionalProperties, "singlePermutation")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.GetAlertEventResponseMultiplePermutation = nil
-		dst.GetAlertEventResponseSinglePermutation = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(GetAlertEventResponse)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src GetAlertEventResponse) MarshalJSON() ([]byte, error) {
-	if src.GetAlertEventResponseMultiplePermutation != nil {
-		return json.Marshal(&src.GetAlertEventResponseMultiplePermutation)
-	}
-
-	if src.GetAlertEventResponseSinglePermutation != nil {
-		return json.Marshal(&src.GetAlertEventResponseSinglePermutation)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *GetAlertEventResponse) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.GetAlertEventResponseMultiplePermutation != nil {
-		return obj.GetAlertEventResponseMultiplePermutation
-	}
-
-	if obj.GetAlertEventResponseSinglePermutation != nil {
-		return obj.GetAlertEventResponseSinglePermutation
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj GetAlertEventResponse) GetActualInstanceValue() (interface{}) {
-	if obj.GetAlertEventResponseMultiplePermutation != nil {
-		return *obj.GetAlertEventResponseMultiplePermutation
-	}
-
-	if obj.GetAlertEventResponseSinglePermutation != nil {
-		return *obj.GetAlertEventResponseSinglePermutation
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableGetAlertEventResponse struct {
@@ -170,4 +297,3 @@ func (v *NullableGetAlertEventResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

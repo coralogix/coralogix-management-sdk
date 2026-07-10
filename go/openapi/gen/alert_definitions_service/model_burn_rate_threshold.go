@@ -13,126 +13,216 @@ package alert_definitions_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// BurnRateThreshold - struct for BurnRateThreshold
+// checks if the BurnRateThreshold type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BurnRateThreshold{}
+
+// BurnRateThreshold Burn rate threshold definition
 type BurnRateThreshold struct {
-	BurnRateThresholdDual *BurnRateThresholdDual
-	BurnRateThresholdSingle *BurnRateThresholdSingle
+	Dual *BurnRateTypeDual `json:"dual,omitempty"`
+	// The rules for the burn rate threshold
+	Rules                             []SloThresholdRule  `json:"rules,omitempty"`
+	Single                            *BurnRateTypeSingle `json:"single,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// BurnRateThresholdDualAsBurnRateThreshold is a convenience function that returns BurnRateThresholdDual wrapped in BurnRateThreshold
-func BurnRateThresholdDualAsBurnRateThreshold(v *BurnRateThresholdDual) BurnRateThreshold {
-	return BurnRateThreshold{
-		BurnRateThresholdDual: v,
+type _BurnRateThreshold BurnRateThreshold
+
+// NewBurnRateThreshold instantiates a new BurnRateThreshold object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewBurnRateThreshold() *BurnRateThreshold {
+	this := BurnRateThreshold{}
+	return &this
+}
+
+// NewBurnRateThresholdWithDefaults instantiates a new BurnRateThreshold object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewBurnRateThresholdWithDefaults() *BurnRateThreshold {
+	this := BurnRateThreshold{}
+	return &this
+}
+
+// GetDual returns the Dual field value if set, zero value otherwise.
+func (o *BurnRateThreshold) GetDual() BurnRateTypeDual {
+	if o == nil || IsNil(o.Dual) {
+		var ret BurnRateTypeDual
+		return ret
 	}
+	return *o.Dual
 }
 
-// BurnRateThresholdSingleAsBurnRateThreshold is a convenience function that returns BurnRateThresholdSingle wrapped in BurnRateThreshold
-func BurnRateThresholdSingleAsBurnRateThreshold(v *BurnRateThresholdSingle) BurnRateThreshold {
-	return BurnRateThreshold{
-		BurnRateThresholdSingle: v,
+// GetDualOk returns a tuple with the Dual field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BurnRateThreshold) GetDualOk() (*BurnRateTypeDual, bool) {
+	if o == nil || IsNil(o.Dual) {
+		return nil, false
 	}
+	return o.Dual, true
 }
 
+// HasDual returns a boolean if a field has been set.
+func (o *BurnRateThreshold) HasDual() bool {
+	if o != nil && !IsNil(o.Dual) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *BurnRateThreshold) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into BurnRateThresholdDual
-	err = json.Unmarshal(data, &dst.BurnRateThresholdDual)
-	if err == nil {
-		jsonBurnRateThresholdDual, _ := json.Marshal(dst.BurnRateThresholdDual)
-		if string(jsonBurnRateThresholdDual) == "{}" { // empty struct
-			dst.BurnRateThresholdDual = nil
-		} else {
-			if err = validator.Validate(dst.BurnRateThresholdDual); err != nil {
-				dst.BurnRateThresholdDual = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetDual gets a reference to the given BurnRateTypeDual and assigns it to the Dual field.
+func (o *BurnRateThreshold) SetDual(v BurnRateTypeDual) {
+	o.Dual = &v
+}
+
+// GetRules returns the Rules field value if set, zero value otherwise.
+func (o *BurnRateThreshold) GetRules() []SloThresholdRule {
+	if o == nil || IsNil(o.Rules) {
+		var ret []SloThresholdRule
+		return ret
+	}
+	return o.Rules
+}
+
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BurnRateThreshold) GetRulesOk() ([]SloThresholdRule, bool) {
+	if o == nil || IsNil(o.Rules) {
+		return nil, false
+	}
+	return o.Rules, true
+}
+
+// HasRules returns a boolean if a field has been set.
+func (o *BurnRateThreshold) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []SloThresholdRule and assigns it to the Rules field.
+func (o *BurnRateThreshold) SetRules(v []SloThresholdRule) {
+	o.Rules = v
+}
+
+// GetSingle returns the Single field value if set, zero value otherwise.
+func (o *BurnRateThreshold) GetSingle() BurnRateTypeSingle {
+	if o == nil || IsNil(o.Single) {
+		var ret BurnRateTypeSingle
+		return ret
+	}
+	return *o.Single
+}
+
+// GetSingleOk returns a tuple with the Single field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BurnRateThreshold) GetSingleOk() (*BurnRateTypeSingle, bool) {
+	if o == nil || IsNil(o.Single) {
+		return nil, false
+	}
+	return o.Single, true
+}
+
+// HasSingle returns a boolean if a field has been set.
+func (o *BurnRateThreshold) HasSingle() bool {
+	if o != nil && !IsNil(o.Single) {
+		return true
+	}
+
+	return false
+}
+
+// SetSingle gets a reference to the given BurnRateTypeSingle and assigns it to the Single field.
+func (o *BurnRateThreshold) SetSingle(v BurnRateTypeSingle) {
+	o.Single = &v
+}
+
+func (o BurnRateThreshold) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o BurnRateThreshold) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dual) {
+		toSerialize["dual"] = o.Dual
+	}
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
+	if !IsNil(o.Single) {
+		toSerialize["single"] = o.Single
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["dual"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["single"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [dual, single] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["dual"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dual must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["single"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field single must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *BurnRateThreshold) UnmarshalJSON(data []byte) (err error) {
+	varBurnRateThreshold := _BurnRateThreshold{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBurnRateThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BurnRateThreshold(varBurnRateThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["dual"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.BurnRateThresholdDual = nil
-	}
-
-	// try to unmarshal data into BurnRateThresholdSingle
-	err = json.Unmarshal(data, &dst.BurnRateThresholdSingle)
-	if err == nil {
-		jsonBurnRateThresholdSingle, _ := json.Marshal(dst.BurnRateThresholdSingle)
-		if string(jsonBurnRateThresholdSingle) == "{}" { // empty struct
-			dst.BurnRateThresholdSingle = nil
-		} else {
-			if err = validator.Validate(dst.BurnRateThresholdSingle); err != nil {
-				dst.BurnRateThresholdSingle = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["single"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.BurnRateThresholdSingle = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [dual, single] may be set"}
+		}
+
+		delete(additionalProperties, "dual")
+		delete(additionalProperties, "rules")
+		delete(additionalProperties, "single")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.BurnRateThresholdDual = nil
-		dst.BurnRateThresholdSingle = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(BurnRateThreshold)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src BurnRateThreshold) MarshalJSON() ([]byte, error) {
-	if src.BurnRateThresholdDual != nil {
-		return json.Marshal(&src.BurnRateThresholdDual)
-	}
-
-	if src.BurnRateThresholdSingle != nil {
-		return json.Marshal(&src.BurnRateThresholdSingle)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *BurnRateThreshold) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.BurnRateThresholdDual != nil {
-		return obj.BurnRateThresholdDual
-	}
-
-	if obj.BurnRateThresholdSingle != nil {
-		return obj.BurnRateThresholdSingle
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj BurnRateThreshold) GetActualInstanceValue() (interface{}) {
-	if obj.BurnRateThresholdDual != nil {
-		return *obj.BurnRateThresholdDual
-	}
-
-	if obj.BurnRateThresholdSingle != nil {
-		return *obj.BurnRateThresholdSingle
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableBurnRateThreshold struct {
@@ -170,4 +260,3 @@ func (v *NullableBurnRateThreshold) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -13,620 +13,1303 @@ package alert_definitions_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// AlertDefProperties - struct for AlertDefProperties
+// checks if the AlertDefProperties type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AlertDefProperties{}
+
+// AlertDefProperties User-configurable properties of an alert definition
 type AlertDefProperties struct {
-	AlertDefPropertiesAnalyticsImmediate *AlertDefPropertiesAnalyticsImmediate
-	AlertDefPropertiesAnalyticsThreshold *AlertDefPropertiesAnalyticsThreshold
-	AlertDefPropertiesFlow *AlertDefPropertiesFlow
-	AlertDefPropertiesLogsAnomaly *AlertDefPropertiesLogsAnomaly
-	AlertDefPropertiesLogsImmediate *AlertDefPropertiesLogsImmediate
-	AlertDefPropertiesLogsNewValue *AlertDefPropertiesLogsNewValue
-	AlertDefPropertiesLogsRatioThreshold *AlertDefPropertiesLogsRatioThreshold
-	AlertDefPropertiesLogsThreshold *AlertDefPropertiesLogsThreshold
-	AlertDefPropertiesLogsTimeRelativeThreshold *AlertDefPropertiesLogsTimeRelativeThreshold
-	AlertDefPropertiesLogsUniqueCount *AlertDefPropertiesLogsUniqueCount
-	AlertDefPropertiesMetricAnomaly *AlertDefPropertiesMetricAnomaly
-	AlertDefPropertiesMetricThreshold *AlertDefPropertiesMetricThreshold
-	AlertDefPropertiesSloThreshold *AlertDefPropertiesSloThreshold
-	AlertDefPropertiesTracingImmediate *AlertDefPropertiesTracingImmediate
-	AlertDefPropertiesTracingThreshold *AlertDefPropertiesTracingThreshold
+	ActiveOn           *ActivitySchedule       `json:"activeOn,omitempty"`
+	AnalyticsImmediate *AnalyticsImmediateType `json:"analyticsImmediate,omitempty"`
+	AnalyticsThreshold *AnalyticsThresholdType `json:"analyticsThreshold,omitempty"`
+	// The sources from which to sample logs
+	DataSources []AlertDefDataSource `json:"dataSources,omitempty"`
+	// Whether the alert has been marked as deleted
+	Deleted *bool `json:"deleted,omitempty"`
+	// A detailed description of what the alert monitors and when it triggers
+	Description *string `json:"description,omitempty"`
+	// Whether the alert is currently active and monitoring
+	Enabled *bool `json:"enabled,omitempty"`
+	// Labels used to identify and categorize the alert entity
+	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	Flow         *FlowType          `json:"flow,omitempty"`
+	// Keys used to group and aggregate alert data
+	GroupByKeys               []string                       `json:"groupByKeys,omitempty"`
+	IncidentsSettings         *AlertDefIncidentSettings      `json:"incidentsSettings,omitempty"`
+	LogsAnomaly               *LogsAnomalyType               `json:"logsAnomaly,omitempty"`
+	LogsImmediate             *LogsImmediateType             `json:"logsImmediate,omitempty"`
+	LogsNewValue              *LogsNewValueType              `json:"logsNewValue,omitempty"`
+	LogsRatioThreshold        *LogsRatioThresholdType        `json:"logsRatioThreshold,omitempty"`
+	LogsThreshold             *LogsThresholdType             `json:"logsThreshold,omitempty"`
+	LogsTimeRelativeThreshold *LogsTimeRelativeThresholdType `json:"logsTimeRelativeThreshold,omitempty"`
+	LogsUniqueCount           *LogsUniqueCountType           `json:"logsUniqueCount,omitempty"`
+	MetricAnomaly             *MetricAnomalyType             `json:"metricAnomaly,omitempty"`
+	MetricThreshold           *MetricThresholdType           `json:"metricThreshold,omitempty"`
+	// The name of the alert definition
+	Name              *string                    `json:"name,omitempty"`
+	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
+	// Additional notification groups for alerts (deprecated)
+	NotificationGroupExcess []AlertDefNotificationGroup `json:"notificationGroupExcess,omitempty"`
+	// Whether the alert is in phantom mode (creating incidents or not)
+	PhantomMode                       *bool                 `json:"phantomMode,omitempty"`
+	Priority                          *AlertDefPriority     `json:"priority,omitempty"`
+	SloThreshold                      *SloThresholdType     `json:"sloThreshold,omitempty"`
+	TracingImmediate                  *TracingImmediateType `json:"tracingImmediate,omitempty"`
+	TracingThreshold                  *TracingThresholdType `json:"tracingThreshold,omitempty"`
+	Type                              *AlertDefType         `json:"type,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// AlertDefPropertiesAnalyticsImmediateAsAlertDefProperties is a convenience function that returns AlertDefPropertiesAnalyticsImmediate wrapped in AlertDefProperties
-func AlertDefPropertiesAnalyticsImmediateAsAlertDefProperties(v *AlertDefPropertiesAnalyticsImmediate) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesAnalyticsImmediate: v,
+type _AlertDefProperties AlertDefProperties
+
+// NewAlertDefProperties instantiates a new AlertDefProperties object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAlertDefProperties() *AlertDefProperties {
+	this := AlertDefProperties{}
+	return &this
+}
+
+// NewAlertDefPropertiesWithDefaults instantiates a new AlertDefProperties object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAlertDefPropertiesWithDefaults() *AlertDefProperties {
+	this := AlertDefProperties{}
+	return &this
+}
+
+// GetActiveOn returns the ActiveOn field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetActiveOn() ActivitySchedule {
+	if o == nil || IsNil(o.ActiveOn) {
+		var ret ActivitySchedule
+		return ret
 	}
+	return *o.ActiveOn
 }
 
-// AlertDefPropertiesAnalyticsThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesAnalyticsThreshold wrapped in AlertDefProperties
-func AlertDefPropertiesAnalyticsThresholdAsAlertDefProperties(v *AlertDefPropertiesAnalyticsThreshold) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesAnalyticsThreshold: v,
+// GetActiveOnOk returns a tuple with the ActiveOn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetActiveOnOk() (*ActivitySchedule, bool) {
+	if o == nil || IsNil(o.ActiveOn) {
+		return nil, false
 	}
+	return o.ActiveOn, true
 }
 
-// AlertDefPropertiesFlowAsAlertDefProperties is a convenience function that returns AlertDefPropertiesFlow wrapped in AlertDefProperties
-func AlertDefPropertiesFlowAsAlertDefProperties(v *AlertDefPropertiesFlow) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesFlow: v,
+// HasActiveOn returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasActiveOn() bool {
+	if o != nil && !IsNil(o.ActiveOn) {
+		return true
 	}
+
+	return false
 }
 
-// AlertDefPropertiesLogsAnomalyAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsAnomaly wrapped in AlertDefProperties
-func AlertDefPropertiesLogsAnomalyAsAlertDefProperties(v *AlertDefPropertiesLogsAnomaly) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesLogsAnomaly: v,
+// SetActiveOn gets a reference to the given ActivitySchedule and assigns it to the ActiveOn field.
+func (o *AlertDefProperties) SetActiveOn(v ActivitySchedule) {
+	o.ActiveOn = &v
+}
+
+// GetAnalyticsImmediate returns the AnalyticsImmediate field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetAnalyticsImmediate() AnalyticsImmediateType {
+	if o == nil || IsNil(o.AnalyticsImmediate) {
+		var ret AnalyticsImmediateType
+		return ret
 	}
+	return *o.AnalyticsImmediate
 }
 
-// AlertDefPropertiesLogsImmediateAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsImmediate wrapped in AlertDefProperties
-func AlertDefPropertiesLogsImmediateAsAlertDefProperties(v *AlertDefPropertiesLogsImmediate) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesLogsImmediate: v,
+// GetAnalyticsImmediateOk returns a tuple with the AnalyticsImmediate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetAnalyticsImmediateOk() (*AnalyticsImmediateType, bool) {
+	if o == nil || IsNil(o.AnalyticsImmediate) {
+		return nil, false
 	}
+	return o.AnalyticsImmediate, true
 }
 
-// AlertDefPropertiesLogsNewValueAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsNewValue wrapped in AlertDefProperties
-func AlertDefPropertiesLogsNewValueAsAlertDefProperties(v *AlertDefPropertiesLogsNewValue) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesLogsNewValue: v,
+// HasAnalyticsImmediate returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasAnalyticsImmediate() bool {
+	if o != nil && !IsNil(o.AnalyticsImmediate) {
+		return true
 	}
+
+	return false
 }
 
-// AlertDefPropertiesLogsRatioThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsRatioThreshold wrapped in AlertDefProperties
-func AlertDefPropertiesLogsRatioThresholdAsAlertDefProperties(v *AlertDefPropertiesLogsRatioThreshold) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesLogsRatioThreshold: v,
+// SetAnalyticsImmediate gets a reference to the given AnalyticsImmediateType and assigns it to the AnalyticsImmediate field.
+func (o *AlertDefProperties) SetAnalyticsImmediate(v AnalyticsImmediateType) {
+	o.AnalyticsImmediate = &v
+}
+
+// GetAnalyticsThreshold returns the AnalyticsThreshold field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetAnalyticsThreshold() AnalyticsThresholdType {
+	if o == nil || IsNil(o.AnalyticsThreshold) {
+		var ret AnalyticsThresholdType
+		return ret
 	}
+	return *o.AnalyticsThreshold
 }
 
-// AlertDefPropertiesLogsThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsThreshold wrapped in AlertDefProperties
-func AlertDefPropertiesLogsThresholdAsAlertDefProperties(v *AlertDefPropertiesLogsThreshold) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesLogsThreshold: v,
+// GetAnalyticsThresholdOk returns a tuple with the AnalyticsThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetAnalyticsThresholdOk() (*AnalyticsThresholdType, bool) {
+	if o == nil || IsNil(o.AnalyticsThreshold) {
+		return nil, false
 	}
+	return o.AnalyticsThreshold, true
 }
 
-// AlertDefPropertiesLogsTimeRelativeThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsTimeRelativeThreshold wrapped in AlertDefProperties
-func AlertDefPropertiesLogsTimeRelativeThresholdAsAlertDefProperties(v *AlertDefPropertiesLogsTimeRelativeThreshold) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesLogsTimeRelativeThreshold: v,
+// HasAnalyticsThreshold returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasAnalyticsThreshold() bool {
+	if o != nil && !IsNil(o.AnalyticsThreshold) {
+		return true
 	}
+
+	return false
 }
 
-// AlertDefPropertiesLogsUniqueCountAsAlertDefProperties is a convenience function that returns AlertDefPropertiesLogsUniqueCount wrapped in AlertDefProperties
-func AlertDefPropertiesLogsUniqueCountAsAlertDefProperties(v *AlertDefPropertiesLogsUniqueCount) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesLogsUniqueCount: v,
+// SetAnalyticsThreshold gets a reference to the given AnalyticsThresholdType and assigns it to the AnalyticsThreshold field.
+func (o *AlertDefProperties) SetAnalyticsThreshold(v AnalyticsThresholdType) {
+	o.AnalyticsThreshold = &v
+}
+
+// GetDataSources returns the DataSources field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetDataSources() []AlertDefDataSource {
+	if o == nil || IsNil(o.DataSources) {
+		var ret []AlertDefDataSource
+		return ret
 	}
+	return o.DataSources
 }
 
-// AlertDefPropertiesMetricAnomalyAsAlertDefProperties is a convenience function that returns AlertDefPropertiesMetricAnomaly wrapped in AlertDefProperties
-func AlertDefPropertiesMetricAnomalyAsAlertDefProperties(v *AlertDefPropertiesMetricAnomaly) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesMetricAnomaly: v,
+// GetDataSourcesOk returns a tuple with the DataSources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetDataSourcesOk() ([]AlertDefDataSource, bool) {
+	if o == nil || IsNil(o.DataSources) {
+		return nil, false
 	}
+	return o.DataSources, true
 }
 
-// AlertDefPropertiesMetricThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesMetricThreshold wrapped in AlertDefProperties
-func AlertDefPropertiesMetricThresholdAsAlertDefProperties(v *AlertDefPropertiesMetricThreshold) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesMetricThreshold: v,
+// HasDataSources returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasDataSources() bool {
+	if o != nil && !IsNil(o.DataSources) {
+		return true
 	}
+
+	return false
 }
 
-// AlertDefPropertiesSloThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesSloThreshold wrapped in AlertDefProperties
-func AlertDefPropertiesSloThresholdAsAlertDefProperties(v *AlertDefPropertiesSloThreshold) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesSloThreshold: v,
+// SetDataSources gets a reference to the given []AlertDefDataSource and assigns it to the DataSources field.
+func (o *AlertDefProperties) SetDataSources(v []AlertDefDataSource) {
+	o.DataSources = v
+}
+
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetDeleted() bool {
+	if o == nil || IsNil(o.Deleted) {
+		var ret bool
+		return ret
 	}
+	return *o.Deleted
 }
 
-// AlertDefPropertiesTracingImmediateAsAlertDefProperties is a convenience function that returns AlertDefPropertiesTracingImmediate wrapped in AlertDefProperties
-func AlertDefPropertiesTracingImmediateAsAlertDefProperties(v *AlertDefPropertiesTracingImmediate) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesTracingImmediate: v,
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetDeletedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Deleted) {
+		return nil, false
 	}
+	return o.Deleted, true
 }
 
-// AlertDefPropertiesTracingThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesTracingThreshold wrapped in AlertDefProperties
-func AlertDefPropertiesTracingThresholdAsAlertDefProperties(v *AlertDefPropertiesTracingThreshold) AlertDefProperties {
-	return AlertDefProperties{
-		AlertDefPropertiesTracingThreshold: v,
+// HasDeleted returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasDeleted() bool {
+	if o != nil && !IsNil(o.Deleted) {
+		return true
 	}
+
+	return false
 }
 
+// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+func (o *AlertDefProperties) SetDeleted(v bool) {
+	o.Deleted = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into AlertDefPropertiesAnalyticsImmediate
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesAnalyticsImmediate)
-	if err == nil {
-		jsonAlertDefPropertiesAnalyticsImmediate, _ := json.Marshal(dst.AlertDefPropertiesAnalyticsImmediate)
-		if string(jsonAlertDefPropertiesAnalyticsImmediate) == "{}" { // empty struct
-			dst.AlertDefPropertiesAnalyticsImmediate = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesAnalyticsImmediate); err != nil {
-				dst.AlertDefPropertiesAnalyticsImmediate = nil
-			} else {
-				match++
-			}
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *AlertDefProperties) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetEnabled() bool {
+	if o == nil || IsNil(o.Enabled) {
+		var ret bool
+		return ret
+	}
+	return *o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Enabled) {
+		return nil, false
+	}
+	return o.Enabled, true
+}
+
+// HasEnabled returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+func (o *AlertDefProperties) SetEnabled(v bool) {
+	o.Enabled = &v
+}
+
+// GetEntityLabels returns the EntityLabels field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetEntityLabels() map[string]string {
+	if o == nil || IsNil(o.EntityLabels) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.EntityLabels
+}
+
+// GetEntityLabelsOk returns a tuple with the EntityLabels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetEntityLabelsOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.EntityLabels) {
+		return nil, false
+	}
+	return o.EntityLabels, true
+}
+
+// HasEntityLabels returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasEntityLabels() bool {
+	if o != nil && !IsNil(o.EntityLabels) {
+		return true
+	}
+
+	return false
+}
+
+// SetEntityLabels gets a reference to the given map[string]string and assigns it to the EntityLabels field.
+func (o *AlertDefProperties) SetEntityLabels(v map[string]string) {
+	o.EntityLabels = &v
+}
+
+// GetFlow returns the Flow field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetFlow() FlowType {
+	if o == nil || IsNil(o.Flow) {
+		var ret FlowType
+		return ret
+	}
+	return *o.Flow
+}
+
+// GetFlowOk returns a tuple with the Flow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetFlowOk() (*FlowType, bool) {
+	if o == nil || IsNil(o.Flow) {
+		return nil, false
+	}
+	return o.Flow, true
+}
+
+// HasFlow returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasFlow() bool {
+	if o != nil && !IsNil(o.Flow) {
+		return true
+	}
+
+	return false
+}
+
+// SetFlow gets a reference to the given FlowType and assigns it to the Flow field.
+func (o *AlertDefProperties) SetFlow(v FlowType) {
+	o.Flow = &v
+}
+
+// GetGroupByKeys returns the GroupByKeys field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetGroupByKeys() []string {
+	if o == nil || IsNil(o.GroupByKeys) {
+		var ret []string
+		return ret
+	}
+	return o.GroupByKeys
+}
+
+// GetGroupByKeysOk returns a tuple with the GroupByKeys field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetGroupByKeysOk() ([]string, bool) {
+	if o == nil || IsNil(o.GroupByKeys) {
+		return nil, false
+	}
+	return o.GroupByKeys, true
+}
+
+// HasGroupByKeys returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasGroupByKeys() bool {
+	if o != nil && !IsNil(o.GroupByKeys) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupByKeys gets a reference to the given []string and assigns it to the GroupByKeys field.
+func (o *AlertDefProperties) SetGroupByKeys(v []string) {
+	o.GroupByKeys = v
+}
+
+// GetIncidentsSettings returns the IncidentsSettings field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetIncidentsSettings() AlertDefIncidentSettings {
+	if o == nil || IsNil(o.IncidentsSettings) {
+		var ret AlertDefIncidentSettings
+		return ret
+	}
+	return *o.IncidentsSettings
+}
+
+// GetIncidentsSettingsOk returns a tuple with the IncidentsSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetIncidentsSettingsOk() (*AlertDefIncidentSettings, bool) {
+	if o == nil || IsNil(o.IncidentsSettings) {
+		return nil, false
+	}
+	return o.IncidentsSettings, true
+}
+
+// HasIncidentsSettings returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasIncidentsSettings() bool {
+	if o != nil && !IsNil(o.IncidentsSettings) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncidentsSettings gets a reference to the given AlertDefIncidentSettings and assigns it to the IncidentsSettings field.
+func (o *AlertDefProperties) SetIncidentsSettings(v AlertDefIncidentSettings) {
+	o.IncidentsSettings = &v
+}
+
+// GetLogsAnomaly returns the LogsAnomaly field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetLogsAnomaly() LogsAnomalyType {
+	if o == nil || IsNil(o.LogsAnomaly) {
+		var ret LogsAnomalyType
+		return ret
+	}
+	return *o.LogsAnomaly
+}
+
+// GetLogsAnomalyOk returns a tuple with the LogsAnomaly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetLogsAnomalyOk() (*LogsAnomalyType, bool) {
+	if o == nil || IsNil(o.LogsAnomaly) {
+		return nil, false
+	}
+	return o.LogsAnomaly, true
+}
+
+// HasLogsAnomaly returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasLogsAnomaly() bool {
+	if o != nil && !IsNil(o.LogsAnomaly) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsAnomaly gets a reference to the given LogsAnomalyType and assigns it to the LogsAnomaly field.
+func (o *AlertDefProperties) SetLogsAnomaly(v LogsAnomalyType) {
+	o.LogsAnomaly = &v
+}
+
+// GetLogsImmediate returns the LogsImmediate field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetLogsImmediate() LogsImmediateType {
+	if o == nil || IsNil(o.LogsImmediate) {
+		var ret LogsImmediateType
+		return ret
+	}
+	return *o.LogsImmediate
+}
+
+// GetLogsImmediateOk returns a tuple with the LogsImmediate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetLogsImmediateOk() (*LogsImmediateType, bool) {
+	if o == nil || IsNil(o.LogsImmediate) {
+		return nil, false
+	}
+	return o.LogsImmediate, true
+}
+
+// HasLogsImmediate returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasLogsImmediate() bool {
+	if o != nil && !IsNil(o.LogsImmediate) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsImmediate gets a reference to the given LogsImmediateType and assigns it to the LogsImmediate field.
+func (o *AlertDefProperties) SetLogsImmediate(v LogsImmediateType) {
+	o.LogsImmediate = &v
+}
+
+// GetLogsNewValue returns the LogsNewValue field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetLogsNewValue() LogsNewValueType {
+	if o == nil || IsNil(o.LogsNewValue) {
+		var ret LogsNewValueType
+		return ret
+	}
+	return *o.LogsNewValue
+}
+
+// GetLogsNewValueOk returns a tuple with the LogsNewValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetLogsNewValueOk() (*LogsNewValueType, bool) {
+	if o == nil || IsNil(o.LogsNewValue) {
+		return nil, false
+	}
+	return o.LogsNewValue, true
+}
+
+// HasLogsNewValue returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasLogsNewValue() bool {
+	if o != nil && !IsNil(o.LogsNewValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsNewValue gets a reference to the given LogsNewValueType and assigns it to the LogsNewValue field.
+func (o *AlertDefProperties) SetLogsNewValue(v LogsNewValueType) {
+	o.LogsNewValue = &v
+}
+
+// GetLogsRatioThreshold returns the LogsRatioThreshold field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetLogsRatioThreshold() LogsRatioThresholdType {
+	if o == nil || IsNil(o.LogsRatioThreshold) {
+		var ret LogsRatioThresholdType
+		return ret
+	}
+	return *o.LogsRatioThreshold
+}
+
+// GetLogsRatioThresholdOk returns a tuple with the LogsRatioThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetLogsRatioThresholdOk() (*LogsRatioThresholdType, bool) {
+	if o == nil || IsNil(o.LogsRatioThreshold) {
+		return nil, false
+	}
+	return o.LogsRatioThreshold, true
+}
+
+// HasLogsRatioThreshold returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasLogsRatioThreshold() bool {
+	if o != nil && !IsNil(o.LogsRatioThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsRatioThreshold gets a reference to the given LogsRatioThresholdType and assigns it to the LogsRatioThreshold field.
+func (o *AlertDefProperties) SetLogsRatioThreshold(v LogsRatioThresholdType) {
+	o.LogsRatioThreshold = &v
+}
+
+// GetLogsThreshold returns the LogsThreshold field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetLogsThreshold() LogsThresholdType {
+	if o == nil || IsNil(o.LogsThreshold) {
+		var ret LogsThresholdType
+		return ret
+	}
+	return *o.LogsThreshold
+}
+
+// GetLogsThresholdOk returns a tuple with the LogsThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetLogsThresholdOk() (*LogsThresholdType, bool) {
+	if o == nil || IsNil(o.LogsThreshold) {
+		return nil, false
+	}
+	return o.LogsThreshold, true
+}
+
+// HasLogsThreshold returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasLogsThreshold() bool {
+	if o != nil && !IsNil(o.LogsThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsThreshold gets a reference to the given LogsThresholdType and assigns it to the LogsThreshold field.
+func (o *AlertDefProperties) SetLogsThreshold(v LogsThresholdType) {
+	o.LogsThreshold = &v
+}
+
+// GetLogsTimeRelativeThreshold returns the LogsTimeRelativeThreshold field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetLogsTimeRelativeThreshold() LogsTimeRelativeThresholdType {
+	if o == nil || IsNil(o.LogsTimeRelativeThreshold) {
+		var ret LogsTimeRelativeThresholdType
+		return ret
+	}
+	return *o.LogsTimeRelativeThreshold
+}
+
+// GetLogsTimeRelativeThresholdOk returns a tuple with the LogsTimeRelativeThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetLogsTimeRelativeThresholdOk() (*LogsTimeRelativeThresholdType, bool) {
+	if o == nil || IsNil(o.LogsTimeRelativeThreshold) {
+		return nil, false
+	}
+	return o.LogsTimeRelativeThreshold, true
+}
+
+// HasLogsTimeRelativeThreshold returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasLogsTimeRelativeThreshold() bool {
+	if o != nil && !IsNil(o.LogsTimeRelativeThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsTimeRelativeThreshold gets a reference to the given LogsTimeRelativeThresholdType and assigns it to the LogsTimeRelativeThreshold field.
+func (o *AlertDefProperties) SetLogsTimeRelativeThreshold(v LogsTimeRelativeThresholdType) {
+	o.LogsTimeRelativeThreshold = &v
+}
+
+// GetLogsUniqueCount returns the LogsUniqueCount field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetLogsUniqueCount() LogsUniqueCountType {
+	if o == nil || IsNil(o.LogsUniqueCount) {
+		var ret LogsUniqueCountType
+		return ret
+	}
+	return *o.LogsUniqueCount
+}
+
+// GetLogsUniqueCountOk returns a tuple with the LogsUniqueCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetLogsUniqueCountOk() (*LogsUniqueCountType, bool) {
+	if o == nil || IsNil(o.LogsUniqueCount) {
+		return nil, false
+	}
+	return o.LogsUniqueCount, true
+}
+
+// HasLogsUniqueCount returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasLogsUniqueCount() bool {
+	if o != nil && !IsNil(o.LogsUniqueCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogsUniqueCount gets a reference to the given LogsUniqueCountType and assigns it to the LogsUniqueCount field.
+func (o *AlertDefProperties) SetLogsUniqueCount(v LogsUniqueCountType) {
+	o.LogsUniqueCount = &v
+}
+
+// GetMetricAnomaly returns the MetricAnomaly field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetMetricAnomaly() MetricAnomalyType {
+	if o == nil || IsNil(o.MetricAnomaly) {
+		var ret MetricAnomalyType
+		return ret
+	}
+	return *o.MetricAnomaly
+}
+
+// GetMetricAnomalyOk returns a tuple with the MetricAnomaly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetMetricAnomalyOk() (*MetricAnomalyType, bool) {
+	if o == nil || IsNil(o.MetricAnomaly) {
+		return nil, false
+	}
+	return o.MetricAnomaly, true
+}
+
+// HasMetricAnomaly returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasMetricAnomaly() bool {
+	if o != nil && !IsNil(o.MetricAnomaly) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricAnomaly gets a reference to the given MetricAnomalyType and assigns it to the MetricAnomaly field.
+func (o *AlertDefProperties) SetMetricAnomaly(v MetricAnomalyType) {
+	o.MetricAnomaly = &v
+}
+
+// GetMetricThreshold returns the MetricThreshold field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetMetricThreshold() MetricThresholdType {
+	if o == nil || IsNil(o.MetricThreshold) {
+		var ret MetricThresholdType
+		return ret
+	}
+	return *o.MetricThreshold
+}
+
+// GetMetricThresholdOk returns a tuple with the MetricThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetMetricThresholdOk() (*MetricThresholdType, bool) {
+	if o == nil || IsNil(o.MetricThreshold) {
+		return nil, false
+	}
+	return o.MetricThreshold, true
+}
+
+// HasMetricThreshold returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasMetricThreshold() bool {
+	if o != nil && !IsNil(o.MetricThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricThreshold gets a reference to the given MetricThresholdType and assigns it to the MetricThreshold field.
+func (o *AlertDefProperties) SetMetricThreshold(v MetricThresholdType) {
+	o.MetricThreshold = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *AlertDefProperties) SetName(v string) {
+	o.Name = &v
+}
+
+// GetNotificationGroup returns the NotificationGroup field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetNotificationGroup() AlertDefNotificationGroup {
+	if o == nil || IsNil(o.NotificationGroup) {
+		var ret AlertDefNotificationGroup
+		return ret
+	}
+	return *o.NotificationGroup
+}
+
+// GetNotificationGroupOk returns a tuple with the NotificationGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetNotificationGroupOk() (*AlertDefNotificationGroup, bool) {
+	if o == nil || IsNil(o.NotificationGroup) {
+		return nil, false
+	}
+	return o.NotificationGroup, true
+}
+
+// HasNotificationGroup returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasNotificationGroup() bool {
+	if o != nil && !IsNil(o.NotificationGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotificationGroup gets a reference to the given AlertDefNotificationGroup and assigns it to the NotificationGroup field.
+func (o *AlertDefProperties) SetNotificationGroup(v AlertDefNotificationGroup) {
+	o.NotificationGroup = &v
+}
+
+// GetNotificationGroupExcess returns the NotificationGroupExcess field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetNotificationGroupExcess() []AlertDefNotificationGroup {
+	if o == nil || IsNil(o.NotificationGroupExcess) {
+		var ret []AlertDefNotificationGroup
+		return ret
+	}
+	return o.NotificationGroupExcess
+}
+
+// GetNotificationGroupExcessOk returns a tuple with the NotificationGroupExcess field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetNotificationGroupExcessOk() ([]AlertDefNotificationGroup, bool) {
+	if o == nil || IsNil(o.NotificationGroupExcess) {
+		return nil, false
+	}
+	return o.NotificationGroupExcess, true
+}
+
+// HasNotificationGroupExcess returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasNotificationGroupExcess() bool {
+	if o != nil && !IsNil(o.NotificationGroupExcess) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotificationGroupExcess gets a reference to the given []AlertDefNotificationGroup and assigns it to the NotificationGroupExcess field.
+func (o *AlertDefProperties) SetNotificationGroupExcess(v []AlertDefNotificationGroup) {
+	o.NotificationGroupExcess = v
+}
+
+// GetPhantomMode returns the PhantomMode field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetPhantomMode() bool {
+	if o == nil || IsNil(o.PhantomMode) {
+		var ret bool
+		return ret
+	}
+	return *o.PhantomMode
+}
+
+// GetPhantomModeOk returns a tuple with the PhantomMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetPhantomModeOk() (*bool, bool) {
+	if o == nil || IsNil(o.PhantomMode) {
+		return nil, false
+	}
+	return o.PhantomMode, true
+}
+
+// HasPhantomMode returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasPhantomMode() bool {
+	if o != nil && !IsNil(o.PhantomMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhantomMode gets a reference to the given bool and assigns it to the PhantomMode field.
+func (o *AlertDefProperties) SetPhantomMode(v bool) {
+	o.PhantomMode = &v
+}
+
+// GetPriority returns the Priority field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetPriority() AlertDefPriority {
+	if o == nil || IsNil(o.Priority) {
+		var ret AlertDefPriority
+		return ret
+	}
+	return *o.Priority
+}
+
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetPriorityOk() (*AlertDefPriority, bool) {
+	if o == nil || IsNil(o.Priority) {
+		return nil, false
+	}
+	return o.Priority, true
+}
+
+// HasPriority returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasPriority() bool {
+	if o != nil && !IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given AlertDefPriority and assigns it to the Priority field.
+func (o *AlertDefProperties) SetPriority(v AlertDefPriority) {
+	o.Priority = &v
+}
+
+// GetSloThreshold returns the SloThreshold field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetSloThreshold() SloThresholdType {
+	if o == nil || IsNil(o.SloThreshold) {
+		var ret SloThresholdType
+		return ret
+	}
+	return *o.SloThreshold
+}
+
+// GetSloThresholdOk returns a tuple with the SloThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetSloThresholdOk() (*SloThresholdType, bool) {
+	if o == nil || IsNil(o.SloThreshold) {
+		return nil, false
+	}
+	return o.SloThreshold, true
+}
+
+// HasSloThreshold returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasSloThreshold() bool {
+	if o != nil && !IsNil(o.SloThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetSloThreshold gets a reference to the given SloThresholdType and assigns it to the SloThreshold field.
+func (o *AlertDefProperties) SetSloThreshold(v SloThresholdType) {
+	o.SloThreshold = &v
+}
+
+// GetTracingImmediate returns the TracingImmediate field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetTracingImmediate() TracingImmediateType {
+	if o == nil || IsNil(o.TracingImmediate) {
+		var ret TracingImmediateType
+		return ret
+	}
+	return *o.TracingImmediate
+}
+
+// GetTracingImmediateOk returns a tuple with the TracingImmediate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetTracingImmediateOk() (*TracingImmediateType, bool) {
+	if o == nil || IsNil(o.TracingImmediate) {
+		return nil, false
+	}
+	return o.TracingImmediate, true
+}
+
+// HasTracingImmediate returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasTracingImmediate() bool {
+	if o != nil && !IsNil(o.TracingImmediate) {
+		return true
+	}
+
+	return false
+}
+
+// SetTracingImmediate gets a reference to the given TracingImmediateType and assigns it to the TracingImmediate field.
+func (o *AlertDefProperties) SetTracingImmediate(v TracingImmediateType) {
+	o.TracingImmediate = &v
+}
+
+// GetTracingThreshold returns the TracingThreshold field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetTracingThreshold() TracingThresholdType {
+	if o == nil || IsNil(o.TracingThreshold) {
+		var ret TracingThresholdType
+		return ret
+	}
+	return *o.TracingThreshold
+}
+
+// GetTracingThresholdOk returns a tuple with the TracingThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetTracingThresholdOk() (*TracingThresholdType, bool) {
+	if o == nil || IsNil(o.TracingThreshold) {
+		return nil, false
+	}
+	return o.TracingThreshold, true
+}
+
+// HasTracingThreshold returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasTracingThreshold() bool {
+	if o != nil && !IsNil(o.TracingThreshold) {
+		return true
+	}
+
+	return false
+}
+
+// SetTracingThreshold gets a reference to the given TracingThresholdType and assigns it to the TracingThreshold field.
+func (o *AlertDefProperties) SetTracingThreshold(v TracingThresholdType) {
+	o.TracingThreshold = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetType() AlertDefType {
+	if o == nil || IsNil(o.Type) {
+		var ret AlertDefType
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetTypeOk() (*AlertDefType, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given AlertDefType and assigns it to the Type field.
+func (o *AlertDefProperties) SetType(v AlertDefType) {
+	o.Type = &v
+}
+
+func (o AlertDefProperties) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AlertDefProperties) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ActiveOn) {
+		toSerialize["activeOn"] = o.ActiveOn
+	}
+	if !IsNil(o.AnalyticsImmediate) {
+		toSerialize["analyticsImmediate"] = o.AnalyticsImmediate
+	}
+	if !IsNil(o.AnalyticsThreshold) {
+		toSerialize["analyticsThreshold"] = o.AnalyticsThreshold
+	}
+	if !IsNil(o.DataSources) {
+		toSerialize["dataSources"] = o.DataSources
+	}
+	if !IsNil(o.Deleted) {
+		toSerialize["deleted"] = o.Deleted
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if !IsNil(o.EntityLabels) {
+		toSerialize["entityLabels"] = o.EntityLabels
+	}
+	if !IsNil(o.Flow) {
+		toSerialize["flow"] = o.Flow
+	}
+	if !IsNil(o.GroupByKeys) {
+		toSerialize["groupByKeys"] = o.GroupByKeys
+	}
+	if !IsNil(o.IncidentsSettings) {
+		toSerialize["incidentsSettings"] = o.IncidentsSettings
+	}
+	if !IsNil(o.LogsAnomaly) {
+		toSerialize["logsAnomaly"] = o.LogsAnomaly
+	}
+	if !IsNil(o.LogsImmediate) {
+		toSerialize["logsImmediate"] = o.LogsImmediate
+	}
+	if !IsNil(o.LogsNewValue) {
+		toSerialize["logsNewValue"] = o.LogsNewValue
+	}
+	if !IsNil(o.LogsRatioThreshold) {
+		toSerialize["logsRatioThreshold"] = o.LogsRatioThreshold
+	}
+	if !IsNil(o.LogsThreshold) {
+		toSerialize["logsThreshold"] = o.LogsThreshold
+	}
+	if !IsNil(o.LogsTimeRelativeThreshold) {
+		toSerialize["logsTimeRelativeThreshold"] = o.LogsTimeRelativeThreshold
+	}
+	if !IsNil(o.LogsUniqueCount) {
+		toSerialize["logsUniqueCount"] = o.LogsUniqueCount
+	}
+	if !IsNil(o.MetricAnomaly) {
+		toSerialize["metricAnomaly"] = o.MetricAnomaly
+	}
+	if !IsNil(o.MetricThreshold) {
+		toSerialize["metricThreshold"] = o.MetricThreshold
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.NotificationGroup) {
+		toSerialize["notificationGroup"] = o.NotificationGroup
+	}
+	if !IsNil(o.NotificationGroupExcess) {
+		toSerialize["notificationGroupExcess"] = o.NotificationGroupExcess
+	}
+	if !IsNil(o.PhantomMode) {
+		toSerialize["phantomMode"] = o.PhantomMode
+	}
+	if !IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
+	}
+	if !IsNil(o.SloThreshold) {
+		toSerialize["sloThreshold"] = o.SloThreshold
+	}
+	if !IsNil(o.TracingImmediate) {
+		toSerialize["tracingImmediate"] = o.TracingImmediate
+	}
+	if !IsNil(o.TracingThreshold) {
+		toSerialize["tracingThreshold"] = o.TracingThreshold
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logsImmediate"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["tracingImmediate"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["logsThreshold"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["logsRatioThreshold"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["logsTimeRelativeThreshold"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metricThreshold"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["tracingThreshold"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["flow"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["logsAnomaly"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metricAnomaly"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["logsNewValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["logsUniqueCount"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sloThreshold"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["analyticsImmediate"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["analyticsThreshold"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsImmediate, tracingImmediate, logsThreshold, logsRatioThreshold, logsTimeRelativeThreshold, metricThreshold, tracingThreshold, flow, logsAnomaly, metricAnomaly, logsNewValue, logsUniqueCount, sloThreshold, analyticsImmediate, analyticsThreshold] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["logsImmediate"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsImmediate must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["tracingImmediate"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field tracingImmediate must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsRatioThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsRatioThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsTimeRelativeThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsTimeRelativeThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metricThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["tracingThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field tracingThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["flow"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field flow must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsAnomaly"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsAnomaly must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metricAnomaly"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricAnomaly must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsNewValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsNewValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsUniqueCount"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsUniqueCount must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sloThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sloThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["analyticsImmediate"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field analyticsImmediate must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["analyticsThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field analyticsThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *AlertDefProperties) UnmarshalJSON(data []byte) (err error) {
+	varAlertDefProperties := _AlertDefProperties{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefProperties)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefProperties(varAlertDefProperties)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logsImmediate"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesAnalyticsImmediate = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesAnalyticsThreshold
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesAnalyticsThreshold)
-	if err == nil {
-		jsonAlertDefPropertiesAnalyticsThreshold, _ := json.Marshal(dst.AlertDefPropertiesAnalyticsThreshold)
-		if string(jsonAlertDefPropertiesAnalyticsThreshold) == "{}" { // empty struct
-			dst.AlertDefPropertiesAnalyticsThreshold = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesAnalyticsThreshold); err != nil {
-				dst.AlertDefPropertiesAnalyticsThreshold = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["tracingImmediate"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesAnalyticsThreshold = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesFlow
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesFlow)
-	if err == nil {
-		jsonAlertDefPropertiesFlow, _ := json.Marshal(dst.AlertDefPropertiesFlow)
-		if string(jsonAlertDefPropertiesFlow) == "{}" { // empty struct
-			dst.AlertDefPropertiesFlow = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesFlow); err != nil {
-				dst.AlertDefPropertiesFlow = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["logsThreshold"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesFlow = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesLogsAnomaly
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsAnomaly)
-	if err == nil {
-		jsonAlertDefPropertiesLogsAnomaly, _ := json.Marshal(dst.AlertDefPropertiesLogsAnomaly)
-		if string(jsonAlertDefPropertiesLogsAnomaly) == "{}" { // empty struct
-			dst.AlertDefPropertiesLogsAnomaly = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesLogsAnomaly); err != nil {
-				dst.AlertDefPropertiesLogsAnomaly = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["logsRatioThreshold"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesLogsAnomaly = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesLogsImmediate
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsImmediate)
-	if err == nil {
-		jsonAlertDefPropertiesLogsImmediate, _ := json.Marshal(dst.AlertDefPropertiesLogsImmediate)
-		if string(jsonAlertDefPropertiesLogsImmediate) == "{}" { // empty struct
-			dst.AlertDefPropertiesLogsImmediate = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesLogsImmediate); err != nil {
-				dst.AlertDefPropertiesLogsImmediate = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["logsTimeRelativeThreshold"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesLogsImmediate = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesLogsNewValue
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsNewValue)
-	if err == nil {
-		jsonAlertDefPropertiesLogsNewValue, _ := json.Marshal(dst.AlertDefPropertiesLogsNewValue)
-		if string(jsonAlertDefPropertiesLogsNewValue) == "{}" { // empty struct
-			dst.AlertDefPropertiesLogsNewValue = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesLogsNewValue); err != nil {
-				dst.AlertDefPropertiesLogsNewValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metricThreshold"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesLogsNewValue = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesLogsRatioThreshold
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsRatioThreshold)
-	if err == nil {
-		jsonAlertDefPropertiesLogsRatioThreshold, _ := json.Marshal(dst.AlertDefPropertiesLogsRatioThreshold)
-		if string(jsonAlertDefPropertiesLogsRatioThreshold) == "{}" { // empty struct
-			dst.AlertDefPropertiesLogsRatioThreshold = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesLogsRatioThreshold); err != nil {
-				dst.AlertDefPropertiesLogsRatioThreshold = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["tracingThreshold"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesLogsRatioThreshold = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesLogsThreshold
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsThreshold)
-	if err == nil {
-		jsonAlertDefPropertiesLogsThreshold, _ := json.Marshal(dst.AlertDefPropertiesLogsThreshold)
-		if string(jsonAlertDefPropertiesLogsThreshold) == "{}" { // empty struct
-			dst.AlertDefPropertiesLogsThreshold = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesLogsThreshold); err != nil {
-				dst.AlertDefPropertiesLogsThreshold = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["flow"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesLogsThreshold = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesLogsTimeRelativeThreshold
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsTimeRelativeThreshold)
-	if err == nil {
-		jsonAlertDefPropertiesLogsTimeRelativeThreshold, _ := json.Marshal(dst.AlertDefPropertiesLogsTimeRelativeThreshold)
-		if string(jsonAlertDefPropertiesLogsTimeRelativeThreshold) == "{}" { // empty struct
-			dst.AlertDefPropertiesLogsTimeRelativeThreshold = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesLogsTimeRelativeThreshold); err != nil {
-				dst.AlertDefPropertiesLogsTimeRelativeThreshold = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["logsAnomaly"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesLogsTimeRelativeThreshold = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesLogsUniqueCount
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsUniqueCount)
-	if err == nil {
-		jsonAlertDefPropertiesLogsUniqueCount, _ := json.Marshal(dst.AlertDefPropertiesLogsUniqueCount)
-		if string(jsonAlertDefPropertiesLogsUniqueCount) == "{}" { // empty struct
-			dst.AlertDefPropertiesLogsUniqueCount = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesLogsUniqueCount); err != nil {
-				dst.AlertDefPropertiesLogsUniqueCount = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metricAnomaly"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesLogsUniqueCount = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesMetricAnomaly
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesMetricAnomaly)
-	if err == nil {
-		jsonAlertDefPropertiesMetricAnomaly, _ := json.Marshal(dst.AlertDefPropertiesMetricAnomaly)
-		if string(jsonAlertDefPropertiesMetricAnomaly) == "{}" { // empty struct
-			dst.AlertDefPropertiesMetricAnomaly = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesMetricAnomaly); err != nil {
-				dst.AlertDefPropertiesMetricAnomaly = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["logsNewValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesMetricAnomaly = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesMetricThreshold
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesMetricThreshold)
-	if err == nil {
-		jsonAlertDefPropertiesMetricThreshold, _ := json.Marshal(dst.AlertDefPropertiesMetricThreshold)
-		if string(jsonAlertDefPropertiesMetricThreshold) == "{}" { // empty struct
-			dst.AlertDefPropertiesMetricThreshold = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesMetricThreshold); err != nil {
-				dst.AlertDefPropertiesMetricThreshold = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["logsUniqueCount"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesMetricThreshold = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesSloThreshold
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesSloThreshold)
-	if err == nil {
-		jsonAlertDefPropertiesSloThreshold, _ := json.Marshal(dst.AlertDefPropertiesSloThreshold)
-		if string(jsonAlertDefPropertiesSloThreshold) == "{}" { // empty struct
-			dst.AlertDefPropertiesSloThreshold = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesSloThreshold); err != nil {
-				dst.AlertDefPropertiesSloThreshold = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sloThreshold"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesSloThreshold = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesTracingImmediate
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesTracingImmediate)
-	if err == nil {
-		jsonAlertDefPropertiesTracingImmediate, _ := json.Marshal(dst.AlertDefPropertiesTracingImmediate)
-		if string(jsonAlertDefPropertiesTracingImmediate) == "{}" { // empty struct
-			dst.AlertDefPropertiesTracingImmediate = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesTracingImmediate); err != nil {
-				dst.AlertDefPropertiesTracingImmediate = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["analyticsImmediate"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesTracingImmediate = nil
-	}
-
-	// try to unmarshal data into AlertDefPropertiesTracingThreshold
-	err = json.Unmarshal(data, &dst.AlertDefPropertiesTracingThreshold)
-	if err == nil {
-		jsonAlertDefPropertiesTracingThreshold, _ := json.Marshal(dst.AlertDefPropertiesTracingThreshold)
-		if string(jsonAlertDefPropertiesTracingThreshold) == "{}" { // empty struct
-			dst.AlertDefPropertiesTracingThreshold = nil
-		} else {
-			if err = validator.Validate(dst.AlertDefPropertiesTracingThreshold); err != nil {
-				dst.AlertDefPropertiesTracingThreshold = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["analyticsThreshold"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertDefPropertiesTracingThreshold = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logsImmediate, tracingImmediate, logsThreshold, logsRatioThreshold, logsTimeRelativeThreshold, metricThreshold, tracingThreshold, flow, logsAnomaly, metricAnomaly, logsNewValue, logsUniqueCount, sloThreshold, analyticsImmediate, analyticsThreshold] may be set"}
+		}
+
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "analyticsImmediate")
+		delete(additionalProperties, "analyticsThreshold")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "flow")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "logsAnomaly")
+		delete(additionalProperties, "logsImmediate")
+		delete(additionalProperties, "logsNewValue")
+		delete(additionalProperties, "logsRatioThreshold")
+		delete(additionalProperties, "logsThreshold")
+		delete(additionalProperties, "logsTimeRelativeThreshold")
+		delete(additionalProperties, "logsUniqueCount")
+		delete(additionalProperties, "metricAnomaly")
+		delete(additionalProperties, "metricThreshold")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "sloThreshold")
+		delete(additionalProperties, "tracingImmediate")
+		delete(additionalProperties, "tracingThreshold")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AlertDefPropertiesAnalyticsImmediate = nil
-		dst.AlertDefPropertiesAnalyticsThreshold = nil
-		dst.AlertDefPropertiesFlow = nil
-		dst.AlertDefPropertiesLogsAnomaly = nil
-		dst.AlertDefPropertiesLogsImmediate = nil
-		dst.AlertDefPropertiesLogsNewValue = nil
-		dst.AlertDefPropertiesLogsRatioThreshold = nil
-		dst.AlertDefPropertiesLogsThreshold = nil
-		dst.AlertDefPropertiesLogsTimeRelativeThreshold = nil
-		dst.AlertDefPropertiesLogsUniqueCount = nil
-		dst.AlertDefPropertiesMetricAnomaly = nil
-		dst.AlertDefPropertiesMetricThreshold = nil
-		dst.AlertDefPropertiesSloThreshold = nil
-		dst.AlertDefPropertiesTracingImmediate = nil
-		dst.AlertDefPropertiesTracingThreshold = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(AlertDefProperties)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src AlertDefProperties) MarshalJSON() ([]byte, error) {
-	if src.AlertDefPropertiesAnalyticsImmediate != nil {
-		return json.Marshal(&src.AlertDefPropertiesAnalyticsImmediate)
-	}
-
-	if src.AlertDefPropertiesAnalyticsThreshold != nil {
-		return json.Marshal(&src.AlertDefPropertiesAnalyticsThreshold)
-	}
-
-	if src.AlertDefPropertiesFlow != nil {
-		return json.Marshal(&src.AlertDefPropertiesFlow)
-	}
-
-	if src.AlertDefPropertiesLogsAnomaly != nil {
-		return json.Marshal(&src.AlertDefPropertiesLogsAnomaly)
-	}
-
-	if src.AlertDefPropertiesLogsImmediate != nil {
-		return json.Marshal(&src.AlertDefPropertiesLogsImmediate)
-	}
-
-	if src.AlertDefPropertiesLogsNewValue != nil {
-		return json.Marshal(&src.AlertDefPropertiesLogsNewValue)
-	}
-
-	if src.AlertDefPropertiesLogsRatioThreshold != nil {
-		return json.Marshal(&src.AlertDefPropertiesLogsRatioThreshold)
-	}
-
-	if src.AlertDefPropertiesLogsThreshold != nil {
-		return json.Marshal(&src.AlertDefPropertiesLogsThreshold)
-	}
-
-	if src.AlertDefPropertiesLogsTimeRelativeThreshold != nil {
-		return json.Marshal(&src.AlertDefPropertiesLogsTimeRelativeThreshold)
-	}
-
-	if src.AlertDefPropertiesLogsUniqueCount != nil {
-		return json.Marshal(&src.AlertDefPropertiesLogsUniqueCount)
-	}
-
-	if src.AlertDefPropertiesMetricAnomaly != nil {
-		return json.Marshal(&src.AlertDefPropertiesMetricAnomaly)
-	}
-
-	if src.AlertDefPropertiesMetricThreshold != nil {
-		return json.Marshal(&src.AlertDefPropertiesMetricThreshold)
-	}
-
-	if src.AlertDefPropertiesSloThreshold != nil {
-		return json.Marshal(&src.AlertDefPropertiesSloThreshold)
-	}
-
-	if src.AlertDefPropertiesTracingImmediate != nil {
-		return json.Marshal(&src.AlertDefPropertiesTracingImmediate)
-	}
-
-	if src.AlertDefPropertiesTracingThreshold != nil {
-		return json.Marshal(&src.AlertDefPropertiesTracingThreshold)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *AlertDefProperties) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.AlertDefPropertiesAnalyticsImmediate != nil {
-		return obj.AlertDefPropertiesAnalyticsImmediate
-	}
-
-	if obj.AlertDefPropertiesAnalyticsThreshold != nil {
-		return obj.AlertDefPropertiesAnalyticsThreshold
-	}
-
-	if obj.AlertDefPropertiesFlow != nil {
-		return obj.AlertDefPropertiesFlow
-	}
-
-	if obj.AlertDefPropertiesLogsAnomaly != nil {
-		return obj.AlertDefPropertiesLogsAnomaly
-	}
-
-	if obj.AlertDefPropertiesLogsImmediate != nil {
-		return obj.AlertDefPropertiesLogsImmediate
-	}
-
-	if obj.AlertDefPropertiesLogsNewValue != nil {
-		return obj.AlertDefPropertiesLogsNewValue
-	}
-
-	if obj.AlertDefPropertiesLogsRatioThreshold != nil {
-		return obj.AlertDefPropertiesLogsRatioThreshold
-	}
-
-	if obj.AlertDefPropertiesLogsThreshold != nil {
-		return obj.AlertDefPropertiesLogsThreshold
-	}
-
-	if obj.AlertDefPropertiesLogsTimeRelativeThreshold != nil {
-		return obj.AlertDefPropertiesLogsTimeRelativeThreshold
-	}
-
-	if obj.AlertDefPropertiesLogsUniqueCount != nil {
-		return obj.AlertDefPropertiesLogsUniqueCount
-	}
-
-	if obj.AlertDefPropertiesMetricAnomaly != nil {
-		return obj.AlertDefPropertiesMetricAnomaly
-	}
-
-	if obj.AlertDefPropertiesMetricThreshold != nil {
-		return obj.AlertDefPropertiesMetricThreshold
-	}
-
-	if obj.AlertDefPropertiesSloThreshold != nil {
-		return obj.AlertDefPropertiesSloThreshold
-	}
-
-	if obj.AlertDefPropertiesTracingImmediate != nil {
-		return obj.AlertDefPropertiesTracingImmediate
-	}
-
-	if obj.AlertDefPropertiesTracingThreshold != nil {
-		return obj.AlertDefPropertiesTracingThreshold
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj AlertDefProperties) GetActualInstanceValue() (interface{}) {
-	if obj.AlertDefPropertiesAnalyticsImmediate != nil {
-		return *obj.AlertDefPropertiesAnalyticsImmediate
-	}
-
-	if obj.AlertDefPropertiesAnalyticsThreshold != nil {
-		return *obj.AlertDefPropertiesAnalyticsThreshold
-	}
-
-	if obj.AlertDefPropertiesFlow != nil {
-		return *obj.AlertDefPropertiesFlow
-	}
-
-	if obj.AlertDefPropertiesLogsAnomaly != nil {
-		return *obj.AlertDefPropertiesLogsAnomaly
-	}
-
-	if obj.AlertDefPropertiesLogsImmediate != nil {
-		return *obj.AlertDefPropertiesLogsImmediate
-	}
-
-	if obj.AlertDefPropertiesLogsNewValue != nil {
-		return *obj.AlertDefPropertiesLogsNewValue
-	}
-
-	if obj.AlertDefPropertiesLogsRatioThreshold != nil {
-		return *obj.AlertDefPropertiesLogsRatioThreshold
-	}
-
-	if obj.AlertDefPropertiesLogsThreshold != nil {
-		return *obj.AlertDefPropertiesLogsThreshold
-	}
-
-	if obj.AlertDefPropertiesLogsTimeRelativeThreshold != nil {
-		return *obj.AlertDefPropertiesLogsTimeRelativeThreshold
-	}
-
-	if obj.AlertDefPropertiesLogsUniqueCount != nil {
-		return *obj.AlertDefPropertiesLogsUniqueCount
-	}
-
-	if obj.AlertDefPropertiesMetricAnomaly != nil {
-		return *obj.AlertDefPropertiesMetricAnomaly
-	}
-
-	if obj.AlertDefPropertiesMetricThreshold != nil {
-		return *obj.AlertDefPropertiesMetricThreshold
-	}
-
-	if obj.AlertDefPropertiesSloThreshold != nil {
-		return *obj.AlertDefPropertiesSloThreshold
-	}
-
-	if obj.AlertDefPropertiesTracingImmediate != nil {
-		return *obj.AlertDefPropertiesTracingImmediate
-	}
-
-	if obj.AlertDefPropertiesTracingThreshold != nil {
-		return *obj.AlertDefPropertiesTracingThreshold
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableAlertDefProperties struct {
@@ -664,4 +1347,3 @@ func (v *NullableAlertDefProperties) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

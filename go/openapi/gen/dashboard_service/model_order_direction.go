@@ -24,9 +24,9 @@ type OrderDirection string
 // List of OrderDirection
 const (
 	ORDERDIRECTION_ORDER_DIRECTION_UNSPECIFIED OrderDirection = "ORDER_DIRECTION_UNSPECIFIED"
-	ORDERDIRECTION_ORDER_DIRECTION_ASC OrderDirection = "ORDER_DIRECTION_ASC"
-	ORDERDIRECTION_ORDER_DIRECTION_DESC OrderDirection = "ORDER_DIRECTION_DESC"
-	ORDERDIRECTION_ORDER_DIRECTION_NONE OrderDirection = "ORDER_DIRECTION_NONE"
+	ORDERDIRECTION_ORDER_DIRECTION_ASC         OrderDirection = "ORDER_DIRECTION_ASC"
+	ORDERDIRECTION_ORDER_DIRECTION_DESC        OrderDirection = "ORDER_DIRECTION_DESC"
+	ORDERDIRECTION_ORDER_DIRECTION_NONE        OrderDirection = "ORDER_DIRECTION_NONE"
 )
 
 // All allowed values of OrderDirection enum
@@ -115,4 +115,3 @@ func (v *NullableOrderDirection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -13,164 +13,375 @@ package metrics_data_archive_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// TenantConfigV2 - struct for TenantConfigV2
+// checks if the TenantConfigV2 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TenantConfigV2{}
+
+// TenantConfigV2 Tenant config v2.
 type TenantConfigV2 struct {
-	TenantConfigV2Gcs *TenantConfigV2Gcs
-	TenantConfigV2Ibm *TenantConfigV2Ibm
-	TenantConfigV2S3 *TenantConfigV2S3
+	// Whether metrics archiving is disabled for this tenant.
+	Disabled *bool        `json:"disabled,omitempty"`
+	Gcs      *GcsConfig   `json:"gcs,omitempty"`
+	Ibm      *IbmConfigV2 `json:"ibm,omitempty"`
+	// Storage path prefix applied to all archived objects.
+	Prefix          *string                 `json:"prefix,omitempty"`
+	RetentionPolicy *RetentionPolicyRequest `json:"retentionPolicy,omitempty"`
+	S3              *S3Config               `json:"s3,omitempty"`
+	// Tenant identifier.
+	TenantId                          *int64 `json:"tenantId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// TenantConfigV2GcsAsTenantConfigV2 is a convenience function that returns TenantConfigV2Gcs wrapped in TenantConfigV2
-func TenantConfigV2GcsAsTenantConfigV2(v *TenantConfigV2Gcs) TenantConfigV2 {
-	return TenantConfigV2{
-		TenantConfigV2Gcs: v,
+type _TenantConfigV2 TenantConfigV2
+
+// NewTenantConfigV2 instantiates a new TenantConfigV2 object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewTenantConfigV2() *TenantConfigV2 {
+	this := TenantConfigV2{}
+	return &this
+}
+
+// NewTenantConfigV2WithDefaults instantiates a new TenantConfigV2 object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewTenantConfigV2WithDefaults() *TenantConfigV2 {
+	this := TenantConfigV2{}
+	return &this
+}
+
+// GetDisabled returns the Disabled field value if set, zero value otherwise.
+func (o *TenantConfigV2) GetDisabled() bool {
+	if o == nil || IsNil(o.Disabled) {
+		var ret bool
+		return ret
 	}
+	return *o.Disabled
 }
 
-// TenantConfigV2IbmAsTenantConfigV2 is a convenience function that returns TenantConfigV2Ibm wrapped in TenantConfigV2
-func TenantConfigV2IbmAsTenantConfigV2(v *TenantConfigV2Ibm) TenantConfigV2 {
-	return TenantConfigV2{
-		TenantConfigV2Ibm: v,
+// GetDisabledOk returns a tuple with the Disabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantConfigV2) GetDisabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Disabled) {
+		return nil, false
 	}
+	return o.Disabled, true
 }
 
-// TenantConfigV2S3AsTenantConfigV2 is a convenience function that returns TenantConfigV2S3 wrapped in TenantConfigV2
-func TenantConfigV2S3AsTenantConfigV2(v *TenantConfigV2S3) TenantConfigV2 {
-	return TenantConfigV2{
-		TenantConfigV2S3: v,
+// HasDisabled returns a boolean if a field has been set.
+func (o *TenantConfigV2) HasDisabled() bool {
+	if o != nil && !IsNil(o.Disabled) {
+		return true
 	}
+
+	return false
 }
 
+// SetDisabled gets a reference to the given bool and assigns it to the Disabled field.
+func (o *TenantConfigV2) SetDisabled(v bool) {
+	o.Disabled = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *TenantConfigV2) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into TenantConfigV2Gcs
-	err = json.Unmarshal(data, &dst.TenantConfigV2Gcs)
-	if err == nil {
-		jsonTenantConfigV2Gcs, _ := json.Marshal(dst.TenantConfigV2Gcs)
-		if string(jsonTenantConfigV2Gcs) == "{}" { // empty struct
-			dst.TenantConfigV2Gcs = nil
-		} else {
-			if err = validator.Validate(dst.TenantConfigV2Gcs); err != nil {
-				dst.TenantConfigV2Gcs = nil
-			} else {
-				match++
-			}
+// GetGcs returns the Gcs field value if set, zero value otherwise.
+func (o *TenantConfigV2) GetGcs() GcsConfig {
+	if o == nil || IsNil(o.Gcs) {
+		var ret GcsConfig
+		return ret
+	}
+	return *o.Gcs
+}
+
+// GetGcsOk returns a tuple with the Gcs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantConfigV2) GetGcsOk() (*GcsConfig, bool) {
+	if o == nil || IsNil(o.Gcs) {
+		return nil, false
+	}
+	return o.Gcs, true
+}
+
+// HasGcs returns a boolean if a field has been set.
+func (o *TenantConfigV2) HasGcs() bool {
+	if o != nil && !IsNil(o.Gcs) {
+		return true
+	}
+
+	return false
+}
+
+// SetGcs gets a reference to the given GcsConfig and assigns it to the Gcs field.
+func (o *TenantConfigV2) SetGcs(v GcsConfig) {
+	o.Gcs = &v
+}
+
+// GetIbm returns the Ibm field value if set, zero value otherwise.
+func (o *TenantConfigV2) GetIbm() IbmConfigV2 {
+	if o == nil || IsNil(o.Ibm) {
+		var ret IbmConfigV2
+		return ret
+	}
+	return *o.Ibm
+}
+
+// GetIbmOk returns a tuple with the Ibm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantConfigV2) GetIbmOk() (*IbmConfigV2, bool) {
+	if o == nil || IsNil(o.Ibm) {
+		return nil, false
+	}
+	return o.Ibm, true
+}
+
+// HasIbm returns a boolean if a field has been set.
+func (o *TenantConfigV2) HasIbm() bool {
+	if o != nil && !IsNil(o.Ibm) {
+		return true
+	}
+
+	return false
+}
+
+// SetIbm gets a reference to the given IbmConfigV2 and assigns it to the Ibm field.
+func (o *TenantConfigV2) SetIbm(v IbmConfigV2) {
+	o.Ibm = &v
+}
+
+// GetPrefix returns the Prefix field value if set, zero value otherwise.
+func (o *TenantConfigV2) GetPrefix() string {
+	if o == nil || IsNil(o.Prefix) {
+		var ret string
+		return ret
+	}
+	return *o.Prefix
+}
+
+// GetPrefixOk returns a tuple with the Prefix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantConfigV2) GetPrefixOk() (*string, bool) {
+	if o == nil || IsNil(o.Prefix) {
+		return nil, false
+	}
+	return o.Prefix, true
+}
+
+// HasPrefix returns a boolean if a field has been set.
+func (o *TenantConfigV2) HasPrefix() bool {
+	if o != nil && !IsNil(o.Prefix) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrefix gets a reference to the given string and assigns it to the Prefix field.
+func (o *TenantConfigV2) SetPrefix(v string) {
+	o.Prefix = &v
+}
+
+// GetRetentionPolicy returns the RetentionPolicy field value if set, zero value otherwise.
+func (o *TenantConfigV2) GetRetentionPolicy() RetentionPolicyRequest {
+	if o == nil || IsNil(o.RetentionPolicy) {
+		var ret RetentionPolicyRequest
+		return ret
+	}
+	return *o.RetentionPolicy
+}
+
+// GetRetentionPolicyOk returns a tuple with the RetentionPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantConfigV2) GetRetentionPolicyOk() (*RetentionPolicyRequest, bool) {
+	if o == nil || IsNil(o.RetentionPolicy) {
+		return nil, false
+	}
+	return o.RetentionPolicy, true
+}
+
+// HasRetentionPolicy returns a boolean if a field has been set.
+func (o *TenantConfigV2) HasRetentionPolicy() bool {
+	if o != nil && !IsNil(o.RetentionPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetRetentionPolicy gets a reference to the given RetentionPolicyRequest and assigns it to the RetentionPolicy field.
+func (o *TenantConfigV2) SetRetentionPolicy(v RetentionPolicyRequest) {
+	o.RetentionPolicy = &v
+}
+
+// GetS3 returns the S3 field value if set, zero value otherwise.
+func (o *TenantConfigV2) GetS3() S3Config {
+	if o == nil || IsNil(o.S3) {
+		var ret S3Config
+		return ret
+	}
+	return *o.S3
+}
+
+// GetS3Ok returns a tuple with the S3 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantConfigV2) GetS3Ok() (*S3Config, bool) {
+	if o == nil || IsNil(o.S3) {
+		return nil, false
+	}
+	return o.S3, true
+}
+
+// HasS3 returns a boolean if a field has been set.
+func (o *TenantConfigV2) HasS3() bool {
+	if o != nil && !IsNil(o.S3) {
+		return true
+	}
+
+	return false
+}
+
+// SetS3 gets a reference to the given S3Config and assigns it to the S3 field.
+func (o *TenantConfigV2) SetS3(v S3Config) {
+	o.S3 = &v
+}
+
+// GetTenantId returns the TenantId field value if set, zero value otherwise.
+func (o *TenantConfigV2) GetTenantId() int64 {
+	if o == nil || IsNil(o.TenantId) {
+		var ret int64
+		return ret
+	}
+	return *o.TenantId
+}
+
+// GetTenantIdOk returns a tuple with the TenantId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TenantConfigV2) GetTenantIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.TenantId) {
+		return nil, false
+	}
+	return o.TenantId, true
+}
+
+// HasTenantId returns a boolean if a field has been set.
+func (o *TenantConfigV2) HasTenantId() bool {
+	if o != nil && !IsNil(o.TenantId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTenantId gets a reference to the given int64 and assigns it to the TenantId field.
+func (o *TenantConfigV2) SetTenantId(v int64) {
+	o.TenantId = &v
+}
+
+func (o TenantConfigV2) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TenantConfigV2) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Disabled) {
+		toSerialize["disabled"] = o.Disabled
+	}
+	if !IsNil(o.Gcs) {
+		toSerialize["gcs"] = o.Gcs
+	}
+	if !IsNil(o.Ibm) {
+		toSerialize["ibm"] = o.Ibm
+	}
+	if !IsNil(o.Prefix) {
+		toSerialize["prefix"] = o.Prefix
+	}
+	if !IsNil(o.RetentionPolicy) {
+		toSerialize["retentionPolicy"] = o.RetentionPolicy
+	}
+	if !IsNil(o.S3) {
+		toSerialize["s3"] = o.S3
+	}
+	if !IsNil(o.TenantId) {
+		toSerialize["tenantId"] = o.TenantId
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["ibm"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["s3"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["gcs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [ibm, s3, gcs] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["ibm"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ibm must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["s3"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field s3 must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["gcs"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field gcs must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *TenantConfigV2) UnmarshalJSON(data []byte) (err error) {
+	varTenantConfigV2 := _TenantConfigV2{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTenantConfigV2)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TenantConfigV2(varTenantConfigV2)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["ibm"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TenantConfigV2Gcs = nil
-	}
-
-	// try to unmarshal data into TenantConfigV2Ibm
-	err = json.Unmarshal(data, &dst.TenantConfigV2Ibm)
-	if err == nil {
-		jsonTenantConfigV2Ibm, _ := json.Marshal(dst.TenantConfigV2Ibm)
-		if string(jsonTenantConfigV2Ibm) == "{}" { // empty struct
-			dst.TenantConfigV2Ibm = nil
-		} else {
-			if err = validator.Validate(dst.TenantConfigV2Ibm); err != nil {
-				dst.TenantConfigV2Ibm = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["s3"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TenantConfigV2Ibm = nil
-	}
-
-	// try to unmarshal data into TenantConfigV2S3
-	err = json.Unmarshal(data, &dst.TenantConfigV2S3)
-	if err == nil {
-		jsonTenantConfigV2S3, _ := json.Marshal(dst.TenantConfigV2S3)
-		if string(jsonTenantConfigV2S3) == "{}" { // empty struct
-			dst.TenantConfigV2S3 = nil
-		} else {
-			if err = validator.Validate(dst.TenantConfigV2S3); err != nil {
-				dst.TenantConfigV2S3 = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["gcs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TenantConfigV2S3 = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [ibm, s3, gcs] may be set"}
+		}
+
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "gcs")
+		delete(additionalProperties, "ibm")
+		delete(additionalProperties, "prefix")
+		delete(additionalProperties, "retentionPolicy")
+		delete(additionalProperties, "s3")
+		delete(additionalProperties, "tenantId")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TenantConfigV2Gcs = nil
-		dst.TenantConfigV2Ibm = nil
-		dst.TenantConfigV2S3 = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TenantConfigV2)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src TenantConfigV2) MarshalJSON() ([]byte, error) {
-	if src.TenantConfigV2Gcs != nil {
-		return json.Marshal(&src.TenantConfigV2Gcs)
-	}
-
-	if src.TenantConfigV2Ibm != nil {
-		return json.Marshal(&src.TenantConfigV2Ibm)
-	}
-
-	if src.TenantConfigV2S3 != nil {
-		return json.Marshal(&src.TenantConfigV2S3)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *TenantConfigV2) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.TenantConfigV2Gcs != nil {
-		return obj.TenantConfigV2Gcs
-	}
-
-	if obj.TenantConfigV2Ibm != nil {
-		return obj.TenantConfigV2Ibm
-	}
-
-	if obj.TenantConfigV2S3 != nil {
-		return obj.TenantConfigV2S3
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj TenantConfigV2) GetActualInstanceValue() (interface{}) {
-	if obj.TenantConfigV2Gcs != nil {
-		return *obj.TenantConfigV2Gcs
-	}
-
-	if obj.TenantConfigV2Ibm != nil {
-		return *obj.TenantConfigV2Ibm
-	}
-
-	if obj.TenantConfigV2S3 != nil {
-		return *obj.TenantConfigV2S3
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableTenantConfigV2 struct {
@@ -208,4 +419,3 @@ func (v *NullableTenantConfigV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

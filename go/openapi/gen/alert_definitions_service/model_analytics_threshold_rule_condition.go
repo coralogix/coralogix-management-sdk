@@ -23,8 +23,9 @@ var _ MappedNullable = &AnalyticsThresholdRuleCondition{}
 // AnalyticsThresholdRuleCondition Defines the threshold value to compare against
 type AnalyticsThresholdRuleCondition struct {
 	// The threshold value to compare against
-	Threshold *float64 `json:"threshold,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Threshold                         *float64 `json:"threshold,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AnalyticsThresholdRuleCondition AnalyticsThresholdRuleCondition
@@ -79,7 +80,7 @@ func (o *AnalyticsThresholdRuleCondition) SetThreshold(v float64) {
 }
 
 func (o AnalyticsThresholdRuleCondition) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *AnalyticsThresholdRuleCondition) UnmarshalJSON(data []byte) (err error)
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "threshold")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableAnalyticsThresholdRuleCondition) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

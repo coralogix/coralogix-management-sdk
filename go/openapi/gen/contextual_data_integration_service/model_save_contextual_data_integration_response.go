@@ -23,8 +23,9 @@ var _ MappedNullable = &SaveContextualDataIntegrationResponse{}
 // SaveContextualDataIntegrationResponse Response returned after successfully saving a contextual data integration.
 type SaveContextualDataIntegrationResponse struct {
 	// The integration id.
-	IntegrationId *string `json:"integrationId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IntegrationId                     *string `json:"integrationId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SaveContextualDataIntegrationResponse SaveContextualDataIntegrationResponse
@@ -79,7 +80,7 @@ func (o *SaveContextualDataIntegrationResponse) SetIntegrationId(v string) {
 }
 
 func (o SaveContextualDataIntegrationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *SaveContextualDataIntegrationResponse) UnmarshalJSON(data []byte) (err 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "integrationId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableSaveContextualDataIntegrationResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

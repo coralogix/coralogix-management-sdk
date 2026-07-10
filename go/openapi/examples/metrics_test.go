@@ -41,39 +41,33 @@ func TestArchiveMetrics(t *testing.T) {
 		Region: &awsRegion,
 	}
 
-	configureReq := metrics.MetricsConfiguratorPublicServiceConfigureTenantRequest{
-		ConfigureTenantRequestS3: &metrics.ConfigureTenantRequestS3{
-			S3: s3Config,
-		},
+	configureReq := metrics.ConfigureTenantRequest{
+		S3: &s3Config,
 	}
 	_, httpResp, err := client.
 		MetricsConfiguratorPublicServiceConfigureTenant(ctx).
-		MetricsConfiguratorPublicServiceConfigureTenantRequest(configureReq).
+		ConfigureTenantRequest(configureReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
-	validateReq := metrics.MetricsConfiguratorPublicServiceValidateBucketRequest{
-		ValidateBucketRequestS3: &metrics.ValidateBucketRequestS3{
-			S3: s3Config,
-		},
+	validateReq := metrics.BucketValidationRequest{
+		S3: &s3Config,
 	}
 	_, httpResp, err = client.
 		MetricsConfiguratorPublicServiceValidateBucket(ctx).
-		MetricsConfiguratorPublicServiceValidateBucketRequest(validateReq).
+		BucketValidationRequest(validateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	retentionDays := int64(30)
-	updateReq := metrics.MetricsConfiguratorPublicServiceUpdateRequest{
-		UpdateRequestS3: &metrics.UpdateRequestS3{
-			RetentionDays: &retentionDays,
-			S3:            s3Config,
-		},
+	updateReq := metrics.UpdateTenantRequest{
+		RetentionDays: &retentionDays,
+		S3:            &s3Config,
 	}
 
 	_, httpResp, err = client.
 		MetricsConfiguratorPublicServiceUpdate(ctx).
-		MetricsConfiguratorPublicServiceUpdateRequest(updateReq).
+		UpdateTenantRequest(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -83,9 +77,9 @@ func TestArchiveMetrics(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.NotNil(t, getResp)
 
-	if getResp != nil && getResp.TenantConfig != nil && getResp.TenantConfig.TenantConfigV2S3 != nil {
-		require.Equal(t, metricsBucket, *getResp.TenantConfig.TenantConfigV2S3.S3.Bucket)
-		require.Equal(t, awsRegion, *getResp.TenantConfig.TenantConfigV2S3.S3.Region)
+	if getResp != nil && getResp.TenantConfig != nil && getResp.TenantConfig.S3 != nil {
+		require.Equal(t, metricsBucket, *getResp.TenantConfig.S3.Bucket)
+		require.Equal(t, awsRegion, *getResp.TenantConfig.S3.Region)
 	} else {
 		t.Fatalf("expected S3 tenant config, got nil")
 	}

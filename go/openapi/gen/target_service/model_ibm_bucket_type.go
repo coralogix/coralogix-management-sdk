@@ -24,8 +24,8 @@ type IbmBucketType string
 // List of IbmBucketType
 const (
 	IBMBUCKETTYPE_IBM_BUCKET_TYPE_UNSPECIFIED IbmBucketType = "IBM_BUCKET_TYPE_UNSPECIFIED"
-	IBMBUCKETTYPE_IBM_BUCKET_TYPE_EXTERNAL IbmBucketType = "IBM_BUCKET_TYPE_EXTERNAL"
-	IBMBUCKETTYPE_IBM_BUCKET_TYPE_INTERNAL IbmBucketType = "IBM_BUCKET_TYPE_INTERNAL"
+	IBMBUCKETTYPE_IBM_BUCKET_TYPE_EXTERNAL    IbmBucketType = "IBM_BUCKET_TYPE_EXTERNAL"
+	IBMBUCKETTYPE_IBM_BUCKET_TYPE_INTERNAL    IbmBucketType = "IBM_BUCKET_TYPE_INTERNAL"
 )
 
 // All allowed values of IbmBucketType enum
@@ -113,4 +113,3 @@ func (v *NullableIbmBucketType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

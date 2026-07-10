@@ -24,8 +24,9 @@ var _ MappedNullable = &CloseIncidentsResponse{}
 // CloseIncidentsResponse Response containing the updated incidents after closing
 type CloseIncidentsResponse struct {
 	// List of incidents after closing
-	Incidents []Incident `json:"incidents"`
-	AdditionalProperties map[string]interface{}
+	Incidents                         []Incident `json:"incidents"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CloseIncidentsResponse CloseIncidentsResponse
@@ -73,7 +74,7 @@ func (o *CloseIncidentsResponse) SetIncidents(v []Incident) {
 }
 
 func (o CloseIncidentsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +105,10 @@ func (o *CloseIncidentsResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -129,6 +130,7 @@ func (o *CloseIncidentsResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "incidents")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -169,4 +171,3 @@ func (v *NullableCloseIncidentsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

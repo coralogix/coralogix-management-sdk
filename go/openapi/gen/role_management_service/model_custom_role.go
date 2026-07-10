@@ -35,8 +35,9 @@ type CustomRole struct {
 	// The role id.
 	RoleId *int64 `json:"roleId,omitempty"`
 	// Team identifier.
-	TeamId *int64 `json:"teamId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TeamId                            *int64 `json:"teamId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CustomRole CustomRole
@@ -283,7 +284,7 @@ func (o *CustomRole) SetTeamId(v int64) {
 }
 
 func (o CustomRole) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -344,6 +345,7 @@ func (o *CustomRole) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "roleId")
 		delete(additionalProperties, "teamId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -384,4 +386,3 @@ func (v *NullableCustomRole) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

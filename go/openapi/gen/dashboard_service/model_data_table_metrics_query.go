@@ -24,11 +24,12 @@ var _ MappedNullable = &DataTableMetricsQuery{}
 type DataTableMetricsQuery struct {
 	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
 	// List of metrics filters
-	Filters []MetricsFilter `json:"filters,omitempty"`
-	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
-	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
-	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Filters                           []MetricsFilter  `json:"filters,omitempty"`
+	PromqlQuery                       *PromQlQuery     `json:"promqlQuery,omitempty"`
+	PromqlQueryType                   *PromQLQueryType `json:"promqlQueryType,omitempty"`
+	TimeFrame                         *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DataTableMetricsQuery DataTableMetricsQuery
@@ -211,7 +212,7 @@ func (o *DataTableMetricsQuery) SetTimeFrame(v TimeFrameSelect) {
 }
 
 func (o DataTableMetricsQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -264,6 +265,7 @@ func (o *DataTableMetricsQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "promqlQueryType")
 		delete(additionalProperties, "timeFrame")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -304,4 +306,3 @@ func (v *NullableDataTableMetricsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

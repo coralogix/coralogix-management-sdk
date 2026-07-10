@@ -23,10 +23,11 @@ var _ MappedNullable = &Markdown{}
 // Markdown Markdown.
 type Markdown struct {
 	// Markdown text
-	MarkdownText *string `json:"markdownText,omitempty"`
+	MarkdownText *string `json:"markdownText,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Tooltip text to display on widget hover
-	TooltipText *string `json:"tooltipText,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TooltipText                       *string `json:"tooltipText,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Markdown Markdown
@@ -113,7 +114,7 @@ func (o *Markdown) SetTooltipText(v string) {
 }
 
 func (o Markdown) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *Markdown) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "markdownText")
 		delete(additionalProperties, "tooltipText")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableMarkdown) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

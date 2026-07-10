@@ -23,8 +23,9 @@ var _ MappedNullable = &MetricFilter{}
 // MetricFilter Metric filter.
 type MetricFilter struct {
 	// A PromQL filter for metrics
-	Promql *string `json:"promql,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Promql                            *string `json:"promql,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MetricFilter MetricFilter
@@ -79,7 +80,7 @@ func (o *MetricFilter) SetPromql(v string) {
 }
 
 func (o MetricFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *MetricFilter) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "promql")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableMetricFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

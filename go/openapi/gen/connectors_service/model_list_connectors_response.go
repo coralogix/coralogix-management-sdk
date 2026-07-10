@@ -23,8 +23,9 @@ var _ MappedNullable = &ListConnectorsResponse{}
 // ListConnectorsResponse Response containing a list of connectors
 type ListConnectorsResponse struct {
 	// The connectors.
-	Connectors []Connector `json:"connectors,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Connectors                        []Connector `json:"connectors,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListConnectorsResponse ListConnectorsResponse
@@ -79,7 +80,7 @@ func (o *ListConnectorsResponse) SetConnectors(v []Connector) {
 }
 
 func (o ListConnectorsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ListConnectorsResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "connectors")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableListConnectorsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

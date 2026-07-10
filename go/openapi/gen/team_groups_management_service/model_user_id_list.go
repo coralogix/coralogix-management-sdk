@@ -23,8 +23,9 @@ var _ MappedNullable = &UserIdList{}
 // UserIdList User id list.
 type UserIdList struct {
 	// The user ids.
-	UserIds []string `json:"userIds,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UserIds                           []string `json:"userIds,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UserIdList UserIdList
@@ -79,7 +80,7 @@ func (o *UserIdList) SetUserIds(v []string) {
 }
 
 func (o UserIdList) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *UserIdList) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "userIds")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableUserIdList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

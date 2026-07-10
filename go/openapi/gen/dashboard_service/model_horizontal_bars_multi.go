@@ -27,32 +27,33 @@ type HorizontalBarsMulti struct {
 	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme, one of the predefined values
-	ColorScheme *string `json:"colorScheme,omitempty"`
-	ColorsBy *ColorsBy `json:"colorsBy,omitempty"`
+	ColorScheme *string   `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	ColorsBy    *ColorsBy `json:"colorsBy,omitempty"`
 	// Custom unit (requires to have unit field set to custom to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// Specifies where to display the bar value
 	DisplayOnBar *bool `json:"displayOnBar,omitempty"`
 	// Custom template name for a group, can contain variables
-	GroupNameTemplate *string `json:"groupNameTemplate,omitempty"`
+	GroupNameTemplate *string `json:"groupNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to ignore color scheme and derive colors from algorithm
-	HashColors *bool `json:"hashColors,omitempty"`
-	Legend *Legend `json:"legend,omitempty"`
+	HashColors *bool   `json:"hashColors,omitempty"`
+	Legend     *Legend `json:"legend,omitempty"`
 	// Maximum number of bars on a chart
 	MaxBarsPerChart *int32 `json:"maxBarsPerChart,omitempty"`
 	// Per-query field settings
 	QueryFieldSettings []HorizontalBarsMultiQueryFieldSettings `json:"queryFieldSettings,omitempty"`
-	ScaleType *ScaleType `json:"scaleType,omitempty"`
-	SortOrder *VisualizationSortOrder `json:"sortOrder,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
+	ScaleType          *ScaleType                              `json:"scaleType,omitempty"`
+	SortOrder          *VisualizationSortOrder                 `json:"sortOrder,omitempty"`
+	Unit               *CommonUnit                             `json:"unit,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
-	YAxisMin *float32 `json:"yAxisMin,omitempty"`
-	YAxisViewBy *HorizontalBarsMultiYAxisViewBy `json:"yAxisViewBy,omitempty"`
-	AdditionalProperties map[string]interface{}
+	YAxisMin                          *float32                        `json:"yAxisMin,omitempty"`
+	YAxisViewBy                       *HorizontalBarsMultiYAxisViewBy `json:"yAxisViewBy,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _HorizontalBarsMulti HorizontalBarsMulti
@@ -651,7 +652,7 @@ func (o *HorizontalBarsMulti) SetYAxisViewBy(v HorizontalBarsMultiYAxisViewBy) {
 }
 
 func (o HorizontalBarsMulti) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -756,6 +757,7 @@ func (o *HorizontalBarsMulti) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "yAxisMin")
 		delete(additionalProperties, "yAxisViewBy")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -796,4 +798,3 @@ func (v *NullableHorizontalBarsMulti) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -39,8 +39,9 @@ type ExtensionRevision struct {
 	// The permission denied items.
 	PermissionDeniedItems []ExtensionItem `json:"permissionDeniedItems,omitempty"`
 	// Version.
-	Version *string `json:"version,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Version                           *string `json:"version,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ExtensionRevision ExtensionRevision
@@ -351,7 +352,7 @@ func (o *ExtensionRevision) SetVersion(v string) {
 }
 
 func (o ExtensionRevision) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -420,6 +421,7 @@ func (o *ExtensionRevision) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "permissionDeniedItems")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -460,4 +462,3 @@ func (v *NullableExtensionRevision) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

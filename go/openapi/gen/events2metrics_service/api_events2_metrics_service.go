@@ -16,17 +16,16 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"reflect"
+	"strings"
 )
-
 
 // Events2MetricsServiceAPIService Events2MetricsServiceAPI service
 type Events2MetricsServiceAPIService service
 
 type ApiEvents2MetricServiceAtomicBatchExecuteE2MRequest struct {
-	ctx context.Context
-	ApiService *Events2MetricsServiceAPIService
+	ctx                                              context.Context
+	ApiService                                       *Events2MetricsServiceAPIService
 	events2MetricServiceAtomicBatchExecuteE2MRequest *Events2MetricServiceAtomicBatchExecuteE2MRequest
 }
 
@@ -44,24 +43,25 @@ Events2MetricServiceAtomicBatchExecuteE2M Atomic Batch Execute E2M
 
 Atomically executes a batch of events-to-metrics rules.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiEvents2MetricServiceAtomicBatchExecuteE2MRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiEvents2MetricServiceAtomicBatchExecuteE2MRequest
 */
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceAtomicBatchExecuteE2M(ctx context.Context) ApiEvents2MetricServiceAtomicBatchExecuteE2MRequest {
 	return ApiEvents2MetricServiceAtomicBatchExecuteE2MRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AtomicBatchExecuteE2MResponse
+//
+//	@return AtomicBatchExecuteE2MResponse
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceAtomicBatchExecuteE2MExecute(r ApiEvents2MetricServiceAtomicBatchExecuteE2MRequest) (*AtomicBatchExecuteE2MResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AtomicBatchExecuteE2MResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AtomicBatchExecuteE2MResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Events2MetricsServiceAPIService.Events2MetricServiceAtomicBatchExecuteE2M")
@@ -132,13 +132,13 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceAtomicBatchExecute
 }
 
 type ApiEvents2MetricServiceCreateE2MRequest struct {
-	ctx context.Context
-	ApiService *Events2MetricsServiceAPIService
-	events2MetricServiceCreateE2MRequest *Events2MetricServiceCreateE2MRequest
+	ctx             context.Context
+	ApiService      *Events2MetricsServiceAPIService
+	e2MCreateParams *E2MCreateParams
 }
 
-func (r ApiEvents2MetricServiceCreateE2MRequest) Events2MetricServiceCreateE2MRequest(events2MetricServiceCreateE2MRequest Events2MetricServiceCreateE2MRequest) ApiEvents2MetricServiceCreateE2MRequest {
-	r.events2MetricServiceCreateE2MRequest = &events2MetricServiceCreateE2MRequest
+func (r ApiEvents2MetricServiceCreateE2MRequest) E2MCreateParams(e2MCreateParams E2MCreateParams) ApiEvents2MetricServiceCreateE2MRequest {
+	r.e2MCreateParams = &e2MCreateParams
 	return r
 }
 
@@ -151,24 +151,25 @@ Events2MetricServiceCreateE2M Create a new E2M
 
 Creates a new events-to-metrics rule.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiEvents2MetricServiceCreateE2MRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiEvents2MetricServiceCreateE2MRequest
 */
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceCreateE2M(ctx context.Context) ApiEvents2MetricServiceCreateE2MRequest {
 	return ApiEvents2MetricServiceCreateE2MRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateE2MResponse
+//
+//	@return CreateE2MResponse
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceCreateE2MExecute(r ApiEvents2MetricServiceCreateE2MRequest) (*CreateE2MResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateE2MResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateE2MResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Events2MetricsServiceAPIService.Events2MetricServiceCreateE2M")
@@ -181,8 +182,8 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceCreateE2MExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.events2MetricServiceCreateE2MRequest == nil {
-		return localVarReturnValue, nil, reportError("events2MetricServiceCreateE2MRequest is required and must be specified")
+	if r.e2MCreateParams == nil {
+		return localVarReturnValue, nil, reportError("e2MCreateParams is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -203,7 +204,7 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceCreateE2MExecute(r
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.events2MetricServiceCreateE2MRequest
+	localVarPostBody = r.e2MCreateParams
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -242,9 +243,9 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceCreateE2MExecute(r
 }
 
 type ApiEvents2MetricServiceDeleteE2MRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *Events2MetricsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiEvents2MetricServiceDeleteE2MRequest) Execute() (*DeleteE2MResponse, *http.Response, error) {
@@ -256,26 +257,27 @@ Events2MetricServiceDeleteE2M Delete an E2M
 
 Deletes the events-to-metrics rule with the specified ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiEvents2MetricServiceDeleteE2MRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiEvents2MetricServiceDeleteE2MRequest
 */
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceDeleteE2M(ctx context.Context, id string) ApiEvents2MetricServiceDeleteE2MRequest {
 	return ApiEvents2MetricServiceDeleteE2MRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteE2MResponse
+//
+//	@return DeleteE2MResponse
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceDeleteE2MExecute(r ApiEvents2MetricServiceDeleteE2MRequest) (*DeleteE2MResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteE2MResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteE2MResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Events2MetricsServiceAPIService.Events2MetricServiceDeleteE2M")
@@ -348,9 +350,9 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceDeleteE2MExecute(r
 }
 
 type ApiEvents2MetricServiceGetE2MRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *Events2MetricsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiEvents2MetricServiceGetE2MRequest) Execute() (*GetE2MResponse, *http.Response, error) {
@@ -362,26 +364,27 @@ Events2MetricServiceGetE2M Get an E2M
 
 Returns the details of the specified events-to-metrics rule.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiEvents2MetricServiceGetE2MRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiEvents2MetricServiceGetE2MRequest
 */
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceGetE2M(ctx context.Context, id string) ApiEvents2MetricServiceGetE2MRequest {
 	return ApiEvents2MetricServiceGetE2MRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetE2MResponse
+//
+//	@return GetE2MResponse
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceGetE2MExecute(r ApiEvents2MetricServiceGetE2MRequest) (*GetE2MResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetE2MResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetE2MResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Events2MetricsServiceAPIService.Events2MetricServiceGetE2M")
@@ -454,7 +457,7 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceGetE2MExecute(r Ap
 }
 
 type ApiEvents2MetricServiceGetLimitsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *Events2MetricsServiceAPIService
 }
 
@@ -467,24 +470,25 @@ Events2MetricServiceGetLimits Get E2M Limits
 
 Returns the events-to-metrics quota limits for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiEvents2MetricServiceGetLimitsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiEvents2MetricServiceGetLimitsRequest
 */
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceGetLimits(ctx context.Context) ApiEvents2MetricServiceGetLimitsRequest {
 	return ApiEvents2MetricServiceGetLimitsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetLimitsResponse
+//
+//	@return GetLimitsResponse
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceGetLimitsExecute(r ApiEvents2MetricServiceGetLimitsRequest) (*GetLimitsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetLimitsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetLimitsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Events2MetricsServiceAPIService.Events2MetricServiceGetLimits")
@@ -553,7 +557,7 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceGetLimitsExecute(r
 }
 
 type ApiEvents2MetricServiceListE2MRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *Events2MetricsServiceAPIService
 }
 
@@ -566,24 +570,25 @@ Events2MetricServiceListE2M List E2Ms
 
 Returns all events-to-metrics rules for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiEvents2MetricServiceListE2MRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiEvents2MetricServiceListE2MRequest
 */
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceListE2M(ctx context.Context) ApiEvents2MetricServiceListE2MRequest {
 	return ApiEvents2MetricServiceListE2MRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListE2MResponse
+//
+//	@return ListE2MResponse
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceListE2MExecute(r ApiEvents2MetricServiceListE2MRequest) (*ListE2MResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListE2MResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListE2MResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Events2MetricsServiceAPIService.Events2MetricServiceListE2M")
@@ -652,10 +657,10 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceListE2MExecute(r A
 }
 
 type ApiEvents2MetricServiceListLabelsCardinalityRequest struct {
-	ctx context.Context
-	ApiService *Events2MetricsServiceAPIService
-	spansQuery *SpansQuery
-	logsQuery *SpansQuery1
+	ctx          context.Context
+	ApiService   *Events2MetricsServiceAPIService
+	spansQuery   *SpansQuery
+	logsQuery    *SpansQuery1
 	metricLabels *[]MetricLabel
 }
 
@@ -686,24 +691,25 @@ Events2MetricServiceListLabelsCardinality List E2M Labels Cardinality
 
 Returns cardinality information for events-to-metrics labels.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiEvents2MetricServiceListLabelsCardinalityRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiEvents2MetricServiceListLabelsCardinalityRequest
 */
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceListLabelsCardinality(ctx context.Context) ApiEvents2MetricServiceListLabelsCardinalityRequest {
 	return ApiEvents2MetricServiceListLabelsCardinalityRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListLabelsCardinalityResponse
+//
+//	@return ListLabelsCardinalityResponse
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceListLabelsCardinalityExecute(r ApiEvents2MetricServiceListLabelsCardinalityRequest) (*ListLabelsCardinalityResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListLabelsCardinalityResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListLabelsCardinalityResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Events2MetricsServiceAPIService.Events2MetricServiceListLabelsCardinality")
@@ -718,20 +724,28 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceListLabelsCardinal
 	localVarFormParams := url.Values{}
 
 	if r.spansQuery != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "spans_query", r.spansQuery, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "spans_query", r.spansQuery, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.logsQuery != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "logs_query", r.logsQuery, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "logs_query", r.logsQuery, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.metricLabels != nil {
 		t := *r.metricLabels
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "metric_labels", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "metric_labels", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "metric_labels", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "metric_labels", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -789,13 +803,13 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceListLabelsCardinal
 }
 
 type ApiEvents2MetricServiceReplaceE2MRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *Events2MetricsServiceAPIService
-	events2MetricServiceReplaceE2MRequest *Events2MetricServiceReplaceE2MRequest
+	e2M1       *E2M1
 }
 
-func (r ApiEvents2MetricServiceReplaceE2MRequest) Events2MetricServiceReplaceE2MRequest(events2MetricServiceReplaceE2MRequest Events2MetricServiceReplaceE2MRequest) ApiEvents2MetricServiceReplaceE2MRequest {
-	r.events2MetricServiceReplaceE2MRequest = &events2MetricServiceReplaceE2MRequest
+func (r ApiEvents2MetricServiceReplaceE2MRequest) E2M1(e2M1 E2M1) ApiEvents2MetricServiceReplaceE2MRequest {
+	r.e2M1 = &e2M1
 	return r
 }
 
@@ -808,24 +822,25 @@ Events2MetricServiceReplaceE2M Replace an E2M
 
 Updates an existing events-to-metrics rule.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiEvents2MetricServiceReplaceE2MRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiEvents2MetricServiceReplaceE2MRequest
 */
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceReplaceE2M(ctx context.Context) ApiEvents2MetricServiceReplaceE2MRequest {
 	return ApiEvents2MetricServiceReplaceE2MRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReplaceE2MResponse
+//
+//	@return ReplaceE2MResponse
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceReplaceE2MExecute(r ApiEvents2MetricServiceReplaceE2MRequest) (*ReplaceE2MResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceE2MResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplaceE2MResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "Events2MetricsServiceAPIService.Events2MetricServiceReplaceE2M")
@@ -838,8 +853,8 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceReplaceE2MExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.events2MetricServiceReplaceE2MRequest == nil {
-		return localVarReturnValue, nil, reportError("events2MetricServiceReplaceE2MRequest is required and must be specified")
+	if r.e2M1 == nil {
+		return localVarReturnValue, nil, reportError("e2M1 is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -860,7 +875,7 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceReplaceE2MExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.events2MetricServiceReplaceE2MRequest
+	localVarPostBody = r.e2M1
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

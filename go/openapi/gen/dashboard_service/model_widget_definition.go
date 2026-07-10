@@ -13,392 +13,500 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// WidgetDefinition - struct for WidgetDefinition
+// checks if the WidgetDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WidgetDefinition{}
+
+// WidgetDefinition Definition.
 type WidgetDefinition struct {
-	WidgetDefinitionBarChart *WidgetDefinitionBarChart
-	WidgetDefinitionDataTable *WidgetDefinitionDataTable
-	WidgetDefinitionDynamic *WidgetDefinitionDynamic
-	WidgetDefinitionGauge *WidgetDefinitionGauge
-	WidgetDefinitionHexagon *WidgetDefinitionHexagon
-	WidgetDefinitionHorizontalBarChart *WidgetDefinitionHorizontalBarChart
-	WidgetDefinitionLineChart *WidgetDefinitionLineChart
-	WidgetDefinitionMarkdown *WidgetDefinitionMarkdown
-	WidgetDefinitionPieChart *WidgetDefinitionPieChart
+	BarChart                          *BarChart           `json:"barChart,omitempty"`
+	DataTable                         *DataTable          `json:"dataTable,omitempty"`
+	Dynamic                           *WidgetsDynamic     `json:"dynamic,omitempty"`
+	Gauge                             *WidgetsGauge       `json:"gauge,omitempty"`
+	Hexagon                           *Hexagon            `json:"hexagon,omitempty"`
+	HorizontalBarChart                *HorizontalBarChart `json:"horizontalBarChart,omitempty"`
+	LineChart                         *LineChart          `json:"lineChart,omitempty"`
+	Markdown                          *Markdown           `json:"markdown,omitempty"`
+	PieChart                          *WidgetsPieChart    `json:"pieChart,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// WidgetDefinitionBarChartAsWidgetDefinition is a convenience function that returns WidgetDefinitionBarChart wrapped in WidgetDefinition
-func WidgetDefinitionBarChartAsWidgetDefinition(v *WidgetDefinitionBarChart) WidgetDefinition {
-	return WidgetDefinition{
-		WidgetDefinitionBarChart: v,
+type _WidgetDefinition WidgetDefinition
+
+// NewWidgetDefinition instantiates a new WidgetDefinition object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewWidgetDefinition() *WidgetDefinition {
+	this := WidgetDefinition{}
+	return &this
+}
+
+// NewWidgetDefinitionWithDefaults instantiates a new WidgetDefinition object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewWidgetDefinitionWithDefaults() *WidgetDefinition {
+	this := WidgetDefinition{}
+	return &this
+}
+
+// GetBarChart returns the BarChart field value if set, zero value otherwise.
+func (o *WidgetDefinition) GetBarChart() BarChart {
+	if o == nil || IsNil(o.BarChart) {
+		var ret BarChart
+		return ret
 	}
+	return *o.BarChart
 }
 
-// WidgetDefinitionDataTableAsWidgetDefinition is a convenience function that returns WidgetDefinitionDataTable wrapped in WidgetDefinition
-func WidgetDefinitionDataTableAsWidgetDefinition(v *WidgetDefinitionDataTable) WidgetDefinition {
-	return WidgetDefinition{
-		WidgetDefinitionDataTable: v,
+// GetBarChartOk returns a tuple with the BarChart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WidgetDefinition) GetBarChartOk() (*BarChart, bool) {
+	if o == nil || IsNil(o.BarChart) {
+		return nil, false
 	}
+	return o.BarChart, true
 }
 
-// WidgetDefinitionDynamicAsWidgetDefinition is a convenience function that returns WidgetDefinitionDynamic wrapped in WidgetDefinition
-func WidgetDefinitionDynamicAsWidgetDefinition(v *WidgetDefinitionDynamic) WidgetDefinition {
-	return WidgetDefinition{
-		WidgetDefinitionDynamic: v,
+// HasBarChart returns a boolean if a field has been set.
+func (o *WidgetDefinition) HasBarChart() bool {
+	if o != nil && !IsNil(o.BarChart) {
+		return true
 	}
+
+	return false
 }
 
-// WidgetDefinitionGaugeAsWidgetDefinition is a convenience function that returns WidgetDefinitionGauge wrapped in WidgetDefinition
-func WidgetDefinitionGaugeAsWidgetDefinition(v *WidgetDefinitionGauge) WidgetDefinition {
-	return WidgetDefinition{
-		WidgetDefinitionGauge: v,
+// SetBarChart gets a reference to the given BarChart and assigns it to the BarChart field.
+func (o *WidgetDefinition) SetBarChart(v BarChart) {
+	o.BarChart = &v
+}
+
+// GetDataTable returns the DataTable field value if set, zero value otherwise.
+func (o *WidgetDefinition) GetDataTable() DataTable {
+	if o == nil || IsNil(o.DataTable) {
+		var ret DataTable
+		return ret
 	}
+	return *o.DataTable
 }
 
-// WidgetDefinitionHexagonAsWidgetDefinition is a convenience function that returns WidgetDefinitionHexagon wrapped in WidgetDefinition
-func WidgetDefinitionHexagonAsWidgetDefinition(v *WidgetDefinitionHexagon) WidgetDefinition {
-	return WidgetDefinition{
-		WidgetDefinitionHexagon: v,
+// GetDataTableOk returns a tuple with the DataTable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WidgetDefinition) GetDataTableOk() (*DataTable, bool) {
+	if o == nil || IsNil(o.DataTable) {
+		return nil, false
 	}
+	return o.DataTable, true
 }
 
-// WidgetDefinitionHorizontalBarChartAsWidgetDefinition is a convenience function that returns WidgetDefinitionHorizontalBarChart wrapped in WidgetDefinition
-func WidgetDefinitionHorizontalBarChartAsWidgetDefinition(v *WidgetDefinitionHorizontalBarChart) WidgetDefinition {
-	return WidgetDefinition{
-		WidgetDefinitionHorizontalBarChart: v,
+// HasDataTable returns a boolean if a field has been set.
+func (o *WidgetDefinition) HasDataTable() bool {
+	if o != nil && !IsNil(o.DataTable) {
+		return true
 	}
+
+	return false
 }
 
-// WidgetDefinitionLineChartAsWidgetDefinition is a convenience function that returns WidgetDefinitionLineChart wrapped in WidgetDefinition
-func WidgetDefinitionLineChartAsWidgetDefinition(v *WidgetDefinitionLineChart) WidgetDefinition {
-	return WidgetDefinition{
-		WidgetDefinitionLineChart: v,
+// SetDataTable gets a reference to the given DataTable and assigns it to the DataTable field.
+func (o *WidgetDefinition) SetDataTable(v DataTable) {
+	o.DataTable = &v
+}
+
+// GetDynamic returns the Dynamic field value if set, zero value otherwise.
+func (o *WidgetDefinition) GetDynamic() WidgetsDynamic {
+	if o == nil || IsNil(o.Dynamic) {
+		var ret WidgetsDynamic
+		return ret
 	}
+	return *o.Dynamic
 }
 
-// WidgetDefinitionMarkdownAsWidgetDefinition is a convenience function that returns WidgetDefinitionMarkdown wrapped in WidgetDefinition
-func WidgetDefinitionMarkdownAsWidgetDefinition(v *WidgetDefinitionMarkdown) WidgetDefinition {
-	return WidgetDefinition{
-		WidgetDefinitionMarkdown: v,
+// GetDynamicOk returns a tuple with the Dynamic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WidgetDefinition) GetDynamicOk() (*WidgetsDynamic, bool) {
+	if o == nil || IsNil(o.Dynamic) {
+		return nil, false
 	}
+	return o.Dynamic, true
 }
 
-// WidgetDefinitionPieChartAsWidgetDefinition is a convenience function that returns WidgetDefinitionPieChart wrapped in WidgetDefinition
-func WidgetDefinitionPieChartAsWidgetDefinition(v *WidgetDefinitionPieChart) WidgetDefinition {
-	return WidgetDefinition{
-		WidgetDefinitionPieChart: v,
+// HasDynamic returns a boolean if a field has been set.
+func (o *WidgetDefinition) HasDynamic() bool {
+	if o != nil && !IsNil(o.Dynamic) {
+		return true
 	}
+
+	return false
 }
 
+// SetDynamic gets a reference to the given WidgetsDynamic and assigns it to the Dynamic field.
+func (o *WidgetDefinition) SetDynamic(v WidgetsDynamic) {
+	o.Dynamic = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *WidgetDefinition) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into WidgetDefinitionBarChart
-	err = json.Unmarshal(data, &dst.WidgetDefinitionBarChart)
-	if err == nil {
-		jsonWidgetDefinitionBarChart, _ := json.Marshal(dst.WidgetDefinitionBarChart)
-		if string(jsonWidgetDefinitionBarChart) == "{}" { // empty struct
-			dst.WidgetDefinitionBarChart = nil
-		} else {
-			if err = validator.Validate(dst.WidgetDefinitionBarChart); err != nil {
-				dst.WidgetDefinitionBarChart = nil
-			} else {
-				match++
-			}
+// GetGauge returns the Gauge field value if set, zero value otherwise.
+func (o *WidgetDefinition) GetGauge() WidgetsGauge {
+	if o == nil || IsNil(o.Gauge) {
+		var ret WidgetsGauge
+		return ret
+	}
+	return *o.Gauge
+}
+
+// GetGaugeOk returns a tuple with the Gauge field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WidgetDefinition) GetGaugeOk() (*WidgetsGauge, bool) {
+	if o == nil || IsNil(o.Gauge) {
+		return nil, false
+	}
+	return o.Gauge, true
+}
+
+// HasGauge returns a boolean if a field has been set.
+func (o *WidgetDefinition) HasGauge() bool {
+	if o != nil && !IsNil(o.Gauge) {
+		return true
+	}
+
+	return false
+}
+
+// SetGauge gets a reference to the given WidgetsGauge and assigns it to the Gauge field.
+func (o *WidgetDefinition) SetGauge(v WidgetsGauge) {
+	o.Gauge = &v
+}
+
+// GetHexagon returns the Hexagon field value if set, zero value otherwise.
+func (o *WidgetDefinition) GetHexagon() Hexagon {
+	if o == nil || IsNil(o.Hexagon) {
+		var ret Hexagon
+		return ret
+	}
+	return *o.Hexagon
+}
+
+// GetHexagonOk returns a tuple with the Hexagon field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WidgetDefinition) GetHexagonOk() (*Hexagon, bool) {
+	if o == nil || IsNil(o.Hexagon) {
+		return nil, false
+	}
+	return o.Hexagon, true
+}
+
+// HasHexagon returns a boolean if a field has been set.
+func (o *WidgetDefinition) HasHexagon() bool {
+	if o != nil && !IsNil(o.Hexagon) {
+		return true
+	}
+
+	return false
+}
+
+// SetHexagon gets a reference to the given Hexagon and assigns it to the Hexagon field.
+func (o *WidgetDefinition) SetHexagon(v Hexagon) {
+	o.Hexagon = &v
+}
+
+// GetHorizontalBarChart returns the HorizontalBarChart field value if set, zero value otherwise.
+func (o *WidgetDefinition) GetHorizontalBarChart() HorizontalBarChart {
+	if o == nil || IsNil(o.HorizontalBarChart) {
+		var ret HorizontalBarChart
+		return ret
+	}
+	return *o.HorizontalBarChart
+}
+
+// GetHorizontalBarChartOk returns a tuple with the HorizontalBarChart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WidgetDefinition) GetHorizontalBarChartOk() (*HorizontalBarChart, bool) {
+	if o == nil || IsNil(o.HorizontalBarChart) {
+		return nil, false
+	}
+	return o.HorizontalBarChart, true
+}
+
+// HasHorizontalBarChart returns a boolean if a field has been set.
+func (o *WidgetDefinition) HasHorizontalBarChart() bool {
+	if o != nil && !IsNil(o.HorizontalBarChart) {
+		return true
+	}
+
+	return false
+}
+
+// SetHorizontalBarChart gets a reference to the given HorizontalBarChart and assigns it to the HorizontalBarChart field.
+func (o *WidgetDefinition) SetHorizontalBarChart(v HorizontalBarChart) {
+	o.HorizontalBarChart = &v
+}
+
+// GetLineChart returns the LineChart field value if set, zero value otherwise.
+func (o *WidgetDefinition) GetLineChart() LineChart {
+	if o == nil || IsNil(o.LineChart) {
+		var ret LineChart
+		return ret
+	}
+	return *o.LineChart
+}
+
+// GetLineChartOk returns a tuple with the LineChart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WidgetDefinition) GetLineChartOk() (*LineChart, bool) {
+	if o == nil || IsNil(o.LineChart) {
+		return nil, false
+	}
+	return o.LineChart, true
+}
+
+// HasLineChart returns a boolean if a field has been set.
+func (o *WidgetDefinition) HasLineChart() bool {
+	if o != nil && !IsNil(o.LineChart) {
+		return true
+	}
+
+	return false
+}
+
+// SetLineChart gets a reference to the given LineChart and assigns it to the LineChart field.
+func (o *WidgetDefinition) SetLineChart(v LineChart) {
+	o.LineChart = &v
+}
+
+// GetMarkdown returns the Markdown field value if set, zero value otherwise.
+func (o *WidgetDefinition) GetMarkdown() Markdown {
+	if o == nil || IsNil(o.Markdown) {
+		var ret Markdown
+		return ret
+	}
+	return *o.Markdown
+}
+
+// GetMarkdownOk returns a tuple with the Markdown field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WidgetDefinition) GetMarkdownOk() (*Markdown, bool) {
+	if o == nil || IsNil(o.Markdown) {
+		return nil, false
+	}
+	return o.Markdown, true
+}
+
+// HasMarkdown returns a boolean if a field has been set.
+func (o *WidgetDefinition) HasMarkdown() bool {
+	if o != nil && !IsNil(o.Markdown) {
+		return true
+	}
+
+	return false
+}
+
+// SetMarkdown gets a reference to the given Markdown and assigns it to the Markdown field.
+func (o *WidgetDefinition) SetMarkdown(v Markdown) {
+	o.Markdown = &v
+}
+
+// GetPieChart returns the PieChart field value if set, zero value otherwise.
+func (o *WidgetDefinition) GetPieChart() WidgetsPieChart {
+	if o == nil || IsNil(o.PieChart) {
+		var ret WidgetsPieChart
+		return ret
+	}
+	return *o.PieChart
+}
+
+// GetPieChartOk returns a tuple with the PieChart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WidgetDefinition) GetPieChartOk() (*WidgetsPieChart, bool) {
+	if o == nil || IsNil(o.PieChart) {
+		return nil, false
+	}
+	return o.PieChart, true
+}
+
+// HasPieChart returns a boolean if a field has been set.
+func (o *WidgetDefinition) HasPieChart() bool {
+	if o != nil && !IsNil(o.PieChart) {
+		return true
+	}
+
+	return false
+}
+
+// SetPieChart gets a reference to the given WidgetsPieChart and assigns it to the PieChart field.
+func (o *WidgetDefinition) SetPieChart(v WidgetsPieChart) {
+	o.PieChart = &v
+}
+
+func (o WidgetDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WidgetDefinition) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BarChart) {
+		toSerialize["barChart"] = o.BarChart
+	}
+	if !IsNil(o.DataTable) {
+		toSerialize["dataTable"] = o.DataTable
+	}
+	if !IsNil(o.Dynamic) {
+		toSerialize["dynamic"] = o.Dynamic
+	}
+	if !IsNil(o.Gauge) {
+		toSerialize["gauge"] = o.Gauge
+	}
+	if !IsNil(o.Hexagon) {
+		toSerialize["hexagon"] = o.Hexagon
+	}
+	if !IsNil(o.HorizontalBarChart) {
+		toSerialize["horizontalBarChart"] = o.HorizontalBarChart
+	}
+	if !IsNil(o.LineChart) {
+		toSerialize["lineChart"] = o.LineChart
+	}
+	if !IsNil(o.Markdown) {
+		toSerialize["markdown"] = o.Markdown
+	}
+	if !IsNil(o.PieChart) {
+		toSerialize["pieChart"] = o.PieChart
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["lineChart"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dataTable"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["gauge"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["pieChart"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["barChart"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["horizontalBarChart"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["markdown"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["hexagon"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dynamic"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [lineChart, dataTable, gauge, pieChart, barChart, horizontalBarChart, markdown, hexagon, dynamic] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["lineChart"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field lineChart must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dataTable"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dataTable must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["gauge"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field gauge must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["pieChart"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field pieChart must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["barChart"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field barChart must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["horizontalBarChart"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field horizontalBarChart must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["markdown"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field markdown must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["hexagon"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field hexagon must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dynamic"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dynamic must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *WidgetDefinition) UnmarshalJSON(data []byte) (err error) {
+	varWidgetDefinition := _WidgetDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetDefinition(varWidgetDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["lineChart"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.WidgetDefinitionBarChart = nil
-	}
-
-	// try to unmarshal data into WidgetDefinitionDataTable
-	err = json.Unmarshal(data, &dst.WidgetDefinitionDataTable)
-	if err == nil {
-		jsonWidgetDefinitionDataTable, _ := json.Marshal(dst.WidgetDefinitionDataTable)
-		if string(jsonWidgetDefinitionDataTable) == "{}" { // empty struct
-			dst.WidgetDefinitionDataTable = nil
-		} else {
-			if err = validator.Validate(dst.WidgetDefinitionDataTable); err != nil {
-				dst.WidgetDefinitionDataTable = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dataTable"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.WidgetDefinitionDataTable = nil
-	}
-
-	// try to unmarshal data into WidgetDefinitionDynamic
-	err = json.Unmarshal(data, &dst.WidgetDefinitionDynamic)
-	if err == nil {
-		jsonWidgetDefinitionDynamic, _ := json.Marshal(dst.WidgetDefinitionDynamic)
-		if string(jsonWidgetDefinitionDynamic) == "{}" { // empty struct
-			dst.WidgetDefinitionDynamic = nil
-		} else {
-			if err = validator.Validate(dst.WidgetDefinitionDynamic); err != nil {
-				dst.WidgetDefinitionDynamic = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["gauge"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.WidgetDefinitionDynamic = nil
-	}
-
-	// try to unmarshal data into WidgetDefinitionGauge
-	err = json.Unmarshal(data, &dst.WidgetDefinitionGauge)
-	if err == nil {
-		jsonWidgetDefinitionGauge, _ := json.Marshal(dst.WidgetDefinitionGauge)
-		if string(jsonWidgetDefinitionGauge) == "{}" { // empty struct
-			dst.WidgetDefinitionGauge = nil
-		} else {
-			if err = validator.Validate(dst.WidgetDefinitionGauge); err != nil {
-				dst.WidgetDefinitionGauge = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["pieChart"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.WidgetDefinitionGauge = nil
-	}
-
-	// try to unmarshal data into WidgetDefinitionHexagon
-	err = json.Unmarshal(data, &dst.WidgetDefinitionHexagon)
-	if err == nil {
-		jsonWidgetDefinitionHexagon, _ := json.Marshal(dst.WidgetDefinitionHexagon)
-		if string(jsonWidgetDefinitionHexagon) == "{}" { // empty struct
-			dst.WidgetDefinitionHexagon = nil
-		} else {
-			if err = validator.Validate(dst.WidgetDefinitionHexagon); err != nil {
-				dst.WidgetDefinitionHexagon = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["barChart"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.WidgetDefinitionHexagon = nil
-	}
-
-	// try to unmarshal data into WidgetDefinitionHorizontalBarChart
-	err = json.Unmarshal(data, &dst.WidgetDefinitionHorizontalBarChart)
-	if err == nil {
-		jsonWidgetDefinitionHorizontalBarChart, _ := json.Marshal(dst.WidgetDefinitionHorizontalBarChart)
-		if string(jsonWidgetDefinitionHorizontalBarChart) == "{}" { // empty struct
-			dst.WidgetDefinitionHorizontalBarChart = nil
-		} else {
-			if err = validator.Validate(dst.WidgetDefinitionHorizontalBarChart); err != nil {
-				dst.WidgetDefinitionHorizontalBarChart = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["horizontalBarChart"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.WidgetDefinitionHorizontalBarChart = nil
-	}
-
-	// try to unmarshal data into WidgetDefinitionLineChart
-	err = json.Unmarshal(data, &dst.WidgetDefinitionLineChart)
-	if err == nil {
-		jsonWidgetDefinitionLineChart, _ := json.Marshal(dst.WidgetDefinitionLineChart)
-		if string(jsonWidgetDefinitionLineChart) == "{}" { // empty struct
-			dst.WidgetDefinitionLineChart = nil
-		} else {
-			if err = validator.Validate(dst.WidgetDefinitionLineChart); err != nil {
-				dst.WidgetDefinitionLineChart = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["markdown"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.WidgetDefinitionLineChart = nil
-	}
-
-	// try to unmarshal data into WidgetDefinitionMarkdown
-	err = json.Unmarshal(data, &dst.WidgetDefinitionMarkdown)
-	if err == nil {
-		jsonWidgetDefinitionMarkdown, _ := json.Marshal(dst.WidgetDefinitionMarkdown)
-		if string(jsonWidgetDefinitionMarkdown) == "{}" { // empty struct
-			dst.WidgetDefinitionMarkdown = nil
-		} else {
-			if err = validator.Validate(dst.WidgetDefinitionMarkdown); err != nil {
-				dst.WidgetDefinitionMarkdown = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["hexagon"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.WidgetDefinitionMarkdown = nil
-	}
-
-	// try to unmarshal data into WidgetDefinitionPieChart
-	err = json.Unmarshal(data, &dst.WidgetDefinitionPieChart)
-	if err == nil {
-		jsonWidgetDefinitionPieChart, _ := json.Marshal(dst.WidgetDefinitionPieChart)
-		if string(jsonWidgetDefinitionPieChart) == "{}" { // empty struct
-			dst.WidgetDefinitionPieChart = nil
-		} else {
-			if err = validator.Validate(dst.WidgetDefinitionPieChart); err != nil {
-				dst.WidgetDefinitionPieChart = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dynamic"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.WidgetDefinitionPieChart = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [lineChart, dataTable, gauge, pieChart, barChart, horizontalBarChart, markdown, hexagon, dynamic] may be set"}
+		}
+
+		delete(additionalProperties, "barChart")
+		delete(additionalProperties, "dataTable")
+		delete(additionalProperties, "dynamic")
+		delete(additionalProperties, "gauge")
+		delete(additionalProperties, "hexagon")
+		delete(additionalProperties, "horizontalBarChart")
+		delete(additionalProperties, "lineChart")
+		delete(additionalProperties, "markdown")
+		delete(additionalProperties, "pieChart")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.WidgetDefinitionBarChart = nil
-		dst.WidgetDefinitionDataTable = nil
-		dst.WidgetDefinitionDynamic = nil
-		dst.WidgetDefinitionGauge = nil
-		dst.WidgetDefinitionHexagon = nil
-		dst.WidgetDefinitionHorizontalBarChart = nil
-		dst.WidgetDefinitionLineChart = nil
-		dst.WidgetDefinitionMarkdown = nil
-		dst.WidgetDefinitionPieChart = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(WidgetDefinition)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src WidgetDefinition) MarshalJSON() ([]byte, error) {
-	if src.WidgetDefinitionBarChart != nil {
-		return json.Marshal(&src.WidgetDefinitionBarChart)
-	}
-
-	if src.WidgetDefinitionDataTable != nil {
-		return json.Marshal(&src.WidgetDefinitionDataTable)
-	}
-
-	if src.WidgetDefinitionDynamic != nil {
-		return json.Marshal(&src.WidgetDefinitionDynamic)
-	}
-
-	if src.WidgetDefinitionGauge != nil {
-		return json.Marshal(&src.WidgetDefinitionGauge)
-	}
-
-	if src.WidgetDefinitionHexagon != nil {
-		return json.Marshal(&src.WidgetDefinitionHexagon)
-	}
-
-	if src.WidgetDefinitionHorizontalBarChart != nil {
-		return json.Marshal(&src.WidgetDefinitionHorizontalBarChart)
-	}
-
-	if src.WidgetDefinitionLineChart != nil {
-		return json.Marshal(&src.WidgetDefinitionLineChart)
-	}
-
-	if src.WidgetDefinitionMarkdown != nil {
-		return json.Marshal(&src.WidgetDefinitionMarkdown)
-	}
-
-	if src.WidgetDefinitionPieChart != nil {
-		return json.Marshal(&src.WidgetDefinitionPieChart)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *WidgetDefinition) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.WidgetDefinitionBarChart != nil {
-		return obj.WidgetDefinitionBarChart
-	}
-
-	if obj.WidgetDefinitionDataTable != nil {
-		return obj.WidgetDefinitionDataTable
-	}
-
-	if obj.WidgetDefinitionDynamic != nil {
-		return obj.WidgetDefinitionDynamic
-	}
-
-	if obj.WidgetDefinitionGauge != nil {
-		return obj.WidgetDefinitionGauge
-	}
-
-	if obj.WidgetDefinitionHexagon != nil {
-		return obj.WidgetDefinitionHexagon
-	}
-
-	if obj.WidgetDefinitionHorizontalBarChart != nil {
-		return obj.WidgetDefinitionHorizontalBarChart
-	}
-
-	if obj.WidgetDefinitionLineChart != nil {
-		return obj.WidgetDefinitionLineChart
-	}
-
-	if obj.WidgetDefinitionMarkdown != nil {
-		return obj.WidgetDefinitionMarkdown
-	}
-
-	if obj.WidgetDefinitionPieChart != nil {
-		return obj.WidgetDefinitionPieChart
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj WidgetDefinition) GetActualInstanceValue() (interface{}) {
-	if obj.WidgetDefinitionBarChart != nil {
-		return *obj.WidgetDefinitionBarChart
-	}
-
-	if obj.WidgetDefinitionDataTable != nil {
-		return *obj.WidgetDefinitionDataTable
-	}
-
-	if obj.WidgetDefinitionDynamic != nil {
-		return *obj.WidgetDefinitionDynamic
-	}
-
-	if obj.WidgetDefinitionGauge != nil {
-		return *obj.WidgetDefinitionGauge
-	}
-
-	if obj.WidgetDefinitionHexagon != nil {
-		return *obj.WidgetDefinitionHexagon
-	}
-
-	if obj.WidgetDefinitionHorizontalBarChart != nil {
-		return *obj.WidgetDefinitionHorizontalBarChart
-	}
-
-	if obj.WidgetDefinitionLineChart != nil {
-		return *obj.WidgetDefinitionLineChart
-	}
-
-	if obj.WidgetDefinitionMarkdown != nil {
-		return *obj.WidgetDefinitionMarkdown
-	}
-
-	if obj.WidgetDefinitionPieChart != nil {
-		return *obj.WidgetDefinitionPieChart
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableWidgetDefinition struct {
@@ -436,4 +544,3 @@ func (v *NullableWidgetDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

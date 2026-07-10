@@ -23,8 +23,9 @@ var _ MappedNullable = &ProductTypeValues{}
 // ProductTypeValues Product type values.
 type ProductTypeValues struct {
 	// The values.
-	Values []SloProductType `json:"values,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Values                            []SloProductType `json:"values,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ProductTypeValues ProductTypeValues
@@ -79,7 +80,7 @@ func (o *ProductTypeValues) SetValues(v []SloProductType) {
 }
 
 func (o ProductTypeValues) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ProductTypeValues) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableProductTypeValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

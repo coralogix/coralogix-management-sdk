@@ -25,8 +25,9 @@ type ActionsServiceOrderActionsRequest struct {
 	// The private actions order.
 	PrivateActionsOrder *map[string]int64 `json:"privateActionsOrder,omitempty"`
 	// The shared actions order.
-	SharedActionsOrder *map[string]int64 `json:"sharedActionsOrder,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SharedActionsOrder                *map[string]int64 `json:"sharedActionsOrder,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ActionsServiceOrderActionsRequest ActionsServiceOrderActionsRequest
@@ -113,7 +114,7 @@ func (o *ActionsServiceOrderActionsRequest) SetSharedActionsOrder(v map[string]i
 }
 
 func (o ActionsServiceOrderActionsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *ActionsServiceOrderActionsRequest) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "privateActionsOrder")
 		delete(additionalProperties, "sharedActionsOrder")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableActionsServiceOrderActionsRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -25,8 +25,9 @@ type ValueCount struct {
 	// Count of cases for this value
 	Count *int64 `json:"count,omitempty"`
 	// Filter value
-	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Value                             *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ValueCount ValueCount
@@ -113,7 +114,7 @@ func (o *ValueCount) SetValue(v string) {
 }
 
 func (o ValueCount) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *ValueCount) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "count")
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableValueCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -13,126 +13,215 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Schedule - struct for Schedule
+// checks if the Schedule type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Schedule{}
+
+// Schedule Schedule.
 type Schedule struct {
-	ScheduleOneTime *ScheduleOneTime
-	ScheduleRecurring *ScheduleRecurring
+	OneTime                           *OneTime           `json:"oneTime,omitempty"`
+	Recurring                         *Recurring         `json:"recurring,omitempty"`
+	ScheduleOperation                 *ScheduleOperation `json:"scheduleOperation,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// ScheduleOneTimeAsSchedule is a convenience function that returns ScheduleOneTime wrapped in Schedule
-func ScheduleOneTimeAsSchedule(v *ScheduleOneTime) Schedule {
-	return Schedule{
-		ScheduleOneTime: v,
+type _Schedule Schedule
+
+// NewSchedule instantiates a new Schedule object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSchedule() *Schedule {
+	this := Schedule{}
+	return &this
+}
+
+// NewScheduleWithDefaults instantiates a new Schedule object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewScheduleWithDefaults() *Schedule {
+	this := Schedule{}
+	return &this
+}
+
+// GetOneTime returns the OneTime field value if set, zero value otherwise.
+func (o *Schedule) GetOneTime() OneTime {
+	if o == nil || IsNil(o.OneTime) {
+		var ret OneTime
+		return ret
 	}
+	return *o.OneTime
 }
 
-// ScheduleRecurringAsSchedule is a convenience function that returns ScheduleRecurring wrapped in Schedule
-func ScheduleRecurringAsSchedule(v *ScheduleRecurring) Schedule {
-	return Schedule{
-		ScheduleRecurring: v,
+// GetOneTimeOk returns a tuple with the OneTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schedule) GetOneTimeOk() (*OneTime, bool) {
+	if o == nil || IsNil(o.OneTime) {
+		return nil, false
 	}
+	return o.OneTime, true
 }
 
+// HasOneTime returns a boolean if a field has been set.
+func (o *Schedule) HasOneTime() bool {
+	if o != nil && !IsNil(o.OneTime) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Schedule) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ScheduleOneTime
-	err = json.Unmarshal(data, &dst.ScheduleOneTime)
-	if err == nil {
-		jsonScheduleOneTime, _ := json.Marshal(dst.ScheduleOneTime)
-		if string(jsonScheduleOneTime) == "{}" { // empty struct
-			dst.ScheduleOneTime = nil
-		} else {
-			if err = validator.Validate(dst.ScheduleOneTime); err != nil {
-				dst.ScheduleOneTime = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetOneTime gets a reference to the given OneTime and assigns it to the OneTime field.
+func (o *Schedule) SetOneTime(v OneTime) {
+	o.OneTime = &v
+}
+
+// GetRecurring returns the Recurring field value if set, zero value otherwise.
+func (o *Schedule) GetRecurring() Recurring {
+	if o == nil || IsNil(o.Recurring) {
+		var ret Recurring
+		return ret
+	}
+	return *o.Recurring
+}
+
+// GetRecurringOk returns a tuple with the Recurring field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schedule) GetRecurringOk() (*Recurring, bool) {
+	if o == nil || IsNil(o.Recurring) {
+		return nil, false
+	}
+	return o.Recurring, true
+}
+
+// HasRecurring returns a boolean if a field has been set.
+func (o *Schedule) HasRecurring() bool {
+	if o != nil && !IsNil(o.Recurring) {
+		return true
+	}
+
+	return false
+}
+
+// SetRecurring gets a reference to the given Recurring and assigns it to the Recurring field.
+func (o *Schedule) SetRecurring(v Recurring) {
+	o.Recurring = &v
+}
+
+// GetScheduleOperation returns the ScheduleOperation field value if set, zero value otherwise.
+func (o *Schedule) GetScheduleOperation() ScheduleOperation {
+	if o == nil || IsNil(o.ScheduleOperation) {
+		var ret ScheduleOperation
+		return ret
+	}
+	return *o.ScheduleOperation
+}
+
+// GetScheduleOperationOk returns a tuple with the ScheduleOperation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schedule) GetScheduleOperationOk() (*ScheduleOperation, bool) {
+	if o == nil || IsNil(o.ScheduleOperation) {
+		return nil, false
+	}
+	return o.ScheduleOperation, true
+}
+
+// HasScheduleOperation returns a boolean if a field has been set.
+func (o *Schedule) HasScheduleOperation() bool {
+	if o != nil && !IsNil(o.ScheduleOperation) {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduleOperation gets a reference to the given ScheduleOperation and assigns it to the ScheduleOperation field.
+func (o *Schedule) SetScheduleOperation(v ScheduleOperation) {
+	o.ScheduleOperation = &v
+}
+
+func (o Schedule) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Schedule) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.OneTime) {
+		toSerialize["oneTime"] = o.OneTime
+	}
+	if !IsNil(o.Recurring) {
+		toSerialize["recurring"] = o.Recurring
+	}
+	if !IsNil(o.ScheduleOperation) {
+		toSerialize["scheduleOperation"] = o.ScheduleOperation
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["oneTime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["recurring"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [oneTime, recurring] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["oneTime"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field oneTime must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["recurring"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field recurring must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Schedule) UnmarshalJSON(data []byte) (err error) {
+	varSchedule := _Schedule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSchedule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Schedule(varSchedule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["oneTime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ScheduleOneTime = nil
-	}
-
-	// try to unmarshal data into ScheduleRecurring
-	err = json.Unmarshal(data, &dst.ScheduleRecurring)
-	if err == nil {
-		jsonScheduleRecurring, _ := json.Marshal(dst.ScheduleRecurring)
-		if string(jsonScheduleRecurring) == "{}" { // empty struct
-			dst.ScheduleRecurring = nil
-		} else {
-			if err = validator.Validate(dst.ScheduleRecurring); err != nil {
-				dst.ScheduleRecurring = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["recurring"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ScheduleRecurring = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [oneTime, recurring] may be set"}
+		}
+
+		delete(additionalProperties, "oneTime")
+		delete(additionalProperties, "recurring")
+		delete(additionalProperties, "scheduleOperation")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ScheduleOneTime = nil
-		dst.ScheduleRecurring = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Schedule)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Schedule) MarshalJSON() ([]byte, error) {
-	if src.ScheduleOneTime != nil {
-		return json.Marshal(&src.ScheduleOneTime)
-	}
-
-	if src.ScheduleRecurring != nil {
-		return json.Marshal(&src.ScheduleRecurring)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Schedule) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ScheduleOneTime != nil {
-		return obj.ScheduleOneTime
-	}
-
-	if obj.ScheduleRecurring != nil {
-		return obj.ScheduleRecurring
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Schedule) GetActualInstanceValue() (interface{}) {
-	if obj.ScheduleOneTime != nil {
-		return *obj.ScheduleOneTime
-	}
-
-	if obj.ScheduleRecurring != nil {
-		return *obj.ScheduleRecurring
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSchedule struct {
@@ -170,4 +259,3 @@ func (v *NullableSchedule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,9 +23,10 @@ var _ MappedNullable = &TracingImmediateType{}
 // TracingImmediateType Configuration for immediate alerts triggered on trace entries
 type TracingImmediateType struct {
 	// Notification payload field filter
-	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
-	TracingFilter *TracingFilter `json:"tracingFilter,omitempty"`
-	AdditionalProperties map[string]interface{}
+	NotificationPayloadFilter         []string       `json:"notificationPayloadFilter,omitempty"`
+	TracingFilter                     *TracingFilter `json:"tracingFilter,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TracingImmediateType TracingImmediateType
@@ -112,7 +113,7 @@ func (o *TracingImmediateType) SetTracingFilter(v TracingFilter) {
 }
 
 func (o TracingImmediateType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *TracingImmediateType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "notificationPayloadFilter")
 		delete(additionalProperties, "tracingFilter")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableTracingImmediateType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

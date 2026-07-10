@@ -22,8 +22,9 @@ var _ MappedNullable = &NotEqualsSelection{}
 
 // NotEqualsSelection This data structure defines the values for the non-equality comparison.
 type NotEqualsSelection struct {
-	List *NotEqualsSelectionListSelection `json:"list,omitempty"`
-	AdditionalProperties map[string]interface{}
+	List                              *NotEqualsSelectionListSelection `json:"list,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _NotEqualsSelection NotEqualsSelection
@@ -78,7 +79,7 @@ func (o *NotEqualsSelection) SetList(v NotEqualsSelectionListSelection) {
 }
 
 func (o NotEqualsSelection) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *NotEqualsSelection) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "list")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableNotEqualsSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

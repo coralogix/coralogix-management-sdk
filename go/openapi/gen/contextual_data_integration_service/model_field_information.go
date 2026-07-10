@@ -13,278 +13,892 @@ package contextual_data_integration_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// FieldInformation - struct for FieldInformation
+// checks if the FieldInformation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FieldInformation{}
+
+// FieldInformation struct for FieldInformation
 type FieldInformation struct {
-	FieldInformationMultiText *FieldInformationMultiText
-	FieldInformationMultipleSelection *FieldInformationMultipleSelection
-	FieldInformationSelection *FieldInformationSelection
-	FieldInformationSingle *FieldInformationSingle
-	FieldInformationSingleBoolean *FieldInformationSingleBoolean
-	FieldInformationSingleNumber *FieldInformationSingleNumber
+	// Regular expression pattern that the field value must match for validation.
+	AllowedPattern *string         `json:"allowedPattern,omitempty"`
+	ApplicableIf   *FieldCondition `json:"applicableIf,omitempty"`
+	// Link to documentation providing more information about this field.
+	DocumentationReference *string `json:"documentationReference,omitempty"`
+	// Identifier of the UI group this field belongs to for form layout purposes.
+	GroupId           *string                 `json:"groupId,omitempty"`
+	MultiText         *ListTextValue          `json:"multiText,omitempty"`
+	MultipleSelection *MultipleSelectionValue `json:"multipleSelection,omitempty"`
+	// Display name.
+	Name *string `json:"name,omitempty"`
+	// Placeholder text shown in the input field before a value is entered.
+	Placeholder *string `json:"placeholder,omitempty"`
+	// Whether this field has a predefined value that is suggested to the user.
+	Predefined *bool `json:"predefined,omitempty"`
+	// Whether this field is read-only and cannot be modified by the user.
+	Readonly *bool `json:"readonly,omitempty"`
+	// Whether this field must be filled in before the integration can be deployed.
+	Required      *bool                                  `json:"required,omitempty"`
+	Selection     *SelectionValue                        `json:"selection,omitempty"`
+	Single        *SingleValue                           `json:"single,omitempty"`
+	SingleBoolean *SingleBooleanValue                    `json:"singleBoolean,omitempty"`
+	SingleNumber  *IntegrationRevisionSingleNumericValue `json:"singleNumber,omitempty"`
+	// Name of the template parameter this field maps to in the deployment template.
+	TemplateParamName *string `json:"templateParamName,omitempty"`
+	// Tooltip text displayed on hover to provide additional context for this field.
+	Tooltip *string    `json:"tooltip,omitempty"`
+	Type    *InputType `json:"type,omitempty"`
+	// Notice displayed to users when an upgrade is required to use this field.
+	UpgradeNotice *string `json:"upgradeNotice,omitempty"`
+	// Whether this field is visible in the integration configuration UI.
+	Visible                           *bool `json:"visible,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// FieldInformationMultiTextAsFieldInformation is a convenience function that returns FieldInformationMultiText wrapped in FieldInformation
-func FieldInformationMultiTextAsFieldInformation(v *FieldInformationMultiText) FieldInformation {
-	return FieldInformation{
-		FieldInformationMultiText: v,
+type _FieldInformation FieldInformation
+
+// NewFieldInformation instantiates a new FieldInformation object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewFieldInformation() *FieldInformation {
+	this := FieldInformation{}
+	return &this
+}
+
+// NewFieldInformationWithDefaults instantiates a new FieldInformation object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewFieldInformationWithDefaults() *FieldInformation {
+	this := FieldInformation{}
+	return &this
+}
+
+// GetAllowedPattern returns the AllowedPattern field value if set, zero value otherwise.
+func (o *FieldInformation) GetAllowedPattern() string {
+	if o == nil || IsNil(o.AllowedPattern) {
+		var ret string
+		return ret
 	}
+	return *o.AllowedPattern
 }
 
-// FieldInformationMultipleSelectionAsFieldInformation is a convenience function that returns FieldInformationMultipleSelection wrapped in FieldInformation
-func FieldInformationMultipleSelectionAsFieldInformation(v *FieldInformationMultipleSelection) FieldInformation {
-	return FieldInformation{
-		FieldInformationMultipleSelection: v,
+// GetAllowedPatternOk returns a tuple with the AllowedPattern field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetAllowedPatternOk() (*string, bool) {
+	if o == nil || IsNil(o.AllowedPattern) {
+		return nil, false
 	}
+	return o.AllowedPattern, true
 }
 
-// FieldInformationSelectionAsFieldInformation is a convenience function that returns FieldInformationSelection wrapped in FieldInformation
-func FieldInformationSelectionAsFieldInformation(v *FieldInformationSelection) FieldInformation {
-	return FieldInformation{
-		FieldInformationSelection: v,
+// HasAllowedPattern returns a boolean if a field has been set.
+func (o *FieldInformation) HasAllowedPattern() bool {
+	if o != nil && !IsNil(o.AllowedPattern) {
+		return true
 	}
+
+	return false
 }
 
-// FieldInformationSingleAsFieldInformation is a convenience function that returns FieldInformationSingle wrapped in FieldInformation
-func FieldInformationSingleAsFieldInformation(v *FieldInformationSingle) FieldInformation {
-	return FieldInformation{
-		FieldInformationSingle: v,
+// SetAllowedPattern gets a reference to the given string and assigns it to the AllowedPattern field.
+func (o *FieldInformation) SetAllowedPattern(v string) {
+	o.AllowedPattern = &v
+}
+
+// GetApplicableIf returns the ApplicableIf field value if set, zero value otherwise.
+func (o *FieldInformation) GetApplicableIf() FieldCondition {
+	if o == nil || IsNil(o.ApplicableIf) {
+		var ret FieldCondition
+		return ret
 	}
+	return *o.ApplicableIf
 }
 
-// FieldInformationSingleBooleanAsFieldInformation is a convenience function that returns FieldInformationSingleBoolean wrapped in FieldInformation
-func FieldInformationSingleBooleanAsFieldInformation(v *FieldInformationSingleBoolean) FieldInformation {
-	return FieldInformation{
-		FieldInformationSingleBoolean: v,
+// GetApplicableIfOk returns a tuple with the ApplicableIf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetApplicableIfOk() (*FieldCondition, bool) {
+	if o == nil || IsNil(o.ApplicableIf) {
+		return nil, false
 	}
+	return o.ApplicableIf, true
 }
 
-// FieldInformationSingleNumberAsFieldInformation is a convenience function that returns FieldInformationSingleNumber wrapped in FieldInformation
-func FieldInformationSingleNumberAsFieldInformation(v *FieldInformationSingleNumber) FieldInformation {
-	return FieldInformation{
-		FieldInformationSingleNumber: v,
+// HasApplicableIf returns a boolean if a field has been set.
+func (o *FieldInformation) HasApplicableIf() bool {
+	if o != nil && !IsNil(o.ApplicableIf) {
+		return true
 	}
+
+	return false
 }
 
+// SetApplicableIf gets a reference to the given FieldCondition and assigns it to the ApplicableIf field.
+func (o *FieldInformation) SetApplicableIf(v FieldCondition) {
+	o.ApplicableIf = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *FieldInformation) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into FieldInformationMultiText
-	err = json.Unmarshal(data, &dst.FieldInformationMultiText)
-	if err == nil {
-		jsonFieldInformationMultiText, _ := json.Marshal(dst.FieldInformationMultiText)
-		if string(jsonFieldInformationMultiText) == "{}" { // empty struct
-			dst.FieldInformationMultiText = nil
-		} else {
-			if err = validator.Validate(dst.FieldInformationMultiText); err != nil {
-				dst.FieldInformationMultiText = nil
-			} else {
-				match++
-			}
+// GetDocumentationReference returns the DocumentationReference field value if set, zero value otherwise.
+func (o *FieldInformation) GetDocumentationReference() string {
+	if o == nil || IsNil(o.DocumentationReference) {
+		var ret string
+		return ret
+	}
+	return *o.DocumentationReference
+}
+
+// GetDocumentationReferenceOk returns a tuple with the DocumentationReference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetDocumentationReferenceOk() (*string, bool) {
+	if o == nil || IsNil(o.DocumentationReference) {
+		return nil, false
+	}
+	return o.DocumentationReference, true
+}
+
+// HasDocumentationReference returns a boolean if a field has been set.
+func (o *FieldInformation) HasDocumentationReference() bool {
+	if o != nil && !IsNil(o.DocumentationReference) {
+		return true
+	}
+
+	return false
+}
+
+// SetDocumentationReference gets a reference to the given string and assigns it to the DocumentationReference field.
+func (o *FieldInformation) SetDocumentationReference(v string) {
+	o.DocumentationReference = &v
+}
+
+// GetGroupId returns the GroupId field value if set, zero value otherwise.
+func (o *FieldInformation) GetGroupId() string {
+	if o == nil || IsNil(o.GroupId) {
+		var ret string
+		return ret
+	}
+	return *o.GroupId
+}
+
+// GetGroupIdOk returns a tuple with the GroupId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetGroupIdOk() (*string, bool) {
+	if o == nil || IsNil(o.GroupId) {
+		return nil, false
+	}
+	return o.GroupId, true
+}
+
+// HasGroupId returns a boolean if a field has been set.
+func (o *FieldInformation) HasGroupId() bool {
+	if o != nil && !IsNil(o.GroupId) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupId gets a reference to the given string and assigns it to the GroupId field.
+func (o *FieldInformation) SetGroupId(v string) {
+	o.GroupId = &v
+}
+
+// GetMultiText returns the MultiText field value if set, zero value otherwise.
+func (o *FieldInformation) GetMultiText() ListTextValue {
+	if o == nil || IsNil(o.MultiText) {
+		var ret ListTextValue
+		return ret
+	}
+	return *o.MultiText
+}
+
+// GetMultiTextOk returns a tuple with the MultiText field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetMultiTextOk() (*ListTextValue, bool) {
+	if o == nil || IsNil(o.MultiText) {
+		return nil, false
+	}
+	return o.MultiText, true
+}
+
+// HasMultiText returns a boolean if a field has been set.
+func (o *FieldInformation) HasMultiText() bool {
+	if o != nil && !IsNil(o.MultiText) {
+		return true
+	}
+
+	return false
+}
+
+// SetMultiText gets a reference to the given ListTextValue and assigns it to the MultiText field.
+func (o *FieldInformation) SetMultiText(v ListTextValue) {
+	o.MultiText = &v
+}
+
+// GetMultipleSelection returns the MultipleSelection field value if set, zero value otherwise.
+func (o *FieldInformation) GetMultipleSelection() MultipleSelectionValue {
+	if o == nil || IsNil(o.MultipleSelection) {
+		var ret MultipleSelectionValue
+		return ret
+	}
+	return *o.MultipleSelection
+}
+
+// GetMultipleSelectionOk returns a tuple with the MultipleSelection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetMultipleSelectionOk() (*MultipleSelectionValue, bool) {
+	if o == nil || IsNil(o.MultipleSelection) {
+		return nil, false
+	}
+	return o.MultipleSelection, true
+}
+
+// HasMultipleSelection returns a boolean if a field has been set.
+func (o *FieldInformation) HasMultipleSelection() bool {
+	if o != nil && !IsNil(o.MultipleSelection) {
+		return true
+	}
+
+	return false
+}
+
+// SetMultipleSelection gets a reference to the given MultipleSelectionValue and assigns it to the MultipleSelection field.
+func (o *FieldInformation) SetMultipleSelection(v MultipleSelectionValue) {
+	o.MultipleSelection = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *FieldInformation) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *FieldInformation) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *FieldInformation) SetName(v string) {
+	o.Name = &v
+}
+
+// GetPlaceholder returns the Placeholder field value if set, zero value otherwise.
+func (o *FieldInformation) GetPlaceholder() string {
+	if o == nil || IsNil(o.Placeholder) {
+		var ret string
+		return ret
+	}
+	return *o.Placeholder
+}
+
+// GetPlaceholderOk returns a tuple with the Placeholder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetPlaceholderOk() (*string, bool) {
+	if o == nil || IsNil(o.Placeholder) {
+		return nil, false
+	}
+	return o.Placeholder, true
+}
+
+// HasPlaceholder returns a boolean if a field has been set.
+func (o *FieldInformation) HasPlaceholder() bool {
+	if o != nil && !IsNil(o.Placeholder) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlaceholder gets a reference to the given string and assigns it to the Placeholder field.
+func (o *FieldInformation) SetPlaceholder(v string) {
+	o.Placeholder = &v
+}
+
+// GetPredefined returns the Predefined field value if set, zero value otherwise.
+func (o *FieldInformation) GetPredefined() bool {
+	if o == nil || IsNil(o.Predefined) {
+		var ret bool
+		return ret
+	}
+	return *o.Predefined
+}
+
+// GetPredefinedOk returns a tuple with the Predefined field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetPredefinedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Predefined) {
+		return nil, false
+	}
+	return o.Predefined, true
+}
+
+// HasPredefined returns a boolean if a field has been set.
+func (o *FieldInformation) HasPredefined() bool {
+	if o != nil && !IsNil(o.Predefined) {
+		return true
+	}
+
+	return false
+}
+
+// SetPredefined gets a reference to the given bool and assigns it to the Predefined field.
+func (o *FieldInformation) SetPredefined(v bool) {
+	o.Predefined = &v
+}
+
+// GetReadonly returns the Readonly field value if set, zero value otherwise.
+func (o *FieldInformation) GetReadonly() bool {
+	if o == nil || IsNil(o.Readonly) {
+		var ret bool
+		return ret
+	}
+	return *o.Readonly
+}
+
+// GetReadonlyOk returns a tuple with the Readonly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetReadonlyOk() (*bool, bool) {
+	if o == nil || IsNil(o.Readonly) {
+		return nil, false
+	}
+	return o.Readonly, true
+}
+
+// HasReadonly returns a boolean if a field has been set.
+func (o *FieldInformation) HasReadonly() bool {
+	if o != nil && !IsNil(o.Readonly) {
+		return true
+	}
+
+	return false
+}
+
+// SetReadonly gets a reference to the given bool and assigns it to the Readonly field.
+func (o *FieldInformation) SetReadonly(v bool) {
+	o.Readonly = &v
+}
+
+// GetRequired returns the Required field value if set, zero value otherwise.
+func (o *FieldInformation) GetRequired() bool {
+	if o == nil || IsNil(o.Required) {
+		var ret bool
+		return ret
+	}
+	return *o.Required
+}
+
+// GetRequiredOk returns a tuple with the Required field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetRequiredOk() (*bool, bool) {
+	if o == nil || IsNil(o.Required) {
+		return nil, false
+	}
+	return o.Required, true
+}
+
+// HasRequired returns a boolean if a field has been set.
+func (o *FieldInformation) HasRequired() bool {
+	if o != nil && !IsNil(o.Required) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequired gets a reference to the given bool and assigns it to the Required field.
+func (o *FieldInformation) SetRequired(v bool) {
+	o.Required = &v
+}
+
+// GetSelection returns the Selection field value if set, zero value otherwise.
+func (o *FieldInformation) GetSelection() SelectionValue {
+	if o == nil || IsNil(o.Selection) {
+		var ret SelectionValue
+		return ret
+	}
+	return *o.Selection
+}
+
+// GetSelectionOk returns a tuple with the Selection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetSelectionOk() (*SelectionValue, bool) {
+	if o == nil || IsNil(o.Selection) {
+		return nil, false
+	}
+	return o.Selection, true
+}
+
+// HasSelection returns a boolean if a field has been set.
+func (o *FieldInformation) HasSelection() bool {
+	if o != nil && !IsNil(o.Selection) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelection gets a reference to the given SelectionValue and assigns it to the Selection field.
+func (o *FieldInformation) SetSelection(v SelectionValue) {
+	o.Selection = &v
+}
+
+// GetSingle returns the Single field value if set, zero value otherwise.
+func (o *FieldInformation) GetSingle() SingleValue {
+	if o == nil || IsNil(o.Single) {
+		var ret SingleValue
+		return ret
+	}
+	return *o.Single
+}
+
+// GetSingleOk returns a tuple with the Single field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetSingleOk() (*SingleValue, bool) {
+	if o == nil || IsNil(o.Single) {
+		return nil, false
+	}
+	return o.Single, true
+}
+
+// HasSingle returns a boolean if a field has been set.
+func (o *FieldInformation) HasSingle() bool {
+	if o != nil && !IsNil(o.Single) {
+		return true
+	}
+
+	return false
+}
+
+// SetSingle gets a reference to the given SingleValue and assigns it to the Single field.
+func (o *FieldInformation) SetSingle(v SingleValue) {
+	o.Single = &v
+}
+
+// GetSingleBoolean returns the SingleBoolean field value if set, zero value otherwise.
+func (o *FieldInformation) GetSingleBoolean() SingleBooleanValue {
+	if o == nil || IsNil(o.SingleBoolean) {
+		var ret SingleBooleanValue
+		return ret
+	}
+	return *o.SingleBoolean
+}
+
+// GetSingleBooleanOk returns a tuple with the SingleBoolean field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetSingleBooleanOk() (*SingleBooleanValue, bool) {
+	if o == nil || IsNil(o.SingleBoolean) {
+		return nil, false
+	}
+	return o.SingleBoolean, true
+}
+
+// HasSingleBoolean returns a boolean if a field has been set.
+func (o *FieldInformation) HasSingleBoolean() bool {
+	if o != nil && !IsNil(o.SingleBoolean) {
+		return true
+	}
+
+	return false
+}
+
+// SetSingleBoolean gets a reference to the given SingleBooleanValue and assigns it to the SingleBoolean field.
+func (o *FieldInformation) SetSingleBoolean(v SingleBooleanValue) {
+	o.SingleBoolean = &v
+}
+
+// GetSingleNumber returns the SingleNumber field value if set, zero value otherwise.
+func (o *FieldInformation) GetSingleNumber() IntegrationRevisionSingleNumericValue {
+	if o == nil || IsNil(o.SingleNumber) {
+		var ret IntegrationRevisionSingleNumericValue
+		return ret
+	}
+	return *o.SingleNumber
+}
+
+// GetSingleNumberOk returns a tuple with the SingleNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetSingleNumberOk() (*IntegrationRevisionSingleNumericValue, bool) {
+	if o == nil || IsNil(o.SingleNumber) {
+		return nil, false
+	}
+	return o.SingleNumber, true
+}
+
+// HasSingleNumber returns a boolean if a field has been set.
+func (o *FieldInformation) HasSingleNumber() bool {
+	if o != nil && !IsNil(o.SingleNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetSingleNumber gets a reference to the given IntegrationRevisionSingleNumericValue and assigns it to the SingleNumber field.
+func (o *FieldInformation) SetSingleNumber(v IntegrationRevisionSingleNumericValue) {
+	o.SingleNumber = &v
+}
+
+// GetTemplateParamName returns the TemplateParamName field value if set, zero value otherwise.
+func (o *FieldInformation) GetTemplateParamName() string {
+	if o == nil || IsNil(o.TemplateParamName) {
+		var ret string
+		return ret
+	}
+	return *o.TemplateParamName
+}
+
+// GetTemplateParamNameOk returns a tuple with the TemplateParamName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetTemplateParamNameOk() (*string, bool) {
+	if o == nil || IsNil(o.TemplateParamName) {
+		return nil, false
+	}
+	return o.TemplateParamName, true
+}
+
+// HasTemplateParamName returns a boolean if a field has been set.
+func (o *FieldInformation) HasTemplateParamName() bool {
+	if o != nil && !IsNil(o.TemplateParamName) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateParamName gets a reference to the given string and assigns it to the TemplateParamName field.
+func (o *FieldInformation) SetTemplateParamName(v string) {
+	o.TemplateParamName = &v
+}
+
+// GetTooltip returns the Tooltip field value if set, zero value otherwise.
+func (o *FieldInformation) GetTooltip() string {
+	if o == nil || IsNil(o.Tooltip) {
+		var ret string
+		return ret
+	}
+	return *o.Tooltip
+}
+
+// GetTooltipOk returns a tuple with the Tooltip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetTooltipOk() (*string, bool) {
+	if o == nil || IsNil(o.Tooltip) {
+		return nil, false
+	}
+	return o.Tooltip, true
+}
+
+// HasTooltip returns a boolean if a field has been set.
+func (o *FieldInformation) HasTooltip() bool {
+	if o != nil && !IsNil(o.Tooltip) {
+		return true
+	}
+
+	return false
+}
+
+// SetTooltip gets a reference to the given string and assigns it to the Tooltip field.
+func (o *FieldInformation) SetTooltip(v string) {
+	o.Tooltip = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *FieldInformation) GetType() InputType {
+	if o == nil || IsNil(o.Type) {
+		var ret InputType
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetTypeOk() (*InputType, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *FieldInformation) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given InputType and assigns it to the Type field.
+func (o *FieldInformation) SetType(v InputType) {
+	o.Type = &v
+}
+
+// GetUpgradeNotice returns the UpgradeNotice field value if set, zero value otherwise.
+func (o *FieldInformation) GetUpgradeNotice() string {
+	if o == nil || IsNil(o.UpgradeNotice) {
+		var ret string
+		return ret
+	}
+	return *o.UpgradeNotice
+}
+
+// GetUpgradeNoticeOk returns a tuple with the UpgradeNotice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetUpgradeNoticeOk() (*string, bool) {
+	if o == nil || IsNil(o.UpgradeNotice) {
+		return nil, false
+	}
+	return o.UpgradeNotice, true
+}
+
+// HasUpgradeNotice returns a boolean if a field has been set.
+func (o *FieldInformation) HasUpgradeNotice() bool {
+	if o != nil && !IsNil(o.UpgradeNotice) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpgradeNotice gets a reference to the given string and assigns it to the UpgradeNotice field.
+func (o *FieldInformation) SetUpgradeNotice(v string) {
+	o.UpgradeNotice = &v
+}
+
+// GetVisible returns the Visible field value if set, zero value otherwise.
+func (o *FieldInformation) GetVisible() bool {
+	if o == nil || IsNil(o.Visible) {
+		var ret bool
+		return ret
+	}
+	return *o.Visible
+}
+
+// GetVisibleOk returns a tuple with the Visible field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FieldInformation) GetVisibleOk() (*bool, bool) {
+	if o == nil || IsNil(o.Visible) {
+		return nil, false
+	}
+	return o.Visible, true
+}
+
+// HasVisible returns a boolean if a field has been set.
+func (o *FieldInformation) HasVisible() bool {
+	if o != nil && !IsNil(o.Visible) {
+		return true
+	}
+
+	return false
+}
+
+// SetVisible gets a reference to the given bool and assigns it to the Visible field.
+func (o *FieldInformation) SetVisible(v bool) {
+	o.Visible = &v
+}
+
+func (o FieldInformation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FieldInformation) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AllowedPattern) {
+		toSerialize["allowedPattern"] = o.AllowedPattern
+	}
+	if !IsNil(o.ApplicableIf) {
+		toSerialize["applicableIf"] = o.ApplicableIf
+	}
+	if !IsNil(o.DocumentationReference) {
+		toSerialize["documentationReference"] = o.DocumentationReference
+	}
+	if !IsNil(o.GroupId) {
+		toSerialize["groupId"] = o.GroupId
+	}
+	if !IsNil(o.MultiText) {
+		toSerialize["multiText"] = o.MultiText
+	}
+	if !IsNil(o.MultipleSelection) {
+		toSerialize["multipleSelection"] = o.MultipleSelection
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Placeholder) {
+		toSerialize["placeholder"] = o.Placeholder
+	}
+	if !IsNil(o.Predefined) {
+		toSerialize["predefined"] = o.Predefined
+	}
+	if !IsNil(o.Readonly) {
+		toSerialize["readonly"] = o.Readonly
+	}
+	if !IsNil(o.Required) {
+		toSerialize["required"] = o.Required
+	}
+	if !IsNil(o.Selection) {
+		toSerialize["selection"] = o.Selection
+	}
+	if !IsNil(o.Single) {
+		toSerialize["single"] = o.Single
+	}
+	if !IsNil(o.SingleBoolean) {
+		toSerialize["singleBoolean"] = o.SingleBoolean
+	}
+	if !IsNil(o.SingleNumber) {
+		toSerialize["singleNumber"] = o.SingleNumber
+	}
+	if !IsNil(o.TemplateParamName) {
+		toSerialize["templateParamName"] = o.TemplateParamName
+	}
+	if !IsNil(o.Tooltip) {
+		toSerialize["tooltip"] = o.Tooltip
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.UpgradeNotice) {
+		toSerialize["upgradeNotice"] = o.UpgradeNotice
+	}
+	if !IsNil(o.Visible) {
+		toSerialize["visible"] = o.Visible
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["single"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["multiText"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["multipleSelection"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["singleBoolean"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["selection"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["singleNumber"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [single, multiText, multipleSelection, singleBoolean, selection, singleNumber] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["single"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field single must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["multiText"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multiText must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["multipleSelection"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multipleSelection must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["singleBoolean"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singleBoolean must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["selection"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field selection must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["singleNumber"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singleNumber must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *FieldInformation) UnmarshalJSON(data []byte) (err error) {
+	varFieldInformation := _FieldInformation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFieldInformation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FieldInformation(varFieldInformation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["single"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FieldInformationMultiText = nil
-	}
-
-	// try to unmarshal data into FieldInformationMultipleSelection
-	err = json.Unmarshal(data, &dst.FieldInformationMultipleSelection)
-	if err == nil {
-		jsonFieldInformationMultipleSelection, _ := json.Marshal(dst.FieldInformationMultipleSelection)
-		if string(jsonFieldInformationMultipleSelection) == "{}" { // empty struct
-			dst.FieldInformationMultipleSelection = nil
-		} else {
-			if err = validator.Validate(dst.FieldInformationMultipleSelection); err != nil {
-				dst.FieldInformationMultipleSelection = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["multiText"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FieldInformationMultipleSelection = nil
-	}
-
-	// try to unmarshal data into FieldInformationSelection
-	err = json.Unmarshal(data, &dst.FieldInformationSelection)
-	if err == nil {
-		jsonFieldInformationSelection, _ := json.Marshal(dst.FieldInformationSelection)
-		if string(jsonFieldInformationSelection) == "{}" { // empty struct
-			dst.FieldInformationSelection = nil
-		} else {
-			if err = validator.Validate(dst.FieldInformationSelection); err != nil {
-				dst.FieldInformationSelection = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["multipleSelection"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FieldInformationSelection = nil
-	}
-
-	// try to unmarshal data into FieldInformationSingle
-	err = json.Unmarshal(data, &dst.FieldInformationSingle)
-	if err == nil {
-		jsonFieldInformationSingle, _ := json.Marshal(dst.FieldInformationSingle)
-		if string(jsonFieldInformationSingle) == "{}" { // empty struct
-			dst.FieldInformationSingle = nil
-		} else {
-			if err = validator.Validate(dst.FieldInformationSingle); err != nil {
-				dst.FieldInformationSingle = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["singleBoolean"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FieldInformationSingle = nil
-	}
-
-	// try to unmarshal data into FieldInformationSingleBoolean
-	err = json.Unmarshal(data, &dst.FieldInformationSingleBoolean)
-	if err == nil {
-		jsonFieldInformationSingleBoolean, _ := json.Marshal(dst.FieldInformationSingleBoolean)
-		if string(jsonFieldInformationSingleBoolean) == "{}" { // empty struct
-			dst.FieldInformationSingleBoolean = nil
-		} else {
-			if err = validator.Validate(dst.FieldInformationSingleBoolean); err != nil {
-				dst.FieldInformationSingleBoolean = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["selection"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FieldInformationSingleBoolean = nil
-	}
-
-	// try to unmarshal data into FieldInformationSingleNumber
-	err = json.Unmarshal(data, &dst.FieldInformationSingleNumber)
-	if err == nil {
-		jsonFieldInformationSingleNumber, _ := json.Marshal(dst.FieldInformationSingleNumber)
-		if string(jsonFieldInformationSingleNumber) == "{}" { // empty struct
-			dst.FieldInformationSingleNumber = nil
-		} else {
-			if err = validator.Validate(dst.FieldInformationSingleNumber); err != nil {
-				dst.FieldInformationSingleNumber = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["singleNumber"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FieldInformationSingleNumber = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [single, multiText, multipleSelection, singleBoolean, selection, singleNumber] may be set"}
+		}
+
+		delete(additionalProperties, "allowedPattern")
+		delete(additionalProperties, "applicableIf")
+		delete(additionalProperties, "documentationReference")
+		delete(additionalProperties, "groupId")
+		delete(additionalProperties, "multiText")
+		delete(additionalProperties, "multipleSelection")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "placeholder")
+		delete(additionalProperties, "predefined")
+		delete(additionalProperties, "readonly")
+		delete(additionalProperties, "required")
+		delete(additionalProperties, "selection")
+		delete(additionalProperties, "single")
+		delete(additionalProperties, "singleBoolean")
+		delete(additionalProperties, "singleNumber")
+		delete(additionalProperties, "templateParamName")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "upgradeNotice")
+		delete(additionalProperties, "visible")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.FieldInformationMultiText = nil
-		dst.FieldInformationMultipleSelection = nil
-		dst.FieldInformationSelection = nil
-		dst.FieldInformationSingle = nil
-		dst.FieldInformationSingleBoolean = nil
-		dst.FieldInformationSingleNumber = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(FieldInformation)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src FieldInformation) MarshalJSON() ([]byte, error) {
-	if src.FieldInformationMultiText != nil {
-		return json.Marshal(&src.FieldInformationMultiText)
-	}
-
-	if src.FieldInformationMultipleSelection != nil {
-		return json.Marshal(&src.FieldInformationMultipleSelection)
-	}
-
-	if src.FieldInformationSelection != nil {
-		return json.Marshal(&src.FieldInformationSelection)
-	}
-
-	if src.FieldInformationSingle != nil {
-		return json.Marshal(&src.FieldInformationSingle)
-	}
-
-	if src.FieldInformationSingleBoolean != nil {
-		return json.Marshal(&src.FieldInformationSingleBoolean)
-	}
-
-	if src.FieldInformationSingleNumber != nil {
-		return json.Marshal(&src.FieldInformationSingleNumber)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *FieldInformation) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.FieldInformationMultiText != nil {
-		return obj.FieldInformationMultiText
-	}
-
-	if obj.FieldInformationMultipleSelection != nil {
-		return obj.FieldInformationMultipleSelection
-	}
-
-	if obj.FieldInformationSelection != nil {
-		return obj.FieldInformationSelection
-	}
-
-	if obj.FieldInformationSingle != nil {
-		return obj.FieldInformationSingle
-	}
-
-	if obj.FieldInformationSingleBoolean != nil {
-		return obj.FieldInformationSingleBoolean
-	}
-
-	if obj.FieldInformationSingleNumber != nil {
-		return obj.FieldInformationSingleNumber
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj FieldInformation) GetActualInstanceValue() (interface{}) {
-	if obj.FieldInformationMultiText != nil {
-		return *obj.FieldInformationMultiText
-	}
-
-	if obj.FieldInformationMultipleSelection != nil {
-		return *obj.FieldInformationMultipleSelection
-	}
-
-	if obj.FieldInformationSelection != nil {
-		return *obj.FieldInformationSelection
-	}
-
-	if obj.FieldInformationSingle != nil {
-		return *obj.FieldInformationSingle
-	}
-
-	if obj.FieldInformationSingleBoolean != nil {
-		return *obj.FieldInformationSingleBoolean
-	}
-
-	if obj.FieldInformationSingleNumber != nil {
-		return *obj.FieldInformationSingleNumber
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableFieldInformation struct {
@@ -322,4 +936,3 @@ func (v *NullableFieldInformation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

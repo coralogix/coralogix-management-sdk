@@ -26,11 +26,12 @@ type MetricsSource struct {
 	// List of labels.
 	Labels []string `json:"labels,omitempty"`
 	// The message template.
-	MessageTemplate *string `json:"messageTemplate,omitempty"`
-	Orientation *AnnotationOrientation `json:"orientation,omitempty"`
-	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
-	Strategy *MetricsSourceStrategy `json:"strategy,omitempty"`
-	AdditionalProperties map[string]interface{}
+	MessageTemplate                   *string                `json:"messageTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Orientation                       *AnnotationOrientation `json:"orientation,omitempty"`
+	PromqlQuery                       *PromQlQuery           `json:"promqlQuery,omitempty"`
+	Strategy                          *MetricsSourceStrategy `json:"strategy,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MetricsSource MetricsSource
@@ -245,7 +246,7 @@ func (o *MetricsSource) SetStrategy(v MetricsSourceStrategy) {
 }
 
 func (o MetricsSource) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -302,6 +303,7 @@ func (o *MetricsSource) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "promqlQuery")
 		delete(additionalProperties, "strategy")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -342,4 +344,3 @@ func (v *NullableMetricsSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

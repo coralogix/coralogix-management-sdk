@@ -23,8 +23,9 @@ var _ MappedNullable = &EventRecurrenceSourceStrategyInstant{}
 // EventRecurrenceSourceStrategyInstant Renders the recurrence event as an instant snapshot at the configured start hour.
 type EventRecurrenceSourceStrategyInstant struct {
 	// The start time hour.
-	StartTimeHour *int32 `json:"startTimeHour,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StartTimeHour                     *int32 `json:"startTimeHour,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _EventRecurrenceSourceStrategyInstant EventRecurrenceSourceStrategyInstant
@@ -79,7 +80,7 @@ func (o *EventRecurrenceSourceStrategyInstant) SetStartTimeHour(v int32) {
 }
 
 func (o EventRecurrenceSourceStrategyInstant) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *EventRecurrenceSourceStrategyInstant) UnmarshalJSON(data []byte) (err e
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "startTimeHour")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableEventRecurrenceSourceStrategyInstant) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

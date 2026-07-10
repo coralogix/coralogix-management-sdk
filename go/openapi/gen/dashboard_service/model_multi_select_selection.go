@@ -13,126 +13,179 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// MultiSelectSelection - struct for MultiSelectSelection
+// checks if the MultiSelectSelection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MultiSelectSelection{}
+
+// MultiSelectSelection Discriminated union defining the current selection state: all values or a specific list of values.
 type MultiSelectSelection struct {
-	MultiSelectSelectionAll *MultiSelectSelectionAll
-	MultiSelectSelectionList *MultiSelectSelectionList
+	// All selection.
+	All                               map[string]interface{}             `json:"all,omitempty"`
+	List                              *MultiSelectSelectionListSelection `json:"list,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// MultiSelectSelectionAllAsMultiSelectSelection is a convenience function that returns MultiSelectSelectionAll wrapped in MultiSelectSelection
-func MultiSelectSelectionAllAsMultiSelectSelection(v *MultiSelectSelectionAll) MultiSelectSelection {
-	return MultiSelectSelection{
-		MultiSelectSelectionAll: v,
+type _MultiSelectSelection MultiSelectSelection
+
+// NewMultiSelectSelection instantiates a new MultiSelectSelection object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewMultiSelectSelection() *MultiSelectSelection {
+	this := MultiSelectSelection{}
+	return &this
+}
+
+// NewMultiSelectSelectionWithDefaults instantiates a new MultiSelectSelection object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewMultiSelectSelectionWithDefaults() *MultiSelectSelection {
+	this := MultiSelectSelection{}
+	return &this
+}
+
+// GetAll returns the All field value if set, zero value otherwise.
+func (o *MultiSelectSelection) GetAll() map[string]interface{} {
+	if o == nil || IsNil(o.All) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.All
 }
 
-// MultiSelectSelectionListAsMultiSelectSelection is a convenience function that returns MultiSelectSelectionList wrapped in MultiSelectSelection
-func MultiSelectSelectionListAsMultiSelectSelection(v *MultiSelectSelectionList) MultiSelectSelection {
-	return MultiSelectSelection{
-		MultiSelectSelectionList: v,
+// GetAllOk returns a tuple with the All field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiSelectSelection) GetAllOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.All) {
+		return map[string]interface{}{}, false
 	}
+	return o.All, true
 }
 
+// HasAll returns a boolean if a field has been set.
+func (o *MultiSelectSelection) HasAll() bool {
+	if o != nil && !IsNil(o.All) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *MultiSelectSelection) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into MultiSelectSelectionAll
-	err = json.Unmarshal(data, &dst.MultiSelectSelectionAll)
-	if err == nil {
-		jsonMultiSelectSelectionAll, _ := json.Marshal(dst.MultiSelectSelectionAll)
-		if string(jsonMultiSelectSelectionAll) == "{}" { // empty struct
-			dst.MultiSelectSelectionAll = nil
-		} else {
-			if err = validator.Validate(dst.MultiSelectSelectionAll); err != nil {
-				dst.MultiSelectSelectionAll = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAll gets a reference to the given map[string]interface{} and assigns it to the All field.
+func (o *MultiSelectSelection) SetAll(v map[string]interface{}) {
+	o.All = v
+}
+
+// GetList returns the List field value if set, zero value otherwise.
+func (o *MultiSelectSelection) GetList() MultiSelectSelectionListSelection {
+	if o == nil || IsNil(o.List) {
+		var ret MultiSelectSelectionListSelection
+		return ret
+	}
+	return *o.List
+}
+
+// GetListOk returns a tuple with the List field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiSelectSelection) GetListOk() (*MultiSelectSelectionListSelection, bool) {
+	if o == nil || IsNil(o.List) {
+		return nil, false
+	}
+	return o.List, true
+}
+
+// HasList returns a boolean if a field has been set.
+func (o *MultiSelectSelection) HasList() bool {
+	if o != nil && !IsNil(o.List) {
+		return true
+	}
+
+	return false
+}
+
+// SetList gets a reference to the given MultiSelectSelectionListSelection and assigns it to the List field.
+func (o *MultiSelectSelection) SetList(v MultiSelectSelectionListSelection) {
+	o.List = &v
+}
+
+func (o MultiSelectSelection) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MultiSelectSelection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.All) {
+		toSerialize["all"] = o.All
+	}
+	if !IsNil(o.List) {
+		toSerialize["list"] = o.List
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["all"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["list"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [all, list] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["all"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field all must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["list"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field list must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *MultiSelectSelection) UnmarshalJSON(data []byte) (err error) {
+	varMultiSelectSelection := _MultiSelectSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectSelection(varMultiSelectSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["all"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiSelectSelectionAll = nil
-	}
-
-	// try to unmarshal data into MultiSelectSelectionList
-	err = json.Unmarshal(data, &dst.MultiSelectSelectionList)
-	if err == nil {
-		jsonMultiSelectSelectionList, _ := json.Marshal(dst.MultiSelectSelectionList)
-		if string(jsonMultiSelectSelectionList) == "{}" { // empty struct
-			dst.MultiSelectSelectionList = nil
-		} else {
-			if err = validator.Validate(dst.MultiSelectSelectionList); err != nil {
-				dst.MultiSelectSelectionList = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["list"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiSelectSelectionList = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [all, list] may be set"}
+		}
+
+		delete(additionalProperties, "all")
+		delete(additionalProperties, "list")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.MultiSelectSelectionAll = nil
-		dst.MultiSelectSelectionList = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(MultiSelectSelection)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src MultiSelectSelection) MarshalJSON() ([]byte, error) {
-	if src.MultiSelectSelectionAll != nil {
-		return json.Marshal(&src.MultiSelectSelectionAll)
-	}
-
-	if src.MultiSelectSelectionList != nil {
-		return json.Marshal(&src.MultiSelectSelectionList)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *MultiSelectSelection) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.MultiSelectSelectionAll != nil {
-		return obj.MultiSelectSelectionAll
-	}
-
-	if obj.MultiSelectSelectionList != nil {
-		return obj.MultiSelectSelectionList
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj MultiSelectSelection) GetActualInstanceValue() (interface{}) {
-	if obj.MultiSelectSelectionAll != nil {
-		return *obj.MultiSelectSelectionAll
-	}
-
-	if obj.MultiSelectSelectionList != nil {
-		return *obj.MultiSelectSelectionList
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableMultiSelectSelection struct {
@@ -170,4 +223,3 @@ func (v *NullableMultiSelectSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

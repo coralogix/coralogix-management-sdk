@@ -24,8 +24,9 @@ var _ MappedNullable = &SetIDPParametersRequest{}
 type SetIDPParametersRequest struct {
 	Params *IDPParameters `json:"params,omitempty"`
 	// Team identifier.
-	TeamId *int64 `json:"teamId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TeamId                            *int64 `json:"teamId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SetIDPParametersRequest SetIDPParametersRequest
@@ -112,7 +113,7 @@ func (o *SetIDPParametersRequest) SetTeamId(v int64) {
 }
 
 func (o SetIDPParametersRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *SetIDPParametersRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "params")
 		delete(additionalProperties, "teamId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableSetIDPParametersRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

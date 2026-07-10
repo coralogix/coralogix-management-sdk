@@ -25,8 +25,9 @@ type TemplatedConnectorConfigField struct {
 	// The field name.
 	FieldName *string `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Template.
-	Template *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Template                          *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TemplatedConnectorConfigField TemplatedConnectorConfigField
@@ -113,7 +114,7 @@ func (o *TemplatedConnectorConfigField) SetTemplate(v string) {
 }
 
 func (o TemplatedConnectorConfigField) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *TemplatedConnectorConfigField) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fieldName")
 		delete(additionalProperties, "template")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableTemplatedConnectorConfigField) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

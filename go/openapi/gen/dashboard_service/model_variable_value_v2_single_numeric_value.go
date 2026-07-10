@@ -22,8 +22,9 @@ var _ MappedNullable = &VariableValueV2SingleNumericValue{}
 
 // VariableValueV2SingleNumericValue Integration revision.single numeric value.
 type VariableValueV2SingleNumericValue struct {
-	Value *NumericValueLabel `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Value                             *NumericValueLabel `json:"value,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _VariableValueV2SingleNumericValue VariableValueV2SingleNumericValue
@@ -78,7 +79,7 @@ func (o *VariableValueV2SingleNumericValue) SetValue(v NumericValueLabel) {
 }
 
 func (o VariableValueV2SingleNumericValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *VariableValueV2SingleNumericValue) UnmarshalJSON(data []byte) (err erro
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableVariableValueV2SingleNumericValue) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

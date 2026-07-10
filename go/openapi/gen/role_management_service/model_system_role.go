@@ -29,8 +29,9 @@ type SystemRole struct {
 	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
 	// The role id.
-	RoleId *int64 `json:"roleId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RoleId                            *int64 `json:"roleId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SystemRole SystemRole
@@ -181,7 +182,7 @@ func (o *SystemRole) SetRoleId(v int64) {
 }
 
 func (o SystemRole) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,6 +231,7 @@ func (o *SystemRole) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "permissions")
 		delete(additionalProperties, "roleId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -270,4 +272,3 @@ func (v *NullableSystemRole) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

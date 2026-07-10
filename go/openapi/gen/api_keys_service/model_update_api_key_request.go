@@ -27,10 +27,11 @@ type UpdateApiKeyRequest struct {
 	// Whether the API key is active. Set to false to deactivate without deleting.
 	IsActive *bool `json:"isActive,omitempty"`
 	// New display name for the API key.
-	NewName *string `json:"newName,omitempty"`
-	Permissions *UpdateApiKeyRequestPermissions `json:"permissions,omitempty"`
-	Presets *Presets `json:"presets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	NewName                           *string                         `json:"newName,omitempty"`
+	Permissions                       *UpdateApiKeyRequestPermissions `json:"permissions,omitempty"`
+	Presets                           *Presets                        `json:"presets,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UpdateApiKeyRequest UpdateApiKeyRequest
@@ -213,7 +214,7 @@ func (o *UpdateApiKeyRequest) SetPresets(v Presets) {
 }
 
 func (o UpdateApiKeyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,6 +267,7 @@ func (o *UpdateApiKeyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "permissions")
 		delete(additionalProperties, "presets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -306,4 +308,3 @@ func (v *NullableUpdateApiKeyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

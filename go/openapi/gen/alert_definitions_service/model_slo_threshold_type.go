@@ -13,126 +13,215 @@ package alert_definitions_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// SloThresholdType - struct for SloThresholdType
+// checks if the SloThresholdType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SloThresholdType{}
+
+// SloThresholdType SLO threshold type definition
 type SloThresholdType struct {
-	SloThresholdTypeBurnRate *SloThresholdTypeBurnRate
-	SloThresholdTypeErrorBudget *SloThresholdTypeErrorBudget
+	BurnRate                          *BurnRateThreshold    `json:"burnRate,omitempty"`
+	ErrorBudget                       *ErrorBudgetThreshold `json:"errorBudget,omitempty"`
+	SloDefinition                     *V3SloDefinition      `json:"sloDefinition,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// SloThresholdTypeBurnRateAsSloThresholdType is a convenience function that returns SloThresholdTypeBurnRate wrapped in SloThresholdType
-func SloThresholdTypeBurnRateAsSloThresholdType(v *SloThresholdTypeBurnRate) SloThresholdType {
-	return SloThresholdType{
-		SloThresholdTypeBurnRate: v,
+type _SloThresholdType SloThresholdType
+
+// NewSloThresholdType instantiates a new SloThresholdType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSloThresholdType() *SloThresholdType {
+	this := SloThresholdType{}
+	return &this
+}
+
+// NewSloThresholdTypeWithDefaults instantiates a new SloThresholdType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewSloThresholdTypeWithDefaults() *SloThresholdType {
+	this := SloThresholdType{}
+	return &this
+}
+
+// GetBurnRate returns the BurnRate field value if set, zero value otherwise.
+func (o *SloThresholdType) GetBurnRate() BurnRateThreshold {
+	if o == nil || IsNil(o.BurnRate) {
+		var ret BurnRateThreshold
+		return ret
 	}
+	return *o.BurnRate
 }
 
-// SloThresholdTypeErrorBudgetAsSloThresholdType is a convenience function that returns SloThresholdTypeErrorBudget wrapped in SloThresholdType
-func SloThresholdTypeErrorBudgetAsSloThresholdType(v *SloThresholdTypeErrorBudget) SloThresholdType {
-	return SloThresholdType{
-		SloThresholdTypeErrorBudget: v,
+// GetBurnRateOk returns a tuple with the BurnRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloThresholdType) GetBurnRateOk() (*BurnRateThreshold, bool) {
+	if o == nil || IsNil(o.BurnRate) {
+		return nil, false
 	}
+	return o.BurnRate, true
 }
 
+// HasBurnRate returns a boolean if a field has been set.
+func (o *SloThresholdType) HasBurnRate() bool {
+	if o != nil && !IsNil(o.BurnRate) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *SloThresholdType) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into SloThresholdTypeBurnRate
-	err = json.Unmarshal(data, &dst.SloThresholdTypeBurnRate)
-	if err == nil {
-		jsonSloThresholdTypeBurnRate, _ := json.Marshal(dst.SloThresholdTypeBurnRate)
-		if string(jsonSloThresholdTypeBurnRate) == "{}" { // empty struct
-			dst.SloThresholdTypeBurnRate = nil
-		} else {
-			if err = validator.Validate(dst.SloThresholdTypeBurnRate); err != nil {
-				dst.SloThresholdTypeBurnRate = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetBurnRate gets a reference to the given BurnRateThreshold and assigns it to the BurnRate field.
+func (o *SloThresholdType) SetBurnRate(v BurnRateThreshold) {
+	o.BurnRate = &v
+}
+
+// GetErrorBudget returns the ErrorBudget field value if set, zero value otherwise.
+func (o *SloThresholdType) GetErrorBudget() ErrorBudgetThreshold {
+	if o == nil || IsNil(o.ErrorBudget) {
+		var ret ErrorBudgetThreshold
+		return ret
+	}
+	return *o.ErrorBudget
+}
+
+// GetErrorBudgetOk returns a tuple with the ErrorBudget field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloThresholdType) GetErrorBudgetOk() (*ErrorBudgetThreshold, bool) {
+	if o == nil || IsNil(o.ErrorBudget) {
+		return nil, false
+	}
+	return o.ErrorBudget, true
+}
+
+// HasErrorBudget returns a boolean if a field has been set.
+func (o *SloThresholdType) HasErrorBudget() bool {
+	if o != nil && !IsNil(o.ErrorBudget) {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorBudget gets a reference to the given ErrorBudgetThreshold and assigns it to the ErrorBudget field.
+func (o *SloThresholdType) SetErrorBudget(v ErrorBudgetThreshold) {
+	o.ErrorBudget = &v
+}
+
+// GetSloDefinition returns the SloDefinition field value if set, zero value otherwise.
+func (o *SloThresholdType) GetSloDefinition() V3SloDefinition {
+	if o == nil || IsNil(o.SloDefinition) {
+		var ret V3SloDefinition
+		return ret
+	}
+	return *o.SloDefinition
+}
+
+// GetSloDefinitionOk returns a tuple with the SloDefinition field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloThresholdType) GetSloDefinitionOk() (*V3SloDefinition, bool) {
+	if o == nil || IsNil(o.SloDefinition) {
+		return nil, false
+	}
+	return o.SloDefinition, true
+}
+
+// HasSloDefinition returns a boolean if a field has been set.
+func (o *SloThresholdType) HasSloDefinition() bool {
+	if o != nil && !IsNil(o.SloDefinition) {
+		return true
+	}
+
+	return false
+}
+
+// SetSloDefinition gets a reference to the given V3SloDefinition and assigns it to the SloDefinition field.
+func (o *SloThresholdType) SetSloDefinition(v V3SloDefinition) {
+	o.SloDefinition = &v
+}
+
+func (o SloThresholdType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SloThresholdType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BurnRate) {
+		toSerialize["burnRate"] = o.BurnRate
+	}
+	if !IsNil(o.ErrorBudget) {
+		toSerialize["errorBudget"] = o.ErrorBudget
+	}
+	if !IsNil(o.SloDefinition) {
+		toSerialize["sloDefinition"] = o.SloDefinition
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["errorBudget"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["burnRate"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [errorBudget, burnRate] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["errorBudget"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field errorBudget must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["burnRate"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field burnRate must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *SloThresholdType) UnmarshalJSON(data []byte) (err error) {
+	varSloThresholdType := _SloThresholdType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloThresholdType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloThresholdType(varSloThresholdType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["errorBudget"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloThresholdTypeBurnRate = nil
-	}
-
-	// try to unmarshal data into SloThresholdTypeErrorBudget
-	err = json.Unmarshal(data, &dst.SloThresholdTypeErrorBudget)
-	if err == nil {
-		jsonSloThresholdTypeErrorBudget, _ := json.Marshal(dst.SloThresholdTypeErrorBudget)
-		if string(jsonSloThresholdTypeErrorBudget) == "{}" { // empty struct
-			dst.SloThresholdTypeErrorBudget = nil
-		} else {
-			if err = validator.Validate(dst.SloThresholdTypeErrorBudget); err != nil {
-				dst.SloThresholdTypeErrorBudget = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["burnRate"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloThresholdTypeErrorBudget = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [errorBudget, burnRate] may be set"}
+		}
+
+		delete(additionalProperties, "burnRate")
+		delete(additionalProperties, "errorBudget")
+		delete(additionalProperties, "sloDefinition")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.SloThresholdTypeBurnRate = nil
-		dst.SloThresholdTypeErrorBudget = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(SloThresholdType)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src SloThresholdType) MarshalJSON() ([]byte, error) {
-	if src.SloThresholdTypeBurnRate != nil {
-		return json.Marshal(&src.SloThresholdTypeBurnRate)
-	}
-
-	if src.SloThresholdTypeErrorBudget != nil {
-		return json.Marshal(&src.SloThresholdTypeErrorBudget)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *SloThresholdType) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.SloThresholdTypeBurnRate != nil {
-		return obj.SloThresholdTypeBurnRate
-	}
-
-	if obj.SloThresholdTypeErrorBudget != nil {
-		return obj.SloThresholdTypeErrorBudget
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj SloThresholdType) GetActualInstanceValue() (interface{}) {
-	if obj.SloThresholdTypeBurnRate != nil {
-		return *obj.SloThresholdTypeBurnRate
-	}
-
-	if obj.SloThresholdTypeErrorBudget != nil {
-		return *obj.SloThresholdTypeErrorBudget
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSloThresholdType struct {
@@ -170,4 +259,3 @@ func (v *NullableSloThresholdType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

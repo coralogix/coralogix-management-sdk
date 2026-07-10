@@ -16,14 +16,10 @@ model_case_settings.go
 model_create_case_settings_request.go
 model_create_case_settings_response.go
 model_entity_label_filter.go
-model_entity_label_filter_all.go
 model_entity_label_filter_values.go
-model_entity_label_filter_values_variant.go
 model_error.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go
-model_filter_path_and_values_filters.go
-model_filter_path_and_values_multiple_values.go
 model_filters.go
 model_get_active_case_settings_response.go
 model_get_case_settings_response.go
@@ -32,9 +28,7 @@ model_global_indicator_settings.go
 model_indicator_filter.go
 model_indicator_priority.go
 model_indicator_priority_filter.go
-model_indicator_priority_filter_all.go
 model_indicator_priority_filter_values.go
-model_indicator_priority_filter_values_variant.go
 model_kpi_settings.go
 model_kpi_type.go
 model_multiple_values.go

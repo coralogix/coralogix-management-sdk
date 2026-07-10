@@ -13,164 +13,225 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// RuleScope - struct for RuleScope
+// checks if the RuleScope type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RuleScope{}
+
+// RuleScope Rule scope.
 type RuleScope struct {
-	RuleScopeField *RuleScopeField
-	RuleScopeFieldType *RuleScopeFieldType
-	RuleScopeRegex *RuleScopeRegex
+	Field     *ObservationField `json:"field,omitempty"`
+	FieldType *FieldDataType    `json:"fieldType,omitempty"`
+	// Regular expression pattern used to scope the rule.
+	Regex                             *string `json:"regex,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// RuleScopeFieldAsRuleScope is a convenience function that returns RuleScopeField wrapped in RuleScope
-func RuleScopeFieldAsRuleScope(v *RuleScopeField) RuleScope {
-	return RuleScope{
-		RuleScopeField: v,
+type _RuleScope RuleScope
+
+// NewRuleScope instantiates a new RuleScope object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRuleScope() *RuleScope {
+	this := RuleScope{}
+	return &this
+}
+
+// NewRuleScopeWithDefaults instantiates a new RuleScope object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRuleScopeWithDefaults() *RuleScope {
+	this := RuleScope{}
+	return &this
+}
+
+// GetField returns the Field field value if set, zero value otherwise.
+func (o *RuleScope) GetField() ObservationField {
+	if o == nil || IsNil(o.Field) {
+		var ret ObservationField
+		return ret
 	}
+	return *o.Field
 }
 
-// RuleScopeFieldTypeAsRuleScope is a convenience function that returns RuleScopeFieldType wrapped in RuleScope
-func RuleScopeFieldTypeAsRuleScope(v *RuleScopeFieldType) RuleScope {
-	return RuleScope{
-		RuleScopeFieldType: v,
+// GetFieldOk returns a tuple with the Field field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleScope) GetFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.Field) {
+		return nil, false
 	}
+	return o.Field, true
 }
 
-// RuleScopeRegexAsRuleScope is a convenience function that returns RuleScopeRegex wrapped in RuleScope
-func RuleScopeRegexAsRuleScope(v *RuleScopeRegex) RuleScope {
-	return RuleScope{
-		RuleScopeRegex: v,
+// HasField returns a boolean if a field has been set.
+func (o *RuleScope) HasField() bool {
+	if o != nil && !IsNil(o.Field) {
+		return true
 	}
+
+	return false
 }
 
+// SetField gets a reference to the given ObservationField and assigns it to the Field field.
+func (o *RuleScope) SetField(v ObservationField) {
+	o.Field = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *RuleScope) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into RuleScopeField
-	err = json.Unmarshal(data, &dst.RuleScopeField)
-	if err == nil {
-		jsonRuleScopeField, _ := json.Marshal(dst.RuleScopeField)
-		if string(jsonRuleScopeField) == "{}" { // empty struct
-			dst.RuleScopeField = nil
-		} else {
-			if err = validator.Validate(dst.RuleScopeField); err != nil {
-				dst.RuleScopeField = nil
-			} else {
-				match++
-			}
+// GetFieldType returns the FieldType field value if set, zero value otherwise.
+func (o *RuleScope) GetFieldType() FieldDataType {
+	if o == nil || IsNil(o.FieldType) {
+		var ret FieldDataType
+		return ret
+	}
+	return *o.FieldType
+}
+
+// GetFieldTypeOk returns a tuple with the FieldType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleScope) GetFieldTypeOk() (*FieldDataType, bool) {
+	if o == nil || IsNil(o.FieldType) {
+		return nil, false
+	}
+	return o.FieldType, true
+}
+
+// HasFieldType returns a boolean if a field has been set.
+func (o *RuleScope) HasFieldType() bool {
+	if o != nil && !IsNil(o.FieldType) {
+		return true
+	}
+
+	return false
+}
+
+// SetFieldType gets a reference to the given FieldDataType and assigns it to the FieldType field.
+func (o *RuleScope) SetFieldType(v FieldDataType) {
+	o.FieldType = &v
+}
+
+// GetRegex returns the Regex field value if set, zero value otherwise.
+func (o *RuleScope) GetRegex() string {
+	if o == nil || IsNil(o.Regex) {
+		var ret string
+		return ret
+	}
+	return *o.Regex
+}
+
+// GetRegexOk returns a tuple with the Regex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleScope) GetRegexOk() (*string, bool) {
+	if o == nil || IsNil(o.Regex) {
+		return nil, false
+	}
+	return o.Regex, true
+}
+
+// HasRegex returns a boolean if a field has been set.
+func (o *RuleScope) HasRegex() bool {
+	if o != nil && !IsNil(o.Regex) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegex gets a reference to the given string and assigns it to the Regex field.
+func (o *RuleScope) SetRegex(v string) {
+	o.Regex = &v
+}
+
+func (o RuleScope) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RuleScope) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Field) {
+		toSerialize["field"] = o.Field
+	}
+	if !IsNil(o.FieldType) {
+		toSerialize["fieldType"] = o.FieldType
+	}
+	if !IsNil(o.Regex) {
+		toSerialize["regex"] = o.Regex
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["field"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["regex"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["fieldType"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [field, regex, fieldType] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["field"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field field must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["regex"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field regex must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["fieldType"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field fieldType must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *RuleScope) UnmarshalJSON(data []byte) (err error) {
+	varRuleScope := _RuleScope{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleScope)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleScope(varRuleScope)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["field"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleScopeField = nil
-	}
-
-	// try to unmarshal data into RuleScopeFieldType
-	err = json.Unmarshal(data, &dst.RuleScopeFieldType)
-	if err == nil {
-		jsonRuleScopeFieldType, _ := json.Marshal(dst.RuleScopeFieldType)
-		if string(jsonRuleScopeFieldType) == "{}" { // empty struct
-			dst.RuleScopeFieldType = nil
-		} else {
-			if err = validator.Validate(dst.RuleScopeFieldType); err != nil {
-				dst.RuleScopeFieldType = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["regex"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleScopeFieldType = nil
-	}
-
-	// try to unmarshal data into RuleScopeRegex
-	err = json.Unmarshal(data, &dst.RuleScopeRegex)
-	if err == nil {
-		jsonRuleScopeRegex, _ := json.Marshal(dst.RuleScopeRegex)
-		if string(jsonRuleScopeRegex) == "{}" { // empty struct
-			dst.RuleScopeRegex = nil
-		} else {
-			if err = validator.Validate(dst.RuleScopeRegex); err != nil {
-				dst.RuleScopeRegex = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["fieldType"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.RuleScopeRegex = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [field, regex, fieldType] may be set"}
+		}
+
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "fieldType")
+		delete(additionalProperties, "regex")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.RuleScopeField = nil
-		dst.RuleScopeFieldType = nil
-		dst.RuleScopeRegex = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(RuleScope)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src RuleScope) MarshalJSON() ([]byte, error) {
-	if src.RuleScopeField != nil {
-		return json.Marshal(&src.RuleScopeField)
-	}
-
-	if src.RuleScopeFieldType != nil {
-		return json.Marshal(&src.RuleScopeFieldType)
-	}
-
-	if src.RuleScopeRegex != nil {
-		return json.Marshal(&src.RuleScopeRegex)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *RuleScope) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.RuleScopeField != nil {
-		return obj.RuleScopeField
-	}
-
-	if obj.RuleScopeFieldType != nil {
-		return obj.RuleScopeFieldType
-	}
-
-	if obj.RuleScopeRegex != nil {
-		return obj.RuleScopeRegex
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj RuleScope) GetActualInstanceValue() (interface{}) {
-	if obj.RuleScopeField != nil {
-		return *obj.RuleScopeField
-	}
-
-	if obj.RuleScopeFieldType != nil {
-		return *obj.RuleScopeFieldType
-	}
-
-	if obj.RuleScopeRegex != nil {
-		return *obj.RuleScopeRegex
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableRuleScope struct {
@@ -208,4 +269,3 @@ func (v *NullableRuleScope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

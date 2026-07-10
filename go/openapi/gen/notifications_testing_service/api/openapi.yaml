@@ -1,827 +1,1079 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /notifications/notification-center/v1/connectors:test:
-    post:
-      description: Sends a test notification.
-      externalDocs:
-        url: ""
-      operationId: TestingService_TestExistingConnector
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TestingService_TestExistingConnector_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestExistingConnectorResponse"
-          description: ""
-      summary: Test Existing Connector
-      tags:
-      - Notifications testing service
-  /notifications/notification-center/v1/connectors:testConfig:
-    post:
-      description: Tests a notification connector configuration.
-      externalDocs:
-        url: ""
-      operationId: TestingService_TestConnectorConfig
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Test_Connector_Config_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestConnectorConfigResponse"
-          description: ""
-      summary: Test Connector Config
-      tags:
-      - Notifications testing service
-  /notifications/notification-center/v1/destinations:test:
-    post:
-      description: Tests a notification destination.
-      externalDocs:
-        url: ""
-      operationId: TestingService_TestDestination
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TestingService_TestDestination_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestDestinationResponse"
-          description: ""
-      summary: Test Destination
-      tags:
-      - Notifications testing service
-  /notifications/notification-center/v1/presets:test:
-    post:
-      description: Tests an existing notification preset.
-      externalDocs:
-        url: ""
-      operationId: TestingService_TestExistingPreset
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TestingService_TestExistingPreset_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestExistingPresetResponse"
-          description: ""
-      summary: Test Existing Preset
-      tags:
-      - Notifications testing service
-  /notifications/notification-center/v1/presets:testConfig:
-    post:
-      description: Tests a notification preset configuration.
-      externalDocs:
-        url: ""
-      operationId: TestingService_TestPresetConfig
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TestingService_TestPresetConfig_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestPresetConfigResponse"
-          description: ""
-      summary: Test Preset Config
-      tags:
-      - Notifications testing service
-  /notifications/notification-center/v1/routers:testCondition:
-    post:
-      description: Tests notification routing conditions.
-      externalDocs:
-        url: ""
-      operationId: TestingService_TestRoutingConditionValid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Test_Routing_Condition_Valid_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestRoutingConditionValidResponse"
-          description: ""
-      summary: Test Routing Condition Valid
-      tags:
-      - Notifications testing service
-  /notifications/notification-center/v1/templates:test:
-    post:
-      description: Tests the rendering of a notification template.
-      externalDocs:
-        url: ""
-      operationId: TestingService_TestTemplateRender
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TestingService_TestTemplateRender_request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TestTemplateRenderResponse"
-          description: ""
-      summary: Test Template Render
-      tags:
-      - Notifications testing service
-components:
-  schemas:
-    ConfigOverrides:
-      properties:
-        conditionType:
-          $ref: "#/components/schemas/notification_center.ConditionType"
-        messageConfig:
-          $ref: "#/components/schemas/MessageConfig"
-        payloadType:
-          description: Connector payload schema type.
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    FailureReason:
-      description: Failure reason.
-      enum:
-      - FAILURE_REASON_UNSPECIFIED
-      - INVALID_TEMPLATE
-      - FIELD_NOT_FOUND
-      - TEMPLATE_EXCEEDS_MAX_LENGTH
-      - RENDERED_VALUE_EXCEEDS_MAX_LENGTH
-      type: string
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    MatchEntityTypeAndSubTypeCondition:
-      description: Match entity type and sub type condition.
-      externalDocs:
-        url: ""
-      properties:
-        entitySubType:
-          description: The entity sub type.
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    MatchEntityTypeCondition:
-      additionalProperties: false
-      description: Match entity type condition.
-      externalDocs:
-        url: ""
-      type: object
-    MessageConfig:
-      description: Message config.
-      externalDocs:
-        url: ""
-      properties:
-        fields:
-          description: List of fields.
-          items:
-            $ref: "#/components/schemas/notification_center.MessageConfigField"
-          maxItems: 100
-          minItems: 0
-          type: array
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    NotificationCenterConditionTypeMatchEntityType:
-      description: Field condition.condition type.
-      externalDocs:
-        url: ""
-      properties:
-        matchEntityType:
-          additionalProperties: false
-          description: Match entity type condition.
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - matchEntityType
-      type: object
-    NotificationCenterConditionTypeMatchEntityTypeAndSubType:
-      description: Field condition.condition type.
-      externalDocs:
-        url: ""
-      properties:
-        matchEntityTypeAndSubType:
-          $ref: "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
-      required:
-      - matchEntityTypeAndSubType
-      type: object
-    TemplatedConnectorConfigField:
-      properties:
-        fieldName:
-          description: The field name.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        template:
-          description: Template.
-          maxLength: 20000
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    TestConnectorConfigResponse:
-      description: Response containing the results of a connector configuration test.
-      example:
-        result:
-          failure:
-            message: message
-            statusCode: 139
-      externalDocs:
-        url: ""
-      properties:
-        result:
-          $ref: "#/components/schemas/TestResult"
-      type: object
-    TestDestinationResponse:
-      description: Response containing the results of a notification destination test.
-      example:
-        result:
-          failure:
-            message: message
-            statusCode: 139
-      externalDocs:
-        url: ""
-      properties:
-        result:
-          $ref: "#/components/schemas/TestResult"
-      type: object
-    TestExistingConnectorResponse:
-      description: Response containing the results of testing an existing connector.
-      example:
-        result:
-          failure:
-            message: message
-            statusCode: 139
-      externalDocs:
-        url: ""
-      properties:
-        result:
-          $ref: "#/components/schemas/TestResult"
-      type: object
-    TestExistingPresetResponse:
-      description: Response containing the results of testing an existing preset.
-      example:
-        result:
-          failure:
-            message: message
-            statusCode: 139
-      externalDocs:
-        url: ""
-      properties:
-        result:
-          $ref: "#/components/schemas/TestResult"
-      type: object
-    TestPresetConfigResponse:
-      description: Response containing the results of a notification preset configuration
-        test.
-      example:
-        result:
-          failure:
-            message: message
-            statusCode: 139
-      externalDocs:
-        url: ""
-      properties:
-        result:
-          $ref: "#/components/schemas/TestResult"
-      type: object
-    TestResult:
-      oneOf:
-      - $ref: "#/components/schemas/TestResultFailureVariant"
-      - $ref: "#/components/schemas/TestResultSuccessVariant"
-    TestResult.Failure:
-      description: Failure.
-      example:
-        message: message
-        statusCode: 139
-      externalDocs:
-        url: ""
-      properties:
-        message:
-          description: Human-readable message.
-          maxLength: 10000
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        statusCode:
-          description: The status code.
-          format: int64
-          maximum: 599
-          minimum: 100
-          type: integer
-      type: object
-    TestResult.Success:
-      description: Indicates the notification test succeeded.
-      externalDocs:
-        url: ""
-      properties:
-        metadata:
-          additionalProperties:
-            minLength: 0
-            type: string
-          description: Metadata.
-          type: object
-      type: object
-    TestResultFailureVariant:
-      description: "Result of a notification test, either a success or failure."
-      example:
-        failure:
-          message: message
-          statusCode: 139
-      externalDocs:
-        url: ""
-      properties:
-        failure:
-          $ref: "#/components/schemas/TestResult.Failure"
-      required:
-      - failure
-      type: object
-    TestResultSuccessVariant:
-      description: "Result of a notification test, either a success or failure."
-      externalDocs:
-        url: ""
-      properties:
-        success:
-          $ref: "#/components/schemas/TestResult.Success"
-      required:
-      - success
-      type: object
-    TestRoutingConditionValidResponse:
-      oneOf:
-      - $ref: "#/components/schemas/TestRoutingConditionValidResponseFailureVariant"
-      - $ref: "#/components/schemas/TestRoutingConditionValidResponseSuccessVariant"
-    TestRoutingConditionValidResponse.Failure:
-      description: "Indicates the routing condition is invalid, with a human-readable\
-        \ error message."
-      example:
-        message: "Invalid condition: condition should be rendered to a boolean value\
-          \ (true or false)"
-      externalDocs:
-        url: ""
-      properties:
-        message:
-          description: Human-readable message.
-          example: "Invalid condition: condition should be rendered to a boolean value\
-            \ (true or false)"
-          maxLength: 10000
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    TestRoutingConditionValidResponse.Success:
-      description: "Indicates the routing condition is valid, with the evaluated result."
-      externalDocs:
-        url: ""
-      properties:
-        result:
-          description: Result.
-          example: true
-          type: boolean
-      type: object
-    TestRoutingConditionValidResponseFailureVariant:
-      description: Response which specifies condition evaluation result or error
-      example:
-        failure:
-          message: "Invalid condition: condition should be rendered to a boolean value\
-            \ (true or false)"
-      externalDocs:
-        description: Find out more about notification center
-        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
-      properties:
-        failure:
-          $ref: "#/components/schemas/TestRoutingConditionValidResponse.Failure"
-      required:
-      - failure
-      title: Test Routing Condition Valid Response
-      type: object
-    TestRoutingConditionValidResponseSuccessVariant:
-      description: Response which specifies condition evaluation result or error
-      externalDocs:
-        description: Find out more about notification center
-        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
-      properties:
-        success:
-          $ref: "#/components/schemas/TestRoutingConditionValidResponse.Success"
-      required:
-      - success
-      title: Test Routing Condition Valid Response
-      type: object
-    TestTemplateRenderResponse:
-      description: Response containing the results of a notification template render
-        test.
-      example:
-        result:
-          failure:
-            reason: FAILURE_REASON_UNSPECIFIED
-            message: Template rendering failed
-      externalDocs:
-        url: ""
-      properties:
-        result:
-          $ref: "#/components/schemas/TestTemplateRenderResult"
-      type: object
-    TestTemplateRenderResult:
-      oneOf:
-      - $ref: "#/components/schemas/TestTemplateRenderResultFailureVariant"
-      - $ref: "#/components/schemas/TestTemplateRenderResultSuccessVariant"
-    TestTemplateRenderResult.Failure:
-      description: "Indicates the template render test failed, with a message and\
-        \ failure reason."
-      example:
-        reason: FAILURE_REASON_UNSPECIFIED
-        message: Template rendering failed
-      externalDocs:
-        url: ""
-      properties:
-        message:
-          description: Human-readable message.
-          example: Template rendering failed
-          maxLength: 10000
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        reason:
-          $ref: "#/components/schemas/FailureReason"
-      type: object
-    TestTemplateRenderResult.Success:
-      description: Success.
-      externalDocs:
-        url: ""
-      properties:
-        renderedValue:
-          description: The rendered value.
-          example: Rendered template result
-          maxLength: 50000
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    TestTemplateRenderResultFailureVariant:
-      description: "Result of a template render test, either a success with rendered\
-        \ output or a failure with reason."
-      example:
-        failure:
-          reason: FAILURE_REASON_UNSPECIFIED
-          message: Template rendering failed
-      externalDocs:
-        url: ""
-      properties:
-        failure:
-          $ref: "#/components/schemas/TestTemplateRenderResult.Failure"
-      required:
-      - failure
-      type: object
-    TestTemplateRenderResultSuccessVariant:
-      description: "Result of a template render test, either a success with rendered\
-        \ output or a failure with reason."
-      externalDocs:
-        url: ""
-      properties:
-        success:
-          $ref: "#/components/schemas/TestTemplateRenderResult.Success"
-      required:
-      - success
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    notification_center.ConditionType:
-      oneOf:
-      - $ref: "#/components/schemas/NotificationCenterConditionTypeMatchEntityType"
-      - $ref: "#/components/schemas/NotificationCenterConditionTypeMatchEntityTypeAndSubType"
-    notification_center.ConnectorConfigField:
-      properties:
-        fieldName:
-          description: The field name.
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        value:
-          description: The value.
-          maxLength: 20000
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    notification_center.ConnectorType:
-      description: Connector type.
-      enum:
-      - CONNECTOR_TYPE_UNSPECIFIED
-      - SLACK
-      - GENERIC_HTTPS
-      - PAGERDUTY
-      - IBM_EVENT_NOTIFICATIONS
-      - SERVICE_NOW
-      - EMAIL
-      - PAGERDUTY_INCIDENTS
-      - MICROSOFT_TEAMS
-      type: string
-    notification_center.EntityType:
-      description: Entity type.
-      enum:
-      - ENTITY_TYPE_UNSPECIFIED
-      - ALERTS
-      - TEST_NOTIFICATIONS
-      - CASES
-      type: string
-    notification_center.MessageConfigField:
-      description: Message config field provides a way to define a template that can
-        be used to render the notification content
-      externalDocs:
-        description: Find out more about notification center
-        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
-      properties:
-        fieldName:
-          description: The field name.
-          example: title
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        template:
-          description: The template.
-          example: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-          maxLength: 20000
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      title: Message Config Field
-      type: object
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    TestingService_TestExistingConnector_request:
-      description: Request for sending a test notification.
-      properties:
-        connectorId:
-          description: The connector id.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        payloadType:
-          description: Payload type to use when testing the connector.
-          example: default
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    Test_Connector_Config_Request:
-      description: Request to test a connector configuration
-      properties:
-        entityType:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        fields:
-          description: Fields.
-          items:
-            $ref: "#/components/schemas/notification_center.ConnectorConfigField"
-          maxItems: 100
-          minItems: 0
-          type: array
-        payloadType:
-          description: Payload type to use when testing the connector.
-          example: default
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        type:
-          $ref: "#/components/schemas/notification_center.ConnectorType"
-      title: Test Connector Config Request
-      type: object
-    TestingService_TestDestination_request:
-      description: Request for testing a notification destination.
-      properties:
-        connectorConfigFields:
-          description: The connector config fields.
-          items:
-            $ref: "#/components/schemas/TemplatedConnectorConfigField"
-          maxItems: 100
-          minItems: 0
-          type: array
-        connectorId:
-          description: The connector id.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        entitySubType:
-          description: Entity sub-type to use when testing the destination.
-          example: logsImmediateResolved
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        entityType:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        messageConfigFields:
-          description: The message config fields.
-          items:
-            $ref: "#/components/schemas/notification_center.MessageConfigField"
-          maxItems: 100
-          minItems: 0
-          type: array
-        payloadType:
-          description: Payload type to use when testing the destination.
-          example: default
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        presetId:
-          description: The preset id.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-      type: object
-    TestingService_TestExistingPreset_request:
-      description: Request for testing an existing notification preset.
-      properties:
-        connectorId:
-          description: The connector id.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        entitySubType:
-          description: Entity sub-type to use when testing the preset.
-          example: logsImmediateResolved
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        entityType:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        presetId:
-          description: The preset id.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-      type: object
-    TestingService_TestPresetConfig_request:
-      description: Request for testing a notification preset configuration.
-      properties:
-        configOverrides:
-          description: The config overrides.
-          items:
-            $ref: "#/components/schemas/ConfigOverrides"
-          maxItems: 100
-          minItems: 0
-          type: array
-        connectorId:
-          description: The connector id.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        entitySubType:
-          description: Entity sub-type to use when testing the preset configuration.
-          example: metric
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        entityType:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        parentPresetId:
-          description: The parent preset id.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-      type: object
-    Test_Routing_Condition_Valid_Request:
-      description: Request to check that provided routing condition is valid
-      properties:
-        entityType:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        template:
-          description: Routing condition expression to validate.
-          example: alertDef.priority == 'P1'
-          maxLength: 20000
-          minLength: 1
-          pattern: "^[\\s\\S]+$"
-          type: string
-      title: Test Routing Condition Valid Request
-      type: object
-    TestingService_TestTemplateRender_request:
-      description: Request for testing notification template rendering.
-      properties:
-        entitySubType:
-          description: Entity sub-type to use when testing template rendering.
-          example: logsImmediateResolved
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        entityType:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        template:
-          description: Template string to test rendering for.
-          example: "{{ alertDef.name }}"
-          maxLength: 20000
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/notifications/notification-center/v1/connectors:test": {
+      "post": {
+        "tags": [
+          "Notifications testing service"
+        ],
+        "summary": "Test Existing Connector",
+        "description": "Sends a test notification.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TestingService_TestExistingConnector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request for sending a test notification.",
+                "type": "object",
+                "properties": {
+                  "connectorId": {
+                    "description": "The connector id.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "payloadType": {
+                    "example": "default",
+                    "description": "Payload type to use when testing the connector.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestExistingConnectorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/connectors:testConfig": {
+      "post": {
+        "tags": [
+          "Notifications testing service"
+        ],
+        "summary": "Test Connector Config",
+        "description": "Tests a notification connector configuration.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TestingService_TestConnectorConfig",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Test Connector Config Request",
+                "description": "Request to test a connector configuration",
+                "type": "object",
+                "properties": {
+                  "entityType": {
+                    "$ref": "#/components/schemas/notification_center.EntityType"
+                  },
+                  "fields": {
+                    "description": "Fields.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/notification_center.ConnectorConfigField"
+                    },
+                    "minItems": 0,
+                    "maxItems": 100
+                  },
+                  "payloadType": {
+                    "example": "default",
+                    "description": "Payload type to use when testing the connector.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
+                  },
+                  "type": {
+                    "$ref": "#/components/schemas/notification_center.ConnectorType"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestConnectorConfigResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/destinations:test": {
+      "post": {
+        "tags": [
+          "Notifications testing service"
+        ],
+        "summary": "Test Destination",
+        "description": "Tests a notification destination.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TestingService_TestDestination",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request for testing a notification destination.",
+                "type": "object",
+                "properties": {
+                  "connectorConfigFields": {
+                    "description": "The connector config fields.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TemplatedConnectorConfigField"
+                    },
+                    "minItems": 0,
+                    "maxItems": 100
+                  },
+                  "connectorId": {
+                    "description": "The connector id.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "entitySubType": {
+                    "example": "logsImmediateResolved",
+                    "description": "Entity sub-type to use when testing the destination.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
+                  },
+                  "entityType": {
+                    "$ref": "#/components/schemas/notification_center.EntityType"
+                  },
+                  "messageConfigFields": {
+                    "description": "The message config fields.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/notification_center.MessageConfigField"
+                    },
+                    "minItems": 0,
+                    "maxItems": 100
+                  },
+                  "payloadType": {
+                    "example": "default",
+                    "description": "Payload type to use when testing the destination.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
+                  },
+                  "presetId": {
+                    "description": "The preset id.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestDestinationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets:test": {
+      "post": {
+        "tags": [
+          "Notifications testing service"
+        ],
+        "summary": "Test Existing Preset",
+        "description": "Tests an existing notification preset.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TestingService_TestExistingPreset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request for testing an existing notification preset.",
+                "type": "object",
+                "properties": {
+                  "connectorId": {
+                    "description": "The connector id.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "entitySubType": {
+                    "example": "logsImmediateResolved",
+                    "description": "Entity sub-type to use when testing the preset.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
+                  },
+                  "entityType": {
+                    "$ref": "#/components/schemas/notification_center.EntityType"
+                  },
+                  "presetId": {
+                    "description": "The preset id.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestExistingPresetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets:testConfig": {
+      "post": {
+        "tags": [
+          "Notifications testing service"
+        ],
+        "summary": "Test Preset Config",
+        "description": "Tests a notification preset configuration.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TestingService_TestPresetConfig",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request for testing a notification preset configuration.",
+                "type": "object",
+                "properties": {
+                  "configOverrides": {
+                    "description": "The config overrides.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ConfigOverrides"
+                    },
+                    "minItems": 0,
+                    "maxItems": 100
+                  },
+                  "connectorId": {
+                    "description": "The connector id.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "entitySubType": {
+                    "example": "metric",
+                    "description": "Entity sub-type to use when testing the preset configuration.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
+                  },
+                  "entityType": {
+                    "$ref": "#/components/schemas/notification_center.EntityType"
+                  },
+                  "parentPresetId": {
+                    "description": "The parent preset id.",
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestPresetConfigResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/routers:testCondition": {
+      "post": {
+        "tags": [
+          "Notifications testing service"
+        ],
+        "summary": "Test Routing Condition Valid",
+        "description": "Tests notification routing conditions.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TestingService_TestRoutingConditionValid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Test Routing Condition Valid Request",
+                "description": "Request to check that provided routing condition is valid",
+                "type": "object",
+                "properties": {
+                  "entityType": {
+                    "$ref": "#/components/schemas/notification_center.EntityType"
+                  },
+                  "template": {
+                    "example": "alertDef.priority == 'P1'",
+                    "description": "Routing condition expression to validate.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 20000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestRoutingConditionValidResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/templates:test": {
+      "post": {
+        "tags": [
+          "Notifications testing service"
+        ],
+        "summary": "Test Template Render",
+        "description": "Tests the rendering of a notification template.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TestingService_TestTemplateRender",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request for testing notification template rendering.",
+                "type": "object",
+                "properties": {
+                  "entitySubType": {
+                    "example": "logsImmediateResolved",
+                    "description": "Entity sub-type to use when testing template rendering.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
+                  },
+                  "entityType": {
+                    "$ref": "#/components/schemas/notification_center.EntityType"
+                  },
+                  "template": {
+                    "example": "{{ alertDef.name }}",
+                    "description": "Template string to test rendering for.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 20000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestTemplateRenderResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConfigOverrides": {
+        "type": "object",
+        "properties": {
+          "conditionType": {
+            "$ref": "#/components/schemas/notification_center.ConditionType"
+          },
+          "messageConfig": {
+            "$ref": "#/components/schemas/MessageConfig"
+          },
+          "payloadType": {
+            "description": "Connector payload schema type.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+      },
+      "FailureReason": {
+        "description": "Failure reason.",
+        "type": "string",
+        "enum": [
+          "FAILURE_REASON_UNSPECIFIED",
+          "INVALID_TEMPLATE",
+          "FIELD_NOT_FOUND",
+          "TEMPLATE_EXCEEDS_MAX_LENGTH",
+          "RENDERED_VALUE_EXCEEDS_MAX_LENGTH"
+        ]
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "MatchEntityTypeAndSubTypeCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Match entity type and sub type condition.",
+        "type": "object",
+        "properties": {
+          "entitySubType": {
+            "description": "The entity sub type.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+      },
+      "MatchEntityTypeCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Match entity type condition.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "MessageConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Message config.",
+        "type": "object",
+        "properties": {
+          "fields": {
+            "description": "List of fields.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/notification_center.MessageConfigField"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "TemplatedConnectorConfigField": {
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "description": "The field name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "template": {
+            "description": "Template.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 20000
+          }
+        }
+      },
+      "TestConnectorConfigResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of a connector configuration test.",
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/TestResult"
+          }
+        }
+      },
+      "TestDestinationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of a notification destination test.",
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/TestResult"
+          }
+        }
+      },
+      "TestExistingConnectorResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of testing an existing connector.",
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/TestResult"
+          }
+        }
+      },
+      "TestExistingPresetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of testing an existing preset.",
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/TestResult"
+          }
+        }
+      },
+      "TestPresetConfigResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of a notification preset configuration test.",
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/TestResult"
+          }
+        }
+      },
+      "TestResult": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of a notification test, either a success or failure.",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/TestResult.Failure"
+          },
+          "success": {
+            "$ref": "#/components/schemas/TestResult.Success"
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "success"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "failure"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "success"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "failure"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "TestResult.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Failure.",
+        "type": "object",
+        "properties": {
+          "message": {
+            "description": "Human-readable message.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
+          },
+          "statusCode": {
+            "description": "The status code.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 100,
+            "maximum": 599
+          }
+        }
+      },
+      "TestResult.Success": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Indicates the notification test succeeded.",
+        "type": "object",
+        "properties": {
+          "metadata": {
+            "description": "Metadata.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 0
+            }
+          }
+        }
+      },
+      "TestRoutingConditionValidResponse": {
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+        },
+        "title": "Test Routing Condition Valid Response",
+        "description": "Response which specifies condition evaluation result or error",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/TestRoutingConditionValidResponse.Failure"
+          },
+          "success": {
+            "$ref": "#/components/schemas/TestRoutingConditionValidResponse.Success"
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "success"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "failure"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "success"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "failure"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "TestRoutingConditionValidResponse.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Indicates the routing condition is invalid, with a human-readable error message.",
+        "type": "object",
+        "properties": {
+          "message": {
+            "example": "Invalid condition: condition should be rendered to a boolean value (true or false)",
+            "description": "Human-readable message.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
+          }
+        }
+      },
+      "TestRoutingConditionValidResponse.Success": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Indicates the routing condition is valid, with the evaluated result.",
+        "type": "object",
+        "properties": {
+          "result": {
+            "example": true,
+            "description": "Result.",
+            "type": "boolean"
+          }
+        }
+      },
+      "TestTemplateRenderResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of a notification template render test.",
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/TestTemplateRenderResult"
+          }
+        }
+      },
+      "TestTemplateRenderResult": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of a template render test, either a success with rendered output or a failure with reason.",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/TestTemplateRenderResult.Failure"
+          },
+          "success": {
+            "$ref": "#/components/schemas/TestTemplateRenderResult.Success"
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "success"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "failure"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "success"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "failure"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "TestTemplateRenderResult.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Indicates the template render test failed, with a message and failure reason.",
+        "type": "object",
+        "properties": {
+          "message": {
+            "example": "Template rendering failed",
+            "description": "Human-readable message.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
+          },
+          "reason": {
+            "$ref": "#/components/schemas/FailureReason"
+          }
+        }
+      },
+      "TestTemplateRenderResult.Success": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Success.",
+        "type": "object",
+        "properties": {
+          "renderedValue": {
+            "example": "Rendered template result",
+            "description": "The rendered value.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 50000
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "notification_center.ConditionType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Field condition.condition type.",
+        "type": "object",
+        "properties": {
+          "matchEntityType": {
+            "$ref": "#/components/schemas/MatchEntityTypeCondition"
+          },
+          "matchEntityTypeAndSubType": {
+            "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "matchEntityType"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "matchEntityTypeAndSubType"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "matchEntityType"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "matchEntityTypeAndSubType"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "notification_center.ConnectorConfigField": {
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "description": "The field name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "value": {
+            "description": "The value.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 20000
+          }
+        }
+      },
+      "notification_center.ConnectorType": {
+        "description": "Connector type.",
+        "type": "string",
+        "enum": [
+          "CONNECTOR_TYPE_UNSPECIFIED",
+          "SLACK",
+          "GENERIC_HTTPS",
+          "PAGERDUTY",
+          "IBM_EVENT_NOTIFICATIONS",
+          "SERVICE_NOW",
+          "EMAIL",
+          "PAGERDUTY_INCIDENTS",
+          "MICROSOFT_TEAMS"
+        ]
+      },
+      "notification_center.EntityType": {
+        "description": "Entity type.",
+        "type": "string",
+        "enum": [
+          "ENTITY_TYPE_UNSPECIFIED",
+          "ALERTS",
+          "TEST_NOTIFICATIONS",
+          "CASES"
+        ]
+      },
+      "notification_center.MessageConfigField": {
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+        },
+        "title": "Message Config Field",
+        "description": "Message config field provides a way to define a template that can be used to render the notification content",
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "example": "title",
+            "description": "The field name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "template": {
+            "example": "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}",
+            "description": "The template.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 20000
+          }
+        }
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

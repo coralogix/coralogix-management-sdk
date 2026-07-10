@@ -83,12 +83,15 @@
                     "items": {
                       "$ref": "#/components/schemas/InRuleGroup"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 1000
                   },
                   "name": {
                     "description": "Display name.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 255
                   }
                 }
               }
@@ -217,12 +220,15 @@
                     "items": {
                       "$ref": "#/components/schemas/InRuleGroup"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 1000
                   },
                   "name": {
                     "description": "Display name.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 255
                   }
                 }
               }
@@ -334,7 +340,9 @@
           "schema": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "style": "simple"
         }
@@ -355,9 +363,14 @@
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           }
-        }
+        },
+        "required": [
+          "id"
+        ]
       },
       "Error": {
         "description": "Standard error response body returned for a failed request.",
@@ -380,16 +393,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -400,26 +403,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -430,9 +413,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -472,27 +467,38 @@
             "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 1800000
           },
           "expr": {
             "description": "The expr.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
           },
           "labels": {
             "description": "List of labels.",
             "type": "object",
             "additionalProperties": {
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             }
           },
           "record": {
             "description": "Record.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
-        }
+        },
+        "required": [
+          "record",
+          "expr"
+        ]
       },
       "InRuleGroup": {
         "externalDocs": {
@@ -506,13 +512,16 @@
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "interval": {
             "description": "Interval.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 60,
+            "maximum": 4294967295
           },
           "limit": {
             "description": "Limit.",
@@ -524,7 +533,9 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "rules": {
             "description": "List of rules.",
@@ -532,15 +543,20 @@
             "items": {
               "$ref": "#/components/schemas/InRule"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "version": {
             "description": "Version number.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -559,25 +575,36 @@
         }
       },
       "OutRule": {
+        "externalDocs": {
+          "description": "Find out more about recording rules",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+        },
+        "title": "Out Rule",
+        "description": "A recording rule as returned by the API.",
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
             "description": "The evaluation delay ms.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 1800000
           },
           "expr": {
             "description": "The expr.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
           },
           "labels": {
             "description": "List of labels.",
             "type": "object",
             "additionalProperties": {
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             }
           },
           "lastEvalDurationMs": {
@@ -590,23 +617,39 @@
           "record": {
             "description": "Record.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
-        }
+        },
+        "required": [
+          "record",
+          "expr",
+          "labels"
+        ]
       },
       "OutRuleGroup": {
+        "externalDocs": {
+          "description": "Find out more about recording rules",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+        },
+        "title": "Out Rule Group",
+        "description": "A group of recording rules as returned by the API.",
         "type": "object",
         "properties": {
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "interval": {
             "description": "Interval.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 60,
+            "maximum": 4294967295
           },
           "lastEvalAt": {
             "description": "The last eval at.",
@@ -625,7 +668,9 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "rules": {
             "description": "List of rules.",
@@ -633,15 +678,23 @@
             "items": {
               "$ref": "#/components/schemas/OutRule"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "version": {
             "description": "Version number.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           }
-        }
+        },
+        "required": [
+          "name",
+          "rules",
+          "version",
+          "id"
+        ]
       },
       "OutRuleGroupSet": {
         "externalDocs": {
@@ -658,19 +711,29 @@
             "items": {
               "$ref": "#/components/schemas/OutRuleGroup"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
-        }
+        },
+        "required": [
+          "id",
+          "groups",
+          "name"
+        ]
       },
       "RuleGroupSetListing": {
         "externalDocs": {
@@ -687,9 +750,13 @@
             "items": {
               "$ref": "#/components/schemas/OutRuleGroupSet"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
-        }
+        },
+        "required": [
+          "sets"
+        ]
       },
       "events.v3.FilterMatcher": {
         "type": "string",

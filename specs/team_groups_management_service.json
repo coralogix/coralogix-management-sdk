@@ -757,16 +757,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -777,26 +767,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -807,9 +777,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -999,27 +981,13 @@
         }
       },
       "RoleUpdateAction": {
-        "discriminator": {
-          "propertyName": "action_type",
-          "mapping": {
-            "clear": "#/components/schemas/RoleUpdateActionClear",
-            "set_role_id": "#/components/schemas/RoleUpdateActionSetRoleId"
-          }
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/RoleUpdateActionClear"
-          },
-          {
-            "$ref": "#/components/schemas/RoleUpdateActionSetRoleId"
-          }
-        ]
-      },
-      "RoleUpdateActionClear": {
         "externalDocs": {
           "url": ""
         },
         "description": "Clear role.",
+        "discriminator": {
+          "propertyName": "actionType"
+        },
         "type": "object",
         "properties": {
           "actionType": {
@@ -1029,32 +997,46 @@
           },
           "clear": {
             "$ref": "#/components/schemas/ClearRole"
-          }
-        },
-        "required": [
-          "actionType",
-          "clear"
-        ]
-      },
-      "RoleUpdateActionSetRoleId": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Clear role.",
-        "type": "object",
-        "properties": {
-          "actionType": {
-            "description": "Discriminator indicating the role update action type (set_role_id or clear).",
-            "type": "string",
-            "minLength": 0
           },
           "setRoleId": {
             "$ref": "#/components/schemas/SetRoleId"
           }
         },
         "required": [
-          "actionType",
-          "setRoleId"
+          "actionType"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "setRoleId"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "clear"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "setRoleId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "clear"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "ScopeUpdate": {
@@ -1072,27 +1054,13 @@
         }
       },
       "ScopeUpdateAction": {
-        "discriminator": {
-          "propertyName": "action_type",
-          "mapping": {
-            "clear": "#/components/schemas/ScopeUpdateActionClear",
-            "set_scope_id": "#/components/schemas/ScopeUpdateActionSetScopeId"
-          }
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ScopeUpdateActionClear"
-          },
-          {
-            "$ref": "#/components/schemas/ScopeUpdateActionSetScopeId"
-          }
-        ]
-      },
-      "ScopeUpdateActionClear": {
         "externalDocs": {
           "url": ""
         },
         "description": "Set scope id.",
+        "discriminator": {
+          "propertyName": "actionType"
+        },
         "type": "object",
         "properties": {
           "actionType": {
@@ -1102,32 +1070,46 @@
           },
           "clear": {
             "$ref": "#/components/schemas/ClearScope"
-          }
-        },
-        "required": [
-          "actionType",
-          "clear"
-        ]
-      },
-      "ScopeUpdateActionSetScopeId": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Set scope id.",
-        "type": "object",
-        "properties": {
-          "actionType": {
-            "description": "Discriminator indicating the scope update action type (set_scope_id or clear).",
-            "type": "string",
-            "minLength": 0
           },
           "setScopeId": {
             "$ref": "#/components/schemas/SetScopeId"
           }
         },
         "required": [
-          "actionType",
-          "setScopeId"
+          "actionType"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "setScopeId"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "clear"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "setScopeId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "clear"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "SetRoleId": {
@@ -1277,31 +1259,13 @@
         }
       },
       "UserUpdatesOperation": {
-        "discriminator": {
-          "propertyName": "operation_type",
-          "mapping": {
-            "add": "#/components/schemas/UserUpdatesOperationAdd",
-            "remove": "#/components/schemas/UserUpdatesOperationRemove",
-            "set": "#/components/schemas/UserUpdatesOperationSet"
-          }
-        },
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/UserUpdatesOperationAdd"
-          },
-          {
-            "$ref": "#/components/schemas/UserUpdatesOperationRemove"
-          },
-          {
-            "$ref": "#/components/schemas/UserUpdatesOperationSet"
-          }
-        ]
-      },
-      "UserUpdatesOperationAdd": {
         "externalDocs": {
           "url": ""
         },
         "description": "User id list.",
+        "discriminator": {
+          "propertyName": "operationType"
+        },
         "type": "object",
         "properties": {
           "add": {
@@ -1311,53 +1275,61 @@
             "description": "Discriminator indicating the user update operation type (add, remove, or set).",
             "type": "string",
             "minLength": 0
-          }
-        },
-        "required": [
-          "operationType",
-          "add"
-        ]
-      },
-      "UserUpdatesOperationRemove": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "User id list.",
-        "type": "object",
-        "properties": {
-          "operationType": {
-            "description": "Discriminator indicating the user update operation type (add, remove, or set).",
-            "type": "string",
-            "minLength": 0
           },
           "remove": {
             "$ref": "#/components/schemas/UserIdList"
-          }
-        },
-        "required": [
-          "operationType",
-          "remove"
-        ]
-      },
-      "UserUpdatesOperationSet": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "User id list.",
-        "type": "object",
-        "properties": {
-          "operationType": {
-            "description": "Discriminator indicating the user update operation type (add, remove, or set).",
-            "type": "string",
-            "minLength": 0
           },
           "set": {
             "$ref": "#/components/schemas/UserIdList"
           }
         },
         "required": [
-          "operationType",
-          "set"
+          "operationType"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "add"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "remove"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "set"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "add"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "remove"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "set"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "events.v3.FilterMatcher": {

@@ -31,8 +31,9 @@ type SlackCommentMetadata struct {
 	// Slack user ID
 	UserId *string `json:"userId,omitempty"`
 	// Slack workspace ID
-	WorkspaceId *string `json:"workspaceId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	WorkspaceId                       *string `json:"workspaceId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SlackCommentMetadata SlackCommentMetadata
@@ -215,7 +216,7 @@ func (o *SlackCommentMetadata) SetWorkspaceId(v string) {
 }
 
 func (o SlackCommentMetadata) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,6 +269,7 @@ func (o *SlackCommentMetadata) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "userId")
 		delete(additionalProperties, "workspaceId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -308,4 +310,3 @@ func (v *NullableSlackCommentMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

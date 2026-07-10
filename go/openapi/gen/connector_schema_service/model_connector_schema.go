@@ -26,9 +26,10 @@ type ConnectorSchema struct {
 	// The message config schemas.
 	MessageConfigSchemas []MessageConfigSchema `json:"messageConfigSchemas,omitempty"`
 	// The supported payload types.
-	SupportedPayloadTypes []string `json:"supportedPayloadTypes,omitempty"`
-	Type *NotificationCenterConnectorType `json:"type,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SupportedPayloadTypes             []string                         `json:"supportedPayloadTypes,omitempty"`
+	Type                              *NotificationCenterConnectorType `json:"type,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ConnectorSchema ConnectorSchema
@@ -179,7 +180,7 @@ func (o *ConnectorSchema) SetType(v NotificationCenterConnectorType) {
 }
 
 func (o ConnectorSchema) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,6 +229,7 @@ func (o *ConnectorSchema) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "supportedPayloadTypes")
 		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -268,4 +270,3 @@ func (v *NullableConnectorSchema) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

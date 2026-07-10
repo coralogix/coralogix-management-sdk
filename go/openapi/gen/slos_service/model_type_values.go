@@ -23,8 +23,9 @@ var _ MappedNullable = &TypeValues{}
 // TypeValues Type values.
 type TypeValues struct {
 	// The values.
-	Values []SloType `json:"values,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Values                            []SloType `json:"values,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TypeValues TypeValues
@@ -79,7 +80,7 @@ func (o *TypeValues) SetValues(v []SloType) {
 }
 
 func (o TypeValues) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *TypeValues) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableTypeValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

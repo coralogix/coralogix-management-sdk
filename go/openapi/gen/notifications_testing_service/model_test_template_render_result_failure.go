@@ -23,9 +23,10 @@ var _ MappedNullable = &TestTemplateRenderResultFailure{}
 // TestTemplateRenderResultFailure Indicates the template render test failed, with a message and failure reason.
 type TestTemplateRenderResultFailure struct {
 	// Human-readable message.
-	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Reason *FailureReason `json:"reason,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Message                           *string        `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Reason                            *FailureReason `json:"reason,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestTemplateRenderResultFailure TestTemplateRenderResultFailure
@@ -112,7 +113,7 @@ func (o *TestTemplateRenderResultFailure) SetReason(v FailureReason) {
 }
 
 func (o TestTemplateRenderResultFailure) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *TestTemplateRenderResultFailure) UnmarshalJSON(data []byte) (err error)
 		delete(additionalProperties, "message")
 		delete(additionalProperties, "reason")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableTestTemplateRenderResultFailure) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

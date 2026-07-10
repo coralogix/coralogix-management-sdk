@@ -23,9 +23,10 @@ var _ MappedNullable = &ConnectorTypeSummary{}
 // ConnectorTypeSummary Summary information about a connector type
 type ConnectorTypeSummary struct {
 	// Number of items.
-	Count *int64 `json:"count,omitempty"`
-	Type *NotificationCenterConnectorType `json:"type,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Count                             *int64                           `json:"count,omitempty"`
+	Type                              *NotificationCenterConnectorType `json:"type,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ConnectorTypeSummary ConnectorTypeSummary
@@ -112,7 +113,7 @@ func (o *ConnectorTypeSummary) SetType(v NotificationCenterConnectorType) {
 }
 
 func (o ConnectorTypeSummary) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *ConnectorTypeSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "count")
 		delete(additionalProperties, "type")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableConnectorTypeSummary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

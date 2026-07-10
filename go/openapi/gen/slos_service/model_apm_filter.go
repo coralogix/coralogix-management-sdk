@@ -28,8 +28,9 @@ type ApmFilter struct {
 	// Deprecated
 	Value *string `json:"value,omitempty"`
 	// Preferred: multiple values to match (OR semantics, e.g. status IN [500, 503])
-	Values []string `json:"values,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Values                            []string `json:"values,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ApmFilter ApmFilter
@@ -151,7 +152,7 @@ func (o *ApmFilter) SetValues(v []string) {
 }
 
 func (o ApmFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,6 +197,7 @@ func (o *ApmFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "value")
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -236,4 +238,3 @@ func (v *NullableApmFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

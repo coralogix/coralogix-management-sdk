@@ -13,126 +13,178 @@ package data_usage_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// DataUsageServiceGetDailyUsageProcessedGbsRequest - struct for DataUsageServiceGetDailyUsageProcessedGbsRequest
+// checks if the DataUsageServiceGetDailyUsageProcessedGbsRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DataUsageServiceGetDailyUsageProcessedGbsRequest{}
+
+// DataUsageServiceGetDailyUsageProcessedGbsRequest Request for daily processed gigabytes usage data for the specified period.
 type DataUsageServiceGetDailyUsageProcessedGbsRequest struct {
-	GetDailyUsageProcessedGbsRequestDateRange *GetDailyUsageProcessedGbsRequestDateRange
-	GetDailyUsageProcessedGbsRequestRange *GetDailyUsageProcessedGbsRequestRange
+	DateRange                         *V2DateRange `json:"dateRange,omitempty"`
+	Range                             *V2Range     `json:"range,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// GetDailyUsageProcessedGbsRequestDateRangeAsDataUsageServiceGetDailyUsageProcessedGbsRequest is a convenience function that returns GetDailyUsageProcessedGbsRequestDateRange wrapped in DataUsageServiceGetDailyUsageProcessedGbsRequest
-func GetDailyUsageProcessedGbsRequestDateRangeAsDataUsageServiceGetDailyUsageProcessedGbsRequest(v *GetDailyUsageProcessedGbsRequestDateRange) DataUsageServiceGetDailyUsageProcessedGbsRequest {
-	return DataUsageServiceGetDailyUsageProcessedGbsRequest{
-		GetDailyUsageProcessedGbsRequestDateRange: v,
+type _DataUsageServiceGetDailyUsageProcessedGbsRequest DataUsageServiceGetDailyUsageProcessedGbsRequest
+
+// NewDataUsageServiceGetDailyUsageProcessedGbsRequest instantiates a new DataUsageServiceGetDailyUsageProcessedGbsRequest object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDataUsageServiceGetDailyUsageProcessedGbsRequest() *DataUsageServiceGetDailyUsageProcessedGbsRequest {
+	this := DataUsageServiceGetDailyUsageProcessedGbsRequest{}
+	return &this
+}
+
+// NewDataUsageServiceGetDailyUsageProcessedGbsRequestWithDefaults instantiates a new DataUsageServiceGetDailyUsageProcessedGbsRequest object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDataUsageServiceGetDailyUsageProcessedGbsRequestWithDefaults() *DataUsageServiceGetDailyUsageProcessedGbsRequest {
+	this := DataUsageServiceGetDailyUsageProcessedGbsRequest{}
+	return &this
+}
+
+// GetDateRange returns the DateRange field value if set, zero value otherwise.
+func (o *DataUsageServiceGetDailyUsageProcessedGbsRequest) GetDateRange() V2DateRange {
+	if o == nil || IsNil(o.DateRange) {
+		var ret V2DateRange
+		return ret
 	}
+	return *o.DateRange
 }
 
-// GetDailyUsageProcessedGbsRequestRangeAsDataUsageServiceGetDailyUsageProcessedGbsRequest is a convenience function that returns GetDailyUsageProcessedGbsRequestRange wrapped in DataUsageServiceGetDailyUsageProcessedGbsRequest
-func GetDailyUsageProcessedGbsRequestRangeAsDataUsageServiceGetDailyUsageProcessedGbsRequest(v *GetDailyUsageProcessedGbsRequestRange) DataUsageServiceGetDailyUsageProcessedGbsRequest {
-	return DataUsageServiceGetDailyUsageProcessedGbsRequest{
-		GetDailyUsageProcessedGbsRequestRange: v,
+// GetDateRangeOk returns a tuple with the DateRange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataUsageServiceGetDailyUsageProcessedGbsRequest) GetDateRangeOk() (*V2DateRange, bool) {
+	if o == nil || IsNil(o.DateRange) {
+		return nil, false
 	}
+	return o.DateRange, true
 }
 
+// HasDateRange returns a boolean if a field has been set.
+func (o *DataUsageServiceGetDailyUsageProcessedGbsRequest) HasDateRange() bool {
+	if o != nil && !IsNil(o.DateRange) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *DataUsageServiceGetDailyUsageProcessedGbsRequest) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into GetDailyUsageProcessedGbsRequestDateRange
-	err = json.Unmarshal(data, &dst.GetDailyUsageProcessedGbsRequestDateRange)
-	if err == nil {
-		jsonGetDailyUsageProcessedGbsRequestDateRange, _ := json.Marshal(dst.GetDailyUsageProcessedGbsRequestDateRange)
-		if string(jsonGetDailyUsageProcessedGbsRequestDateRange) == "{}" { // empty struct
-			dst.GetDailyUsageProcessedGbsRequestDateRange = nil
-		} else {
-			if err = validator.Validate(dst.GetDailyUsageProcessedGbsRequestDateRange); err != nil {
-				dst.GetDailyUsageProcessedGbsRequestDateRange = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetDateRange gets a reference to the given V2DateRange and assigns it to the DateRange field.
+func (o *DataUsageServiceGetDailyUsageProcessedGbsRequest) SetDateRange(v V2DateRange) {
+	o.DateRange = &v
+}
+
+// GetRange returns the Range field value if set, zero value otherwise.
+func (o *DataUsageServiceGetDailyUsageProcessedGbsRequest) GetRange() V2Range {
+	if o == nil || IsNil(o.Range) {
+		var ret V2Range
+		return ret
+	}
+	return *o.Range
+}
+
+// GetRangeOk returns a tuple with the Range field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataUsageServiceGetDailyUsageProcessedGbsRequest) GetRangeOk() (*V2Range, bool) {
+	if o == nil || IsNil(o.Range) {
+		return nil, false
+	}
+	return o.Range, true
+}
+
+// HasRange returns a boolean if a field has been set.
+func (o *DataUsageServiceGetDailyUsageProcessedGbsRequest) HasRange() bool {
+	if o != nil && !IsNil(o.Range) {
+		return true
+	}
+
+	return false
+}
+
+// SetRange gets a reference to the given V2Range and assigns it to the Range field.
+func (o *DataUsageServiceGetDailyUsageProcessedGbsRequest) SetRange(v V2Range) {
+	o.Range = &v
+}
+
+func (o DataUsageServiceGetDailyUsageProcessedGbsRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DataUsageServiceGetDailyUsageProcessedGbsRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.DateRange) {
+		toSerialize["dateRange"] = o.DateRange
+	}
+	if !IsNil(o.Range) {
+		toSerialize["range"] = o.Range
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["range"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dateRange"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [range, dateRange] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["range"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field range must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dateRange"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dateRange must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *DataUsageServiceGetDailyUsageProcessedGbsRequest) UnmarshalJSON(data []byte) (err error) {
+	varDataUsageServiceGetDailyUsageProcessedGbsRequest := _DataUsageServiceGetDailyUsageProcessedGbsRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataUsageServiceGetDailyUsageProcessedGbsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataUsageServiceGetDailyUsageProcessedGbsRequest(varDataUsageServiceGetDailyUsageProcessedGbsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["range"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GetDailyUsageProcessedGbsRequestDateRange = nil
-	}
-
-	// try to unmarshal data into GetDailyUsageProcessedGbsRequestRange
-	err = json.Unmarshal(data, &dst.GetDailyUsageProcessedGbsRequestRange)
-	if err == nil {
-		jsonGetDailyUsageProcessedGbsRequestRange, _ := json.Marshal(dst.GetDailyUsageProcessedGbsRequestRange)
-		if string(jsonGetDailyUsageProcessedGbsRequestRange) == "{}" { // empty struct
-			dst.GetDailyUsageProcessedGbsRequestRange = nil
-		} else {
-			if err = validator.Validate(dst.GetDailyUsageProcessedGbsRequestRange); err != nil {
-				dst.GetDailyUsageProcessedGbsRequestRange = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dateRange"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GetDailyUsageProcessedGbsRequestRange = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [range, dateRange] may be set"}
+		}
+
+		delete(additionalProperties, "dateRange")
+		delete(additionalProperties, "range")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.GetDailyUsageProcessedGbsRequestDateRange = nil
-		dst.GetDailyUsageProcessedGbsRequestRange = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(DataUsageServiceGetDailyUsageProcessedGbsRequest)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src DataUsageServiceGetDailyUsageProcessedGbsRequest) MarshalJSON() ([]byte, error) {
-	if src.GetDailyUsageProcessedGbsRequestDateRange != nil {
-		return json.Marshal(&src.GetDailyUsageProcessedGbsRequestDateRange)
-	}
-
-	if src.GetDailyUsageProcessedGbsRequestRange != nil {
-		return json.Marshal(&src.GetDailyUsageProcessedGbsRequestRange)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *DataUsageServiceGetDailyUsageProcessedGbsRequest) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.GetDailyUsageProcessedGbsRequestDateRange != nil {
-		return obj.GetDailyUsageProcessedGbsRequestDateRange
-	}
-
-	if obj.GetDailyUsageProcessedGbsRequestRange != nil {
-		return obj.GetDailyUsageProcessedGbsRequestRange
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj DataUsageServiceGetDailyUsageProcessedGbsRequest) GetActualInstanceValue() (interface{}) {
-	if obj.GetDailyUsageProcessedGbsRequestDateRange != nil {
-		return *obj.GetDailyUsageProcessedGbsRequestDateRange
-	}
-
-	if obj.GetDailyUsageProcessedGbsRequestRange != nil {
-		return *obj.GetDailyUsageProcessedGbsRequestRange
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableDataUsageServiceGetDailyUsageProcessedGbsRequest struct {
@@ -170,4 +222,3 @@ func (v *NullableDataUsageServiceGetDailyUsageProcessedGbsRequest) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

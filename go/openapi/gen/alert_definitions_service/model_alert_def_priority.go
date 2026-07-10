@@ -24,10 +24,10 @@ type AlertDefPriority string
 // List of AlertDefPriority
 const (
 	ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED AlertDefPriority = "ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED"
-	ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P4 AlertDefPriority = "ALERT_DEF_PRIORITY_P4"
-	ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P3 AlertDefPriority = "ALERT_DEF_PRIORITY_P3"
-	ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P2 AlertDefPriority = "ALERT_DEF_PRIORITY_P2"
-	ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1 AlertDefPriority = "ALERT_DEF_PRIORITY_P1"
+	ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P4                AlertDefPriority = "ALERT_DEF_PRIORITY_P4"
+	ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P3                AlertDefPriority = "ALERT_DEF_PRIORITY_P3"
+	ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P2                AlertDefPriority = "ALERT_DEF_PRIORITY_P2"
+	ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1                AlertDefPriority = "ALERT_DEF_PRIORITY_P1"
 )
 
 // All allowed values of AlertDefPriority enum
@@ -117,4 +117,3 @@ func (v *NullableAlertDefPriority) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

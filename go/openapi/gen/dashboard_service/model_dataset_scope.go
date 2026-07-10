@@ -24,9 +24,9 @@ type DatasetScope string
 // List of DatasetScope
 const (
 	DATASETSCOPE_DATASET_SCOPE_UNSPECIFIED DatasetScope = "DATASET_SCOPE_UNSPECIFIED"
-	DATASETSCOPE_DATASET_SCOPE_USER_DATA DatasetScope = "DATASET_SCOPE_USER_DATA"
-	DATASETSCOPE_DATASET_SCOPE_LABEL DatasetScope = "DATASET_SCOPE_LABEL"
-	DATASETSCOPE_DATASET_SCOPE_METADATA DatasetScope = "DATASET_SCOPE_METADATA"
+	DATASETSCOPE_DATASET_SCOPE_USER_DATA   DatasetScope = "DATASET_SCOPE_USER_DATA"
+	DATASETSCOPE_DATASET_SCOPE_LABEL       DatasetScope = "DATASET_SCOPE_LABEL"
+	DATASETSCOPE_DATASET_SCOPE_METADATA    DatasetScope = "DATASET_SCOPE_METADATA"
 )
 
 // All allowed values of DatasetScope enum
@@ -115,4 +115,3 @@ func (v *NullableDatasetScope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

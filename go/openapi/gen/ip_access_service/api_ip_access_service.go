@@ -18,13 +18,12 @@ import (
 	"net/url"
 )
 
-
 // IPAccessServiceAPIService IPAccessServiceAPI service
 type IPAccessServiceAPIService service
 
 type ApiIpAccessServiceCreateCompanyIpAccessSettingsRequest struct {
-	ctx context.Context
-	ApiService *IPAccessServiceAPIService
+	ctx                                  context.Context
+	ApiService                           *IPAccessServiceAPIService
 	createCompanyIPAccessSettingsRequest *CreateCompanyIPAccessSettingsRequest
 }
 
@@ -42,24 +41,25 @@ IpAccessServiceCreateCompanyIpAccessSettings Create company IP access settings
 
 Sets the IP access restrictions for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiIpAccessServiceCreateCompanyIpAccessSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiIpAccessServiceCreateCompanyIpAccessSettingsRequest
 */
 func (a *IPAccessServiceAPIService) IpAccessServiceCreateCompanyIpAccessSettings(ctx context.Context) ApiIpAccessServiceCreateCompanyIpAccessSettingsRequest {
 	return ApiIpAccessServiceCreateCompanyIpAccessSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateCompanyIpAccessSettingsResponse
+//
+//	@return CreateCompanyIpAccessSettingsResponse
 func (a *IPAccessServiceAPIService) IpAccessServiceCreateCompanyIpAccessSettingsExecute(r ApiIpAccessServiceCreateCompanyIpAccessSettingsRequest) (*CreateCompanyIpAccessSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateCompanyIpAccessSettingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateCompanyIpAccessSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPAccessServiceAPIService.IpAccessServiceCreateCompanyIpAccessSettings")
@@ -121,8 +121,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceCreateCompanyIpAccessSettings
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -132,8 +132,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceCreateCompanyIpAccessSettings
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -143,8 +143,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceCreateCompanyIpAccessSettings
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -162,9 +162,9 @@ func (a *IPAccessServiceAPIService) IpAccessServiceCreateCompanyIpAccessSettings
 }
 
 type ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *IPAccessServiceAPIService
-	id *string
+	id         *string
 }
 
 // The unique identifier of the company IP access settings to delete.
@@ -182,24 +182,25 @@ IpAccessServiceDeleteCompanyIpAccessSettings Delete company IP access settings
 
 Removes the IP access restrictions for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest
 */
 func (a *IPAccessServiceAPIService) IpAccessServiceDeleteCompanyIpAccessSettings(ctx context.Context) ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest {
 	return ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *IPAccessServiceAPIService) IpAccessServiceDeleteCompanyIpAccessSettingsExecute(r ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPAccessServiceAPIService.IpAccessServiceDeleteCompanyIpAccessSettings")
@@ -214,7 +215,9 @@ func (a *IPAccessServiceAPIService) IpAccessServiceDeleteCompanyIpAccessSettings
 	localVarFormParams := url.Values{}
 
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -262,8 +265,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceDeleteCompanyIpAccessSettings
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -273,8 +276,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceDeleteCompanyIpAccessSettings
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -284,8 +287,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceDeleteCompanyIpAccessSettings
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -303,9 +306,9 @@ func (a *IPAccessServiceAPIService) IpAccessServiceDeleteCompanyIpAccessSettings
 }
 
 type ApiIpAccessServiceGetCompanyIpAccessSettingsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *IPAccessServiceAPIService
-	id *string
+	id         *string
 }
 
 // The ID of the company IP access settings to get. If it&#39;s not provided, the id will be derived from the authorization header.
@@ -323,24 +326,25 @@ IpAccessServiceGetCompanyIpAccessSettings Get company IP access settings
 
 Returns the current IP access settings for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiIpAccessServiceGetCompanyIpAccessSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiIpAccessServiceGetCompanyIpAccessSettingsRequest
 */
 func (a *IPAccessServiceAPIService) IpAccessServiceGetCompanyIpAccessSettings(ctx context.Context) ApiIpAccessServiceGetCompanyIpAccessSettingsRequest {
 	return ApiIpAccessServiceGetCompanyIpAccessSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetCompanyIpAccessSettingsResponse
+//
+//	@return GetCompanyIpAccessSettingsResponse
 func (a *IPAccessServiceAPIService) IpAccessServiceGetCompanyIpAccessSettingsExecute(r ApiIpAccessServiceGetCompanyIpAccessSettingsRequest) (*GetCompanyIpAccessSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCompanyIpAccessSettingsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCompanyIpAccessSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPAccessServiceAPIService.IpAccessServiceGetCompanyIpAccessSettings")
@@ -355,7 +359,9 @@ func (a *IPAccessServiceAPIService) IpAccessServiceGetCompanyIpAccessSettingsExe
 	localVarFormParams := url.Values{}
 
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -403,8 +409,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceGetCompanyIpAccessSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -414,8 +420,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceGetCompanyIpAccessSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -425,8 +431,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceGetCompanyIpAccessSettingsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -444,8 +450,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceGetCompanyIpAccessSettingsExe
 }
 
 type ApiIpAccessServiceReplaceCompanyIpAccessSettingsRequest struct {
-	ctx context.Context
-	ApiService *IPAccessServiceAPIService
+	ctx                                   context.Context
+	ApiService                            *IPAccessServiceAPIService
 	replaceCompanyIPAccessSettingsRequest *ReplaceCompanyIPAccessSettingsRequest
 }
 
@@ -463,24 +469,25 @@ IpAccessServiceReplaceCompanyIpAccessSettings Replace company IP access settings
 
 Updates the IP access restrictions for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiIpAccessServiceReplaceCompanyIpAccessSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiIpAccessServiceReplaceCompanyIpAccessSettingsRequest
 */
 func (a *IPAccessServiceAPIService) IpAccessServiceReplaceCompanyIpAccessSettings(ctx context.Context) ApiIpAccessServiceReplaceCompanyIpAccessSettingsRequest {
 	return ApiIpAccessServiceReplaceCompanyIpAccessSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReplaceCompanyIpAccessSettingsResponse
+//
+//	@return ReplaceCompanyIpAccessSettingsResponse
 func (a *IPAccessServiceAPIService) IpAccessServiceReplaceCompanyIpAccessSettingsExecute(r ApiIpAccessServiceReplaceCompanyIpAccessSettingsRequest) (*ReplaceCompanyIpAccessSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceCompanyIpAccessSettingsResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplaceCompanyIpAccessSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IPAccessServiceAPIService.IpAccessServiceReplaceCompanyIpAccessSettings")
@@ -542,8 +549,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceReplaceCompanyIpAccessSetting
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -553,8 +560,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceReplaceCompanyIpAccessSetting
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -564,8 +571,8 @@ func (a *IPAccessServiceAPIService) IpAccessServiceReplaceCompanyIpAccessSetting
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

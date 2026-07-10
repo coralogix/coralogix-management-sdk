@@ -13,126 +13,180 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// HorizontalBarChartYAxisViewBy - struct for HorizontalBarChartYAxisViewBy
+// checks if the HorizontalBarChartYAxisViewBy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HorizontalBarChartYAxisViewBy{}
+
+// HorizontalBarChartYAxisViewBy Horizontal bar chart.y axis view by.
 type HorizontalBarChartYAxisViewBy struct {
-	HorizontalBarChartYAxisViewByCategory *HorizontalBarChartYAxisViewByCategory
-	HorizontalBarChartYAxisViewByValue *HorizontalBarChartYAxisViewByValue
+	// Y axis view by category.
+	Category map[string]interface{} `json:"category,omitempty"`
+	// Y axis view by value.
+	Value                             map[string]interface{} `json:"value,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// HorizontalBarChartYAxisViewByCategoryAsHorizontalBarChartYAxisViewBy is a convenience function that returns HorizontalBarChartYAxisViewByCategory wrapped in HorizontalBarChartYAxisViewBy
-func HorizontalBarChartYAxisViewByCategoryAsHorizontalBarChartYAxisViewBy(v *HorizontalBarChartYAxisViewByCategory) HorizontalBarChartYAxisViewBy {
-	return HorizontalBarChartYAxisViewBy{
-		HorizontalBarChartYAxisViewByCategory: v,
+type _HorizontalBarChartYAxisViewBy HorizontalBarChartYAxisViewBy
+
+// NewHorizontalBarChartYAxisViewBy instantiates a new HorizontalBarChartYAxisViewBy object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewHorizontalBarChartYAxisViewBy() *HorizontalBarChartYAxisViewBy {
+	this := HorizontalBarChartYAxisViewBy{}
+	return &this
+}
+
+// NewHorizontalBarChartYAxisViewByWithDefaults instantiates a new HorizontalBarChartYAxisViewBy object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewHorizontalBarChartYAxisViewByWithDefaults() *HorizontalBarChartYAxisViewBy {
+	this := HorizontalBarChartYAxisViewBy{}
+	return &this
+}
+
+// GetCategory returns the Category field value if set, zero value otherwise.
+func (o *HorizontalBarChartYAxisViewBy) GetCategory() map[string]interface{} {
+	if o == nil || IsNil(o.Category) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.Category
 }
 
-// HorizontalBarChartYAxisViewByValueAsHorizontalBarChartYAxisViewBy is a convenience function that returns HorizontalBarChartYAxisViewByValue wrapped in HorizontalBarChartYAxisViewBy
-func HorizontalBarChartYAxisViewByValueAsHorizontalBarChartYAxisViewBy(v *HorizontalBarChartYAxisViewByValue) HorizontalBarChartYAxisViewBy {
-	return HorizontalBarChartYAxisViewBy{
-		HorizontalBarChartYAxisViewByValue: v,
+// GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HorizontalBarChartYAxisViewBy) GetCategoryOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Category) {
+		return map[string]interface{}{}, false
 	}
+	return o.Category, true
 }
 
+// HasCategory returns a boolean if a field has been set.
+func (o *HorizontalBarChartYAxisViewBy) HasCategory() bool {
+	if o != nil && !IsNil(o.Category) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *HorizontalBarChartYAxisViewBy) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into HorizontalBarChartYAxisViewByCategory
-	err = json.Unmarshal(data, &dst.HorizontalBarChartYAxisViewByCategory)
-	if err == nil {
-		jsonHorizontalBarChartYAxisViewByCategory, _ := json.Marshal(dst.HorizontalBarChartYAxisViewByCategory)
-		if string(jsonHorizontalBarChartYAxisViewByCategory) == "{}" { // empty struct
-			dst.HorizontalBarChartYAxisViewByCategory = nil
-		} else {
-			if err = validator.Validate(dst.HorizontalBarChartYAxisViewByCategory); err != nil {
-				dst.HorizontalBarChartYAxisViewByCategory = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetCategory gets a reference to the given map[string]interface{} and assigns it to the Category field.
+func (o *HorizontalBarChartYAxisViewBy) SetCategory(v map[string]interface{}) {
+	o.Category = v
+}
+
+// GetValue returns the Value field value if set, zero value otherwise.
+func (o *HorizontalBarChartYAxisViewBy) GetValue() map[string]interface{} {
+	if o == nil || IsNil(o.Value) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HorizontalBarChartYAxisViewBy) GetValueOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Value) {
+		return map[string]interface{}{}, false
+	}
+	return o.Value, true
+}
+
+// HasValue returns a boolean if a field has been set.
+func (o *HorizontalBarChartYAxisViewBy) HasValue() bool {
+	if o != nil && !IsNil(o.Value) {
+		return true
+	}
+
+	return false
+}
+
+// SetValue gets a reference to the given map[string]interface{} and assigns it to the Value field.
+func (o *HorizontalBarChartYAxisViewBy) SetValue(v map[string]interface{}) {
+	o.Value = v
+}
+
+func (o HorizontalBarChartYAxisViewBy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HorizontalBarChartYAxisViewBy) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Category) {
+		toSerialize["category"] = o.Category
+	}
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["category"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["value"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [category, value] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["category"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field category must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["value"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field value must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *HorizontalBarChartYAxisViewBy) UnmarshalJSON(data []byte) (err error) {
+	varHorizontalBarChartYAxisViewBy := _HorizontalBarChartYAxisViewBy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHorizontalBarChartYAxisViewBy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HorizontalBarChartYAxisViewBy(varHorizontalBarChartYAxisViewBy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["category"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HorizontalBarChartYAxisViewByCategory = nil
-	}
-
-	// try to unmarshal data into HorizontalBarChartYAxisViewByValue
-	err = json.Unmarshal(data, &dst.HorizontalBarChartYAxisViewByValue)
-	if err == nil {
-		jsonHorizontalBarChartYAxisViewByValue, _ := json.Marshal(dst.HorizontalBarChartYAxisViewByValue)
-		if string(jsonHorizontalBarChartYAxisViewByValue) == "{}" { // empty struct
-			dst.HorizontalBarChartYAxisViewByValue = nil
-		} else {
-			if err = validator.Validate(dst.HorizontalBarChartYAxisViewByValue); err != nil {
-				dst.HorizontalBarChartYAxisViewByValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["value"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HorizontalBarChartYAxisViewByValue = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [category, value] may be set"}
+		}
+
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.HorizontalBarChartYAxisViewByCategory = nil
-		dst.HorizontalBarChartYAxisViewByValue = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(HorizontalBarChartYAxisViewBy)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src HorizontalBarChartYAxisViewBy) MarshalJSON() ([]byte, error) {
-	if src.HorizontalBarChartYAxisViewByCategory != nil {
-		return json.Marshal(&src.HorizontalBarChartYAxisViewByCategory)
-	}
-
-	if src.HorizontalBarChartYAxisViewByValue != nil {
-		return json.Marshal(&src.HorizontalBarChartYAxisViewByValue)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *HorizontalBarChartYAxisViewBy) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.HorizontalBarChartYAxisViewByCategory != nil {
-		return obj.HorizontalBarChartYAxisViewByCategory
-	}
-
-	if obj.HorizontalBarChartYAxisViewByValue != nil {
-		return obj.HorizontalBarChartYAxisViewByValue
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj HorizontalBarChartYAxisViewBy) GetActualInstanceValue() (interface{}) {
-	if obj.HorizontalBarChartYAxisViewByCategory != nil {
-		return *obj.HorizontalBarChartYAxisViewByCategory
-	}
-
-	if obj.HorizontalBarChartYAxisViewByValue != nil {
-		return *obj.HorizontalBarChartYAxisViewByValue
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableHorizontalBarChartYAxisViewBy struct {
@@ -170,4 +224,3 @@ func (v *NullableHorizontalBarChartYAxisViewBy) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -79,17 +79,18 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *EntitiesServiceAPI* | [**EntitiesServiceListEntitySubTypes**](docs/EntitiesServiceAPI.md#entitiesservicelistentitysubtypes) | **Get** /notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes | List Entity Subtypes
+*EntitiesServiceAPI* | [**EntitiesServiceListEntityTypeAttachmentTypes**](docs/EntitiesServiceAPI.md#entitiesservicelistentitytypeattachmenttypes) | **Get** /notifications/notification-center/v1/entity-types/{entity_type}/attachment-types | List Entity Type Attachment Types
 *EntitiesServiceAPI* | [**EntitiesServiceListEntityTypes**](docs/EntitiesServiceAPI.md#entitiesservicelistentitytypes) | **Get** /notifications/notification-center/v1/entity-types | List Entity Types
 
 
 ## Documentation For Models
 
+ - [EntityTypeAttachmentType](docs/EntityTypeAttachmentType.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [ListEntitySubTypesResponse](docs/ListEntitySubTypesResponse.md)
+ - [ListEntityTypeAttachmentTypesResponse](docs/ListEntityTypeAttachmentTypesResponse.md)
  - [ListEntityTypesResponse](docs/ListEntityTypesResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationCenterEntityType](docs/NotificationCenterEntityType.md)

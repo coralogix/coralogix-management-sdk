@@ -25,8 +25,9 @@ type GlobalIndicatorSettings struct {
 	// Enable/disable this setting. When this is disabled, no alerts will be processed for cases.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Whitelist conditions for the alerts to be processed. Empty list means all alerts are processed. Filtering_condition evaluations will be OR'ed together
-	FilteringConditions []IndicatorFilter `json:"filteringConditions,omitempty"`
-	AdditionalProperties map[string]interface{}
+	FilteringConditions               []IndicatorFilter `json:"filteringConditions,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GlobalIndicatorSettings GlobalIndicatorSettings
@@ -113,7 +114,7 @@ func (o *GlobalIndicatorSettings) SetFilteringConditions(v []IndicatorFilter) {
 }
 
 func (o GlobalIndicatorSettings) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *GlobalIndicatorSettings) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "filteringConditions")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableGlobalIndicatorSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

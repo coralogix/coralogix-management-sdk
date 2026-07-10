@@ -23,18 +23,18 @@ type InputType string
 
 // List of InputType
 const (
-	INPUTTYPE_API_KEY InputType = "API_KEY"
-	INPUTTYPE_TEXT InputType = "TEXT"
-	INPUTTYPE_LIST_TEXT InputType = "LIST_TEXT"
-	INPUTTYPE_MULTIPLE_SELECTION InputType = "MULTIPLE_SELECTION"
-	INPUTTYPE_BOOLEAN InputType = "BOOLEAN"
-	INPUTTYPE_SELECT InputType = "SELECT"
-	INPUTTYPE_JSON InputType = "JSON"
-	INPUTTYPE_NUMBER InputType = "NUMBER"
-	INPUTTYPE_SENSITIVE_DATA InputType = "SENSITIVE_DATA"
-	INPUTTYPE_JSON_OBJECT_ARRAY InputType = "JSON_OBJECT_ARRAY"
-	INPUTTYPE_AWS_REGION_SELECT InputType = "AWS_REGION_SELECT"
-	INPUTTYPE_AWS_REGION_MULTISELECT InputType = "AWS_REGION_MULTISELECT"
+	INPUTTYPE_API_KEY                       InputType = "API_KEY"
+	INPUTTYPE_TEXT                          InputType = "TEXT"
+	INPUTTYPE_LIST_TEXT                     InputType = "LIST_TEXT"
+	INPUTTYPE_MULTIPLE_SELECTION            InputType = "MULTIPLE_SELECTION"
+	INPUTTYPE_BOOLEAN                       InputType = "BOOLEAN"
+	INPUTTYPE_SELECT                        InputType = "SELECT"
+	INPUTTYPE_JSON                          InputType = "JSON"
+	INPUTTYPE_NUMBER                        InputType = "NUMBER"
+	INPUTTYPE_SENSITIVE_DATA                InputType = "SENSITIVE_DATA"
+	INPUTTYPE_JSON_OBJECT_ARRAY             InputType = "JSON_OBJECT_ARRAY"
+	INPUTTYPE_AWS_REGION_SELECT             InputType = "AWS_REGION_SELECT"
+	INPUTTYPE_AWS_REGION_MULTISELECT        InputType = "AWS_REGION_MULTISELECT"
 	INPUTTYPE_AWS_CLOUDWATCH_NAMESPACE_LIST InputType = "AWS_CLOUDWATCH_NAMESPACE_LIST"
 )
 
@@ -133,4 +133,3 @@ func (v *NullableInputType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

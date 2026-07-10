@@ -23,8 +23,9 @@ var _ MappedNullable = &MessageConfig{}
 // MessageConfig Message config.
 type MessageConfig struct {
 	// List of fields.
-	Fields []NotificationCenterMessageConfigField `json:"fields,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Fields                            []NotificationCenterMessageConfigField `json:"fields,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MessageConfig MessageConfig
@@ -79,7 +80,7 @@ func (o *MessageConfig) SetFields(v []NotificationCenterMessageConfigField) {
 }
 
 func (o MessageConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *MessageConfig) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "fields")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableMessageConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

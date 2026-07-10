@@ -25,11 +25,12 @@ type LogsSource struct {
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
 	// The label fields.
 	LabelFields []ObservationField `json:"labelFields,omitempty"`
-	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	LuceneQuery *LuceneQuery       `json:"luceneQuery,omitempty"`
 	// The message template.
-	MessageTemplate *string `json:"messageTemplate,omitempty"`
-	Strategy *LogsSourceStrategy `json:"strategy,omitempty"`
-	AdditionalProperties map[string]interface{}
+	MessageTemplate                   *string             `json:"messageTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Strategy                          *LogsSourceStrategy `json:"strategy,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogsSource LogsSource
@@ -212,7 +213,7 @@ func (o *LogsSource) SetStrategy(v LogsSourceStrategy) {
 }
 
 func (o LogsSource) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,6 +266,7 @@ func (o *LogsSource) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "messageTemplate")
 		delete(additionalProperties, "strategy")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -305,4 +307,3 @@ func (v *NullableLogsSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

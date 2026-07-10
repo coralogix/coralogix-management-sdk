@@ -25,8 +25,9 @@ type SetActiveRequest struct {
 	// The is active.
 	IsActive *bool `json:"isActive,omitempty"`
 	// Team identifier.
-	TeamId *int64 `json:"teamId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TeamId                            *int64 `json:"teamId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SetActiveRequest SetActiveRequest
@@ -113,7 +114,7 @@ func (o *SetActiveRequest) SetTeamId(v int64) {
 }
 
 func (o SetActiveRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *SetActiveRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "isActive")
 		delete(additionalProperties, "teamId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableSetActiveRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

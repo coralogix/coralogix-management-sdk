@@ -23,15 +23,16 @@ var _ MappedNullable = &WidgetsPieChartLabelDefinition{}
 // WidgetsPieChartLabelDefinition Label definition.
 type WidgetsPieChartLabelDefinition struct {
 	// Are labels visible
-	IsVisible *bool `json:"isVisible,omitempty"`
+	IsVisible   *bool                       `json:"isVisible,omitempty"`
 	LabelSource *WidgetsPieChartLabelSource `json:"labelSource,omitempty"`
 	// Whether to show the name of slice in the label
 	ShowName *bool `json:"showName,omitempty"`
 	// Whether to show percentage value of slice in the label
 	ShowPercentage *bool `json:"showPercentage,omitempty"`
 	// Whether to show value of slice in the label
-	ShowValue *bool `json:"showValue,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ShowValue                         *bool `json:"showValue,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _WidgetsPieChartLabelDefinition WidgetsPieChartLabelDefinition
@@ -214,7 +215,7 @@ func (o *WidgetsPieChartLabelDefinition) SetShowValue(v bool) {
 }
 
 func (o WidgetsPieChartLabelDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -267,6 +268,7 @@ func (o *WidgetsPieChartLabelDefinition) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "showPercentage")
 		delete(additionalProperties, "showValue")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -307,4 +309,3 @@ func (v *NullableWidgetsPieChartLabelDefinition) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

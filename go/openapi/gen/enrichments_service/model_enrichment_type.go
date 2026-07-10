@@ -13,202 +13,271 @@ package enrichments_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// EnrichmentType - struct for EnrichmentType
+// checks if the EnrichmentType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnrichmentType{}
+
+// EnrichmentType Enrichment type.
 type EnrichmentType struct {
-	EnrichmentTypeAws *EnrichmentTypeAws
-	EnrichmentTypeCustomEnrichment *EnrichmentTypeCustomEnrichment
-	EnrichmentTypeGeoIp *EnrichmentTypeGeoIp
-	EnrichmentTypeSuspiciousIp *EnrichmentTypeSuspiciousIp
+	Aws              *AwsType              `json:"aws,omitempty"`
+	CustomEnrichment *CustomEnrichmentType `json:"customEnrichment,omitempty"`
+	GeoIp            *GeoIpType            `json:"geoIp,omitempty"`
+	// Suspicious ip type.
+	SuspiciousIp                      map[string]interface{} `json:"suspiciousIp,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// EnrichmentTypeAwsAsEnrichmentType is a convenience function that returns EnrichmentTypeAws wrapped in EnrichmentType
-func EnrichmentTypeAwsAsEnrichmentType(v *EnrichmentTypeAws) EnrichmentType {
-	return EnrichmentType{
-		EnrichmentTypeAws: v,
+type _EnrichmentType EnrichmentType
+
+// NewEnrichmentType instantiates a new EnrichmentType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewEnrichmentType() *EnrichmentType {
+	this := EnrichmentType{}
+	return &this
+}
+
+// NewEnrichmentTypeWithDefaults instantiates a new EnrichmentType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewEnrichmentTypeWithDefaults() *EnrichmentType {
+	this := EnrichmentType{}
+	return &this
+}
+
+// GetAws returns the Aws field value if set, zero value otherwise.
+func (o *EnrichmentType) GetAws() AwsType {
+	if o == nil || IsNil(o.Aws) {
+		var ret AwsType
+		return ret
 	}
+	return *o.Aws
 }
 
-// EnrichmentTypeCustomEnrichmentAsEnrichmentType is a convenience function that returns EnrichmentTypeCustomEnrichment wrapped in EnrichmentType
-func EnrichmentTypeCustomEnrichmentAsEnrichmentType(v *EnrichmentTypeCustomEnrichment) EnrichmentType {
-	return EnrichmentType{
-		EnrichmentTypeCustomEnrichment: v,
+// GetAwsOk returns a tuple with the Aws field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnrichmentType) GetAwsOk() (*AwsType, bool) {
+	if o == nil || IsNil(o.Aws) {
+		return nil, false
 	}
+	return o.Aws, true
 }
 
-// EnrichmentTypeGeoIpAsEnrichmentType is a convenience function that returns EnrichmentTypeGeoIp wrapped in EnrichmentType
-func EnrichmentTypeGeoIpAsEnrichmentType(v *EnrichmentTypeGeoIp) EnrichmentType {
-	return EnrichmentType{
-		EnrichmentTypeGeoIp: v,
+// HasAws returns a boolean if a field has been set.
+func (o *EnrichmentType) HasAws() bool {
+	if o != nil && !IsNil(o.Aws) {
+		return true
 	}
+
+	return false
 }
 
-// EnrichmentTypeSuspiciousIpAsEnrichmentType is a convenience function that returns EnrichmentTypeSuspiciousIp wrapped in EnrichmentType
-func EnrichmentTypeSuspiciousIpAsEnrichmentType(v *EnrichmentTypeSuspiciousIp) EnrichmentType {
-	return EnrichmentType{
-		EnrichmentTypeSuspiciousIp: v,
+// SetAws gets a reference to the given AwsType and assigns it to the Aws field.
+func (o *EnrichmentType) SetAws(v AwsType) {
+	o.Aws = &v
+}
+
+// GetCustomEnrichment returns the CustomEnrichment field value if set, zero value otherwise.
+func (o *EnrichmentType) GetCustomEnrichment() CustomEnrichmentType {
+	if o == nil || IsNil(o.CustomEnrichment) {
+		var ret CustomEnrichmentType
+		return ret
 	}
+	return *o.CustomEnrichment
 }
 
+// GetCustomEnrichmentOk returns a tuple with the CustomEnrichment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnrichmentType) GetCustomEnrichmentOk() (*CustomEnrichmentType, bool) {
+	if o == nil || IsNil(o.CustomEnrichment) {
+		return nil, false
+	}
+	return o.CustomEnrichment, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *EnrichmentType) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into EnrichmentTypeAws
-	err = json.Unmarshal(data, &dst.EnrichmentTypeAws)
-	if err == nil {
-		jsonEnrichmentTypeAws, _ := json.Marshal(dst.EnrichmentTypeAws)
-		if string(jsonEnrichmentTypeAws) == "{}" { // empty struct
-			dst.EnrichmentTypeAws = nil
-		} else {
-			if err = validator.Validate(dst.EnrichmentTypeAws); err != nil {
-				dst.EnrichmentTypeAws = nil
-			} else {
-				match++
-			}
+// HasCustomEnrichment returns a boolean if a field has been set.
+func (o *EnrichmentType) HasCustomEnrichment() bool {
+	if o != nil && !IsNil(o.CustomEnrichment) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomEnrichment gets a reference to the given CustomEnrichmentType and assigns it to the CustomEnrichment field.
+func (o *EnrichmentType) SetCustomEnrichment(v CustomEnrichmentType) {
+	o.CustomEnrichment = &v
+}
+
+// GetGeoIp returns the GeoIp field value if set, zero value otherwise.
+func (o *EnrichmentType) GetGeoIp() GeoIpType {
+	if o == nil || IsNil(o.GeoIp) {
+		var ret GeoIpType
+		return ret
+	}
+	return *o.GeoIp
+}
+
+// GetGeoIpOk returns a tuple with the GeoIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnrichmentType) GetGeoIpOk() (*GeoIpType, bool) {
+	if o == nil || IsNil(o.GeoIp) {
+		return nil, false
+	}
+	return o.GeoIp, true
+}
+
+// HasGeoIp returns a boolean if a field has been set.
+func (o *EnrichmentType) HasGeoIp() bool {
+	if o != nil && !IsNil(o.GeoIp) {
+		return true
+	}
+
+	return false
+}
+
+// SetGeoIp gets a reference to the given GeoIpType and assigns it to the GeoIp field.
+func (o *EnrichmentType) SetGeoIp(v GeoIpType) {
+	o.GeoIp = &v
+}
+
+// GetSuspiciousIp returns the SuspiciousIp field value if set, zero value otherwise.
+func (o *EnrichmentType) GetSuspiciousIp() map[string]interface{} {
+	if o == nil || IsNil(o.SuspiciousIp) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.SuspiciousIp
+}
+
+// GetSuspiciousIpOk returns a tuple with the SuspiciousIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnrichmentType) GetSuspiciousIpOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.SuspiciousIp) {
+		return map[string]interface{}{}, false
+	}
+	return o.SuspiciousIp, true
+}
+
+// HasSuspiciousIp returns a boolean if a field has been set.
+func (o *EnrichmentType) HasSuspiciousIp() bool {
+	if o != nil && !IsNil(o.SuspiciousIp) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuspiciousIp gets a reference to the given map[string]interface{} and assigns it to the SuspiciousIp field.
+func (o *EnrichmentType) SetSuspiciousIp(v map[string]interface{}) {
+	o.SuspiciousIp = v
+}
+
+func (o EnrichmentType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EnrichmentType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Aws) {
+		toSerialize["aws"] = o.Aws
+	}
+	if !IsNil(o.CustomEnrichment) {
+		toSerialize["customEnrichment"] = o.CustomEnrichment
+	}
+	if !IsNil(o.GeoIp) {
+		toSerialize["geoIp"] = o.GeoIp
+	}
+	if !IsNil(o.SuspiciousIp) {
+		toSerialize["suspiciousIp"] = o.SuspiciousIp
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["geoIp"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["suspiciousIp"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["aws"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["customEnrichment"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [geoIp, suspiciousIp, aws, customEnrichment] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["geoIp"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field geoIp must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["suspiciousIp"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field suspiciousIp must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["aws"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field aws must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["customEnrichment"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field customEnrichment must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *EnrichmentType) UnmarshalJSON(data []byte) (err error) {
+	varEnrichmentType := _EnrichmentType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEnrichmentType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EnrichmentType(varEnrichmentType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["geoIp"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EnrichmentTypeAws = nil
-	}
-
-	// try to unmarshal data into EnrichmentTypeCustomEnrichment
-	err = json.Unmarshal(data, &dst.EnrichmentTypeCustomEnrichment)
-	if err == nil {
-		jsonEnrichmentTypeCustomEnrichment, _ := json.Marshal(dst.EnrichmentTypeCustomEnrichment)
-		if string(jsonEnrichmentTypeCustomEnrichment) == "{}" { // empty struct
-			dst.EnrichmentTypeCustomEnrichment = nil
-		} else {
-			if err = validator.Validate(dst.EnrichmentTypeCustomEnrichment); err != nil {
-				dst.EnrichmentTypeCustomEnrichment = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["suspiciousIp"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EnrichmentTypeCustomEnrichment = nil
-	}
-
-	// try to unmarshal data into EnrichmentTypeGeoIp
-	err = json.Unmarshal(data, &dst.EnrichmentTypeGeoIp)
-	if err == nil {
-		jsonEnrichmentTypeGeoIp, _ := json.Marshal(dst.EnrichmentTypeGeoIp)
-		if string(jsonEnrichmentTypeGeoIp) == "{}" { // empty struct
-			dst.EnrichmentTypeGeoIp = nil
-		} else {
-			if err = validator.Validate(dst.EnrichmentTypeGeoIp); err != nil {
-				dst.EnrichmentTypeGeoIp = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["aws"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EnrichmentTypeGeoIp = nil
-	}
-
-	// try to unmarshal data into EnrichmentTypeSuspiciousIp
-	err = json.Unmarshal(data, &dst.EnrichmentTypeSuspiciousIp)
-	if err == nil {
-		jsonEnrichmentTypeSuspiciousIp, _ := json.Marshal(dst.EnrichmentTypeSuspiciousIp)
-		if string(jsonEnrichmentTypeSuspiciousIp) == "{}" { // empty struct
-			dst.EnrichmentTypeSuspiciousIp = nil
-		} else {
-			if err = validator.Validate(dst.EnrichmentTypeSuspiciousIp); err != nil {
-				dst.EnrichmentTypeSuspiciousIp = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["customEnrichment"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EnrichmentTypeSuspiciousIp = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [geoIp, suspiciousIp, aws, customEnrichment] may be set"}
+		}
+
+		delete(additionalProperties, "aws")
+		delete(additionalProperties, "customEnrichment")
+		delete(additionalProperties, "geoIp")
+		delete(additionalProperties, "suspiciousIp")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.EnrichmentTypeAws = nil
-		dst.EnrichmentTypeCustomEnrichment = nil
-		dst.EnrichmentTypeGeoIp = nil
-		dst.EnrichmentTypeSuspiciousIp = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(EnrichmentType)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src EnrichmentType) MarshalJSON() ([]byte, error) {
-	if src.EnrichmentTypeAws != nil {
-		return json.Marshal(&src.EnrichmentTypeAws)
-	}
-
-	if src.EnrichmentTypeCustomEnrichment != nil {
-		return json.Marshal(&src.EnrichmentTypeCustomEnrichment)
-	}
-
-	if src.EnrichmentTypeGeoIp != nil {
-		return json.Marshal(&src.EnrichmentTypeGeoIp)
-	}
-
-	if src.EnrichmentTypeSuspiciousIp != nil {
-		return json.Marshal(&src.EnrichmentTypeSuspiciousIp)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *EnrichmentType) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.EnrichmentTypeAws != nil {
-		return obj.EnrichmentTypeAws
-	}
-
-	if obj.EnrichmentTypeCustomEnrichment != nil {
-		return obj.EnrichmentTypeCustomEnrichment
-	}
-
-	if obj.EnrichmentTypeGeoIp != nil {
-		return obj.EnrichmentTypeGeoIp
-	}
-
-	if obj.EnrichmentTypeSuspiciousIp != nil {
-		return obj.EnrichmentTypeSuspiciousIp
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj EnrichmentType) GetActualInstanceValue() (interface{}) {
-	if obj.EnrichmentTypeAws != nil {
-		return *obj.EnrichmentTypeAws
-	}
-
-	if obj.EnrichmentTypeCustomEnrichment != nil {
-		return *obj.EnrichmentTypeCustomEnrichment
-	}
-
-	if obj.EnrichmentTypeGeoIp != nil {
-		return *obj.EnrichmentTypeGeoIp
-	}
-
-	if obj.EnrichmentTypeSuspiciousIp != nil {
-		return *obj.EnrichmentTypeSuspiciousIp
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableEnrichmentType struct {
@@ -246,4 +315,3 @@ func (v *NullableEnrichmentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

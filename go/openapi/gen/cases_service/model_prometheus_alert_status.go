@@ -13,126 +13,178 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// PrometheusAlertStatus - struct for PrometheusAlertStatus
+// checks if the PrometheusAlertStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PrometheusAlertStatus{}
+
+// PrometheusAlertStatus Lifecycle status of a Prometheus alert or alert group.
 type PrometheusAlertStatus struct {
-	PrometheusAlertStatusResolved *PrometheusAlertStatusResolved
-	PrometheusAlertStatusTriggered *PrometheusAlertStatusTriggered
+	Resolved                          *Resolved  `json:"resolved,omitempty"`
+	Triggered                         *Triggered `json:"triggered,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// PrometheusAlertStatusResolvedAsPrometheusAlertStatus is a convenience function that returns PrometheusAlertStatusResolved wrapped in PrometheusAlertStatus
-func PrometheusAlertStatusResolvedAsPrometheusAlertStatus(v *PrometheusAlertStatusResolved) PrometheusAlertStatus {
-	return PrometheusAlertStatus{
-		PrometheusAlertStatusResolved: v,
+type _PrometheusAlertStatus PrometheusAlertStatus
+
+// NewPrometheusAlertStatus instantiates a new PrometheusAlertStatus object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewPrometheusAlertStatus() *PrometheusAlertStatus {
+	this := PrometheusAlertStatus{}
+	return &this
+}
+
+// NewPrometheusAlertStatusWithDefaults instantiates a new PrometheusAlertStatus object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewPrometheusAlertStatusWithDefaults() *PrometheusAlertStatus {
+	this := PrometheusAlertStatus{}
+	return &this
+}
+
+// GetResolved returns the Resolved field value if set, zero value otherwise.
+func (o *PrometheusAlertStatus) GetResolved() Resolved {
+	if o == nil || IsNil(o.Resolved) {
+		var ret Resolved
+		return ret
 	}
+	return *o.Resolved
 }
 
-// PrometheusAlertStatusTriggeredAsPrometheusAlertStatus is a convenience function that returns PrometheusAlertStatusTriggered wrapped in PrometheusAlertStatus
-func PrometheusAlertStatusTriggeredAsPrometheusAlertStatus(v *PrometheusAlertStatusTriggered) PrometheusAlertStatus {
-	return PrometheusAlertStatus{
-		PrometheusAlertStatusTriggered: v,
+// GetResolvedOk returns a tuple with the Resolved field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PrometheusAlertStatus) GetResolvedOk() (*Resolved, bool) {
+	if o == nil || IsNil(o.Resolved) {
+		return nil, false
 	}
+	return o.Resolved, true
 }
 
+// HasResolved returns a boolean if a field has been set.
+func (o *PrometheusAlertStatus) HasResolved() bool {
+	if o != nil && !IsNil(o.Resolved) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *PrometheusAlertStatus) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into PrometheusAlertStatusResolved
-	err = json.Unmarshal(data, &dst.PrometheusAlertStatusResolved)
-	if err == nil {
-		jsonPrometheusAlertStatusResolved, _ := json.Marshal(dst.PrometheusAlertStatusResolved)
-		if string(jsonPrometheusAlertStatusResolved) == "{}" { // empty struct
-			dst.PrometheusAlertStatusResolved = nil
-		} else {
-			if err = validator.Validate(dst.PrometheusAlertStatusResolved); err != nil {
-				dst.PrometheusAlertStatusResolved = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetResolved gets a reference to the given Resolved and assigns it to the Resolved field.
+func (o *PrometheusAlertStatus) SetResolved(v Resolved) {
+	o.Resolved = &v
+}
+
+// GetTriggered returns the Triggered field value if set, zero value otherwise.
+func (o *PrometheusAlertStatus) GetTriggered() Triggered {
+	if o == nil || IsNil(o.Triggered) {
+		var ret Triggered
+		return ret
+	}
+	return *o.Triggered
+}
+
+// GetTriggeredOk returns a tuple with the Triggered field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PrometheusAlertStatus) GetTriggeredOk() (*Triggered, bool) {
+	if o == nil || IsNil(o.Triggered) {
+		return nil, false
+	}
+	return o.Triggered, true
+}
+
+// HasTriggered returns a boolean if a field has been set.
+func (o *PrometheusAlertStatus) HasTriggered() bool {
+	if o != nil && !IsNil(o.Triggered) {
+		return true
+	}
+
+	return false
+}
+
+// SetTriggered gets a reference to the given Triggered and assigns it to the Triggered field.
+func (o *PrometheusAlertStatus) SetTriggered(v Triggered) {
+	o.Triggered = &v
+}
+
+func (o PrometheusAlertStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PrometheusAlertStatus) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Resolved) {
+		toSerialize["resolved"] = o.Resolved
+	}
+	if !IsNil(o.Triggered) {
+		toSerialize["triggered"] = o.Triggered
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["triggered"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["resolved"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [triggered, resolved] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["triggered"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field triggered must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["resolved"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field resolved must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *PrometheusAlertStatus) UnmarshalJSON(data []byte) (err error) {
+	varPrometheusAlertStatus := _PrometheusAlertStatus{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPrometheusAlertStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PrometheusAlertStatus(varPrometheusAlertStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["triggered"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PrometheusAlertStatusResolved = nil
-	}
-
-	// try to unmarshal data into PrometheusAlertStatusTriggered
-	err = json.Unmarshal(data, &dst.PrometheusAlertStatusTriggered)
-	if err == nil {
-		jsonPrometheusAlertStatusTriggered, _ := json.Marshal(dst.PrometheusAlertStatusTriggered)
-		if string(jsonPrometheusAlertStatusTriggered) == "{}" { // empty struct
-			dst.PrometheusAlertStatusTriggered = nil
-		} else {
-			if err = validator.Validate(dst.PrometheusAlertStatusTriggered); err != nil {
-				dst.PrometheusAlertStatusTriggered = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["resolved"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.PrometheusAlertStatusTriggered = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [triggered, resolved] may be set"}
+		}
+
+		delete(additionalProperties, "resolved")
+		delete(additionalProperties, "triggered")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.PrometheusAlertStatusResolved = nil
-		dst.PrometheusAlertStatusTriggered = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(PrometheusAlertStatus)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src PrometheusAlertStatus) MarshalJSON() ([]byte, error) {
-	if src.PrometheusAlertStatusResolved != nil {
-		return json.Marshal(&src.PrometheusAlertStatusResolved)
-	}
-
-	if src.PrometheusAlertStatusTriggered != nil {
-		return json.Marshal(&src.PrometheusAlertStatusTriggered)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *PrometheusAlertStatus) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.PrometheusAlertStatusResolved != nil {
-		return obj.PrometheusAlertStatusResolved
-	}
-
-	if obj.PrometheusAlertStatusTriggered != nil {
-		return obj.PrometheusAlertStatusTriggered
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj PrometheusAlertStatus) GetActualInstanceValue() (interface{}) {
-	if obj.PrometheusAlertStatusResolved != nil {
-		return *obj.PrometheusAlertStatusResolved
-	}
-
-	if obj.PrometheusAlertStatusTriggered != nil {
-		return *obj.PrometheusAlertStatusTriggered
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullablePrometheusAlertStatus struct {
@@ -170,4 +222,3 @@ func (v *NullablePrometheusAlertStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -14,163 +14,288 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// UserUpdatesOperation - struct for UserUpdatesOperation
+// checks if the UserUpdatesOperation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserUpdatesOperation{}
+
+// UserUpdatesOperation User id list.
 type UserUpdatesOperation struct {
-	UserUpdatesOperationAdd *UserUpdatesOperationAdd
-	UserUpdatesOperationRemove *UserUpdatesOperationRemove
-	UserUpdatesOperationSet *UserUpdatesOperationSet
+	Add *UserIdList `json:"add,omitempty"`
+	// Discriminator indicating the user update operation type (add, remove, or set).
+	OperationType                     string      `json:"operationType"`
+	Remove                            *UserIdList `json:"remove,omitempty"`
+	Set                               *UserIdList `json:"set,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// UserUpdatesOperationAddAsUserUpdatesOperation is a convenience function that returns UserUpdatesOperationAdd wrapped in UserUpdatesOperation
-func UserUpdatesOperationAddAsUserUpdatesOperation(v *UserUpdatesOperationAdd) UserUpdatesOperation {
-	return UserUpdatesOperation{
-		UserUpdatesOperationAdd: v,
+type _UserUpdatesOperation UserUpdatesOperation
+
+// NewUserUpdatesOperation instantiates a new UserUpdatesOperation object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewUserUpdatesOperation(operationType string) *UserUpdatesOperation {
+	this := UserUpdatesOperation{}
+	this.OperationType = operationType
+	return &this
+}
+
+// NewUserUpdatesOperationWithDefaults instantiates a new UserUpdatesOperation object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewUserUpdatesOperationWithDefaults() *UserUpdatesOperation {
+	this := UserUpdatesOperation{}
+	return &this
+}
+
+// GetAdd returns the Add field value if set, zero value otherwise.
+func (o *UserUpdatesOperation) GetAdd() UserIdList {
+	if o == nil || IsNil(o.Add) {
+		var ret UserIdList
+		return ret
 	}
+	return *o.Add
 }
 
-// UserUpdatesOperationRemoveAsUserUpdatesOperation is a convenience function that returns UserUpdatesOperationRemove wrapped in UserUpdatesOperation
-func UserUpdatesOperationRemoveAsUserUpdatesOperation(v *UserUpdatesOperationRemove) UserUpdatesOperation {
-	return UserUpdatesOperation{
-		UserUpdatesOperationRemove: v,
+// GetAddOk returns a tuple with the Add field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserUpdatesOperation) GetAddOk() (*UserIdList, bool) {
+	if o == nil || IsNil(o.Add) {
+		return nil, false
 	}
+	return o.Add, true
 }
 
-// UserUpdatesOperationSetAsUserUpdatesOperation is a convenience function that returns UserUpdatesOperationSet wrapped in UserUpdatesOperation
-func UserUpdatesOperationSetAsUserUpdatesOperation(v *UserUpdatesOperationSet) UserUpdatesOperation {
-	return UserUpdatesOperation{
-		UserUpdatesOperationSet: v,
+// HasAdd returns a boolean if a field has been set.
+func (o *UserUpdatesOperation) HasAdd() bool {
+	if o != nil && !IsNil(o.Add) {
+		return true
 	}
+
+	return false
 }
 
+// SetAdd gets a reference to the given UserIdList and assigns it to the Add field.
+func (o *UserUpdatesOperation) SetAdd(v UserIdList) {
+	o.Add = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *UserUpdatesOperation) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into UserUpdatesOperationAdd
-	err = json.Unmarshal(data, &dst.UserUpdatesOperationAdd)
-	if err == nil {
-		jsonUserUpdatesOperationAdd, _ := json.Marshal(dst.UserUpdatesOperationAdd)
-		if string(jsonUserUpdatesOperationAdd) == "{}" { // empty struct
-			dst.UserUpdatesOperationAdd = nil
-		} else {
-			if err = validator.Validate(dst.UserUpdatesOperationAdd); err != nil {
-				dst.UserUpdatesOperationAdd = nil
-			} else {
-				match++
-			}
+// GetOperationType returns the OperationType field value
+func (o *UserUpdatesOperation) GetOperationType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.OperationType
+}
+
+// GetOperationTypeOk returns a tuple with the OperationType field value
+// and a boolean to check if the value has been set.
+func (o *UserUpdatesOperation) GetOperationTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OperationType, true
+}
+
+// SetOperationType sets field value
+func (o *UserUpdatesOperation) SetOperationType(v string) {
+	o.OperationType = v
+}
+
+// GetRemove returns the Remove field value if set, zero value otherwise.
+func (o *UserUpdatesOperation) GetRemove() UserIdList {
+	if o == nil || IsNil(o.Remove) {
+		var ret UserIdList
+		return ret
+	}
+	return *o.Remove
+}
+
+// GetRemoveOk returns a tuple with the Remove field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserUpdatesOperation) GetRemoveOk() (*UserIdList, bool) {
+	if o == nil || IsNil(o.Remove) {
+		return nil, false
+	}
+	return o.Remove, true
+}
+
+// HasRemove returns a boolean if a field has been set.
+func (o *UserUpdatesOperation) HasRemove() bool {
+	if o != nil && !IsNil(o.Remove) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemove gets a reference to the given UserIdList and assigns it to the Remove field.
+func (o *UserUpdatesOperation) SetRemove(v UserIdList) {
+	o.Remove = &v
+}
+
+// GetSet returns the Set field value if set, zero value otherwise.
+func (o *UserUpdatesOperation) GetSet() UserIdList {
+	if o == nil || IsNil(o.Set) {
+		var ret UserIdList
+		return ret
+	}
+	return *o.Set
+}
+
+// GetSetOk returns a tuple with the Set field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserUpdatesOperation) GetSetOk() (*UserIdList, bool) {
+	if o == nil || IsNil(o.Set) {
+		return nil, false
+	}
+	return o.Set, true
+}
+
+// HasSet returns a boolean if a field has been set.
+func (o *UserUpdatesOperation) HasSet() bool {
+	if o != nil && !IsNil(o.Set) {
+		return true
+	}
+
+	return false
+}
+
+// SetSet gets a reference to the given UserIdList and assigns it to the Set field.
+func (o *UserUpdatesOperation) SetSet(v UserIdList) {
+	o.Set = &v
+}
+
+func (o UserUpdatesOperation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UserUpdatesOperation) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Add) {
+		toSerialize["add"] = o.Add
+	}
+	toSerialize["operationType"] = o.OperationType
+	if !IsNil(o.Remove) {
+		toSerialize["remove"] = o.Remove
+	}
+	if !IsNil(o.Set) {
+		toSerialize["set"] = o.Set
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["add"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["remove"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["set"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [add, remove, set] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["add"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field add must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["remove"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field remove must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["set"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field set must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *UserUpdatesOperation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"operationType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.UserUpdatesOperationAdd = nil
 	}
 
-	// try to unmarshal data into UserUpdatesOperationRemove
-	err = json.Unmarshal(data, &dst.UserUpdatesOperationRemove)
-	if err == nil {
-		jsonUserUpdatesOperationRemove, _ := json.Marshal(dst.UserUpdatesOperationRemove)
-		if string(jsonUserUpdatesOperationRemove) == "{}" { // empty struct
-			dst.UserUpdatesOperationRemove = nil
-		} else {
-			if err = validator.Validate(dst.UserUpdatesOperationRemove); err != nil {
-				dst.UserUpdatesOperationRemove = nil
-			} else {
-				match++
-			}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["add"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["remove"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["set"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [add, remove, set] may be set"}
+	}
+
+	varUserUpdatesOperation := _UserUpdatesOperation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUserUpdatesOperation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserUpdatesOperation(varUserUpdatesOperation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["add"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.UserUpdatesOperationRemove = nil
-	}
-
-	// try to unmarshal data into UserUpdatesOperationSet
-	err = json.Unmarshal(data, &dst.UserUpdatesOperationSet)
-	if err == nil {
-		jsonUserUpdatesOperationSet, _ := json.Marshal(dst.UserUpdatesOperationSet)
-		if string(jsonUserUpdatesOperationSet) == "{}" { // empty struct
-			dst.UserUpdatesOperationSet = nil
-		} else {
-			if err = validator.Validate(dst.UserUpdatesOperationSet); err != nil {
-				dst.UserUpdatesOperationSet = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["remove"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.UserUpdatesOperationSet = nil
+		if _, exists := additionalProperties["set"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [add, remove, set] may be set"}
+		}
+
+		delete(additionalProperties, "add")
+		delete(additionalProperties, "operationType")
+		delete(additionalProperties, "remove")
+		delete(additionalProperties, "set")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.UserUpdatesOperationAdd = nil
-		dst.UserUpdatesOperationRemove = nil
-		dst.UserUpdatesOperationSet = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(UserUpdatesOperation)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src UserUpdatesOperation) MarshalJSON() ([]byte, error) {
-	if src.UserUpdatesOperationAdd != nil {
-		return json.Marshal(&src.UserUpdatesOperationAdd)
-	}
-
-	if src.UserUpdatesOperationRemove != nil {
-		return json.Marshal(&src.UserUpdatesOperationRemove)
-	}
-
-	if src.UserUpdatesOperationSet != nil {
-		return json.Marshal(&src.UserUpdatesOperationSet)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *UserUpdatesOperation) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.UserUpdatesOperationAdd != nil {
-		return obj.UserUpdatesOperationAdd
-	}
-
-	if obj.UserUpdatesOperationRemove != nil {
-		return obj.UserUpdatesOperationRemove
-	}
-
-	if obj.UserUpdatesOperationSet != nil {
-		return obj.UserUpdatesOperationSet
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj UserUpdatesOperation) GetActualInstanceValue() (interface{}) {
-	if obj.UserUpdatesOperationAdd != nil {
-		return *obj.UserUpdatesOperationAdd
-	}
-
-	if obj.UserUpdatesOperationRemove != nil {
-		return *obj.UserUpdatesOperationRemove
-	}
-
-	if obj.UserUpdatesOperationSet != nil {
-		return *obj.UserUpdatesOperationSet
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableUserUpdatesOperation struct {
@@ -208,4 +333,3 @@ func (v *NullableUserUpdatesOperation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

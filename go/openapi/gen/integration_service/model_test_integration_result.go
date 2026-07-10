@@ -13,126 +13,179 @@ package integration_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// TestIntegrationResult - struct for TestIntegrationResult
+// checks if the TestIntegrationResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TestIntegrationResult{}
+
+// TestIntegrationResult Test integration result.
 type TestIntegrationResult struct {
-	TestIntegrationResultFailure *TestIntegrationResultFailure
-	TestIntegrationResultSuccessVariant *TestIntegrationResultSuccessVariant
+	Failure *V1Failure `json:"failure,omitempty"`
+	// Success.
+	Success                           map[string]interface{} `json:"success,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// TestIntegrationResultFailureAsTestIntegrationResult is a convenience function that returns TestIntegrationResultFailure wrapped in TestIntegrationResult
-func TestIntegrationResultFailureAsTestIntegrationResult(v *TestIntegrationResultFailure) TestIntegrationResult {
-	return TestIntegrationResult{
-		TestIntegrationResultFailure: v,
+type _TestIntegrationResult TestIntegrationResult
+
+// NewTestIntegrationResult instantiates a new TestIntegrationResult object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewTestIntegrationResult() *TestIntegrationResult {
+	this := TestIntegrationResult{}
+	return &this
+}
+
+// NewTestIntegrationResultWithDefaults instantiates a new TestIntegrationResult object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewTestIntegrationResultWithDefaults() *TestIntegrationResult {
+	this := TestIntegrationResult{}
+	return &this
+}
+
+// GetFailure returns the Failure field value if set, zero value otherwise.
+func (o *TestIntegrationResult) GetFailure() V1Failure {
+	if o == nil || IsNil(o.Failure) {
+		var ret V1Failure
+		return ret
 	}
+	return *o.Failure
 }
 
-// TestIntegrationResultSuccessVariantAsTestIntegrationResult is a convenience function that returns TestIntegrationResultSuccessVariant wrapped in TestIntegrationResult
-func TestIntegrationResultSuccessVariantAsTestIntegrationResult(v *TestIntegrationResultSuccessVariant) TestIntegrationResult {
-	return TestIntegrationResult{
-		TestIntegrationResultSuccessVariant: v,
+// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestIntegrationResult) GetFailureOk() (*V1Failure, bool) {
+	if o == nil || IsNil(o.Failure) {
+		return nil, false
 	}
+	return o.Failure, true
 }
 
+// HasFailure returns a boolean if a field has been set.
+func (o *TestIntegrationResult) HasFailure() bool {
+	if o != nil && !IsNil(o.Failure) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *TestIntegrationResult) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into TestIntegrationResultFailure
-	err = json.Unmarshal(data, &dst.TestIntegrationResultFailure)
-	if err == nil {
-		jsonTestIntegrationResultFailure, _ := json.Marshal(dst.TestIntegrationResultFailure)
-		if string(jsonTestIntegrationResultFailure) == "{}" { // empty struct
-			dst.TestIntegrationResultFailure = nil
-		} else {
-			if err = validator.Validate(dst.TestIntegrationResultFailure); err != nil {
-				dst.TestIntegrationResultFailure = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetFailure gets a reference to the given V1Failure and assigns it to the Failure field.
+func (o *TestIntegrationResult) SetFailure(v V1Failure) {
+	o.Failure = &v
+}
+
+// GetSuccess returns the Success field value if set, zero value otherwise.
+func (o *TestIntegrationResult) GetSuccess() map[string]interface{} {
+	if o == nil || IsNil(o.Success) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Success
+}
+
+// GetSuccessOk returns a tuple with the Success field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestIntegrationResult) GetSuccessOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Success) {
+		return map[string]interface{}{}, false
+	}
+	return o.Success, true
+}
+
+// HasSuccess returns a boolean if a field has been set.
+func (o *TestIntegrationResult) HasSuccess() bool {
+	if o != nil && !IsNil(o.Success) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuccess gets a reference to the given map[string]interface{} and assigns it to the Success field.
+func (o *TestIntegrationResult) SetSuccess(v map[string]interface{}) {
+	o.Success = v
+}
+
+func (o TestIntegrationResult) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TestIntegrationResult) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Failure) {
+		toSerialize["failure"] = o.Failure
+	}
+	if !IsNil(o.Success) {
+		toSerialize["success"] = o.Success
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["success"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["failure"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["success"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field success must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["failure"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field failure must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *TestIntegrationResult) UnmarshalJSON(data []byte) (err error) {
+	varTestIntegrationResult := _TestIntegrationResult{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestIntegrationResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestIntegrationResult(varTestIntegrationResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["success"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TestIntegrationResultFailure = nil
-	}
-
-	// try to unmarshal data into TestIntegrationResultSuccessVariant
-	err = json.Unmarshal(data, &dst.TestIntegrationResultSuccessVariant)
-	if err == nil {
-		jsonTestIntegrationResultSuccessVariant, _ := json.Marshal(dst.TestIntegrationResultSuccessVariant)
-		if string(jsonTestIntegrationResultSuccessVariant) == "{}" { // empty struct
-			dst.TestIntegrationResultSuccessVariant = nil
-		} else {
-			if err = validator.Validate(dst.TestIntegrationResultSuccessVariant); err != nil {
-				dst.TestIntegrationResultSuccessVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["failure"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TestIntegrationResultSuccessVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+		}
+
+		delete(additionalProperties, "failure")
+		delete(additionalProperties, "success")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TestIntegrationResultFailure = nil
-		dst.TestIntegrationResultSuccessVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TestIntegrationResult)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src TestIntegrationResult) MarshalJSON() ([]byte, error) {
-	if src.TestIntegrationResultFailure != nil {
-		return json.Marshal(&src.TestIntegrationResultFailure)
-	}
-
-	if src.TestIntegrationResultSuccessVariant != nil {
-		return json.Marshal(&src.TestIntegrationResultSuccessVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *TestIntegrationResult) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.TestIntegrationResultFailure != nil {
-		return obj.TestIntegrationResultFailure
-	}
-
-	if obj.TestIntegrationResultSuccessVariant != nil {
-		return obj.TestIntegrationResultSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj TestIntegrationResult) GetActualInstanceValue() (interface{}) {
-	if obj.TestIntegrationResultFailure != nil {
-		return *obj.TestIntegrationResultFailure
-	}
-
-	if obj.TestIntegrationResultSuccessVariant != nil {
-		return *obj.TestIntegrationResultSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableTestIntegrationResult struct {
@@ -170,4 +223,3 @@ func (v *NullableTestIntegrationResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -13,164 +13,224 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// SpansSourceStrategy - struct for SpansSourceStrategy
+// checks if the SpansSourceStrategy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SpansSourceStrategy{}
+
+// SpansSourceStrategy Determines the time strategy for fetching spans (instant snapshot, fixed range, or sliding window).
 type SpansSourceStrategy struct {
-	SpansSourceStrategyDurationVariant *SpansSourceStrategyDurationVariant
-	SpansSourceStrategyInstantVariant *SpansSourceStrategyInstantVariant
-	SpansSourceStrategyRangeVariant *SpansSourceStrategyRangeVariant
+	Duration                          *SpansSourceStrategyDuration `json:"duration,omitempty"`
+	Instant                           *SpansSourceStrategyInstant  `json:"instant,omitempty"`
+	Range                             *SpansSourceStrategyRange    `json:"range,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// SpansSourceStrategyDurationVariantAsSpansSourceStrategy is a convenience function that returns SpansSourceStrategyDurationVariant wrapped in SpansSourceStrategy
-func SpansSourceStrategyDurationVariantAsSpansSourceStrategy(v *SpansSourceStrategyDurationVariant) SpansSourceStrategy {
-	return SpansSourceStrategy{
-		SpansSourceStrategyDurationVariant: v,
+type _SpansSourceStrategy SpansSourceStrategy
+
+// NewSpansSourceStrategy instantiates a new SpansSourceStrategy object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSpansSourceStrategy() *SpansSourceStrategy {
+	this := SpansSourceStrategy{}
+	return &this
+}
+
+// NewSpansSourceStrategyWithDefaults instantiates a new SpansSourceStrategy object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewSpansSourceStrategyWithDefaults() *SpansSourceStrategy {
+	this := SpansSourceStrategy{}
+	return &this
+}
+
+// GetDuration returns the Duration field value if set, zero value otherwise.
+func (o *SpansSourceStrategy) GetDuration() SpansSourceStrategyDuration {
+	if o == nil || IsNil(o.Duration) {
+		var ret SpansSourceStrategyDuration
+		return ret
 	}
+	return *o.Duration
 }
 
-// SpansSourceStrategyInstantVariantAsSpansSourceStrategy is a convenience function that returns SpansSourceStrategyInstantVariant wrapped in SpansSourceStrategy
-func SpansSourceStrategyInstantVariantAsSpansSourceStrategy(v *SpansSourceStrategyInstantVariant) SpansSourceStrategy {
-	return SpansSourceStrategy{
-		SpansSourceStrategyInstantVariant: v,
+// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpansSourceStrategy) GetDurationOk() (*SpansSourceStrategyDuration, bool) {
+	if o == nil || IsNil(o.Duration) {
+		return nil, false
 	}
+	return o.Duration, true
 }
 
-// SpansSourceStrategyRangeVariantAsSpansSourceStrategy is a convenience function that returns SpansSourceStrategyRangeVariant wrapped in SpansSourceStrategy
-func SpansSourceStrategyRangeVariantAsSpansSourceStrategy(v *SpansSourceStrategyRangeVariant) SpansSourceStrategy {
-	return SpansSourceStrategy{
-		SpansSourceStrategyRangeVariant: v,
+// HasDuration returns a boolean if a field has been set.
+func (o *SpansSourceStrategy) HasDuration() bool {
+	if o != nil && !IsNil(o.Duration) {
+		return true
 	}
+
+	return false
 }
 
+// SetDuration gets a reference to the given SpansSourceStrategyDuration and assigns it to the Duration field.
+func (o *SpansSourceStrategy) SetDuration(v SpansSourceStrategyDuration) {
+	o.Duration = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *SpansSourceStrategy) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into SpansSourceStrategyDurationVariant
-	err = json.Unmarshal(data, &dst.SpansSourceStrategyDurationVariant)
-	if err == nil {
-		jsonSpansSourceStrategyDurationVariant, _ := json.Marshal(dst.SpansSourceStrategyDurationVariant)
-		if string(jsonSpansSourceStrategyDurationVariant) == "{}" { // empty struct
-			dst.SpansSourceStrategyDurationVariant = nil
-		} else {
-			if err = validator.Validate(dst.SpansSourceStrategyDurationVariant); err != nil {
-				dst.SpansSourceStrategyDurationVariant = nil
-			} else {
-				match++
-			}
+// GetInstant returns the Instant field value if set, zero value otherwise.
+func (o *SpansSourceStrategy) GetInstant() SpansSourceStrategyInstant {
+	if o == nil || IsNil(o.Instant) {
+		var ret SpansSourceStrategyInstant
+		return ret
+	}
+	return *o.Instant
+}
+
+// GetInstantOk returns a tuple with the Instant field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpansSourceStrategy) GetInstantOk() (*SpansSourceStrategyInstant, bool) {
+	if o == nil || IsNil(o.Instant) {
+		return nil, false
+	}
+	return o.Instant, true
+}
+
+// HasInstant returns a boolean if a field has been set.
+func (o *SpansSourceStrategy) HasInstant() bool {
+	if o != nil && !IsNil(o.Instant) {
+		return true
+	}
+
+	return false
+}
+
+// SetInstant gets a reference to the given SpansSourceStrategyInstant and assigns it to the Instant field.
+func (o *SpansSourceStrategy) SetInstant(v SpansSourceStrategyInstant) {
+	o.Instant = &v
+}
+
+// GetRange returns the Range field value if set, zero value otherwise.
+func (o *SpansSourceStrategy) GetRange() SpansSourceStrategyRange {
+	if o == nil || IsNil(o.Range) {
+		var ret SpansSourceStrategyRange
+		return ret
+	}
+	return *o.Range
+}
+
+// GetRangeOk returns a tuple with the Range field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpansSourceStrategy) GetRangeOk() (*SpansSourceStrategyRange, bool) {
+	if o == nil || IsNil(o.Range) {
+		return nil, false
+	}
+	return o.Range, true
+}
+
+// HasRange returns a boolean if a field has been set.
+func (o *SpansSourceStrategy) HasRange() bool {
+	if o != nil && !IsNil(o.Range) {
+		return true
+	}
+
+	return false
+}
+
+// SetRange gets a reference to the given SpansSourceStrategyRange and assigns it to the Range field.
+func (o *SpansSourceStrategy) SetRange(v SpansSourceStrategyRange) {
+	o.Range = &v
+}
+
+func (o SpansSourceStrategy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SpansSourceStrategy) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Duration) {
+		toSerialize["duration"] = o.Duration
+	}
+	if !IsNil(o.Instant) {
+		toSerialize["instant"] = o.Instant
+	}
+	if !IsNil(o.Range) {
+		toSerialize["range"] = o.Range
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["instant"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["range"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["duration"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [instant, range, duration] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["instant"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field instant must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["range"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field range must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["duration"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field duration must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *SpansSourceStrategy) UnmarshalJSON(data []byte) (err error) {
+	varSpansSourceStrategy := _SpansSourceStrategy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpansSourceStrategy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpansSourceStrategy(varSpansSourceStrategy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["instant"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SpansSourceStrategyDurationVariant = nil
-	}
-
-	// try to unmarshal data into SpansSourceStrategyInstantVariant
-	err = json.Unmarshal(data, &dst.SpansSourceStrategyInstantVariant)
-	if err == nil {
-		jsonSpansSourceStrategyInstantVariant, _ := json.Marshal(dst.SpansSourceStrategyInstantVariant)
-		if string(jsonSpansSourceStrategyInstantVariant) == "{}" { // empty struct
-			dst.SpansSourceStrategyInstantVariant = nil
-		} else {
-			if err = validator.Validate(dst.SpansSourceStrategyInstantVariant); err != nil {
-				dst.SpansSourceStrategyInstantVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["range"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SpansSourceStrategyInstantVariant = nil
-	}
-
-	// try to unmarshal data into SpansSourceStrategyRangeVariant
-	err = json.Unmarshal(data, &dst.SpansSourceStrategyRangeVariant)
-	if err == nil {
-		jsonSpansSourceStrategyRangeVariant, _ := json.Marshal(dst.SpansSourceStrategyRangeVariant)
-		if string(jsonSpansSourceStrategyRangeVariant) == "{}" { // empty struct
-			dst.SpansSourceStrategyRangeVariant = nil
-		} else {
-			if err = validator.Validate(dst.SpansSourceStrategyRangeVariant); err != nil {
-				dst.SpansSourceStrategyRangeVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["duration"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SpansSourceStrategyRangeVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [instant, range, duration] may be set"}
+		}
+
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "instant")
+		delete(additionalProperties, "range")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.SpansSourceStrategyDurationVariant = nil
-		dst.SpansSourceStrategyInstantVariant = nil
-		dst.SpansSourceStrategyRangeVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(SpansSourceStrategy)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src SpansSourceStrategy) MarshalJSON() ([]byte, error) {
-	if src.SpansSourceStrategyDurationVariant != nil {
-		return json.Marshal(&src.SpansSourceStrategyDurationVariant)
-	}
-
-	if src.SpansSourceStrategyInstantVariant != nil {
-		return json.Marshal(&src.SpansSourceStrategyInstantVariant)
-	}
-
-	if src.SpansSourceStrategyRangeVariant != nil {
-		return json.Marshal(&src.SpansSourceStrategyRangeVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *SpansSourceStrategy) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.SpansSourceStrategyDurationVariant != nil {
-		return obj.SpansSourceStrategyDurationVariant
-	}
-
-	if obj.SpansSourceStrategyInstantVariant != nil {
-		return obj.SpansSourceStrategyInstantVariant
-	}
-
-	if obj.SpansSourceStrategyRangeVariant != nil {
-		return obj.SpansSourceStrategyRangeVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj SpansSourceStrategy) GetActualInstanceValue() (interface{}) {
-	if obj.SpansSourceStrategyDurationVariant != nil {
-		return *obj.SpansSourceStrategyDurationVariant
-	}
-
-	if obj.SpansSourceStrategyInstantVariant != nil {
-		return *obj.SpansSourceStrategyInstantVariant
-	}
-
-	if obj.SpansSourceStrategyRangeVariant != nil {
-		return *obj.SpansSourceStrategyRangeVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSpansSourceStrategy struct {
@@ -208,4 +268,3 @@ func (v *NullableSpansSourceStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,8 +23,9 @@ var _ MappedNullable = &GetIntegrationsResponse{}
 // GetIntegrationsResponse This data structure represents a list of outgoing webhook types.
 type GetIntegrationsResponse struct {
 	// The integrations.
-	Integrations []GetIntegrationsResponseIntegrationWithCounts `json:"integrations,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Integrations                      []GetIntegrationsResponseIntegrationWithCounts `json:"integrations,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetIntegrationsResponse GetIntegrationsResponse
@@ -79,7 +80,7 @@ func (o *GetIntegrationsResponse) SetIntegrations(v []GetIntegrationsResponseInt
 }
 
 func (o GetIntegrationsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *GetIntegrationsResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "integrations")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableGetIntegrationsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

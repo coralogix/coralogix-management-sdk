@@ -1,1321 +1,998 @@
-openapi: 3.0.0
-info:
-  title: ""
-  version: 1.0.0
-servers:
-- url: /
-paths:
-  /notifications/notification-center/v1/presets:
-    get:
-      description: Returns all notification presets.
-      externalDocs:
-        url: ""
-      operationId: PresetsService_BatchGetPresets
-      parameters:
-      - description: The unique identifiers of the presets to retrieve.
-        explode: true
-        in: query
-        name: preset_ids
-        required: false
-        schema:
-          description: The unique identifiers of the presets to retrieve.
-          items:
-            description: The unique identifiers of the presets to retrieve.
-            minLength: 0
-            type: string
-          maxItems: 600
-          minItems: 0
-          type: array
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BatchGetPresetsResponse"
-          description: ""
-      summary: Batch Get Presets
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets/custom/{id}:
-    delete:
-      description: Deletes the custom notification preset with the specified ID.
-      externalDocs:
-        url: ""
-      operationId: PresetsService_DeleteCustomPreset
-      parameters:
-      - description: Unique identifier.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: Unique identifier.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteCustomPresetResponse"
-          description: ""
-      summary: Delete Custom Preset
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets/custom/{id}/default:
-    post:
-      description: Sets a custom preset as the default.
-      externalDocs:
-        url: ""
-      operationId: PresetsService_SetCustomPresetAsDefault
-      parameters:
-      - description: The unique identifier of the custom preset to set as default.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: The unique identifier of the custom preset to set as default.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SetCustomPresetAsDefaultResponse"
-          description: ""
-      summary: Set Custom Preset As Default
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets/summaries/system:
-    get:
-      description: Returns summaries for all system-defined notification presets.
-      externalDocs:
-        url: ""
-      operationId: PresetsService_GetSystemDefaultPresetSummary
-      parameters:
-      - description: The connector type whose system default preset summary is requested.
-        explode: true
-        in: query
-        name: connector_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.ConnectorType"
-        style: form
-      - description: The entity type whose system default preset summary is requested.
-        explode: true
-        in: query
-        name: entity_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetSystemDefaultPresetSummaryResponse"
-          description: ""
-      summary: Get System Default Preset Summary
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets/{id}:
-    get:
-      description: Returns the details of the specified notification preset.
-      externalDocs:
-        url: ""
-      operationId: PresetsService_GetPreset
-      parameters:
-      - description: The unique identifier of the preset to retrieve.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: The unique identifier of the preset to retrieve.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetPresetResponse"
-          description: ""
-      summary: Get Preset
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets/{id}/default/apply:
-    post:
-      description: Sets the specified preset as the default for an entity.
-      externalDocs:
-        url: ""
-      operationId: PresetsService_SetPresetAsDefault
-      parameters:
-      - description: The unique identifier of the preset to set as default.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          description: The unique identifier of the preset to set as default.
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SetPresetAsDefaultResponse"
-          description: ""
-      summary: Set Preset As Default
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets:createCustom:
-    post:
-      description: Creates a new custom notification preset.
-      externalDocs:
-        url: ""
-      operationId: PresetsService_CreateCustomPreset
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Create_Custom_Preset_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateCustomPresetResponse"
-          description: ""
-      summary: Create Custom Preset
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets:getDefaultSummary:
-    get:
-      description: Returns a summary of the default notification preset.
-      externalDocs:
-        url: ""
-      operationId: PresetsService_GetDefaultPresetSummary
-      parameters:
-      - description: The connector type whose default preset summary is requested.
-        explode: true
-        in: query
-        name: connector_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.ConnectorType"
-        style: form
-      - description: The entity type whose default preset summary is requested.
-        explode: true
-        in: query
-        name: entity_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetDefaultPresetSummaryResponse"
-          description: ""
-      summary: Get Default Preset Summary
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets:replaceCustom:
-    put:
-      description: Replaces an existing custom notification preset.
-      externalDocs:
-        url: ""
-      operationId: PresetsService_ReplaceCustomPreset
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Replace_Custom_Preset_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReplaceCustomPresetResponse"
-          description: ""
-      summary: Replace Custom Preset
-      tags:
-      - Presets service
-  /notifications/notification-center/v1/presets:summariesList:
-    get:
-      description: Returns a list of notification preset summaries.
-      externalDocs:
-        url: ""
-      operationId: PresetsService_ListPresetSummaries
-      parameters:
-      - description: Filter preset summaries by their connector type.
-        explode: true
-        in: query
-        name: connector_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.ConnectorType"
-        style: form
-      - description: Filter preset summaries by their entity type.
-        explode: true
-        in: query
-        name: entity_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListPresetSummariesResponse"
-          description: ""
-      summary: List Preset Summaries
-      tags:
-      - Presets service
-components:
-  schemas:
-    AttachmentConfig:
-      description: Attachment config.
-      example:
-        policy: AUTO
-      externalDocs:
-        url: ""
-      properties:
-        policy:
-          $ref: "#/components/schemas/AttachmentConfigPolicy"
-      type: object
-    AttachmentConfigPolicy:
-      description: Attachment config policy.
-      enum:
-      - AUTO
-      - ENABLED
-      - DISABLED
-      type: string
-    BatchGetPresetsResponse:
-      description: Response containing the requested presets and any IDs not found
-      example:
-        notFoundIds:
-        - notFoundIds
-        - notFoundIds
-        - notFoundIds
-        - notFoundIds
-        - notFoundIds
-        presets:
-          key:
-            connectorType: CONNECTOR_TYPE_UNSPECIFIED
-            configOverrides:
-            - messageConfig:
-                fields:
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-              payloadType: payloadType
-              conditionType:
-                matchEntityType: "{}"
-            - messageConfig:
-                fields:
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-              payloadType: payloadType
-              conditionType:
-                matchEntityType: "{}"
-            - messageConfig:
-                fields:
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-              payloadType: payloadType
-              conditionType:
-                matchEntityType: "{}"
-            - messageConfig:
-                fields:
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-              payloadType: payloadType
-              conditionType:
-                matchEntityType: "{}"
-            - messageConfig:
-                fields:
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                  fieldName: title
-              payloadType: payloadType
-              conditionType:
-                matchEntityType: "{}"
-            createTime: 2000-01-23T04:56:07.000+00:00
-            entityType: ENTITY_TYPE_UNSPECIFIED
-            name: My Preset
-            description: Custom preset for alerts
-            attachmentConfig:
-              policy: AUTO
-            updateTime: 2000-01-23T04:56:07.000+00:00
-            id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-            presetType: PRESET_TYPE_UNSPECIFIED
-            parentId: preset_system_slack_alerts_basic
-      externalDocs:
-        description: Find out more about notification center
-        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
-      properties:
-        notFoundIds:
-          description: The not found ids.
-          items:
-            description: The not found ids.
-            minLength: 0
-            type: string
-          maxItems: 600
-          minItems: 0
-          type: array
-        presets:
-          additionalProperties:
-            $ref: "#/components/schemas/Preset"
-          description: List of permission presets.
-          type: object
-      title: Batch Get Presets Response
-      type: object
-    ConfigOverrides:
-      example:
-        messageConfig:
-          fields:
-          - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-            fieldName: title
-          - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-            fieldName: title
-          - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-            fieldName: title
-          - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-            fieldName: title
-          - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-            fieldName: title
-        payloadType: payloadType
-        conditionType:
-          matchEntityType: "{}"
-      properties:
-        conditionType:
-          $ref: "#/components/schemas/notification_center.ConditionType"
-        messageConfig:
-          $ref: "#/components/schemas/MessageConfig"
-        payloadType:
-          description: Connector payload schema type.
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    CreateCustomPresetResponse:
-      description: Response containing the created custom preset
-      example:
-        preset:
-          connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          configOverrides:
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          createTime: 2000-01-23T04:56:07.000+00:00
-          entityType: ENTITY_TYPE_UNSPECIFIED
-          name: My Preset
-          description: Custom preset for alerts
-          attachmentConfig:
-            policy: AUTO
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          presetType: PRESET_TYPE_UNSPECIFIED
-          parentId: preset_system_slack_alerts_basic
-      externalDocs:
-        description: Find out more about notification center
-        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
-      properties:
-        preset:
-          $ref: "#/components/schemas/Preset"
-      title: Create Custom Preset Response
-      type: object
-    DeleteCustomPresetResponse:
-      additionalProperties: false
-      description: Response returned after successfully deleting a custom notification
-        preset.
-      externalDocs:
-        url: ""
-      type: object
-    FilterPathAndValues:
-      oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
-    FilterPathAndValuesFilters:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        filters:
-          $ref: "#/components/schemas/Filters"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - filters
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    FilterPathAndValuesMultipleValues:
-      description: This data structure represents a filter path and values
-      externalDocs:
-        url: ""
-      properties:
-        multipleValues:
-          $ref: "#/components/schemas/MultipleValues"
-        path:
-          example: test
-          minLength: 0
-          type: string
-      required:
-      - multipleValues
-      - path
-      - values
-      title: FilterPathAndValues
-      type: object
-    Filters:
-      description: This data structure represents a filter
-      externalDocs:
-        url: ""
-      properties:
-        operator:
-          $ref: "#/components/schemas/v3.FilterOperator"
-        pathAndValues:
-          items:
-            $ref: "#/components/schemas/FilterPathAndValues"
-          minItems: 0
-          type: array
-      required:
-      - pathAndValues
-      title: Filters
-      type: object
-    GetDefaultPresetSummaryResponse:
-      description: Response containing a summary of the default notification preset.
-      example:
-        presetSummary:
-          connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          createTime: 2000-01-23T04:56:07.000+00:00
-          entityType: ENTITY_TYPE_UNSPECIFIED
-          name: My Preset
-          description: Custom preset for alerts
-          attachmentConfig:
-            policy: AUTO
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          presetType: PRESET_TYPE_UNSPECIFIED
-          parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
-      externalDocs:
-        url: ""
-      properties:
-        presetSummary:
-          $ref: "#/components/schemas/PresetSummary"
-      type: object
-    GetPresetResponse:
-      description: Response containing the details of a notification preset.
-      example:
-        preset:
-          connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          configOverrides:
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          createTime: 2000-01-23T04:56:07.000+00:00
-          entityType: ENTITY_TYPE_UNSPECIFIED
-          name: My Preset
-          description: Custom preset for alerts
-          attachmentConfig:
-            policy: AUTO
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          presetType: PRESET_TYPE_UNSPECIFIED
-          parentId: preset_system_slack_alerts_basic
-      externalDocs:
-        url: ""
-      properties:
-        preset:
-          $ref: "#/components/schemas/Preset"
-      type: object
-    GetSystemDefaultPresetSummaryResponse:
-      description: Response containing a summary of the system default notification
-        preset.
-      example:
-        presetSummary:
-          connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          createTime: 2000-01-23T04:56:07.000+00:00
-          entityType: ENTITY_TYPE_UNSPECIFIED
-          name: My Preset
-          description: Custom preset for alerts
-          attachmentConfig:
-            policy: AUTO
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          presetType: PRESET_TYPE_UNSPECIFIED
-          parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
-      externalDocs:
-        url: ""
-      properties:
-        presetSummary:
-          $ref: "#/components/schemas/PresetSummary"
-      type: object
-    ListPresetSummariesResponse:
-      description: Response containing a list of notification preset summaries.
-      example:
-        presetSummaries:
-        - connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          createTime: 2000-01-23T04:56:07.000+00:00
-          entityType: ENTITY_TYPE_UNSPECIFIED
-          name: My Preset
-          description: Custom preset for alerts
-          attachmentConfig:
-            policy: AUTO
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          presetType: PRESET_TYPE_UNSPECIFIED
-          parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
-        - connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          createTime: 2000-01-23T04:56:07.000+00:00
-          entityType: ENTITY_TYPE_UNSPECIFIED
-          name: My Preset
-          description: Custom preset for alerts
-          attachmentConfig:
-            policy: AUTO
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          presetType: PRESET_TYPE_UNSPECIFIED
-          parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
-        - connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          createTime: 2000-01-23T04:56:07.000+00:00
-          entityType: ENTITY_TYPE_UNSPECIFIED
-          name: My Preset
-          description: Custom preset for alerts
-          attachmentConfig:
-            policy: AUTO
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          presetType: PRESET_TYPE_UNSPECIFIED
-          parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
-        - connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          createTime: 2000-01-23T04:56:07.000+00:00
-          entityType: ENTITY_TYPE_UNSPECIFIED
-          name: My Preset
-          description: Custom preset for alerts
-          attachmentConfig:
-            policy: AUTO
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          presetType: PRESET_TYPE_UNSPECIFIED
-          parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
-        - connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          createTime: 2000-01-23T04:56:07.000+00:00
-          entityType: ENTITY_TYPE_UNSPECIFIED
-          name: My Preset
-          description: Custom preset for alerts
-          attachmentConfig:
-            policy: AUTO
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          presetType: PRESET_TYPE_UNSPECIFIED
-          parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
-      externalDocs:
-        url: ""
-      properties:
-        presetSummaries:
-          description: The preset summaries.
-          items:
-            $ref: "#/components/schemas/PresetSummary"
-          maxItems: 600
-          minItems: 0
-          type: array
-      type: object
-    MatchEntityTypeAndSubTypeCondition:
-      description: Match entity type and sub type condition.
-      externalDocs:
-        url: ""
-      properties:
-        entitySubType:
-          description: The entity sub type.
-          maxLength: 100
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-      type: object
-    MatchEntityTypeCondition:
-      additionalProperties: false
-      description: Match entity type condition.
-      externalDocs:
-        url: ""
-      type: object
-    MessageConfig:
-      description: Message config.
-      example:
-        fields:
-        - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-          fieldName: title
-        - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-          fieldName: title
-        - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-          fieldName: title
-        - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-          fieldName: title
-        - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-          fieldName: title
-      externalDocs:
-        url: ""
-      properties:
-        fields:
-          description: List of fields.
-          items:
-            $ref: "#/components/schemas/notification_center.MessageConfigField"
-          maxItems: 100
-          minItems: 0
-          type: array
-      type: object
-    MultipleValues:
-      properties:
-        matcher:
-          $ref: "#/components/schemas/events.v3.FilterMatcher"
-        values:
-          items:
-            minLength: 0
-            type: string
-          minItems: 0
-          type: array
-      type: object
-    NotificationCenterConditionTypeMatchEntityType:
-      description: Field condition.condition type.
-      example:
-        matchEntityType: "{}"
-      externalDocs:
-        url: ""
-      properties:
-        matchEntityType:
-          additionalProperties: false
-          description: Match entity type condition.
-          externalDocs:
-            url: ""
-          type: object
-      required:
-      - matchEntityType
-      type: object
-    NotificationCenterConditionTypeMatchEntityTypeAndSubType:
-      description: Field condition.condition type.
-      externalDocs:
-        url: ""
-      properties:
-        matchEntityTypeAndSubType:
-          $ref: "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
-      required:
-      - matchEntityTypeAndSubType
-      type: object
-    Preset:
-      description: Set of preconfigured templates for notification content rendering
-      example:
-        connectorType: CONNECTOR_TYPE_UNSPECIFIED
-        configOverrides:
-        - messageConfig:
-            fields:
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-          payloadType: payloadType
-          conditionType:
-            matchEntityType: "{}"
-        - messageConfig:
-            fields:
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-          payloadType: payloadType
-          conditionType:
-            matchEntityType: "{}"
-        - messageConfig:
-            fields:
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-          payloadType: payloadType
-          conditionType:
-            matchEntityType: "{}"
-        - messageConfig:
-            fields:
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-          payloadType: payloadType
-          conditionType:
-            matchEntityType: "{}"
-        - messageConfig:
-            fields:
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-              fieldName: title
-          payloadType: payloadType
-          conditionType:
-            matchEntityType: "{}"
-        createTime: 2000-01-23T04:56:07.000+00:00
-        entityType: ENTITY_TYPE_UNSPECIFIED
-        name: My Preset
-        description: Custom preset for alerts
-        attachmentConfig:
-          policy: AUTO
-        updateTime: 2000-01-23T04:56:07.000+00:00
-        id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-        presetType: PRESET_TYPE_UNSPECIFIED
-        parentId: preset_system_slack_alerts_basic
-      externalDocs:
-        description: Find out more about notification center
-        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
-      properties:
-        attachmentConfig:
-          $ref: "#/components/schemas/AttachmentConfig"
-        configOverrides:
-          description: The config overrides.
-          items:
-            $ref: "#/components/schemas/ConfigOverrides"
-          maxItems: 100
-          minItems: 0
-          type: array
-        connectorType:
-          $ref: "#/components/schemas/notification_center.ConnectorType"
-        createTime:
-          description: The create time.
-          format: date-time
-          minLength: 0
-          type: string
-        description:
-          description: Human-readable description.
-          example: Custom preset for alerts
-          maxLength: 5000
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        entityType:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        id:
-          description: Unique identifier.
-          example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        name:
-          description: Display name.
-          example: My Preset
-          maxLength: 200
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        parentId:
-          description: The parent id.
-          example: preset_system_slack_alerts_basic
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        presetType:
-          $ref: "#/components/schemas/PresetType"
-        updateTime:
-          description: Timestamp of the last update.
-          format: date-time
-          minLength: 0
-          type: string
-      title: Preset
-      type: object
-    PresetSummary:
-      description: Provides a concise overview of a preset
-      example:
-        connectorType: CONNECTOR_TYPE_UNSPECIFIED
-        createTime: 2000-01-23T04:56:07.000+00:00
-        entityType: ENTITY_TYPE_UNSPECIFIED
-        name: My Preset
-        description: Custom preset for alerts
-        attachmentConfig:
-          policy: AUTO
-        updateTime: 2000-01-23T04:56:07.000+00:00
-        id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-        presetType: PRESET_TYPE_UNSPECIFIED
-        parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
-      externalDocs:
-        description: Find out more about notification center
-        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
-      properties:
-        attachmentConfig:
-          $ref: "#/components/schemas/AttachmentConfig"
-        connectorType:
-          $ref: "#/components/schemas/notification_center.ConnectorType"
-        createTime:
-          description: The create time.
-          format: date-time
-          minLength: 0
-          type: string
-        description:
-          description: Human-readable description.
-          example: Custom preset for alerts
-          maxLength: 5000
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-        entityType:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        id:
-          description: Unique identifier.
-          example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        name:
-          description: Display name.
-          example: My Preset
-          maxLength: 200
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        parentId:
-          description: The parent id.
-          example: c246e826-10c2-405e-8d3f-afcc24ad4d15
-          maxLength: 128
-          minLength: 1
-          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
-          type: string
-        presetType:
-          $ref: "#/components/schemas/PresetType"
-        updateTime:
-          description: Timestamp of the last update.
-          format: date-time
-          minLength: 0
-          type: string
-      title: Preset Summary
-      type: object
-    PresetType:
-      description: Preset type.
-      enum:
-      - PRESET_TYPE_UNSPECIFIED
-      - SYSTEM
-      - CUSTOM
-      type: string
-    ReplaceCustomPresetResponse:
-      description: Response containing the updated custom preset
-      example:
-        preset:
-          connectorType: CONNECTOR_TYPE_UNSPECIFIED
-          configOverrides:
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          - messageConfig:
-              fields:
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-                fieldName: title
-            payloadType: payloadType
-            conditionType:
-              matchEntityType: "{}"
-          createTime: 2000-01-23T04:56:07.000+00:00
-          entityType: ENTITY_TYPE_UNSPECIFIED
-          name: My Preset
-          description: Custom preset for alerts
-          attachmentConfig:
-            policy: AUTO
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          presetType: PRESET_TYPE_UNSPECIFIED
-          parentId: preset_system_slack_alerts_basic
-      externalDocs:
-        description: Find out more about notification center
-        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
-      properties:
-        preset:
-          $ref: "#/components/schemas/Preset"
-      title: Replace Custom Preset Response
-      type: object
-    SetCustomPresetAsDefaultResponse:
-      additionalProperties: false
-      description: Response returned after setting a custom preset as the default.
-      externalDocs:
-        url: ""
-      type: object
-    SetPresetAsDefaultResponse:
-      additionalProperties: false
-      description: Response returned after setting a preset as the default.
-      externalDocs:
-        url: ""
-      type: object
-    events.v3.FilterMatcher:
-      enum:
-      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
-      - FILTER_MATCHER_REGEXP
-      type: string
-    notification_center.ConditionType:
-      oneOf:
-      - $ref: "#/components/schemas/NotificationCenterConditionTypeMatchEntityType"
-      - $ref: "#/components/schemas/NotificationCenterConditionTypeMatchEntityTypeAndSubType"
-    notification_center.ConnectorType:
-      description: Connector type.
-      enum:
-      - CONNECTOR_TYPE_UNSPECIFIED
-      - SLACK
-      - GENERIC_HTTPS
-      - PAGERDUTY
-      - IBM_EVENT_NOTIFICATIONS
-      - SERVICE_NOW
-      - EMAIL
-      - PAGERDUTY_INCIDENTS
-      - MICROSOFT_TEAMS
-      type: string
-    notification_center.EntityType:
-      description: Entity type.
-      enum:
-      - ENTITY_TYPE_UNSPECIFIED
-      - ALERTS
-      - TEST_NOTIFICATIONS
-      - CASES
-      type: string
-    notification_center.MessageConfigField:
-      description: Message config field provides a way to define a template that can
-        be used to render the notification content
-      example:
-        template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-        fieldName: title
-      externalDocs:
-        description: Find out more about notification center
-        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
-      properties:
-        fieldName:
-          description: The field name.
-          example: title
-          maxLength: 256
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        template:
-          description: The template.
-          example: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
-          maxLength: 20000
-          minLength: 0
-          pattern: "^[\\s\\S]*$"
-          type: string
-      title: Message Config Field
-      type: object
-    v3.FilterOperator:
-      description: Filter operator.
-      enum:
-      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
-      - FILTER_OPERATOR_OR
-      type: string
-    Create_Custom_Preset_Request:
-      description: Request to create a new custom preset
-      properties:
-        preset:
-          $ref: "#/components/schemas/Preset"
-      title: Create Custom Preset Request
-      type: object
-    Replace_Custom_Preset_Request:
-      description: Request to replace an existing custom preset
-      properties:
-        preset:
-          $ref: "#/components/schemas/Preset"
-      title: Replace Custom Preset Request
-      type: object
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/notifications/notification-center/v1/presets": {
+      "get": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Batch Get Presets",
+        "description": "Returns all notification presets.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_BatchGetPresets",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "preset_ids",
+            "description": "The unique identifiers of the presets to retrieve.",
+            "schema": {
+              "description": "The unique identifiers of the presets to retrieve.",
+              "type": "array",
+              "items": {
+                "description": "The unique identifiers of the presets to retrieve.",
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0,
+              "maxItems": 600
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchGetPresetsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets/custom/{id}": {
+      "delete": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Delete Custom Preset",
+        "description": "Deletes the custom notification preset with the specified ID.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_DeleteCustomPreset",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Unique identifier.",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier.",
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCustomPresetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets/custom/{id}/default": {
+      "post": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Set Custom Preset As Default",
+        "description": "Sets a custom preset as the default.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_SetCustomPresetAsDefault",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The unique identifier of the custom preset to set as default.",
+            "required": true,
+            "schema": {
+              "description": "The unique identifier of the custom preset to set as default.",
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetCustomPresetAsDefaultResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets/summaries/system": {
+      "get": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Get System Default Preset Summary",
+        "description": "Returns summaries for all system-defined notification presets.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_GetSystemDefaultPresetSummary",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "connector_type",
+            "description": "The connector type whose system default preset summary is requested.",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.ConnectorType"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "entity_type",
+            "description": "The entity type whose system default preset summary is requested.",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.EntityType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSystemDefaultPresetSummaryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets/{id}": {
+      "get": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Get Preset",
+        "description": "Returns the details of the specified notification preset.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_GetPreset",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The unique identifier of the preset to retrieve.",
+            "required": true,
+            "schema": {
+              "description": "The unique identifier of the preset to retrieve.",
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPresetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets/{id}/default/apply": {
+      "post": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Set Preset As Default",
+        "description": "Sets the specified preset as the default for an entity.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_SetPresetAsDefault",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The unique identifier of the preset to set as default.",
+            "required": true,
+            "schema": {
+              "description": "The unique identifier of the preset to set as default.",
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetPresetAsDefaultResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets:createCustom": {
+      "post": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Create Custom Preset",
+        "description": "Creates a new custom notification preset.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_CreateCustomPreset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create Custom Preset Request",
+                "description": "Request to create a new custom preset",
+                "type": "object",
+                "properties": {
+                  "preset": {
+                    "$ref": "#/components/schemas/Preset"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCustomPresetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets:getDefaultSummary": {
+      "get": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Get Default Preset Summary",
+        "description": "Returns a summary of the default notification preset.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_GetDefaultPresetSummary",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "connector_type",
+            "description": "The connector type whose default preset summary is requested.",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.ConnectorType"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "entity_type",
+            "description": "The entity type whose default preset summary is requested.",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.EntityType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDefaultPresetSummaryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets:replaceCustom": {
+      "put": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "Replace Custom Preset",
+        "description": "Replaces an existing custom notification preset.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_ReplaceCustomPreset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Replace Custom Preset Request",
+                "description": "Request to replace an existing custom preset",
+                "type": "object",
+                "properties": {
+                  "preset": {
+                    "$ref": "#/components/schemas/Preset"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceCustomPresetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/presets:summariesList": {
+      "get": {
+        "tags": [
+          "Presets service"
+        ],
+        "summary": "List Preset Summaries",
+        "description": "Returns a list of notification preset summaries.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PresetsService_ListPresetSummaries",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "connector_type",
+            "description": "Filter preset summaries by their connector type.",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.ConnectorType"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "entity_type",
+            "description": "Filter preset summaries by their entity type.",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.EntityType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListPresetSummariesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AttachmentConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Attachment config.",
+        "type": "object",
+        "properties": {
+          "policy": {
+            "$ref": "#/components/schemas/AttachmentConfigPolicy"
+          }
+        }
+      },
+      "AttachmentConfigPolicy": {
+        "description": "Attachment config policy.",
+        "type": "string",
+        "enum": [
+          "AUTO",
+          "ENABLED",
+          "DISABLED"
+        ]
+      },
+      "BatchGetPresetsResponse": {
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+        },
+        "title": "Batch Get Presets Response",
+        "description": "Response containing the requested presets and any IDs not found",
+        "type": "object",
+        "properties": {
+          "notFoundIds": {
+            "description": "The not found ids.",
+            "type": "array",
+            "items": {
+              "description": "The not found ids.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0,
+            "maxItems": 600
+          },
+          "presets": {
+            "description": "List of permission presets.",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Preset"
+            }
+          }
+        }
+      },
+      "ConfigOverrides": {
+        "type": "object",
+        "properties": {
+          "conditionType": {
+            "$ref": "#/components/schemas/notification_center.ConditionType"
+          },
+          "messageConfig": {
+            "$ref": "#/components/schemas/MessageConfig"
+          },
+          "payloadType": {
+            "description": "Connector payload schema type.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+      },
+      "CreateCustomPresetResponse": {
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+        },
+        "title": "Create Custom Preset Response",
+        "description": "Response containing the created custom preset",
+        "type": "object",
+        "properties": {
+          "preset": {
+            "$ref": "#/components/schemas/Preset"
+          }
+        }
+      },
+      "DeleteCustomPresetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting a custom notification preset.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetDefaultPresetSummaryResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a summary of the default notification preset.",
+        "type": "object",
+        "properties": {
+          "presetSummary": {
+            "$ref": "#/components/schemas/PresetSummary"
+          }
+        }
+      },
+      "GetPresetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the details of a notification preset.",
+        "type": "object",
+        "properties": {
+          "preset": {
+            "$ref": "#/components/schemas/Preset"
+          }
+        }
+      },
+      "GetSystemDefaultPresetSummaryResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a summary of the system default notification preset.",
+        "type": "object",
+        "properties": {
+          "presetSummary": {
+            "$ref": "#/components/schemas/PresetSummary"
+          }
+        }
+      },
+      "ListPresetSummariesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of notification preset summaries.",
+        "type": "object",
+        "properties": {
+          "presetSummaries": {
+            "description": "The preset summaries.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PresetSummary"
+            },
+            "minItems": 0,
+            "maxItems": 600
+          }
+        }
+      },
+      "MatchEntityTypeAndSubTypeCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Match entity type and sub type condition.",
+        "type": "object",
+        "properties": {
+          "entitySubType": {
+            "description": "The entity sub type.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+      },
+      "MatchEntityTypeCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Match entity type condition.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "MessageConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Message config.",
+        "type": "object",
+        "properties": {
+          "fields": {
+            "description": "List of fields.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/notification_center.MessageConfigField"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "Preset": {
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+        },
+        "title": "Preset",
+        "description": "Set of preconfigured templates for notification content rendering",
+        "type": "object",
+        "properties": {
+          "attachmentConfig": {
+            "$ref": "#/components/schemas/AttachmentConfig"
+          },
+          "configOverrides": {
+            "description": "The config overrides.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigOverrides"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "connectorType": {
+            "$ref": "#/components/schemas/notification_center.ConnectorType"
+          },
+          "createTime": {
+            "description": "The create time.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
+          },
+          "description": {
+            "example": "Custom preset for alerts",
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 5000
+          },
+          "entityType": {
+            "$ref": "#/components/schemas/notification_center.EntityType"
+          },
+          "id": {
+            "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
+            "description": "Unique identifier.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "name": {
+            "example": "My Preset",
+            "description": "Display name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "parentId": {
+            "example": "preset_system_slack_alerts_basic",
+            "description": "The parent id.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "presetType": {
+            "$ref": "#/components/schemas/PresetType"
+          },
+          "updateTime": {
+            "description": "Timestamp of the last update.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
+          }
+        }
+      },
+      "PresetSummary": {
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+        },
+        "title": "Preset Summary",
+        "description": "Provides a concise overview of a preset",
+        "type": "object",
+        "properties": {
+          "attachmentConfig": {
+            "$ref": "#/components/schemas/AttachmentConfig"
+          },
+          "connectorType": {
+            "$ref": "#/components/schemas/notification_center.ConnectorType"
+          },
+          "createTime": {
+            "description": "The create time.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
+          },
+          "description": {
+            "example": "Custom preset for alerts",
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 5000
+          },
+          "entityType": {
+            "$ref": "#/components/schemas/notification_center.EntityType"
+          },
+          "id": {
+            "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
+            "description": "Unique identifier.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "name": {
+            "example": "My Preset",
+            "description": "Display name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "parentId": {
+            "example": "c246e826-10c2-405e-8d3f-afcc24ad4d15",
+            "description": "The parent id.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "presetType": {
+            "$ref": "#/components/schemas/PresetType"
+          },
+          "updateTime": {
+            "description": "Timestamp of the last update.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
+          }
+        }
+      },
+      "PresetType": {
+        "description": "Preset type.",
+        "type": "string",
+        "enum": [
+          "PRESET_TYPE_UNSPECIFIED",
+          "SYSTEM",
+          "CUSTOM"
+        ]
+      },
+      "ReplaceCustomPresetResponse": {
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+        },
+        "title": "Replace Custom Preset Response",
+        "description": "Response containing the updated custom preset",
+        "type": "object",
+        "properties": {
+          "preset": {
+            "$ref": "#/components/schemas/Preset"
+          }
+        }
+      },
+      "SetCustomPresetAsDefaultResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after setting a custom preset as the default.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SetPresetAsDefaultResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after setting a preset as the default.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "notification_center.ConditionType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Field condition.condition type.",
+        "type": "object",
+        "properties": {
+          "matchEntityType": {
+            "$ref": "#/components/schemas/MatchEntityTypeCondition"
+          },
+          "matchEntityTypeAndSubType": {
+            "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "matchEntityType"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "matchEntityTypeAndSubType"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "matchEntityType"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "matchEntityTypeAndSubType"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "notification_center.ConnectorType": {
+        "description": "Connector type.",
+        "type": "string",
+        "enum": [
+          "CONNECTOR_TYPE_UNSPECIFIED",
+          "SLACK",
+          "GENERIC_HTTPS",
+          "PAGERDUTY",
+          "IBM_EVENT_NOTIFICATIONS",
+          "SERVICE_NOW",
+          "EMAIL",
+          "PAGERDUTY_INCIDENTS",
+          "MICROSOFT_TEAMS"
+        ]
+      },
+      "notification_center.EntityType": {
+        "description": "Entity type.",
+        "type": "string",
+        "enum": [
+          "ENTITY_TYPE_UNSPECIFIED",
+          "ALERTS",
+          "TEST_NOTIFICATIONS",
+          "CASES"
+        ]
+      },
+      "notification_center.MessageConfigField": {
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+        },
+        "title": "Message Config Field",
+        "description": "Message config field provides a way to define a template that can be used to render the notification content",
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "example": "title",
+            "description": "The field name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "template": {
+            "example": "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}",
+            "description": "The template.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 20000
+          }
+        }
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

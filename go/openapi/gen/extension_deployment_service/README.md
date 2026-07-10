@@ -94,8 +94,6 @@ Class | Method | HTTP request | Description
  - [ExtensionDeployment](docs/ExtensionDeployment.md)
  - [FailedItem](docs/FailedItem.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetDeployedExtensionsResponse](docs/GetDeployedExtensionsResponse.md)
  - [ItemCounts](docs/ItemCounts.md)

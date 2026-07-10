@@ -24,8 +24,9 @@ var _ MappedNullable = &BulkClearPriorityOverrideResponse{}
 // BulkClearPriorityOverrideResponse Response containing the updated cases
 type BulkClearPriorityOverrideResponse struct {
 	// Updated cases
-	Cases []Case `json:"cases"`
-	AdditionalProperties map[string]interface{}
+	Cases                             []Case `json:"cases"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _BulkClearPriorityOverrideResponse BulkClearPriorityOverrideResponse
@@ -73,7 +74,7 @@ func (o *BulkClearPriorityOverrideResponse) SetCases(v []Case) {
 }
 
 func (o BulkClearPriorityOverrideResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +105,10 @@ func (o *BulkClearPriorityOverrideResponse) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -129,6 +130,7 @@ func (o *BulkClearPriorityOverrideResponse) UnmarshalJSON(data []byte) (err erro
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "cases")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -169,4 +171,3 @@ func (v *NullableBulkClearPriorityOverrideResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

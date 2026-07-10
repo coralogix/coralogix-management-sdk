@@ -23,11 +23,11 @@ type PiiCategory string
 
 // List of PiiCategory
 const (
-	PIICATEGORY_PHONE_NUMBER PiiCategory = "PHONE_NUMBER"
+	PIICATEGORY_PHONE_NUMBER  PiiCategory = "PHONE_NUMBER"
 	PIICATEGORY_EMAIL_ADDRESS PiiCategory = "EMAIL_ADDRESS"
-	PIICATEGORY_CREDIT_CARD PiiCategory = "CREDIT_CARD"
-	PIICATEGORY_IBAN_CODE PiiCategory = "IBAN_CODE"
-	PIICATEGORY_US_SSN PiiCategory = "US_SSN"
+	PIICATEGORY_CREDIT_CARD   PiiCategory = "CREDIT_CARD"
+	PIICATEGORY_IBAN_CODE     PiiCategory = "IBAN_CODE"
+	PIICATEGORY_US_SSN        PiiCategory = "US_SSN"
 )
 
 // All allowed values of PiiCategory enum
@@ -117,4 +117,3 @@ func (v *NullablePiiCategory) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

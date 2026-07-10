@@ -13,240 +13,354 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// AlertIndicatorDeepLink - struct for AlertIndicatorDeepLink
+// checks if the AlertIndicatorDeepLink type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AlertIndicatorDeepLink{}
+
+// AlertIndicatorDeepLink Deep links derived from a single alert indicator on a case.
 type AlertIndicatorDeepLink struct {
-	AlertIndicatorDeepLinkLogs *AlertIndicatorDeepLinkLogs
-	AlertIndicatorDeepLinkMetric *AlertIndicatorDeepLinkMetric
-	AlertIndicatorDeepLinkRum *AlertIndicatorDeepLinkRum
-	AlertIndicatorDeepLinkSlo *AlertIndicatorDeepLinkSlo
-	AlertIndicatorDeepLinkTracing *AlertIndicatorDeepLinkTracing
+	// URL to the alert definition that triggered the indicator. Empty when not available.
+	AlertDef                          *string      `json:"alertDef,omitempty"`
+	Logs                              *LogsLink    `json:"logs,omitempty"`
+	Metric                            *MetricLink  `json:"metric,omitempty"`
+	Rum                               *RumLink     `json:"rum,omitempty"`
+	Slo                               *SloLink     `json:"slo,omitempty"`
+	Tracing                           *TracingLink `json:"tracing,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// AlertIndicatorDeepLinkLogsAsAlertIndicatorDeepLink is a convenience function that returns AlertIndicatorDeepLinkLogs wrapped in AlertIndicatorDeepLink
-func AlertIndicatorDeepLinkLogsAsAlertIndicatorDeepLink(v *AlertIndicatorDeepLinkLogs) AlertIndicatorDeepLink {
-	return AlertIndicatorDeepLink{
-		AlertIndicatorDeepLinkLogs: v,
+type _AlertIndicatorDeepLink AlertIndicatorDeepLink
+
+// NewAlertIndicatorDeepLink instantiates a new AlertIndicatorDeepLink object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAlertIndicatorDeepLink() *AlertIndicatorDeepLink {
+	this := AlertIndicatorDeepLink{}
+	return &this
+}
+
+// NewAlertIndicatorDeepLinkWithDefaults instantiates a new AlertIndicatorDeepLink object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAlertIndicatorDeepLinkWithDefaults() *AlertIndicatorDeepLink {
+	this := AlertIndicatorDeepLink{}
+	return &this
+}
+
+// GetAlertDef returns the AlertDef field value if set, zero value otherwise.
+func (o *AlertIndicatorDeepLink) GetAlertDef() string {
+	if o == nil || IsNil(o.AlertDef) {
+		var ret string
+		return ret
 	}
+	return *o.AlertDef
 }
 
-// AlertIndicatorDeepLinkMetricAsAlertIndicatorDeepLink is a convenience function that returns AlertIndicatorDeepLinkMetric wrapped in AlertIndicatorDeepLink
-func AlertIndicatorDeepLinkMetricAsAlertIndicatorDeepLink(v *AlertIndicatorDeepLinkMetric) AlertIndicatorDeepLink {
-	return AlertIndicatorDeepLink{
-		AlertIndicatorDeepLinkMetric: v,
+// GetAlertDefOk returns a tuple with the AlertDef field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertIndicatorDeepLink) GetAlertDefOk() (*string, bool) {
+	if o == nil || IsNil(o.AlertDef) {
+		return nil, false
 	}
+	return o.AlertDef, true
 }
 
-// AlertIndicatorDeepLinkRumAsAlertIndicatorDeepLink is a convenience function that returns AlertIndicatorDeepLinkRum wrapped in AlertIndicatorDeepLink
-func AlertIndicatorDeepLinkRumAsAlertIndicatorDeepLink(v *AlertIndicatorDeepLinkRum) AlertIndicatorDeepLink {
-	return AlertIndicatorDeepLink{
-		AlertIndicatorDeepLinkRum: v,
+// HasAlertDef returns a boolean if a field has been set.
+func (o *AlertIndicatorDeepLink) HasAlertDef() bool {
+	if o != nil && !IsNil(o.AlertDef) {
+		return true
 	}
+
+	return false
 }
 
-// AlertIndicatorDeepLinkSloAsAlertIndicatorDeepLink is a convenience function that returns AlertIndicatorDeepLinkSlo wrapped in AlertIndicatorDeepLink
-func AlertIndicatorDeepLinkSloAsAlertIndicatorDeepLink(v *AlertIndicatorDeepLinkSlo) AlertIndicatorDeepLink {
-	return AlertIndicatorDeepLink{
-		AlertIndicatorDeepLinkSlo: v,
+// SetAlertDef gets a reference to the given string and assigns it to the AlertDef field.
+func (o *AlertIndicatorDeepLink) SetAlertDef(v string) {
+	o.AlertDef = &v
+}
+
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *AlertIndicatorDeepLink) GetLogs() LogsLink {
+	if o == nil || IsNil(o.Logs) {
+		var ret LogsLink
+		return ret
 	}
+	return *o.Logs
 }
 
-// AlertIndicatorDeepLinkTracingAsAlertIndicatorDeepLink is a convenience function that returns AlertIndicatorDeepLinkTracing wrapped in AlertIndicatorDeepLink
-func AlertIndicatorDeepLinkTracingAsAlertIndicatorDeepLink(v *AlertIndicatorDeepLinkTracing) AlertIndicatorDeepLink {
-	return AlertIndicatorDeepLink{
-		AlertIndicatorDeepLinkTracing: v,
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertIndicatorDeepLink) GetLogsOk() (*LogsLink, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
 	}
+	return o.Logs, true
 }
 
+// HasLogs returns a boolean if a field has been set.
+func (o *AlertIndicatorDeepLink) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *AlertIndicatorDeepLink) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into AlertIndicatorDeepLinkLogs
-	err = json.Unmarshal(data, &dst.AlertIndicatorDeepLinkLogs)
-	if err == nil {
-		jsonAlertIndicatorDeepLinkLogs, _ := json.Marshal(dst.AlertIndicatorDeepLinkLogs)
-		if string(jsonAlertIndicatorDeepLinkLogs) == "{}" { // empty struct
-			dst.AlertIndicatorDeepLinkLogs = nil
-		} else {
-			if err = validator.Validate(dst.AlertIndicatorDeepLinkLogs); err != nil {
-				dst.AlertIndicatorDeepLinkLogs = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetLogs gets a reference to the given LogsLink and assigns it to the Logs field.
+func (o *AlertIndicatorDeepLink) SetLogs(v LogsLink) {
+	o.Logs = &v
+}
+
+// GetMetric returns the Metric field value if set, zero value otherwise.
+func (o *AlertIndicatorDeepLink) GetMetric() MetricLink {
+	if o == nil || IsNil(o.Metric) {
+		var ret MetricLink
+		return ret
+	}
+	return *o.Metric
+}
+
+// GetMetricOk returns a tuple with the Metric field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertIndicatorDeepLink) GetMetricOk() (*MetricLink, bool) {
+	if o == nil || IsNil(o.Metric) {
+		return nil, false
+	}
+	return o.Metric, true
+}
+
+// HasMetric returns a boolean if a field has been set.
+func (o *AlertIndicatorDeepLink) HasMetric() bool {
+	if o != nil && !IsNil(o.Metric) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetric gets a reference to the given MetricLink and assigns it to the Metric field.
+func (o *AlertIndicatorDeepLink) SetMetric(v MetricLink) {
+	o.Metric = &v
+}
+
+// GetRum returns the Rum field value if set, zero value otherwise.
+func (o *AlertIndicatorDeepLink) GetRum() RumLink {
+	if o == nil || IsNil(o.Rum) {
+		var ret RumLink
+		return ret
+	}
+	return *o.Rum
+}
+
+// GetRumOk returns a tuple with the Rum field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertIndicatorDeepLink) GetRumOk() (*RumLink, bool) {
+	if o == nil || IsNil(o.Rum) {
+		return nil, false
+	}
+	return o.Rum, true
+}
+
+// HasRum returns a boolean if a field has been set.
+func (o *AlertIndicatorDeepLink) HasRum() bool {
+	if o != nil && !IsNil(o.Rum) {
+		return true
+	}
+
+	return false
+}
+
+// SetRum gets a reference to the given RumLink and assigns it to the Rum field.
+func (o *AlertIndicatorDeepLink) SetRum(v RumLink) {
+	o.Rum = &v
+}
+
+// GetSlo returns the Slo field value if set, zero value otherwise.
+func (o *AlertIndicatorDeepLink) GetSlo() SloLink {
+	if o == nil || IsNil(o.Slo) {
+		var ret SloLink
+		return ret
+	}
+	return *o.Slo
+}
+
+// GetSloOk returns a tuple with the Slo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertIndicatorDeepLink) GetSloOk() (*SloLink, bool) {
+	if o == nil || IsNil(o.Slo) {
+		return nil, false
+	}
+	return o.Slo, true
+}
+
+// HasSlo returns a boolean if a field has been set.
+func (o *AlertIndicatorDeepLink) HasSlo() bool {
+	if o != nil && !IsNil(o.Slo) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlo gets a reference to the given SloLink and assigns it to the Slo field.
+func (o *AlertIndicatorDeepLink) SetSlo(v SloLink) {
+	o.Slo = &v
+}
+
+// GetTracing returns the Tracing field value if set, zero value otherwise.
+func (o *AlertIndicatorDeepLink) GetTracing() TracingLink {
+	if o == nil || IsNil(o.Tracing) {
+		var ret TracingLink
+		return ret
+	}
+	return *o.Tracing
+}
+
+// GetTracingOk returns a tuple with the Tracing field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertIndicatorDeepLink) GetTracingOk() (*TracingLink, bool) {
+	if o == nil || IsNil(o.Tracing) {
+		return nil, false
+	}
+	return o.Tracing, true
+}
+
+// HasTracing returns a boolean if a field has been set.
+func (o *AlertIndicatorDeepLink) HasTracing() bool {
+	if o != nil && !IsNil(o.Tracing) {
+		return true
+	}
+
+	return false
+}
+
+// SetTracing gets a reference to the given TracingLink and assigns it to the Tracing field.
+func (o *AlertIndicatorDeepLink) SetTracing(v TracingLink) {
+	o.Tracing = &v
+}
+
+func (o AlertIndicatorDeepLink) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AlertIndicatorDeepLink) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AlertDef) {
+		toSerialize["alertDef"] = o.AlertDef
+	}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Metric) {
+		toSerialize["metric"] = o.Metric
+	}
+	if !IsNil(o.Rum) {
+		toSerialize["rum"] = o.Rum
+	}
+	if !IsNil(o.Slo) {
+		toSerialize["slo"] = o.Slo
+	}
+	if !IsNil(o.Tracing) {
+		toSerialize["tracing"] = o.Tracing
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metric"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["rum"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["slo"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["tracing"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logs, metric, rum, slo, tracing] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["logs"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logs must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metric"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metric must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["rum"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field rum must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["slo"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field slo must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["tracing"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field tracing must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *AlertIndicatorDeepLink) UnmarshalJSON(data []byte) (err error) {
+	varAlertIndicatorDeepLink := _AlertIndicatorDeepLink{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertIndicatorDeepLink)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertIndicatorDeepLink(varAlertIndicatorDeepLink)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertIndicatorDeepLinkLogs = nil
-	}
-
-	// try to unmarshal data into AlertIndicatorDeepLinkMetric
-	err = json.Unmarshal(data, &dst.AlertIndicatorDeepLinkMetric)
-	if err == nil {
-		jsonAlertIndicatorDeepLinkMetric, _ := json.Marshal(dst.AlertIndicatorDeepLinkMetric)
-		if string(jsonAlertIndicatorDeepLinkMetric) == "{}" { // empty struct
-			dst.AlertIndicatorDeepLinkMetric = nil
-		} else {
-			if err = validator.Validate(dst.AlertIndicatorDeepLinkMetric); err != nil {
-				dst.AlertIndicatorDeepLinkMetric = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metric"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertIndicatorDeepLinkMetric = nil
-	}
-
-	// try to unmarshal data into AlertIndicatorDeepLinkRum
-	err = json.Unmarshal(data, &dst.AlertIndicatorDeepLinkRum)
-	if err == nil {
-		jsonAlertIndicatorDeepLinkRum, _ := json.Marshal(dst.AlertIndicatorDeepLinkRum)
-		if string(jsonAlertIndicatorDeepLinkRum) == "{}" { // empty struct
-			dst.AlertIndicatorDeepLinkRum = nil
-		} else {
-			if err = validator.Validate(dst.AlertIndicatorDeepLinkRum); err != nil {
-				dst.AlertIndicatorDeepLinkRum = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["rum"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertIndicatorDeepLinkRum = nil
-	}
-
-	// try to unmarshal data into AlertIndicatorDeepLinkSlo
-	err = json.Unmarshal(data, &dst.AlertIndicatorDeepLinkSlo)
-	if err == nil {
-		jsonAlertIndicatorDeepLinkSlo, _ := json.Marshal(dst.AlertIndicatorDeepLinkSlo)
-		if string(jsonAlertIndicatorDeepLinkSlo) == "{}" { // empty struct
-			dst.AlertIndicatorDeepLinkSlo = nil
-		} else {
-			if err = validator.Validate(dst.AlertIndicatorDeepLinkSlo); err != nil {
-				dst.AlertIndicatorDeepLinkSlo = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["slo"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertIndicatorDeepLinkSlo = nil
-	}
-
-	// try to unmarshal data into AlertIndicatorDeepLinkTracing
-	err = json.Unmarshal(data, &dst.AlertIndicatorDeepLinkTracing)
-	if err == nil {
-		jsonAlertIndicatorDeepLinkTracing, _ := json.Marshal(dst.AlertIndicatorDeepLinkTracing)
-		if string(jsonAlertIndicatorDeepLinkTracing) == "{}" { // empty struct
-			dst.AlertIndicatorDeepLinkTracing = nil
-		} else {
-			if err = validator.Validate(dst.AlertIndicatorDeepLinkTracing); err != nil {
-				dst.AlertIndicatorDeepLinkTracing = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["tracing"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.AlertIndicatorDeepLinkTracing = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logs, metric, rum, slo, tracing] may be set"}
+		}
+
+		delete(additionalProperties, "alertDef")
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "metric")
+		delete(additionalProperties, "rum")
+		delete(additionalProperties, "slo")
+		delete(additionalProperties, "tracing")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AlertIndicatorDeepLinkLogs = nil
-		dst.AlertIndicatorDeepLinkMetric = nil
-		dst.AlertIndicatorDeepLinkRum = nil
-		dst.AlertIndicatorDeepLinkSlo = nil
-		dst.AlertIndicatorDeepLinkTracing = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(AlertIndicatorDeepLink)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src AlertIndicatorDeepLink) MarshalJSON() ([]byte, error) {
-	if src.AlertIndicatorDeepLinkLogs != nil {
-		return json.Marshal(&src.AlertIndicatorDeepLinkLogs)
-	}
-
-	if src.AlertIndicatorDeepLinkMetric != nil {
-		return json.Marshal(&src.AlertIndicatorDeepLinkMetric)
-	}
-
-	if src.AlertIndicatorDeepLinkRum != nil {
-		return json.Marshal(&src.AlertIndicatorDeepLinkRum)
-	}
-
-	if src.AlertIndicatorDeepLinkSlo != nil {
-		return json.Marshal(&src.AlertIndicatorDeepLinkSlo)
-	}
-
-	if src.AlertIndicatorDeepLinkTracing != nil {
-		return json.Marshal(&src.AlertIndicatorDeepLinkTracing)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *AlertIndicatorDeepLink) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.AlertIndicatorDeepLinkLogs != nil {
-		return obj.AlertIndicatorDeepLinkLogs
-	}
-
-	if obj.AlertIndicatorDeepLinkMetric != nil {
-		return obj.AlertIndicatorDeepLinkMetric
-	}
-
-	if obj.AlertIndicatorDeepLinkRum != nil {
-		return obj.AlertIndicatorDeepLinkRum
-	}
-
-	if obj.AlertIndicatorDeepLinkSlo != nil {
-		return obj.AlertIndicatorDeepLinkSlo
-	}
-
-	if obj.AlertIndicatorDeepLinkTracing != nil {
-		return obj.AlertIndicatorDeepLinkTracing
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj AlertIndicatorDeepLink) GetActualInstanceValue() (interface{}) {
-	if obj.AlertIndicatorDeepLinkLogs != nil {
-		return *obj.AlertIndicatorDeepLinkLogs
-	}
-
-	if obj.AlertIndicatorDeepLinkMetric != nil {
-		return *obj.AlertIndicatorDeepLinkMetric
-	}
-
-	if obj.AlertIndicatorDeepLinkRum != nil {
-		return *obj.AlertIndicatorDeepLinkRum
-	}
-
-	if obj.AlertIndicatorDeepLinkSlo != nil {
-		return *obj.AlertIndicatorDeepLinkSlo
-	}
-
-	if obj.AlertIndicatorDeepLinkTracing != nil {
-		return *obj.AlertIndicatorDeepLinkTracing
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableAlertIndicatorDeepLink struct {
@@ -284,4 +398,3 @@ func (v *NullableAlertIndicatorDeepLink) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

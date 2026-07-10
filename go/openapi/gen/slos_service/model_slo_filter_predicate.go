@@ -22,8 +22,9 @@ var _ MappedNullable = &SloFilterPredicate{}
 
 // SloFilterPredicate Predicate used for filtering SLOs
 type SloFilterPredicate struct {
-	Is *SloFilterPredicateIs `json:"is,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Is                                *IsFilterPredicate `json:"is,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SloFilterPredicate SloFilterPredicate
@@ -46,9 +47,9 @@ func NewSloFilterPredicateWithDefaults() *SloFilterPredicate {
 }
 
 // GetIs returns the Is field value if set, zero value otherwise.
-func (o *SloFilterPredicate) GetIs() SloFilterPredicateIs {
+func (o *SloFilterPredicate) GetIs() IsFilterPredicate {
 	if o == nil || IsNil(o.Is) {
-		var ret SloFilterPredicateIs
+		var ret IsFilterPredicate
 		return ret
 	}
 	return *o.Is
@@ -56,7 +57,7 @@ func (o *SloFilterPredicate) GetIs() SloFilterPredicateIs {
 
 // GetIsOk returns a tuple with the Is field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SloFilterPredicate) GetIsOk() (*SloFilterPredicateIs, bool) {
+func (o *SloFilterPredicate) GetIsOk() (*IsFilterPredicate, bool) {
 	if o == nil || IsNil(o.Is) {
 		return nil, false
 	}
@@ -72,13 +73,13 @@ func (o *SloFilterPredicate) HasIs() bool {
 	return false
 }
 
-// SetIs gets a reference to the given SloFilterPredicateIs and assigns it to the Is field.
-func (o *SloFilterPredicate) SetIs(v SloFilterPredicateIs) {
+// SetIs gets a reference to the given IsFilterPredicate and assigns it to the Is field.
+func (o *SloFilterPredicate) SetIs(v IsFilterPredicate) {
 	o.Is = &v
 }
 
 func (o SloFilterPredicate) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *SloFilterPredicate) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "is")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableSloFilterPredicate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

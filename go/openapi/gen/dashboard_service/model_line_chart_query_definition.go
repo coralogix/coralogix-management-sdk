@@ -24,9 +24,9 @@ var _ MappedNullable = &LineChartQueryDefinition{}
 // LineChartQueryDefinition LineChart represents the configuration of a line chart widget.
 type LineChartQueryDefinition struct {
 	// Applied color scheme for this query, one of the predefined values
-	ColorScheme *string `json:"colorScheme,omitempty"`
+	ColorScheme *string `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit   *string                    `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	Decimal *int32 `json:"decimal,omitempty"`
@@ -34,26 +34,27 @@ type LineChartQueryDefinition struct {
 	DecimalPrecision *bool `json:"decimalPrecision,omitempty"`
 	// Whether to ignore color scheme and derive colors from algorithm
 	HashColors *bool `json:"hashColors,omitempty"`
-	// Unique id of the query definition
-	Id string `json:"id"`
+	// Unique id of the query definition. If empty or omitted, it is auto-replaced with a generated UUID.
+	Id                 string              `json:"id" validate:"regexp=^[\\s\\S]*$"`
 	IntervalResolution *IntervalResolution `json:"intervalResolution,omitempty"`
 	// Is the query visible
 	IsVisible *bool `json:"isVisible,omitempty"`
 	// Custom name of the query
-	Name *string `json:"name,omitempty"`
-	Query LineChartQuery `json:"query"`
+	Name       *string              `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Query      LineChartQuery       `json:"query"`
 	Resolution *LineChartResolution `json:"resolution,omitempty"`
-	ScaleType *ScaleType `json:"scaleType,omitempty"`
+	ScaleType  *ScaleType           `json:"scaleType,omitempty"`
 	// Max count of the series per query
 	SeriesCountLimit *string `json:"seriesCountLimit,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Custom template for the series name
-	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
+	SeriesNameTemplate *string     `json:"seriesNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Unit               *CommonUnit `json:"unit,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
-	YAxisMin *float32 `json:"yAxisMin,omitempty"`
-	AdditionalProperties map[string]interface{}
+	YAxisMin                          *float32 `json:"yAxisMin,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LineChartQueryDefinition LineChartQueryDefinition
@@ -638,7 +639,7 @@ func (o *LineChartQueryDefinition) SetYAxisMin(v float32) {
 }
 
 func (o LineChartQueryDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -719,10 +720,10 @@ func (o *LineChartQueryDefinition) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -761,6 +762,7 @@ func (o *LineChartQueryDefinition) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "yAxisMax")
 		delete(additionalProperties, "yAxisMin")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -801,4 +803,3 @@ func (v *NullableLineChartQueryDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

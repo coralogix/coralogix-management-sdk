@@ -13,164 +13,226 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// MultiStringValue - struct for MultiStringValue
+// checks if the MultiStringValue type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MultiStringValue{}
+
+// MultiStringValue A variable value representing multiple selected string values: all, a specific list, or selected-all.
 type MultiStringValue struct {
-	MultiStringValueAll *MultiStringValueAll
-	MultiStringValueList *MultiStringValueList
-	MultiStringValueSelectedAll *MultiStringValueSelectedAll
+	// All value.
+	All  map[string]interface{} `json:"all,omitempty"`
+	List *ListValue             `json:"list,omitempty"`
+	// Selected all value.
+	SelectedAll                       map[string]interface{} `json:"selectedAll,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// MultiStringValueAllAsMultiStringValue is a convenience function that returns MultiStringValueAll wrapped in MultiStringValue
-func MultiStringValueAllAsMultiStringValue(v *MultiStringValueAll) MultiStringValue {
-	return MultiStringValue{
-		MultiStringValueAll: v,
+type _MultiStringValue MultiStringValue
+
+// NewMultiStringValue instantiates a new MultiStringValue object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewMultiStringValue() *MultiStringValue {
+	this := MultiStringValue{}
+	return &this
+}
+
+// NewMultiStringValueWithDefaults instantiates a new MultiStringValue object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewMultiStringValueWithDefaults() *MultiStringValue {
+	this := MultiStringValue{}
+	return &this
+}
+
+// GetAll returns the All field value if set, zero value otherwise.
+func (o *MultiStringValue) GetAll() map[string]interface{} {
+	if o == nil || IsNil(o.All) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.All
 }
 
-// MultiStringValueListAsMultiStringValue is a convenience function that returns MultiStringValueList wrapped in MultiStringValue
-func MultiStringValueListAsMultiStringValue(v *MultiStringValueList) MultiStringValue {
-	return MultiStringValue{
-		MultiStringValueList: v,
+// GetAllOk returns a tuple with the All field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiStringValue) GetAllOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.All) {
+		return map[string]interface{}{}, false
 	}
+	return o.All, true
 }
 
-// MultiStringValueSelectedAllAsMultiStringValue is a convenience function that returns MultiStringValueSelectedAll wrapped in MultiStringValue
-func MultiStringValueSelectedAllAsMultiStringValue(v *MultiStringValueSelectedAll) MultiStringValue {
-	return MultiStringValue{
-		MultiStringValueSelectedAll: v,
+// HasAll returns a boolean if a field has been set.
+func (o *MultiStringValue) HasAll() bool {
+	if o != nil && !IsNil(o.All) {
+		return true
 	}
+
+	return false
 }
 
+// SetAll gets a reference to the given map[string]interface{} and assigns it to the All field.
+func (o *MultiStringValue) SetAll(v map[string]interface{}) {
+	o.All = v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *MultiStringValue) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into MultiStringValueAll
-	err = json.Unmarshal(data, &dst.MultiStringValueAll)
-	if err == nil {
-		jsonMultiStringValueAll, _ := json.Marshal(dst.MultiStringValueAll)
-		if string(jsonMultiStringValueAll) == "{}" { // empty struct
-			dst.MultiStringValueAll = nil
-		} else {
-			if err = validator.Validate(dst.MultiStringValueAll); err != nil {
-				dst.MultiStringValueAll = nil
-			} else {
-				match++
-			}
+// GetList returns the List field value if set, zero value otherwise.
+func (o *MultiStringValue) GetList() ListValue {
+	if o == nil || IsNil(o.List) {
+		var ret ListValue
+		return ret
+	}
+	return *o.List
+}
+
+// GetListOk returns a tuple with the List field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiStringValue) GetListOk() (*ListValue, bool) {
+	if o == nil || IsNil(o.List) {
+		return nil, false
+	}
+	return o.List, true
+}
+
+// HasList returns a boolean if a field has been set.
+func (o *MultiStringValue) HasList() bool {
+	if o != nil && !IsNil(o.List) {
+		return true
+	}
+
+	return false
+}
+
+// SetList gets a reference to the given ListValue and assigns it to the List field.
+func (o *MultiStringValue) SetList(v ListValue) {
+	o.List = &v
+}
+
+// GetSelectedAll returns the SelectedAll field value if set, zero value otherwise.
+func (o *MultiStringValue) GetSelectedAll() map[string]interface{} {
+	if o == nil || IsNil(o.SelectedAll) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.SelectedAll
+}
+
+// GetSelectedAllOk returns a tuple with the SelectedAll field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiStringValue) GetSelectedAllOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.SelectedAll) {
+		return map[string]interface{}{}, false
+	}
+	return o.SelectedAll, true
+}
+
+// HasSelectedAll returns a boolean if a field has been set.
+func (o *MultiStringValue) HasSelectedAll() bool {
+	if o != nil && !IsNil(o.SelectedAll) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelectedAll gets a reference to the given map[string]interface{} and assigns it to the SelectedAll field.
+func (o *MultiStringValue) SetSelectedAll(v map[string]interface{}) {
+	o.SelectedAll = v
+}
+
+func (o MultiStringValue) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MultiStringValue) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.All) {
+		toSerialize["all"] = o.All
+	}
+	if !IsNil(o.List) {
+		toSerialize["list"] = o.List
+	}
+	if !IsNil(o.SelectedAll) {
+		toSerialize["selectedAll"] = o.SelectedAll
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["all"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["list"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["selectedAll"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [all, list, selectedAll] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["all"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field all must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["list"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field list must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["selectedAll"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field selectedAll must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *MultiStringValue) UnmarshalJSON(data []byte) (err error) {
+	varMultiStringValue := _MultiStringValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiStringValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiStringValue(varMultiStringValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["all"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiStringValueAll = nil
-	}
-
-	// try to unmarshal data into MultiStringValueList
-	err = json.Unmarshal(data, &dst.MultiStringValueList)
-	if err == nil {
-		jsonMultiStringValueList, _ := json.Marshal(dst.MultiStringValueList)
-		if string(jsonMultiStringValueList) == "{}" { // empty struct
-			dst.MultiStringValueList = nil
-		} else {
-			if err = validator.Validate(dst.MultiStringValueList); err != nil {
-				dst.MultiStringValueList = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["list"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiStringValueList = nil
-	}
-
-	// try to unmarshal data into MultiStringValueSelectedAll
-	err = json.Unmarshal(data, &dst.MultiStringValueSelectedAll)
-	if err == nil {
-		jsonMultiStringValueSelectedAll, _ := json.Marshal(dst.MultiStringValueSelectedAll)
-		if string(jsonMultiStringValueSelectedAll) == "{}" { // empty struct
-			dst.MultiStringValueSelectedAll = nil
-		} else {
-			if err = validator.Validate(dst.MultiStringValueSelectedAll); err != nil {
-				dst.MultiStringValueSelectedAll = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["selectedAll"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiStringValueSelectedAll = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [all, list, selectedAll] may be set"}
+		}
+
+		delete(additionalProperties, "all")
+		delete(additionalProperties, "list")
+		delete(additionalProperties, "selectedAll")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.MultiStringValueAll = nil
-		dst.MultiStringValueList = nil
-		dst.MultiStringValueSelectedAll = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(MultiStringValue)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src MultiStringValue) MarshalJSON() ([]byte, error) {
-	if src.MultiStringValueAll != nil {
-		return json.Marshal(&src.MultiStringValueAll)
-	}
-
-	if src.MultiStringValueList != nil {
-		return json.Marshal(&src.MultiStringValueList)
-	}
-
-	if src.MultiStringValueSelectedAll != nil {
-		return json.Marshal(&src.MultiStringValueSelectedAll)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *MultiStringValue) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.MultiStringValueAll != nil {
-		return obj.MultiStringValueAll
-	}
-
-	if obj.MultiStringValueList != nil {
-		return obj.MultiStringValueList
-	}
-
-	if obj.MultiStringValueSelectedAll != nil {
-		return obj.MultiStringValueSelectedAll
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj MultiStringValue) GetActualInstanceValue() (interface{}) {
-	if obj.MultiStringValueAll != nil {
-		return *obj.MultiStringValueAll
-	}
-
-	if obj.MultiStringValueList != nil {
-		return *obj.MultiStringValueList
-	}
-
-	if obj.MultiStringValueSelectedAll != nil {
-		return *obj.MultiStringValueSelectedAll
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableMultiStringValue struct {
@@ -208,4 +270,3 @@ func (v *NullableMultiStringValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

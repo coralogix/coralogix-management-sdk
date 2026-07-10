@@ -24,10 +24,11 @@ var _ MappedNullable = &IncidentEventUpsertState{}
 // IncidentEventUpsertState Incident event upsert state.
 type IncidentEventUpsertState struct {
 	// The is muted.
-	IsMuted *bool `json:"isMuted,omitempty"`
-	Payload UpsertIncidentStatePayload `json:"payload"`
-	StateType UpsertIncidentStateType `json:"stateType"`
-	AdditionalProperties map[string]interface{}
+	IsMuted                           *bool                      `json:"isMuted,omitempty"`
+	Payload                           UpsertIncidentStatePayload `json:"payload"`
+	StateType                         UpsertIncidentStateType    `json:"stateType"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentEventUpsertState IncidentEventUpsertState
@@ -132,7 +133,7 @@ func (o *IncidentEventUpsertState) SetStateType(v UpsertIncidentStateType) {
 }
 
 func (o IncidentEventUpsertState) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -168,10 +169,10 @@ func (o *IncidentEventUpsertState) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -195,6 +196,7 @@ func (o *IncidentEventUpsertState) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "payload")
 		delete(additionalProperties, "stateType")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -235,4 +237,3 @@ func (v *NullableIncidentEventUpsertState) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

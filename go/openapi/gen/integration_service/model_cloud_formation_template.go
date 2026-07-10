@@ -29,8 +29,9 @@ type CloudFormationTemplate struct {
 	// The post installation steps.
 	PostInstallationSteps *map[string]string `json:"postInstallationSteps,omitempty"`
 	// The template url.
-	TemplateUrl *string `json:"templateUrl,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TemplateUrl                       *string `json:"templateUrl,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CloudFormationTemplate CloudFormationTemplate
@@ -181,7 +182,7 @@ func (o *CloudFormationTemplate) SetTemplateUrl(v string) {
 }
 
 func (o CloudFormationTemplate) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,6 +231,7 @@ func (o *CloudFormationTemplate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "postInstallationSteps")
 		delete(additionalProperties, "templateUrl")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -270,4 +272,3 @@ func (v *NullableCloudFormationTemplate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

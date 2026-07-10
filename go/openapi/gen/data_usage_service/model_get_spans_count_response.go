@@ -23,8 +23,9 @@ var _ MappedNullable = &GetSpansCountResponse{}
 // GetSpansCountResponse This data structure is used to return spans count.
 type GetSpansCountResponse struct {
 	// The spans count.
-	SpansCount []SpansCount `json:"spansCount,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SpansCount                        []SpansCount `json:"spansCount,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetSpansCountResponse GetSpansCountResponse
@@ -79,7 +80,7 @@ func (o *GetSpansCountResponse) SetSpansCount(v []SpansCount) {
 }
 
 func (o GetSpansCountResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *GetSpansCountResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "spansCount")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableGetSpansCountResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

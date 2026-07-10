@@ -723,12 +723,51 @@
         "additionalProperties": false
       },
       "EntityLabelFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "All or EntityLabel list",
+        "description": "Select all items from a specific list of EntityLabels (Key/Values).",
+        "type": "object",
+        "properties": {
+          "all": {
+            "$ref": "#/components/schemas/All"
+          },
+          "values": {
+            "$ref": "#/components/schemas/EntityLabelFilter.Values"
+          }
+        },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/EntityLabelFilterAll"
+            "type": "object",
+            "required": [
+              "all"
+            ]
           },
           {
-            "$ref": "#/components/schemas/EntityLabelFilterValuesVariant"
+            "type": "object",
+            "required": [
+              "values"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "all"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "values"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },
@@ -748,38 +787,6 @@
             "minItems": 0
           }
         }
-      },
-      "EntityLabelFilterAll": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "All or EntityLabel list",
-        "description": "Select all items from a specific list of EntityLabels (Key/Values).",
-        "type": "object",
-        "properties": {
-          "all": {
-            "$ref": "#/components/schemas/All"
-          }
-        },
-        "required": [
-          "all"
-        ]
-      },
-      "EntityLabelFilterValuesVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "All or EntityLabel list",
-        "description": "Select all items from a specific list of EntityLabels (Key/Values).",
-        "type": "object",
-        "properties": {
-          "values": {
-            "$ref": "#/components/schemas/EntityLabelFilter.Values"
-          }
-        },
-        "required": [
-          "values"
-        ]
       },
       "Error": {
         "description": "Standard error response body returned for a failed request.",
@@ -802,16 +809,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -822,26 +819,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -852,9 +829,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -987,12 +976,51 @@
         ]
       },
       "IndicatorPriorityFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "All or IndicatorPriority list",
+        "description": "Select all priorities or a specific list of IndicatorPriority values.",
+        "type": "object",
+        "properties": {
+          "all": {
+            "$ref": "#/components/schemas/All"
+          },
+          "values": {
+            "$ref": "#/components/schemas/IndicatorPriorityFilter.Values"
+          }
+        },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IndicatorPriorityFilterAll"
+            "type": "object",
+            "required": [
+              "all"
+            ]
           },
           {
-            "$ref": "#/components/schemas/IndicatorPriorityFilterValuesVariant"
+            "type": "object",
+            "required": [
+              "values"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "all"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "values"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },
@@ -1012,38 +1040,6 @@
             "minItems": 0
           }
         }
-      },
-      "IndicatorPriorityFilterAll": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "All or IndicatorPriority list",
-        "description": "Select all priorities or a specific list of IndicatorPriority values.",
-        "type": "object",
-        "properties": {
-          "all": {
-            "$ref": "#/components/schemas/All"
-          }
-        },
-        "required": [
-          "all"
-        ]
-      },
-      "IndicatorPriorityFilterValuesVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "All or IndicatorPriority list",
-        "description": "Select all priorities or a specific list of IndicatorPriority values.",
-        "type": "object",
-        "properties": {
-          "values": {
-            "$ref": "#/components/schemas/IndicatorPriorityFilter.Values"
-          }
-        },
-        "required": [
-          "values"
-        ]
       },
       "KPISettings": {
         "externalDocs": {
@@ -1078,7 +1074,8 @@
         "enum": [
           "KPI_TYPE_UNSPECIFIED",
           "KPI_TYPE_TIME_TO_ACKNOWLEDGE",
-          "KPI_TYPE_TIME_TO_RESOLVE"
+          "KPI_TYPE_TIME_TO_RESOLVE",
+          "KPI_TYPE_TIME_TO_UPDATE"
         ]
       },
       "MultipleValues": {

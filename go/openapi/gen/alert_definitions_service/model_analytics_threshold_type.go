@@ -24,9 +24,9 @@ var _ MappedNullable = &AnalyticsThresholdType{}
 type AnalyticsThresholdType struct {
 	DataprimeQuery *DataprimeAlertQuery `json:"dataprimeQuery,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
-	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
-	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
-	Operator *AnalyticsThresholdOperator `json:"operator,omitempty"`
+	EvaluationDelayMs *int32                      `json:"evaluationDelayMs,omitempty"`
+	NoDataPolicy      *NoDataPolicy               `json:"noDataPolicy,omitempty"`
+	Operator          *AnalyticsThresholdOperator `json:"operator,omitempty"`
 	// The per-priority threshold rules
 	Rules []AnalyticsThresholdRule `json:"rules,omitempty"`
 	// The name of the numeric result column to compare
@@ -34,8 +34,9 @@ type AnalyticsThresholdType struct {
 	// The evaluation window duration in minutes
 	TimeframeMinutes *int32 `json:"timeframeMinutes,omitempty"`
 	// Whether each result row is treated as a separate permutation. Defaults to true for threshold alerts as permutation count is easier to estimate.
-	UseRowsAsPermutations *bool `json:"useRowsAsPermutations,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UseRowsAsPermutations             *bool `json:"useRowsAsPermutations,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AnalyticsThresholdType AnalyticsThresholdType
@@ -314,7 +315,7 @@ func (o *AnalyticsThresholdType) SetUseRowsAsPermutations(v bool) {
 }
 
 func (o AnalyticsThresholdType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -379,6 +380,7 @@ func (o *AnalyticsThresholdType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "timeframeMinutes")
 		delete(additionalProperties, "useRowsAsPermutations")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -419,4 +421,3 @@ func (v *NullableAnalyticsThresholdType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

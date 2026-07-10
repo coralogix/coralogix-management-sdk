@@ -13,164 +13,231 @@ package case_events_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// CommentAttachment - struct for CommentAttachment
+// checks if the CommentAttachment type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CommentAttachment{}
+
+// CommentAttachment struct for CommentAttachment
 type CommentAttachment struct {
-	CommentAttachmentCustomWidget *CommentAttachmentCustomWidget
-	CommentAttachmentFile *CommentAttachmentFile
-	CommentAttachmentLog *CommentAttachmentLog
+	CustomWidget                                    *CustomDashboardWidgetAttachment `json:"customWidget,omitempty"`
+	File                                            *FileAttachment                  `json:"file,omitempty"`
+	Log                                             *LogAttachment                   `json:"log,omitempty"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
-// CommentAttachmentCustomWidgetAsCommentAttachment is a convenience function that returns CommentAttachmentCustomWidget wrapped in CommentAttachment
-func CommentAttachmentCustomWidgetAsCommentAttachment(v *CommentAttachmentCustomWidget) CommentAttachment {
-	return CommentAttachment{
-		CommentAttachmentCustomWidget: v,
+type _CommentAttachment CommentAttachment
+
+// NewCommentAttachment instantiates a new CommentAttachment object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewCommentAttachment() *CommentAttachment {
+	this := CommentAttachment{}
+	return &this
+}
+
+// NewCommentAttachmentWithDefaults instantiates a new CommentAttachment object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewCommentAttachmentWithDefaults() *CommentAttachment {
+	this := CommentAttachment{}
+	return &this
+}
+
+// GetCustomWidget returns the CustomWidget field value if set, zero value otherwise.
+func (o *CommentAttachment) GetCustomWidget() CustomDashboardWidgetAttachment {
+	if o == nil || IsNil(o.CustomWidget) {
+		var ret CustomDashboardWidgetAttachment
+		return ret
 	}
+	return *o.CustomWidget
 }
 
-// CommentAttachmentFileAsCommentAttachment is a convenience function that returns CommentAttachmentFile wrapped in CommentAttachment
-func CommentAttachmentFileAsCommentAttachment(v *CommentAttachmentFile) CommentAttachment {
-	return CommentAttachment{
-		CommentAttachmentFile: v,
+// GetCustomWidgetOk returns a tuple with the CustomWidget field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CommentAttachment) GetCustomWidgetOk() (*CustomDashboardWidgetAttachment, bool) {
+	if o == nil || IsNil(o.CustomWidget) {
+		return nil, false
 	}
+	return o.CustomWidget, true
 }
 
-// CommentAttachmentLogAsCommentAttachment is a convenience function that returns CommentAttachmentLog wrapped in CommentAttachment
-func CommentAttachmentLogAsCommentAttachment(v *CommentAttachmentLog) CommentAttachment {
-	return CommentAttachment{
-		CommentAttachmentLog: v,
+// HasCustomWidget returns a boolean if a field has been set.
+func (o *CommentAttachment) HasCustomWidget() bool {
+	if o != nil && !IsNil(o.CustomWidget) {
+		return true
 	}
+
+	return false
 }
 
+// SetCustomWidget gets a reference to the given CustomDashboardWidgetAttachment and assigns it to the CustomWidget field.
+func (o *CommentAttachment) SetCustomWidget(v CustomDashboardWidgetAttachment) {
+	o.CustomWidget = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *CommentAttachment) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into CommentAttachmentCustomWidget
-	err = json.Unmarshal(data, &dst.CommentAttachmentCustomWidget)
-	if err == nil {
-		jsonCommentAttachmentCustomWidget, _ := json.Marshal(dst.CommentAttachmentCustomWidget)
-		if string(jsonCommentAttachmentCustomWidget) == "{}" { // empty struct
-			dst.CommentAttachmentCustomWidget = nil
-		} else {
-			if err = validator.Validate(dst.CommentAttachmentCustomWidget); err != nil {
-				dst.CommentAttachmentCustomWidget = nil
-			} else {
-				match++
-			}
+// GetFile returns the File field value if set, zero value otherwise.
+func (o *CommentAttachment) GetFile() FileAttachment {
+	if o == nil || IsNil(o.File) {
+		var ret FileAttachment
+		return ret
+	}
+	return *o.File
+}
+
+// GetFileOk returns a tuple with the File field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CommentAttachment) GetFileOk() (*FileAttachment, bool) {
+	if o == nil || IsNil(o.File) {
+		return nil, false
+	}
+	return o.File, true
+}
+
+// HasFile returns a boolean if a field has been set.
+func (o *CommentAttachment) HasFile() bool {
+	if o != nil && !IsNil(o.File) {
+		return true
+	}
+
+	return false
+}
+
+// SetFile gets a reference to the given FileAttachment and assigns it to the File field.
+func (o *CommentAttachment) SetFile(v FileAttachment) {
+	o.File = &v
+}
+
+// GetLog returns the Log field value if set, zero value otherwise.
+func (o *CommentAttachment) GetLog() LogAttachment {
+	if o == nil || IsNil(o.Log) {
+		var ret LogAttachment
+		return ret
+	}
+	return *o.Log
+}
+
+// GetLogOk returns a tuple with the Log field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CommentAttachment) GetLogOk() (*LogAttachment, bool) {
+	if o == nil || IsNil(o.Log) {
+		return nil, false
+	}
+	return o.Log, true
+}
+
+// HasLog returns a boolean if a field has been set.
+func (o *CommentAttachment) HasLog() bool {
+	if o != nil && !IsNil(o.Log) {
+		return true
+	}
+
+	return false
+}
+
+// SetLog gets a reference to the given LogAttachment and assigns it to the Log field.
+func (o *CommentAttachment) SetLog(v LogAttachment) {
+	o.Log = &v
+}
+
+func (o CommentAttachment) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CommentAttachment) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CustomWidget) {
+		toSerialize["customWidget"] = o.CustomWidget
+	}
+	if !IsNil(o.File) {
+		toSerialize["file"] = o.File
+	}
+	if !IsNil(o.Log) {
+		toSerialize["log"] = o.Log
+	}
+	requiredOneOfGroup0Matches := 0
+	if _, exists := toSerialize["log"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["customWidget"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["file"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [log, customWidget, file] must be set"}
 		}
-	} else {
-		dst.CommentAttachmentCustomWidget = nil
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [log, customWidget, file] must be set"}
 	}
 
-	// try to unmarshal data into CommentAttachmentFile
-	err = json.Unmarshal(data, &dst.CommentAttachmentFile)
-	if err == nil {
-		jsonCommentAttachmentFile, _ := json.Marshal(dst.CommentAttachmentFile)
-		if string(jsonCommentAttachmentFile) == "{}" { // empty struct
-			dst.CommentAttachmentFile = nil
-		} else {
-			if err = validator.Validate(dst.CommentAttachmentFile); err != nil {
-				dst.CommentAttachmentFile = nil
-			} else {
-				match++
-			}
+	if _, exists := o.AdditionalProperties["log"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field log must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["customWidget"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field customWidget must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["file"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field file must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *CommentAttachment) UnmarshalJSON(data []byte) (err error) {
+	varCommentAttachment := _CommentAttachment{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCommentAttachment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CommentAttachment(varCommentAttachment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		requiredOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["log"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CommentAttachmentFile = nil
-	}
-
-	// try to unmarshal data into CommentAttachmentLog
-	err = json.Unmarshal(data, &dst.CommentAttachmentLog)
-	if err == nil {
-		jsonCommentAttachmentLog, _ := json.Marshal(dst.CommentAttachmentLog)
-		if string(jsonCommentAttachmentLog) == "{}" { // empty struct
-			dst.CommentAttachmentLog = nil
-		} else {
-			if err = validator.Validate(dst.CommentAttachmentLog); err != nil {
-				dst.CommentAttachmentLog = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["customWidget"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CommentAttachmentLog = nil
+		if _, exists := additionalProperties["file"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
+		}
+		if requiredOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [log, customWidget, file] may be set"}
+		}
+
+		delete(additionalProperties, "customWidget")
+		delete(additionalProperties, "file")
+		delete(additionalProperties, "log")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.CommentAttachmentCustomWidget = nil
-		dst.CommentAttachmentFile = nil
-		dst.CommentAttachmentLog = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(CommentAttachment)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src CommentAttachment) MarshalJSON() ([]byte, error) {
-	if src.CommentAttachmentCustomWidget != nil {
-		return json.Marshal(&src.CommentAttachmentCustomWidget)
-	}
-
-	if src.CommentAttachmentFile != nil {
-		return json.Marshal(&src.CommentAttachmentFile)
-	}
-
-	if src.CommentAttachmentLog != nil {
-		return json.Marshal(&src.CommentAttachmentLog)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *CommentAttachment) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.CommentAttachmentCustomWidget != nil {
-		return obj.CommentAttachmentCustomWidget
-	}
-
-	if obj.CommentAttachmentFile != nil {
-		return obj.CommentAttachmentFile
-	}
-
-	if obj.CommentAttachmentLog != nil {
-		return obj.CommentAttachmentLog
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj CommentAttachment) GetActualInstanceValue() (interface{}) {
-	if obj.CommentAttachmentCustomWidget != nil {
-		return *obj.CommentAttachmentCustomWidget
-	}
-
-	if obj.CommentAttachmentFile != nil {
-		return *obj.CommentAttachmentFile
-	}
-
-	if obj.CommentAttachmentLog != nil {
-		return *obj.CommentAttachmentLog
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableCommentAttachment struct {
@@ -208,4 +275,3 @@ func (v *NullableCommentAttachment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

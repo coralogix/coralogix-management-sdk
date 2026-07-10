@@ -189,7 +189,7 @@ func dashboardFromFixture(t *testing.T, name string, opts ...dashboardFixtureOpt
 	var dashboard dashboards.Dashboard
 	err = json.Unmarshal(data, &dashboard)
 	require.NoError(t, err)
-	require.NotNil(t, dashboard.GetActualInstance())
+	require.Equal(t, name, dashboard.GetName())
 	return dashboard
 }
 
@@ -219,7 +219,7 @@ func withDashboardID(t *testing.T, dashboard dashboards.Dashboard, id string) da
 
 	err = json.Unmarshal(data, &dashboard)
 	require.NoError(t, err)
-	require.NotNil(t, dashboard.GetActualInstance())
+	require.Equal(t, id, dashboard.GetId())
 	return dashboard
 }
 

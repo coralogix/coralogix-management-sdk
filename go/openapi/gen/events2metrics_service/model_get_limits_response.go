@@ -25,10 +25,11 @@ type GetLimitsResponse struct {
 	// The company id.
 	CompanyId *string `json:"companyId,omitempty"`
 	// The labels limit.
-	LabelsLimit *int32 `json:"labelsLimit,omitempty"`
-	MetricsLimit *LimitUsage `json:"metricsLimit,omitempty"`
-	PermutationsLimit *LimitUsage `json:"permutationsLimit,omitempty"`
-	AdditionalProperties map[string]interface{}
+	LabelsLimit                       *int32      `json:"labelsLimit,omitempty"`
+	MetricsLimit                      *LimitUsage `json:"metricsLimit,omitempty"`
+	PermutationsLimit                 *LimitUsage `json:"permutationsLimit,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetLimitsResponse GetLimitsResponse
@@ -179,7 +180,7 @@ func (o *GetLimitsResponse) SetPermutationsLimit(v LimitUsage) {
 }
 
 func (o GetLimitsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,6 +229,7 @@ func (o *GetLimitsResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "metricsLimit")
 		delete(additionalProperties, "permutationsLimit")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -268,4 +270,3 @@ func (v *NullableGetLimitsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

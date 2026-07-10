@@ -24,8 +24,8 @@ type GaugeThresholdBy string
 // List of Gauge.ThresholdBy
 const (
 	GAUGETHRESHOLDBY_THRESHOLD_BY_UNSPECIFIED GaugeThresholdBy = "THRESHOLD_BY_UNSPECIFIED"
-	GAUGETHRESHOLDBY_THRESHOLD_BY_VALUE GaugeThresholdBy = "THRESHOLD_BY_VALUE"
-	GAUGETHRESHOLDBY_THRESHOLD_BY_BACKGROUND GaugeThresholdBy = "THRESHOLD_BY_BACKGROUND"
+	GAUGETHRESHOLDBY_THRESHOLD_BY_VALUE       GaugeThresholdBy = "THRESHOLD_BY_VALUE"
+	GAUGETHRESHOLDBY_THRESHOLD_BY_BACKGROUND  GaugeThresholdBy = "THRESHOLD_BY_BACKGROUND"
 )
 
 // All allowed values of GaugeThresholdBy enum
@@ -113,4 +113,3 @@ func (v *NullableGaugeThresholdBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,13 +22,14 @@ var _ MappedNullable = &DashboardFolder{}
 
 // DashboardFolder Dashboard folder.
 type DashboardFolder struct {
-	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	// Unique identifier. A UUID.
+	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
-	// The parent id.
-	ParentId *string `json:"parentId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// The parent id. A UUID that must differ from this folder's own id.
+	ParentId                          *string `json:"parentId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DashboardFolder DashboardFolder
@@ -147,7 +148,7 @@ func (o *DashboardFolder) SetParentId(v string) {
 }
 
 func (o DashboardFolder) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *DashboardFolder) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parentId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableDashboardFolder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

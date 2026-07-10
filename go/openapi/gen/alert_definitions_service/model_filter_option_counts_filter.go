@@ -22,13 +22,14 @@ var _ MappedNullable = &FilterOptionCountsFilter{}
 
 // FilterOptionCountsFilter Filter configuration for counting filter options
 type FilterOptionCountsFilter struct {
-	EnabledFilter interface{} `json:"enabledFilter,omitempty"`
-	EntityLabelsFilter interface{} `json:"entityLabelsFilter,omitempty"`
-	NameFilter interface{} `json:"nameFilter,omitempty"`
-	PriorityFilter interface{} `json:"priorityFilter,omitempty"`
-	StatusFilter interface{} `json:"statusFilter,omitempty"`
-	TypeFilter interface{} `json:"typeFilter,omitempty"`
-	AdditionalProperties map[string]interface{}
+	EnabledFilter                     *FilterOptionCountsEnabledFilter      `json:"enabledFilter,omitempty"`
+	EntityLabelsFilter                *FilterOptionCountsEntityLabelsFilter `json:"entityLabelsFilter,omitempty"`
+	NameFilter                        *FilterOptionCountsNameFilter         `json:"nameFilter,omitempty"`
+	PriorityFilter                    *FilterOptionCountsPriorityFilter     `json:"priorityFilter,omitempty"`
+	StatusFilter                      *FilterOptionCountsStatusFilter       `json:"statusFilter,omitempty"`
+	TypeFilter                        *FilterOptionCountsTypeFilter         `json:"typeFilter,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _FilterOptionCountsFilter FilterOptionCountsFilter
@@ -50,23 +51,22 @@ func NewFilterOptionCountsFilterWithDefaults() *FilterOptionCountsFilter {
 	return &this
 }
 
-// GetEnabledFilter returns the EnabledFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FilterOptionCountsFilter) GetEnabledFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetEnabledFilter returns the EnabledFilter field value if set, zero value otherwise.
+func (o *FilterOptionCountsFilter) GetEnabledFilter() FilterOptionCountsEnabledFilter {
+	if o == nil || IsNil(o.EnabledFilter) {
+		var ret FilterOptionCountsEnabledFilter
 		return ret
 	}
-	return o.EnabledFilter
+	return *o.EnabledFilter
 }
 
 // GetEnabledFilterOk returns a tuple with the EnabledFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FilterOptionCountsFilter) GetEnabledFilterOk() (*interface{}, bool) {
+func (o *FilterOptionCountsFilter) GetEnabledFilterOk() (*FilterOptionCountsEnabledFilter, bool) {
 	if o == nil || IsNil(o.EnabledFilter) {
 		return nil, false
 	}
-	return &o.EnabledFilter, true
+	return o.EnabledFilter, true
 }
 
 // HasEnabledFilter returns a boolean if a field has been set.
@@ -78,28 +78,27 @@ func (o *FilterOptionCountsFilter) HasEnabledFilter() bool {
 	return false
 }
 
-// SetEnabledFilter gets a reference to the given interface{} and assigns it to the EnabledFilter field.
-func (o *FilterOptionCountsFilter) SetEnabledFilter(v interface{}) {
-	o.EnabledFilter = v
+// SetEnabledFilter gets a reference to the given FilterOptionCountsEnabledFilter and assigns it to the EnabledFilter field.
+func (o *FilterOptionCountsFilter) SetEnabledFilter(v FilterOptionCountsEnabledFilter) {
+	o.EnabledFilter = &v
 }
 
-// GetEntityLabelsFilter returns the EntityLabelsFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FilterOptionCountsFilter) GetEntityLabelsFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetEntityLabelsFilter returns the EntityLabelsFilter field value if set, zero value otherwise.
+func (o *FilterOptionCountsFilter) GetEntityLabelsFilter() FilterOptionCountsEntityLabelsFilter {
+	if o == nil || IsNil(o.EntityLabelsFilter) {
+		var ret FilterOptionCountsEntityLabelsFilter
 		return ret
 	}
-	return o.EntityLabelsFilter
+	return *o.EntityLabelsFilter
 }
 
 // GetEntityLabelsFilterOk returns a tuple with the EntityLabelsFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FilterOptionCountsFilter) GetEntityLabelsFilterOk() (*interface{}, bool) {
+func (o *FilterOptionCountsFilter) GetEntityLabelsFilterOk() (*FilterOptionCountsEntityLabelsFilter, bool) {
 	if o == nil || IsNil(o.EntityLabelsFilter) {
 		return nil, false
 	}
-	return &o.EntityLabelsFilter, true
+	return o.EntityLabelsFilter, true
 }
 
 // HasEntityLabelsFilter returns a boolean if a field has been set.
@@ -111,28 +110,27 @@ func (o *FilterOptionCountsFilter) HasEntityLabelsFilter() bool {
 	return false
 }
 
-// SetEntityLabelsFilter gets a reference to the given interface{} and assigns it to the EntityLabelsFilter field.
-func (o *FilterOptionCountsFilter) SetEntityLabelsFilter(v interface{}) {
-	o.EntityLabelsFilter = v
+// SetEntityLabelsFilter gets a reference to the given FilterOptionCountsEntityLabelsFilter and assigns it to the EntityLabelsFilter field.
+func (o *FilterOptionCountsFilter) SetEntityLabelsFilter(v FilterOptionCountsEntityLabelsFilter) {
+	o.EntityLabelsFilter = &v
 }
 
-// GetNameFilter returns the NameFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FilterOptionCountsFilter) GetNameFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetNameFilter returns the NameFilter field value if set, zero value otherwise.
+func (o *FilterOptionCountsFilter) GetNameFilter() FilterOptionCountsNameFilter {
+	if o == nil || IsNil(o.NameFilter) {
+		var ret FilterOptionCountsNameFilter
 		return ret
 	}
-	return o.NameFilter
+	return *o.NameFilter
 }
 
 // GetNameFilterOk returns a tuple with the NameFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FilterOptionCountsFilter) GetNameFilterOk() (*interface{}, bool) {
+func (o *FilterOptionCountsFilter) GetNameFilterOk() (*FilterOptionCountsNameFilter, bool) {
 	if o == nil || IsNil(o.NameFilter) {
 		return nil, false
 	}
-	return &o.NameFilter, true
+	return o.NameFilter, true
 }
 
 // HasNameFilter returns a boolean if a field has been set.
@@ -144,28 +142,27 @@ func (o *FilterOptionCountsFilter) HasNameFilter() bool {
 	return false
 }
 
-// SetNameFilter gets a reference to the given interface{} and assigns it to the NameFilter field.
-func (o *FilterOptionCountsFilter) SetNameFilter(v interface{}) {
-	o.NameFilter = v
+// SetNameFilter gets a reference to the given FilterOptionCountsNameFilter and assigns it to the NameFilter field.
+func (o *FilterOptionCountsFilter) SetNameFilter(v FilterOptionCountsNameFilter) {
+	o.NameFilter = &v
 }
 
-// GetPriorityFilter returns the PriorityFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FilterOptionCountsFilter) GetPriorityFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetPriorityFilter returns the PriorityFilter field value if set, zero value otherwise.
+func (o *FilterOptionCountsFilter) GetPriorityFilter() FilterOptionCountsPriorityFilter {
+	if o == nil || IsNil(o.PriorityFilter) {
+		var ret FilterOptionCountsPriorityFilter
 		return ret
 	}
-	return o.PriorityFilter
+	return *o.PriorityFilter
 }
 
 // GetPriorityFilterOk returns a tuple with the PriorityFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FilterOptionCountsFilter) GetPriorityFilterOk() (*interface{}, bool) {
+func (o *FilterOptionCountsFilter) GetPriorityFilterOk() (*FilterOptionCountsPriorityFilter, bool) {
 	if o == nil || IsNil(o.PriorityFilter) {
 		return nil, false
 	}
-	return &o.PriorityFilter, true
+	return o.PriorityFilter, true
 }
 
 // HasPriorityFilter returns a boolean if a field has been set.
@@ -177,28 +174,27 @@ func (o *FilterOptionCountsFilter) HasPriorityFilter() bool {
 	return false
 }
 
-// SetPriorityFilter gets a reference to the given interface{} and assigns it to the PriorityFilter field.
-func (o *FilterOptionCountsFilter) SetPriorityFilter(v interface{}) {
-	o.PriorityFilter = v
+// SetPriorityFilter gets a reference to the given FilterOptionCountsPriorityFilter and assigns it to the PriorityFilter field.
+func (o *FilterOptionCountsFilter) SetPriorityFilter(v FilterOptionCountsPriorityFilter) {
+	o.PriorityFilter = &v
 }
 
-// GetStatusFilter returns the StatusFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FilterOptionCountsFilter) GetStatusFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetStatusFilter returns the StatusFilter field value if set, zero value otherwise.
+func (o *FilterOptionCountsFilter) GetStatusFilter() FilterOptionCountsStatusFilter {
+	if o == nil || IsNil(o.StatusFilter) {
+		var ret FilterOptionCountsStatusFilter
 		return ret
 	}
-	return o.StatusFilter
+	return *o.StatusFilter
 }
 
 // GetStatusFilterOk returns a tuple with the StatusFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FilterOptionCountsFilter) GetStatusFilterOk() (*interface{}, bool) {
+func (o *FilterOptionCountsFilter) GetStatusFilterOk() (*FilterOptionCountsStatusFilter, bool) {
 	if o == nil || IsNil(o.StatusFilter) {
 		return nil, false
 	}
-	return &o.StatusFilter, true
+	return o.StatusFilter, true
 }
 
 // HasStatusFilter returns a boolean if a field has been set.
@@ -210,28 +206,27 @@ func (o *FilterOptionCountsFilter) HasStatusFilter() bool {
 	return false
 }
 
-// SetStatusFilter gets a reference to the given interface{} and assigns it to the StatusFilter field.
-func (o *FilterOptionCountsFilter) SetStatusFilter(v interface{}) {
-	o.StatusFilter = v
+// SetStatusFilter gets a reference to the given FilterOptionCountsStatusFilter and assigns it to the StatusFilter field.
+func (o *FilterOptionCountsFilter) SetStatusFilter(v FilterOptionCountsStatusFilter) {
+	o.StatusFilter = &v
 }
 
-// GetTypeFilter returns the TypeFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FilterOptionCountsFilter) GetTypeFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetTypeFilter returns the TypeFilter field value if set, zero value otherwise.
+func (o *FilterOptionCountsFilter) GetTypeFilter() FilterOptionCountsTypeFilter {
+	if o == nil || IsNil(o.TypeFilter) {
+		var ret FilterOptionCountsTypeFilter
 		return ret
 	}
-	return o.TypeFilter
+	return *o.TypeFilter
 }
 
 // GetTypeFilterOk returns a tuple with the TypeFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FilterOptionCountsFilter) GetTypeFilterOk() (*interface{}, bool) {
+func (o *FilterOptionCountsFilter) GetTypeFilterOk() (*FilterOptionCountsTypeFilter, bool) {
 	if o == nil || IsNil(o.TypeFilter) {
 		return nil, false
 	}
-	return &o.TypeFilter, true
+	return o.TypeFilter, true
 }
 
 // HasTypeFilter returns a boolean if a field has been set.
@@ -243,13 +238,13 @@ func (o *FilterOptionCountsFilter) HasTypeFilter() bool {
 	return false
 }
 
-// SetTypeFilter gets a reference to the given interface{} and assigns it to the TypeFilter field.
-func (o *FilterOptionCountsFilter) SetTypeFilter(v interface{}) {
-	o.TypeFilter = v
+// SetTypeFilter gets a reference to the given FilterOptionCountsTypeFilter and assigns it to the TypeFilter field.
+func (o *FilterOptionCountsFilter) SetTypeFilter(v FilterOptionCountsTypeFilter) {
+	o.TypeFilter = &v
 }
 
 func (o FilterOptionCountsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -258,22 +253,22 @@ func (o FilterOptionCountsFilter) MarshalJSON() ([]byte, error) {
 
 func (o FilterOptionCountsFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.EnabledFilter != nil {
+	if !IsNil(o.EnabledFilter) {
 		toSerialize["enabledFilter"] = o.EnabledFilter
 	}
-	if o.EntityLabelsFilter != nil {
+	if !IsNil(o.EntityLabelsFilter) {
 		toSerialize["entityLabelsFilter"] = o.EntityLabelsFilter
 	}
-	if o.NameFilter != nil {
+	if !IsNil(o.NameFilter) {
 		toSerialize["nameFilter"] = o.NameFilter
 	}
-	if o.PriorityFilter != nil {
+	if !IsNil(o.PriorityFilter) {
 		toSerialize["priorityFilter"] = o.PriorityFilter
 	}
-	if o.StatusFilter != nil {
+	if !IsNil(o.StatusFilter) {
 		toSerialize["statusFilter"] = o.StatusFilter
 	}
-	if o.TypeFilter != nil {
+	if !IsNil(o.TypeFilter) {
 		toSerialize["typeFilter"] = o.TypeFilter
 	}
 
@@ -306,6 +301,7 @@ func (o *FilterOptionCountsFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "statusFilter")
 		delete(additionalProperties, "typeFilter")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -346,4 +342,3 @@ func (v *NullableFilterOptionCountsFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

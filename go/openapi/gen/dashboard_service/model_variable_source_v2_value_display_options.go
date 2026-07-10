@@ -23,10 +23,11 @@ var _ MappedNullable = &VariableSourceV2ValueDisplayOptions{}
 // VariableSourceV2ValueDisplayOptions Value display options.
 type VariableSourceV2ValueDisplayOptions struct {
 	// The label regex.
-	LabelRegex *string `json:"labelRegex,omitempty"`
+	LabelRegex *string `json:"labelRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The value regex.
-	ValueRegex *string `json:"valueRegex,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ValueRegex                        *string `json:"valueRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _VariableSourceV2ValueDisplayOptions VariableSourceV2ValueDisplayOptions
@@ -113,7 +114,7 @@ func (o *VariableSourceV2ValueDisplayOptions) SetValueRegex(v string) {
 }
 
 func (o VariableSourceV2ValueDisplayOptions) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *VariableSourceV2ValueDisplayOptions) UnmarshalJSON(data []byte) (err er
 		delete(additionalProperties, "labelRegex")
 		delete(additionalProperties, "valueRegex")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableVariableSourceV2ValueDisplayOptions) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

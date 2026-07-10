@@ -96,8 +96,6 @@ Class | Method | HTTP request | Description
  - [EvaluationType](docs/EvaluationType.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetAiApplicationByIdResponse](docs/GetAiApplicationByIdResponse.md)
  - [GetCompanyModelPricingResponse](docs/GetCompanyModelPricingResponse.md)

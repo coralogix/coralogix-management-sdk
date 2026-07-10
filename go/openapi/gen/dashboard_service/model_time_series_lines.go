@@ -27,35 +27,36 @@ type TimeSeriesLines struct {
 	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme for this query, one of the predefined values
-	ColorScheme *string `json:"colorScheme,omitempty"`
+	ColorScheme *string `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether the line should remain connected instead of producing scattered points when null values are present in between
 	ConnectNulls *bool `json:"connectNulls,omitempty"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// Whether to ignore color scheme and derive colors from algorithm
-	HashColors *bool `json:"hashColors,omitempty"`
-	Legend *Legend `json:"legend,omitempty"`
-	ScaleType *ScaleType `json:"scaleType,omitempty"`
+	HashColors *bool      `json:"hashColors,omitempty"`
+	Legend     *Legend    `json:"legend,omitempty"`
+	ScaleType  *ScaleType `json:"scaleType,omitempty"`
 	// Max count of the series per query
 	SeriesCountLimit *string `json:"seriesCountLimit,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Custom template for the series name
-	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty"`
-	StackedLine *VisualizationStackedLine `json:"stackedLine,omitempty"`
-	TemporalField *ObservationField `json:"temporalField,omitempty"`
-	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
+	SeriesNameTemplate *string                   `json:"seriesNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	StackedLine        *VisualizationStackedLine `json:"stackedLine,omitempty"`
+	TemporalField      *ObservationField         `json:"temporalField,omitempty"`
+	Tooltip            *TimeSeriesTooltip        `json:"tooltip,omitempty"`
+	Unit               *CommonUnit               `json:"unit,omitempty"`
 	// When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.
 	UseDataTimeRange *bool `json:"useDataTimeRange,omitempty"`
 	// The value fields.
-	ValueFields []ObservationField `json:"valueFields,omitempty"`
-	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
+	ValueFields     []ObservationField `json:"valueFields,omitempty"`
+	XAxisTimeFormat *XAxisTimeFormat   `json:"xAxisTimeFormat,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
-	YAxisMin *float32 `json:"yAxisMin,omitempty"`
-	AdditionalProperties map[string]interface{}
+	YAxisMin                          *float32 `json:"yAxisMin,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TimeSeriesLines TimeSeriesLines
@@ -718,7 +719,7 @@ func (o *TimeSeriesLines) SetYAxisMin(v float32) {
 }
 
 func (o TimeSeriesLines) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -831,6 +832,7 @@ func (o *TimeSeriesLines) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "yAxisMax")
 		delete(additionalProperties, "yAxisMin")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -871,4 +873,3 @@ func (v *NullableTimeSeriesLines) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

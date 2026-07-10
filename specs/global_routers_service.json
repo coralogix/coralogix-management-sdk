@@ -385,16 +385,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -405,26 +395,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -435,9 +405,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -752,12 +734,50 @@
         }
       },
       "ValidateEntityLabelMatcherResult": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of validating an entity label matcher, indicating whether it is valid or contains errors.",
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult.Failure"
+          },
+          "success": {
+            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult.Success"
+          }
+        },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResultFailureVariant"
+            "type": "object",
+            "required": [
+              "success"
+            ]
           },
           {
-            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResultSuccessVariant"
+            "type": "object",
+            "required": [
+              "failure"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "success"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "failure"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },
@@ -784,36 +804,6 @@
         "description": "Test integration result.success.",
         "type": "object",
         "additionalProperties": false
-      },
-      "ValidateEntityLabelMatcherResultFailureVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Result of validating an entity label matcher, indicating whether it is valid or contains errors.",
-        "type": "object",
-        "properties": {
-          "failure": {
-            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult.Failure"
-          }
-        },
-        "required": [
-          "failure"
-        ]
-      },
-      "ValidateEntityLabelMatcherResultSuccessVariant": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Result of validating an entity label matcher, indicating whether it is valid or contains errors.",
-        "type": "object",
-        "properties": {
-          "success": {
-            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult.Success"
-          }
-        },
-        "required": [
-          "success"
-        ]
       },
       "events.v3.FilterMatcher": {
         "type": "string",

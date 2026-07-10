@@ -25,8 +25,9 @@ type KeyInfoKeyPermissions struct {
 	// Permissions.
 	Permissions []string `json:"permissions,omitempty"`
 	// Presets.
-	Presets []PresetInfo `json:"presets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Presets                           []PresetInfo `json:"presets,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _KeyInfoKeyPermissions KeyInfoKeyPermissions
@@ -113,7 +114,7 @@ func (o *KeyInfoKeyPermissions) SetPresets(v []PresetInfo) {
 }
 
 func (o KeyInfoKeyPermissions) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *KeyInfoKeyPermissions) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "permissions")
 		delete(additionalProperties, "presets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableKeyInfoKeyPermissions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

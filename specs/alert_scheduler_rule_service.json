@@ -58,12 +58,78 @@
             "name": "alert_scheduler_rules_ids",
             "description": "Filter results to the specified alert scheduler rule or rule version IDs.",
             "schema": {
+              "type": "object",
+              "properties": {
+                "alertSchedulerIds": {
+                  "externalDocs": {
+                    "url": ""
+                  },
+                  "description": "Alert scheduler rule ids.",
+                  "type": "object",
+                  "properties": {
+                    "alertSchedulerRuleIds": {
+                      "description": "List of alert scheduler rule IDs.",
+                      "type": "array",
+                      "items": {
+                        "description": "List of alert scheduler rule IDs.",
+                        "type": "string",
+                        "minLength": 0
+                      },
+                      "minItems": 0
+                    }
+                  }
+                },
+                "alertSchedulerVersionIds": {
+                  "externalDocs": {
+                    "url": ""
+                  },
+                  "description": "Alert scheduler rule version ids.",
+                  "type": "object",
+                  "properties": {
+                    "alertSchedulerRuleVersionIds": {
+                      "description": "The alert scheduler rule version ids.",
+                      "type": "array",
+                      "items": {
+                        "description": "The alert scheduler rule version ids.",
+                        "type": "string",
+                        "minLength": 0
+                      },
+                      "minItems": 0
+                    }
+                  }
+                }
+              },
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+                  "type": "object",
+                  "required": [
+                    "alertSchedulerIds"
+                  ]
                 },
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
+                  "type": "object",
+                  "required": [
+                    "alertSchedulerVersionIds"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "not": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "alertSchedulerIds"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "required": [
+                          "alertSchedulerVersionIds"
+                        ]
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -645,84 +711,6 @@
           }
         }
       },
-      "AlertSchedulerRuleIds": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Alert scheduler rule ids.",
-        "type": "object",
-        "properties": {
-          "alertSchedulerRuleIds": {
-            "description": "List of alert scheduler rule IDs.",
-            "type": "array",
-            "items": {
-              "description": "List of alert scheduler rule IDs.",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
-          }
-        }
-      },
-      "AlertSchedulerRuleProtobufV1FilterAlertMetaLabels": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Alert scheduler rule protobuf.v1.filter.",
-        "type": "object",
-        "properties": {
-          "alertMetaLabels": {
-            "$ref": "#/components/schemas/MetaLabels"
-          },
-          "whatExpression": {
-            "description": "Dataprime expression that filters the alerts by group-by values.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "alertMetaLabels"
-        ]
-      },
-      "AlertSchedulerRuleProtobufV1FilterAlertUniqueIds": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Alert scheduler rule protobuf.v1.filter.",
-        "type": "object",
-        "properties": {
-          "alertUniqueIds": {
-            "$ref": "#/components/schemas/AlertUniqueIds"
-          },
-          "whatExpression": {
-            "description": "Dataprime expression that filters the alerts by group-by values.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "alertUniqueIds"
-        ]
-      },
-      "AlertSchedulerRuleVersionIds": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Alert scheduler rule version ids.",
-        "type": "object",
-        "properties": {
-          "alertSchedulerRuleVersionIds": {
-            "description": "The alert scheduler rule version ids.",
-            "type": "array",
-            "items": {
-              "description": "The alert scheduler rule version ids.",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
-          }
-        }
-      },
       "AlertSchedulerRuleWithActiveTimeframe": {
         "type": "object",
         "properties": {
@@ -868,39 +856,7 @@
           }
         }
       },
-      "FilterByAlertSchedulerRuleIdsAlertSchedulerIds": {
-        "type": "object",
-        "properties": {
-          "alertSchedulerIds": {
-            "$ref": "#/components/schemas/AlertSchedulerRuleIds"
-          }
-        },
-        "required": [
-          "alertSchedulerIds"
-        ]
-      },
-      "FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds": {
-        "type": "object",
-        "properties": {
-          "alertSchedulerVersionIds": {
-            "$ref": "#/components/schemas/AlertSchedulerRuleVersionIds"
-          }
-        },
-        "required": [
-          "alertSchedulerVersionIds"
-        ]
-      },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -911,26 +867,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -941,9 +877,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -1078,29 +1026,6 @@
         }
       },
       "Recurring": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/RecurringAlwaysActive"
-          },
-          {
-            "$ref": "#/components/schemas/RecurringSchedule"
-          }
-        ]
-      },
-      "Recurring.Dynamic": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/RecurringDynamicDaily"
-          },
-          {
-            "$ref": "#/components/schemas/RecurringDynamicMonthly"
-          },
-          {
-            "$ref": "#/components/schemas/RecurringDynamicWeekly"
-          }
-        ]
-      },
-      "RecurringAlwaysActive": {
         "externalDocs": {
           "url": ""
         },
@@ -1109,13 +1034,46 @@
         "properties": {
           "alwaysActive": {
             "$ref": "#/components/schemas/Always"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Recurring.Dynamic"
           }
         },
-        "required": [
-          "alwaysActive"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "alwaysActive"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "schedule"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "alwaysActive"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "schedule"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
-      "RecurringDynamicDaily": {
+      "Recurring.Dynamic": {
         "externalDocs": {
           "url": ""
         },
@@ -1125,59 +1083,9 @@
           "daily": {
             "$ref": "#/components/schemas/Daily"
           },
-          "repeatEvery": {
-            "description": "Interval multiplier controlling how often the rule recurs (e.g., every N days, weeks, or months).",
-            "type": "integer",
-            "format": "int32"
-          },
-          "terminationDate": {
-            "description": "ISO 8601 date after which the recurring rule stops being applied.",
-            "type": "string",
-            "minLength": 0
-          },
-          "timeframe": {
-            "$ref": "#/components/schemas/Timeframe"
-          }
-        },
-        "required": [
-          "daily"
-        ]
-      },
-      "RecurringDynamicMonthly": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Dynamic.",
-        "type": "object",
-        "properties": {
           "monthly": {
             "$ref": "#/components/schemas/Monthly"
           },
-          "repeatEvery": {
-            "description": "Interval multiplier controlling how often the rule recurs (e.g., every N days, weeks, or months).",
-            "type": "integer",
-            "format": "int32"
-          },
-          "terminationDate": {
-            "description": "ISO 8601 date after which the recurring rule stops being applied.",
-            "type": "string",
-            "minLength": 0
-          },
-          "timeframe": {
-            "$ref": "#/components/schemas/Timeframe"
-          }
-        },
-        "required": [
-          "monthly"
-        ]
-      },
-      "RecurringDynamicWeekly": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Dynamic.",
-        "type": "object",
-        "properties": {
           "repeatEvery": {
             "description": "Interval multiplier controlling how often the rule recurs (e.g., every N days, weeks, or months).",
             "type": "integer",
@@ -1195,36 +1103,53 @@
             "$ref": "#/components/schemas/Weekly"
           }
         },
-        "required": [
-          "weekly"
-        ]
-      },
-      "RecurringSchedule": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Recurring schedule that activates the alert scheduler rule on a repeating cadence.",
-        "type": "object",
-        "properties": {
-          "schedule": {
-            "$ref": "#/components/schemas/Recurring.Dynamic"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "daily"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "weekly"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "monthly"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "daily"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "weekly"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "monthly"
+                  ]
+                }
+              ]
+            }
           }
-        },
-        "required": [
-          "schedule"
         ]
       },
       "Schedule": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/ScheduleOneTime"
-          },
-          {
-            "$ref": "#/components/schemas/ScheduleRecurring"
-          }
-        ]
-      },
-      "ScheduleOneTime": {
         "externalDocs": {
           "url": ""
         },
@@ -1234,12 +1159,45 @@
           "oneTime": {
             "$ref": "#/components/schemas/OneTime"
           },
+          "recurring": {
+            "$ref": "#/components/schemas/Recurring"
+          },
           "scheduleOperation": {
             "$ref": "#/components/schemas/ScheduleOperation"
           }
         },
-        "required": [
-          "oneTime"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "oneTime"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "recurring"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "oneTime"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "recurring"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "ScheduleOperation": {
@@ -1251,35 +1209,7 @@
           "SCHEDULE_OPERATION_ACTIVATE"
         ]
       },
-      "ScheduleRecurring": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Schedule.",
-        "type": "object",
-        "properties": {
-          "recurring": {
-            "$ref": "#/components/schemas/Recurring"
-          },
-          "scheduleOperation": {
-            "$ref": "#/components/schemas/ScheduleOperation"
-          }
-        },
-        "required": [
-          "recurring"
-        ]
-      },
       "Timeframe": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TimeframeDuration"
-          },
-          {
-            "$ref": "#/components/schemas/TimeframeEndTime"
-          }
-        ]
-      },
-      "TimeframeDuration": {
         "externalDocs": {
           "url": ""
         },
@@ -1289,28 +1219,6 @@
           "duration": {
             "$ref": "#/components/schemas/v1.Duration"
           },
-          "startTime": {
-            "description": "Start time.",
-            "type": "string",
-            "minLength": 0
-          },
-          "timezone": {
-            "description": "Timezone.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "duration"
-        ]
-      },
-      "TimeframeEndTime": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Timeframe.",
-        "type": "object",
-        "properties": {
           "endTime": {
             "description": "End time.",
             "type": "string",
@@ -1327,8 +1235,38 @@
             "minLength": 0
           }
         },
-        "required": [
-          "endTime"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "endTime"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "duration"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "endTime"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "duration"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "UpdateAlertSchedulerRuleRequest": {
@@ -1407,12 +1345,55 @@
         }
       },
       "alert_scheduler_rule_protobuf.v1.Filter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Alert scheduler rule protobuf.v1.filter.",
+        "type": "object",
+        "properties": {
+          "alertMetaLabels": {
+            "$ref": "#/components/schemas/MetaLabels"
+          },
+          "alertUniqueIds": {
+            "$ref": "#/components/schemas/AlertUniqueIds"
+          },
+          "whatExpression": {
+            "description": "Dataprime expression that filters the alerts by group-by values.",
+            "type": "string",
+            "minLength": 0
+          }
+        },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
+            "type": "object",
+            "required": [
+              "alertMetaLabels"
+            ]
           },
           {
-            "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
+            "type": "object",
+            "required": [
+              "alertUniqueIds"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "alertMetaLabels"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "alertUniqueIds"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },

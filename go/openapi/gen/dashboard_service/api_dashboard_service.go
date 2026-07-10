@@ -19,12 +19,11 @@ import (
 	"strings"
 )
 
-
 // DashboardServiceAPIService DashboardServiceAPI service
 type DashboardServiceAPIService service
 
 type ApiDashboardCatalogServiceGetDashboardCatalogRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DashboardServiceAPIService
 }
 
@@ -40,24 +39,25 @@ Get a list of all dashboards accessible.
 Requires the following permissions:
 - `team-dashboards:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDashboardCatalogServiceGetDashboardCatalogRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDashboardCatalogServiceGetDashboardCatalogRequest
 */
 func (a *DashboardServiceAPIService) DashboardCatalogServiceGetDashboardCatalog(ctx context.Context) ApiDashboardCatalogServiceGetDashboardCatalogRequest {
 	return ApiDashboardCatalogServiceGetDashboardCatalogRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetDashboardCatalogResponse
+//
+//	@return GetDashboardCatalogResponse
 func (a *DashboardServiceAPIService) DashboardCatalogServiceGetDashboardCatalogExecute(r ApiDashboardCatalogServiceGetDashboardCatalogRequest) (*GetDashboardCatalogResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDashboardCatalogResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDashboardCatalogResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardCatalogServiceGetDashboardCatalog")
@@ -117,8 +117,8 @@ func (a *DashboardServiceAPIService) DashboardCatalogServiceGetDashboardCatalogE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -128,8 +128,8 @@ func (a *DashboardServiceAPIService) DashboardCatalogServiceGetDashboardCatalogE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -139,8 +139,8 @@ func (a *DashboardServiceAPIService) DashboardCatalogServiceGetDashboardCatalogE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -158,9 +158,9 @@ func (a *DashboardServiceAPIService) DashboardCatalogServiceGetDashboardCatalogE
 }
 
 type ApiDashboardsServiceAssignDashboardFolderRequest struct {
-	ctx context.Context
-	ApiService *DashboardServiceAPIService
-	dashboardId string
+	ctx                                         context.Context
+	ApiService                                  *DashboardServiceAPIService
+	dashboardId                                 string
 	assignDashboardToFolderRequestDataStructure *AssignDashboardToFolderRequestDataStructure
 }
 
@@ -181,26 +181,27 @@ Assigns the dashboard to a folder.
 Requires the following permissions:
 - `team-dashboards:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId The dashboard id.
- @return ApiDashboardsServiceAssignDashboardFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param dashboardId The dashboard id.
+	@return ApiDashboardsServiceAssignDashboardFolderRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolder(ctx context.Context, dashboardId string) ApiDashboardsServiceAssignDashboardFolderRequest {
 	return ApiDashboardsServiceAssignDashboardFolderRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		dashboardId: dashboardId,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolderExecute(r ApiDashboardsServiceAssignDashboardFolderRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardsServiceAssignDashboardFolder")
@@ -214,8 +215,11 @@ func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolderExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.dashboardId) < 0 {
-		return localVarReturnValue, nil, reportError("dashboardId must have at least 0 elements")
+	if strlen(r.dashboardId) < 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have at least 21 elements")
+	}
+	if strlen(r.dashboardId) > 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have less than 21 elements")
 	}
 	if r.assignDashboardToFolderRequestDataStructure == nil {
 		return localVarReturnValue, nil, reportError("assignDashboardToFolderRequestDataStructure is required and must be specified")
@@ -269,8 +273,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolderExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -280,8 +284,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolderExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -291,8 +295,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolderExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -310,13 +314,13 @@ func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolderExecu
 }
 
 type ApiDashboardsServiceCheckDashboardRequest struct {
-	ctx context.Context
-	ApiService *DashboardServiceAPIService
-	dashboardsServiceCheckDashboardRequest *DashboardsServiceCheckDashboardRequest
+	ctx                                context.Context
+	ApiService                         *DashboardServiceAPIService
+	checkDashboardRequestDataStructure *CheckDashboardRequestDataStructure
 }
 
-func (r ApiDashboardsServiceCheckDashboardRequest) DashboardsServiceCheckDashboardRequest(dashboardsServiceCheckDashboardRequest DashboardsServiceCheckDashboardRequest) ApiDashboardsServiceCheckDashboardRequest {
-	r.dashboardsServiceCheckDashboardRequest = &dashboardsServiceCheckDashboardRequest
+func (r ApiDashboardsServiceCheckDashboardRequest) CheckDashboardRequestDataStructure(checkDashboardRequestDataStructure CheckDashboardRequestDataStructure) ApiDashboardsServiceCheckDashboardRequest {
+	r.checkDashboardRequestDataStructure = &checkDashboardRequestDataStructure
 	return r
 }
 
@@ -332,24 +336,25 @@ Checks a dashboard definition or an existing dashboard by id and returns validat
 Requires the following permissions:
 - `team-dashboards:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDashboardsServiceCheckDashboardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDashboardsServiceCheckDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceCheckDashboard(ctx context.Context) ApiDashboardsServiceCheckDashboardRequest {
 	return ApiDashboardsServiceCheckDashboardRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CheckDashboardResponse
+//
+//	@return CheckDashboardResponse
 func (a *DashboardServiceAPIService) DashboardsServiceCheckDashboardExecute(r ApiDashboardsServiceCheckDashboardRequest) (*CheckDashboardResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CheckDashboardResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CheckDashboardResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardsServiceCheckDashboard")
@@ -362,8 +367,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceCheckDashboardExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.dashboardsServiceCheckDashboardRequest == nil {
-		return localVarReturnValue, nil, reportError("dashboardsServiceCheckDashboardRequest is required and must be specified")
+	if r.checkDashboardRequestDataStructure == nil {
+		return localVarReturnValue, nil, reportError("checkDashboardRequestDataStructure is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -384,7 +389,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceCheckDashboardExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.dashboardsServiceCheckDashboardRequest
+	localVarPostBody = r.checkDashboardRequestDataStructure
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -414,8 +419,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceCheckDashboardExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -425,8 +430,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceCheckDashboardExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -436,8 +441,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceCheckDashboardExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -455,8 +460,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceCheckDashboardExecute(r Ap
 }
 
 type ApiDashboardsServiceCreateDashboardRequest struct {
-	ctx context.Context
-	ApiService *DashboardServiceAPIService
+	ctx                                 context.Context
+	ApiService                          *DashboardServiceAPIService
 	createDashboardRequestDataStructure *CreateDashboardRequestDataStructure
 }
 
@@ -477,24 +482,25 @@ Creates a new dashboard.
 Requires the following permissions:
 - `team-dashboards:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDashboardsServiceCreateDashboardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDashboardsServiceCreateDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceCreateDashboard(ctx context.Context) ApiDashboardsServiceCreateDashboardRequest {
 	return ApiDashboardsServiceCreateDashboardRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateDashboardResponse
+//
+//	@return CreateDashboardResponse
 func (a *DashboardServiceAPIService) DashboardsServiceCreateDashboardExecute(r ApiDashboardsServiceCreateDashboardRequest) (*CreateDashboardResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateDashboardResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateDashboardResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardsServiceCreateDashboard")
@@ -559,8 +565,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceCreateDashboardExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -570,8 +576,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceCreateDashboardExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -581,8 +587,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceCreateDashboardExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -600,10 +606,10 @@ func (a *DashboardServiceAPIService) DashboardsServiceCreateDashboardExecute(r A
 }
 
 type ApiDashboardsServiceDeleteDashboardRequest struct {
-	ctx context.Context
-	ApiService *DashboardServiceAPIService
+	ctx         context.Context
+	ApiService  *DashboardServiceAPIService
 	dashboardId string
-	requestId *string
+	requestId   *string
 }
 
 // Optional client-supplied request identifier used to correlate the deletion request.
@@ -624,26 +630,27 @@ Deletes the dashboard with the specified ID.
 Requires the following permissions:
 - `team-dashboards:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId The dashboard id.
- @return ApiDashboardsServiceDeleteDashboardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param dashboardId The dashboard id.
+	@return ApiDashboardsServiceDeleteDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceDeleteDashboard(ctx context.Context, dashboardId string) ApiDashboardsServiceDeleteDashboardRequest {
 	return ApiDashboardsServiceDeleteDashboardRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		dashboardId: dashboardId,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *DashboardServiceAPIService) DashboardsServiceDeleteDashboardExecute(r ApiDashboardsServiceDeleteDashboardRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardsServiceDeleteDashboard")
@@ -657,12 +664,17 @@ func (a *DashboardServiceAPIService) DashboardsServiceDeleteDashboardExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.dashboardId) < 0 {
-		return localVarReturnValue, nil, reportError("dashboardId must have at least 0 elements")
+	if strlen(r.dashboardId) < 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have at least 21 elements")
+	}
+	if strlen(r.dashboardId) > 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have less than 21 elements")
 	}
 
 	if r.requestId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -710,8 +722,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceDeleteDashboardExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -721,8 +733,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceDeleteDashboardExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -732,8 +744,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceDeleteDashboardExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -751,8 +763,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceDeleteDashboardExecute(r A
 }
 
 type ApiDashboardsServiceGetDashboardRequest struct {
-	ctx context.Context
-	ApiService *DashboardServiceAPIService
+	ctx         context.Context
+	ApiService  *DashboardServiceAPIService
 	dashboardId string
 }
 
@@ -768,26 +780,27 @@ Returns the details of the specified dashboard.
 Requires the following permissions:
 - `team-dashboards:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId The dashboard id.
- @return ApiDashboardsServiceGetDashboardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param dashboardId The dashboard id.
+	@return ApiDashboardsServiceGetDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceGetDashboard(ctx context.Context, dashboardId string) ApiDashboardsServiceGetDashboardRequest {
 	return ApiDashboardsServiceGetDashboardRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		dashboardId: dashboardId,
 	}
 }
 
 // Execute executes the request
-//  @return GetDashboardResponse
+//
+//	@return GetDashboardResponse
 func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardExecute(r ApiDashboardsServiceGetDashboardRequest) (*GetDashboardResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDashboardResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDashboardResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardsServiceGetDashboard")
@@ -801,8 +814,11 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardExecute(r ApiD
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.dashboardId) < 0 {
-		return localVarReturnValue, nil, reportError("dashboardId must have at least 0 elements")
+	if strlen(r.dashboardId) < 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have at least 21 elements")
+	}
+	if strlen(r.dashboardId) > 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have less than 21 elements")
 	}
 
 	// to determine the Content-Type header
@@ -851,8 +867,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardExecute(r ApiD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -862,8 +878,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardExecute(r ApiD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -873,8 +889,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardExecute(r ApiD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -892,9 +908,9 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardExecute(r ApiD
 }
 
 type ApiDashboardsServiceGetDashboardBySlugRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DashboardServiceAPIService
-	slug string
+	slug       string
 }
 
 func (r ApiDashboardsServiceGetDashboardBySlugRequest) Execute() (*GetDashboardBySlugResponse, *http.Response, error) {
@@ -909,26 +925,27 @@ Returns the dashboard associated with the specified slug.
 Requires the following permissions:
 - `team-dashboards:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param slug The URL slug identifying the dashboard to retrieve.
- @return ApiDashboardsServiceGetDashboardBySlugRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param slug The URL slug identifying the dashboard to retrieve.
+	@return ApiDashboardsServiceGetDashboardBySlugRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlug(ctx context.Context, slug string) ApiDashboardsServiceGetDashboardBySlugRequest {
 	return ApiDashboardsServiceGetDashboardBySlugRequest{
 		ApiService: a,
-		ctx: ctx,
-		slug: slug,
+		ctx:        ctx,
+		slug:       slug,
 	}
 }
 
 // Execute executes the request
-//  @return GetDashboardBySlugResponse
+//
+//	@return GetDashboardBySlugResponse
 func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlugExecute(r ApiDashboardsServiceGetDashboardBySlugRequest) (*GetDashboardBySlugResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDashboardBySlugResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDashboardBySlugResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardsServiceGetDashboardBySlug")
@@ -942,8 +959,11 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlugExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.slug) < 0 {
-		return localVarReturnValue, nil, reportError("slug must have at least 0 elements")
+	if strlen(r.slug) < 1 {
+		return localVarReturnValue, nil, reportError("slug must have at least 1 elements")
+	}
+	if strlen(r.slug) > 255 {
+		return localVarReturnValue, nil, reportError("slug must have less than 255 elements")
 	}
 
 	// to determine the Content-Type header
@@ -992,8 +1012,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlugExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1003,8 +1023,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlugExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1014,8 +1034,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlugExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1033,10 +1053,10 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlugExecute(
 }
 
 type ApiDashboardsServicePinDashboardRequest struct {
-	ctx context.Context
-	ApiService *DashboardServiceAPIService
+	ctx         context.Context
+	ApiService  *DashboardServiceAPIService
 	dashboardId string
-	requestId *string
+	requestId   *string
 }
 
 // Idempotency key for the pin request, used to prevent duplicate operations.
@@ -1057,26 +1077,27 @@ Pins the specified dashboard.
 Requires the following permissions:
 - `team-dashboards:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId The dashboard id.
- @return ApiDashboardsServicePinDashboardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param dashboardId The dashboard id.
+	@return ApiDashboardsServicePinDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServicePinDashboard(ctx context.Context, dashboardId string) ApiDashboardsServicePinDashboardRequest {
 	return ApiDashboardsServicePinDashboardRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		dashboardId: dashboardId,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *DashboardServiceAPIService) DashboardsServicePinDashboardExecute(r ApiDashboardsServicePinDashboardRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardsServicePinDashboard")
@@ -1090,12 +1111,17 @@ func (a *DashboardServiceAPIService) DashboardsServicePinDashboardExecute(r ApiD
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.dashboardId) < 0 {
-		return localVarReturnValue, nil, reportError("dashboardId must have at least 0 elements")
+	if strlen(r.dashboardId) < 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have at least 21 elements")
+	}
+	if strlen(r.dashboardId) > 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have less than 21 elements")
 	}
 
 	if r.requestId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1143,8 +1169,8 @@ func (a *DashboardServiceAPIService) DashboardsServicePinDashboardExecute(r ApiD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1154,8 +1180,8 @@ func (a *DashboardServiceAPIService) DashboardsServicePinDashboardExecute(r ApiD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1165,8 +1191,8 @@ func (a *DashboardServiceAPIService) DashboardsServicePinDashboardExecute(r ApiD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1184,8 +1210,8 @@ func (a *DashboardServiceAPIService) DashboardsServicePinDashboardExecute(r ApiD
 }
 
 type ApiDashboardsServiceReplaceDashboardRequest struct {
-	ctx context.Context
-	ApiService *DashboardServiceAPIService
+	ctx                                  context.Context
+	ApiService                           *DashboardServiceAPIService
 	replaceDashboardRequestDataStructure *ReplaceDashboardRequestDataStructure
 }
 
@@ -1206,24 +1232,25 @@ Replaces an existing dashboard.
 Requires the following permissions:
 - `team-dashboards:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDashboardsServiceReplaceDashboardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDashboardsServiceReplaceDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceReplaceDashboard(ctx context.Context) ApiDashboardsServiceReplaceDashboardRequest {
 	return ApiDashboardsServiceReplaceDashboardRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *DashboardServiceAPIService) DashboardsServiceReplaceDashboardExecute(r ApiDashboardsServiceReplaceDashboardRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardsServiceReplaceDashboard")
@@ -1288,8 +1315,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDashboardExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1299,8 +1326,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDashboardExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1310,8 +1337,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDashboardExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1329,9 +1356,9 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDashboardExecute(r 
 }
 
 type ApiDashboardsServiceReplaceDefaultDashboardRequest struct {
-	ctx context.Context
-	ApiService *DashboardServiceAPIService
-	dashboardId string
+	ctx                                         context.Context
+	ApiService                                  *DashboardServiceAPIService
+	dashboardId                                 string
 	replaceDefaultDashboardRequestDataStructure *ReplaceDefaultDashboardRequestDataStructure
 }
 
@@ -1352,26 +1379,27 @@ Sets the specified dashboard as the default.
 Requires the following permissions:
 - `team-dashboards:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId The dashboard id.
- @return ApiDashboardsServiceReplaceDefaultDashboardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param dashboardId The dashboard id.
+	@return ApiDashboardsServiceReplaceDefaultDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceReplaceDefaultDashboard(ctx context.Context, dashboardId string) ApiDashboardsServiceReplaceDefaultDashboardRequest {
 	return ApiDashboardsServiceReplaceDefaultDashboardRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		dashboardId: dashboardId,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *DashboardServiceAPIService) DashboardsServiceReplaceDefaultDashboardExecute(r ApiDashboardsServiceReplaceDefaultDashboardRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardsServiceReplaceDefaultDashboard")
@@ -1385,8 +1413,11 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDefaultDashboardExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.dashboardId) < 0 {
-		return localVarReturnValue, nil, reportError("dashboardId must have at least 0 elements")
+	if strlen(r.dashboardId) < 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have at least 21 elements")
+	}
+	if strlen(r.dashboardId) > 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have less than 21 elements")
 	}
 	if r.replaceDefaultDashboardRequestDataStructure == nil {
 		return localVarReturnValue, nil, reportError("replaceDefaultDashboardRequestDataStructure is required and must be specified")
@@ -1440,8 +1471,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDefaultDashboardExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1451,8 +1482,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDefaultDashboardExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1462,8 +1493,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDefaultDashboardExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1481,10 +1512,10 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDefaultDashboardExe
 }
 
 type ApiDashboardsServiceUnpinDashboardRequest struct {
-	ctx context.Context
-	ApiService *DashboardServiceAPIService
+	ctx         context.Context
+	ApiService  *DashboardServiceAPIService
 	dashboardId string
-	requestId *string
+	requestId   *string
 }
 
 // Idempotency key for the unpin request, used to prevent duplicate operations.
@@ -1505,26 +1536,27 @@ Unpins the specified dashboard.
 Requires the following permissions:
 - `team-dashboards:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId The dashboard id.
- @return ApiDashboardsServiceUnpinDashboardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param dashboardId The dashboard id.
+	@return ApiDashboardsServiceUnpinDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboard(ctx context.Context, dashboardId string) ApiDashboardsServiceUnpinDashboardRequest {
 	return ApiDashboardsServiceUnpinDashboardRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		dashboardId: dashboardId,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboardExecute(r ApiDashboardsServiceUnpinDashboardRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardServiceAPIService.DashboardsServiceUnpinDashboard")
@@ -1538,12 +1570,17 @@ func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboardExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.dashboardId) < 0 {
-		return localVarReturnValue, nil, reportError("dashboardId must have at least 0 elements")
+	if strlen(r.dashboardId) < 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have at least 21 elements")
+	}
+	if strlen(r.dashboardId) > 21 {
+		return localVarReturnValue, nil, reportError("dashboardId must have less than 21 elements")
 	}
 
 	if r.requestId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1591,8 +1628,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboardExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1602,8 +1639,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboardExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1613,8 +1650,8 @@ func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboardExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

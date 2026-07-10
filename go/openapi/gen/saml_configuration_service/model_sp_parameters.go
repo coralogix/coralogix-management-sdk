@@ -31,8 +31,9 @@ type SPParameters struct {
 	// The name id format.
 	NameIdFormat *string `json:"nameIdFormat,omitempty"`
 	// The signing cert pem.
-	SigningCertPem *string `json:"signingCertPem,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SigningCertPem                    *string `json:"signingCertPem,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SPParameters SPParameters
@@ -215,7 +216,7 @@ func (o *SPParameters) SetSigningCertPem(v string) {
 }
 
 func (o SPParameters) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,6 +269,7 @@ func (o *SPParameters) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "nameIdFormat")
 		delete(additionalProperties, "signingCertPem")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -308,4 +310,3 @@ func (v *NullableSPParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

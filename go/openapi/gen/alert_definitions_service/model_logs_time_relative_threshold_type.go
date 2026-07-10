@@ -25,14 +25,15 @@ type LogsTimeRelativeThresholdType struct {
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
 	// Ignore infinity values in the alert
-	IgnoreInfinity *bool `json:"ignoreInfinity,omitempty"`
-	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
+	IgnoreInfinity *bool         `json:"ignoreInfinity,omitempty"`
+	LogsFilter     *V3LogsFilter `json:"logsFilter,omitempty"`
 	// The notification payload filter.
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	// The rules for the time-relative alert
-	Rules []LogsTimeRelativeRule `json:"rules,omitempty"`
-	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Rules                             []LogsTimeRelativeRule        `json:"rules,omitempty"`
+	UndetectedValuesManagement        *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogsTimeRelativeThresholdType LogsTimeRelativeThresholdType
@@ -247,7 +248,7 @@ func (o *LogsTimeRelativeThresholdType) SetUndetectedValuesManagement(v V3Undete
 }
 
 func (o LogsTimeRelativeThresholdType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -304,6 +305,7 @@ func (o *LogsTimeRelativeThresholdType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "rules")
 		delete(additionalProperties, "undetectedValuesManagement")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -344,4 +346,3 @@ func (v *NullableLogsTimeRelativeThresholdType) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -14,7 +14,7 @@ import (
 )
 
 // CreateTracingImmediateAlert returns a reusable OpenAPI alert definition payload
-func CreateTracingImmediateAlert() *alerts.AlertDefPropertiesTracingImmediate {
+func CreateTracingImmediateAlert() *alerts.AlertDefProperties {
 	name := "Standard alert example"
 	startHour := int32(8)
 	startMinute := int32(30)
@@ -23,7 +23,7 @@ func CreateTracingImmediateAlert() *alerts.AlertDefPropertiesTracingImmediate {
 	latencyThresholdMs := "30"
 	// applicationName := "nginx"
 	// subsystemName := "subsystem-name"
-	return &alerts.AlertDefPropertiesTracingImmediate{
+	return &alerts.AlertDefProperties{
 		Name:        &name,
 		Description: alerts.PtrString("Standard alert example from OpenAPI SDK"),
 		Enabled:     alerts.PtrBool(true),
@@ -40,10 +40,8 @@ func CreateTracingImmediateAlert() *alerts.AlertDefPropertiesTracingImmediate {
 					Minutes:  alerts.PtrInt64(5),
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: &alerts.V3IntegrationType{
-						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
-							Recipients: alerts.Recipients{
-								Emails: []string{"example@coralogix.com"},
-							},
+						Recipients: &alerts.Recipients{
+							Emails: []string{"example@coralogix.com"},
 						},
 					},
 				},
@@ -57,7 +55,7 @@ func CreateTracingImmediateAlert() *alerts.AlertDefPropertiesTracingImmediate {
 			StartTime: &alerts.TimeOfDay{Hours: &startHour, Minutes: &startMinute},
 			EndTime:   &alerts.TimeOfDay{Hours: &endHour, Minutes: &endMinute},
 		},
-		TracingImmediate: alerts.TracingImmediateType{
+		TracingImmediate: &alerts.TracingImmediateType{
 			TracingFilter: &alerts.TracingFilter{
 				SimpleFilter: &alerts.TracingSimpleFilter{
 					LatencyThresholdMs: &latencyThresholdMs,
@@ -67,7 +65,7 @@ func CreateTracingImmediateAlert() *alerts.AlertDefPropertiesTracingImmediate {
 	}
 }
 
-func CreateLogsRatioAlert() *alerts.AlertDefPropertiesLogsRatioThreshold {
+func CreateLogsRatioAlert() *alerts.AlertDefProperties {
 	name := "Standard alert example"
 	startHour := int32(8)
 	startMinute := int32(30)
@@ -76,7 +74,7 @@ func CreateLogsRatioAlert() *alerts.AlertDefPropertiesLogsRatioThreshold {
 	numeratorAlias := "numerator"
 	denominatorAlias := "denominator"
 	threshold := float64(2)
-	return &alerts.AlertDefPropertiesLogsRatioThreshold{
+	return &alerts.AlertDefProperties{
 		Name:        &name,
 		Description: alerts.PtrString("Standard alert example from OpenAPI SDK"),
 		Enabled:     alerts.PtrBool(true),
@@ -93,10 +91,8 @@ func CreateLogsRatioAlert() *alerts.AlertDefPropertiesLogsRatioThreshold {
 					Minutes:  alerts.PtrInt64(5),
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: &alerts.V3IntegrationType{
-						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
-							Recipients: alerts.Recipients{
-								Emails: []string{"example@coralogix.com"},
-							},
+						Recipients: &alerts.Recipients{
+							Emails: []string{"example@coralogix.com"},
 						},
 					},
 				},
@@ -110,7 +106,7 @@ func CreateLogsRatioAlert() *alerts.AlertDefPropertiesLogsRatioThreshold {
 			StartTime: &alerts.TimeOfDay{Hours: &startHour, Minutes: &startMinute},
 			EndTime:   &alerts.TimeOfDay{Hours: &endHour, Minutes: &endMinute},
 		},
-		LogsRatioThreshold: alerts.LogsRatioThresholdType{
+		LogsRatioThreshold: &alerts.LogsRatioThresholdType{
 			NumeratorAlias:   &numeratorAlias,
 			DenominatorAlias: &denominatorAlias,
 			Rules: []alerts.LogsRatioRules{
@@ -131,7 +127,7 @@ func CreateLogsRatioAlert() *alerts.AlertDefPropertiesLogsRatioThreshold {
 	}
 }
 
-func CreateTracingThresholdAlert() *alerts.AlertDefPropertiesTracingThreshold {
+func CreateTracingThresholdAlert() *alerts.AlertDefProperties {
 	name := "Standard alert example"
 	startHour := int32(8)
 	startMinute := int32(30)
@@ -139,7 +135,7 @@ func CreateTracingThresholdAlert() *alerts.AlertDefPropertiesTracingThreshold {
 	endMinute := int32(30)
 	latencyThresholdMs := "30"
 	spanAmount := float64(5)
-	return &alerts.AlertDefPropertiesTracingThreshold{
+	return &alerts.AlertDefProperties{
 		Name:        &name,
 		Description: alerts.PtrString("Standard alert example from OpenAPI SDK"),
 		Enabled:     alerts.PtrBool(true),
@@ -156,10 +152,8 @@ func CreateTracingThresholdAlert() *alerts.AlertDefPropertiesTracingThreshold {
 					Minutes:  alerts.PtrInt64(5),
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: &alerts.V3IntegrationType{
-						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
-							Recipients: alerts.Recipients{
-								Emails: []string{"example@coralogix.com"},
-							},
+						Recipients: &alerts.Recipients{
+							Emails: []string{"example@coralogix.com"},
 						},
 					},
 				},
@@ -173,7 +167,7 @@ func CreateTracingThresholdAlert() *alerts.AlertDefPropertiesTracingThreshold {
 			StartTime: &alerts.TimeOfDay{Hours: &startHour, Minutes: &startMinute},
 			EndTime:   &alerts.TimeOfDay{Hours: &endHour, Minutes: &endMinute},
 		},
-		TracingThreshold: alerts.TracingThresholdType{
+		TracingThreshold: &alerts.TracingThresholdType{
 			TracingFilter: &alerts.TracingFilter{
 				SimpleFilter: &alerts.TracingSimpleFilter{
 					LatencyThresholdMs: &latencyThresholdMs,
@@ -205,7 +199,7 @@ func CreateTracingThresholdAlert() *alerts.AlertDefPropertiesTracingThreshold {
 	}
 }
 
-func CreateFlowAlert(alertId string) *alerts.AlertDefPropertiesFlow {
+func CreateFlowAlert(alertId string) *alerts.AlertDefProperties {
 	name := "Standard alert example"
 	startHour := int32(8)
 	startMinute := int32(30)
@@ -213,7 +207,7 @@ func CreateFlowAlert(alertId string) *alerts.AlertDefPropertiesFlow {
 	endMinute := int32(30)
 	enforceSuppresion := false
 	timeframeMs := "10"
-	return &alerts.AlertDefPropertiesFlow{
+	return &alerts.AlertDefProperties{
 		Name:        &name,
 		Description: alerts.PtrString("Standard alert example from OpenAPI SDK"),
 		Enabled:     alerts.PtrBool(true),
@@ -230,10 +224,8 @@ func CreateFlowAlert(alertId string) *alerts.AlertDefPropertiesFlow {
 					Minutes:  alerts.PtrInt64(5),
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: &alerts.V3IntegrationType{
-						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
-							Recipients: alerts.Recipients{
-								Emails: []string{"example@coralogix.com"},
-							},
+						Recipients: &alerts.Recipients{
+							Emails: []string{"example@coralogix.com"},
 						},
 					},
 				},
@@ -247,7 +239,7 @@ func CreateFlowAlert(alertId string) *alerts.AlertDefPropertiesFlow {
 			StartTime: &alerts.TimeOfDay{Hours: &startHour, Minutes: &startMinute},
 			EndTime:   &alerts.TimeOfDay{Hours: &endHour, Minutes: &endMinute},
 		},
-		Flow: alerts.FlowType{
+		Flow: &alerts.FlowType{
 			EnforceSuppression: &enforceSuppresion,
 			Stages: []alerts.FlowStages{
 				{
@@ -277,9 +269,7 @@ func TestTracingImmediateAlerts(t *testing.T) {
 	ctx := context.Background()
 
 	createReq := alerts.CreateAlertDefinitionRequest{
-		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesTracingImmediate: CreateTracingImmediateAlert(),
-		},
+		AlertDefProperties: CreateTracingImmediateAlert(),
 	}
 	created, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
@@ -298,17 +288,15 @@ func TestTracingImmediateAlerts(t *testing.T) {
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
 		Id: created.AlertDef.Id,
 		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesTracingImmediate: &alerts.AlertDefPropertiesTracingImmediate{
-				Name:             created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.Name,
-				Description:      &newDesc,
-				Enabled:          created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.Enabled,
-				Priority:         created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.Priority,
-				Type:             created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.Type,
-				EntityLabels:     created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.EntityLabels,
-				GroupByKeys:      created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.GroupByKeys,
-				PhantomMode:      created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.PhantomMode,
-				TracingImmediate: created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.TracingImmediate,
-			},
+			Name:             created.AlertDef.AlertDefProperties.Name,
+			Description:      &newDesc,
+			Enabled:          created.AlertDef.AlertDefProperties.Enabled,
+			Priority:         created.AlertDef.AlertDefProperties.Priority,
+			Type:             created.AlertDef.AlertDefProperties.Type,
+			EntityLabels:     created.AlertDef.AlertDefProperties.EntityLabels,
+			GroupByKeys:      created.AlertDef.AlertDefProperties.GroupByKeys,
+			PhantomMode:      created.AlertDef.AlertDefProperties.PhantomMode,
+			TracingImmediate: created.AlertDef.AlertDefProperties.TracingImmediate,
 		},
 	}
 	updated, httpResp, err := client.
@@ -316,7 +304,7 @@ func TestTracingImmediateAlerts(t *testing.T) {
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesTracingImmediate.Description, newDesc)
+	require.Equal(t, *updated.AlertDef.AlertDefProperties.Description, newDesc)
 
 	_, httpResp, err = client.
 		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
@@ -336,9 +324,7 @@ func TestLogsRatioAlerts(t *testing.T) {
 	ctx := context.Background()
 
 	createReq := alerts.CreateAlertDefinitionRequest{
-		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesLogsRatioThreshold: CreateLogsRatioAlert(),
-		},
+		AlertDefProperties: CreateLogsRatioAlert(),
 	}
 	created, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
@@ -357,17 +343,15 @@ func TestLogsRatioAlerts(t *testing.T) {
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
 		Id: created.AlertDef.Id,
 		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesLogsRatioThreshold: &alerts.AlertDefPropertiesLogsRatioThreshold{
-				Name:               created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.Name,
-				Description:        &newDesc,
-				Enabled:            created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.Enabled,
-				Priority:           created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.Priority,
-				Type:               created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.Type,
-				EntityLabels:       created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.EntityLabels,
-				GroupByKeys:        created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.GroupByKeys,
-				PhantomMode:        created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.PhantomMode,
-				LogsRatioThreshold: created.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.LogsRatioThreshold,
-			},
+			Name:               created.AlertDef.AlertDefProperties.Name,
+			Description:        &newDesc,
+			Enabled:            created.AlertDef.AlertDefProperties.Enabled,
+			Priority:           created.AlertDef.AlertDefProperties.Priority,
+			Type:               created.AlertDef.AlertDefProperties.Type,
+			EntityLabels:       created.AlertDef.AlertDefProperties.EntityLabels,
+			GroupByKeys:        created.AlertDef.AlertDefProperties.GroupByKeys,
+			PhantomMode:        created.AlertDef.AlertDefProperties.PhantomMode,
+			LogsRatioThreshold: created.AlertDef.AlertDefProperties.LogsRatioThreshold,
 		},
 	}
 	updated, httpResp, err := client.
@@ -375,7 +359,7 @@ func TestLogsRatioAlerts(t *testing.T) {
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesLogsRatioThreshold.Description, newDesc)
+	require.Equal(t, *updated.AlertDef.AlertDefProperties.Description, newDesc)
 
 	_, httpResp, err = client.
 		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
@@ -395,9 +379,7 @@ func TestTracingThresholdAlerts(t *testing.T) {
 	ctx := context.Background()
 
 	createReq := alerts.CreateAlertDefinitionRequest{
-		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesTracingThreshold: CreateTracingThresholdAlert(),
-		},
+		AlertDefProperties: CreateTracingThresholdAlert(),
 	}
 	created, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
@@ -416,17 +398,15 @@ func TestTracingThresholdAlerts(t *testing.T) {
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
 		Id: created.AlertDef.Id,
 		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesTracingThreshold: &alerts.AlertDefPropertiesTracingThreshold{
-				Name:             created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.Name,
-				Description:      &newDesc,
-				Enabled:          created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.Enabled,
-				Priority:         created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.Priority,
-				Type:             created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.Type,
-				EntityLabels:     created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.EntityLabels,
-				GroupByKeys:      created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.GroupByKeys,
-				PhantomMode:      created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.PhantomMode,
-				TracingThreshold: created.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.TracingThreshold,
-			},
+			Name:             created.AlertDef.AlertDefProperties.Name,
+			Description:      &newDesc,
+			Enabled:          created.AlertDef.AlertDefProperties.Enabled,
+			Priority:         created.AlertDef.AlertDefProperties.Priority,
+			Type:             created.AlertDef.AlertDefProperties.Type,
+			EntityLabels:     created.AlertDef.AlertDefProperties.EntityLabels,
+			GroupByKeys:      created.AlertDef.AlertDefProperties.GroupByKeys,
+			PhantomMode:      created.AlertDef.AlertDefProperties.PhantomMode,
+			TracingThreshold: created.AlertDef.AlertDefProperties.TracingThreshold,
 		},
 	}
 	updated, httpResp, err := client.
@@ -434,7 +414,7 @@ func TestTracingThresholdAlerts(t *testing.T) {
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesTracingThreshold.Description, newDesc)
+	require.Equal(t, *updated.AlertDef.AlertDefProperties.Description, newDesc)
 
 	_, httpResp, err = client.
 		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
@@ -455,9 +435,7 @@ func TestFlowAlerts(t *testing.T) {
 
 	// First create a tracing threshold alert to be used in the flow
 	tracingAlertReq := alerts.CreateAlertDefinitionRequest{
-		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesTracingThreshold: CreateTracingThresholdAlert(),
-		},
+		AlertDefProperties: CreateTracingThresholdAlert(),
 	}
 	tracingAlert, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
@@ -468,9 +446,7 @@ func TestFlowAlerts(t *testing.T) {
 
 	// Now create the flow alert using the created tracing alert
 	flowAlertReq := alerts.CreateAlertDefinitionRequest{
-		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesFlow: CreateFlowAlert(*tracingAlert.AlertDef.Id),
-		},
+		AlertDefProperties: CreateFlowAlert(*tracingAlert.AlertDef.Id),
 	}
 	flowAlert, httpResp, err := client.
 		AlertDefsServiceCreateAlertDef(ctx).
@@ -489,17 +465,15 @@ func TestFlowAlerts(t *testing.T) {
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
 		Id: flowAlert.AlertDef.Id,
 		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesFlow: &alerts.AlertDefPropertiesFlow{
-				Name:         flowAlert.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.Name,
-				Description:  &newDesc,
-				Enabled:      flowAlert.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.Enabled,
-				Priority:     flowAlert.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.Priority,
-				Type:         flowAlert.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.Type,
-				EntityLabels: flowAlert.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.EntityLabels,
-				GroupByKeys:  flowAlert.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.GroupByKeys,
-				PhantomMode:  flowAlert.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.PhantomMode,
-				Flow:         flowAlert.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.Flow,
-			},
+			Name:         flowAlert.AlertDef.AlertDefProperties.Name,
+			Description:  &newDesc,
+			Enabled:      flowAlert.AlertDef.AlertDefProperties.Enabled,
+			Priority:     flowAlert.AlertDef.AlertDefProperties.Priority,
+			Type:         flowAlert.AlertDef.AlertDefProperties.Type,
+			EntityLabels: flowAlert.AlertDef.AlertDefProperties.EntityLabels,
+			GroupByKeys:  flowAlert.AlertDef.AlertDefProperties.GroupByKeys,
+			PhantomMode:  flowAlert.AlertDef.AlertDefProperties.PhantomMode,
+			Flow:         flowAlert.AlertDef.AlertDefProperties.Flow,
 		},
 	}
 	updated, httpResp, err := client.
@@ -507,7 +481,7 @@ func TestFlowAlerts(t *testing.T) {
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesFlow.Description, newDesc)
+	require.Equal(t, *updated.AlertDef.AlertDefProperties.Description, newDesc)
 
 	_, httpResp, err = client.
 		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
@@ -535,22 +509,18 @@ func TestSloAlerts(t *testing.T) {
 	sloClient := clientSet.SLOs()
 	sloPayload := getRequestBasedSlo("example_slo_for_alert")
 
-	createSloReq := slos.SlosServiceReplaceSloRequest{
-		SloRequestBasedMetricSli: sloPayload,
-	}
+	createSloReq := *sloPayload
 	sloResp, httpResp, err := sloClient.
 		SlosServiceCreateSlo(ctx).
-		SlosServiceReplaceSloRequest(createSloReq).
+		Slo1(createSloReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	sloID := sloResp.GetSlo().SloRequestBasedMetricSli.GetId()
+	sloID := sloResp.Slo.GetId()
 	require.NotEmpty(t, sloID)
 
 	alertsClient := clientSet.Alerts()
 	createAlertReq := alerts.CreateAlertDefinitionRequest{
-		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesSloThreshold: CreateBurnRateSloAlert(sloID),
-		},
+		AlertDefProperties: CreateBurnRateSloAlert(sloID),
 	}
 
 	created, httpResp, err := alertsClient.
@@ -570,17 +540,15 @@ func TestSloAlerts(t *testing.T) {
 	updateReq := alerts.ReplaceAlertDefinitionRequest{
 		Id: created.AlertDef.Id,
 		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesSloThreshold: &alerts.AlertDefPropertiesSloThreshold{
-				Name:         created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Name,
-				Description:  &newDesc,
-				Enabled:      created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Enabled,
-				Priority:     created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Priority,
-				Type:         created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Type,
-				EntityLabels: created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.EntityLabels,
-				GroupByKeys:  created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.GroupByKeys,
-				PhantomMode:  created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.PhantomMode,
-				SloThreshold: created.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.SloThreshold,
-			},
+			Name:         created.AlertDef.AlertDefProperties.Name,
+			Description:  &newDesc,
+			Enabled:      created.AlertDef.AlertDefProperties.Enabled,
+			Priority:     created.AlertDef.AlertDefProperties.Priority,
+			Type:         created.AlertDef.AlertDefProperties.Type,
+			EntityLabels: created.AlertDef.AlertDefProperties.EntityLabels,
+			GroupByKeys:  created.AlertDef.AlertDefProperties.GroupByKeys,
+			PhantomMode:  created.AlertDef.AlertDefProperties.PhantomMode,
+			SloThreshold: created.AlertDef.AlertDefProperties.SloThreshold,
 		},
 	}
 	updated, httpResp, err := alertsClient.
@@ -588,7 +556,7 @@ func TestSloAlerts(t *testing.T) {
 		ReplaceAlertDefinitionRequest(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, *updated.AlertDef.AlertDefProperties.AlertDefPropertiesSloThreshold.Description, newDesc)
+	require.Equal(t, *updated.AlertDef.AlertDefProperties.Description, newDesc)
 
 	_, httpResp, err = alertsClient.
 		AlertDefsServiceDeleteAlertDef(ctx, *updated.AlertDef.Id).
@@ -614,9 +582,7 @@ func TestAlertScheduler(t *testing.T) {
 
 	alertsClient := clientSet.Alerts()
 	createAlertReq := alerts.CreateAlertDefinitionRequest{
-		AlertDefProperties: &alerts.AlertDefProperties{
-			AlertDefPropertiesTracingImmediate: CreateTracingImmediateAlert(),
-		},
+		AlertDefProperties: CreateTracingImmediateAlert(),
 	}
 
 	createdAlert, httpResp, err := alertsClient.
@@ -631,25 +597,21 @@ func TestAlertScheduler(t *testing.T) {
 	name := "Scheduler Test " + time.Now().Format(time.RFC3339)
 	enabled := true
 
-	schedule := scheduler.ScheduleOneTimeAsSchedule(&scheduler.ScheduleOneTime{
+	schedule := scheduler.Schedule{
 		ScheduleOperation: scheduler.SCHEDULEOPERATION_SCHEDULE_OPERATION_MUTE.Ptr(),
-		OneTime: scheduler.OneTime{
+		OneTime: &scheduler.OneTime{
 			Timeframe: &scheduler.Timeframe{
-				TimeframeEndTime: &scheduler.TimeframeEndTime{
-					StartTime: scheduler.PtrString("2025-01-01T00:00:00.000Z"),
-					EndTime:   "2025-12-31T23:59:59.000Z",
-					Timezone:  scheduler.PtrString("UTC"),
-				},
+				StartTime: scheduler.PtrString("2025-01-01T00:00:00.000Z"),
+				EndTime:   scheduler.PtrString("2025-12-31T23:59:59.000Z"),
+				Timezone:  scheduler.PtrString("UTC"),
 			},
 		},
-	})
+	}
 
 	filter := scheduler.AlertSchedulerRuleProtobufV1Filter{
-		AlertSchedulerRuleProtobufV1FilterAlertUniqueIds: &scheduler.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds{
-			WhatExpression: scheduler.PtrString("source logs | filter $d.cpodId:string == '122'"),
-			AlertUniqueIds: scheduler.AlertUniqueIds{
-				Value: []string{*createdAlert.AlertDef.Id},
-			},
+		WhatExpression: scheduler.PtrString("source logs | filter $d.cpodId:string == '122'"),
+		AlertUniqueIds: &scheduler.AlertUniqueIds{
+			Value: []string{*createdAlert.AlertDef.Id},
 		},
 	}
 
@@ -709,8 +671,8 @@ func TestAlertScheduler(t *testing.T) {
 }
 
 // CreateSloAlert returns a reusable Burn Rate SLO alert definition payload
-func CreateBurnRateSloAlert(sloID string) *alerts.AlertDefPropertiesSloThreshold {
-	return &alerts.AlertDefPropertiesSloThreshold{
+func CreateBurnRateSloAlert(sloID string) *alerts.AlertDefProperties {
+	return &alerts.AlertDefProperties{
 		Name:        slos.PtrString("SLO Burn Rate Alert Example"),
 		Description: alerts.PtrString("SLO burn rate alert created via OpenAPI SDK"),
 		Enabled:     alerts.PtrBool(true),
@@ -726,10 +688,8 @@ func CreateBurnRateSloAlert(sloID string) *alerts.AlertDefPropertiesSloThreshold
 					Minutes:  alerts.PtrInt64(5),
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: &alerts.V3IntegrationType{
-						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
-							Recipients: alerts.Recipients{
-								Emails: []string{"example@coralogix.com"},
-							},
+						Recipients: &alerts.Recipients{
+							Emails: []string{"example@coralogix.com"},
 						},
 					},
 				},
@@ -743,29 +703,25 @@ func CreateBurnRateSloAlert(sloID string) *alerts.AlertDefPropertiesSloThreshold
 			StartTime: &alerts.TimeOfDay{Hours: slos.PtrInt32(8), Minutes: slos.PtrInt32(32)},
 			EndTime:   &alerts.TimeOfDay{Hours: slos.PtrInt32(20), Minutes: slos.PtrInt32(30)},
 		},
-		SloThreshold: alerts.SloThresholdType{
-			SloThresholdTypeBurnRate: &alerts.SloThresholdTypeBurnRate{
-				SloDefinition: &alerts.V3SloDefinition{
-					SloId: &sloID,
+		SloThreshold: &alerts.SloThresholdType{
+			SloDefinition: &alerts.V3SloDefinition{
+				SloId: &sloID,
+			},
+			BurnRate: &alerts.BurnRateThreshold{
+				Rules: []alerts.SloThresholdRule{
+					{
+						Condition: &alerts.SloThresholdCondition{
+							Threshold: slos.PtrFloat64(1),
+						},
+						Override: &alerts.AlertDefOverride{
+							Priority: alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
+						},
+					},
 				},
-				BurnRate: alerts.BurnRateThreshold{
-					BurnRateThresholdSingle: &alerts.BurnRateThresholdSingle{
-						Rules: []alerts.SloThresholdRule{
-							{
-								Condition: &alerts.SloThresholdCondition{
-									Threshold: slos.PtrFloat64(1),
-								},
-								Override: &alerts.AlertDefOverride{
-									Priority: alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
-								},
-							},
-						},
-						Single: alerts.BurnRateTypeSingle{
-							TimeDuration: &alerts.TimeDuration{
-								Duration: slos.PtrString("1"),
-								Unit:     alerts.DURATIONUNIT_DURATION_UNIT_HOURS.Ptr(),
-							},
-						},
+				Single: &alerts.BurnRateTypeSingle{
+					TimeDuration: &alerts.TimeDuration{
+						Duration: slos.PtrString("1"),
+						Unit:     alerts.DURATIONUNIT_DURATION_UNIT_HOURS.Ptr(),
 					},
 				},
 			},

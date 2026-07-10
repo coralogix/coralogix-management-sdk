@@ -13,126 +13,178 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// VariableDefinition - struct for VariableDefinition
+// checks if the VariableDefinition type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VariableDefinition{}
+
+// VariableDefinition Discriminated union defining the variable type: either a constant value or a multi-select query-driven variable.
 type VariableDefinition struct {
-	VariableDefinitionConstant *VariableDefinitionConstant
-	VariableDefinitionMultiSelect *VariableDefinitionMultiSelect
+	Constant                          *Constant    `json:"constant,omitempty"`
+	MultiSelect                       *MultiSelect `json:"multiSelect,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// VariableDefinitionConstantAsVariableDefinition is a convenience function that returns VariableDefinitionConstant wrapped in VariableDefinition
-func VariableDefinitionConstantAsVariableDefinition(v *VariableDefinitionConstant) VariableDefinition {
-	return VariableDefinition{
-		VariableDefinitionConstant: v,
+type _VariableDefinition VariableDefinition
+
+// NewVariableDefinition instantiates a new VariableDefinition object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewVariableDefinition() *VariableDefinition {
+	this := VariableDefinition{}
+	return &this
+}
+
+// NewVariableDefinitionWithDefaults instantiates a new VariableDefinition object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewVariableDefinitionWithDefaults() *VariableDefinition {
+	this := VariableDefinition{}
+	return &this
+}
+
+// GetConstant returns the Constant field value if set, zero value otherwise.
+func (o *VariableDefinition) GetConstant() Constant {
+	if o == nil || IsNil(o.Constant) {
+		var ret Constant
+		return ret
 	}
+	return *o.Constant
 }
 
-// VariableDefinitionMultiSelectAsVariableDefinition is a convenience function that returns VariableDefinitionMultiSelect wrapped in VariableDefinition
-func VariableDefinitionMultiSelectAsVariableDefinition(v *VariableDefinitionMultiSelect) VariableDefinition {
-	return VariableDefinition{
-		VariableDefinitionMultiSelect: v,
+// GetConstantOk returns a tuple with the Constant field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableDefinition) GetConstantOk() (*Constant, bool) {
+	if o == nil || IsNil(o.Constant) {
+		return nil, false
 	}
+	return o.Constant, true
 }
 
+// HasConstant returns a boolean if a field has been set.
+func (o *VariableDefinition) HasConstant() bool {
+	if o != nil && !IsNil(o.Constant) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *VariableDefinition) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into VariableDefinitionConstant
-	err = json.Unmarshal(data, &dst.VariableDefinitionConstant)
-	if err == nil {
-		jsonVariableDefinitionConstant, _ := json.Marshal(dst.VariableDefinitionConstant)
-		if string(jsonVariableDefinitionConstant) == "{}" { // empty struct
-			dst.VariableDefinitionConstant = nil
-		} else {
-			if err = validator.Validate(dst.VariableDefinitionConstant); err != nil {
-				dst.VariableDefinitionConstant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetConstant gets a reference to the given Constant and assigns it to the Constant field.
+func (o *VariableDefinition) SetConstant(v Constant) {
+	o.Constant = &v
+}
+
+// GetMultiSelect returns the MultiSelect field value if set, zero value otherwise.
+func (o *VariableDefinition) GetMultiSelect() MultiSelect {
+	if o == nil || IsNil(o.MultiSelect) {
+		var ret MultiSelect
+		return ret
+	}
+	return *o.MultiSelect
+}
+
+// GetMultiSelectOk returns a tuple with the MultiSelect field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VariableDefinition) GetMultiSelectOk() (*MultiSelect, bool) {
+	if o == nil || IsNil(o.MultiSelect) {
+		return nil, false
+	}
+	return o.MultiSelect, true
+}
+
+// HasMultiSelect returns a boolean if a field has been set.
+func (o *VariableDefinition) HasMultiSelect() bool {
+	if o != nil && !IsNil(o.MultiSelect) {
+		return true
+	}
+
+	return false
+}
+
+// SetMultiSelect gets a reference to the given MultiSelect and assigns it to the MultiSelect field.
+func (o *VariableDefinition) SetMultiSelect(v MultiSelect) {
+	o.MultiSelect = &v
+}
+
+func (o VariableDefinition) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VariableDefinition) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Constant) {
+		toSerialize["constant"] = o.Constant
+	}
+	if !IsNil(o.MultiSelect) {
+		toSerialize["multiSelect"] = o.MultiSelect
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["constant"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["multiSelect"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [constant, multiSelect] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["constant"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field constant must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["multiSelect"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multiSelect must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *VariableDefinition) UnmarshalJSON(data []byte) (err error) {
+	varVariableDefinition := _VariableDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableDefinition(varVariableDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["constant"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableDefinitionConstant = nil
-	}
-
-	// try to unmarshal data into VariableDefinitionMultiSelect
-	err = json.Unmarshal(data, &dst.VariableDefinitionMultiSelect)
-	if err == nil {
-		jsonVariableDefinitionMultiSelect, _ := json.Marshal(dst.VariableDefinitionMultiSelect)
-		if string(jsonVariableDefinitionMultiSelect) == "{}" { // empty struct
-			dst.VariableDefinitionMultiSelect = nil
-		} else {
-			if err = validator.Validate(dst.VariableDefinitionMultiSelect); err != nil {
-				dst.VariableDefinitionMultiSelect = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["multiSelect"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.VariableDefinitionMultiSelect = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [constant, multiSelect] may be set"}
+		}
+
+		delete(additionalProperties, "constant")
+		delete(additionalProperties, "multiSelect")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.VariableDefinitionConstant = nil
-		dst.VariableDefinitionMultiSelect = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(VariableDefinition)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src VariableDefinition) MarshalJSON() ([]byte, error) {
-	if src.VariableDefinitionConstant != nil {
-		return json.Marshal(&src.VariableDefinitionConstant)
-	}
-
-	if src.VariableDefinitionMultiSelect != nil {
-		return json.Marshal(&src.VariableDefinitionMultiSelect)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *VariableDefinition) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.VariableDefinitionConstant != nil {
-		return obj.VariableDefinitionConstant
-	}
-
-	if obj.VariableDefinitionMultiSelect != nil {
-		return obj.VariableDefinitionMultiSelect
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj VariableDefinition) GetActualInstanceValue() (interface{}) {
-	if obj.VariableDefinitionConstant != nil {
-		return *obj.VariableDefinitionConstant
-	}
-
-	if obj.VariableDefinitionMultiSelect != nil {
-		return *obj.VariableDefinitionMultiSelect
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableVariableDefinition struct {
@@ -170,4 +222,3 @@ func (v *NullableVariableDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

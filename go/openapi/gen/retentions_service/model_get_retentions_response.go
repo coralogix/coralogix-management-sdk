@@ -23,8 +23,9 @@ var _ MappedNullable = &GetRetentionsResponse{}
 // GetRetentionsResponse Response containing the current data retention settings.
 type GetRetentionsResponse struct {
 	// The retentions.
-	Retentions []ArchiveV1Retention `json:"retentions,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Retentions                        []ArchiveV1Retention `json:"retentions,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetRetentionsResponse GetRetentionsResponse
@@ -79,7 +80,7 @@ func (o *GetRetentionsResponse) SetRetentions(v []ArchiveV1Retention) {
 }
 
 func (o GetRetentionsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *GetRetentionsResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "retentions")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableGetRetentionsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

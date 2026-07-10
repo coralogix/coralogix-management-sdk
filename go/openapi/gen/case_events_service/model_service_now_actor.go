@@ -29,8 +29,9 @@ type ServiceNowActor struct {
 	// Mail of the user
 	UserEmail *string `json:"userEmail,omitempty"`
 	// Username
-	Username *string `json:"username,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Username                          *string `json:"username,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ServiceNowActor ServiceNowActor
@@ -181,7 +182,7 @@ func (o *ServiceNowActor) SetUsername(v string) {
 }
 
 func (o ServiceNowActor) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,6 +231,7 @@ func (o *ServiceNowActor) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "userEmail")
 		delete(additionalProperties, "username")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -270,4 +272,3 @@ func (v *NullableServiceNowActor) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

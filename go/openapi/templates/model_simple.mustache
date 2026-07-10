@@ -24,6 +24,10 @@ type {{classname}} struct {
 {{/vars}}
 {{#isAdditionalPropertiesTrue}}
 	AdditionalProperties map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
+{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+	requiredOneOfGroup{{index}}FromUnmarshalWithoutKnownArm bool
+{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
 {{/isAdditionalPropertiesTrue}}
 }
 
@@ -348,6 +352,56 @@ func (o {{classname}}) ToMap() (map[string]interface{}, error) {
 	{{/isNullable}}
 	{{/vars}}
 	{{#isAdditionalPropertiesTrue}}
+	{{/isAdditionalPropertiesTrue}}
+	{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+	requiredOneOfGroup{{index}}Matches := 0
+	{{#fields}}
+	if _, exists := toSerialize["{{.}}"]; exists {
+		requiredOneOfGroup{{index}}Matches++
+	}
+	{{/fields}}
+	if requiredOneOfGroup{{index}}Matches == 0 {
+		{{#isAdditionalPropertiesTrue}}
+		if !o.requiredOneOfGroup{{index}}FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [{{fieldList}}] must be set"}
+		}
+		{{/isAdditionalPropertiesTrue}}
+		{{^isAdditionalPropertiesTrue}}
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [{{fieldList}}] must be set"}
+		{{/isAdditionalPropertiesTrue}}
+	}
+	if requiredOneOfGroup{{index}}Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [{{fieldList}}] must be set"}
+	}
+
+	{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+	{{#vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
+	optionalOneOfGroup{{index}}Matches := 0
+	{{#fields}}
+	if _, exists := toSerialize["{{.}}"]; exists {
+		optionalOneOfGroup{{index}}Matches++
+	}
+	{{/fields}}
+	if optionalOneOfGroup{{index}}Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [{{fieldList}}] may be set"}
+	}
+
+	{{/vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
+	{{#isAdditionalPropertiesTrue}}
+	{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+	{{#fields}}
+	if _, exists := o.AdditionalProperties["{{.}}"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field {{.}} must be set through the typed field, not AdditionalProperties"}
+	}
+	{{/fields}}
+	{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+	{{#vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
+	{{#fields}}
+	if _, exists := o.AdditionalProperties["{{.}}"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field {{.}} must be set through the typed field, not AdditionalProperties"}
+	}
+	{{/fields}}
+	{{/vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -415,6 +469,30 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+	requiredOneOfGroup{{index}}Matches := 0
+	{{#fields}}
+	if _, exists := allProperties["{{.}}"]; exists {
+		requiredOneOfGroup{{index}}Matches++
+	}
+	{{/fields}}
+	if requiredOneOfGroup{{index}}Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [{{fieldList}}] may be set"}
+	}
+
+	{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+	{{#vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
+	optionalOneOfGroup{{index}}Matches := 0
+	{{#fields}}
+	if _, exists := allProperties["{{.}}"]; exists {
+		optionalOneOfGroup{{index}}Matches++
+	}
+	{{/fields}}
+	if optionalOneOfGroup{{index}}Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [{{fieldList}}] may be set"}
+	}
+
+	{{/vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
 	{{#useDefaultValuesForRequiredVars}}
 	if defaultValueApplied {
 		data, err = json.Marshal(allProperties)
@@ -467,6 +545,30 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+		requiredOneOfGroup{{index}}MatchesInPayload := 0
+		{{#fields}}
+		if _, exists := additionalProperties["{{.}}"]; exists {
+			requiredOneOfGroup{{index}}MatchesInPayload++
+		}
+		{{/fields}}
+		if requiredOneOfGroup{{index}}MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [{{fieldList}}] may be set"}
+		}
+
+		{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+		{{#vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
+		optionalOneOfGroup{{index}}MatchesInPayload := 0
+		{{#fields}}
+		if _, exists := additionalProperties["{{.}}"]; exists {
+			optionalOneOfGroup{{index}}MatchesInPayload++
+		}
+		{{/fields}}
+		if optionalOneOfGroup{{index}}MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [{{fieldList}}] may be set"}
+		}
+
+		{{/vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
 		{{#vars}}
 		delete(additionalProperties, "{{{baseName}}}")
 		{{/vars}}
@@ -490,6 +592,10 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 		}
 
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+		o.requiredOneOfGroup{{index}}FromUnmarshalWithoutKnownArm = requiredOneOfGroup{{index}}MatchesInPayload == 0 && len(additionalProperties) > 0
+		{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
 	}
 
 	return err
@@ -509,10 +615,38 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+		requiredOneOfGroup{{index}}MatchesInPayload := 0
+		{{#fields}}
+		if _, exists := additionalProperties["{{.}}"]; exists {
+			requiredOneOfGroup{{index}}MatchesInPayload++
+		}
+		{{/fields}}
+		if requiredOneOfGroup{{index}}MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [{{fieldList}}] may be set"}
+		}
+
+		{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+		{{#vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
+		optionalOneOfGroup{{index}}MatchesInPayload := 0
+		{{#fields}}
+		if _, exists := additionalProperties["{{.}}"]; exists {
+			optionalOneOfGroup{{index}}MatchesInPayload++
+		}
+		{{/fields}}
+		if optionalOneOfGroup{{index}}MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [{{fieldList}}] may be set"}
+		}
+
+		{{/vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
 		{{#vars}}
 		delete(additionalProperties, "{{{baseName}}}")
 		{{/vars}}
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+		o.requiredOneOfGroup{{index}}FromUnmarshalWithoutKnownArm = requiredOneOfGroup{{index}}MatchesInPayload == 0 && len(additionalProperties) > 0
+		{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
 	}
 
 	return err
@@ -533,10 +667,38 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+		requiredOneOfGroup{{index}}MatchesInPayload := 0
+		{{#fields}}
+		if _, exists := additionalProperties["{{.}}"]; exists {
+			requiredOneOfGroup{{index}}MatchesInPayload++
+		}
+		{{/fields}}
+		if requiredOneOfGroup{{index}}MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [{{fieldList}}] may be set"}
+		}
+
+		{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+		{{#vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
+		optionalOneOfGroup{{index}}MatchesInPayload := 0
+		{{#fields}}
+		if _, exists := additionalProperties["{{.}}"]; exists {
+			optionalOneOfGroup{{index}}MatchesInPayload++
+		}
+		{{/fields}}
+		if optionalOneOfGroup{{index}}MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [{{fieldList}}] may be set"}
+		}
+
+		{{/vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
 		{{#vars}}
 		delete(additionalProperties, "{{{baseName}}}")
 		{{/vars}}
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+		o.requiredOneOfGroup{{index}}FromUnmarshalWithoutKnownArm = requiredOneOfGroup{{index}}MatchesInPayload == 0 && len(additionalProperties) > 0
+		{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
 	}
 
 	return err

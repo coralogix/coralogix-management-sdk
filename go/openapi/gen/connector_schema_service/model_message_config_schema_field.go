@@ -31,12 +31,13 @@ type MessageConfigSchemaField struct {
 	// The disable override.
 	DisableOverride *bool `json:"disableOverride,omitempty"`
 	// The field name.
-	FieldName *string `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	FieldType *FieldType `json:"fieldType,omitempty"`
+	FieldName     *string                `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	FieldType     *FieldType             `json:"fieldType,omitempty"`
 	RenderingMode *TemplateRenderingMode `json:"renderingMode,omitempty"`
 	// The required.
-	Required *bool `json:"required,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Required                          *bool `json:"required,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MessageConfigSchemaField MessageConfigSchemaField
@@ -315,7 +316,7 @@ func (o *MessageConfigSchemaField) SetRequired(v bool) {
 }
 
 func (o MessageConfigSchemaField) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -380,6 +381,7 @@ func (o *MessageConfigSchemaField) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "renderingMode")
 		delete(additionalProperties, "required")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -420,4 +422,3 @@ func (v *NullableMessageConfigSchemaField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

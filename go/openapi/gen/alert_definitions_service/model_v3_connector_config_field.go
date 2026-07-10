@@ -25,8 +25,9 @@ type V3ConnectorConfigField struct {
 	// The name of the configuration field
 	FieldName *string `json:"fieldName,omitempty"`
 	// The template for the configuration field
-	Template *string `json:"template,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Template                          *string `json:"template,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V3ConnectorConfigField V3ConnectorConfigField
@@ -113,7 +114,7 @@ func (o *V3ConnectorConfigField) SetTemplate(v string) {
 }
 
 func (o V3ConnectorConfigField) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *V3ConnectorConfigField) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fieldName")
 		delete(additionalProperties, "template")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableV3ConnectorConfigField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

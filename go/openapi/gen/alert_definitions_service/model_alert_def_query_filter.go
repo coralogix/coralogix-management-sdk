@@ -22,17 +22,18 @@ var _ MappedNullable = &AlertDefQueryFilter{}
 
 // AlertDefQueryFilter Filter configuration for alert defs
 type AlertDefQueryFilter struct {
-	EnabledFilter interface{} `json:"enabledFilter,omitempty"`
-	EntityLabelsFilter interface{} `json:"entityLabelsFilter,omitempty"`
-	IdFilter interface{} `json:"idFilter,omitempty"`
-	LastTriggeredTimeRangeFilter interface{} `json:"lastTriggeredTimeRangeFilter,omitempty"`
-	ModifiedTimeRangeFilter interface{} `json:"modifiedTimeRangeFilter,omitempty"`
-	NameFilter interface{} `json:"nameFilter,omitempty"`
-	PriorityFilter interface{} `json:"priorityFilter,omitempty"`
-	StatusFilter interface{} `json:"statusFilter,omitempty"`
-	TypeFilter interface{} `json:"typeFilter,omitempty"`
-	TypeSpecificFilter interface{} `json:"typeSpecificFilter,omitempty"`
-	AdditionalProperties map[string]interface{}
+	EnabledFilter                     *AlertDefEnabledFilter           `json:"enabledFilter,omitempty"`
+	EntityLabelsFilter                *AlertDefEntityLabelsFilter      `json:"entityLabelsFilter,omitempty"`
+	IdFilter                          *AlertDefIdFilter                `json:"idFilter,omitempty"`
+	LastTriggeredTimeRangeFilter      *AlertDefLastTriggeredTimeFilter `json:"lastTriggeredTimeRangeFilter,omitempty"`
+	ModifiedTimeRangeFilter           *AlertDefModifiedTimeFilter      `json:"modifiedTimeRangeFilter,omitempty"`
+	NameFilter                        *AlertDefNameFilter              `json:"nameFilter,omitempty"`
+	PriorityFilter                    *AlertDefPriorityFilter          `json:"priorityFilter,omitempty"`
+	StatusFilter                      *AlertDefStatusFilter            `json:"statusFilter,omitempty"`
+	TypeFilter                        *AlertDefTypeFilter              `json:"typeFilter,omitempty"`
+	TypeSpecificFilter                *AlertDefTypeSpecificFilter      `json:"typeSpecificFilter,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AlertDefQueryFilter AlertDefQueryFilter
@@ -54,23 +55,22 @@ func NewAlertDefQueryFilterWithDefaults() *AlertDefQueryFilter {
 	return &this
 }
 
-// GetEnabledFilter returns the EnabledFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AlertDefQueryFilter) GetEnabledFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetEnabledFilter returns the EnabledFilter field value if set, zero value otherwise.
+func (o *AlertDefQueryFilter) GetEnabledFilter() AlertDefEnabledFilter {
+	if o == nil || IsNil(o.EnabledFilter) {
+		var ret AlertDefEnabledFilter
 		return ret
 	}
-	return o.EnabledFilter
+	return *o.EnabledFilter
 }
 
 // GetEnabledFilterOk returns a tuple with the EnabledFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlertDefQueryFilter) GetEnabledFilterOk() (*interface{}, bool) {
+func (o *AlertDefQueryFilter) GetEnabledFilterOk() (*AlertDefEnabledFilter, bool) {
 	if o == nil || IsNil(o.EnabledFilter) {
 		return nil, false
 	}
-	return &o.EnabledFilter, true
+	return o.EnabledFilter, true
 }
 
 // HasEnabledFilter returns a boolean if a field has been set.
@@ -82,28 +82,27 @@ func (o *AlertDefQueryFilter) HasEnabledFilter() bool {
 	return false
 }
 
-// SetEnabledFilter gets a reference to the given interface{} and assigns it to the EnabledFilter field.
-func (o *AlertDefQueryFilter) SetEnabledFilter(v interface{}) {
-	o.EnabledFilter = v
+// SetEnabledFilter gets a reference to the given AlertDefEnabledFilter and assigns it to the EnabledFilter field.
+func (o *AlertDefQueryFilter) SetEnabledFilter(v AlertDefEnabledFilter) {
+	o.EnabledFilter = &v
 }
 
-// GetEntityLabelsFilter returns the EntityLabelsFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AlertDefQueryFilter) GetEntityLabelsFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetEntityLabelsFilter returns the EntityLabelsFilter field value if set, zero value otherwise.
+func (o *AlertDefQueryFilter) GetEntityLabelsFilter() AlertDefEntityLabelsFilter {
+	if o == nil || IsNil(o.EntityLabelsFilter) {
+		var ret AlertDefEntityLabelsFilter
 		return ret
 	}
-	return o.EntityLabelsFilter
+	return *o.EntityLabelsFilter
 }
 
 // GetEntityLabelsFilterOk returns a tuple with the EntityLabelsFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlertDefQueryFilter) GetEntityLabelsFilterOk() (*interface{}, bool) {
+func (o *AlertDefQueryFilter) GetEntityLabelsFilterOk() (*AlertDefEntityLabelsFilter, bool) {
 	if o == nil || IsNil(o.EntityLabelsFilter) {
 		return nil, false
 	}
-	return &o.EntityLabelsFilter, true
+	return o.EntityLabelsFilter, true
 }
 
 // HasEntityLabelsFilter returns a boolean if a field has been set.
@@ -115,28 +114,27 @@ func (o *AlertDefQueryFilter) HasEntityLabelsFilter() bool {
 	return false
 }
 
-// SetEntityLabelsFilter gets a reference to the given interface{} and assigns it to the EntityLabelsFilter field.
-func (o *AlertDefQueryFilter) SetEntityLabelsFilter(v interface{}) {
-	o.EntityLabelsFilter = v
+// SetEntityLabelsFilter gets a reference to the given AlertDefEntityLabelsFilter and assigns it to the EntityLabelsFilter field.
+func (o *AlertDefQueryFilter) SetEntityLabelsFilter(v AlertDefEntityLabelsFilter) {
+	o.EntityLabelsFilter = &v
 }
 
-// GetIdFilter returns the IdFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AlertDefQueryFilter) GetIdFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetIdFilter returns the IdFilter field value if set, zero value otherwise.
+func (o *AlertDefQueryFilter) GetIdFilter() AlertDefIdFilter {
+	if o == nil || IsNil(o.IdFilter) {
+		var ret AlertDefIdFilter
 		return ret
 	}
-	return o.IdFilter
+	return *o.IdFilter
 }
 
 // GetIdFilterOk returns a tuple with the IdFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlertDefQueryFilter) GetIdFilterOk() (*interface{}, bool) {
+func (o *AlertDefQueryFilter) GetIdFilterOk() (*AlertDefIdFilter, bool) {
 	if o == nil || IsNil(o.IdFilter) {
 		return nil, false
 	}
-	return &o.IdFilter, true
+	return o.IdFilter, true
 }
 
 // HasIdFilter returns a boolean if a field has been set.
@@ -148,28 +146,27 @@ func (o *AlertDefQueryFilter) HasIdFilter() bool {
 	return false
 }
 
-// SetIdFilter gets a reference to the given interface{} and assigns it to the IdFilter field.
-func (o *AlertDefQueryFilter) SetIdFilter(v interface{}) {
-	o.IdFilter = v
+// SetIdFilter gets a reference to the given AlertDefIdFilter and assigns it to the IdFilter field.
+func (o *AlertDefQueryFilter) SetIdFilter(v AlertDefIdFilter) {
+	o.IdFilter = &v
 }
 
-// GetLastTriggeredTimeRangeFilter returns the LastTriggeredTimeRangeFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AlertDefQueryFilter) GetLastTriggeredTimeRangeFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetLastTriggeredTimeRangeFilter returns the LastTriggeredTimeRangeFilter field value if set, zero value otherwise.
+func (o *AlertDefQueryFilter) GetLastTriggeredTimeRangeFilter() AlertDefLastTriggeredTimeFilter {
+	if o == nil || IsNil(o.LastTriggeredTimeRangeFilter) {
+		var ret AlertDefLastTriggeredTimeFilter
 		return ret
 	}
-	return o.LastTriggeredTimeRangeFilter
+	return *o.LastTriggeredTimeRangeFilter
 }
 
 // GetLastTriggeredTimeRangeFilterOk returns a tuple with the LastTriggeredTimeRangeFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlertDefQueryFilter) GetLastTriggeredTimeRangeFilterOk() (*interface{}, bool) {
+func (o *AlertDefQueryFilter) GetLastTriggeredTimeRangeFilterOk() (*AlertDefLastTriggeredTimeFilter, bool) {
 	if o == nil || IsNil(o.LastTriggeredTimeRangeFilter) {
 		return nil, false
 	}
-	return &o.LastTriggeredTimeRangeFilter, true
+	return o.LastTriggeredTimeRangeFilter, true
 }
 
 // HasLastTriggeredTimeRangeFilter returns a boolean if a field has been set.
@@ -181,28 +178,27 @@ func (o *AlertDefQueryFilter) HasLastTriggeredTimeRangeFilter() bool {
 	return false
 }
 
-// SetLastTriggeredTimeRangeFilter gets a reference to the given interface{} and assigns it to the LastTriggeredTimeRangeFilter field.
-func (o *AlertDefQueryFilter) SetLastTriggeredTimeRangeFilter(v interface{}) {
-	o.LastTriggeredTimeRangeFilter = v
+// SetLastTriggeredTimeRangeFilter gets a reference to the given AlertDefLastTriggeredTimeFilter and assigns it to the LastTriggeredTimeRangeFilter field.
+func (o *AlertDefQueryFilter) SetLastTriggeredTimeRangeFilter(v AlertDefLastTriggeredTimeFilter) {
+	o.LastTriggeredTimeRangeFilter = &v
 }
 
-// GetModifiedTimeRangeFilter returns the ModifiedTimeRangeFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AlertDefQueryFilter) GetModifiedTimeRangeFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetModifiedTimeRangeFilter returns the ModifiedTimeRangeFilter field value if set, zero value otherwise.
+func (o *AlertDefQueryFilter) GetModifiedTimeRangeFilter() AlertDefModifiedTimeFilter {
+	if o == nil || IsNil(o.ModifiedTimeRangeFilter) {
+		var ret AlertDefModifiedTimeFilter
 		return ret
 	}
-	return o.ModifiedTimeRangeFilter
+	return *o.ModifiedTimeRangeFilter
 }
 
 // GetModifiedTimeRangeFilterOk returns a tuple with the ModifiedTimeRangeFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlertDefQueryFilter) GetModifiedTimeRangeFilterOk() (*interface{}, bool) {
+func (o *AlertDefQueryFilter) GetModifiedTimeRangeFilterOk() (*AlertDefModifiedTimeFilter, bool) {
 	if o == nil || IsNil(o.ModifiedTimeRangeFilter) {
 		return nil, false
 	}
-	return &o.ModifiedTimeRangeFilter, true
+	return o.ModifiedTimeRangeFilter, true
 }
 
 // HasModifiedTimeRangeFilter returns a boolean if a field has been set.
@@ -214,28 +210,27 @@ func (o *AlertDefQueryFilter) HasModifiedTimeRangeFilter() bool {
 	return false
 }
 
-// SetModifiedTimeRangeFilter gets a reference to the given interface{} and assigns it to the ModifiedTimeRangeFilter field.
-func (o *AlertDefQueryFilter) SetModifiedTimeRangeFilter(v interface{}) {
-	o.ModifiedTimeRangeFilter = v
+// SetModifiedTimeRangeFilter gets a reference to the given AlertDefModifiedTimeFilter and assigns it to the ModifiedTimeRangeFilter field.
+func (o *AlertDefQueryFilter) SetModifiedTimeRangeFilter(v AlertDefModifiedTimeFilter) {
+	o.ModifiedTimeRangeFilter = &v
 }
 
-// GetNameFilter returns the NameFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AlertDefQueryFilter) GetNameFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetNameFilter returns the NameFilter field value if set, zero value otherwise.
+func (o *AlertDefQueryFilter) GetNameFilter() AlertDefNameFilter {
+	if o == nil || IsNil(o.NameFilter) {
+		var ret AlertDefNameFilter
 		return ret
 	}
-	return o.NameFilter
+	return *o.NameFilter
 }
 
 // GetNameFilterOk returns a tuple with the NameFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlertDefQueryFilter) GetNameFilterOk() (*interface{}, bool) {
+func (o *AlertDefQueryFilter) GetNameFilterOk() (*AlertDefNameFilter, bool) {
 	if o == nil || IsNil(o.NameFilter) {
 		return nil, false
 	}
-	return &o.NameFilter, true
+	return o.NameFilter, true
 }
 
 // HasNameFilter returns a boolean if a field has been set.
@@ -247,28 +242,27 @@ func (o *AlertDefQueryFilter) HasNameFilter() bool {
 	return false
 }
 
-// SetNameFilter gets a reference to the given interface{} and assigns it to the NameFilter field.
-func (o *AlertDefQueryFilter) SetNameFilter(v interface{}) {
-	o.NameFilter = v
+// SetNameFilter gets a reference to the given AlertDefNameFilter and assigns it to the NameFilter field.
+func (o *AlertDefQueryFilter) SetNameFilter(v AlertDefNameFilter) {
+	o.NameFilter = &v
 }
 
-// GetPriorityFilter returns the PriorityFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AlertDefQueryFilter) GetPriorityFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetPriorityFilter returns the PriorityFilter field value if set, zero value otherwise.
+func (o *AlertDefQueryFilter) GetPriorityFilter() AlertDefPriorityFilter {
+	if o == nil || IsNil(o.PriorityFilter) {
+		var ret AlertDefPriorityFilter
 		return ret
 	}
-	return o.PriorityFilter
+	return *o.PriorityFilter
 }
 
 // GetPriorityFilterOk returns a tuple with the PriorityFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlertDefQueryFilter) GetPriorityFilterOk() (*interface{}, bool) {
+func (o *AlertDefQueryFilter) GetPriorityFilterOk() (*AlertDefPriorityFilter, bool) {
 	if o == nil || IsNil(o.PriorityFilter) {
 		return nil, false
 	}
-	return &o.PriorityFilter, true
+	return o.PriorityFilter, true
 }
 
 // HasPriorityFilter returns a boolean if a field has been set.
@@ -280,28 +274,27 @@ func (o *AlertDefQueryFilter) HasPriorityFilter() bool {
 	return false
 }
 
-// SetPriorityFilter gets a reference to the given interface{} and assigns it to the PriorityFilter field.
-func (o *AlertDefQueryFilter) SetPriorityFilter(v interface{}) {
-	o.PriorityFilter = v
+// SetPriorityFilter gets a reference to the given AlertDefPriorityFilter and assigns it to the PriorityFilter field.
+func (o *AlertDefQueryFilter) SetPriorityFilter(v AlertDefPriorityFilter) {
+	o.PriorityFilter = &v
 }
 
-// GetStatusFilter returns the StatusFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AlertDefQueryFilter) GetStatusFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetStatusFilter returns the StatusFilter field value if set, zero value otherwise.
+func (o *AlertDefQueryFilter) GetStatusFilter() AlertDefStatusFilter {
+	if o == nil || IsNil(o.StatusFilter) {
+		var ret AlertDefStatusFilter
 		return ret
 	}
-	return o.StatusFilter
+	return *o.StatusFilter
 }
 
 // GetStatusFilterOk returns a tuple with the StatusFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlertDefQueryFilter) GetStatusFilterOk() (*interface{}, bool) {
+func (o *AlertDefQueryFilter) GetStatusFilterOk() (*AlertDefStatusFilter, bool) {
 	if o == nil || IsNil(o.StatusFilter) {
 		return nil, false
 	}
-	return &o.StatusFilter, true
+	return o.StatusFilter, true
 }
 
 // HasStatusFilter returns a boolean if a field has been set.
@@ -313,28 +306,27 @@ func (o *AlertDefQueryFilter) HasStatusFilter() bool {
 	return false
 }
 
-// SetStatusFilter gets a reference to the given interface{} and assigns it to the StatusFilter field.
-func (o *AlertDefQueryFilter) SetStatusFilter(v interface{}) {
-	o.StatusFilter = v
+// SetStatusFilter gets a reference to the given AlertDefStatusFilter and assigns it to the StatusFilter field.
+func (o *AlertDefQueryFilter) SetStatusFilter(v AlertDefStatusFilter) {
+	o.StatusFilter = &v
 }
 
-// GetTypeFilter returns the TypeFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AlertDefQueryFilter) GetTypeFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetTypeFilter returns the TypeFilter field value if set, zero value otherwise.
+func (o *AlertDefQueryFilter) GetTypeFilter() AlertDefTypeFilter {
+	if o == nil || IsNil(o.TypeFilter) {
+		var ret AlertDefTypeFilter
 		return ret
 	}
-	return o.TypeFilter
+	return *o.TypeFilter
 }
 
 // GetTypeFilterOk returns a tuple with the TypeFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlertDefQueryFilter) GetTypeFilterOk() (*interface{}, bool) {
+func (o *AlertDefQueryFilter) GetTypeFilterOk() (*AlertDefTypeFilter, bool) {
 	if o == nil || IsNil(o.TypeFilter) {
 		return nil, false
 	}
-	return &o.TypeFilter, true
+	return o.TypeFilter, true
 }
 
 // HasTypeFilter returns a boolean if a field has been set.
@@ -346,28 +338,27 @@ func (o *AlertDefQueryFilter) HasTypeFilter() bool {
 	return false
 }
 
-// SetTypeFilter gets a reference to the given interface{} and assigns it to the TypeFilter field.
-func (o *AlertDefQueryFilter) SetTypeFilter(v interface{}) {
-	o.TypeFilter = v
+// SetTypeFilter gets a reference to the given AlertDefTypeFilter and assigns it to the TypeFilter field.
+func (o *AlertDefQueryFilter) SetTypeFilter(v AlertDefTypeFilter) {
+	o.TypeFilter = &v
 }
 
-// GetTypeSpecificFilter returns the TypeSpecificFilter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AlertDefQueryFilter) GetTypeSpecificFilter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetTypeSpecificFilter returns the TypeSpecificFilter field value if set, zero value otherwise.
+func (o *AlertDefQueryFilter) GetTypeSpecificFilter() AlertDefTypeSpecificFilter {
+	if o == nil || IsNil(o.TypeSpecificFilter) {
+		var ret AlertDefTypeSpecificFilter
 		return ret
 	}
-	return o.TypeSpecificFilter
+	return *o.TypeSpecificFilter
 }
 
 // GetTypeSpecificFilterOk returns a tuple with the TypeSpecificFilter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AlertDefQueryFilter) GetTypeSpecificFilterOk() (*interface{}, bool) {
+func (o *AlertDefQueryFilter) GetTypeSpecificFilterOk() (*AlertDefTypeSpecificFilter, bool) {
 	if o == nil || IsNil(o.TypeSpecificFilter) {
 		return nil, false
 	}
-	return &o.TypeSpecificFilter, true
+	return o.TypeSpecificFilter, true
 }
 
 // HasTypeSpecificFilter returns a boolean if a field has been set.
@@ -379,13 +370,13 @@ func (o *AlertDefQueryFilter) HasTypeSpecificFilter() bool {
 	return false
 }
 
-// SetTypeSpecificFilter gets a reference to the given interface{} and assigns it to the TypeSpecificFilter field.
-func (o *AlertDefQueryFilter) SetTypeSpecificFilter(v interface{}) {
-	o.TypeSpecificFilter = v
+// SetTypeSpecificFilter gets a reference to the given AlertDefTypeSpecificFilter and assigns it to the TypeSpecificFilter field.
+func (o *AlertDefQueryFilter) SetTypeSpecificFilter(v AlertDefTypeSpecificFilter) {
+	o.TypeSpecificFilter = &v
 }
 
 func (o AlertDefQueryFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -394,34 +385,34 @@ func (o AlertDefQueryFilter) MarshalJSON() ([]byte, error) {
 
 func (o AlertDefQueryFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.EnabledFilter != nil {
+	if !IsNil(o.EnabledFilter) {
 		toSerialize["enabledFilter"] = o.EnabledFilter
 	}
-	if o.EntityLabelsFilter != nil {
+	if !IsNil(o.EntityLabelsFilter) {
 		toSerialize["entityLabelsFilter"] = o.EntityLabelsFilter
 	}
-	if o.IdFilter != nil {
+	if !IsNil(o.IdFilter) {
 		toSerialize["idFilter"] = o.IdFilter
 	}
-	if o.LastTriggeredTimeRangeFilter != nil {
+	if !IsNil(o.LastTriggeredTimeRangeFilter) {
 		toSerialize["lastTriggeredTimeRangeFilter"] = o.LastTriggeredTimeRangeFilter
 	}
-	if o.ModifiedTimeRangeFilter != nil {
+	if !IsNil(o.ModifiedTimeRangeFilter) {
 		toSerialize["modifiedTimeRangeFilter"] = o.ModifiedTimeRangeFilter
 	}
-	if o.NameFilter != nil {
+	if !IsNil(o.NameFilter) {
 		toSerialize["nameFilter"] = o.NameFilter
 	}
-	if o.PriorityFilter != nil {
+	if !IsNil(o.PriorityFilter) {
 		toSerialize["priorityFilter"] = o.PriorityFilter
 	}
-	if o.StatusFilter != nil {
+	if !IsNil(o.StatusFilter) {
 		toSerialize["statusFilter"] = o.StatusFilter
 	}
-	if o.TypeFilter != nil {
+	if !IsNil(o.TypeFilter) {
 		toSerialize["typeFilter"] = o.TypeFilter
 	}
-	if o.TypeSpecificFilter != nil {
+	if !IsNil(o.TypeSpecificFilter) {
 		toSerialize["typeSpecificFilter"] = o.TypeSpecificFilter
 	}
 
@@ -458,6 +449,7 @@ func (o *AlertDefQueryFilter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "typeFilter")
 		delete(additionalProperties, "typeSpecificFilter")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -498,4 +490,3 @@ func (v *NullableAlertDefQueryFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

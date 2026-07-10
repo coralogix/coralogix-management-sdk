@@ -22,8 +22,9 @@ var _ MappedNullable = &GetDashboardFolderResponse{}
 
 // GetDashboardFolderResponse Response containing the details of a dashboard folder.
 type GetDashboardFolderResponse struct {
-	Folder *DashboardFolder `json:"folder,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Folder                            *DashboardFolder `json:"folder,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetDashboardFolderResponse GetDashboardFolderResponse
@@ -78,7 +79,7 @@ func (o *GetDashboardFolderResponse) SetFolder(v DashboardFolder) {
 }
 
 func (o GetDashboardFolderResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *GetDashboardFolderResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "folder")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableGetDashboardFolderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -13,164 +13,224 @@ package slos_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// SloExecutionResponse - struct for SloExecutionResponse
+// checks if the SloExecutionResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SloExecutionResponse{}
+
+// SloExecutionResponse Response for an executed SLO operation.
 type SloExecutionResponse struct {
-	SloExecutionResponseCreateSloResponse *SloExecutionResponseCreateSloResponse
-	SloExecutionResponseDeleteSloResponse *SloExecutionResponseDeleteSloResponse
-	SloExecutionResponseReplaceSloResponse *SloExecutionResponseReplaceSloResponse
+	CreateSloResponse                 *CreateSloResponse  `json:"createSloResponse,omitempty"`
+	DeleteSloResponse                 *DeleteSloResponse  `json:"deleteSloResponse,omitempty"`
+	ReplaceSloResponse                *ReplaceSloResponse `json:"replaceSloResponse,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// SloExecutionResponseCreateSloResponseAsSloExecutionResponse is a convenience function that returns SloExecutionResponseCreateSloResponse wrapped in SloExecutionResponse
-func SloExecutionResponseCreateSloResponseAsSloExecutionResponse(v *SloExecutionResponseCreateSloResponse) SloExecutionResponse {
-	return SloExecutionResponse{
-		SloExecutionResponseCreateSloResponse: v,
+type _SloExecutionResponse SloExecutionResponse
+
+// NewSloExecutionResponse instantiates a new SloExecutionResponse object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSloExecutionResponse() *SloExecutionResponse {
+	this := SloExecutionResponse{}
+	return &this
+}
+
+// NewSloExecutionResponseWithDefaults instantiates a new SloExecutionResponse object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewSloExecutionResponseWithDefaults() *SloExecutionResponse {
+	this := SloExecutionResponse{}
+	return &this
+}
+
+// GetCreateSloResponse returns the CreateSloResponse field value if set, zero value otherwise.
+func (o *SloExecutionResponse) GetCreateSloResponse() CreateSloResponse {
+	if o == nil || IsNil(o.CreateSloResponse) {
+		var ret CreateSloResponse
+		return ret
 	}
+	return *o.CreateSloResponse
 }
 
-// SloExecutionResponseDeleteSloResponseAsSloExecutionResponse is a convenience function that returns SloExecutionResponseDeleteSloResponse wrapped in SloExecutionResponse
-func SloExecutionResponseDeleteSloResponseAsSloExecutionResponse(v *SloExecutionResponseDeleteSloResponse) SloExecutionResponse {
-	return SloExecutionResponse{
-		SloExecutionResponseDeleteSloResponse: v,
+// GetCreateSloResponseOk returns a tuple with the CreateSloResponse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloExecutionResponse) GetCreateSloResponseOk() (*CreateSloResponse, bool) {
+	if o == nil || IsNil(o.CreateSloResponse) {
+		return nil, false
 	}
+	return o.CreateSloResponse, true
 }
 
-// SloExecutionResponseReplaceSloResponseAsSloExecutionResponse is a convenience function that returns SloExecutionResponseReplaceSloResponse wrapped in SloExecutionResponse
-func SloExecutionResponseReplaceSloResponseAsSloExecutionResponse(v *SloExecutionResponseReplaceSloResponse) SloExecutionResponse {
-	return SloExecutionResponse{
-		SloExecutionResponseReplaceSloResponse: v,
+// HasCreateSloResponse returns a boolean if a field has been set.
+func (o *SloExecutionResponse) HasCreateSloResponse() bool {
+	if o != nil && !IsNil(o.CreateSloResponse) {
+		return true
 	}
+
+	return false
 }
 
+// SetCreateSloResponse gets a reference to the given CreateSloResponse and assigns it to the CreateSloResponse field.
+func (o *SloExecutionResponse) SetCreateSloResponse(v CreateSloResponse) {
+	o.CreateSloResponse = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *SloExecutionResponse) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into SloExecutionResponseCreateSloResponse
-	err = json.Unmarshal(data, &dst.SloExecutionResponseCreateSloResponse)
-	if err == nil {
-		jsonSloExecutionResponseCreateSloResponse, _ := json.Marshal(dst.SloExecutionResponseCreateSloResponse)
-		if string(jsonSloExecutionResponseCreateSloResponse) == "{}" { // empty struct
-			dst.SloExecutionResponseCreateSloResponse = nil
-		} else {
-			if err = validator.Validate(dst.SloExecutionResponseCreateSloResponse); err != nil {
-				dst.SloExecutionResponseCreateSloResponse = nil
-			} else {
-				match++
-			}
+// GetDeleteSloResponse returns the DeleteSloResponse field value if set, zero value otherwise.
+func (o *SloExecutionResponse) GetDeleteSloResponse() DeleteSloResponse {
+	if o == nil || IsNil(o.DeleteSloResponse) {
+		var ret DeleteSloResponse
+		return ret
+	}
+	return *o.DeleteSloResponse
+}
+
+// GetDeleteSloResponseOk returns a tuple with the DeleteSloResponse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloExecutionResponse) GetDeleteSloResponseOk() (*DeleteSloResponse, bool) {
+	if o == nil || IsNil(o.DeleteSloResponse) {
+		return nil, false
+	}
+	return o.DeleteSloResponse, true
+}
+
+// HasDeleteSloResponse returns a boolean if a field has been set.
+func (o *SloExecutionResponse) HasDeleteSloResponse() bool {
+	if o != nil && !IsNil(o.DeleteSloResponse) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleteSloResponse gets a reference to the given DeleteSloResponse and assigns it to the DeleteSloResponse field.
+func (o *SloExecutionResponse) SetDeleteSloResponse(v DeleteSloResponse) {
+	o.DeleteSloResponse = &v
+}
+
+// GetReplaceSloResponse returns the ReplaceSloResponse field value if set, zero value otherwise.
+func (o *SloExecutionResponse) GetReplaceSloResponse() ReplaceSloResponse {
+	if o == nil || IsNil(o.ReplaceSloResponse) {
+		var ret ReplaceSloResponse
+		return ret
+	}
+	return *o.ReplaceSloResponse
+}
+
+// GetReplaceSloResponseOk returns a tuple with the ReplaceSloResponse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloExecutionResponse) GetReplaceSloResponseOk() (*ReplaceSloResponse, bool) {
+	if o == nil || IsNil(o.ReplaceSloResponse) {
+		return nil, false
+	}
+	return o.ReplaceSloResponse, true
+}
+
+// HasReplaceSloResponse returns a boolean if a field has been set.
+func (o *SloExecutionResponse) HasReplaceSloResponse() bool {
+	if o != nil && !IsNil(o.ReplaceSloResponse) {
+		return true
+	}
+
+	return false
+}
+
+// SetReplaceSloResponse gets a reference to the given ReplaceSloResponse and assigns it to the ReplaceSloResponse field.
+func (o *SloExecutionResponse) SetReplaceSloResponse(v ReplaceSloResponse) {
+	o.ReplaceSloResponse = &v
+}
+
+func (o SloExecutionResponse) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SloExecutionResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CreateSloResponse) {
+		toSerialize["createSloResponse"] = o.CreateSloResponse
+	}
+	if !IsNil(o.DeleteSloResponse) {
+		toSerialize["deleteSloResponse"] = o.DeleteSloResponse
+	}
+	if !IsNil(o.ReplaceSloResponse) {
+		toSerialize["replaceSloResponse"] = o.ReplaceSloResponse
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["createSloResponse"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["replaceSloResponse"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["deleteSloResponse"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [createSloResponse, replaceSloResponse, deleteSloResponse] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["createSloResponse"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field createSloResponse must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["replaceSloResponse"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field replaceSloResponse must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["deleteSloResponse"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field deleteSloResponse must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *SloExecutionResponse) UnmarshalJSON(data []byte) (err error) {
+	varSloExecutionResponse := _SloExecutionResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloExecutionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloExecutionResponse(varSloExecutionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["createSloResponse"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloExecutionResponseCreateSloResponse = nil
-	}
-
-	// try to unmarshal data into SloExecutionResponseDeleteSloResponse
-	err = json.Unmarshal(data, &dst.SloExecutionResponseDeleteSloResponse)
-	if err == nil {
-		jsonSloExecutionResponseDeleteSloResponse, _ := json.Marshal(dst.SloExecutionResponseDeleteSloResponse)
-		if string(jsonSloExecutionResponseDeleteSloResponse) == "{}" { // empty struct
-			dst.SloExecutionResponseDeleteSloResponse = nil
-		} else {
-			if err = validator.Validate(dst.SloExecutionResponseDeleteSloResponse); err != nil {
-				dst.SloExecutionResponseDeleteSloResponse = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["replaceSloResponse"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloExecutionResponseDeleteSloResponse = nil
-	}
-
-	// try to unmarshal data into SloExecutionResponseReplaceSloResponse
-	err = json.Unmarshal(data, &dst.SloExecutionResponseReplaceSloResponse)
-	if err == nil {
-		jsonSloExecutionResponseReplaceSloResponse, _ := json.Marshal(dst.SloExecutionResponseReplaceSloResponse)
-		if string(jsonSloExecutionResponseReplaceSloResponse) == "{}" { // empty struct
-			dst.SloExecutionResponseReplaceSloResponse = nil
-		} else {
-			if err = validator.Validate(dst.SloExecutionResponseReplaceSloResponse); err != nil {
-				dst.SloExecutionResponseReplaceSloResponse = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["deleteSloResponse"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloExecutionResponseReplaceSloResponse = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [createSloResponse, replaceSloResponse, deleteSloResponse] may be set"}
+		}
+
+		delete(additionalProperties, "createSloResponse")
+		delete(additionalProperties, "deleteSloResponse")
+		delete(additionalProperties, "replaceSloResponse")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.SloExecutionResponseCreateSloResponse = nil
-		dst.SloExecutionResponseDeleteSloResponse = nil
-		dst.SloExecutionResponseReplaceSloResponse = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(SloExecutionResponse)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src SloExecutionResponse) MarshalJSON() ([]byte, error) {
-	if src.SloExecutionResponseCreateSloResponse != nil {
-		return json.Marshal(&src.SloExecutionResponseCreateSloResponse)
-	}
-
-	if src.SloExecutionResponseDeleteSloResponse != nil {
-		return json.Marshal(&src.SloExecutionResponseDeleteSloResponse)
-	}
-
-	if src.SloExecutionResponseReplaceSloResponse != nil {
-		return json.Marshal(&src.SloExecutionResponseReplaceSloResponse)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *SloExecutionResponse) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.SloExecutionResponseCreateSloResponse != nil {
-		return obj.SloExecutionResponseCreateSloResponse
-	}
-
-	if obj.SloExecutionResponseDeleteSloResponse != nil {
-		return obj.SloExecutionResponseDeleteSloResponse
-	}
-
-	if obj.SloExecutionResponseReplaceSloResponse != nil {
-		return obj.SloExecutionResponseReplaceSloResponse
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj SloExecutionResponse) GetActualInstanceValue() (interface{}) {
-	if obj.SloExecutionResponseCreateSloResponse != nil {
-		return *obj.SloExecutionResponseCreateSloResponse
-	}
-
-	if obj.SloExecutionResponseDeleteSloResponse != nil {
-		return *obj.SloExecutionResponseDeleteSloResponse
-	}
-
-	if obj.SloExecutionResponseReplaceSloResponse != nil {
-		return *obj.SloExecutionResponseReplaceSloResponse
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSloExecutionResponse struct {
@@ -208,4 +268,3 @@ func (v *NullableSloExecutionResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -13,126 +13,704 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Heatmap - struct for Heatmap
+// checks if the Heatmap type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Heatmap{}
+
+// Heatmap Heatmap.
 type Heatmap struct {
-	HeatmapColorRange *HeatmapColorRange
-	HeatmapPreset *HeatmapPreset
+	// Whether to render numeric value with abbreviation
+	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	// Optional number indicating the max value for gradient color axis. Automatically calculated from data if not provided.
+	ColorAxisMax *float32 `json:"colorAxisMax,omitempty"`
+	// Optional number indicating the lowest value for gradient color axis. Automatically calculated from data if not provided.
+	ColorAxisMin *float32           `json:"colorAxisMin,omitempty"`
+	ColorRange   *ColorGradientType `json:"colorRange,omitempty"`
+	// Custom unit (requires to have unit field as 'custom' to take effect)
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Number indicating the decimal precision of the numeric values, within range 0-15
+	DecimalPrecision    *int32                      `json:"decimalPrecision,omitempty"`
+	HistogramBucketUnit *HeatmapHistogramBucketUnit `json:"histogramBucketUnit,omitempty"`
+	Preset              *HeatmapColorPreset         `json:"preset,omitempty"`
+	ScaleType           *ScaleType                  `json:"scaleType,omitempty"`
+	// Whether to render numeric values inside the heatmap tiles
+	ShowNumbers *bool             `json:"showNumbers,omitempty"`
+	Tooltip     *HeatmapTooltip   `json:"tooltip,omitempty"`
+	Unit        *CommonUnit       `json:"unit,omitempty"`
+	ValueField  *ObservationField `json:"valueField,omitempty"`
+	// List of observation fields used as x-axis categories in the heatmap grid.
+	XAxisFields     []ObservationField `json:"xAxisFields,omitempty"`
+	XAxisTimeFormat *XAxisTimeFormat   `json:"xAxisTimeFormat,omitempty"`
+	// List of observation fields used as y-axis categories in the heatmap grid.
+	YAxisFields                       []ObservationField `json:"yAxisFields,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// HeatmapColorRangeAsHeatmap is a convenience function that returns HeatmapColorRange wrapped in Heatmap
-func HeatmapColorRangeAsHeatmap(v *HeatmapColorRange) Heatmap {
-	return Heatmap{
-		HeatmapColorRange: v,
+type _Heatmap Heatmap
+
+// NewHeatmap instantiates a new Heatmap object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewHeatmap() *Heatmap {
+	this := Heatmap{}
+	return &this
+}
+
+// NewHeatmapWithDefaults instantiates a new Heatmap object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewHeatmapWithDefaults() *Heatmap {
+	this := Heatmap{}
+	return &this
+}
+
+// GetAllowAbbreviation returns the AllowAbbreviation field value if set, zero value otherwise.
+func (o *Heatmap) GetAllowAbbreviation() bool {
+	if o == nil || IsNil(o.AllowAbbreviation) {
+		var ret bool
+		return ret
 	}
+	return *o.AllowAbbreviation
 }
 
-// HeatmapPresetAsHeatmap is a convenience function that returns HeatmapPreset wrapped in Heatmap
-func HeatmapPresetAsHeatmap(v *HeatmapPreset) Heatmap {
-	return Heatmap{
-		HeatmapPreset: v,
+// GetAllowAbbreviationOk returns a tuple with the AllowAbbreviation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetAllowAbbreviationOk() (*bool, bool) {
+	if o == nil || IsNil(o.AllowAbbreviation) {
+		return nil, false
 	}
+	return o.AllowAbbreviation, true
 }
 
+// HasAllowAbbreviation returns a boolean if a field has been set.
+func (o *Heatmap) HasAllowAbbreviation() bool {
+	if o != nil && !IsNil(o.AllowAbbreviation) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Heatmap) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into HeatmapColorRange
-	err = json.Unmarshal(data, &dst.HeatmapColorRange)
-	if err == nil {
-		jsonHeatmapColorRange, _ := json.Marshal(dst.HeatmapColorRange)
-		if string(jsonHeatmapColorRange) == "{}" { // empty struct
-			dst.HeatmapColorRange = nil
-		} else {
-			if err = validator.Validate(dst.HeatmapColorRange); err != nil {
-				dst.HeatmapColorRange = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAllowAbbreviation gets a reference to the given bool and assigns it to the AllowAbbreviation field.
+func (o *Heatmap) SetAllowAbbreviation(v bool) {
+	o.AllowAbbreviation = &v
+}
+
+// GetColorAxisMax returns the ColorAxisMax field value if set, zero value otherwise.
+func (o *Heatmap) GetColorAxisMax() float32 {
+	if o == nil || IsNil(o.ColorAxisMax) {
+		var ret float32
+		return ret
+	}
+	return *o.ColorAxisMax
+}
+
+// GetColorAxisMaxOk returns a tuple with the ColorAxisMax field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetColorAxisMaxOk() (*float32, bool) {
+	if o == nil || IsNil(o.ColorAxisMax) {
+		return nil, false
+	}
+	return o.ColorAxisMax, true
+}
+
+// HasColorAxisMax returns a boolean if a field has been set.
+func (o *Heatmap) HasColorAxisMax() bool {
+	if o != nil && !IsNil(o.ColorAxisMax) {
+		return true
+	}
+
+	return false
+}
+
+// SetColorAxisMax gets a reference to the given float32 and assigns it to the ColorAxisMax field.
+func (o *Heatmap) SetColorAxisMax(v float32) {
+	o.ColorAxisMax = &v
+}
+
+// GetColorAxisMin returns the ColorAxisMin field value if set, zero value otherwise.
+func (o *Heatmap) GetColorAxisMin() float32 {
+	if o == nil || IsNil(o.ColorAxisMin) {
+		var ret float32
+		return ret
+	}
+	return *o.ColorAxisMin
+}
+
+// GetColorAxisMinOk returns a tuple with the ColorAxisMin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetColorAxisMinOk() (*float32, bool) {
+	if o == nil || IsNil(o.ColorAxisMin) {
+		return nil, false
+	}
+	return o.ColorAxisMin, true
+}
+
+// HasColorAxisMin returns a boolean if a field has been set.
+func (o *Heatmap) HasColorAxisMin() bool {
+	if o != nil && !IsNil(o.ColorAxisMin) {
+		return true
+	}
+
+	return false
+}
+
+// SetColorAxisMin gets a reference to the given float32 and assigns it to the ColorAxisMin field.
+func (o *Heatmap) SetColorAxisMin(v float32) {
+	o.ColorAxisMin = &v
+}
+
+// GetColorRange returns the ColorRange field value if set, zero value otherwise.
+func (o *Heatmap) GetColorRange() ColorGradientType {
+	if o == nil || IsNil(o.ColorRange) {
+		var ret ColorGradientType
+		return ret
+	}
+	return *o.ColorRange
+}
+
+// GetColorRangeOk returns a tuple with the ColorRange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetColorRangeOk() (*ColorGradientType, bool) {
+	if o == nil || IsNil(o.ColorRange) {
+		return nil, false
+	}
+	return o.ColorRange, true
+}
+
+// HasColorRange returns a boolean if a field has been set.
+func (o *Heatmap) HasColorRange() bool {
+	if o != nil && !IsNil(o.ColorRange) {
+		return true
+	}
+
+	return false
+}
+
+// SetColorRange gets a reference to the given ColorGradientType and assigns it to the ColorRange field.
+func (o *Heatmap) SetColorRange(v ColorGradientType) {
+	o.ColorRange = &v
+}
+
+// GetCustomUnit returns the CustomUnit field value if set, zero value otherwise.
+func (o *Heatmap) GetCustomUnit() string {
+	if o == nil || IsNil(o.CustomUnit) {
+		var ret string
+		return ret
+	}
+	return *o.CustomUnit
+}
+
+// GetCustomUnitOk returns a tuple with the CustomUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetCustomUnitOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomUnit) {
+		return nil, false
+	}
+	return o.CustomUnit, true
+}
+
+// HasCustomUnit returns a boolean if a field has been set.
+func (o *Heatmap) HasCustomUnit() bool {
+	if o != nil && !IsNil(o.CustomUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomUnit gets a reference to the given string and assigns it to the CustomUnit field.
+func (o *Heatmap) SetCustomUnit(v string) {
+	o.CustomUnit = &v
+}
+
+// GetDecimalPrecision returns the DecimalPrecision field value if set, zero value otherwise.
+func (o *Heatmap) GetDecimalPrecision() int32 {
+	if o == nil || IsNil(o.DecimalPrecision) {
+		var ret int32
+		return ret
+	}
+	return *o.DecimalPrecision
+}
+
+// GetDecimalPrecisionOk returns a tuple with the DecimalPrecision field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetDecimalPrecisionOk() (*int32, bool) {
+	if o == nil || IsNil(o.DecimalPrecision) {
+		return nil, false
+	}
+	return o.DecimalPrecision, true
+}
+
+// HasDecimalPrecision returns a boolean if a field has been set.
+func (o *Heatmap) HasDecimalPrecision() bool {
+	if o != nil && !IsNil(o.DecimalPrecision) {
+		return true
+	}
+
+	return false
+}
+
+// SetDecimalPrecision gets a reference to the given int32 and assigns it to the DecimalPrecision field.
+func (o *Heatmap) SetDecimalPrecision(v int32) {
+	o.DecimalPrecision = &v
+}
+
+// GetHistogramBucketUnit returns the HistogramBucketUnit field value if set, zero value otherwise.
+func (o *Heatmap) GetHistogramBucketUnit() HeatmapHistogramBucketUnit {
+	if o == nil || IsNil(o.HistogramBucketUnit) {
+		var ret HeatmapHistogramBucketUnit
+		return ret
+	}
+	return *o.HistogramBucketUnit
+}
+
+// GetHistogramBucketUnitOk returns a tuple with the HistogramBucketUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetHistogramBucketUnitOk() (*HeatmapHistogramBucketUnit, bool) {
+	if o == nil || IsNil(o.HistogramBucketUnit) {
+		return nil, false
+	}
+	return o.HistogramBucketUnit, true
+}
+
+// HasHistogramBucketUnit returns a boolean if a field has been set.
+func (o *Heatmap) HasHistogramBucketUnit() bool {
+	if o != nil && !IsNil(o.HistogramBucketUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetHistogramBucketUnit gets a reference to the given HeatmapHistogramBucketUnit and assigns it to the HistogramBucketUnit field.
+func (o *Heatmap) SetHistogramBucketUnit(v HeatmapHistogramBucketUnit) {
+	o.HistogramBucketUnit = &v
+}
+
+// GetPreset returns the Preset field value if set, zero value otherwise.
+func (o *Heatmap) GetPreset() HeatmapColorPreset {
+	if o == nil || IsNil(o.Preset) {
+		var ret HeatmapColorPreset
+		return ret
+	}
+	return *o.Preset
+}
+
+// GetPresetOk returns a tuple with the Preset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetPresetOk() (*HeatmapColorPreset, bool) {
+	if o == nil || IsNil(o.Preset) {
+		return nil, false
+	}
+	return o.Preset, true
+}
+
+// HasPreset returns a boolean if a field has been set.
+func (o *Heatmap) HasPreset() bool {
+	if o != nil && !IsNil(o.Preset) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreset gets a reference to the given HeatmapColorPreset and assigns it to the Preset field.
+func (o *Heatmap) SetPreset(v HeatmapColorPreset) {
+	o.Preset = &v
+}
+
+// GetScaleType returns the ScaleType field value if set, zero value otherwise.
+func (o *Heatmap) GetScaleType() ScaleType {
+	if o == nil || IsNil(o.ScaleType) {
+		var ret ScaleType
+		return ret
+	}
+	return *o.ScaleType
+}
+
+// GetScaleTypeOk returns a tuple with the ScaleType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetScaleTypeOk() (*ScaleType, bool) {
+	if o == nil || IsNil(o.ScaleType) {
+		return nil, false
+	}
+	return o.ScaleType, true
+}
+
+// HasScaleType returns a boolean if a field has been set.
+func (o *Heatmap) HasScaleType() bool {
+	if o != nil && !IsNil(o.ScaleType) {
+		return true
+	}
+
+	return false
+}
+
+// SetScaleType gets a reference to the given ScaleType and assigns it to the ScaleType field.
+func (o *Heatmap) SetScaleType(v ScaleType) {
+	o.ScaleType = &v
+}
+
+// GetShowNumbers returns the ShowNumbers field value if set, zero value otherwise.
+func (o *Heatmap) GetShowNumbers() bool {
+	if o == nil || IsNil(o.ShowNumbers) {
+		var ret bool
+		return ret
+	}
+	return *o.ShowNumbers
+}
+
+// GetShowNumbersOk returns a tuple with the ShowNumbers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetShowNumbersOk() (*bool, bool) {
+	if o == nil || IsNil(o.ShowNumbers) {
+		return nil, false
+	}
+	return o.ShowNumbers, true
+}
+
+// HasShowNumbers returns a boolean if a field has been set.
+func (o *Heatmap) HasShowNumbers() bool {
+	if o != nil && !IsNil(o.ShowNumbers) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowNumbers gets a reference to the given bool and assigns it to the ShowNumbers field.
+func (o *Heatmap) SetShowNumbers(v bool) {
+	o.ShowNumbers = &v
+}
+
+// GetTooltip returns the Tooltip field value if set, zero value otherwise.
+func (o *Heatmap) GetTooltip() HeatmapTooltip {
+	if o == nil || IsNil(o.Tooltip) {
+		var ret HeatmapTooltip
+		return ret
+	}
+	return *o.Tooltip
+}
+
+// GetTooltipOk returns a tuple with the Tooltip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetTooltipOk() (*HeatmapTooltip, bool) {
+	if o == nil || IsNil(o.Tooltip) {
+		return nil, false
+	}
+	return o.Tooltip, true
+}
+
+// HasTooltip returns a boolean if a field has been set.
+func (o *Heatmap) HasTooltip() bool {
+	if o != nil && !IsNil(o.Tooltip) {
+		return true
+	}
+
+	return false
+}
+
+// SetTooltip gets a reference to the given HeatmapTooltip and assigns it to the Tooltip field.
+func (o *Heatmap) SetTooltip(v HeatmapTooltip) {
+	o.Tooltip = &v
+}
+
+// GetUnit returns the Unit field value if set, zero value otherwise.
+func (o *Heatmap) GetUnit() CommonUnit {
+	if o == nil || IsNil(o.Unit) {
+		var ret CommonUnit
+		return ret
+	}
+	return *o.Unit
+}
+
+// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetUnitOk() (*CommonUnit, bool) {
+	if o == nil || IsNil(o.Unit) {
+		return nil, false
+	}
+	return o.Unit, true
+}
+
+// HasUnit returns a boolean if a field has been set.
+func (o *Heatmap) HasUnit() bool {
+	if o != nil && !IsNil(o.Unit) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnit gets a reference to the given CommonUnit and assigns it to the Unit field.
+func (o *Heatmap) SetUnit(v CommonUnit) {
+	o.Unit = &v
+}
+
+// GetValueField returns the ValueField field value if set, zero value otherwise.
+func (o *Heatmap) GetValueField() ObservationField {
+	if o == nil || IsNil(o.ValueField) {
+		var ret ObservationField
+		return ret
+	}
+	return *o.ValueField
+}
+
+// GetValueFieldOk returns a tuple with the ValueField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetValueFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.ValueField) {
+		return nil, false
+	}
+	return o.ValueField, true
+}
+
+// HasValueField returns a boolean if a field has been set.
+func (o *Heatmap) HasValueField() bool {
+	if o != nil && !IsNil(o.ValueField) {
+		return true
+	}
+
+	return false
+}
+
+// SetValueField gets a reference to the given ObservationField and assigns it to the ValueField field.
+func (o *Heatmap) SetValueField(v ObservationField) {
+	o.ValueField = &v
+}
+
+// GetXAxisFields returns the XAxisFields field value if set, zero value otherwise.
+func (o *Heatmap) GetXAxisFields() []ObservationField {
+	if o == nil || IsNil(o.XAxisFields) {
+		var ret []ObservationField
+		return ret
+	}
+	return o.XAxisFields
+}
+
+// GetXAxisFieldsOk returns a tuple with the XAxisFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetXAxisFieldsOk() ([]ObservationField, bool) {
+	if o == nil || IsNil(o.XAxisFields) {
+		return nil, false
+	}
+	return o.XAxisFields, true
+}
+
+// HasXAxisFields returns a boolean if a field has been set.
+func (o *Heatmap) HasXAxisFields() bool {
+	if o != nil && !IsNil(o.XAxisFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetXAxisFields gets a reference to the given []ObservationField and assigns it to the XAxisFields field.
+func (o *Heatmap) SetXAxisFields(v []ObservationField) {
+	o.XAxisFields = v
+}
+
+// GetXAxisTimeFormat returns the XAxisTimeFormat field value if set, zero value otherwise.
+func (o *Heatmap) GetXAxisTimeFormat() XAxisTimeFormat {
+	if o == nil || IsNil(o.XAxisTimeFormat) {
+		var ret XAxisTimeFormat
+		return ret
+	}
+	return *o.XAxisTimeFormat
+}
+
+// GetXAxisTimeFormatOk returns a tuple with the XAxisTimeFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetXAxisTimeFormatOk() (*XAxisTimeFormat, bool) {
+	if o == nil || IsNil(o.XAxisTimeFormat) {
+		return nil, false
+	}
+	return o.XAxisTimeFormat, true
+}
+
+// HasXAxisTimeFormat returns a boolean if a field has been set.
+func (o *Heatmap) HasXAxisTimeFormat() bool {
+	if o != nil && !IsNil(o.XAxisTimeFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetXAxisTimeFormat gets a reference to the given XAxisTimeFormat and assigns it to the XAxisTimeFormat field.
+func (o *Heatmap) SetXAxisTimeFormat(v XAxisTimeFormat) {
+	o.XAxisTimeFormat = &v
+}
+
+// GetYAxisFields returns the YAxisFields field value if set, zero value otherwise.
+func (o *Heatmap) GetYAxisFields() []ObservationField {
+	if o == nil || IsNil(o.YAxisFields) {
+		var ret []ObservationField
+		return ret
+	}
+	return o.YAxisFields
+}
+
+// GetYAxisFieldsOk returns a tuple with the YAxisFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Heatmap) GetYAxisFieldsOk() ([]ObservationField, bool) {
+	if o == nil || IsNil(o.YAxisFields) {
+		return nil, false
+	}
+	return o.YAxisFields, true
+}
+
+// HasYAxisFields returns a boolean if a field has been set.
+func (o *Heatmap) HasYAxisFields() bool {
+	if o != nil && !IsNil(o.YAxisFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetYAxisFields gets a reference to the given []ObservationField and assigns it to the YAxisFields field.
+func (o *Heatmap) SetYAxisFields(v []ObservationField) {
+	o.YAxisFields = v
+}
+
+func (o Heatmap) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Heatmap) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AllowAbbreviation) {
+		toSerialize["allowAbbreviation"] = o.AllowAbbreviation
+	}
+	if !IsNil(o.ColorAxisMax) {
+		toSerialize["colorAxisMax"] = o.ColorAxisMax
+	}
+	if !IsNil(o.ColorAxisMin) {
+		toSerialize["colorAxisMin"] = o.ColorAxisMin
+	}
+	if !IsNil(o.ColorRange) {
+		toSerialize["colorRange"] = o.ColorRange
+	}
+	if !IsNil(o.CustomUnit) {
+		toSerialize["customUnit"] = o.CustomUnit
+	}
+	if !IsNil(o.DecimalPrecision) {
+		toSerialize["decimalPrecision"] = o.DecimalPrecision
+	}
+	if !IsNil(o.HistogramBucketUnit) {
+		toSerialize["histogramBucketUnit"] = o.HistogramBucketUnit
+	}
+	if !IsNil(o.Preset) {
+		toSerialize["preset"] = o.Preset
+	}
+	if !IsNil(o.ScaleType) {
+		toSerialize["scaleType"] = o.ScaleType
+	}
+	if !IsNil(o.ShowNumbers) {
+		toSerialize["showNumbers"] = o.ShowNumbers
+	}
+	if !IsNil(o.Tooltip) {
+		toSerialize["tooltip"] = o.Tooltip
+	}
+	if !IsNil(o.Unit) {
+		toSerialize["unit"] = o.Unit
+	}
+	if !IsNil(o.ValueField) {
+		toSerialize["valueField"] = o.ValueField
+	}
+	if !IsNil(o.XAxisFields) {
+		toSerialize["xAxisFields"] = o.XAxisFields
+	}
+	if !IsNil(o.XAxisTimeFormat) {
+		toSerialize["xAxisTimeFormat"] = o.XAxisTimeFormat
+	}
+	if !IsNil(o.YAxisFields) {
+		toSerialize["yAxisFields"] = o.YAxisFields
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["preset"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["colorRange"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [preset, colorRange] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["preset"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field preset must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["colorRange"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field colorRange must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Heatmap) UnmarshalJSON(data []byte) (err error) {
+	varHeatmap := _Heatmap{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHeatmap)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Heatmap(varHeatmap)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["preset"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HeatmapColorRange = nil
-	}
-
-	// try to unmarshal data into HeatmapPreset
-	err = json.Unmarshal(data, &dst.HeatmapPreset)
-	if err == nil {
-		jsonHeatmapPreset, _ := json.Marshal(dst.HeatmapPreset)
-		if string(jsonHeatmapPreset) == "{}" { // empty struct
-			dst.HeatmapPreset = nil
-		} else {
-			if err = validator.Validate(dst.HeatmapPreset); err != nil {
-				dst.HeatmapPreset = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["colorRange"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HeatmapPreset = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [preset, colorRange] may be set"}
+		}
+
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "colorAxisMax")
+		delete(additionalProperties, "colorAxisMin")
+		delete(additionalProperties, "colorRange")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "histogramBucketUnit")
+		delete(additionalProperties, "preset")
+		delete(additionalProperties, "scaleType")
+		delete(additionalProperties, "showNumbers")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "valueField")
+		delete(additionalProperties, "xAxisFields")
+		delete(additionalProperties, "xAxisTimeFormat")
+		delete(additionalProperties, "yAxisFields")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.HeatmapColorRange = nil
-		dst.HeatmapPreset = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Heatmap)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Heatmap) MarshalJSON() ([]byte, error) {
-	if src.HeatmapColorRange != nil {
-		return json.Marshal(&src.HeatmapColorRange)
-	}
-
-	if src.HeatmapPreset != nil {
-		return json.Marshal(&src.HeatmapPreset)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Heatmap) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.HeatmapColorRange != nil {
-		return obj.HeatmapColorRange
-	}
-
-	if obj.HeatmapPreset != nil {
-		return obj.HeatmapPreset
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Heatmap) GetActualInstanceValue() (interface{}) {
-	if obj.HeatmapColorRange != nil {
-		return *obj.HeatmapColorRange
-	}
-
-	if obj.HeatmapPreset != nil {
-		return *obj.HeatmapPreset
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableHeatmap struct {
@@ -170,4 +748,3 @@ func (v *NullableHeatmap) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -31,7 +31,7 @@ type Integration struct {
 	// Icon identifier.
 	Icon *string `json:"icon,omitempty"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id              *string            `json:"id,omitempty"`
 	IntegrationType *V1IntegrationType `json:"integrationType,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty"`
@@ -40,8 +40,9 @@ type Integration struct {
 	// List of tags.
 	Tags []string `json:"tags,omitempty"`
 	// The versions.
-	Versions []string `json:"versions,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Versions                          []string `json:"versions,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _Integration Integration
@@ -384,7 +385,7 @@ func (o *Integration) SetVersions(v []string) {
 }
 
 func (o Integration) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -457,6 +458,7 @@ func (o *Integration) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "versions")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -497,4 +499,3 @@ func (v *NullableIntegration) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

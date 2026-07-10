@@ -23,8 +23,8 @@ var _ MappedNullable = &GetAllExtensionsResponseExtension{}
 // GetAllExtensionsResponseExtension struct for GetAllExtensionsResponseExtension
 type GetAllExtensionsResponseExtension struct {
 	// The dark mode image.
-	DarkModeImage *string `json:"darkModeImage,omitempty"`
-	Deprecation *Deprecation `json:"deprecation,omitempty"`
+	DarkModeImage *string      `json:"darkModeImage,omitempty"`
+	Deprecation   *Deprecation `json:"deprecation,omitempty"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	// Image reference.
@@ -38,8 +38,9 @@ type GetAllExtensionsResponseExtension struct {
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// The revisions.
-	Revisions []GetAllExtensionsResponseRevision `json:"revisions,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Revisions                         []GetAllExtensionsResponseRevision `json:"revisions,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetAllExtensionsResponseExtension GetAllExtensionsResponseExtension
@@ -350,7 +351,7 @@ func (o *GetAllExtensionsResponseExtension) SetRevisions(v []GetAllExtensionsRes
 }
 
 func (o GetAllExtensionsResponseExtension) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -419,6 +420,7 @@ func (o *GetAllExtensionsResponseExtension) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "revisions")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -459,4 +461,3 @@ func (v *NullableGetAllExtensionsResponseExtension) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

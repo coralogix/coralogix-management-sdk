@@ -23,8 +23,9 @@ var _ MappedNullable = &CaseLabelsFilter{}
 // CaseLabelsFilter Filters applied against Case's labels when queries/filters counted
 type CaseLabelsFilter struct {
 	// List of case key:value labels to filter on
-	FlatLabels []V1KeyValue `json:"flatLabels,omitempty"`
-	AdditionalProperties map[string]interface{}
+	FlatLabels                        []V1KeyValue `json:"flatLabels,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CaseLabelsFilter CaseLabelsFilter
@@ -79,7 +80,7 @@ func (o *CaseLabelsFilter) SetFlatLabels(v []V1KeyValue) {
 }
 
 func (o CaseLabelsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *CaseLabelsFilter) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "flatLabels")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableCaseLabelsFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

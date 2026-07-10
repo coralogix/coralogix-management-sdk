@@ -25,8 +25,9 @@ type EnabledCount struct {
 	// The count for this enabled status
 	Count *int64 `json:"count,omitempty"`
 	// Whether the alert is enabled (true) or disabled (false)
-	Enabled *bool `json:"enabled,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Enabled                           *bool `json:"enabled,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _EnabledCount EnabledCount
@@ -113,7 +114,7 @@ func (o *EnabledCount) SetEnabled(v bool) {
 }
 
 func (o EnabledCount) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *EnabledCount) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "count")
 		delete(additionalProperties, "enabled")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableEnabledCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

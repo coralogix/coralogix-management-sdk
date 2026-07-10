@@ -23,8 +23,9 @@ var _ MappedNullable = &AzureArmTemplate{}
 // AzureArmTemplate This data structure represents an azure ARM template.
 type AzureArmTemplate struct {
 	// The template url.
-	TemplateUrl *string `json:"templateUrl,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TemplateUrl                       *string `json:"templateUrl,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AzureArmTemplate AzureArmTemplate
@@ -79,7 +80,7 @@ func (o *AzureArmTemplate) SetTemplateUrl(v string) {
 }
 
 func (o AzureArmTemplate) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *AzureArmTemplate) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "templateUrl")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableAzureArmTemplate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

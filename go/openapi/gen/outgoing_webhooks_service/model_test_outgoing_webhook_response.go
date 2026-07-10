@@ -13,126 +13,179 @@ package outgoing_webhooks_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// TestOutgoingWebhookResponse - struct for TestOutgoingWebhookResponse
+// checks if the TestOutgoingWebhookResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TestOutgoingWebhookResponse{}
+
+// TestOutgoingWebhookResponse Response containing the results of an outgoing webhook test.
 type TestOutgoingWebhookResponse struct {
-	TestOutgoingWebhookResponseFailureVariant *TestOutgoingWebhookResponseFailureVariant
-	TestOutgoingWebhookResponseSuccessVariant *TestOutgoingWebhookResponseSuccessVariant
+	Failure *TestOutgoingWebhookResponseFailure `json:"failure,omitempty"`
+	// Success.
+	Success                           map[string]interface{} `json:"success,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// TestOutgoingWebhookResponseFailureVariantAsTestOutgoingWebhookResponse is a convenience function that returns TestOutgoingWebhookResponseFailureVariant wrapped in TestOutgoingWebhookResponse
-func TestOutgoingWebhookResponseFailureVariantAsTestOutgoingWebhookResponse(v *TestOutgoingWebhookResponseFailureVariant) TestOutgoingWebhookResponse {
-	return TestOutgoingWebhookResponse{
-		TestOutgoingWebhookResponseFailureVariant: v,
+type _TestOutgoingWebhookResponse TestOutgoingWebhookResponse
+
+// NewTestOutgoingWebhookResponse instantiates a new TestOutgoingWebhookResponse object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewTestOutgoingWebhookResponse() *TestOutgoingWebhookResponse {
+	this := TestOutgoingWebhookResponse{}
+	return &this
+}
+
+// NewTestOutgoingWebhookResponseWithDefaults instantiates a new TestOutgoingWebhookResponse object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewTestOutgoingWebhookResponseWithDefaults() *TestOutgoingWebhookResponse {
+	this := TestOutgoingWebhookResponse{}
+	return &this
+}
+
+// GetFailure returns the Failure field value if set, zero value otherwise.
+func (o *TestOutgoingWebhookResponse) GetFailure() TestOutgoingWebhookResponseFailure {
+	if o == nil || IsNil(o.Failure) {
+		var ret TestOutgoingWebhookResponseFailure
+		return ret
 	}
+	return *o.Failure
 }
 
-// TestOutgoingWebhookResponseSuccessVariantAsTestOutgoingWebhookResponse is a convenience function that returns TestOutgoingWebhookResponseSuccessVariant wrapped in TestOutgoingWebhookResponse
-func TestOutgoingWebhookResponseSuccessVariantAsTestOutgoingWebhookResponse(v *TestOutgoingWebhookResponseSuccessVariant) TestOutgoingWebhookResponse {
-	return TestOutgoingWebhookResponse{
-		TestOutgoingWebhookResponseSuccessVariant: v,
+// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestOutgoingWebhookResponse) GetFailureOk() (*TestOutgoingWebhookResponseFailure, bool) {
+	if o == nil || IsNil(o.Failure) {
+		return nil, false
 	}
+	return o.Failure, true
 }
 
+// HasFailure returns a boolean if a field has been set.
+func (o *TestOutgoingWebhookResponse) HasFailure() bool {
+	if o != nil && !IsNil(o.Failure) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *TestOutgoingWebhookResponse) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into TestOutgoingWebhookResponseFailureVariant
-	err = json.Unmarshal(data, &dst.TestOutgoingWebhookResponseFailureVariant)
-	if err == nil {
-		jsonTestOutgoingWebhookResponseFailureVariant, _ := json.Marshal(dst.TestOutgoingWebhookResponseFailureVariant)
-		if string(jsonTestOutgoingWebhookResponseFailureVariant) == "{}" { // empty struct
-			dst.TestOutgoingWebhookResponseFailureVariant = nil
-		} else {
-			if err = validator.Validate(dst.TestOutgoingWebhookResponseFailureVariant); err != nil {
-				dst.TestOutgoingWebhookResponseFailureVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetFailure gets a reference to the given TestOutgoingWebhookResponseFailure and assigns it to the Failure field.
+func (o *TestOutgoingWebhookResponse) SetFailure(v TestOutgoingWebhookResponseFailure) {
+	o.Failure = &v
+}
+
+// GetSuccess returns the Success field value if set, zero value otherwise.
+func (o *TestOutgoingWebhookResponse) GetSuccess() map[string]interface{} {
+	if o == nil || IsNil(o.Success) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Success
+}
+
+// GetSuccessOk returns a tuple with the Success field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestOutgoingWebhookResponse) GetSuccessOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Success) {
+		return map[string]interface{}{}, false
+	}
+	return o.Success, true
+}
+
+// HasSuccess returns a boolean if a field has been set.
+func (o *TestOutgoingWebhookResponse) HasSuccess() bool {
+	if o != nil && !IsNil(o.Success) {
+		return true
+	}
+
+	return false
+}
+
+// SetSuccess gets a reference to the given map[string]interface{} and assigns it to the Success field.
+func (o *TestOutgoingWebhookResponse) SetSuccess(v map[string]interface{}) {
+	o.Success = v
+}
+
+func (o TestOutgoingWebhookResponse) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TestOutgoingWebhookResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Failure) {
+		toSerialize["failure"] = o.Failure
+	}
+	if !IsNil(o.Success) {
+		toSerialize["success"] = o.Success
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["success"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["failure"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["success"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field success must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["failure"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field failure must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *TestOutgoingWebhookResponse) UnmarshalJSON(data []byte) (err error) {
+	varTestOutgoingWebhookResponse := _TestOutgoingWebhookResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestOutgoingWebhookResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestOutgoingWebhookResponse(varTestOutgoingWebhookResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["success"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TestOutgoingWebhookResponseFailureVariant = nil
-	}
-
-	// try to unmarshal data into TestOutgoingWebhookResponseSuccessVariant
-	err = json.Unmarshal(data, &dst.TestOutgoingWebhookResponseSuccessVariant)
-	if err == nil {
-		jsonTestOutgoingWebhookResponseSuccessVariant, _ := json.Marshal(dst.TestOutgoingWebhookResponseSuccessVariant)
-		if string(jsonTestOutgoingWebhookResponseSuccessVariant) == "{}" { // empty struct
-			dst.TestOutgoingWebhookResponseSuccessVariant = nil
-		} else {
-			if err = validator.Validate(dst.TestOutgoingWebhookResponseSuccessVariant); err != nil {
-				dst.TestOutgoingWebhookResponseSuccessVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["failure"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TestOutgoingWebhookResponseSuccessVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [success, failure] may be set"}
+		}
+
+		delete(additionalProperties, "failure")
+		delete(additionalProperties, "success")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TestOutgoingWebhookResponseFailureVariant = nil
-		dst.TestOutgoingWebhookResponseSuccessVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TestOutgoingWebhookResponse)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src TestOutgoingWebhookResponse) MarshalJSON() ([]byte, error) {
-	if src.TestOutgoingWebhookResponseFailureVariant != nil {
-		return json.Marshal(&src.TestOutgoingWebhookResponseFailureVariant)
-	}
-
-	if src.TestOutgoingWebhookResponseSuccessVariant != nil {
-		return json.Marshal(&src.TestOutgoingWebhookResponseSuccessVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *TestOutgoingWebhookResponse) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.TestOutgoingWebhookResponseFailureVariant != nil {
-		return obj.TestOutgoingWebhookResponseFailureVariant
-	}
-
-	if obj.TestOutgoingWebhookResponseSuccessVariant != nil {
-		return obj.TestOutgoingWebhookResponseSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj TestOutgoingWebhookResponse) GetActualInstanceValue() (interface{}) {
-	if obj.TestOutgoingWebhookResponseFailureVariant != nil {
-		return *obj.TestOutgoingWebhookResponseFailureVariant
-	}
-
-	if obj.TestOutgoingWebhookResponseSuccessVariant != nil {
-		return *obj.TestOutgoingWebhookResponseSuccessVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableTestOutgoingWebhookResponse struct {
@@ -170,4 +223,3 @@ func (v *NullableTestOutgoingWebhookResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

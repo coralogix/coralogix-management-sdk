@@ -24,14 +24,14 @@ type NotificationCenterConnectorType string
 // List of notification_center.ConnectorType
 const (
 	NOTIFICATIONCENTERCONNECTORTYPE_CONNECTOR_TYPE_UNSPECIFIED NotificationCenterConnectorType = "CONNECTOR_TYPE_UNSPECIFIED"
-	NOTIFICATIONCENTERCONNECTORTYPE_SLACK NotificationCenterConnectorType = "SLACK"
-	NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS NotificationCenterConnectorType = "GENERIC_HTTPS"
-	NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY NotificationCenterConnectorType = "PAGERDUTY"
-	NOTIFICATIONCENTERCONNECTORTYPE_IBM_EVENT_NOTIFICATIONS NotificationCenterConnectorType = "IBM_EVENT_NOTIFICATIONS"
-	NOTIFICATIONCENTERCONNECTORTYPE_SERVICE_NOW NotificationCenterConnectorType = "SERVICE_NOW"
-	NOTIFICATIONCENTERCONNECTORTYPE_EMAIL NotificationCenterConnectorType = "EMAIL"
-	NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY_INCIDENTS NotificationCenterConnectorType = "PAGERDUTY_INCIDENTS"
-	NOTIFICATIONCENTERCONNECTORTYPE_MICROSOFT_TEAMS NotificationCenterConnectorType = "MICROSOFT_TEAMS"
+	NOTIFICATIONCENTERCONNECTORTYPE_SLACK                      NotificationCenterConnectorType = "SLACK"
+	NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS              NotificationCenterConnectorType = "GENERIC_HTTPS"
+	NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY                  NotificationCenterConnectorType = "PAGERDUTY"
+	NOTIFICATIONCENTERCONNECTORTYPE_IBM_EVENT_NOTIFICATIONS    NotificationCenterConnectorType = "IBM_EVENT_NOTIFICATIONS"
+	NOTIFICATIONCENTERCONNECTORTYPE_SERVICE_NOW                NotificationCenterConnectorType = "SERVICE_NOW"
+	NOTIFICATIONCENTERCONNECTORTYPE_EMAIL                      NotificationCenterConnectorType = "EMAIL"
+	NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY_INCIDENTS        NotificationCenterConnectorType = "PAGERDUTY_INCIDENTS"
+	NOTIFICATIONCENTERCONNECTORTYPE_MICROSOFT_TEAMS            NotificationCenterConnectorType = "MICROSOFT_TEAMS"
 )
 
 // All allowed values of NotificationCenterConnectorType enum
@@ -125,4 +125,3 @@ func (v *NullableNotificationCenterConnectorType) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

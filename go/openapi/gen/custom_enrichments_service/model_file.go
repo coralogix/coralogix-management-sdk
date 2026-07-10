@@ -13,126 +13,294 @@ package custom_enrichments_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// File - struct for File
+// checks if the File type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &File{}
+
+// File This data structure represents a file
 type File struct {
-	FileBinary *FileBinary
-	FileTextual *FileTextual
+	// Binary content of the file encoded as base64.
+	Binary *string `json:"binary,omitempty"`
+	// File extension indicating the file format (e.g., csv, json).
+	Extension *string `json:"extension,omitempty"`
+	// Name of the file.
+	Name *string `json:"name,omitempty"`
+	// Size of the file in bytes.
+	Size *int64 `json:"size,omitempty"`
+	// Textual content of the file as a UTF-8 string.
+	Textual                           *string `json:"textual,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// FileBinaryAsFile is a convenience function that returns FileBinary wrapped in File
-func FileBinaryAsFile(v *FileBinary) File {
-	return File{
-		FileBinary: v,
+type _File File
+
+// NewFile instantiates a new File object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewFile() *File {
+	this := File{}
+	return &this
+}
+
+// NewFileWithDefaults instantiates a new File object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewFileWithDefaults() *File {
+	this := File{}
+	return &this
+}
+
+// GetBinary returns the Binary field value if set, zero value otherwise.
+func (o *File) GetBinary() string {
+	if o == nil || IsNil(o.Binary) {
+		var ret string
+		return ret
 	}
+	return *o.Binary
 }
 
-// FileTextualAsFile is a convenience function that returns FileTextual wrapped in File
-func FileTextualAsFile(v *FileTextual) File {
-	return File{
-		FileTextual: v,
+// GetBinaryOk returns a tuple with the Binary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *File) GetBinaryOk() (*string, bool) {
+	if o == nil || IsNil(o.Binary) {
+		return nil, false
 	}
+	return o.Binary, true
 }
 
+// HasBinary returns a boolean if a field has been set.
+func (o *File) HasBinary() bool {
+	if o != nil && !IsNil(o.Binary) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *File) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into FileBinary
-	err = json.Unmarshal(data, &dst.FileBinary)
-	if err == nil {
-		jsonFileBinary, _ := json.Marshal(dst.FileBinary)
-		if string(jsonFileBinary) == "{}" { // empty struct
-			dst.FileBinary = nil
-		} else {
-			if err = validator.Validate(dst.FileBinary); err != nil {
-				dst.FileBinary = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetBinary gets a reference to the given string and assigns it to the Binary field.
+func (o *File) SetBinary(v string) {
+	o.Binary = &v
+}
+
+// GetExtension returns the Extension field value if set, zero value otherwise.
+func (o *File) GetExtension() string {
+	if o == nil || IsNil(o.Extension) {
+		var ret string
+		return ret
+	}
+	return *o.Extension
+}
+
+// GetExtensionOk returns a tuple with the Extension field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *File) GetExtensionOk() (*string, bool) {
+	if o == nil || IsNil(o.Extension) {
+		return nil, false
+	}
+	return o.Extension, true
+}
+
+// HasExtension returns a boolean if a field has been set.
+func (o *File) HasExtension() bool {
+	if o != nil && !IsNil(o.Extension) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtension gets a reference to the given string and assigns it to the Extension field.
+func (o *File) SetExtension(v string) {
+	o.Extension = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *File) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *File) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *File) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *File) SetName(v string) {
+	o.Name = &v
+}
+
+// GetSize returns the Size field value if set, zero value otherwise.
+func (o *File) GetSize() int64 {
+	if o == nil || IsNil(o.Size) {
+		var ret int64
+		return ret
+	}
+	return *o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *File) GetSizeOk() (*int64, bool) {
+	if o == nil || IsNil(o.Size) {
+		return nil, false
+	}
+	return o.Size, true
+}
+
+// HasSize returns a boolean if a field has been set.
+func (o *File) HasSize() bool {
+	if o != nil && !IsNil(o.Size) {
+		return true
+	}
+
+	return false
+}
+
+// SetSize gets a reference to the given int64 and assigns it to the Size field.
+func (o *File) SetSize(v int64) {
+	o.Size = &v
+}
+
+// GetTextual returns the Textual field value if set, zero value otherwise.
+func (o *File) GetTextual() string {
+	if o == nil || IsNil(o.Textual) {
+		var ret string
+		return ret
+	}
+	return *o.Textual
+}
+
+// GetTextualOk returns a tuple with the Textual field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *File) GetTextualOk() (*string, bool) {
+	if o == nil || IsNil(o.Textual) {
+		return nil, false
+	}
+	return o.Textual, true
+}
+
+// HasTextual returns a boolean if a field has been set.
+func (o *File) HasTextual() bool {
+	if o != nil && !IsNil(o.Textual) {
+		return true
+	}
+
+	return false
+}
+
+// SetTextual gets a reference to the given string and assigns it to the Textual field.
+func (o *File) SetTextual(v string) {
+	o.Textual = &v
+}
+
+func (o File) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o File) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Binary) {
+		toSerialize["binary"] = o.Binary
+	}
+	if !IsNil(o.Extension) {
+		toSerialize["extension"] = o.Extension
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Size) {
+		toSerialize["size"] = o.Size
+	}
+	if !IsNil(o.Textual) {
+		toSerialize["textual"] = o.Textual
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["textual"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["binary"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [textual, binary] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["textual"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field textual must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["binary"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field binary must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *File) UnmarshalJSON(data []byte) (err error) {
+	varFile := _File{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = File(varFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["textual"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FileBinary = nil
-	}
-
-	// try to unmarshal data into FileTextual
-	err = json.Unmarshal(data, &dst.FileTextual)
-	if err == nil {
-		jsonFileTextual, _ := json.Marshal(dst.FileTextual)
-		if string(jsonFileTextual) == "{}" { // empty struct
-			dst.FileTextual = nil
-		} else {
-			if err = validator.Validate(dst.FileTextual); err != nil {
-				dst.FileTextual = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["binary"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.FileTextual = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [textual, binary] may be set"}
+		}
+
+		delete(additionalProperties, "binary")
+		delete(additionalProperties, "extension")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "textual")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.FileBinary = nil
-		dst.FileTextual = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(File)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src File) MarshalJSON() ([]byte, error) {
-	if src.FileBinary != nil {
-		return json.Marshal(&src.FileBinary)
-	}
-
-	if src.FileTextual != nil {
-		return json.Marshal(&src.FileTextual)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *File) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.FileBinary != nil {
-		return obj.FileBinary
-	}
-
-	if obj.FileTextual != nil {
-		return obj.FileTextual
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj File) GetActualInstanceValue() (interface{}) {
-	if obj.FileBinary != nil {
-		return *obj.FileBinary
-	}
-
-	if obj.FileTextual != nil {
-		return *obj.FileTextual
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableFile struct {
@@ -170,4 +338,3 @@ func (v *NullableFile) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

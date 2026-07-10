@@ -26,8 +26,9 @@ type SourceMapMetadata struct {
 	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// The is uploaded successful.
-	IsUploadedSuccessful *bool `json:"isUploadedSuccessful,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IsUploadedSuccessful              *bool `json:"isUploadedSuccessful,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SourceMapMetadata SourceMapMetadata
@@ -114,7 +115,7 @@ func (o *SourceMapMetadata) SetIsUploadedSuccessful(v bool) {
 }
 
 func (o SourceMapMetadata) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -155,6 +156,7 @@ func (o *SourceMapMetadata) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "isUploadedSuccessful")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -195,4 +197,3 @@ func (v *NullableSourceMapMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

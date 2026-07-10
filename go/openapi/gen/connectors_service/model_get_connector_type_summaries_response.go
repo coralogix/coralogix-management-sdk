@@ -23,8 +23,9 @@ var _ MappedNullable = &GetConnectorTypeSummariesResponse{}
 // GetConnectorTypeSummariesResponse Response containing summaries of connector types
 type GetConnectorTypeSummariesResponse struct {
 	// The connector type summaries.
-	ConnectorTypeSummaries []ConnectorTypeSummary `json:"connectorTypeSummaries,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ConnectorTypeSummaries            []ConnectorTypeSummary `json:"connectorTypeSummaries,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetConnectorTypeSummariesResponse GetConnectorTypeSummariesResponse
@@ -79,7 +80,7 @@ func (o *GetConnectorTypeSummariesResponse) SetConnectorTypeSummaries(v []Connec
 }
 
 func (o GetConnectorTypeSummariesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *GetConnectorTypeSummariesResponse) UnmarshalJSON(data []byte) (err erro
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "connectorTypeSummaries")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableGetConnectorTypeSummariesResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

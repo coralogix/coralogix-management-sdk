@@ -24,8 +24,9 @@ var _ MappedNullable = &AlertSchedulerRuleWithActiveTimeframe{}
 type AlertSchedulerRuleWithActiveTimeframe struct {
 	AlertSchedulerRule *AlertSchedulerRule `json:"alertSchedulerRule,omitempty"`
 	// The next active timeframes.
-	NextActiveTimeframes []ActiveTimeframe `json:"nextActiveTimeframes,omitempty"`
-	AdditionalProperties map[string]interface{}
+	NextActiveTimeframes              []ActiveTimeframe `json:"nextActiveTimeframes,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AlertSchedulerRuleWithActiveTimeframe AlertSchedulerRuleWithActiveTimeframe
@@ -112,7 +113,7 @@ func (o *AlertSchedulerRuleWithActiveTimeframe) SetNextActiveTimeframes(v []Acti
 }
 
 func (o AlertSchedulerRuleWithActiveTimeframe) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *AlertSchedulerRuleWithActiveTimeframe) UnmarshalJSON(data []byte) (err 
 		delete(additionalProperties, "alertSchedulerRule")
 		delete(additionalProperties, "nextActiveTimeframes")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableAlertSchedulerRuleWithActiveTimeframe) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

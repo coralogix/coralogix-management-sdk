@@ -73,16 +73,69 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Update Tenant Request",
+                "description": "This data structure is used to update the configuration of a tenant.",
                 "type": "object",
+                "properties": {
+                  "gcs": {
+                    "$ref": "#/components/schemas/GcsConfig"
+                  },
+                  "ibm": {
+                    "$ref": "#/components/schemas/IbmConfigV2"
+                  },
+                  "retentionDays": {
+                    "description": "Archive retention period in days.",
+                    "type": "integer",
+                    "format": "int64",
+                    "minimum": 0
+                  },
+                  "s3": {
+                    "$ref": "#/components/schemas/S3Config"
+                  }
+                },
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateRequestGcs"
+                    "type": "object",
+                    "required": [
+                      "ibm"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/UpdateRequestIbm"
+                    "type": "object",
+                    "required": [
+                      "s3"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/UpdateRequestS3"
+                    "type": "object",
+                    "required": [
+                      "gcs"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "ibm"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "s3"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "gcs"
+                          ]
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -147,16 +200,66 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Configure Tenant Request",
+                "description": "This data structure is used to configure a tenant.",
                 "type": "object",
+                "properties": {
+                  "gcs": {
+                    "$ref": "#/components/schemas/GcsConfig"
+                  },
+                  "ibm": {
+                    "$ref": "#/components/schemas/IbmConfigV2"
+                  },
+                  "retentionPolicy": {
+                    "$ref": "#/components/schemas/RetentionPolicyRequest"
+                  },
+                  "s3": {
+                    "$ref": "#/components/schemas/S3Config"
+                  }
+                },
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/ConfigureTenantRequestGcs"
+                    "type": "object",
+                    "required": [
+                      "ibm"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/ConfigureTenantRequestIbm"
+                    "type": "object",
+                    "required": [
+                      "s3"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/ConfigureTenantRequestS3"
+                    "type": "object",
+                    "required": [
+                      "gcs"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "ibm"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "s3"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "gcs"
+                          ]
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -333,16 +436,63 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Bucket Validation Request",
+                "description": "This data structure is used to validate a bucket.",
                 "type": "object",
+                "properties": {
+                  "gcs": {
+                    "$ref": "#/components/schemas/GcsConfig"
+                  },
+                  "ibm": {
+                    "$ref": "#/components/schemas/IbmConfigV2"
+                  },
+                  "s3": {
+                    "$ref": "#/components/schemas/S3Config"
+                  }
+                },
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/ValidateBucketRequestGcs"
+                    "type": "object",
+                    "required": [
+                      "ibm"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/ValidateBucketRequestIbm"
+                    "type": "object",
+                    "required": [
+                      "s3"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/ValidateBucketRequestS3"
+                    "type": "object",
+                    "required": [
+                      "gcs"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "ibm"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "s3"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "gcs"
+                          ]
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -397,66 +547,6 @@
   },
   "components": {
     "schemas": {
-      "ConfigureTenantRequestGcs": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
-        "title": "Configure Tenant Request",
-        "description": "This data structure is used to configure a tenant.",
-        "type": "object",
-        "properties": {
-          "gcs": {
-            "$ref": "#/components/schemas/GcsConfig"
-          },
-          "retentionPolicy": {
-            "$ref": "#/components/schemas/RetentionPolicyRequest"
-          }
-        },
-        "required": [
-          "gcs"
-        ]
-      },
-      "ConfigureTenantRequestIbm": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
-        "title": "Configure Tenant Request",
-        "description": "This data structure is used to configure a tenant.",
-        "type": "object",
-        "properties": {
-          "ibm": {
-            "$ref": "#/components/schemas/IbmConfigV2"
-          },
-          "retentionPolicy": {
-            "$ref": "#/components/schemas/RetentionPolicyRequest"
-          }
-        },
-        "required": [
-          "ibm"
-        ]
-      },
-      "ConfigureTenantRequestS3": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
-        "title": "Configure Tenant Request",
-        "description": "This data structure is used to configure a tenant.",
-        "type": "object",
-        "properties": {
-          "retentionPolicy": {
-            "$ref": "#/components/schemas/RetentionPolicyRequest"
-          },
-          "s3": {
-            "$ref": "#/components/schemas/S3Config"
-          }
-        },
-        "required": [
-          "s3"
-        ]
-      },
       "Error": {
         "description": "Standard error response body returned for a failed request.",
         "type": "object",
@@ -478,16 +568,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -498,26 +578,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -528,9 +588,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -683,235 +755,84 @@
         }
       },
       "TenantConfigV2": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Tenant config v2.",
+        "type": "object",
+        "properties": {
+          "disabled": {
+            "description": "Whether metrics archiving is disabled for this tenant.",
+            "type": "boolean"
+          },
+          "gcs": {
+            "$ref": "#/components/schemas/GcsConfig"
+          },
+          "ibm": {
+            "$ref": "#/components/schemas/IbmConfigV2"
+          },
+          "prefix": {
+            "description": "Storage path prefix applied to all archived objects.",
+            "type": "string",
+            "minLength": 0
+          },
+          "retentionPolicy": {
+            "$ref": "#/components/schemas/RetentionPolicyRequest"
+          },
+          "s3": {
+            "$ref": "#/components/schemas/S3Config"
+          },
+          "tenantId": {
+            "description": "Tenant identifier.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          }
+        },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TenantConfigV2Gcs"
+            "type": "object",
+            "required": [
+              "ibm"
+            ]
           },
           {
-            "$ref": "#/components/schemas/TenantConfigV2Ibm"
+            "type": "object",
+            "required": [
+              "s3"
+            ]
           },
           {
-            "$ref": "#/components/schemas/TenantConfigV2S3"
+            "type": "object",
+            "required": [
+              "gcs"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "ibm"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "s3"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "gcs"
+                  ]
+                }
+              ]
+            }
           }
-        ]
-      },
-      "TenantConfigV2Gcs": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Tenant config v2.",
-        "type": "object",
-        "properties": {
-          "disabled": {
-            "description": "Whether metrics archiving is disabled for this tenant.",
-            "type": "boolean"
-          },
-          "gcs": {
-            "$ref": "#/components/schemas/GcsConfig"
-          },
-          "prefix": {
-            "description": "Storage path prefix applied to all archived objects.",
-            "type": "string",
-            "minLength": 0
-          },
-          "retentionPolicy": {
-            "$ref": "#/components/schemas/RetentionPolicyRequest"
-          },
-          "tenantId": {
-            "description": "Tenant identifier.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          }
-        },
-        "required": [
-          "gcs"
-        ]
-      },
-      "TenantConfigV2Ibm": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Tenant config v2.",
-        "type": "object",
-        "properties": {
-          "disabled": {
-            "description": "Whether metrics archiving is disabled for this tenant.",
-            "type": "boolean"
-          },
-          "ibm": {
-            "$ref": "#/components/schemas/IbmConfigV2"
-          },
-          "prefix": {
-            "description": "Storage path prefix applied to all archived objects.",
-            "type": "string",
-            "minLength": 0
-          },
-          "retentionPolicy": {
-            "$ref": "#/components/schemas/RetentionPolicyRequest"
-          },
-          "tenantId": {
-            "description": "Tenant identifier.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          }
-        },
-        "required": [
-          "ibm"
-        ]
-      },
-      "TenantConfigV2S3": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Tenant config v2.",
-        "type": "object",
-        "properties": {
-          "disabled": {
-            "description": "Whether metrics archiving is disabled for this tenant.",
-            "type": "boolean"
-          },
-          "prefix": {
-            "description": "Storage path prefix applied to all archived objects.",
-            "type": "string",
-            "minLength": 0
-          },
-          "retentionPolicy": {
-            "$ref": "#/components/schemas/RetentionPolicyRequest"
-          },
-          "s3": {
-            "$ref": "#/components/schemas/S3Config"
-          },
-          "tenantId": {
-            "description": "Tenant identifier.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          }
-        },
-        "required": [
-          "s3"
-        ]
-      },
-      "UpdateRequestGcs": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
-        "title": "Update Tenant Request",
-        "description": "This data structure is used to update the configuration of a tenant.",
-        "type": "object",
-        "properties": {
-          "gcs": {
-            "$ref": "#/components/schemas/GcsConfig"
-          },
-          "retentionDays": {
-            "description": "Archive retention period in days.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          }
-        },
-        "required": [
-          "gcs"
-        ]
-      },
-      "UpdateRequestIbm": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
-        "title": "Update Tenant Request",
-        "description": "This data structure is used to update the configuration of a tenant.",
-        "type": "object",
-        "properties": {
-          "ibm": {
-            "$ref": "#/components/schemas/IbmConfigV2"
-          },
-          "retentionDays": {
-            "description": "Archive retention period in days.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          }
-        },
-        "required": [
-          "ibm"
-        ]
-      },
-      "UpdateRequestS3": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
-        "title": "Update Tenant Request",
-        "description": "This data structure is used to update the configuration of a tenant.",
-        "type": "object",
-        "properties": {
-          "retentionDays": {
-            "description": "Archive retention period in days.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          },
-          "s3": {
-            "$ref": "#/components/schemas/S3Config"
-          }
-        },
-        "required": [
-          "s3"
-        ]
-      },
-      "ValidateBucketRequestGcs": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
-        "title": "Bucket Validation Request",
-        "description": "This data structure is used to validate a bucket.",
-        "type": "object",
-        "properties": {
-          "gcs": {
-            "$ref": "#/components/schemas/GcsConfig"
-          }
-        },
-        "required": [
-          "gcs"
-        ]
-      },
-      "ValidateBucketRequestIbm": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
-        "title": "Bucket Validation Request",
-        "description": "This data structure is used to validate a bucket.",
-        "type": "object",
-        "properties": {
-          "ibm": {
-            "$ref": "#/components/schemas/IbmConfigV2"
-          }
-        },
-        "required": [
-          "ibm"
-        ]
-      },
-      "ValidateBucketRequestS3": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
-        "title": "Bucket Validation Request",
-        "description": "This data structure is used to validate a bucket.",
-        "type": "object",
-        "properties": {
-          "s3": {
-            "$ref": "#/components/schemas/S3Config"
-          }
-        },
-        "required": [
-          "s3"
         ]
       },
       "events.v3.FilterMatcher": {

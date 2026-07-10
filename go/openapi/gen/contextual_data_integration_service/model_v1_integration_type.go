@@ -13,316 +13,414 @@ package contextual_data_integration_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// V1IntegrationType - struct for V1IntegrationType
+// checks if the V1IntegrationType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1IntegrationType{}
+
+// V1IntegrationType This data structure represents an integration type.
 type V1IntegrationType struct {
-	V1IntegrationTypeArm *V1IntegrationTypeArm
-	V1IntegrationTypeCloudformation *V1IntegrationTypeCloudformation
-	V1IntegrationTypeContextualData *V1IntegrationTypeContextualData
-	V1IntegrationTypeGenericWebhook *V1IntegrationTypeGenericWebhook
-	V1IntegrationTypeManaged *V1IntegrationTypeManaged
-	V1IntegrationTypePushBasedContextualData *V1IntegrationTypePushBasedContextualData
-	V1IntegrationTypeUntracked *V1IntegrationTypeUntracked
+	// This data structure represents an Azure ARM integration.
+	Arm map[string]interface{} `json:"arm,omitempty"`
+	// This data structure represents a CloudFormation integration.
+	Cloudformation map[string]interface{} `json:"cloudformation,omitempty"`
+	// This data structure represents a contextual data integration.
+	ContextualData map[string]interface{} `json:"contextualData,omitempty"`
+	// This data structure represents a generic webhook integration.
+	GenericWebhook map[string]interface{} `json:"genericWebhook,omitempty"`
+	Managed        *Managed               `json:"managed,omitempty"`
+	// This data structure represents a push based contextual data integration.
+	PushBasedContextualData map[string]interface{} `json:"pushBasedContextualData,omitempty"`
+	// This data structure represents an untracked integration.
+	Untracked                         map[string]interface{} `json:"untracked,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// V1IntegrationTypeArmAsV1IntegrationType is a convenience function that returns V1IntegrationTypeArm wrapped in V1IntegrationType
-func V1IntegrationTypeArmAsV1IntegrationType(v *V1IntegrationTypeArm) V1IntegrationType {
-	return V1IntegrationType{
-		V1IntegrationTypeArm: v,
+type _V1IntegrationType V1IntegrationType
+
+// NewV1IntegrationType instantiates a new V1IntegrationType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewV1IntegrationType() *V1IntegrationType {
+	this := V1IntegrationType{}
+	return &this
+}
+
+// NewV1IntegrationTypeWithDefaults instantiates a new V1IntegrationType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewV1IntegrationTypeWithDefaults() *V1IntegrationType {
+	this := V1IntegrationType{}
+	return &this
+}
+
+// GetArm returns the Arm field value if set, zero value otherwise.
+func (o *V1IntegrationType) GetArm() map[string]interface{} {
+	if o == nil || IsNil(o.Arm) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.Arm
 }
 
-// V1IntegrationTypeCloudformationAsV1IntegrationType is a convenience function that returns V1IntegrationTypeCloudformation wrapped in V1IntegrationType
-func V1IntegrationTypeCloudformationAsV1IntegrationType(v *V1IntegrationTypeCloudformation) V1IntegrationType {
-	return V1IntegrationType{
-		V1IntegrationTypeCloudformation: v,
+// GetArmOk returns a tuple with the Arm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1IntegrationType) GetArmOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Arm) {
+		return map[string]interface{}{}, false
 	}
+	return o.Arm, true
 }
 
-// V1IntegrationTypeContextualDataAsV1IntegrationType is a convenience function that returns V1IntegrationTypeContextualData wrapped in V1IntegrationType
-func V1IntegrationTypeContextualDataAsV1IntegrationType(v *V1IntegrationTypeContextualData) V1IntegrationType {
-	return V1IntegrationType{
-		V1IntegrationTypeContextualData: v,
+// HasArm returns a boolean if a field has been set.
+func (o *V1IntegrationType) HasArm() bool {
+	if o != nil && !IsNil(o.Arm) {
+		return true
 	}
+
+	return false
 }
 
-// V1IntegrationTypeGenericWebhookAsV1IntegrationType is a convenience function that returns V1IntegrationTypeGenericWebhook wrapped in V1IntegrationType
-func V1IntegrationTypeGenericWebhookAsV1IntegrationType(v *V1IntegrationTypeGenericWebhook) V1IntegrationType {
-	return V1IntegrationType{
-		V1IntegrationTypeGenericWebhook: v,
+// SetArm gets a reference to the given map[string]interface{} and assigns it to the Arm field.
+func (o *V1IntegrationType) SetArm(v map[string]interface{}) {
+	o.Arm = v
+}
+
+// GetCloudformation returns the Cloudformation field value if set, zero value otherwise.
+func (o *V1IntegrationType) GetCloudformation() map[string]interface{} {
+	if o == nil || IsNil(o.Cloudformation) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.Cloudformation
 }
 
-// V1IntegrationTypeManagedAsV1IntegrationType is a convenience function that returns V1IntegrationTypeManaged wrapped in V1IntegrationType
-func V1IntegrationTypeManagedAsV1IntegrationType(v *V1IntegrationTypeManaged) V1IntegrationType {
-	return V1IntegrationType{
-		V1IntegrationTypeManaged: v,
+// GetCloudformationOk returns a tuple with the Cloudformation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1IntegrationType) GetCloudformationOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Cloudformation) {
+		return map[string]interface{}{}, false
 	}
+	return o.Cloudformation, true
 }
 
-// V1IntegrationTypePushBasedContextualDataAsV1IntegrationType is a convenience function that returns V1IntegrationTypePushBasedContextualData wrapped in V1IntegrationType
-func V1IntegrationTypePushBasedContextualDataAsV1IntegrationType(v *V1IntegrationTypePushBasedContextualData) V1IntegrationType {
-	return V1IntegrationType{
-		V1IntegrationTypePushBasedContextualData: v,
+// HasCloudformation returns a boolean if a field has been set.
+func (o *V1IntegrationType) HasCloudformation() bool {
+	if o != nil && !IsNil(o.Cloudformation) {
+		return true
 	}
+
+	return false
 }
 
-// V1IntegrationTypeUntrackedAsV1IntegrationType is a convenience function that returns V1IntegrationTypeUntracked wrapped in V1IntegrationType
-func V1IntegrationTypeUntrackedAsV1IntegrationType(v *V1IntegrationTypeUntracked) V1IntegrationType {
-	return V1IntegrationType{
-		V1IntegrationTypeUntracked: v,
+// SetCloudformation gets a reference to the given map[string]interface{} and assigns it to the Cloudformation field.
+func (o *V1IntegrationType) SetCloudformation(v map[string]interface{}) {
+	o.Cloudformation = v
+}
+
+// GetContextualData returns the ContextualData field value if set, zero value otherwise.
+func (o *V1IntegrationType) GetContextualData() map[string]interface{} {
+	if o == nil || IsNil(o.ContextualData) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.ContextualData
 }
 
+// GetContextualDataOk returns a tuple with the ContextualData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1IntegrationType) GetContextualDataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ContextualData) {
+		return map[string]interface{}{}, false
+	}
+	return o.ContextualData, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *V1IntegrationType) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into V1IntegrationTypeArm
-	err = json.Unmarshal(data, &dst.V1IntegrationTypeArm)
-	if err == nil {
-		jsonV1IntegrationTypeArm, _ := json.Marshal(dst.V1IntegrationTypeArm)
-		if string(jsonV1IntegrationTypeArm) == "{}" { // empty struct
-			dst.V1IntegrationTypeArm = nil
-		} else {
-			if err = validator.Validate(dst.V1IntegrationTypeArm); err != nil {
-				dst.V1IntegrationTypeArm = nil
-			} else {
-				match++
-			}
+// HasContextualData returns a boolean if a field has been set.
+func (o *V1IntegrationType) HasContextualData() bool {
+	if o != nil && !IsNil(o.ContextualData) {
+		return true
+	}
+
+	return false
+}
+
+// SetContextualData gets a reference to the given map[string]interface{} and assigns it to the ContextualData field.
+func (o *V1IntegrationType) SetContextualData(v map[string]interface{}) {
+	o.ContextualData = v
+}
+
+// GetGenericWebhook returns the GenericWebhook field value if set, zero value otherwise.
+func (o *V1IntegrationType) GetGenericWebhook() map[string]interface{} {
+	if o == nil || IsNil(o.GenericWebhook) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.GenericWebhook
+}
+
+// GetGenericWebhookOk returns a tuple with the GenericWebhook field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1IntegrationType) GetGenericWebhookOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.GenericWebhook) {
+		return map[string]interface{}{}, false
+	}
+	return o.GenericWebhook, true
+}
+
+// HasGenericWebhook returns a boolean if a field has been set.
+func (o *V1IntegrationType) HasGenericWebhook() bool {
+	if o != nil && !IsNil(o.GenericWebhook) {
+		return true
+	}
+
+	return false
+}
+
+// SetGenericWebhook gets a reference to the given map[string]interface{} and assigns it to the GenericWebhook field.
+func (o *V1IntegrationType) SetGenericWebhook(v map[string]interface{}) {
+	o.GenericWebhook = v
+}
+
+// GetManaged returns the Managed field value if set, zero value otherwise.
+func (o *V1IntegrationType) GetManaged() Managed {
+	if o == nil || IsNil(o.Managed) {
+		var ret Managed
+		return ret
+	}
+	return *o.Managed
+}
+
+// GetManagedOk returns a tuple with the Managed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1IntegrationType) GetManagedOk() (*Managed, bool) {
+	if o == nil || IsNil(o.Managed) {
+		return nil, false
+	}
+	return o.Managed, true
+}
+
+// HasManaged returns a boolean if a field has been set.
+func (o *V1IntegrationType) HasManaged() bool {
+	if o != nil && !IsNil(o.Managed) {
+		return true
+	}
+
+	return false
+}
+
+// SetManaged gets a reference to the given Managed and assigns it to the Managed field.
+func (o *V1IntegrationType) SetManaged(v Managed) {
+	o.Managed = &v
+}
+
+// GetPushBasedContextualData returns the PushBasedContextualData field value if set, zero value otherwise.
+func (o *V1IntegrationType) GetPushBasedContextualData() map[string]interface{} {
+	if o == nil || IsNil(o.PushBasedContextualData) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.PushBasedContextualData
+}
+
+// GetPushBasedContextualDataOk returns a tuple with the PushBasedContextualData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1IntegrationType) GetPushBasedContextualDataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.PushBasedContextualData) {
+		return map[string]interface{}{}, false
+	}
+	return o.PushBasedContextualData, true
+}
+
+// HasPushBasedContextualData returns a boolean if a field has been set.
+func (o *V1IntegrationType) HasPushBasedContextualData() bool {
+	if o != nil && !IsNil(o.PushBasedContextualData) {
+		return true
+	}
+
+	return false
+}
+
+// SetPushBasedContextualData gets a reference to the given map[string]interface{} and assigns it to the PushBasedContextualData field.
+func (o *V1IntegrationType) SetPushBasedContextualData(v map[string]interface{}) {
+	o.PushBasedContextualData = v
+}
+
+// GetUntracked returns the Untracked field value if set, zero value otherwise.
+func (o *V1IntegrationType) GetUntracked() map[string]interface{} {
+	if o == nil || IsNil(o.Untracked) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Untracked
+}
+
+// GetUntrackedOk returns a tuple with the Untracked field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1IntegrationType) GetUntrackedOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Untracked) {
+		return map[string]interface{}{}, false
+	}
+	return o.Untracked, true
+}
+
+// HasUntracked returns a boolean if a field has been set.
+func (o *V1IntegrationType) HasUntracked() bool {
+	if o != nil && !IsNil(o.Untracked) {
+		return true
+	}
+
+	return false
+}
+
+// SetUntracked gets a reference to the given map[string]interface{} and assigns it to the Untracked field.
+func (o *V1IntegrationType) SetUntracked(v map[string]interface{}) {
+	o.Untracked = v
+}
+
+func (o V1IntegrationType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o V1IntegrationType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Arm) {
+		toSerialize["arm"] = o.Arm
+	}
+	if !IsNil(o.Cloudformation) {
+		toSerialize["cloudformation"] = o.Cloudformation
+	}
+	if !IsNil(o.ContextualData) {
+		toSerialize["contextualData"] = o.ContextualData
+	}
+	if !IsNil(o.GenericWebhook) {
+		toSerialize["genericWebhook"] = o.GenericWebhook
+	}
+	if !IsNil(o.Managed) {
+		toSerialize["managed"] = o.Managed
+	}
+	if !IsNil(o.PushBasedContextualData) {
+		toSerialize["pushBasedContextualData"] = o.PushBasedContextualData
+	}
+	if !IsNil(o.Untracked) {
+		toSerialize["untracked"] = o.Untracked
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["managed"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["untracked"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["cloudformation"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["arm"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["pushBasedContextualData"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["contextualData"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["genericWebhook"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [managed, untracked, cloudformation, arm, pushBasedContextualData, contextualData, genericWebhook] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["managed"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field managed must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["untracked"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field untracked must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["cloudformation"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field cloudformation must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["arm"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field arm must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["pushBasedContextualData"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field pushBasedContextualData must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["contextualData"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field contextualData must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["genericWebhook"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field genericWebhook must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *V1IntegrationType) UnmarshalJSON(data []byte) (err error) {
+	varV1IntegrationType := _V1IntegrationType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1IntegrationType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1IntegrationType(varV1IntegrationType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["managed"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V1IntegrationTypeArm = nil
-	}
-
-	// try to unmarshal data into V1IntegrationTypeCloudformation
-	err = json.Unmarshal(data, &dst.V1IntegrationTypeCloudformation)
-	if err == nil {
-		jsonV1IntegrationTypeCloudformation, _ := json.Marshal(dst.V1IntegrationTypeCloudformation)
-		if string(jsonV1IntegrationTypeCloudformation) == "{}" { // empty struct
-			dst.V1IntegrationTypeCloudformation = nil
-		} else {
-			if err = validator.Validate(dst.V1IntegrationTypeCloudformation); err != nil {
-				dst.V1IntegrationTypeCloudformation = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["untracked"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V1IntegrationTypeCloudformation = nil
-	}
-
-	// try to unmarshal data into V1IntegrationTypeContextualData
-	err = json.Unmarshal(data, &dst.V1IntegrationTypeContextualData)
-	if err == nil {
-		jsonV1IntegrationTypeContextualData, _ := json.Marshal(dst.V1IntegrationTypeContextualData)
-		if string(jsonV1IntegrationTypeContextualData) == "{}" { // empty struct
-			dst.V1IntegrationTypeContextualData = nil
-		} else {
-			if err = validator.Validate(dst.V1IntegrationTypeContextualData); err != nil {
-				dst.V1IntegrationTypeContextualData = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["cloudformation"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V1IntegrationTypeContextualData = nil
-	}
-
-	// try to unmarshal data into V1IntegrationTypeGenericWebhook
-	err = json.Unmarshal(data, &dst.V1IntegrationTypeGenericWebhook)
-	if err == nil {
-		jsonV1IntegrationTypeGenericWebhook, _ := json.Marshal(dst.V1IntegrationTypeGenericWebhook)
-		if string(jsonV1IntegrationTypeGenericWebhook) == "{}" { // empty struct
-			dst.V1IntegrationTypeGenericWebhook = nil
-		} else {
-			if err = validator.Validate(dst.V1IntegrationTypeGenericWebhook); err != nil {
-				dst.V1IntegrationTypeGenericWebhook = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["arm"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V1IntegrationTypeGenericWebhook = nil
-	}
-
-	// try to unmarshal data into V1IntegrationTypeManaged
-	err = json.Unmarshal(data, &dst.V1IntegrationTypeManaged)
-	if err == nil {
-		jsonV1IntegrationTypeManaged, _ := json.Marshal(dst.V1IntegrationTypeManaged)
-		if string(jsonV1IntegrationTypeManaged) == "{}" { // empty struct
-			dst.V1IntegrationTypeManaged = nil
-		} else {
-			if err = validator.Validate(dst.V1IntegrationTypeManaged); err != nil {
-				dst.V1IntegrationTypeManaged = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["pushBasedContextualData"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V1IntegrationTypeManaged = nil
-	}
-
-	// try to unmarshal data into V1IntegrationTypePushBasedContextualData
-	err = json.Unmarshal(data, &dst.V1IntegrationTypePushBasedContextualData)
-	if err == nil {
-		jsonV1IntegrationTypePushBasedContextualData, _ := json.Marshal(dst.V1IntegrationTypePushBasedContextualData)
-		if string(jsonV1IntegrationTypePushBasedContextualData) == "{}" { // empty struct
-			dst.V1IntegrationTypePushBasedContextualData = nil
-		} else {
-			if err = validator.Validate(dst.V1IntegrationTypePushBasedContextualData); err != nil {
-				dst.V1IntegrationTypePushBasedContextualData = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["contextualData"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V1IntegrationTypePushBasedContextualData = nil
-	}
-
-	// try to unmarshal data into V1IntegrationTypeUntracked
-	err = json.Unmarshal(data, &dst.V1IntegrationTypeUntracked)
-	if err == nil {
-		jsonV1IntegrationTypeUntracked, _ := json.Marshal(dst.V1IntegrationTypeUntracked)
-		if string(jsonV1IntegrationTypeUntracked) == "{}" { // empty struct
-			dst.V1IntegrationTypeUntracked = nil
-		} else {
-			if err = validator.Validate(dst.V1IntegrationTypeUntracked); err != nil {
-				dst.V1IntegrationTypeUntracked = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["genericWebhook"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V1IntegrationTypeUntracked = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [managed, untracked, cloudformation, arm, pushBasedContextualData, contextualData, genericWebhook] may be set"}
+		}
+
+		delete(additionalProperties, "arm")
+		delete(additionalProperties, "cloudformation")
+		delete(additionalProperties, "contextualData")
+		delete(additionalProperties, "genericWebhook")
+		delete(additionalProperties, "managed")
+		delete(additionalProperties, "pushBasedContextualData")
+		delete(additionalProperties, "untracked")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.V1IntegrationTypeArm = nil
-		dst.V1IntegrationTypeCloudformation = nil
-		dst.V1IntegrationTypeContextualData = nil
-		dst.V1IntegrationTypeGenericWebhook = nil
-		dst.V1IntegrationTypeManaged = nil
-		dst.V1IntegrationTypePushBasedContextualData = nil
-		dst.V1IntegrationTypeUntracked = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(V1IntegrationType)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src V1IntegrationType) MarshalJSON() ([]byte, error) {
-	if src.V1IntegrationTypeArm != nil {
-		return json.Marshal(&src.V1IntegrationTypeArm)
-	}
-
-	if src.V1IntegrationTypeCloudformation != nil {
-		return json.Marshal(&src.V1IntegrationTypeCloudformation)
-	}
-
-	if src.V1IntegrationTypeContextualData != nil {
-		return json.Marshal(&src.V1IntegrationTypeContextualData)
-	}
-
-	if src.V1IntegrationTypeGenericWebhook != nil {
-		return json.Marshal(&src.V1IntegrationTypeGenericWebhook)
-	}
-
-	if src.V1IntegrationTypeManaged != nil {
-		return json.Marshal(&src.V1IntegrationTypeManaged)
-	}
-
-	if src.V1IntegrationTypePushBasedContextualData != nil {
-		return json.Marshal(&src.V1IntegrationTypePushBasedContextualData)
-	}
-
-	if src.V1IntegrationTypeUntracked != nil {
-		return json.Marshal(&src.V1IntegrationTypeUntracked)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *V1IntegrationType) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.V1IntegrationTypeArm != nil {
-		return obj.V1IntegrationTypeArm
-	}
-
-	if obj.V1IntegrationTypeCloudformation != nil {
-		return obj.V1IntegrationTypeCloudformation
-	}
-
-	if obj.V1IntegrationTypeContextualData != nil {
-		return obj.V1IntegrationTypeContextualData
-	}
-
-	if obj.V1IntegrationTypeGenericWebhook != nil {
-		return obj.V1IntegrationTypeGenericWebhook
-	}
-
-	if obj.V1IntegrationTypeManaged != nil {
-		return obj.V1IntegrationTypeManaged
-	}
-
-	if obj.V1IntegrationTypePushBasedContextualData != nil {
-		return obj.V1IntegrationTypePushBasedContextualData
-	}
-
-	if obj.V1IntegrationTypeUntracked != nil {
-		return obj.V1IntegrationTypeUntracked
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj V1IntegrationType) GetActualInstanceValue() (interface{}) {
-	if obj.V1IntegrationTypeArm != nil {
-		return *obj.V1IntegrationTypeArm
-	}
-
-	if obj.V1IntegrationTypeCloudformation != nil {
-		return *obj.V1IntegrationTypeCloudformation
-	}
-
-	if obj.V1IntegrationTypeContextualData != nil {
-		return *obj.V1IntegrationTypeContextualData
-	}
-
-	if obj.V1IntegrationTypeGenericWebhook != nil {
-		return *obj.V1IntegrationTypeGenericWebhook
-	}
-
-	if obj.V1IntegrationTypeManaged != nil {
-		return *obj.V1IntegrationTypeManaged
-	}
-
-	if obj.V1IntegrationTypePushBasedContextualData != nil {
-		return *obj.V1IntegrationTypePushBasedContextualData
-	}
-
-	if obj.V1IntegrationTypeUntracked != nil {
-		return *obj.V1IntegrationTypeUntracked
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableV1IntegrationType struct {
@@ -360,4 +458,3 @@ func (v *NullableV1IntegrationType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

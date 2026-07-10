@@ -23,8 +23,9 @@ var _ MappedNullable = &DeleteSloResponse{}
 // DeleteSloResponse Response after deleting an existing SLO.
 type DeleteSloResponse struct {
 	// The effected slo alert ids.
-	EffectedSloAlertIds []string `json:"effectedSloAlertIds,omitempty"`
-	AdditionalProperties map[string]interface{}
+	EffectedSloAlertIds               []string `json:"effectedSloAlertIds,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DeleteSloResponse DeleteSloResponse
@@ -79,7 +80,7 @@ func (o *DeleteSloResponse) SetEffectedSloAlertIds(v []string) {
 }
 
 func (o DeleteSloResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *DeleteSloResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "effectedSloAlertIds")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableDeleteSloResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

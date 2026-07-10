@@ -26,8 +26,9 @@ type DateRange struct {
 	// The from date.
 	FromDate *time.Time `json:"fromDate,omitempty"`
 	// The to date.
-	ToDate *time.Time `json:"toDate,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ToDate                            *time.Time `json:"toDate,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DateRange DateRange
@@ -114,7 +115,7 @@ func (o *DateRange) SetToDate(v time.Time) {
 }
 
 func (o DateRange) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -155,6 +156,7 @@ func (o *DateRange) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fromDate")
 		delete(additionalProperties, "toDate")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -195,4 +197,3 @@ func (v *NullableDateRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

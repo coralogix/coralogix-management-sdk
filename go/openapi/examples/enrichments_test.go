@@ -32,10 +32,8 @@ func TestEnrichmentsGeoIp(t *testing.T) {
 	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
-		EnrichmentTypeGeoIp: &enrichments.EnrichmentTypeGeoIp{
-			GeoIp: enrichments.GeoIpType{
-				WithAsn: enrichments.PtrBool(true),
-			},
+		GeoIp: &enrichments.GeoIpType{
+			WithAsn: enrichments.PtrBool(true),
 		},
 	}
 
@@ -73,10 +71,8 @@ func TestEnrichmentsAws(t *testing.T) {
 	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
-		EnrichmentTypeAws: &enrichments.EnrichmentTypeAws{
-			Aws: enrichments.AwsType{
-				ResourceType: enrichments.PtrString("ec2"),
-			},
+		Aws: &enrichments.AwsType{
+			ResourceType: enrichments.PtrString("ec2"),
 		},
 	}
 	model := enrichments.NewEnrichmentRequestModel(enrichmentType, "coralogix.metadata.sdkId")
@@ -114,11 +110,9 @@ func TestEnrichmentsCustom(t *testing.T) {
 		CreateCustomEnrichmentRequest(custom_enrichments_service.
 			CreateCustomEnrichmentRequest{
 			File: custom_enrichments_service.File{
-				FileTextual: &custom_enrichments_service.FileTextual{
-					Extension: &ext,
-					Name:      &name,
-					Textual:   contents,
-				},
+				Extension: &ext,
+				Name:      &name,
+				Textual:   &contents,
 			},
 			Description: name,
 			Name:        name,
@@ -130,10 +124,8 @@ func TestEnrichmentsCustom(t *testing.T) {
 	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
-		EnrichmentTypeCustomEnrichment: &enrichments.EnrichmentTypeCustomEnrichment{
-			CustomEnrichment: enrichments.CustomEnrichmentType{
-				Id: data.CustomEnrichment.Id,
-			},
+		CustomEnrichment: &enrichments.CustomEnrichmentType{
+			Id: data.CustomEnrichment.Id,
 		},
 	}
 	model := enrichments.NewEnrichmentRequestModel(enrichmentType, "coralogix.metadata.sdkId")
@@ -169,9 +161,7 @@ func TestEnrichmentsSuspiciousIp(t *testing.T) {
 	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
-		EnrichmentTypeSuspiciousIp: &enrichments.EnrichmentTypeSuspiciousIp{
-			SuspiciousIp: map[string]interface{}{},
-		},
+		SuspiciousIp: map[string]interface{}{},
 	}
 	model := enrichments.NewEnrichmentRequestModel(enrichmentType, "coralogix.metadata.sdkId")
 	req := *enrichments.NewEnrichmentsCreationRequest([]enrichments.EnrichmentRequestModel{*model})

@@ -31,8 +31,9 @@ type V2SpansQuery struct {
 	// The service filters.
 	ServiceFilters []string `json:"serviceFilters,omitempty"`
 	// The subsystemname filters.
-	SubsystemnameFilters []string `json:"subsystemnameFilters,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SubsystemnameFilters              []string `json:"subsystemnameFilters,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _V2SpansQuery V2SpansQuery
@@ -215,7 +216,7 @@ func (o *V2SpansQuery) SetSubsystemnameFilters(v []string) {
 }
 
 func (o V2SpansQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,6 +269,7 @@ func (o *V2SpansQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "serviceFilters")
 		delete(additionalProperties, "subsystemnameFilters")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -308,4 +310,3 @@ func (v *NullableV2SpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

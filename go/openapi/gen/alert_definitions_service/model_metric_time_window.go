@@ -13,126 +13,179 @@ package alert_definitions_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// MetricTimeWindow - struct for MetricTimeWindow
+// checks if the MetricTimeWindow type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MetricTimeWindow{}
+
+// MetricTimeWindow Metric time window.
 type MetricTimeWindow struct {
-	MetricTimeWindowMetricTimeWindowDynamicDuration *MetricTimeWindowMetricTimeWindowDynamicDuration
-	MetricTimeWindowMetricTimeWindowSpecificValue *MetricTimeWindowMetricTimeWindowSpecificValue
+	// The time window as a dynamic value
+	MetricTimeWindowDynamicDuration   *string                `json:"metricTimeWindowDynamicDuration,omitempty"`
+	MetricTimeWindowSpecificValue     *MetricTimeWindowValue `json:"metricTimeWindowSpecificValue,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// MetricTimeWindowMetricTimeWindowDynamicDurationAsMetricTimeWindow is a convenience function that returns MetricTimeWindowMetricTimeWindowDynamicDuration wrapped in MetricTimeWindow
-func MetricTimeWindowMetricTimeWindowDynamicDurationAsMetricTimeWindow(v *MetricTimeWindowMetricTimeWindowDynamicDuration) MetricTimeWindow {
-	return MetricTimeWindow{
-		MetricTimeWindowMetricTimeWindowDynamicDuration: v,
+type _MetricTimeWindow MetricTimeWindow
+
+// NewMetricTimeWindow instantiates a new MetricTimeWindow object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewMetricTimeWindow() *MetricTimeWindow {
+	this := MetricTimeWindow{}
+	return &this
+}
+
+// NewMetricTimeWindowWithDefaults instantiates a new MetricTimeWindow object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewMetricTimeWindowWithDefaults() *MetricTimeWindow {
+	this := MetricTimeWindow{}
+	return &this
+}
+
+// GetMetricTimeWindowDynamicDuration returns the MetricTimeWindowDynamicDuration field value if set, zero value otherwise.
+func (o *MetricTimeWindow) GetMetricTimeWindowDynamicDuration() string {
+	if o == nil || IsNil(o.MetricTimeWindowDynamicDuration) {
+		var ret string
+		return ret
 	}
+	return *o.MetricTimeWindowDynamicDuration
 }
 
-// MetricTimeWindowMetricTimeWindowSpecificValueAsMetricTimeWindow is a convenience function that returns MetricTimeWindowMetricTimeWindowSpecificValue wrapped in MetricTimeWindow
-func MetricTimeWindowMetricTimeWindowSpecificValueAsMetricTimeWindow(v *MetricTimeWindowMetricTimeWindowSpecificValue) MetricTimeWindow {
-	return MetricTimeWindow{
-		MetricTimeWindowMetricTimeWindowSpecificValue: v,
+// GetMetricTimeWindowDynamicDurationOk returns a tuple with the MetricTimeWindowDynamicDuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricTimeWindow) GetMetricTimeWindowDynamicDurationOk() (*string, bool) {
+	if o == nil || IsNil(o.MetricTimeWindowDynamicDuration) {
+		return nil, false
 	}
+	return o.MetricTimeWindowDynamicDuration, true
 }
 
+// HasMetricTimeWindowDynamicDuration returns a boolean if a field has been set.
+func (o *MetricTimeWindow) HasMetricTimeWindowDynamicDuration() bool {
+	if o != nil && !IsNil(o.MetricTimeWindowDynamicDuration) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *MetricTimeWindow) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into MetricTimeWindowMetricTimeWindowDynamicDuration
-	err = json.Unmarshal(data, &dst.MetricTimeWindowMetricTimeWindowDynamicDuration)
-	if err == nil {
-		jsonMetricTimeWindowMetricTimeWindowDynamicDuration, _ := json.Marshal(dst.MetricTimeWindowMetricTimeWindowDynamicDuration)
-		if string(jsonMetricTimeWindowMetricTimeWindowDynamicDuration) == "{}" { // empty struct
-			dst.MetricTimeWindowMetricTimeWindowDynamicDuration = nil
-		} else {
-			if err = validator.Validate(dst.MetricTimeWindowMetricTimeWindowDynamicDuration); err != nil {
-				dst.MetricTimeWindowMetricTimeWindowDynamicDuration = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetMetricTimeWindowDynamicDuration gets a reference to the given string and assigns it to the MetricTimeWindowDynamicDuration field.
+func (o *MetricTimeWindow) SetMetricTimeWindowDynamicDuration(v string) {
+	o.MetricTimeWindowDynamicDuration = &v
+}
+
+// GetMetricTimeWindowSpecificValue returns the MetricTimeWindowSpecificValue field value if set, zero value otherwise.
+func (o *MetricTimeWindow) GetMetricTimeWindowSpecificValue() MetricTimeWindowValue {
+	if o == nil || IsNil(o.MetricTimeWindowSpecificValue) {
+		var ret MetricTimeWindowValue
+		return ret
+	}
+	return *o.MetricTimeWindowSpecificValue
+}
+
+// GetMetricTimeWindowSpecificValueOk returns a tuple with the MetricTimeWindowSpecificValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricTimeWindow) GetMetricTimeWindowSpecificValueOk() (*MetricTimeWindowValue, bool) {
+	if o == nil || IsNil(o.MetricTimeWindowSpecificValue) {
+		return nil, false
+	}
+	return o.MetricTimeWindowSpecificValue, true
+}
+
+// HasMetricTimeWindowSpecificValue returns a boolean if a field has been set.
+func (o *MetricTimeWindow) HasMetricTimeWindowSpecificValue() bool {
+	if o != nil && !IsNil(o.MetricTimeWindowSpecificValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricTimeWindowSpecificValue gets a reference to the given MetricTimeWindowValue and assigns it to the MetricTimeWindowSpecificValue field.
+func (o *MetricTimeWindow) SetMetricTimeWindowSpecificValue(v MetricTimeWindowValue) {
+	o.MetricTimeWindowSpecificValue = &v
+}
+
+func (o MetricTimeWindow) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MetricTimeWindow) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.MetricTimeWindowDynamicDuration) {
+		toSerialize["metricTimeWindowDynamicDuration"] = o.MetricTimeWindowDynamicDuration
+	}
+	if !IsNil(o.MetricTimeWindowSpecificValue) {
+		toSerialize["metricTimeWindowSpecificValue"] = o.MetricTimeWindowSpecificValue
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["metricTimeWindowSpecificValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metricTimeWindowDynamicDuration"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metricTimeWindowSpecificValue, metricTimeWindowDynamicDuration] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["metricTimeWindowSpecificValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricTimeWindowSpecificValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metricTimeWindowDynamicDuration"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricTimeWindowDynamicDuration must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *MetricTimeWindow) UnmarshalJSON(data []byte) (err error) {
+	varMetricTimeWindow := _MetricTimeWindow{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricTimeWindow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricTimeWindow(varMetricTimeWindow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["metricTimeWindowSpecificValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MetricTimeWindowMetricTimeWindowDynamicDuration = nil
-	}
-
-	// try to unmarshal data into MetricTimeWindowMetricTimeWindowSpecificValue
-	err = json.Unmarshal(data, &dst.MetricTimeWindowMetricTimeWindowSpecificValue)
-	if err == nil {
-		jsonMetricTimeWindowMetricTimeWindowSpecificValue, _ := json.Marshal(dst.MetricTimeWindowMetricTimeWindowSpecificValue)
-		if string(jsonMetricTimeWindowMetricTimeWindowSpecificValue) == "{}" { // empty struct
-			dst.MetricTimeWindowMetricTimeWindowSpecificValue = nil
-		} else {
-			if err = validator.Validate(dst.MetricTimeWindowMetricTimeWindowSpecificValue); err != nil {
-				dst.MetricTimeWindowMetricTimeWindowSpecificValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metricTimeWindowDynamicDuration"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MetricTimeWindowMetricTimeWindowSpecificValue = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [metricTimeWindowSpecificValue, metricTimeWindowDynamicDuration] may be set"}
+		}
+
+		delete(additionalProperties, "metricTimeWindowDynamicDuration")
+		delete(additionalProperties, "metricTimeWindowSpecificValue")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.MetricTimeWindowMetricTimeWindowDynamicDuration = nil
-		dst.MetricTimeWindowMetricTimeWindowSpecificValue = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(MetricTimeWindow)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src MetricTimeWindow) MarshalJSON() ([]byte, error) {
-	if src.MetricTimeWindowMetricTimeWindowDynamicDuration != nil {
-		return json.Marshal(&src.MetricTimeWindowMetricTimeWindowDynamicDuration)
-	}
-
-	if src.MetricTimeWindowMetricTimeWindowSpecificValue != nil {
-		return json.Marshal(&src.MetricTimeWindowMetricTimeWindowSpecificValue)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *MetricTimeWindow) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.MetricTimeWindowMetricTimeWindowDynamicDuration != nil {
-		return obj.MetricTimeWindowMetricTimeWindowDynamicDuration
-	}
-
-	if obj.MetricTimeWindowMetricTimeWindowSpecificValue != nil {
-		return obj.MetricTimeWindowMetricTimeWindowSpecificValue
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj MetricTimeWindow) GetActualInstanceValue() (interface{}) {
-	if obj.MetricTimeWindowMetricTimeWindowDynamicDuration != nil {
-		return *obj.MetricTimeWindowMetricTimeWindowDynamicDuration
-	}
-
-	if obj.MetricTimeWindowMetricTimeWindowSpecificValue != nil {
-		return *obj.MetricTimeWindowMetricTimeWindowSpecificValue
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableMetricTimeWindow struct {
@@ -170,4 +223,3 @@ func (v *NullableMetricTimeWindow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

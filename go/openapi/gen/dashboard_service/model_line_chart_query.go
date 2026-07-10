@@ -13,202 +13,270 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// LineChartQuery - struct for LineChartQuery
+// checks if the LineChartQuery type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LineChartQuery{}
+
+// LineChartQuery Discriminated union of possible query types for the line chart widget.
 type LineChartQuery struct {
-	LineChartQueryDataprime *LineChartQueryDataprime
-	LineChartQueryLogs *LineChartQueryLogs
-	LineChartQueryMetrics *LineChartQueryMetrics
-	LineChartQuerySpans *LineChartQuerySpans
+	Dataprime                         *LineChartDataprimeQuery `json:"dataprime,omitempty"`
+	Logs                              *LineChartLogsQuery      `json:"logs,omitempty"`
+	Metrics                           *LineChartMetricsQuery   `json:"metrics,omitempty"`
+	Spans                             *LineChartSpansQuery     `json:"spans,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// LineChartQueryDataprimeAsLineChartQuery is a convenience function that returns LineChartQueryDataprime wrapped in LineChartQuery
-func LineChartQueryDataprimeAsLineChartQuery(v *LineChartQueryDataprime) LineChartQuery {
-	return LineChartQuery{
-		LineChartQueryDataprime: v,
+type _LineChartQuery LineChartQuery
+
+// NewLineChartQuery instantiates a new LineChartQuery object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewLineChartQuery() *LineChartQuery {
+	this := LineChartQuery{}
+	return &this
+}
+
+// NewLineChartQueryWithDefaults instantiates a new LineChartQuery object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewLineChartQueryWithDefaults() *LineChartQuery {
+	this := LineChartQuery{}
+	return &this
+}
+
+// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+func (o *LineChartQuery) GetDataprime() LineChartDataprimeQuery {
+	if o == nil || IsNil(o.Dataprime) {
+		var ret LineChartDataprimeQuery
+		return ret
 	}
+	return *o.Dataprime
 }
 
-// LineChartQueryLogsAsLineChartQuery is a convenience function that returns LineChartQueryLogs wrapped in LineChartQuery
-func LineChartQueryLogsAsLineChartQuery(v *LineChartQueryLogs) LineChartQuery {
-	return LineChartQuery{
-		LineChartQueryLogs: v,
+// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LineChartQuery) GetDataprimeOk() (*LineChartDataprimeQuery, bool) {
+	if o == nil || IsNil(o.Dataprime) {
+		return nil, false
 	}
+	return o.Dataprime, true
 }
 
-// LineChartQueryMetricsAsLineChartQuery is a convenience function that returns LineChartQueryMetrics wrapped in LineChartQuery
-func LineChartQueryMetricsAsLineChartQuery(v *LineChartQueryMetrics) LineChartQuery {
-	return LineChartQuery{
-		LineChartQueryMetrics: v,
+// HasDataprime returns a boolean if a field has been set.
+func (o *LineChartQuery) HasDataprime() bool {
+	if o != nil && !IsNil(o.Dataprime) {
+		return true
 	}
+
+	return false
 }
 
-// LineChartQuerySpansAsLineChartQuery is a convenience function that returns LineChartQuerySpans wrapped in LineChartQuery
-func LineChartQuerySpansAsLineChartQuery(v *LineChartQuerySpans) LineChartQuery {
-	return LineChartQuery{
-		LineChartQuerySpans: v,
+// SetDataprime gets a reference to the given LineChartDataprimeQuery and assigns it to the Dataprime field.
+func (o *LineChartQuery) SetDataprime(v LineChartDataprimeQuery) {
+	o.Dataprime = &v
+}
+
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *LineChartQuery) GetLogs() LineChartLogsQuery {
+	if o == nil || IsNil(o.Logs) {
+		var ret LineChartLogsQuery
+		return ret
 	}
+	return *o.Logs
 }
 
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LineChartQuery) GetLogsOk() (*LineChartLogsQuery, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
+	}
+	return o.Logs, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *LineChartQuery) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into LineChartQueryDataprime
-	err = json.Unmarshal(data, &dst.LineChartQueryDataprime)
-	if err == nil {
-		jsonLineChartQueryDataprime, _ := json.Marshal(dst.LineChartQueryDataprime)
-		if string(jsonLineChartQueryDataprime) == "{}" { // empty struct
-			dst.LineChartQueryDataprime = nil
-		} else {
-			if err = validator.Validate(dst.LineChartQueryDataprime); err != nil {
-				dst.LineChartQueryDataprime = nil
-			} else {
-				match++
-			}
+// HasLogs returns a boolean if a field has been set.
+func (o *LineChartQuery) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogs gets a reference to the given LineChartLogsQuery and assigns it to the Logs field.
+func (o *LineChartQuery) SetLogs(v LineChartLogsQuery) {
+	o.Logs = &v
+}
+
+// GetMetrics returns the Metrics field value if set, zero value otherwise.
+func (o *LineChartQuery) GetMetrics() LineChartMetricsQuery {
+	if o == nil || IsNil(o.Metrics) {
+		var ret LineChartMetricsQuery
+		return ret
+	}
+	return *o.Metrics
+}
+
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LineChartQuery) GetMetricsOk() (*LineChartMetricsQuery, bool) {
+	if o == nil || IsNil(o.Metrics) {
+		return nil, false
+	}
+	return o.Metrics, true
+}
+
+// HasMetrics returns a boolean if a field has been set.
+func (o *LineChartQuery) HasMetrics() bool {
+	if o != nil && !IsNil(o.Metrics) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetrics gets a reference to the given LineChartMetricsQuery and assigns it to the Metrics field.
+func (o *LineChartQuery) SetMetrics(v LineChartMetricsQuery) {
+	o.Metrics = &v
+}
+
+// GetSpans returns the Spans field value if set, zero value otherwise.
+func (o *LineChartQuery) GetSpans() LineChartSpansQuery {
+	if o == nil || IsNil(o.Spans) {
+		var ret LineChartSpansQuery
+		return ret
+	}
+	return *o.Spans
+}
+
+// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LineChartQuery) GetSpansOk() (*LineChartSpansQuery, bool) {
+	if o == nil || IsNil(o.Spans) {
+		return nil, false
+	}
+	return o.Spans, true
+}
+
+// HasSpans returns a boolean if a field has been set.
+func (o *LineChartQuery) HasSpans() bool {
+	if o != nil && !IsNil(o.Spans) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpans gets a reference to the given LineChartSpansQuery and assigns it to the Spans field.
+func (o *LineChartQuery) SetSpans(v LineChartSpansQuery) {
+	o.Spans = &v
+}
+
+func (o LineChartQuery) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o LineChartQuery) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dataprime) {
+		toSerialize["dataprime"] = o.Dataprime
+	}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Metrics) {
+		toSerialize["metrics"] = o.Metrics
+	}
+	if !IsNil(o.Spans) {
+		toSerialize["spans"] = o.Spans
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metrics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spans"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dataprime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logs, metrics, spans, dataprime] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["logs"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logs must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metrics"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metrics must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["spans"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spans must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dataprime"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dataprime must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *LineChartQuery) UnmarshalJSON(data []byte) (err error) {
+	varLineChartQuery := _LineChartQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLineChartQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LineChartQuery(varLineChartQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LineChartQueryDataprime = nil
-	}
-
-	// try to unmarshal data into LineChartQueryLogs
-	err = json.Unmarshal(data, &dst.LineChartQueryLogs)
-	if err == nil {
-		jsonLineChartQueryLogs, _ := json.Marshal(dst.LineChartQueryLogs)
-		if string(jsonLineChartQueryLogs) == "{}" { // empty struct
-			dst.LineChartQueryLogs = nil
-		} else {
-			if err = validator.Validate(dst.LineChartQueryLogs); err != nil {
-				dst.LineChartQueryLogs = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metrics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LineChartQueryLogs = nil
-	}
-
-	// try to unmarshal data into LineChartQueryMetrics
-	err = json.Unmarshal(data, &dst.LineChartQueryMetrics)
-	if err == nil {
-		jsonLineChartQueryMetrics, _ := json.Marshal(dst.LineChartQueryMetrics)
-		if string(jsonLineChartQueryMetrics) == "{}" { // empty struct
-			dst.LineChartQueryMetrics = nil
-		} else {
-			if err = validator.Validate(dst.LineChartQueryMetrics); err != nil {
-				dst.LineChartQueryMetrics = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spans"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LineChartQueryMetrics = nil
-	}
-
-	// try to unmarshal data into LineChartQuerySpans
-	err = json.Unmarshal(data, &dst.LineChartQuerySpans)
-	if err == nil {
-		jsonLineChartQuerySpans, _ := json.Marshal(dst.LineChartQuerySpans)
-		if string(jsonLineChartQuerySpans) == "{}" { // empty struct
-			dst.LineChartQuerySpans = nil
-		} else {
-			if err = validator.Validate(dst.LineChartQuerySpans); err != nil {
-				dst.LineChartQuerySpans = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dataprime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.LineChartQuerySpans = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logs, metrics, spans, dataprime] may be set"}
+		}
+
+		delete(additionalProperties, "dataprime")
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.LineChartQueryDataprime = nil
-		dst.LineChartQueryLogs = nil
-		dst.LineChartQueryMetrics = nil
-		dst.LineChartQuerySpans = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(LineChartQuery)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src LineChartQuery) MarshalJSON() ([]byte, error) {
-	if src.LineChartQueryDataprime != nil {
-		return json.Marshal(&src.LineChartQueryDataprime)
-	}
-
-	if src.LineChartQueryLogs != nil {
-		return json.Marshal(&src.LineChartQueryLogs)
-	}
-
-	if src.LineChartQueryMetrics != nil {
-		return json.Marshal(&src.LineChartQueryMetrics)
-	}
-
-	if src.LineChartQuerySpans != nil {
-		return json.Marshal(&src.LineChartQuerySpans)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *LineChartQuery) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.LineChartQueryDataprime != nil {
-		return obj.LineChartQueryDataprime
-	}
-
-	if obj.LineChartQueryLogs != nil {
-		return obj.LineChartQueryLogs
-	}
-
-	if obj.LineChartQueryMetrics != nil {
-		return obj.LineChartQueryMetrics
-	}
-
-	if obj.LineChartQuerySpans != nil {
-		return obj.LineChartQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj LineChartQuery) GetActualInstanceValue() (interface{}) {
-	if obj.LineChartQueryDataprime != nil {
-		return *obj.LineChartQueryDataprime
-	}
-
-	if obj.LineChartQueryLogs != nil {
-		return *obj.LineChartQueryLogs
-	}
-
-	if obj.LineChartQueryMetrics != nil {
-		return *obj.LineChartQueryMetrics
-	}
-
-	if obj.LineChartQuerySpans != nil {
-		return *obj.LineChartQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableLineChartQuery struct {
@@ -246,4 +314,3 @@ func (v *NullableLineChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

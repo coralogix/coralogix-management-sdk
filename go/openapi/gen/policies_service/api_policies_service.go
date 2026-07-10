@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // PoliciesServiceAPIService PoliciesServiceAPI service
 type PoliciesServiceAPIService service
 
 type ApiPoliciesServiceAtomicOverwriteLogPoliciesRequest struct {
-	ctx context.Context
-	ApiService *PoliciesServiceAPIService
+	ctx                               context.Context
+	ApiService                        *PoliciesServiceAPIService
 	atomicOverwriteLogPoliciesRequest *AtomicOverwriteLogPoliciesRequest
 }
 
@@ -43,24 +42,25 @@ PoliciesServiceAtomicOverwriteLogPolicies Atomic Overwrite Log Policies
 
 Updates the log data retention policies.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPoliciesServiceAtomicOverwriteLogPoliciesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPoliciesServiceAtomicOverwriteLogPoliciesRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteLogPolicies(ctx context.Context) ApiPoliciesServiceAtomicOverwriteLogPoliciesRequest {
 	return ApiPoliciesServiceAtomicOverwriteLogPoliciesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AtomicOverwriteLogPoliciesResponse
+//
+//	@return AtomicOverwriteLogPoliciesResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteLogPoliciesExecute(r ApiPoliciesServiceAtomicOverwriteLogPoliciesRequest) (*AtomicOverwriteLogPoliciesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AtomicOverwriteLogPoliciesResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AtomicOverwriteLogPoliciesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceAtomicOverwriteLogPolicies")
@@ -125,8 +125,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteLogPoliciesExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -136,8 +136,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteLogPoliciesExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -147,8 +147,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteLogPoliciesExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -166,8 +166,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteLogPoliciesExe
 }
 
 type ApiPoliciesServiceAtomicOverwriteSpanPoliciesRequest struct {
-	ctx context.Context
-	ApiService *PoliciesServiceAPIService
+	ctx                                context.Context
+	ApiService                         *PoliciesServiceAPIService
 	atomicOverwriteSpanPoliciesRequest *AtomicOverwriteSpanPoliciesRequest
 }
 
@@ -185,24 +185,25 @@ PoliciesServiceAtomicOverwriteSpanPolicies Atomic Overwrite Span Policies
 
 Updates span data retention policies.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPoliciesServiceAtomicOverwriteSpanPoliciesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPoliciesServiceAtomicOverwriteSpanPoliciesRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteSpanPolicies(ctx context.Context) ApiPoliciesServiceAtomicOverwriteSpanPoliciesRequest {
 	return ApiPoliciesServiceAtomicOverwriteSpanPoliciesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AtomicOverwriteSpanPoliciesResponse
+//
+//	@return AtomicOverwriteSpanPoliciesResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteSpanPoliciesExecute(r ApiPoliciesServiceAtomicOverwriteSpanPoliciesRequest) (*AtomicOverwriteSpanPoliciesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AtomicOverwriteSpanPoliciesResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AtomicOverwriteSpanPoliciesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceAtomicOverwriteSpanPolicies")
@@ -267,8 +268,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteSpanPoliciesEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -278,8 +279,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteSpanPoliciesEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -289,8 +290,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteSpanPoliciesEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -308,8 +309,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteSpanPoliciesEx
 }
 
 type ApiPoliciesServiceBulkTestLogPoliciesRequest struct {
-	ctx context.Context
-	ApiService *PoliciesServiceAPIService
+	ctx                        context.Context
+	ApiService                 *PoliciesServiceAPIService
 	bulkTestLogPoliciesRequest *BulkTestLogPoliciesRequest
 }
 
@@ -327,24 +328,25 @@ PoliciesServiceBulkTestLogPolicies Bulk Test Log Policies
 
 Tests the data policies against sample data.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPoliciesServiceBulkTestLogPoliciesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPoliciesServiceBulkTestLogPoliciesRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceBulkTestLogPolicies(ctx context.Context) ApiPoliciesServiceBulkTestLogPoliciesRequest {
 	return ApiPoliciesServiceBulkTestLogPoliciesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BulkTestLogPoliciesResponse
+//
+//	@return BulkTestLogPoliciesResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceBulkTestLogPoliciesExecute(r ApiPoliciesServiceBulkTestLogPoliciesRequest) (*BulkTestLogPoliciesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkTestLogPoliciesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkTestLogPoliciesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceBulkTestLogPolicies")
@@ -409,8 +411,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceBulkTestLogPoliciesExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -420,8 +422,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceBulkTestLogPoliciesExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -431,8 +433,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceBulkTestLogPoliciesExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -450,13 +452,13 @@ func (a *PoliciesServiceAPIService) PoliciesServiceBulkTestLogPoliciesExecute(r 
 }
 
 type ApiPoliciesServiceCreatePolicyRequest struct {
-	ctx context.Context
-	ApiService *PoliciesServiceAPIService
-	policiesServiceCreatePolicyRequest *PoliciesServiceCreatePolicyRequest
+	ctx                 context.Context
+	ApiService          *PoliciesServiceAPIService
+	createPolicyRequest *CreatePolicyRequest
 }
 
-func (r ApiPoliciesServiceCreatePolicyRequest) PoliciesServiceCreatePolicyRequest(policiesServiceCreatePolicyRequest PoliciesServiceCreatePolicyRequest) ApiPoliciesServiceCreatePolicyRequest {
-	r.policiesServiceCreatePolicyRequest = &policiesServiceCreatePolicyRequest
+func (r ApiPoliciesServiceCreatePolicyRequest) CreatePolicyRequest(createPolicyRequest CreatePolicyRequest) ApiPoliciesServiceCreatePolicyRequest {
+	r.createPolicyRequest = &createPolicyRequest
 	return r
 }
 
@@ -469,24 +471,25 @@ PoliciesServiceCreatePolicy Create Policy
 
 Creates a new data policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPoliciesServiceCreatePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPoliciesServiceCreatePolicyRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicy(ctx context.Context) ApiPoliciesServiceCreatePolicyRequest {
 	return ApiPoliciesServiceCreatePolicyRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreatePolicyResponse
+//
+//	@return CreatePolicyResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicyExecute(r ApiPoliciesServiceCreatePolicyRequest) (*CreatePolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreatePolicyResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreatePolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceCreatePolicy")
@@ -499,8 +502,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicyExecute(r ApiPoli
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.policiesServiceCreatePolicyRequest == nil {
-		return localVarReturnValue, nil, reportError("policiesServiceCreatePolicyRequest is required and must be specified")
+	if r.createPolicyRequest == nil {
+		return localVarReturnValue, nil, reportError("createPolicyRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -521,7 +524,7 @@ func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicyExecute(r ApiPoli
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.policiesServiceCreatePolicyRequest
+	localVarPostBody = r.createPolicyRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -551,8 +554,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicyExecute(r ApiPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -562,8 +565,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicyExecute(r ApiPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -573,8 +576,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicyExecute(r ApiPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -592,9 +595,9 @@ func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicyExecute(r ApiPoli
 }
 
 type ApiPoliciesServiceDeletePolicyRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PoliciesServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiPoliciesServiceDeletePolicyRequest) Execute() (*DeletePolicyResponse, *http.Response, error) {
@@ -606,26 +609,27 @@ PoliciesServiceDeletePolicy Delete Policy
 
 Deletes the data policy with the specified ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the data policy to delete.
- @return ApiPoliciesServiceDeletePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier of the data policy to delete.
+	@return ApiPoliciesServiceDeletePolicyRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceDeletePolicy(ctx context.Context, id string) ApiPoliciesServiceDeletePolicyRequest {
 	return ApiPoliciesServiceDeletePolicyRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DeletePolicyResponse
+//
+//	@return DeletePolicyResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceDeletePolicyExecute(r ApiPoliciesServiceDeletePolicyRequest) (*DeletePolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeletePolicyResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeletePolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceDeletePolicy")
@@ -689,8 +693,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceDeletePolicyExecute(r ApiPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -700,8 +704,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceDeletePolicyExecute(r ApiPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -711,8 +715,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceDeletePolicyExecute(r ApiPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -730,13 +734,13 @@ func (a *PoliciesServiceAPIService) PoliciesServiceDeletePolicyExecute(r ApiPoli
 }
 
 type ApiPoliciesServiceForecastPolicyUsageRequest struct {
-	ctx context.Context
-	ApiService *PoliciesServiceAPIService
-	policiesServiceForecastPolicyUsageRequest *PoliciesServiceForecastPolicyUsageRequest
+	ctx                        context.Context
+	ApiService                 *PoliciesServiceAPIService
+	forecastPolicyUsageRequest *ForecastPolicyUsageRequest
 }
 
-func (r ApiPoliciesServiceForecastPolicyUsageRequest) PoliciesServiceForecastPolicyUsageRequest(policiesServiceForecastPolicyUsageRequest PoliciesServiceForecastPolicyUsageRequest) ApiPoliciesServiceForecastPolicyUsageRequest {
-	r.policiesServiceForecastPolicyUsageRequest = &policiesServiceForecastPolicyUsageRequest
+func (r ApiPoliciesServiceForecastPolicyUsageRequest) ForecastPolicyUsageRequest(forecastPolicyUsageRequest ForecastPolicyUsageRequest) ApiPoliciesServiceForecastPolicyUsageRequest {
+	r.forecastPolicyUsageRequest = &forecastPolicyUsageRequest
 	return r
 }
 
@@ -749,24 +753,25 @@ PoliciesServiceForecastPolicyUsage Forecast Policy Usage
 
 Forecasts the usage in bytes that a draft TCO policy would match over the requested time window, given its application/subsystem rules and log or span filters. Use this before saving a new or modified policy to see the impact on your quota.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPoliciesServiceForecastPolicyUsageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPoliciesServiceForecastPolicyUsageRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsage(ctx context.Context) ApiPoliciesServiceForecastPolicyUsageRequest {
 	return ApiPoliciesServiceForecastPolicyUsageRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ForecastPolicyUsageResponse
+//
+//	@return ForecastPolicyUsageResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsageExecute(r ApiPoliciesServiceForecastPolicyUsageRequest) (*ForecastPolicyUsageResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ForecastPolicyUsageResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ForecastPolicyUsageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceForecastPolicyUsage")
@@ -779,8 +784,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsageExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.policiesServiceForecastPolicyUsageRequest == nil {
-		return localVarReturnValue, nil, reportError("policiesServiceForecastPolicyUsageRequest is required and must be specified")
+	if r.forecastPolicyUsageRequest == nil {
+		return localVarReturnValue, nil, reportError("forecastPolicyUsageRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -801,7 +806,7 @@ func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsageExecute(r 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.policiesServiceForecastPolicyUsageRequest
+	localVarPostBody = r.forecastPolicyUsageRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -831,8 +836,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsageExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -842,8 +847,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsageExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -853,8 +858,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsageExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -872,10 +877,10 @@ func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsageExecute(r 
 }
 
 type ApiPoliciesServiceGetCompanyPoliciesRequest struct {
-	ctx context.Context
-	ApiService *PoliciesServiceAPIService
+	ctx         context.Context
+	ApiService  *PoliciesServiceAPIService
 	enabledOnly *bool
-	sourceType *V1SourceType
+	sourceType  *V1SourceType
 }
 
 // When true, return only policies that are currently enabled.
@@ -899,24 +904,25 @@ PoliciesServiceGetCompanyPolicies Get Company Policies
 
 Returns all data policies for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPoliciesServiceGetCompanyPoliciesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPoliciesServiceGetCompanyPoliciesRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceGetCompanyPolicies(ctx context.Context) ApiPoliciesServiceGetCompanyPoliciesRequest {
 	return ApiPoliciesServiceGetCompanyPoliciesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetCompanyPoliciesResponse
+//
+//	@return GetCompanyPoliciesResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceGetCompanyPoliciesExecute(r ApiPoliciesServiceGetCompanyPoliciesRequest) (*GetCompanyPoliciesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCompanyPoliciesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCompanyPoliciesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceGetCompanyPolicies")
@@ -931,10 +937,14 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetCompanyPoliciesExecute(r A
 	localVarFormParams := url.Values{}
 
 	if r.enabledOnly != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "enabled_only", r.enabledOnly, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "enabled_only", r.enabledOnly, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.sourceType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "source_type", r.sourceType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "source_type", r.sourceType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -982,8 +992,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetCompanyPoliciesExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -993,8 +1003,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetCompanyPoliciesExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1004,8 +1014,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetCompanyPoliciesExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1023,9 +1033,9 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetCompanyPoliciesExecute(r A
 }
 
 type ApiPoliciesServiceGetPolicyRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PoliciesServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiPoliciesServiceGetPolicyRequest) Execute() (*GetPolicyResponse, *http.Response, error) {
@@ -1037,26 +1047,27 @@ PoliciesServiceGetPolicy Get Policy by ID
 
 Returns the details of the specified data policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the data policy to retrieve.
- @return ApiPoliciesServiceGetPolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier of the data policy to retrieve.
+	@return ApiPoliciesServiceGetPolicyRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicy(ctx context.Context, id string) ApiPoliciesServiceGetPolicyRequest {
 	return ApiPoliciesServiceGetPolicyRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetPolicyResponse
+//
+//	@return GetPolicyResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicyExecute(r ApiPoliciesServiceGetPolicyRequest) (*GetPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceGetPolicy")
@@ -1120,8 +1131,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicyExecute(r ApiPolicie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1131,8 +1142,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicyExecute(r ApiPolicie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1142,8 +1153,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicyExecute(r ApiPolicie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1161,7 +1172,7 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicyExecute(r ApiPolicie
 }
 
 type ApiPoliciesServiceGetPolicySettingsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PoliciesServiceAPIService
 }
 
@@ -1174,24 +1185,25 @@ PoliciesServiceGetPolicySettings Get Policy Priority Settings
 
 Returns the current data policy settings.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPoliciesServiceGetPolicySettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPoliciesServiceGetPolicySettingsRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicySettings(ctx context.Context) ApiPoliciesServiceGetPolicySettingsRequest {
 	return ApiPoliciesServiceGetPolicySettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetPolicySettingsResponse
+//
+//	@return GetPolicySettingsResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicySettingsExecute(r ApiPoliciesServiceGetPolicySettingsRequest) (*GetPolicySettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPolicySettingsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPolicySettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceGetPolicySettings")
@@ -1251,8 +1263,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicySettingsExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1262,8 +1274,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicySettingsExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1273,8 +1285,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicySettingsExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1292,8 +1304,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicySettingsExecute(r Ap
 }
 
 type ApiPoliciesServiceReorderPoliciesRequest struct {
-	ctx context.Context
-	ApiService *PoliciesServiceAPIService
+	ctx                    context.Context
+	ApiService             *PoliciesServiceAPIService
 	reorderPoliciesRequest *ReorderPoliciesRequest
 }
 
@@ -1311,24 +1323,25 @@ PoliciesServiceReorderPolicies Reorder Policies
 
 Reorders all data policies.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPoliciesServiceReorderPoliciesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPoliciesServiceReorderPoliciesRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceReorderPolicies(ctx context.Context) ApiPoliciesServiceReorderPoliciesRequest {
 	return ApiPoliciesServiceReorderPoliciesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReorderPoliciesResponse
+//
+//	@return ReorderPoliciesResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceReorderPoliciesExecute(r ApiPoliciesServiceReorderPoliciesRequest) (*ReorderPoliciesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReorderPoliciesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReorderPoliciesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceReorderPolicies")
@@ -1393,8 +1406,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceReorderPoliciesExecute(r ApiP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1404,8 +1417,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceReorderPoliciesExecute(r ApiP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1415,8 +1428,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceReorderPoliciesExecute(r ApiP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1434,8 +1447,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceReorderPoliciesExecute(r ApiP
 }
 
 type ApiPoliciesServiceReplacePolicySettingsRequest struct {
-	ctx context.Context
-	ApiService *PoliciesServiceAPIService
+	ctx                          context.Context
+	ApiService                   *PoliciesServiceAPIService
 	replacePolicySettingsRequest *ReplacePolicySettingsRequest
 }
 
@@ -1453,24 +1466,25 @@ PoliciesServiceReplacePolicySettings Replace Policy Settings
 
 Updates data policy settings.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPoliciesServiceReplacePolicySettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPoliciesServiceReplacePolicySettingsRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceReplacePolicySettings(ctx context.Context) ApiPoliciesServiceReplacePolicySettingsRequest {
 	return ApiPoliciesServiceReplacePolicySettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReplacePolicySettingsResponse
+//
+//	@return ReplacePolicySettingsResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceReplacePolicySettingsExecute(r ApiPoliciesServiceReplacePolicySettingsRequest) (*ReplacePolicySettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplacePolicySettingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplacePolicySettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceReplacePolicySettings")
@@ -1532,8 +1546,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceReplacePolicySettingsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1543,8 +1557,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceReplacePolicySettingsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1554,8 +1568,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceReplacePolicySettingsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1573,13 +1587,13 @@ func (a *PoliciesServiceAPIService) PoliciesServiceReplacePolicySettingsExecute(
 }
 
 type ApiPoliciesServiceUpdatePolicyRequest struct {
-	ctx context.Context
-	ApiService *PoliciesServiceAPIService
-	policiesServiceUpdatePolicyRequest *PoliciesServiceUpdatePolicyRequest
+	ctx                 context.Context
+	ApiService          *PoliciesServiceAPIService
+	updatePolicyRequest *UpdatePolicyRequest
 }
 
-func (r ApiPoliciesServiceUpdatePolicyRequest) PoliciesServiceUpdatePolicyRequest(policiesServiceUpdatePolicyRequest PoliciesServiceUpdatePolicyRequest) ApiPoliciesServiceUpdatePolicyRequest {
-	r.policiesServiceUpdatePolicyRequest = &policiesServiceUpdatePolicyRequest
+func (r ApiPoliciesServiceUpdatePolicyRequest) UpdatePolicyRequest(updatePolicyRequest UpdatePolicyRequest) ApiPoliciesServiceUpdatePolicyRequest {
+	r.updatePolicyRequest = &updatePolicyRequest
 	return r
 }
 
@@ -1592,24 +1606,25 @@ PoliciesServiceUpdatePolicy Update Policy
 
 Updates an existing data policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPoliciesServiceUpdatePolicyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPoliciesServiceUpdatePolicyRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceUpdatePolicy(ctx context.Context) ApiPoliciesServiceUpdatePolicyRequest {
 	return ApiPoliciesServiceUpdatePolicyRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return UpdatePolicyResponse
+//
+//	@return UpdatePolicyResponse
 func (a *PoliciesServiceAPIService) PoliciesServiceUpdatePolicyExecute(r ApiPoliciesServiceUpdatePolicyRequest) (*UpdatePolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdatePolicyResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdatePolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceUpdatePolicy")
@@ -1622,8 +1637,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceUpdatePolicyExecute(r ApiPoli
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.policiesServiceUpdatePolicyRequest == nil {
-		return localVarReturnValue, nil, reportError("policiesServiceUpdatePolicyRequest is required and must be specified")
+	if r.updatePolicyRequest == nil {
+		return localVarReturnValue, nil, reportError("updatePolicyRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1644,7 +1659,7 @@ func (a *PoliciesServiceAPIService) PoliciesServiceUpdatePolicyExecute(r ApiPoli
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.policiesServiceUpdatePolicyRequest
+	localVarPostBody = r.updatePolicyRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1674,8 +1689,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceUpdatePolicyExecute(r ApiPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1685,8 +1700,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceUpdatePolicyExecute(r ApiPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1696,8 +1711,8 @@ func (a *PoliciesServiceAPIService) PoliciesServiceUpdatePolicyExecute(r ApiPoli
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

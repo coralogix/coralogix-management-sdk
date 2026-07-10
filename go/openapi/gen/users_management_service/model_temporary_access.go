@@ -24,8 +24,9 @@ var _ MappedNullable = &TemporaryAccess{}
 // TemporaryAccess User with temporary access. The user's access will automatically expire at the specified timestamp.
 type TemporaryAccess struct {
 	// Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.
-	ExpireAt *time.Time `json:"expireAt,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ExpireAt                          *time.Time `json:"expireAt,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TemporaryAccess TemporaryAccess
@@ -80,7 +81,7 @@ func (o *TemporaryAccess) SetExpireAt(v time.Time) {
 }
 
 func (o TemporaryAccess) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -117,6 +118,7 @@ func (o *TemporaryAccess) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "expireAt")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -157,4 +159,3 @@ func (v *NullableTemporaryAccess) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

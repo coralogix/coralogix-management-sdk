@@ -16,18 +16,17 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"reflect"
+	"strings"
 )
-
 
 // PresetsServiceAPIService PresetsServiceAPI service
 type PresetsServiceAPIService service
 
 type ApiPresetsServiceBatchGetPresetsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PresetsServiceAPIService
-	presetIds *[]string
+	presetIds  *[]string
 }
 
 // The unique identifiers of the presets to retrieve.
@@ -45,24 +44,25 @@ PresetsServiceBatchGetPresets Batch Get Presets
 
 Returns all notification presets.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPresetsServiceBatchGetPresetsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPresetsServiceBatchGetPresetsRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceBatchGetPresets(ctx context.Context) ApiPresetsServiceBatchGetPresetsRequest {
 	return ApiPresetsServiceBatchGetPresetsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BatchGetPresetsResponse
+//
+//	@return BatchGetPresetsResponse
 func (a *PresetsServiceAPIService) PresetsServiceBatchGetPresetsExecute(r ApiPresetsServiceBatchGetPresetsRequest) (*BatchGetPresetsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BatchGetPresetsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BatchGetPresetsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresetsServiceAPIService.PresetsServiceBatchGetPresets")
@@ -81,10 +81,14 @@ func (a *PresetsServiceAPIService) PresetsServiceBatchGetPresetsExecute(r ApiPre
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "preset_ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "preset_ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "preset_ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "preset_ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -142,8 +146,8 @@ func (a *PresetsServiceAPIService) PresetsServiceBatchGetPresetsExecute(r ApiPre
 }
 
 type ApiPresetsServiceCreateCustomPresetRequest struct {
-	ctx context.Context
-	ApiService *PresetsServiceAPIService
+	ctx                       context.Context
+	ApiService                *PresetsServiceAPIService
 	createCustomPresetRequest *CreateCustomPresetRequest
 }
 
@@ -161,24 +165,25 @@ PresetsServiceCreateCustomPreset Create Custom Preset
 
 Creates a new custom notification preset.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPresetsServiceCreateCustomPresetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPresetsServiceCreateCustomPresetRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceCreateCustomPreset(ctx context.Context) ApiPresetsServiceCreateCustomPresetRequest {
 	return ApiPresetsServiceCreateCustomPresetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateCustomPresetResponse
+//
+//	@return CreateCustomPresetResponse
 func (a *PresetsServiceAPIService) PresetsServiceCreateCustomPresetExecute(r ApiPresetsServiceCreateCustomPresetRequest) (*CreateCustomPresetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateCustomPresetResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateCustomPresetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresetsServiceAPIService.PresetsServiceCreateCustomPreset")
@@ -249,9 +254,9 @@ func (a *PresetsServiceAPIService) PresetsServiceCreateCustomPresetExecute(r Api
 }
 
 type ApiPresetsServiceDeleteCustomPresetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PresetsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiPresetsServiceDeleteCustomPresetRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -263,26 +268,27 @@ PresetsServiceDeleteCustomPreset Delete Custom Preset
 
 Deletes the custom notification preset with the specified ID.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
- @return ApiPresetsServiceDeleteCustomPresetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Unique identifier.
+	@return ApiPresetsServiceDeleteCustomPresetRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceDeleteCustomPreset(ctx context.Context, id string) ApiPresetsServiceDeleteCustomPresetRequest {
 	return ApiPresetsServiceDeleteCustomPresetRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *PresetsServiceAPIService) PresetsServiceDeleteCustomPresetExecute(r ApiPresetsServiceDeleteCustomPresetRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresetsServiceAPIService.PresetsServiceDeleteCustomPreset")
@@ -358,10 +364,10 @@ func (a *PresetsServiceAPIService) PresetsServiceDeleteCustomPresetExecute(r Api
 }
 
 type ApiPresetsServiceGetDefaultPresetSummaryRequest struct {
-	ctx context.Context
-	ApiService *PresetsServiceAPIService
+	ctx           context.Context
+	ApiService    *PresetsServiceAPIService
 	connectorType *NotificationCenterConnectorType
-	entityType *NotificationCenterEntityType
+	entityType    *NotificationCenterEntityType
 }
 
 // The connector type whose default preset summary is requested.
@@ -385,24 +391,25 @@ PresetsServiceGetDefaultPresetSummary Get Default Preset Summary
 
 Returns a summary of the default notification preset.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPresetsServiceGetDefaultPresetSummaryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPresetsServiceGetDefaultPresetSummaryRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceGetDefaultPresetSummary(ctx context.Context) ApiPresetsServiceGetDefaultPresetSummaryRequest {
 	return ApiPresetsServiceGetDefaultPresetSummaryRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetDefaultPresetSummaryResponse
+//
+//	@return GetDefaultPresetSummaryResponse
 func (a *PresetsServiceAPIService) PresetsServiceGetDefaultPresetSummaryExecute(r ApiPresetsServiceGetDefaultPresetSummaryRequest) (*GetDefaultPresetSummaryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDefaultPresetSummaryResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDefaultPresetSummaryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresetsServiceAPIService.PresetsServiceGetDefaultPresetSummary")
@@ -417,10 +424,14 @@ func (a *PresetsServiceAPIService) PresetsServiceGetDefaultPresetSummaryExecute(
 	localVarFormParams := url.Values{}
 
 	if r.connectorType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.entityType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -477,9 +488,9 @@ func (a *PresetsServiceAPIService) PresetsServiceGetDefaultPresetSummaryExecute(
 }
 
 type ApiPresetsServiceGetPresetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PresetsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiPresetsServiceGetPresetRequest) Execute() (*GetPresetResponse, *http.Response, error) {
@@ -491,26 +502,27 @@ PresetsServiceGetPreset Get Preset
 
 Returns the details of the specified notification preset.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the preset to retrieve.
- @return ApiPresetsServiceGetPresetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier of the preset to retrieve.
+	@return ApiPresetsServiceGetPresetRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceGetPreset(ctx context.Context, id string) ApiPresetsServiceGetPresetRequest {
 	return ApiPresetsServiceGetPresetRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetPresetResponse
+//
+//	@return GetPresetResponse
 func (a *PresetsServiceAPIService) PresetsServiceGetPresetExecute(r ApiPresetsServiceGetPresetRequest) (*GetPresetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPresetResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPresetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresetsServiceAPIService.PresetsServiceGetPreset")
@@ -586,10 +598,10 @@ func (a *PresetsServiceAPIService) PresetsServiceGetPresetExecute(r ApiPresetsSe
 }
 
 type ApiPresetsServiceGetSystemDefaultPresetSummaryRequest struct {
-	ctx context.Context
-	ApiService *PresetsServiceAPIService
+	ctx           context.Context
+	ApiService    *PresetsServiceAPIService
 	connectorType *NotificationCenterConnectorType
-	entityType *NotificationCenterEntityType
+	entityType    *NotificationCenterEntityType
 }
 
 // The connector type whose system default preset summary is requested.
@@ -613,24 +625,25 @@ PresetsServiceGetSystemDefaultPresetSummary Get System Default Preset Summary
 
 Returns summaries for all system-defined notification presets.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPresetsServiceGetSystemDefaultPresetSummaryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPresetsServiceGetSystemDefaultPresetSummaryRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceGetSystemDefaultPresetSummary(ctx context.Context) ApiPresetsServiceGetSystemDefaultPresetSummaryRequest {
 	return ApiPresetsServiceGetSystemDefaultPresetSummaryRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetSystemDefaultPresetSummaryResponse
+//
+//	@return GetSystemDefaultPresetSummaryResponse
 func (a *PresetsServiceAPIService) PresetsServiceGetSystemDefaultPresetSummaryExecute(r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) (*GetSystemDefaultPresetSummaryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSystemDefaultPresetSummaryResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSystemDefaultPresetSummaryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresetsServiceAPIService.PresetsServiceGetSystemDefaultPresetSummary")
@@ -645,10 +658,14 @@ func (a *PresetsServiceAPIService) PresetsServiceGetSystemDefaultPresetSummaryEx
 	localVarFormParams := url.Values{}
 
 	if r.connectorType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.entityType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -705,10 +722,10 @@ func (a *PresetsServiceAPIService) PresetsServiceGetSystemDefaultPresetSummaryEx
 }
 
 type ApiPresetsServiceListPresetSummariesRequest struct {
-	ctx context.Context
-	ApiService *PresetsServiceAPIService
+	ctx           context.Context
+	ApiService    *PresetsServiceAPIService
 	connectorType *NotificationCenterConnectorType
-	entityType *NotificationCenterEntityType
+	entityType    *NotificationCenterEntityType
 }
 
 // Filter preset summaries by their connector type.
@@ -732,24 +749,25 @@ PresetsServiceListPresetSummaries List Preset Summaries
 
 Returns a list of notification preset summaries.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPresetsServiceListPresetSummariesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPresetsServiceListPresetSummariesRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceListPresetSummaries(ctx context.Context) ApiPresetsServiceListPresetSummariesRequest {
 	return ApiPresetsServiceListPresetSummariesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListPresetSummariesResponse
+//
+//	@return ListPresetSummariesResponse
 func (a *PresetsServiceAPIService) PresetsServiceListPresetSummariesExecute(r ApiPresetsServiceListPresetSummariesRequest) (*ListPresetSummariesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListPresetSummariesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListPresetSummariesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresetsServiceAPIService.PresetsServiceListPresetSummaries")
@@ -764,10 +782,14 @@ func (a *PresetsServiceAPIService) PresetsServiceListPresetSummariesExecute(r Ap
 	localVarFormParams := url.Values{}
 
 	if r.connectorType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "connector_type", r.connectorType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	if r.entityType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "entity_type", r.entityType, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -824,8 +846,8 @@ func (a *PresetsServiceAPIService) PresetsServiceListPresetSummariesExecute(r Ap
 }
 
 type ApiPresetsServiceReplaceCustomPresetRequest struct {
-	ctx context.Context
-	ApiService *PresetsServiceAPIService
+	ctx                        context.Context
+	ApiService                 *PresetsServiceAPIService
 	replaceCustomPresetRequest *ReplaceCustomPresetRequest
 }
 
@@ -843,24 +865,25 @@ PresetsServiceReplaceCustomPreset Replace Custom Preset
 
 Replaces an existing custom notification preset.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPresetsServiceReplaceCustomPresetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPresetsServiceReplaceCustomPresetRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceReplaceCustomPreset(ctx context.Context) ApiPresetsServiceReplaceCustomPresetRequest {
 	return ApiPresetsServiceReplaceCustomPresetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ReplaceCustomPresetResponse
+//
+//	@return ReplaceCustomPresetResponse
 func (a *PresetsServiceAPIService) PresetsServiceReplaceCustomPresetExecute(r ApiPresetsServiceReplaceCustomPresetRequest) (*ReplaceCustomPresetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceCustomPresetResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplaceCustomPresetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresetsServiceAPIService.PresetsServiceReplaceCustomPreset")
@@ -931,9 +954,9 @@ func (a *PresetsServiceAPIService) PresetsServiceReplaceCustomPresetExecute(r Ap
 }
 
 type ApiPresetsServiceSetCustomPresetAsDefaultRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PresetsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiPresetsServiceSetCustomPresetAsDefaultRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -945,26 +968,27 @@ PresetsServiceSetCustomPresetAsDefault Set Custom Preset As Default
 
 Sets a custom preset as the default.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the custom preset to set as default.
- @return ApiPresetsServiceSetCustomPresetAsDefaultRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier of the custom preset to set as default.
+	@return ApiPresetsServiceSetCustomPresetAsDefaultRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceSetCustomPresetAsDefault(ctx context.Context, id string) ApiPresetsServiceSetCustomPresetAsDefaultRequest {
 	return ApiPresetsServiceSetCustomPresetAsDefaultRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *PresetsServiceAPIService) PresetsServiceSetCustomPresetAsDefaultExecute(r ApiPresetsServiceSetCustomPresetAsDefaultRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresetsServiceAPIService.PresetsServiceSetCustomPresetAsDefault")
@@ -1040,9 +1064,9 @@ func (a *PresetsServiceAPIService) PresetsServiceSetCustomPresetAsDefaultExecute
 }
 
 type ApiPresetsServiceSetPresetAsDefaultRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PresetsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiPresetsServiceSetPresetAsDefaultRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -1054,26 +1078,27 @@ PresetsServiceSetPresetAsDefault Set Preset As Default
 
 Sets the specified preset as the default for an entity.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The unique identifier of the preset to set as default.
- @return ApiPresetsServiceSetPresetAsDefaultRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier of the preset to set as default.
+	@return ApiPresetsServiceSetPresetAsDefaultRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceSetPresetAsDefault(ctx context.Context, id string) ApiPresetsServiceSetPresetAsDefaultRequest {
 	return ApiPresetsServiceSetPresetAsDefaultRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *PresetsServiceAPIService) PresetsServiceSetPresetAsDefaultExecute(r ApiPresetsServiceSetPresetAsDefaultRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PresetsServiceAPIService.PresetsServiceSetPresetAsDefault")

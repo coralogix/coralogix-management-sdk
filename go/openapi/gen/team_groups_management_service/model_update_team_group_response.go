@@ -22,8 +22,9 @@ var _ MappedNullable = &UpdateTeamGroupResponse{}
 
 // UpdateTeamGroupResponse Response containing the updated team group.
 type UpdateTeamGroupResponse struct {
-	Group *TeamGroup `json:"group,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Group                             *TeamGroup `json:"group,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _UpdateTeamGroupResponse UpdateTeamGroupResponse
@@ -78,7 +79,7 @@ func (o *UpdateTeamGroupResponse) SetGroup(v TeamGroup) {
 }
 
 func (o UpdateTeamGroupResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *UpdateTeamGroupResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "group")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableUpdateTeamGroupResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

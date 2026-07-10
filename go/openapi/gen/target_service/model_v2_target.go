@@ -14,125 +14,245 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// V2Target - struct for V2Target
+// checks if the V2Target type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V2Target{}
+
+// V2Target This data structure represents a target to archive logs.
 type V2Target struct {
-	V2TargetIbmCos *V2TargetIbmCos
-	V2TargetS3 *V2TargetS3
+	ArchiveSpec                                     ArchiveSpec       `json:"archiveSpec"`
+	IbmCos                                          *IBMCosTargetSpec `json:"ibmCos,omitempty"`
+	S3                                              *S3TargetSpec     `json:"s3,omitempty"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
-// V2TargetIbmCosAsV2Target is a convenience function that returns V2TargetIbmCos wrapped in V2Target
-func V2TargetIbmCosAsV2Target(v *V2TargetIbmCos) V2Target {
-	return V2Target{
-		V2TargetIbmCos: v,
+type _V2Target V2Target
+
+// NewV2Target instantiates a new V2Target object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewV2Target(archiveSpec ArchiveSpec) *V2Target {
+	this := V2Target{}
+	this.ArchiveSpec = archiveSpec
+	return &this
+}
+
+// NewV2TargetWithDefaults instantiates a new V2Target object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewV2TargetWithDefaults() *V2Target {
+	this := V2Target{}
+	return &this
+}
+
+// GetArchiveSpec returns the ArchiveSpec field value
+func (o *V2Target) GetArchiveSpec() ArchiveSpec {
+	if o == nil {
+		var ret ArchiveSpec
+		return ret
 	}
+
+	return o.ArchiveSpec
 }
 
-// V2TargetS3AsV2Target is a convenience function that returns V2TargetS3 wrapped in V2Target
-func V2TargetS3AsV2Target(v *V2TargetS3) V2Target {
-	return V2Target{
-		V2TargetS3: v,
+// GetArchiveSpecOk returns a tuple with the ArchiveSpec field value
+// and a boolean to check if the value has been set.
+func (o *V2Target) GetArchiveSpecOk() (*ArchiveSpec, bool) {
+	if o == nil {
+		return nil, false
 	}
+	return &o.ArchiveSpec, true
 }
 
+// SetArchiveSpec sets field value
+func (o *V2Target) SetArchiveSpec(v ArchiveSpec) {
+	o.ArchiveSpec = v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *V2Target) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into V2TargetIbmCos
-	err = json.Unmarshal(data, &dst.V2TargetIbmCos)
-	if err == nil {
-		jsonV2TargetIbmCos, _ := json.Marshal(dst.V2TargetIbmCos)
-		if string(jsonV2TargetIbmCos) == "{}" { // empty struct
-			dst.V2TargetIbmCos = nil
-		} else {
-			if err = validator.Validate(dst.V2TargetIbmCos); err != nil {
-				dst.V2TargetIbmCos = nil
-			} else {
-				match++
-			}
+// GetIbmCos returns the IbmCos field value if set, zero value otherwise.
+func (o *V2Target) GetIbmCos() IBMCosTargetSpec {
+	if o == nil || IsNil(o.IbmCos) {
+		var ret IBMCosTargetSpec
+		return ret
+	}
+	return *o.IbmCos
+}
+
+// GetIbmCosOk returns a tuple with the IbmCos field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Target) GetIbmCosOk() (*IBMCosTargetSpec, bool) {
+	if o == nil || IsNil(o.IbmCos) {
+		return nil, false
+	}
+	return o.IbmCos, true
+}
+
+// HasIbmCos returns a boolean if a field has been set.
+func (o *V2Target) HasIbmCos() bool {
+	if o != nil && !IsNil(o.IbmCos) {
+		return true
+	}
+
+	return false
+}
+
+// SetIbmCos gets a reference to the given IBMCosTargetSpec and assigns it to the IbmCos field.
+func (o *V2Target) SetIbmCos(v IBMCosTargetSpec) {
+	o.IbmCos = &v
+}
+
+// GetS3 returns the S3 field value if set, zero value otherwise.
+func (o *V2Target) GetS3() S3TargetSpec {
+	if o == nil || IsNil(o.S3) {
+		var ret S3TargetSpec
+		return ret
+	}
+	return *o.S3
+}
+
+// GetS3Ok returns a tuple with the S3 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Target) GetS3Ok() (*S3TargetSpec, bool) {
+	if o == nil || IsNil(o.S3) {
+		return nil, false
+	}
+	return o.S3, true
+}
+
+// HasS3 returns a boolean if a field has been set.
+func (o *V2Target) HasS3() bool {
+	if o != nil && !IsNil(o.S3) {
+		return true
+	}
+
+	return false
+}
+
+// SetS3 gets a reference to the given S3TargetSpec and assigns it to the S3 field.
+func (o *V2Target) SetS3(v S3TargetSpec) {
+	o.S3 = &v
+}
+
+func (o V2Target) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o V2Target) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["archiveSpec"] = o.ArchiveSpec
+	if !IsNil(o.IbmCos) {
+		toSerialize["ibmCos"] = o.IbmCos
+	}
+	if !IsNil(o.S3) {
+		toSerialize["s3"] = o.S3
+	}
+	requiredOneOfGroup0Matches := 0
+	if _, exists := toSerialize["s3"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["ibmCos"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [s3, ibmCos] must be set"}
 		}
-	} else {
-		dst.V2TargetIbmCos = nil
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [s3, ibmCos] must be set"}
 	}
 
-	// try to unmarshal data into V2TargetS3
-	err = json.Unmarshal(data, &dst.V2TargetS3)
-	if err == nil {
-		jsonV2TargetS3, _ := json.Marshal(dst.V2TargetS3)
-		if string(jsonV2TargetS3) == "{}" { // empty struct
-			dst.V2TargetS3 = nil
-		} else {
-			if err = validator.Validate(dst.V2TargetS3); err != nil {
-				dst.V2TargetS3 = nil
-			} else {
-				match++
-			}
+	if _, exists := o.AdditionalProperties["s3"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field s3 must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ibmCos"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ibmCos must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *V2Target) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"archiveSpec",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.V2TargetS3 = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.V2TargetIbmCos = nil
-		dst.V2TargetS3 = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(V2Target)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["s3"]; exists {
+		requiredOneOfGroup0Matches++
 	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src V2Target) MarshalJSON() ([]byte, error) {
-	if src.V2TargetIbmCos != nil {
-		return json.Marshal(&src.V2TargetIbmCos)
+	if _, exists := allProperties["ibmCos"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [s3, ibmCos] may be set"}
 	}
 
-	if src.V2TargetS3 != nil {
-		return json.Marshal(&src.V2TargetS3)
+	varV2Target := _V2Target{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2Target)
+
+	if err != nil {
+		return err
 	}
 
-	return nil, nil // no data in oneOf schemas
-}
+	*o = V2Target(varV2Target)
 
-// Get the actual instance
-func (obj *V2Target) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.V2TargetIbmCos != nil {
-		return obj.V2TargetIbmCos
-	}
+	additionalProperties := make(map[string]interface{})
 
-	if obj.V2TargetS3 != nil {
-		return obj.V2TargetS3
-	}
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		requiredOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["s3"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
+		}
+		if _, exists := additionalProperties["ibmCos"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
+		}
+		if requiredOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [s3, ibmCos] may be set"}
+		}
 
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj V2Target) GetActualInstanceValue() (interface{}) {
-	if obj.V2TargetIbmCos != nil {
-		return *obj.V2TargetIbmCos
+		delete(additionalProperties, "archiveSpec")
+		delete(additionalProperties, "ibmCos")
+		delete(additionalProperties, "s3")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
-	if obj.V2TargetS3 != nil {
-		return *obj.V2TargetS3
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableV2Target struct {
@@ -170,4 +290,3 @@ func (v *NullableV2Target) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

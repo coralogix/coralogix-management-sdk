@@ -1,0 +1,891 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/dataplan/data-usage/v1/capabilities": {
+      "get": {
+        "tags": [
+          "Data Usage Query service"
+        ],
+        "summary": "Get data usage capabilities",
+        "description": "Returns the labels, measurement kinds, units, and per-request limits supported by the public data-usage API in v1, so clients can validate queries before submitting them.\n\nRequires the following permissions:\n- `data-usage:Read`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DataUsageQueryService_GetDataUsageCapabilities",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDataUsageCapabilitiesResponse"
+                },
+                "example": {
+                  "maxFilterValues": 256,
+                  "maxFilters": 8,
+                  "maxGroupByLabels": 6,
+                  "maxUsageEntriesPerMessage": 1000,
+                  "supportedLabels": [
+                    {
+                      "highCardinality": false,
+                      "key": "feature_id",
+                      "keyDescription": "Coralogix feature identifier such as logs_ingestion.",
+                      "knownValues": [
+                        {
+                          "description": "Log volume ingested.",
+                          "value": "logs_ingestion"
+                        }
+                      ]
+                    }
+                  ],
+                  "supportedMeasurements": [
+                    {
+                      "description": "Bytes processed.",
+                      "kind": "MEASUREMENT_KIND_PROCESSED_DATA_SIZE",
+                      "unit": "MEASUREMENT_UNIT_BYTES"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "data-usage:Read"
+        ]
+      }
+    },
+    "/dataplan/data-usage/v1/query": {
+      "post": {
+        "tags": [
+          "Data Usage Query service"
+        ],
+        "summary": "Query data usage",
+        "description": "Returns billable data usage aggregated into daily or hourly buckets. Supports filtering and grouping by labels listed by the capabilities endpoint.\n\nRequires the following permissions:\n- `data-usage:Read`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DataUsageQueryService_DataUsage",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Shared query payload used by both unary and streamed data-usage methods.",
+                "type": "object",
+                "properties": {
+                  "daily": {
+                    "$ref": "#/components/schemas/UsageDailyQuery"
+                  },
+                  "filters": {
+                    "description": "Label predicates applied before aggregation.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UsageLabelFilter"
+                    },
+                    "minItems": 0,
+                    "maxItems": 16
+                  },
+                  "groupBy": {
+                    "$ref": "#/components/schemas/UsageGroupBy"
+                  },
+                  "hourly": {
+                    "$ref": "#/components/schemas/UsageHourlyQuery"
+                  },
+                  "limit": {
+                    "$ref": "#/components/schemas/UsageLimit"
+                  },
+                  "measurementKindFilter": {
+                    "description": "Measurement kind filter applied before aggregation. Omit (or pass an empty list) to include all supported measurement kinds.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UsageMeasurementKind"
+                    },
+                    "minItems": 0,
+                    "maxItems": 8
+                  }
+                },
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "daily"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "hourly"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "daily"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "hourly"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataUsageResponse"
+                },
+                "example": {
+                  "buckets": [
+                    {
+                      "entries": [
+                        {
+                          "labels": [
+                            {
+                              "key": "feature_id",
+                              "value": "logs_ingestion"
+                            }
+                          ],
+                          "measurements": [
+                            {
+                              "cxQuotaUnits": {
+                                "value": "1.5"
+                              },
+                              "kind": "MEASUREMENT_KIND_PROCESSED_DATA_SIZE",
+                              "measuredUnit": "MEASUREMENT_UNIT_BYTES",
+                              "measuredValue": "1073741824"
+                            }
+                          ]
+                        }
+                      ],
+                      "range": {
+                        "end": "2026-06-02T00:00:00.000Z",
+                        "start": "2026-06-01T00:00:00.000Z"
+                      }
+                    }
+                  ],
+                  "queryRange": {
+                    "end": "2026-06-08T00:00:00.000Z",
+                    "start": "2026-06-01T00:00:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "data-usage:Read"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Bucket": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A single time bucket of grouped usage entries.",
+        "type": "object",
+        "properties": {
+          "entries": {
+            "description": "Usage entries inside this bucket, one per unique combination of `groupBy` values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageEntry"
+            },
+            "minItems": 0,
+            "maxItems": 100000
+          },
+          "range": {
+            "$ref": "#/components/schemas/UsageTimestampRange"
+          }
+        }
+      },
+      "DataUsageResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Bucket-first usage results for the resolved query interval.",
+        "type": "object",
+        "properties": {
+          "buckets": {
+            "description": "Bucket-first usage results. Daily queries yield one bucket per UTC calendar day; hourly queries yield one bucket per UTC hour.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bucket"
+            },
+            "minItems": 0,
+            "maxItems": 1827
+          },
+          "queryRange": {
+            "$ref": "#/components/schemas/UsageTimestampRange"
+          }
+        }
+      },
+      "Date": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A full calendar date (year, month, day). All three components are required.",
+        "type": "object",
+        "properties": {
+          "day": {
+            "description": "Day of the month. Must be from 1 to 31 and valid for the year and month.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 31
+          },
+          "month": {
+            "description": "Month of the year. Must be from 1 to 12.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 12
+          },
+          "year": {
+            "description": "Year of the date. Must be from 1 to 9999.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 9999
+          }
+        },
+        "required": [
+          "year",
+          "month",
+          "day"
+        ]
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetDataUsageCapabilitiesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Capabilities of the public data-usage query surface in v1.",
+        "type": "object",
+        "properties": {
+          "maxFilterValues": {
+            "description": "Maximum number of values accepted by one label filter.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "maximum": 1024
+          },
+          "maxFilters": {
+            "description": "Maximum number of label filters accepted in one query.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "maximum": 16
+          },
+          "maxGroupByLabels": {
+            "description": "Maximum number of label keys accepted in a `groupBy` request.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "maximum": 16
+          },
+          "maxUsageEntriesPerMessage": {
+            "description": "Maximum number of usage entries the server may include in a single response. `0` means no fixed entry limit is advertised.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "maximum": 1000000
+          },
+          "supportedLabels": {
+            "description": "Supported labels for the public API surface, with descriptions, cardinality hints, and any stable known values.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageCapabilityLabel"
+            },
+            "minItems": 0,
+            "maxItems": 256
+          },
+          "supportedMeasurements": {
+            "description": "Supported measurement kinds and raw units returned by `UsageEntry`.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageCapabilityMeasurement"
+            },
+            "minItems": 0,
+            "maxItems": 32
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "UsageCalendarDateRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Half-open UTC calendar date interval `[start, end)`. Both bounds are required full calendar dates.",
+        "type": "object",
+        "properties": {
+          "end": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "start": {
+            "$ref": "#/components/schemas/Date"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ]
+      },
+      "UsageCapabilityLabel": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A label supported by the public data-usage query surface.",
+        "type": "object",
+        "properties": {
+          "highCardinality": {
+            "description": "Whether this label is considered high cardinality and therefore more likely to produce large result sets.",
+            "type": "boolean"
+          },
+          "key": {
+            "example": "feature_id",
+            "description": "Canonical label key string.",
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "keyDescription": {
+            "description": "Short user-facing description of the label.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "knownValues": {
+            "description": "Stable known values for the label when available. May be incomplete for dynamic or evolving labels.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageCapabilityLabel.LabelValue"
+            },
+            "minItems": 0,
+            "maxItems": 4096
+          }
+        }
+      },
+      "UsageCapabilityLabel.LabelValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A known value for a label, with a short description.",
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "Short user-facing description of this value.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "value": {
+            "example": "logs_ingestion",
+            "description": "The label value.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1024
+          }
+        }
+      },
+      "UsageCapabilityMeasurement": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A measurement kind supported by the public data-usage query surface, with its raw unit.",
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "Short user-facing description of this measurement kind.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "kind": {
+            "$ref": "#/components/schemas/UsageMeasurementKind"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/UsageMeasurementUnit"
+          }
+        }
+      },
+      "UsageDailyQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Day-oriented query. Always returns 1-day UTC buckets.",
+        "type": "object",
+        "properties": {
+          "dateRange": {
+            "$ref": "#/components/schemas/UsageCalendarDateRange"
+          },
+          "relativeRange": {
+            "$ref": "#/components/schemas/UsageDailyRelativeRange"
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "dateRange"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "relativeRange"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "dateRange"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "relativeRange"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "UsageDailyRelativeRange": {
+        "title": "Daily relative range",
+        "description": "Relative day-oriented presets resolved by the server at request time.",
+        "type": "string",
+        "enum": [
+          "DAILY_RELATIVE_RANGE_UNSPECIFIED",
+          "DAILY_RELATIVE_RANGE_CURRENT_MONTH",
+          "DAILY_RELATIVE_RANGE_PREVIOUS_MONTH",
+          "DAILY_RELATIVE_RANGE_CURRENT_YEAR",
+          "DAILY_RELATIVE_RANGE_LAST_7_DAYS",
+          "DAILY_RELATIVE_RANGE_LAST_14_DAYS",
+          "DAILY_RELATIVE_RANGE_LAST_30_DAYS",
+          "DAILY_RELATIVE_RANGE_LAST_90_DAYS",
+          "DAILY_RELATIVE_RANGE_LAST_180_DAYS",
+          "DAILY_RELATIVE_RANGE_LAST_365_DAYS"
+        ]
+      },
+      "UsageEntry": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "One row of usage for a unique combination of grouped label values, with its raw measurements.",
+        "type": "object",
+        "properties": {
+          "labels": {
+            "description": "Label values matching the request's `groupBy` keys. Empty when the request does not group by labels.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageLabel"
+            },
+            "minItems": 0,
+            "maxItems": 16
+          },
+          "measurements": {
+            "description": "Raw usage measurements for this label combination.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageMeasurement"
+            },
+            "minItems": 0,
+            "maxItems": 8
+          }
+        }
+      },
+      "UsageGroupBy": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Set of canonical label keys to group results by.",
+        "type": "object",
+        "properties": {
+          "keys": {
+            "example": [
+              "feature_id"
+            ],
+            "description": "Label key to group by. Supported keys are listed by the capabilities endpoint.",
+            "type": "array",
+            "items": {
+              "description": "Label key to group by. Supported keys are listed by the capabilities endpoint.",
+              "type": "string",
+              "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "minItems": 0,
+            "maxItems": 16
+          }
+        }
+      },
+      "UsageHourlyQuery": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Hour-oriented query. Always returns 1-hour buckets. Max window: 14 days.",
+        "type": "object",
+        "properties": {
+          "relativeRange": {
+            "$ref": "#/components/schemas/UsageHourlyRelativeRange"
+          },
+          "timeRange": {
+            "$ref": "#/components/schemas/UsageTimestampRange"
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "timeRange"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "relativeRange"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "timeRange"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "relativeRange"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "UsageHourlyRelativeRange": {
+        "title": "Hourly relative range",
+        "description": "Relative hour-oriented presets resolved by the server at request time.",
+        "type": "string",
+        "enum": [
+          "HOURLY_RELATIVE_RANGE_UNSPECIFIED",
+          "HOURLY_RELATIVE_RANGE_LAST_12_HOURS",
+          "HOURLY_RELATIVE_RANGE_LAST_24_HOURS",
+          "HOURLY_RELATIVE_RANGE_LAST_48_HOURS",
+          "HOURLY_RELATIVE_RANGE_LAST_7_DAYS",
+          "HOURLY_RELATIVE_RANGE_LAST_14_DAYS"
+        ]
+      },
+      "UsageLabel": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A single label key/value pair in the grouped result.",
+        "type": "object",
+        "properties": {
+          "key": {
+            "example": "feature_id",
+            "description": "Canonical response label key string.",
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "value": {
+            "example": "logs_ingestion",
+            "description": "Value of the label for this row.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1024
+          }
+        }
+      },
+      "UsageLabelFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Predicate applied to a single label before aggregation. A complete predicate requires `key`, `operator`, and a non-empty `values` list.",
+        "type": "object",
+        "properties": {
+          "key": {
+            "example": "pillar",
+            "description": "Label key to filter on. Supported keys are listed by the capabilities endpoint.",
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "operator": {
+            "$ref": "#/components/schemas/UsageLabelFilter.FilterOperator"
+          },
+          "values": {
+            "example": [
+              "logs"
+            ],
+            "description": "Values to match against `key`. Required and must be non-empty when an `operator` is set.",
+            "type": "array",
+            "items": {
+              "description": "Values to match against `key`. Required and must be non-empty when an `operator` is set.",
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 1024
+            },
+            "minItems": 1,
+            "maxItems": 1024
+          }
+        },
+        "required": [
+          "key",
+          "operator",
+          "values"
+        ]
+      },
+      "UsageLabelFilter.FilterOperator": {
+        "title": "Label filter operator",
+        "description": "How `values` are matched against the label: inclusively (one of) or exclusively (none of).",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_UNSPECIFIED",
+          "FILTER_OPERATOR_IN",
+          "FILTER_OPERATOR_NOT_IN"
+        ]
+      },
+      "UsageLimit": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Per-bucket result-size cap requested by the client.",
+        "type": "object",
+        "properties": {
+          "perBucket": {
+            "description": "Maximum number of usage entries returned per bucket. The server may apply a lower hard limit.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maximum": 100000
+          }
+        }
+      },
+      "UsageMeasurement": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Raw measurement of a single kind for the parent usage row.",
+        "type": "object",
+        "properties": {
+          "cxQuotaUnits": {
+            "example": {
+              "value": "1.5"
+            },
+            "description": "Billable units charged for this measurement. The decimal magnitude is carried as a string in the `value` field of this object.",
+            "type": "object",
+            "properties": {
+              "value": {
+                "description": "Decimal value encoded as a string, using optional sign, fraction, and exponent notation.",
+                "type": "string",
+                "pattern": "^[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)(?:[eE][+-]?\\d+)?$",
+                "minLength": 1,
+                "maxLength": 128
+              }
+            }
+          },
+          "kind": {
+            "$ref": "#/components/schemas/UsageMeasurementKind"
+          },
+          "measuredUnit": {
+            "$ref": "#/components/schemas/UsageMeasurementUnit"
+          },
+          "measuredValue": {
+            "description": "Raw measured amount for this usage row, in the unit indicated by `measuredUnit`.",
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
+          }
+        }
+      },
+      "UsageMeasurementKind": {
+        "title": "Measurement kind",
+        "description": "Type of usage this entry reports.",
+        "type": "string",
+        "enum": [
+          "MEASUREMENT_KIND_UNSPECIFIED",
+          "MEASUREMENT_KIND_PROCESSED_DATA_SIZE",
+          "MEASUREMENT_KIND_EVALUATIONS",
+          "MEASUREMENT_KIND_PROCESSED_EVENTS",
+          "MEASUREMENT_KIND_OLLY"
+        ]
+      },
+      "UsageMeasurementUnit": {
+        "title": "Measurement unit",
+        "description": "Raw unit of a measured amount.",
+        "type": "string",
+        "enum": [
+          "MEASUREMENT_UNIT_UNSPECIFIED",
+          "MEASUREMENT_UNIT_BYTES",
+          "MEASUREMENT_UNIT_TOKENS",
+          "MEASUREMENT_UNIT_EVENTS"
+        ]
+      },
+      "UsageTimestampRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Half-open timestamp interval `[start, end)`. Both bounds are required.",
+        "type": "object",
+        "properties": {
+          "end": {
+            "example": "2026-06-08T00:00:00.000Z",
+            "description": "Exclusive end of the timestamp range, as a UTC timestamp string later than `start`.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0,
+            "maxLength": 32
+          },
+          "start": {
+            "example": "2026-06-01T00:00:00.000Z",
+            "description": "Inclusive start of the timestamp range, as a UTC timestamp string.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0,
+            "maxLength": 32
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ]
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}

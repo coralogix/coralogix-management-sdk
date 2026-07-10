@@ -13,126 +13,179 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// EqualsSelection - struct for EqualsSelection
+// checks if the EqualsSelection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EqualsSelection{}
+
+// EqualsSelection This data structure defines the values for the equality comparison.
 type EqualsSelection struct {
-	EqualsSelectionAll *EqualsSelectionAll
-	EqualsSelectionList *EqualsSelectionList
+	// This data structure indicates that all values are selected.
+	All                               map[string]interface{}        `json:"all,omitempty"`
+	List                              *EqualsSelectionListSelection `json:"list,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// EqualsSelectionAllAsEqualsSelection is a convenience function that returns EqualsSelectionAll wrapped in EqualsSelection
-func EqualsSelectionAllAsEqualsSelection(v *EqualsSelectionAll) EqualsSelection {
-	return EqualsSelection{
-		EqualsSelectionAll: v,
+type _EqualsSelection EqualsSelection
+
+// NewEqualsSelection instantiates a new EqualsSelection object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewEqualsSelection() *EqualsSelection {
+	this := EqualsSelection{}
+	return &this
+}
+
+// NewEqualsSelectionWithDefaults instantiates a new EqualsSelection object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewEqualsSelectionWithDefaults() *EqualsSelection {
+	this := EqualsSelection{}
+	return &this
+}
+
+// GetAll returns the All field value if set, zero value otherwise.
+func (o *EqualsSelection) GetAll() map[string]interface{} {
+	if o == nil || IsNil(o.All) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.All
 }
 
-// EqualsSelectionListAsEqualsSelection is a convenience function that returns EqualsSelectionList wrapped in EqualsSelection
-func EqualsSelectionListAsEqualsSelection(v *EqualsSelectionList) EqualsSelection {
-	return EqualsSelection{
-		EqualsSelectionList: v,
+// GetAllOk returns a tuple with the All field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EqualsSelection) GetAllOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.All) {
+		return map[string]interface{}{}, false
 	}
+	return o.All, true
 }
 
+// HasAll returns a boolean if a field has been set.
+func (o *EqualsSelection) HasAll() bool {
+	if o != nil && !IsNil(o.All) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *EqualsSelection) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into EqualsSelectionAll
-	err = json.Unmarshal(data, &dst.EqualsSelectionAll)
-	if err == nil {
-		jsonEqualsSelectionAll, _ := json.Marshal(dst.EqualsSelectionAll)
-		if string(jsonEqualsSelectionAll) == "{}" { // empty struct
-			dst.EqualsSelectionAll = nil
-		} else {
-			if err = validator.Validate(dst.EqualsSelectionAll); err != nil {
-				dst.EqualsSelectionAll = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetAll gets a reference to the given map[string]interface{} and assigns it to the All field.
+func (o *EqualsSelection) SetAll(v map[string]interface{}) {
+	o.All = v
+}
+
+// GetList returns the List field value if set, zero value otherwise.
+func (o *EqualsSelection) GetList() EqualsSelectionListSelection {
+	if o == nil || IsNil(o.List) {
+		var ret EqualsSelectionListSelection
+		return ret
+	}
+	return *o.List
+}
+
+// GetListOk returns a tuple with the List field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EqualsSelection) GetListOk() (*EqualsSelectionListSelection, bool) {
+	if o == nil || IsNil(o.List) {
+		return nil, false
+	}
+	return o.List, true
+}
+
+// HasList returns a boolean if a field has been set.
+func (o *EqualsSelection) HasList() bool {
+	if o != nil && !IsNil(o.List) {
+		return true
+	}
+
+	return false
+}
+
+// SetList gets a reference to the given EqualsSelectionListSelection and assigns it to the List field.
+func (o *EqualsSelection) SetList(v EqualsSelectionListSelection) {
+	o.List = &v
+}
+
+func (o EqualsSelection) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EqualsSelection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.All) {
+		toSerialize["all"] = o.All
+	}
+	if !IsNil(o.List) {
+		toSerialize["list"] = o.List
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["all"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["list"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [all, list] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["all"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field all must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["list"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field list must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *EqualsSelection) UnmarshalJSON(data []byte) (err error) {
+	varEqualsSelection := _EqualsSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEqualsSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EqualsSelection(varEqualsSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["all"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EqualsSelectionAll = nil
-	}
-
-	// try to unmarshal data into EqualsSelectionList
-	err = json.Unmarshal(data, &dst.EqualsSelectionList)
-	if err == nil {
-		jsonEqualsSelectionList, _ := json.Marshal(dst.EqualsSelectionList)
-		if string(jsonEqualsSelectionList) == "{}" { // empty struct
-			dst.EqualsSelectionList = nil
-		} else {
-			if err = validator.Validate(dst.EqualsSelectionList); err != nil {
-				dst.EqualsSelectionList = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["list"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.EqualsSelectionList = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [all, list] may be set"}
+		}
+
+		delete(additionalProperties, "all")
+		delete(additionalProperties, "list")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.EqualsSelectionAll = nil
-		dst.EqualsSelectionList = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(EqualsSelection)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src EqualsSelection) MarshalJSON() ([]byte, error) {
-	if src.EqualsSelectionAll != nil {
-		return json.Marshal(&src.EqualsSelectionAll)
-	}
-
-	if src.EqualsSelectionList != nil {
-		return json.Marshal(&src.EqualsSelectionList)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *EqualsSelection) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.EqualsSelectionAll != nil {
-		return obj.EqualsSelectionAll
-	}
-
-	if obj.EqualsSelectionList != nil {
-		return obj.EqualsSelectionList
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj EqualsSelection) GetActualInstanceValue() (interface{}) {
-	if obj.EqualsSelectionAll != nil {
-		return *obj.EqualsSelectionAll
-	}
-
-	if obj.EqualsSelectionList != nil {
-		return *obj.EqualsSelectionList
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableEqualsSelection struct {
@@ -170,4 +223,3 @@ func (v *NullableEqualsSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

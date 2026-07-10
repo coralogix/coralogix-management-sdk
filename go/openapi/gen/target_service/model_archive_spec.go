@@ -26,11 +26,12 @@ type ArchiveSpec struct {
 	// Deprecated
 	ArchivingFormatId *string `json:"archivingFormatId,omitempty"`
 	// The enable tags.
-	EnableTags *bool `json:"enableTags,omitempty"`
-	Format *TargetFormat `json:"format,omitempty"`
+	EnableTags *bool         `json:"enableTags,omitempty"`
+	Format     *TargetFormat `json:"format,omitempty"`
 	// The archiving format id.
-	IsActive *bool `json:"isActive,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IsActive                          *bool `json:"isActive,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ArchiveSpec ArchiveSpec
@@ -184,7 +185,7 @@ func (o *ArchiveSpec) SetIsActive(v bool) {
 }
 
 func (o ArchiveSpec) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,6 +234,7 @@ func (o *ArchiveSpec) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "format")
 		delete(additionalProperties, "isActive")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -273,4 +275,3 @@ func (v *NullableArchiveSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

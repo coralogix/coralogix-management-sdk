@@ -23,12 +23,13 @@ var _ MappedNullable = &GaugeThreshold{}
 // GaugeThreshold Definition of a single gauge threshold
 type GaugeThreshold struct {
 	// Color of the threshold
-	Color *string `json:"color,omitempty"`
+	Color *string `json:"color,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Minimum bound value of the threshold
 	From *float64 `json:"from,omitempty"`
 	// Optional label of the threshold
-	Label *string `json:"label,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Label                             *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GaugeThreshold GaugeThreshold
@@ -147,7 +148,7 @@ func (o *GaugeThreshold) SetLabel(v string) {
 }
 
 func (o GaugeThreshold) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *GaugeThreshold) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "from")
 		delete(additionalProperties, "label")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableGaugeThreshold) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

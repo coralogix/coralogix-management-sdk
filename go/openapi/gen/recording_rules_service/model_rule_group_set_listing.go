@@ -13,6 +13,7 @@ package recording_rules_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,8 +24,9 @@ var _ MappedNullable = &RuleGroupSetListing{}
 // RuleGroupSetListing A listing of rule group sets.
 type RuleGroupSetListing struct {
 	// The sets.
-	Sets []OutRuleGroupSet `json:"sets,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Sets                              []OutRuleGroupSet `json:"sets"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RuleGroupSetListing RuleGroupSetListing
@@ -33,8 +35,9 @@ type _RuleGroupSetListing RuleGroupSetListing
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleGroupSetListing() *RuleGroupSetListing {
+func NewRuleGroupSetListing(sets []OutRuleGroupSet) *RuleGroupSetListing {
 	this := RuleGroupSetListing{}
+	this.Sets = sets
 	return &this
 }
 
@@ -46,40 +49,32 @@ func NewRuleGroupSetListingWithDefaults() *RuleGroupSetListing {
 	return &this
 }
 
-// GetSets returns the Sets field value if set, zero value otherwise.
+// GetSets returns the Sets field value
 func (o *RuleGroupSetListing) GetSets() []OutRuleGroupSet {
-	if o == nil || IsNil(o.Sets) {
+	if o == nil {
 		var ret []OutRuleGroupSet
 		return ret
 	}
+
 	return o.Sets
 }
 
-// GetSetsOk returns a tuple with the Sets field value if set, nil otherwise
+// GetSetsOk returns a tuple with the Sets field value
 // and a boolean to check if the value has been set.
 func (o *RuleGroupSetListing) GetSetsOk() ([]OutRuleGroupSet, bool) {
-	if o == nil || IsNil(o.Sets) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Sets, true
 }
 
-// HasSets returns a boolean if a field has been set.
-func (o *RuleGroupSetListing) HasSets() bool {
-	if o != nil && !IsNil(o.Sets) {
-		return true
-	}
-
-	return false
-}
-
-// SetSets gets a reference to the given []OutRuleGroupSet and assigns it to the Sets field.
+// SetSets sets field value
 func (o *RuleGroupSetListing) SetSets(v []OutRuleGroupSet) {
 	o.Sets = v
 }
 
 func (o RuleGroupSetListing) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -88,9 +83,7 @@ func (o RuleGroupSetListing) MarshalJSON() ([]byte, error) {
 
 func (o RuleGroupSetListing) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Sets) {
-		toSerialize["sets"] = o.Sets
-	}
+	toSerialize["sets"] = o.Sets
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -100,6 +93,27 @@ func (o RuleGroupSetListing) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RuleGroupSetListing) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"sets",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRuleGroupSetListing := _RuleGroupSetListing{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -116,6 +130,7 @@ func (o *RuleGroupSetListing) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "sets")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +171,3 @@ func (v *NullableRuleGroupSetListing) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

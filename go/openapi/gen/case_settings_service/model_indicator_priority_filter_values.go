@@ -23,8 +23,9 @@ var _ MappedNullable = &IndicatorPriorityFilterValues{}
 // IndicatorPriorityFilterValues Entity label filter.values.
 type IndicatorPriorityFilterValues struct {
 	// List of IndicatorPriorities to filter to. Passing empty list here means no alerts will be processed.
-	Items []IndicatorPriority `json:"items,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Items                             []IndicatorPriority `json:"items,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IndicatorPriorityFilterValues IndicatorPriorityFilterValues
@@ -79,7 +80,7 @@ func (o *IndicatorPriorityFilterValues) SetItems(v []IndicatorPriority) {
 }
 
 func (o IndicatorPriorityFilterValues) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *IndicatorPriorityFilterValues) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "items")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableIndicatorPriorityFilterValues) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

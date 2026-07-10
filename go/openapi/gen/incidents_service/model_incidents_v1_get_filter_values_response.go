@@ -23,8 +23,9 @@ var _ MappedNullable = &IncidentsV1GetFilterValuesResponse{}
 
 // IncidentsV1GetFilterValuesResponse Response containing available filter values for incidents
 type IncidentsV1GetFilterValuesResponse struct {
-	FiltersValues IncidentQueryFiltersValues `json:"filtersValues"`
-	AdditionalProperties map[string]interface{}
+	FiltersValues                     IncidentQueryFiltersValues `json:"filtersValues"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentsV1GetFilterValuesResponse IncidentsV1GetFilterValuesResponse
@@ -72,7 +73,7 @@ func (o *IncidentsV1GetFilterValuesResponse) SetFiltersValues(v IncidentQueryFil
 }
 
 func (o IncidentsV1GetFilterValuesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -103,10 +104,10 @@ func (o *IncidentsV1GetFilterValuesResponse) UnmarshalJSON(data []byte) (err err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -128,6 +129,7 @@ func (o *IncidentsV1GetFilterValuesResponse) UnmarshalJSON(data []byte) (err err
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "filtersValues")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -168,4 +170,3 @@ func (v *NullableIncidentsV1GetFilterValuesResponse) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,8 +22,9 @@ var _ MappedNullable = &PriorityOverride{}
 
 // PriorityOverride Priority override.
 type PriorityOverride struct {
-	QuotaBased *QuotaBased `json:"quotaBased,omitempty"`
-	AdditionalProperties map[string]interface{}
+	QuotaBased                        *QuotaBased `json:"quotaBased,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PriorityOverride PriorityOverride
@@ -78,7 +79,7 @@ func (o *PriorityOverride) SetQuotaBased(v QuotaBased) {
 }
 
 func (o PriorityOverride) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *PriorityOverride) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "quotaBased")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullablePriorityOverride) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

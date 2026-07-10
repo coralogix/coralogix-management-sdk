@@ -13,126 +13,178 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// QuerySourceLogsQueryType - struct for QuerySourceLogsQueryType
+// checks if the QuerySourceLogsQueryType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &QuerySourceLogsQueryType{}
+
+// QuerySourceLogsQueryType Type.
 type QuerySourceLogsQueryType struct {
-	QuerySourceLogsQueryTypeFieldNameVariant *QuerySourceLogsQueryTypeFieldNameVariant
-	QuerySourceLogsQueryTypeFieldValueVariant *QuerySourceLogsQueryTypeFieldValueVariant
+	FieldName                         *QuerySourceLogsQueryTypeFieldName  `json:"fieldName,omitempty"`
+	FieldValue                        *QuerySourceLogsQueryTypeFieldValue `json:"fieldValue,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// QuerySourceLogsQueryTypeFieldNameVariantAsQuerySourceLogsQueryType is a convenience function that returns QuerySourceLogsQueryTypeFieldNameVariant wrapped in QuerySourceLogsQueryType
-func QuerySourceLogsQueryTypeFieldNameVariantAsQuerySourceLogsQueryType(v *QuerySourceLogsQueryTypeFieldNameVariant) QuerySourceLogsQueryType {
-	return QuerySourceLogsQueryType{
-		QuerySourceLogsQueryTypeFieldNameVariant: v,
+type _QuerySourceLogsQueryType QuerySourceLogsQueryType
+
+// NewQuerySourceLogsQueryType instantiates a new QuerySourceLogsQueryType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewQuerySourceLogsQueryType() *QuerySourceLogsQueryType {
+	this := QuerySourceLogsQueryType{}
+	return &this
+}
+
+// NewQuerySourceLogsQueryTypeWithDefaults instantiates a new QuerySourceLogsQueryType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewQuerySourceLogsQueryTypeWithDefaults() *QuerySourceLogsQueryType {
+	this := QuerySourceLogsQueryType{}
+	return &this
+}
+
+// GetFieldName returns the FieldName field value if set, zero value otherwise.
+func (o *QuerySourceLogsQueryType) GetFieldName() QuerySourceLogsQueryTypeFieldName {
+	if o == nil || IsNil(o.FieldName) {
+		var ret QuerySourceLogsQueryTypeFieldName
+		return ret
 	}
+	return *o.FieldName
 }
 
-// QuerySourceLogsQueryTypeFieldValueVariantAsQuerySourceLogsQueryType is a convenience function that returns QuerySourceLogsQueryTypeFieldValueVariant wrapped in QuerySourceLogsQueryType
-func QuerySourceLogsQueryTypeFieldValueVariantAsQuerySourceLogsQueryType(v *QuerySourceLogsQueryTypeFieldValueVariant) QuerySourceLogsQueryType {
-	return QuerySourceLogsQueryType{
-		QuerySourceLogsQueryTypeFieldValueVariant: v,
+// GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceLogsQueryType) GetFieldNameOk() (*QuerySourceLogsQueryTypeFieldName, bool) {
+	if o == nil || IsNil(o.FieldName) {
+		return nil, false
 	}
+	return o.FieldName, true
 }
 
+// HasFieldName returns a boolean if a field has been set.
+func (o *QuerySourceLogsQueryType) HasFieldName() bool {
+	if o != nil && !IsNil(o.FieldName) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *QuerySourceLogsQueryType) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into QuerySourceLogsQueryTypeFieldNameVariant
-	err = json.Unmarshal(data, &dst.QuerySourceLogsQueryTypeFieldNameVariant)
-	if err == nil {
-		jsonQuerySourceLogsQueryTypeFieldNameVariant, _ := json.Marshal(dst.QuerySourceLogsQueryTypeFieldNameVariant)
-		if string(jsonQuerySourceLogsQueryTypeFieldNameVariant) == "{}" { // empty struct
-			dst.QuerySourceLogsQueryTypeFieldNameVariant = nil
-		} else {
-			if err = validator.Validate(dst.QuerySourceLogsQueryTypeFieldNameVariant); err != nil {
-				dst.QuerySourceLogsQueryTypeFieldNameVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetFieldName gets a reference to the given QuerySourceLogsQueryTypeFieldName and assigns it to the FieldName field.
+func (o *QuerySourceLogsQueryType) SetFieldName(v QuerySourceLogsQueryTypeFieldName) {
+	o.FieldName = &v
+}
+
+// GetFieldValue returns the FieldValue field value if set, zero value otherwise.
+func (o *QuerySourceLogsQueryType) GetFieldValue() QuerySourceLogsQueryTypeFieldValue {
+	if o == nil || IsNil(o.FieldValue) {
+		var ret QuerySourceLogsQueryTypeFieldValue
+		return ret
+	}
+	return *o.FieldValue
+}
+
+// GetFieldValueOk returns a tuple with the FieldValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceLogsQueryType) GetFieldValueOk() (*QuerySourceLogsQueryTypeFieldValue, bool) {
+	if o == nil || IsNil(o.FieldValue) {
+		return nil, false
+	}
+	return o.FieldValue, true
+}
+
+// HasFieldValue returns a boolean if a field has been set.
+func (o *QuerySourceLogsQueryType) HasFieldValue() bool {
+	if o != nil && !IsNil(o.FieldValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetFieldValue gets a reference to the given QuerySourceLogsQueryTypeFieldValue and assigns it to the FieldValue field.
+func (o *QuerySourceLogsQueryType) SetFieldValue(v QuerySourceLogsQueryTypeFieldValue) {
+	o.FieldValue = &v
+}
+
+func (o QuerySourceLogsQueryType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o QuerySourceLogsQueryType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.FieldName) {
+		toSerialize["fieldName"] = o.FieldName
+	}
+	if !IsNil(o.FieldValue) {
+		toSerialize["fieldValue"] = o.FieldValue
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["fieldName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["fieldValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [fieldName, fieldValue] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["fieldName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field fieldName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["fieldValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field fieldValue must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *QuerySourceLogsQueryType) UnmarshalJSON(data []byte) (err error) {
+	varQuerySourceLogsQueryType := _QuerySourceLogsQueryType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceLogsQueryType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceLogsQueryType(varQuerySourceLogsQueryType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["fieldName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QuerySourceLogsQueryTypeFieldNameVariant = nil
-	}
-
-	// try to unmarshal data into QuerySourceLogsQueryTypeFieldValueVariant
-	err = json.Unmarshal(data, &dst.QuerySourceLogsQueryTypeFieldValueVariant)
-	if err == nil {
-		jsonQuerySourceLogsQueryTypeFieldValueVariant, _ := json.Marshal(dst.QuerySourceLogsQueryTypeFieldValueVariant)
-		if string(jsonQuerySourceLogsQueryTypeFieldValueVariant) == "{}" { // empty struct
-			dst.QuerySourceLogsQueryTypeFieldValueVariant = nil
-		} else {
-			if err = validator.Validate(dst.QuerySourceLogsQueryTypeFieldValueVariant); err != nil {
-				dst.QuerySourceLogsQueryTypeFieldValueVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["fieldValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QuerySourceLogsQueryTypeFieldValueVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [fieldName, fieldValue] may be set"}
+		}
+
+		delete(additionalProperties, "fieldName")
+		delete(additionalProperties, "fieldValue")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.QuerySourceLogsQueryTypeFieldNameVariant = nil
-		dst.QuerySourceLogsQueryTypeFieldValueVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(QuerySourceLogsQueryType)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src QuerySourceLogsQueryType) MarshalJSON() ([]byte, error) {
-	if src.QuerySourceLogsQueryTypeFieldNameVariant != nil {
-		return json.Marshal(&src.QuerySourceLogsQueryTypeFieldNameVariant)
-	}
-
-	if src.QuerySourceLogsQueryTypeFieldValueVariant != nil {
-		return json.Marshal(&src.QuerySourceLogsQueryTypeFieldValueVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *QuerySourceLogsQueryType) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.QuerySourceLogsQueryTypeFieldNameVariant != nil {
-		return obj.QuerySourceLogsQueryTypeFieldNameVariant
-	}
-
-	if obj.QuerySourceLogsQueryTypeFieldValueVariant != nil {
-		return obj.QuerySourceLogsQueryTypeFieldValueVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj QuerySourceLogsQueryType) GetActualInstanceValue() (interface{}) {
-	if obj.QuerySourceLogsQueryTypeFieldNameVariant != nil {
-		return *obj.QuerySourceLogsQueryTypeFieldNameVariant
-	}
-
-	if obj.QuerySourceLogsQueryTypeFieldValueVariant != nil {
-		return *obj.QuerySourceLogsQueryTypeFieldValueVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableQuerySourceLogsQueryType struct {
@@ -170,4 +222,3 @@ func (v *NullableQuerySourceLogsQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,9 +23,9 @@ type ConnectionStatus string
 
 // List of ConnectionStatus
 const (
-	CONNECTIONSTATUS_PENDING ConnectionStatus = "PENDING"
-	CONNECTIONSTATUS_ACTIVE ConnectionStatus = "ACTIVE"
-	CONNECTIONSTATUS_FAILING ConnectionStatus = "FAILING"
+	CONNECTIONSTATUS_PENDING        ConnectionStatus = "PENDING"
+	CONNECTIONSTATUS_ACTIVE         ConnectionStatus = "ACTIVE"
+	CONNECTIONSTATUS_FAILING        ConnectionStatus = "FAILING"
 	CONNECTIONSTATUS_STATUS_UNKNOWN ConnectionStatus = "STATUS_UNKNOWN"
 )
 
@@ -115,4 +115,3 @@ func (v *NullableConnectionStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,8 +22,9 @@ var _ MappedNullable = &EventsServiceBatchGetEventFilterParameter{}
 
 // EventsServiceBatchGetEventFilterParameter struct for EventsServiceBatchGetEventFilterParameter
 type EventsServiceBatchGetEventFilterParameter struct {
-	Timestamp interface{} `json:"timestamp,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Timestamp                         *TimestampRange `json:"timestamp,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _EventsServiceBatchGetEventFilterParameter EventsServiceBatchGetEventFilterParameter
@@ -45,23 +46,22 @@ func NewEventsServiceBatchGetEventFilterParameterWithDefaults() *EventsServiceBa
 	return &this
 }
 
-// GetTimestamp returns the Timestamp field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EventsServiceBatchGetEventFilterParameter) GetTimestamp() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+func (o *EventsServiceBatchGetEventFilterParameter) GetTimestamp() TimestampRange {
+	if o == nil || IsNil(o.Timestamp) {
+		var ret TimestampRange
 		return ret
 	}
-	return o.Timestamp
+	return *o.Timestamp
 }
 
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EventsServiceBatchGetEventFilterParameter) GetTimestampOk() (*interface{}, bool) {
+func (o *EventsServiceBatchGetEventFilterParameter) GetTimestampOk() (*TimestampRange, bool) {
 	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
-	return &o.Timestamp, true
+	return o.Timestamp, true
 }
 
 // HasTimestamp returns a boolean if a field has been set.
@@ -73,13 +73,13 @@ func (o *EventsServiceBatchGetEventFilterParameter) HasTimestamp() bool {
 	return false
 }
 
-// SetTimestamp gets a reference to the given interface{} and assigns it to the Timestamp field.
-func (o *EventsServiceBatchGetEventFilterParameter) SetTimestamp(v interface{}) {
-	o.Timestamp = v
+// SetTimestamp gets a reference to the given TimestampRange and assigns it to the Timestamp field.
+func (o *EventsServiceBatchGetEventFilterParameter) SetTimestamp(v TimestampRange) {
+	o.Timestamp = &v
 }
 
 func (o EventsServiceBatchGetEventFilterParameter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -88,7 +88,7 @@ func (o EventsServiceBatchGetEventFilterParameter) MarshalJSON() ([]byte, error)
 
 func (o EventsServiceBatchGetEventFilterParameter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Timestamp != nil {
+	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
 
@@ -116,6 +116,7 @@ func (o *EventsServiceBatchGetEventFilterParameter) UnmarshalJSON(data []byte) (
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "timestamp")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +157,3 @@ func (v *NullableEventsServiceBatchGetEventFilterParameter) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

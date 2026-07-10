@@ -14,125 +14,246 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// V1OrderBy - struct for V1OrderBy
+// checks if the V1OrderBy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1OrderBy{}
+
+// V1OrderBy struct for V1OrderBy
 type V1OrderBy struct {
-	V1OrderByContextualLabel *V1OrderByContextualLabel
-	V1OrderByIncidentField *V1OrderByIncidentField
+	// A contextual label key to order by.
+	ContextualLabel                                 *string            `json:"contextualLabel,omitempty"`
+	Direction                                       V1OrderByDirection `json:"direction"`
+	IncidentField                                   *IncidentFields    `json:"incidentField,omitempty"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
-// V1OrderByContextualLabelAsV1OrderBy is a convenience function that returns V1OrderByContextualLabel wrapped in V1OrderBy
-func V1OrderByContextualLabelAsV1OrderBy(v *V1OrderByContextualLabel) V1OrderBy {
-	return V1OrderBy{
-		V1OrderByContextualLabel: v,
+type _V1OrderBy V1OrderBy
+
+// NewV1OrderBy instantiates a new V1OrderBy object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewV1OrderBy(direction V1OrderByDirection) *V1OrderBy {
+	this := V1OrderBy{}
+	this.Direction = direction
+	return &this
+}
+
+// NewV1OrderByWithDefaults instantiates a new V1OrderBy object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewV1OrderByWithDefaults() *V1OrderBy {
+	this := V1OrderBy{}
+	return &this
+}
+
+// GetContextualLabel returns the ContextualLabel field value if set, zero value otherwise.
+func (o *V1OrderBy) GetContextualLabel() string {
+	if o == nil || IsNil(o.ContextualLabel) {
+		var ret string
+		return ret
 	}
+	return *o.ContextualLabel
 }
 
-// V1OrderByIncidentFieldAsV1OrderBy is a convenience function that returns V1OrderByIncidentField wrapped in V1OrderBy
-func V1OrderByIncidentFieldAsV1OrderBy(v *V1OrderByIncidentField) V1OrderBy {
-	return V1OrderBy{
-		V1OrderByIncidentField: v,
+// GetContextualLabelOk returns a tuple with the ContextualLabel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1OrderBy) GetContextualLabelOk() (*string, bool) {
+	if o == nil || IsNil(o.ContextualLabel) {
+		return nil, false
 	}
+	return o.ContextualLabel, true
 }
 
+// HasContextualLabel returns a boolean if a field has been set.
+func (o *V1OrderBy) HasContextualLabel() bool {
+	if o != nil && !IsNil(o.ContextualLabel) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *V1OrderBy) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into V1OrderByContextualLabel
-	err = json.Unmarshal(data, &dst.V1OrderByContextualLabel)
-	if err == nil {
-		jsonV1OrderByContextualLabel, _ := json.Marshal(dst.V1OrderByContextualLabel)
-		if string(jsonV1OrderByContextualLabel) == "{}" { // empty struct
-			dst.V1OrderByContextualLabel = nil
-		} else {
-			if err = validator.Validate(dst.V1OrderByContextualLabel); err != nil {
-				dst.V1OrderByContextualLabel = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetContextualLabel gets a reference to the given string and assigns it to the ContextualLabel field.
+func (o *V1OrderBy) SetContextualLabel(v string) {
+	o.ContextualLabel = &v
+}
+
+// GetDirection returns the Direction field value
+func (o *V1OrderBy) GetDirection() V1OrderByDirection {
+	if o == nil {
+		var ret V1OrderByDirection
+		return ret
+	}
+
+	return o.Direction
+}
+
+// GetDirectionOk returns a tuple with the Direction field value
+// and a boolean to check if the value has been set.
+func (o *V1OrderBy) GetDirectionOk() (*V1OrderByDirection, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Direction, true
+}
+
+// SetDirection sets field value
+func (o *V1OrderBy) SetDirection(v V1OrderByDirection) {
+	o.Direction = v
+}
+
+// GetIncidentField returns the IncidentField field value if set, zero value otherwise.
+func (o *V1OrderBy) GetIncidentField() IncidentFields {
+	if o == nil || IsNil(o.IncidentField) {
+		var ret IncidentFields
+		return ret
+	}
+	return *o.IncidentField
+}
+
+// GetIncidentFieldOk returns a tuple with the IncidentField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1OrderBy) GetIncidentFieldOk() (*IncidentFields, bool) {
+	if o == nil || IsNil(o.IncidentField) {
+		return nil, false
+	}
+	return o.IncidentField, true
+}
+
+// HasIncidentField returns a boolean if a field has been set.
+func (o *V1OrderBy) HasIncidentField() bool {
+	if o != nil && !IsNil(o.IncidentField) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncidentField gets a reference to the given IncidentFields and assigns it to the IncidentField field.
+func (o *V1OrderBy) SetIncidentField(v IncidentFields) {
+	o.IncidentField = &v
+}
+
+func (o V1OrderBy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o V1OrderBy) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ContextualLabel) {
+		toSerialize["contextualLabel"] = o.ContextualLabel
+	}
+	toSerialize["direction"] = o.Direction
+	if !IsNil(o.IncidentField) {
+		toSerialize["incidentField"] = o.IncidentField
+	}
+	requiredOneOfGroup0Matches := 0
+	if _, exists := toSerialize["incidentField"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["contextualLabel"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [incidentField, contextualLabel] must be set"}
 		}
-	} else {
-		dst.V1OrderByContextualLabel = nil
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [incidentField, contextualLabel] must be set"}
 	}
 
-	// try to unmarshal data into V1OrderByIncidentField
-	err = json.Unmarshal(data, &dst.V1OrderByIncidentField)
-	if err == nil {
-		jsonV1OrderByIncidentField, _ := json.Marshal(dst.V1OrderByIncidentField)
-		if string(jsonV1OrderByIncidentField) == "{}" { // empty struct
-			dst.V1OrderByIncidentField = nil
-		} else {
-			if err = validator.Validate(dst.V1OrderByIncidentField); err != nil {
-				dst.V1OrderByIncidentField = nil
-			} else {
-				match++
-			}
+	if _, exists := o.AdditionalProperties["incidentField"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field incidentField must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["contextualLabel"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field contextualLabel must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *V1OrderBy) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"direction",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.V1OrderByIncidentField = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.V1OrderByContextualLabel = nil
-		dst.V1OrderByIncidentField = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(V1OrderBy)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["incidentField"]; exists {
+		requiredOneOfGroup0Matches++
 	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src V1OrderBy) MarshalJSON() ([]byte, error) {
-	if src.V1OrderByContextualLabel != nil {
-		return json.Marshal(&src.V1OrderByContextualLabel)
+	if _, exists := allProperties["contextualLabel"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [incidentField, contextualLabel] may be set"}
 	}
 
-	if src.V1OrderByIncidentField != nil {
-		return json.Marshal(&src.V1OrderByIncidentField)
+	varV1OrderBy := _V1OrderBy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1OrderBy)
+
+	if err != nil {
+		return err
 	}
 
-	return nil, nil // no data in oneOf schemas
-}
+	*o = V1OrderBy(varV1OrderBy)
 
-// Get the actual instance
-func (obj *V1OrderBy) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.V1OrderByContextualLabel != nil {
-		return obj.V1OrderByContextualLabel
-	}
+	additionalProperties := make(map[string]interface{})
 
-	if obj.V1OrderByIncidentField != nil {
-		return obj.V1OrderByIncidentField
-	}
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		requiredOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["incidentField"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
+		}
+		if _, exists := additionalProperties["contextualLabel"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
+		}
+		if requiredOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [incidentField, contextualLabel] may be set"}
+		}
 
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj V1OrderBy) GetActualInstanceValue() (interface{}) {
-	if obj.V1OrderByContextualLabel != nil {
-		return *obj.V1OrderByContextualLabel
+		delete(additionalProperties, "contextualLabel")
+		delete(additionalProperties, "direction")
+		delete(additionalProperties, "incidentField")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
-	if obj.V1OrderByIncidentField != nil {
-		return *obj.V1OrderByIncidentField
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableV1OrderBy struct {
@@ -170,4 +291,3 @@ func (v *NullableV1OrderBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

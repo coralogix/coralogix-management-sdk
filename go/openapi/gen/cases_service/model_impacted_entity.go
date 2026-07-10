@@ -13,126 +13,178 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ImpactedEntity - struct for ImpactedEntity
+// checks if the ImpactedEntity type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ImpactedEntity{}
+
+// ImpactedEntity Entity affected by a case (e.g., an APM service or database).
 type ImpactedEntity struct {
-	ImpactedEntityApmDatabase *ImpactedEntityApmDatabase
-	ImpactedEntityApmService *ImpactedEntityApmService
+	ApmDatabase                       *ApmDatabaseEntity `json:"apmDatabase,omitempty"`
+	ApmService                        *ApmServiceEntity  `json:"apmService,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// ImpactedEntityApmDatabaseAsImpactedEntity is a convenience function that returns ImpactedEntityApmDatabase wrapped in ImpactedEntity
-func ImpactedEntityApmDatabaseAsImpactedEntity(v *ImpactedEntityApmDatabase) ImpactedEntity {
-	return ImpactedEntity{
-		ImpactedEntityApmDatabase: v,
+type _ImpactedEntity ImpactedEntity
+
+// NewImpactedEntity instantiates a new ImpactedEntity object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewImpactedEntity() *ImpactedEntity {
+	this := ImpactedEntity{}
+	return &this
+}
+
+// NewImpactedEntityWithDefaults instantiates a new ImpactedEntity object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewImpactedEntityWithDefaults() *ImpactedEntity {
+	this := ImpactedEntity{}
+	return &this
+}
+
+// GetApmDatabase returns the ApmDatabase field value if set, zero value otherwise.
+func (o *ImpactedEntity) GetApmDatabase() ApmDatabaseEntity {
+	if o == nil || IsNil(o.ApmDatabase) {
+		var ret ApmDatabaseEntity
+		return ret
 	}
+	return *o.ApmDatabase
 }
 
-// ImpactedEntityApmServiceAsImpactedEntity is a convenience function that returns ImpactedEntityApmService wrapped in ImpactedEntity
-func ImpactedEntityApmServiceAsImpactedEntity(v *ImpactedEntityApmService) ImpactedEntity {
-	return ImpactedEntity{
-		ImpactedEntityApmService: v,
+// GetApmDatabaseOk returns a tuple with the ApmDatabase field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ImpactedEntity) GetApmDatabaseOk() (*ApmDatabaseEntity, bool) {
+	if o == nil || IsNil(o.ApmDatabase) {
+		return nil, false
 	}
+	return o.ApmDatabase, true
 }
 
+// HasApmDatabase returns a boolean if a field has been set.
+func (o *ImpactedEntity) HasApmDatabase() bool {
+	if o != nil && !IsNil(o.ApmDatabase) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ImpactedEntity) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ImpactedEntityApmDatabase
-	err = json.Unmarshal(data, &dst.ImpactedEntityApmDatabase)
-	if err == nil {
-		jsonImpactedEntityApmDatabase, _ := json.Marshal(dst.ImpactedEntityApmDatabase)
-		if string(jsonImpactedEntityApmDatabase) == "{}" { // empty struct
-			dst.ImpactedEntityApmDatabase = nil
-		} else {
-			if err = validator.Validate(dst.ImpactedEntityApmDatabase); err != nil {
-				dst.ImpactedEntityApmDatabase = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetApmDatabase gets a reference to the given ApmDatabaseEntity and assigns it to the ApmDatabase field.
+func (o *ImpactedEntity) SetApmDatabase(v ApmDatabaseEntity) {
+	o.ApmDatabase = &v
+}
+
+// GetApmService returns the ApmService field value if set, zero value otherwise.
+func (o *ImpactedEntity) GetApmService() ApmServiceEntity {
+	if o == nil || IsNil(o.ApmService) {
+		var ret ApmServiceEntity
+		return ret
+	}
+	return *o.ApmService
+}
+
+// GetApmServiceOk returns a tuple with the ApmService field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ImpactedEntity) GetApmServiceOk() (*ApmServiceEntity, bool) {
+	if o == nil || IsNil(o.ApmService) {
+		return nil, false
+	}
+	return o.ApmService, true
+}
+
+// HasApmService returns a boolean if a field has been set.
+func (o *ImpactedEntity) HasApmService() bool {
+	if o != nil && !IsNil(o.ApmService) {
+		return true
+	}
+
+	return false
+}
+
+// SetApmService gets a reference to the given ApmServiceEntity and assigns it to the ApmService field.
+func (o *ImpactedEntity) SetApmService(v ApmServiceEntity) {
+	o.ApmService = &v
+}
+
+func (o ImpactedEntity) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ImpactedEntity) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApmDatabase) {
+		toSerialize["apmDatabase"] = o.ApmDatabase
+	}
+	if !IsNil(o.ApmService) {
+		toSerialize["apmService"] = o.ApmService
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["apmService"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["apmDatabase"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [apmService, apmDatabase] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["apmService"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field apmService must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["apmDatabase"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field apmDatabase must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ImpactedEntity) UnmarshalJSON(data []byte) (err error) {
+	varImpactedEntity := _ImpactedEntity{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varImpactedEntity)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ImpactedEntity(varImpactedEntity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["apmService"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ImpactedEntityApmDatabase = nil
-	}
-
-	// try to unmarshal data into ImpactedEntityApmService
-	err = json.Unmarshal(data, &dst.ImpactedEntityApmService)
-	if err == nil {
-		jsonImpactedEntityApmService, _ := json.Marshal(dst.ImpactedEntityApmService)
-		if string(jsonImpactedEntityApmService) == "{}" { // empty struct
-			dst.ImpactedEntityApmService = nil
-		} else {
-			if err = validator.Validate(dst.ImpactedEntityApmService); err != nil {
-				dst.ImpactedEntityApmService = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["apmDatabase"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ImpactedEntityApmService = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [apmService, apmDatabase] may be set"}
+		}
+
+		delete(additionalProperties, "apmDatabase")
+		delete(additionalProperties, "apmService")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ImpactedEntityApmDatabase = nil
-		dst.ImpactedEntityApmService = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ImpactedEntity)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ImpactedEntity) MarshalJSON() ([]byte, error) {
-	if src.ImpactedEntityApmDatabase != nil {
-		return json.Marshal(&src.ImpactedEntityApmDatabase)
-	}
-
-	if src.ImpactedEntityApmService != nil {
-		return json.Marshal(&src.ImpactedEntityApmService)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ImpactedEntity) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ImpactedEntityApmDatabase != nil {
-		return obj.ImpactedEntityApmDatabase
-	}
-
-	if obj.ImpactedEntityApmService != nil {
-		return obj.ImpactedEntityApmService
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ImpactedEntity) GetActualInstanceValue() (interface{}) {
-	if obj.ImpactedEntityApmDatabase != nil {
-		return *obj.ImpactedEntityApmDatabase
-	}
-
-	if obj.ImpactedEntityApmService != nil {
-		return *obj.ImpactedEntityApmService
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableImpactedEntity struct {
@@ -170,4 +222,3 @@ func (v *NullableImpactedEntity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

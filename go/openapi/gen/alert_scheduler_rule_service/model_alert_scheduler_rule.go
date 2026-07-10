@@ -27,20 +27,21 @@ type AlertSchedulerRule struct {
 	// Human-readable description.
 	Description *string `json:"description,omitempty"`
 	// Whether this resource is enabled.
-	Enabled *bool `json:"enabled,omitempty"`
-	Filter *AlertSchedulerRuleProtobufV1Filter `json:"filter,omitempty"`
+	Enabled *bool                               `json:"enabled,omitempty"`
+	Filter  *AlertSchedulerRuleProtobufV1Filter `json:"filter,omitempty"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	// Metadata labels.
 	MetaLabels []MetaLabelsProtobufV1MetaLabel `json:"metaLabels,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name     *string   `json:"name,omitempty"`
 	Schedule *Schedule `json:"schedule,omitempty"`
 	// Unique identifier.
 	UniqueIdentifier *string `json:"uniqueIdentifier,omitempty"`
 	// Last-updated timestamp.
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	AdditionalProperties map[string]interface{}
+	UpdatedAt                         *string `json:"updatedAt,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AlertSchedulerRule AlertSchedulerRule
@@ -383,7 +384,7 @@ func (o *AlertSchedulerRule) SetUpdatedAt(v string) {
 }
 
 func (o AlertSchedulerRule) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -456,6 +457,7 @@ func (o *AlertSchedulerRule) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "uniqueIdentifier")
 		delete(additionalProperties, "updatedAt")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -496,4 +498,3 @@ func (v *NullableAlertSchedulerRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,10 +23,13 @@ var _ MappedNullable = &SpanRules{}
 // SpanRules Span rules.
 type SpanRules struct {
 	ActionRule *QuotaV1Rule `json:"actionRule,omitempty"`
-	ServiceRule *QuotaV1Rule `json:"serviceRule,omitempty"`
+	// The dpxl expression.
+	DpxlExpression *string      `json:"dpxlExpression,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	ServiceRule    *QuotaV1Rule `json:"serviceRule,omitempty"`
 	// The tag rules.
-	TagRules []TagRule `json:"tagRules,omitempty"`
-	AdditionalProperties map[string]interface{}
+	TagRules                          []TagRule `json:"tagRules,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SpanRules SpanRules
@@ -78,6 +81,38 @@ func (o *SpanRules) HasActionRule() bool {
 // SetActionRule gets a reference to the given QuotaV1Rule and assigns it to the ActionRule field.
 func (o *SpanRules) SetActionRule(v QuotaV1Rule) {
 	o.ActionRule = &v
+}
+
+// GetDpxlExpression returns the DpxlExpression field value if set, zero value otherwise.
+func (o *SpanRules) GetDpxlExpression() string {
+	if o == nil || IsNil(o.DpxlExpression) {
+		var ret string
+		return ret
+	}
+	return *o.DpxlExpression
+}
+
+// GetDpxlExpressionOk returns a tuple with the DpxlExpression field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpanRules) GetDpxlExpressionOk() (*string, bool) {
+	if o == nil || IsNil(o.DpxlExpression) {
+		return nil, false
+	}
+	return o.DpxlExpression, true
+}
+
+// HasDpxlExpression returns a boolean if a field has been set.
+func (o *SpanRules) HasDpxlExpression() bool {
+	if o != nil && !IsNil(o.DpxlExpression) {
+		return true
+	}
+
+	return false
+}
+
+// SetDpxlExpression gets a reference to the given string and assigns it to the DpxlExpression field.
+func (o *SpanRules) SetDpxlExpression(v string) {
+	o.DpxlExpression = &v
 }
 
 // GetServiceRule returns the ServiceRule field value if set, zero value otherwise.
@@ -145,7 +180,7 @@ func (o *SpanRules) SetTagRules(v []TagRule) {
 }
 
 func (o SpanRules) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -156,6 +191,9 @@ func (o SpanRules) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ActionRule) {
 		toSerialize["actionRule"] = o.ActionRule
+	}
+	if !IsNil(o.DpxlExpression) {
+		toSerialize["dpxlExpression"] = o.DpxlExpression
 	}
 	if !IsNil(o.ServiceRule) {
 		toSerialize["serviceRule"] = o.ServiceRule
@@ -187,9 +225,11 @@ func (o *SpanRules) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "actionRule")
+		delete(additionalProperties, "dpxlExpression")
 		delete(additionalProperties, "serviceRule")
 		delete(additionalProperties, "tagRules")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -230,4 +270,3 @@ func (v *NullableSpanRules) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

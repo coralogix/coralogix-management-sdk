@@ -23,10 +23,11 @@ var _ MappedNullable = &StringValueLabel{}
 // StringValueLabel String value label.
 type StringValueLabel struct {
 	// The label.
-	Label *string `json:"label,omitempty"`
+	Label *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The value.
-	Value *string `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Value                             *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _StringValueLabel StringValueLabel
@@ -113,7 +114,7 @@ func (o *StringValueLabel) SetValue(v string) {
 }
 
 func (o StringValueLabel) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *StringValueLabel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "label")
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableStringValueLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

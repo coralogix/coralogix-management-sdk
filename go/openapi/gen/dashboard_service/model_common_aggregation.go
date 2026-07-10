@@ -24,11 +24,11 @@ type CommonAggregation string
 // List of common.Aggregation
 const (
 	COMMONAGGREGATION_AGGREGATION_UNSPECIFIED CommonAggregation = "AGGREGATION_UNSPECIFIED"
-	COMMONAGGREGATION_AGGREGATION_LAST CommonAggregation = "AGGREGATION_LAST"
-	COMMONAGGREGATION_AGGREGATION_MIN CommonAggregation = "AGGREGATION_MIN"
-	COMMONAGGREGATION_AGGREGATION_MAX CommonAggregation = "AGGREGATION_MAX"
-	COMMONAGGREGATION_AGGREGATION_AVG CommonAggregation = "AGGREGATION_AVG"
-	COMMONAGGREGATION_AGGREGATION_SUM CommonAggregation = "AGGREGATION_SUM"
+	COMMONAGGREGATION_AGGREGATION_LAST        CommonAggregation = "AGGREGATION_LAST"
+	COMMONAGGREGATION_AGGREGATION_MIN         CommonAggregation = "AGGREGATION_MIN"
+	COMMONAGGREGATION_AGGREGATION_MAX         CommonAggregation = "AGGREGATION_MAX"
+	COMMONAGGREGATION_AGGREGATION_AVG         CommonAggregation = "AGGREGATION_AVG"
+	COMMONAGGREGATION_AGGREGATION_SUM         CommonAggregation = "AGGREGATION_SUM"
 )
 
 // All allowed values of CommonAggregation enum
@@ -119,4 +119,3 @@ func (v *NullableCommonAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

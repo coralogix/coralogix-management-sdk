@@ -25,8 +25,9 @@ type LabelsPermutationsCardinalityDay struct {
 	// The day.
 	Day *string `json:"day,omitempty"`
 	// List of permutations.
-	Permutations *int32 `json:"permutations,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Permutations                      *int32 `json:"permutations,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LabelsPermutationsCardinalityDay LabelsPermutationsCardinalityDay
@@ -113,7 +114,7 @@ func (o *LabelsPermutationsCardinalityDay) SetPermutations(v int32) {
 }
 
 func (o LabelsPermutationsCardinalityDay) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *LabelsPermutationsCardinalityDay) UnmarshalJSON(data []byte) (err error
 		delete(additionalProperties, "day")
 		delete(additionalProperties, "permutations")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableLabelsPermutationsCardinalityDay) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

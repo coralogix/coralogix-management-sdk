@@ -24,8 +24,9 @@ var _ MappedNullable = &TestIntegrationRequest{}
 type TestIntegrationRequest struct {
 	IntegrationData *IntegrationMetadata `json:"integrationData,omitempty"`
 	// ID of the existing integration instance to test.
-	IntegrationId *string `json:"integrationId,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IntegrationId                     *string `json:"integrationId,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _TestIntegrationRequest TestIntegrationRequest
@@ -112,7 +113,7 @@ func (o *TestIntegrationRequest) SetIntegrationId(v string) {
 }
 
 func (o TestIntegrationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *TestIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "integrationData")
 		delete(additionalProperties, "integrationId")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableTestIntegrationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

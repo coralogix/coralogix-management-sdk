@@ -24,11 +24,11 @@ type V2Pillar string
 // List of v2.Pillar
 const (
 	V2PILLAR_PILLAR_UNSPECIFIED V2Pillar = "PILLAR_UNSPECIFIED"
-	V2PILLAR_PILLAR_METRICS V2Pillar = "PILLAR_METRICS"
-	V2PILLAR_PILLAR_LOGS V2Pillar = "PILLAR_LOGS"
-	V2PILLAR_PILLAR_SPANS V2Pillar = "PILLAR_SPANS"
-	V2PILLAR_PILLAR_BINARY V2Pillar = "PILLAR_BINARY"
-	V2PILLAR_PILLAR_PROFILES V2Pillar = "PILLAR_PROFILES"
+	V2PILLAR_PILLAR_METRICS     V2Pillar = "PILLAR_METRICS"
+	V2PILLAR_PILLAR_LOGS        V2Pillar = "PILLAR_LOGS"
+	V2PILLAR_PILLAR_SPANS       V2Pillar = "PILLAR_SPANS"
+	V2PILLAR_PILLAR_BINARY      V2Pillar = "PILLAR_BINARY"
+	V2PILLAR_PILLAR_PROFILES    V2Pillar = "PILLAR_PROFILES"
 )
 
 // All allowed values of V2Pillar enum
@@ -119,4 +119,3 @@ func (v *NullableV2Pillar) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

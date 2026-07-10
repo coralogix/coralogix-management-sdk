@@ -23,12 +23,13 @@ var _ MappedNullable = &CaseDeepLinks{}
 // CaseDeepLinks Pre-built URLs that navigate from a case to the relevant views.
 type CaseDeepLinks struct {
 	// Per-alert-indicator deep links, keyed by alert_indicator_id.
-	AlertIndicators map[string]AlertIndicatorDeepLink `json:"alertIndicators,omitempty"`
+	AlertIndicators *map[string]AlertIndicatorDeepLink `json:"alertIndicators,omitempty"`
 	// Absolute URL to the case detail page.
 	Detail *string `json:"detail,omitempty"`
 	// Per-impacted-entity drilldown links.
-	ImpactedEntities []ImpactedEntityLink `json:"impactedEntities,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ImpactedEntities                  []ImpactedEntityLink `json:"impactedEntities,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CaseDeepLinks CaseDeepLinks
@@ -56,14 +57,14 @@ func (o *CaseDeepLinks) GetAlertIndicators() map[string]AlertIndicatorDeepLink {
 		var ret map[string]AlertIndicatorDeepLink
 		return ret
 	}
-	return o.AlertIndicators
+	return *o.AlertIndicators
 }
 
 // GetAlertIndicatorsOk returns a tuple with the AlertIndicators field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CaseDeepLinks) GetAlertIndicatorsOk() (map[string]AlertIndicatorDeepLink, bool) {
+func (o *CaseDeepLinks) GetAlertIndicatorsOk() (*map[string]AlertIndicatorDeepLink, bool) {
 	if o == nil || IsNil(o.AlertIndicators) {
-		return map[string]AlertIndicatorDeepLink{}, false
+		return nil, false
 	}
 	return o.AlertIndicators, true
 }
@@ -79,7 +80,7 @@ func (o *CaseDeepLinks) HasAlertIndicators() bool {
 
 // SetAlertIndicators gets a reference to the given map[string]AlertIndicatorDeepLink and assigns it to the AlertIndicators field.
 func (o *CaseDeepLinks) SetAlertIndicators(v map[string]AlertIndicatorDeepLink) {
-	o.AlertIndicators = v
+	o.AlertIndicators = &v
 }
 
 // GetDetail returns the Detail field value if set, zero value otherwise.
@@ -147,7 +148,7 @@ func (o *CaseDeepLinks) SetImpactedEntities(v []ImpactedEntityLink) {
 }
 
 func (o CaseDeepLinks) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *CaseDeepLinks) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "detail")
 		delete(additionalProperties, "impactedEntities")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableCaseDeepLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

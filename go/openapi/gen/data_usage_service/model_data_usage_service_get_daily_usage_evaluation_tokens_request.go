@@ -13,126 +13,178 @@ package data_usage_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// DataUsageServiceGetDailyUsageEvaluationTokensRequest - struct for DataUsageServiceGetDailyUsageEvaluationTokensRequest
+// checks if the DataUsageServiceGetDailyUsageEvaluationTokensRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DataUsageServiceGetDailyUsageEvaluationTokensRequest{}
+
+// DataUsageServiceGetDailyUsageEvaluationTokensRequest Request for daily evaluation token usage data for the specified period.
 type DataUsageServiceGetDailyUsageEvaluationTokensRequest struct {
-	GetDailyUsageEvaluationTokensRequestDateRange *GetDailyUsageEvaluationTokensRequestDateRange
-	GetDailyUsageEvaluationTokensRequestRange *GetDailyUsageEvaluationTokensRequestRange
+	DateRange                         *V2DateRange `json:"dateRange,omitempty"`
+	Range                             *V2Range     `json:"range,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// GetDailyUsageEvaluationTokensRequestDateRangeAsDataUsageServiceGetDailyUsageEvaluationTokensRequest is a convenience function that returns GetDailyUsageEvaluationTokensRequestDateRange wrapped in DataUsageServiceGetDailyUsageEvaluationTokensRequest
-func GetDailyUsageEvaluationTokensRequestDateRangeAsDataUsageServiceGetDailyUsageEvaluationTokensRequest(v *GetDailyUsageEvaluationTokensRequestDateRange) DataUsageServiceGetDailyUsageEvaluationTokensRequest {
-	return DataUsageServiceGetDailyUsageEvaluationTokensRequest{
-		GetDailyUsageEvaluationTokensRequestDateRange: v,
+type _DataUsageServiceGetDailyUsageEvaluationTokensRequest DataUsageServiceGetDailyUsageEvaluationTokensRequest
+
+// NewDataUsageServiceGetDailyUsageEvaluationTokensRequest instantiates a new DataUsageServiceGetDailyUsageEvaluationTokensRequest object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDataUsageServiceGetDailyUsageEvaluationTokensRequest() *DataUsageServiceGetDailyUsageEvaluationTokensRequest {
+	this := DataUsageServiceGetDailyUsageEvaluationTokensRequest{}
+	return &this
+}
+
+// NewDataUsageServiceGetDailyUsageEvaluationTokensRequestWithDefaults instantiates a new DataUsageServiceGetDailyUsageEvaluationTokensRequest object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDataUsageServiceGetDailyUsageEvaluationTokensRequestWithDefaults() *DataUsageServiceGetDailyUsageEvaluationTokensRequest {
+	this := DataUsageServiceGetDailyUsageEvaluationTokensRequest{}
+	return &this
+}
+
+// GetDateRange returns the DateRange field value if set, zero value otherwise.
+func (o *DataUsageServiceGetDailyUsageEvaluationTokensRequest) GetDateRange() V2DateRange {
+	if o == nil || IsNil(o.DateRange) {
+		var ret V2DateRange
+		return ret
 	}
+	return *o.DateRange
 }
 
-// GetDailyUsageEvaluationTokensRequestRangeAsDataUsageServiceGetDailyUsageEvaluationTokensRequest is a convenience function that returns GetDailyUsageEvaluationTokensRequestRange wrapped in DataUsageServiceGetDailyUsageEvaluationTokensRequest
-func GetDailyUsageEvaluationTokensRequestRangeAsDataUsageServiceGetDailyUsageEvaluationTokensRequest(v *GetDailyUsageEvaluationTokensRequestRange) DataUsageServiceGetDailyUsageEvaluationTokensRequest {
-	return DataUsageServiceGetDailyUsageEvaluationTokensRequest{
-		GetDailyUsageEvaluationTokensRequestRange: v,
+// GetDateRangeOk returns a tuple with the DateRange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataUsageServiceGetDailyUsageEvaluationTokensRequest) GetDateRangeOk() (*V2DateRange, bool) {
+	if o == nil || IsNil(o.DateRange) {
+		return nil, false
 	}
+	return o.DateRange, true
 }
 
+// HasDateRange returns a boolean if a field has been set.
+func (o *DataUsageServiceGetDailyUsageEvaluationTokensRequest) HasDateRange() bool {
+	if o != nil && !IsNil(o.DateRange) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *DataUsageServiceGetDailyUsageEvaluationTokensRequest) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into GetDailyUsageEvaluationTokensRequestDateRange
-	err = json.Unmarshal(data, &dst.GetDailyUsageEvaluationTokensRequestDateRange)
-	if err == nil {
-		jsonGetDailyUsageEvaluationTokensRequestDateRange, _ := json.Marshal(dst.GetDailyUsageEvaluationTokensRequestDateRange)
-		if string(jsonGetDailyUsageEvaluationTokensRequestDateRange) == "{}" { // empty struct
-			dst.GetDailyUsageEvaluationTokensRequestDateRange = nil
-		} else {
-			if err = validator.Validate(dst.GetDailyUsageEvaluationTokensRequestDateRange); err != nil {
-				dst.GetDailyUsageEvaluationTokensRequestDateRange = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetDateRange gets a reference to the given V2DateRange and assigns it to the DateRange field.
+func (o *DataUsageServiceGetDailyUsageEvaluationTokensRequest) SetDateRange(v V2DateRange) {
+	o.DateRange = &v
+}
+
+// GetRange returns the Range field value if set, zero value otherwise.
+func (o *DataUsageServiceGetDailyUsageEvaluationTokensRequest) GetRange() V2Range {
+	if o == nil || IsNil(o.Range) {
+		var ret V2Range
+		return ret
+	}
+	return *o.Range
+}
+
+// GetRangeOk returns a tuple with the Range field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataUsageServiceGetDailyUsageEvaluationTokensRequest) GetRangeOk() (*V2Range, bool) {
+	if o == nil || IsNil(o.Range) {
+		return nil, false
+	}
+	return o.Range, true
+}
+
+// HasRange returns a boolean if a field has been set.
+func (o *DataUsageServiceGetDailyUsageEvaluationTokensRequest) HasRange() bool {
+	if o != nil && !IsNil(o.Range) {
+		return true
+	}
+
+	return false
+}
+
+// SetRange gets a reference to the given V2Range and assigns it to the Range field.
+func (o *DataUsageServiceGetDailyUsageEvaluationTokensRequest) SetRange(v V2Range) {
+	o.Range = &v
+}
+
+func (o DataUsageServiceGetDailyUsageEvaluationTokensRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DataUsageServiceGetDailyUsageEvaluationTokensRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.DateRange) {
+		toSerialize["dateRange"] = o.DateRange
+	}
+	if !IsNil(o.Range) {
+		toSerialize["range"] = o.Range
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["range"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dateRange"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [range, dateRange] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["range"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field range must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dateRange"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dateRange must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *DataUsageServiceGetDailyUsageEvaluationTokensRequest) UnmarshalJSON(data []byte) (err error) {
+	varDataUsageServiceGetDailyUsageEvaluationTokensRequest := _DataUsageServiceGetDailyUsageEvaluationTokensRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataUsageServiceGetDailyUsageEvaluationTokensRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataUsageServiceGetDailyUsageEvaluationTokensRequest(varDataUsageServiceGetDailyUsageEvaluationTokensRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["range"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GetDailyUsageEvaluationTokensRequestDateRange = nil
-	}
-
-	// try to unmarshal data into GetDailyUsageEvaluationTokensRequestRange
-	err = json.Unmarshal(data, &dst.GetDailyUsageEvaluationTokensRequestRange)
-	if err == nil {
-		jsonGetDailyUsageEvaluationTokensRequestRange, _ := json.Marshal(dst.GetDailyUsageEvaluationTokensRequestRange)
-		if string(jsonGetDailyUsageEvaluationTokensRequestRange) == "{}" { // empty struct
-			dst.GetDailyUsageEvaluationTokensRequestRange = nil
-		} else {
-			if err = validator.Validate(dst.GetDailyUsageEvaluationTokensRequestRange); err != nil {
-				dst.GetDailyUsageEvaluationTokensRequestRange = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dateRange"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.GetDailyUsageEvaluationTokensRequestRange = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [range, dateRange] may be set"}
+		}
+
+		delete(additionalProperties, "dateRange")
+		delete(additionalProperties, "range")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.GetDailyUsageEvaluationTokensRequestDateRange = nil
-		dst.GetDailyUsageEvaluationTokensRequestRange = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(DataUsageServiceGetDailyUsageEvaluationTokensRequest)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src DataUsageServiceGetDailyUsageEvaluationTokensRequest) MarshalJSON() ([]byte, error) {
-	if src.GetDailyUsageEvaluationTokensRequestDateRange != nil {
-		return json.Marshal(&src.GetDailyUsageEvaluationTokensRequestDateRange)
-	}
-
-	if src.GetDailyUsageEvaluationTokensRequestRange != nil {
-		return json.Marshal(&src.GetDailyUsageEvaluationTokensRequestRange)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *DataUsageServiceGetDailyUsageEvaluationTokensRequest) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.GetDailyUsageEvaluationTokensRequestDateRange != nil {
-		return obj.GetDailyUsageEvaluationTokensRequestDateRange
-	}
-
-	if obj.GetDailyUsageEvaluationTokensRequestRange != nil {
-		return obj.GetDailyUsageEvaluationTokensRequestRange
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj DataUsageServiceGetDailyUsageEvaluationTokensRequest) GetActualInstanceValue() (interface{}) {
-	if obj.GetDailyUsageEvaluationTokensRequestDateRange != nil {
-		return *obj.GetDailyUsageEvaluationTokensRequestDateRange
-	}
-
-	if obj.GetDailyUsageEvaluationTokensRequestRange != nil {
-		return *obj.GetDailyUsageEvaluationTokensRequestRange
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableDataUsageServiceGetDailyUsageEvaluationTokensRequest struct {
@@ -170,4 +222,3 @@ func (v *NullableDataUsageServiceGetDailyUsageEvaluationTokensRequest) Unmarshal
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

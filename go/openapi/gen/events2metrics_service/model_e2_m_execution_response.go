@@ -13,164 +13,224 @@ package events2metrics_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// E2MExecutionResponse - struct for E2MExecutionResponse
+// checks if the E2MExecutionResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &E2MExecutionResponse{}
+
+// E2MExecutionResponse struct for E2MExecutionResponse
 type E2MExecutionResponse struct {
-	E2MExecutionResponseCreated *E2MExecutionResponseCreated
-	E2MExecutionResponseDeleted *E2MExecutionResponseDeleted
-	E2MExecutionResponseReplaced *E2MExecutionResponseReplaced
+	Created                           *CreateE2MResponse  `json:"created,omitempty"`
+	Deleted                           *DeleteE2MResponse  `json:"deleted,omitempty"`
+	Replaced                          *ReplaceE2MResponse `json:"replaced,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// E2MExecutionResponseCreatedAsE2MExecutionResponse is a convenience function that returns E2MExecutionResponseCreated wrapped in E2MExecutionResponse
-func E2MExecutionResponseCreatedAsE2MExecutionResponse(v *E2MExecutionResponseCreated) E2MExecutionResponse {
-	return E2MExecutionResponse{
-		E2MExecutionResponseCreated: v,
+type _E2MExecutionResponse E2MExecutionResponse
+
+// NewE2MExecutionResponse instantiates a new E2MExecutionResponse object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewE2MExecutionResponse() *E2MExecutionResponse {
+	this := E2MExecutionResponse{}
+	return &this
+}
+
+// NewE2MExecutionResponseWithDefaults instantiates a new E2MExecutionResponse object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewE2MExecutionResponseWithDefaults() *E2MExecutionResponse {
+	this := E2MExecutionResponse{}
+	return &this
+}
+
+// GetCreated returns the Created field value if set, zero value otherwise.
+func (o *E2MExecutionResponse) GetCreated() CreateE2MResponse {
+	if o == nil || IsNil(o.Created) {
+		var ret CreateE2MResponse
+		return ret
 	}
+	return *o.Created
 }
 
-// E2MExecutionResponseDeletedAsE2MExecutionResponse is a convenience function that returns E2MExecutionResponseDeleted wrapped in E2MExecutionResponse
-func E2MExecutionResponseDeletedAsE2MExecutionResponse(v *E2MExecutionResponseDeleted) E2MExecutionResponse {
-	return E2MExecutionResponse{
-		E2MExecutionResponseDeleted: v,
+// GetCreatedOk returns a tuple with the Created field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2MExecutionResponse) GetCreatedOk() (*CreateE2MResponse, bool) {
+	if o == nil || IsNil(o.Created) {
+		return nil, false
 	}
+	return o.Created, true
 }
 
-// E2MExecutionResponseReplacedAsE2MExecutionResponse is a convenience function that returns E2MExecutionResponseReplaced wrapped in E2MExecutionResponse
-func E2MExecutionResponseReplacedAsE2MExecutionResponse(v *E2MExecutionResponseReplaced) E2MExecutionResponse {
-	return E2MExecutionResponse{
-		E2MExecutionResponseReplaced: v,
+// HasCreated returns a boolean if a field has been set.
+func (o *E2MExecutionResponse) HasCreated() bool {
+	if o != nil && !IsNil(o.Created) {
+		return true
 	}
+
+	return false
 }
 
+// SetCreated gets a reference to the given CreateE2MResponse and assigns it to the Created field.
+func (o *E2MExecutionResponse) SetCreated(v CreateE2MResponse) {
+	o.Created = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *E2MExecutionResponse) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into E2MExecutionResponseCreated
-	err = json.Unmarshal(data, &dst.E2MExecutionResponseCreated)
-	if err == nil {
-		jsonE2MExecutionResponseCreated, _ := json.Marshal(dst.E2MExecutionResponseCreated)
-		if string(jsonE2MExecutionResponseCreated) == "{}" { // empty struct
-			dst.E2MExecutionResponseCreated = nil
-		} else {
-			if err = validator.Validate(dst.E2MExecutionResponseCreated); err != nil {
-				dst.E2MExecutionResponseCreated = nil
-			} else {
-				match++
-			}
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
+func (o *E2MExecutionResponse) GetDeleted() DeleteE2MResponse {
+	if o == nil || IsNil(o.Deleted) {
+		var ret DeleteE2MResponse
+		return ret
+	}
+	return *o.Deleted
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2MExecutionResponse) GetDeletedOk() (*DeleteE2MResponse, bool) {
+	if o == nil || IsNil(o.Deleted) {
+		return nil, false
+	}
+	return o.Deleted, true
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *E2MExecutionResponse) HasDeleted() bool {
+	if o != nil && !IsNil(o.Deleted) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given DeleteE2MResponse and assigns it to the Deleted field.
+func (o *E2MExecutionResponse) SetDeleted(v DeleteE2MResponse) {
+	o.Deleted = &v
+}
+
+// GetReplaced returns the Replaced field value if set, zero value otherwise.
+func (o *E2MExecutionResponse) GetReplaced() ReplaceE2MResponse {
+	if o == nil || IsNil(o.Replaced) {
+		var ret ReplaceE2MResponse
+		return ret
+	}
+	return *o.Replaced
+}
+
+// GetReplacedOk returns a tuple with the Replaced field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2MExecutionResponse) GetReplacedOk() (*ReplaceE2MResponse, bool) {
+	if o == nil || IsNil(o.Replaced) {
+		return nil, false
+	}
+	return o.Replaced, true
+}
+
+// HasReplaced returns a boolean if a field has been set.
+func (o *E2MExecutionResponse) HasReplaced() bool {
+	if o != nil && !IsNil(o.Replaced) {
+		return true
+	}
+
+	return false
+}
+
+// SetReplaced gets a reference to the given ReplaceE2MResponse and assigns it to the Replaced field.
+func (o *E2MExecutionResponse) SetReplaced(v ReplaceE2MResponse) {
+	o.Replaced = &v
+}
+
+func (o E2MExecutionResponse) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o E2MExecutionResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Created) {
+		toSerialize["created"] = o.Created
+	}
+	if !IsNil(o.Deleted) {
+		toSerialize["deleted"] = o.Deleted
+	}
+	if !IsNil(o.Replaced) {
+		toSerialize["replaced"] = o.Replaced
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["created"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["replaced"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["deleted"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [created, replaced, deleted] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["created"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field created must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["replaced"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field replaced must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["deleted"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field deleted must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *E2MExecutionResponse) UnmarshalJSON(data []byte) (err error) {
+	varE2MExecutionResponse := _E2MExecutionResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varE2MExecutionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = E2MExecutionResponse(varE2MExecutionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["created"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.E2MExecutionResponseCreated = nil
-	}
-
-	// try to unmarshal data into E2MExecutionResponseDeleted
-	err = json.Unmarshal(data, &dst.E2MExecutionResponseDeleted)
-	if err == nil {
-		jsonE2MExecutionResponseDeleted, _ := json.Marshal(dst.E2MExecutionResponseDeleted)
-		if string(jsonE2MExecutionResponseDeleted) == "{}" { // empty struct
-			dst.E2MExecutionResponseDeleted = nil
-		} else {
-			if err = validator.Validate(dst.E2MExecutionResponseDeleted); err != nil {
-				dst.E2MExecutionResponseDeleted = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["replaced"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.E2MExecutionResponseDeleted = nil
-	}
-
-	// try to unmarshal data into E2MExecutionResponseReplaced
-	err = json.Unmarshal(data, &dst.E2MExecutionResponseReplaced)
-	if err == nil {
-		jsonE2MExecutionResponseReplaced, _ := json.Marshal(dst.E2MExecutionResponseReplaced)
-		if string(jsonE2MExecutionResponseReplaced) == "{}" { // empty struct
-			dst.E2MExecutionResponseReplaced = nil
-		} else {
-			if err = validator.Validate(dst.E2MExecutionResponseReplaced); err != nil {
-				dst.E2MExecutionResponseReplaced = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["deleted"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.E2MExecutionResponseReplaced = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [created, replaced, deleted] may be set"}
+		}
+
+		delete(additionalProperties, "created")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "replaced")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.E2MExecutionResponseCreated = nil
-		dst.E2MExecutionResponseDeleted = nil
-		dst.E2MExecutionResponseReplaced = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(E2MExecutionResponse)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src E2MExecutionResponse) MarshalJSON() ([]byte, error) {
-	if src.E2MExecutionResponseCreated != nil {
-		return json.Marshal(&src.E2MExecutionResponseCreated)
-	}
-
-	if src.E2MExecutionResponseDeleted != nil {
-		return json.Marshal(&src.E2MExecutionResponseDeleted)
-	}
-
-	if src.E2MExecutionResponseReplaced != nil {
-		return json.Marshal(&src.E2MExecutionResponseReplaced)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *E2MExecutionResponse) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.E2MExecutionResponseCreated != nil {
-		return obj.E2MExecutionResponseCreated
-	}
-
-	if obj.E2MExecutionResponseDeleted != nil {
-		return obj.E2MExecutionResponseDeleted
-	}
-
-	if obj.E2MExecutionResponseReplaced != nil {
-		return obj.E2MExecutionResponseReplaced
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj E2MExecutionResponse) GetActualInstanceValue() (interface{}) {
-	if obj.E2MExecutionResponseCreated != nil {
-		return *obj.E2MExecutionResponseCreated
-	}
-
-	if obj.E2MExecutionResponseDeleted != nil {
-		return *obj.E2MExecutionResponseDeleted
-	}
-
-	if obj.E2MExecutionResponseReplaced != nil {
-		return *obj.E2MExecutionResponseReplaced
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableE2MExecutionResponse struct {
@@ -208,4 +268,3 @@ func (v *NullableE2MExecutionResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

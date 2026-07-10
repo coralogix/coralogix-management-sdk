@@ -24,7 +24,7 @@ type NotifyOn string
 // List of NotifyOn
 const (
 	NOTIFYON_NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED NotifyOn = "NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"
-	NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED NotifyOn = "NOTIFY_ON_TRIGGERED_AND_RESOLVED"
+	NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED     NotifyOn = "NOTIFY_ON_TRIGGERED_AND_RESOLVED"
 )
 
 // All allowed values of NotifyOn enum
@@ -111,4 +111,3 @@ func (v *NullableNotifyOn) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

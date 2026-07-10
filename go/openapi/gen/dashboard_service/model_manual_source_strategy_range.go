@@ -23,13 +23,14 @@ var _ MappedNullable = &ManualSourceStrategyRange{}
 // ManualSourceStrategyRange Range strategy: places the annotation spanning between two absolute timestamp values.
 type ManualSourceStrategyRange struct {
 	// The custom unit.
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The end value.
 	EndValue *float64 `json:"endValue,omitempty"`
 	// The start value.
-	StartValue *float64 `json:"startValue,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StartValue                        *float64    `json:"startValue,omitempty"`
+	Unit                              *CommonUnit `json:"unit,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ManualSourceStrategyRange ManualSourceStrategyRange
@@ -180,7 +181,7 @@ func (o *ManualSourceStrategyRange) SetUnit(v CommonUnit) {
 }
 
 func (o ManualSourceStrategyRange) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -229,6 +230,7 @@ func (o *ManualSourceStrategyRange) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "startValue")
 		delete(additionalProperties, "unit")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -269,4 +271,3 @@ func (v *NullableManualSourceStrategyRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

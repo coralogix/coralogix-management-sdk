@@ -13,164 +13,261 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ColorLabelMapping - struct for ColorLabelMapping
+// checks if the ColorLabelMapping type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ColorLabelMapping{}
+
+// ColorLabelMapping Reusable color and label mapping configuration supporting range, value, and regex-based mappings
 type ColorLabelMapping struct {
-	ColorLabelMappingRange *ColorLabelMappingRange
-	ColorLabelMappingRegex *ColorLabelMappingRegex
-	ColorLabelMappingValue *ColorLabelMappingValue
+	ColorBy                           *ColorApplyTarget              `json:"colorBy,omitempty"`
+	Range                             *RangeMapping                  `json:"range,omitempty"`
+	Regex                             *RegexMapping                  `json:"regex,omitempty"`
+	Value                             *ColorLabelMappingValueMapping `json:"value,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// ColorLabelMappingRangeAsColorLabelMapping is a convenience function that returns ColorLabelMappingRange wrapped in ColorLabelMapping
-func ColorLabelMappingRangeAsColorLabelMapping(v *ColorLabelMappingRange) ColorLabelMapping {
-	return ColorLabelMapping{
-		ColorLabelMappingRange: v,
+type _ColorLabelMapping ColorLabelMapping
+
+// NewColorLabelMapping instantiates a new ColorLabelMapping object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewColorLabelMapping() *ColorLabelMapping {
+	this := ColorLabelMapping{}
+	return &this
+}
+
+// NewColorLabelMappingWithDefaults instantiates a new ColorLabelMapping object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewColorLabelMappingWithDefaults() *ColorLabelMapping {
+	this := ColorLabelMapping{}
+	return &this
+}
+
+// GetColorBy returns the ColorBy field value if set, zero value otherwise.
+func (o *ColorLabelMapping) GetColorBy() ColorApplyTarget {
+	if o == nil || IsNil(o.ColorBy) {
+		var ret ColorApplyTarget
+		return ret
 	}
+	return *o.ColorBy
 }
 
-// ColorLabelMappingRegexAsColorLabelMapping is a convenience function that returns ColorLabelMappingRegex wrapped in ColorLabelMapping
-func ColorLabelMappingRegexAsColorLabelMapping(v *ColorLabelMappingRegex) ColorLabelMapping {
-	return ColorLabelMapping{
-		ColorLabelMappingRegex: v,
+// GetColorByOk returns a tuple with the ColorBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ColorLabelMapping) GetColorByOk() (*ColorApplyTarget, bool) {
+	if o == nil || IsNil(o.ColorBy) {
+		return nil, false
 	}
+	return o.ColorBy, true
 }
 
-// ColorLabelMappingValueAsColorLabelMapping is a convenience function that returns ColorLabelMappingValue wrapped in ColorLabelMapping
-func ColorLabelMappingValueAsColorLabelMapping(v *ColorLabelMappingValue) ColorLabelMapping {
-	return ColorLabelMapping{
-		ColorLabelMappingValue: v,
+// HasColorBy returns a boolean if a field has been set.
+func (o *ColorLabelMapping) HasColorBy() bool {
+	if o != nil && !IsNil(o.ColorBy) {
+		return true
 	}
+
+	return false
 }
 
+// SetColorBy gets a reference to the given ColorApplyTarget and assigns it to the ColorBy field.
+func (o *ColorLabelMapping) SetColorBy(v ColorApplyTarget) {
+	o.ColorBy = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ColorLabelMapping) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ColorLabelMappingRange
-	err = json.Unmarshal(data, &dst.ColorLabelMappingRange)
-	if err == nil {
-		jsonColorLabelMappingRange, _ := json.Marshal(dst.ColorLabelMappingRange)
-		if string(jsonColorLabelMappingRange) == "{}" { // empty struct
-			dst.ColorLabelMappingRange = nil
-		} else {
-			if err = validator.Validate(dst.ColorLabelMappingRange); err != nil {
-				dst.ColorLabelMappingRange = nil
-			} else {
-				match++
-			}
+// GetRange returns the Range field value if set, zero value otherwise.
+func (o *ColorLabelMapping) GetRange() RangeMapping {
+	if o == nil || IsNil(o.Range) {
+		var ret RangeMapping
+		return ret
+	}
+	return *o.Range
+}
+
+// GetRangeOk returns a tuple with the Range field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ColorLabelMapping) GetRangeOk() (*RangeMapping, bool) {
+	if o == nil || IsNil(o.Range) {
+		return nil, false
+	}
+	return o.Range, true
+}
+
+// HasRange returns a boolean if a field has been set.
+func (o *ColorLabelMapping) HasRange() bool {
+	if o != nil && !IsNil(o.Range) {
+		return true
+	}
+
+	return false
+}
+
+// SetRange gets a reference to the given RangeMapping and assigns it to the Range field.
+func (o *ColorLabelMapping) SetRange(v RangeMapping) {
+	o.Range = &v
+}
+
+// GetRegex returns the Regex field value if set, zero value otherwise.
+func (o *ColorLabelMapping) GetRegex() RegexMapping {
+	if o == nil || IsNil(o.Regex) {
+		var ret RegexMapping
+		return ret
+	}
+	return *o.Regex
+}
+
+// GetRegexOk returns a tuple with the Regex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ColorLabelMapping) GetRegexOk() (*RegexMapping, bool) {
+	if o == nil || IsNil(o.Regex) {
+		return nil, false
+	}
+	return o.Regex, true
+}
+
+// HasRegex returns a boolean if a field has been set.
+func (o *ColorLabelMapping) HasRegex() bool {
+	if o != nil && !IsNil(o.Regex) {
+		return true
+	}
+
+	return false
+}
+
+// SetRegex gets a reference to the given RegexMapping and assigns it to the Regex field.
+func (o *ColorLabelMapping) SetRegex(v RegexMapping) {
+	o.Regex = &v
+}
+
+// GetValue returns the Value field value if set, zero value otherwise.
+func (o *ColorLabelMapping) GetValue() ColorLabelMappingValueMapping {
+	if o == nil || IsNil(o.Value) {
+		var ret ColorLabelMappingValueMapping
+		return ret
+	}
+	return *o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ColorLabelMapping) GetValueOk() (*ColorLabelMappingValueMapping, bool) {
+	if o == nil || IsNil(o.Value) {
+		return nil, false
+	}
+	return o.Value, true
+}
+
+// HasValue returns a boolean if a field has been set.
+func (o *ColorLabelMapping) HasValue() bool {
+	if o != nil && !IsNil(o.Value) {
+		return true
+	}
+
+	return false
+}
+
+// SetValue gets a reference to the given ColorLabelMappingValueMapping and assigns it to the Value field.
+func (o *ColorLabelMapping) SetValue(v ColorLabelMappingValueMapping) {
+	o.Value = &v
+}
+
+func (o ColorLabelMapping) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ColorLabelMapping) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ColorBy) {
+		toSerialize["colorBy"] = o.ColorBy
+	}
+	if !IsNil(o.Range) {
+		toSerialize["range"] = o.Range
+	}
+	if !IsNil(o.Regex) {
+		toSerialize["regex"] = o.Regex
+	}
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["range"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["value"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["regex"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [range, value, regex] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["range"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field range must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["value"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field value must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["regex"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field regex must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ColorLabelMapping) UnmarshalJSON(data []byte) (err error) {
+	varColorLabelMapping := _ColorLabelMapping{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varColorLabelMapping)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ColorLabelMapping(varColorLabelMapping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["range"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ColorLabelMappingRange = nil
-	}
-
-	// try to unmarshal data into ColorLabelMappingRegex
-	err = json.Unmarshal(data, &dst.ColorLabelMappingRegex)
-	if err == nil {
-		jsonColorLabelMappingRegex, _ := json.Marshal(dst.ColorLabelMappingRegex)
-		if string(jsonColorLabelMappingRegex) == "{}" { // empty struct
-			dst.ColorLabelMappingRegex = nil
-		} else {
-			if err = validator.Validate(dst.ColorLabelMappingRegex); err != nil {
-				dst.ColorLabelMappingRegex = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["value"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ColorLabelMappingRegex = nil
-	}
-
-	// try to unmarshal data into ColorLabelMappingValue
-	err = json.Unmarshal(data, &dst.ColorLabelMappingValue)
-	if err == nil {
-		jsonColorLabelMappingValue, _ := json.Marshal(dst.ColorLabelMappingValue)
-		if string(jsonColorLabelMappingValue) == "{}" { // empty struct
-			dst.ColorLabelMappingValue = nil
-		} else {
-			if err = validator.Validate(dst.ColorLabelMappingValue); err != nil {
-				dst.ColorLabelMappingValue = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["regex"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ColorLabelMappingValue = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [range, value, regex] may be set"}
+		}
+
+		delete(additionalProperties, "colorBy")
+		delete(additionalProperties, "range")
+		delete(additionalProperties, "regex")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ColorLabelMappingRange = nil
-		dst.ColorLabelMappingRegex = nil
-		dst.ColorLabelMappingValue = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ColorLabelMapping)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ColorLabelMapping) MarshalJSON() ([]byte, error) {
-	if src.ColorLabelMappingRange != nil {
-		return json.Marshal(&src.ColorLabelMappingRange)
-	}
-
-	if src.ColorLabelMappingRegex != nil {
-		return json.Marshal(&src.ColorLabelMappingRegex)
-	}
-
-	if src.ColorLabelMappingValue != nil {
-		return json.Marshal(&src.ColorLabelMappingValue)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ColorLabelMapping) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ColorLabelMappingRange != nil {
-		return obj.ColorLabelMappingRange
-	}
-
-	if obj.ColorLabelMappingRegex != nil {
-		return obj.ColorLabelMappingRegex
-	}
-
-	if obj.ColorLabelMappingValue != nil {
-		return obj.ColorLabelMappingValue
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ColorLabelMapping) GetActualInstanceValue() (interface{}) {
-	if obj.ColorLabelMappingRange != nil {
-		return *obj.ColorLabelMappingRange
-	}
-
-	if obj.ColorLabelMappingRegex != nil {
-		return *obj.ColorLabelMappingRegex
-	}
-
-	if obj.ColorLabelMappingValue != nil {
-		return *obj.ColorLabelMappingValue
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableColorLabelMapping struct {
@@ -208,4 +305,3 @@ func (v *NullableColorLabelMapping) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

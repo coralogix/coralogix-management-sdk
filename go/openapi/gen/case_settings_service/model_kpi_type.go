@@ -23,9 +23,10 @@ type KPIType string
 
 // List of KPIType
 const (
-	KPITYPE_KPI_TYPE_UNSPECIFIED KPIType = "KPI_TYPE_UNSPECIFIED"
+	KPITYPE_KPI_TYPE_UNSPECIFIED         KPIType = "KPI_TYPE_UNSPECIFIED"
 	KPITYPE_KPI_TYPE_TIME_TO_ACKNOWLEDGE KPIType = "KPI_TYPE_TIME_TO_ACKNOWLEDGE"
-	KPITYPE_KPI_TYPE_TIME_TO_RESOLVE KPIType = "KPI_TYPE_TIME_TO_RESOLVE"
+	KPITYPE_KPI_TYPE_TIME_TO_RESOLVE     KPIType = "KPI_TYPE_TIME_TO_RESOLVE"
+	KPITYPE_KPI_TYPE_TIME_TO_UPDATE      KPIType = "KPI_TYPE_TIME_TO_UPDATE"
 )
 
 // All allowed values of KPIType enum
@@ -33,6 +34,7 @@ var AllowedKPITypeEnumValues = []KPIType{
 	"KPI_TYPE_UNSPECIFIED",
 	"KPI_TYPE_TIME_TO_ACKNOWLEDGE",
 	"KPI_TYPE_TIME_TO_RESOLVE",
+	"KPI_TYPE_TIME_TO_UPDATE",
 }
 
 func (v *KPIType) UnmarshalJSON(src []byte) error {
@@ -113,4 +115,3 @@ func (v *NullableKPIType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

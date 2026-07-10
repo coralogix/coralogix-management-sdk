@@ -23,8 +23,9 @@ var _ MappedNullable = &GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsP
 // GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue struct for GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue
 type GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue struct {
 	// The values.
-	Values []string `json:"values,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Values                            []string `json:"values,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue
@@ -79,7 +80,7 @@ func (o *GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue) 
 }
 
 func (o GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue) 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableGlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParamete
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

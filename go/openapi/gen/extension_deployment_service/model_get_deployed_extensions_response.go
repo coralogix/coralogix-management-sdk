@@ -23,8 +23,9 @@ var _ MappedNullable = &GetDeployedExtensionsResponse{}
 // GetDeployedExtensionsResponse Response containing a list of deployed extensions.
 type GetDeployedExtensionsResponse struct {
 	// The deployed extensions.
-	DeployedExtensions []DeployedExtension `json:"deployedExtensions,omitempty"`
-	AdditionalProperties map[string]interface{}
+	DeployedExtensions                []DeployedExtension `json:"deployedExtensions,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetDeployedExtensionsResponse GetDeployedExtensionsResponse
@@ -79,7 +80,7 @@ func (o *GetDeployedExtensionsResponse) SetDeployedExtensions(v []DeployedExtens
 }
 
 func (o GetDeployedExtensionsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *GetDeployedExtensionsResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "deployedExtensions")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableGetDeployedExtensionsResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

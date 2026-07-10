@@ -19,13 +19,12 @@ import (
 	"strings"
 )
 
-
 // DashboardFoldersServiceAPIService DashboardFoldersServiceAPI service
 type DashboardFoldersServiceAPIService service
 
 type ApiDashboardFoldersServiceCreateDashboardFolderRequest struct {
-	ctx context.Context
-	ApiService *DashboardFoldersServiceAPIService
+	ctx                                       context.Context
+	ApiService                                *DashboardFoldersServiceAPIService
 	createDashboardFolderRequestDataStructure *CreateDashboardFolderRequestDataStructure
 }
 
@@ -46,24 +45,25 @@ Creates a new dashboard folder.
 Requires the following permissions:
 - `team-dashboards:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDashboardFoldersServiceCreateDashboardFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDashboardFoldersServiceCreateDashboardFolderRequest
 */
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceCreateDashboardFolder(ctx context.Context) ApiDashboardFoldersServiceCreateDashboardFolderRequest {
 	return ApiDashboardFoldersServiceCreateDashboardFolderRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateDashboardFolderResponse
+//
+//	@return CreateDashboardFolderResponse
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceCreateDashboardFolderExecute(r ApiDashboardFoldersServiceCreateDashboardFolderRequest) (*CreateDashboardFolderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateDashboardFolderResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateDashboardFolderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardFoldersServiceAPIService.DashboardFoldersServiceCreateDashboardFolder")
@@ -125,8 +125,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceCreateDashboa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -136,8 +136,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceCreateDashboa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -147,8 +147,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceCreateDashboa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -166,10 +166,10 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceCreateDashboa
 }
 
 type ApiDashboardFoldersServiceDeleteDashboardFolderRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DashboardFoldersServiceAPIService
-	folderId string
-	requestId *string
+	folderId   string
+	requestId  *string
 }
 
 // Idempotency key for the delete folder request, used to prevent duplicate operations.
@@ -190,26 +190,27 @@ Deletes the dashboard folder with the specified ID.
 Requires the following permissions:
 - `team-dashboards:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param folderId The folder id.
- @return ApiDashboardFoldersServiceDeleteDashboardFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param folderId The folder id.
+	@return ApiDashboardFoldersServiceDeleteDashboardFolderRequest
 */
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboardFolder(ctx context.Context, folderId string) ApiDashboardFoldersServiceDeleteDashboardFolderRequest {
 	return ApiDashboardFoldersServiceDeleteDashboardFolderRequest{
 		ApiService: a,
-		ctx: ctx,
-		folderId: folderId,
+		ctx:        ctx,
+		folderId:   folderId,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboardFolderExecute(r ApiDashboardFoldersServiceDeleteDashboardFolderRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardFoldersServiceAPIService.DashboardFoldersServiceDeleteDashboardFolder")
@@ -223,12 +224,17 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.folderId) < 0 {
-		return localVarReturnValue, nil, reportError("folderId must have at least 0 elements")
+	if strlen(r.folderId) < 36 {
+		return localVarReturnValue, nil, reportError("folderId must have at least 36 elements")
+	}
+	if strlen(r.folderId) > 36 {
+		return localVarReturnValue, nil, reportError("folderId must have less than 36 elements")
 	}
 
 	if r.requestId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -276,8 +282,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -287,8 +293,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -298,8 +304,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -317,10 +323,10 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboa
 }
 
 type ApiDashboardFoldersServiceGetDashboardFolderRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DashboardFoldersServiceAPIService
-	folderId string
-	requestId *string
+	folderId   string
+	requestId  *string
 }
 
 // Optional client-supplied request identifier used to correlate the get folder request.
@@ -341,26 +347,27 @@ Returns a dashboard folder data.
 Requires the following permissions:
 - `team-dashboards:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param folderId The folder id.
- @return ApiDashboardFoldersServiceGetDashboardFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param folderId The folder id.
+	@return ApiDashboardFoldersServiceGetDashboardFolderRequest
 */
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardFolder(ctx context.Context, folderId string) ApiDashboardFoldersServiceGetDashboardFolderRequest {
 	return ApiDashboardFoldersServiceGetDashboardFolderRequest{
 		ApiService: a,
-		ctx: ctx,
-		folderId: folderId,
+		ctx:        ctx,
+		folderId:   folderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetDashboardFolderResponse
+//
+//	@return GetDashboardFolderResponse
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardFolderExecute(r ApiDashboardFoldersServiceGetDashboardFolderRequest) (*GetDashboardFolderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDashboardFolderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDashboardFolderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardFoldersServiceAPIService.DashboardFoldersServiceGetDashboardFolder")
@@ -374,12 +381,17 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardF
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.folderId) < 0 {
-		return localVarReturnValue, nil, reportError("folderId must have at least 0 elements")
+	if strlen(r.folderId) < 36 {
+		return localVarReturnValue, nil, reportError("folderId must have at least 36 elements")
+	}
+	if strlen(r.folderId) > 36 {
+		return localVarReturnValue, nil, reportError("folderId must have less than 36 elements")
 	}
 
 	if r.requestId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -427,8 +439,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -438,8 +450,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -449,8 +461,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -468,7 +480,7 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardF
 }
 
 type ApiDashboardFoldersServiceListDashboardFoldersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DashboardFoldersServiceAPIService
 }
 
@@ -484,24 +496,25 @@ List all dashboard folders accessible.
 Requires the following permissions:
 - `team-dashboards:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDashboardFoldersServiceListDashboardFoldersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDashboardFoldersServiceListDashboardFoldersRequest
 */
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceListDashboardFolders(ctx context.Context) ApiDashboardFoldersServiceListDashboardFoldersRequest {
 	return ApiDashboardFoldersServiceListDashboardFoldersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListDashboardFoldersResponse
+//
+//	@return ListDashboardFoldersResponse
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceListDashboardFoldersExecute(r ApiDashboardFoldersServiceListDashboardFoldersRequest) (*ListDashboardFoldersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListDashboardFoldersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListDashboardFoldersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardFoldersServiceAPIService.DashboardFoldersServiceListDashboardFolders")
@@ -561,8 +574,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceListDashboard
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -572,8 +585,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceListDashboard
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -583,8 +596,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceListDashboard
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -602,8 +615,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceListDashboard
 }
 
 type ApiDashboardFoldersServiceReplaceDashboardFolderRequest struct {
-	ctx context.Context
-	ApiService *DashboardFoldersServiceAPIService
+	ctx                                        context.Context
+	ApiService                                 *DashboardFoldersServiceAPIService
 	replaceDashboardFolderRequestDataStructure *ReplaceDashboardFolderRequestDataStructure
 }
 
@@ -624,24 +637,25 @@ Replaces an existing dashboard folder.
 Requires the following permissions:
 - `team-dashboards:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDashboardFoldersServiceReplaceDashboardFolderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDashboardFoldersServiceReplaceDashboardFolderRequest
 */
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceReplaceDashboardFolder(ctx context.Context) ApiDashboardFoldersServiceReplaceDashboardFolderRequest {
 	return ApiDashboardFoldersServiceReplaceDashboardFolderRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceReplaceDashboardFolderExecute(r ApiDashboardFoldersServiceReplaceDashboardFolderRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DashboardFoldersServiceAPIService.DashboardFoldersServiceReplaceDashboardFolder")
@@ -703,8 +717,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceReplaceDashbo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -714,8 +728,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceReplaceDashbo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -725,8 +739,8 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceReplaceDashbo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -25,8 +25,9 @@ type ApmServiceEntity struct {
 	// Programming language of the APM service
 	Language *string `json:"language,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Name of the impacted APM service
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Name                              *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ApmServiceEntity ApmServiceEntity
@@ -113,7 +114,7 @@ func (o *ApmServiceEntity) SetName(v string) {
 }
 
 func (o ApmServiceEntity) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *ApmServiceEntity) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "language")
 		delete(additionalProperties, "name")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableApmServiceEntity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -23,8 +23,9 @@ var _ MappedNullable = &GetCaseDeepLinksResponse{}
 
 // GetCaseDeepLinksResponse Response containing the deep links for the requested case
 type GetCaseDeepLinksResponse struct {
-	DeepLinks CaseDeepLinks `json:"deepLinks"`
-	AdditionalProperties map[string]interface{}
+	DeepLinks                         CaseDeepLinks `json:"deepLinks"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetCaseDeepLinksResponse GetCaseDeepLinksResponse
@@ -72,7 +73,7 @@ func (o *GetCaseDeepLinksResponse) SetDeepLinks(v CaseDeepLinks) {
 }
 
 func (o GetCaseDeepLinksResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -103,10 +104,10 @@ func (o *GetCaseDeepLinksResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -128,6 +129,7 @@ func (o *GetCaseDeepLinksResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "deepLinks")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -168,4 +170,3 @@ func (v *NullableGetCaseDeepLinksResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

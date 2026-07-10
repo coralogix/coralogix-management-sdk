@@ -24,7 +24,7 @@ type EventsV3OrderByFields string
 // List of events.v3.OrderByFields
 const (
 	EVENTSV3ORDERBYFIELDS_ORDER_BY_FIELDS_UNSPECIFIED EventsV3OrderByFields = "ORDER_BY_FIELDS_UNSPECIFIED"
-	EVENTSV3ORDERBYFIELDS_ORDER_BY_FIELDS_TIMESTAMP EventsV3OrderByFields = "ORDER_BY_FIELDS_TIMESTAMP"
+	EVENTSV3ORDERBYFIELDS_ORDER_BY_FIELDS_TIMESTAMP   EventsV3OrderByFields = "ORDER_BY_FIELDS_TIMESTAMP"
 )
 
 // All allowed values of EventsV3OrderByFields enum
@@ -111,4 +111,3 @@ func (v *NullableEventsV3OrderByFields) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

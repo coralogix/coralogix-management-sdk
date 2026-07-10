@@ -13,202 +13,270 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// HorizontalBarChartQuery - struct for HorizontalBarChartQuery
+// checks if the HorizontalBarChartQuery type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HorizontalBarChartQuery{}
+
+// HorizontalBarChartQuery Query.
 type HorizontalBarChartQuery struct {
-	HorizontalBarChartQueryDataprime *HorizontalBarChartQueryDataprime
-	HorizontalBarChartQueryLogs *HorizontalBarChartQueryLogs
-	HorizontalBarChartQueryMetrics *HorizontalBarChartQueryMetrics
-	HorizontalBarChartQuerySpans *HorizontalBarChartQuerySpans
+	Dataprime                         *HorizontalBarChartDataprimeQuery `json:"dataprime,omitempty"`
+	Logs                              *HorizontalBarChartLogsQuery      `json:"logs,omitempty"`
+	Metrics                           *HorizontalBarChartMetricsQuery   `json:"metrics,omitempty"`
+	Spans                             *HorizontalBarChartSpansQuery     `json:"spans,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// HorizontalBarChartQueryDataprimeAsHorizontalBarChartQuery is a convenience function that returns HorizontalBarChartQueryDataprime wrapped in HorizontalBarChartQuery
-func HorizontalBarChartQueryDataprimeAsHorizontalBarChartQuery(v *HorizontalBarChartQueryDataprime) HorizontalBarChartQuery {
-	return HorizontalBarChartQuery{
-		HorizontalBarChartQueryDataprime: v,
+type _HorizontalBarChartQuery HorizontalBarChartQuery
+
+// NewHorizontalBarChartQuery instantiates a new HorizontalBarChartQuery object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewHorizontalBarChartQuery() *HorizontalBarChartQuery {
+	this := HorizontalBarChartQuery{}
+	return &this
+}
+
+// NewHorizontalBarChartQueryWithDefaults instantiates a new HorizontalBarChartQuery object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewHorizontalBarChartQueryWithDefaults() *HorizontalBarChartQuery {
+	this := HorizontalBarChartQuery{}
+	return &this
+}
+
+// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+func (o *HorizontalBarChartQuery) GetDataprime() HorizontalBarChartDataprimeQuery {
+	if o == nil || IsNil(o.Dataprime) {
+		var ret HorizontalBarChartDataprimeQuery
+		return ret
 	}
+	return *o.Dataprime
 }
 
-// HorizontalBarChartQueryLogsAsHorizontalBarChartQuery is a convenience function that returns HorizontalBarChartQueryLogs wrapped in HorizontalBarChartQuery
-func HorizontalBarChartQueryLogsAsHorizontalBarChartQuery(v *HorizontalBarChartQueryLogs) HorizontalBarChartQuery {
-	return HorizontalBarChartQuery{
-		HorizontalBarChartQueryLogs: v,
+// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HorizontalBarChartQuery) GetDataprimeOk() (*HorizontalBarChartDataprimeQuery, bool) {
+	if o == nil || IsNil(o.Dataprime) {
+		return nil, false
 	}
+	return o.Dataprime, true
 }
 
-// HorizontalBarChartQueryMetricsAsHorizontalBarChartQuery is a convenience function that returns HorizontalBarChartQueryMetrics wrapped in HorizontalBarChartQuery
-func HorizontalBarChartQueryMetricsAsHorizontalBarChartQuery(v *HorizontalBarChartQueryMetrics) HorizontalBarChartQuery {
-	return HorizontalBarChartQuery{
-		HorizontalBarChartQueryMetrics: v,
+// HasDataprime returns a boolean if a field has been set.
+func (o *HorizontalBarChartQuery) HasDataprime() bool {
+	if o != nil && !IsNil(o.Dataprime) {
+		return true
 	}
+
+	return false
 }
 
-// HorizontalBarChartQuerySpansAsHorizontalBarChartQuery is a convenience function that returns HorizontalBarChartQuerySpans wrapped in HorizontalBarChartQuery
-func HorizontalBarChartQuerySpansAsHorizontalBarChartQuery(v *HorizontalBarChartQuerySpans) HorizontalBarChartQuery {
-	return HorizontalBarChartQuery{
-		HorizontalBarChartQuerySpans: v,
+// SetDataprime gets a reference to the given HorizontalBarChartDataprimeQuery and assigns it to the Dataprime field.
+func (o *HorizontalBarChartQuery) SetDataprime(v HorizontalBarChartDataprimeQuery) {
+	o.Dataprime = &v
+}
+
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *HorizontalBarChartQuery) GetLogs() HorizontalBarChartLogsQuery {
+	if o == nil || IsNil(o.Logs) {
+		var ret HorizontalBarChartLogsQuery
+		return ret
 	}
+	return *o.Logs
 }
 
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HorizontalBarChartQuery) GetLogsOk() (*HorizontalBarChartLogsQuery, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
+	}
+	return o.Logs, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *HorizontalBarChartQuery) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into HorizontalBarChartQueryDataprime
-	err = json.Unmarshal(data, &dst.HorizontalBarChartQueryDataprime)
-	if err == nil {
-		jsonHorizontalBarChartQueryDataprime, _ := json.Marshal(dst.HorizontalBarChartQueryDataprime)
-		if string(jsonHorizontalBarChartQueryDataprime) == "{}" { // empty struct
-			dst.HorizontalBarChartQueryDataprime = nil
-		} else {
-			if err = validator.Validate(dst.HorizontalBarChartQueryDataprime); err != nil {
-				dst.HorizontalBarChartQueryDataprime = nil
-			} else {
-				match++
-			}
+// HasLogs returns a boolean if a field has been set.
+func (o *HorizontalBarChartQuery) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogs gets a reference to the given HorizontalBarChartLogsQuery and assigns it to the Logs field.
+func (o *HorizontalBarChartQuery) SetLogs(v HorizontalBarChartLogsQuery) {
+	o.Logs = &v
+}
+
+// GetMetrics returns the Metrics field value if set, zero value otherwise.
+func (o *HorizontalBarChartQuery) GetMetrics() HorizontalBarChartMetricsQuery {
+	if o == nil || IsNil(o.Metrics) {
+		var ret HorizontalBarChartMetricsQuery
+		return ret
+	}
+	return *o.Metrics
+}
+
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HorizontalBarChartQuery) GetMetricsOk() (*HorizontalBarChartMetricsQuery, bool) {
+	if o == nil || IsNil(o.Metrics) {
+		return nil, false
+	}
+	return o.Metrics, true
+}
+
+// HasMetrics returns a boolean if a field has been set.
+func (o *HorizontalBarChartQuery) HasMetrics() bool {
+	if o != nil && !IsNil(o.Metrics) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetrics gets a reference to the given HorizontalBarChartMetricsQuery and assigns it to the Metrics field.
+func (o *HorizontalBarChartQuery) SetMetrics(v HorizontalBarChartMetricsQuery) {
+	o.Metrics = &v
+}
+
+// GetSpans returns the Spans field value if set, zero value otherwise.
+func (o *HorizontalBarChartQuery) GetSpans() HorizontalBarChartSpansQuery {
+	if o == nil || IsNil(o.Spans) {
+		var ret HorizontalBarChartSpansQuery
+		return ret
+	}
+	return *o.Spans
+}
+
+// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HorizontalBarChartQuery) GetSpansOk() (*HorizontalBarChartSpansQuery, bool) {
+	if o == nil || IsNil(o.Spans) {
+		return nil, false
+	}
+	return o.Spans, true
+}
+
+// HasSpans returns a boolean if a field has been set.
+func (o *HorizontalBarChartQuery) HasSpans() bool {
+	if o != nil && !IsNil(o.Spans) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpans gets a reference to the given HorizontalBarChartSpansQuery and assigns it to the Spans field.
+func (o *HorizontalBarChartQuery) SetSpans(v HorizontalBarChartSpansQuery) {
+	o.Spans = &v
+}
+
+func (o HorizontalBarChartQuery) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HorizontalBarChartQuery) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dataprime) {
+		toSerialize["dataprime"] = o.Dataprime
+	}
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
+	if !IsNil(o.Metrics) {
+		toSerialize["metrics"] = o.Metrics
+	}
+	if !IsNil(o.Spans) {
+		toSerialize["spans"] = o.Spans
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logs"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spans"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metrics"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["dataprime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logs, spans, metrics, dataprime] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["logs"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logs must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["spans"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spans must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metrics"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metrics must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dataprime"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dataprime must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *HorizontalBarChartQuery) UnmarshalJSON(data []byte) (err error) {
+	varHorizontalBarChartQuery := _HorizontalBarChartQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHorizontalBarChartQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HorizontalBarChartQuery(varHorizontalBarChartQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logs"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HorizontalBarChartQueryDataprime = nil
-	}
-
-	// try to unmarshal data into HorizontalBarChartQueryLogs
-	err = json.Unmarshal(data, &dst.HorizontalBarChartQueryLogs)
-	if err == nil {
-		jsonHorizontalBarChartQueryLogs, _ := json.Marshal(dst.HorizontalBarChartQueryLogs)
-		if string(jsonHorizontalBarChartQueryLogs) == "{}" { // empty struct
-			dst.HorizontalBarChartQueryLogs = nil
-		} else {
-			if err = validator.Validate(dst.HorizontalBarChartQueryLogs); err != nil {
-				dst.HorizontalBarChartQueryLogs = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spans"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HorizontalBarChartQueryLogs = nil
-	}
-
-	// try to unmarshal data into HorizontalBarChartQueryMetrics
-	err = json.Unmarshal(data, &dst.HorizontalBarChartQueryMetrics)
-	if err == nil {
-		jsonHorizontalBarChartQueryMetrics, _ := json.Marshal(dst.HorizontalBarChartQueryMetrics)
-		if string(jsonHorizontalBarChartQueryMetrics) == "{}" { // empty struct
-			dst.HorizontalBarChartQueryMetrics = nil
-		} else {
-			if err = validator.Validate(dst.HorizontalBarChartQueryMetrics); err != nil {
-				dst.HorizontalBarChartQueryMetrics = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metrics"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HorizontalBarChartQueryMetrics = nil
-	}
-
-	// try to unmarshal data into HorizontalBarChartQuerySpans
-	err = json.Unmarshal(data, &dst.HorizontalBarChartQuerySpans)
-	if err == nil {
-		jsonHorizontalBarChartQuerySpans, _ := json.Marshal(dst.HorizontalBarChartQuerySpans)
-		if string(jsonHorizontalBarChartQuerySpans) == "{}" { // empty struct
-			dst.HorizontalBarChartQuerySpans = nil
-		} else {
-			if err = validator.Validate(dst.HorizontalBarChartQuerySpans); err != nil {
-				dst.HorizontalBarChartQuerySpans = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["dataprime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.HorizontalBarChartQuerySpans = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logs, spans, metrics, dataprime] may be set"}
+		}
+
+		delete(additionalProperties, "dataprime")
+		delete(additionalProperties, "logs")
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.HorizontalBarChartQueryDataprime = nil
-		dst.HorizontalBarChartQueryLogs = nil
-		dst.HorizontalBarChartQueryMetrics = nil
-		dst.HorizontalBarChartQuerySpans = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(HorizontalBarChartQuery)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src HorizontalBarChartQuery) MarshalJSON() ([]byte, error) {
-	if src.HorizontalBarChartQueryDataprime != nil {
-		return json.Marshal(&src.HorizontalBarChartQueryDataprime)
-	}
-
-	if src.HorizontalBarChartQueryLogs != nil {
-		return json.Marshal(&src.HorizontalBarChartQueryLogs)
-	}
-
-	if src.HorizontalBarChartQueryMetrics != nil {
-		return json.Marshal(&src.HorizontalBarChartQueryMetrics)
-	}
-
-	if src.HorizontalBarChartQuerySpans != nil {
-		return json.Marshal(&src.HorizontalBarChartQuerySpans)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *HorizontalBarChartQuery) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.HorizontalBarChartQueryDataprime != nil {
-		return obj.HorizontalBarChartQueryDataprime
-	}
-
-	if obj.HorizontalBarChartQueryLogs != nil {
-		return obj.HorizontalBarChartQueryLogs
-	}
-
-	if obj.HorizontalBarChartQueryMetrics != nil {
-		return obj.HorizontalBarChartQueryMetrics
-	}
-
-	if obj.HorizontalBarChartQuerySpans != nil {
-		return obj.HorizontalBarChartQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj HorizontalBarChartQuery) GetActualInstanceValue() (interface{}) {
-	if obj.HorizontalBarChartQueryDataprime != nil {
-		return *obj.HorizontalBarChartQueryDataprime
-	}
-
-	if obj.HorizontalBarChartQueryLogs != nil {
-		return *obj.HorizontalBarChartQueryLogs
-	}
-
-	if obj.HorizontalBarChartQueryMetrics != nil {
-		return *obj.HorizontalBarChartQueryMetrics
-	}
-
-	if obj.HorizontalBarChartQuerySpans != nil {
-		return *obj.HorizontalBarChartQuerySpans
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableHorizontalBarChartQuery struct {
@@ -246,4 +314,3 @@ func (v *NullableHorizontalBarChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

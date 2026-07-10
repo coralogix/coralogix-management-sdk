@@ -31,11 +31,12 @@ type View struct {
 	// The is compact mode.
 	IsCompactMode *bool `json:"isCompactMode,omitempty"`
 	// View name
-	Name string `json:"name"`
-	SearchQuery *SearchQuery `json:"searchQuery,omitempty"`
-	TimeSelection TimeSelection `json:"timeSelection"`
-	ViewType *ViewType `json:"viewType,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Name                              string        `json:"name" validate:"regexp=^[\\s\\S]*$"`
+	SearchQuery                       *SearchQuery  `json:"searchQuery,omitempty"`
+	TimeSelection                     TimeSelection `json:"timeSelection"`
+	ViewType                          *ViewType     `json:"viewType,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _View View
@@ -293,7 +294,7 @@ func (o *View) SetViewType(v ViewType) {
 }
 
 func (o View) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -343,10 +344,10 @@ func (o *View) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -375,6 +376,7 @@ func (o *View) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "timeSelection")
 		delete(additionalProperties, "viewType")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -415,4 +417,3 @@ func (v *NullableView) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

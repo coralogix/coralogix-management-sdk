@@ -23,8 +23,9 @@ var _ MappedNullable = &FilterWidgetScopeSpecificWidgets{}
 // FilterWidgetScopeSpecificWidgets Annotation.widget scope.specific widgets.
 type FilterWidgetScopeSpecificWidgets struct {
 	// The widget ids.
-	WidgetIds []UUID `json:"widgetIds,omitempty"`
-	AdditionalProperties map[string]interface{}
+	WidgetIds                         []UUID `json:"widgetIds,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _FilterWidgetScopeSpecificWidgets FilterWidgetScopeSpecificWidgets
@@ -79,7 +80,7 @@ func (o *FilterWidgetScopeSpecificWidgets) SetWidgetIds(v []UUID) {
 }
 
 func (o FilterWidgetScopeSpecificWidgets) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *FilterWidgetScopeSpecificWidgets) UnmarshalJSON(data []byte) (err error
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "widgetIds")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableFilterWidgetScopeSpecificWidgets) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

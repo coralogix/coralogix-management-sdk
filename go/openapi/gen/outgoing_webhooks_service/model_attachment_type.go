@@ -23,9 +23,9 @@ type AttachmentType string
 
 // List of AttachmentType
 const (
-	ATTACHMENTTYPE_EMPTY AttachmentType = "EMPTY"
+	ATTACHMENTTYPE_EMPTY           AttachmentType = "EMPTY"
 	ATTACHMENTTYPE_METRIC_SNAPSHOT AttachmentType = "METRIC_SNAPSHOT"
-	ATTACHMENTTYPE_LOGS AttachmentType = "LOGS"
+	ATTACHMENTTYPE_LOGS            AttachmentType = "LOGS"
 )
 
 // All allowed values of AttachmentType enum
@@ -113,4 +113,3 @@ func (v *NullableAttachmentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

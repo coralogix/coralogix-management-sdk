@@ -29,8 +29,9 @@ type RuleSubgroup struct {
 	// Sort order.
 	Order *int64 `json:"order,omitempty"`
 	// List of rules.
-	Rules []RulesV1Rule `json:"rules,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Rules                             []RulesV1Rule `json:"rules,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RuleSubgroup RuleSubgroup
@@ -181,7 +182,7 @@ func (o *RuleSubgroup) SetRules(v []RulesV1Rule) {
 }
 
 func (o RuleSubgroup) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,6 +231,7 @@ func (o *RuleSubgroup) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "order")
 		delete(additionalProperties, "rules")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -270,4 +272,3 @@ func (v *NullableRuleSubgroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

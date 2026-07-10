@@ -88,35 +88,21 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [ConfigureTenantRequestGcs](docs/ConfigureTenantRequestGcs.md)
- - [ConfigureTenantRequestIbm](docs/ConfigureTenantRequestIbm.md)
- - [ConfigureTenantRequestS3](docs/ConfigureTenantRequestS3.md)
+ - [BucketValidationRequest](docs/BucketValidationRequest.md)
+ - [ConfigureTenantRequest](docs/ConfigureTenantRequest.md)
  - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GcsConfig](docs/GcsConfig.md)
  - [GetTenantConfigResponseV2](docs/GetTenantConfigResponseV2.md)
  - [IbmConfigV2](docs/IbmConfigV2.md)
- - [MetricsConfiguratorPublicServiceConfigureTenantRequest](docs/MetricsConfiguratorPublicServiceConfigureTenantRequest.md)
- - [MetricsConfiguratorPublicServiceUpdateRequest](docs/MetricsConfiguratorPublicServiceUpdateRequest.md)
- - [MetricsConfiguratorPublicServiceValidateBucketRequest](docs/MetricsConfiguratorPublicServiceValidateBucketRequest.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [RetentionPolicyRequest](docs/RetentionPolicyRequest.md)
  - [S3Config](docs/S3Config.md)
  - [TenantConfigV2](docs/TenantConfigV2.md)
- - [TenantConfigV2Gcs](docs/TenantConfigV2Gcs.md)
- - [TenantConfigV2Ibm](docs/TenantConfigV2Ibm.md)
- - [TenantConfigV2S3](docs/TenantConfigV2S3.md)
- - [UpdateRequestGcs](docs/UpdateRequestGcs.md)
- - [UpdateRequestIbm](docs/UpdateRequestIbm.md)
- - [UpdateRequestS3](docs/UpdateRequestS3.md)
+ - [UpdateTenantRequest](docs/UpdateTenantRequest.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
- - [ValidateBucketRequestGcs](docs/ValidateBucketRequestGcs.md)
- - [ValidateBucketRequestIbm](docs/ValidateBucketRequestIbm.md)
- - [ValidateBucketRequestS3](docs/ValidateBucketRequestS3.md)
 
 
 ## Documentation For Authorization

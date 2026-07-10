@@ -23,9 +23,10 @@ var _ MappedNullable = &NotificationRouter{}
 // NotificationRouter Configuration for routing notifications
 type NotificationRouter struct {
 	// The ID of the notification router
-	Id *string `json:"id,omitempty"`
-	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Id                                *string   `json:"id,omitempty"`
+	NotifyOn                          *NotifyOn `json:"notifyOn,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _NotificationRouter NotificationRouter
@@ -112,7 +113,7 @@ func (o *NotificationRouter) SetNotifyOn(v NotifyOn) {
 }
 
 func (o NotificationRouter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *NotificationRouter) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "notifyOn")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableNotificationRouter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

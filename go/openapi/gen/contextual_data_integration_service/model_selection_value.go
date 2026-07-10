@@ -25,8 +25,9 @@ type SelectionValue struct {
 	// The default value.
 	DefaultValue *string `json:"defaultValue,omitempty"`
 	// Options.
-	Options []string `json:"options,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Options                           []string `json:"options,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SelectionValue SelectionValue
@@ -113,7 +114,7 @@ func (o *SelectionValue) SetOptions(v []string) {
 }
 
 func (o SelectionValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *SelectionValue) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "defaultValue")
 		delete(additionalProperties, "options")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableSelectionValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,8 +22,9 @@ var _ MappedNullable = &IncidentEventClose{}
 
 // IncidentEventClose Incident event close.
 type IncidentEventClose struct {
-	ClosedBy *IncidentsV1UserDetails `json:"closedBy,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ClosedBy                          *IncidentsV1UserDetails `json:"closedBy,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentEventClose IncidentEventClose
@@ -78,7 +79,7 @@ func (o *IncidentEventClose) SetClosedBy(v IncidentsV1UserDetails) {
 }
 
 func (o IncidentEventClose) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *IncidentEventClose) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "closedBy")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableIncidentEventClose) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

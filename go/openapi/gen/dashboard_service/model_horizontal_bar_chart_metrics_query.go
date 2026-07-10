@@ -22,18 +22,19 @@ var _ MappedNullable = &HorizontalBarChartMetricsQuery{}
 
 // HorizontalBarChartMetricsQuery A metrics variant of the query
 type HorizontalBarChartMetricsQuery struct {
-	Aggregation *CommonAggregation `json:"aggregation,omitempty"`
-	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
+	Aggregation *CommonAggregation      `json:"aggregation,omitempty"`
+	EditorMode  *MetricsQueryEditorMode `json:"editorMode,omitempty"`
 	// List of metrics filters
 	Filters []MetricsFilter `json:"filters,omitempty"`
 	// List of field names by which metric results are grouped
-	GroupNames []string `json:"groupNames,omitempty"`
-	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
+	GroupNames      []string         `json:"groupNames,omitempty"`
+	PromqlQuery     *PromQlQuery     `json:"promqlQuery,omitempty"`
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
 	// Field name by which results in groups are divided into subgroups
-	StackedGroupName *string `json:"stackedGroupName,omitempty"`
-	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StackedGroupName                  *string          `json:"stackedGroupName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	TimeFrame                         *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _HorizontalBarChartMetricsQuery HorizontalBarChartMetricsQuery
@@ -312,7 +313,7 @@ func (o *HorizontalBarChartMetricsQuery) SetTimeFrame(v TimeFrameSelect) {
 }
 
 func (o HorizontalBarChartMetricsQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -377,6 +378,7 @@ func (o *HorizontalBarChartMetricsQuery) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "stackedGroupName")
 		delete(additionalProperties, "timeFrame")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -417,4 +419,3 @@ func (v *NullableHorizontalBarChartMetricsQuery) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

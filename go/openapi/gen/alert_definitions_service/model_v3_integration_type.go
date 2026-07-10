@@ -13,126 +13,179 @@ package alert_definitions_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// V3IntegrationType - struct for V3IntegrationType
+// checks if the V3IntegrationType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V3IntegrationType{}
+
+// V3IntegrationType Defines the type of integration to use for notifications
 type V3IntegrationType struct {
-	V3IntegrationTypeIntegrationId *V3IntegrationTypeIntegrationId
-	V3IntegrationTypeRecipients *V3IntegrationTypeRecipients
+	// The integration ID for the notification
+	IntegrationId                     *int64      `json:"integrationId,omitempty"`
+	Recipients                        *Recipients `json:"recipients,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// V3IntegrationTypeIntegrationIdAsV3IntegrationType is a convenience function that returns V3IntegrationTypeIntegrationId wrapped in V3IntegrationType
-func V3IntegrationTypeIntegrationIdAsV3IntegrationType(v *V3IntegrationTypeIntegrationId) V3IntegrationType {
-	return V3IntegrationType{
-		V3IntegrationTypeIntegrationId: v,
+type _V3IntegrationType V3IntegrationType
+
+// NewV3IntegrationType instantiates a new V3IntegrationType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewV3IntegrationType() *V3IntegrationType {
+	this := V3IntegrationType{}
+	return &this
+}
+
+// NewV3IntegrationTypeWithDefaults instantiates a new V3IntegrationType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewV3IntegrationTypeWithDefaults() *V3IntegrationType {
+	this := V3IntegrationType{}
+	return &this
+}
+
+// GetIntegrationId returns the IntegrationId field value if set, zero value otherwise.
+func (o *V3IntegrationType) GetIntegrationId() int64 {
+	if o == nil || IsNil(o.IntegrationId) {
+		var ret int64
+		return ret
 	}
+	return *o.IntegrationId
 }
 
-// V3IntegrationTypeRecipientsAsV3IntegrationType is a convenience function that returns V3IntegrationTypeRecipients wrapped in V3IntegrationType
-func V3IntegrationTypeRecipientsAsV3IntegrationType(v *V3IntegrationTypeRecipients) V3IntegrationType {
-	return V3IntegrationType{
-		V3IntegrationTypeRecipients: v,
+// GetIntegrationIdOk returns a tuple with the IntegrationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V3IntegrationType) GetIntegrationIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.IntegrationId) {
+		return nil, false
 	}
+	return o.IntegrationId, true
 }
 
+// HasIntegrationId returns a boolean if a field has been set.
+func (o *V3IntegrationType) HasIntegrationId() bool {
+	if o != nil && !IsNil(o.IntegrationId) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *V3IntegrationType) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into V3IntegrationTypeIntegrationId
-	err = json.Unmarshal(data, &dst.V3IntegrationTypeIntegrationId)
-	if err == nil {
-		jsonV3IntegrationTypeIntegrationId, _ := json.Marshal(dst.V3IntegrationTypeIntegrationId)
-		if string(jsonV3IntegrationTypeIntegrationId) == "{}" { // empty struct
-			dst.V3IntegrationTypeIntegrationId = nil
-		} else {
-			if err = validator.Validate(dst.V3IntegrationTypeIntegrationId); err != nil {
-				dst.V3IntegrationTypeIntegrationId = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetIntegrationId gets a reference to the given int64 and assigns it to the IntegrationId field.
+func (o *V3IntegrationType) SetIntegrationId(v int64) {
+	o.IntegrationId = &v
+}
+
+// GetRecipients returns the Recipients field value if set, zero value otherwise.
+func (o *V3IntegrationType) GetRecipients() Recipients {
+	if o == nil || IsNil(o.Recipients) {
+		var ret Recipients
+		return ret
+	}
+	return *o.Recipients
+}
+
+// GetRecipientsOk returns a tuple with the Recipients field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V3IntegrationType) GetRecipientsOk() (*Recipients, bool) {
+	if o == nil || IsNil(o.Recipients) {
+		return nil, false
+	}
+	return o.Recipients, true
+}
+
+// HasRecipients returns a boolean if a field has been set.
+func (o *V3IntegrationType) HasRecipients() bool {
+	if o != nil && !IsNil(o.Recipients) {
+		return true
+	}
+
+	return false
+}
+
+// SetRecipients gets a reference to the given Recipients and assigns it to the Recipients field.
+func (o *V3IntegrationType) SetRecipients(v Recipients) {
+	o.Recipients = &v
+}
+
+func (o V3IntegrationType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o V3IntegrationType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.IntegrationId) {
+		toSerialize["integrationId"] = o.IntegrationId
+	}
+	if !IsNil(o.Recipients) {
+		toSerialize["recipients"] = o.Recipients
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["integrationId"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["recipients"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [integrationId, recipients] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["integrationId"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field integrationId must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["recipients"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field recipients must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *V3IntegrationType) UnmarshalJSON(data []byte) (err error) {
+	varV3IntegrationType := _V3IntegrationType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV3IntegrationType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V3IntegrationType(varV3IntegrationType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["integrationId"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V3IntegrationTypeIntegrationId = nil
-	}
-
-	// try to unmarshal data into V3IntegrationTypeRecipients
-	err = json.Unmarshal(data, &dst.V3IntegrationTypeRecipients)
-	if err == nil {
-		jsonV3IntegrationTypeRecipients, _ := json.Marshal(dst.V3IntegrationTypeRecipients)
-		if string(jsonV3IntegrationTypeRecipients) == "{}" { // empty struct
-			dst.V3IntegrationTypeRecipients = nil
-		} else {
-			if err = validator.Validate(dst.V3IntegrationTypeRecipients); err != nil {
-				dst.V3IntegrationTypeRecipients = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["recipients"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.V3IntegrationTypeRecipients = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [integrationId, recipients] may be set"}
+		}
+
+		delete(additionalProperties, "integrationId")
+		delete(additionalProperties, "recipients")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.V3IntegrationTypeIntegrationId = nil
-		dst.V3IntegrationTypeRecipients = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(V3IntegrationType)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src V3IntegrationType) MarshalJSON() ([]byte, error) {
-	if src.V3IntegrationTypeIntegrationId != nil {
-		return json.Marshal(&src.V3IntegrationTypeIntegrationId)
-	}
-
-	if src.V3IntegrationTypeRecipients != nil {
-		return json.Marshal(&src.V3IntegrationTypeRecipients)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *V3IntegrationType) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.V3IntegrationTypeIntegrationId != nil {
-		return obj.V3IntegrationTypeIntegrationId
-	}
-
-	if obj.V3IntegrationTypeRecipients != nil {
-		return obj.V3IntegrationTypeRecipients
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj V3IntegrationType) GetActualInstanceValue() (interface{}) {
-	if obj.V3IntegrationTypeIntegrationId != nil {
-		return *obj.V3IntegrationTypeIntegrationId
-	}
-
-	if obj.V3IntegrationTypeRecipients != nil {
-		return *obj.V3IntegrationTypeRecipients
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableV3IntegrationType struct {
@@ -170,4 +223,3 @@ func (v *NullableV3IntegrationType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

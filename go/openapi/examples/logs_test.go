@@ -35,7 +35,7 @@ func TestArchiveLogs(t *testing.T) {
 	client := cxsdk.NewArchiveLogsClient(cfg)
 
 	setTargetReq := targets.SetTargetResponse{
-		S3: &targets.S3TargetSpec{
+		S3: targets.S3TargetSpec{
 			Bucket: logsBucket,
 			Region: &awsRegion,
 		},
@@ -53,9 +53,9 @@ func TestArchiveLogs(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.NotNil(t, got)
 
-	if got.Target.V2TargetS3 != nil {
-		require.Equal(t, logsBucket, got.Target.V2TargetS3.S3.Bucket)
-		require.Equal(t, awsRegion, *got.Target.V2TargetS3.S3.Region)
+	if got.Target.S3 != nil {
+		require.Equal(t, logsBucket, got.Target.S3.Bucket)
+		require.Equal(t, awsRegion, *got.Target.S3.Region)
 	} else {
 		t.Fatalf("expected S3 target, got nil")
 	}

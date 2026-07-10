@@ -13,126 +13,180 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// QueryMetricsQueryStringOrVariable - struct for QueryMetricsQueryStringOrVariable
+// checks if the QueryMetricsQueryStringOrVariable type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &QueryMetricsQueryStringOrVariable{}
+
+// QueryMetricsQueryStringOrVariable String or variable.
 type QueryMetricsQueryStringOrVariable struct {
-	QueryMetricsQueryStringOrVariableStringValue *QueryMetricsQueryStringOrVariableStringValue
-	QueryMetricsQueryStringOrVariableVariableName *QueryMetricsQueryStringOrVariableVariableName
+	// A literal string value.
+	StringValue *string `json:"stringValue,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// The name of a dashboard variable whose current value will be substituted.
+	VariableName                      *string `json:"variableName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// QueryMetricsQueryStringOrVariableStringValueAsQueryMetricsQueryStringOrVariable is a convenience function that returns QueryMetricsQueryStringOrVariableStringValue wrapped in QueryMetricsQueryStringOrVariable
-func QueryMetricsQueryStringOrVariableStringValueAsQueryMetricsQueryStringOrVariable(v *QueryMetricsQueryStringOrVariableStringValue) QueryMetricsQueryStringOrVariable {
-	return QueryMetricsQueryStringOrVariable{
-		QueryMetricsQueryStringOrVariableStringValue: v,
+type _QueryMetricsQueryStringOrVariable QueryMetricsQueryStringOrVariable
+
+// NewQueryMetricsQueryStringOrVariable instantiates a new QueryMetricsQueryStringOrVariable object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewQueryMetricsQueryStringOrVariable() *QueryMetricsQueryStringOrVariable {
+	this := QueryMetricsQueryStringOrVariable{}
+	return &this
+}
+
+// NewQueryMetricsQueryStringOrVariableWithDefaults instantiates a new QueryMetricsQueryStringOrVariable object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewQueryMetricsQueryStringOrVariableWithDefaults() *QueryMetricsQueryStringOrVariable {
+	this := QueryMetricsQueryStringOrVariable{}
+	return &this
+}
+
+// GetStringValue returns the StringValue field value if set, zero value otherwise.
+func (o *QueryMetricsQueryStringOrVariable) GetStringValue() string {
+	if o == nil || IsNil(o.StringValue) {
+		var ret string
+		return ret
 	}
+	return *o.StringValue
 }
 
-// QueryMetricsQueryStringOrVariableVariableNameAsQueryMetricsQueryStringOrVariable is a convenience function that returns QueryMetricsQueryStringOrVariableVariableName wrapped in QueryMetricsQueryStringOrVariable
-func QueryMetricsQueryStringOrVariableVariableNameAsQueryMetricsQueryStringOrVariable(v *QueryMetricsQueryStringOrVariableVariableName) QueryMetricsQueryStringOrVariable {
-	return QueryMetricsQueryStringOrVariable{
-		QueryMetricsQueryStringOrVariableVariableName: v,
+// GetStringValueOk returns a tuple with the StringValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryMetricsQueryStringOrVariable) GetStringValueOk() (*string, bool) {
+	if o == nil || IsNil(o.StringValue) {
+		return nil, false
 	}
+	return o.StringValue, true
 }
 
+// HasStringValue returns a boolean if a field has been set.
+func (o *QueryMetricsQueryStringOrVariable) HasStringValue() bool {
+	if o != nil && !IsNil(o.StringValue) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *QueryMetricsQueryStringOrVariable) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into QueryMetricsQueryStringOrVariableStringValue
-	err = json.Unmarshal(data, &dst.QueryMetricsQueryStringOrVariableStringValue)
-	if err == nil {
-		jsonQueryMetricsQueryStringOrVariableStringValue, _ := json.Marshal(dst.QueryMetricsQueryStringOrVariableStringValue)
-		if string(jsonQueryMetricsQueryStringOrVariableStringValue) == "{}" { // empty struct
-			dst.QueryMetricsQueryStringOrVariableStringValue = nil
-		} else {
-			if err = validator.Validate(dst.QueryMetricsQueryStringOrVariableStringValue); err != nil {
-				dst.QueryMetricsQueryStringOrVariableStringValue = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetStringValue gets a reference to the given string and assigns it to the StringValue field.
+func (o *QueryMetricsQueryStringOrVariable) SetStringValue(v string) {
+	o.StringValue = &v
+}
+
+// GetVariableName returns the VariableName field value if set, zero value otherwise.
+func (o *QueryMetricsQueryStringOrVariable) GetVariableName() string {
+	if o == nil || IsNil(o.VariableName) {
+		var ret string
+		return ret
+	}
+	return *o.VariableName
+}
+
+// GetVariableNameOk returns a tuple with the VariableName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryMetricsQueryStringOrVariable) GetVariableNameOk() (*string, bool) {
+	if o == nil || IsNil(o.VariableName) {
+		return nil, false
+	}
+	return o.VariableName, true
+}
+
+// HasVariableName returns a boolean if a field has been set.
+func (o *QueryMetricsQueryStringOrVariable) HasVariableName() bool {
+	if o != nil && !IsNil(o.VariableName) {
+		return true
+	}
+
+	return false
+}
+
+// SetVariableName gets a reference to the given string and assigns it to the VariableName field.
+func (o *QueryMetricsQueryStringOrVariable) SetVariableName(v string) {
+	o.VariableName = &v
+}
+
+func (o QueryMetricsQueryStringOrVariable) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o QueryMetricsQueryStringOrVariable) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.StringValue) {
+		toSerialize["stringValue"] = o.StringValue
+	}
+	if !IsNil(o.VariableName) {
+		toSerialize["variableName"] = o.VariableName
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["stringValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["variableName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [stringValue, variableName] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["stringValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field stringValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["variableName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field variableName must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *QueryMetricsQueryStringOrVariable) UnmarshalJSON(data []byte) (err error) {
+	varQueryMetricsQueryStringOrVariable := _QueryMetricsQueryStringOrVariable{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryMetricsQueryStringOrVariable)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryMetricsQueryStringOrVariable(varQueryMetricsQueryStringOrVariable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["stringValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QueryMetricsQueryStringOrVariableStringValue = nil
-	}
-
-	// try to unmarshal data into QueryMetricsQueryStringOrVariableVariableName
-	err = json.Unmarshal(data, &dst.QueryMetricsQueryStringOrVariableVariableName)
-	if err == nil {
-		jsonQueryMetricsQueryStringOrVariableVariableName, _ := json.Marshal(dst.QueryMetricsQueryStringOrVariableVariableName)
-		if string(jsonQueryMetricsQueryStringOrVariableVariableName) == "{}" { // empty struct
-			dst.QueryMetricsQueryStringOrVariableVariableName = nil
-		} else {
-			if err = validator.Validate(dst.QueryMetricsQueryStringOrVariableVariableName); err != nil {
-				dst.QueryMetricsQueryStringOrVariableVariableName = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["variableName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QueryMetricsQueryStringOrVariableVariableName = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [stringValue, variableName] may be set"}
+		}
+
+		delete(additionalProperties, "stringValue")
+		delete(additionalProperties, "variableName")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.QueryMetricsQueryStringOrVariableStringValue = nil
-		dst.QueryMetricsQueryStringOrVariableVariableName = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(QueryMetricsQueryStringOrVariable)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src QueryMetricsQueryStringOrVariable) MarshalJSON() ([]byte, error) {
-	if src.QueryMetricsQueryStringOrVariableStringValue != nil {
-		return json.Marshal(&src.QueryMetricsQueryStringOrVariableStringValue)
-	}
-
-	if src.QueryMetricsQueryStringOrVariableVariableName != nil {
-		return json.Marshal(&src.QueryMetricsQueryStringOrVariableVariableName)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *QueryMetricsQueryStringOrVariable) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.QueryMetricsQueryStringOrVariableStringValue != nil {
-		return obj.QueryMetricsQueryStringOrVariableStringValue
-	}
-
-	if obj.QueryMetricsQueryStringOrVariableVariableName != nil {
-		return obj.QueryMetricsQueryStringOrVariableVariableName
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj QueryMetricsQueryStringOrVariable) GetActualInstanceValue() (interface{}) {
-	if obj.QueryMetricsQueryStringOrVariableStringValue != nil {
-		return *obj.QueryMetricsQueryStringOrVariableStringValue
-	}
-
-	if obj.QueryMetricsQueryStringOrVariableVariableName != nil {
-		return *obj.QueryMetricsQueryStringOrVariableVariableName
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableQueryMetricsQueryStringOrVariable struct {
@@ -170,4 +224,3 @@ func (v *NullableQueryMetricsQueryStringOrVariable) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

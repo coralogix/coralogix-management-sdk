@@ -16,18 +16,17 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"reflect"
+	"strings"
 )
-
 
 // CasesServiceAPIService CasesServiceAPI service
 type CasesServiceAPIService service
 
 type ApiCasesServiceAcknowledgeCaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiCasesServiceAcknowledgeCaseRequest) Execute() (*AcknowledgeCaseResponse, *http.Response, error) {
@@ -42,26 +41,27 @@ Mark the case as acknowledged by a user.
 Requires the following permissions:
 - `case:Acknowledge`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case to acknowledge. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceAcknowledgeCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case to acknowledge. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceAcknowledgeCaseRequest
 */
 func (a *CasesServiceAPIService) CasesServiceAcknowledgeCase(ctx context.Context, id string) ApiCasesServiceAcknowledgeCaseRequest {
 	return ApiCasesServiceAcknowledgeCaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return AcknowledgeCaseResponse
+//
+//	@return AcknowledgeCaseResponse
 func (a *CasesServiceAPIService) CasesServiceAcknowledgeCaseExecute(r ApiCasesServiceAcknowledgeCaseRequest) (*AcknowledgeCaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AcknowledgeCaseResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AcknowledgeCaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceAcknowledgeCase")
@@ -128,8 +128,8 @@ func (a *CasesServiceAPIService) CasesServiceAcknowledgeCaseExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -139,8 +139,8 @@ func (a *CasesServiceAPIService) CasesServiceAcknowledgeCaseExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -150,8 +150,8 @@ func (a *CasesServiceAPIService) CasesServiceAcknowledgeCaseExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -169,9 +169,9 @@ func (a *CasesServiceAPIService) CasesServiceAcknowledgeCaseExecute(r ApiCasesSe
 }
 
 type ApiCasesServiceAssignCaseRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
-	id string
+	ctx               context.Context
+	ApiService        *CasesServiceAPIService
+	id                string
 	assignCaseRequest *AssignCaseRequest
 }
 
@@ -192,26 +192,27 @@ Assign a case to a specific user.
 Requires the following permissions:
 - `case:Assign`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case to assign. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceAssignCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case to assign. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceAssignCaseRequest
 */
 func (a *CasesServiceAPIService) CasesServiceAssignCase(ctx context.Context, id string) ApiCasesServiceAssignCaseRequest {
 	return ApiCasesServiceAssignCaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return AssignCaseResponse
+//
+//	@return AssignCaseResponse
 func (a *CasesServiceAPIService) CasesServiceAssignCaseExecute(r ApiCasesServiceAssignCaseRequest) (*AssignCaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AssignCaseResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssignCaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceAssignCase")
@@ -283,8 +284,8 @@ func (a *CasesServiceAPIService) CasesServiceAssignCaseExecute(r ApiCasesService
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -294,8 +295,8 @@ func (a *CasesServiceAPIService) CasesServiceAssignCaseExecute(r ApiCasesService
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -305,8 +306,8 @@ func (a *CasesServiceAPIService) CasesServiceAssignCaseExecute(r ApiCasesService
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -324,8 +325,8 @@ func (a *CasesServiceAPIService) CasesServiceAssignCaseExecute(r ApiCasesService
 }
 
 type ApiCasesServiceBulkAcknowledgeRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
+	ctx                    context.Context
+	ApiService             *CasesServiceAPIService
 	bulkAcknowledgeRequest *BulkAcknowledgeRequest
 }
 
@@ -346,24 +347,25 @@ Mark multiple cases as acknowledged in a single operation.
 Requires the following permissions:
 - `case:Acknowledge`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceBulkAcknowledgeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceBulkAcknowledgeRequest
 */
 func (a *CasesServiceAPIService) CasesServiceBulkAcknowledge(ctx context.Context) ApiCasesServiceBulkAcknowledgeRequest {
 	return ApiCasesServiceBulkAcknowledgeRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BulkAcknowledgeResponse
+//
+//	@return BulkAcknowledgeResponse
 func (a *CasesServiceAPIService) CasesServiceBulkAcknowledgeExecute(r ApiCasesServiceBulkAcknowledgeRequest) (*BulkAcknowledgeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkAcknowledgeResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkAcknowledgeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkAcknowledge")
@@ -428,8 +430,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkAcknowledgeExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -439,8 +441,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkAcknowledgeExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -450,8 +452,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkAcknowledgeExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -469,8 +471,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkAcknowledgeExecute(r ApiCasesSe
 }
 
 type ApiCasesServiceBulkAssignRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
+	ctx               context.Context
+	ApiService        *CasesServiceAPIService
 	bulkAssignRequest *BulkAssignRequest
 }
 
@@ -491,24 +493,25 @@ Assign multiple cases to a specific user in a single operation.
 Requires the following permissions:
 - `case:Assign`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceBulkAssignRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceBulkAssignRequest
 */
 func (a *CasesServiceAPIService) CasesServiceBulkAssign(ctx context.Context) ApiCasesServiceBulkAssignRequest {
 	return ApiCasesServiceBulkAssignRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BulkAssignResponse
+//
+//	@return BulkAssignResponse
 func (a *CasesServiceAPIService) CasesServiceBulkAssignExecute(r ApiCasesServiceBulkAssignRequest) (*BulkAssignResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkAssignResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkAssignResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkAssign")
@@ -573,8 +576,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkAssignExecute(r ApiCasesService
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -584,8 +587,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkAssignExecute(r ApiCasesService
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -595,8 +598,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkAssignExecute(r ApiCasesService
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -614,9 +617,9 @@ func (a *CasesServiceAPIService) CasesServiceBulkAssignExecute(r ApiCasesService
 }
 
 type ApiCasesServiceBulkClearPriorityOverrideRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
-	ids *[]string
+	ids        *[]string
 }
 
 // IDs of the cases to clear priority override for. Each entry accepts either the case UUID (the &#x60;id&#x60; field on a case) or the readable identifier (the &#x60;readable_id&#x60; field, e.g. &#x60;CASE-123&#x60;).
@@ -637,24 +640,25 @@ Remove previously set priority overrides from multiple cases in a single operati
 Requires the following permissions:
 - `case:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceBulkClearPriorityOverrideRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceBulkClearPriorityOverrideRequest
 */
 func (a *CasesServiceAPIService) CasesServiceBulkClearPriorityOverride(ctx context.Context) ApiCasesServiceBulkClearPriorityOverrideRequest {
 	return ApiCasesServiceBulkClearPriorityOverrideRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BulkClearPriorityOverrideResponse
+//
+//	@return BulkClearPriorityOverrideResponse
 func (a *CasesServiceAPIService) CasesServiceBulkClearPriorityOverrideExecute(r ApiCasesServiceBulkClearPriorityOverrideRequest) (*BulkClearPriorityOverrideResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkClearPriorityOverrideResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkClearPriorityOverrideResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkClearPriorityOverride")
@@ -673,10 +677,14 @@ func (a *CasesServiceAPIService) CasesServiceBulkClearPriorityOverrideExecute(r 
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -725,8 +733,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkClearPriorityOverrideExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -736,8 +744,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkClearPriorityOverrideExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -747,8 +755,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkClearPriorityOverrideExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -766,8 +774,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkClearPriorityOverrideExecute(r 
 }
 
 type ApiCasesServiceBulkCloseRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
+	ctx              context.Context
+	ApiService       *CasesServiceAPIService
 	bulkCloseRequest *BulkCloseRequest
 }
 
@@ -788,24 +796,25 @@ Close multiple cases in a single operation.
 Requires the following permissions:
 - `case:Close`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceBulkCloseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceBulkCloseRequest
 */
 func (a *CasesServiceAPIService) CasesServiceBulkClose(ctx context.Context) ApiCasesServiceBulkCloseRequest {
 	return ApiCasesServiceBulkCloseRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BulkCloseResponse
+//
+//	@return BulkCloseResponse
 func (a *CasesServiceAPIService) CasesServiceBulkCloseExecute(r ApiCasesServiceBulkCloseRequest) (*BulkCloseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkCloseResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkCloseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkClose")
@@ -870,8 +879,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkCloseExecute(r ApiCasesServiceB
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -881,8 +890,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkCloseExecute(r ApiCasesServiceB
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -892,8 +901,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkCloseExecute(r ApiCasesServiceB
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -911,8 +920,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkCloseExecute(r ApiCasesServiceB
 }
 
 type ApiCasesServiceBulkResolveRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
+	ctx                context.Context
+	ApiService         *CasesServiceAPIService
 	bulkResolveRequest *BulkResolveRequest
 }
 
@@ -933,24 +942,25 @@ Resolve multiple cases in a single operation.
 Requires the following permissions:
 - `case:Close`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceBulkResolveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceBulkResolveRequest
 */
 func (a *CasesServiceAPIService) CasesServiceBulkResolve(ctx context.Context) ApiCasesServiceBulkResolveRequest {
 	return ApiCasesServiceBulkResolveRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BulkResolveResponse
+//
+//	@return BulkResolveResponse
 func (a *CasesServiceAPIService) CasesServiceBulkResolveExecute(r ApiCasesServiceBulkResolveRequest) (*BulkResolveResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkResolveResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkResolveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkResolve")
@@ -1015,8 +1025,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkResolveExecute(r ApiCasesServic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1026,8 +1036,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkResolveExecute(r ApiCasesServic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1037,8 +1047,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkResolveExecute(r ApiCasesServic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1056,8 +1066,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkResolveExecute(r ApiCasesServic
 }
 
 type ApiCasesServiceBulkSetPriorityOverrideRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
+	ctx                         context.Context
+	ApiService                  *CasesServiceAPIService
 	bulkOverridePriorityRequest *BulkOverridePriorityRequest
 }
 
@@ -1078,24 +1088,25 @@ Override the priority with for multiple cases in a single operation.
 Requires the following permissions:
 - `case:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceBulkSetPriorityOverrideRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceBulkSetPriorityOverrideRequest
 */
 func (a *CasesServiceAPIService) CasesServiceBulkSetPriorityOverride(ctx context.Context) ApiCasesServiceBulkSetPriorityOverrideRequest {
 	return ApiCasesServiceBulkSetPriorityOverrideRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BulkSetPriorityOverrideResponse
+//
+//	@return BulkSetPriorityOverrideResponse
 func (a *CasesServiceAPIService) CasesServiceBulkSetPriorityOverrideExecute(r ApiCasesServiceBulkSetPriorityOverrideRequest) (*BulkSetPriorityOverrideResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkSetPriorityOverrideResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkSetPriorityOverrideResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkSetPriorityOverride")
@@ -1160,8 +1171,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkSetPriorityOverrideExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1171,8 +1182,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkSetPriorityOverrideExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1182,8 +1193,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkSetPriorityOverrideExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1201,9 +1212,9 @@ func (a *CasesServiceAPIService) CasesServiceBulkSetPriorityOverrideExecute(r Ap
 }
 
 type ApiCasesServiceBulkUnassignRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
-	ids *[]string
+	ids        *[]string
 }
 
 // IDs of the cases to unassign. Each entry accepts either the case UUID (the &#x60;id&#x60; field on a case) or the readable identifier (the &#x60;readable_id&#x60; field, e.g. &#x60;CASE-123&#x60;).
@@ -1224,24 +1235,25 @@ Remove the current assignee from multiple cases in a single operation.
 Requires the following permissions:
 - `case:Assign`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceBulkUnassignRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceBulkUnassignRequest
 */
 func (a *CasesServiceAPIService) CasesServiceBulkUnassign(ctx context.Context) ApiCasesServiceBulkUnassignRequest {
 	return ApiCasesServiceBulkUnassignRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BulkUnassignResponse
+//
+//	@return BulkUnassignResponse
 func (a *CasesServiceAPIService) CasesServiceBulkUnassignExecute(r ApiCasesServiceBulkUnassignRequest) (*BulkUnassignResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkUnassignResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkUnassignResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceBulkUnassign")
@@ -1260,10 +1272,14 @@ func (a *CasesServiceAPIService) CasesServiceBulkUnassignExecute(r ApiCasesServi
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi")
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
 			}
 		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi")
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
 		}
 	}
 	// to determine the Content-Type header
@@ -1312,8 +1328,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkUnassignExecute(r ApiCasesServi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1323,8 +1339,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkUnassignExecute(r ApiCasesServi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1334,8 +1350,8 @@ func (a *CasesServiceAPIService) CasesServiceBulkUnassignExecute(r ApiCasesServi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1353,9 +1369,9 @@ func (a *CasesServiceAPIService) CasesServiceBulkUnassignExecute(r ApiCasesServi
 }
 
 type ApiCasesServiceClearPriorityOverrideRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiCasesServiceClearPriorityOverrideRequest) Execute() (*ClearPriorityOverrideResponse, *http.Response, error) {
@@ -1370,26 +1386,27 @@ Remove a previously set priority override for a case.
 Requires the following permissions:
 - `case:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceClearPriorityOverrideRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceClearPriorityOverrideRequest
 */
 func (a *CasesServiceAPIService) CasesServiceClearPriorityOverride(ctx context.Context, id string) ApiCasesServiceClearPriorityOverrideRequest {
 	return ApiCasesServiceClearPriorityOverrideRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return ClearPriorityOverrideResponse
+//
+//	@return ClearPriorityOverrideResponse
 func (a *CasesServiceAPIService) CasesServiceClearPriorityOverrideExecute(r ApiCasesServiceClearPriorityOverrideRequest) (*ClearPriorityOverrideResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ClearPriorityOverrideResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ClearPriorityOverrideResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceClearPriorityOverride")
@@ -1456,8 +1473,8 @@ func (a *CasesServiceAPIService) CasesServiceClearPriorityOverrideExecute(r ApiC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1467,8 +1484,8 @@ func (a *CasesServiceAPIService) CasesServiceClearPriorityOverrideExecute(r ApiC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1478,8 +1495,8 @@ func (a *CasesServiceAPIService) CasesServiceClearPriorityOverrideExecute(r ApiC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1497,9 +1514,9 @@ func (a *CasesServiceAPIService) CasesServiceClearPriorityOverrideExecute(r ApiC
 }
 
 type ApiCasesServiceCloseCaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiCasesServiceCloseCaseRequest) Execute() (*CloseCaseResponse, *http.Response, error) {
@@ -1514,26 +1531,27 @@ Close a case that no longer requires action.
 Requires the following permissions:
 - `case:Close`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case to close. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceCloseCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case to close. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceCloseCaseRequest
 */
 func (a *CasesServiceAPIService) CasesServiceCloseCase(ctx context.Context, id string) ApiCasesServiceCloseCaseRequest {
 	return ApiCasesServiceCloseCaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return CloseCaseResponse
+//
+//	@return CloseCaseResponse
 func (a *CasesServiceAPIService) CasesServiceCloseCaseExecute(r ApiCasesServiceCloseCaseRequest) (*CloseCaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CloseCaseResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloseCaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceCloseCase")
@@ -1600,8 +1618,8 @@ func (a *CasesServiceAPIService) CasesServiceCloseCaseExecute(r ApiCasesServiceC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1611,8 +1629,8 @@ func (a *CasesServiceAPIService) CasesServiceCloseCaseExecute(r ApiCasesServiceC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1622,8 +1640,8 @@ func (a *CasesServiceAPIService) CasesServiceCloseCaseExecute(r ApiCasesServiceC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1641,9 +1659,9 @@ func (a *CasesServiceAPIService) CasesServiceCloseCaseExecute(r ApiCasesServiceC
 }
 
 type ApiCasesServiceGetCaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiCasesServiceGetCaseRequest) Execute() (*GetCaseResponse, *http.Response, error) {
@@ -1658,26 +1676,27 @@ Retrieve detailed information about a single case by its unique identifier.
 Requires the following permissions:
 - `case:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceGetCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceGetCaseRequest
 */
 func (a *CasesServiceAPIService) CasesServiceGetCase(ctx context.Context, id string) ApiCasesServiceGetCaseRequest {
 	return ApiCasesServiceGetCaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return GetCaseResponse
+//
+//	@return GetCaseResponse
 func (a *CasesServiceAPIService) CasesServiceGetCaseExecute(r ApiCasesServiceGetCaseRequest) (*GetCaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCaseResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceGetCase")
@@ -1744,8 +1763,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseExecute(r ApiCasesServiceGet
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1755,8 +1774,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseExecute(r ApiCasesServiceGet
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1766,8 +1785,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseExecute(r ApiCasesServiceGet
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1785,8 +1804,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseExecute(r ApiCasesServiceGet
 }
 
 type ApiCasesServiceGetCaseByIndicatorRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
+	ctx                       context.Context
+	ApiService                *CasesServiceAPIService
 	getCaseByIndicatorRequest *GetCaseByIndicatorRequest
 }
 
@@ -1807,24 +1826,25 @@ Retrieve a case by its source indicator. Currently supports Prometheus AlertMana
 Requires the following permissions:
 - `case:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceGetCaseByIndicatorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceGetCaseByIndicatorRequest
 */
 func (a *CasesServiceAPIService) CasesServiceGetCaseByIndicator(ctx context.Context) ApiCasesServiceGetCaseByIndicatorRequest {
 	return ApiCasesServiceGetCaseByIndicatorRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetCaseByIndicatorResponse
+//
+//	@return GetCaseByIndicatorResponse
 func (a *CasesServiceAPIService) CasesServiceGetCaseByIndicatorExecute(r ApiCasesServiceGetCaseByIndicatorRequest) (*GetCaseByIndicatorResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCaseByIndicatorResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCaseByIndicatorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceGetCaseByIndicator")
@@ -1886,8 +1906,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseByIndicatorExecute(r ApiCase
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1897,8 +1917,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseByIndicatorExecute(r ApiCase
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1908,8 +1928,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseByIndicatorExecute(r ApiCase
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1919,8 +1939,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseByIndicatorExecute(r ApiCase
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1938,9 +1958,9 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseByIndicatorExecute(r ApiCase
 }
 
 type ApiCasesServiceGetCaseDeepLinksRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
-	caseId string
+	caseId     string
 }
 
 func (r ApiCasesServiceGetCaseDeepLinksRequest) Execute() (*GetCaseDeepLinksResponse, *http.Response, error) {
@@ -1955,26 +1975,27 @@ Retrieve deep-link URLs for a case.
 Requires the following permissions:
 - `case:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param caseId ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceGetCaseDeepLinksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param caseId ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceGetCaseDeepLinksRequest
 */
 func (a *CasesServiceAPIService) CasesServiceGetCaseDeepLinks(ctx context.Context, caseId string) ApiCasesServiceGetCaseDeepLinksRequest {
 	return ApiCasesServiceGetCaseDeepLinksRequest{
 		ApiService: a,
-		ctx: ctx,
-		caseId: caseId,
+		ctx:        ctx,
+		caseId:     caseId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCaseDeepLinksResponse
+//
+//	@return GetCaseDeepLinksResponse
 func (a *CasesServiceAPIService) CasesServiceGetCaseDeepLinksExecute(r ApiCasesServiceGetCaseDeepLinksRequest) (*GetCaseDeepLinksResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCaseDeepLinksResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCaseDeepLinksResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceGetCaseDeepLinks")
@@ -2041,8 +2062,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseDeepLinksExecute(r ApiCasesS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2052,8 +2073,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseDeepLinksExecute(r ApiCasesS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2063,8 +2084,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseDeepLinksExecute(r ApiCasesS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2082,8 +2103,8 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseDeepLinksExecute(r ApiCasesS
 }
 
 type ApiCasesServiceGetFilterValuesRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
+	ctx                        context.Context
+	ApiService                 *CasesServiceAPIService
 	getCaseFilterValuesRequest *GetCaseFilterValuesRequest
 }
 
@@ -2104,24 +2125,25 @@ Retrieve available filter and aggregation values for cases.
 Requires the following permissions:
 - `case:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceGetFilterValuesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceGetFilterValuesRequest
 */
 func (a *CasesServiceAPIService) CasesServiceGetFilterValues(ctx context.Context) ApiCasesServiceGetFilterValuesRequest {
 	return ApiCasesServiceGetFilterValuesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CasesV1GetFilterValuesResponse
+//
+//	@return CasesV1GetFilterValuesResponse
 func (a *CasesServiceAPIService) CasesServiceGetFilterValuesExecute(r ApiCasesServiceGetFilterValuesRequest) (*CasesV1GetFilterValuesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CasesV1GetFilterValuesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CasesV1GetFilterValuesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceGetFilterValues")
@@ -2183,8 +2205,8 @@ func (a *CasesServiceAPIService) CasesServiceGetFilterValuesExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2194,8 +2216,8 @@ func (a *CasesServiceAPIService) CasesServiceGetFilterValuesExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2205,8 +2227,8 @@ func (a *CasesServiceAPIService) CasesServiceGetFilterValuesExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2224,7 +2246,7 @@ func (a *CasesServiceAPIService) CasesServiceGetFilterValuesExecute(r ApiCasesSe
 }
 
 type ApiCasesServiceGetGroupingKeysRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
 }
 
@@ -2240,24 +2262,25 @@ Retrieve all available grouping keys that can be used for organizing and filteri
 Requires the following permissions:
 - `case:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceGetGroupingKeysRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceGetGroupingKeysRequest
 */
 func (a *CasesServiceAPIService) CasesServiceGetGroupingKeys(ctx context.Context) ApiCasesServiceGetGroupingKeysRequest {
 	return ApiCasesServiceGetGroupingKeysRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetGroupingKeysResponse
+//
+//	@return GetGroupingKeysResponse
 func (a *CasesServiceAPIService) CasesServiceGetGroupingKeysExecute(r ApiCasesServiceGetGroupingKeysRequest) (*GetGroupingKeysResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetGroupingKeysResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGroupingKeysResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceGetGroupingKeys")
@@ -2317,8 +2340,8 @@ func (a *CasesServiceAPIService) CasesServiceGetGroupingKeysExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2328,8 +2351,8 @@ func (a *CasesServiceAPIService) CasesServiceGetGroupingKeysExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2339,8 +2362,8 @@ func (a *CasesServiceAPIService) CasesServiceGetGroupingKeysExecute(r ApiCasesSe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2358,8 +2381,8 @@ func (a *CasesServiceAPIService) CasesServiceGetGroupingKeysExecute(r ApiCasesSe
 }
 
 type ApiCasesServiceListCasesRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
+	ctx              context.Context
+	ApiService       *CasesServiceAPIService
 	listCasesRequest *ListCasesRequest
 }
 
@@ -2380,24 +2403,25 @@ List cases using filters, pagination and custom ordering.
 Requires the following permissions:
 - `case:Read`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCasesServiceListCasesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCasesServiceListCasesRequest
 */
 func (a *CasesServiceAPIService) CasesServiceListCases(ctx context.Context) ApiCasesServiceListCasesRequest {
 	return ApiCasesServiceListCasesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListCasesResponse
+//
+//	@return ListCasesResponse
 func (a *CasesServiceAPIService) CasesServiceListCasesExecute(r ApiCasesServiceListCasesRequest) (*ListCasesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListCasesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListCasesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceListCases")
@@ -2459,8 +2483,8 @@ func (a *CasesServiceAPIService) CasesServiceListCasesExecute(r ApiCasesServiceL
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2470,8 +2494,8 @@ func (a *CasesServiceAPIService) CasesServiceListCasesExecute(r ApiCasesServiceL
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2481,8 +2505,8 @@ func (a *CasesServiceAPIService) CasesServiceListCasesExecute(r ApiCasesServiceL
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2500,9 +2524,9 @@ func (a *CasesServiceAPIService) CasesServiceListCasesExecute(r ApiCasesServiceL
 }
 
 type ApiCasesServiceResolveCaseRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
-	id string
+	ctx                context.Context
+	ApiService         *CasesServiceAPIService
+	id                 string
 	resolveCaseRequest *ResolveCaseRequest
 }
 
@@ -2523,26 +2547,27 @@ Mark a case as resolved.
 Requires the following permissions:
 - `case:Close`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case to resolve. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceResolveCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case to resolve. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceResolveCaseRequest
 */
 func (a *CasesServiceAPIService) CasesServiceResolveCase(ctx context.Context, id string) ApiCasesServiceResolveCaseRequest {
 	return ApiCasesServiceResolveCaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return ResolveCaseResponse
+//
+//	@return ResolveCaseResponse
 func (a *CasesServiceAPIService) CasesServiceResolveCaseExecute(r ApiCasesServiceResolveCaseRequest) (*ResolveCaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ResolveCaseResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResolveCaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceResolveCase")
@@ -2611,8 +2636,8 @@ func (a *CasesServiceAPIService) CasesServiceResolveCaseExecute(r ApiCasesServic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2622,8 +2647,8 @@ func (a *CasesServiceAPIService) CasesServiceResolveCaseExecute(r ApiCasesServic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2633,8 +2658,8 @@ func (a *CasesServiceAPIService) CasesServiceResolveCaseExecute(r ApiCasesServic
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2652,9 +2677,9 @@ func (a *CasesServiceAPIService) CasesServiceResolveCaseExecute(r ApiCasesServic
 }
 
 type ApiCasesServiceSetPriorityOverrideRequest struct {
-	ctx context.Context
-	ApiService *CasesServiceAPIService
-	id string
+	ctx                        context.Context
+	ApiService                 *CasesServiceAPIService
+	id                         string
 	setPriorityOverrideRequest *SetPriorityOverrideRequest
 }
 
@@ -2675,26 +2700,27 @@ Override a case's computed priority with a specific value.
 Requires the following permissions:
 - `case:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceSetPriorityOverrideRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceSetPriorityOverrideRequest
 */
 func (a *CasesServiceAPIService) CasesServiceSetPriorityOverride(ctx context.Context, id string) ApiCasesServiceSetPriorityOverrideRequest {
 	return ApiCasesServiceSetPriorityOverrideRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return SetPriorityOverrideResponse
+//
+//	@return SetPriorityOverrideResponse
 func (a *CasesServiceAPIService) CasesServiceSetPriorityOverrideExecute(r ApiCasesServiceSetPriorityOverrideRequest) (*SetPriorityOverrideResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SetPriorityOverrideResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SetPriorityOverrideResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceSetPriorityOverride")
@@ -2766,8 +2792,8 @@ func (a *CasesServiceAPIService) CasesServiceSetPriorityOverrideExecute(r ApiCas
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2777,8 +2803,8 @@ func (a *CasesServiceAPIService) CasesServiceSetPriorityOverrideExecute(r ApiCas
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2788,8 +2814,8 @@ func (a *CasesServiceAPIService) CasesServiceSetPriorityOverrideExecute(r ApiCas
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2807,9 +2833,9 @@ func (a *CasesServiceAPIService) CasesServiceSetPriorityOverrideExecute(r ApiCas
 }
 
 type ApiCasesServiceUnacknowledgeCaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiCasesServiceUnacknowledgeCaseRequest) Execute() (*UnacknowledgeCaseResponse, *http.Response, error) {
@@ -2824,26 +2850,27 @@ Remove the acknowledgment from a case.
 Requires the following permissions:
 - `case:Acknowledge`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case to unacknowledge. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceUnacknowledgeCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case to unacknowledge. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceUnacknowledgeCaseRequest
 */
 func (a *CasesServiceAPIService) CasesServiceUnacknowledgeCase(ctx context.Context, id string) ApiCasesServiceUnacknowledgeCaseRequest {
 	return ApiCasesServiceUnacknowledgeCaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return UnacknowledgeCaseResponse
+//
+//	@return UnacknowledgeCaseResponse
 func (a *CasesServiceAPIService) CasesServiceUnacknowledgeCaseExecute(r ApiCasesServiceUnacknowledgeCaseRequest) (*UnacknowledgeCaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UnacknowledgeCaseResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UnacknowledgeCaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceUnacknowledgeCase")
@@ -2910,8 +2937,8 @@ func (a *CasesServiceAPIService) CasesServiceUnacknowledgeCaseExecute(r ApiCases
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2921,8 +2948,8 @@ func (a *CasesServiceAPIService) CasesServiceUnacknowledgeCaseExecute(r ApiCases
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2932,8 +2959,8 @@ func (a *CasesServiceAPIService) CasesServiceUnacknowledgeCaseExecute(r ApiCases
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2951,9 +2978,9 @@ func (a *CasesServiceAPIService) CasesServiceUnacknowledgeCaseExecute(r ApiCases
 }
 
 type ApiCasesServiceUnassignCaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiCasesServiceUnassignCaseRequest) Execute() (*UnassignCaseResponse, *http.Response, error) {
@@ -2968,26 +2995,27 @@ Remove the current assignee from a case.
 Requires the following permissions:
 - `case:Assign`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case to unassign. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceUnassignCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case to unassign. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceUnassignCaseRequest
 */
 func (a *CasesServiceAPIService) CasesServiceUnassignCase(ctx context.Context, id string) ApiCasesServiceUnassignCaseRequest {
 	return ApiCasesServiceUnassignCaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return UnassignCaseResponse
+//
+//	@return UnassignCaseResponse
 func (a *CasesServiceAPIService) CasesServiceUnassignCaseExecute(r ApiCasesServiceUnassignCaseRequest) (*UnassignCaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UnassignCaseResponse
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UnassignCaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceUnassignCase")
@@ -3054,8 +3082,8 @@ func (a *CasesServiceAPIService) CasesServiceUnassignCaseExecute(r ApiCasesServi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3065,8 +3093,8 @@ func (a *CasesServiceAPIService) CasesServiceUnassignCaseExecute(r ApiCasesServi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3076,8 +3104,8 @@ func (a *CasesServiceAPIService) CasesServiceUnassignCaseExecute(r ApiCasesServi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3095,10 +3123,10 @@ func (a *CasesServiceAPIService) CasesServiceUnassignCaseExecute(r ApiCasesServi
 }
 
 type ApiCasesServiceUpdateCaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CasesServiceAPIService
-	id string
-	casePatch *CasePatch
+	id         string
+	casePatch  *CasePatch
 }
 
 func (r ApiCasesServiceUpdateCaseRequest) CasePatch(casePatch CasePatch) ApiCasesServiceUpdateCaseRequest {
@@ -3118,26 +3146,27 @@ Apply a partial update (patch) to a case.
 Requires the following permissions:
 - `case:Update`
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id ID of the case to update. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
- @return ApiCasesServiceUpdateCaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id ID of the case to update. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+	@return ApiCasesServiceUpdateCaseRequest
 */
 func (a *CasesServiceAPIService) CasesServiceUpdateCase(ctx context.Context, id string) ApiCasesServiceUpdateCaseRequest {
 	return ApiCasesServiceUpdateCaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateCaseResponse
+//
+//	@return UpdateCaseResponse
 func (a *CasesServiceAPIService) CasesServiceUpdateCaseExecute(r ApiCasesServiceUpdateCaseRequest) (*UpdateCaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateCaseResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateCaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceUpdateCase")
@@ -3206,8 +3235,8 @@ func (a *CasesServiceAPIService) CasesServiceUpdateCaseExecute(r ApiCasesService
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3217,8 +3246,8 @@ func (a *CasesServiceAPIService) CasesServiceUpdateCaseExecute(r ApiCasesService
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3228,8 +3257,8 @@ func (a *CasesServiceAPIService) CasesServiceUpdateCaseExecute(r ApiCasesService
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

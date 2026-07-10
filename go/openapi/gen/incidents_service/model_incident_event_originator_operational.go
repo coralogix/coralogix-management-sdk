@@ -23,8 +23,9 @@ var _ MappedNullable = &IncidentEventOriginatorOperational{}
 // IncidentEventOriginatorOperational Incident event originator operational.
 type IncidentEventOriginatorOperational struct {
 	// The system name.
-	SystemName *string `json:"systemName,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SystemName                        *string `json:"systemName,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentEventOriginatorOperational IncidentEventOriginatorOperational
@@ -79,7 +80,7 @@ func (o *IncidentEventOriginatorOperational) SetSystemName(v string) {
 }
 
 func (o IncidentEventOriginatorOperational) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *IncidentEventOriginatorOperational) UnmarshalJSON(data []byte) (err err
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "systemName")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableIncidentEventOriginatorOperational) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

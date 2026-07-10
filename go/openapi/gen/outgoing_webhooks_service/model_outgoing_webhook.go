@@ -13,506 +13,907 @@ package outgoing_webhooks_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
+	"time"
 )
 
 var _ = bytes.MinRead
 
-// OutgoingWebhook - struct for OutgoingWebhook
+// checks if the OutgoingWebhook type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OutgoingWebhook{}
+
+// OutgoingWebhook Outgoing webhook.
 type OutgoingWebhook struct {
-	OutgoingWebhookAwsEventBridge *OutgoingWebhookAwsEventBridge
-	OutgoingWebhookDemisto *OutgoingWebhookDemisto
-	OutgoingWebhookEmailGroup *OutgoingWebhookEmailGroup
-	OutgoingWebhookGenericWebhook *OutgoingWebhookGenericWebhook
-	OutgoingWebhookIbmEventNotifications *OutgoingWebhookIbmEventNotifications
-	OutgoingWebhookJira *OutgoingWebhookJira
-	OutgoingWebhookMicrosoftTeams *OutgoingWebhookMicrosoftTeams
-	OutgoingWebhookMsTeamsWorkflow *OutgoingWebhookMsTeamsWorkflow
-	OutgoingWebhookOpsgenie *OutgoingWebhookOpsgenie
-	OutgoingWebhookPagerDuty *OutgoingWebhookPagerDuty
-	OutgoingWebhookSendLog *OutgoingWebhookSendLog
-	OutgoingWebhookSlack *OutgoingWebhookSlack
+	AwsEventBridge *AwsEventBridgeConfig `json:"awsEventBridge,omitempty"`
+	// Creation timestamp.
+	CreatedAt  *time.Time        `json:"createdAt,omitempty"`
+	Demisto    *DemistoConfig    `json:"demisto,omitempty"`
+	EmailGroup *EmailGroupConfig `json:"emailGroup,omitempty"`
+	// External identifier.
+	ExternalId            *int64                       `json:"externalId,omitempty"`
+	GenericWebhook        *GenericWebhookConfig        `json:"genericWebhook,omitempty"`
+	IbmEventNotifications *IbmEventNotificationsConfig `json:"ibmEventNotifications,omitempty"`
+	// Unique identifier.
+	Id   *string     `json:"id,omitempty"`
+	Jira *JiraConfig `json:"jira,omitempty"`
+	// Microsoft teams config.
+	MicrosoftTeams map[string]interface{} `json:"microsoftTeams,omitempty"`
+	// Ms teams workflow config.
+	MsTeamsWorkflow map[string]interface{} `json:"msTeamsWorkflow,omitempty"`
+	// Display name.
+	Name *string `json:"name,omitempty"`
+	// Opsgenie config.
+	Opsgenie  map[string]interface{} `json:"opsgenie,omitempty"`
+	PagerDuty *PagerDutyConfig       `json:"pagerDuty,omitempty"`
+	SendLog   *SendLogConfig         `json:"sendLog,omitempty"`
+	Slack     *SlackConfig           `json:"slack,omitempty"`
+	Type      *WebhookType           `json:"type,omitempty"`
+	// Last-updated timestamp.
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// URL.
+	Url                               *string `json:"url,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// OutgoingWebhookAwsEventBridgeAsOutgoingWebhook is a convenience function that returns OutgoingWebhookAwsEventBridge wrapped in OutgoingWebhook
-func OutgoingWebhookAwsEventBridgeAsOutgoingWebhook(v *OutgoingWebhookAwsEventBridge) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookAwsEventBridge: v,
+type _OutgoingWebhook OutgoingWebhook
+
+// NewOutgoingWebhook instantiates a new OutgoingWebhook object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewOutgoingWebhook() *OutgoingWebhook {
+	this := OutgoingWebhook{}
+	return &this
+}
+
+// NewOutgoingWebhookWithDefaults instantiates a new OutgoingWebhook object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewOutgoingWebhookWithDefaults() *OutgoingWebhook {
+	this := OutgoingWebhook{}
+	return &this
+}
+
+// GetAwsEventBridge returns the AwsEventBridge field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetAwsEventBridge() AwsEventBridgeConfig {
+	if o == nil || IsNil(o.AwsEventBridge) {
+		var ret AwsEventBridgeConfig
+		return ret
 	}
+	return *o.AwsEventBridge
 }
 
-// OutgoingWebhookDemistoAsOutgoingWebhook is a convenience function that returns OutgoingWebhookDemisto wrapped in OutgoingWebhook
-func OutgoingWebhookDemistoAsOutgoingWebhook(v *OutgoingWebhookDemisto) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookDemisto: v,
+// GetAwsEventBridgeOk returns a tuple with the AwsEventBridge field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetAwsEventBridgeOk() (*AwsEventBridgeConfig, bool) {
+	if o == nil || IsNil(o.AwsEventBridge) {
+		return nil, false
 	}
+	return o.AwsEventBridge, true
 }
 
-// OutgoingWebhookEmailGroupAsOutgoingWebhook is a convenience function that returns OutgoingWebhookEmailGroup wrapped in OutgoingWebhook
-func OutgoingWebhookEmailGroupAsOutgoingWebhook(v *OutgoingWebhookEmailGroup) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookEmailGroup: v,
+// HasAwsEventBridge returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasAwsEventBridge() bool {
+	if o != nil && !IsNil(o.AwsEventBridge) {
+		return true
 	}
+
+	return false
 }
 
-// OutgoingWebhookGenericWebhookAsOutgoingWebhook is a convenience function that returns OutgoingWebhookGenericWebhook wrapped in OutgoingWebhook
-func OutgoingWebhookGenericWebhookAsOutgoingWebhook(v *OutgoingWebhookGenericWebhook) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookGenericWebhook: v,
+// SetAwsEventBridge gets a reference to the given AwsEventBridgeConfig and assigns it to the AwsEventBridge field.
+func (o *OutgoingWebhook) SetAwsEventBridge(v AwsEventBridgeConfig) {
+	o.AwsEventBridge = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetCreatedAt() time.Time {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
 	}
+	return *o.CreatedAt
 }
 
-// OutgoingWebhookIbmEventNotificationsAsOutgoingWebhook is a convenience function that returns OutgoingWebhookIbmEventNotifications wrapped in OutgoingWebhook
-func OutgoingWebhookIbmEventNotificationsAsOutgoingWebhook(v *OutgoingWebhookIbmEventNotifications) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookIbmEventNotifications: v,
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
 	}
+	return o.CreatedAt, true
 }
 
-// OutgoingWebhookJiraAsOutgoingWebhook is a convenience function that returns OutgoingWebhookJira wrapped in OutgoingWebhook
-func OutgoingWebhookJiraAsOutgoingWebhook(v *OutgoingWebhookJira) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookJira: v,
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
 	}
+
+	return false
 }
 
-// OutgoingWebhookMicrosoftTeamsAsOutgoingWebhook is a convenience function that returns OutgoingWebhookMicrosoftTeams wrapped in OutgoingWebhook
-func OutgoingWebhookMicrosoftTeamsAsOutgoingWebhook(v *OutgoingWebhookMicrosoftTeams) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookMicrosoftTeams: v,
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *OutgoingWebhook) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
+// GetDemisto returns the Demisto field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetDemisto() DemistoConfig {
+	if o == nil || IsNil(o.Demisto) {
+		var ret DemistoConfig
+		return ret
 	}
+	return *o.Demisto
 }
 
-// OutgoingWebhookMsTeamsWorkflowAsOutgoingWebhook is a convenience function that returns OutgoingWebhookMsTeamsWorkflow wrapped in OutgoingWebhook
-func OutgoingWebhookMsTeamsWorkflowAsOutgoingWebhook(v *OutgoingWebhookMsTeamsWorkflow) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookMsTeamsWorkflow: v,
+// GetDemistoOk returns a tuple with the Demisto field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetDemistoOk() (*DemistoConfig, bool) {
+	if o == nil || IsNil(o.Demisto) {
+		return nil, false
 	}
+	return o.Demisto, true
 }
 
-// OutgoingWebhookOpsgenieAsOutgoingWebhook is a convenience function that returns OutgoingWebhookOpsgenie wrapped in OutgoingWebhook
-func OutgoingWebhookOpsgenieAsOutgoingWebhook(v *OutgoingWebhookOpsgenie) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookOpsgenie: v,
+// HasDemisto returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasDemisto() bool {
+	if o != nil && !IsNil(o.Demisto) {
+		return true
 	}
+
+	return false
 }
 
-// OutgoingWebhookPagerDutyAsOutgoingWebhook is a convenience function that returns OutgoingWebhookPagerDuty wrapped in OutgoingWebhook
-func OutgoingWebhookPagerDutyAsOutgoingWebhook(v *OutgoingWebhookPagerDuty) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookPagerDuty: v,
+// SetDemisto gets a reference to the given DemistoConfig and assigns it to the Demisto field.
+func (o *OutgoingWebhook) SetDemisto(v DemistoConfig) {
+	o.Demisto = &v
+}
+
+// GetEmailGroup returns the EmailGroup field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetEmailGroup() EmailGroupConfig {
+	if o == nil || IsNil(o.EmailGroup) {
+		var ret EmailGroupConfig
+		return ret
 	}
+	return *o.EmailGroup
 }
 
-// OutgoingWebhookSendLogAsOutgoingWebhook is a convenience function that returns OutgoingWebhookSendLog wrapped in OutgoingWebhook
-func OutgoingWebhookSendLogAsOutgoingWebhook(v *OutgoingWebhookSendLog) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookSendLog: v,
+// GetEmailGroupOk returns a tuple with the EmailGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetEmailGroupOk() (*EmailGroupConfig, bool) {
+	if o == nil || IsNil(o.EmailGroup) {
+		return nil, false
 	}
+	return o.EmailGroup, true
 }
 
-// OutgoingWebhookSlackAsOutgoingWebhook is a convenience function that returns OutgoingWebhookSlack wrapped in OutgoingWebhook
-func OutgoingWebhookSlackAsOutgoingWebhook(v *OutgoingWebhookSlack) OutgoingWebhook {
-	return OutgoingWebhook{
-		OutgoingWebhookSlack: v,
+// HasEmailGroup returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasEmailGroup() bool {
+	if o != nil && !IsNil(o.EmailGroup) {
+		return true
 	}
+
+	return false
 }
 
+// SetEmailGroup gets a reference to the given EmailGroupConfig and assigns it to the EmailGroup field.
+func (o *OutgoingWebhook) SetEmailGroup(v EmailGroupConfig) {
+	o.EmailGroup = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *OutgoingWebhook) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into OutgoingWebhookAwsEventBridge
-	err = json.Unmarshal(data, &dst.OutgoingWebhookAwsEventBridge)
-	if err == nil {
-		jsonOutgoingWebhookAwsEventBridge, _ := json.Marshal(dst.OutgoingWebhookAwsEventBridge)
-		if string(jsonOutgoingWebhookAwsEventBridge) == "{}" { // empty struct
-			dst.OutgoingWebhookAwsEventBridge = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookAwsEventBridge); err != nil {
-				dst.OutgoingWebhookAwsEventBridge = nil
-			} else {
-				match++
-			}
+// GetExternalId returns the ExternalId field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetExternalId() int64 {
+	if o == nil || IsNil(o.ExternalId) {
+		var ret int64
+		return ret
+	}
+	return *o.ExternalId
+}
+
+// GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetExternalIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.ExternalId) {
+		return nil, false
+	}
+	return o.ExternalId, true
+}
+
+// HasExternalId returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasExternalId() bool {
+	if o != nil && !IsNil(o.ExternalId) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalId gets a reference to the given int64 and assigns it to the ExternalId field.
+func (o *OutgoingWebhook) SetExternalId(v int64) {
+	o.ExternalId = &v
+}
+
+// GetGenericWebhook returns the GenericWebhook field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetGenericWebhook() GenericWebhookConfig {
+	if o == nil || IsNil(o.GenericWebhook) {
+		var ret GenericWebhookConfig
+		return ret
+	}
+	return *o.GenericWebhook
+}
+
+// GetGenericWebhookOk returns a tuple with the GenericWebhook field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetGenericWebhookOk() (*GenericWebhookConfig, bool) {
+	if o == nil || IsNil(o.GenericWebhook) {
+		return nil, false
+	}
+	return o.GenericWebhook, true
+}
+
+// HasGenericWebhook returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasGenericWebhook() bool {
+	if o != nil && !IsNil(o.GenericWebhook) {
+		return true
+	}
+
+	return false
+}
+
+// SetGenericWebhook gets a reference to the given GenericWebhookConfig and assigns it to the GenericWebhook field.
+func (o *OutgoingWebhook) SetGenericWebhook(v GenericWebhookConfig) {
+	o.GenericWebhook = &v
+}
+
+// GetIbmEventNotifications returns the IbmEventNotifications field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetIbmEventNotifications() IbmEventNotificationsConfig {
+	if o == nil || IsNil(o.IbmEventNotifications) {
+		var ret IbmEventNotificationsConfig
+		return ret
+	}
+	return *o.IbmEventNotifications
+}
+
+// GetIbmEventNotificationsOk returns a tuple with the IbmEventNotifications field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetIbmEventNotificationsOk() (*IbmEventNotificationsConfig, bool) {
+	if o == nil || IsNil(o.IbmEventNotifications) {
+		return nil, false
+	}
+	return o.IbmEventNotifications, true
+}
+
+// HasIbmEventNotifications returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasIbmEventNotifications() bool {
+	if o != nil && !IsNil(o.IbmEventNotifications) {
+		return true
+	}
+
+	return false
+}
+
+// SetIbmEventNotifications gets a reference to the given IbmEventNotificationsConfig and assigns it to the IbmEventNotifications field.
+func (o *OutgoingWebhook) SetIbmEventNotifications(v IbmEventNotificationsConfig) {
+	o.IbmEventNotifications = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *OutgoingWebhook) SetId(v string) {
+	o.Id = &v
+}
+
+// GetJira returns the Jira field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetJira() JiraConfig {
+	if o == nil || IsNil(o.Jira) {
+		var ret JiraConfig
+		return ret
+	}
+	return *o.Jira
+}
+
+// GetJiraOk returns a tuple with the Jira field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetJiraOk() (*JiraConfig, bool) {
+	if o == nil || IsNil(o.Jira) {
+		return nil, false
+	}
+	return o.Jira, true
+}
+
+// HasJira returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasJira() bool {
+	if o != nil && !IsNil(o.Jira) {
+		return true
+	}
+
+	return false
+}
+
+// SetJira gets a reference to the given JiraConfig and assigns it to the Jira field.
+func (o *OutgoingWebhook) SetJira(v JiraConfig) {
+	o.Jira = &v
+}
+
+// GetMicrosoftTeams returns the MicrosoftTeams field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetMicrosoftTeams() map[string]interface{} {
+	if o == nil || IsNil(o.MicrosoftTeams) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.MicrosoftTeams
+}
+
+// GetMicrosoftTeamsOk returns a tuple with the MicrosoftTeams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetMicrosoftTeamsOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.MicrosoftTeams) {
+		return map[string]interface{}{}, false
+	}
+	return o.MicrosoftTeams, true
+}
+
+// HasMicrosoftTeams returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasMicrosoftTeams() bool {
+	if o != nil && !IsNil(o.MicrosoftTeams) {
+		return true
+	}
+
+	return false
+}
+
+// SetMicrosoftTeams gets a reference to the given map[string]interface{} and assigns it to the MicrosoftTeams field.
+func (o *OutgoingWebhook) SetMicrosoftTeams(v map[string]interface{}) {
+	o.MicrosoftTeams = v
+}
+
+// GetMsTeamsWorkflow returns the MsTeamsWorkflow field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetMsTeamsWorkflow() map[string]interface{} {
+	if o == nil || IsNil(o.MsTeamsWorkflow) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.MsTeamsWorkflow
+}
+
+// GetMsTeamsWorkflowOk returns a tuple with the MsTeamsWorkflow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetMsTeamsWorkflowOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.MsTeamsWorkflow) {
+		return map[string]interface{}{}, false
+	}
+	return o.MsTeamsWorkflow, true
+}
+
+// HasMsTeamsWorkflow returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasMsTeamsWorkflow() bool {
+	if o != nil && !IsNil(o.MsTeamsWorkflow) {
+		return true
+	}
+
+	return false
+}
+
+// SetMsTeamsWorkflow gets a reference to the given map[string]interface{} and assigns it to the MsTeamsWorkflow field.
+func (o *OutgoingWebhook) SetMsTeamsWorkflow(v map[string]interface{}) {
+	o.MsTeamsWorkflow = v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *OutgoingWebhook) SetName(v string) {
+	o.Name = &v
+}
+
+// GetOpsgenie returns the Opsgenie field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetOpsgenie() map[string]interface{} {
+	if o == nil || IsNil(o.Opsgenie) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Opsgenie
+}
+
+// GetOpsgenieOk returns a tuple with the Opsgenie field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetOpsgenieOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Opsgenie) {
+		return map[string]interface{}{}, false
+	}
+	return o.Opsgenie, true
+}
+
+// HasOpsgenie returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasOpsgenie() bool {
+	if o != nil && !IsNil(o.Opsgenie) {
+		return true
+	}
+
+	return false
+}
+
+// SetOpsgenie gets a reference to the given map[string]interface{} and assigns it to the Opsgenie field.
+func (o *OutgoingWebhook) SetOpsgenie(v map[string]interface{}) {
+	o.Opsgenie = v
+}
+
+// GetPagerDuty returns the PagerDuty field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetPagerDuty() PagerDutyConfig {
+	if o == nil || IsNil(o.PagerDuty) {
+		var ret PagerDutyConfig
+		return ret
+	}
+	return *o.PagerDuty
+}
+
+// GetPagerDutyOk returns a tuple with the PagerDuty field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetPagerDutyOk() (*PagerDutyConfig, bool) {
+	if o == nil || IsNil(o.PagerDuty) {
+		return nil, false
+	}
+	return o.PagerDuty, true
+}
+
+// HasPagerDuty returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasPagerDuty() bool {
+	if o != nil && !IsNil(o.PagerDuty) {
+		return true
+	}
+
+	return false
+}
+
+// SetPagerDuty gets a reference to the given PagerDutyConfig and assigns it to the PagerDuty field.
+func (o *OutgoingWebhook) SetPagerDuty(v PagerDutyConfig) {
+	o.PagerDuty = &v
+}
+
+// GetSendLog returns the SendLog field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetSendLog() SendLogConfig {
+	if o == nil || IsNil(o.SendLog) {
+		var ret SendLogConfig
+		return ret
+	}
+	return *o.SendLog
+}
+
+// GetSendLogOk returns a tuple with the SendLog field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetSendLogOk() (*SendLogConfig, bool) {
+	if o == nil || IsNil(o.SendLog) {
+		return nil, false
+	}
+	return o.SendLog, true
+}
+
+// HasSendLog returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasSendLog() bool {
+	if o != nil && !IsNil(o.SendLog) {
+		return true
+	}
+
+	return false
+}
+
+// SetSendLog gets a reference to the given SendLogConfig and assigns it to the SendLog field.
+func (o *OutgoingWebhook) SetSendLog(v SendLogConfig) {
+	o.SendLog = &v
+}
+
+// GetSlack returns the Slack field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetSlack() SlackConfig {
+	if o == nil || IsNil(o.Slack) {
+		var ret SlackConfig
+		return ret
+	}
+	return *o.Slack
+}
+
+// GetSlackOk returns a tuple with the Slack field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetSlackOk() (*SlackConfig, bool) {
+	if o == nil || IsNil(o.Slack) {
+		return nil, false
+	}
+	return o.Slack, true
+}
+
+// HasSlack returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasSlack() bool {
+	if o != nil && !IsNil(o.Slack) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlack gets a reference to the given SlackConfig and assigns it to the Slack field.
+func (o *OutgoingWebhook) SetSlack(v SlackConfig) {
+	o.Slack = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetType() WebhookType {
+	if o == nil || IsNil(o.Type) {
+		var ret WebhookType
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetTypeOk() (*WebhookType, bool) {
+	if o == nil || IsNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasType() bool {
+	if o != nil && !IsNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given WebhookType and assigns it to the Type field.
+func (o *OutgoingWebhook) SetType(v WebhookType) {
+	o.Type = &v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetUpdatedAt() time.Time {
+	if o == nil || IsNil(o.UpdatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.UpdatedAt) {
+		return nil, false
+	}
+	return o.UpdatedAt, true
+}
+
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasUpdatedAt() bool {
+	if o != nil && !IsNil(o.UpdatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+func (o *OutgoingWebhook) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = &v
+}
+
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *OutgoingWebhook) GetUrl() string {
+	if o == nil || IsNil(o.Url) {
+		var ret string
+		return ret
+	}
+	return *o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutgoingWebhook) GetUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.Url) {
+		return nil, false
+	}
+	return o.Url, true
+}
+
+// HasUrl returns a boolean if a field has been set.
+func (o *OutgoingWebhook) HasUrl() bool {
+	if o != nil && !IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *OutgoingWebhook) SetUrl(v string) {
+	o.Url = &v
+}
+
+func (o OutgoingWebhook) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OutgoingWebhook) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AwsEventBridge) {
+		toSerialize["awsEventBridge"] = o.AwsEventBridge
+	}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if !IsNil(o.Demisto) {
+		toSerialize["demisto"] = o.Demisto
+	}
+	if !IsNil(o.EmailGroup) {
+		toSerialize["emailGroup"] = o.EmailGroup
+	}
+	if !IsNil(o.ExternalId) {
+		toSerialize["externalId"] = o.ExternalId
+	}
+	if !IsNil(o.GenericWebhook) {
+		toSerialize["genericWebhook"] = o.GenericWebhook
+	}
+	if !IsNil(o.IbmEventNotifications) {
+		toSerialize["ibmEventNotifications"] = o.IbmEventNotifications
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Jira) {
+		toSerialize["jira"] = o.Jira
+	}
+	if !IsNil(o.MicrosoftTeams) {
+		toSerialize["microsoftTeams"] = o.MicrosoftTeams
+	}
+	if !IsNil(o.MsTeamsWorkflow) {
+		toSerialize["msTeamsWorkflow"] = o.MsTeamsWorkflow
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Opsgenie) {
+		toSerialize["opsgenie"] = o.Opsgenie
+	}
+	if !IsNil(o.PagerDuty) {
+		toSerialize["pagerDuty"] = o.PagerDuty
+	}
+	if !IsNil(o.SendLog) {
+		toSerialize["sendLog"] = o.SendLog
+	}
+	if !IsNil(o.Slack) {
+		toSerialize["slack"] = o.Slack
+	}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.UpdatedAt) {
+		toSerialize["updatedAt"] = o.UpdatedAt
+	}
+	if !IsNil(o.Url) {
+		toSerialize["url"] = o.Url
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["genericWebhook"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["slack"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["pagerDuty"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sendLog"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["emailGroup"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["microsoftTeams"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["jira"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["opsgenie"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["demisto"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["awsEventBridge"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["ibmEventNotifications"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["msTeamsWorkflow"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["genericWebhook"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field genericWebhook must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["slack"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field slack must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["pagerDuty"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field pagerDuty must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sendLog"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sendLog must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["emailGroup"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field emailGroup must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["microsoftTeams"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field microsoftTeams must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["jira"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field jira must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["opsgenie"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field opsgenie must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["demisto"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field demisto must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["awsEventBridge"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field awsEventBridge must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ibmEventNotifications"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ibmEventNotifications must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["msTeamsWorkflow"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field msTeamsWorkflow must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *OutgoingWebhook) UnmarshalJSON(data []byte) (err error) {
+	varOutgoingWebhook := _OutgoingWebhook{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhook)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhook(varOutgoingWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["genericWebhook"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookAwsEventBridge = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookDemisto
-	err = json.Unmarshal(data, &dst.OutgoingWebhookDemisto)
-	if err == nil {
-		jsonOutgoingWebhookDemisto, _ := json.Marshal(dst.OutgoingWebhookDemisto)
-		if string(jsonOutgoingWebhookDemisto) == "{}" { // empty struct
-			dst.OutgoingWebhookDemisto = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookDemisto); err != nil {
-				dst.OutgoingWebhookDemisto = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["slack"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookDemisto = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookEmailGroup
-	err = json.Unmarshal(data, &dst.OutgoingWebhookEmailGroup)
-	if err == nil {
-		jsonOutgoingWebhookEmailGroup, _ := json.Marshal(dst.OutgoingWebhookEmailGroup)
-		if string(jsonOutgoingWebhookEmailGroup) == "{}" { // empty struct
-			dst.OutgoingWebhookEmailGroup = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookEmailGroup); err != nil {
-				dst.OutgoingWebhookEmailGroup = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["pagerDuty"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookEmailGroup = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookGenericWebhook
-	err = json.Unmarshal(data, &dst.OutgoingWebhookGenericWebhook)
-	if err == nil {
-		jsonOutgoingWebhookGenericWebhook, _ := json.Marshal(dst.OutgoingWebhookGenericWebhook)
-		if string(jsonOutgoingWebhookGenericWebhook) == "{}" { // empty struct
-			dst.OutgoingWebhookGenericWebhook = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookGenericWebhook); err != nil {
-				dst.OutgoingWebhookGenericWebhook = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sendLog"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookGenericWebhook = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookIbmEventNotifications
-	err = json.Unmarshal(data, &dst.OutgoingWebhookIbmEventNotifications)
-	if err == nil {
-		jsonOutgoingWebhookIbmEventNotifications, _ := json.Marshal(dst.OutgoingWebhookIbmEventNotifications)
-		if string(jsonOutgoingWebhookIbmEventNotifications) == "{}" { // empty struct
-			dst.OutgoingWebhookIbmEventNotifications = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookIbmEventNotifications); err != nil {
-				dst.OutgoingWebhookIbmEventNotifications = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["emailGroup"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookIbmEventNotifications = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookJira
-	err = json.Unmarshal(data, &dst.OutgoingWebhookJira)
-	if err == nil {
-		jsonOutgoingWebhookJira, _ := json.Marshal(dst.OutgoingWebhookJira)
-		if string(jsonOutgoingWebhookJira) == "{}" { // empty struct
-			dst.OutgoingWebhookJira = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookJira); err != nil {
-				dst.OutgoingWebhookJira = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["microsoftTeams"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookJira = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookMicrosoftTeams
-	err = json.Unmarshal(data, &dst.OutgoingWebhookMicrosoftTeams)
-	if err == nil {
-		jsonOutgoingWebhookMicrosoftTeams, _ := json.Marshal(dst.OutgoingWebhookMicrosoftTeams)
-		if string(jsonOutgoingWebhookMicrosoftTeams) == "{}" { // empty struct
-			dst.OutgoingWebhookMicrosoftTeams = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookMicrosoftTeams); err != nil {
-				dst.OutgoingWebhookMicrosoftTeams = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["jira"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookMicrosoftTeams = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookMsTeamsWorkflow
-	err = json.Unmarshal(data, &dst.OutgoingWebhookMsTeamsWorkflow)
-	if err == nil {
-		jsonOutgoingWebhookMsTeamsWorkflow, _ := json.Marshal(dst.OutgoingWebhookMsTeamsWorkflow)
-		if string(jsonOutgoingWebhookMsTeamsWorkflow) == "{}" { // empty struct
-			dst.OutgoingWebhookMsTeamsWorkflow = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookMsTeamsWorkflow); err != nil {
-				dst.OutgoingWebhookMsTeamsWorkflow = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["opsgenie"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookMsTeamsWorkflow = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookOpsgenie
-	err = json.Unmarshal(data, &dst.OutgoingWebhookOpsgenie)
-	if err == nil {
-		jsonOutgoingWebhookOpsgenie, _ := json.Marshal(dst.OutgoingWebhookOpsgenie)
-		if string(jsonOutgoingWebhookOpsgenie) == "{}" { // empty struct
-			dst.OutgoingWebhookOpsgenie = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookOpsgenie); err != nil {
-				dst.OutgoingWebhookOpsgenie = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["demisto"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookOpsgenie = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookPagerDuty
-	err = json.Unmarshal(data, &dst.OutgoingWebhookPagerDuty)
-	if err == nil {
-		jsonOutgoingWebhookPagerDuty, _ := json.Marshal(dst.OutgoingWebhookPagerDuty)
-		if string(jsonOutgoingWebhookPagerDuty) == "{}" { // empty struct
-			dst.OutgoingWebhookPagerDuty = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookPagerDuty); err != nil {
-				dst.OutgoingWebhookPagerDuty = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["awsEventBridge"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookPagerDuty = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookSendLog
-	err = json.Unmarshal(data, &dst.OutgoingWebhookSendLog)
-	if err == nil {
-		jsonOutgoingWebhookSendLog, _ := json.Marshal(dst.OutgoingWebhookSendLog)
-		if string(jsonOutgoingWebhookSendLog) == "{}" { // empty struct
-			dst.OutgoingWebhookSendLog = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookSendLog); err != nil {
-				dst.OutgoingWebhookSendLog = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["ibmEventNotifications"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookSendLog = nil
-	}
-
-	// try to unmarshal data into OutgoingWebhookSlack
-	err = json.Unmarshal(data, &dst.OutgoingWebhookSlack)
-	if err == nil {
-		jsonOutgoingWebhookSlack, _ := json.Marshal(dst.OutgoingWebhookSlack)
-		if string(jsonOutgoingWebhookSlack) == "{}" { // empty struct
-			dst.OutgoingWebhookSlack = nil
-		} else {
-			if err = validator.Validate(dst.OutgoingWebhookSlack); err != nil {
-				dst.OutgoingWebhookSlack = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["msTeamsWorkflow"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.OutgoingWebhookSlack = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] may be set"}
+		}
+
+		delete(additionalProperties, "awsEventBridge")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "demisto")
+		delete(additionalProperties, "emailGroup")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "genericWebhook")
+		delete(additionalProperties, "ibmEventNotifications")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "jira")
+		delete(additionalProperties, "microsoftTeams")
+		delete(additionalProperties, "msTeamsWorkflow")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "opsgenie")
+		delete(additionalProperties, "pagerDuty")
+		delete(additionalProperties, "sendLog")
+		delete(additionalProperties, "slack")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.OutgoingWebhookAwsEventBridge = nil
-		dst.OutgoingWebhookDemisto = nil
-		dst.OutgoingWebhookEmailGroup = nil
-		dst.OutgoingWebhookGenericWebhook = nil
-		dst.OutgoingWebhookIbmEventNotifications = nil
-		dst.OutgoingWebhookJira = nil
-		dst.OutgoingWebhookMicrosoftTeams = nil
-		dst.OutgoingWebhookMsTeamsWorkflow = nil
-		dst.OutgoingWebhookOpsgenie = nil
-		dst.OutgoingWebhookPagerDuty = nil
-		dst.OutgoingWebhookSendLog = nil
-		dst.OutgoingWebhookSlack = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(OutgoingWebhook)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src OutgoingWebhook) MarshalJSON() ([]byte, error) {
-	if src.OutgoingWebhookAwsEventBridge != nil {
-		return json.Marshal(&src.OutgoingWebhookAwsEventBridge)
-	}
-
-	if src.OutgoingWebhookDemisto != nil {
-		return json.Marshal(&src.OutgoingWebhookDemisto)
-	}
-
-	if src.OutgoingWebhookEmailGroup != nil {
-		return json.Marshal(&src.OutgoingWebhookEmailGroup)
-	}
-
-	if src.OutgoingWebhookGenericWebhook != nil {
-		return json.Marshal(&src.OutgoingWebhookGenericWebhook)
-	}
-
-	if src.OutgoingWebhookIbmEventNotifications != nil {
-		return json.Marshal(&src.OutgoingWebhookIbmEventNotifications)
-	}
-
-	if src.OutgoingWebhookJira != nil {
-		return json.Marshal(&src.OutgoingWebhookJira)
-	}
-
-	if src.OutgoingWebhookMicrosoftTeams != nil {
-		return json.Marshal(&src.OutgoingWebhookMicrosoftTeams)
-	}
-
-	if src.OutgoingWebhookMsTeamsWorkflow != nil {
-		return json.Marshal(&src.OutgoingWebhookMsTeamsWorkflow)
-	}
-
-	if src.OutgoingWebhookOpsgenie != nil {
-		return json.Marshal(&src.OutgoingWebhookOpsgenie)
-	}
-
-	if src.OutgoingWebhookPagerDuty != nil {
-		return json.Marshal(&src.OutgoingWebhookPagerDuty)
-	}
-
-	if src.OutgoingWebhookSendLog != nil {
-		return json.Marshal(&src.OutgoingWebhookSendLog)
-	}
-
-	if src.OutgoingWebhookSlack != nil {
-		return json.Marshal(&src.OutgoingWebhookSlack)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *OutgoingWebhook) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.OutgoingWebhookAwsEventBridge != nil {
-		return obj.OutgoingWebhookAwsEventBridge
-	}
-
-	if obj.OutgoingWebhookDemisto != nil {
-		return obj.OutgoingWebhookDemisto
-	}
-
-	if obj.OutgoingWebhookEmailGroup != nil {
-		return obj.OutgoingWebhookEmailGroup
-	}
-
-	if obj.OutgoingWebhookGenericWebhook != nil {
-		return obj.OutgoingWebhookGenericWebhook
-	}
-
-	if obj.OutgoingWebhookIbmEventNotifications != nil {
-		return obj.OutgoingWebhookIbmEventNotifications
-	}
-
-	if obj.OutgoingWebhookJira != nil {
-		return obj.OutgoingWebhookJira
-	}
-
-	if obj.OutgoingWebhookMicrosoftTeams != nil {
-		return obj.OutgoingWebhookMicrosoftTeams
-	}
-
-	if obj.OutgoingWebhookMsTeamsWorkflow != nil {
-		return obj.OutgoingWebhookMsTeamsWorkflow
-	}
-
-	if obj.OutgoingWebhookOpsgenie != nil {
-		return obj.OutgoingWebhookOpsgenie
-	}
-
-	if obj.OutgoingWebhookPagerDuty != nil {
-		return obj.OutgoingWebhookPagerDuty
-	}
-
-	if obj.OutgoingWebhookSendLog != nil {
-		return obj.OutgoingWebhookSendLog
-	}
-
-	if obj.OutgoingWebhookSlack != nil {
-		return obj.OutgoingWebhookSlack
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj OutgoingWebhook) GetActualInstanceValue() (interface{}) {
-	if obj.OutgoingWebhookAwsEventBridge != nil {
-		return *obj.OutgoingWebhookAwsEventBridge
-	}
-
-	if obj.OutgoingWebhookDemisto != nil {
-		return *obj.OutgoingWebhookDemisto
-	}
-
-	if obj.OutgoingWebhookEmailGroup != nil {
-		return *obj.OutgoingWebhookEmailGroup
-	}
-
-	if obj.OutgoingWebhookGenericWebhook != nil {
-		return *obj.OutgoingWebhookGenericWebhook
-	}
-
-	if obj.OutgoingWebhookIbmEventNotifications != nil {
-		return *obj.OutgoingWebhookIbmEventNotifications
-	}
-
-	if obj.OutgoingWebhookJira != nil {
-		return *obj.OutgoingWebhookJira
-	}
-
-	if obj.OutgoingWebhookMicrosoftTeams != nil {
-		return *obj.OutgoingWebhookMicrosoftTeams
-	}
-
-	if obj.OutgoingWebhookMsTeamsWorkflow != nil {
-		return *obj.OutgoingWebhookMsTeamsWorkflow
-	}
-
-	if obj.OutgoingWebhookOpsgenie != nil {
-		return *obj.OutgoingWebhookOpsgenie
-	}
-
-	if obj.OutgoingWebhookPagerDuty != nil {
-		return *obj.OutgoingWebhookPagerDuty
-	}
-
-	if obj.OutgoingWebhookSendLog != nil {
-		return *obj.OutgoingWebhookSendLog
-	}
-
-	if obj.OutgoingWebhookSlack != nil {
-		return *obj.OutgoingWebhookSlack
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableOutgoingWebhook struct {
@@ -550,4 +951,3 @@ func (v *NullableOutgoingWebhook) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

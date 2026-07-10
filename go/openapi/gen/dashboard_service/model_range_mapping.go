@@ -22,11 +22,12 @@ var _ MappedNullable = &RangeMapping{}
 
 // RangeMapping Range-based color mapping using min/max bounds and color thresholds
 type RangeMapping struct {
-	MinMax *MinMax `json:"minMax,omitempty"`
+	MinMax        *MinMax        `json:"minMax,omitempty"`
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	// List of color thresholds defining color ranges
-	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Thresholds                        []CommonThreshold `json:"thresholds,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RangeMapping RangeMapping
@@ -145,7 +146,7 @@ func (o *RangeMapping) SetThresholds(v []CommonThreshold) {
 }
 
 func (o RangeMapping) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -190,6 +191,7 @@ func (o *RangeMapping) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "thresholdType")
 		delete(additionalProperties, "thresholds")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -230,4 +232,3 @@ func (v *NullableRangeMapping) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

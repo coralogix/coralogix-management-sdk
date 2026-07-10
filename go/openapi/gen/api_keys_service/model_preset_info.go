@@ -25,8 +25,9 @@ type PresetInfo struct {
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// List of permissions.
-	Permissions []string `json:"permissions,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Permissions                       []string `json:"permissions,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PresetInfo PresetInfo
@@ -113,7 +114,7 @@ func (o *PresetInfo) SetPermissions(v []string) {
 }
 
 func (o PresetInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *PresetInfo) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "permissions")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullablePresetInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

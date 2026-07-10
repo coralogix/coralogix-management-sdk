@@ -439,16 +439,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -459,26 +449,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -489,9 +459,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -518,16 +500,6 @@
         ]
       },
       "GetAlertEventResponse": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/GetAlertEventResponseMultiplePermutation"
-          },
-          {
-            "$ref": "#/components/schemas/GetAlertEventResponseSinglePermutation"
-          }
-        ]
-      },
-      "GetAlertEventResponseMultiplePermutation": {
         "externalDocs": {
           "url": ""
         },
@@ -545,34 +517,43 @@
           },
           "pagination": {
             "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
-          }
-        },
-        "required": [
-          "multiplePermutation"
-        ]
-      },
-      "GetAlertEventResponseSinglePermutation": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Get alert event response",
-        "description": "Response containing the details of an alert event.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Unique identifier of the alert event.",
-            "type": "string",
-            "minLength": 0
-          },
-          "pagination": {
-            "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
           },
           "singlePermutation": {
             "$ref": "#/components/schemas/AlertEvent"
           }
         },
-        "required": [
-          "singlePermutation"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "singlePermutation"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "multiplePermutation"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "singlePermutation"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "multiplePermutation"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "GetAlertEventStatsResponse": {

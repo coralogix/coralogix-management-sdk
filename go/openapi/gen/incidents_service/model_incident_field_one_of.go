@@ -13,468 +13,601 @@ package incidents_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
+	"time"
 )
 
 var _ = bytes.MinRead
 
-// IncidentFieldOneOf - struct for IncidentFieldOneOf
+// checks if the IncidentFieldOneOf type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IncidentFieldOneOf{}
+
+// IncidentFieldOneOf Incident field one of.
 type IncidentFieldOneOf struct {
-	IncidentFieldOneOfApplicationName *IncidentFieldOneOfApplicationName
-	IncidentFieldOneOfClosedAt *IncidentFieldOneOfClosedAt
-	IncidentFieldOneOfCreatedAt *IncidentFieldOneOfCreatedAt
-	IncidentFieldOneOfDuration *IncidentFieldOneOfDuration
-	IncidentFieldOneOfId *IncidentFieldOneOfId
-	IncidentFieldOneOfLastStateUpdateTime *IncidentFieldOneOfLastStateUpdateTime
-	IncidentFieldOneOfName *IncidentFieldOneOfName
-	IncidentFieldOneOfSeverity *IncidentFieldOneOfSeverity
-	IncidentFieldOneOfState *IncidentFieldOneOfState
-	IncidentFieldOneOfStatus *IncidentFieldOneOfStatus
-	IncidentFieldOneOfSubsystemName *IncidentFieldOneOfSubsystemName
+	// Application associated with the incident.
+	ApplicationName *string `json:"applicationName,omitempty"`
+	// Timestamp when the incident was closed.
+	ClosedAt *time.Time `json:"closedAt,omitempty"`
+	// Timestamp when the incident was created.
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// Duration.
+	Duration *string `json:"duration,omitempty"`
+	// Unique identifier of the incident.
+	Id *string `json:"id,omitempty"`
+	// Timestamp of the most recent state change.
+	LastStateUpdateTime *time.Time `json:"lastStateUpdateTime,omitempty"`
+	// Display name of the incident.
+	Name     *string           `json:"name,omitempty"`
+	Severity *IncidentSeverity `json:"severity,omitempty"`
+	State    *IncidentState    `json:"state,omitempty"`
+	Status   *IncidentStatus   `json:"status,omitempty"`
+	// Subsystem associated with the incident.
+	SubsystemName                     *string `json:"subsystemName,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// IncidentFieldOneOfApplicationNameAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfApplicationName wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfApplicationNameAsIncidentFieldOneOf(v *IncidentFieldOneOfApplicationName) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfApplicationName: v,
+type _IncidentFieldOneOf IncidentFieldOneOf
+
+// NewIncidentFieldOneOf instantiates a new IncidentFieldOneOf object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewIncidentFieldOneOf() *IncidentFieldOneOf {
+	this := IncidentFieldOneOf{}
+	return &this
+}
+
+// NewIncidentFieldOneOfWithDefaults instantiates a new IncidentFieldOneOf object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewIncidentFieldOneOfWithDefaults() *IncidentFieldOneOf {
+	this := IncidentFieldOneOf{}
+	return &this
+}
+
+// GetApplicationName returns the ApplicationName field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetApplicationName() string {
+	if o == nil || IsNil(o.ApplicationName) {
+		var ret string
+		return ret
 	}
+	return *o.ApplicationName
 }
 
-// IncidentFieldOneOfClosedAtAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfClosedAt wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfClosedAtAsIncidentFieldOneOf(v *IncidentFieldOneOfClosedAt) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfClosedAt: v,
+// GetApplicationNameOk returns a tuple with the ApplicationName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetApplicationNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationName) {
+		return nil, false
 	}
+	return o.ApplicationName, true
 }
 
-// IncidentFieldOneOfCreatedAtAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfCreatedAt wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfCreatedAtAsIncidentFieldOneOf(v *IncidentFieldOneOfCreatedAt) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfCreatedAt: v,
+// HasApplicationName returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasApplicationName() bool {
+	if o != nil && !IsNil(o.ApplicationName) {
+		return true
 	}
+
+	return false
 }
 
-// IncidentFieldOneOfDurationAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfDuration wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfDurationAsIncidentFieldOneOf(v *IncidentFieldOneOfDuration) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfDuration: v,
+// SetApplicationName gets a reference to the given string and assigns it to the ApplicationName field.
+func (o *IncidentFieldOneOf) SetApplicationName(v string) {
+	o.ApplicationName = &v
+}
+
+// GetClosedAt returns the ClosedAt field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetClosedAt() time.Time {
+	if o == nil || IsNil(o.ClosedAt) {
+		var ret time.Time
+		return ret
 	}
+	return *o.ClosedAt
 }
 
-// IncidentFieldOneOfIdAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfId wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfIdAsIncidentFieldOneOf(v *IncidentFieldOneOfId) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfId: v,
+// GetClosedAtOk returns a tuple with the ClosedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetClosedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.ClosedAt) {
+		return nil, false
 	}
+	return o.ClosedAt, true
 }
 
-// IncidentFieldOneOfLastStateUpdateTimeAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfLastStateUpdateTime wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfLastStateUpdateTimeAsIncidentFieldOneOf(v *IncidentFieldOneOfLastStateUpdateTime) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfLastStateUpdateTime: v,
+// HasClosedAt returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasClosedAt() bool {
+	if o != nil && !IsNil(o.ClosedAt) {
+		return true
 	}
+
+	return false
 }
 
-// IncidentFieldOneOfNameAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfName wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfNameAsIncidentFieldOneOf(v *IncidentFieldOneOfName) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfName: v,
+// SetClosedAt gets a reference to the given time.Time and assigns it to the ClosedAt field.
+func (o *IncidentFieldOneOf) SetClosedAt(v time.Time) {
+	o.ClosedAt = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetCreatedAt() time.Time {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
 	}
+	return *o.CreatedAt
 }
 
-// IncidentFieldOneOfSeverityAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfSeverity wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfSeverityAsIncidentFieldOneOf(v *IncidentFieldOneOfSeverity) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfSeverity: v,
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
 	}
+	return o.CreatedAt, true
 }
 
-// IncidentFieldOneOfStateAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfState wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfStateAsIncidentFieldOneOf(v *IncidentFieldOneOfState) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfState: v,
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
 	}
+
+	return false
 }
 
-// IncidentFieldOneOfStatusAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfStatus wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfStatusAsIncidentFieldOneOf(v *IncidentFieldOneOfStatus) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfStatus: v,
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *IncidentFieldOneOf) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
+// GetDuration returns the Duration field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetDuration() string {
+	if o == nil || IsNil(o.Duration) {
+		var ret string
+		return ret
 	}
+	return *o.Duration
 }
 
-// IncidentFieldOneOfSubsystemNameAsIncidentFieldOneOf is a convenience function that returns IncidentFieldOneOfSubsystemName wrapped in IncidentFieldOneOf
-func IncidentFieldOneOfSubsystemNameAsIncidentFieldOneOf(v *IncidentFieldOneOfSubsystemName) IncidentFieldOneOf {
-	return IncidentFieldOneOf{
-		IncidentFieldOneOfSubsystemName: v,
+// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetDurationOk() (*string, bool) {
+	if o == nil || IsNil(o.Duration) {
+		return nil, false
 	}
+	return o.Duration, true
 }
 
+// HasDuration returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasDuration() bool {
+	if o != nil && !IsNil(o.Duration) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into IncidentFieldOneOfApplicationName
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfApplicationName)
-	if err == nil {
-		jsonIncidentFieldOneOfApplicationName, _ := json.Marshal(dst.IncidentFieldOneOfApplicationName)
-		if string(jsonIncidentFieldOneOfApplicationName) == "{}" { // empty struct
-			dst.IncidentFieldOneOfApplicationName = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfApplicationName); err != nil {
-				dst.IncidentFieldOneOfApplicationName = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetDuration gets a reference to the given string and assigns it to the Duration field.
+func (o *IncidentFieldOneOf) SetDuration(v string) {
+	o.Duration = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *IncidentFieldOneOf) SetId(v string) {
+	o.Id = &v
+}
+
+// GetLastStateUpdateTime returns the LastStateUpdateTime field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetLastStateUpdateTime() time.Time {
+	if o == nil || IsNil(o.LastStateUpdateTime) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastStateUpdateTime
+}
+
+// GetLastStateUpdateTimeOk returns a tuple with the LastStateUpdateTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetLastStateUpdateTimeOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.LastStateUpdateTime) {
+		return nil, false
+	}
+	return o.LastStateUpdateTime, true
+}
+
+// HasLastStateUpdateTime returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasLastStateUpdateTime() bool {
+	if o != nil && !IsNil(o.LastStateUpdateTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastStateUpdateTime gets a reference to the given time.Time and assigns it to the LastStateUpdateTime field.
+func (o *IncidentFieldOneOf) SetLastStateUpdateTime(v time.Time) {
+	o.LastStateUpdateTime = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *IncidentFieldOneOf) SetName(v string) {
+	o.Name = &v
+}
+
+// GetSeverity returns the Severity field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetSeverity() IncidentSeverity {
+	if o == nil || IsNil(o.Severity) {
+		var ret IncidentSeverity
+		return ret
+	}
+	return *o.Severity
+}
+
+// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetSeverityOk() (*IncidentSeverity, bool) {
+	if o == nil || IsNil(o.Severity) {
+		return nil, false
+	}
+	return o.Severity, true
+}
+
+// HasSeverity returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasSeverity() bool {
+	if o != nil && !IsNil(o.Severity) {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverity gets a reference to the given IncidentSeverity and assigns it to the Severity field.
+func (o *IncidentFieldOneOf) SetSeverity(v IncidentSeverity) {
+	o.Severity = &v
+}
+
+// GetState returns the State field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetState() IncidentState {
+	if o == nil || IsNil(o.State) {
+		var ret IncidentState
+		return ret
+	}
+	return *o.State
+}
+
+// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetStateOk() (*IncidentState, bool) {
+	if o == nil || IsNil(o.State) {
+		return nil, false
+	}
+	return o.State, true
+}
+
+// HasState returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasState() bool {
+	if o != nil && !IsNil(o.State) {
+		return true
+	}
+
+	return false
+}
+
+// SetState gets a reference to the given IncidentState and assigns it to the State field.
+func (o *IncidentFieldOneOf) SetState(v IncidentState) {
+	o.State = &v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetStatus() IncidentStatus {
+	if o == nil || IsNil(o.Status) {
+		var ret IncidentStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetStatusOk() (*IncidentStatus, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given IncidentStatus and assigns it to the Status field.
+func (o *IncidentFieldOneOf) SetStatus(v IncidentStatus) {
+	o.Status = &v
+}
+
+// GetSubsystemName returns the SubsystemName field value if set, zero value otherwise.
+func (o *IncidentFieldOneOf) GetSubsystemName() string {
+	if o == nil || IsNil(o.SubsystemName) {
+		var ret string
+		return ret
+	}
+	return *o.SubsystemName
+}
+
+// GetSubsystemNameOk returns a tuple with the SubsystemName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IncidentFieldOneOf) GetSubsystemNameOk() (*string, bool) {
+	if o == nil || IsNil(o.SubsystemName) {
+		return nil, false
+	}
+	return o.SubsystemName, true
+}
+
+// HasSubsystemName returns a boolean if a field has been set.
+func (o *IncidentFieldOneOf) HasSubsystemName() bool {
+	if o != nil && !IsNil(o.SubsystemName) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubsystemName gets a reference to the given string and assigns it to the SubsystemName field.
+func (o *IncidentFieldOneOf) SetSubsystemName(v string) {
+	o.SubsystemName = &v
+}
+
+func (o IncidentFieldOneOf) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IncidentFieldOneOf) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApplicationName) {
+		toSerialize["applicationName"] = o.ApplicationName
+	}
+	if !IsNil(o.ClosedAt) {
+		toSerialize["closedAt"] = o.ClosedAt
+	}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if !IsNil(o.Duration) {
+		toSerialize["duration"] = o.Duration
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.LastStateUpdateTime) {
+		toSerialize["lastStateUpdateTime"] = o.LastStateUpdateTime
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Severity) {
+		toSerialize["severity"] = o.Severity
+	}
+	if !IsNil(o.State) {
+		toSerialize["state"] = o.State
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.SubsystemName) {
+		toSerialize["subsystemName"] = o.SubsystemName
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["id"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["severity"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["name"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["createdAt"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["closedAt"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["state"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["status"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["lastStateUpdateTime"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["applicationName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["subsystemName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["duration"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [id, severity, name, createdAt, closedAt, state, status, lastStateUpdateTime, applicationName, subsystemName, duration] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["id"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field id must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["severity"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field severity must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["name"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field name must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["createdAt"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field createdAt must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["closedAt"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field closedAt must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["state"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field state must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["status"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field status must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["lastStateUpdateTime"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field lastStateUpdateTime must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["applicationName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field applicationName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["subsystemName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field subsystemName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["duration"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field duration must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *IncidentFieldOneOf) UnmarshalJSON(data []byte) (err error) {
+	varIncidentFieldOneOf := _IncidentFieldOneOf{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentFieldOneOf)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentFieldOneOf(varIncidentFieldOneOf)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["id"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfApplicationName = nil
-	}
-
-	// try to unmarshal data into IncidentFieldOneOfClosedAt
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfClosedAt)
-	if err == nil {
-		jsonIncidentFieldOneOfClosedAt, _ := json.Marshal(dst.IncidentFieldOneOfClosedAt)
-		if string(jsonIncidentFieldOneOfClosedAt) == "{}" { // empty struct
-			dst.IncidentFieldOneOfClosedAt = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfClosedAt); err != nil {
-				dst.IncidentFieldOneOfClosedAt = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["severity"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfClosedAt = nil
-	}
-
-	// try to unmarshal data into IncidentFieldOneOfCreatedAt
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfCreatedAt)
-	if err == nil {
-		jsonIncidentFieldOneOfCreatedAt, _ := json.Marshal(dst.IncidentFieldOneOfCreatedAt)
-		if string(jsonIncidentFieldOneOfCreatedAt) == "{}" { // empty struct
-			dst.IncidentFieldOneOfCreatedAt = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfCreatedAt); err != nil {
-				dst.IncidentFieldOneOfCreatedAt = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["name"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfCreatedAt = nil
-	}
-
-	// try to unmarshal data into IncidentFieldOneOfDuration
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfDuration)
-	if err == nil {
-		jsonIncidentFieldOneOfDuration, _ := json.Marshal(dst.IncidentFieldOneOfDuration)
-		if string(jsonIncidentFieldOneOfDuration) == "{}" { // empty struct
-			dst.IncidentFieldOneOfDuration = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfDuration); err != nil {
-				dst.IncidentFieldOneOfDuration = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["createdAt"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfDuration = nil
-	}
-
-	// try to unmarshal data into IncidentFieldOneOfId
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfId)
-	if err == nil {
-		jsonIncidentFieldOneOfId, _ := json.Marshal(dst.IncidentFieldOneOfId)
-		if string(jsonIncidentFieldOneOfId) == "{}" { // empty struct
-			dst.IncidentFieldOneOfId = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfId); err != nil {
-				dst.IncidentFieldOneOfId = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["closedAt"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfId = nil
-	}
-
-	// try to unmarshal data into IncidentFieldOneOfLastStateUpdateTime
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfLastStateUpdateTime)
-	if err == nil {
-		jsonIncidentFieldOneOfLastStateUpdateTime, _ := json.Marshal(dst.IncidentFieldOneOfLastStateUpdateTime)
-		if string(jsonIncidentFieldOneOfLastStateUpdateTime) == "{}" { // empty struct
-			dst.IncidentFieldOneOfLastStateUpdateTime = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfLastStateUpdateTime); err != nil {
-				dst.IncidentFieldOneOfLastStateUpdateTime = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["state"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfLastStateUpdateTime = nil
-	}
-
-	// try to unmarshal data into IncidentFieldOneOfName
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfName)
-	if err == nil {
-		jsonIncidentFieldOneOfName, _ := json.Marshal(dst.IncidentFieldOneOfName)
-		if string(jsonIncidentFieldOneOfName) == "{}" { // empty struct
-			dst.IncidentFieldOneOfName = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfName); err != nil {
-				dst.IncidentFieldOneOfName = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["status"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfName = nil
-	}
-
-	// try to unmarshal data into IncidentFieldOneOfSeverity
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfSeverity)
-	if err == nil {
-		jsonIncidentFieldOneOfSeverity, _ := json.Marshal(dst.IncidentFieldOneOfSeverity)
-		if string(jsonIncidentFieldOneOfSeverity) == "{}" { // empty struct
-			dst.IncidentFieldOneOfSeverity = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfSeverity); err != nil {
-				dst.IncidentFieldOneOfSeverity = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["lastStateUpdateTime"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfSeverity = nil
-	}
-
-	// try to unmarshal data into IncidentFieldOneOfState
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfState)
-	if err == nil {
-		jsonIncidentFieldOneOfState, _ := json.Marshal(dst.IncidentFieldOneOfState)
-		if string(jsonIncidentFieldOneOfState) == "{}" { // empty struct
-			dst.IncidentFieldOneOfState = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfState); err != nil {
-				dst.IncidentFieldOneOfState = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["applicationName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfState = nil
-	}
-
-	// try to unmarshal data into IncidentFieldOneOfStatus
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfStatus)
-	if err == nil {
-		jsonIncidentFieldOneOfStatus, _ := json.Marshal(dst.IncidentFieldOneOfStatus)
-		if string(jsonIncidentFieldOneOfStatus) == "{}" { // empty struct
-			dst.IncidentFieldOneOfStatus = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfStatus); err != nil {
-				dst.IncidentFieldOneOfStatus = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["subsystemName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfStatus = nil
-	}
-
-	// try to unmarshal data into IncidentFieldOneOfSubsystemName
-	err = json.Unmarshal(data, &dst.IncidentFieldOneOfSubsystemName)
-	if err == nil {
-		jsonIncidentFieldOneOfSubsystemName, _ := json.Marshal(dst.IncidentFieldOneOfSubsystemName)
-		if string(jsonIncidentFieldOneOfSubsystemName) == "{}" { // empty struct
-			dst.IncidentFieldOneOfSubsystemName = nil
-		} else {
-			if err = validator.Validate(dst.IncidentFieldOneOfSubsystemName); err != nil {
-				dst.IncidentFieldOneOfSubsystemName = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["duration"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.IncidentFieldOneOfSubsystemName = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [id, severity, name, createdAt, closedAt, state, status, lastStateUpdateTime, applicationName, subsystemName, duration] may be set"}
+		}
+
+		delete(additionalProperties, "applicationName")
+		delete(additionalProperties, "closedAt")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "lastStateUpdateTime")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "subsystemName")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.IncidentFieldOneOfApplicationName = nil
-		dst.IncidentFieldOneOfClosedAt = nil
-		dst.IncidentFieldOneOfCreatedAt = nil
-		dst.IncidentFieldOneOfDuration = nil
-		dst.IncidentFieldOneOfId = nil
-		dst.IncidentFieldOneOfLastStateUpdateTime = nil
-		dst.IncidentFieldOneOfName = nil
-		dst.IncidentFieldOneOfSeverity = nil
-		dst.IncidentFieldOneOfState = nil
-		dst.IncidentFieldOneOfStatus = nil
-		dst.IncidentFieldOneOfSubsystemName = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(IncidentFieldOneOf)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src IncidentFieldOneOf) MarshalJSON() ([]byte, error) {
-	if src.IncidentFieldOneOfApplicationName != nil {
-		return json.Marshal(&src.IncidentFieldOneOfApplicationName)
-	}
-
-	if src.IncidentFieldOneOfClosedAt != nil {
-		return json.Marshal(&src.IncidentFieldOneOfClosedAt)
-	}
-
-	if src.IncidentFieldOneOfCreatedAt != nil {
-		return json.Marshal(&src.IncidentFieldOneOfCreatedAt)
-	}
-
-	if src.IncidentFieldOneOfDuration != nil {
-		return json.Marshal(&src.IncidentFieldOneOfDuration)
-	}
-
-	if src.IncidentFieldOneOfId != nil {
-		return json.Marshal(&src.IncidentFieldOneOfId)
-	}
-
-	if src.IncidentFieldOneOfLastStateUpdateTime != nil {
-		return json.Marshal(&src.IncidentFieldOneOfLastStateUpdateTime)
-	}
-
-	if src.IncidentFieldOneOfName != nil {
-		return json.Marshal(&src.IncidentFieldOneOfName)
-	}
-
-	if src.IncidentFieldOneOfSeverity != nil {
-		return json.Marshal(&src.IncidentFieldOneOfSeverity)
-	}
-
-	if src.IncidentFieldOneOfState != nil {
-		return json.Marshal(&src.IncidentFieldOneOfState)
-	}
-
-	if src.IncidentFieldOneOfStatus != nil {
-		return json.Marshal(&src.IncidentFieldOneOfStatus)
-	}
-
-	if src.IncidentFieldOneOfSubsystemName != nil {
-		return json.Marshal(&src.IncidentFieldOneOfSubsystemName)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *IncidentFieldOneOf) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.IncidentFieldOneOfApplicationName != nil {
-		return obj.IncidentFieldOneOfApplicationName
-	}
-
-	if obj.IncidentFieldOneOfClosedAt != nil {
-		return obj.IncidentFieldOneOfClosedAt
-	}
-
-	if obj.IncidentFieldOneOfCreatedAt != nil {
-		return obj.IncidentFieldOneOfCreatedAt
-	}
-
-	if obj.IncidentFieldOneOfDuration != nil {
-		return obj.IncidentFieldOneOfDuration
-	}
-
-	if obj.IncidentFieldOneOfId != nil {
-		return obj.IncidentFieldOneOfId
-	}
-
-	if obj.IncidentFieldOneOfLastStateUpdateTime != nil {
-		return obj.IncidentFieldOneOfLastStateUpdateTime
-	}
-
-	if obj.IncidentFieldOneOfName != nil {
-		return obj.IncidentFieldOneOfName
-	}
-
-	if obj.IncidentFieldOneOfSeverity != nil {
-		return obj.IncidentFieldOneOfSeverity
-	}
-
-	if obj.IncidentFieldOneOfState != nil {
-		return obj.IncidentFieldOneOfState
-	}
-
-	if obj.IncidentFieldOneOfStatus != nil {
-		return obj.IncidentFieldOneOfStatus
-	}
-
-	if obj.IncidentFieldOneOfSubsystemName != nil {
-		return obj.IncidentFieldOneOfSubsystemName
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj IncidentFieldOneOf) GetActualInstanceValue() (interface{}) {
-	if obj.IncidentFieldOneOfApplicationName != nil {
-		return *obj.IncidentFieldOneOfApplicationName
-	}
-
-	if obj.IncidentFieldOneOfClosedAt != nil {
-		return *obj.IncidentFieldOneOfClosedAt
-	}
-
-	if obj.IncidentFieldOneOfCreatedAt != nil {
-		return *obj.IncidentFieldOneOfCreatedAt
-	}
-
-	if obj.IncidentFieldOneOfDuration != nil {
-		return *obj.IncidentFieldOneOfDuration
-	}
-
-	if obj.IncidentFieldOneOfId != nil {
-		return *obj.IncidentFieldOneOfId
-	}
-
-	if obj.IncidentFieldOneOfLastStateUpdateTime != nil {
-		return *obj.IncidentFieldOneOfLastStateUpdateTime
-	}
-
-	if obj.IncidentFieldOneOfName != nil {
-		return *obj.IncidentFieldOneOfName
-	}
-
-	if obj.IncidentFieldOneOfSeverity != nil {
-		return *obj.IncidentFieldOneOfSeverity
-	}
-
-	if obj.IncidentFieldOneOfState != nil {
-		return *obj.IncidentFieldOneOfState
-	}
-
-	if obj.IncidentFieldOneOfStatus != nil {
-		return *obj.IncidentFieldOneOfStatus
-	}
-
-	if obj.IncidentFieldOneOfSubsystemName != nil {
-		return *obj.IncidentFieldOneOfSubsystemName
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableIncidentFieldOneOf struct {
@@ -512,4 +645,3 @@ func (v *NullableIncidentFieldOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

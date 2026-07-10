@@ -24,8 +24,9 @@ var _ MappedNullable = &CreateCompanyIPAccessSettingsRequest{}
 type CreateCompanyIPAccessSettingsRequest struct {
 	EnableCoralogixCustomerSupportAccess *CoralogixCustomerSupportAccess `json:"enableCoralogixCustomerSupportAccess,omitempty"`
 	// List of IP access entries to create.
-	IpAccess []IpAccess `json:"ipAccess,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IpAccess                          []IpAccess `json:"ipAccess,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CreateCompanyIPAccessSettingsRequest CreateCompanyIPAccessSettingsRequest
@@ -112,7 +113,7 @@ func (o *CreateCompanyIPAccessSettingsRequest) SetIpAccess(v []IpAccess) {
 }
 
 func (o CreateCompanyIPAccessSettingsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *CreateCompanyIPAccessSettingsRequest) UnmarshalJSON(data []byte) (err e
 		delete(additionalProperties, "enableCoralogixCustomerSupportAccess")
 		delete(additionalProperties, "ipAccess")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableCreateCompanyIPAccessSettingsRequest) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

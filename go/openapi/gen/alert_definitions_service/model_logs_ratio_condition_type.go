@@ -24,7 +24,7 @@ type LogsRatioConditionType string
 // List of LogsRatioConditionType
 const (
 	LOGSRATIOCONDITIONTYPE_LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED LogsRatioConditionType = "LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED"
-	LOGSRATIOCONDITIONTYPE_LOGS_RATIO_CONDITION_TYPE_LESS_THAN LogsRatioConditionType = "LOGS_RATIO_CONDITION_TYPE_LESS_THAN"
+	LOGSRATIOCONDITIONTYPE_LOGS_RATIO_CONDITION_TYPE_LESS_THAN                LogsRatioConditionType = "LOGS_RATIO_CONDITION_TYPE_LESS_THAN"
 )
 
 // All allowed values of LogsRatioConditionType enum
@@ -111,4 +111,3 @@ func (v *NullableLogsRatioConditionType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

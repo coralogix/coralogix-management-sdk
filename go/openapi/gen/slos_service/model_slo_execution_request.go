@@ -13,164 +13,231 @@ package slos_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// SloExecutionRequest - struct for SloExecutionRequest
+// checks if the SloExecutionRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SloExecutionRequest{}
+
+// SloExecutionRequest Request for executing an SLO operation.
 type SloExecutionRequest struct {
-	SloExecutionRequestCreateSloRequest *SloExecutionRequestCreateSloRequest
-	SloExecutionRequestDeleteSloRequest *SloExecutionRequestDeleteSloRequest
-	SloExecutionRequestReplaceSloRequest *SloExecutionRequestReplaceSloRequest
+	CreateSloRequest                                *CreateSloRequest  `json:"createSloRequest,omitempty"`
+	DeleteSloRequest                                *DeleteSloRequest  `json:"deleteSloRequest,omitempty"`
+	ReplaceSloRequest                               *ReplaceSloRequest `json:"replaceSloRequest,omitempty"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
-// SloExecutionRequestCreateSloRequestAsSloExecutionRequest is a convenience function that returns SloExecutionRequestCreateSloRequest wrapped in SloExecutionRequest
-func SloExecutionRequestCreateSloRequestAsSloExecutionRequest(v *SloExecutionRequestCreateSloRequest) SloExecutionRequest {
-	return SloExecutionRequest{
-		SloExecutionRequestCreateSloRequest: v,
+type _SloExecutionRequest SloExecutionRequest
+
+// NewSloExecutionRequest instantiates a new SloExecutionRequest object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSloExecutionRequest() *SloExecutionRequest {
+	this := SloExecutionRequest{}
+	return &this
+}
+
+// NewSloExecutionRequestWithDefaults instantiates a new SloExecutionRequest object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewSloExecutionRequestWithDefaults() *SloExecutionRequest {
+	this := SloExecutionRequest{}
+	return &this
+}
+
+// GetCreateSloRequest returns the CreateSloRequest field value if set, zero value otherwise.
+func (o *SloExecutionRequest) GetCreateSloRequest() CreateSloRequest {
+	if o == nil || IsNil(o.CreateSloRequest) {
+		var ret CreateSloRequest
+		return ret
 	}
+	return *o.CreateSloRequest
 }
 
-// SloExecutionRequestDeleteSloRequestAsSloExecutionRequest is a convenience function that returns SloExecutionRequestDeleteSloRequest wrapped in SloExecutionRequest
-func SloExecutionRequestDeleteSloRequestAsSloExecutionRequest(v *SloExecutionRequestDeleteSloRequest) SloExecutionRequest {
-	return SloExecutionRequest{
-		SloExecutionRequestDeleteSloRequest: v,
+// GetCreateSloRequestOk returns a tuple with the CreateSloRequest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloExecutionRequest) GetCreateSloRequestOk() (*CreateSloRequest, bool) {
+	if o == nil || IsNil(o.CreateSloRequest) {
+		return nil, false
 	}
+	return o.CreateSloRequest, true
 }
 
-// SloExecutionRequestReplaceSloRequestAsSloExecutionRequest is a convenience function that returns SloExecutionRequestReplaceSloRequest wrapped in SloExecutionRequest
-func SloExecutionRequestReplaceSloRequestAsSloExecutionRequest(v *SloExecutionRequestReplaceSloRequest) SloExecutionRequest {
-	return SloExecutionRequest{
-		SloExecutionRequestReplaceSloRequest: v,
+// HasCreateSloRequest returns a boolean if a field has been set.
+func (o *SloExecutionRequest) HasCreateSloRequest() bool {
+	if o != nil && !IsNil(o.CreateSloRequest) {
+		return true
 	}
+
+	return false
 }
 
+// SetCreateSloRequest gets a reference to the given CreateSloRequest and assigns it to the CreateSloRequest field.
+func (o *SloExecutionRequest) SetCreateSloRequest(v CreateSloRequest) {
+	o.CreateSloRequest = &v
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *SloExecutionRequest) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into SloExecutionRequestCreateSloRequest
-	err = json.Unmarshal(data, &dst.SloExecutionRequestCreateSloRequest)
-	if err == nil {
-		jsonSloExecutionRequestCreateSloRequest, _ := json.Marshal(dst.SloExecutionRequestCreateSloRequest)
-		if string(jsonSloExecutionRequestCreateSloRequest) == "{}" { // empty struct
-			dst.SloExecutionRequestCreateSloRequest = nil
-		} else {
-			if err = validator.Validate(dst.SloExecutionRequestCreateSloRequest); err != nil {
-				dst.SloExecutionRequestCreateSloRequest = nil
-			} else {
-				match++
-			}
+// GetDeleteSloRequest returns the DeleteSloRequest field value if set, zero value otherwise.
+func (o *SloExecutionRequest) GetDeleteSloRequest() DeleteSloRequest {
+	if o == nil || IsNil(o.DeleteSloRequest) {
+		var ret DeleteSloRequest
+		return ret
+	}
+	return *o.DeleteSloRequest
+}
+
+// GetDeleteSloRequestOk returns a tuple with the DeleteSloRequest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloExecutionRequest) GetDeleteSloRequestOk() (*DeleteSloRequest, bool) {
+	if o == nil || IsNil(o.DeleteSloRequest) {
+		return nil, false
+	}
+	return o.DeleteSloRequest, true
+}
+
+// HasDeleteSloRequest returns a boolean if a field has been set.
+func (o *SloExecutionRequest) HasDeleteSloRequest() bool {
+	if o != nil && !IsNil(o.DeleteSloRequest) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleteSloRequest gets a reference to the given DeleteSloRequest and assigns it to the DeleteSloRequest field.
+func (o *SloExecutionRequest) SetDeleteSloRequest(v DeleteSloRequest) {
+	o.DeleteSloRequest = &v
+}
+
+// GetReplaceSloRequest returns the ReplaceSloRequest field value if set, zero value otherwise.
+func (o *SloExecutionRequest) GetReplaceSloRequest() ReplaceSloRequest {
+	if o == nil || IsNil(o.ReplaceSloRequest) {
+		var ret ReplaceSloRequest
+		return ret
+	}
+	return *o.ReplaceSloRequest
+}
+
+// GetReplaceSloRequestOk returns a tuple with the ReplaceSloRequest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloExecutionRequest) GetReplaceSloRequestOk() (*ReplaceSloRequest, bool) {
+	if o == nil || IsNil(o.ReplaceSloRequest) {
+		return nil, false
+	}
+	return o.ReplaceSloRequest, true
+}
+
+// HasReplaceSloRequest returns a boolean if a field has been set.
+func (o *SloExecutionRequest) HasReplaceSloRequest() bool {
+	if o != nil && !IsNil(o.ReplaceSloRequest) {
+		return true
+	}
+
+	return false
+}
+
+// SetReplaceSloRequest gets a reference to the given ReplaceSloRequest and assigns it to the ReplaceSloRequest field.
+func (o *SloExecutionRequest) SetReplaceSloRequest(v ReplaceSloRequest) {
+	o.ReplaceSloRequest = &v
+}
+
+func (o SloExecutionRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SloExecutionRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CreateSloRequest) {
+		toSerialize["createSloRequest"] = o.CreateSloRequest
+	}
+	if !IsNil(o.DeleteSloRequest) {
+		toSerialize["deleteSloRequest"] = o.DeleteSloRequest
+	}
+	if !IsNil(o.ReplaceSloRequest) {
+		toSerialize["replaceSloRequest"] = o.ReplaceSloRequest
+	}
+	requiredOneOfGroup0Matches := 0
+	if _, exists := toSerialize["createSloRequest"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["replaceSloRequest"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["deleteSloRequest"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [createSloRequest, replaceSloRequest, deleteSloRequest] must be set"}
 		}
-	} else {
-		dst.SloExecutionRequestCreateSloRequest = nil
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [createSloRequest, replaceSloRequest, deleteSloRequest] must be set"}
 	}
 
-	// try to unmarshal data into SloExecutionRequestDeleteSloRequest
-	err = json.Unmarshal(data, &dst.SloExecutionRequestDeleteSloRequest)
-	if err == nil {
-		jsonSloExecutionRequestDeleteSloRequest, _ := json.Marshal(dst.SloExecutionRequestDeleteSloRequest)
-		if string(jsonSloExecutionRequestDeleteSloRequest) == "{}" { // empty struct
-			dst.SloExecutionRequestDeleteSloRequest = nil
-		} else {
-			if err = validator.Validate(dst.SloExecutionRequestDeleteSloRequest); err != nil {
-				dst.SloExecutionRequestDeleteSloRequest = nil
-			} else {
-				match++
-			}
+	if _, exists := o.AdditionalProperties["createSloRequest"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field createSloRequest must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["replaceSloRequest"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field replaceSloRequest must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["deleteSloRequest"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field deleteSloRequest must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *SloExecutionRequest) UnmarshalJSON(data []byte) (err error) {
+	varSloExecutionRequest := _SloExecutionRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloExecutionRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloExecutionRequest(varSloExecutionRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		requiredOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["createSloRequest"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloExecutionRequestDeleteSloRequest = nil
-	}
-
-	// try to unmarshal data into SloExecutionRequestReplaceSloRequest
-	err = json.Unmarshal(data, &dst.SloExecutionRequestReplaceSloRequest)
-	if err == nil {
-		jsonSloExecutionRequestReplaceSloRequest, _ := json.Marshal(dst.SloExecutionRequestReplaceSloRequest)
-		if string(jsonSloExecutionRequestReplaceSloRequest) == "{}" { // empty struct
-			dst.SloExecutionRequestReplaceSloRequest = nil
-		} else {
-			if err = validator.Validate(dst.SloExecutionRequestReplaceSloRequest); err != nil {
-				dst.SloExecutionRequestReplaceSloRequest = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["replaceSloRequest"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloExecutionRequestReplaceSloRequest = nil
+		if _, exists := additionalProperties["deleteSloRequest"]; exists {
+			requiredOneOfGroup0MatchesInPayload++
+		}
+		if requiredOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [createSloRequest, replaceSloRequest, deleteSloRequest] may be set"}
+		}
+
+		delete(additionalProperties, "createSloRequest")
+		delete(additionalProperties, "deleteSloRequest")
+		delete(additionalProperties, "replaceSloRequest")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.SloExecutionRequestCreateSloRequest = nil
-		dst.SloExecutionRequestDeleteSloRequest = nil
-		dst.SloExecutionRequestReplaceSloRequest = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(SloExecutionRequest)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src SloExecutionRequest) MarshalJSON() ([]byte, error) {
-	if src.SloExecutionRequestCreateSloRequest != nil {
-		return json.Marshal(&src.SloExecutionRequestCreateSloRequest)
-	}
-
-	if src.SloExecutionRequestDeleteSloRequest != nil {
-		return json.Marshal(&src.SloExecutionRequestDeleteSloRequest)
-	}
-
-	if src.SloExecutionRequestReplaceSloRequest != nil {
-		return json.Marshal(&src.SloExecutionRequestReplaceSloRequest)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *SloExecutionRequest) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.SloExecutionRequestCreateSloRequest != nil {
-		return obj.SloExecutionRequestCreateSloRequest
-	}
-
-	if obj.SloExecutionRequestDeleteSloRequest != nil {
-		return obj.SloExecutionRequestDeleteSloRequest
-	}
-
-	if obj.SloExecutionRequestReplaceSloRequest != nil {
-		return obj.SloExecutionRequestReplaceSloRequest
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj SloExecutionRequest) GetActualInstanceValue() (interface{}) {
-	if obj.SloExecutionRequestCreateSloRequest != nil {
-		return *obj.SloExecutionRequestCreateSloRequest
-	}
-
-	if obj.SloExecutionRequestDeleteSloRequest != nil {
-		return *obj.SloExecutionRequestDeleteSloRequest
-	}
-
-	if obj.SloExecutionRequestReplaceSloRequest != nil {
-		return *obj.SloExecutionRequestReplaceSloRequest
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSloExecutionRequest struct {
@@ -208,4 +275,3 @@ func (v *NullableSloExecutionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

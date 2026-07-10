@@ -13,354 +13,458 @@ package slos_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// SloFilterField - struct for SloFilterField
+// checks if the SloFilterField type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SloFilterField{}
+
+// SloFilterField Field used for filtering SLOs
 type SloFilterField struct {
-	SloFilterFieldConstFilter *SloFilterFieldConstFilter
-	SloFilterFieldLabelName *SloFilterFieldLabelName
-	SloFilterFieldOwnershipEnvironmentValues *SloFilterFieldOwnershipEnvironmentValues
-	SloFilterFieldOwnershipServiceValues *SloFilterFieldOwnershipServiceValues
-	SloFilterFieldOwnershipTeamValues *SloFilterFieldOwnershipTeamValues
-	SloFilterFieldProductType *SloFilterFieldProductType
-	SloFilterFieldServiceName *SloFilterFieldServiceName
-	SloFilterFieldSloType *SloFilterFieldSloType
+	ConstFilter *SloConstantFilterField `json:"constFilter,omitempty"`
+	// Filter by a specific SLO label key.
+	LabelName                  *string       `json:"labelName,omitempty"`
+	OwnershipEnvironmentValues *StringValues `json:"ownershipEnvironmentValues,omitempty"`
+	OwnershipServiceValues     *StringValues `json:"ownershipServiceValues,omitempty"`
+	OwnershipTeamValues        *StringValues `json:"ownershipTeamValues,omitempty"`
+	// Filter discriminator for SLO product type values.
+	ProductType *bool `json:"productType,omitempty"`
+	// Filter by service name from the APM SLI services list (not ownership tags). Only valid for APM product SLOs. MUST be used together with a product_type filter that includes APM; the server may reject the request otherwise. To filter by configured ownership service on any SLO type, use ownership_service_values instead.
+	ServiceName *string `json:"serviceName,omitempty"`
+	// Filter discriminator for SLO type values.
+	SloType                           *bool `json:"sloType,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// SloFilterFieldConstFilterAsSloFilterField is a convenience function that returns SloFilterFieldConstFilter wrapped in SloFilterField
-func SloFilterFieldConstFilterAsSloFilterField(v *SloFilterFieldConstFilter) SloFilterField {
-	return SloFilterField{
-		SloFilterFieldConstFilter: v,
+type _SloFilterField SloFilterField
+
+// NewSloFilterField instantiates a new SloFilterField object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSloFilterField() *SloFilterField {
+	this := SloFilterField{}
+	return &this
+}
+
+// NewSloFilterFieldWithDefaults instantiates a new SloFilterField object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewSloFilterFieldWithDefaults() *SloFilterField {
+	this := SloFilterField{}
+	return &this
+}
+
+// GetConstFilter returns the ConstFilter field value if set, zero value otherwise.
+func (o *SloFilterField) GetConstFilter() SloConstantFilterField {
+	if o == nil || IsNil(o.ConstFilter) {
+		var ret SloConstantFilterField
+		return ret
 	}
+	return *o.ConstFilter
 }
 
-// SloFilterFieldLabelNameAsSloFilterField is a convenience function that returns SloFilterFieldLabelName wrapped in SloFilterField
-func SloFilterFieldLabelNameAsSloFilterField(v *SloFilterFieldLabelName) SloFilterField {
-	return SloFilterField{
-		SloFilterFieldLabelName: v,
+// GetConstFilterOk returns a tuple with the ConstFilter field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloFilterField) GetConstFilterOk() (*SloConstantFilterField, bool) {
+	if o == nil || IsNil(o.ConstFilter) {
+		return nil, false
 	}
+	return o.ConstFilter, true
 }
 
-// SloFilterFieldOwnershipEnvironmentValuesAsSloFilterField is a convenience function that returns SloFilterFieldOwnershipEnvironmentValues wrapped in SloFilterField
-func SloFilterFieldOwnershipEnvironmentValuesAsSloFilterField(v *SloFilterFieldOwnershipEnvironmentValues) SloFilterField {
-	return SloFilterField{
-		SloFilterFieldOwnershipEnvironmentValues: v,
+// HasConstFilter returns a boolean if a field has been set.
+func (o *SloFilterField) HasConstFilter() bool {
+	if o != nil && !IsNil(o.ConstFilter) {
+		return true
 	}
+
+	return false
 }
 
-// SloFilterFieldOwnershipServiceValuesAsSloFilterField is a convenience function that returns SloFilterFieldOwnershipServiceValues wrapped in SloFilterField
-func SloFilterFieldOwnershipServiceValuesAsSloFilterField(v *SloFilterFieldOwnershipServiceValues) SloFilterField {
-	return SloFilterField{
-		SloFilterFieldOwnershipServiceValues: v,
+// SetConstFilter gets a reference to the given SloConstantFilterField and assigns it to the ConstFilter field.
+func (o *SloFilterField) SetConstFilter(v SloConstantFilterField) {
+	o.ConstFilter = &v
+}
+
+// GetLabelName returns the LabelName field value if set, zero value otherwise.
+func (o *SloFilterField) GetLabelName() string {
+	if o == nil || IsNil(o.LabelName) {
+		var ret string
+		return ret
 	}
+	return *o.LabelName
 }
 
-// SloFilterFieldOwnershipTeamValuesAsSloFilterField is a convenience function that returns SloFilterFieldOwnershipTeamValues wrapped in SloFilterField
-func SloFilterFieldOwnershipTeamValuesAsSloFilterField(v *SloFilterFieldOwnershipTeamValues) SloFilterField {
-	return SloFilterField{
-		SloFilterFieldOwnershipTeamValues: v,
+// GetLabelNameOk returns a tuple with the LabelName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloFilterField) GetLabelNameOk() (*string, bool) {
+	if o == nil || IsNil(o.LabelName) {
+		return nil, false
 	}
+	return o.LabelName, true
 }
 
-// SloFilterFieldProductTypeAsSloFilterField is a convenience function that returns SloFilterFieldProductType wrapped in SloFilterField
-func SloFilterFieldProductTypeAsSloFilterField(v *SloFilterFieldProductType) SloFilterField {
-	return SloFilterField{
-		SloFilterFieldProductType: v,
+// HasLabelName returns a boolean if a field has been set.
+func (o *SloFilterField) HasLabelName() bool {
+	if o != nil && !IsNil(o.LabelName) {
+		return true
 	}
+
+	return false
 }
 
-// SloFilterFieldServiceNameAsSloFilterField is a convenience function that returns SloFilterFieldServiceName wrapped in SloFilterField
-func SloFilterFieldServiceNameAsSloFilterField(v *SloFilterFieldServiceName) SloFilterField {
-	return SloFilterField{
-		SloFilterFieldServiceName: v,
+// SetLabelName gets a reference to the given string and assigns it to the LabelName field.
+func (o *SloFilterField) SetLabelName(v string) {
+	o.LabelName = &v
+}
+
+// GetOwnershipEnvironmentValues returns the OwnershipEnvironmentValues field value if set, zero value otherwise.
+func (o *SloFilterField) GetOwnershipEnvironmentValues() StringValues {
+	if o == nil || IsNil(o.OwnershipEnvironmentValues) {
+		var ret StringValues
+		return ret
 	}
+	return *o.OwnershipEnvironmentValues
 }
 
-// SloFilterFieldSloTypeAsSloFilterField is a convenience function that returns SloFilterFieldSloType wrapped in SloFilterField
-func SloFilterFieldSloTypeAsSloFilterField(v *SloFilterFieldSloType) SloFilterField {
-	return SloFilterField{
-		SloFilterFieldSloType: v,
+// GetOwnershipEnvironmentValuesOk returns a tuple with the OwnershipEnvironmentValues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloFilterField) GetOwnershipEnvironmentValuesOk() (*StringValues, bool) {
+	if o == nil || IsNil(o.OwnershipEnvironmentValues) {
+		return nil, false
 	}
+	return o.OwnershipEnvironmentValues, true
 }
 
+// HasOwnershipEnvironmentValues returns a boolean if a field has been set.
+func (o *SloFilterField) HasOwnershipEnvironmentValues() bool {
+	if o != nil && !IsNil(o.OwnershipEnvironmentValues) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into SloFilterFieldConstFilter
-	err = json.Unmarshal(data, &dst.SloFilterFieldConstFilter)
-	if err == nil {
-		jsonSloFilterFieldConstFilter, _ := json.Marshal(dst.SloFilterFieldConstFilter)
-		if string(jsonSloFilterFieldConstFilter) == "{}" { // empty struct
-			dst.SloFilterFieldConstFilter = nil
-		} else {
-			if err = validator.Validate(dst.SloFilterFieldConstFilter); err != nil {
-				dst.SloFilterFieldConstFilter = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetOwnershipEnvironmentValues gets a reference to the given StringValues and assigns it to the OwnershipEnvironmentValues field.
+func (o *SloFilterField) SetOwnershipEnvironmentValues(v StringValues) {
+	o.OwnershipEnvironmentValues = &v
+}
+
+// GetOwnershipServiceValues returns the OwnershipServiceValues field value if set, zero value otherwise.
+func (o *SloFilterField) GetOwnershipServiceValues() StringValues {
+	if o == nil || IsNil(o.OwnershipServiceValues) {
+		var ret StringValues
+		return ret
+	}
+	return *o.OwnershipServiceValues
+}
+
+// GetOwnershipServiceValuesOk returns a tuple with the OwnershipServiceValues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloFilterField) GetOwnershipServiceValuesOk() (*StringValues, bool) {
+	if o == nil || IsNil(o.OwnershipServiceValues) {
+		return nil, false
+	}
+	return o.OwnershipServiceValues, true
+}
+
+// HasOwnershipServiceValues returns a boolean if a field has been set.
+func (o *SloFilterField) HasOwnershipServiceValues() bool {
+	if o != nil && !IsNil(o.OwnershipServiceValues) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwnershipServiceValues gets a reference to the given StringValues and assigns it to the OwnershipServiceValues field.
+func (o *SloFilterField) SetOwnershipServiceValues(v StringValues) {
+	o.OwnershipServiceValues = &v
+}
+
+// GetOwnershipTeamValues returns the OwnershipTeamValues field value if set, zero value otherwise.
+func (o *SloFilterField) GetOwnershipTeamValues() StringValues {
+	if o == nil || IsNil(o.OwnershipTeamValues) {
+		var ret StringValues
+		return ret
+	}
+	return *o.OwnershipTeamValues
+}
+
+// GetOwnershipTeamValuesOk returns a tuple with the OwnershipTeamValues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloFilterField) GetOwnershipTeamValuesOk() (*StringValues, bool) {
+	if o == nil || IsNil(o.OwnershipTeamValues) {
+		return nil, false
+	}
+	return o.OwnershipTeamValues, true
+}
+
+// HasOwnershipTeamValues returns a boolean if a field has been set.
+func (o *SloFilterField) HasOwnershipTeamValues() bool {
+	if o != nil && !IsNil(o.OwnershipTeamValues) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwnershipTeamValues gets a reference to the given StringValues and assigns it to the OwnershipTeamValues field.
+func (o *SloFilterField) SetOwnershipTeamValues(v StringValues) {
+	o.OwnershipTeamValues = &v
+}
+
+// GetProductType returns the ProductType field value if set, zero value otherwise.
+func (o *SloFilterField) GetProductType() bool {
+	if o == nil || IsNil(o.ProductType) {
+		var ret bool
+		return ret
+	}
+	return *o.ProductType
+}
+
+// GetProductTypeOk returns a tuple with the ProductType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloFilterField) GetProductTypeOk() (*bool, bool) {
+	if o == nil || IsNil(o.ProductType) {
+		return nil, false
+	}
+	return o.ProductType, true
+}
+
+// HasProductType returns a boolean if a field has been set.
+func (o *SloFilterField) HasProductType() bool {
+	if o != nil && !IsNil(o.ProductType) {
+		return true
+	}
+
+	return false
+}
+
+// SetProductType gets a reference to the given bool and assigns it to the ProductType field.
+func (o *SloFilterField) SetProductType(v bool) {
+	o.ProductType = &v
+}
+
+// GetServiceName returns the ServiceName field value if set, zero value otherwise.
+func (o *SloFilterField) GetServiceName() string {
+	if o == nil || IsNil(o.ServiceName) {
+		var ret string
+		return ret
+	}
+	return *o.ServiceName
+}
+
+// GetServiceNameOk returns a tuple with the ServiceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloFilterField) GetServiceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ServiceName) {
+		return nil, false
+	}
+	return o.ServiceName, true
+}
+
+// HasServiceName returns a boolean if a field has been set.
+func (o *SloFilterField) HasServiceName() bool {
+	if o != nil && !IsNil(o.ServiceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceName gets a reference to the given string and assigns it to the ServiceName field.
+func (o *SloFilterField) SetServiceName(v string) {
+	o.ServiceName = &v
+}
+
+// GetSloType returns the SloType field value if set, zero value otherwise.
+func (o *SloFilterField) GetSloType() bool {
+	if o == nil || IsNil(o.SloType) {
+		var ret bool
+		return ret
+	}
+	return *o.SloType
+}
+
+// GetSloTypeOk returns a tuple with the SloType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloFilterField) GetSloTypeOk() (*bool, bool) {
+	if o == nil || IsNil(o.SloType) {
+		return nil, false
+	}
+	return o.SloType, true
+}
+
+// HasSloType returns a boolean if a field has been set.
+func (o *SloFilterField) HasSloType() bool {
+	if o != nil && !IsNil(o.SloType) {
+		return true
+	}
+
+	return false
+}
+
+// SetSloType gets a reference to the given bool and assigns it to the SloType field.
+func (o *SloFilterField) SetSloType(v bool) {
+	o.SloType = &v
+}
+
+func (o SloFilterField) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SloFilterField) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ConstFilter) {
+		toSerialize["constFilter"] = o.ConstFilter
+	}
+	if !IsNil(o.LabelName) {
+		toSerialize["labelName"] = o.LabelName
+	}
+	if !IsNil(o.OwnershipEnvironmentValues) {
+		toSerialize["ownershipEnvironmentValues"] = o.OwnershipEnvironmentValues
+	}
+	if !IsNil(o.OwnershipServiceValues) {
+		toSerialize["ownershipServiceValues"] = o.OwnershipServiceValues
+	}
+	if !IsNil(o.OwnershipTeamValues) {
+		toSerialize["ownershipTeamValues"] = o.OwnershipTeamValues
+	}
+	if !IsNil(o.ProductType) {
+		toSerialize["productType"] = o.ProductType
+	}
+	if !IsNil(o.ServiceName) {
+		toSerialize["serviceName"] = o.ServiceName
+	}
+	if !IsNil(o.SloType) {
+		toSerialize["sloType"] = o.SloType
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["constFilter"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["labelName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["sloType"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["productType"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["serviceName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["ownershipServiceValues"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["ownershipEnvironmentValues"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["ownershipTeamValues"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [constFilter, labelName, sloType, productType, serviceName, ownershipServiceValues, ownershipEnvironmentValues, ownershipTeamValues] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["constFilter"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field constFilter must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["labelName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field labelName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sloType"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sloType must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["productType"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field productType must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["serviceName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field serviceName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ownershipServiceValues"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ownershipServiceValues must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ownershipEnvironmentValues"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ownershipEnvironmentValues must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ownershipTeamValues"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ownershipTeamValues must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *SloFilterField) UnmarshalJSON(data []byte) (err error) {
+	varSloFilterField := _SloFilterField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloFilterField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloFilterField(varSloFilterField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["constFilter"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloFilterFieldConstFilter = nil
-	}
-
-	// try to unmarshal data into SloFilterFieldLabelName
-	err = json.Unmarshal(data, &dst.SloFilterFieldLabelName)
-	if err == nil {
-		jsonSloFilterFieldLabelName, _ := json.Marshal(dst.SloFilterFieldLabelName)
-		if string(jsonSloFilterFieldLabelName) == "{}" { // empty struct
-			dst.SloFilterFieldLabelName = nil
-		} else {
-			if err = validator.Validate(dst.SloFilterFieldLabelName); err != nil {
-				dst.SloFilterFieldLabelName = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["labelName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloFilterFieldLabelName = nil
-	}
-
-	// try to unmarshal data into SloFilterFieldOwnershipEnvironmentValues
-	err = json.Unmarshal(data, &dst.SloFilterFieldOwnershipEnvironmentValues)
-	if err == nil {
-		jsonSloFilterFieldOwnershipEnvironmentValues, _ := json.Marshal(dst.SloFilterFieldOwnershipEnvironmentValues)
-		if string(jsonSloFilterFieldOwnershipEnvironmentValues) == "{}" { // empty struct
-			dst.SloFilterFieldOwnershipEnvironmentValues = nil
-		} else {
-			if err = validator.Validate(dst.SloFilterFieldOwnershipEnvironmentValues); err != nil {
-				dst.SloFilterFieldOwnershipEnvironmentValues = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["sloType"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloFilterFieldOwnershipEnvironmentValues = nil
-	}
-
-	// try to unmarshal data into SloFilterFieldOwnershipServiceValues
-	err = json.Unmarshal(data, &dst.SloFilterFieldOwnershipServiceValues)
-	if err == nil {
-		jsonSloFilterFieldOwnershipServiceValues, _ := json.Marshal(dst.SloFilterFieldOwnershipServiceValues)
-		if string(jsonSloFilterFieldOwnershipServiceValues) == "{}" { // empty struct
-			dst.SloFilterFieldOwnershipServiceValues = nil
-		} else {
-			if err = validator.Validate(dst.SloFilterFieldOwnershipServiceValues); err != nil {
-				dst.SloFilterFieldOwnershipServiceValues = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["productType"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloFilterFieldOwnershipServiceValues = nil
-	}
-
-	// try to unmarshal data into SloFilterFieldOwnershipTeamValues
-	err = json.Unmarshal(data, &dst.SloFilterFieldOwnershipTeamValues)
-	if err == nil {
-		jsonSloFilterFieldOwnershipTeamValues, _ := json.Marshal(dst.SloFilterFieldOwnershipTeamValues)
-		if string(jsonSloFilterFieldOwnershipTeamValues) == "{}" { // empty struct
-			dst.SloFilterFieldOwnershipTeamValues = nil
-		} else {
-			if err = validator.Validate(dst.SloFilterFieldOwnershipTeamValues); err != nil {
-				dst.SloFilterFieldOwnershipTeamValues = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["serviceName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloFilterFieldOwnershipTeamValues = nil
-	}
-
-	// try to unmarshal data into SloFilterFieldProductType
-	err = json.Unmarshal(data, &dst.SloFilterFieldProductType)
-	if err == nil {
-		jsonSloFilterFieldProductType, _ := json.Marshal(dst.SloFilterFieldProductType)
-		if string(jsonSloFilterFieldProductType) == "{}" { // empty struct
-			dst.SloFilterFieldProductType = nil
-		} else {
-			if err = validator.Validate(dst.SloFilterFieldProductType); err != nil {
-				dst.SloFilterFieldProductType = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["ownershipServiceValues"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloFilterFieldProductType = nil
-	}
-
-	// try to unmarshal data into SloFilterFieldServiceName
-	err = json.Unmarshal(data, &dst.SloFilterFieldServiceName)
-	if err == nil {
-		jsonSloFilterFieldServiceName, _ := json.Marshal(dst.SloFilterFieldServiceName)
-		if string(jsonSloFilterFieldServiceName) == "{}" { // empty struct
-			dst.SloFilterFieldServiceName = nil
-		} else {
-			if err = validator.Validate(dst.SloFilterFieldServiceName); err != nil {
-				dst.SloFilterFieldServiceName = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["ownershipEnvironmentValues"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloFilterFieldServiceName = nil
-	}
-
-	// try to unmarshal data into SloFilterFieldSloType
-	err = json.Unmarshal(data, &dst.SloFilterFieldSloType)
-	if err == nil {
-		jsonSloFilterFieldSloType, _ := json.Marshal(dst.SloFilterFieldSloType)
-		if string(jsonSloFilterFieldSloType) == "{}" { // empty struct
-			dst.SloFilterFieldSloType = nil
-		} else {
-			if err = validator.Validate(dst.SloFilterFieldSloType); err != nil {
-				dst.SloFilterFieldSloType = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["ownershipTeamValues"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SloFilterFieldSloType = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [constFilter, labelName, sloType, productType, serviceName, ownershipServiceValues, ownershipEnvironmentValues, ownershipTeamValues] may be set"}
+		}
+
+		delete(additionalProperties, "constFilter")
+		delete(additionalProperties, "labelName")
+		delete(additionalProperties, "ownershipEnvironmentValues")
+		delete(additionalProperties, "ownershipServiceValues")
+		delete(additionalProperties, "ownershipTeamValues")
+		delete(additionalProperties, "productType")
+		delete(additionalProperties, "serviceName")
+		delete(additionalProperties, "sloType")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.SloFilterFieldConstFilter = nil
-		dst.SloFilterFieldLabelName = nil
-		dst.SloFilterFieldOwnershipEnvironmentValues = nil
-		dst.SloFilterFieldOwnershipServiceValues = nil
-		dst.SloFilterFieldOwnershipTeamValues = nil
-		dst.SloFilterFieldProductType = nil
-		dst.SloFilterFieldServiceName = nil
-		dst.SloFilterFieldSloType = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(SloFilterField)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src SloFilterField) MarshalJSON() ([]byte, error) {
-	if src.SloFilterFieldConstFilter != nil {
-		return json.Marshal(&src.SloFilterFieldConstFilter)
-	}
-
-	if src.SloFilterFieldLabelName != nil {
-		return json.Marshal(&src.SloFilterFieldLabelName)
-	}
-
-	if src.SloFilterFieldOwnershipEnvironmentValues != nil {
-		return json.Marshal(&src.SloFilterFieldOwnershipEnvironmentValues)
-	}
-
-	if src.SloFilterFieldOwnershipServiceValues != nil {
-		return json.Marshal(&src.SloFilterFieldOwnershipServiceValues)
-	}
-
-	if src.SloFilterFieldOwnershipTeamValues != nil {
-		return json.Marshal(&src.SloFilterFieldOwnershipTeamValues)
-	}
-
-	if src.SloFilterFieldProductType != nil {
-		return json.Marshal(&src.SloFilterFieldProductType)
-	}
-
-	if src.SloFilterFieldServiceName != nil {
-		return json.Marshal(&src.SloFilterFieldServiceName)
-	}
-
-	if src.SloFilterFieldSloType != nil {
-		return json.Marshal(&src.SloFilterFieldSloType)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *SloFilterField) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.SloFilterFieldConstFilter != nil {
-		return obj.SloFilterFieldConstFilter
-	}
-
-	if obj.SloFilterFieldLabelName != nil {
-		return obj.SloFilterFieldLabelName
-	}
-
-	if obj.SloFilterFieldOwnershipEnvironmentValues != nil {
-		return obj.SloFilterFieldOwnershipEnvironmentValues
-	}
-
-	if obj.SloFilterFieldOwnershipServiceValues != nil {
-		return obj.SloFilterFieldOwnershipServiceValues
-	}
-
-	if obj.SloFilterFieldOwnershipTeamValues != nil {
-		return obj.SloFilterFieldOwnershipTeamValues
-	}
-
-	if obj.SloFilterFieldProductType != nil {
-		return obj.SloFilterFieldProductType
-	}
-
-	if obj.SloFilterFieldServiceName != nil {
-		return obj.SloFilterFieldServiceName
-	}
-
-	if obj.SloFilterFieldSloType != nil {
-		return obj.SloFilterFieldSloType
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj SloFilterField) GetActualInstanceValue() (interface{}) {
-	if obj.SloFilterFieldConstFilter != nil {
-		return *obj.SloFilterFieldConstFilter
-	}
-
-	if obj.SloFilterFieldLabelName != nil {
-		return *obj.SloFilterFieldLabelName
-	}
-
-	if obj.SloFilterFieldOwnershipEnvironmentValues != nil {
-		return *obj.SloFilterFieldOwnershipEnvironmentValues
-	}
-
-	if obj.SloFilterFieldOwnershipServiceValues != nil {
-		return *obj.SloFilterFieldOwnershipServiceValues
-	}
-
-	if obj.SloFilterFieldOwnershipTeamValues != nil {
-		return *obj.SloFilterFieldOwnershipTeamValues
-	}
-
-	if obj.SloFilterFieldProductType != nil {
-		return *obj.SloFilterFieldProductType
-	}
-
-	if obj.SloFilterFieldServiceName != nil {
-		return *obj.SloFilterFieldServiceName
-	}
-
-	if obj.SloFilterFieldSloType != nil {
-		return *obj.SloFilterFieldSloType
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSloFilterField struct {
@@ -398,4 +502,3 @@ func (v *NullableSloFilterField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

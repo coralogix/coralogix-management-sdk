@@ -23,8 +23,9 @@ var _ MappedNullable = &BulkDeleteAlertDefinitionsRequest{}
 // BulkDeleteAlertDefinitionsRequest A request to delete multiple alert defintions by their IDs
 type BulkDeleteAlertDefinitionsRequest struct {
 	// List of alert definition IDs to delete.
-	Ids []string `json:"ids,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Ids                               []string `json:"ids,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _BulkDeleteAlertDefinitionsRequest BulkDeleteAlertDefinitionsRequest
@@ -79,7 +80,7 @@ func (o *BulkDeleteAlertDefinitionsRequest) SetIds(v []string) {
 }
 
 func (o BulkDeleteAlertDefinitionsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *BulkDeleteAlertDefinitionsRequest) UnmarshalJSON(data []byte) (err erro
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "ids")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableBulkDeleteAlertDefinitionsRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -52,13 +52,19 @@
                 "contextualLabels": {
                   "description": "Filter by contextual labels",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ContextualLabelValues"
+                  }
                 },
-                "createdAtRange": {},
+                "createdAtRange": {
+                  "$ref": "#/components/schemas/v1.TimeRange"
+                },
                 "displayLabels": {
                   "description": "Filter by display labels",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/DisplayLabelValues"
+                  }
                 },
                 "endTime": {
                   "deprecated": true,
@@ -67,7 +73,9 @@
                   "format": "date-time",
                   "minLength": 0
                 },
-                "incidentDurationRange": {},
+                "incidentDurationRange": {
+                  "$ref": "#/components/schemas/v1.TimeRange"
+                },
                 "isMuted": {
                   "description": "Indicates if the incident is muted",
                   "type": "boolean"
@@ -75,13 +83,17 @@
                 "metaLabels": {
                   "description": "Filters all incidents with the given meta labels",
                   "type": "array",
-                  "items": {},
+                  "items": {
+                    "$ref": "#/components/schemas/incidents.v1.MetaLabel"
+                  },
                   "minItems": 0
                 },
                 "metaLabelsOp": {
                   "$ref": "#/components/schemas/v1.FilterOperator"
                 },
-                "searchQuery": {},
+                "searchQuery": {
+                  "$ref": "#/components/schemas/IncidentSearchQuery"
+                },
                 "severity": {
                   "description": "Filter by incident severity",
                   "type": "array",
@@ -135,12 +147,36 @@
               "description": "Group by fields for aggregation",
               "type": "array",
               "items": {
+                "externalDocs": {
+                  "url": ""
+                },
+                "title": "Incident group by",
+                "type": "object",
+                "properties": {
+                  "contextualLabel": {
+                    "description": "The contextual label to group by.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "incidentField": {
+                    "$ref": "#/components/schemas/IncidentFields"
+                  },
+                  "orderByDirection": {
+                    "$ref": "#/components/schemas/v1.OrderByDirection"
+                  }
+                },
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GroupByContextualLabel"
+                    "type": "object",
+                    "required": [
+                      "incidentField"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/GroupByIncidentField"
+                    "type": "object",
+                    "required": [
+                      "contextualLabel"
+                    ]
                   }
                 ]
               },
@@ -255,18 +291,24 @@
                 "contextualLabels": {
                   "description": "The contextual labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ContextualLabelValues"
+                  }
                 },
                 "displayLabels": {
                   "description": "The display labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/DisplayLabelValues"
+                  }
                 },
                 "isMuted": {
                   "description": "Indicates if the incident is muted",
                   "type": "boolean"
                 },
-                "labels": {},
+                "labels": {
+                  "$ref": "#/components/schemas/LabelsFilter"
+                },
                 "name": {
                   "description": "The name of the incident",
                   "type": "string",
@@ -288,7 +330,9 @@
                   },
                   "minItems": 0
                 },
-                "timestamp": {}
+                "timestamp": {
+                  "$ref": "#/components/schemas/v1.TimeRange"
+                }
               }
             },
             "style": "form"
@@ -421,18 +465,24 @@
                 "contextualLabels": {
                   "description": "The contextual labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ContextualLabelValues"
+                  }
                 },
                 "displayLabels": {
                   "description": "The display labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/DisplayLabelValues"
+                  }
                 },
                 "isMuted": {
                   "description": "Indicates if the incident is muted",
                   "type": "boolean"
                 },
-                "labels": {},
+                "labels": {
+                  "$ref": "#/components/schemas/LabelsFilter"
+                },
                 "name": {
                   "description": "The name of the incident",
                   "type": "string",
@@ -454,7 +504,9 @@
                   },
                   "minItems": 0
                 },
-                "timestamp": {}
+                "timestamp": {
+                  "$ref": "#/components/schemas/v1.TimeRange"
+                }
               }
             },
             "style": "form"
@@ -827,18 +879,24 @@
                 "contextualLabels": {
                   "description": "The contextual labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ContextualLabelValues"
+                  }
                 },
                 "displayLabels": {
                   "description": "The display labels of the incident",
                   "type": "object",
-                  "additionalProperties": {}
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/DisplayLabelValues"
+                  }
                 },
                 "isMuted": {
                   "description": "Indicates if the incident is muted",
                   "type": "boolean"
                 },
-                "labels": {},
+                "labels": {
+                  "$ref": "#/components/schemas/LabelsFilter"
+                },
                 "name": {
                   "description": "The name of the incident",
                   "type": "string",
@@ -860,7 +918,9 @@
                   },
                   "minItems": 0
                 },
-                "timestamp": {}
+                "timestamp": {
+                  "$ref": "#/components/schemas/v1.TimeRange"
+                }
               }
             },
             "style": "form"
@@ -2001,16 +2061,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -2021,26 +2071,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -2051,9 +2081,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -2129,76 +2171,48 @@
           "incident"
         ]
       },
-      "GroupByContextualLabel": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident group by",
-        "type": "object",
-        "properties": {
-          "contextualLabel": {
-            "description": "The contextual label to group by.",
-            "type": "string",
-            "minLength": 0
-          },
-          "orderByDirection": {
-            "$ref": "#/components/schemas/v1.OrderByDirection"
-          }
-        },
-        "required": [
-          "field",
-          "contextualLabel"
-        ]
-      },
-      "GroupByIncidentField": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident group by",
-        "type": "object",
-        "properties": {
-          "incidentField": {
-            "$ref": "#/components/schemas/IncidentFields"
-          },
-          "orderByDirection": {
-            "$ref": "#/components/schemas/v1.OrderByDirection"
-          }
-        },
-        "required": [
-          "field",
-          "incidentField"
-        ]
-      },
       "GroupByValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/GroupByValuesContextualLabels"
-          },
-          {
-            "$ref": "#/components/schemas/GroupByValuesIncidentField"
-          }
-        ]
-      },
-      "GroupByValuesContextualLabels": {
         "type": "object",
         "properties": {
           "contextualLabels": {
             "$ref": "#/components/schemas/ContextualLabels"
-          }
-        },
-        "required": [
-          "contextualLabels"
-        ]
-      },
-      "GroupByValuesIncidentField": {
-        "type": "object",
-        "properties": {
+          },
           "incidentField": {
             "$ref": "#/components/schemas/IncidentFieldOneOf"
           }
         },
-        "required": [
-          "incidentField"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "incidentField"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "contextualLabels"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "incidentField"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "contextualLabels"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "Incident": {
@@ -2457,58 +2471,6 @@
         ]
       },
       "IncidentEvent": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventCloseOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
-          }
-        ]
-      },
-      "IncidentEventAcknowledge": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident event acknowledge.",
-        "type": "object",
-        "properties": {
-          "acknowledgedBy": {
-            "$ref": "#/components/schemas/incidents.v1.UserDetails"
-          }
-        }
-      },
-      "IncidentEventAcknowledgeAdministrativeEvent": {
         "externalDocs": {
           "url": ""
         },
@@ -2522,39 +2484,11 @@
           "administrativeEvent": {
             "$ref": "#/components/schemas/IncidentEventOriginatorAdministrative"
           },
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
+          "assignment": {
+            "$ref": "#/components/schemas/IncidentEventAssign"
           },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "acknowledge",
-          "administrativeEvent"
-        ]
-      },
-      "IncidentEventAcknowledgeOperationalEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "acknowledge": {
-            "$ref": "#/components/schemas/IncidentEventAcknowledge"
+          "close": {
+            "$ref": "#/components/schemas/IncidentEventClose"
           },
           "id": {
             "example": "incident_event_id",
@@ -2570,17 +2504,92 @@
           },
           "originatorType": {
             "$ref": "#/components/schemas/OriginatorType"
+          },
+          "snoozeIndicator": {
+            "$ref": "#/components/schemas/IncidentEventSnoozeIndicator"
+          },
+          "unassign": {
+            "$ref": "#/components/schemas/IncidentEventUnassign"
+          },
+          "upsertState": {
+            "$ref": "#/components/schemas/IncidentEventUpsertState"
           }
         },
         "required": [
           "id",
           "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "acknowledge",
-          "operationalEvent"
+          "originatorType"
+        ],
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "snoozeIndicator"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "assignment"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "unassign"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "upsertState"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "acknowledge"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "close"
+                ]
+              }
+            ]
+          },
+          {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "administrativeEvent"
+                ]
+              },
+              {
+                "type": "object",
+                "required": [
+                  "operationalEvent"
+                ]
+              }
+            ]
+          }
         ]
+      },
+      "IncidentEventAcknowledge": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Incident event acknowledge.",
+        "type": "object",
+        "properties": {
+          "acknowledgedBy": {
+            "$ref": "#/components/schemas/incidents.v1.UserDetails"
+          }
+        }
       },
       "IncidentEventAlertType": {
         "description": "Incident event alert type.",
@@ -2610,80 +2619,6 @@
           }
         }
       },
-      "IncidentEventAssignmentAdministrativeEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "administrativeEvent": {
-            "$ref": "#/components/schemas/IncidentEventOriginatorAdministrative"
-          },
-          "assignment": {
-            "$ref": "#/components/schemas/IncidentEventAssign"
-          },
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
-          },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "administrativeEvent",
-          "assignment"
-        ]
-      },
-      "IncidentEventAssignmentOperationalEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "assignment": {
-            "$ref": "#/components/schemas/IncidentEventAssign"
-          },
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
-          },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "operationalEvent": {
-            "$ref": "#/components/schemas/IncidentEventOriginatorOperational"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "assignment",
-          "operationalEvent"
-        ]
-      },
       "IncidentEventClose": {
         "externalDocs": {
           "url": ""
@@ -2695,80 +2630,6 @@
             "$ref": "#/components/schemas/incidents.v1.UserDetails"
           }
         }
-      },
-      "IncidentEventCloseAdministrativeEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "administrativeEvent": {
-            "$ref": "#/components/schemas/IncidentEventOriginatorAdministrative"
-          },
-          "close": {
-            "$ref": "#/components/schemas/IncidentEventClose"
-          },
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
-          },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "administrativeEvent",
-          "close"
-        ]
-      },
-      "IncidentEventCloseOperationalEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "close": {
-            "$ref": "#/components/schemas/IncidentEventClose"
-          },
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
-          },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "operationalEvent": {
-            "$ref": "#/components/schemas/IncidentEventOriginatorOperational"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "close",
-          "operationalEvent"
-        ]
       },
       "IncidentEventExtended": {
         "externalDocs": {
@@ -2923,80 +2784,6 @@
           }
         }
       },
-      "IncidentEventSnoozeIndicatorAdministrativeEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "administrativeEvent": {
-            "$ref": "#/components/schemas/IncidentEventOriginatorAdministrative"
-          },
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
-          },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          },
-          "snoozeIndicator": {
-            "$ref": "#/components/schemas/IncidentEventSnoozeIndicator"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "administrativeEvent",
-          "snoozeIndicator"
-        ]
-      },
-      "IncidentEventSnoozeIndicatorOperationalEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
-          },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "operationalEvent": {
-            "$ref": "#/components/schemas/IncidentEventOriginatorOperational"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          },
-          "snoozeIndicator": {
-            "$ref": "#/components/schemas/IncidentEventSnoozeIndicator"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "operationalEvent",
-          "snoozeIndicator"
-        ]
-      },
       "IncidentEventType": {
         "description": "Incident event type.",
         "type": "string",
@@ -3018,80 +2805,6 @@
         "description": "Incident event unassign.",
         "type": "object",
         "additionalProperties": false
-      },
-      "IncidentEventUnassignAdministrativeEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "administrativeEvent": {
-            "$ref": "#/components/schemas/IncidentEventOriginatorAdministrative"
-          },
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
-          },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          },
-          "unassign": {
-            "$ref": "#/components/schemas/IncidentEventUnassign"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "administrativeEvent",
-          "unassign"
-        ]
-      },
-      "IncidentEventUnassignOperationalEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
-          },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "operationalEvent": {
-            "$ref": "#/components/schemas/IncidentEventOriginatorOperational"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          },
-          "unassign": {
-            "$ref": "#/components/schemas/IncidentEventUnassign"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "operationalEvent",
-          "unassign"
-        ]
       },
       "IncidentEventUpsertState": {
         "externalDocs": {
@@ -3117,118 +2830,7 @@
           "payload"
         ]
       },
-      "IncidentEventUpsertStateAdministrativeEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "administrativeEvent": {
-            "$ref": "#/components/schemas/IncidentEventOriginatorAdministrative"
-          },
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
-          },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          },
-          "upsertState": {
-            "$ref": "#/components/schemas/IncidentEventUpsertState"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "administrativeEvent",
-          "upsertState"
-        ]
-      },
-      "IncidentEventUpsertStateOperationalEvent": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident event",
-        "description": "Incident event.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "example": "incident_event_id",
-            "description": "The ID of the incident event",
-            "type": "string",
-            "minLength": 0
-          },
-          "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
-          },
-          "operationalEvent": {
-            "$ref": "#/components/schemas/IncidentEventOriginatorOperational"
-          },
-          "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
-          },
-          "upsertState": {
-            "$ref": "#/components/schemas/IncidentEventUpsertState"
-          }
-        },
-        "required": [
-          "id",
-          "incidentEventType",
-          "originatorType",
-          "originator",
-          "incidentEventPayload",
-          "operationalEvent",
-          "upsertState"
-        ]
-      },
       "IncidentFieldOneOf": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfClosedAt"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfCreatedAt"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfId"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfState"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
-          }
-        ]
-      },
-      "IncidentFieldOneOfApplicationName": {
         "externalDocs": {
           "url": ""
         },
@@ -3239,177 +2841,195 @@
             "description": "Application associated with the incident.",
             "type": "string",
             "minLength": 0
-          }
-        },
-        "required": [
-          "applicationName"
-        ]
-      },
-      "IncidentFieldOneOfClosedAt": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident field one of.",
-        "type": "object",
-        "properties": {
+          },
           "closedAt": {
             "description": "Timestamp when the incident was closed.",
             "type": "string",
             "format": "date-time",
             "minLength": 0
-          }
-        },
-        "required": [
-          "closedAt"
-        ]
-      },
-      "IncidentFieldOneOfCreatedAt": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident field one of.",
-        "type": "object",
-        "properties": {
+          },
           "createdAt": {
             "description": "Timestamp when the incident was created.",
             "type": "string",
             "format": "date-time",
             "minLength": 0
-          }
-        },
-        "required": [
-          "createdAt"
-        ]
-      },
-      "IncidentFieldOneOfDuration": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident field one of.",
-        "type": "object",
-        "properties": {
+          },
           "duration": {
             "description": "Duration.",
             "type": "string",
             "minLength": 0
-          }
-        },
-        "required": [
-          "duration"
-        ]
-      },
-      "IncidentFieldOneOfId": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident field one of.",
-        "type": "object",
-        "properties": {
+          },
           "id": {
             "description": "Unique identifier of the incident.",
             "type": "string",
             "minLength": 0
-          }
-        },
-        "required": [
-          "id"
-        ]
-      },
-      "IncidentFieldOneOfLastStateUpdateTime": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident field one of.",
-        "type": "object",
-        "properties": {
+          },
           "lastStateUpdateTime": {
             "description": "Timestamp of the most recent state change.",
             "type": "string",
             "format": "date-time",
             "minLength": 0
-          }
-        },
-        "required": [
-          "lastStateUpdateTime"
-        ]
-      },
-      "IncidentFieldOneOfName": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident field one of.",
-        "type": "object",
-        "properties": {
+          },
           "name": {
             "description": "Display name of the incident.",
             "type": "string",
             "minLength": 0
-          }
-        },
-        "required": [
-          "name"
-        ]
-      },
-      "IncidentFieldOneOfSeverity": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident field one of.",
-        "type": "object",
-        "properties": {
+          },
           "severity": {
             "$ref": "#/components/schemas/IncidentSeverity"
-          }
-        },
-        "required": [
-          "severity"
-        ]
-      },
-      "IncidentFieldOneOfState": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident field one of.",
-        "type": "object",
-        "properties": {
+          },
           "state": {
             "$ref": "#/components/schemas/IncidentState"
-          }
-        },
-        "required": [
-          "state"
-        ]
-      },
-      "IncidentFieldOneOfStatus": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident field one of.",
-        "type": "object",
-        "properties": {
+          },
           "status": {
             "$ref": "#/components/schemas/IncidentStatus"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "IncidentFieldOneOfSubsystemName": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Incident field one of.",
-        "type": "object",
-        "properties": {
+          },
           "subsystemName": {
             "description": "Subsystem associated with the incident.",
             "type": "string",
             "minLength": 0
           }
         },
-        "required": [
-          "subsystemName"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "severity"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "name"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "createdAt"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "closedAt"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "state"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "status"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "lastStateUpdateTime"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "applicationName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "subsystemName"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "duration"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "severity"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "createdAt"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "closedAt"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "state"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "lastStateUpdateTime"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "applicationName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "subsystemName"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "duration"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "IncidentFields": {
@@ -3669,16 +3289,6 @@
         ]
       },
       "IncidentSearchQuery": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/IncidentSearchQueryContextualLabel"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentSearchQueryIncidentField"
-          }
-        ]
-      },
-      "IncidentSearchQueryContextualLabel": {
         "externalDocs": {
           "url": ""
         },
@@ -3691,27 +3301,6 @@
             "type": "string",
             "minLength": 0
           },
-          "query": {
-            "example": "error",
-            "description": "The search query",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "query",
-          "field",
-          "contextualLabel"
-        ]
-      },
-      "IncidentSearchQueryIncidentField": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident search query",
-        "description": "Incident search query.",
-        "type": "object",
-        "properties": {
           "incidentField": {
             "$ref": "#/components/schemas/IncidentFields"
           },
@@ -3723,9 +3312,21 @@
           }
         },
         "required": [
-          "query",
-          "field",
-          "incidentField"
+          "query"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "incidentField"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "contextualLabel"
+            ]
+          }
         ]
       },
       "IncidentSeverity": {
@@ -3892,6 +3493,30 @@
         "required": [
           "status",
           "count"
+        ]
+      },
+      "LabelsFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Label filter configuration",
+        "description": "Filter configuration for incident events based on meta labels and their combination operator.",
+        "type": "object",
+        "properties": {
+          "metaLabels": {
+            "description": "The meta labels of the incident",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/incidents.v1.MetaLabel"
+            },
+            "minItems": 0
+          },
+          "operator": {
+            "$ref": "#/components/schemas/v1.FilterOperator"
+          }
+        },
+        "required": [
+          "metaLabels"
         ]
       },
       "ListIncidentAggregationsResponse": {
@@ -4110,48 +3735,6 @@
           "UPSERT_INCIDENT_STATE_TYPE_RESOLVED"
         ]
       },
-      "V1OrderByContextualLabel": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident order by",
-        "type": "object",
-        "properties": {
-          "contextualLabel": {
-            "description": "A contextual label key to order by.",
-            "type": "string",
-            "minLength": 0
-          },
-          "direction": {
-            "$ref": "#/components/schemas/v1.OrderByDirection"
-          }
-        },
-        "required": [
-          "field",
-          "direction",
-          "contextualLabel"
-        ]
-      },
-      "V1OrderByIncidentField": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Incident order by",
-        "type": "object",
-        "properties": {
-          "direction": {
-            "$ref": "#/components/schemas/v1.OrderByDirection"
-          },
-          "incidentField": {
-            "$ref": "#/components/schemas/IncidentFields"
-          }
-        },
-        "required": [
-          "field",
-          "direction",
-          "incidentField"
-        ]
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -4277,12 +3860,39 @@
         ]
       },
       "v1.OrderBy": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Incident order by",
+        "type": "object",
+        "properties": {
+          "contextualLabel": {
+            "description": "A contextual label key to order by.",
+            "type": "string",
+            "minLength": 0
+          },
+          "direction": {
+            "$ref": "#/components/schemas/v1.OrderByDirection"
+          },
+          "incidentField": {
+            "$ref": "#/components/schemas/IncidentFields"
+          }
+        },
+        "required": [
+          "direction"
+        ],
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V1OrderByContextualLabel"
+            "type": "object",
+            "required": [
+              "incidentField"
+            ]
           },
           {
-            "$ref": "#/components/schemas/V1OrderByIncidentField"
+            "type": "object",
+            "required": [
+              "contextualLabel"
+            ]
           }
         ]
       },

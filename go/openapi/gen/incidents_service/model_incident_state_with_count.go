@@ -24,9 +24,10 @@ var _ MappedNullable = &IncidentStateWithCount{}
 // IncidentStateWithCount struct for IncidentStateWithCount
 type IncidentStateWithCount struct {
 	// Number of items.
-	Count int32 `json:"count"`
-	State IncidentState `json:"state"`
-	AdditionalProperties map[string]interface{}
+	Count                             int32         `json:"count"`
+	State                             IncidentState `json:"state"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentStateWithCount IncidentStateWithCount
@@ -99,7 +100,7 @@ func (o *IncidentStateWithCount) SetState(v IncidentState) {
 }
 
 func (o IncidentStateWithCount) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -132,10 +133,10 @@ func (o *IncidentStateWithCount) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -158,6 +159,7 @@ func (o *IncidentStateWithCount) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "count")
 		delete(additionalProperties, "state")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -198,4 +200,3 @@ func (v *NullableIncidentStateWithCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

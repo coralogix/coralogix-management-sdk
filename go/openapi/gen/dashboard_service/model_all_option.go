@@ -25,8 +25,9 @@ type AllOption struct {
 	// The include all.
 	IncludeAll *bool `json:"includeAll,omitempty"`
 	// The label.
-	Label *string `json:"label,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Label                             *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AllOption AllOption
@@ -113,7 +114,7 @@ func (o *AllOption) SetLabel(v string) {
 }
 
 func (o AllOption) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *AllOption) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "includeAll")
 		delete(additionalProperties, "label")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableAllOption) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

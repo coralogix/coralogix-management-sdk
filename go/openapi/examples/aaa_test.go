@@ -47,9 +47,7 @@ func TestApiKeys(t *testing.T) {
 	createReq := apikeys.CreateApiKeyRequest{
 		Name: &name,
 		Owner: &apikeys.Owner{
-			OwnerTeamId: &apikeys.OwnerTeamId{
-				TeamId: teamID,
-			},
+			TeamId: &teamID,
 		},
 		KeyPermissions: &apikeys.CreateApiKeyRequestKeyPermissions{
 			Presets:     []string{"APM"},
@@ -74,9 +72,13 @@ func TestApiKeys(t *testing.T) {
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
-	updated, httpResp, err := client.ApiKeysServiceGetApiKey(context.Background(), *created.KeyId).Execute()
-	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, newName, *updated.KeyInfo.Name)
+	require.Eventually(t, func() bool {
+		updated, httpResp, err := client.ApiKeysServiceGetApiKey(context.Background(), *created.KeyId).Execute()
+		if cxsdk.NewAPIError(httpResp, err) != nil || updated.KeyInfo == nil || updated.KeyInfo.Name == nil {
+			return false
+		}
+		return *updated.KeyInfo.Name == newName
+	}, time.Minute, 2*time.Second)
 
 	_, httpResp, err = client.ApiKeysServiceDeleteApiKey(context.Background(), *created.KeyId).Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
@@ -224,16 +226,14 @@ func TestCustomRoles(t *testing.T) {
 	require.NoError(t, err)
 
 	createReq := customroles.RoleManagementServiceCreateRoleRequest{
-		CreateRoleRequestParentRoleName: &customroles.CreateRoleRequestParentRoleName{
-			Name:           customroles.PtrString("custom-role-sample"),
-			Description:    customroles.PtrString("This is a sample custom role"),
-			ParentRoleName: "Standard User",
-			Permissions: []string{
-				"team-actions:UpdateConfig",
-				"TEAM-CUSTOM-API-KEYS:READCONFIG",
-			},
-			TeamId: &teamID,
+		Name:           customroles.PtrString("custom-role-sample"),
+		Description:    customroles.PtrString("This is a sample custom role"),
+		ParentRoleName: customroles.PtrString("Standard User"),
+		Permissions: []string{
+			"team-actions:UpdateConfig",
+			"TEAM-CUSTOM-API-KEYS:READCONFIG",
 		},
+		TeamId: &teamID,
 	}
 
 	created, httpResp, err := client.

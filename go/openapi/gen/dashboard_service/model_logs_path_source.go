@@ -24,8 +24,9 @@ var _ MappedNullable = &LogsPathSource{}
 type LogsPathSource struct {
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	// The value.
-	Value *string `json:"value,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Value                             *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogsPathSource LogsPathSource
@@ -112,7 +113,7 @@ func (o *LogsPathSource) SetValue(v string) {
 }
 
 func (o LogsPathSource) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *LogsPathSource) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "observationField")
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableLogsPathSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

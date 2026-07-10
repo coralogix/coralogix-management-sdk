@@ -22,8 +22,9 @@ var _ MappedNullable = &ListIncidentEventsFilterValuesResponse{}
 
 // ListIncidentEventsFilterValuesResponse A response containing available filter values for incident events
 type ListIncidentEventsFilterValuesResponse struct {
-	FiltersValues *IncidentQueryFiltersValues `json:"filtersValues,omitempty"`
-	AdditionalProperties map[string]interface{}
+	FiltersValues                     *IncidentQueryFiltersValues `json:"filtersValues,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListIncidentEventsFilterValuesResponse ListIncidentEventsFilterValuesResponse
@@ -78,7 +79,7 @@ func (o *ListIncidentEventsFilterValuesResponse) SetFiltersValues(v IncidentQuer
 }
 
 func (o ListIncidentEventsFilterValuesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *ListIncidentEventsFilterValuesResponse) UnmarshalJSON(data []byte) (err
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "filtersValues")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableListIncidentEventsFilterValuesResponse) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

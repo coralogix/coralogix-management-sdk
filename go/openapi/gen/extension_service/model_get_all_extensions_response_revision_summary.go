@@ -23,9 +23,10 @@ var _ MappedNullable = &GetAllExtensionsResponseRevisionSummary{}
 // GetAllExtensionsResponseRevisionSummary Revision summary.
 type GetAllExtensionsResponseRevisionSummary struct {
 	// The is new.
-	IsNew *bool `json:"isNew,omitempty"`
-	ItemCounts *ItemCounts `json:"itemCounts,omitempty"`
-	AdditionalProperties map[string]interface{}
+	IsNew                             *bool       `json:"isNew,omitempty"`
+	ItemCounts                        *ItemCounts `json:"itemCounts,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetAllExtensionsResponseRevisionSummary GetAllExtensionsResponseRevisionSummary
@@ -112,7 +113,7 @@ func (o *GetAllExtensionsResponseRevisionSummary) SetItemCounts(v ItemCounts) {
 }
 
 func (o GetAllExtensionsResponseRevisionSummary) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,6 +154,7 @@ func (o *GetAllExtensionsResponseRevisionSummary) UnmarshalJSON(data []byte) (er
 		delete(additionalProperties, "isNew")
 		delete(additionalProperties, "itemCounts")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -193,4 +195,3 @@ func (v *NullableGetAllExtensionsResponseRevisionSummary) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

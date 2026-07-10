@@ -27,8 +27,9 @@ type RoutingLabels struct {
 	// Service name.
 	Service *string `json:"service,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Team.
-	Team *string `json:"team,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Team                              *string `json:"team,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _RoutingLabels RoutingLabels
@@ -147,7 +148,7 @@ func (o *RoutingLabels) SetTeam(v string) {
 }
 
 func (o RoutingLabels) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *RoutingLabels) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "service")
 		delete(additionalProperties, "team")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableRoutingLabels) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

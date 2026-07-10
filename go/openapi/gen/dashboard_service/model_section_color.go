@@ -22,8 +22,9 @@ var _ MappedNullable = &SectionColor{}
 
 // SectionColor Section color.
 type SectionColor struct {
-	Predefined *SectionPredefinedColor `json:"predefined,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Predefined                        *SectionPredefinedColor `json:"predefined,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SectionColor SectionColor
@@ -78,7 +79,7 @@ func (o *SectionColor) SetPredefined(v SectionPredefinedColor) {
 }
 
 func (o SectionColor) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *SectionColor) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "predefined")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableSectionColor) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

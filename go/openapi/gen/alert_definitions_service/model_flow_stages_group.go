@@ -23,10 +23,11 @@ var _ MappedNullable = &FlowStagesGroup{}
 // FlowStagesGroup Defines a group of stages in a flow alert
 type FlowStagesGroup struct {
 	// The alert definitions for the flow stage group.
-	AlertDefs []FlowStagesGroupsAlertDefs `json:"alertDefs,omitempty"`
-	AlertsOp *AlertsOp `json:"alertsOp,omitempty"`
-	NextOp *NextOp `json:"nextOp,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AlertDefs                         []FlowStagesGroupsAlertDefs `json:"alertDefs,omitempty"`
+	AlertsOp                          *AlertsOp                   `json:"alertsOp,omitempty"`
+	NextOp                            *NextOp                     `json:"nextOp,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _FlowStagesGroup FlowStagesGroup
@@ -145,7 +146,7 @@ func (o *FlowStagesGroup) SetNextOp(v NextOp) {
 }
 
 func (o FlowStagesGroup) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -190,6 +191,7 @@ func (o *FlowStagesGroup) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "alertsOp")
 		delete(additionalProperties, "nextOp")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -230,4 +232,3 @@ func (v *NullableFlowStagesGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -25,8 +25,9 @@ type AssigneeCount struct {
 	// Identifier of the assignee
 	Assignee *string `json:"assignee,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number of cases assigned to this assignee
-	Count *int64 `json:"count,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Count                             *int64 `json:"count,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AssigneeCount AssigneeCount
@@ -113,7 +114,7 @@ func (o *AssigneeCount) SetCount(v int64) {
 }
 
 func (o AssigneeCount) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *AssigneeCount) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "assignee")
 		delete(additionalProperties, "count")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableAssigneeCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

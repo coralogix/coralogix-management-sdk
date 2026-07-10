@@ -23,10 +23,11 @@ var _ MappedNullable = &EventRecurrenceSourceStrategyDuration{}
 // EventRecurrenceSourceStrategyDuration Renders the recurrence event as a sliding window starting at the configured hour and spanning the given duration.
 type EventRecurrenceSourceStrategyDuration struct {
 	// Duration.
-	Duration *string `json:"duration,omitempty"`
+	Duration *string `json:"duration,omitempty" validate:"regexp=^\\\\d+(\\\\.\\\\d+)?s$"`
 	// The start time hour.
-	StartTimeHour *int32 `json:"startTimeHour,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StartTimeHour                     *int32 `json:"startTimeHour,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _EventRecurrenceSourceStrategyDuration EventRecurrenceSourceStrategyDuration
@@ -113,7 +114,7 @@ func (o *EventRecurrenceSourceStrategyDuration) SetStartTimeHour(v int32) {
 }
 
 func (o EventRecurrenceSourceStrategyDuration) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *EventRecurrenceSourceStrategyDuration) UnmarshalJSON(data []byte) (err 
 		delete(additionalProperties, "duration")
 		delete(additionalProperties, "startTimeHour")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableEventRecurrenceSourceStrategyDuration) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -25,8 +25,9 @@ type BulkDeleteAlertDefsResponse struct {
 	// IDs of alert definitions that were successfully deleted
 	DeletedIds []string `json:"deletedIds,omitempty"`
 	// IDs of alert definitions that were not found
-	NotFoundIds []string `json:"notFoundIds,omitempty"`
-	AdditionalProperties map[string]interface{}
+	NotFoundIds                       []string `json:"notFoundIds,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _BulkDeleteAlertDefsResponse BulkDeleteAlertDefsResponse
@@ -113,7 +114,7 @@ func (o *BulkDeleteAlertDefsResponse) SetNotFoundIds(v []string) {
 }
 
 func (o BulkDeleteAlertDefsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *BulkDeleteAlertDefsResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "deletedIds")
 		delete(additionalProperties, "notFoundIds")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableBulkDeleteAlertDefsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

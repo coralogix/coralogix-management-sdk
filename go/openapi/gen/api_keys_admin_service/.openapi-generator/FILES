@@ -19,15 +19,10 @@ model_delete_api_keys_request.go
 model_error.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go
-model_filter_path_and_values_filters.go
-model_filter_path_and_values_multiple_values.go
 model_filters.go
 model_get_team_members_api_keys_response.go
 model_multiple_values.go
 model_owner.go
-model_owner_organisation_id.go
-model_owner_team_id.go
-model_owner_user_id.go
 model_permissions_preset.go
 model_update_api_keys_status_request.go
 model_v3_api_key.go

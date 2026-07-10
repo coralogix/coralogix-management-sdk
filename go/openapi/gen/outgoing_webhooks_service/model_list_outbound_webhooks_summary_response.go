@@ -23,8 +23,9 @@ var _ MappedNullable = &ListOutboundWebhooksSummaryResponse{}
 // ListOutboundWebhooksSummaryResponse Response containing summary information for outgoing webhooks.
 type ListOutboundWebhooksSummaryResponse struct {
 	// The outbound webhook summaries.
-	OutboundWebhookSummaries []OutboundWebhookSummary `json:"outboundWebhookSummaries,omitempty"`
-	AdditionalProperties map[string]interface{}
+	OutboundWebhookSummaries          []OutboundWebhookSummary `json:"outboundWebhookSummaries,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListOutboundWebhooksSummaryResponse ListOutboundWebhooksSummaryResponse
@@ -79,7 +80,7 @@ func (o *ListOutboundWebhooksSummaryResponse) SetOutboundWebhookSummaries(v []Ou
 }
 
 func (o ListOutboundWebhooksSummaryResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *ListOutboundWebhooksSummaryResponse) UnmarshalJSON(data []byte) (err er
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "outboundWebhookSummaries")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableListOutboundWebhooksSummaryResponse) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

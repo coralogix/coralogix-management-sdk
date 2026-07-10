@@ -39,8 +39,9 @@ type AiEvaluationsServiceUpdateCustomEvaluationRequest struct {
 	// Comma-separated list of field paths to update. When provided, only the listed fields are touched; a listed field that is absent from the request body is cleared. When omitted, only fields present in the body are updated.
 	UpdateMask *string `json:"updateMask,omitempty" validate:"regexp=^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$"`
 	// Description of what counts as violating the policy.
-	Violates *string `json:"violates,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Violates                          *string `json:"violates,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AiEvaluationsServiceUpdateCustomEvaluationRequest AiEvaluationsServiceUpdateCustomEvaluationRequest
@@ -351,7 +352,7 @@ func (o *AiEvaluationsServiceUpdateCustomEvaluationRequest) SetViolates(v string
 }
 
 func (o AiEvaluationsServiceUpdateCustomEvaluationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -420,6 +421,7 @@ func (o *AiEvaluationsServiceUpdateCustomEvaluationRequest) UnmarshalJSON(data [
 		delete(additionalProperties, "updateMask")
 		delete(additionalProperties, "violates")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -460,4 +462,3 @@ func (v *NullableAiEvaluationsServiceUpdateCustomEvaluationRequest) UnmarshalJSO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

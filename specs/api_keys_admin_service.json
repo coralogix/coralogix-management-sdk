@@ -492,16 +492,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -512,26 +502,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -542,9 +512,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -606,19 +588,6 @@
         }
       },
       "Owner": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/OwnerOrganisationId"
-          },
-          {
-            "$ref": "#/components/schemas/OwnerTeamId"
-          },
-          {
-            "$ref": "#/components/schemas/OwnerUserId"
-          }
-        ]
-      },
-      "OwnerOrganisationId": {
         "externalDocs": {
           "url": ""
         },
@@ -629,45 +598,63 @@
             "description": "Organisation identifier of the API key owner.",
             "type": "string",
             "minLength": 0
-          }
-        },
-        "required": [
-          "organisationId"
-        ]
-      },
-      "OwnerTeamId": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Owner.",
-        "type": "object",
-        "properties": {
+          },
           "teamId": {
             "description": "The team id.",
             "type": "integer",
             "format": "int64",
             "minimum": 0
-          }
-        },
-        "required": [
-          "teamId"
-        ]
-      },
-      "OwnerUserId": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Owner.",
-        "type": "object",
-        "properties": {
+          },
           "userId": {
             "description": "User identifier of the API key owner.",
             "type": "string",
             "minLength": 0
           }
         },
-        "required": [
-          "userId"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "userId"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "teamId"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "organisationId"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "userId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "teamId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "organisationId"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "PermissionsPreset": {

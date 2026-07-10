@@ -13,202 +13,270 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// QuerySourceMetricsQueryType - struct for QuerySourceMetricsQueryType
+// checks if the QuerySourceMetricsQueryType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &QuerySourceMetricsQueryType{}
+
+// QuerySourceMetricsQueryType Discriminated union specifying what kind of metric data to fetch: metric names, label names, or label values.
 type QuerySourceMetricsQueryType struct {
-	QuerySourceMetricsQueryTypeLabelNameVariant *QuerySourceMetricsQueryTypeLabelNameVariant
-	QuerySourceMetricsQueryTypeLabelValueVariant *QuerySourceMetricsQueryTypeLabelValueVariant
-	QuerySourceMetricsQueryTypeMetricNameVariant *QuerySourceMetricsQueryTypeMetricNameVariant
-	QuerySourceMetricsQueryTypePromqlQuery *QuerySourceMetricsQueryTypePromqlQuery
+	LabelName                         *QuerySourceMetricsQueryTypeLabelName  `json:"labelName,omitempty"`
+	LabelValue                        *QuerySourceMetricsQueryTypeLabelValue `json:"labelValue,omitempty"`
+	MetricName                        *QuerySourceMetricsQueryTypeMetricName `json:"metricName,omitempty"`
+	PromqlQuery                       *PromqlQuery                           `json:"promqlQuery,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// QuerySourceMetricsQueryTypeLabelNameVariantAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypeLabelNameVariant wrapped in QuerySourceMetricsQueryType
-func QuerySourceMetricsQueryTypeLabelNameVariantAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypeLabelNameVariant) QuerySourceMetricsQueryType {
-	return QuerySourceMetricsQueryType{
-		QuerySourceMetricsQueryTypeLabelNameVariant: v,
+type _QuerySourceMetricsQueryType QuerySourceMetricsQueryType
+
+// NewQuerySourceMetricsQueryType instantiates a new QuerySourceMetricsQueryType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewQuerySourceMetricsQueryType() *QuerySourceMetricsQueryType {
+	this := QuerySourceMetricsQueryType{}
+	return &this
+}
+
+// NewQuerySourceMetricsQueryTypeWithDefaults instantiates a new QuerySourceMetricsQueryType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewQuerySourceMetricsQueryTypeWithDefaults() *QuerySourceMetricsQueryType {
+	this := QuerySourceMetricsQueryType{}
+	return &this
+}
+
+// GetLabelName returns the LabelName field value if set, zero value otherwise.
+func (o *QuerySourceMetricsQueryType) GetLabelName() QuerySourceMetricsQueryTypeLabelName {
+	if o == nil || IsNil(o.LabelName) {
+		var ret QuerySourceMetricsQueryTypeLabelName
+		return ret
 	}
+	return *o.LabelName
 }
 
-// QuerySourceMetricsQueryTypeLabelValueVariantAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypeLabelValueVariant wrapped in QuerySourceMetricsQueryType
-func QuerySourceMetricsQueryTypeLabelValueVariantAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypeLabelValueVariant) QuerySourceMetricsQueryType {
-	return QuerySourceMetricsQueryType{
-		QuerySourceMetricsQueryTypeLabelValueVariant: v,
+// GetLabelNameOk returns a tuple with the LabelName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceMetricsQueryType) GetLabelNameOk() (*QuerySourceMetricsQueryTypeLabelName, bool) {
+	if o == nil || IsNil(o.LabelName) {
+		return nil, false
 	}
+	return o.LabelName, true
 }
 
-// QuerySourceMetricsQueryTypeMetricNameVariantAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypeMetricNameVariant wrapped in QuerySourceMetricsQueryType
-func QuerySourceMetricsQueryTypeMetricNameVariantAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypeMetricNameVariant) QuerySourceMetricsQueryType {
-	return QuerySourceMetricsQueryType{
-		QuerySourceMetricsQueryTypeMetricNameVariant: v,
+// HasLabelName returns a boolean if a field has been set.
+func (o *QuerySourceMetricsQueryType) HasLabelName() bool {
+	if o != nil && !IsNil(o.LabelName) {
+		return true
 	}
+
+	return false
 }
 
-// QuerySourceMetricsQueryTypePromqlQueryAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypePromqlQuery wrapped in QuerySourceMetricsQueryType
-func QuerySourceMetricsQueryTypePromqlQueryAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypePromqlQuery) QuerySourceMetricsQueryType {
-	return QuerySourceMetricsQueryType{
-		QuerySourceMetricsQueryTypePromqlQuery: v,
+// SetLabelName gets a reference to the given QuerySourceMetricsQueryTypeLabelName and assigns it to the LabelName field.
+func (o *QuerySourceMetricsQueryType) SetLabelName(v QuerySourceMetricsQueryTypeLabelName) {
+	o.LabelName = &v
+}
+
+// GetLabelValue returns the LabelValue field value if set, zero value otherwise.
+func (o *QuerySourceMetricsQueryType) GetLabelValue() QuerySourceMetricsQueryTypeLabelValue {
+	if o == nil || IsNil(o.LabelValue) {
+		var ret QuerySourceMetricsQueryTypeLabelValue
+		return ret
 	}
+	return *o.LabelValue
 }
 
+// GetLabelValueOk returns a tuple with the LabelValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceMetricsQueryType) GetLabelValueOk() (*QuerySourceMetricsQueryTypeLabelValue, bool) {
+	if o == nil || IsNil(o.LabelValue) {
+		return nil, false
+	}
+	return o.LabelValue, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *QuerySourceMetricsQueryType) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into QuerySourceMetricsQueryTypeLabelNameVariant
-	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypeLabelNameVariant)
-	if err == nil {
-		jsonQuerySourceMetricsQueryTypeLabelNameVariant, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeLabelNameVariant)
-		if string(jsonQuerySourceMetricsQueryTypeLabelNameVariant) == "{}" { // empty struct
-			dst.QuerySourceMetricsQueryTypeLabelNameVariant = nil
-		} else {
-			if err = validator.Validate(dst.QuerySourceMetricsQueryTypeLabelNameVariant); err != nil {
-				dst.QuerySourceMetricsQueryTypeLabelNameVariant = nil
-			} else {
-				match++
-			}
+// HasLabelValue returns a boolean if a field has been set.
+func (o *QuerySourceMetricsQueryType) HasLabelValue() bool {
+	if o != nil && !IsNil(o.LabelValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabelValue gets a reference to the given QuerySourceMetricsQueryTypeLabelValue and assigns it to the LabelValue field.
+func (o *QuerySourceMetricsQueryType) SetLabelValue(v QuerySourceMetricsQueryTypeLabelValue) {
+	o.LabelValue = &v
+}
+
+// GetMetricName returns the MetricName field value if set, zero value otherwise.
+func (o *QuerySourceMetricsQueryType) GetMetricName() QuerySourceMetricsQueryTypeMetricName {
+	if o == nil || IsNil(o.MetricName) {
+		var ret QuerySourceMetricsQueryTypeMetricName
+		return ret
+	}
+	return *o.MetricName
+}
+
+// GetMetricNameOk returns a tuple with the MetricName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceMetricsQueryType) GetMetricNameOk() (*QuerySourceMetricsQueryTypeMetricName, bool) {
+	if o == nil || IsNil(o.MetricName) {
+		return nil, false
+	}
+	return o.MetricName, true
+}
+
+// HasMetricName returns a boolean if a field has been set.
+func (o *QuerySourceMetricsQueryType) HasMetricName() bool {
+	if o != nil && !IsNil(o.MetricName) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricName gets a reference to the given QuerySourceMetricsQueryTypeMetricName and assigns it to the MetricName field.
+func (o *QuerySourceMetricsQueryType) SetMetricName(v QuerySourceMetricsQueryTypeMetricName) {
+	o.MetricName = &v
+}
+
+// GetPromqlQuery returns the PromqlQuery field value if set, zero value otherwise.
+func (o *QuerySourceMetricsQueryType) GetPromqlQuery() PromqlQuery {
+	if o == nil || IsNil(o.PromqlQuery) {
+		var ret PromqlQuery
+		return ret
+	}
+	return *o.PromqlQuery
+}
+
+// GetPromqlQueryOk returns a tuple with the PromqlQuery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySourceMetricsQueryType) GetPromqlQueryOk() (*PromqlQuery, bool) {
+	if o == nil || IsNil(o.PromqlQuery) {
+		return nil, false
+	}
+	return o.PromqlQuery, true
+}
+
+// HasPromqlQuery returns a boolean if a field has been set.
+func (o *QuerySourceMetricsQueryType) HasPromqlQuery() bool {
+	if o != nil && !IsNil(o.PromqlQuery) {
+		return true
+	}
+
+	return false
+}
+
+// SetPromqlQuery gets a reference to the given PromqlQuery and assigns it to the PromqlQuery field.
+func (o *QuerySourceMetricsQueryType) SetPromqlQuery(v PromqlQuery) {
+	o.PromqlQuery = &v
+}
+
+func (o QuerySourceMetricsQueryType) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o QuerySourceMetricsQueryType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.LabelName) {
+		toSerialize["labelName"] = o.LabelName
+	}
+	if !IsNil(o.LabelValue) {
+		toSerialize["labelValue"] = o.LabelValue
+	}
+	if !IsNil(o.MetricName) {
+		toSerialize["metricName"] = o.MetricName
+	}
+	if !IsNil(o.PromqlQuery) {
+		toSerialize["promqlQuery"] = o.PromqlQuery
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["metricName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["labelName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["labelValue"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["promqlQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metricName, labelName, labelValue, promqlQuery] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["metricName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["labelName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field labelName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["labelValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field labelValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["promqlQuery"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field promqlQuery must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *QuerySourceMetricsQueryType) UnmarshalJSON(data []byte) (err error) {
+	varQuerySourceMetricsQueryType := _QuerySourceMetricsQueryType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceMetricsQueryType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceMetricsQueryType(varQuerySourceMetricsQueryType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["metricName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QuerySourceMetricsQueryTypeLabelNameVariant = nil
-	}
-
-	// try to unmarshal data into QuerySourceMetricsQueryTypeLabelValueVariant
-	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypeLabelValueVariant)
-	if err == nil {
-		jsonQuerySourceMetricsQueryTypeLabelValueVariant, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeLabelValueVariant)
-		if string(jsonQuerySourceMetricsQueryTypeLabelValueVariant) == "{}" { // empty struct
-			dst.QuerySourceMetricsQueryTypeLabelValueVariant = nil
-		} else {
-			if err = validator.Validate(dst.QuerySourceMetricsQueryTypeLabelValueVariant); err != nil {
-				dst.QuerySourceMetricsQueryTypeLabelValueVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["labelName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QuerySourceMetricsQueryTypeLabelValueVariant = nil
-	}
-
-	// try to unmarshal data into QuerySourceMetricsQueryTypeMetricNameVariant
-	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypeMetricNameVariant)
-	if err == nil {
-		jsonQuerySourceMetricsQueryTypeMetricNameVariant, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeMetricNameVariant)
-		if string(jsonQuerySourceMetricsQueryTypeMetricNameVariant) == "{}" { // empty struct
-			dst.QuerySourceMetricsQueryTypeMetricNameVariant = nil
-		} else {
-			if err = validator.Validate(dst.QuerySourceMetricsQueryTypeMetricNameVariant); err != nil {
-				dst.QuerySourceMetricsQueryTypeMetricNameVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["labelValue"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QuerySourceMetricsQueryTypeMetricNameVariant = nil
-	}
-
-	// try to unmarshal data into QuerySourceMetricsQueryTypePromqlQuery
-	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypePromqlQuery)
-	if err == nil {
-		jsonQuerySourceMetricsQueryTypePromqlQuery, _ := json.Marshal(dst.QuerySourceMetricsQueryTypePromqlQuery)
-		if string(jsonQuerySourceMetricsQueryTypePromqlQuery) == "{}" { // empty struct
-			dst.QuerySourceMetricsQueryTypePromqlQuery = nil
-		} else {
-			if err = validator.Validate(dst.QuerySourceMetricsQueryTypePromqlQuery); err != nil {
-				dst.QuerySourceMetricsQueryTypePromqlQuery = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["promqlQuery"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.QuerySourceMetricsQueryTypePromqlQuery = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [metricName, labelName, labelValue, promqlQuery] may be set"}
+		}
+
+		delete(additionalProperties, "labelName")
+		delete(additionalProperties, "labelValue")
+		delete(additionalProperties, "metricName")
+		delete(additionalProperties, "promqlQuery")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.QuerySourceMetricsQueryTypeLabelNameVariant = nil
-		dst.QuerySourceMetricsQueryTypeLabelValueVariant = nil
-		dst.QuerySourceMetricsQueryTypeMetricNameVariant = nil
-		dst.QuerySourceMetricsQueryTypePromqlQuery = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(QuerySourceMetricsQueryType)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src QuerySourceMetricsQueryType) MarshalJSON() ([]byte, error) {
-	if src.QuerySourceMetricsQueryTypeLabelNameVariant != nil {
-		return json.Marshal(&src.QuerySourceMetricsQueryTypeLabelNameVariant)
-	}
-
-	if src.QuerySourceMetricsQueryTypeLabelValueVariant != nil {
-		return json.Marshal(&src.QuerySourceMetricsQueryTypeLabelValueVariant)
-	}
-
-	if src.QuerySourceMetricsQueryTypeMetricNameVariant != nil {
-		return json.Marshal(&src.QuerySourceMetricsQueryTypeMetricNameVariant)
-	}
-
-	if src.QuerySourceMetricsQueryTypePromqlQuery != nil {
-		return json.Marshal(&src.QuerySourceMetricsQueryTypePromqlQuery)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *QuerySourceMetricsQueryType) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.QuerySourceMetricsQueryTypeLabelNameVariant != nil {
-		return obj.QuerySourceMetricsQueryTypeLabelNameVariant
-	}
-
-	if obj.QuerySourceMetricsQueryTypeLabelValueVariant != nil {
-		return obj.QuerySourceMetricsQueryTypeLabelValueVariant
-	}
-
-	if obj.QuerySourceMetricsQueryTypeMetricNameVariant != nil {
-		return obj.QuerySourceMetricsQueryTypeMetricNameVariant
-	}
-
-	if obj.QuerySourceMetricsQueryTypePromqlQuery != nil {
-		return obj.QuerySourceMetricsQueryTypePromqlQuery
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj QuerySourceMetricsQueryType) GetActualInstanceValue() (interface{}) {
-	if obj.QuerySourceMetricsQueryTypeLabelNameVariant != nil {
-		return *obj.QuerySourceMetricsQueryTypeLabelNameVariant
-	}
-
-	if obj.QuerySourceMetricsQueryTypeLabelValueVariant != nil {
-		return *obj.QuerySourceMetricsQueryTypeLabelValueVariant
-	}
-
-	if obj.QuerySourceMetricsQueryTypeMetricNameVariant != nil {
-		return *obj.QuerySourceMetricsQueryTypeMetricNameVariant
-	}
-
-	if obj.QuerySourceMetricsQueryTypePromqlQuery != nil {
-		return *obj.QuerySourceMetricsQueryTypePromqlQuery
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableQuerySourceMetricsQueryType struct {
@@ -246,4 +314,3 @@ func (v *NullableQuerySourceMetricsQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

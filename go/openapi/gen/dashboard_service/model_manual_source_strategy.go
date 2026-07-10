@@ -13,126 +13,178 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// ManualSourceStrategy - struct for ManualSourceStrategy
+// checks if the ManualSourceStrategy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ManualSourceStrategy{}
+
+// ManualSourceStrategy Defines the time positioning strategy for manually placed annotations (instant point or range).
 type ManualSourceStrategy struct {
-	ManualSourceStrategyInstantVariant *ManualSourceStrategyInstantVariant
-	ManualSourceStrategyRangeVariant *ManualSourceStrategyRangeVariant
+	Instant                           *ManualSourceStrategyInstant `json:"instant,omitempty"`
+	Range                             *ManualSourceStrategyRange   `json:"range,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// ManualSourceStrategyInstantVariantAsManualSourceStrategy is a convenience function that returns ManualSourceStrategyInstantVariant wrapped in ManualSourceStrategy
-func ManualSourceStrategyInstantVariantAsManualSourceStrategy(v *ManualSourceStrategyInstantVariant) ManualSourceStrategy {
-	return ManualSourceStrategy{
-		ManualSourceStrategyInstantVariant: v,
+type _ManualSourceStrategy ManualSourceStrategy
+
+// NewManualSourceStrategy instantiates a new ManualSourceStrategy object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewManualSourceStrategy() *ManualSourceStrategy {
+	this := ManualSourceStrategy{}
+	return &this
+}
+
+// NewManualSourceStrategyWithDefaults instantiates a new ManualSourceStrategy object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewManualSourceStrategyWithDefaults() *ManualSourceStrategy {
+	this := ManualSourceStrategy{}
+	return &this
+}
+
+// GetInstant returns the Instant field value if set, zero value otherwise.
+func (o *ManualSourceStrategy) GetInstant() ManualSourceStrategyInstant {
+	if o == nil || IsNil(o.Instant) {
+		var ret ManualSourceStrategyInstant
+		return ret
 	}
+	return *o.Instant
 }
 
-// ManualSourceStrategyRangeVariantAsManualSourceStrategy is a convenience function that returns ManualSourceStrategyRangeVariant wrapped in ManualSourceStrategy
-func ManualSourceStrategyRangeVariantAsManualSourceStrategy(v *ManualSourceStrategyRangeVariant) ManualSourceStrategy {
-	return ManualSourceStrategy{
-		ManualSourceStrategyRangeVariant: v,
+// GetInstantOk returns a tuple with the Instant field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualSourceStrategy) GetInstantOk() (*ManualSourceStrategyInstant, bool) {
+	if o == nil || IsNil(o.Instant) {
+		return nil, false
 	}
+	return o.Instant, true
 }
 
+// HasInstant returns a boolean if a field has been set.
+func (o *ManualSourceStrategy) HasInstant() bool {
+	if o != nil && !IsNil(o.Instant) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *ManualSourceStrategy) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into ManualSourceStrategyInstantVariant
-	err = json.Unmarshal(data, &dst.ManualSourceStrategyInstantVariant)
-	if err == nil {
-		jsonManualSourceStrategyInstantVariant, _ := json.Marshal(dst.ManualSourceStrategyInstantVariant)
-		if string(jsonManualSourceStrategyInstantVariant) == "{}" { // empty struct
-			dst.ManualSourceStrategyInstantVariant = nil
-		} else {
-			if err = validator.Validate(dst.ManualSourceStrategyInstantVariant); err != nil {
-				dst.ManualSourceStrategyInstantVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetInstant gets a reference to the given ManualSourceStrategyInstant and assigns it to the Instant field.
+func (o *ManualSourceStrategy) SetInstant(v ManualSourceStrategyInstant) {
+	o.Instant = &v
+}
+
+// GetRange returns the Range field value if set, zero value otherwise.
+func (o *ManualSourceStrategy) GetRange() ManualSourceStrategyRange {
+	if o == nil || IsNil(o.Range) {
+		var ret ManualSourceStrategyRange
+		return ret
+	}
+	return *o.Range
+}
+
+// GetRangeOk returns a tuple with the Range field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualSourceStrategy) GetRangeOk() (*ManualSourceStrategyRange, bool) {
+	if o == nil || IsNil(o.Range) {
+		return nil, false
+	}
+	return o.Range, true
+}
+
+// HasRange returns a boolean if a field has been set.
+func (o *ManualSourceStrategy) HasRange() bool {
+	if o != nil && !IsNil(o.Range) {
+		return true
+	}
+
+	return false
+}
+
+// SetRange gets a reference to the given ManualSourceStrategyRange and assigns it to the Range field.
+func (o *ManualSourceStrategy) SetRange(v ManualSourceStrategyRange) {
+	o.Range = &v
+}
+
+func (o ManualSourceStrategy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ManualSourceStrategy) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Instant) {
+		toSerialize["instant"] = o.Instant
+	}
+	if !IsNil(o.Range) {
+		toSerialize["range"] = o.Range
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["instant"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["range"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [instant, range] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["instant"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field instant must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["range"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field range must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *ManualSourceStrategy) UnmarshalJSON(data []byte) (err error) {
+	varManualSourceStrategy := _ManualSourceStrategy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varManualSourceStrategy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ManualSourceStrategy(varManualSourceStrategy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["instant"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ManualSourceStrategyInstantVariant = nil
-	}
-
-	// try to unmarshal data into ManualSourceStrategyRangeVariant
-	err = json.Unmarshal(data, &dst.ManualSourceStrategyRangeVariant)
-	if err == nil {
-		jsonManualSourceStrategyRangeVariant, _ := json.Marshal(dst.ManualSourceStrategyRangeVariant)
-		if string(jsonManualSourceStrategyRangeVariant) == "{}" { // empty struct
-			dst.ManualSourceStrategyRangeVariant = nil
-		} else {
-			if err = validator.Validate(dst.ManualSourceStrategyRangeVariant); err != nil {
-				dst.ManualSourceStrategyRangeVariant = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["range"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.ManualSourceStrategyRangeVariant = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [instant, range] may be set"}
+		}
+
+		delete(additionalProperties, "instant")
+		delete(additionalProperties, "range")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.ManualSourceStrategyInstantVariant = nil
-		dst.ManualSourceStrategyRangeVariant = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ManualSourceStrategy)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src ManualSourceStrategy) MarshalJSON() ([]byte, error) {
-	if src.ManualSourceStrategyInstantVariant != nil {
-		return json.Marshal(&src.ManualSourceStrategyInstantVariant)
-	}
-
-	if src.ManualSourceStrategyRangeVariant != nil {
-		return json.Marshal(&src.ManualSourceStrategyRangeVariant)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *ManualSourceStrategy) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.ManualSourceStrategyInstantVariant != nil {
-		return obj.ManualSourceStrategyInstantVariant
-	}
-
-	if obj.ManualSourceStrategyRangeVariant != nil {
-		return obj.ManualSourceStrategyRangeVariant
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj ManualSourceStrategy) GetActualInstanceValue() (interface{}) {
-	if obj.ManualSourceStrategyInstantVariant != nil {
-		return *obj.ManualSourceStrategyInstantVariant
-	}
-
-	if obj.ManualSourceStrategyRangeVariant != nil {
-		return *obj.ManualSourceStrategyRangeVariant
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableManualSourceStrategy struct {
@@ -170,4 +222,3 @@ func (v *NullableManualSourceStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

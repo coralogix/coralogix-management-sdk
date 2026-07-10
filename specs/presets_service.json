@@ -524,16 +524,6 @@
         "additionalProperties": false
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -544,26 +534,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -574,9 +544,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -713,36 +695,6 @@
             "minItems": 0
           }
         }
-      },
-      "NotificationCenterConditionTypeMatchEntityType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Field condition.condition type.",
-        "type": "object",
-        "properties": {
-          "matchEntityType": {
-            "$ref": "#/components/schemas/MatchEntityTypeCondition"
-          }
-        },
-        "required": [
-          "matchEntityType"
-        ]
-      },
-      "NotificationCenterConditionTypeMatchEntityTypeAndSubType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Field condition.condition type.",
-        "type": "object",
-        "properties": {
-          "matchEntityTypeAndSubType": {
-            "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
-          }
-        },
-        "required": [
-          "matchEntityTypeAndSubType"
-        ]
       },
       "Preset": {
         "externalDocs": {
@@ -934,12 +886,50 @@
         ]
       },
       "notification_center.ConditionType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Field condition.condition type.",
+        "type": "object",
+        "properties": {
+          "matchEntityType": {
+            "$ref": "#/components/schemas/MatchEntityTypeCondition"
+          },
+          "matchEntityTypeAndSubType": {
+            "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
+          }
+        },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/NotificationCenterConditionTypeMatchEntityType"
+            "type": "object",
+            "required": [
+              "matchEntityType"
+            ]
           },
           {
-            "$ref": "#/components/schemas/NotificationCenterConditionTypeMatchEntityTypeAndSubType"
+            "type": "object",
+            "required": [
+              "matchEntityTypeAndSubType"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "matchEntityType"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "matchEntityTypeAndSubType"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },

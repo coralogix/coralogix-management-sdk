@@ -29,8 +29,9 @@ type ArchiveV1Retention struct {
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// Sort order.
-	Order *int32 `json:"order,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Order                             *int32 `json:"order,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ArchiveV1Retention ArchiveV1Retention
@@ -181,7 +182,7 @@ func (o *ArchiveV1Retention) SetOrder(v int32) {
 }
 
 func (o ArchiveV1Retention) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,6 +231,7 @@ func (o *ArchiveV1Retention) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "order")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -270,4 +272,3 @@ func (v *NullableArchiveV1Retention) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

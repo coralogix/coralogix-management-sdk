@@ -22,8 +22,9 @@ var _ MappedNullable = &SaveIntegrationRequest{}
 
 // SaveIntegrationRequest Request for creating an integration deployment.
 type SaveIntegrationRequest struct {
-	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Metadata                          *IntegrationMetadata `json:"metadata,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _SaveIntegrationRequest SaveIntegrationRequest
@@ -78,7 +79,7 @@ func (o *SaveIntegrationRequest) SetMetadata(v IntegrationMetadata) {
 }
 
 func (o SaveIntegrationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *SaveIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "metadata")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableSaveIntegrationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

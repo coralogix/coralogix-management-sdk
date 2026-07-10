@@ -22,9 +22,10 @@ var _ MappedNullable = &AnalyticsThresholdRule{}
 
 // AnalyticsThresholdRule A rule that defines a threshold condition and its priority override
 type AnalyticsThresholdRule struct {
-	Condition *AnalyticsThresholdRuleCondition `json:"condition,omitempty"`
-	Override *AlertDefOverride `json:"override,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Condition                         *AnalyticsThresholdRuleCondition `json:"condition,omitempty"`
+	Override                          *AlertDefOverride                `json:"override,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AnalyticsThresholdRule AnalyticsThresholdRule
@@ -111,7 +112,7 @@ func (o *AnalyticsThresholdRule) SetOverride(v AlertDefOverride) {
 }
 
 func (o AnalyticsThresholdRule) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *AnalyticsThresholdRule) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "condition")
 		delete(additionalProperties, "override")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableAnalyticsThresholdRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

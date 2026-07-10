@@ -93,8 +93,6 @@ Class | Method | HTTP request | Description
  - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
- - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
- - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
  - [GetCompanyIpAccessSettingsResponse](docs/GetCompanyIpAccessSettingsResponse.md)
  - [IpAccess](docs/IpAccess.md)

@@ -81,21 +81,111 @@
               "description": "Dimensions to filter results by; only entries that contain all listed dimensions are returned.",
               "type": "array",
               "items": {
+                "type": "object",
+                "properties": {
+                  "genericDimension": {
+                    "externalDocs": {
+                      "description": "Find out more about data usage.",
+                      "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                    },
+                    "title": "Generic Dimension",
+                    "description": "This data structure represents a generic dimension.",
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "example": "key",
+                        "description": "The key.",
+                        "type": "string",
+                        "minLength": 0
+                      },
+                      "value": {
+                        "example": "value",
+                        "description": "The value.",
+                        "type": "string",
+                        "minLength": 0
+                      }
+                    }
+                  },
+                  "pillar": {
+                    "$ref": "#/components/schemas/v2.Pillar"
+                  },
+                  "priority": {
+                    "$ref": "#/components/schemas/v2.Priority"
+                  },
+                  "severity": {
+                    "$ref": "#/components/schemas/datausage.v2.Severity"
+                  },
+                  "tier": {
+                    "$ref": "#/components/schemas/v2.TcoTier"
+                  }
+                },
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/DimensionGenericDimension"
+                    "type": "object",
+                    "required": [
+                      "pillar"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/DimensionPillar"
+                    "type": "object",
+                    "required": [
+                      "genericDimension"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/DimensionPriority"
+                    "type": "object",
+                    "required": [
+                      "tier"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/DimensionSeverity"
+                    "type": "object",
+                    "required": [
+                      "severity"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/DimensionTier"
+                    "type": "object",
+                    "required": [
+                      "priority"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "pillar"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "genericDimension"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "tier"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "severity"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "priority"
+                          ]
+                        }
+                      ]
+                    }
                   }
                 ]
               },
@@ -163,13 +253,47 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request for daily evaluation token usage data for the specified period.",
                 "type": "object",
+                "properties": {
+                  "dateRange": {
+                    "$ref": "#/components/schemas/v2.DateRange"
+                  },
+                  "range": {
+                    "$ref": "#/components/schemas/v2.Range"
+                  }
+                },
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
+                    "type": "object",
+                    "required": [
+                      "range"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
+                    "type": "object",
+                    "required": [
+                      "dateRange"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "range"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "dateRange"
+                          ]
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -236,13 +360,47 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request for daily processed gigabytes usage data for the specified period.",
                 "type": "object",
+                "properties": {
+                  "dateRange": {
+                    "$ref": "#/components/schemas/v2.DateRange"
+                  },
+                  "range": {
+                    "$ref": "#/components/schemas/v2.Range"
+                  }
+                },
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
+                    "type": "object",
+                    "required": [
+                      "range"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
+                    "type": "object",
+                    "required": [
+                      "dateRange"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "range"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "dateRange"
+                          ]
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -309,13 +467,47 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request for daily units usage data for the specified period.",
                 "type": "object",
+                "properties": {
+                  "dateRange": {
+                    "$ref": "#/components/schemas/v2.DateRange"
+                  },
+                  "range": {
+                    "$ref": "#/components/schemas/v2.Range"
+                  }
+                },
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
+                    "type": "object",
+                    "required": [
+                      "range"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
+                    "type": "object",
+                    "required": [
+                      "dateRange"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "range"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "dateRange"
+                          ]
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -959,77 +1151,92 @@
         }
       },
       "Dimension": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/DimensionGenericDimension"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionPillar"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionPriority"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionTier"
-          }
-        ]
-      },
-      "DimensionGenericDimension": {
         "type": "object",
         "properties": {
           "genericDimension": {
             "$ref": "#/components/schemas/GenericDimension"
-          }
-        },
-        "required": [
-          "genericDimension"
-        ]
-      },
-      "DimensionPillar": {
-        "type": "object",
-        "properties": {
+          },
           "pillar": {
             "$ref": "#/components/schemas/v2.Pillar"
-          }
-        },
-        "required": [
-          "pillar"
-        ]
-      },
-      "DimensionPriority": {
-        "type": "object",
-        "properties": {
+          },
           "priority": {
             "$ref": "#/components/schemas/v2.Priority"
-          }
-        },
-        "required": [
-          "priority"
-        ]
-      },
-      "DimensionSeverity": {
-        "type": "object",
-        "properties": {
+          },
           "severity": {
             "$ref": "#/components/schemas/datausage.v2.Severity"
-          }
-        },
-        "required": [
-          "severity"
-        ]
-      },
-      "DimensionTier": {
-        "type": "object",
-        "properties": {
+          },
           "tier": {
             "$ref": "#/components/schemas/v2.TcoTier"
           }
         },
-        "required": [
-          "tier"
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "pillar"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "genericDimension"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "tier"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "severity"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "priority"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "pillar"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "genericDimension"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "tier"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "severity"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "priority"
+                  ]
+                }
+              ]
+            }
+          }
         ]
       },
       "Error": {
@@ -1066,16 +1273,6 @@
         }
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -1086,26 +1283,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -1116,9 +1293,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -1167,36 +1356,6 @@
           }
         }
       },
-      "GetDailyUsageEvaluationTokensRequestDateRange": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Request for daily evaluation token usage data for the specified period.",
-        "type": "object",
-        "properties": {
-          "dateRange": {
-            "$ref": "#/components/schemas/v2.DateRange"
-          }
-        },
-        "required": [
-          "dateRange"
-        ]
-      },
-      "GetDailyUsageEvaluationTokensRequestRange": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Request for daily evaluation token usage data for the specified period.",
-        "type": "object",
-        "properties": {
-          "range": {
-            "$ref": "#/components/schemas/v2.Range"
-          }
-        },
-        "required": [
-          "range"
-        ]
-      },
       "GetDailyUsageEvaluationTokensResponse": {
         "externalDocs": {
           "url": ""
@@ -1214,36 +1373,6 @@
           }
         }
       },
-      "GetDailyUsageProcessedGbsRequestDateRange": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Request for daily processed gigabytes usage data for the specified period.",
-        "type": "object",
-        "properties": {
-          "dateRange": {
-            "$ref": "#/components/schemas/v2.DateRange"
-          }
-        },
-        "required": [
-          "dateRange"
-        ]
-      },
-      "GetDailyUsageProcessedGbsRequestRange": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Request for daily processed gigabytes usage data for the specified period.",
-        "type": "object",
-        "properties": {
-          "range": {
-            "$ref": "#/components/schemas/v2.Range"
-          }
-        },
-        "required": [
-          "range"
-        ]
-      },
       "GetDailyUsageProcessedGbsResponse": {
         "externalDocs": {
           "url": ""
@@ -1260,36 +1389,6 @@
             "minItems": 0
           }
         }
-      },
-      "GetDailyUsageUnitsRequestDateRange": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Request for daily units usage data for the specified period.",
-        "type": "object",
-        "properties": {
-          "dateRange": {
-            "$ref": "#/components/schemas/v2.DateRange"
-          }
-        },
-        "required": [
-          "dateRange"
-        ]
-      },
-      "GetDailyUsageUnitsRequestRange": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Request for daily units usage data for the specified period.",
-        "type": "object",
-        "properties": {
-          "range": {
-            "$ref": "#/components/schemas/v2.Range"
-          }
-        },
-        "required": [
-          "range"
-        ]
       },
       "GetDailyUsageUnitsResponse": {
         "externalDocs": {

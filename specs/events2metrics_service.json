@@ -43,13 +43,117 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "E2M",
+                "description": "This data structure represents an Event to Metrics (E2M) object.",
                 "type": "object",
+                "properties": {
+                  "createTime": {
+                    "example": "2022-06-30T12:30:00.000Z",
+                    "description": "RFC3339 timestamp of when this E2M was created.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "dataSource": {
+                    "example": "my_namespace/my_dataset",
+                    "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "description": {
+                    "example": "avg and max the latency of catalog service",
+                    "description": "Human-readable description of this E2M.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "id": {
+                    "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+                    "description": "Unique identifier for this E2M. Required on update requests.",
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    "minLength": 36,
+                    "maxLength": 36
+                  },
+                  "isInternal": {
+                    "description": "Indicates whether this E2M is for internal use only.",
+                    "type": "boolean"
+                  },
+                  "logsQuery": {
+                    "$ref": "#/components/schemas/v2.LogsQuery"
+                  },
+                  "metricFields": {
+                    "description": "Metric fields to extract and aggregate from the events.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/v2.MetricField"
+                    },
+                    "minItems": 0,
+                    "maxItems": 10
+                  },
+                  "metricLabels": {
+                    "description": "Metric labels to attach to the generated metrics.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetricLabel"
+                    },
+                    "minItems": 0
+                  },
+                  "name": {
+                    "example": "Service_catalog_latency",
+                    "description": "Human-readable name for this E2M.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "permutations": {
+                    "$ref": "#/components/schemas/E2MPermutations"
+                  },
+                  "spansQuery": {
+                    "$ref": "#/components/schemas/v2.SpansQuery"
+                  },
+                  "type": {
+                    "$ref": "#/components/schemas/E2MType"
+                  },
+                  "updateTime": {
+                    "example": "2022-06-30T12:30:00.000Z",
+                    "description": "RFC3339 timestamp of when this E2M was last updated.",
+                    "type": "string",
+                    "minLength": 0
+                  }
+                },
+                "required": [
+                  "name",
+                  "type"
+                ],
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MLogsQuery"
+                    "type": "object",
+                    "required": [
+                      "spansQuery"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/E2MSpansQuery"
+                    "type": "object",
+                    "required": [
+                      "logsQuery"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "spansQuery"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "logsQuery"
+                          ]
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -84,13 +188,94 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "E2M Create Params",
+                "description": "This data structure is used to create a new event to metric definition",
                 "type": "object",
+                "properties": {
+                  "dataSource": {
+                    "example": "my_namespace/my_dataset",
+                    "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "description": {
+                    "example": "avg and max the latency of catalog service",
+                    "description": "Human-readable description for the new E2M.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "logsQuery": {
+                    "$ref": "#/components/schemas/v2.LogsQuery"
+                  },
+                  "metricFields": {
+                    "description": "Metric fields to create and aggregate from the events.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/v2.MetricField"
+                    },
+                    "minItems": 0
+                  },
+                  "metricLabels": {
+                    "description": "Metric labels to attach to the generated metrics.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MetricLabel"
+                    },
+                    "minItems": 0
+                  },
+                  "name": {
+                    "example": "Service catalog latency",
+                    "description": "Human-readable name for the new E2M.",
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "permutationsLimit": {
+                    "example": 30000,
+                    "description": "Maximum number of unique metric permutations allowed for this E2M.",
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "spansQuery": {
+                    "$ref": "#/components/schemas/v2.SpansQuery"
+                  },
+                  "type": {
+                    "$ref": "#/components/schemas/E2MType"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
+                    "type": "object",
+                    "required": [
+                      "spansQuery"
+                    ]
                   },
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
+                    "type": "object",
+                    "required": [
+                      "logsQuery"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "not": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "spansQuery"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "logsQuery"
+                          ]
+                        }
+                      ]
+                    }
                   }
                 ]
               }
@@ -540,12 +725,121 @@
         ]
       },
       "E2M": {
+        "externalDocs": {
+          "description": "Find out more about events2metrics",
+          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+        },
+        "title": "E2M",
+        "description": "This data structure represents an Event to Metrics (E2M) object.",
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "example": "2022-06-30T12:30:00.000Z",
+            "description": "RFC3339 timestamp of when this E2M was created.",
+            "type": "string",
+            "minLength": 0
+          },
+          "dataSource": {
+            "example": "my_namespace/my_dataset",
+            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
+            "type": "string",
+            "minLength": 0
+          },
+          "description": {
+            "example": "avg and max the latency of catalog service",
+            "description": "Human-readable description of this E2M.",
+            "type": "string",
+            "minLength": 0
+          },
+          "id": {
+            "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+            "description": "Unique identifier for this E2M. Required on update requests.",
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "isInternal": {
+            "description": "Indicates whether this E2M is for internal use only.",
+            "type": "boolean"
+          },
+          "logsQuery": {
+            "$ref": "#/components/schemas/v2.LogsQuery"
+          },
+          "metricFields": {
+            "description": "Metric fields to extract and aggregate from the events.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v2.MetricField"
+            },
+            "minItems": 0,
+            "maxItems": 10
+          },
+          "metricLabels": {
+            "description": "Metric labels to attach to the generated metrics.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricLabel"
+            },
+            "minItems": 0
+          },
+          "name": {
+            "example": "Service_catalog_latency",
+            "description": "Human-readable name for this E2M.",
+            "type": "string",
+            "minLength": 0
+          },
+          "permutations": {
+            "$ref": "#/components/schemas/E2MPermutations"
+          },
+          "spansQuery": {
+            "$ref": "#/components/schemas/v2.SpansQuery"
+          },
+          "type": {
+            "$ref": "#/components/schemas/E2MType"
+          },
+          "updateTime": {
+            "example": "2022-06-30T12:30:00.000Z",
+            "description": "RFC3339 timestamp of when this E2M was last updated.",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "name",
+          "type"
+        ],
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MLogsQuery"
+            "type": "object",
+            "required": [
+              "spansQuery"
+            ]
           },
           {
-            "$ref": "#/components/schemas/E2MSpansQuery"
+            "type": "object",
+            "required": [
+              "logsQuery"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "spansQuery"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logsQuery"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },
@@ -586,16 +880,6 @@
         }
       },
       "E2MCreateParams": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
-          },
-          {
-            "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
-          }
-        ]
-      },
-      "E2MCreateParamsLogsQuery": {
         "externalDocs": {
           "description": "Find out more about events2metrics",
           "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
@@ -618,64 +902,6 @@
           },
           "logsQuery": {
             "$ref": "#/components/schemas/v2.LogsQuery"
-          },
-          "metricFields": {
-            "description": "Metric fields to create and aggregate from the events.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/v2.MetricField"
-            },
-            "minItems": 0
-          },
-          "metricLabels": {
-            "description": "Metric labels to attach to the generated metrics.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MetricLabel"
-            },
-            "minItems": 0
-          },
-          "name": {
-            "example": "Service catalog latency",
-            "description": "Human-readable name for the new E2M.",
-            "type": "string",
-            "minLength": 0
-          },
-          "permutationsLimit": {
-            "example": 30000,
-            "description": "Maximum number of unique metric permutations allowed for this E2M.",
-            "type": "integer",
-            "format": "int32"
-          },
-          "type": {
-            "$ref": "#/components/schemas/E2MType"
-          }
-        },
-        "required": [
-          "name",
-          "logsQuery"
-        ]
-      },
-      "E2MCreateParamsSpansQuery": {
-        "externalDocs": {
-          "description": "Find out more about events2metrics",
-          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
-        },
-        "title": "E2M Create Params",
-        "description": "This data structure is used to create a new event to metric definition",
-        "type": "object",
-        "properties": {
-          "dataSource": {
-            "example": "my_namespace/my_dataset",
-            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
-            "type": "string",
-            "minLength": 0
-          },
-          "description": {
-            "example": "avg and max the latency of catalog service",
-            "description": "Human-readable description for the new E2M.",
-            "type": "string",
-            "minLength": 0
           },
           "metricFields": {
             "description": "Metric fields to create and aggregate from the events.",
@@ -713,184 +939,158 @@
           }
         },
         "required": [
-          "name",
-          "spansQuery"
-        ]
-      },
-      "E2MExecutionRequest": {
+          "name"
+        ],
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MExecutionRequestCreate"
+            "type": "object",
+            "required": [
+              "spansQuery"
+            ]
           },
           {
-            "$ref": "#/components/schemas/E2MExecutionRequestDelete"
+            "type": "object",
+            "required": [
+              "logsQuery"
+            ]
           },
           {
-            "$ref": "#/components/schemas/E2MExecutionRequestReplace"
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "spansQuery"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "logsQuery"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },
-      "E2MExecutionRequestCreate": {
+      "E2MExecutionRequest": {
         "type": "object",
         "properties": {
           "create": {
             "$ref": "#/components/schemas/CreateE2MRequest"
-          }
-        },
-        "required": [
-          "create"
-        ]
-      },
-      "E2MExecutionRequestDelete": {
-        "type": "object",
-        "properties": {
+          },
           "delete": {
             "$ref": "#/components/schemas/DeleteE2MRequest"
-          }
-        },
-        "required": [
-          "delete"
-        ]
-      },
-      "E2MExecutionRequestReplace": {
-        "type": "object",
-        "properties": {
+          },
           "replace": {
             "$ref": "#/components/schemas/ReplaceE2MRequest"
           }
         },
-        "required": [
-          "replace"
-        ]
-      },
-      "E2MExecutionResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MExecutionResponseCreated"
+            "type": "object",
+            "required": [
+              "create"
+            ]
           },
           {
-            "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
+            "type": "object",
+            "required": [
+              "replace"
+            ]
           },
           {
-            "$ref": "#/components/schemas/E2MExecutionResponseReplaced"
+            "type": "object",
+            "required": [
+              "delete"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "create"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "replace"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "delete"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },
-      "E2MExecutionResponseCreated": {
+      "E2MExecutionResponse": {
         "type": "object",
         "properties": {
           "created": {
             "$ref": "#/components/schemas/CreateE2MResponse"
-          }
-        },
-        "required": [
-          "created"
-        ]
-      },
-      "E2MExecutionResponseDeleted": {
-        "type": "object",
-        "properties": {
+          },
           "deleted": {
             "$ref": "#/components/schemas/DeleteE2MResponse"
-          }
-        },
-        "required": [
-          "deleted"
-        ]
-      },
-      "E2MExecutionResponseReplaced": {
-        "type": "object",
-        "properties": {
+          },
           "replaced": {
             "$ref": "#/components/schemas/ReplaceE2MResponse"
           }
         },
-        "required": [
-          "replaced"
-        ]
-      },
-      "E2MLogsQuery": {
-        "externalDocs": {
-          "description": "Find out more about events2metrics",
-          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
-        },
-        "title": "E2M",
-        "description": "This data structure represents an Event to Metrics (E2M) object.",
-        "type": "object",
-        "properties": {
-          "createTime": {
-            "example": "2022-06-30T12:30:00.000Z",
-            "description": "RFC3339 timestamp of when this E2M was created.",
-            "type": "string",
-            "minLength": 0
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "created"
+            ]
           },
-          "dataSource": {
-            "example": "my_namespace/my_dataset",
-            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
-            "type": "string",
-            "minLength": 0
+          {
+            "type": "object",
+            "required": [
+              "replaced"
+            ]
           },
-          "description": {
-            "example": "avg and max the latency of catalog service",
-            "description": "Human-readable description of this E2M.",
-            "type": "string",
-            "minLength": 0
+          {
+            "type": "object",
+            "required": [
+              "deleted"
+            ]
           },
-          "id": {
-            "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
-            "description": "Unique identifier for this E2M. Required on update requests.",
-            "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-            "minLength": 36,
-            "maxLength": 36
-          },
-          "isInternal": {
-            "description": "Indicates whether this E2M is for internal use only.",
-            "type": "boolean"
-          },
-          "logsQuery": {
-            "$ref": "#/components/schemas/v2.LogsQuery"
-          },
-          "metricFields": {
-            "description": "Metric fields to extract and aggregate from the events.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/v2.MetricField"
-            },
-            "minItems": 0,
-            "maxItems": 10
-          },
-          "metricLabels": {
-            "description": "Metric labels to attach to the generated metrics.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MetricLabel"
-            },
-            "minItems": 0
-          },
-          "name": {
-            "example": "Service_catalog_latency",
-            "description": "Human-readable name for this E2M.",
-            "type": "string",
-            "minLength": 0
-          },
-          "permutations": {
-            "$ref": "#/components/schemas/E2MPermutations"
-          },
-          "type": {
-            "$ref": "#/components/schemas/E2MType"
-          },
-          "updateTime": {
-            "example": "2022-06-30T12:30:00.000Z",
-            "description": "RFC3339 timestamp of when this E2M was last updated.",
-            "type": "string",
-            "minLength": 0
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "created"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "replaced"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "deleted"
+                  ]
+                }
+              ]
+            }
           }
-        },
-        "required": [
-          "name",
-          "type",
-          "logsQuery"
         ]
       },
       "E2MPermutations": {
@@ -918,90 +1118,6 @@
           "hasExceededLimit"
         ]
       },
-      "E2MSpansQuery": {
-        "externalDocs": {
-          "description": "Find out more about events2metrics",
-          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
-        },
-        "title": "E2M",
-        "description": "This data structure represents an Event to Metrics (E2M) object.",
-        "type": "object",
-        "properties": {
-          "createTime": {
-            "example": "2022-06-30T12:30:00.000Z",
-            "description": "RFC3339 timestamp of when this E2M was created.",
-            "type": "string",
-            "minLength": 0
-          },
-          "dataSource": {
-            "example": "my_namespace/my_dataset",
-            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
-            "type": "string",
-            "minLength": 0
-          },
-          "description": {
-            "example": "avg and max the latency of catalog service",
-            "description": "Human-readable description of this E2M.",
-            "type": "string",
-            "minLength": 0
-          },
-          "id": {
-            "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
-            "description": "Unique identifier for this E2M. Required on update requests.",
-            "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-            "minLength": 36,
-            "maxLength": 36
-          },
-          "isInternal": {
-            "description": "Indicates whether this E2M is for internal use only.",
-            "type": "boolean"
-          },
-          "metricFields": {
-            "description": "Metric fields to extract and aggregate from the events.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/v2.MetricField"
-            },
-            "minItems": 0,
-            "maxItems": 10
-          },
-          "metricLabels": {
-            "description": "Metric labels to attach to the generated metrics.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MetricLabel"
-            },
-            "minItems": 0
-          },
-          "name": {
-            "example": "Service_catalog_latency",
-            "description": "Human-readable name for this E2M.",
-            "type": "string",
-            "minLength": 0
-          },
-          "permutations": {
-            "$ref": "#/components/schemas/E2MPermutations"
-          },
-          "spansQuery": {
-            "$ref": "#/components/schemas/v2.SpansQuery"
-          },
-          "type": {
-            "$ref": "#/components/schemas/E2MType"
-          },
-          "updateTime": {
-            "example": "2022-06-30T12:30:00.000Z",
-            "description": "RFC3339 timestamp of when this E2M was last updated.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "name",
-          "type",
-          "spansQuery"
-        ]
-      },
       "E2MType": {
         "description": "E2 m type.",
         "type": "string",
@@ -1012,16 +1128,6 @@
         ]
       },
       "FilterPathAndValues": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
-          },
-          {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
-          }
-        ]
-      },
-      "FilterPathAndValuesFilters": {
         "externalDocs": {
           "url": ""
         },
@@ -1032,26 +1138,6 @@
           "filters": {
             "$ref": "#/components/schemas/Filters"
           },
-          "path": {
-            "example": "test",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "path",
-          "values",
-          "filters"
-        ]
-      },
-      "FilterPathAndValuesMultipleValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
-        "type": "object",
-        "properties": {
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
@@ -1062,9 +1148,21 @@
           }
         },
         "required": [
-          "path",
-          "values",
-          "multipleValues"
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
         ]
       },
       "Filters": {
@@ -1292,97 +1390,6 @@
           "SAMPLE_TYPE_MAX"
         ]
       },
-      "V2AggregationHistogram": {
-        "externalDocs": {
-          "description": "Find out more about events2metrics",
-          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
-        },
-        "title": "Aggregation",
-        "description": "This data structure represents an aggregation",
-        "type": "object",
-        "properties": {
-          "aggType": {
-            "$ref": "#/components/schemas/AggType"
-          },
-          "enabled": {
-            "description": "Whether this resource is enabled.",
-            "type": "boolean"
-          },
-          "histogram": {
-            "$ref": "#/components/schemas/E2MAggHistogram"
-          },
-          "targetMetricName": {
-            "example": "alias_field_name_agg_func",
-            "description": "Name of the target metric produced by this aggregation.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "histogram"
-        ]
-      },
-      "V2AggregationNone": {
-        "externalDocs": {
-          "description": "Find out more about events2metrics",
-          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
-        },
-        "title": "Aggregation",
-        "description": "This data structure represents an aggregation",
-        "type": "object",
-        "properties": {
-          "aggType": {
-            "$ref": "#/components/schemas/AggType"
-          },
-          "enabled": {
-            "description": "Whether this resource is enabled.",
-            "type": "boolean"
-          },
-          "none": {
-            "description": "Marker indicating no additional metadata is needed for this aggregation type.",
-            "type": "object"
-          },
-          "targetMetricName": {
-            "example": "alias_field_name_agg_func",
-            "description": "Name of the target metric produced by this aggregation.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "none"
-        ]
-      },
-      "V2AggregationSamples": {
-        "externalDocs": {
-          "description": "Find out more about events2metrics",
-          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
-        },
-        "title": "Aggregation",
-        "description": "This data structure represents an aggregation",
-        "type": "object",
-        "properties": {
-          "aggType": {
-            "$ref": "#/components/schemas/AggType"
-          },
-          "enabled": {
-            "description": "Whether this resource is enabled.",
-            "type": "boolean"
-          },
-          "samples": {
-            "$ref": "#/components/schemas/E2MAggSamples"
-          },
-          "targetMetricName": {
-            "example": "alias_field_name_agg_func",
-            "description": "Name of the target metric produced by this aggregation.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
-        "required": [
-          "samples"
-        ]
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -1404,15 +1411,81 @@
         ]
       },
       "v2.Aggregation": {
+        "externalDocs": {
+          "description": "Find out more about events2metrics",
+          "url": "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+        },
+        "title": "Aggregation",
+        "description": "This data structure represents an aggregation",
+        "type": "object",
+        "properties": {
+          "aggType": {
+            "$ref": "#/components/schemas/AggType"
+          },
+          "enabled": {
+            "description": "Whether this resource is enabled.",
+            "type": "boolean"
+          },
+          "histogram": {
+            "$ref": "#/components/schemas/E2MAggHistogram"
+          },
+          "none": {
+            "description": "Marker indicating no additional metadata is needed for this aggregation type.",
+            "type": "object"
+          },
+          "samples": {
+            "$ref": "#/components/schemas/E2MAggSamples"
+          },
+          "targetMetricName": {
+            "example": "alias_field_name_agg_func",
+            "description": "Name of the target metric produced by this aggregation.",
+            "type": "string",
+            "minLength": 0
+          }
+        },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V2AggregationHistogram"
+            "type": "object",
+            "required": [
+              "none"
+            ]
           },
           {
-            "$ref": "#/components/schemas/V2AggregationNone"
+            "type": "object",
+            "required": [
+              "samples"
+            ]
           },
           {
-            "$ref": "#/components/schemas/V2AggregationSamples"
+            "type": "object",
+            "required": [
+              "histogram"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "none"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "samples"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "histogram"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },

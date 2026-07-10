@@ -24,8 +24,9 @@ var _ MappedNullable = &AiApplicationsServiceSetCompanyModelPricingRequest{}
 // AiApplicationsServiceSetCompanyModelPricingRequest Request to set (replace) the company's custom model pricing.
 type AiApplicationsServiceSetCompanyModelPricingRequest struct {
 	// Full replacement map of model name to custom price.
-	Prices map[string]ModelPrice `json:"prices"`
-	AdditionalProperties map[string]interface{}
+	Prices                            map[string]ModelPrice `json:"prices"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AiApplicationsServiceSetCompanyModelPricingRequest AiApplicationsServiceSetCompanyModelPricingRequest
@@ -73,7 +74,7 @@ func (o *AiApplicationsServiceSetCompanyModelPricingRequest) SetPrices(v map[str
 }
 
 func (o AiApplicationsServiceSetCompanyModelPricingRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +105,10 @@ func (o *AiApplicationsServiceSetCompanyModelPricingRequest) UnmarshalJSON(data 
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -129,6 +130,7 @@ func (o *AiApplicationsServiceSetCompanyModelPricingRequest) UnmarshalJSON(data 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "prices")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -169,4 +171,3 @@ func (v *NullableAiApplicationsServiceSetCompanyModelPricingRequest) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

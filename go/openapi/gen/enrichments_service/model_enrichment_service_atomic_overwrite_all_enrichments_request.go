@@ -23,8 +23,9 @@ var _ MappedNullable = &EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest{}
 // EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest Request to atomically replace all enrichment rules.
 type EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest struct {
 	// Complete list of enrichment rules to replace all existing rules.
-	RequestEnrichments []EnrichmentRequestModel `json:"requestEnrichments,omitempty"`
-	AdditionalProperties map[string]interface{}
+	RequestEnrichments                []EnrichmentRequestModel `json:"requestEnrichments,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest
@@ -79,7 +80,7 @@ func (o *EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest) SetRequestEnrich
 }
 
 func (o EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest) UnmarshalJSON(da
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "requestEnrichments")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

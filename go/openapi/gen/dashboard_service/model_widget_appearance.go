@@ -23,8 +23,9 @@ var _ MappedNullable = &WidgetAppearance{}
 // WidgetAppearance Appearance.
 type WidgetAppearance struct {
 	// The width.
-	Width *int32 `json:"width,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Width                             *int32 `json:"width,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _WidgetAppearance WidgetAppearance
@@ -79,7 +80,7 @@ func (o *WidgetAppearance) SetWidth(v int32) {
 }
 
 func (o WidgetAppearance) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -116,6 +117,7 @@ func (o *WidgetAppearance) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "width")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -156,4 +158,3 @@ func (v *NullableWidgetAppearance) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

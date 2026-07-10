@@ -13,126 +13,179 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// SectionOptions - struct for SectionOptions
+// checks if the SectionOptions type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SectionOptions{}
+
+// SectionOptions Section options.
 type SectionOptions struct {
-	SectionOptionsCustom *SectionOptionsCustom
-	SectionOptionsInternal *SectionOptionsInternal
+	Custom *CustomSectionOptions `json:"custom,omitempty"`
+	// Internal section options.
+	Internal                          map[string]interface{} `json:"internal,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// SectionOptionsCustomAsSectionOptions is a convenience function that returns SectionOptionsCustom wrapped in SectionOptions
-func SectionOptionsCustomAsSectionOptions(v *SectionOptionsCustom) SectionOptions {
-	return SectionOptions{
-		SectionOptionsCustom: v,
+type _SectionOptions SectionOptions
+
+// NewSectionOptions instantiates a new SectionOptions object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewSectionOptions() *SectionOptions {
+	this := SectionOptions{}
+	return &this
+}
+
+// NewSectionOptionsWithDefaults instantiates a new SectionOptions object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewSectionOptionsWithDefaults() *SectionOptions {
+	this := SectionOptions{}
+	return &this
+}
+
+// GetCustom returns the Custom field value if set, zero value otherwise.
+func (o *SectionOptions) GetCustom() CustomSectionOptions {
+	if o == nil || IsNil(o.Custom) {
+		var ret CustomSectionOptions
+		return ret
 	}
+	return *o.Custom
 }
 
-// SectionOptionsInternalAsSectionOptions is a convenience function that returns SectionOptionsInternal wrapped in SectionOptions
-func SectionOptionsInternalAsSectionOptions(v *SectionOptionsInternal) SectionOptions {
-	return SectionOptions{
-		SectionOptionsInternal: v,
+// GetCustomOk returns a tuple with the Custom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SectionOptions) GetCustomOk() (*CustomSectionOptions, bool) {
+	if o == nil || IsNil(o.Custom) {
+		return nil, false
 	}
+	return o.Custom, true
 }
 
+// HasCustom returns a boolean if a field has been set.
+func (o *SectionOptions) HasCustom() bool {
+	if o != nil && !IsNil(o.Custom) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *SectionOptions) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into SectionOptionsCustom
-	err = json.Unmarshal(data, &dst.SectionOptionsCustom)
-	if err == nil {
-		jsonSectionOptionsCustom, _ := json.Marshal(dst.SectionOptionsCustom)
-		if string(jsonSectionOptionsCustom) == "{}" { // empty struct
-			dst.SectionOptionsCustom = nil
-		} else {
-			if err = validator.Validate(dst.SectionOptionsCustom); err != nil {
-				dst.SectionOptionsCustom = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetCustom gets a reference to the given CustomSectionOptions and assigns it to the Custom field.
+func (o *SectionOptions) SetCustom(v CustomSectionOptions) {
+	o.Custom = &v
+}
+
+// GetInternal returns the Internal field value if set, zero value otherwise.
+func (o *SectionOptions) GetInternal() map[string]interface{} {
+	if o == nil || IsNil(o.Internal) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Internal
+}
+
+// GetInternalOk returns a tuple with the Internal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SectionOptions) GetInternalOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Internal) {
+		return map[string]interface{}{}, false
+	}
+	return o.Internal, true
+}
+
+// HasInternal returns a boolean if a field has been set.
+func (o *SectionOptions) HasInternal() bool {
+	if o != nil && !IsNil(o.Internal) {
+		return true
+	}
+
+	return false
+}
+
+// SetInternal gets a reference to the given map[string]interface{} and assigns it to the Internal field.
+func (o *SectionOptions) SetInternal(v map[string]interface{}) {
+	o.Internal = v
+}
+
+func (o SectionOptions) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SectionOptions) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Custom) {
+		toSerialize["custom"] = o.Custom
+	}
+	if !IsNil(o.Internal) {
+		toSerialize["internal"] = o.Internal
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["internal"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["custom"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [internal, custom] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["internal"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field internal must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["custom"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field custom must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *SectionOptions) UnmarshalJSON(data []byte) (err error) {
+	varSectionOptions := _SectionOptions{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSectionOptions)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SectionOptions(varSectionOptions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["internal"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SectionOptionsCustom = nil
-	}
-
-	// try to unmarshal data into SectionOptionsInternal
-	err = json.Unmarshal(data, &dst.SectionOptionsInternal)
-	if err == nil {
-		jsonSectionOptionsInternal, _ := json.Marshal(dst.SectionOptionsInternal)
-		if string(jsonSectionOptionsInternal) == "{}" { // empty struct
-			dst.SectionOptionsInternal = nil
-		} else {
-			if err = validator.Validate(dst.SectionOptionsInternal); err != nil {
-				dst.SectionOptionsInternal = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["custom"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.SectionOptionsInternal = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [internal, custom] may be set"}
+		}
+
+		delete(additionalProperties, "custom")
+		delete(additionalProperties, "internal")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.SectionOptionsCustom = nil
-		dst.SectionOptionsInternal = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(SectionOptions)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src SectionOptions) MarshalJSON() ([]byte, error) {
-	if src.SectionOptionsCustom != nil {
-		return json.Marshal(&src.SectionOptionsCustom)
-	}
-
-	if src.SectionOptionsInternal != nil {
-		return json.Marshal(&src.SectionOptionsInternal)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *SectionOptions) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.SectionOptionsCustom != nil {
-		return obj.SectionOptionsCustom
-	}
-
-	if obj.SectionOptionsInternal != nil {
-		return obj.SectionOptionsInternal
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj SectionOptions) GetActualInstanceValue() (interface{}) {
-	if obj.SectionOptionsCustom != nil {
-		return *obj.SectionOptionsCustom
-	}
-
-	if obj.SectionOptionsInternal != nil {
-		return *obj.SectionOptionsInternal
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableSectionOptions struct {
@@ -170,4 +223,3 @@ func (v *NullableSectionOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

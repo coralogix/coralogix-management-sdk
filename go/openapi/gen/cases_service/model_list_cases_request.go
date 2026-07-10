@@ -22,10 +22,11 @@ var _ MappedNullable = &ListCasesRequest{}
 
 // ListCasesRequest Request to list cases with filtering and pagination
 type ListCasesRequest struct {
-	Filters *CaseFilters `json:"filters,omitempty"`
-	OrderBy *CaseOrderBy `json:"orderBy,omitempty"`
-	Pagination *CasesV1PaginationRequest `json:"pagination,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Filters                           *CaseFilters              `json:"filters,omitempty"`
+	OrderBy                           *CaseOrderBy              `json:"orderBy,omitempty"`
+	Pagination                        *CasesV1PaginationRequest `json:"pagination,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _ListCasesRequest ListCasesRequest
@@ -144,7 +145,7 @@ func (o *ListCasesRequest) SetPagination(v CasesV1PaginationRequest) {
 }
 
 func (o ListCasesRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -189,6 +190,7 @@ func (o *ListCasesRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "orderBy")
 		delete(additionalProperties, "pagination")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -229,4 +231,3 @@ func (v *NullableListCasesRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

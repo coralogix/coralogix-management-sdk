@@ -22,8 +22,9 @@ var _ MappedNullable = &QueryMetricsQuerySelection{}
 
 // QueryMetricsQuerySelection Discriminated union of selection types for the filter operator.
 type QueryMetricsQuerySelection struct {
-	List *QueryMetricsQuerySelectionListSelection `json:"list,omitempty"`
-	AdditionalProperties map[string]interface{}
+	List                              *QueryMetricsQuerySelectionListSelection `json:"list,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _QueryMetricsQuerySelection QueryMetricsQuerySelection
@@ -78,7 +79,7 @@ func (o *QueryMetricsQuerySelection) SetList(v QueryMetricsQuerySelectionListSel
 }
 
 func (o QueryMetricsQuerySelection) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -115,6 +116,7 @@ func (o *QueryMetricsQuerySelection) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "list")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -155,4 +157,3 @@ func (v *NullableQueryMetricsQuerySelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

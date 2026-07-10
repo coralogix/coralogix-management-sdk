@@ -25,8 +25,9 @@ type MultiSelectSelectionListSelection struct {
 	// List of labels.
 	Labels []string `json:"labels,omitempty"`
 	// List of values.
-	Values []string `json:"values,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Values                            []string `json:"values,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MultiSelectSelectionListSelection MultiSelectSelectionListSelection
@@ -113,7 +114,7 @@ func (o *MultiSelectSelectionListSelection) SetValues(v []string) {
 }
 
 func (o MultiSelectSelectionListSelection) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *MultiSelectSelectionListSelection) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "labels")
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableMultiSelectSelectionListSelection) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

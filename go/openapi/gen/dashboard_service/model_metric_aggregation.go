@@ -22,9 +22,10 @@ var _ MappedNullable = &MetricAggregation{}
 
 // MetricAggregation Metric aggregation.
 type MetricAggregation struct {
-	AggregationType *MetricAggregationType `json:"aggregationType,omitempty"`
-	MetricField *MetricAggregationMetricField `json:"metricField,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AggregationType                   *MetricAggregationType        `json:"aggregationType,omitempty"`
+	MetricField                       *MetricAggregationMetricField `json:"metricField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _MetricAggregation MetricAggregation
@@ -111,7 +112,7 @@ func (o *MetricAggregation) SetMetricField(v MetricAggregationMetricField) {
 }
 
 func (o MetricAggregation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *MetricAggregation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "aggregationType")
 		delete(additionalProperties, "metricField")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullableMetricAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

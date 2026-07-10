@@ -23,34 +23,35 @@ var _ MappedNullable = &VerticalBarsMulti{}
 // VerticalBarsMulti Visualization configuration for vertical bars with multiple queries.
 type VerticalBarsMulti struct {
 	// Whether to render numeric value with abbreviation
-	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
-	BarValueDisplay *VisualizationBarValueDisplay `json:"barValueDisplay,omitempty"`
+	AllowAbbreviation *bool                         `json:"allowAbbreviation,omitempty"`
+	BarValueDisplay   *VisualizationBarValueDisplay `json:"barValueDisplay,omitempty"`
 	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme, one of the predefined values
-	ColorScheme *string `json:"colorScheme,omitempty"`
-	ColorsBy *ColorsBy `json:"colorsBy,omitempty"`
+	ColorScheme *string   `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	ColorsBy    *ColorsBy `json:"colorsBy,omitempty"`
 	// Custom unit (requires to have unit field set to custom to take effect)
-	CustomUnit *string `json:"customUnit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// Custom template name for a group, can contain variables
-	GroupNameTemplate *string `json:"groupNameTemplate,omitempty"`
+	GroupNameTemplate *string `json:"groupNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to ignore color scheme and derive colors from algorithm
-	HashColors *bool `json:"hashColors,omitempty"`
-	Legend *Legend `json:"legend,omitempty"`
+	HashColors *bool   `json:"hashColors,omitempty"`
+	Legend     *Legend `json:"legend,omitempty"`
 	// Maximum number of bars on a chart
 	MaxBarsPerChart *int32 `json:"maxBarsPerChart,omitempty"`
 	// Per-query field settings
 	QueryFieldSettings []VerticalBarsMultiQueryFieldSettings `json:"queryFieldSettings,omitempty"`
-	ScaleType *ScaleType `json:"scaleType,omitempty"`
-	SortOrder *VisualizationSortOrder `json:"sortOrder,omitempty"`
-	Unit *CommonUnit `json:"unit,omitempty"`
+	ScaleType          *ScaleType                            `json:"scaleType,omitempty"`
+	SortOrder          *VisualizationSortOrder               `json:"sortOrder,omitempty"`
+	Unit               *CommonUnit                           `json:"unit,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
-	YAxisMin *float32 `json:"yAxisMin,omitempty"`
-	AdditionalProperties map[string]interface{}
+	YAxisMin                          *float32 `json:"yAxisMin,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _VerticalBarsMulti VerticalBarsMulti
@@ -617,7 +618,7 @@ func (o *VerticalBarsMulti) SetYAxisMin(v float32) {
 }
 
 func (o VerticalBarsMulti) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -718,6 +719,7 @@ func (o *VerticalBarsMulti) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "yAxisMax")
 		delete(additionalProperties, "yAxisMin")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -758,4 +760,3 @@ func (v *NullableVerticalBarsMulti) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

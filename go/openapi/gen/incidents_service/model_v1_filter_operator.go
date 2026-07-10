@@ -24,7 +24,7 @@ type V1FilterOperator string
 // List of v1.FilterOperator
 const (
 	V1FILTEROPERATOR_FILTER_OPERATOR_OR_OR_UNSPECIFIED V1FilterOperator = "FILTER_OPERATOR_OR_OR_UNSPECIFIED"
-	V1FILTEROPERATOR_FILTER_OPERATOR_AND V1FilterOperator = "FILTER_OPERATOR_AND"
+	V1FILTEROPERATOR_FILTER_OPERATOR_AND               V1FilterOperator = "FILTER_OPERATOR_AND"
 )
 
 // All allowed values of V1FilterOperator enum
@@ -111,4 +111,3 @@ func (v *NullableV1FilterOperator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

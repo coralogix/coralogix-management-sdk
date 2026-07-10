@@ -14,429 +14,912 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// Dashboard - struct for Dashboard
+// checks if the Dashboard type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Dashboard{}
+
+// Dashboard Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.
 type Dashboard struct {
-	DashboardFifteenMinutesAbsoluteTimeFrame *DashboardFifteenMinutesAbsoluteTimeFrame
-	DashboardFifteenMinutesRelativeTimeFrame *DashboardFifteenMinutesRelativeTimeFrame
-	DashboardFiveMinutesAbsoluteTimeFrame *DashboardFiveMinutesAbsoluteTimeFrame
-	DashboardFiveMinutesRelativeTimeFrame *DashboardFiveMinutesRelativeTimeFrame
-	DashboardOffAbsoluteTimeFrame *DashboardOffAbsoluteTimeFrame
-	DashboardOffRelativeTimeFrame *DashboardOffRelativeTimeFrame
-	DashboardOneMinuteAbsoluteTimeFrame *DashboardOneMinuteAbsoluteTimeFrame
-	DashboardOneMinuteRelativeTimeFrame *DashboardOneMinuteRelativeTimeFrame
-	DashboardTwoMinutesAbsoluteTimeFrame *DashboardTwoMinutesAbsoluteTimeFrame
-	DashboardTwoMinutesRelativeTimeFrame *DashboardTwoMinutesRelativeTimeFrame
+	AbsoluteTimeFrame *TimeFrame `json:"absoluteTimeFrame,omitempty"`
+	// A list of public actions that are available within the dashboard context
+	Actions []DashboardAction `json:"actions,omitempty"`
+	// A list of annotations that can be used within the dashboard's visualizations
+	Annotations []Annotation `json:"annotations,omitempty"`
+	// A brief description or summary of the dashboard's purpose or content
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Auto refresh fifteen minutes.
+	FifteenMinutes map[string]interface{} `json:"fifteenMinutes,omitempty"`
+	// A list of filters that can be applied to the dashboard's data
+	Filters []FiltersFilter `json:"filters,omitempty"`
+	// Auto refresh five minutes.
+	FiveMinutes map[string]interface{} `json:"fiveMinutes,omitempty"`
+	FolderId    *UUID                  `json:"folderId,omitempty"`
+	FolderPath  *FolderPath            `json:"folderPath,omitempty"`
+	// A unique identifier of the dashboard
+	Id     *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Layout Layout  `json:"layout"`
+	// The display name of the dashboard
+	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
+	// Auto refresh off.
+	Off map[string]interface{} `json:"off,omitempty"`
+	// Auto refresh one minute.
+	OneMinute map[string]interface{} `json:"oneMinute,omitempty"`
+	// Relative time frame specifying a duration from the current time
+	RelativeTimeFrame *string `json:"relativeTimeFrame,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// A unique slug name serving as an alias for accessing the dashboard
+	SlugName *string `json:"slugName,omitempty" validate:"regexp=^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$"`
+	// Auto refresh two minutes.
+	TwoMinutes map[string]interface{} `json:"twoMinutes,omitempty"`
+	// A list of variables that can be used within the dashboard for dynamic content
+	Variables []Variable `json:"variables,omitempty"`
+	// A list of variables that can be used within the dashboard for dynamic content
+	VariablesV2                       []VariableV2 `json:"variablesV2,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// DashboardFifteenMinutesAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardFifteenMinutesAbsoluteTimeFrame wrapped in Dashboard
-func DashboardFifteenMinutesAbsoluteTimeFrameAsDashboard(v *DashboardFifteenMinutesAbsoluteTimeFrame) Dashboard {
-	return Dashboard{
-		DashboardFifteenMinutesAbsoluteTimeFrame: v,
+type _Dashboard Dashboard
+
+// NewDashboard instantiates a new Dashboard object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewDashboard(layout Layout, name string) *Dashboard {
+	this := Dashboard{}
+	this.Layout = layout
+	this.Name = name
+	return &this
+}
+
+// NewDashboardWithDefaults instantiates a new Dashboard object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewDashboardWithDefaults() *Dashboard {
+	this := Dashboard{}
+	return &this
+}
+
+// GetAbsoluteTimeFrame returns the AbsoluteTimeFrame field value if set, zero value otherwise.
+func (o *Dashboard) GetAbsoluteTimeFrame() TimeFrame {
+	if o == nil || IsNil(o.AbsoluteTimeFrame) {
+		var ret TimeFrame
+		return ret
 	}
+	return *o.AbsoluteTimeFrame
 }
 
-// DashboardFifteenMinutesRelativeTimeFrameAsDashboard is a convenience function that returns DashboardFifteenMinutesRelativeTimeFrame wrapped in Dashboard
-func DashboardFifteenMinutesRelativeTimeFrameAsDashboard(v *DashboardFifteenMinutesRelativeTimeFrame) Dashboard {
-	return Dashboard{
-		DashboardFifteenMinutesRelativeTimeFrame: v,
+// GetAbsoluteTimeFrameOk returns a tuple with the AbsoluteTimeFrame field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetAbsoluteTimeFrameOk() (*TimeFrame, bool) {
+	if o == nil || IsNil(o.AbsoluteTimeFrame) {
+		return nil, false
 	}
+	return o.AbsoluteTimeFrame, true
 }
 
-// DashboardFiveMinutesAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardFiveMinutesAbsoluteTimeFrame wrapped in Dashboard
-func DashboardFiveMinutesAbsoluteTimeFrameAsDashboard(v *DashboardFiveMinutesAbsoluteTimeFrame) Dashboard {
-	return Dashboard{
-		DashboardFiveMinutesAbsoluteTimeFrame: v,
+// HasAbsoluteTimeFrame returns a boolean if a field has been set.
+func (o *Dashboard) HasAbsoluteTimeFrame() bool {
+	if o != nil && !IsNil(o.AbsoluteTimeFrame) {
+		return true
 	}
+
+	return false
 }
 
-// DashboardFiveMinutesRelativeTimeFrameAsDashboard is a convenience function that returns DashboardFiveMinutesRelativeTimeFrame wrapped in Dashboard
-func DashboardFiveMinutesRelativeTimeFrameAsDashboard(v *DashboardFiveMinutesRelativeTimeFrame) Dashboard {
-	return Dashboard{
-		DashboardFiveMinutesRelativeTimeFrame: v,
+// SetAbsoluteTimeFrame gets a reference to the given TimeFrame and assigns it to the AbsoluteTimeFrame field.
+func (o *Dashboard) SetAbsoluteTimeFrame(v TimeFrame) {
+	o.AbsoluteTimeFrame = &v
+}
+
+// GetActions returns the Actions field value if set, zero value otherwise.
+func (o *Dashboard) GetActions() []DashboardAction {
+	if o == nil || IsNil(o.Actions) {
+		var ret []DashboardAction
+		return ret
 	}
+	return o.Actions
 }
 
-// DashboardOffAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardOffAbsoluteTimeFrame wrapped in Dashboard
-func DashboardOffAbsoluteTimeFrameAsDashboard(v *DashboardOffAbsoluteTimeFrame) Dashboard {
-	return Dashboard{
-		DashboardOffAbsoluteTimeFrame: v,
+// GetActionsOk returns a tuple with the Actions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetActionsOk() ([]DashboardAction, bool) {
+	if o == nil || IsNil(o.Actions) {
+		return nil, false
 	}
+	return o.Actions, true
 }
 
-// DashboardOffRelativeTimeFrameAsDashboard is a convenience function that returns DashboardOffRelativeTimeFrame wrapped in Dashboard
-func DashboardOffRelativeTimeFrameAsDashboard(v *DashboardOffRelativeTimeFrame) Dashboard {
-	return Dashboard{
-		DashboardOffRelativeTimeFrame: v,
+// HasActions returns a boolean if a field has been set.
+func (o *Dashboard) HasActions() bool {
+	if o != nil && !IsNil(o.Actions) {
+		return true
 	}
+
+	return false
 }
 
-// DashboardOneMinuteAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardOneMinuteAbsoluteTimeFrame wrapped in Dashboard
-func DashboardOneMinuteAbsoluteTimeFrameAsDashboard(v *DashboardOneMinuteAbsoluteTimeFrame) Dashboard {
-	return Dashboard{
-		DashboardOneMinuteAbsoluteTimeFrame: v,
+// SetActions gets a reference to the given []DashboardAction and assigns it to the Actions field.
+func (o *Dashboard) SetActions(v []DashboardAction) {
+	o.Actions = v
+}
+
+// GetAnnotations returns the Annotations field value if set, zero value otherwise.
+func (o *Dashboard) GetAnnotations() []Annotation {
+	if o == nil || IsNil(o.Annotations) {
+		var ret []Annotation
+		return ret
 	}
+	return o.Annotations
 }
 
-// DashboardOneMinuteRelativeTimeFrameAsDashboard is a convenience function that returns DashboardOneMinuteRelativeTimeFrame wrapped in Dashboard
-func DashboardOneMinuteRelativeTimeFrameAsDashboard(v *DashboardOneMinuteRelativeTimeFrame) Dashboard {
-	return Dashboard{
-		DashboardOneMinuteRelativeTimeFrame: v,
+// GetAnnotationsOk returns a tuple with the Annotations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetAnnotationsOk() ([]Annotation, bool) {
+	if o == nil || IsNil(o.Annotations) {
+		return nil, false
 	}
+	return o.Annotations, true
 }
 
-// DashboardTwoMinutesAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardTwoMinutesAbsoluteTimeFrame wrapped in Dashboard
-func DashboardTwoMinutesAbsoluteTimeFrameAsDashboard(v *DashboardTwoMinutesAbsoluteTimeFrame) Dashboard {
-	return Dashboard{
-		DashboardTwoMinutesAbsoluteTimeFrame: v,
+// HasAnnotations returns a boolean if a field has been set.
+func (o *Dashboard) HasAnnotations() bool {
+	if o != nil && !IsNil(o.Annotations) {
+		return true
 	}
+
+	return false
 }
 
-// DashboardTwoMinutesRelativeTimeFrameAsDashboard is a convenience function that returns DashboardTwoMinutesRelativeTimeFrame wrapped in Dashboard
-func DashboardTwoMinutesRelativeTimeFrameAsDashboard(v *DashboardTwoMinutesRelativeTimeFrame) Dashboard {
-	return Dashboard{
-		DashboardTwoMinutesRelativeTimeFrame: v,
+// SetAnnotations gets a reference to the given []Annotation and assigns it to the Annotations field.
+func (o *Dashboard) SetAnnotations(v []Annotation) {
+	o.Annotations = v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *Dashboard) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
 	}
+	return *o.Description
 }
 
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *Dashboard) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into DashboardFifteenMinutesAbsoluteTimeFrame
-	err = json.Unmarshal(data, &dst.DashboardFifteenMinutesAbsoluteTimeFrame)
-	if err == nil {
-		jsonDashboardFifteenMinutesAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardFifteenMinutesAbsoluteTimeFrame)
-		if string(jsonDashboardFifteenMinutesAbsoluteTimeFrame) == "{}" { // empty struct
-			dst.DashboardFifteenMinutesAbsoluteTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.DashboardFifteenMinutesAbsoluteTimeFrame); err != nil {
-				dst.DashboardFifteenMinutesAbsoluteTimeFrame = nil
-			} else {
-				match++
-			}
+// HasDescription returns a boolean if a field has been set.
+func (o *Dashboard) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *Dashboard) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetFifteenMinutes returns the FifteenMinutes field value if set, zero value otherwise.
+func (o *Dashboard) GetFifteenMinutes() map[string]interface{} {
+	if o == nil || IsNil(o.FifteenMinutes) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.FifteenMinutes
+}
+
+// GetFifteenMinutesOk returns a tuple with the FifteenMinutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetFifteenMinutesOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.FifteenMinutes) {
+		return map[string]interface{}{}, false
+	}
+	return o.FifteenMinutes, true
+}
+
+// HasFifteenMinutes returns a boolean if a field has been set.
+func (o *Dashboard) HasFifteenMinutes() bool {
+	if o != nil && !IsNil(o.FifteenMinutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetFifteenMinutes gets a reference to the given map[string]interface{} and assigns it to the FifteenMinutes field.
+func (o *Dashboard) SetFifteenMinutes(v map[string]interface{}) {
+	o.FifteenMinutes = v
+}
+
+// GetFilters returns the Filters field value if set, zero value otherwise.
+func (o *Dashboard) GetFilters() []FiltersFilter {
+	if o == nil || IsNil(o.Filters) {
+		var ret []FiltersFilter
+		return ret
+	}
+	return o.Filters
+}
+
+// GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetFiltersOk() ([]FiltersFilter, bool) {
+	if o == nil || IsNil(o.Filters) {
+		return nil, false
+	}
+	return o.Filters, true
+}
+
+// HasFilters returns a boolean if a field has been set.
+func (o *Dashboard) HasFilters() bool {
+	if o != nil && !IsNil(o.Filters) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilters gets a reference to the given []FiltersFilter and assigns it to the Filters field.
+func (o *Dashboard) SetFilters(v []FiltersFilter) {
+	o.Filters = v
+}
+
+// GetFiveMinutes returns the FiveMinutes field value if set, zero value otherwise.
+func (o *Dashboard) GetFiveMinutes() map[string]interface{} {
+	if o == nil || IsNil(o.FiveMinutes) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.FiveMinutes
+}
+
+// GetFiveMinutesOk returns a tuple with the FiveMinutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetFiveMinutesOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.FiveMinutes) {
+		return map[string]interface{}{}, false
+	}
+	return o.FiveMinutes, true
+}
+
+// HasFiveMinutes returns a boolean if a field has been set.
+func (o *Dashboard) HasFiveMinutes() bool {
+	if o != nil && !IsNil(o.FiveMinutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetFiveMinutes gets a reference to the given map[string]interface{} and assigns it to the FiveMinutes field.
+func (o *Dashboard) SetFiveMinutes(v map[string]interface{}) {
+	o.FiveMinutes = v
+}
+
+// GetFolderId returns the FolderId field value if set, zero value otherwise.
+func (o *Dashboard) GetFolderId() UUID {
+	if o == nil || IsNil(o.FolderId) {
+		var ret UUID
+		return ret
+	}
+	return *o.FolderId
+}
+
+// GetFolderIdOk returns a tuple with the FolderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetFolderIdOk() (*UUID, bool) {
+	if o == nil || IsNil(o.FolderId) {
+		return nil, false
+	}
+	return o.FolderId, true
+}
+
+// HasFolderId returns a boolean if a field has been set.
+func (o *Dashboard) HasFolderId() bool {
+	if o != nil && !IsNil(o.FolderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetFolderId gets a reference to the given UUID and assigns it to the FolderId field.
+func (o *Dashboard) SetFolderId(v UUID) {
+	o.FolderId = &v
+}
+
+// GetFolderPath returns the FolderPath field value if set, zero value otherwise.
+func (o *Dashboard) GetFolderPath() FolderPath {
+	if o == nil || IsNil(o.FolderPath) {
+		var ret FolderPath
+		return ret
+	}
+	return *o.FolderPath
+}
+
+// GetFolderPathOk returns a tuple with the FolderPath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetFolderPathOk() (*FolderPath, bool) {
+	if o == nil || IsNil(o.FolderPath) {
+		return nil, false
+	}
+	return o.FolderPath, true
+}
+
+// HasFolderPath returns a boolean if a field has been set.
+func (o *Dashboard) HasFolderPath() bool {
+	if o != nil && !IsNil(o.FolderPath) {
+		return true
+	}
+
+	return false
+}
+
+// SetFolderPath gets a reference to the given FolderPath and assigns it to the FolderPath field.
+func (o *Dashboard) SetFolderPath(v FolderPath) {
+	o.FolderPath = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *Dashboard) GetId() string {
+	if o == nil || IsNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *Dashboard) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *Dashboard) SetId(v string) {
+	o.Id = &v
+}
+
+// GetLayout returns the Layout field value
+func (o *Dashboard) GetLayout() Layout {
+	if o == nil {
+		var ret Layout
+		return ret
+	}
+
+	return o.Layout
+}
+
+// GetLayoutOk returns a tuple with the Layout field value
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetLayoutOk() (*Layout, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Layout, true
+}
+
+// SetLayout sets field value
+func (o *Dashboard) SetLayout(v Layout) {
+	o.Layout = v
+}
+
+// GetName returns the Name field value
+func (o *Dashboard) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *Dashboard) SetName(v string) {
+	o.Name = v
+}
+
+// GetOff returns the Off field value if set, zero value otherwise.
+func (o *Dashboard) GetOff() map[string]interface{} {
+	if o == nil || IsNil(o.Off) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Off
+}
+
+// GetOffOk returns a tuple with the Off field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetOffOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Off) {
+		return map[string]interface{}{}, false
+	}
+	return o.Off, true
+}
+
+// HasOff returns a boolean if a field has been set.
+func (o *Dashboard) HasOff() bool {
+	if o != nil && !IsNil(o.Off) {
+		return true
+	}
+
+	return false
+}
+
+// SetOff gets a reference to the given map[string]interface{} and assigns it to the Off field.
+func (o *Dashboard) SetOff(v map[string]interface{}) {
+	o.Off = v
+}
+
+// GetOneMinute returns the OneMinute field value if set, zero value otherwise.
+func (o *Dashboard) GetOneMinute() map[string]interface{} {
+	if o == nil || IsNil(o.OneMinute) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.OneMinute
+}
+
+// GetOneMinuteOk returns a tuple with the OneMinute field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetOneMinuteOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.OneMinute) {
+		return map[string]interface{}{}, false
+	}
+	return o.OneMinute, true
+}
+
+// HasOneMinute returns a boolean if a field has been set.
+func (o *Dashboard) HasOneMinute() bool {
+	if o != nil && !IsNil(o.OneMinute) {
+		return true
+	}
+
+	return false
+}
+
+// SetOneMinute gets a reference to the given map[string]interface{} and assigns it to the OneMinute field.
+func (o *Dashboard) SetOneMinute(v map[string]interface{}) {
+	o.OneMinute = v
+}
+
+// GetRelativeTimeFrame returns the RelativeTimeFrame field value if set, zero value otherwise.
+func (o *Dashboard) GetRelativeTimeFrame() string {
+	if o == nil || IsNil(o.RelativeTimeFrame) {
+		var ret string
+		return ret
+	}
+	return *o.RelativeTimeFrame
+}
+
+// GetRelativeTimeFrameOk returns a tuple with the RelativeTimeFrame field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetRelativeTimeFrameOk() (*string, bool) {
+	if o == nil || IsNil(o.RelativeTimeFrame) {
+		return nil, false
+	}
+	return o.RelativeTimeFrame, true
+}
+
+// HasRelativeTimeFrame returns a boolean if a field has been set.
+func (o *Dashboard) HasRelativeTimeFrame() bool {
+	if o != nil && !IsNil(o.RelativeTimeFrame) {
+		return true
+	}
+
+	return false
+}
+
+// SetRelativeTimeFrame gets a reference to the given string and assigns it to the RelativeTimeFrame field.
+func (o *Dashboard) SetRelativeTimeFrame(v string) {
+	o.RelativeTimeFrame = &v
+}
+
+// GetSlugName returns the SlugName field value if set, zero value otherwise.
+func (o *Dashboard) GetSlugName() string {
+	if o == nil || IsNil(o.SlugName) {
+		var ret string
+		return ret
+	}
+	return *o.SlugName
+}
+
+// GetSlugNameOk returns a tuple with the SlugName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetSlugNameOk() (*string, bool) {
+	if o == nil || IsNil(o.SlugName) {
+		return nil, false
+	}
+	return o.SlugName, true
+}
+
+// HasSlugName returns a boolean if a field has been set.
+func (o *Dashboard) HasSlugName() bool {
+	if o != nil && !IsNil(o.SlugName) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlugName gets a reference to the given string and assigns it to the SlugName field.
+func (o *Dashboard) SetSlugName(v string) {
+	o.SlugName = &v
+}
+
+// GetTwoMinutes returns the TwoMinutes field value if set, zero value otherwise.
+func (o *Dashboard) GetTwoMinutes() map[string]interface{} {
+	if o == nil || IsNil(o.TwoMinutes) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.TwoMinutes
+}
+
+// GetTwoMinutesOk returns a tuple with the TwoMinutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetTwoMinutesOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.TwoMinutes) {
+		return map[string]interface{}{}, false
+	}
+	return o.TwoMinutes, true
+}
+
+// HasTwoMinutes returns a boolean if a field has been set.
+func (o *Dashboard) HasTwoMinutes() bool {
+	if o != nil && !IsNil(o.TwoMinutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetTwoMinutes gets a reference to the given map[string]interface{} and assigns it to the TwoMinutes field.
+func (o *Dashboard) SetTwoMinutes(v map[string]interface{}) {
+	o.TwoMinutes = v
+}
+
+// GetVariables returns the Variables field value if set, zero value otherwise.
+func (o *Dashboard) GetVariables() []Variable {
+	if o == nil || IsNil(o.Variables) {
+		var ret []Variable
+		return ret
+	}
+	return o.Variables
+}
+
+// GetVariablesOk returns a tuple with the Variables field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetVariablesOk() ([]Variable, bool) {
+	if o == nil || IsNil(o.Variables) {
+		return nil, false
+	}
+	return o.Variables, true
+}
+
+// HasVariables returns a boolean if a field has been set.
+func (o *Dashboard) HasVariables() bool {
+	if o != nil && !IsNil(o.Variables) {
+		return true
+	}
+
+	return false
+}
+
+// SetVariables gets a reference to the given []Variable and assigns it to the Variables field.
+func (o *Dashboard) SetVariables(v []Variable) {
+	o.Variables = v
+}
+
+// GetVariablesV2 returns the VariablesV2 field value if set, zero value otherwise.
+func (o *Dashboard) GetVariablesV2() []VariableV2 {
+	if o == nil || IsNil(o.VariablesV2) {
+		var ret []VariableV2
+		return ret
+	}
+	return o.VariablesV2
+}
+
+// GetVariablesV2Ok returns a tuple with the VariablesV2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Dashboard) GetVariablesV2Ok() ([]VariableV2, bool) {
+	if o == nil || IsNil(o.VariablesV2) {
+		return nil, false
+	}
+	return o.VariablesV2, true
+}
+
+// HasVariablesV2 returns a boolean if a field has been set.
+func (o *Dashboard) HasVariablesV2() bool {
+	if o != nil && !IsNil(o.VariablesV2) {
+		return true
+	}
+
+	return false
+}
+
+// SetVariablesV2 gets a reference to the given []VariableV2 and assigns it to the VariablesV2 field.
+func (o *Dashboard) SetVariablesV2(v []VariableV2) {
+	o.VariablesV2 = v
+}
+
+func (o Dashboard) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Dashboard) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AbsoluteTimeFrame) {
+		toSerialize["absoluteTimeFrame"] = o.AbsoluteTimeFrame
+	}
+	if !IsNil(o.Actions) {
+		toSerialize["actions"] = o.Actions
+	}
+	if !IsNil(o.Annotations) {
+		toSerialize["annotations"] = o.Annotations
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.FifteenMinutes) {
+		toSerialize["fifteenMinutes"] = o.FifteenMinutes
+	}
+	if !IsNil(o.Filters) {
+		toSerialize["filters"] = o.Filters
+	}
+	if !IsNil(o.FiveMinutes) {
+		toSerialize["fiveMinutes"] = o.FiveMinutes
+	}
+	if !IsNil(o.FolderId) {
+		toSerialize["folderId"] = o.FolderId
+	}
+	if !IsNil(o.FolderPath) {
+		toSerialize["folderPath"] = o.FolderPath
+	}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	toSerialize["layout"] = o.Layout
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Off) {
+		toSerialize["off"] = o.Off
+	}
+	if !IsNil(o.OneMinute) {
+		toSerialize["oneMinute"] = o.OneMinute
+	}
+	if !IsNil(o.RelativeTimeFrame) {
+		toSerialize["relativeTimeFrame"] = o.RelativeTimeFrame
+	}
+	if !IsNil(o.SlugName) {
+		toSerialize["slugName"] = o.SlugName
+	}
+	if !IsNil(o.TwoMinutes) {
+		toSerialize["twoMinutes"] = o.TwoMinutes
+	}
+	if !IsNil(o.Variables) {
+		toSerialize["variables"] = o.Variables
+	}
+	if !IsNil(o.VariablesV2) {
+		toSerialize["variablesV2"] = o.VariablesV2
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["off"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["twoMinutes"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["fiveMinutes"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["oneMinute"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["fifteenMinutes"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [off, twoMinutes, fiveMinutes, oneMinute, fifteenMinutes] may be set"}
+	}
+
+	optionalOneOfGroup1Matches := 0
+	if _, exists := toSerialize["absoluteTimeFrame"]; exists {
+		optionalOneOfGroup1Matches++
+	}
+	if _, exists := toSerialize["relativeTimeFrame"]; exists {
+		optionalOneOfGroup1Matches++
+	}
+	if optionalOneOfGroup1Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [absoluteTimeFrame, relativeTimeFrame] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["off"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field off must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["twoMinutes"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field twoMinutes must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["fiveMinutes"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field fiveMinutes must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["oneMinute"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field oneMinute must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["fifteenMinutes"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field fifteenMinutes must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["absoluteTimeFrame"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field absoluteTimeFrame must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["relativeTimeFrame"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field relativeTimeFrame must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *Dashboard) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"layout",
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
-	} else {
-		dst.DashboardFifteenMinutesAbsoluteTimeFrame = nil
 	}
 
-	// try to unmarshal data into DashboardFifteenMinutesRelativeTimeFrame
-	err = json.Unmarshal(data, &dst.DashboardFifteenMinutesRelativeTimeFrame)
-	if err == nil {
-		jsonDashboardFifteenMinutesRelativeTimeFrame, _ := json.Marshal(dst.DashboardFifteenMinutesRelativeTimeFrame)
-		if string(jsonDashboardFifteenMinutesRelativeTimeFrame) == "{}" { // empty struct
-			dst.DashboardFifteenMinutesRelativeTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.DashboardFifteenMinutesRelativeTimeFrame); err != nil {
-				dst.DashboardFifteenMinutesRelativeTimeFrame = nil
-			} else {
-				match++
-			}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["off"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["twoMinutes"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["fiveMinutes"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["oneMinute"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["fifteenMinutes"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [off, twoMinutes, fiveMinutes, oneMinute, fifteenMinutes] may be set"}
+	}
+
+	optionalOneOfGroup1Matches := 0
+	if _, exists := allProperties["absoluteTimeFrame"]; exists {
+		optionalOneOfGroup1Matches++
+	}
+	if _, exists := allProperties["relativeTimeFrame"]; exists {
+		optionalOneOfGroup1Matches++
+	}
+	if optionalOneOfGroup1Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [absoluteTimeFrame, relativeTimeFrame] may be set"}
+	}
+
+	varDashboard := _Dashboard{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDashboard)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Dashboard(varDashboard)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["off"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DashboardFifteenMinutesRelativeTimeFrame = nil
-	}
-
-	// try to unmarshal data into DashboardFiveMinutesAbsoluteTimeFrame
-	err = json.Unmarshal(data, &dst.DashboardFiveMinutesAbsoluteTimeFrame)
-	if err == nil {
-		jsonDashboardFiveMinutesAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardFiveMinutesAbsoluteTimeFrame)
-		if string(jsonDashboardFiveMinutesAbsoluteTimeFrame) == "{}" { // empty struct
-			dst.DashboardFiveMinutesAbsoluteTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.DashboardFiveMinutesAbsoluteTimeFrame); err != nil {
-				dst.DashboardFiveMinutesAbsoluteTimeFrame = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["twoMinutes"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DashboardFiveMinutesAbsoluteTimeFrame = nil
-	}
-
-	// try to unmarshal data into DashboardFiveMinutesRelativeTimeFrame
-	err = json.Unmarshal(data, &dst.DashboardFiveMinutesRelativeTimeFrame)
-	if err == nil {
-		jsonDashboardFiveMinutesRelativeTimeFrame, _ := json.Marshal(dst.DashboardFiveMinutesRelativeTimeFrame)
-		if string(jsonDashboardFiveMinutesRelativeTimeFrame) == "{}" { // empty struct
-			dst.DashboardFiveMinutesRelativeTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.DashboardFiveMinutesRelativeTimeFrame); err != nil {
-				dst.DashboardFiveMinutesRelativeTimeFrame = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["fiveMinutes"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DashboardFiveMinutesRelativeTimeFrame = nil
-	}
-
-	// try to unmarshal data into DashboardOffAbsoluteTimeFrame
-	err = json.Unmarshal(data, &dst.DashboardOffAbsoluteTimeFrame)
-	if err == nil {
-		jsonDashboardOffAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardOffAbsoluteTimeFrame)
-		if string(jsonDashboardOffAbsoluteTimeFrame) == "{}" { // empty struct
-			dst.DashboardOffAbsoluteTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.DashboardOffAbsoluteTimeFrame); err != nil {
-				dst.DashboardOffAbsoluteTimeFrame = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["oneMinute"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DashboardOffAbsoluteTimeFrame = nil
-	}
-
-	// try to unmarshal data into DashboardOffRelativeTimeFrame
-	err = json.Unmarshal(data, &dst.DashboardOffRelativeTimeFrame)
-	if err == nil {
-		jsonDashboardOffRelativeTimeFrame, _ := json.Marshal(dst.DashboardOffRelativeTimeFrame)
-		if string(jsonDashboardOffRelativeTimeFrame) == "{}" { // empty struct
-			dst.DashboardOffRelativeTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.DashboardOffRelativeTimeFrame); err != nil {
-				dst.DashboardOffRelativeTimeFrame = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["fifteenMinutes"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.DashboardOffRelativeTimeFrame = nil
-	}
-
-	// try to unmarshal data into DashboardOneMinuteAbsoluteTimeFrame
-	err = json.Unmarshal(data, &dst.DashboardOneMinuteAbsoluteTimeFrame)
-	if err == nil {
-		jsonDashboardOneMinuteAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardOneMinuteAbsoluteTimeFrame)
-		if string(jsonDashboardOneMinuteAbsoluteTimeFrame) == "{}" { // empty struct
-			dst.DashboardOneMinuteAbsoluteTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.DashboardOneMinuteAbsoluteTimeFrame); err != nil {
-				dst.DashboardOneMinuteAbsoluteTimeFrame = nil
-			} else {
-				match++
-			}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [off, twoMinutes, fiveMinutes, oneMinute, fifteenMinutes] may be set"}
 		}
-	} else {
-		dst.DashboardOneMinuteAbsoluteTimeFrame = nil
-	}
 
-	// try to unmarshal data into DashboardOneMinuteRelativeTimeFrame
-	err = json.Unmarshal(data, &dst.DashboardOneMinuteRelativeTimeFrame)
-	if err == nil {
-		jsonDashboardOneMinuteRelativeTimeFrame, _ := json.Marshal(dst.DashboardOneMinuteRelativeTimeFrame)
-		if string(jsonDashboardOneMinuteRelativeTimeFrame) == "{}" { // empty struct
-			dst.DashboardOneMinuteRelativeTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.DashboardOneMinuteRelativeTimeFrame); err != nil {
-				dst.DashboardOneMinuteRelativeTimeFrame = nil
-			} else {
-				match++
-			}
+		optionalOneOfGroup1MatchesInPayload := 0
+		if _, exists := additionalProperties["absoluteTimeFrame"]; exists {
+			optionalOneOfGroup1MatchesInPayload++
 		}
-	} else {
-		dst.DashboardOneMinuteRelativeTimeFrame = nil
-	}
-
-	// try to unmarshal data into DashboardTwoMinutesAbsoluteTimeFrame
-	err = json.Unmarshal(data, &dst.DashboardTwoMinutesAbsoluteTimeFrame)
-	if err == nil {
-		jsonDashboardTwoMinutesAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardTwoMinutesAbsoluteTimeFrame)
-		if string(jsonDashboardTwoMinutesAbsoluteTimeFrame) == "{}" { // empty struct
-			dst.DashboardTwoMinutesAbsoluteTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.DashboardTwoMinutesAbsoluteTimeFrame); err != nil {
-				dst.DashboardTwoMinutesAbsoluteTimeFrame = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["relativeTimeFrame"]; exists {
+			optionalOneOfGroup1MatchesInPayload++
 		}
-	} else {
-		dst.DashboardTwoMinutesAbsoluteTimeFrame = nil
-	}
-
-	// try to unmarshal data into DashboardTwoMinutesRelativeTimeFrame
-	err = json.Unmarshal(data, &dst.DashboardTwoMinutesRelativeTimeFrame)
-	if err == nil {
-		jsonDashboardTwoMinutesRelativeTimeFrame, _ := json.Marshal(dst.DashboardTwoMinutesRelativeTimeFrame)
-		if string(jsonDashboardTwoMinutesRelativeTimeFrame) == "{}" { // empty struct
-			dst.DashboardTwoMinutesRelativeTimeFrame = nil
-		} else {
-			if err = validator.Validate(dst.DashboardTwoMinutesRelativeTimeFrame); err != nil {
-				dst.DashboardTwoMinutesRelativeTimeFrame = nil
-			} else {
-				match++
-			}
+		if optionalOneOfGroup1MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [absoluteTimeFrame, relativeTimeFrame] may be set"}
 		}
-	} else {
-		dst.DashboardTwoMinutesRelativeTimeFrame = nil
+
+		delete(additionalProperties, "absoluteTimeFrame")
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "annotations")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "fifteenMinutes")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "fiveMinutes")
+		delete(additionalProperties, "folderId")
+		delete(additionalProperties, "folderPath")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "layout")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "off")
+		delete(additionalProperties, "oneMinute")
+		delete(additionalProperties, "relativeTimeFrame")
+		delete(additionalProperties, "slugName")
+		delete(additionalProperties, "twoMinutes")
+		delete(additionalProperties, "variables")
+		delete(additionalProperties, "variablesV2")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.DashboardFifteenMinutesAbsoluteTimeFrame = nil
-		dst.DashboardFifteenMinutesRelativeTimeFrame = nil
-		dst.DashboardFiveMinutesAbsoluteTimeFrame = nil
-		dst.DashboardFiveMinutesRelativeTimeFrame = nil
-		dst.DashboardOffAbsoluteTimeFrame = nil
-		dst.DashboardOffRelativeTimeFrame = nil
-		dst.DashboardOneMinuteAbsoluteTimeFrame = nil
-		dst.DashboardOneMinuteRelativeTimeFrame = nil
-		dst.DashboardTwoMinutesAbsoluteTimeFrame = nil
-		dst.DashboardTwoMinutesRelativeTimeFrame = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Dashboard)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src Dashboard) MarshalJSON() ([]byte, error) {
-	if src.DashboardFifteenMinutesAbsoluteTimeFrame != nil {
-		return json.Marshal(&src.DashboardFifteenMinutesAbsoluteTimeFrame)
-	}
-
-	if src.DashboardFifteenMinutesRelativeTimeFrame != nil {
-		return json.Marshal(&src.DashboardFifteenMinutesRelativeTimeFrame)
-	}
-
-	if src.DashboardFiveMinutesAbsoluteTimeFrame != nil {
-		return json.Marshal(&src.DashboardFiveMinutesAbsoluteTimeFrame)
-	}
-
-	if src.DashboardFiveMinutesRelativeTimeFrame != nil {
-		return json.Marshal(&src.DashboardFiveMinutesRelativeTimeFrame)
-	}
-
-	if src.DashboardOffAbsoluteTimeFrame != nil {
-		return json.Marshal(&src.DashboardOffAbsoluteTimeFrame)
-	}
-
-	if src.DashboardOffRelativeTimeFrame != nil {
-		return json.Marshal(&src.DashboardOffRelativeTimeFrame)
-	}
-
-	if src.DashboardOneMinuteAbsoluteTimeFrame != nil {
-		return json.Marshal(&src.DashboardOneMinuteAbsoluteTimeFrame)
-	}
-
-	if src.DashboardOneMinuteRelativeTimeFrame != nil {
-		return json.Marshal(&src.DashboardOneMinuteRelativeTimeFrame)
-	}
-
-	if src.DashboardTwoMinutesAbsoluteTimeFrame != nil {
-		return json.Marshal(&src.DashboardTwoMinutesAbsoluteTimeFrame)
-	}
-
-	if src.DashboardTwoMinutesRelativeTimeFrame != nil {
-		return json.Marshal(&src.DashboardTwoMinutesRelativeTimeFrame)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *Dashboard) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.DashboardFifteenMinutesAbsoluteTimeFrame != nil {
-		return obj.DashboardFifteenMinutesAbsoluteTimeFrame
-	}
-
-	if obj.DashboardFifteenMinutesRelativeTimeFrame != nil {
-		return obj.DashboardFifteenMinutesRelativeTimeFrame
-	}
-
-	if obj.DashboardFiveMinutesAbsoluteTimeFrame != nil {
-		return obj.DashboardFiveMinutesAbsoluteTimeFrame
-	}
-
-	if obj.DashboardFiveMinutesRelativeTimeFrame != nil {
-		return obj.DashboardFiveMinutesRelativeTimeFrame
-	}
-
-	if obj.DashboardOffAbsoluteTimeFrame != nil {
-		return obj.DashboardOffAbsoluteTimeFrame
-	}
-
-	if obj.DashboardOffRelativeTimeFrame != nil {
-		return obj.DashboardOffRelativeTimeFrame
-	}
-
-	if obj.DashboardOneMinuteAbsoluteTimeFrame != nil {
-		return obj.DashboardOneMinuteAbsoluteTimeFrame
-	}
-
-	if obj.DashboardOneMinuteRelativeTimeFrame != nil {
-		return obj.DashboardOneMinuteRelativeTimeFrame
-	}
-
-	if obj.DashboardTwoMinutesAbsoluteTimeFrame != nil {
-		return obj.DashboardTwoMinutesAbsoluteTimeFrame
-	}
-
-	if obj.DashboardTwoMinutesRelativeTimeFrame != nil {
-		return obj.DashboardTwoMinutesRelativeTimeFrame
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj Dashboard) GetActualInstanceValue() (interface{}) {
-	if obj.DashboardFifteenMinutesAbsoluteTimeFrame != nil {
-		return *obj.DashboardFifteenMinutesAbsoluteTimeFrame
-	}
-
-	if obj.DashboardFifteenMinutesRelativeTimeFrame != nil {
-		return *obj.DashboardFifteenMinutesRelativeTimeFrame
-	}
-
-	if obj.DashboardFiveMinutesAbsoluteTimeFrame != nil {
-		return *obj.DashboardFiveMinutesAbsoluteTimeFrame
-	}
-
-	if obj.DashboardFiveMinutesRelativeTimeFrame != nil {
-		return *obj.DashboardFiveMinutesRelativeTimeFrame
-	}
-
-	if obj.DashboardOffAbsoluteTimeFrame != nil {
-		return *obj.DashboardOffAbsoluteTimeFrame
-	}
-
-	if obj.DashboardOffRelativeTimeFrame != nil {
-		return *obj.DashboardOffRelativeTimeFrame
-	}
-
-	if obj.DashboardOneMinuteAbsoluteTimeFrame != nil {
-		return *obj.DashboardOneMinuteAbsoluteTimeFrame
-	}
-
-	if obj.DashboardOneMinuteRelativeTimeFrame != nil {
-		return *obj.DashboardOneMinuteRelativeTimeFrame
-	}
-
-	if obj.DashboardTwoMinutesAbsoluteTimeFrame != nil {
-		return *obj.DashboardTwoMinutesAbsoluteTimeFrame
-	}
-
-	if obj.DashboardTwoMinutesRelativeTimeFrame != nil {
-		return *obj.DashboardTwoMinutesRelativeTimeFrame
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableDashboard struct {
@@ -474,4 +957,3 @@ func (v *NullableDashboard) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

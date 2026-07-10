@@ -23,21 +23,22 @@ var _ MappedNullable = &DetailedDailyProcessedGbs{}
 
 // DetailedDailyProcessedGbs struct for DetailedDailyProcessedGbs
 type DetailedDailyProcessedGbs struct {
-	BlockedGbs *V2GB `json:"blockedGbs,omitempty"`
-	BlockedMetricsGbs *V2GB `json:"blockedMetricsGbs,omitempty"`
-	CpuProfilesGbs *V2GB `json:"cpuProfilesGbs,omitempty"`
-	HighLogsGbs *V2GB `json:"highLogsGbs,omitempty"`
-	HighMetricsGbs *V2GB `json:"highMetricsGbs,omitempty"`
-	HighTracingGbs *V2GB `json:"highTracingGbs,omitempty"`
-	LowLogsGbs *V2GB `json:"lowLogsGbs,omitempty"`
+	BlockedGbs             *V2GB `json:"blockedGbs,omitempty"`
+	BlockedMetricsGbs      *V2GB `json:"blockedMetricsGbs,omitempty"`
+	CpuProfilesGbs         *V2GB `json:"cpuProfilesGbs,omitempty"`
+	HighLogsGbs            *V2GB `json:"highLogsGbs,omitempty"`
+	HighMetricsGbs         *V2GB `json:"highMetricsGbs,omitempty"`
+	HighTracingGbs         *V2GB `json:"highTracingGbs,omitempty"`
+	LowLogsGbs             *V2GB `json:"lowLogsGbs,omitempty"`
 	LowSessionRecordingGbs *V2GB `json:"lowSessionRecordingGbs,omitempty"`
-	LowTracingGbs *V2GB `json:"lowTracingGbs,omitempty"`
-	MediumLogsGbs *V2GB `json:"mediumLogsGbs,omitempty"`
-	MediumTracingGbs *V2GB `json:"mediumTracingGbs,omitempty"`
+	LowTracingGbs          *V2GB `json:"lowTracingGbs,omitempty"`
+	MediumLogsGbs          *V2GB `json:"mediumLogsGbs,omitempty"`
+	MediumTracingGbs       *V2GB `json:"mediumTracingGbs,omitempty"`
 	// The stats date.
-	StatsDate *time.Time `json:"statsDate,omitempty"`
-	TotalGbs *V2GB `json:"totalGbs,omitempty"`
-	AdditionalProperties map[string]interface{}
+	StatsDate                         *time.Time `json:"statsDate,omitempty"`
+	TotalGbs                          *V2GB      `json:"totalGbs,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _DetailedDailyProcessedGbs DetailedDailyProcessedGbs
@@ -476,7 +477,7 @@ func (o *DetailedDailyProcessedGbs) SetTotalGbs(v V2GB) {
 }
 
 func (o DetailedDailyProcessedGbs) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -561,6 +562,7 @@ func (o *DetailedDailyProcessedGbs) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "statsDate")
 		delete(additionalProperties, "totalGbs")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -601,4 +603,3 @@ func (v *NullableDetailedDailyProcessedGbs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

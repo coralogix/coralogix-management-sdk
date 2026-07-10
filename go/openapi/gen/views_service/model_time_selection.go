@@ -13,126 +13,178 @@ package views_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// TimeSelection - struct for TimeSelection
+// checks if the TimeSelection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TimeSelection{}
+
+// TimeSelection Time selection.
 type TimeSelection struct {
-	TimeSelectionCustomSelection *TimeSelectionCustomSelection
-	TimeSelectionQuickSelection *TimeSelectionQuickSelection
+	CustomSelection                   *CustomTimeSelection `json:"customSelection,omitempty"`
+	QuickSelection                    *QuickTimeSelection  `json:"quickSelection,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// TimeSelectionCustomSelectionAsTimeSelection is a convenience function that returns TimeSelectionCustomSelection wrapped in TimeSelection
-func TimeSelectionCustomSelectionAsTimeSelection(v *TimeSelectionCustomSelection) TimeSelection {
-	return TimeSelection{
-		TimeSelectionCustomSelection: v,
+type _TimeSelection TimeSelection
+
+// NewTimeSelection instantiates a new TimeSelection object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewTimeSelection() *TimeSelection {
+	this := TimeSelection{}
+	return &this
+}
+
+// NewTimeSelectionWithDefaults instantiates a new TimeSelection object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewTimeSelectionWithDefaults() *TimeSelection {
+	this := TimeSelection{}
+	return &this
+}
+
+// GetCustomSelection returns the CustomSelection field value if set, zero value otherwise.
+func (o *TimeSelection) GetCustomSelection() CustomTimeSelection {
+	if o == nil || IsNil(o.CustomSelection) {
+		var ret CustomTimeSelection
+		return ret
 	}
+	return *o.CustomSelection
 }
 
-// TimeSelectionQuickSelectionAsTimeSelection is a convenience function that returns TimeSelectionQuickSelection wrapped in TimeSelection
-func TimeSelectionQuickSelectionAsTimeSelection(v *TimeSelectionQuickSelection) TimeSelection {
-	return TimeSelection{
-		TimeSelectionQuickSelection: v,
+// GetCustomSelectionOk returns a tuple with the CustomSelection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TimeSelection) GetCustomSelectionOk() (*CustomTimeSelection, bool) {
+	if o == nil || IsNil(o.CustomSelection) {
+		return nil, false
 	}
+	return o.CustomSelection, true
 }
 
+// HasCustomSelection returns a boolean if a field has been set.
+func (o *TimeSelection) HasCustomSelection() bool {
+	if o != nil && !IsNil(o.CustomSelection) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *TimeSelection) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into TimeSelectionCustomSelection
-	err = json.Unmarshal(data, &dst.TimeSelectionCustomSelection)
-	if err == nil {
-		jsonTimeSelectionCustomSelection, _ := json.Marshal(dst.TimeSelectionCustomSelection)
-		if string(jsonTimeSelectionCustomSelection) == "{}" { // empty struct
-			dst.TimeSelectionCustomSelection = nil
-		} else {
-			if err = validator.Validate(dst.TimeSelectionCustomSelection); err != nil {
-				dst.TimeSelectionCustomSelection = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetCustomSelection gets a reference to the given CustomTimeSelection and assigns it to the CustomSelection field.
+func (o *TimeSelection) SetCustomSelection(v CustomTimeSelection) {
+	o.CustomSelection = &v
+}
+
+// GetQuickSelection returns the QuickSelection field value if set, zero value otherwise.
+func (o *TimeSelection) GetQuickSelection() QuickTimeSelection {
+	if o == nil || IsNil(o.QuickSelection) {
+		var ret QuickTimeSelection
+		return ret
+	}
+	return *o.QuickSelection
+}
+
+// GetQuickSelectionOk returns a tuple with the QuickSelection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TimeSelection) GetQuickSelectionOk() (*QuickTimeSelection, bool) {
+	if o == nil || IsNil(o.QuickSelection) {
+		return nil, false
+	}
+	return o.QuickSelection, true
+}
+
+// HasQuickSelection returns a boolean if a field has been set.
+func (o *TimeSelection) HasQuickSelection() bool {
+	if o != nil && !IsNil(o.QuickSelection) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuickSelection gets a reference to the given QuickTimeSelection and assigns it to the QuickSelection field.
+func (o *TimeSelection) SetQuickSelection(v QuickTimeSelection) {
+	o.QuickSelection = &v
+}
+
+func (o TimeSelection) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TimeSelection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CustomSelection) {
+		toSerialize["customSelection"] = o.CustomSelection
+	}
+	if !IsNil(o.QuickSelection) {
+		toSerialize["quickSelection"] = o.QuickSelection
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["quickSelection"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["customSelection"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [quickSelection, customSelection] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["quickSelection"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field quickSelection must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["customSelection"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field customSelection must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *TimeSelection) UnmarshalJSON(data []byte) (err error) {
+	varTimeSelection := _TimeSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeSelection(varTimeSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["quickSelection"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TimeSelectionCustomSelection = nil
-	}
-
-	// try to unmarshal data into TimeSelectionQuickSelection
-	err = json.Unmarshal(data, &dst.TimeSelectionQuickSelection)
-	if err == nil {
-		jsonTimeSelectionQuickSelection, _ := json.Marshal(dst.TimeSelectionQuickSelection)
-		if string(jsonTimeSelectionQuickSelection) == "{}" { // empty struct
-			dst.TimeSelectionQuickSelection = nil
-		} else {
-			if err = validator.Validate(dst.TimeSelectionQuickSelection); err != nil {
-				dst.TimeSelectionQuickSelection = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["customSelection"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.TimeSelectionQuickSelection = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [quickSelection, customSelection] may be set"}
+		}
+
+		delete(additionalProperties, "customSelection")
+		delete(additionalProperties, "quickSelection")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.TimeSelectionCustomSelection = nil
-		dst.TimeSelectionQuickSelection = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(TimeSelection)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src TimeSelection) MarshalJSON() ([]byte, error) {
-	if src.TimeSelectionCustomSelection != nil {
-		return json.Marshal(&src.TimeSelectionCustomSelection)
-	}
-
-	if src.TimeSelectionQuickSelection != nil {
-		return json.Marshal(&src.TimeSelectionQuickSelection)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *TimeSelection) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.TimeSelectionCustomSelection != nil {
-		return obj.TimeSelectionCustomSelection
-	}
-
-	if obj.TimeSelectionQuickSelection != nil {
-		return obj.TimeSelectionQuickSelection
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj TimeSelection) GetActualInstanceValue() (interface{}) {
-	if obj.TimeSelectionCustomSelection != nil {
-		return *obj.TimeSelectionCustomSelection
-	}
-
-	if obj.TimeSelectionQuickSelection != nil {
-		return *obj.TimeSelectionQuickSelection
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableTimeSelection struct {
@@ -170,4 +222,3 @@ func (v *NullableTimeSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

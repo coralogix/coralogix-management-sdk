@@ -29,7 +29,7 @@ type IncidentQueryFiltersValues struct {
 	ContextualLabels map[string]ContextualLabelValuesWithCount `json:"contextualLabels"`
 	// The display labels.
 	DisplayLabels map[string]DisplayLabelValuesWithCount `json:"displayLabels"`
-	MetaLabelsOp V1FilterOperator `json:"metaLabelsOp"`
+	MetaLabelsOp  V1FilterOperator                       `json:"metaLabelsOp"`
 	// The meta labels with count.
 	MetaLabelsWithCount []IncidentMetaLabelsWithCount `json:"metaLabelsWithCount"`
 	// The severity with count.
@@ -37,8 +37,9 @@ type IncidentQueryFiltersValues struct {
 	// The state with count.
 	StateWithCount []IncidentStateWithCount `json:"stateWithCount"`
 	// The status with count.
-	StatusWithCount []IncidentStatusWithCount `json:"statusWithCount"`
-	AdditionalProperties map[string]interface{}
+	StatusWithCount                   []IncidentStatusWithCount `json:"statusWithCount"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _IncidentQueryFiltersValues IncidentQueryFiltersValues
@@ -261,7 +262,7 @@ func (o *IncidentQueryFiltersValues) SetStatusWithCount(v []IncidentStatusWithCo
 }
 
 func (o IncidentQueryFiltersValues) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,10 +307,10 @@ func (o *IncidentQueryFiltersValues) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -338,6 +339,7 @@ func (o *IncidentQueryFiltersValues) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "stateWithCount")
 		delete(additionalProperties, "statusWithCount")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -378,4 +380,3 @@ func (v *NullableIncidentQueryFiltersValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

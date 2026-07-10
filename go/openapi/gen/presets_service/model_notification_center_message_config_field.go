@@ -25,8 +25,9 @@ type NotificationCenterMessageConfigField struct {
 	// The field name.
 	FieldName *string `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The template.
-	Template *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Template                          *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _NotificationCenterMessageConfigField NotificationCenterMessageConfigField
@@ -113,7 +114,7 @@ func (o *NotificationCenterMessageConfigField) SetTemplate(v string) {
 }
 
 func (o NotificationCenterMessageConfigField) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *NotificationCenterMessageConfigField) UnmarshalJSON(data []byte) (err e
 		delete(additionalProperties, "fieldName")
 		delete(additionalProperties, "template")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableNotificationCenterMessageConfigField) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

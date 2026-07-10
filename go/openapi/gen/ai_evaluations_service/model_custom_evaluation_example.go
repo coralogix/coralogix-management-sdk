@@ -25,8 +25,9 @@ type CustomEvaluationExample struct {
 	// Example conversation text.
 	Conversation *string `json:"conversation,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Expected score for this example.
-	Score *string `json:"score,omitempty" validate:"regexp=^[0-9]+$"`
-	AdditionalProperties map[string]interface{}
+	Score                             *string `json:"score,omitempty" validate:"regexp=^[0-9]+$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CustomEvaluationExample CustomEvaluationExample
@@ -113,7 +114,7 @@ func (o *CustomEvaluationExample) SetScore(v string) {
 }
 
 func (o CustomEvaluationExample) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,6 +155,7 @@ func (o *CustomEvaluationExample) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "conversation")
 		delete(additionalProperties, "score")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -194,4 +196,3 @@ func (v *NullableCustomEvaluationExample) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

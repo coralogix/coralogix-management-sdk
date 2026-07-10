@@ -13,354 +13,462 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// CaseResolver - struct for CaseResolver
+// checks if the CaseResolver type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CaseResolver{}
+
+// CaseResolver Entity responsible for resolving the case.
 type CaseResolver struct {
-	CaseResolverApiKeyVariant *CaseResolverApiKeyVariant
-	CaseResolverCxUser *CaseResolverCxUser
-	CaseResolverMicrosoftTeams *CaseResolverMicrosoftTeams
-	CaseResolverPagerDuty *CaseResolverPagerDuty
-	CaseResolverPrometheusAlertManager *CaseResolverPrometheusAlertManager
-	CaseResolverServiceNow *CaseResolverServiceNow
-	CaseResolverSlack *CaseResolverSlack
-	CaseResolverSystem *CaseResolverSystem
+	// Marker indicating that the case was resolved using an API key.
+	ApiKey map[string]interface{} `json:"apiKey,omitempty"`
+	// Marker indicating that the case was resolved by a Coralogix user.
+	CxUser map[string]interface{} `json:"cxUser,omitempty"`
+	// Marker indicating that the case was resolved through a Microsoft Teams integration.
+	MicrosoftTeams map[string]interface{} `json:"microsoftTeams,omitempty"`
+	// Marker indicating that the case was resolved through a PagerDuty integration.
+	PagerDuty map[string]interface{} `json:"pagerDuty,omitempty"`
+	// Marker indicating that the case was resolved through a Prometheus AlertManager integration.
+	PrometheusAlertManager map[string]interface{} `json:"prometheusAlertManager,omitempty"`
+	// Marker indicating that the case was resolved through a ServiceNow integration.
+	ServiceNow map[string]interface{} `json:"serviceNow,omitempty"`
+	// Marker indicating that the case was resolved through a Slack integration.
+	Slack map[string]interface{} `json:"slack,omitempty"`
+	// Marker indicating that the case was resolved automatically by the Cases system.
+	System                            map[string]interface{} `json:"system,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// CaseResolverApiKeyVariantAsCaseResolver is a convenience function that returns CaseResolverApiKeyVariant wrapped in CaseResolver
-func CaseResolverApiKeyVariantAsCaseResolver(v *CaseResolverApiKeyVariant) CaseResolver {
-	return CaseResolver{
-		CaseResolverApiKeyVariant: v,
+type _CaseResolver CaseResolver
+
+// NewCaseResolver instantiates a new CaseResolver object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewCaseResolver() *CaseResolver {
+	this := CaseResolver{}
+	return &this
+}
+
+// NewCaseResolverWithDefaults instantiates a new CaseResolver object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewCaseResolverWithDefaults() *CaseResolver {
+	this := CaseResolver{}
+	return &this
+}
+
+// GetApiKey returns the ApiKey field value if set, zero value otherwise.
+func (o *CaseResolver) GetApiKey() map[string]interface{} {
+	if o == nil || IsNil(o.ApiKey) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.ApiKey
 }
 
-// CaseResolverCxUserAsCaseResolver is a convenience function that returns CaseResolverCxUser wrapped in CaseResolver
-func CaseResolverCxUserAsCaseResolver(v *CaseResolverCxUser) CaseResolver {
-	return CaseResolver{
-		CaseResolverCxUser: v,
+// GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseResolver) GetApiKeyOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ApiKey) {
+		return map[string]interface{}{}, false
 	}
+	return o.ApiKey, true
 }
 
-// CaseResolverMicrosoftTeamsAsCaseResolver is a convenience function that returns CaseResolverMicrosoftTeams wrapped in CaseResolver
-func CaseResolverMicrosoftTeamsAsCaseResolver(v *CaseResolverMicrosoftTeams) CaseResolver {
-	return CaseResolver{
-		CaseResolverMicrosoftTeams: v,
+// HasApiKey returns a boolean if a field has been set.
+func (o *CaseResolver) HasApiKey() bool {
+	if o != nil && !IsNil(o.ApiKey) {
+		return true
 	}
+
+	return false
 }
 
-// CaseResolverPagerDutyAsCaseResolver is a convenience function that returns CaseResolverPagerDuty wrapped in CaseResolver
-func CaseResolverPagerDutyAsCaseResolver(v *CaseResolverPagerDuty) CaseResolver {
-	return CaseResolver{
-		CaseResolverPagerDuty: v,
+// SetApiKey gets a reference to the given map[string]interface{} and assigns it to the ApiKey field.
+func (o *CaseResolver) SetApiKey(v map[string]interface{}) {
+	o.ApiKey = v
+}
+
+// GetCxUser returns the CxUser field value if set, zero value otherwise.
+func (o *CaseResolver) GetCxUser() map[string]interface{} {
+	if o == nil || IsNil(o.CxUser) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.CxUser
 }
 
-// CaseResolverPrometheusAlertManagerAsCaseResolver is a convenience function that returns CaseResolverPrometheusAlertManager wrapped in CaseResolver
-func CaseResolverPrometheusAlertManagerAsCaseResolver(v *CaseResolverPrometheusAlertManager) CaseResolver {
-	return CaseResolver{
-		CaseResolverPrometheusAlertManager: v,
+// GetCxUserOk returns a tuple with the CxUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseResolver) GetCxUserOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.CxUser) {
+		return map[string]interface{}{}, false
 	}
+	return o.CxUser, true
 }
 
-// CaseResolverServiceNowAsCaseResolver is a convenience function that returns CaseResolverServiceNow wrapped in CaseResolver
-func CaseResolverServiceNowAsCaseResolver(v *CaseResolverServiceNow) CaseResolver {
-	return CaseResolver{
-		CaseResolverServiceNow: v,
+// HasCxUser returns a boolean if a field has been set.
+func (o *CaseResolver) HasCxUser() bool {
+	if o != nil && !IsNil(o.CxUser) {
+		return true
 	}
+
+	return false
 }
 
-// CaseResolverSlackAsCaseResolver is a convenience function that returns CaseResolverSlack wrapped in CaseResolver
-func CaseResolverSlackAsCaseResolver(v *CaseResolverSlack) CaseResolver {
-	return CaseResolver{
-		CaseResolverSlack: v,
+// SetCxUser gets a reference to the given map[string]interface{} and assigns it to the CxUser field.
+func (o *CaseResolver) SetCxUser(v map[string]interface{}) {
+	o.CxUser = v
+}
+
+// GetMicrosoftTeams returns the MicrosoftTeams field value if set, zero value otherwise.
+func (o *CaseResolver) GetMicrosoftTeams() map[string]interface{} {
+	if o == nil || IsNil(o.MicrosoftTeams) {
+		var ret map[string]interface{}
+		return ret
 	}
+	return o.MicrosoftTeams
 }
 
-// CaseResolverSystemAsCaseResolver is a convenience function that returns CaseResolverSystem wrapped in CaseResolver
-func CaseResolverSystemAsCaseResolver(v *CaseResolverSystem) CaseResolver {
-	return CaseResolver{
-		CaseResolverSystem: v,
+// GetMicrosoftTeamsOk returns a tuple with the MicrosoftTeams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseResolver) GetMicrosoftTeamsOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.MicrosoftTeams) {
+		return map[string]interface{}{}, false
 	}
+	return o.MicrosoftTeams, true
 }
 
+// HasMicrosoftTeams returns a boolean if a field has been set.
+func (o *CaseResolver) HasMicrosoftTeams() bool {
+	if o != nil && !IsNil(o.MicrosoftTeams) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *CaseResolver) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into CaseResolverApiKeyVariant
-	err = json.Unmarshal(data, &dst.CaseResolverApiKeyVariant)
-	if err == nil {
-		jsonCaseResolverApiKeyVariant, _ := json.Marshal(dst.CaseResolverApiKeyVariant)
-		if string(jsonCaseResolverApiKeyVariant) == "{}" { // empty struct
-			dst.CaseResolverApiKeyVariant = nil
-		} else {
-			if err = validator.Validate(dst.CaseResolverApiKeyVariant); err != nil {
-				dst.CaseResolverApiKeyVariant = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetMicrosoftTeams gets a reference to the given map[string]interface{} and assigns it to the MicrosoftTeams field.
+func (o *CaseResolver) SetMicrosoftTeams(v map[string]interface{}) {
+	o.MicrosoftTeams = v
+}
+
+// GetPagerDuty returns the PagerDuty field value if set, zero value otherwise.
+func (o *CaseResolver) GetPagerDuty() map[string]interface{} {
+	if o == nil || IsNil(o.PagerDuty) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.PagerDuty
+}
+
+// GetPagerDutyOk returns a tuple with the PagerDuty field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseResolver) GetPagerDutyOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.PagerDuty) {
+		return map[string]interface{}{}, false
+	}
+	return o.PagerDuty, true
+}
+
+// HasPagerDuty returns a boolean if a field has been set.
+func (o *CaseResolver) HasPagerDuty() bool {
+	if o != nil && !IsNil(o.PagerDuty) {
+		return true
+	}
+
+	return false
+}
+
+// SetPagerDuty gets a reference to the given map[string]interface{} and assigns it to the PagerDuty field.
+func (o *CaseResolver) SetPagerDuty(v map[string]interface{}) {
+	o.PagerDuty = v
+}
+
+// GetPrometheusAlertManager returns the PrometheusAlertManager field value if set, zero value otherwise.
+func (o *CaseResolver) GetPrometheusAlertManager() map[string]interface{} {
+	if o == nil || IsNil(o.PrometheusAlertManager) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.PrometheusAlertManager
+}
+
+// GetPrometheusAlertManagerOk returns a tuple with the PrometheusAlertManager field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseResolver) GetPrometheusAlertManagerOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.PrometheusAlertManager) {
+		return map[string]interface{}{}, false
+	}
+	return o.PrometheusAlertManager, true
+}
+
+// HasPrometheusAlertManager returns a boolean if a field has been set.
+func (o *CaseResolver) HasPrometheusAlertManager() bool {
+	if o != nil && !IsNil(o.PrometheusAlertManager) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrometheusAlertManager gets a reference to the given map[string]interface{} and assigns it to the PrometheusAlertManager field.
+func (o *CaseResolver) SetPrometheusAlertManager(v map[string]interface{}) {
+	o.PrometheusAlertManager = v
+}
+
+// GetServiceNow returns the ServiceNow field value if set, zero value otherwise.
+func (o *CaseResolver) GetServiceNow() map[string]interface{} {
+	if o == nil || IsNil(o.ServiceNow) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.ServiceNow
+}
+
+// GetServiceNowOk returns a tuple with the ServiceNow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseResolver) GetServiceNowOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ServiceNow) {
+		return map[string]interface{}{}, false
+	}
+	return o.ServiceNow, true
+}
+
+// HasServiceNow returns a boolean if a field has been set.
+func (o *CaseResolver) HasServiceNow() bool {
+	if o != nil && !IsNil(o.ServiceNow) {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceNow gets a reference to the given map[string]interface{} and assigns it to the ServiceNow field.
+func (o *CaseResolver) SetServiceNow(v map[string]interface{}) {
+	o.ServiceNow = v
+}
+
+// GetSlack returns the Slack field value if set, zero value otherwise.
+func (o *CaseResolver) GetSlack() map[string]interface{} {
+	if o == nil || IsNil(o.Slack) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Slack
+}
+
+// GetSlackOk returns a tuple with the Slack field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseResolver) GetSlackOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Slack) {
+		return map[string]interface{}{}, false
+	}
+	return o.Slack, true
+}
+
+// HasSlack returns a boolean if a field has been set.
+func (o *CaseResolver) HasSlack() bool {
+	if o != nil && !IsNil(o.Slack) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlack gets a reference to the given map[string]interface{} and assigns it to the Slack field.
+func (o *CaseResolver) SetSlack(v map[string]interface{}) {
+	o.Slack = v
+}
+
+// GetSystem returns the System field value if set, zero value otherwise.
+func (o *CaseResolver) GetSystem() map[string]interface{} {
+	if o == nil || IsNil(o.System) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.System
+}
+
+// GetSystemOk returns a tuple with the System field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseResolver) GetSystemOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.System) {
+		return map[string]interface{}{}, false
+	}
+	return o.System, true
+}
+
+// HasSystem returns a boolean if a field has been set.
+func (o *CaseResolver) HasSystem() bool {
+	if o != nil && !IsNil(o.System) {
+		return true
+	}
+
+	return false
+}
+
+// SetSystem gets a reference to the given map[string]interface{} and assigns it to the System field.
+func (o *CaseResolver) SetSystem(v map[string]interface{}) {
+	o.System = v
+}
+
+func (o CaseResolver) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o CaseResolver) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApiKey) {
+		toSerialize["apiKey"] = o.ApiKey
+	}
+	if !IsNil(o.CxUser) {
+		toSerialize["cxUser"] = o.CxUser
+	}
+	if !IsNil(o.MicrosoftTeams) {
+		toSerialize["microsoftTeams"] = o.MicrosoftTeams
+	}
+	if !IsNil(o.PagerDuty) {
+		toSerialize["pagerDuty"] = o.PagerDuty
+	}
+	if !IsNil(o.PrometheusAlertManager) {
+		toSerialize["prometheusAlertManager"] = o.PrometheusAlertManager
+	}
+	if !IsNil(o.ServiceNow) {
+		toSerialize["serviceNow"] = o.ServiceNow
+	}
+	if !IsNil(o.Slack) {
+		toSerialize["slack"] = o.Slack
+	}
+	if !IsNil(o.System) {
+		toSerialize["system"] = o.System
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["system"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["cxUser"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["serviceNow"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["apiKey"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["slack"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["prometheusAlertManager"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["pagerDuty"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["microsoftTeams"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [system, cxUser, serviceNow, apiKey, slack, prometheusAlertManager, pagerDuty, microsoftTeams] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["system"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field system must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["cxUser"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field cxUser must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["serviceNow"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field serviceNow must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["apiKey"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field apiKey must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["slack"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field slack must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["prometheusAlertManager"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field prometheusAlertManager must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["pagerDuty"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field pagerDuty must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["microsoftTeams"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field microsoftTeams must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *CaseResolver) UnmarshalJSON(data []byte) (err error) {
+	varCaseResolver := _CaseResolver{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCaseResolver)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CaseResolver(varCaseResolver)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["system"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseResolverApiKeyVariant = nil
-	}
-
-	// try to unmarshal data into CaseResolverCxUser
-	err = json.Unmarshal(data, &dst.CaseResolverCxUser)
-	if err == nil {
-		jsonCaseResolverCxUser, _ := json.Marshal(dst.CaseResolverCxUser)
-		if string(jsonCaseResolverCxUser) == "{}" { // empty struct
-			dst.CaseResolverCxUser = nil
-		} else {
-			if err = validator.Validate(dst.CaseResolverCxUser); err != nil {
-				dst.CaseResolverCxUser = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["cxUser"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseResolverCxUser = nil
-	}
-
-	// try to unmarshal data into CaseResolverMicrosoftTeams
-	err = json.Unmarshal(data, &dst.CaseResolverMicrosoftTeams)
-	if err == nil {
-		jsonCaseResolverMicrosoftTeams, _ := json.Marshal(dst.CaseResolverMicrosoftTeams)
-		if string(jsonCaseResolverMicrosoftTeams) == "{}" { // empty struct
-			dst.CaseResolverMicrosoftTeams = nil
-		} else {
-			if err = validator.Validate(dst.CaseResolverMicrosoftTeams); err != nil {
-				dst.CaseResolverMicrosoftTeams = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["serviceNow"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseResolverMicrosoftTeams = nil
-	}
-
-	// try to unmarshal data into CaseResolverPagerDuty
-	err = json.Unmarshal(data, &dst.CaseResolverPagerDuty)
-	if err == nil {
-		jsonCaseResolverPagerDuty, _ := json.Marshal(dst.CaseResolverPagerDuty)
-		if string(jsonCaseResolverPagerDuty) == "{}" { // empty struct
-			dst.CaseResolverPagerDuty = nil
-		} else {
-			if err = validator.Validate(dst.CaseResolverPagerDuty); err != nil {
-				dst.CaseResolverPagerDuty = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["apiKey"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseResolverPagerDuty = nil
-	}
-
-	// try to unmarshal data into CaseResolverPrometheusAlertManager
-	err = json.Unmarshal(data, &dst.CaseResolverPrometheusAlertManager)
-	if err == nil {
-		jsonCaseResolverPrometheusAlertManager, _ := json.Marshal(dst.CaseResolverPrometheusAlertManager)
-		if string(jsonCaseResolverPrometheusAlertManager) == "{}" { // empty struct
-			dst.CaseResolverPrometheusAlertManager = nil
-		} else {
-			if err = validator.Validate(dst.CaseResolverPrometheusAlertManager); err != nil {
-				dst.CaseResolverPrometheusAlertManager = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["slack"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseResolverPrometheusAlertManager = nil
-	}
-
-	// try to unmarshal data into CaseResolverServiceNow
-	err = json.Unmarshal(data, &dst.CaseResolverServiceNow)
-	if err == nil {
-		jsonCaseResolverServiceNow, _ := json.Marshal(dst.CaseResolverServiceNow)
-		if string(jsonCaseResolverServiceNow) == "{}" { // empty struct
-			dst.CaseResolverServiceNow = nil
-		} else {
-			if err = validator.Validate(dst.CaseResolverServiceNow); err != nil {
-				dst.CaseResolverServiceNow = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["prometheusAlertManager"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseResolverServiceNow = nil
-	}
-
-	// try to unmarshal data into CaseResolverSlack
-	err = json.Unmarshal(data, &dst.CaseResolverSlack)
-	if err == nil {
-		jsonCaseResolverSlack, _ := json.Marshal(dst.CaseResolverSlack)
-		if string(jsonCaseResolverSlack) == "{}" { // empty struct
-			dst.CaseResolverSlack = nil
-		} else {
-			if err = validator.Validate(dst.CaseResolverSlack); err != nil {
-				dst.CaseResolverSlack = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["pagerDuty"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseResolverSlack = nil
-	}
-
-	// try to unmarshal data into CaseResolverSystem
-	err = json.Unmarshal(data, &dst.CaseResolverSystem)
-	if err == nil {
-		jsonCaseResolverSystem, _ := json.Marshal(dst.CaseResolverSystem)
-		if string(jsonCaseResolverSystem) == "{}" { // empty struct
-			dst.CaseResolverSystem = nil
-		} else {
-			if err = validator.Validate(dst.CaseResolverSystem); err != nil {
-				dst.CaseResolverSystem = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["microsoftTeams"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.CaseResolverSystem = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [system, cxUser, serviceNow, apiKey, slack, prometheusAlertManager, pagerDuty, microsoftTeams] may be set"}
+		}
+
+		delete(additionalProperties, "apiKey")
+		delete(additionalProperties, "cxUser")
+		delete(additionalProperties, "microsoftTeams")
+		delete(additionalProperties, "pagerDuty")
+		delete(additionalProperties, "prometheusAlertManager")
+		delete(additionalProperties, "serviceNow")
+		delete(additionalProperties, "slack")
+		delete(additionalProperties, "system")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.CaseResolverApiKeyVariant = nil
-		dst.CaseResolverCxUser = nil
-		dst.CaseResolverMicrosoftTeams = nil
-		dst.CaseResolverPagerDuty = nil
-		dst.CaseResolverPrometheusAlertManager = nil
-		dst.CaseResolverServiceNow = nil
-		dst.CaseResolverSlack = nil
-		dst.CaseResolverSystem = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(CaseResolver)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src CaseResolver) MarshalJSON() ([]byte, error) {
-	if src.CaseResolverApiKeyVariant != nil {
-		return json.Marshal(&src.CaseResolverApiKeyVariant)
-	}
-
-	if src.CaseResolverCxUser != nil {
-		return json.Marshal(&src.CaseResolverCxUser)
-	}
-
-	if src.CaseResolverMicrosoftTeams != nil {
-		return json.Marshal(&src.CaseResolverMicrosoftTeams)
-	}
-
-	if src.CaseResolverPagerDuty != nil {
-		return json.Marshal(&src.CaseResolverPagerDuty)
-	}
-
-	if src.CaseResolverPrometheusAlertManager != nil {
-		return json.Marshal(&src.CaseResolverPrometheusAlertManager)
-	}
-
-	if src.CaseResolverServiceNow != nil {
-		return json.Marshal(&src.CaseResolverServiceNow)
-	}
-
-	if src.CaseResolverSlack != nil {
-		return json.Marshal(&src.CaseResolverSlack)
-	}
-
-	if src.CaseResolverSystem != nil {
-		return json.Marshal(&src.CaseResolverSystem)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *CaseResolver) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.CaseResolverApiKeyVariant != nil {
-		return obj.CaseResolverApiKeyVariant
-	}
-
-	if obj.CaseResolverCxUser != nil {
-		return obj.CaseResolverCxUser
-	}
-
-	if obj.CaseResolverMicrosoftTeams != nil {
-		return obj.CaseResolverMicrosoftTeams
-	}
-
-	if obj.CaseResolverPagerDuty != nil {
-		return obj.CaseResolverPagerDuty
-	}
-
-	if obj.CaseResolverPrometheusAlertManager != nil {
-		return obj.CaseResolverPrometheusAlertManager
-	}
-
-	if obj.CaseResolverServiceNow != nil {
-		return obj.CaseResolverServiceNow
-	}
-
-	if obj.CaseResolverSlack != nil {
-		return obj.CaseResolverSlack
-	}
-
-	if obj.CaseResolverSystem != nil {
-		return obj.CaseResolverSystem
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj CaseResolver) GetActualInstanceValue() (interface{}) {
-	if obj.CaseResolverApiKeyVariant != nil {
-		return *obj.CaseResolverApiKeyVariant
-	}
-
-	if obj.CaseResolverCxUser != nil {
-		return *obj.CaseResolverCxUser
-	}
-
-	if obj.CaseResolverMicrosoftTeams != nil {
-		return *obj.CaseResolverMicrosoftTeams
-	}
-
-	if obj.CaseResolverPagerDuty != nil {
-		return *obj.CaseResolverPagerDuty
-	}
-
-	if obj.CaseResolverPrometheusAlertManager != nil {
-		return *obj.CaseResolverPrometheusAlertManager
-	}
-
-	if obj.CaseResolverServiceNow != nil {
-		return *obj.CaseResolverServiceNow
-	}
-
-	if obj.CaseResolverSlack != nil {
-		return *obj.CaseResolverSlack
-	}
-
-	if obj.CaseResolverSystem != nil {
-		return *obj.CaseResolverSystem
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableCaseResolver struct {
@@ -398,4 +506,3 @@ func (v *NullableCaseResolver) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

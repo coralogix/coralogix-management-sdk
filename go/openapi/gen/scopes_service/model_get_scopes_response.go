@@ -24,8 +24,9 @@ var _ MappedNullable = &GetScopesResponse{}
 // GetScopesResponse This data structure represents a response to get scopes
 type GetScopesResponse struct {
 	// List of scopes.
-	Scopes []V1Scope `json:"scopes"`
-	AdditionalProperties map[string]interface{}
+	Scopes                            []V1Scope `json:"scopes"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _GetScopesResponse GetScopesResponse
@@ -73,7 +74,7 @@ func (o *GetScopesResponse) SetScopes(v []V1Scope) {
 }
 
 func (o GetScopesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +105,10 @@ func (o *GetScopesResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -129,6 +130,7 @@ func (o *GetScopesResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "scopes")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -169,4 +171,3 @@ func (v *NullableGetScopesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -22,9 +22,10 @@ var _ MappedNullable = &PromqlQuery{}
 
 // PromqlQuery Variable query source that executes a PromQL query to populate variable values.
 type PromqlQuery struct {
-	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
-	Query *PromQlQuery `json:"query,omitempty"`
-	AdditionalProperties map[string]interface{}
+	PromqlQueryType                   *PromQLQueryType `json:"promqlQueryType,omitempty"`
+	Query                             *PromQlQuery     `json:"query,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _PromqlQuery PromqlQuery
@@ -111,7 +112,7 @@ func (o *PromqlQuery) SetQuery(v PromQlQuery) {
 }
 
 func (o PromqlQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -152,6 +153,7 @@ func (o *PromqlQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "promqlQueryType")
 		delete(additionalProperties, "query")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -192,4 +194,3 @@ func (v *NullablePromqlQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

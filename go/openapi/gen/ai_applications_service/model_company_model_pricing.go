@@ -27,8 +27,9 @@ type CompanyModelPricing struct {
 	// Unique identifier of the pricing record.
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Map of model name to custom price. Replaces all existing prices on set.
-	Prices *map[string]ModelPrice `json:"prices,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Prices                            *map[string]ModelPrice `json:"prices,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _CompanyModelPricing CompanyModelPricing
@@ -147,7 +148,7 @@ func (o *CompanyModelPricing) SetPrices(v map[string]ModelPrice) {
 }
 
 func (o CompanyModelPricing) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -192,6 +193,7 @@ func (o *CompanyModelPricing) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "prices")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -232,4 +234,3 @@ func (v *NullableCompanyModelPricing) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

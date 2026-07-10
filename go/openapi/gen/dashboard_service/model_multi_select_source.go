@@ -13,240 +13,316 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 var _ = bytes.MinRead
 
-// MultiSelectSource - struct for MultiSelectSource
+// checks if the MultiSelectSource type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MultiSelectSource{}
+
+// MultiSelectSource Source.
 type MultiSelectSource struct {
-	MultiSelectSourceConstantList *MultiSelectSourceConstantList
-	MultiSelectSourceLogsPath *MultiSelectSourceLogsPath
-	MultiSelectSourceMetricLabel *MultiSelectSourceMetricLabel
-	MultiSelectSourceQuery *MultiSelectSourceQuery
-	MultiSelectSourceSpanField *MultiSelectSourceSpanField
+	ConstantList                      *ConstantListSource     `json:"constantList,omitempty"`
+	LogsPath                          *LogsPathSource         `json:"logsPath,omitempty"`
+	MetricLabel                       *MetricLabelSource      `json:"metricLabel,omitempty"`
+	Query                             *MultiSelectQuerySource `json:"query,omitempty"`
+	SpanField                         *SpanFieldSource        `json:"spanField,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
-// MultiSelectSourceConstantListAsMultiSelectSource is a convenience function that returns MultiSelectSourceConstantList wrapped in MultiSelectSource
-func MultiSelectSourceConstantListAsMultiSelectSource(v *MultiSelectSourceConstantList) MultiSelectSource {
-	return MultiSelectSource{
-		MultiSelectSourceConstantList: v,
+type _MultiSelectSource MultiSelectSource
+
+// NewMultiSelectSource instantiates a new MultiSelectSource object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewMultiSelectSource() *MultiSelectSource {
+	this := MultiSelectSource{}
+	return &this
+}
+
+// NewMultiSelectSourceWithDefaults instantiates a new MultiSelectSource object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewMultiSelectSourceWithDefaults() *MultiSelectSource {
+	this := MultiSelectSource{}
+	return &this
+}
+
+// GetConstantList returns the ConstantList field value if set, zero value otherwise.
+func (o *MultiSelectSource) GetConstantList() ConstantListSource {
+	if o == nil || IsNil(o.ConstantList) {
+		var ret ConstantListSource
+		return ret
 	}
+	return *o.ConstantList
 }
 
-// MultiSelectSourceLogsPathAsMultiSelectSource is a convenience function that returns MultiSelectSourceLogsPath wrapped in MultiSelectSource
-func MultiSelectSourceLogsPathAsMultiSelectSource(v *MultiSelectSourceLogsPath) MultiSelectSource {
-	return MultiSelectSource{
-		MultiSelectSourceLogsPath: v,
+// GetConstantListOk returns a tuple with the ConstantList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiSelectSource) GetConstantListOk() (*ConstantListSource, bool) {
+	if o == nil || IsNil(o.ConstantList) {
+		return nil, false
 	}
+	return o.ConstantList, true
 }
 
-// MultiSelectSourceMetricLabelAsMultiSelectSource is a convenience function that returns MultiSelectSourceMetricLabel wrapped in MultiSelectSource
-func MultiSelectSourceMetricLabelAsMultiSelectSource(v *MultiSelectSourceMetricLabel) MultiSelectSource {
-	return MultiSelectSource{
-		MultiSelectSourceMetricLabel: v,
+// HasConstantList returns a boolean if a field has been set.
+func (o *MultiSelectSource) HasConstantList() bool {
+	if o != nil && !IsNil(o.ConstantList) {
+		return true
 	}
+
+	return false
 }
 
-// MultiSelectSourceQueryAsMultiSelectSource is a convenience function that returns MultiSelectSourceQuery wrapped in MultiSelectSource
-func MultiSelectSourceQueryAsMultiSelectSource(v *MultiSelectSourceQuery) MultiSelectSource {
-	return MultiSelectSource{
-		MultiSelectSourceQuery: v,
+// SetConstantList gets a reference to the given ConstantListSource and assigns it to the ConstantList field.
+func (o *MultiSelectSource) SetConstantList(v ConstantListSource) {
+	o.ConstantList = &v
+}
+
+// GetLogsPath returns the LogsPath field value if set, zero value otherwise.
+func (o *MultiSelectSource) GetLogsPath() LogsPathSource {
+	if o == nil || IsNil(o.LogsPath) {
+		var ret LogsPathSource
+		return ret
 	}
+	return *o.LogsPath
 }
 
-// MultiSelectSourceSpanFieldAsMultiSelectSource is a convenience function that returns MultiSelectSourceSpanField wrapped in MultiSelectSource
-func MultiSelectSourceSpanFieldAsMultiSelectSource(v *MultiSelectSourceSpanField) MultiSelectSource {
-	return MultiSelectSource{
-		MultiSelectSourceSpanField: v,
+// GetLogsPathOk returns a tuple with the LogsPath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiSelectSource) GetLogsPathOk() (*LogsPathSource, bool) {
+	if o == nil || IsNil(o.LogsPath) {
+		return nil, false
 	}
+	return o.LogsPath, true
 }
 
+// HasLogsPath returns a boolean if a field has been set.
+func (o *MultiSelectSource) HasLogsPath() bool {
+	if o != nil && !IsNil(o.LogsPath) {
+		return true
+	}
 
-// Unmarshal JSON data into one of the pointers in the struct
-func (dst *MultiSelectSource) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into MultiSelectSourceConstantList
-	err = json.Unmarshal(data, &dst.MultiSelectSourceConstantList)
-	if err == nil {
-		jsonMultiSelectSourceConstantList, _ := json.Marshal(dst.MultiSelectSourceConstantList)
-		if string(jsonMultiSelectSourceConstantList) == "{}" { // empty struct
-			dst.MultiSelectSourceConstantList = nil
-		} else {
-			if err = validator.Validate(dst.MultiSelectSourceConstantList); err != nil {
-				dst.MultiSelectSourceConstantList = nil
-			} else {
-				match++
-			}
+	return false
+}
+
+// SetLogsPath gets a reference to the given LogsPathSource and assigns it to the LogsPath field.
+func (o *MultiSelectSource) SetLogsPath(v LogsPathSource) {
+	o.LogsPath = &v
+}
+
+// GetMetricLabel returns the MetricLabel field value if set, zero value otherwise.
+func (o *MultiSelectSource) GetMetricLabel() MetricLabelSource {
+	if o == nil || IsNil(o.MetricLabel) {
+		var ret MetricLabelSource
+		return ret
+	}
+	return *o.MetricLabel
+}
+
+// GetMetricLabelOk returns a tuple with the MetricLabel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiSelectSource) GetMetricLabelOk() (*MetricLabelSource, bool) {
+	if o == nil || IsNil(o.MetricLabel) {
+		return nil, false
+	}
+	return o.MetricLabel, true
+}
+
+// HasMetricLabel returns a boolean if a field has been set.
+func (o *MultiSelectSource) HasMetricLabel() bool {
+	if o != nil && !IsNil(o.MetricLabel) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricLabel gets a reference to the given MetricLabelSource and assigns it to the MetricLabel field.
+func (o *MultiSelectSource) SetMetricLabel(v MetricLabelSource) {
+	o.MetricLabel = &v
+}
+
+// GetQuery returns the Query field value if set, zero value otherwise.
+func (o *MultiSelectSource) GetQuery() MultiSelectQuerySource {
+	if o == nil || IsNil(o.Query) {
+		var ret MultiSelectQuerySource
+		return ret
+	}
+	return *o.Query
+}
+
+// GetQueryOk returns a tuple with the Query field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiSelectSource) GetQueryOk() (*MultiSelectQuerySource, bool) {
+	if o == nil || IsNil(o.Query) {
+		return nil, false
+	}
+	return o.Query, true
+}
+
+// HasQuery returns a boolean if a field has been set.
+func (o *MultiSelectSource) HasQuery() bool {
+	if o != nil && !IsNil(o.Query) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuery gets a reference to the given MultiSelectQuerySource and assigns it to the Query field.
+func (o *MultiSelectSource) SetQuery(v MultiSelectQuerySource) {
+	o.Query = &v
+}
+
+// GetSpanField returns the SpanField field value if set, zero value otherwise.
+func (o *MultiSelectSource) GetSpanField() SpanFieldSource {
+	if o == nil || IsNil(o.SpanField) {
+		var ret SpanFieldSource
+		return ret
+	}
+	return *o.SpanField
+}
+
+// GetSpanFieldOk returns a tuple with the SpanField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiSelectSource) GetSpanFieldOk() (*SpanFieldSource, bool) {
+	if o == nil || IsNil(o.SpanField) {
+		return nil, false
+	}
+	return o.SpanField, true
+}
+
+// HasSpanField returns a boolean if a field has been set.
+func (o *MultiSelectSource) HasSpanField() bool {
+	if o != nil && !IsNil(o.SpanField) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpanField gets a reference to the given SpanFieldSource and assigns it to the SpanField field.
+func (o *MultiSelectSource) SetSpanField(v SpanFieldSource) {
+	o.SpanField = &v
+}
+
+func (o MultiSelectSource) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MultiSelectSource) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ConstantList) {
+		toSerialize["constantList"] = o.ConstantList
+	}
+	if !IsNil(o.LogsPath) {
+		toSerialize["logsPath"] = o.LogsPath
+	}
+	if !IsNil(o.MetricLabel) {
+		toSerialize["metricLabel"] = o.MetricLabel
+	}
+	if !IsNil(o.Query) {
+		toSerialize["query"] = o.Query
+	}
+	if !IsNil(o.SpanField) {
+		toSerialize["spanField"] = o.SpanField
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["logsPath"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["metricLabel"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["constantList"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["spanField"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["query"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsPath, metricLabel, constantList, spanField, query] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["logsPath"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsPath must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metricLabel"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricLabel must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["constantList"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field constantList must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["spanField"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spanField must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["query"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field query must be set through the typed field, not AdditionalProperties"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *MultiSelectSource) UnmarshalJSON(data []byte) (err error) {
+	varMultiSelectSource := _MultiSelectSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectSource(varMultiSelectSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["logsPath"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiSelectSourceConstantList = nil
-	}
-
-	// try to unmarshal data into MultiSelectSourceLogsPath
-	err = json.Unmarshal(data, &dst.MultiSelectSourceLogsPath)
-	if err == nil {
-		jsonMultiSelectSourceLogsPath, _ := json.Marshal(dst.MultiSelectSourceLogsPath)
-		if string(jsonMultiSelectSourceLogsPath) == "{}" { // empty struct
-			dst.MultiSelectSourceLogsPath = nil
-		} else {
-			if err = validator.Validate(dst.MultiSelectSourceLogsPath); err != nil {
-				dst.MultiSelectSourceLogsPath = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["metricLabel"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiSelectSourceLogsPath = nil
-	}
-
-	// try to unmarshal data into MultiSelectSourceMetricLabel
-	err = json.Unmarshal(data, &dst.MultiSelectSourceMetricLabel)
-	if err == nil {
-		jsonMultiSelectSourceMetricLabel, _ := json.Marshal(dst.MultiSelectSourceMetricLabel)
-		if string(jsonMultiSelectSourceMetricLabel) == "{}" { // empty struct
-			dst.MultiSelectSourceMetricLabel = nil
-		} else {
-			if err = validator.Validate(dst.MultiSelectSourceMetricLabel); err != nil {
-				dst.MultiSelectSourceMetricLabel = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["constantList"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiSelectSourceMetricLabel = nil
-	}
-
-	// try to unmarshal data into MultiSelectSourceQuery
-	err = json.Unmarshal(data, &dst.MultiSelectSourceQuery)
-	if err == nil {
-		jsonMultiSelectSourceQuery, _ := json.Marshal(dst.MultiSelectSourceQuery)
-		if string(jsonMultiSelectSourceQuery) == "{}" { // empty struct
-			dst.MultiSelectSourceQuery = nil
-		} else {
-			if err = validator.Validate(dst.MultiSelectSourceQuery); err != nil {
-				dst.MultiSelectSourceQuery = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["spanField"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiSelectSourceQuery = nil
-	}
-
-	// try to unmarshal data into MultiSelectSourceSpanField
-	err = json.Unmarshal(data, &dst.MultiSelectSourceSpanField)
-	if err == nil {
-		jsonMultiSelectSourceSpanField, _ := json.Marshal(dst.MultiSelectSourceSpanField)
-		if string(jsonMultiSelectSourceSpanField) == "{}" { // empty struct
-			dst.MultiSelectSourceSpanField = nil
-		} else {
-			if err = validator.Validate(dst.MultiSelectSourceSpanField); err != nil {
-				dst.MultiSelectSourceSpanField = nil
-			} else {
-				match++
-			}
+		if _, exists := additionalProperties["query"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
 		}
-	} else {
-		dst.MultiSelectSourceSpanField = nil
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [logsPath, metricLabel, constantList, spanField, query] may be set"}
+		}
+
+		delete(additionalProperties, "constantList")
+		delete(additionalProperties, "logsPath")
+		delete(additionalProperties, "metricLabel")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "spanField")
+		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.MultiSelectSourceConstantList = nil
-		dst.MultiSelectSourceLogsPath = nil
-		dst.MultiSelectSourceMetricLabel = nil
-		dst.MultiSelectSourceQuery = nil
-		dst.MultiSelectSourceSpanField = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(MultiSelectSource)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match — preserve forward-compat by leaving all variant pointers nil
-		return nil
-	}
-}
-
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src MultiSelectSource) MarshalJSON() ([]byte, error) {
-	if src.MultiSelectSourceConstantList != nil {
-		return json.Marshal(&src.MultiSelectSourceConstantList)
-	}
-
-	if src.MultiSelectSourceLogsPath != nil {
-		return json.Marshal(&src.MultiSelectSourceLogsPath)
-	}
-
-	if src.MultiSelectSourceMetricLabel != nil {
-		return json.Marshal(&src.MultiSelectSourceMetricLabel)
-	}
-
-	if src.MultiSelectSourceQuery != nil {
-		return json.Marshal(&src.MultiSelectSourceQuery)
-	}
-
-	if src.MultiSelectSourceSpanField != nil {
-		return json.Marshal(&src.MultiSelectSourceSpanField)
-	}
-
-	return nil, nil // no data in oneOf schemas
-}
-
-// Get the actual instance
-func (obj *MultiSelectSource) GetActualInstance() (interface{}) {
-	if obj == nil {
-		return nil
-	}
-	if obj.MultiSelectSourceConstantList != nil {
-		return obj.MultiSelectSourceConstantList
-	}
-
-	if obj.MultiSelectSourceLogsPath != nil {
-		return obj.MultiSelectSourceLogsPath
-	}
-
-	if obj.MultiSelectSourceMetricLabel != nil {
-		return obj.MultiSelectSourceMetricLabel
-	}
-
-	if obj.MultiSelectSourceQuery != nil {
-		return obj.MultiSelectSourceQuery
-	}
-
-	if obj.MultiSelectSourceSpanField != nil {
-		return obj.MultiSelectSourceSpanField
-	}
-
-	// all schemas are nil
-	return nil
-}
-
-// Get the actual instance value
-func (obj MultiSelectSource) GetActualInstanceValue() (interface{}) {
-	if obj.MultiSelectSourceConstantList != nil {
-		return *obj.MultiSelectSourceConstantList
-	}
-
-	if obj.MultiSelectSourceLogsPath != nil {
-		return *obj.MultiSelectSourceLogsPath
-	}
-
-	if obj.MultiSelectSourceMetricLabel != nil {
-		return *obj.MultiSelectSourceMetricLabel
-	}
-
-	if obj.MultiSelectSourceQuery != nil {
-		return *obj.MultiSelectSourceQuery
-	}
-
-	if obj.MultiSelectSourceSpanField != nil {
-		return *obj.MultiSelectSourceSpanField
-	}
-
-	// all schemas are nil
-	return nil
+	return err
 }
 
 type NullableMultiSelectSource struct {
@@ -284,4 +360,3 @@ func (v *NullableMultiSelectSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

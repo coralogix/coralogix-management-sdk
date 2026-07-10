@@ -24,13 +24,14 @@ var _ MappedNullable = &LogsAnomalyType{}
 type LogsAnomalyType struct {
 	AnomalyAlertSettings *AnomalyAlertSettings `json:"anomalyAlertSettings,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
-	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
-	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
+	EvaluationDelayMs *int32        `json:"evaluationDelayMs,omitempty"`
+	LogsFilter        *V3LogsFilter `json:"logsFilter,omitempty"`
 	// The filter to specify which fields to include in the notification payload
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	// The rules for the log anomaly alert
-	Rules []LogsAnomalyRule `json:"rules,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Rules                             []LogsAnomalyRule `json:"rules,omitempty"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogsAnomalyType LogsAnomalyType
@@ -213,7 +214,7 @@ func (o *LogsAnomalyType) SetRules(v []LogsAnomalyRule) {
 }
 
 func (o LogsAnomalyType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,6 +267,7 @@ func (o *LogsAnomalyType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "notificationPayloadFilter")
 		delete(additionalProperties, "rules")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -306,4 +308,3 @@ func (v *NullableLogsAnomalyType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

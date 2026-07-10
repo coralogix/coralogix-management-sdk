@@ -39,8 +39,9 @@ type AiEvaluationsServiceCreateCustomEvaluationRequest struct {
 	// Whether to include the system prompt in the LLM input.
 	ShouldIncludeSystemPrompt *bool `json:"shouldIncludeSystemPrompt,omitempty"`
 	// Description of what counts as violating the policy.
-	Violates *string `json:"violates,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties map[string]interface{}
+	Violates                          *string `json:"violates,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties              map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _AiEvaluationsServiceCreateCustomEvaluationRequest AiEvaluationsServiceCreateCustomEvaluationRequest
@@ -351,7 +352,7 @@ func (o *AiEvaluationsServiceCreateCustomEvaluationRequest) SetViolates(v string
 }
 
 func (o AiEvaluationsServiceCreateCustomEvaluationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -420,6 +421,7 @@ func (o *AiEvaluationsServiceCreateCustomEvaluationRequest) UnmarshalJSON(data [
 		delete(additionalProperties, "shouldIncludeSystemPrompt")
 		delete(additionalProperties, "violates")
 		o.AdditionalProperties = additionalProperties
+		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
 
 	return err
@@ -460,4 +462,3 @@ func (v *NullableAiEvaluationsServiceCreateCustomEvaluationRequest) UnmarshalJSO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

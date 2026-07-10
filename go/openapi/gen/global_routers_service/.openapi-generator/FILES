@@ -13,8 +13,6 @@ model_create_global_router_response.go
 model_events_v3_filter_matcher.go
 model_fallback_target.go
 model_filter_path_and_values.go
-model_filter_path_and_values_filters.go
-model_filter_path_and_values_multiple_values.go
 model_filters.go
 model_get_global_router_response.go
 model_global_router.go
@@ -31,7 +29,5 @@ model_v3_filter_operator.go
 model_validate_entity_label_matcher_response.go
 model_validate_entity_label_matcher_result.go
 model_validate_entity_label_matcher_result_failure.go
-model_validate_entity_label_matcher_result_failure_variant.go
-model_validate_entity_label_matcher_result_success_variant.go
 response.go
 utils.go
