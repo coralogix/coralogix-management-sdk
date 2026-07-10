@@ -449,7 +449,7 @@ func (o IncidentEvent) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [snoozeIndicator, assignment, unassign, upsertState, acknowledge, close] must be set"}
 		}
 	}
@@ -465,7 +465,7 @@ func (o IncidentEvent) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup1Matches++
 	}
 	if requiredOneOfGroup1Matches == 0 {
-		if !o.requiredOneOfGroup1FromUnmarshalWithoutKnownArm {
+		if !o.requiredOneOfGroup1FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [administrativeEvent, operationalEvent] must be set"}
 		}
 	}

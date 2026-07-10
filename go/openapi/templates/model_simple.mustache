@@ -362,7 +362,7 @@ func (o {{classname}}) ToMap() (map[string]interface{}, error) {
 	{{/fields}}
 	if requiredOneOfGroup{{index}}Matches == 0 {
 		{{#isAdditionalPropertiesTrue}}
-		if !o.requiredOneOfGroup{{index}}FromUnmarshalWithoutKnownArm {
+		if !o.requiredOneOfGroup{{index}}FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [{{fieldList}}] must be set"}
 		}
 		{{/isAdditionalPropertiesTrue}}
