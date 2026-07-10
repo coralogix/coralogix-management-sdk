@@ -17,6 +17,7 @@ package examples
 import (
 	"context"
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/google/uuid"
@@ -28,6 +29,52 @@ import (
 	globalrouters "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/global_routers_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
 )
+
+var staleNotificationConnectorNamePrefixes = []string{
+	"TestConnector-",
+	"TestConnectorCases-",
+	"TestPagerdutyConnector",
+	"TestPagerdutyIncidentsConnector-",
+	"TestSlackConnector",
+}
+
+func TestCleanupStaleNotificationConnectors(t *testing.T) {
+	ctx := context.Background()
+	client := cxsdk.NewConnectorsClient(newTestConfig())
+
+	list, httpResp, err := client.
+		ConnectorsServiceListConnectors(ctx).
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+	require.NotNil(t, list)
+
+	deleted := 0
+	for _, connector := range list.Connectors {
+		name := connector.GetName()
+		id := connector.GetId()
+		if id == "" || !isStaleNotificationConnectorName(name) {
+			continue
+		}
+
+		_, httpResp, err = client.
+			ConnectorsServiceDeleteConnector(ctx, id).
+			Execute()
+		require.NoError(t, cxsdk.NewAPIError(httpResp, err), "delete stale connector %q (%s)", name, id)
+		deleted++
+		t.Logf("deleted stale connector %q (%s)", name, id)
+	}
+
+	t.Logf("deleted %d stale notification connectors", deleted)
+}
+
+func isStaleNotificationConnectorName(name string) bool {
+	for _, prefix := range staleNotificationConnectorNamePrefixes {
+		if strings.HasPrefix(name, prefix) {
+			return true
+		}
+	}
+	return false
+}
 
 func TestHttpsConnector(t *testing.T) {
 	cfg := newTestConfig()
