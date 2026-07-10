@@ -67,6 +67,17 @@ func TestCleanupStaleNotificationConnectors(t *testing.T) {
 	t.Logf("deleted %d stale notification connectors", deleted)
 }
 
+func TestPagerdutyIncidentsIntegrationPrerequisite(t *testing.T) {
+	ctx := context.Background()
+	client := cxsdk.NewIntegrationsClient(newTestConfig())
+
+	got, httpResp, err := client.
+		IntegrationServiceGetDeployedIntegration(ctx, "test-integration").
+		Execute()
+	require.NoError(t, cxsdk.NewAPIError(httpResp, err), "expected deployed integration %q to exist", "test-integration")
+	require.NotNil(t, got)
+}
+
 func isStaleNotificationConnectorName(name string) bool {
 	for _, prefix := range staleNotificationConnectorNamePrefixes {
 		if strings.HasPrefix(name, prefix) {
