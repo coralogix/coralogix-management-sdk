@@ -11,7 +11,7 @@
           "Extension service"
         ],
         "summary": "Get all extensions",
-        "description": "Creates a new extension.",
+        "description": "Creates a new extension.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -89,7 +89,7 @@
           "Extension service"
         ],
         "summary": "Get extension by ID",
-        "description": "Returns the details of the specified extension.",
+        "description": "Returns the details of the specified extension.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
         "externalDocs": {
           "url": ""
         },

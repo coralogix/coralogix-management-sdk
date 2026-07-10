@@ -26,7 +26,7 @@ type ViewFolder struct {
 	// Unique identifier for folders
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Folder name
-	Name                              string `json:"name"`
+	Name                              string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties              map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

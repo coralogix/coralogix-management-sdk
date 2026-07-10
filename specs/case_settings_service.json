@@ -11,7 +11,7 @@
           "Case Settings service"
         ],
         "summary": "Create a case settings team configuration",
-        "description": "Create a new case settings team configuration with an optional display name and settings.",
+        "description": "Create a new case settings team configuration with an optional display name and settings.\n\nRequires the following permissions:\n- `case-config:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -120,7 +120,7 @@
           "Case Settings service"
         ],
         "summary": "Get a case settings team configuration",
-        "description": "Retrieve a single case settings team configuration by its identifier.",
+        "description": "Retrieve a single case settings team configuration by its identifier.\n\nRequires the following permissions:\n- `case-config:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -213,7 +213,7 @@
           "Case Settings service"
         ],
         "summary": "Delete a case settings team configuration",
-        "description": "Delete a case settings team configuration by its identifier.",
+        "description": "Delete a case settings team configuration by its identifier.\n\nRequires the following permissions:\n- `case-config:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -306,7 +306,7 @@
           "Case Settings service"
         ],
         "summary": "Update a case settings team configuration",
-        "description": "Update the display name and/or settings of an existing case settings team configuration.",
+        "description": "Update the display name and/or settings of an existing case settings team configuration.\n\nRequires the following permissions:\n- `case-config:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -428,7 +428,7 @@
           "Case Settings service"
         ],
         "summary": "Get the active case settings team configuration",
-        "description": "Retrieve the currently active case settings team configuration (after any org- or user-level precedence resolution).",
+        "description": "Retrieve the currently active case settings team configuration (after any org- or user-level precedence resolution).\n\nRequires the following permissions:\n- `case-config:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -496,7 +496,7 @@
           "Case Settings service"
         ],
         "summary": "Get system default case settings team configuration settings",
-        "description": "Retrieve the platform-wide default settings for case settings team configurations.",
+        "description": "Retrieve the platform-wide default settings for case settings team configurations.\n\nRequires the following permissions:\n- `case-config:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -662,7 +662,7 @@
             "$ref": "#/components/schemas/CaseLifecycle"
           },
           "createTime": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the team configuration was created",
             "type": "string",
             "format": "date-time",

@@ -23,7 +23,7 @@ var _ MappedNullable = &CreateViewFolderRequest{}
 // CreateViewFolderRequest Create view folder.
 type CreateViewFolderRequest struct {
 	// Folder name
-	Name                              *string `json:"name,omitempty"`
+	Name                              *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties              map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

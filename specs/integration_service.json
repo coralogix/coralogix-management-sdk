@@ -11,7 +11,7 @@
           "Integration service"
         ],
         "summary": "Get all integrations",
-        "description": "Returns all available integration definitions.",
+        "description": "Returns all available integration definitions.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -81,7 +81,7 @@
           "Integration service"
         ],
         "summary": "Get integration definition",
-        "description": "Returns the definition for the specified integration type.",
+        "description": "Returns the definition for the specified integration type.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -164,7 +164,7 @@
           "Integration service"
         ],
         "summary": "Get deployed integration",
-        "description": "Returns the deployed instance of the specified integration.",
+        "description": "Returns the deployed instance of the specified integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -237,7 +237,7 @@
           "Integration service"
         ],
         "summary": "Delete integration",
-        "description": "Removes the specified deployed integration instance.",
+        "description": "Removes the specified deployed integration instance.\n\nRequires the following permissions:\n- `integrations:Deploy`",
         "externalDocs": {
           "url": ""
         },
@@ -309,7 +309,7 @@
           "Integration service"
         ],
         "summary": "Get RUM integration versions data",
-        "description": "Returns RUM application version data.",
+        "description": "Returns RUM application version data.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -380,7 +380,7 @@
           "Integration service"
         ],
         "summary": "Trigger sync of RUM integration data",
-        "description": "Syncs RUM data for the team.",
+        "description": "Syncs RUM data for the team.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -455,7 +455,7 @@
           "Integration service"
         ],
         "summary": "Get integration details",
-        "description": "Returns the details of the specified integration.",
+        "description": "Returns the details of the specified integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -537,7 +537,7 @@
           "Integration service"
         ],
         "summary": "List managed integration keys",
-        "description": "Returns a list of managed integration keys.",
+        "description": "Returns a list of managed integration keys.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -595,7 +595,7 @@
           "Integration service"
         ],
         "summary": "Get managed integration status",
-        "description": "Returns the status of the specified managed integration.",
+        "description": "Returns the status of the specified managed integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -667,7 +667,7 @@
           "Integration service"
         ],
         "summary": "Update integration",
-        "description": "Updates an existing integration deployment.",
+        "description": "Updates an existing integration deployment.\n\nRequires the following permissions:\n- `integrations:Deploy`",
         "externalDocs": {
           "url": ""
         },
@@ -744,7 +744,7 @@
           "Integration service"
         ],
         "summary": "Save integration registration metadata",
-        "description": "Creates or updates an integration deployment.",
+        "description": "Creates or updates an integration deployment.\n\nRequires the following permissions:\n- `integrations:Deploy`",
         "externalDocs": {
           "url": ""
         },
@@ -818,7 +818,7 @@
           "Integration service"
         ],
         "summary": "Test integration",
-        "description": "Tests the integration configuration.",
+        "description": "Tests the integration configuration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -897,7 +897,7 @@
           "Integration service"
         ],
         "summary": "Get integration template",
-        "description": "Returns the template for an integration.",
+        "description": "Returns the template for an integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "externalDocs": {
           "url": ""
         },

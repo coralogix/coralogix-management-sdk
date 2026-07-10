@@ -11,7 +11,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Get outgoing webhook types",
-        "description": "Returns all available outgoing webhook types.",
+        "description": "Returns all available outgoing webhook types.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -69,7 +69,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Get outgoing webhook type details",
-        "description": "Returns the details for the specified outgoing webhook type.",
+        "description": "Returns the details for the specified outgoing webhook type.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -139,7 +139,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Test an outgoing webhook",
-        "description": "Tests an outgoing webhook configuration.",
+        "description": "Tests an outgoing webhook configuration.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -213,7 +213,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "List all outgoing webhooks",
-        "description": "Returns all outgoing webhooks for the team.",
+        "description": "Returns all outgoing webhooks for the team.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -269,7 +269,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Update an outgoing webhook",
-        "description": "Updates an existing outgoing webhook.",
+        "description": "Updates an existing outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -347,7 +347,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Create an outgoing webhook",
-        "description": "Creates a new outgoing webhook.",
+        "description": "Creates a new outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -421,7 +421,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "List outgoing webhooks",
-        "description": "Returns outgoing webhooks grouped by type.",
+        "description": "Returns outgoing webhooks grouped by type.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -490,7 +490,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "List outbound webhooks summary",
-        "description": "Returns summary information for all outgoing webhooks.",
+        "description": "Returns summary information for all outgoing webhooks.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadSummary`",
         "externalDocs": {
           "url": ""
         },
@@ -548,7 +548,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Get outgoing webhook",
-        "description": "Returns the details of the specified outgoing webhook.",
+        "description": "Returns the details of the specified outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -618,7 +618,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Delete an outgoing webhook",
-        "description": "Deletes the outgoing webhook with the specified ID.",
+        "description": "Deletes the outgoing webhook with the specified ID.\n\nRequires the following permissions:\n- `outbound-webhooks:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -691,7 +691,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Test an existing outgoing webhook",
-        "description": "Tests the specified outgoing webhook.",
+        "description": "Tests the specified outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },

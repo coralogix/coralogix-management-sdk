@@ -42,6 +42,9 @@ DashboardFoldersServiceCreateDashboardFolder Create a dashboard folder
 
 Creates a new dashboard folder.
 
+Requires the following permissions:
+- `team-dashboards:Update`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiDashboardFoldersServiceCreateDashboardFolderRequest
 */
@@ -183,6 +186,9 @@ func (r ApiDashboardFoldersServiceDeleteDashboardFolderRequest) Execute() (map[s
 DashboardFoldersServiceDeleteDashboardFolder Delete a dashboard folder
 
 Deletes the dashboard folder with the specified ID.
+
+Requires the following permissions:
+- `team-dashboards:Update`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param folderId The folder id.
@@ -338,6 +344,9 @@ DashboardFoldersServiceGetDashboardFolder Get a dashboard folder
 
 Returns a dashboard folder data.
 
+Requires the following permissions:
+- `team-dashboards:Read`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param folderId The folder id.
 	@return ApiDashboardFoldersServiceGetDashboardFolderRequest
@@ -484,6 +493,9 @@ DashboardFoldersServiceListDashboardFolders List dashboard folders
 
 List all dashboard folders accessible.
 
+Requires the following permissions:
+- `team-dashboards:Read`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiDashboardFoldersServiceListDashboardFoldersRequest
 */
@@ -621,6 +633,9 @@ func (r ApiDashboardFoldersServiceReplaceDashboardFolderRequest) Execute() (map[
 DashboardFoldersServiceReplaceDashboardFolder Replace a dashboard folder
 
 Replaces an existing dashboard folder.
+
+Requires the following permissions:
+- `team-dashboards:Update`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiDashboardFoldersServiceReplaceDashboardFolderRequest

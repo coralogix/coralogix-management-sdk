@@ -48,7 +48,7 @@
                 "type": "object",
                 "properties": {
                   "createTime": {
-                    "example": "2022-06-30T12:30:00Z",
+                    "example": "2022-06-30T12:30:00.000Z",
                     "description": "RFC3339 timestamp of when this E2M was created.",
                     "type": "string",
                     "minLength": 0
@@ -113,7 +113,7 @@
                     "$ref": "#/components/schemas/E2MType"
                   },
                   "updateTime": {
-                    "example": "2022-06-30T12:30:00Z",
+                    "example": "2022-06-30T12:30:00.000Z",
                     "description": "RFC3339 timestamp of when this E2M was last updated.",
                     "type": "string",
                     "minLength": 0
@@ -734,7 +734,7 @@
         "type": "object",
         "properties": {
           "createTime": {
-            "example": "2022-06-30T12:30:00Z",
+            "example": "2022-06-30T12:30:00.000Z",
             "description": "RFC3339 timestamp of when this E2M was created.",
             "type": "string",
             "minLength": 0
@@ -799,7 +799,7 @@
             "$ref": "#/components/schemas/E2MType"
           },
           "updateTime": {
-            "example": "2022-06-30T12:30:00Z",
+            "example": "2022-06-30T12:30:00.000Z",
             "description": "RFC3339 timestamp of when this E2M was last updated.",
             "type": "string",
             "minLength": 0

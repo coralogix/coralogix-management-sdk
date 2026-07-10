@@ -38,6 +38,9 @@ CasesServiceAcknowledgeCase Acknowledge a case
 
 Mark the case as acknowledged by a user.
 
+Requires the following permissions:
+- `case:Acknowledge`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id ID of the case to acknowledge. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
 	@return ApiCasesServiceAcknowledgeCaseRequest
@@ -185,6 +188,9 @@ func (r ApiCasesServiceAssignCaseRequest) Execute() (*AssignCaseResponse, *http.
 CasesServiceAssignCase Assign a case to a user
 
 Assign a case to a specific user.
+
+Requires the following permissions:
+- `case:Assign`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id ID of the case to assign. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
@@ -338,6 +344,9 @@ CasesServiceBulkAcknowledge Acknowledge multiple cases
 
 Mark multiple cases as acknowledged in a single operation.
 
+Requires the following permissions:
+- `case:Acknowledge`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceBulkAcknowledgeRequest
 */
@@ -480,6 +489,9 @@ func (r ApiCasesServiceBulkAssignRequest) Execute() (*BulkAssignResponse, *http.
 CasesServiceBulkAssign Assign multiple cases to a user
 
 Assign multiple cases to a specific user in a single operation.
+
+Requires the following permissions:
+- `case:Assign`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceBulkAssignRequest
@@ -624,6 +636,9 @@ func (r ApiCasesServiceBulkClearPriorityOverrideRequest) Execute() (*BulkClearPr
 CasesServiceBulkClearPriorityOverride Remove priority override from multiple cases
 
 Remove previously set priority overrides from multiple cases in a single operation.
+
+Requires the following permissions:
+- `case:Update`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceBulkClearPriorityOverrideRequest
@@ -778,6 +793,9 @@ CasesServiceBulkClose Close multiple cases
 
 Close multiple cases in a single operation.
 
+Requires the following permissions:
+- `case:Close`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceBulkCloseRequest
 */
@@ -920,6 +938,9 @@ func (r ApiCasesServiceBulkResolveRequest) Execute() (*BulkResolveResponse, *htt
 CasesServiceBulkResolve Resolve multiple cases
 
 Resolve multiple cases in a single operation.
+
+Requires the following permissions:
+- `case:Close`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceBulkResolveRequest
@@ -1064,6 +1085,9 @@ CasesServiceBulkSetPriorityOverride Override priority for multiple cases
 
 Override the priority with for multiple cases in a single operation.
 
+Requires the following permissions:
+- `case:Update`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceBulkSetPriorityOverrideRequest
 */
@@ -1207,6 +1231,9 @@ func (r ApiCasesServiceBulkUnassignRequest) Execute() (*BulkUnassignResponse, *h
 CasesServiceBulkUnassign Remove assignment from multiple cases
 
 Remove the current assignee from multiple cases in a single operation.
+
+Requires the following permissions:
+- `case:Assign`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceBulkUnassignRequest
@@ -1356,6 +1383,9 @@ CasesServiceClearPriorityOverride Remove priority override
 
 Remove a previously set priority override for a case.
 
+Requires the following permissions:
+- `case:Update`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
 	@return ApiCasesServiceClearPriorityOverrideRequest
@@ -1498,6 +1528,9 @@ CasesServiceCloseCase Close a case
 
 Close a case that no longer requires action.
 
+Requires the following permissions:
+- `case:Close`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id ID of the case to close. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
 	@return ApiCasesServiceCloseCaseRequest
@@ -1639,6 +1672,9 @@ func (r ApiCasesServiceGetCaseRequest) Execute() (*GetCaseResponse, *http.Respon
 CasesServiceGetCase Get case by ID
 
 Retrieve detailed information about a single case by its unique identifier.
+
+Requires the following permissions:
+- `case:Read`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
@@ -1787,6 +1823,9 @@ CasesServiceGetCaseByIndicator Get case by indicator
 
 Retrieve a case by its source indicator. Currently supports Prometheus AlertManager alerts identified by fingerprint and start time.
 
+Requires the following permissions:
+- `case:Read`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceGetCaseByIndicatorRequest
 */
@@ -1932,6 +1971,9 @@ func (r ApiCasesServiceGetCaseDeepLinksRequest) Execute() (*GetCaseDeepLinksResp
 CasesServiceGetCaseDeepLinks Get case deep links
 
 Retrieve deep-link URLs for a case.
+
+Requires the following permissions:
+- `case:Read`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param caseId ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
@@ -2080,6 +2122,9 @@ CasesServiceGetFilterValues Get available filter values
 
 Retrieve available filter and aggregation values for cases.
 
+Requires the following permissions:
+- `case:Read`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceGetFilterValuesRequest
 */
@@ -2213,6 +2258,9 @@ func (r ApiCasesServiceGetGroupingKeysRequest) Execute() (*GetGroupingKeysRespon
 CasesServiceGetGroupingKeys Get available grouping keys
 
 Retrieve all available grouping keys that can be used for organizing and filtering Cases.
+
+Requires the following permissions:
+- `case:Read`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceGetGroupingKeysRequest
@@ -2351,6 +2399,9 @@ func (r ApiCasesServiceListCasesRequest) Execute() (*ListCasesResponse, *http.Re
 CasesServiceListCases List cases with filters
 
 List cases using filters, pagination and custom ordering.
+
+Requires the following permissions:
+- `case:Read`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCasesServiceListCasesRequest
@@ -2492,6 +2543,9 @@ func (r ApiCasesServiceResolveCaseRequest) Execute() (*ResolveCaseResponse, *htt
 CasesServiceResolveCase Resolve a case
 
 Mark a case as resolved.
+
+Requires the following permissions:
+- `case:Close`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id ID of the case to resolve. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
@@ -2643,6 +2697,9 @@ CasesServiceSetPriorityOverride Set priority override
 
 Override a case's computed priority with a specific value.
 
+Requires the following permissions:
+- `case:Update`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
 	@return ApiCasesServiceSetPriorityOverrideRequest
@@ -2790,6 +2847,9 @@ CasesServiceUnacknowledgeCase Unacknowledge a case
 
 Remove the acknowledgment from a case.
 
+Requires the following permissions:
+- `case:Acknowledge`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id ID of the case to unacknowledge. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
 	@return ApiCasesServiceUnacknowledgeCaseRequest
@@ -2931,6 +2991,9 @@ func (r ApiCasesServiceUnassignCaseRequest) Execute() (*UnassignCaseResponse, *h
 CasesServiceUnassignCase Remove case assignment
 
 Remove the current assignee from a case.
+
+Requires the following permissions:
+- `case:Assign`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id ID of the case to unassign. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
@@ -3079,6 +3142,9 @@ func (r ApiCasesServiceUpdateCaseRequest) Execute() (*UpdateCaseResponse, *http.
 CasesServiceUpdateCase Update case fields
 
 Apply a partial update (patch) to a case.
+
+Requires the following permissions:
+- `case:Update`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id ID of the case to update. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).

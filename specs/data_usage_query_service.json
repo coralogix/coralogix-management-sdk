@@ -11,7 +11,7 @@
           "Data Usage Query service"
         ],
         "summary": "Get data usage capabilities",
-        "description": "Returns the labels, measurement kinds, units, and per-request limits supported by the public data-usage API in v1, so clients can validate queries before submitting them.",
+        "description": "Returns the labels, measurement kinds, units, and per-request limits supported by the public data-usage API in v1, so clients can validate queries before submitting them.\n\nRequires the following permissions:\n- `data-usage:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -65,7 +65,7 @@
           "Data Usage Query service"
         ],
         "summary": "Query data usage",
-        "description": "Returns billable data usage aggregated into daily or hourly buckets. Supports filtering and grouping by labels listed by the capabilities endpoint.",
+        "description": "Returns billable data usage aggregated into daily or hourly buckets. Supports filtering and grouping by labels listed by the capabilities endpoint.\n\nRequires the following permissions:\n- `data-usage:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -178,14 +178,14 @@
                         }
                       ],
                       "range": {
-                        "end": "2026-06-02T00:00:00Z",
-                        "start": "2026-06-01T00:00:00Z"
+                        "end": "2026-06-02T00:00:00.000Z",
+                        "start": "2026-06-01T00:00:00.000Z"
                       }
                     }
                   ],
                   "queryRange": {
-                    "end": "2026-06-08T00:00:00Z",
-                    "start": "2026-06-01T00:00:00Z"
+                    "end": "2026-06-08T00:00:00.000Z",
+                    "start": "2026-06-01T00:00:00.000Z"
                   }
                 }
               }
@@ -850,7 +850,7 @@
         "type": "object",
         "properties": {
           "end": {
-            "example": "2026-06-08T00:00:00Z",
+            "example": "2026-06-08T00:00:00.000Z",
             "description": "Exclusive end of the timestamp range, as a UTC timestamp string later than `start`.",
             "type": "string",
             "format": "date-time",
@@ -858,7 +858,7 @@
             "maxLength": 32
           },
           "start": {
-            "example": "2026-06-01T00:00:00Z",
+            "example": "2026-06-01T00:00:00.000Z",
             "description": "Inclusive start of the timestamp range, as a UTC timestamp string.",
             "type": "string",
             "format": "date-time",

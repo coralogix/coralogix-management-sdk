@@ -42,6 +42,9 @@ OutgoingWebhooksServiceCreateOutgoingWebhook Create an outgoing webhook
 
 Creates a new outgoing webhook.
 
+Requires the following permissions:
+- `outbound-webhooks:UpdateConfig`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiOutgoingWebhooksServiceCreateOutgoingWebhookRequest
 */
@@ -176,6 +179,9 @@ func (r ApiOutgoingWebhooksServiceDeleteOutgoingWebhookRequest) Execute() (map[s
 OutgoingWebhooksServiceDeleteOutgoingWebhook Delete an outgoing webhook
 
 Deletes the outgoing webhook with the specified ID.
+
+Requires the following permissions:
+- `outbound-webhooks:UpdateConfig`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Unique identifier.
@@ -316,6 +322,9 @@ OutgoingWebhooksServiceGetOutgoingWebhook Get outgoing webhook
 
 Returns the details of the specified outgoing webhook.
 
+Requires the following permissions:
+- `outbound-webhooks:ReadConfig`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id The unique identifier of the outgoing webhook.
 	@return ApiOutgoingWebhooksServiceGetOutgoingWebhookRequest
@@ -455,6 +464,9 @@ OutgoingWebhooksServiceGetOutgoingWebhookTypeDetails Get outgoing webhook type d
 
 Returns the details for the specified outgoing webhook type.
 
+Requires the following permissions:
+- `outbound-webhooks:ReadConfig`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param type_ The outgoing webhook type to fetch details for.
 	@return ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest
@@ -590,6 +602,9 @@ OutgoingWebhooksServiceListAllOutgoingWebhooks List all outgoing webhooks
 
 Returns all outgoing webhooks for the team.
 
+Requires the following permissions:
+- `outbound-webhooks:ReadConfig`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiOutgoingWebhooksServiceListAllOutgoingWebhooksRequest
 */
@@ -722,6 +737,9 @@ OutgoingWebhooksServiceListOutboundWebhooksSummary List outbound webhooks summar
 
 Returns summary information for all outgoing webhooks.
 
+Requires the following permissions:
+- `outbound-webhooks:ReadSummary`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiOutgoingWebhooksServiceListOutboundWebhooksSummaryRequest
 */
@@ -853,6 +871,9 @@ func (r ApiOutgoingWebhooksServiceListOutgoingWebhookTypesRequest) Execute() (*L
 OutgoingWebhooksServiceListOutgoingWebhookTypes Get outgoing webhook types
 
 Returns all available outgoing webhook types.
+
+Requires the following permissions:
+- `outbound-webhooks:ReadConfig`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiOutgoingWebhooksServiceListOutgoingWebhookTypesRequest
@@ -993,6 +1014,9 @@ OutgoingWebhooksServiceListOutgoingWebhooks List outgoing webhooks
 
 Returns outgoing webhooks grouped by type.
 
+Requires the following permissions:
+- `outbound-webhooks:ReadConfig`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest
 */
@@ -1130,6 +1154,9 @@ func (r ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest) Execute() 
 OutgoingWebhooksServiceTestExistingOutgoingWebhook Test an existing outgoing webhook
 
 Tests the specified outgoing webhook.
+
+Requires the following permissions:
+- `outbound-webhooks:ReadConfig`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Unique identifier.
@@ -1275,6 +1302,9 @@ OutgoingWebhooksServiceTestOutgoingWebhook Test an outgoing webhook
 
 Tests an outgoing webhook configuration.
 
+Requires the following permissions:
+- `outbound-webhooks:ReadConfig`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiOutgoingWebhooksServiceTestOutgoingWebhookRequest
 */
@@ -1414,6 +1444,9 @@ func (r ApiOutgoingWebhooksServiceUpdateOutgoingWebhookRequest) Execute() (map[s
 OutgoingWebhooksServiceUpdateOutgoingWebhook Update an outgoing webhook
 
 Updates an existing outgoing webhook.
+
+Requires the following permissions:
+- `outbound-webhooks:UpdateConfig`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiOutgoingWebhooksServiceUpdateOutgoingWebhookRequest

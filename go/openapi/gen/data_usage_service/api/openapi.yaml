@@ -31,14 +31,14 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "description": "The from date.",
                   "type": "string",
                   "format": "date-time",
                   "minLength": 0
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "description": "The to date.",
                   "type": "string",
                   "format": "date-time",
@@ -107,7 +107,7 @@
                     }
                   },
                   "pillar": {
-                    "$ref": "#/components/schemas/Pillar"
+                    "$ref": "#/components/schemas/v2.Pillar"
                   },
                   "priority": {
                     "$ref": "#/components/schemas/v2.Priority"
@@ -711,14 +711,14 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "description": "The from date.",
                   "type": "string",
                   "format": "date-time",
                   "minLength": 0
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "description": "The to date.",
                   "type": "string",
                   "format": "date-time",
@@ -869,14 +869,14 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "description": "The from date.",
                   "type": "string",
                   "format": "date-time",
                   "minLength": 0
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "description": "The to date.",
                   "type": "string",
                   "format": "date-time",
@@ -1157,7 +1157,7 @@
             "$ref": "#/components/schemas/GenericDimension"
           },
           "pillar": {
-            "$ref": "#/components/schemas/Pillar"
+            "$ref": "#/components/schemas/v2.Pillar"
           },
           "priority": {
             "$ref": "#/components/schemas/v2.Priority"
@@ -1537,18 +1537,6 @@
           }
         }
       },
-      "Pillar": {
-        "description": "Pillar.",
-        "type": "string",
-        "enum": [
-          "PILLAR_UNSPECIFIED",
-          "PILLAR_METRICS",
-          "PILLAR_LOGS",
-          "PILLAR_SPANS",
-          "PILLAR_BINARY",
-          "PILLAR_PROFILES"
-        ]
-      },
       "SpansCount": {
         "externalDocs": {
           "description": "Find out more about data usage.",
@@ -1607,7 +1595,7 @@
             "maxLength": 20
           },
           "timestamp": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "description": "Timestamp of the event.",
             "type": "string",
             "format": "date-time",
@@ -1675,14 +1663,14 @@
         "type": "object",
         "properties": {
           "fromDate": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "description": "The from date.",
             "type": "string",
             "format": "date-time",
             "minLength": 0
           },
           "toDate": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "description": "The to date.",
             "type": "string",
             "format": "date-time",
@@ -1703,6 +1691,18 @@
             "format": "float"
           }
         }
+      },
+      "v2.Pillar": {
+        "description": "Pillar.",
+        "type": "string",
+        "enum": [
+          "PILLAR_UNSPECIFIED",
+          "PILLAR_METRICS",
+          "PILLAR_LOGS",
+          "PILLAR_SPANS",
+          "PILLAR_BINARY",
+          "PILLAR_PROFILES"
+        ]
       },
       "v2.Priority": {
         "description": "Priority.",

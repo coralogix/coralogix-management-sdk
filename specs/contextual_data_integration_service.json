@@ -11,7 +11,7 @@
           "Contextual data integration service"
         ],
         "summary": "Get all contextual data integrations accessible",
-        "description": "Returns all contextual data integrations for the team.",
+        "description": "Returns all contextual data integrations for the team.\n\nRequires the following permissions:\n- `contextual-data:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -79,7 +79,7 @@
           "Contextual data integration service"
         ],
         "summary": "Update contextual data integration",
-        "description": "Updates an existing contextual data integration.",
+        "description": "Updates an existing contextual data integration.\n\nRequires the following permissions:\n- `contextual-data:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -156,7 +156,7 @@
           "Contextual data integration service"
         ],
         "summary": "Save contextual data integration",
-        "description": "Creates a new contextual data integration.",
+        "description": "Creates a new contextual data integration.\n\nRequires the following permissions:\n- `contextual-data:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -230,7 +230,7 @@
           "Contextual data integration service"
         ],
         "summary": "Get contextual data integration definition",
-        "description": "Returns the definition for the specified contextual data integration type.",
+        "description": "Returns the definition for the specified contextual data integration type.\n\nRequires the following permissions:\n- `contextual-data:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -312,7 +312,7 @@
           "Contextual data integration service"
         ],
         "summary": "Test contextual data integration",
-        "description": "Tests the specified contextual data integration.",
+        "description": "Tests the specified contextual data integration.\n\nRequires the following permissions:\n- `contextual-data:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -400,7 +400,7 @@
           "Contextual data integration service"
         ],
         "summary": "Get contextual data integration details",
-        "description": "Returns the details of the specified contextual data integration.",
+        "description": "Returns the details of the specified contextual data integration.\n\nRequires the following permissions:\n- `contextual-data:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -481,7 +481,7 @@
           "Contextual data integration service"
         ],
         "summary": "Delete contextual data integration",
-        "description": "Deletes the specified contextual data integration.",
+        "description": "Deletes the specified contextual data integration.\n\nRequires the following permissions:\n- `contextual-data:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },

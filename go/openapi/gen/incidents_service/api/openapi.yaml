@@ -11,7 +11,7 @@
           "Incidents service"
         ],
         "summary": "Get incident aggregations",
-        "description": "Retrieve aggregated incident data with support for grouping and filtering.",
+        "description": "Retrieve aggregated incident data with support for grouping and filtering.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -92,45 +92,7 @@
                   "$ref": "#/components/schemas/v1.FilterOperator"
                 },
                 "searchQuery": {
-                  "externalDocs": {
-                    "url": ""
-                  },
-                  "title": "Incident search query",
-                  "description": "Incident search query.",
-                  "type": "object",
-                  "properties": {
-                    "contextualLabel": {
-                      "description": "The contextual label to search in.",
-                      "type": "string",
-                      "minLength": 0
-                    },
-                    "incidentField": {
-                      "$ref": "#/components/schemas/IncidentFields"
-                    },
-                    "query": {
-                      "example": "error",
-                      "description": "The search query",
-                      "type": "string",
-                      "minLength": 0
-                    }
-                  },
-                  "required": [
-                    "query"
-                  ],
-                  "oneOf": [
-                    {
-                      "type": "object",
-                      "required": [
-                        "incidentField"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "required": [
-                        "contextualLabel"
-                      ]
-                    }
-                  ]
+                  "$ref": "#/components/schemas/IncidentSearchQuery"
                 },
                 "severity": {
                   "description": "Filter by incident severity",
@@ -308,7 +270,7 @@
           "Incidents service"
         ],
         "summary": "List incident events with filters",
-        "description": "List incident events with support for filtering, pagination, and ordering.",
+        "description": "List incident events with support for filtering, pagination, and ordering.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -482,7 +444,7 @@
           "Incidents service"
         ],
         "summary": "Get total count of incident events",
-        "description": "Retrieve the total count of incident events matching a filter.",
+        "description": "Retrieve the total count of incident events matching a filter.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -603,7 +565,7 @@
           "Incidents service"
         ],
         "summary": "Get incident by event ID",
-        "description": "Retrieve detailed information about a single incident by related alert event id.",
+        "description": "Retrieve detailed information about a single incident by related alert event id.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -676,7 +638,7 @@
           "Incidents service"
         ],
         "summary": "Acknowledge incident by event id",
-        "description": "Mark incident as acknowledged by event id.",
+        "description": "Mark incident as acknowledged by event id.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
         "externalDocs": {
           "url": ""
         },
@@ -749,7 +711,7 @@
           "Incidents service"
         ],
         "summary": "Resolve incident by event id",
-        "description": "Mark incident as resolved by event id.",
+        "description": "Mark incident as resolved by event id.\n\nRequires the following permissions:\n- `incidents:close`",
         "externalDocs": {
           "url": ""
         },
@@ -822,7 +784,7 @@
           "Incidents service"
         ],
         "summary": "Get available filter values",
-        "description": "Returns filter values for incidents based on the provided criteria.",
+        "description": "Returns filter values for incidents based on the provided criteria.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -896,7 +858,7 @@
           "Incidents service"
         ],
         "summary": "Get available incident event filter values",
-        "description": "Returns available filter values for incident events.",
+        "description": "Returns available filter values for incident events.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -1017,7 +979,7 @@
           "Incidents service"
         ],
         "summary": "Get multiple incidents by IDs",
-        "description": "Retrieve multiple incidents by their IDs in a single request.",
+        "description": "Retrieve multiple incidents by their IDs in a single request.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -1091,7 +1053,7 @@
           "Incidents service"
         ],
         "summary": "List incidents with filters",
-        "description": "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.",
+        "description": "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -1176,7 +1138,7 @@
           "Incidents service"
         ],
         "summary": "Acknowledge incidents",
-        "description": "Mark one or more incidents as acknowledged.",
+        "description": "Mark one or more incidents as acknowledged.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
         "externalDocs": {
           "url": ""
         },
@@ -1265,7 +1227,7 @@
           "Incidents service"
         ],
         "summary": "Assign incidents to a user",
-        "description": "Assign one or more incidents to a specific user.",
+        "description": "Assign one or more incidents to a specific user.\n\nRequires the following permissions:\n- `incidents:assign`",
         "externalDocs": {
           "url": ""
         },
@@ -1356,7 +1318,7 @@
           "Incidents service"
         ],
         "summary": "Remove incident user assignments",
-        "description": "Remove user assignments from one or more incidents.",
+        "description": "Remove user assignments from one or more incidents.\n\nRequires the following permissions:\n- `incidents:assign`",
         "externalDocs": {
           "url": ""
         },
@@ -1436,7 +1398,7 @@
           "Incidents service"
         ],
         "summary": "Close incidents",
-        "description": "Closes all incidents matching the given criteria.",
+        "description": "Closes all incidents matching the given criteria.\n\nRequires the following permissions:\n- `incidents:close`",
         "externalDocs": {
           "url": ""
         },
@@ -1525,7 +1487,7 @@
           "Incidents service"
         ],
         "summary": "Resolve incidents",
-        "description": "Mark one or more incidents as resolved.",
+        "description": "Mark one or more incidents as resolved.\n\nRequires the following permissions:\n- `incidents:close`",
         "externalDocs": {
           "url": ""
         },
@@ -1614,7 +1576,7 @@
           "Incidents service"
         ],
         "summary": "Get incident by ID",
-        "description": "Retrieve detailed information about a single incident by its unique identifier.",
+        "description": "Retrieve detailed information about a single incident by its unique identifier.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -1687,7 +1649,7 @@
           "Incidents service"
         ],
         "summary": "Get incident events",
-        "description": "Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.",
+        "description": "Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -2270,7 +2232,7 @@
             "minItems": 0
           },
           "closedAt": {
-            "example": "2024-01-01T00:00:00Z",
+            "example": "2024-01-01T00:00:00.000Z",
             "description": "The closed at.",
             "type": "string",
             "format": "date-time",
@@ -2285,7 +2247,7 @@
             }
           },
           "createdAt": {
-            "example": "2024-01-01T00:00:00Z",
+            "example": "2024-01-01T00:00:00.000Z",
             "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time",
@@ -2336,7 +2298,7 @@
             "minLength": 0
           },
           "lastStateUpdateTime": {
-            "example": "2024-01-01T00:00:00Z",
+            "example": "2024-01-01T00:00:00.000Z",
             "description": "The last state update time.",
             "type": "string",
             "format": "date-time",

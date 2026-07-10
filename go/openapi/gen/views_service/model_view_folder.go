@@ -27,7 +27,7 @@ type ViewFolder struct {
 	// Unique identifier for folders
 	FolderId *string `json:"folderId,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// View name
-	Name                              string        `json:"name"`
+	Name                              string        `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	SearchQuery                       *SearchQuery  `json:"searchQuery,omitempty"`
 	TimeSelection                     TimeSelection `json:"timeSelection"`
 	ViewType                          *ViewType     `json:"viewType,omitempty"`

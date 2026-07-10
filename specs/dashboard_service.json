@@ -11,7 +11,7 @@
           "Dashboard service"
         ],
         "summary": "Validate a dashboard and return issues",
-        "description": "Checks a dashboard definition or an existing dashboard by id and returns validation issues without persisting changes.",
+        "description": "Checks a dashboard definition or an existing dashboard by id and returns validation issues without persisting changes.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -147,7 +147,7 @@
           "Dashboard service"
         ],
         "summary": "Replace a dashboard",
-        "description": "Replaces an existing dashboard.",
+        "description": "Replaces an existing dashboard.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -243,7 +243,7 @@
           "Dashboard service"
         ],
         "summary": "Create a new dashboard",
-        "description": "Creates a new dashboard.",
+        "description": "Creates a new dashboard.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -341,7 +341,7 @@
           "Dashboard service"
         ],
         "summary": "Get dashboard catalog",
-        "description": "Get a list of all dashboards accessible.",
+        "description": "Get a list of all dashboards accessible.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -399,7 +399,7 @@
           "Dashboard service"
         ],
         "summary": "Get a dashboard by URL slug",
-        "description": "Returns the dashboard associated with the specified slug.",
+        "description": "Returns the dashboard associated with the specified slug.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -473,7 +473,7 @@
           "Dashboard service"
         ],
         "summary": "Get a dashboard",
-        "description": "Returns the details of the specified dashboard.",
+        "description": "Returns the details of the specified dashboard.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -529,7 +529,7 @@
           "Dashboard service"
         ],
         "summary": "Delete a dashboard",
-        "description": "Deletes the dashboard with the specified ID.",
+        "description": "Deletes the dashboard with the specified ID.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -618,7 +618,7 @@
           "Dashboard service"
         ],
         "summary": "Replace the default dashboard",
-        "description": "Sets the specified dashboard as the default.",
+        "description": "Sets the specified dashboard as the default.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -716,7 +716,7 @@
           "Dashboard service"
         ],
         "summary": "Assign a dashboard to a folder",
-        "description": "Assigns the dashboard to a folder.",
+        "description": "Assigns the dashboard to a folder.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -821,7 +821,7 @@
           "Dashboard service"
         ],
         "summary": "Add dashboard to favorites",
-        "description": "Pins the specified dashboard.",
+        "description": "Pins the specified dashboard.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -892,7 +892,7 @@
           "Dashboard service"
         ],
         "summary": "Remove dashboard from favorites",
-        "description": "Unpins the specified dashboard.",
+        "description": "Unpins the specified dashboard.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -1313,6 +1313,26 @@
           "ANNOTATION_ORIENTATION_VERTICAL_UNSPECIFIED",
           "ANNOTATION_ORIENTATION_HORIZONTAL"
         ]
+      },
+      "ArcDisplay": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "ArcDisplay",
+        "description": "Arc display settings; the presence of this object indicates the gauge arcs are shown while its absence hides all arcs, and the fields control which individual arcs are displayed",
+        "type": "object",
+        "properties": {
+          "thresholdArc": {
+            "example": true,
+            "description": "Whether to show the threshold arc which graphically represents the threshold bands over the min/max range (replaces the deprecated showOuterArc)",
+            "type": "boolean"
+          },
+          "valueArc": {
+            "example": true,
+            "description": "Whether to show the value arc which graphically represents the current value (replaces the deprecated showInnerArc)",
+            "type": "boolean"
+          }
+        }
       },
       "AssignDashboardFolderResponse": {
         "externalDocs": {
@@ -12788,6 +12808,9 @@
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
+          "arcDisplay": {
+            "$ref": "#/components/schemas/ArcDisplay"
+          },
           "categoryFields": {
             "description": "List of observation fields used to split gauge into multiple gauge instances.",
             "type": "array",
@@ -12835,13 +12858,20 @@
             "format": "double"
           },
           "showInnerArc": {
+            "deprecated": true,
             "example": false,
-            "description": "Whether to show the inner arc of gauge which graphically represents the value",
+            "description": "Deprecated: use arcDisplay.valueArc instead. Whether to show the inner arc of gauge which graphically represents the value",
+            "type": "boolean"
+          },
+          "showMinMax": {
+            "example": true,
+            "description": "Whether to display the min and max range values on the gauge",
             "type": "boolean"
           },
           "showOuterArc": {
+            "deprecated": true,
             "example": true,
-            "description": "Whether to show the outer arc of gauge which graphically represents the min/max range",
+            "description": "Deprecated: use arcDisplay.thresholdArc instead. Whether to show the outer arc of gauge which graphically represents the min/max range",
             "type": "boolean"
           },
           "thresholdType": {
@@ -13651,6 +13681,9 @@
         "description": "Gauge.",
         "type": "object",
         "properties": {
+          "arcDisplay": {
+            "$ref": "#/components/schemas/ArcDisplay"
+          },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as 'custom' to take effect)",
             "type": "string",
@@ -13700,13 +13733,20 @@
             "$ref": "#/components/schemas/Gauge.Query"
           },
           "showInnerArc": {
+            "deprecated": true,
             "example": false,
-            "description": "Whether to show the inner arc of gauge which graphically represents the value",
+            "description": "Deprecated: use arcDisplay.valueArc instead. Whether to show the inner arc of gauge which graphically represents the value",
+            "type": "boolean"
+          },
+          "showMinMax": {
+            "example": true,
+            "description": "Whether to display the min and max range values on the gauge",
             "type": "boolean"
           },
           "showOuterArc": {
+            "deprecated": true,
             "example": true,
-            "description": "Whether to show the outer arc of gauge which graphically represents the min/max range",
+            "description": "Deprecated: use arcDisplay.thresholdArc instead. Whether to show the outer arc of gauge which graphically represents the min/max range",
             "type": "boolean"
           },
           "thresholdBy": {

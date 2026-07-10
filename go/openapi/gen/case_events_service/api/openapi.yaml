@@ -11,7 +11,7 @@
           "Case Events service"
         ],
         "summary": "Create a comment event",
-        "description": "Create a new comment event for a case.",
+        "description": "Create a new comment event for a case.\n\nRequires the following permissions:\n- `case:Comment`",
         "externalDocs": {
           "url": ""
         },
@@ -127,7 +127,7 @@
           "Case Events service"
         ],
         "summary": "List events for a case",
-        "description": "Retrieve all events associated with a specific case.",
+        "description": "Retrieve all events associated with a specific case.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -212,7 +212,7 @@
           "Case Events service"
         ],
         "summary": "Sync external Case events",
-        "description": "Synchronize events from an external source (e.g. Slack) into the case.",
+        "description": "Synchronize events from an external source (e.g. Slack) into the case.\n\nRequires the following permissions:\n- `case:Comment`",
         "externalDocs": {
           "url": ""
         },
@@ -307,7 +307,7 @@
           "Case Events service"
         ],
         "summary": "Get an event by ID",
-        "description": "Retrieve a single event by its unique identifier.",
+        "description": "Retrieve a single event by its unique identifier.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -400,7 +400,7 @@
           "Case Events service"
         ],
         "summary": "Update a comment event",
-        "description": "Modify the content of an existing comment event.",
+        "description": "Modify the content of an existing comment event.\n\nRequires the following permissions:\n- `case:Comment`",
         "externalDocs": {
           "url": ""
         },
@@ -522,7 +522,7 @@
           "Case Events service"
         ],
         "summary": "Delete a comment event",
-        "description": "Delete an existing comment event from a case.",
+        "description": "Delete an existing comment event from a case.\n\nRequires the following permissions:\n- `case:Comment`",
         "externalDocs": {
           "url": ""
         },
@@ -667,7 +667,7 @@
             "$ref": "#/components/schemas/EventActor"
           },
           "createTime": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Server-side insertion time",
             "type": "string",
             "format": "date-time",
@@ -683,7 +683,7 @@
             "minLength": 0
           },
           "eventTime": {
-            "example": "2025-09-22T10:29:45Z",
+            "example": "2025-09-22T10:29:45.000Z",
             "description": "Logical occurrence time of the event",
             "type": "string",
             "format": "date-time",
@@ -1384,7 +1384,7 @@
             "minLength": 0
           },
           "logTimestamp": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the log entry was created",
             "type": "string",
             "format": "date-time",

@@ -11,7 +11,7 @@
           "Cases service"
         ],
         "summary": "Acknowledge multiple cases",
-        "description": "Mark multiple cases as acknowledged in a single operation.",
+        "description": "Mark multiple cases as acknowledged in a single operation.\n\nRequires the following permissions:\n- `case:Acknowledge`",
         "externalDocs": {
           "url": ""
         },
@@ -107,7 +107,7 @@
           "Cases service"
         ],
         "summary": "Acknowledge a case",
-        "description": "Mark the case as acknowledged by a user.",
+        "description": "Mark the case as acknowledged by a user.\n\nRequires the following permissions:\n- `case:Acknowledge`",
         "externalDocs": {
           "url": ""
         },
@@ -180,7 +180,7 @@
           "Cases service"
         ],
         "summary": "Unacknowledge a case",
-        "description": "Remove the acknowledgment from a case.",
+        "description": "Remove the acknowledgment from a case.\n\nRequires the following permissions:\n- `case:Acknowledge`",
         "externalDocs": {
           "url": ""
         },
@@ -255,7 +255,7 @@
           "Cases service"
         ],
         "summary": "Assign multiple cases to a user",
-        "description": "Assign multiple cases to a specific user in a single operation.",
+        "description": "Assign multiple cases to a specific user in a single operation.\n\nRequires the following permissions:\n- `case:Assign`",
         "externalDocs": {
           "url": ""
         },
@@ -349,7 +349,7 @@
           "Cases service"
         ],
         "summary": "Remove assignment from multiple cases",
-        "description": "Remove the current assignee from multiple cases in a single operation.",
+        "description": "Remove the current assignee from multiple cases in a single operation.\n\nRequires the following permissions:\n- `case:Assign`",
         "externalDocs": {
           "url": ""
         },
@@ -432,7 +432,7 @@
           "Cases service"
         ],
         "summary": "Assign a case to a user",
-        "description": "Assign a case to a specific user.",
+        "description": "Assign a case to a specific user.\n\nRequires the following permissions:\n- `case:Assign`",
         "externalDocs": {
           "url": ""
         },
@@ -525,7 +525,7 @@
           "Cases service"
         ],
         "summary": "Remove case assignment",
-        "description": "Remove the current assignee from a case.",
+        "description": "Remove the current assignee from a case.\n\nRequires the following permissions:\n- `case:Assign`",
         "externalDocs": {
           "url": ""
         },
@@ -600,7 +600,7 @@
           "Cases service"
         ],
         "summary": "List cases with filters",
-        "description": "List cases using filters, pagination and custom ordering.",
+        "description": "List cases using filters, pagination and custom ordering.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -680,7 +680,7 @@
           "Cases service"
         ],
         "summary": "Get case deep links",
-        "description": "Retrieve deep-link URLs for a case.",
+        "description": "Retrieve deep-link URLs for a case.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -755,7 +755,7 @@
           "Cases service"
         ],
         "summary": "Get case by ID",
-        "description": "Retrieve detailed information about a single case by its unique identifier.",
+        "description": "Retrieve detailed information about a single case by its unique identifier.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -828,7 +828,7 @@
           "Cases service"
         ],
         "summary": "Update case fields",
-        "description": "Apply a partial update (patch) to a case.",
+        "description": "Apply a partial update (patch) to a case.\n\nRequires the following permissions:\n- `case:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -932,7 +932,7 @@
           "Cases service"
         ],
         "summary": "Close multiple cases",
-        "description": "Close multiple cases in a single operation.",
+        "description": "Close multiple cases in a single operation.\n\nRequires the following permissions:\n- `case:Close`",
         "externalDocs": {
           "url": ""
         },
@@ -1024,7 +1024,7 @@
           "Cases service"
         ],
         "summary": "Close a case",
-        "description": "Close a case that no longer requires action.",
+        "description": "Close a case that no longer requires action.\n\nRequires the following permissions:\n- `case:Close`",
         "externalDocs": {
           "url": ""
         },
@@ -1099,7 +1099,7 @@
           "Cases service"
         ],
         "summary": "Get available filter values",
-        "description": "Retrieve available filter and aggregation values for cases.",
+        "description": "Retrieve available filter and aggregation values for cases.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -1173,7 +1173,7 @@
           "Cases service"
         ],
         "summary": "Get available grouping keys",
-        "description": "Retrieve all available grouping keys that can be used for organizing and filtering Cases.",
+        "description": "Retrieve all available grouping keys that can be used for organizing and filtering Cases.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -1231,7 +1231,7 @@
           "Cases service"
         ],
         "summary": "Get case by indicator",
-        "description": "Retrieve a case by its source indicator. Currently supports Prometheus AlertManager alerts identified by fingerprint and start time.",
+        "description": "Retrieve a case by its source indicator. Currently supports Prometheus AlertManager alerts identified by fingerprint and start time.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -1263,7 +1263,7 @@
                 "example": {
                   "case": {
                     "category": "CASE_CATEGORY_AVAILABILITY",
-                    "createTime": "2025-09-22T10:30:00Z",
+                    "createTime": "2025-09-22T10:30:00.000Z",
                     "groupings": [],
                     "id": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
                     "impactedEntities": [],
@@ -1328,7 +1328,7 @@
           "Cases service"
         ],
         "summary": "Override priority for multiple cases",
-        "description": "Override the priority with for multiple cases in a single operation.",
+        "description": "Override the priority with for multiple cases in a single operation.\n\nRequires the following permissions:\n- `case:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -1422,7 +1422,7 @@
           "Cases service"
         ],
         "summary": "Remove priority override from multiple cases",
-        "description": "Remove previously set priority overrides from multiple cases in a single operation.",
+        "description": "Remove previously set priority overrides from multiple cases in a single operation.\n\nRequires the following permissions:\n- `case:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -1505,7 +1505,7 @@
           "Cases service"
         ],
         "summary": "Set priority override",
-        "description": "Override a case's computed priority with a specific value.",
+        "description": "Override a case's computed priority with a specific value.\n\nRequires the following permissions:\n- `case:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -1581,7 +1581,7 @@
           "Cases service"
         ],
         "summary": "Remove priority override",
-        "description": "Remove a previously set priority override for a case.",
+        "description": "Remove a previously set priority override for a case.\n\nRequires the following permissions:\n- `case:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -1656,7 +1656,7 @@
           "Cases service"
         ],
         "summary": "Resolve multiple cases",
-        "description": "Resolve multiple cases in a single operation.",
+        "description": "Resolve multiple cases in a single operation.\n\nRequires the following permissions:\n- `case:Close`",
         "externalDocs": {
           "url": ""
         },
@@ -1756,7 +1756,7 @@
           "Cases service"
         ],
         "summary": "Resolve a case",
-        "description": "Mark a case as resolved.",
+        "description": "Mark a case as resolved.\n\nRequires the following permissions:\n- `case:Close`",
         "externalDocs": {
           "url": ""
         },
@@ -2042,7 +2042,7 @@
             "$ref": "#/components/schemas/IndicatorPriority"
           },
           "resolveTime": {
-            "example": "2025-09-22T11:05:00Z",
+            "example": "2025-09-22T11:05:00.000Z",
             "description": "When present, timestamp when the alert resolved.",
             "type": "string",
             "format": "date-time",
@@ -2056,7 +2056,7 @@
             "$ref": "#/components/schemas/AlertSuppression"
           },
           "triggerTime": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the alert triggered.",
             "type": "string",
             "format": "date-time",
@@ -2207,7 +2207,7 @@
             "$ref": "#/components/schemas/AlertDefinitionMuted"
           },
           "suppressedTime": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the alert got suppressed.",
             "type": "string",
             "format": "date-time",
@@ -2446,7 +2446,7 @@
             "$ref": "#/components/schemas/BreachStatus"
           },
           "breachedAt": {
-            "example": "2025-09-22T11:00:00Z",
+            "example": "2025-09-22T11:00:00.000Z",
             "description": "When the KPI breach occurred",
             "type": "string",
             "format": "date-time",
@@ -2457,7 +2457,7 @@
             "$ref": "#/components/schemas/KPIPriority"
           },
           "createdAt": {
-            "example": "2025-09-22T11:00:00Z",
+            "example": "2025-09-22T11:00:00.000Z",
             "description": "When the breached KPI record was created",
             "type": "string",
             "format": "date-time",
@@ -2671,7 +2671,7 @@
             "$ref": "#/components/schemas/CaseCategory"
           },
           "createTime": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "When the case was created",
             "type": "string",
             "format": "date-time",
@@ -3324,7 +3324,7 @@
         "type": "object",
         "properties": {
           "from": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp marking the start of the date range",
             "type": "string",
             "format": "date-time",
@@ -3335,7 +3335,7 @@
             "$ref": "#/components/schemas/DateRangeMode"
           },
           "to": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp marking the end of the date range",
             "type": "string",
             "format": "date-time",
@@ -3594,7 +3594,7 @@
             "maxItems": 1000
           },
           "lastResolvedAt": {
-            "example": "2025-09-22T11:05:00Z",
+            "example": "2025-09-22T11:05:00.000Z",
             "description": "When present, timestamp when the indicator last resolved.",
             "type": "string",
             "format": "date-time",
@@ -3602,7 +3602,7 @@
             "maxLength": 30
           },
           "lastTriggeredAt": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the indicator last triggered.",
             "type": "string",
             "format": "date-time",
@@ -3978,7 +3978,7 @@
         "type": "object",
         "properties": {
           "completedAt": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "When the analysis attempt completed.",
             "type": "string",
             "format": "date-time",
@@ -4002,7 +4002,7 @@
         "type": "object",
         "properties": {
           "generatedAt": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the analysis was generated.",
             "type": "string",
             "format": "date-time",
@@ -4146,7 +4146,7 @@
             }
           },
           "createdAt": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the alert was first observed.",
             "type": "string",
             "format": "date-time",
@@ -4187,7 +4187,7 @@
             "$ref": "#/components/schemas/PrometheusAlertStatus"
           },
           "updatedAt": {
-            "example": "2025-09-22T11:05:00Z",
+            "example": "2025-09-22T11:05:00.000Z",
             "description": "Timestamp when the alert was last updated.",
             "type": "string",
             "format": "date-time",
@@ -4253,7 +4253,7 @@
             "$ref": "#/components/schemas/IndicatorPriority"
           },
           "receivedAt": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the alert group was first received.",
             "type": "string",
             "format": "date-time",
@@ -4272,7 +4272,7 @@
             "$ref": "#/components/schemas/PrometheusAlertStatus"
           },
           "updatedAt": {
-            "example": "2025-09-22T11:05:00Z",
+            "example": "2025-09-22T11:05:00.000Z",
             "description": "Timestamp when the alert group was last updated.",
             "type": "string",
             "format": "date-time",
@@ -4318,7 +4318,7 @@
             "maxLength": 256
           },
           "startedAt": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "ISO-8601 timestamp of when the alert episode began (the `startsAt` field from Prometheus AlertManager).",
             "type": "string",
             "format": "date-time",
@@ -4418,7 +4418,7 @@
             "maxLength": 4096
           },
           "resolveTime": {
-            "example": "2025-09-22T11:15:00Z",
+            "example": "2025-09-22T11:15:00.000Z",
             "description": "Timestamp when the case was resolved",
             "type": "string",
             "format": "date-time",
@@ -4455,7 +4455,7 @@
         "type": "object",
         "properties": {
           "resolvedAt": {
-            "example": "2025-09-22T11:05:00Z",
+            "example": "2025-09-22T11:05:00.000Z",
             "description": "Timestamp when the alert was resolved.",
             "type": "string",
             "format": "date-time",
@@ -4463,7 +4463,7 @@
             "maxLength": 30
           },
           "triggeredAt": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the alert was originally triggered.",
             "type": "string",
             "format": "date-time",
@@ -4593,7 +4593,7 @@
         "type": "object",
         "properties": {
           "triggeredAt": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the alert was triggered.",
             "type": "string",
             "format": "date-time",

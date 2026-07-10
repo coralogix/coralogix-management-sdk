@@ -67,7 +67,9 @@
                     "example": "My Folder",
                     "description": "Folder name",
                     "type": "string",
-                    "minLength": 1
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
                   }
                 },
                 "required": [
@@ -117,7 +119,9 @@
                     "example": "My Folder",
                     "description": "Folder name",
                     "type": "string",
-                    "minLength": 1
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
                   }
                 }
               }
@@ -296,7 +300,8 @@
             "items": {
               "$ref": "#/components/schemas/ViewFolder"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100000
           }
         }
       },
@@ -336,7 +341,9 @@
             "example": "My Folder",
             "description": "Folder name",
             "type": "string",
-            "minLength": 1
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           }
         },
         "required": [

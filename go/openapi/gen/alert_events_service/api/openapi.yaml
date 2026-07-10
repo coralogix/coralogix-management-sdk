@@ -11,7 +11,7 @@
           "Alert events service"
         ],
         "summary": "Get alert events statistics",
-        "description": "Returns statistical data for alert events.",
+        "description": "Returns statistical data for alert events.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -109,7 +109,7 @@
           "Alert events service"
         ],
         "summary": "Get alert event by ID",
-        "description": "Returns the alert event with the specified ID.",
+        "description": "Returns the alert event with the specified ID.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },

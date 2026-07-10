@@ -25,7 +25,7 @@ var _ MappedNullable = &QuickTimeSelection{}
 type QuickTimeSelection struct {
 	// Folder name
 	// Deprecated
-	Caption *string `json:"caption,omitempty"`
+	Caption *string `json:"caption,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Folder name
 	Seconds                           int64 `json:"seconds"`
 	AdditionalProperties              map[string]interface{}

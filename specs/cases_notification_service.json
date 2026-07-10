@@ -11,7 +11,7 @@
           "Cases notification service"
         ],
         "summary": "List notification deliveries for cases",
-        "description": "Retrieve notification delivery records for one or more cases, including routing, target, and outcome information.",
+        "description": "Retrieve notification delivery records for one or more cases, including routing, target, and outcome information.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -423,7 +423,7 @@
             "minLength": 0
           },
           "timestamp": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "When the notification was triggered",
             "type": "string",
             "format": "date-time",

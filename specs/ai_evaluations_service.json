@@ -686,14 +686,14 @@
                       "config": {
                         "competition": {}
                       },
-                      "createdAt": "2026-06-02T15:30:00Z",
+                      "createdAt": "2026-06-02T15:30:00.000Z",
                       "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
                       "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
                       "isEnabled": true,
                       "subsystem": "api",
                       "target": "RESPONSE",
                       "threshold": 0.7,
-                      "updatedAt": "2026-06-02T15:35:00Z"
+                      "updatedAt": "2026-06-02T15:35:00.000Z"
                     }
                   ]
                 }
@@ -770,14 +770,14 @@
                     "config": {
                       "competition": {}
                     },
-                    "createdAt": "2026-06-02T15:30:00Z",
+                    "createdAt": "2026-06-02T15:30:00.000Z",
                     "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
                     "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
                     "isEnabled": true,
                     "subsystem": "api",
                     "target": "RESPONSE",
                     "threshold": 0.7,
-                    "updatedAt": "2026-06-02T15:35:00Z"
+                    "updatedAt": "2026-06-02T15:35:00.000Z"
                   }
                 }
               }
@@ -797,14 +797,14 @@
                     "config": {
                       "competition": {}
                     },
-                    "createdAt": "2026-06-02T15:30:00Z",
+                    "createdAt": "2026-06-02T15:30:00.000Z",
                     "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
                     "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
                     "isEnabled": true,
                     "subsystem": "api",
                     "target": "RESPONSE",
                     "threshold": 0.7,
-                    "updatedAt": "2026-06-02T15:35:00Z"
+                    "updatedAt": "2026-06-02T15:35:00.000Z"
                   }
                 }
               }
@@ -855,14 +855,14 @@
                     "config": {
                       "competition": {}
                     },
-                    "createdAt": "2026-06-02T15:30:00Z",
+                    "createdAt": "2026-06-02T15:30:00.000Z",
                     "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
                     "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
                     "isEnabled": true,
                     "subsystem": "api",
                     "target": "RESPONSE",
                     "threshold": 0.7,
-                    "updatedAt": "2026-06-02T15:35:00Z"
+                    "updatedAt": "2026-06-02T15:35:00.000Z"
                   }
                 }
               }
@@ -1003,14 +1003,14 @@
                     "config": {
                       "competition": {}
                     },
-                    "createdAt": "2026-06-02T15:30:00Z",
+                    "createdAt": "2026-06-02T15:30:00.000Z",
                     "createdBy": "7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d",
                     "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d",
                     "isEnabled": true,
                     "subsystem": "api",
                     "target": "RESPONSE",
                     "threshold": 0.7,
-                    "updatedAt": "2026-06-02T15:35:00Z"
+                    "updatedAt": "2026-06-02T15:35:00.000Z"
                   }
                 }
               }

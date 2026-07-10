@@ -24,7 +24,7 @@ var _ MappedNullable = &SearchQuery{}
 // SearchQuery Search query.
 type SearchQuery struct {
 	// Query string.
-	Query                             string      `json:"query"`
+	Query                             string      `json:"query" validate:"regexp=^[\\s\\S]*$"`
 	SyntaxType                        *SyntaxType `json:"syntaxType,omitempty"`
 	AdditionalProperties              map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

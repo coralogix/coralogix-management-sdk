@@ -182,6 +182,12 @@ func (a *ViewsServiceAPIService) ViewsServiceDeleteViewExecute(r ApiViewsService
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.id < 1 {
+		return localVarReturnValue, nil, reportError("id must be greater than 1")
+	}
+	if r.id > 2147483647 {
+		return localVarReturnValue, nil, reportError("id must be less than 2147483647")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -286,6 +292,12 @@ func (a *ViewsServiceAPIService) ViewsServiceGetViewExecute(r ApiViewsServiceGet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.id < 1 {
+		return localVarReturnValue, nil, reportError("id must be greater than 1")
+	}
+	if r.id > 2147483647 {
+		return localVarReturnValue, nil, reportError("id must be less than 2147483647")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -496,6 +508,12 @@ func (a *ViewsServiceAPIService) ViewsServiceReplaceViewExecute(r ApiViewsServic
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.id < 1 {
+		return localVarReturnValue, nil, reportError("id must be greater than 1")
+	}
+	if r.id > 2147483647 {
+		return localVarReturnValue, nil, reportError("id must be less than 2147483647")
+	}
 	if r.view1 == nil {
 		return localVarReturnValue, nil, reportError("view1 is required and must be specified")
 	}

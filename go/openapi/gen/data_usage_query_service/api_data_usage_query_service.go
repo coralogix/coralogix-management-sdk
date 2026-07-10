@@ -41,6 +41,9 @@ DataUsageQueryServiceDataUsage Query data usage
 
 Returns billable data usage aggregated into daily or hourly buckets. Supports filtering and grouping by labels listed by the capabilities endpoint.
 
+Requires the following permissions:
+- `data-usage:Read`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiDataUsageQueryServiceDataUsageRequest
 */
@@ -145,6 +148,9 @@ func (r ApiDataUsageQueryServiceGetDataUsageCapabilitiesRequest) Execute() (*Get
 DataUsageQueryServiceGetDataUsageCapabilities Get data usage capabilities
 
 Returns the labels, measurement kinds, units, and per-request limits supported by the public data-usage API in v1, so clients can validate queries before submitting them.
+
+Requires the following permissions:
+- `data-usage:Read`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiDataUsageQueryServiceGetDataUsageCapabilitiesRequest

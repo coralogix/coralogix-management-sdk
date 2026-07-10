@@ -11,7 +11,7 @@
           "Extension deployment service"
         ],
         "summary": "Get deployed extensions",
-        "description": "Returns all deployed extensions.",
+        "description": "Returns all deployed extensions.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -67,7 +67,7 @@
           "Extension deployment service"
         ],
         "summary": "Deploy extension",
-        "description": "Deploys an extension.",
+        "description": "Deploys an extension.\n\nRequires the following permissions:\n- `extensions:Deploy`",
         "externalDocs": {
           "url": ""
         },
@@ -251,7 +251,7 @@
           "Extension deployment service"
         ],
         "summary": "Update extension",
-        "description": "Updates a deployed extension.",
+        "description": "Updates a deployed extension.\n\nRequires the following permissions:\n- `extensions:Deploy`",
         "externalDocs": {
           "url": ""
         },
@@ -435,7 +435,7 @@
           "Extension deployment service"
         ],
         "summary": "Revert deployment of extension",
-        "description": "Undeploys the specified extension.",
+        "description": "Undeploys the specified extension.\n\nRequires the following permissions:\n- `extensions:Deploy`",
         "externalDocs": {
           "url": ""
         },

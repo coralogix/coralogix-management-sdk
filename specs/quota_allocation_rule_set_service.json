@@ -11,7 +11,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Get quota allocation rule set",
-        "description": "Returns the current quota allocation rules.",
+        "description": "Returns the current quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -90,7 +90,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Replace quota allocation rule set",
-        "description": "Updates the quota allocation rules.",
+        "description": "Updates the quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
         "externalDocs": {
           "url": ""
         },
@@ -176,7 +176,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Create quota allocation rule set",
-        "description": "Creates new quota allocation rules.",
+        "description": "Creates new quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
         "externalDocs": {
           "url": ""
         },
@@ -262,7 +262,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Delete quota allocation rule set",
-        "description": "Deletes the quota allocation rules.",
+        "description": "Deletes the quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
         "externalDocs": {
           "url": ""
         },

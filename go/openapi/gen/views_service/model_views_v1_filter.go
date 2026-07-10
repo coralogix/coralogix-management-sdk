@@ -24,7 +24,7 @@ var _ MappedNullable = &ViewsV1Filter{}
 // ViewsV1Filter View folder.
 type ViewsV1Filter struct {
 	// Filter name
-	Name string `json:"name"`
+	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	// Filter selected values
 	SelectedValues                    map[string]bool `json:"selectedValues"`
 	AdditionalProperties              map[string]interface{}

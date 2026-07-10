@@ -72,11 +72,11 @@
                     {
                       "application": "checkout",
                       "companyId": "12345",
-                      "createdAt": "2026-06-02T15:30:00Z",
+                      "createdAt": "2026-06-02T15:30:00.000Z",
                       "guardrailsIntegrated": true,
                       "id": "175677d1-fc90-4a89-9e35-0590b188ebb2",
                       "subsystem": "api",
-                      "updatedAt": "2026-06-02T15:35:00Z"
+                      "updatedAt": "2026-06-02T15:35:00.000Z"
                     }
                   ]
                 }
@@ -125,11 +125,11 @@
                   "aiApplication": {
                     "application": "checkout",
                     "companyId": "12345",
-                    "createdAt": "2026-06-02T15:30:00Z",
+                    "createdAt": "2026-06-02T15:30:00.000Z",
                     "guardrailsIntegrated": true,
                     "id": "175677d1-fc90-4a89-9e35-0590b188ebb2",
                     "subsystem": "api",
-                    "updatedAt": "2026-06-02T15:35:00Z"
+                    "updatedAt": "2026-06-02T15:35:00.000Z"
                   }
                 }
               }

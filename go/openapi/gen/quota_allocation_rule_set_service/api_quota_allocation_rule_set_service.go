@@ -41,6 +41,9 @@ QuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSet Create quota allocatio
 
 Creates new quota allocation rules.
 
+Requires the following permissions:
+- `team-quota-rules:Manage`
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest
 */
@@ -188,6 +191,9 @@ func (r ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest) Exe
 QuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSet Delete quota allocation rule set
 
 Deletes the quota allocation rules.
+
+Requires the following permissions:
+- `team-quota-rules:Manage`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest
@@ -338,6 +344,9 @@ func (r ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest) Execut
 QuotaAllocationRuleSetServiceGetQuotaAllocationRuleSet Get quota allocation rule set
 
 Returns the current quota allocation rules.
+
+Requires the following permissions:
+- `team-quota-rules:Read`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest
@@ -492,6 +501,9 @@ func (r ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest) Ex
 QuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSet Replace quota allocation rule set
 
 Updates the quota allocation rules.
+
+Requires the following permissions:
+- `team-quota-rules:Manage`
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest

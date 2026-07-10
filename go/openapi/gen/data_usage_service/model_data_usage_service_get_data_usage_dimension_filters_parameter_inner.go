@@ -23,7 +23,7 @@ var _ MappedNullable = &DataUsageServiceGetDataUsageDimensionFiltersParameterInn
 // DataUsageServiceGetDataUsageDimensionFiltersParameterInner struct for DataUsageServiceGetDataUsageDimensionFiltersParameterInner
 type DataUsageServiceGetDataUsageDimensionFiltersParameterInner struct {
 	GenericDimension                  *GenericDimension    `json:"genericDimension,omitempty"`
-	Pillar                            *Pillar              `json:"pillar,omitempty"`
+	Pillar                            *V2Pillar            `json:"pillar,omitempty"`
 	Priority                          *V2Priority          `json:"priority,omitempty"`
 	Severity                          *DatausageV2Severity `json:"severity,omitempty"`
 	Tier                              *V2TcoTier           `json:"tier,omitempty"`
@@ -83,9 +83,9 @@ func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) SetGenericD
 }
 
 // GetPillar returns the Pillar field value if set, zero value otherwise.
-func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetPillar() Pillar {
+func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetPillar() V2Pillar {
 	if o == nil || IsNil(o.Pillar) {
-		var ret Pillar
+		var ret V2Pillar
 		return ret
 	}
 	return *o.Pillar
@@ -93,7 +93,7 @@ func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetPillar()
 
 // GetPillarOk returns a tuple with the Pillar field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetPillarOk() (*Pillar, bool) {
+func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetPillarOk() (*V2Pillar, bool) {
 	if o == nil || IsNil(o.Pillar) {
 		return nil, false
 	}
@@ -109,8 +109,8 @@ func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) HasPillar()
 	return false
 }
 
-// SetPillar gets a reference to the given Pillar and assigns it to the Pillar field.
-func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) SetPillar(v Pillar) {
+// SetPillar gets a reference to the given V2Pillar and assigns it to the Pillar field.
+func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) SetPillar(v V2Pillar) {
 	o.Pillar = &v
 }
 

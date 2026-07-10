@@ -1710,7 +1710,7 @@
             "format": "int32"
           },
           "createdAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "description": "Timestamp (RFC 3339) when the policy was created.",
             "type": "string",
             "minLength": 0
@@ -1776,7 +1776,7 @@
             "minItems": 0
           },
           "updatedAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "description": "Timestamp (RFC 3339) when the policy was last updated.",
             "type": "string",
             "minLength": 0

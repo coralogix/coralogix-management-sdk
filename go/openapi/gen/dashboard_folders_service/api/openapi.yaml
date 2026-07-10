@@ -11,7 +11,7 @@
           "Dashboard folders service"
         ],
         "summary": "List dashboard folders",
-        "description": "List all dashboard folders accessible.",
+        "description": "List all dashboard folders accessible.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -67,7 +67,7 @@
           "Dashboard folders service"
         ],
         "summary": "Replace a dashboard folder",
-        "description": "Replaces an existing dashboard folder.",
+        "description": "Replaces an existing dashboard folder.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -146,7 +146,7 @@
           "Dashboard folders service"
         ],
         "summary": "Create a dashboard folder",
-        "description": "Creates a new dashboard folder.",
+        "description": "Creates a new dashboard folder.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -227,7 +227,7 @@
           "Dashboard folders service"
         ],
         "summary": "Get a dashboard folder",
-        "description": "Returns a dashboard folder data.",
+        "description": "Returns a dashboard folder data.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -298,7 +298,7 @@
           "Dashboard folders service"
         ],
         "summary": "Delete a dashboard folder",
-        "description": "Deletes the dashboard folder with the specified ID.",
+        "description": "Deletes the dashboard folder with the specified ID.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },

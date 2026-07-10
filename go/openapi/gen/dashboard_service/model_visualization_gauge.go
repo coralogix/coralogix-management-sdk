@@ -23,7 +23,8 @@ var _ MappedNullable = &VisualizationGauge{}
 // VisualizationGauge Gauge.
 type VisualizationGauge struct {
 	// Whether to render numeric value with abbreviation
-	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	AllowAbbreviation *bool       `json:"allowAbbreviation,omitempty"`
+	ArcDisplay        *ArcDisplay `json:"arcDisplay,omitempty"`
 	// List of observation fields used to split gauge into multiple gauge instances.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)
@@ -38,9 +39,13 @@ type VisualizationGauge struct {
 	Max *float64 `json:"max,omitempty"`
 	// A minimum gauge value used in percentage threshold calculation and for visual value representation
 	Min *float64 `json:"min,omitempty"`
-	// Whether to show the inner arc of gauge which graphically represents the value
+	// Deprecated: use arcDisplay.valueArc instead. Whether to show the inner arc of gauge which graphically represents the value
+	// Deprecated
 	ShowInnerArc *bool `json:"showInnerArc,omitempty"`
-	// Whether to show the outer arc of gauge which graphically represents the min/max range
+	// Whether to display the min and max range values on the gauge
+	ShowMinMax *bool `json:"showMinMax,omitempty"`
+	// Deprecated: use arcDisplay.thresholdArc instead. Whether to show the outer arc of gauge which graphically represents the min/max range
+	// Deprecated
 	ShowOuterArc  *bool          `json:"showOuterArc,omitempty"`
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	// List of value thresholds, each with a certain color and an optional name label
@@ -102,6 +107,38 @@ func (o *VisualizationGauge) HasAllowAbbreviation() bool {
 // SetAllowAbbreviation gets a reference to the given bool and assigns it to the AllowAbbreviation field.
 func (o *VisualizationGauge) SetAllowAbbreviation(v bool) {
 	o.AllowAbbreviation = &v
+}
+
+// GetArcDisplay returns the ArcDisplay field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetArcDisplay() ArcDisplay {
+	if o == nil || IsNil(o.ArcDisplay) {
+		var ret ArcDisplay
+		return ret
+	}
+	return *o.ArcDisplay
+}
+
+// GetArcDisplayOk returns a tuple with the ArcDisplay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetArcDisplayOk() (*ArcDisplay, bool) {
+	if o == nil || IsNil(o.ArcDisplay) {
+		return nil, false
+	}
+	return o.ArcDisplay, true
+}
+
+// HasArcDisplay returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasArcDisplay() bool {
+	if o != nil && !IsNil(o.ArcDisplay) {
+		return true
+	}
+
+	return false
+}
+
+// SetArcDisplay gets a reference to the given ArcDisplay and assigns it to the ArcDisplay field.
+func (o *VisualizationGauge) SetArcDisplay(v ArcDisplay) {
+	o.ArcDisplay = &v
 }
 
 // GetCategoryFields returns the CategoryFields field value if set, zero value otherwise.
@@ -361,6 +398,7 @@ func (o *VisualizationGauge) SetMin(v float64) {
 }
 
 // GetShowInnerArc returns the ShowInnerArc field value if set, zero value otherwise.
+// Deprecated
 func (o *VisualizationGauge) GetShowInnerArc() bool {
 	if o == nil || IsNil(o.ShowInnerArc) {
 		var ret bool
@@ -371,6 +409,7 @@ func (o *VisualizationGauge) GetShowInnerArc() bool {
 
 // GetShowInnerArcOk returns a tuple with the ShowInnerArc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *VisualizationGauge) GetShowInnerArcOk() (*bool, bool) {
 	if o == nil || IsNil(o.ShowInnerArc) {
 		return nil, false
@@ -388,11 +427,45 @@ func (o *VisualizationGauge) HasShowInnerArc() bool {
 }
 
 // SetShowInnerArc gets a reference to the given bool and assigns it to the ShowInnerArc field.
+// Deprecated
 func (o *VisualizationGauge) SetShowInnerArc(v bool) {
 	o.ShowInnerArc = &v
 }
 
+// GetShowMinMax returns the ShowMinMax field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetShowMinMax() bool {
+	if o == nil || IsNil(o.ShowMinMax) {
+		var ret bool
+		return ret
+	}
+	return *o.ShowMinMax
+}
+
+// GetShowMinMaxOk returns a tuple with the ShowMinMax field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetShowMinMaxOk() (*bool, bool) {
+	if o == nil || IsNil(o.ShowMinMax) {
+		return nil, false
+	}
+	return o.ShowMinMax, true
+}
+
+// HasShowMinMax returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasShowMinMax() bool {
+	if o != nil && !IsNil(o.ShowMinMax) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowMinMax gets a reference to the given bool and assigns it to the ShowMinMax field.
+func (o *VisualizationGauge) SetShowMinMax(v bool) {
+	o.ShowMinMax = &v
+}
+
 // GetShowOuterArc returns the ShowOuterArc field value if set, zero value otherwise.
+// Deprecated
 func (o *VisualizationGauge) GetShowOuterArc() bool {
 	if o == nil || IsNil(o.ShowOuterArc) {
 		var ret bool
@@ -403,6 +476,7 @@ func (o *VisualizationGauge) GetShowOuterArc() bool {
 
 // GetShowOuterArcOk returns a tuple with the ShowOuterArc field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *VisualizationGauge) GetShowOuterArcOk() (*bool, bool) {
 	if o == nil || IsNil(o.ShowOuterArc) {
 		return nil, false
@@ -420,6 +494,7 @@ func (o *VisualizationGauge) HasShowOuterArc() bool {
 }
 
 // SetShowOuterArc gets a reference to the given bool and assigns it to the ShowOuterArc field.
+// Deprecated
 func (o *VisualizationGauge) SetShowOuterArc(v bool) {
 	o.ShowOuterArc = &v
 }
@@ -597,6 +672,9 @@ func (o VisualizationGauge) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AllowAbbreviation) {
 		toSerialize["allowAbbreviation"] = o.AllowAbbreviation
 	}
+	if !IsNil(o.ArcDisplay) {
+		toSerialize["arcDisplay"] = o.ArcDisplay
+	}
 	if !IsNil(o.CategoryFields) {
 		toSerialize["categoryFields"] = o.CategoryFields
 	}
@@ -623,6 +701,9 @@ func (o VisualizationGauge) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ShowInnerArc) {
 		toSerialize["showInnerArc"] = o.ShowInnerArc
+	}
+	if !IsNil(o.ShowMinMax) {
+		toSerialize["showMinMax"] = o.ShowMinMax
 	}
 	if !IsNil(o.ShowOuterArc) {
 		toSerialize["showOuterArc"] = o.ShowOuterArc
@@ -666,6 +747,7 @@ func (o *VisualizationGauge) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "arcDisplay")
 		delete(additionalProperties, "categoryFields")
 		delete(additionalProperties, "customUnit")
 		delete(additionalProperties, "decimalPrecision")
@@ -675,6 +757,7 @@ func (o *VisualizationGauge) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "max")
 		delete(additionalProperties, "min")
 		delete(additionalProperties, "showInnerArc")
+		delete(additionalProperties, "showMinMax")
 		delete(additionalProperties, "showOuterArc")
 		delete(additionalProperties, "thresholdType")
 		delete(additionalProperties, "thresholds")

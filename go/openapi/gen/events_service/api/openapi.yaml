@@ -893,7 +893,7 @@
             "minLength": 0
           },
           "cxEventTimestamp": {
-            "example": "2024-05-05T00:00:00Z",
+            "example": "2024-05-05T00:00:00.000Z",
             "description": "The cx event timestamp.",
             "type": "string",
             "format": "date-time",

@@ -784,7 +784,7 @@
         "type": "object",
         "properties": {
           "expireAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "description": "Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.",
             "type": "string",
             "format": "date-time",

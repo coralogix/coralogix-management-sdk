@@ -11,7 +11,7 @@
           "Alert definitions service"
         ],
         "summary": "Get a list of all accessible alert definitions",
-        "description": "Returns all alert definitions for the team.",
+        "description": "Returns all alert definitions for the team.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -174,7 +174,7 @@
           "Alert definitions service"
         ],
         "summary": "Replace an alert definition",
-        "description": "Updates an existing alert definition.",
+        "description": "Updates an existing alert definition.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -252,7 +252,7 @@
           "Alert definitions service"
         ],
         "summary": "Create an alert",
-        "description": "Creates a new alert definition.",
+        "description": "Creates a new alert definition.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -326,7 +326,7 @@
           "Alert definitions service"
         ],
         "summary": "Get counts for filter options",
-        "description": "Returns counts for different filter options based on the provided filters",
+        "description": "Returns counts for different filter options based on the provided filters\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -420,7 +420,7 @@
           "Alert definitions service"
         ],
         "summary": "Bulk delete alert definitions",
-        "description": "Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are.",
+        "description": "Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -504,7 +504,7 @@
           "Alert definitions service"
         ],
         "summary": "Download alerts",
-        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.",
+        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -562,7 +562,7 @@
           "Alert definitions service"
         ],
         "summary": "Bulk replace alert definitions",
-        "description": "Replaces all alert definitions with the provided set.",
+        "description": "Replaces all alert definitions with the provided set.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -641,7 +641,7 @@
           "Alert definitions service"
         ],
         "summary": "Get alert definition by alert version ID",
-        "description": "Returns the alert definition with the specified version ID.",
+        "description": "Returns the alert definition with the specified version ID.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -714,7 +714,7 @@
           "Alert definitions service"
         ],
         "summary": "Get alert definition by ID",
-        "description": "Returns the details of the specified alert definition.",
+        "description": "Returns the details of the specified alert definition.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -785,7 +785,7 @@
           "Alert definitions service"
         ],
         "summary": "DeleteAlertDef",
-        "description": "Deletes the alert definition with the specified ID.",
+        "description": "Deletes the alert definition with the specified ID.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -901,7 +901,7 @@
             "minLength": 0
           },
           "createdTime": {
-            "example": "2023-10-01T12:00:00Z",
+            "example": "2023-10-01T12:00:00.000Z",
             "description": "The time when the alert definition was created",
             "type": "string",
             "format": "date-time",
@@ -914,7 +914,7 @@
             "minLength": 0
           },
           "lastTriggeredTime": {
-            "example": "2023-10-01T12:00:00Z",
+            "example": "2023-10-01T12:00:00.000Z",
             "description": "The last time the alert definition was triggered",
             "type": "string",
             "format": "date-time",
@@ -924,7 +924,7 @@
             "$ref": "#/components/schemas/AlertDefStatus"
           },
           "updatedTime": {
-            "example": "2023-10-01T12:00:00Z",
+            "example": "2023-10-01T12:00:00.000Z",
             "description": "The time when the alert definition was last updated",
             "type": "string",
             "format": "date-time",

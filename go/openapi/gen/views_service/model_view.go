@@ -31,7 +31,7 @@ type View struct {
 	// The is compact mode.
 	IsCompactMode *bool `json:"isCompactMode,omitempty"`
 	// View name
-	Name                              string        `json:"name"`
+	Name                              string        `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	SearchQuery                       *SearchQuery  `json:"searchQuery,omitempty"`
 	TimeSelection                     TimeSelection `json:"timeSelection"`
 	ViewType                          *ViewType     `json:"viewType,omitempty"`

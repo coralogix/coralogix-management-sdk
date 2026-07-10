@@ -113,7 +113,9 @@
                     "example": "Logs view",
                     "description": "View name",
                     "type": "string",
-                    "minLength": 1
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 250
                   },
                   "searchQuery": {
                     "$ref": "#/components/schemas/SearchQuery"
@@ -303,7 +305,9 @@
                     "example": "Logs view",
                     "description": "View name",
                     "type": "string",
-                    "minLength": 1
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 250
                   },
                   "searchQuery": {
                     "$ref": "#/components/schemas/SearchQuery"
@@ -417,7 +421,9 @@
             "example": 52,
             "description": "id",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "style": "simple"
         }
@@ -438,14 +444,16 @@
             "description": "The from time.",
             "type": "string",
             "format": "date-time",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 35
           },
           "toTime": {
             "example": "2024-01-25T11:35:43.152Z",
             "description": "The to time.",
             "type": "string",
             "format": "date-time",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 35
           }
         },
         "required": [
@@ -535,7 +543,8 @@
             "items": {
               "$ref": "#/components/schemas/View"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100000
           }
         }
       },
@@ -567,14 +576,17 @@
             "example": "Last Hour",
             "description": "Folder name",
             "type": "string",
-            "minLength": 1
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           },
           "seconds": {
             "example": 3600,
             "description": "Folder name",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           }
         },
         "required": [
@@ -592,7 +604,9 @@
           "query": {
             "description": "Query string.",
             "type": "string",
-            "minLength": 1
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 65535
           },
           "syntaxType": {
             "$ref": "#/components/schemas/SyntaxType"
@@ -615,7 +629,8 @@
             "items": {
               "$ref": "#/components/schemas/views.v1.Filter"
             },
-            "minItems": 1
+            "minItems": 1,
+            "maxItems": 1000
           }
         }
       },
@@ -699,7 +714,9 @@
             "example": 52,
             "description": "id",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           },
           "isCompactMode": {
             "description": "The is compact mode.",
@@ -709,7 +726,9 @@
             "example": "Logs view",
             "description": "View name",
             "type": "string",
-            "minLength": 1
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 250
           },
           "searchQuery": {
             "$ref": "#/components/schemas/SearchQuery"
@@ -765,7 +784,9 @@
             "example": "applicationName",
             "description": "Filter name",
             "type": "string",
-            "minLength": 1
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 65535
           },
           "selectedValues": {
             "description": "Filter selected values",
