@@ -22,7 +22,6 @@ TEMPLATE_DIR="go/openapi/templates"
 OPENAPI_TOOLS_CONFIG="openapitools.json"
 CODEGEN_SPECS_DIR="$(mktemp -d ".openapi-codegen-specs.XXXXXX")"
 trap 'rm -rf "$CODEGEN_SPECS_DIR"' EXIT
-DASHBOARD_CLIENT_BACKUP="$CODEGEN_SPECS_DIR/dashboard_service_client.go"
 
 source "$SCRIPT_DIR/openapi_generator_common.sh"
 
@@ -70,9 +69,45 @@ generate_dashboard_support_files() {
     "apiTests=false,modelTests=false,apiDocs=false,modelDocs=false,supportingFiles=utils.go"
 }
 
-if [ -f "$OUT_BASE/dashboard_service/client.go" ]; then
-  cp "$OUT_BASE/dashboard_service/client.go" "$DASHBOARD_CLIENT_BACKUP"
-fi
+ensure_dashboard_client_service_wiring() {
+  local client_file="$1/client.go"
+
+  if grep -q "DashboardServiceAPI \*DashboardServiceAPIService" "$client_file" && \
+    grep -q "c.DashboardServiceAPI = (\*DashboardServiceAPIService)(&c.common)" "$client_file"; then
+    return
+  fi
+
+  python3 - "$client_file" <<'PY'
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+content = path.read_text()
+
+content = content.replace(
+    "\t// API Services\n}",
+    "\t// API Services\n\n\tDashboardServiceAPI *DashboardServiceAPIService\n}",
+    1,
+)
+content = content.replace(
+    "\t// API Services\n\n\treturn c",
+    "\t// API Services\n\tc.DashboardServiceAPI = (*DashboardServiceAPIService)(&c.common)\n\n\treturn c",
+    1,
+)
+
+path.write_text(content)
+PY
+
+  if ! grep -q "DashboardServiceAPI \*DashboardServiceAPIService" "$client_file"; then
+    echo "FAILED to populate dashboard APIClient service field" >&2
+    exit 1
+  fi
+
+  if ! grep -q "c.DashboardServiceAPI = (\*DashboardServiceAPIService)(&c.common)" "$client_file"; then
+    echo "FAILED to populate dashboard APIClient service initializer" >&2
+    exit 1
+  fi
+}
 
 rm -rf "$OUT_BASE"
 
@@ -106,11 +141,7 @@ for spec in "$SPECS_DIR"/*; do
       echo "FAILED to generate dashboard support files" >&2
       exit 1
     fi
-    if [ -f "$DASHBOARD_CLIENT_BACKUP" ]; then
-      # Support-only generation does not populate APIClient service fields.
-      # Preserve the checked-in dashboard client while regenerating models/APIs.
-      cp "$DASHBOARD_CLIENT_BACKUP" "$outdir/client.go"
-    fi
+    ensure_dashboard_client_service_wiring "$outdir"
   fi
 
   normalize_regex_validator_tags "$outdir"
