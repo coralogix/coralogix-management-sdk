@@ -235,11 +235,6 @@ func (o MultiSelectSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SpanField) {
 		toSerialize["spanField"] = o.SpanField
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["logsPath"]; exists {
 		optionalOneOfGroup0Matches++
@@ -258,6 +253,10 @@ func (o MultiSelectSource) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsPath, metricLabel, constantList, spanField, query] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

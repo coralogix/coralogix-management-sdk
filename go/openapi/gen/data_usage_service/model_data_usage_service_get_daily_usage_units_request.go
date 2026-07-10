@@ -127,11 +127,6 @@ func (o DataUsageServiceGetDailyUsageUnitsRequest) ToMap() (map[string]interface
 	if !IsNil(o.Range) {
 		toSerialize["range"] = o.Range
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["range"]; exists {
 		optionalOneOfGroup0Matches++
@@ -141,6 +136,10 @@ func (o DataUsageServiceGetDailyUsageUnitsRequest) ToMap() (map[string]interface
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [range, dateRange] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

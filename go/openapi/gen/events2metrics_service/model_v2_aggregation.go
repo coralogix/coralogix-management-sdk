@@ -274,11 +274,6 @@ func (o V2Aggregation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TargetMetricName) {
 		toSerialize["targetMetricName"] = o.TargetMetricName
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["none"]; exists {
 		optionalOneOfGroup0Matches++
@@ -291,6 +286,10 @@ func (o V2Aggregation) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [none, samples, histogram] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

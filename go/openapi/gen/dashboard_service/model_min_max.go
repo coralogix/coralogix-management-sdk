@@ -128,11 +128,6 @@ func (o MinMax) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Custom) {
 		toSerialize["custom"] = o.Custom
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["auto"]; exists {
 		optionalOneOfGroup0Matches++
@@ -142,6 +137,10 @@ func (o MinMax) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [auto, custom] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

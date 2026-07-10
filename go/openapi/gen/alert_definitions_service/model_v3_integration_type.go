@@ -128,11 +128,6 @@ func (o V3IntegrationType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Recipients) {
 		toSerialize["recipients"] = o.Recipients
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["integrationId"]; exists {
 		optionalOneOfGroup0Matches++
@@ -142,6 +137,10 @@ func (o V3IntegrationType) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [integrationId, recipients] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

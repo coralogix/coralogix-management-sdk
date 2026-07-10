@@ -163,11 +163,6 @@ func (o SloExecutionResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReplaceSloResponse) {
 		toSerialize["replaceSloResponse"] = o.ReplaceSloResponse
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["createSloResponse"]; exists {
 		optionalOneOfGroup0Matches++
@@ -180,6 +175,10 @@ func (o SloExecutionResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [createSloResponse, replaceSloResponse, deleteSloResponse] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

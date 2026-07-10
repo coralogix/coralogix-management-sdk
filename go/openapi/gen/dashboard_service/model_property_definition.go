@@ -346,11 +346,6 @@ func (o PropertyDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValuesMapping) {
 		toSerialize["valuesMapping"] = o.ValuesMapping
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["thresholds"]; exists {
 		optionalOneOfGroup0Matches++
@@ -378,6 +373,10 @@ func (o PropertyDefinition) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [thresholds, alignment, units, regexExtract, link, valuesAlias, valuesMapping, columnDisplayName] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

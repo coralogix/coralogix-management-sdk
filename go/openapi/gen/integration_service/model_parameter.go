@@ -312,11 +312,6 @@ func (o Parameter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StringValue) {
 		toSerialize["stringValue"] = o.StringValue
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["stringValue"]; exists {
 		optionalOneOfGroup0Matches++
@@ -338,6 +333,10 @@ func (o Parameter) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [stringValue, booleanValue, stringList, apiKey, numericValue, sensitiveData] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

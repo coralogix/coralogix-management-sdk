@@ -199,11 +199,6 @@ func (o QuerySourceMetricsQueryType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PromqlQuery) {
 		toSerialize["promqlQuery"] = o.PromqlQuery
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["metricName"]; exists {
 		optionalOneOfGroup0Matches++
@@ -219,6 +214,10 @@ func (o QuerySourceMetricsQueryType) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metricName, labelName, labelValue, promqlQuery] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

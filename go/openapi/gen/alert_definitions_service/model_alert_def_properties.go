@@ -1108,11 +1108,6 @@ func (o AlertDefProperties) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["logsImmediate"]; exists {
 		optionalOneOfGroup0Matches++
@@ -1161,6 +1156,10 @@ func (o AlertDefProperties) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsImmediate, tracingImmediate, logsThreshold, logsRatioThreshold, logsTimeRelativeThreshold, metricThreshold, tracingThreshold, flow, logsAnomaly, metricAnomaly, logsNewValue, logsUniqueCount, sloThreshold, analyticsImmediate, analyticsThreshold] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

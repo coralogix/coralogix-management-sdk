@@ -163,11 +163,6 @@ func (o BucketValidationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.S3) {
 		toSerialize["s3"] = o.S3
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["ibm"]; exists {
 		optionalOneOfGroup0Matches++
@@ -180,6 +175,10 @@ func (o BucketValidationRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [ibm, s3, gcs] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

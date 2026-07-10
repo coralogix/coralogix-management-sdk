@@ -595,11 +595,6 @@ func (o Visualization) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerticalBarsMulti) {
 		toSerialize["verticalBarsMulti"] = o.VerticalBarsMulti
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["table"]; exists {
 		optionalOneOfGroup0Matches++
@@ -648,6 +643,10 @@ func (o Visualization) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [table, timeSeriesLines, timeSeriesBars, stat, gauge, hexagonBins, pieChart, horizontalBars, verticalBars, heatmap, geomap, timeSeriesLinesMulti, verticalBarsMulti, horizontalBarsMulti, statCard] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

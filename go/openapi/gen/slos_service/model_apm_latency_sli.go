@@ -201,11 +201,6 @@ func (o ApmLatencySli) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeWindow) {
 		toSerialize["timeWindow"] = o.TimeWindow
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["quantile"]; exists {
 		optionalOneOfGroup0Matches++
@@ -215,6 +210,10 @@ func (o ApmLatencySli) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [quantile, average] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

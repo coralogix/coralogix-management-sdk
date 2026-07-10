@@ -415,11 +415,6 @@ func (o RuleParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReplaceParameters) {
 		toSerialize["replaceParameters"] = o.ReplaceParameters
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["extractParameters"]; exists {
 		optionalOneOfGroup0Matches++
@@ -453,6 +448,10 @@ func (o RuleParameters) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [extractParameters, jsonExtractParameters, replaceParameters, parseParameters, allowParameters, blockParameters, extractTimestampParameters, removeFieldsParameters, jsonStringifyParameters, jsonParseParameters] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

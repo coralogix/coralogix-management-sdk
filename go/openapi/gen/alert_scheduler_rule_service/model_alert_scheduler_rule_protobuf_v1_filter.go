@@ -164,11 +164,6 @@ func (o AlertSchedulerRuleProtobufV1Filter) ToMap() (map[string]interface{}, err
 	if !IsNil(o.WhatExpression) {
 		toSerialize["whatExpression"] = o.WhatExpression
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["alertMetaLabels"]; exists {
 		optionalOneOfGroup0Matches++
@@ -178,6 +173,10 @@ func (o AlertSchedulerRuleProtobufV1Filter) ToMap() (map[string]interface{}, err
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [alertMetaLabels, alertUniqueIds] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

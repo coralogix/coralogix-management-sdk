@@ -155,11 +155,6 @@ func (o V2Target) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.S3) {
 		toSerialize["s3"] = o.S3
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["s3"]; exists {
 		requiredOneOfGroup0Matches++
@@ -174,6 +169,10 @@ func (o V2Target) ToMap() (map[string]interface{}, error) {
 	}
 	if requiredOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [s3, ibmCos] must be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

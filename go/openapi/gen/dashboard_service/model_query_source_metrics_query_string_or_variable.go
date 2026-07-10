@@ -129,11 +129,6 @@ func (o QuerySourceMetricsQueryStringOrVariable) ToMap() (map[string]interface{}
 	if !IsNil(o.VariableName) {
 		toSerialize["variableName"] = o.VariableName
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["stringValue"]; exists {
 		optionalOneOfGroup0Matches++
@@ -143,6 +138,10 @@ func (o QuerySourceMetricsQueryStringOrVariable) ToMap() (map[string]interface{}
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [stringValue, variableName] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

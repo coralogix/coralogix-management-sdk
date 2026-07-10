@@ -349,11 +349,6 @@ func (o {{classname}}) ToMap() (map[string]interface{}, error) {
 	{{/isNullable}}
 	{{/vars}}
 	{{#isAdditionalPropertiesTrue}}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	{{/isAdditionalPropertiesTrue}}
 	{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
 	requiredOneOfGroup{{index}}Matches := 0
@@ -389,6 +384,13 @@ func (o {{classname}}) ToMap() (map[string]interface{}, error) {
 	}
 
 	{{/vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
+	{{#isAdditionalPropertiesTrue}}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	{{/isAdditionalPropertiesTrue}}
 	return toSerialize, nil
 }
 

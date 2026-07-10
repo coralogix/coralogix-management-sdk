@@ -163,11 +163,6 @@ func (o CommentAttachment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Log) {
 		toSerialize["log"] = o.Log
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["log"]; exists {
 		requiredOneOfGroup0Matches++
@@ -185,6 +180,10 @@ func (o CommentAttachment) ToMap() (map[string]interface{}, error) {
 	}
 	if requiredOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [log, customWidget, file] must be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

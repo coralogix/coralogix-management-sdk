@@ -271,11 +271,6 @@ func (o AnnotationSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Spans) {
 		toSerialize["spans"] = o.Spans
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["metrics"]; exists {
 		optionalOneOfGroup0Matches++
@@ -297,6 +292,10 @@ func (o AnnotationSource) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metrics, logs, spans, dataprime, manual, eventRecurrence] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

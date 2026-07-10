@@ -277,11 +277,6 @@ func (o RoleManagementServiceCreateRoleRequest) ToMap() (map[string]interface{},
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["parentRoleId"]; exists {
 		optionalOneOfGroup0Matches++
@@ -291,6 +286,10 @@ func (o RoleManagementServiceCreateRoleRequest) ToMap() (map[string]interface{},
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [parentRoleId, parentRoleName] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

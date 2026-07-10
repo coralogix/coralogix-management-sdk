@@ -157,11 +157,6 @@ func (o AccessType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TemporaryAccess) {
 		toSerialize["temporaryAccess"] = o.TemporaryAccess
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["permanentAccess"]; exists {
 		optionalOneOfGroup0Matches++
@@ -171,6 +166,10 @@ func (o AccessType) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [permanentAccess, temporaryAccess] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

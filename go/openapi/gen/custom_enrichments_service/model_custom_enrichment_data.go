@@ -165,11 +165,6 @@ func (o CustomEnrichmentData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Textual) {
 		toSerialize["textual"] = o.Textual
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["textual"]; exists {
 		optionalOneOfGroup0Matches++
@@ -179,6 +174,10 @@ func (o CustomEnrichmentData) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [textual, binary] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

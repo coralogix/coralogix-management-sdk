@@ -787,11 +787,6 @@ func (o FieldInformation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Visible) {
 		toSerialize["visible"] = o.Visible
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["single"]; exists {
 		optionalOneOfGroup0Matches++
@@ -813,6 +808,10 @@ func (o FieldInformation) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [single, multiText, multipleSelection, singleBoolean, selection, singleNumber] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

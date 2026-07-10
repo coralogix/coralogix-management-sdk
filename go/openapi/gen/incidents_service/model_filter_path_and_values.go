@@ -155,11 +155,6 @@ func (o FilterPathAndValues) ToMap() (map[string]interface{}, error) {
 		toSerialize["multipleValues"] = o.MultipleValues
 	}
 	toSerialize["path"] = o.Path
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["multipleValues"]; exists {
 		requiredOneOfGroup0Matches++
@@ -174,6 +169,10 @@ func (o FilterPathAndValues) ToMap() (map[string]interface{}, error) {
 	}
 	if requiredOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [multipleValues, filters] must be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

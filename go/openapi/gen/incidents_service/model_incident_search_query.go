@@ -157,11 +157,6 @@ func (o IncidentSearchQuery) ToMap() (map[string]interface{}, error) {
 		toSerialize["incidentField"] = o.IncidentField
 	}
 	toSerialize["query"] = o.Query
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["incidentField"]; exists {
 		requiredOneOfGroup0Matches++
@@ -176,6 +171,10 @@ func (o IncidentSearchQuery) ToMap() (map[string]interface{}, error) {
 	}
 	if requiredOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [incidentField, contextualLabel] must be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

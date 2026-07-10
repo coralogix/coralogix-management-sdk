@@ -127,11 +127,6 @@ func (o PrometheusAlertStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Triggered) {
 		toSerialize["triggered"] = o.Triggered
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["triggered"]; exists {
 		optionalOneOfGroup0Matches++
@@ -141,6 +136,10 @@ func (o PrometheusAlertStatus) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [triggered, resolved] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

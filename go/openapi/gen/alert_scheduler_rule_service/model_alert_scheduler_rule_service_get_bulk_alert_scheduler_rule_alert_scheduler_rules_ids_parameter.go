@@ -127,11 +127,6 @@ func (o AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIds
 	if !IsNil(o.AlertSchedulerVersionIds) {
 		toSerialize["alertSchedulerVersionIds"] = o.AlertSchedulerVersionIds
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["alertSchedulerIds"]; exists {
 		optionalOneOfGroup0Matches++
@@ -141,6 +136,10 @@ func (o AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIds
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [alertSchedulerIds, alertSchedulerVersionIds] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

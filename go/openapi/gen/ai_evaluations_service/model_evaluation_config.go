@@ -749,11 +749,6 @@ func (o EvaluationConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Toxicity) {
 		toSerialize["toxicity"] = o.Toxicity
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["allowedTopics"]; exists {
 		optionalOneOfGroup0Matches++
@@ -814,6 +809,10 @@ func (o EvaluationConfig) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [allowedTopics, competition, hallucinationCompleteness, hallucinationContextAdherence, hallucinationContextRelevance, hallucinationCorrectness, pii, promptInjection, restrictedTopics, sexism, sqlAllowedTables, sqlHallucination, sqlReadOnly, sqlRestrictedTables, toxicity, hallucinationTaskAdherence, sqlLoad, languageMismatch, customEvaluation] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

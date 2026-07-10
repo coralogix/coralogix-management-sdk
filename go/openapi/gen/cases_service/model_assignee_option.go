@@ -129,11 +129,6 @@ func (o AssigneeOption) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unassigned) {
 		toSerialize["unassigned"] = o.Unassigned
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["assignee"]; exists {
 		optionalOneOfGroup0Matches++
@@ -143,6 +138,10 @@ func (o AssigneeOption) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [assignee, unassigned] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

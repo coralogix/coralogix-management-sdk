@@ -127,11 +127,6 @@ func (o QuerySourceLogsQueryType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FieldValue) {
 		toSerialize["fieldValue"] = o.FieldValue
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["fieldName"]; exists {
 		optionalOneOfGroup0Matches++
@@ -141,6 +136,10 @@ func (o QuerySourceLogsQueryType) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [fieldName, fieldValue] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

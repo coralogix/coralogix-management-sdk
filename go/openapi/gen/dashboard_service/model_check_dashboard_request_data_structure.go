@@ -165,11 +165,6 @@ func (o CheckDashboardRequestDataStructure) ToMap() (map[string]interface{}, err
 	if !IsNil(o.RequestId) {
 		toSerialize["requestId"] = o.RequestId
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["dashboard"]; exists {
 		optionalOneOfGroup0Matches++
@@ -179,6 +174,10 @@ func (o CheckDashboardRequestDataStructure) ToMap() (map[string]interface{}, err
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [dashboard, dashboardId] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

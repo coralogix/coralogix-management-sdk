@@ -753,11 +753,6 @@ func (o Slo1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WindowBasedMetricSli) {
 		toSerialize["windowBasedMetricSli"] = o.WindowBasedMetricSli
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["requestBasedMetricSli"]; exists {
 		optionalOneOfGroup0Matches++
@@ -770,6 +765,10 @@ func (o Slo1) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [requestBasedMetricSli, windowBasedMetricSli, apmSli] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

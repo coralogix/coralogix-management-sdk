@@ -127,11 +127,6 @@ func (o QuerySourceMetricsQueryOperator) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.NotEquals) {
 		toSerialize["notEquals"] = o.NotEquals
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["equals"]; exists {
 		optionalOneOfGroup0Matches++
@@ -141,6 +136,10 @@ func (o QuerySourceMetricsQueryOperator) ToMap() (map[string]interface{}, error)
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [equals, notEquals] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

@@ -231,11 +231,6 @@ func (o NotificationDelivery) ToMap() (map[string]interface{}, error) {
 		toSerialize["requestNotificationId"] = o.RequestNotificationId
 	}
 	toSerialize["timestamp"] = o.Timestamp
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["noRouterMatched"]; exists {
 		optionalOneOfGroup0Matches++
@@ -248,6 +243,10 @@ func (o NotificationDelivery) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [noRouterMatched, noNotificationCreated, attempted] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

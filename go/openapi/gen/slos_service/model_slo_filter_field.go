@@ -347,11 +347,6 @@ func (o SloFilterField) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SloType) {
 		toSerialize["sloType"] = o.SloType
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["constFilter"]; exists {
 		optionalOneOfGroup0Matches++
@@ -379,6 +374,10 @@ func (o SloFilterField) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [constFilter, labelName, sloType, productType, serviceName, ownershipServiceValues, ownershipEnvironmentValues, ownershipTeamValues] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

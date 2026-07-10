@@ -351,11 +351,6 @@ func (o CaseResolver) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.System) {
 		toSerialize["system"] = o.System
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["system"]; exists {
 		optionalOneOfGroup0Matches++
@@ -383,6 +378,10 @@ func (o CaseResolver) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [system, cxUser, serviceNow, apiKey, slack, prometheusAlertManager, pagerDuty, microsoftTeams] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil

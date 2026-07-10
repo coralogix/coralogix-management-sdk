@@ -192,11 +192,6 @@ func (o UserUpdatesOperation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Set) {
 		toSerialize["set"] = o.Set
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["add"]; exists {
 		optionalOneOfGroup0Matches++
@@ -209,6 +204,10 @@ func (o UserUpdatesOperation) ToMap() (map[string]interface{}, error) {
 	}
 	if optionalOneOfGroup0Matches > 1 {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [add, remove, set] may be set"}
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
 
 	return toSerialize, nil
