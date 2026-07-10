@@ -73,6 +73,30 @@ func TestRequiredOneOf_ResponseUnknownFutureArmIsForwardCompatible(t *testing.T)
 	}
 }
 
+func TestRequiredOneOf_ResponseWithKnownArmAndUnrelatedAdditionalPropertyDoesNotBypassAfterArmCleared(t *testing.T) {
+	payload := `{
+		"path": "service.name",
+		"filters": {"pathAndValues": []},
+		"displayName": "future display"
+	}`
+
+	var got scopes.FilterPathAndValues
+	if err := json.Unmarshal([]byte(payload), &got); err != nil {
+		t.Fatalf("expected response unmarshal to succeed, got: %v", err)
+	}
+	if got.Filters == nil {
+		t.Fatal("expected filters arm to be decoded")
+	}
+	if _, ok := got.AdditionalProperties["displayName"]; !ok {
+		t.Fatal("expected unrelated future field to be preserved in AdditionalProperties")
+	}
+
+	got.Filters = nil
+	if _, err := json.Marshal(got); err == nil {
+		t.Fatal("expected marshal to reject missing required oneOf after clearing the decoded known arm")
+	}
+}
+
 func TestRequiredOneOf_RequestMarshalStillRequiresExactlyOneKnownArm(t *testing.T) {
 	missingArm := scopes.FilterPathAndValues{Path: "service.name"}
 	if _, err := json.Marshal(missingArm); err == nil {

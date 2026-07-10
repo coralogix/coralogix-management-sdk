@@ -23,11 +23,12 @@ var _ MappedNullable = &V2Target{}
 
 // V2Target This data structure represents a target to archive logs.
 type V2Target struct {
-	ArchiveSpec                       ArchiveSpec       `json:"archiveSpec"`
-	IbmCos                            *IBMCosTargetSpec `json:"ibmCos,omitempty"`
-	S3                                *S3TargetSpec     `json:"s3,omitempty"`
-	AdditionalProperties              map[string]interface{}
-	additionalPropertiesFromUnmarshal bool
+	ArchiveSpec                                     ArchiveSpec       `json:"archiveSpec"`
+	IbmCos                                          *IBMCosTargetSpec `json:"ibmCos,omitempty"`
+	S3                                              *S3TargetSpec     `json:"s3,omitempty"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _V2Target V2Target
@@ -163,7 +164,7 @@ func (o V2Target) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if !o.additionalPropertiesFromUnmarshal {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [s3, ibmCos] must be set"}
 		}
 	}
@@ -248,6 +249,7 @@ func (o *V2Target) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "s3")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

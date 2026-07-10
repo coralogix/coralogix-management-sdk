@@ -22,11 +22,12 @@ var _ MappedNullable = &CommentAttachment{}
 
 // CommentAttachment struct for CommentAttachment
 type CommentAttachment struct {
-	CustomWidget                      *CustomDashboardWidgetAttachment `json:"customWidget,omitempty"`
-	File                              *FileAttachment                  `json:"file,omitempty"`
-	Log                               *LogAttachment                   `json:"log,omitempty"`
-	AdditionalProperties              map[string]interface{}
-	additionalPropertiesFromUnmarshal bool
+	CustomWidget                                    *CustomDashboardWidgetAttachment `json:"customWidget,omitempty"`
+	File                                            *FileAttachment                  `json:"file,omitempty"`
+	Log                                             *LogAttachment                   `json:"log,omitempty"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _CommentAttachment CommentAttachment
@@ -174,7 +175,7 @@ func (o CommentAttachment) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if !o.additionalPropertiesFromUnmarshal {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [log, customWidget, file] must be set"}
 		}
 	}
@@ -233,6 +234,7 @@ func (o *CommentAttachment) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "log")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

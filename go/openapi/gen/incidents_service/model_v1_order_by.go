@@ -24,11 +24,12 @@ var _ MappedNullable = &V1OrderBy{}
 // V1OrderBy struct for V1OrderBy
 type V1OrderBy struct {
 	// A contextual label key to order by.
-	ContextualLabel                   *string            `json:"contextualLabel,omitempty"`
-	Direction                         V1OrderByDirection `json:"direction"`
-	IncidentField                     *IncidentFields    `json:"incidentField,omitempty"`
-	AdditionalProperties              map[string]interface{}
-	additionalPropertiesFromUnmarshal bool
+	ContextualLabel                                 *string            `json:"contextualLabel,omitempty"`
+	Direction                                       V1OrderByDirection `json:"direction"`
+	IncidentField                                   *IncidentFields    `json:"incidentField,omitempty"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _V1OrderBy V1OrderBy
@@ -164,7 +165,7 @@ func (o V1OrderBy) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if !o.additionalPropertiesFromUnmarshal {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [incidentField, contextualLabel] must be set"}
 		}
 	}
@@ -249,6 +250,7 @@ func (o *V1OrderBy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "incidentField")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

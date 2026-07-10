@@ -22,11 +22,12 @@ var _ MappedNullable = &SloExecutionRequest{}
 
 // SloExecutionRequest Request for executing an SLO operation.
 type SloExecutionRequest struct {
-	CreateSloRequest                  *CreateSloRequest  `json:"createSloRequest,omitempty"`
-	DeleteSloRequest                  *DeleteSloRequest  `json:"deleteSloRequest,omitempty"`
-	ReplaceSloRequest                 *ReplaceSloRequest `json:"replaceSloRequest,omitempty"`
-	AdditionalProperties              map[string]interface{}
-	additionalPropertiesFromUnmarshal bool
+	CreateSloRequest                                *CreateSloRequest  `json:"createSloRequest,omitempty"`
+	DeleteSloRequest                                *DeleteSloRequest  `json:"deleteSloRequest,omitempty"`
+	ReplaceSloRequest                               *ReplaceSloRequest `json:"replaceSloRequest,omitempty"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _SloExecutionRequest SloExecutionRequest
@@ -174,7 +175,7 @@ func (o SloExecutionRequest) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if !o.additionalPropertiesFromUnmarshal {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [createSloRequest, replaceSloRequest, deleteSloRequest] must be set"}
 		}
 	}
@@ -233,6 +234,7 @@ func (o *SloExecutionRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "replaceSloRequest")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

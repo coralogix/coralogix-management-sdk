@@ -23,11 +23,12 @@ var _ MappedNullable = &FilterPathAndValues{}
 
 // FilterPathAndValues This data structure represents a filter path and values
 type FilterPathAndValues struct {
-	Filters                           *Filters        `json:"filters,omitempty"`
-	MultipleValues                    *MultipleValues `json:"multipleValues,omitempty"`
-	Path                              string          `json:"path"`
-	AdditionalProperties              map[string]interface{}
-	additionalPropertiesFromUnmarshal bool
+	Filters                                         *Filters        `json:"filters,omitempty"`
+	MultipleValues                                  *MultipleValues `json:"multipleValues,omitempty"`
+	Path                                            string          `json:"path"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _FilterPathAndValues FilterPathAndValues
@@ -163,7 +164,7 @@ func (o FilterPathAndValues) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if !o.additionalPropertiesFromUnmarshal {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [multipleValues, filters] must be set"}
 		}
 	}
@@ -248,6 +249,7 @@ func (o *FilterPathAndValues) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "path")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

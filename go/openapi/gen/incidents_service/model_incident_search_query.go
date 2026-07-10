@@ -27,9 +27,10 @@ type IncidentSearchQuery struct {
 	ContextualLabel *string         `json:"contextualLabel,omitempty"`
 	IncidentField   *IncidentFields `json:"incidentField,omitempty"`
 	// The search query
-	Query                             string `json:"query"`
-	AdditionalProperties              map[string]interface{}
-	additionalPropertiesFromUnmarshal bool
+	Query                                           string `json:"query"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _IncidentSearchQuery IncidentSearchQuery
@@ -165,7 +166,7 @@ func (o IncidentSearchQuery) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if !o.additionalPropertiesFromUnmarshal {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [incidentField, contextualLabel] must be set"}
 		}
 	}
@@ -250,6 +251,7 @@ func (o *IncidentSearchQuery) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "query")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

@@ -34,10 +34,12 @@ type IncidentEvent struct {
 	OriginatorType    OriginatorType                      `json:"originatorType"`
 	SnoozeIndicator   *IncidentEventSnoozeIndicator       `json:"snoozeIndicator,omitempty"`
 	// Incident event unassign.
-	Unassign                          map[string]interface{}    `json:"unassign,omitempty"`
-	UpsertState                       *IncidentEventUpsertState `json:"upsertState,omitempty"`
-	AdditionalProperties              map[string]interface{}
-	additionalPropertiesFromUnmarshal bool
+	Unassign                                        map[string]interface{}    `json:"unassign,omitempty"`
+	UpsertState                                     *IncidentEventUpsertState `json:"upsertState,omitempty"`
+	AdditionalProperties                            map[string]interface{}
+	additionalPropertiesFromUnmarshal               bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
+	requiredOneOfGroup1FromUnmarshalWithoutKnownArm bool
 }
 
 type _IncidentEvent IncidentEvent
@@ -447,7 +449,7 @@ func (o IncidentEvent) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
-		if !o.additionalPropertiesFromUnmarshal {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [snoozeIndicator, assignment, unassign, upsertState, acknowledge, close] must be set"}
 		}
 	}
@@ -463,7 +465,7 @@ func (o IncidentEvent) ToMap() (map[string]interface{}, error) {
 		requiredOneOfGroup1Matches++
 	}
 	if requiredOneOfGroup1Matches == 0 {
-		if !o.additionalPropertiesFromUnmarshal {
+		if !o.requiredOneOfGroup1FromUnmarshalWithoutKnownArm {
 			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [administrativeEvent, operationalEvent] must be set"}
 		}
 	}
@@ -622,6 +624,8 @@ func (o *IncidentEvent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "upsertState")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
+		o.requiredOneOfGroup1FromUnmarshalWithoutKnownArm = requiredOneOfGroup1MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err
