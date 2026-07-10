@@ -450,6 +450,37 @@ func (o RuleParameters) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [extractParameters, jsonExtractParameters, replaceParameters, parseParameters, allowParameters, blockParameters, extractTimestampParameters, removeFieldsParameters, jsonStringifyParameters, jsonParseParameters] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["extractParameters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field extractParameters must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["jsonExtractParameters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field jsonExtractParameters must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["replaceParameters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field replaceParameters must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["parseParameters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field parseParameters must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["allowParameters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field allowParameters must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["blockParameters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field blockParameters must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["extractTimestampParameters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field extractTimestampParameters must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["removeFieldsParameters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field removeFieldsParameters must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["jsonStringifyParameters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field jsonStringifyParameters must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["jsonParseParameters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field jsonParseParameters must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

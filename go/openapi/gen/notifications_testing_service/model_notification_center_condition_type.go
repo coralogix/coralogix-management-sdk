@@ -139,6 +139,13 @@ func (o NotificationCenterConditionType) ToMap() (map[string]interface{}, error)
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [matchEntityType, matchEntityTypeAndSubType] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["matchEntityType"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field matchEntityType must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["matchEntityTypeAndSubType"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field matchEntityTypeAndSubType must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

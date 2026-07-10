@@ -213,6 +213,16 @@ func (o ColorLabelMapping) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [range, value, regex] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["range"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field range must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["value"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field value must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["regex"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field regex must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

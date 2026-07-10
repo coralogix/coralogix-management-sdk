@@ -360,6 +360,19 @@ func (o VariableSourceV2QuerySource) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsQuery, metricsQuery, spansQuery, dataprimeQuery] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["logsQuery"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsQuery must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metricsQuery"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricsQuery must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["spansQuery"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spansQuery must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dataprimeQuery"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dataprimeQuery must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

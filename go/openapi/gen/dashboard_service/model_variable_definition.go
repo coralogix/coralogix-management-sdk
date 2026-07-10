@@ -138,6 +138,13 @@ func (o VariableDefinition) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [constant, multiSelect] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["constant"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field constant must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["multiSelect"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multiSelect must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

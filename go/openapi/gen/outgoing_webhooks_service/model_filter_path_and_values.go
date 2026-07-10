@@ -171,6 +171,13 @@ func (o FilterPathAndValues) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [multipleValues, filters] must be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["multipleValues"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multipleValues must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["filters"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field filters must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

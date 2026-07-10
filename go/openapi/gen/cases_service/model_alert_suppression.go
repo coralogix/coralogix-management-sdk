@@ -177,6 +177,13 @@ func (o AlertSuppression) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [activeSuppressionRules, alertDefinitionMuted] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["activeSuppressionRules"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field activeSuppressionRules must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["alertDefinitionMuted"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field alertDefinitionMuted must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

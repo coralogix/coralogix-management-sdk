@@ -495,6 +495,13 @@ func (o UpdatePolicyRequest) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logRules, spanRules] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["logRules"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logRules must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["spanRules"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spanRules must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

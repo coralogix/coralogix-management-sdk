@@ -332,6 +332,19 @@ func (o ForecastPolicyUsageRequest) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [day, week] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["logRules"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logRules must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["spanRules"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spanRules must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["day"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field day must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["week"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field week must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

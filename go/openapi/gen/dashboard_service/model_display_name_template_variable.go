@@ -139,6 +139,13 @@ func (o DisplayNameTemplateVariable) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [observationField, mappedValues] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["observationField"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field observationField must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["mappedValues"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field mappedValues must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

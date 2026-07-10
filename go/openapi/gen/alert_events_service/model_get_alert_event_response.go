@@ -211,6 +211,13 @@ func (o GetAlertEventResponse) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [singlePermutation, multiplePermutation] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["singlePermutation"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singlePermutation must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["multiplePermutation"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multiplePermutation must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

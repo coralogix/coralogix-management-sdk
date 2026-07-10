@@ -212,6 +212,13 @@ func (o ApmLatencySli) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [quantile, average] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["quantile"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field quantile must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["average"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field average must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

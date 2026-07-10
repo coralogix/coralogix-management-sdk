@@ -385,6 +385,20 @@ func (o {{classname}}) ToMap() (map[string]interface{}, error) {
 
 	{{/vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
 	{{#isAdditionalPropertiesTrue}}
+	{{#vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+	{{#fields}}
+	if _, exists := o.AdditionalProperties["{{.}}"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field {{.}} must be set through the typed field, not AdditionalProperties"}
+	}
+	{{/fields}}
+	{{/vendorExtensions.x-cx-codegen.requiredOneOfGroups}}
+	{{#vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
+	{{#fields}}
+	if _, exists := o.AdditionalProperties["{{.}}"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field {{.}} must be set through the typed field, not AdditionalProperties"}
+	}
+	{{/fields}}
+	{{/vendorExtensions.x-cx-codegen.optionalOneOfGroups}}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value

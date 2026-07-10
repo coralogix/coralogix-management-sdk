@@ -138,6 +138,13 @@ func (o CxEventSingleOrMultiple) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [singleEvent, multipleEvents] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["singleEvent"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singleEvent must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["multipleEvents"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multipleEvents must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

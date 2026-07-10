@@ -343,6 +343,28 @@ func (o TextboxDefaultValue) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [singleString, singleNumeric, defaultStringValue, defaultNumericValue, defaultLuceneValue, defaultRegexValue, defaultIntervalValue] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["singleString"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singleString must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["singleNumeric"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singleNumeric must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["defaultStringValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field defaultStringValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["defaultNumericValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field defaultNumericValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["defaultLuceneValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field defaultLuceneValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["defaultRegexValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field defaultRegexValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["defaultIntervalValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field defaultIntervalValue must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

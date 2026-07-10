@@ -173,6 +173,13 @@ func (o IncidentSearchQuery) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [incidentField, contextualLabel] must be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["incidentField"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field incidentField must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["contextualLabel"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field contextualLabel must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

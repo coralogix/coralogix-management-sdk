@@ -140,6 +140,13 @@ func (o AssigneeOption) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [assignee, unassigned] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["assignee"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field assignee must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["unassigned"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field unassigned must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

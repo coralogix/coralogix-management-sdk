@@ -167,6 +167,13 @@ func (o RoleUpdateAction) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [setRoleId, clear] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["setRoleId"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field setRoleId must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["clear"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field clear must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

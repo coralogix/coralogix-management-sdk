@@ -292,6 +292,22 @@ func (o AlertIndicatorDeepLink) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logs, metric, rum, slo, tracing] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["logs"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logs must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metric"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metric must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["rum"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field rum must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["slo"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field slo must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["tracing"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field tracing must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

@@ -178,6 +178,16 @@ func (o XAxis) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [value, time, timeBuckets] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["value"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field value must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["time"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field time must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["timeBuckets"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field timeBuckets must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

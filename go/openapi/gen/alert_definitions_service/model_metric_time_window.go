@@ -139,6 +139,13 @@ func (o MetricTimeWindow) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metricTimeWindowSpecificValue, metricTimeWindowDynamicDuration] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["metricTimeWindowSpecificValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricTimeWindowSpecificValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metricTimeWindowDynamicDuration"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricTimeWindowDynamicDuration must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

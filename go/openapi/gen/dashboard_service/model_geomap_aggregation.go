@@ -256,6 +256,22 @@ func (o GeomapAggregation) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [count, sum, min, max, avg] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["count"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field count must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sum"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sum must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["min"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field min must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["max"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field max must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["avg"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field avg must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

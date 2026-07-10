@@ -177,6 +177,16 @@ func (o RuleMatcher) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [applicationName, subsystemName, severity] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["applicationName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field applicationName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["subsystemName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field subsystemName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["severity"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field severity must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

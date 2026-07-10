@@ -176,6 +176,13 @@ func (o CheckDashboardRequestDataStructure) ToMap() (map[string]interface{}, err
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [dashboard, dashboardId] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["dashboard"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dashboard must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dashboardId"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dashboardId must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

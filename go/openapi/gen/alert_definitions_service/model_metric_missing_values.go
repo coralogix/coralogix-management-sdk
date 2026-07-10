@@ -140,6 +140,13 @@ func (o MetricMissingValues) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [replaceWithZero, minNonNullValuesPct] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["replaceWithZero"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field replaceWithZero must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["minNonNullValuesPct"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field minNonNullValuesPct must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

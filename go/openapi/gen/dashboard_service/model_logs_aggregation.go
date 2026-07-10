@@ -334,6 +334,28 @@ func (o LogsAggregation) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [count, countDistinct, sum, average, min, max, percentile] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["count"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field count must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["countDistinct"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field countDistinct must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sum"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sum must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["average"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field average must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["min"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field min must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["max"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field max must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["percentile"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field percentile must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

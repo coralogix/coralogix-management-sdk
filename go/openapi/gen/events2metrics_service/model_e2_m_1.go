@@ -526,6 +526,13 @@ func (o E2M1) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [spansQuery, logsQuery] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["spansQuery"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spansQuery must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsQuery"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsQuery must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

@@ -335,6 +335,25 @@ func (o Parameter) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [stringValue, booleanValue, stringList, apiKey, numericValue, sensitiveData] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["stringValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field stringValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["booleanValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field booleanValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["stringList"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field stringList must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["apiKey"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field apiKey must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["numericValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field numericValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sensitiveData"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sensitiveData must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

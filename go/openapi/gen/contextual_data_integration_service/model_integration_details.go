@@ -284,6 +284,13 @@ func (o IntegrationDetails) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [local, external] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["local"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field local must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["external"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field external must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

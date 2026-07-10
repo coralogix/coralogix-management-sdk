@@ -176,6 +176,13 @@ func (o SortStrategy) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [category, queryValue] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["category"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field category must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["queryValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field queryValue must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

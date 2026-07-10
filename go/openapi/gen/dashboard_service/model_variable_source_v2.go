@@ -177,6 +177,16 @@ func (o VariableSourceV2) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [static, query, textbox] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["static"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field static must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["query"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field query must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["textbox"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field textbox must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

@@ -811,6 +811,64 @@ func (o EvaluationConfig) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [allowedTopics, competition, hallucinationCompleteness, hallucinationContextAdherence, hallucinationContextRelevance, hallucinationCorrectness, pii, promptInjection, restrictedTopics, sexism, sqlAllowedTables, sqlHallucination, sqlReadOnly, sqlRestrictedTables, toxicity, hallucinationTaskAdherence, sqlLoad, languageMismatch, customEvaluation] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["allowedTopics"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field allowedTopics must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["competition"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field competition must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["hallucinationCompleteness"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field hallucinationCompleteness must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["hallucinationContextAdherence"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field hallucinationContextAdherence must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["hallucinationContextRelevance"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field hallucinationContextRelevance must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["hallucinationCorrectness"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field hallucinationCorrectness must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["pii"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field pii must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["promptInjection"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field promptInjection must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["restrictedTopics"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field restrictedTopics must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sexism"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sexism must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sqlAllowedTables"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sqlAllowedTables must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sqlHallucination"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sqlHallucination must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sqlReadOnly"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sqlReadOnly must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sqlRestrictedTables"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sqlRestrictedTables must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["toxicity"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field toxicity must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["hallucinationTaskAdherence"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field hallucinationTaskAdherence must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sqlLoad"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sqlLoad must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["languageMismatch"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field languageMismatch must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["customEvaluation"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field customEvaluation must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

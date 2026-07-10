@@ -139,6 +139,13 @@ func (o TimeFrameSelect) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [absoluteTimeFrame, relativeTimeFrame] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["absoluteTimeFrame"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field absoluteTimeFrame must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["relativeTimeFrame"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field relativeTimeFrame must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

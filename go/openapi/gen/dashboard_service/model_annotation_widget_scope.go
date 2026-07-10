@@ -139,6 +139,13 @@ func (o AnnotationWidgetScope) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [allWidgets, specificWidgets] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["allWidgets"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field allWidgets must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["specificWidgets"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field specificWidgets must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

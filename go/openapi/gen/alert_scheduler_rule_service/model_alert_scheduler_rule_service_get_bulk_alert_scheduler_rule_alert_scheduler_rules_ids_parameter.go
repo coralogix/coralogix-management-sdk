@@ -138,6 +138,13 @@ func (o AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIds
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [alertSchedulerIds, alertSchedulerVersionIds] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["alertSchedulerIds"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field alertSchedulerIds must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["alertSchedulerVersionIds"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field alertSchedulerVersionIds must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

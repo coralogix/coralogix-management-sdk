@@ -339,6 +339,28 @@ func (o V1IntegrationType) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [managed, untracked, cloudformation, arm, pushBasedContextualData, contextualData, genericWebhook] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["managed"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field managed must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["untracked"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field untracked must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["cloudformation"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field cloudformation must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["arm"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field arm must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["pushBasedContextualData"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field pushBasedContextualData must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["contextualData"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field contextualData must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["genericWebhook"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field genericWebhook must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

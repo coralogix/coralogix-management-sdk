@@ -375,6 +375,31 @@ func (o PropertyDefinition) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [thresholds, alignment, units, regexExtract, link, valuesAlias, valuesMapping, columnDisplayName] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["thresholds"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field thresholds must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["alignment"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field alignment must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["units"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field units must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["regexExtract"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field regexExtract must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["link"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field link must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["valuesAlias"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field valuesAlias must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["valuesMapping"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field valuesMapping must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["columnDisplayName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field columnDisplayName must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

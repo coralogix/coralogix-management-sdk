@@ -217,6 +217,19 @@ func (o EnrichmentType) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [geoIp, suspiciousIp, aws, customEnrichment] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["geoIp"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field geoIp must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["suspiciousIp"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field suspiciousIp must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["aws"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field aws must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["customEnrichment"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field customEnrichment must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

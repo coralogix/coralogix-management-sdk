@@ -255,6 +255,22 @@ func (o MultiSelectSource) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsPath, metricLabel, constantList, spanField, query] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["logsPath"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsPath must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metricLabel"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricLabel must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["constantList"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field constantList must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["spanField"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spanField must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["query"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field query must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

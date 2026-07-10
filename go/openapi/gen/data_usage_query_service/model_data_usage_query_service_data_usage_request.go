@@ -284,6 +284,13 @@ func (o DataUsageQueryServiceDataUsageRequest) ToMap() (map[string]interface{}, 
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [daily, hourly] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["daily"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field daily must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["hourly"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field hourly must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

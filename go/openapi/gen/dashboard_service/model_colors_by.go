@@ -260,6 +260,22 @@ func (o ColorsBy) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [stack, groupBy, aggregation, query, category] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["stack"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field stack must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["groupBy"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field groupBy must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["aggregation"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field aggregation must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["query"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field query must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["category"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field category must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

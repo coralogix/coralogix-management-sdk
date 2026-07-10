@@ -294,6 +294,25 @@ func (o VariableValueV2) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [multiString, singleString, singleNumeric, regex, lucene, interval] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["multiString"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multiString must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["singleString"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singleString must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["singleNumeric"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singleNumeric must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["regex"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field regex must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["lucene"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field lucene must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["interval"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field interval must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

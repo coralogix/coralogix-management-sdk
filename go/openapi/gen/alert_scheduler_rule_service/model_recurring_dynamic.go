@@ -288,6 +288,16 @@ func (o RecurringDynamic) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [daily, weekly, monthly] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["daily"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field daily must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["weekly"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field weekly must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["monthly"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field monthly must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

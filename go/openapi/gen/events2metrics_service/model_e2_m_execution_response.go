@@ -177,6 +177,16 @@ func (o E2MExecutionResponse) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [created, replaced, deleted] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["created"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field created must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["replaced"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field replaced must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["deleted"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field deleted must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

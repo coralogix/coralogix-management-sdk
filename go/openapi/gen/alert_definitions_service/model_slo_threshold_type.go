@@ -174,6 +174,13 @@ func (o SloThresholdType) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [errorBudget, burnRate] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["errorBudget"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field errorBudget must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["burnRate"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field burnRate must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

@@ -528,6 +528,43 @@ func (o CaseEventData) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [assigned, unassigned, comment, statusChanged, notificationSent, notificationFailed, created, priorityDetailsChanged, titleChangedEvent, resolutionReasonChangedEvent, changeAssigneeFailed, kpiBreached] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["assigned"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field assigned must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["unassigned"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field unassigned must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["comment"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field comment must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["statusChanged"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field statusChanged must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["notificationSent"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field notificationSent must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["notificationFailed"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field notificationFailed must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["created"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field created must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["priorityDetailsChanged"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field priorityDetailsChanged must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["titleChangedEvent"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field titleChangedEvent must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["resolutionReasonChangedEvent"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field resolutionReasonChangedEvent must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["changeAssigneeFailed"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field changeAssigneeFailed must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["kpiBreached"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field kpiBreached must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

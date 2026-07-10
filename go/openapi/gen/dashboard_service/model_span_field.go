@@ -179,6 +179,16 @@ func (o SpanField) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metadataField, tagField, processTagField] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["metadataField"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metadataField must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["tagField"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field tagField must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["processTagField"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field processTagField must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

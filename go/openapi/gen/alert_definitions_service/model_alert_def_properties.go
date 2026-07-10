@@ -1158,6 +1158,52 @@ func (o AlertDefProperties) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsImmediate, tracingImmediate, logsThreshold, logsRatioThreshold, logsTimeRelativeThreshold, metricThreshold, tracingThreshold, flow, logsAnomaly, metricAnomaly, logsNewValue, logsUniqueCount, sloThreshold, analyticsImmediate, analyticsThreshold] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["logsImmediate"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsImmediate must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["tracingImmediate"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field tracingImmediate must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsRatioThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsRatioThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsTimeRelativeThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsTimeRelativeThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metricThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["tracingThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field tracingThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["flow"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field flow must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsAnomaly"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsAnomaly must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metricAnomaly"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricAnomaly must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsNewValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsNewValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logsUniqueCount"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logsUniqueCount must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sloThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sloThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["analyticsImmediate"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field analyticsImmediate must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["analyticsThreshold"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field analyticsThreshold must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

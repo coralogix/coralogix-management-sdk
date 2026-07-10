@@ -498,6 +498,40 @@ func (o IncidentFieldOneOf) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [id, severity, name, createdAt, closedAt, state, status, lastStateUpdateTime, applicationName, subsystemName, duration] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["id"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field id must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["severity"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field severity must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["name"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field name must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["createdAt"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field createdAt must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["closedAt"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field closedAt must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["state"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field state must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["status"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field status must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["lastStateUpdateTime"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field lastStateUpdateTime must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["applicationName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field applicationName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["subsystemName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field subsystemName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["duration"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field duration must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

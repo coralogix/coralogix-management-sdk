@@ -177,6 +177,16 @@ func (o SloExecutionResponse) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [createSloResponse, replaceSloResponse, deleteSloResponse] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["createSloResponse"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field createSloResponse must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["replaceSloResponse"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field replaceSloResponse must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["deleteSloResponse"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field deleteSloResponse must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

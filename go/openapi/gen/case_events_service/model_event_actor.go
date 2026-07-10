@@ -373,6 +373,31 @@ func (o EventActor) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [system, user, serviceNow, apiKey, slack, prometheusAlertManager, pagerDuty, microsoftTeams] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["system"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field system must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["user"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field user must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["serviceNow"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field serviceNow must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["apiKey"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field apiKey must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["slack"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field slack must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["prometheusAlertManager"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field prometheusAlertManager must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["pagerDuty"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field pagerDuty must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["microsoftTeams"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field microsoftTeams must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

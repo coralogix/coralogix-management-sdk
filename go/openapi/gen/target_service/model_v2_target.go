@@ -171,6 +171,13 @@ func (o V2Target) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [s3, ibmCos] must be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["s3"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field s3 must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ibmCos"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ibmCos must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

@@ -138,6 +138,13 @@ func (o UsageHourlyQuery) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [timeRange, relativeRange] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["timeRange"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field timeRange must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["relativeRange"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field relativeRange must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

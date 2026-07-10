@@ -138,6 +138,13 @@ func (o GeomapColor) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [size, colorRange] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["size"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field size must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["colorRange"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field colorRange must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

@@ -138,6 +138,13 @@ func (o DataUsageServiceGetDailyUsageProcessedGbsRequest) ToMap() (map[string]in
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [range, dateRange] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["range"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field range must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dateRange"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dateRange must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

@@ -175,6 +175,13 @@ func (o BurnRateThreshold) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [dual, single] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["dual"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dual must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["single"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field single must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

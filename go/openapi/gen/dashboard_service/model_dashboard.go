@@ -768,6 +768,28 @@ func (o Dashboard) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [absoluteTimeFrame, relativeTimeFrame] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["off"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field off must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["twoMinutes"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field twoMinutes must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["fiveMinutes"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field fiveMinutes must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["oneMinute"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field oneMinute must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["fifteenMinutes"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field fifteenMinutes must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["absoluteTimeFrame"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field absoluteTimeFrame must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["relativeTimeFrame"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field relativeTimeFrame must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

@@ -216,6 +216,19 @@ func (o QuerySourceMetricsQueryType) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metricName, labelName, labelValue, promqlQuery] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["metricName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metricName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["labelName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field labelName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["labelValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field labelValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["promqlQuery"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field promqlQuery must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

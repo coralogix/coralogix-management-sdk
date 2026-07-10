@@ -140,6 +140,13 @@ func (o SearchClause) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [id, name] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["id"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field id must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["name"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field name must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

@@ -645,6 +645,52 @@ func (o Visualization) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [table, timeSeriesLines, timeSeriesBars, stat, gauge, hexagonBins, pieChart, horizontalBars, verticalBars, heatmap, geomap, timeSeriesLinesMulti, verticalBarsMulti, horizontalBarsMulti, statCard] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["table"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field table must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["timeSeriesLines"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field timeSeriesLines must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["timeSeriesBars"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field timeSeriesBars must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["stat"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field stat must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["gauge"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field gauge must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["hexagonBins"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field hexagonBins must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["pieChart"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field pieChart must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["horizontalBars"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field horizontalBars must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["verticalBars"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field verticalBars must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["heatmap"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field heatmap must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["geomap"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field geomap must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["timeSeriesLinesMulti"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field timeSeriesLinesMulti must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["verticalBarsMulti"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field verticalBarsMulti must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["horizontalBarsMulti"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field horizontalBarsMulti must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["statCard"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field statCard must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

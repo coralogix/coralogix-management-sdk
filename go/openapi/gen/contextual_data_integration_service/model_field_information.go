@@ -810,6 +810,25 @@ func (o FieldInformation) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [single, multiText, multipleSelection, singleBoolean, selection, singleNumber] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["single"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field single must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["multiText"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multiText must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["multipleSelection"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field multipleSelection must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["singleBoolean"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singleBoolean must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["selection"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field selection must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["singleNumber"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field singleNumber must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

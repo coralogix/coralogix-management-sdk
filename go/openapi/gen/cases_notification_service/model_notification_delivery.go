@@ -245,6 +245,16 @@ func (o NotificationDelivery) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [noRouterMatched, noNotificationCreated, attempted] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["noRouterMatched"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field noRouterMatched must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["noNotificationCreated"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field noNotificationCreated must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["attempted"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field attempted must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

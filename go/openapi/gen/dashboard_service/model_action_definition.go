@@ -138,6 +138,13 @@ func (o ActionDefinition) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [customAction, goToDashboardAction] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["customAction"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field customAction must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["goToDashboardAction"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field goToDashboardAction must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

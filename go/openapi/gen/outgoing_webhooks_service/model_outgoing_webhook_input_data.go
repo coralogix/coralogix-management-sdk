@@ -641,6 +641,43 @@ func (o OutgoingWebhookInputData) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["genericWebhook"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field genericWebhook must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["slack"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field slack must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["pagerDuty"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field pagerDuty must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sendLog"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sendLog must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["emailGroup"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field emailGroup must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["microsoftTeams"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field microsoftTeams must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["jira"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field jira must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["opsgenie"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field opsgenie must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["demisto"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field demisto must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["awsEventBridge"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field awsEventBridge must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ibmEventNotifications"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ibmEventNotifications must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["msTeamsWorkflow"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field msTeamsWorkflow must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

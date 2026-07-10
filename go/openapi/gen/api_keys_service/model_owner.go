@@ -180,6 +180,16 @@ func (o Owner) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [userId, teamId, organisationId] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["userId"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field userId must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["teamId"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field teamId must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["organisationId"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field organisationId must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

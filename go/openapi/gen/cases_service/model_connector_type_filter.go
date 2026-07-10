@@ -139,6 +139,13 @@ func (o ConnectorTypeFilter) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [connectorType, noConnector] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["connectorType"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field connectorType must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["noConnector"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field noConnector must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

@@ -175,6 +175,13 @@ func (o IntervalResolution) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [auto, manual] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["auto"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field auto must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["manual"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field manual must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

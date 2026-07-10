@@ -288,6 +288,13 @@ func (o RoleManagementServiceCreateRoleRequest) ToMap() (map[string]interface{},
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [parentRoleId, parentRoleName] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["parentRoleId"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field parentRoleId must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["parentRoleName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field parentRoleName must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

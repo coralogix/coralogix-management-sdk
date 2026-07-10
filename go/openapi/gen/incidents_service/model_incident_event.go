@@ -471,6 +471,31 @@ func (o IncidentEvent) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [administrativeEvent, operationalEvent] must be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["snoozeIndicator"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field snoozeIndicator must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["assignment"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field assignment must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["unassign"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field unassign must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["upsertState"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field upsertState must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["acknowledge"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field acknowledge must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["close"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field close must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["administrativeEvent"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field administrativeEvent must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["operationalEvent"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field operationalEvent must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

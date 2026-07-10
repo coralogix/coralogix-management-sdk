@@ -182,6 +182,16 @@ func (o CommentAttachment) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [log, customWidget, file] must be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["log"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field log must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["customWidget"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field customWidget must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["file"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field file must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

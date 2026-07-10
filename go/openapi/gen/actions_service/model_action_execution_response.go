@@ -178,6 +178,16 @@ func (o ActionExecutionResponse) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [create, replace, delete] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["create"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field create must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["replace"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field replace must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["delete"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field delete must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

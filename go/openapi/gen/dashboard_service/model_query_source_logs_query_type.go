@@ -138,6 +138,13 @@ func (o QuerySourceLogsQueryType) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [fieldName, fieldValue] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["fieldName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field fieldName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["fieldValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field fieldValue must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

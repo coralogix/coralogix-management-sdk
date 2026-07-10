@@ -767,6 +767,16 @@ func (o Slo1) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [requestBasedMetricSli, windowBasedMetricSli, apmSli] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["requestBasedMetricSli"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field requestBasedMetricSli must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["windowBasedMetricSli"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field windowBasedMetricSli must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["apmSli"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field apmSli must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

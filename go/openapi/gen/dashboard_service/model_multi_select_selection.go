@@ -139,6 +139,13 @@ func (o MultiSelectSelection) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [all, list] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["all"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field all must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["list"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field list must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

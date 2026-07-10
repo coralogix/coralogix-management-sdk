@@ -138,6 +138,13 @@ func (o ImpactedEntity) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [apmService, apmDatabase] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["apmService"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field apmService must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["apmDatabase"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field apmDatabase must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

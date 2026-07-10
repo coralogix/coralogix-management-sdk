@@ -140,6 +140,13 @@ func (o QuerySourceMetricsQueryStringOrVariable) ToMap() (map[string]interface{}
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [stringValue, variableName] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["stringValue"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field stringValue must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["variableName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field variableName must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

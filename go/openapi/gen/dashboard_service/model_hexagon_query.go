@@ -216,6 +216,19 @@ func (o HexagonQuery) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metrics, logs, spans, dataprime] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["metrics"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metrics must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["logs"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field logs must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["spans"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spans must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dataprime"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dataprime must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

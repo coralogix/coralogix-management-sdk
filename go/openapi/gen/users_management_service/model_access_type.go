@@ -168,6 +168,13 @@ func (o AccessType) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [permanentAccess, temporaryAccess] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["permanentAccess"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field permanentAccess must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["temporaryAccess"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field temporaryAccess must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

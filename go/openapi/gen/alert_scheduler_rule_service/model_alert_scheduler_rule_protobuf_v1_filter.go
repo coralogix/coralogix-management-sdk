@@ -175,6 +175,13 @@ func (o AlertSchedulerRuleProtobufV1Filter) ToMap() (map[string]interface{}, err
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [alertMetaLabels, alertUniqueIds] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["alertMetaLabels"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field alertMetaLabels must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["alertUniqueIds"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field alertUniqueIds must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

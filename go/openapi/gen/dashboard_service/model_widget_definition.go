@@ -411,6 +411,34 @@ func (o WidgetDefinition) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [lineChart, dataTable, gauge, pieChart, barChart, horizontalBarChart, markdown, hexagon, dynamic] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["lineChart"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field lineChart must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dataTable"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dataTable must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["gauge"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field gauge must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["pieChart"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field pieChart must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["barChart"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field barChart must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["horizontalBarChart"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field horizontalBarChart must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["markdown"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field markdown must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["hexagon"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field hexagon must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["dynamic"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field dynamic must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

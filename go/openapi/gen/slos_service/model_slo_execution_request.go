@@ -182,6 +182,16 @@ func (o SloExecutionRequest) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [createSloRequest, replaceSloRequest, deleteSloRequest] must be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["createSloRequest"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field createSloRequest must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["replaceSloRequest"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field replaceSloRequest must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["deleteSloRequest"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field deleteSloRequest must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

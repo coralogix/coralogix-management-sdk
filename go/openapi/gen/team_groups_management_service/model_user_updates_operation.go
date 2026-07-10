@@ -206,6 +206,16 @@ func (o UserUpdatesOperation) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [add, remove, set] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["add"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field add must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["remove"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field remove must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["set"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field set must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

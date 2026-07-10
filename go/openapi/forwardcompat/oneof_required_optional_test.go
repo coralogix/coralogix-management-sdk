@@ -104,6 +104,20 @@ func TestRequiredOneOf_RequestMarshalDoesNotCountKnownArmInAdditionalProperties(
 	}
 }
 
+func TestRequiredOneOf_RequestMarshalRejectsKnownSiblingArmInAdditionalProperties(t *testing.T) {
+	filters := scopes.NewFilters(nil)
+	withSiblingArm := scopes.FilterPathAndValues{
+		Path:    "service.name",
+		Filters: filters,
+		AdditionalProperties: map[string]interface{}{
+			"multipleValues": map[string]interface{}{},
+		},
+	}
+	if _, err := json.Marshal(withSiblingArm); err == nil {
+		t.Fatal("expected request marshal to reject known oneOf sibling carried in AdditionalProperties")
+	}
+}
+
 func TestOptionalOneOf_ResponseUnsetAndUnknownFutureArmAreForwardCompatible(t *testing.T) {
 	tests := []struct {
 		name    string

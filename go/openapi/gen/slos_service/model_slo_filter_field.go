@@ -376,6 +376,31 @@ func (o SloFilterField) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [constFilter, labelName, sloType, productType, serviceName, ownershipServiceValues, ownershipEnvironmentValues, ownershipTeamValues] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["constFilter"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field constFilter must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["labelName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field labelName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["sloType"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sloType must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["productType"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field productType must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["serviceName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field serviceName must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ownershipServiceValues"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ownershipServiceValues must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ownershipEnvironmentValues"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ownershipEnvironmentValues must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ownershipTeamValues"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ownershipTeamValues must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

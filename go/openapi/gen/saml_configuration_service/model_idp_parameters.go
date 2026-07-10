@@ -251,6 +251,13 @@ func (o IDPParameters) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [metadataUrl, metadataContent] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["metadataUrl"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metadataUrl must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["metadataContent"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field metadataContent must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

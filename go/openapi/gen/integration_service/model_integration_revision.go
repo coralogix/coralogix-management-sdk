@@ -517,6 +517,25 @@ func (o IntegrationRevision) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [cloudFormation, managedService, helmChart, azureArmTemplate, rum, terraform] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["cloudFormation"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field cloudFormation must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["managedService"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field managedService must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["helmChart"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field helmChart must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["azureArmTemplate"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field azureArmTemplate must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["rum"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field rum must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["terraform"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field terraform must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}

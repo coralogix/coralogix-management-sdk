@@ -288,6 +288,16 @@ func (o V2Aggregation) ToMap() (map[string]interface{}, error) {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [none, samples, histogram] may be set"}
 	}
 
+	if _, exists := o.AdditionalProperties["none"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field none must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["samples"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field samples must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["histogram"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field histogram must be set through the typed field, not AdditionalProperties"}
+	}
+
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
 	}
