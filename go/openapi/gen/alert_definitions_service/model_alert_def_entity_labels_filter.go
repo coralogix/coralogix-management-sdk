@@ -23,9 +23,9 @@ var _ MappedNullable = &AlertDefEntityLabelsFilter{}
 // AlertDefEntityLabelsFilter Filter by alert definition entity labels
 type AlertDefEntityLabelsFilter struct {
 	// The entity label key-value pairs to filter by
-	EntityLabels                      *map[string]string    `json:"entityLabels,omitempty"`
-	ValuesOperator                    *FilterValuesOperator `json:"valuesOperator,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	ValuesOperator *FilterValuesOperator `json:"valuesOperator,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *AlertDefEntityLabelsFilter) SetValuesOperator(v FilterValuesOperator) {
 }
 
 func (o AlertDefEntityLabelsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableAlertDefEntityLabelsFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

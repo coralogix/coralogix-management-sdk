@@ -24,8 +24,8 @@ type TokenOriginType string
 // List of TokenOriginType
 const (
 	TOKENORIGINTYPE_TOKEN_ORIGIN_TYPE_UNSPECIFIED TokenOriginType = "TOKEN_ORIGIN_TYPE_UNSPECIFIED"
-	TOKENORIGINTYPE_TOKEN_ORIGIN_TYPE_USER        TokenOriginType = "TOKEN_ORIGIN_TYPE_USER"
-	TOKENORIGINTYPE_TOKEN_ORIGIN_TYPE_API         TokenOriginType = "TOKEN_ORIGIN_TYPE_API"
+	TOKENORIGINTYPE_TOKEN_ORIGIN_TYPE_USER TokenOriginType = "TOKEN_ORIGIN_TYPE_USER"
+	TOKENORIGINTYPE_TOKEN_ORIGIN_TYPE_API TokenOriginType = "TOKEN_ORIGIN_TYPE_API"
 )
 
 // All allowed values of TokenOriginType enum
@@ -113,3 +113,4 @@ func (v *NullableTokenOriginType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

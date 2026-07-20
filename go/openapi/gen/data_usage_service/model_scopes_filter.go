@@ -25,8 +25,8 @@ type ScopesFilter struct {
 	// List of application names to filter on (OR logic, full match).
 	Application []string `json:"application,omitempty"`
 	// List of subsystem names to filter on (OR logic, full match).
-	Subsystem                         []string `json:"subsystem,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Subsystem []string `json:"subsystem,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *ScopesFilter) SetSubsystem(v []string) {
 }
 
 func (o ScopesFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableScopesFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

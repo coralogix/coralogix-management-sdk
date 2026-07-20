@@ -24,8 +24,8 @@ type LineChartStackedLine string
 // List of LineChart.StackedLine
 const (
 	LINECHARTSTACKEDLINE_STACKED_LINE_UNSPECIFIED LineChartStackedLine = "STACKED_LINE_UNSPECIFIED"
-	LINECHARTSTACKEDLINE_STACKED_LINE_ABSOLUTE    LineChartStackedLine = "STACKED_LINE_ABSOLUTE"
-	LINECHARTSTACKEDLINE_STACKED_LINE_RELATIVE    LineChartStackedLine = "STACKED_LINE_RELATIVE"
+	LINECHARTSTACKEDLINE_STACKED_LINE_ABSOLUTE LineChartStackedLine = "STACKED_LINE_ABSOLUTE"
+	LINECHARTSTACKEDLINE_STACKED_LINE_RELATIVE LineChartStackedLine = "STACKED_LINE_RELATIVE"
 )
 
 // All allowed values of LineChartStackedLine enum
@@ -113,3 +113,4 @@ func (v *NullableLineChartStackedLine) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

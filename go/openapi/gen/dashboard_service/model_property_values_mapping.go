@@ -23,8 +23,8 @@ var _ MappedNullable = &PropertyValuesMapping{}
 // PropertyValuesMapping Property values mapping.
 type PropertyValuesMapping struct {
 	// The mappings.
-	Mappings                          []PropertyValuesMappingValueMapping `json:"mappings,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Mappings []PropertyValuesMappingValueMapping `json:"mappings,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *PropertyValuesMapping) SetMappings(v []PropertyValuesMappingValueMappin
 }
 
 func (o PropertyValuesMapping) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullablePropertyValuesMapping) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

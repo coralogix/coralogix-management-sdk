@@ -23,10 +23,10 @@ type OllyAnalysisStatus string
 
 // List of OllyAnalysisStatus
 const (
-	OLLYANALYSISSTATUS_STATUS_UNSPECIFIED      OllyAnalysisStatus = "STATUS_UNSPECIFIED"
-	OLLYANALYSISSTATUS_STATUS_OK               OllyAnalysisStatus = "STATUS_OK"
+	OLLYANALYSISSTATUS_STATUS_UNSPECIFIED OllyAnalysisStatus = "STATUS_UNSPECIFIED"
+	OLLYANALYSISSTATUS_STATUS_OK OllyAnalysisStatus = "STATUS_OK"
 	OLLYANALYSISSTATUS_STATUS_CAPACITY_REACHED OllyAnalysisStatus = "STATUS_CAPACITY_REACHED"
-	OLLYANALYSISSTATUS_STATUS_FAILED           OllyAnalysisStatus = "STATUS_FAILED"
+	OLLYANALYSISSTATUS_STATUS_FAILED OllyAnalysisStatus = "STATUS_FAILED"
 )
 
 // All allowed values of OllyAnalysisStatus enum
@@ -115,3 +115,4 @@ func (v *NullableOllyAnalysisStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

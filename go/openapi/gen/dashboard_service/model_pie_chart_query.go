@@ -22,11 +22,11 @@ var _ MappedNullable = &PieChartQuery{}
 
 // PieChartQuery Discriminated union of possible query types for the pie chart widget.
 type PieChartQuery struct {
-	Dataprime                         *PieChartDataprimeQuery `json:"dataprime,omitempty"`
-	Logs                              *PieChartLogsQuery      `json:"logs,omitempty"`
-	Metrics                           *PieChartMetricsQuery   `json:"metrics,omitempty"`
-	Spans                             *PieChartSpansQuery     `json:"spans,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Dataprime *PieChartDataprimeQuery `json:"dataprime,omitempty"`
+	Logs *PieChartLogsQuery `json:"logs,omitempty"`
+	Metrics *PieChartMetricsQuery `json:"metrics,omitempty"`
+	Spans *PieChartSpansQuery `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -178,7 +178,7 @@ func (o *PieChartQuery) SetSpans(v PieChartSpansQuery) {
 }
 
 func (o PieChartQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -314,3 +314,4 @@ func (v *NullablePieChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

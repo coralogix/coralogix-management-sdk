@@ -22,9 +22,9 @@ var _ MappedNullable = &CxEventSingleOrMultiple{}
 
 // CxEventSingleOrMultiple This data structure represents a single or multiple events
 type CxEventSingleOrMultiple struct {
-	MultipleEvents                    *CxEventArray `json:"multipleEvents,omitempty"`
-	SingleEvent                       *CxEvent      `json:"singleEvent,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MultipleEvents *CxEventArray `json:"multipleEvents,omitempty"`
+	SingleEvent *CxEvent `json:"singleEvent,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *CxEventSingleOrMultiple) SetSingleEvent(v CxEvent) {
 }
 
 func (o CxEventSingleOrMultiple) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableCxEventSingleOrMultiple) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

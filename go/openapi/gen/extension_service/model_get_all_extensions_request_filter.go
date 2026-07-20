@@ -23,8 +23,8 @@ var _ MappedNullable = &GetAllExtensionsRequestFilter{}
 // GetAllExtensionsRequestFilter Filter by integration ids
 type GetAllExtensionsRequestFilter struct {
 	// The integrations.
-	Integrations                      []string `json:"integrations,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Integrations []string `json:"integrations,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *GetAllExtensionsRequestFilter) SetIntegrations(v []string) {
 }
 
 func (o GetAllExtensionsRequestFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableGetAllExtensionsRequestFilter) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

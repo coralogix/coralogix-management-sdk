@@ -24,7 +24,7 @@ type DurationUnit string
 // List of DurationUnit
 const (
 	DURATIONUNIT_DURATION_UNIT_UNSPECIFIED DurationUnit = "DURATION_UNIT_UNSPECIFIED"
-	DURATIONUNIT_DURATION_UNIT_HOURS       DurationUnit = "DURATION_UNIT_HOURS"
+	DURATIONUNIT_DURATION_UNIT_HOURS DurationUnit = "DURATION_UNIT_HOURS"
 )
 
 // All allowed values of DurationUnit enum
@@ -111,3 +111,4 @@ func (v *NullableDurationUnit) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

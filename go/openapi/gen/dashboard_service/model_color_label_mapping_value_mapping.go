@@ -23,8 +23,8 @@ var _ MappedNullable = &ColorLabelMappingValueMapping{}
 // ColorLabelMappingValueMapping Exact value-based color and label mapping
 type ColorLabelMappingValueMapping struct {
 	// List of exact value-to-display mapping sections
-	Sections                          []MappingSection `json:"sections,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Sections []MappingSection `json:"sections,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ColorLabelMappingValueMapping) SetSections(v []MappingSection) {
 }
 
 func (o ColorLabelMappingValueMapping) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableColorLabelMappingValueMapping) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

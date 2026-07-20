@@ -22,8 +22,8 @@ var _ MappedNullable = &GetRumApplicationVersionDataResponse{}
 
 // GetRumApplicationVersionDataResponse Response containing RUM application version data.
 type GetRumApplicationVersionDataResponse struct {
-	VersionData                       *RumVersionData `json:"versionData,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	VersionData *RumVersionData `json:"versionData,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetRumApplicationVersionDataResponse) SetVersionData(v RumVersionData) 
 }
 
 func (o GetRumApplicationVersionDataResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetRumApplicationVersionDataResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

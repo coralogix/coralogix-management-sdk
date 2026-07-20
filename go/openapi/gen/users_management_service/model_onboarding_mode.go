@@ -25,7 +25,7 @@ type OnboardingMode string
 const (
 	ONBOARDINGMODE_ONBOARDING_MODE_UNSPECIFIED OnboardingMode = "ONBOARDING_MODE_UNSPECIFIED"
 	ONBOARDINGMODE_ONBOARDING_MODE_INVITE_LINK OnboardingMode = "ONBOARDING_MODE_INVITE_LINK"
-	ONBOARDINGMODE_ONBOARDING_MODE_NO_INVITE   OnboardingMode = "ONBOARDING_MODE_NO_INVITE"
+	ONBOARDINGMODE_ONBOARDING_MODE_NO_INVITE OnboardingMode = "ONBOARDING_MODE_NO_INVITE"
 )
 
 // All allowed values of OnboardingMode enum
@@ -113,3 +113,4 @@ func (v *NullableOnboardingMode) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

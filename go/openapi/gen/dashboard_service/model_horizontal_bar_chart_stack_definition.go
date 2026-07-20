@@ -25,8 +25,8 @@ type HorizontalBarChartStackDefinition struct {
 	// How many slices can fit in a single bar
 	MaxSlicesPerBar *int32 `json:"maxSlicesPerBar,omitempty"`
 	// Custom template name of an individual stack
-	StackNameTemplate                 *string `json:"stackNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	StackNameTemplate *string `json:"stackNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *HorizontalBarChartStackDefinition) SetStackNameTemplate(v string) {
 }
 
 func (o HorizontalBarChartStackDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableHorizontalBarChartStackDefinition) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

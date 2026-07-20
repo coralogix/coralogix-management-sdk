@@ -24,8 +24,8 @@ type Delivery string
 // List of Delivery
 const (
 	DELIVERY_DELIVERY_UNSPECIFIED Delivery = "DELIVERY_UNSPECIFIED"
-	DELIVERY_DISABLED             Delivery = "DISABLED"
-	DELIVERY_ERRORS_ONLY          Delivery = "ERRORS_ONLY"
+	DELIVERY_DISABLED Delivery = "DISABLED"
+	DELIVERY_ERRORS_ONLY Delivery = "ERRORS_ONLY"
 )
 
 // All allowed values of Delivery enum
@@ -113,3 +113,4 @@ func (v *NullableDelivery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

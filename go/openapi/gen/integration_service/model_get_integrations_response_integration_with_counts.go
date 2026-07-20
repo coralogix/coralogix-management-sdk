@@ -25,15 +25,15 @@ type GetIntegrationsResponseIntegrationWithCounts struct {
 	// The amount integrations.
 	AmountIntegrations *int64 `json:"amountIntegrations,omitempty"`
 	// List of errors.
-	Errors      []string     `json:"errors,omitempty"`
+	Errors []string `json:"errors,omitempty"`
 	Integration *Integration `json:"integration,omitempty"`
 	// The is deprecated.
 	IsDeprecated *bool `json:"isDeprecated,omitempty"`
 	// The is new.
 	IsNew *bool `json:"isNew,omitempty"`
 	// The upgrade available.
-	UpgradeAvailable                  *bool `json:"upgradeAvailable,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UpgradeAvailable *bool `json:"upgradeAvailable,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -249,7 +249,7 @@ func (o *GetIntegrationsResponseIntegrationWithCounts) SetUpgradeAvailable(v boo
 }
 
 func (o GetIntegrationsResponseIntegrationWithCounts) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -347,3 +347,4 @@ func (v *NullableGetIntegrationsResponseIntegrationWithCounts) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

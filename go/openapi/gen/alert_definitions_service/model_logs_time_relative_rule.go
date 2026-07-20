@@ -22,9 +22,9 @@ var _ MappedNullable = &LogsTimeRelativeRule{}
 
 // LogsTimeRelativeRule LogsTimeRelativeRule is a message that defines a rule for log-based time-relative alerts
 type LogsTimeRelativeRule struct {
-	Condition                         *LogsTimeRelativeCondition `json:"condition,omitempty"`
-	Override                          *AlertDefOverride          `json:"override,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Condition *LogsTimeRelativeCondition `json:"condition,omitempty"`
+	Override *AlertDefOverride `json:"override,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *LogsTimeRelativeRule) SetOverride(v AlertDefOverride) {
 }
 
 func (o LogsTimeRelativeRule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableLogsTimeRelativeRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

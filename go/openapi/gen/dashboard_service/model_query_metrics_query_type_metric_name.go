@@ -23,8 +23,8 @@ var _ MappedNullable = &QueryMetricsQueryTypeMetricName{}
 // QueryMetricsQueryTypeMetricName Fetches distinct metric names matching the given regex pattern.
 type QueryMetricsQueryTypeMetricName struct {
 	// The metric regex.
-	MetricRegex                       *string `json:"metricRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	MetricRegex *string `json:"metricRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *QueryMetricsQueryTypeMetricName) SetMetricRegex(v string) {
 }
 
 func (o QueryMetricsQueryTypeMetricName) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableQueryMetricsQueryTypeMetricName) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

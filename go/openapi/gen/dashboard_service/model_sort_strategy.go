@@ -23,11 +23,11 @@ var _ MappedNullable = &SortStrategy{}
 // SortStrategy Strategy for determining sort key
 type SortStrategy struct {
 	// Sort by category.
-	Category   map[string]interface{} `json:"category,omitempty"`
-	QueryValue *SortByQueryValue      `json:"queryValue,omitempty"`
+	Category map[string]interface{} `json:"category,omitempty"`
+	QueryValue *SortByQueryValue `json:"queryValue,omitempty"`
 	// Discriminator field - STRATEGY_TYPE_CATEGORY or STRATEGY_TYPE_QUERY_VALUE
-	StrategyType                      *string `json:"strategyType,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	StrategyType *string `json:"strategyType,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *SortStrategy) SetStrategyType(v string) {
 }
 
 func (o SortStrategy) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -261,3 +261,4 @@ func (v *NullableSortStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

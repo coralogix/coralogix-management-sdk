@@ -25,8 +25,8 @@ type PieChartStackDefinition struct {
 	// How many slices can fit in a single slice stack
 	MaxSlicesPerStack *int32 `json:"maxSlicesPerStack,omitempty"`
 	// Custom template name of an individual slice in the stack
-	StackNameTemplate                 *string `json:"stackNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	StackNameTemplate *string `json:"stackNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *PieChartStackDefinition) SetStackNameTemplate(v string) {
 }
 
 func (o PieChartStackDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullablePieChartStackDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

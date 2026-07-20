@@ -23,9 +23,9 @@ var _ MappedNullable = &CreateSpanPolicyRequest{}
 
 // CreateSpanPolicyRequest This data structue is used to create a new span policy.
 type CreateSpanPolicyRequest struct {
-	Policy                            CreateGenericPolicyRequest `json:"policy"`
-	SpanRules                         SpanRules                  `json:"spanRules"`
-	AdditionalProperties              map[string]interface{}
+	Policy CreateGenericPolicyRequest `json:"policy"`
+	SpanRules SpanRules `json:"spanRules"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -99,7 +99,7 @@ func (o *CreateSpanPolicyRequest) SetSpanRules(v SpanRules) {
 }
 
 func (o CreateSpanPolicyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -132,10 +132,10 @@ func (o *CreateSpanPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -199,3 +199,4 @@ func (v *NullableCreateSpanPolicyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

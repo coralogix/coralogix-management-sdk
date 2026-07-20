@@ -27,8 +27,8 @@ type AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter 
 	// Start time.
 	StartTime *string `json:"startTime,omitempty"`
 	// Timezone.
-	Timezone                          *string `json:"timezone,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Timezone *string `json:"timezone,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParame
 }
 
 func (o AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimefra
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

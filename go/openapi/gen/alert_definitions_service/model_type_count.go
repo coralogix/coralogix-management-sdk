@@ -23,9 +23,9 @@ var _ MappedNullable = &TypeCount{}
 // TypeCount Count for a specific alert type
 type TypeCount struct {
 	// The count for this alert type
-	Count                             *int64        `json:"count,omitempty"`
-	Type                              *AlertDefType `json:"type,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Count *int64 `json:"count,omitempty"`
+	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *TypeCount) SetType(v AlertDefType) {
 }
 
 func (o TypeCount) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableTypeCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -33,8 +33,8 @@ type GetDataUsageCapabilitiesResponse struct {
 	// Supported labels for the public API surface, with descriptions, cardinality hints, and any stable known values.
 	SupportedLabels []UsageCapabilityLabel `json:"supportedLabels,omitempty"`
 	// Supported measurement kinds and raw units returned by `UsageEntry`.
-	SupportedMeasurements             []UsageCapabilityMeasurement `json:"supportedMeasurements,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SupportedMeasurements []UsageCapabilityMeasurement `json:"supportedMeasurements,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -250,7 +250,7 @@ func (o *GetDataUsageCapabilitiesResponse) SetSupportedMeasurements(v []UsageCap
 }
 
 func (o GetDataUsageCapabilitiesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -348,3 +348,4 @@ func (v *NullableGetDataUsageCapabilitiesResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -26,9 +26,9 @@ type AccessType struct {
 	// Type of access: 'permanent' or 'temporary'
 	AccessType string `json:"accessType"`
 	// User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.
-	PermanentAccess                   map[string]interface{} `json:"permanentAccess,omitempty"`
-	TemporaryAccess                   *TemporaryAccess       `json:"temporaryAccess,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	PermanentAccess map[string]interface{} `json:"permanentAccess,omitempty"`
+	TemporaryAccess *TemporaryAccess `json:"temporaryAccess,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -141,7 +141,7 @@ func (o *AccessType) SetTemporaryAccess(v TemporaryAccess) {
 }
 
 func (o AccessType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,10 +195,10 @@ func (o *AccessType) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -285,3 +285,4 @@ func (v *NullableAccessType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

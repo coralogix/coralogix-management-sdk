@@ -23,8 +23,8 @@ var _ MappedNullable = &ClearRole{}
 // ClearRole Clear role.
 type ClearRole struct {
 	// The clear.
-	Clear                             *bool `json:"clear,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Clear *bool `json:"clear,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ClearRole) SetClear(v bool) {
 }
 
 func (o ClearRole) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableClearRole) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,8 +22,8 @@ var _ MappedNullable = &CreateE2MResponse{}
 
 // CreateE2MResponse Create e2m response.
 type CreateE2MResponse struct {
-	E2m                               *E2M `json:"e2m,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	E2m *E2M `json:"e2m,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *CreateE2MResponse) SetE2m(v E2M) {
 }
 
 func (o CreateE2MResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableCreateE2MResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -217,6 +217,9 @@
                   "priorityOverride": {
                     "$ref": "#/components/schemas/PriorityOverride"
                   },
+                  "rumRules": {
+                    "$ref": "#/components/schemas/LogRules"
+                  },
                   "spanRules": {
                     "$ref": "#/components/schemas/SpanRules"
                   },
@@ -250,6 +253,12 @@
                   },
                   {
                     "type": "object",
+                    "required": [
+                      "rumRules"
+                    ]
+                  },
+                  {
+                    "type": "object",
                     "not": {
                       "anyOf": [
                         {
@@ -262,6 +271,12 @@
                           "type": "object",
                           "required": [
                             "spanRules"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "rumRules"
                           ]
                         }
                       ]
@@ -368,6 +383,9 @@
                   "priorityOverride": {
                     "$ref": "#/components/schemas/PriorityOverride"
                   },
+                  "rumRules": {
+                    "$ref": "#/components/schemas/LogRules"
+                  },
                   "spanRules": {
                     "$ref": "#/components/schemas/SpanRules"
                   },
@@ -402,6 +420,12 @@
                   },
                   {
                     "type": "object",
+                    "required": [
+                      "rumRules"
+                    ]
+                  },
+                  {
+                    "type": "object",
                     "not": {
                       "anyOf": [
                         {
@@ -414,6 +438,12 @@
                           "type": "object",
                           "required": [
                             "spanRules"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "required": [
+                            "rumRules"
                           ]
                         }
                       ]
@@ -497,6 +527,9 @@
                   "logRules": {
                     "$ref": "#/components/schemas/LogRules"
                   },
+                  "rumRules": {
+                    "$ref": "#/components/schemas/LogRules"
+                  },
                   "spanRules": {
                     "$ref": "#/components/schemas/SpanRules"
                   },
@@ -532,6 +565,12 @@
                       },
                       {
                         "type": "object",
+                        "required": [
+                          "rumRules"
+                        ]
+                      },
+                      {
+                        "type": "object",
                         "not": {
                           "anyOf": [
                             {
@@ -544,6 +583,12 @@
                               "type": "object",
                               "required": [
                                 "spanRules"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "required": [
+                                "rumRules"
                               ]
                             }
                           ]
@@ -1070,6 +1115,109 @@
         }
       }
     },
+    "/dataplans/rum-policies/v1": {
+      "put": {
+        "tags": [
+          "Policies Service"
+        ],
+        "summary": "Atomic Overwrite Rum Policies",
+        "description": "Updates RUM data retention policies.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "PoliciesService_AtomicOverwriteRumPolicies",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Atomic Overwrite Rum Policies Request",
+                "description": "In an atomic operation delete all existing RUM policies and create the provided list by order.",
+                "type": "object",
+                "properties": {
+                  "policies": {
+                    "description": "List of RUM policies to create as part of the atomic overwrite.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateRumPolicyRequest"
+                    },
+                    "minItems": 0,
+                    "maxItems": 10000
+                  }
+                },
+                "required": [
+                  "policies"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtomicOverwriteRumPoliciesResponse"
+                },
+                "example": {
+                  "createResponses": [
+                    {
+                      "policy": {
+                        "companyId": 1234,
+                        "deleted": false,
+                        "description": "My RUM Policy Description",
+                        "enabled": true,
+                        "id": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+                        "name": "My RUM Policy",
+                        "order": 1,
+                        "priority": "PRIORITY_TYPE_MEDIUM",
+                        "rumRules": {
+                          "severities": [
+                            "SEVERITY_ERROR",
+                            "SEVERITY_CRITICAL"
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/dataplans/span-policies/v1": {
       "put": {
         "tags": [
@@ -1183,6 +1331,26 @@
               "$ref": "#/components/schemas/CreatePolicyResponse"
             },
             "minItems": 0
+          }
+        }
+      },
+      "AtomicOverwriteRumPoliciesResponse": {
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+        },
+        "title": "Atomic Overwrite Rum Policies Response",
+        "description": "This data structure is obtained when overwriting RUM policies atomically.",
+        "type": "object",
+        "properties": {
+          "createResponses": {
+            "description": "The create responses.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreatePolicyResponse"
+            },
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -1318,6 +1486,27 @@
         },
         "required": [
           "policy"
+        ]
+      },
+      "CreateRumPolicyRequest": {
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+        },
+        "title": "Create Rum Policy Request",
+        "description": "This data structure is used to create a new RUM policy.",
+        "type": "object",
+        "properties": {
+          "policy": {
+            "$ref": "#/components/schemas/CreateGenericPolicyRequest"
+          },
+          "rumRules": {
+            "$ref": "#/components/schemas/LogRules"
+          }
+        },
+        "required": [
+          "policy",
+          "rumRules"
         ]
       },
       "CreateSpanPolicyRequest": {
@@ -1761,6 +1950,9 @@
           "priorityOverrideStatus": {
             "$ref": "#/components/schemas/PriorityOverrideStatus"
           },
+          "rumRules": {
+            "$ref": "#/components/schemas/LogRules"
+          },
           "spanRules": {
             "$ref": "#/components/schemas/SpanRules"
           },
@@ -1806,6 +1998,12 @@
           },
           {
             "type": "object",
+            "required": [
+              "rumRules"
+            ]
+          },
+          {
+            "type": "object",
             "not": {
               "anyOf": [
                 {
@@ -1818,6 +2016,12 @@
                   "type": "object",
                   "required": [
                     "spanRules"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "rumRules"
                   ]
                 }
               ]
@@ -2188,7 +2392,8 @@
         "enum": [
           "SOURCE_TYPE_UNSPECIFIED",
           "SOURCE_TYPE_LOGS",
-          "SOURCE_TYPE_SPANS"
+          "SOURCE_TYPE_SPANS",
+          "SOURCE_TYPE_RUM"
         ]
       },
       "v1.Target": {

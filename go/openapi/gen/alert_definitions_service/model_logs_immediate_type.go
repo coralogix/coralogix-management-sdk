@@ -24,8 +24,8 @@ var _ MappedNullable = &LogsImmediateType{}
 type LogsImmediateType struct {
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	// The notification payload filter.
-	NotificationPayloadFilter         []string `json:"notificationPayloadFilter,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *LogsImmediateType) SetNotificationPayloadFilter(v []string) {
 }
 
 func (o LogsImmediateType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableLogsImmediateType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

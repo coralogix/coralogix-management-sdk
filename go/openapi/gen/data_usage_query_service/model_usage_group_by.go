@@ -23,8 +23,8 @@ var _ MappedNullable = &UsageGroupBy{}
 // UsageGroupBy Set of canonical label keys to group results by.
 type UsageGroupBy struct {
 	// Label key to group by. Supported keys are listed by the capabilities endpoint.
-	Keys                              []string `json:"keys,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Keys []string `json:"keys,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *UsageGroupBy) SetKeys(v []string) {
 }
 
 func (o UsageGroupBy) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableUsageGroupBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

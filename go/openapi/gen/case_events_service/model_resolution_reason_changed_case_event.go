@@ -25,8 +25,8 @@ type ResolutionReasonChangedCaseEvent struct {
 	// Previous resolution reason
 	From *string `json:"from,omitempty"`
 	// New resolution reason
-	To                                *string `json:"to,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	To *string `json:"to,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *ResolutionReasonChangedCaseEvent) SetTo(v string) {
 }
 
 func (o ResolutionReasonChangedCaseEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableResolutionReasonChangedCaseEvent) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

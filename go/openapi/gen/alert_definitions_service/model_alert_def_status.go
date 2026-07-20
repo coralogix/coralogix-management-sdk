@@ -24,9 +24,9 @@ type AlertDefStatus string
 // List of AlertDefStatus
 const (
 	ALERTDEFSTATUS_ALERT_DEF_STATUS_UNSPECIFIED AlertDefStatus = "ALERT_DEF_STATUS_UNSPECIFIED"
-	ALERTDEFSTATUS_ALERT_DEF_STATUS_ALERTING    AlertDefStatus = "ALERT_DEF_STATUS_ALERTING"
-	ALERTDEFSTATUS_ALERT_DEF_STATUS_OK          AlertDefStatus = "ALERT_DEF_STATUS_OK"
-	ALERTDEFSTATUS_ALERT_DEF_STATUS_NO_DATA     AlertDefStatus = "ALERT_DEF_STATUS_NO_DATA"
+	ALERTDEFSTATUS_ALERT_DEF_STATUS_ALERTING AlertDefStatus = "ALERT_DEF_STATUS_ALERTING"
+	ALERTDEFSTATUS_ALERT_DEF_STATUS_OK AlertDefStatus = "ALERT_DEF_STATUS_OK"
+	ALERTDEFSTATUS_ALERT_DEF_STATUS_NO_DATA AlertDefStatus = "ALERT_DEF_STATUS_NO_DATA"
 )
 
 // All allowed values of AlertDefStatus enum
@@ -115,3 +115,4 @@ func (v *NullableAlertDefStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

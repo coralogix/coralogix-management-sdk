@@ -23,9 +23,9 @@ var _ MappedNullable = &TimeDuration{}
 // TimeDuration Configuration for time duration
 type TimeDuration struct {
 	// The duration value
-	Duration                          *string       `json:"duration,omitempty" validate:"regexp=^[0-9]+$"`
-	Unit                              *DurationUnit `json:"unit,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Duration *string `json:"duration,omitempty" validate:"regexp=^[0-9]+$"`
+	Unit *DurationUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *TimeDuration) SetUnit(v DurationUnit) {
 }
 
 func (o TimeDuration) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableTimeDuration) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

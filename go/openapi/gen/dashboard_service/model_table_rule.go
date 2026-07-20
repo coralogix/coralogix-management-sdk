@@ -24,13 +24,13 @@ var _ MappedNullable = &TableRule{}
 type TableRule struct {
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Id          *UUID   `json:"id,omitempty"`
+	Id *UUID `json:"id,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The properties.
-	Properties                        []Property `json:"properties,omitempty"`
-	RuleScope                         *RuleScope `json:"ruleScope,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Properties []Property `json:"properties,omitempty"`
+	RuleScope *RuleScope `json:"ruleScope,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -214,7 +214,7 @@ func (o *TableRule) SetRuleScope(v RuleScope) {
 }
 
 func (o TableRule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -308,3 +308,4 @@ func (v *NullableTableRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

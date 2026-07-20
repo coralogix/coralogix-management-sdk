@@ -24,10 +24,10 @@ var _ MappedNullable = &V3TimeRange{}
 // V3TimeRange Represents a time range with start and end timestamps
 type V3TimeRange struct {
 	// End time of the range
-	EndTime *time.Time `json:"endTime,omitempty"`
+	EndTime *time.Time `json:"endTime,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Start time of the range
-	StartTime                         *time.Time `json:"startTime,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	StartTime *time.Time `json:"startTime,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -115,7 +115,7 @@ func (o *V3TimeRange) SetStartTime(v time.Time) {
 }
 
 func (o V3TimeRange) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,3 +197,4 @@ func (v *NullableV3TimeRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

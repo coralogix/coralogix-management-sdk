@@ -24,8 +24,8 @@ var _ MappedNullable = &BulkCloseResponse{}
 // BulkCloseResponse Response containing the updated cases
 type BulkCloseResponse struct {
 	// Updated cases
-	Cases                             []Case `json:"cases"`
-	AdditionalProperties              map[string]interface{}
+	Cases []Case `json:"cases"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -74,7 +74,7 @@ func (o *BulkCloseResponse) SetCases(v []Case) {
 }
 
 func (o BulkCloseResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -105,10 +105,10 @@ func (o *BulkCloseResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -171,3 +171,4 @@ func (v *NullableBulkCloseResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ var _ MappedNullable = &V1Grouping{}
 // V1Grouping Definition of the SLO grouping fields
 type V1Grouping struct {
 	// List of labels.
-	Labels                            []string `json:"labels,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Labels []string `json:"labels,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *V1Grouping) SetLabels(v []string) {
 }
 
 func (o V1Grouping) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableV1Grouping) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,8 +22,8 @@ var _ MappedNullable = &QuerySourceMetricsQuery{}
 
 // QuerySourceMetricsQuery Variable query source that fetches metric names, label names, or label values from the metrics store.
 type QuerySourceMetricsQuery struct {
-	Type                              *QuerySourceMetricsQueryType `json:"type,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Type *QuerySourceMetricsQueryType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *QuerySourceMetricsQuery) SetType(v QuerySourceMetricsQueryType) {
 }
 
 func (o QuerySourceMetricsQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableQuerySourceMetricsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

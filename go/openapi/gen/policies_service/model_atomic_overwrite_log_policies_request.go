@@ -24,8 +24,8 @@ var _ MappedNullable = &AtomicOverwriteLogPoliciesRequest{}
 // AtomicOverwriteLogPoliciesRequest In an atomic operation delete all existing log policies and create the provided list by order.
 type AtomicOverwriteLogPoliciesRequest struct {
 	// Policies.
-	Policies                          []CreateLogPolicyRequest `json:"policies"`
-	AdditionalProperties              map[string]interface{}
+	Policies []CreateLogPolicyRequest `json:"policies"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -74,7 +74,7 @@ func (o *AtomicOverwriteLogPoliciesRequest) SetPolicies(v []CreateLogPolicyReque
 }
 
 func (o AtomicOverwriteLogPoliciesRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -105,10 +105,10 @@ func (o *AtomicOverwriteLogPoliciesRequest) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -171,3 +171,4 @@ func (v *NullableAtomicOverwriteLogPoliciesRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,9 +22,9 @@ var _ MappedNullable = &AlertEventServiceGetAlertEventsStatsOrderBysParameterInn
 
 // AlertEventServiceGetAlertEventsStatsOrderBysParameterInner struct for AlertEventServiceGetAlertEventsStatsOrderBysParameterInner
 type AlertEventServiceGetAlertEventsStatsOrderBysParameterInner struct {
-	Direction                         *OrderByAlertEventDirection `json:"direction,omitempty"`
-	FieldName                         *OrderByAlertEventFields    `json:"fieldName,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Direction *OrderByAlertEventDirection `json:"direction,omitempty"`
+	FieldName *OrderByAlertEventFields `json:"fieldName,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) SetFieldNam
 }
 
 func (o AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableAlertEventServiceGetAlertEventsStatsOrderBysParameterInner) Unm
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

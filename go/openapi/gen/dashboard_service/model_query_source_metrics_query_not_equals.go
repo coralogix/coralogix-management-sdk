@@ -22,8 +22,8 @@ var _ MappedNullable = &QuerySourceMetricsQueryNotEquals{}
 
 // QuerySourceMetricsQueryNotEquals Not equals.
 type QuerySourceMetricsQueryNotEquals struct {
-	Selection                         *QuerySourceMetricsQuerySelection `json:"selection,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Selection *QuerySourceMetricsQuerySelection `json:"selection,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *QuerySourceMetricsQueryNotEquals) SetSelection(v QuerySourceMetricsQuer
 }
 
 func (o QuerySourceMetricsQueryNotEquals) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableQuerySourceMetricsQueryNotEquals) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

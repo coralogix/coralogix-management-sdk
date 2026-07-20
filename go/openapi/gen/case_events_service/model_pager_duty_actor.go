@@ -29,8 +29,8 @@ type PagerDutyActor struct {
 	// PagerDuty user ID
 	PagerDutyUserId *string `json:"pagerDutyUserId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Email of the PagerDuty user
-	UserEmail                         *string `json:"userEmail,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	UserEmail *string `json:"userEmail,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -182,7 +182,7 @@ func (o *PagerDutyActor) SetUserEmail(v string) {
 }
 
 func (o PagerDutyActor) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -272,3 +272,4 @@ func (v *NullablePagerDutyActor) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,9 +22,9 @@ var _ MappedNullable = &QuerySourceSpansQueryTypeFieldValue{}
 
 // QuerySourceSpansQueryTypeFieldValue Fetches distinct values for a specific span observation field.
 type QuerySourceSpansQueryTypeFieldValue struct {
-	ObservationField                  *ObservationField `json:"observationField,omitempty"`
-	Value                             *SpanField        `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ObservationField *ObservationField `json:"observationField,omitempty"`
+	Value *SpanField `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *QuerySourceSpansQueryTypeFieldValue) SetValue(v SpanField) {
 }
 
 func (o QuerySourceSpansQueryTypeFieldValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableQuerySourceSpansQueryTypeFieldValue) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

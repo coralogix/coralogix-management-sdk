@@ -22,8 +22,8 @@ var _ MappedNullable = &ScopeUpdate{}
 
 // ScopeUpdate Update the scope assigned to the group. Either reference an existing scope by ID or clear the scope.
 type ScopeUpdate struct {
-	Action                            *ScopeUpdateAction `json:"action,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Action *ScopeUpdateAction `json:"action,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *ScopeUpdate) SetAction(v ScopeUpdateAction) {
 }
 
 func (o ScopeUpdate) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableScopeUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

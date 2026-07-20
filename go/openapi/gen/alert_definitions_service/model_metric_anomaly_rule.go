@@ -22,8 +22,8 @@ var _ MappedNullable = &MetricAnomalyRule{}
 
 // MetricAnomalyRule A rule for metric-based anomaly detection alerts
 type MetricAnomalyRule struct {
-	Condition                         *MetricAnomalyCondition `json:"condition,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Condition *MetricAnomalyCondition `json:"condition,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *MetricAnomalyRule) SetCondition(v MetricAnomalyCondition) {
 }
 
 func (o MetricAnomalyRule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableMetricAnomalyRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

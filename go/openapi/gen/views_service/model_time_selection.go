@@ -22,9 +22,9 @@ var _ MappedNullable = &TimeSelection{}
 
 // TimeSelection Time selection.
 type TimeSelection struct {
-	CustomSelection                   *CustomTimeSelection `json:"customSelection,omitempty"`
-	QuickSelection                    *QuickTimeSelection  `json:"quickSelection,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	CustomSelection *CustomTimeSelection `json:"customSelection,omitempty"`
+	QuickSelection *QuickTimeSelection `json:"quickSelection,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *TimeSelection) SetQuickSelection(v QuickTimeSelection) {
 }
 
 func (o TimeSelection) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableTimeSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

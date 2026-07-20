@@ -22,11 +22,11 @@ var _ MappedNullable = &RuleScope{}
 
 // RuleScope Rule scope.
 type RuleScope struct {
-	Field     *ObservationField `json:"field,omitempty"`
-	FieldType *FieldDataType    `json:"fieldType,omitempty"`
+	Field *ObservationField `json:"field,omitempty"`
+	FieldType *FieldDataType `json:"fieldType,omitempty"`
 	// Regular expression pattern used to scope the rule.
-	Regex                             *string `json:"regex,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Regex *string `json:"regex,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *RuleScope) SetRegex(v string) {
 }
 
 func (o RuleScope) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,3 +269,4 @@ func (v *NullableRuleScope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,8 +22,8 @@ var _ MappedNullable = &QuerySourceLogsQueryTypeFieldValue{}
 
 // QuerySourceLogsQueryTypeFieldValue Query.logs query.type.field value.
 type QuerySourceLogsQueryTypeFieldValue struct {
-	ObservationField                  *ObservationField `json:"observationField,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ObservationField *ObservationField `json:"observationField,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *QuerySourceLogsQueryTypeFieldValue) SetObservationField(v ObservationFi
 }
 
 func (o QuerySourceLogsQueryTypeFieldValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableQuerySourceLogsQueryTypeFieldValue) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -18,11 +18,12 @@ import (
 	"net/url"
 )
 
+
 // RetentionsServiceAPIService RetentionsServiceAPI service
 type RetentionsServiceAPIService service
 
 type ApiRetentionsServiceActivateRetentionsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *RetentionsServiceAPIService
 }
 
@@ -35,25 +36,24 @@ RetentionsServiceActivateRetentions Activate Retentions
 
 Activates the specified retention tags.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiRetentionsServiceActivateRetentionsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRetentionsServiceActivateRetentionsRequest
 */
 func (a *RetentionsServiceAPIService) RetentionsServiceActivateRetentions(ctx context.Context) ApiRetentionsServiceActivateRetentionsRequest {
 	return ApiRetentionsServiceActivateRetentionsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ActivateRetentionsResponse
+//  @return ActivateRetentionsResponse
 func (a *RetentionsServiceAPIService) RetentionsServiceActivateRetentionsExecute(r ApiRetentionsServiceActivateRetentionsRequest) (*ActivateRetentionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ActivateRetentionsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ActivateRetentionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RetentionsServiceAPIService.RetentionsServiceActivateRetentions")
@@ -113,8 +113,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceActivateRetentionsExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -124,8 +124,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceActivateRetentionsExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -135,8 +135,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceActivateRetentionsExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -154,7 +154,7 @@ func (a *RetentionsServiceAPIService) RetentionsServiceActivateRetentionsExecute
 }
 
 type ApiRetentionsServiceGetRetentionsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *RetentionsServiceAPIService
 }
 
@@ -167,25 +167,24 @@ RetentionsServiceGetRetentions Get Retentions
 
 Returns all available retention tags.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiRetentionsServiceGetRetentionsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRetentionsServiceGetRetentionsRequest
 */
 func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentions(ctx context.Context) ApiRetentionsServiceGetRetentionsRequest {
 	return ApiRetentionsServiceGetRetentionsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRetentionsResponse
+//  @return GetRetentionsResponse
 func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsExecute(r ApiRetentionsServiceGetRetentionsRequest) (*GetRetentionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetRetentionsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetRetentionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RetentionsServiceAPIService.RetentionsServiceGetRetentions")
@@ -245,8 +244,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -256,8 +255,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -267,8 +266,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -286,7 +285,7 @@ func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsExecute(r Ap
 }
 
 type ApiRetentionsServiceGetRetentionsEnabledRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *RetentionsServiceAPIService
 }
 
@@ -299,25 +298,24 @@ RetentionsServiceGetRetentionsEnabled Get Retentions Enabled
 
 Returns the enabled retention tags for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiRetentionsServiceGetRetentionsEnabledRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRetentionsServiceGetRetentionsEnabledRequest
 */
 func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsEnabled(ctx context.Context) ApiRetentionsServiceGetRetentionsEnabledRequest {
 	return ApiRetentionsServiceGetRetentionsEnabledRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRetentionsEnabledResponse
+//  @return GetRetentionsEnabledResponse
 func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsEnabledExecute(r ApiRetentionsServiceGetRetentionsEnabledRequest) (*GetRetentionsEnabledResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetRetentionsEnabledResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetRetentionsEnabledResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RetentionsServiceAPIService.RetentionsServiceGetRetentionsEnabled")
@@ -377,8 +375,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsEnabledExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -388,8 +386,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsEnabledExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -399,8 +397,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsEnabledExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -418,8 +416,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceGetRetentionsEnabledExecu
 }
 
 type ApiRetentionsServiceUpdateRetentionsRequest struct {
-	ctx                     context.Context
-	ApiService              *RetentionsServiceAPIService
+	ctx context.Context
+	ApiService *RetentionsServiceAPIService
 	updateRetentionsRequest *UpdateRetentionsRequest
 }
 
@@ -437,25 +435,24 @@ RetentionsServiceUpdateRetentions Update Retentions
 
 Creates a new retention tag.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiRetentionsServiceUpdateRetentionsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRetentionsServiceUpdateRetentionsRequest
 */
 func (a *RetentionsServiceAPIService) RetentionsServiceUpdateRetentions(ctx context.Context) ApiRetentionsServiceUpdateRetentionsRequest {
 	return ApiRetentionsServiceUpdateRetentionsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateRetentionsResponse
+//  @return UpdateRetentionsResponse
 func (a *RetentionsServiceAPIService) RetentionsServiceUpdateRetentionsExecute(r ApiRetentionsServiceUpdateRetentionsRequest) (*UpdateRetentionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateRetentionsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateRetentionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RetentionsServiceAPIService.RetentionsServiceUpdateRetentions")
@@ -520,8 +517,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceUpdateRetentionsExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -531,8 +528,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceUpdateRetentionsExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -542,8 +539,8 @@ func (a *RetentionsServiceAPIService) RetentionsServiceUpdateRetentionsExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

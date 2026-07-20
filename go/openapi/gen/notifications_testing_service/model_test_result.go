@@ -22,9 +22,9 @@ var _ MappedNullable = &TestResult{}
 
 // TestResult Result of a notification test, either a success or failure.
 type TestResult struct {
-	Failure                           *TestResultFailure `json:"failure,omitempty"`
-	Success                           *TestResultSuccess `json:"success,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Failure *TestResultFailure `json:"failure,omitempty"`
+	Success *TestResultSuccess `json:"success,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *TestResult) SetSuccess(v TestResultSuccess) {
 }
 
 func (o TestResult) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableTestResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

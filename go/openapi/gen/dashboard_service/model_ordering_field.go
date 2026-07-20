@@ -23,9 +23,9 @@ var _ MappedNullable = &OrderingField{}
 // OrderingField Ordering field.
 type OrderingField struct {
 	// Field name to order by
-	Field                             *string         `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	OrderDirection                    *OrderDirection `json:"orderDirection,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Field *string `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	OrderDirection *OrderDirection `json:"orderDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *OrderingField) SetOrderDirection(v OrderDirection) {
 }
 
 func (o OrderingField) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableOrderingField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

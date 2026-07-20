@@ -23,8 +23,8 @@ var _ MappedNullable = &FilterOptionCountsEnabledFilter{}
 // FilterOptionCountsEnabledFilter Filter by alert definition enabled status for counting options
 type FilterOptionCountsEnabledFilter struct {
 	// Whether to filter for enabled (true) or disabled (false) alerts
-	Enabled                           *bool `json:"enabled,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Enabled *bool `json:"enabled,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *FilterOptionCountsEnabledFilter) SetEnabled(v bool) {
 }
 
 func (o FilterOptionCountsEnabledFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableFilterOptionCountsEnabledFilter) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

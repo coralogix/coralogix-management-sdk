@@ -24,8 +24,8 @@ var _ MappedNullable = &UpdateBulkAlertSchedulerRuleRequestDataStructure{}
 // UpdateBulkAlertSchedulerRuleRequestDataStructure This is a request sent to update multiple alert scheduler rules
 type UpdateBulkAlertSchedulerRuleRequestDataStructure struct {
 	// The update alert scheduler rule requests.
-	UpdateAlertSchedulerRuleRequests  []UpdateAlertSchedulerRuleRequest `json:"updateAlertSchedulerRuleRequests"`
-	AdditionalProperties              map[string]interface{}
+	UpdateAlertSchedulerRuleRequests []UpdateAlertSchedulerRuleRequest `json:"updateAlertSchedulerRuleRequests"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -74,7 +74,7 @@ func (o *UpdateBulkAlertSchedulerRuleRequestDataStructure) SetUpdateAlertSchedul
 }
 
 func (o UpdateBulkAlertSchedulerRuleRequestDataStructure) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -105,10 +105,10 @@ func (o *UpdateBulkAlertSchedulerRuleRequestDataStructure) UnmarshalJSON(data []
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -171,3 +171,4 @@ func (v *NullableUpdateBulkAlertSchedulerRuleRequestDataStructure) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

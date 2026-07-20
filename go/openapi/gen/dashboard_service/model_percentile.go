@@ -23,11 +23,11 @@ var _ MappedNullable = &Percentile{}
 // Percentile Percentile.
 type Percentile struct {
 	// The field.
-	Field            *string           `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Field *string `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	// The percent.
-	Percent                           *float64 `json:"percent,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Percent *float64 `json:"percent,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *Percentile) SetPercent(v float64) {
 }
 
 func (o Percentile) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullablePercentile) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

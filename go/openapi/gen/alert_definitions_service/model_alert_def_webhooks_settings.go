@@ -24,9 +24,9 @@ var _ MappedNullable = &AlertDefWebhooksSettings{}
 type AlertDefWebhooksSettings struct {
 	Integration *V3IntegrationType `json:"integration,omitempty"`
 	// The time in minutes before the alert can be retriggered
-	Minutes                           *int64    `json:"minutes,omitempty"`
-	NotifyOn                          *NotifyOn `json:"notifyOn,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Minutes *int64 `json:"minutes,omitempty"`
+	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *AlertDefWebhooksSettings) SetNotifyOn(v NotifyOn) {
 }
 
 func (o AlertDefWebhooksSettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableAlertDefWebhooksSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

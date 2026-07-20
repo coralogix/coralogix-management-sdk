@@ -24,13 +24,13 @@ type AggType string
 // List of AggType
 const (
 	AGGTYPE_AGG_TYPE_UNSPECIFIED AggType = "AGG_TYPE_UNSPECIFIED"
-	AGGTYPE_AGG_TYPE_MIN         AggType = "AGG_TYPE_MIN"
-	AGGTYPE_AGG_TYPE_MAX         AggType = "AGG_TYPE_MAX"
-	AGGTYPE_AGG_TYPE_COUNT       AggType = "AGG_TYPE_COUNT"
-	AGGTYPE_AGG_TYPE_AVG         AggType = "AGG_TYPE_AVG"
-	AGGTYPE_AGG_TYPE_SUM         AggType = "AGG_TYPE_SUM"
-	AGGTYPE_AGG_TYPE_HISTOGRAM   AggType = "AGG_TYPE_HISTOGRAM"
-	AGGTYPE_AGG_TYPE_SAMPLES     AggType = "AGG_TYPE_SAMPLES"
+	AGGTYPE_AGG_TYPE_MIN AggType = "AGG_TYPE_MIN"
+	AGGTYPE_AGG_TYPE_MAX AggType = "AGG_TYPE_MAX"
+	AGGTYPE_AGG_TYPE_COUNT AggType = "AGG_TYPE_COUNT"
+	AGGTYPE_AGG_TYPE_AVG AggType = "AGG_TYPE_AVG"
+	AGGTYPE_AGG_TYPE_SUM AggType = "AGG_TYPE_SUM"
+	AGGTYPE_AGG_TYPE_HISTOGRAM AggType = "AGG_TYPE_HISTOGRAM"
+	AGGTYPE_AGG_TYPE_SAMPLES AggType = "AGG_TYPE_SAMPLES"
 )
 
 // All allowed values of AggType enum
@@ -123,3 +123,4 @@ func (v *NullableAggType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

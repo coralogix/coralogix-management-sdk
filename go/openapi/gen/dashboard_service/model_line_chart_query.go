@@ -22,11 +22,11 @@ var _ MappedNullable = &LineChartQuery{}
 
 // LineChartQuery Discriminated union of possible query types for the line chart widget.
 type LineChartQuery struct {
-	Dataprime                         *LineChartDataprimeQuery `json:"dataprime,omitempty"`
-	Logs                              *LineChartLogsQuery      `json:"logs,omitempty"`
-	Metrics                           *LineChartMetricsQuery   `json:"metrics,omitempty"`
-	Spans                             *LineChartSpansQuery     `json:"spans,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Dataprime *LineChartDataprimeQuery `json:"dataprime,omitempty"`
+	Logs *LineChartLogsQuery `json:"logs,omitempty"`
+	Metrics *LineChartMetricsQuery `json:"metrics,omitempty"`
+	Spans *LineChartSpansQuery `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -178,7 +178,7 @@ func (o *LineChartQuery) SetSpans(v LineChartSpansQuery) {
 }
 
 func (o LineChartQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -314,3 +314,4 @@ func (v *NullableLineChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,9 +23,9 @@ var _ MappedNullable = &DisplayNameTemplateVariable{}
 // DisplayNameTemplateVariable A variable that can be referenced inside the display name template, backed by either an observation field or mapped values
 type DisplayNameTemplateVariable struct {
 	// Mapped values.
-	MappedValues                      map[string]interface{} `json:"mappedValues,omitempty"`
-	ObservationField                  *ObservationField      `json:"observationField,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MappedValues map[string]interface{} `json:"mappedValues,omitempty"`
+	ObservationField *ObservationField `json:"observationField,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *DisplayNameTemplateVariable) SetObservationField(v ObservationField) {
 }
 
 func (o DisplayNameTemplateVariable) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -223,3 +223,4 @@ func (v *NullableDisplayNameTemplateVariable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

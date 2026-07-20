@@ -13,8 +13,8 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -27,8 +27,8 @@ type Resolved struct {
 	// Timestamp when the alert was resolved.
 	ResolvedAt time.Time `json:"resolvedAt"`
 	// Timestamp when the alert was originally triggered.
-	TriggeredAt                       time.Time `json:"triggeredAt"`
-	AdditionalProperties              map[string]interface{}
+	TriggeredAt time.Time `json:"triggeredAt"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -102,7 +102,7 @@ func (o *Resolved) SetTriggeredAt(v time.Time) {
 }
 
 func (o Resolved) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -135,10 +135,10 @@ func (o *Resolved) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -202,3 +202,4 @@ func (v *NullableResolved) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ var _ MappedNullable = &CreateScopeResponse{}
 
 // CreateScopeResponse This data structure represents a response to create a scope
 type CreateScopeResponse struct {
-	Scope                             V1Scope `json:"scope"`
-	AdditionalProperties              map[string]interface{}
+	Scope V1Scope `json:"scope"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -73,7 +73,7 @@ func (o *CreateScopeResponse) SetScope(v V1Scope) {
 }
 
 func (o CreateScopeResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +104,10 @@ func (o *CreateScopeResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -170,3 +170,4 @@ func (v *NullableCreateScopeResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

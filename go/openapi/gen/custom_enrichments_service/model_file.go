@@ -31,8 +31,8 @@ type File struct {
 	// Size of the file in bytes.
 	Size *int64 `json:"size,omitempty"`
 	// Textual content of the file as a UTF-8 string.
-	Textual                           *string `json:"textual,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Textual *string `json:"textual,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -216,7 +216,7 @@ func (o *File) SetTextual(v string) {
 }
 
 func (o File) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -338,3 +338,4 @@ func (v *NullableFile) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

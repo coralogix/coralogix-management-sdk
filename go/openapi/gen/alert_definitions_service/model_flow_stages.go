@@ -24,9 +24,9 @@ var _ MappedNullable = &FlowStages{}
 type FlowStages struct {
 	FlowStagesGroups *FlowStagesGroups `json:"flowStagesGroups,omitempty"`
 	// The timeframe ms.
-	TimeframeMs                       *string        `json:"timeframeMs,omitempty" validate:"regexp=^-?[0-9]+$"`
-	TimeframeType                     *TimeframeType `json:"timeframeType,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TimeframeMs *string `json:"timeframeMs,omitempty" validate:"regexp=^-?[0-9]+$"`
+	TimeframeType *TimeframeType `json:"timeframeType,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *FlowStages) SetTimeframeType(v TimeframeType) {
 }
 
 func (o FlowStages) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableFlowStages) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

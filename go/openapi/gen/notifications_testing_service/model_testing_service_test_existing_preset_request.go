@@ -25,11 +25,11 @@ type TestingServiceTestExistingPresetRequest struct {
 	// The connector id.
 	ConnectorId *string `json:"connectorId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Entity sub-type to use when testing the preset.
-	EntitySubType *string                       `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	EntityType    *NotificationCenterEntityType `json:"entityType,omitempty"`
+	EntitySubType *string `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// The preset id.
-	PresetId                          *string `json:"presetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
-	AdditionalProperties              map[string]interface{}
+	PresetId *string `json:"presetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -181,7 +181,7 @@ func (o *TestingServiceTestExistingPresetRequest) SetPresetId(v string) {
 }
 
 func (o TestingServiceTestExistingPresetRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,3 +271,4 @@ func (v *NullableTestingServiceTestExistingPresetRequest) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

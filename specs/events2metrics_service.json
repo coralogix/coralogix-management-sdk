@@ -57,19 +57,23 @@
                     "example": "my_namespace/my_dataset",
                     "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 300
                   },
                   "description": {
                     "example": "avg and max the latency of catalog service",
                     "description": "Human-readable description of this E2M.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 2000
                   },
                   "id": {
                     "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
                     "description": "Unique identifier for this E2M. Required on update requests.",
                     "type": "string",
-                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
                     "minLength": 36,
                     "maxLength": 36
                   },
@@ -95,13 +99,16 @@
                     "items": {
                       "$ref": "#/components/schemas/MetricLabel"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 10
                   },
                   "name": {
                     "example": "Service_catalog_latency",
                     "description": "Human-readable name for this E2M.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 255
                   },
                   "permutations": {
                     "$ref": "#/components/schemas/E2MPermutations"
@@ -196,13 +203,17 @@
                     "example": "my_namespace/my_dataset",
                     "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 300
                   },
                   "description": {
                     "example": "avg and max the latency of catalog service",
                     "description": "Human-readable description for the new E2M.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 2000
                   },
                   "logsQuery": {
                     "$ref": "#/components/schemas/v2.LogsQuery"
@@ -213,7 +224,8 @@
                     "items": {
                       "$ref": "#/components/schemas/v2.MetricField"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 10
                   },
                   "metricLabels": {
                     "description": "Metric labels to attach to the generated metrics.",
@@ -221,19 +233,24 @@
                     "items": {
                       "$ref": "#/components/schemas/MetricLabel"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 10
                   },
                   "name": {
                     "example": "Service catalog latency",
                     "description": "Human-readable name for the new E2M.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 255
                   },
                   "permutationsLimit": {
                     "example": 30000,
                     "description": "Maximum number of unique metric permutations allowed for this E2M.",
                     "type": "integer",
-                    "format": "int32"
+                    "format": "int32",
+                    "minimum": 1,
+                    "maximum": 10000000
                   },
                   "spansQuery": {
                     "$ref": "#/components/schemas/v2.SpansQuery"
@@ -321,7 +338,8 @@
                     "items": {
                       "$ref": "#/components/schemas/E2MExecutionRequest"
                     },
-                    "minItems": 0
+                    "minItems": 1,
+                    "maxItems": 100
                   }
                 }
               }
@@ -399,7 +417,9 @@
             "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "style": "simple"
         }
@@ -437,9 +457,12 @@
                     "example": "myAction",
                     "description": "The action filters.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 4096
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "applicationnameFilters": {
                   "description": "The applicationname filters.",
@@ -448,15 +471,20 @@
                     "example": "myApp",
                     "description": "The applicationname filters.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 4096
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "lucene": {
                   "example": "applicationName:myApp",
                   "description": "The lucene.",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 0,
+                  "maxLength": 10000
                 },
                 "serviceFilters": {
                   "description": "The service filters.",
@@ -465,9 +493,12 @@
                     "example": "myService",
                     "description": "The service filters.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 4096
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "subsystemnameFilters": {
                   "description": "The subsystemname filters.",
@@ -476,9 +507,12 @@
                     "example": "mySubsystem",
                     "description": "The subsystemname filters.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 4096
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 }
               }
             },
@@ -501,7 +535,9 @@
                   "example": "new_query",
                   "description": "The alias.",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 1,
+                  "maxLength": 255
                 },
                 "applicationnameFilters": {
                   "description": "The applicationname filters.",
@@ -510,15 +546,20 @@
                     "example": "app_name",
                     "description": "The applicationname filters.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 4096
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "lucene": {
                   "example": "log_obj.numeric_field: [50 TO 100]",
                   "description": "The lucene.",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 0,
+                  "maxLength": 10000
                 },
                 "severityFilters": {
                   "description": "The severity filters.",
@@ -526,7 +567,8 @@
                   "items": {
                     "$ref": "#/components/schemas/logs2metrics.v2.Severity"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 7
                 },
                 "subsystemnameFilters": {
                   "description": "The subsystemname filters.",
@@ -535,9 +577,12 @@
                     "example": "sub_name",
                     "description": "The subsystemname filters.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 4096
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 }
               }
             },
@@ -563,14 +608,17 @@
                     "example": "log_obj.string_value",
                     "description": "The source field.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 255
                   },
                   "targetLabel": {
                     "example": "alias_label_name",
                     "description": "The target label.",
                     "type": "string",
                     "pattern": "^[\\w/-]+$",
-                    "minLength": 0
+                    "minLength": 1,
+                    "maxLength": 255
                   }
                 },
                 "required": [
@@ -578,7 +626,8 @@
                   "sourceField"
                 ]
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 10
             },
             "style": "form"
           }
@@ -652,7 +701,8 @@
             "items": {
               "$ref": "#/components/schemas/E2MExecutionResponse"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -698,7 +748,9 @@
             "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         },
         "required": [
@@ -717,7 +769,9 @@
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         },
         "required": [
@@ -743,19 +797,23 @@
             "example": "my_namespace/my_dataset",
             "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 300
           },
           "description": {
             "example": "avg and max the latency of catalog service",
             "description": "Human-readable description of this E2M.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 2000
           },
           "id": {
             "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
             "description": "Unique identifier for this E2M. Required on update requests.",
             "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "minLength": 36,
             "maxLength": 36
           },
@@ -781,13 +839,16 @@
             "items": {
               "$ref": "#/components/schemas/MetricLabel"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           },
           "name": {
             "example": "Service_catalog_latency",
             "description": "Human-readable name for this E2M.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "permutations": {
             "$ref": "#/components/schemas/E2MPermutations"
@@ -861,7 +922,8 @@
               "type": "number",
               "format": "float"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 64
           }
         }
       },
@@ -892,13 +954,17 @@
             "example": "my_namespace/my_dataset",
             "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 300
           },
           "description": {
             "example": "avg and max the latency of catalog service",
             "description": "Human-readable description for the new E2M.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 2000
           },
           "logsQuery": {
             "$ref": "#/components/schemas/v2.LogsQuery"
@@ -909,7 +975,8 @@
             "items": {
               "$ref": "#/components/schemas/v2.MetricField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           },
           "metricLabels": {
             "description": "Metric labels to attach to the generated metrics.",
@@ -917,19 +984,24 @@
             "items": {
               "$ref": "#/components/schemas/MetricLabel"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           },
           "name": {
             "example": "Service catalog latency",
             "description": "Human-readable name for the new E2M.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "permutationsLimit": {
             "example": 30000,
             "description": "Maximum number of unique metric permutations allowed for this E2M.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 10000000
           },
           "spansQuery": {
             "$ref": "#/components/schemas/v2.SpansQuery"
@@ -1110,7 +1182,9 @@
             "example": 30000,
             "description": "Limit.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 10000000
           }
         },
         "required": [
@@ -1213,14 +1287,19 @@
         "type": "object",
         "properties": {
           "companyId": {
+            "example": "123456",
             "description": "The company id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "labelsLimit": {
             "description": "The labels limit.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 255
           },
           "metricsLimit": {
             "$ref": "#/components/schemas/LimitUsage"
@@ -1234,14 +1313,18 @@
         "type": "object",
         "properties": {
           "day": {
-            "description": "The day.",
+            "description": "The day, formatted as YYYY-MM-DD.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "minLength": 10,
+            "maxLength": 10
           },
           "permutations": {
-            "description": "List of permutations.",
+            "description": "Number of label permutations for this day.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
           }
         }
       },
@@ -1255,12 +1338,16 @@
           "limit": {
             "description": "Limit.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
           },
           "used": {
-            "description": "The used.",
+            "description": "Used.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
           }
         }
       },
@@ -1279,7 +1366,8 @@
             "items": {
               "$ref": "#/components/schemas/E2M"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         },
         "required": [
@@ -1299,7 +1387,8 @@
             "items": {
               "$ref": "#/components/schemas/LabelsPermutationsCardinalityDay"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 366
           }
         }
       },
@@ -1316,14 +1405,17 @@
             "example": "log_obj.string_value",
             "description": "The source field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "targetLabel": {
             "example": "alias_label_name",
             "description": "The target label.",
             "type": "string",
             "pattern": "^[\\w/-]+$",
-            "minLength": 0
+            "minLength": 1,
+            "maxLength": 255
           }
         },
         "required": [
@@ -1440,7 +1532,9 @@
             "example": "alias_field_name_agg_func",
             "description": "Name of the target metric produced by this aggregation.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         },
         "oneOf": [
@@ -1502,7 +1596,9 @@
             "example": "new_query",
             "description": "The alias.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "applicationnameFilters": {
             "description": "The applicationname filters.",
@@ -1511,15 +1607,20 @@
               "example": "app_name",
               "description": "The applicationname filters.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "lucene": {
             "example": "log_obj.numeric_field: [50 TO 100]",
             "description": "The lucene.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 10000
           },
           "severityFilters": {
             "description": "The severity filters.",
@@ -1527,7 +1628,8 @@
             "items": {
               "$ref": "#/components/schemas/logs2metrics.v2.Severity"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 7
           },
           "subsystemnameFilters": {
             "description": "The subsystemname filters.",
@@ -1536,9 +1638,12 @@
               "example": "sub_name",
               "description": "The subsystemname filters.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -1557,20 +1662,24 @@
             "items": {
               "$ref": "#/components/schemas/v2.Aggregation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 7
           },
           "sourceField": {
             "example": "log_obj.numeric_field",
             "description": "The source field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "targetBaseMetricName": {
             "example": "alias_field_name",
             "description": "The target base metric name.",
             "type": "string",
             "pattern": "^[\\w/-]+$",
-            "minLength": 0
+            "minLength": 1,
+            "maxLength": 255
           }
         },
         "required": [
@@ -1595,9 +1704,12 @@
               "example": "myAction",
               "description": "The action filters.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "applicationnameFilters": {
             "description": "The applicationname filters.",
@@ -1606,15 +1718,20 @@
               "example": "myApp",
               "description": "The applicationname filters.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "lucene": {
             "example": "applicationName:myApp",
             "description": "The lucene.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 10000
           },
           "serviceFilters": {
             "description": "The service filters.",
@@ -1623,9 +1740,12 @@
               "example": "myService",
               "description": "The service filters.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "subsystemnameFilters": {
             "description": "The subsystemname filters.",
@@ -1634,9 +1754,12 @@
               "example": "mySubsystem",
               "description": "The subsystemname filters.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },

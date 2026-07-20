@@ -23,19 +23,19 @@ type WebhookType string
 
 // List of WebhookType
 const (
-	WEBHOOKTYPE_UNKNOWN                 WebhookType = "UNKNOWN"
-	WEBHOOKTYPE_GENERIC                 WebhookType = "GENERIC"
-	WEBHOOKTYPE_SLACK                   WebhookType = "SLACK"
-	WEBHOOKTYPE_PAGERDUTY               WebhookType = "PAGERDUTY"
-	WEBHOOKTYPE_SEND_LOG                WebhookType = "SEND_LOG"
-	WEBHOOKTYPE_EMAIL_GROUP             WebhookType = "EMAIL_GROUP"
-	WEBHOOKTYPE_MICROSOFT_TEAMS         WebhookType = "MICROSOFT_TEAMS"
-	WEBHOOKTYPE_JIRA                    WebhookType = "JIRA"
-	WEBHOOKTYPE_OPSGENIE                WebhookType = "OPSGENIE"
-	WEBHOOKTYPE_DEMISTO                 WebhookType = "DEMISTO"
-	WEBHOOKTYPE_AWS_EVENT_BRIDGE        WebhookType = "AWS_EVENT_BRIDGE"
+	WEBHOOKTYPE_UNKNOWN WebhookType = "UNKNOWN"
+	WEBHOOKTYPE_GENERIC WebhookType = "GENERIC"
+	WEBHOOKTYPE_SLACK WebhookType = "SLACK"
+	WEBHOOKTYPE_PAGERDUTY WebhookType = "PAGERDUTY"
+	WEBHOOKTYPE_SEND_LOG WebhookType = "SEND_LOG"
+	WEBHOOKTYPE_EMAIL_GROUP WebhookType = "EMAIL_GROUP"
+	WEBHOOKTYPE_MICROSOFT_TEAMS WebhookType = "MICROSOFT_TEAMS"
+	WEBHOOKTYPE_JIRA WebhookType = "JIRA"
+	WEBHOOKTYPE_OPSGENIE WebhookType = "OPSGENIE"
+	WEBHOOKTYPE_DEMISTO WebhookType = "DEMISTO"
+	WEBHOOKTYPE_AWS_EVENT_BRIDGE WebhookType = "AWS_EVENT_BRIDGE"
 	WEBHOOKTYPE_IBM_EVENT_NOTIFICATIONS WebhookType = "IBM_EVENT_NOTIFICATIONS"
-	WEBHOOKTYPE_MS_TEAMS_WORKFLOW       WebhookType = "MS_TEAMS_WORKFLOW"
+	WEBHOOKTYPE_MS_TEAMS_WORKFLOW WebhookType = "MS_TEAMS_WORKFLOW"
 )
 
 // All allowed values of WebhookType enum
@@ -133,3 +133,4 @@ func (v *NullableWebhookType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

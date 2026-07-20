@@ -23,8 +23,8 @@ var _ MappedNullable = &QuerySourceSpansQueryTypeFieldName{}
 // QuerySourceSpansQueryTypeFieldName Fetches distinct span field names matching the given regex pattern.
 type QuerySourceSpansQueryTypeFieldName struct {
 	// The span regex.
-	SpanRegex                         *string `json:"spanRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	SpanRegex *string `json:"spanRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *QuerySourceSpansQueryTypeFieldName) SetSpanRegex(v string) {
 }
 
 func (o QuerySourceSpansQueryTypeFieldName) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableQuerySourceSpansQueryTypeFieldName) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

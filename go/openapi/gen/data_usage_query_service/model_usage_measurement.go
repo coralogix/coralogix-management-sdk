@@ -23,11 +23,11 @@ var _ MappedNullable = &UsageMeasurement{}
 // UsageMeasurement Raw measurement of a single kind for the parent usage row.
 type UsageMeasurement struct {
 	CxQuotaUnits *UsageMeasurementCxQuotaUnits `json:"cxQuotaUnits,omitempty"`
-	Kind         *UsageMeasurementKind         `json:"kind,omitempty"`
-	MeasuredUnit *UsageMeasurementUnit         `json:"measuredUnit,omitempty"`
+	Kind *UsageMeasurementKind `json:"kind,omitempty"`
+	MeasuredUnit *UsageMeasurementUnit `json:"measuredUnit,omitempty"`
 	// Raw measured amount for this usage row, in the unit indicated by `measuredUnit`.
-	MeasuredValue                     *string `json:"measuredValue,omitempty" validate:"regexp=^[0-9]+$"`
-	AdditionalProperties              map[string]interface{}
+	MeasuredValue *string `json:"measuredValue,omitempty" validate:"regexp=^[0-9]+$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -179,7 +179,7 @@ func (o *UsageMeasurement) SetMeasuredValue(v string) {
 }
 
 func (o UsageMeasurement) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,3 +269,4 @@ func (v *NullableUsageMeasurement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

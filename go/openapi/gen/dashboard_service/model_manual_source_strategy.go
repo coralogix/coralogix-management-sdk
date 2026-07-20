@@ -22,9 +22,9 @@ var _ MappedNullable = &ManualSourceStrategy{}
 
 // ManualSourceStrategy Defines the time positioning strategy for manually placed annotations (instant point or range).
 type ManualSourceStrategy struct {
-	Instant                           *ManualSourceStrategyInstant `json:"instant,omitempty"`
-	Range                             *ManualSourceStrategyRange   `json:"range,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Instant *ManualSourceStrategyInstant `json:"instant,omitempty"`
+	Range *ManualSourceStrategyRange `json:"range,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *ManualSourceStrategy) SetRange(v ManualSourceStrategyRange) {
 }
 
 func (o ManualSourceStrategy) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableManualSourceStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

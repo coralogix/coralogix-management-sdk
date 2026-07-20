@@ -23,8 +23,8 @@ var _ MappedNullable = &ListRuleGroupsResponse{}
 // ListRuleGroupsResponse Response containing a list of parsing rule groups.
 type ListRuleGroupsResponse struct {
 	// The rule groups.
-	RuleGroups                        []RuleGroup `json:"ruleGroups,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	RuleGroups []RuleGroup `json:"ruleGroups,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListRuleGroupsResponse) SetRuleGroups(v []RuleGroup) {
 }
 
 func (o ListRuleGroupsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListRuleGroupsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

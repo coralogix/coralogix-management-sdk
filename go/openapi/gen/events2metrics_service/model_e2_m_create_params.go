@@ -24,21 +24,21 @@ var _ MappedNullable = &E2MCreateParams{}
 // E2MCreateParams This data structure is used to create a new event to metric definition
 type E2MCreateParams struct {
 	// Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.
-	DataSource *string `json:"dataSource,omitempty"`
+	DataSource *string `json:"dataSource,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Human-readable description for the new E2M.
-	Description *string      `json:"description,omitempty"`
-	LogsQuery   *V2LogsQuery `json:"logsQuery,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	LogsQuery *V2LogsQuery `json:"logsQuery,omitempty"`
 	// Metric fields to create and aggregate from the events.
 	MetricFields []V2MetricField `json:"metricFields,omitempty"`
 	// Metric labels to attach to the generated metrics.
 	MetricLabels []MetricLabel `json:"metricLabels,omitempty"`
 	// Human-readable name for the new E2M.
-	Name string `json:"name"`
+	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	// Maximum number of unique metric permutations allowed for this E2M.
-	PermutationsLimit                 *int32        `json:"permutationsLimit,omitempty"`
-	SpansQuery                        *V2SpansQuery `json:"spansQuery,omitempty"`
-	Type                              *E2MType      `json:"type,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	PermutationsLimit *int32 `json:"permutationsLimit,omitempty"`
+	SpansQuery *V2SpansQuery `json:"spansQuery,omitempty"`
+	Type *E2MType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -343,7 +343,7 @@ func (o *E2MCreateParams) SetType(v E2MType) {
 }
 
 func (o E2MCreateParams) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -415,10 +415,10 @@ func (o *E2MCreateParams) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -511,3 +511,4 @@ func (v *NullableE2MCreateParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

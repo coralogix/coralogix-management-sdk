@@ -24,9 +24,9 @@ var _ MappedNullable = &LimitUsage{}
 type LimitUsage struct {
 	// Limit.
 	Limit *int32 `json:"limit,omitempty"`
-	// The used.
-	Used                              *int32 `json:"used,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	// Used.
+	Used *int32 `json:"used,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *LimitUsage) SetUsed(v int32) {
 }
 
 func (o LimitUsage) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableLimitUsage) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

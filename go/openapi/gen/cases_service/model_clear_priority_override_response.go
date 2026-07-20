@@ -23,8 +23,8 @@ var _ MappedNullable = &ClearPriorityOverrideResponse{}
 
 // ClearPriorityOverrideResponse Response containing the case after clearing its priority override.
 type ClearPriorityOverrideResponse struct {
-	Case                              Case `json:"case"`
-	AdditionalProperties              map[string]interface{}
+	Case Case `json:"case"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -73,7 +73,7 @@ func (o *ClearPriorityOverrideResponse) SetCase(v Case) {
 }
 
 func (o ClearPriorityOverrideResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +104,10 @@ func (o *ClearPriorityOverrideResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -170,3 +170,4 @@ func (v *NullableClearPriorityOverrideResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

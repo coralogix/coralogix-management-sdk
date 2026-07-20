@@ -22,11 +22,11 @@ var _ MappedNullable = &UpdateCaseSettingsRequest{}
 
 // UpdateCaseSettingsRequest Request to update an existing case settings team configuration.
 type UpdateCaseSettingsRequest struct {
-	CaseLifecycle           *CaseLifecycle           `json:"caseLifecycle,omitempty"`
+	CaseLifecycle *CaseLifecycle `json:"caseLifecycle,omitempty"`
 	GlobalIndicatorSettings *GlobalIndicatorSettings `json:"globalIndicatorSettings,omitempty"`
 	// New display name for the case settings team configuration
-	Name                              *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *UpdateCaseSettingsRequest) SetName(v string) {
 }
 
 func (o UpdateCaseSettingsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableUpdateCaseSettingsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

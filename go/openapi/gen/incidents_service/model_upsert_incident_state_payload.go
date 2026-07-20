@@ -23,8 +23,8 @@ var _ MappedNullable = &UpsertIncidentStatePayload{}
 // UpsertIncidentStatePayload Upsert incident state payload.
 type UpsertIncidentStatePayload struct {
 	// The cx event key.
-	CxEventKey                        *string `json:"cxEventKey,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	CxEventKey *string `json:"cxEventKey,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *UpsertIncidentStatePayload) SetCxEventKey(v string) {
 }
 
 func (o UpsertIncidentStatePayload) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableUpsertIncidentStatePayload) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

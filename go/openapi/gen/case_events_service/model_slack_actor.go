@@ -29,8 +29,8 @@ type SlackActor struct {
 	// Slack user ID
 	SlackUserId *string `json:"slackUserId,omitempty"`
 	// Email of the Slack user
-	UserEmail                         *string `json:"userEmail,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UserEmail *string `json:"userEmail,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -182,7 +182,7 @@ func (o *SlackActor) SetUserEmail(v string) {
 }
 
 func (o SlackActor) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -272,3 +272,4 @@ func (v *NullableSlackActor) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

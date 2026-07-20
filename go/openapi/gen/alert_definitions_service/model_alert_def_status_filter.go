@@ -24,8 +24,8 @@ var _ MappedNullable = &AlertDefStatusFilter{}
 type AlertDefStatusFilter struct {
 	Matcher *AlertsV3FilterMatcher `json:"matcher,omitempty"`
 	// The status(es) of the alert definition - multiple values are OR'd together
-	Status                            []AlertDefStatus `json:"status,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Status []AlertDefStatus `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *AlertDefStatusFilter) SetStatus(v []AlertDefStatus) {
 }
 
 func (o AlertDefStatusFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableAlertDefStatusFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

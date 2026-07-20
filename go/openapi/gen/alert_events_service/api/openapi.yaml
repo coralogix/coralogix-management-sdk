@@ -27,9 +27,12 @@
               "items": {
                 "description": "The ids.",
                 "type": "string",
-                "minLength": 0
+                "pattern": "^[\\s\\S]*$",
+                "minLength": 1,
+                "maxLength": 36
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 1000
             },
             "style": "form"
           },
@@ -51,7 +54,8 @@
                   }
                 }
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 20
             },
             "style": "form"
           }
@@ -123,7 +127,9 @@
             "schema": {
               "description": "Unique identifier.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 36
             },
             "style": "simple"
           },
@@ -145,7 +151,8 @@
                   }
                 }
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 20
             },
             "style": "form"
           },
@@ -160,12 +167,15 @@
                   "description": "Page size.",
                   "type": "integer",
                   "format": "int64",
-                  "minimum": 0
+                  "minimum": 0,
+                  "maximum": 1000
                 },
                 "pageToken": {
                   "description": "The page token.",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 1,
+                  "maxLength": 4096
                 }
               }
             },
@@ -257,7 +267,8 @@
             "description": "Number of muted items.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "rules": {
             "description": "List of rules.",
@@ -265,9 +276,12 @@
             "items": {
               "description": "List of rules.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 1024
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -293,7 +307,9 @@
           "alertId": {
             "description": "Unique identifier of the alert.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 36
           },
           "groupLabels": {
             "description": "Labels for the group.",
@@ -306,7 +322,9 @@
           "incidentCorrelationKey": {
             "description": "Key used to correlate incidents.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "payload": {
             "description": "Raw payload data.",
@@ -315,12 +333,16 @@
           "payloadType": {
             "description": "Type of the payload.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "permutationId": {
             "description": "Unique identifier of the permutation.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "permutationLabels": {
             "description": "Labels for the permutation.",
@@ -333,7 +355,9 @@
           "preGroupingEventId": {
             "description": "Identifier of the event before grouping.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "status": {
             "$ref": "#/components/schemas/AlertStatus"
@@ -342,7 +366,9 @@
             "description": "Timestamp of the event.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 64
           }
         }
       },
@@ -359,7 +385,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertEvent"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -406,13 +433,15 @@
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "resolvedCount": {
             "description": "The resolved count.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "resolvedPermutationsSamples": {
             "description": "The resolved permutations samples.",
@@ -420,13 +449,15 @@
             "items": {
               "$ref": "#/components/schemas/v3.Permutation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "triggeredCount": {
             "description": "The triggered count.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "triggeredPermutationsSamples": {
             "description": "The triggered permutations samples.",
@@ -434,7 +465,8 @@
             "items": {
               "$ref": "#/components/schemas/v3.Permutation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -510,7 +542,9 @@
           "id": {
             "description": "Unique identifier of the alert event.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 36
           },
           "multiplePermutation": {
             "$ref": "#/components/schemas/AlertEventMultiplePermutation"
@@ -616,13 +650,16 @@
           "nextPageToken": {
             "description": "Token for fetching the next page of results.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "totalSize": {
             "description": "Total number of results.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           }
         }
       },

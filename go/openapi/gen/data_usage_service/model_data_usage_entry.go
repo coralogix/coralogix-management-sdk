@@ -30,8 +30,8 @@ type DataUsageEntry struct {
 	// Timestamp.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	// The units.
-	Units                             *float32 `json:"units,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Units *float32 `json:"units,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -183,7 +183,7 @@ func (o *DataUsageEntry) SetUnits(v float32) {
 }
 
 func (o DataUsageEntry) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -273,3 +273,4 @@ func (v *NullableDataUsageEntry) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

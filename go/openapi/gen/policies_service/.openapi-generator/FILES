@@ -10,6 +10,8 @@ git_push.sh
 model_archive_retention.go
 model_atomic_overwrite_log_policies_request.go
 model_atomic_overwrite_log_policies_response.go
+model_atomic_overwrite_rum_policies_request.go
+model_atomic_overwrite_rum_policies_response.go
 model_atomic_overwrite_span_policies_request.go
 model_atomic_overwrite_span_policies_response.go
 model_bulk_test_log_policies_request.go
@@ -18,6 +20,7 @@ model_create_generic_policy_request.go
 model_create_log_policy_request.go
 model_create_policy_request.go
 model_create_policy_response.go
+model_create_rum_policy_request.go
 model_create_span_policy_request.go
 model_delete_policy_response.go
 model_error.go

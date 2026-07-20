@@ -74,12 +74,15 @@
                   "description": "Page size.",
                   "type": "integer",
                   "format": "int64",
-                  "minimum": 0
+                  "minimum": 0,
+                  "maximum": 1000
                 },
                 "pageToken": {
                   "description": "The page token.",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 1,
+                  "maxLength": 4096
                 }
               }
             },
@@ -116,7 +119,8 @@
                       }
                     }
                   },
-                  "minItems": 1
+                  "minItems": 1,
+                  "maxItems": 20
                 }
               }
             },
@@ -194,7 +198,9 @@
                     "example": "123e4567-e89b-12d3-a456-426614174000",
                     "description": "Alert definition ID",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "minLength": 0,
+                    "maxLength": 36
                   }
                 }
               }
@@ -442,9 +448,12 @@
                     "items": {
                       "description": "List of alert definition IDs to delete.",
                       "type": "string",
-                      "minLength": 0
+                      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                      "minLength": 1,
+                      "maxLength": 36
                     },
-                    "minItems": 0
+                    "minItems": 1,
+                    "maxItems": 100
                   }
                 }
               }
@@ -581,7 +590,8 @@
                     "items": {
                       "$ref": "#/components/schemas/AlertDefToReplace"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 1000
                   }
                 }
               }
@@ -656,7 +666,9 @@
               "example": "123e4567-e89b-12d3-a456-426614174000",
               "description": "Alert version ID",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 36
             },
             "style": "simple"
           }
@@ -729,7 +741,9 @@
               "example": "123e4567-e89b-12d3-a456-426614174000",
               "description": "Alert definition ID",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 0,
+              "maxLength": 36
             },
             "style": "simple"
           }
@@ -800,7 +814,9 @@
               "example": "123e4567-e89b-12d3-a456-426614174000",
               "description": "The unique identifier of the alert definition to delete.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 0,
+              "maxLength": 36
             },
             "style": "simple"
           }
@@ -873,7 +889,8 @@
             "items": {
               "$ref": "#/components/schemas/DayOfWeek"
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 7
           },
           "endTime": {
             "$ref": "#/components/schemas/TimeOfDay"
@@ -898,27 +915,35 @@
           "alertVersionId": {
             "description": "The old alert ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 36
           },
           "createdTime": {
             "example": "2023-10-01T12:00:00.000Z",
             "description": "The time when the alert definition was created",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 64
           },
           "id": {
             "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The alert definition's persistent ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 1,
+            "maxLength": 36
           },
           "lastTriggeredTime": {
             "example": "2023-10-01T12:00:00.000Z",
             "description": "The last time the alert definition was triggered",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 64
           },
           "status": {
             "$ref": "#/components/schemas/AlertDefStatus"
@@ -928,7 +953,9 @@
             "description": "The time when the alert definition was last updated",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 64
           }
         }
       },
@@ -938,12 +965,16 @@
           "dataSet": {
             "description": "File name of the dataset",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 300
           },
           "dataSpace": {
             "description": "Folder name of the datasource",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 50
           }
         }
       },
@@ -999,9 +1030,12 @@
             "items": {
               "description": "The alert definition ID(s) to filter by - multiple values are OR'd together",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 1,
+              "maxLength": 100
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "matchType": {
             "$ref": "#/components/schemas/AlertDefIdFilterMatchType"
@@ -1029,7 +1063,8 @@
             "description": "The time in minutes before the alert can be retriggered",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 1,
+            "maximum": 10080
           },
           "notifyOn": {
             "$ref": "#/components/schemas/NotifyOn"
@@ -1079,9 +1114,12 @@
             "items": {
               "description": "The name(s) of the alert definition - multiple values are OR'd together",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 1024
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -1099,7 +1137,8 @@
             "items": {
               "$ref": "#/components/schemas/NotificationDestination"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "groupByKeys": {
             "example": [
@@ -1111,9 +1150,12 @@
             "items": {
               "description": "The keys to group the alerts by",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 1024
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "router": {
             "$ref": "#/components/schemas/NotificationRouter"
@@ -1124,7 +1166,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDefWebhooksSettings"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -1188,7 +1231,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDefPriority"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -1215,7 +1259,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1
           },
           "deleted": {
             "example": false,
@@ -1226,7 +1271,9 @@
             "example": "Alert description",
             "description": "A detailed description of what the alert monitors and when it triggers",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 3000
           },
           "enabled": {
             "example": true,
@@ -1254,9 +1301,12 @@
             "items": {
               "description": "Keys used to group and aggregate alert data",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 1024
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "incidentsSettings": {
             "$ref": "#/components/schemas/AlertDefIncidentSettings"
@@ -1292,7 +1342,9 @@
             "example": "My Alert",
             "description": "The name of the alert definition",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 512
           },
           "notificationGroup": {
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1303,7 +1355,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "phantomMode": {
             "example": false,
@@ -1536,9 +1589,12 @@
             "items": {
               "description": "The SLO ID(s) to filter by - multiple values are OR'd together",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 1,
+              "maxLength": 36
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -1569,7 +1625,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDefStatus"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -1588,7 +1645,9 @@
             "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The alert definition ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 1,
+            "maxLength": 36
           }
         }
       },
@@ -1630,7 +1689,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDefType"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -1663,7 +1723,8 @@
             "description": "The time in minutes before the alert can be retriggered",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 1,
+            "maximum": 10080
           },
           "notifyOn": {
             "$ref": "#/components/schemas/NotifyOn"
@@ -1694,8 +1755,8 @@
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
             "format": "int32",
-            "minimum": -60000,
-            "maximum": 2147483647
+            "minimum": 0,
+            "maximum": 10800000
           },
           "noDataPolicy": {
             "$ref": "#/components/schemas/NoDataPolicy"
@@ -1774,8 +1835,8 @@
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
             "format": "int32",
-            "minimum": -60000,
-            "maximum": 2147483647
+            "minimum": 0,
+            "maximum": 10800000
           },
           "noDataPolicy": {
             "$ref": "#/components/schemas/NoDataPolicy"
@@ -1798,7 +1859,7 @@
             "type": "string",
             "pattern": "^[\\s\\S]*$",
             "minLength": 0,
-            "maxLength": 256
+            "maxLength": 255
           },
           "timeframeMinutes": {
             "example": 60,
@@ -1826,7 +1887,8 @@
           "percentageOfDeviation": {
             "description": "The percentage of deviation from the baseline for triggering the alert.",
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "minimum": 0
           }
         }
       },
@@ -1847,9 +1909,12 @@
             "items": {
               "description": "IDs of alert definitions that were successfully deleted",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 1,
+              "maxLength": 36
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "notFoundIds": {
             "example": [
@@ -1860,9 +1925,12 @@
             "items": {
               "description": "IDs of alert definitions that were not found",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 1,
+              "maxLength": 36
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -1880,7 +1948,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDef"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "failedToReplaceAlertDefs": {
             "description": "List of alert definitions that failed to be replaced",
@@ -1888,7 +1957,8 @@
             "items": {
               "$ref": "#/components/schemas/FailedToReplaceAlertDef"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "notFoundIds": {
             "example": [
@@ -1899,9 +1969,12 @@
             "items": {
               "description": "List of alert definition IDs that were not found",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 1,
+              "maxLength": 36
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "skippedIds": {
             "example": [
@@ -1912,9 +1985,12 @@
             "items": {
               "description": "List of alert definition IDs that were skipped (no changes detected)",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 1,
+              "maxLength": 36
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -2028,8 +2104,8 @@
             "description": "The DataPrime query string",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 10000
+            "minLength": 1,
+            "maxLength": 65535
           }
         }
       },
@@ -2092,7 +2168,8 @@
             "description": "The count for this enabled status",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "enabled": {
             "example": true,
@@ -2114,19 +2191,24 @@
             "description": "The count for this entity label value",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "labelKey": {
             "example": "environment",
             "description": "The entity label key",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1024
           },
           "labelValue": {
             "example": "production",
             "description": "The entity label value",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1024
           }
         }
       },
@@ -2181,7 +2263,9 @@
             "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The alert definition ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 1,
+            "maxLength": 36
           }
         }
       },
@@ -2199,7 +2283,8 @@
             "items": {
               "$ref": "#/components/schemas/EnabledCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "entityLabelCounts": {
             "description": "Counts for different entity label values",
@@ -2207,7 +2292,8 @@
             "items": {
               "$ref": "#/components/schemas/EntityLabelCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "priorityCounts": {
             "description": "Counts for different alert priorities",
@@ -2215,7 +2301,8 @@
             "items": {
               "$ref": "#/components/schemas/PriorityCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "statusCounts": {
             "description": "Counts for different alert statuses",
@@ -2223,7 +2310,8 @@
             "items": {
               "$ref": "#/components/schemas/StatusCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "typeCounts": {
             "description": "Counts for different alert types",
@@ -2231,7 +2319,8 @@
             "items": {
               "$ref": "#/components/schemas/TypeCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -2292,9 +2381,12 @@
             "items": {
               "description": "The name(s) of the alert definition - multiple values are OR'd together",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 1024
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -2317,7 +2409,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDefPriority"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -2356,7 +2449,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDefStatus"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -2380,7 +2474,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDefType"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -2490,7 +2585,8 @@
             "items": {
               "$ref": "#/components/schemas/FlowStagesGroupsAlertDefs"
             },
-            "minItems": 1
+            "minItems": 1,
+            "maxItems": 30
           },
           "alertsOp": {
             "$ref": "#/components/schemas/AlertsOp"
@@ -2514,7 +2610,8 @@
             "items": {
               "$ref": "#/components/schemas/FlowStagesGroup"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 30
           }
         }
       },
@@ -2530,7 +2627,9 @@
             "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The alert definition ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 36
           },
           "not": {
             "example": true,
@@ -2558,7 +2657,8 @@
             "items": {
               "$ref": "#/components/schemas/FlowStages"
             },
-            "minItems": 1
+            "minItems": 1,
+            "maxItems": 30
           }
         }
       },
@@ -2655,7 +2755,8 @@
             "items": {
               "$ref": "#/components/schemas/AlertDef"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "pagination": {
             "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
@@ -2741,7 +2842,9 @@
             "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 10800000
           },
           "logsFilter": {
             "$ref": "#/components/schemas/v3.LogsFilter"
@@ -2906,7 +3009,8 @@
             "example": 10,
             "description": "The threshold value for the alert condition",
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "minimum": 0
           },
           "timeWindow": {
             "$ref": "#/components/schemas/LogsRatioTimeWindow"
@@ -2962,13 +3066,16 @@
             "example": "denominator_alias",
             "description": "The alias for the denominator filter, used for display purposes",
             "type": "string",
-            "minLength": 0
+            "minLength": 0,
+            "maxLength": 200
           },
           "evaluationDelayMs": {
             "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 10800000
           },
           "groupByFor": {
             "$ref": "#/components/schemas/LogsRatioGroupByFor"
@@ -2998,7 +3105,8 @@
             "example": "numerator_alias",
             "description": "The alias for the numerator filter, used for display purposes",
             "type": "string",
-            "minLength": 0
+            "minLength": 0,
+            "maxLength": 200
           },
           "rules": {
             "description": "The rules for the ratio alert",
@@ -3078,7 +3186,8 @@
             "example": 100,
             "description": "The threshold value for the alert condition",
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "minimum": 0
           },
           "timeWindow": {
             "$ref": "#/components/schemas/LogsTimeWindow"
@@ -3122,7 +3231,9 @@
             "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 10800000
           },
           "logsFilter": {
             "$ref": "#/components/schemas/v3.LogsFilter"
@@ -3186,7 +3297,8 @@
           "threshold": {
             "description": "The threshold value for the alert condition.",
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "minimum": 0
           }
         }
       },
@@ -3227,7 +3339,9 @@
             "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 10800000
           },
           "ignoreInfinity": {
             "example": true,
@@ -3375,7 +3489,7 @@
             "example": "obj.field",
             "description": "The keypath in the logs to be used for unique count",
             "type": "string",
-            "minLength": 0
+            "minLength": 1
           }
         }
       },
@@ -3427,14 +3541,16 @@
             "description": "The percentage of the metric that must exceed the threshold to trigger the alert",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 100
           },
           "minNonNullValuesPct": {
             "example": 10,
             "description": "The percentage of non-null values required to trigger the alert",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 100
           },
           "ofTheLast": {
             "$ref": "#/components/schemas/MetricTimeWindow"
@@ -3484,7 +3600,9 @@
             "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 10800000
           },
           "metricFilter": {
             "$ref": "#/components/schemas/MetricFilter"
@@ -3512,7 +3630,8 @@
             "example": "avg_over_time(metric_name[5m]) > 10",
             "description": "A PromQL filter for metrics",
             "type": "string",
-            "minLength": 0
+            "minLength": 1,
+            "maxLength": 65535
           }
         }
       },
@@ -3529,7 +3648,8 @@
             "description": "If set, specifies the minimum percentage of non-null values required for the alert to be triggered",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 100
           },
           "replaceWithZero": {
             "example": true,
@@ -3587,7 +3707,8 @@
             "description": "The percentage of values that must exceed the threshold to trigger the alert",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 100
           },
           "ofTheLast": {
             "$ref": "#/components/schemas/MetricTimeWindow"
@@ -3639,7 +3760,9 @@
             "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 10800000
           },
           "metricFilter": {
             "$ref": "#/components/schemas/MetricFilter"
@@ -3770,7 +3893,8 @@
             "example": 3600,
             "description": "The timeframe in seconds for auto retiring values that were detected as no-data. accepts only multiples of 60 seconds",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 60
           },
           "state": {
             "$ref": "#/components/schemas/NoDataPolicyState"
@@ -3880,7 +4004,8 @@
             "description": "The count for this alert priority",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "priority": {
             "$ref": "#/components/schemas/AlertDefPriority"
@@ -3904,9 +4029,12 @@
             "items": {
               "description": "The list of email recipients for alert notifications",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 4096
             },
-            "minItems": 1
+            "minItems": 1,
+            "maxItems": 100
           }
         }
       },
@@ -3934,7 +4062,8 @@
           "threshold": {
             "description": "Threshold value.",
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "minimum": 0
           }
         }
       },
@@ -4019,7 +4148,8 @@
             "description": "The count for this alert status",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "status": {
             "$ref": "#/components/schemas/AlertDefStatus"
@@ -4035,7 +4165,7 @@
         "type": "object",
         "properties": {
           "duration": {
-            "example": "60",
+            "example": "24",
             "description": "The duration value",
             "type": "string",
             "pattern": "^[0-9]+$",
@@ -4059,13 +4189,17 @@
             "example": 14,
             "description": "The hours.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 23
           },
           "minutes": {
             "example": 30,
             "description": "The minutes.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 59
           }
         }
       },
@@ -4260,7 +4394,8 @@
             "example": 100,
             "description": "The threshold value for the alert condition",
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "minimum": 0
           },
           "timeWindow": {
             "$ref": "#/components/schemas/TracingTimeWindow"
@@ -4367,7 +4502,8 @@
             "description": "The count for this alert type",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "type": {
             "$ref": "#/components/schemas/AlertDefType"
@@ -4393,13 +4529,16 @@
           "nextPageToken": {
             "description": "Token for fetching the next page of results.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "totalSize": {
             "description": "Total number of results.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           }
         }
       },
@@ -4553,7 +4692,8 @@
             "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The SLO ID",
             "type": "string",
-            "minLength": 0
+            "minLength": 1,
+            "maxLength": 36
           }
         }
       },
@@ -4601,13 +4741,17 @@
             "description": "End time of the range",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 64
           },
           "startTime": {
             "description": "Start time of the range",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 64
           }
         }
       },

@@ -24,11 +24,11 @@ var _ MappedNullable = &SpanRules{}
 type SpanRules struct {
 	ActionRule *QuotaV1Rule `json:"actionRule,omitempty"`
 	// The dpxl expression.
-	DpxlExpression *string      `json:"dpxlExpression,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	ServiceRule    *QuotaV1Rule `json:"serviceRule,omitempty"`
+	DpxlExpression *string `json:"dpxlExpression,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	ServiceRule *QuotaV1Rule `json:"serviceRule,omitempty"`
 	// The tag rules.
-	TagRules                          []TagRule `json:"tagRules,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TagRules []TagRule `json:"tagRules,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -180,7 +180,7 @@ func (o *SpanRules) SetTagRules(v []TagRule) {
 }
 
 func (o SpanRules) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,3 +270,4 @@ func (v *NullableSpanRules) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

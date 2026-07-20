@@ -22,8 +22,8 @@ var _ MappedNullable = &TestExistingPresetResponse{}
 
 // TestExistingPresetResponse Response containing the results of testing an existing preset.
 type TestExistingPresetResponse struct {
-	Result                            *TestResult `json:"result,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Result *TestResult `json:"result,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *TestExistingPresetResponse) SetResult(v TestResult) {
 }
 
 func (o TestExistingPresetResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableTestExistingPresetResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

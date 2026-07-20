@@ -26,11 +26,11 @@ type DataprimeSource struct {
 	// The label fields.
 	LabelFields []ObservationField `json:"labelFields,omitempty"`
 	// The message template.
-	MessageTemplate                   *string                  `json:"messageTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Orientation                       *AnnotationOrientation   `json:"orientation,omitempty"`
-	Query                             *CommonDataprimeQuery    `json:"query,omitempty"`
-	Strategy                          *DataprimeSourceStrategy `json:"strategy,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MessageTemplate *string `json:"messageTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Orientation *AnnotationOrientation `json:"orientation,omitempty"`
+	Query *CommonDataprimeQuery `json:"query,omitempty"`
+	Strategy *DataprimeSourceStrategy `json:"strategy,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -246,7 +246,7 @@ func (o *DataprimeSource) SetStrategy(v DataprimeSourceStrategy) {
 }
 
 func (o DataprimeSource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -344,3 +344,4 @@ func (v *NullableDataprimeSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

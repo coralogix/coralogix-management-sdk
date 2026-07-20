@@ -22,8 +22,8 @@ var _ MappedNullable = &UpdateExtensionResponse{}
 
 // UpdateExtensionResponse Response returned after successfully updating a deployed extension.
 type UpdateExtensionResponse struct {
-	ExtensionDeployment               *ExtensionDeployment `json:"extensionDeployment,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ExtensionDeployment *ExtensionDeployment `json:"extensionDeployment,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *UpdateExtensionResponse) SetExtensionDeployment(v ExtensionDeployment) 
 }
 
 func (o UpdateExtensionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableUpdateExtensionResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

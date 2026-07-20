@@ -23,8 +23,8 @@ var _ MappedNullable = &ArchiveRetention{}
 // ArchiveRetention Archive retention.
 type ArchiveRetention struct {
 	// Unique identifier.
-	Id                                *string `json:"id,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ArchiveRetention) SetId(v string) {
 }
 
 func (o ArchiveRetention) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableArchiveRetention) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

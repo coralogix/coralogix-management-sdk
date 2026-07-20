@@ -22,10 +22,10 @@ var _ MappedNullable = &RuleMatcher{}
 
 // RuleMatcher struct for RuleMatcher
 type RuleMatcher struct {
-	ApplicationName                   *ApplicationNameConstraint `json:"applicationName,omitempty"`
-	Severity                          *SeverityConstraint        `json:"severity,omitempty"`
-	SubsystemName                     *SubsystemNameConstraint   `json:"subsystemName,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ApplicationName *ApplicationNameConstraint `json:"applicationName,omitempty"`
+	Severity *SeverityConstraint `json:"severity,omitempty"`
+	SubsystemName *SubsystemNameConstraint `json:"subsystemName,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *RuleMatcher) SetSubsystemName(v SubsystemNameConstraint) {
 }
 
 func (o RuleMatcher) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,3 +268,4 @@ func (v *NullableRuleMatcher) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

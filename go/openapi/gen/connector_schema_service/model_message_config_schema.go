@@ -25,8 +25,8 @@ type MessageConfigSchema struct {
 	// List of fields.
 	Fields []MessageConfigSchemaField `json:"fields,omitempty"`
 	// Type of the payload.
-	PayloadType                       *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	PayloadType *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *MessageConfigSchema) SetPayloadType(v string) {
 }
 
 func (o MessageConfigSchema) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableMessageConfigSchema) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

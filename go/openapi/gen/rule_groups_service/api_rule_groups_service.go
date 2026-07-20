@@ -16,17 +16,18 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
+
 
 // RuleGroupsServiceAPIService RuleGroupsServiceAPI service
 type RuleGroupsServiceAPIService service
 
 type ApiRuleGroupsServiceBulkDeleteRuleGroupRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *RuleGroupsServiceAPIService
-	groupIds   *[]string
+	groupIds *[]string
 }
 
 // The unique identifiers of the parsing rule groups to delete.
@@ -44,25 +45,24 @@ RuleGroupsServiceBulkDeleteRuleGroup Bulk Delete Rule Group
 
 Deletes all parsing rule groups.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiRuleGroupsServiceBulkDeleteRuleGroupRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRuleGroupsServiceBulkDeleteRuleGroupRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceBulkDeleteRuleGroup(ctx context.Context) ApiRuleGroupsServiceBulkDeleteRuleGroupRequest {
 	return ApiRuleGroupsServiceBulkDeleteRuleGroupRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceBulkDeleteRuleGroupExecute(r ApiRuleGroupsServiceBulkDeleteRuleGroupRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuleGroupsServiceAPIService.RuleGroupsServiceBulkDeleteRuleGroup")
@@ -137,8 +137,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceBulkDeleteRuleGroupExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -148,8 +148,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceBulkDeleteRuleGroupExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -159,8 +159,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceBulkDeleteRuleGroupExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -178,8 +178,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceBulkDeleteRuleGroupExecut
 }
 
 type ApiRuleGroupsServiceCreateRuleGroupRequest struct {
-	ctx                                     context.Context
-	ApiService                              *RuleGroupsServiceAPIService
+	ctx context.Context
+	ApiService *RuleGroupsServiceAPIService
 	ruleGroupsServiceCreateRuleGroupRequest *RuleGroupsServiceCreateRuleGroupRequest
 }
 
@@ -197,25 +197,24 @@ RuleGroupsServiceCreateRuleGroup Create Rule Group
 
 Creates a new parsing rule group.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiRuleGroupsServiceCreateRuleGroupRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRuleGroupsServiceCreateRuleGroupRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceCreateRuleGroup(ctx context.Context) ApiRuleGroupsServiceCreateRuleGroupRequest {
 	return ApiRuleGroupsServiceCreateRuleGroupRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateRuleGroupResponse
+//  @return CreateRuleGroupResponse
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceCreateRuleGroupExecute(r ApiRuleGroupsServiceCreateRuleGroupRequest) (*CreateRuleGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateRuleGroupResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateRuleGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuleGroupsServiceAPIService.RuleGroupsServiceCreateRuleGroup")
@@ -277,8 +276,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceCreateRuleGroupExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -288,8 +287,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceCreateRuleGroupExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -299,8 +298,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceCreateRuleGroupExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -318,9 +317,9 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceCreateRuleGroupExecute(r 
 }
 
 type ApiRuleGroupsServiceDeleteRuleGroupRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *RuleGroupsServiceAPIService
-	groupId    string
+	groupId string
 }
 
 func (r ApiRuleGroupsServiceDeleteRuleGroupRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -332,27 +331,26 @@ RuleGroupsServiceDeleteRuleGroup Delete Rule Group
 
 Deletes the parsing rule group with the specified ID.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param groupId The unique identifier of the parsing rule group to delete.
-	@return ApiRuleGroupsServiceDeleteRuleGroupRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The unique identifier of the parsing rule group to delete.
+ @return ApiRuleGroupsServiceDeleteRuleGroupRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceDeleteRuleGroup(ctx context.Context, groupId string) ApiRuleGroupsServiceDeleteRuleGroupRequest {
 	return ApiRuleGroupsServiceDeleteRuleGroupRequest{
 		ApiService: a,
-		ctx:        ctx,
-		groupId:    groupId,
+		ctx: ctx,
+		groupId: groupId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceDeleteRuleGroupExecute(r ApiRuleGroupsServiceDeleteRuleGroupRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuleGroupsServiceAPIService.RuleGroupsServiceDeleteRuleGroup")
@@ -416,8 +414,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceDeleteRuleGroupExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -427,8 +425,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceDeleteRuleGroupExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -438,8 +436,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceDeleteRuleGroupExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -457,7 +455,7 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceDeleteRuleGroupExecute(r 
 }
 
 type ApiRuleGroupsServiceGetCompanyUsageLimitsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *RuleGroupsServiceAPIService
 }
 
@@ -470,25 +468,24 @@ RuleGroupsServiceGetCompanyUsageLimits Get Company Usage Limits
 
 Returns parsing rule usage limits.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiRuleGroupsServiceGetCompanyUsageLimitsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRuleGroupsServiceGetCompanyUsageLimitsRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetCompanyUsageLimits(ctx context.Context) ApiRuleGroupsServiceGetCompanyUsageLimitsRequest {
 	return ApiRuleGroupsServiceGetCompanyUsageLimitsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCompanyUsageLimitsResponse
+//  @return GetCompanyUsageLimitsResponse
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetCompanyUsageLimitsExecute(r ApiRuleGroupsServiceGetCompanyUsageLimitsRequest) (*GetCompanyUsageLimitsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetCompanyUsageLimitsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetCompanyUsageLimitsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuleGroupsServiceAPIService.RuleGroupsServiceGetCompanyUsageLimits")
@@ -548,8 +545,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetCompanyUsageLimitsExec
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -559,8 +556,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetCompanyUsageLimitsExec
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -570,8 +567,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetCompanyUsageLimitsExec
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -589,9 +586,9 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetCompanyUsageLimitsExec
 }
 
 type ApiRuleGroupsServiceGetRuleGroupRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *RuleGroupsServiceAPIService
-	groupId    string
+	groupId string
 }
 
 func (r ApiRuleGroupsServiceGetRuleGroupRequest) Execute() (*GetRuleGroupResponse, *http.Response, error) {
@@ -603,27 +600,26 @@ RuleGroupsServiceGetRuleGroup Get Rule Group
 
 Returns the details of the specified parsing rule group.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param groupId The unique identifier of the parsing rule group to retrieve.
-	@return ApiRuleGroupsServiceGetRuleGroupRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The unique identifier of the parsing rule group to retrieve.
+ @return ApiRuleGroupsServiceGetRuleGroupRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroup(ctx context.Context, groupId string) ApiRuleGroupsServiceGetRuleGroupRequest {
 	return ApiRuleGroupsServiceGetRuleGroupRequest{
 		ApiService: a,
-		ctx:        ctx,
-		groupId:    groupId,
+		ctx: ctx,
+		groupId: groupId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRuleGroupResponse
+//  @return GetRuleGroupResponse
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupExecute(r ApiRuleGroupsServiceGetRuleGroupRequest) (*GetRuleGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetRuleGroupResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetRuleGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuleGroupsServiceAPIService.RuleGroupsServiceGetRuleGroup")
@@ -687,8 +683,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -698,8 +694,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -709,8 +705,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -728,8 +724,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupExecute(r Api
 }
 
 type ApiRuleGroupsServiceGetRuleGroupModelMappingRequest struct {
-	ctx                                              context.Context
-	ApiService                                       *RuleGroupsServiceAPIService
+	ctx context.Context
+	ApiService *RuleGroupsServiceAPIService
 	ruleGroupsServiceGetRuleGroupModelMappingRequest *RuleGroupsServiceGetRuleGroupModelMappingRequest
 }
 
@@ -747,25 +743,24 @@ RuleGroupsServiceGetRuleGroupModelMapping Get Rule Group Model Mapping
 
 Returns the model mapping for a parsing rule group.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiRuleGroupsServiceGetRuleGroupModelMappingRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRuleGroupsServiceGetRuleGroupModelMappingRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupModelMapping(ctx context.Context) ApiRuleGroupsServiceGetRuleGroupModelMappingRequest {
 	return ApiRuleGroupsServiceGetRuleGroupModelMappingRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRuleGroupModelMappingResponse
+//  @return GetRuleGroupModelMappingResponse
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupModelMappingExecute(r ApiRuleGroupsServiceGetRuleGroupModelMappingRequest) (*GetRuleGroupModelMappingResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetRuleGroupModelMappingResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetRuleGroupModelMappingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuleGroupsServiceAPIService.RuleGroupsServiceGetRuleGroupModelMapping")
@@ -827,8 +822,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupModelMappingE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -838,8 +833,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupModelMappingE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -849,8 +844,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupModelMappingE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -868,7 +863,7 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupModelMappingE
 }
 
 type ApiRuleGroupsServiceListRuleGroupsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *RuleGroupsServiceAPIService
 }
 
@@ -881,25 +876,24 @@ RuleGroupsServiceListRuleGroups List Rule Groups
 
 Returns all parsing rule groups for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiRuleGroupsServiceListRuleGroupsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRuleGroupsServiceListRuleGroupsRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceListRuleGroups(ctx context.Context) ApiRuleGroupsServiceListRuleGroupsRequest {
 	return ApiRuleGroupsServiceListRuleGroupsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListRuleGroupsResponse
+//  @return ListRuleGroupsResponse
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceListRuleGroupsExecute(r ApiRuleGroupsServiceListRuleGroupsRequest) (*ListRuleGroupsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListRuleGroupsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListRuleGroupsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuleGroupsServiceAPIService.RuleGroupsServiceListRuleGroups")
@@ -959,8 +953,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceListRuleGroupsExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -970,8 +964,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceListRuleGroupsExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -981,8 +975,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceListRuleGroupsExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1000,9 +994,9 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceListRuleGroupsExecute(r A
 }
 
 type ApiRuleGroupsServiceUpdateRuleGroupRequest struct {
-	ctx                                     context.Context
-	ApiService                              *RuleGroupsServiceAPIService
-	groupId                                 string
+	ctx context.Context
+	ApiService *RuleGroupsServiceAPIService
+	groupId string
 	ruleGroupsServiceCreateRuleGroupRequest *RuleGroupsServiceCreateRuleGroupRequest
 }
 
@@ -1020,27 +1014,26 @@ RuleGroupsServiceUpdateRuleGroup Update Rule Group
 
 Updates the specified parsing rule group.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param groupId The unique identifier of the parsing rule group to update.
-	@return ApiRuleGroupsServiceUpdateRuleGroupRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param groupId The unique identifier of the parsing rule group to update.
+ @return ApiRuleGroupsServiceUpdateRuleGroupRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceUpdateRuleGroup(ctx context.Context, groupId string) ApiRuleGroupsServiceUpdateRuleGroupRequest {
 	return ApiRuleGroupsServiceUpdateRuleGroupRequest{
 		ApiService: a,
-		ctx:        ctx,
-		groupId:    groupId,
+		ctx: ctx,
+		groupId: groupId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateRuleGroupResponse
+//  @return UpdateRuleGroupResponse
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceUpdateRuleGroupExecute(r ApiRuleGroupsServiceUpdateRuleGroupRequest) (*UpdateRuleGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateRuleGroupResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateRuleGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuleGroupsServiceAPIService.RuleGroupsServiceUpdateRuleGroup")
@@ -1106,8 +1099,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceUpdateRuleGroupExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1117,8 +1110,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceUpdateRuleGroupExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1128,8 +1121,8 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceUpdateRuleGroupExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

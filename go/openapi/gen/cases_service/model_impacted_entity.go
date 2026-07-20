@@ -22,9 +22,9 @@ var _ MappedNullable = &ImpactedEntity{}
 
 // ImpactedEntity Entity affected by a case (e.g., an APM service or database).
 type ImpactedEntity struct {
-	ApmDatabase                       *ApmDatabaseEntity `json:"apmDatabase,omitempty"`
-	ApmService                        *ApmServiceEntity  `json:"apmService,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ApmDatabase *ApmDatabaseEntity `json:"apmDatabase,omitempty"`
+	ApmService *ApmServiceEntity `json:"apmService,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *ImpactedEntity) SetApmService(v ApmServiceEntity) {
 }
 
 func (o ImpactedEntity) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableImpactedEntity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

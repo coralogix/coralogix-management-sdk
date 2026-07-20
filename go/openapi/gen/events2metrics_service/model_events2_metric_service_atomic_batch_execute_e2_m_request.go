@@ -23,8 +23,8 @@ var _ MappedNullable = &Events2MetricServiceAtomicBatchExecuteE2MRequest{}
 // Events2MetricServiceAtomicBatchExecuteE2MRequest Request containing an atomic list of events-to-metrics actions to execute.
 type Events2MetricServiceAtomicBatchExecuteE2MRequest struct {
 	// The requests.
-	Requests                          []E2MExecutionRequest `json:"requests,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Requests []E2MExecutionRequest `json:"requests,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *Events2MetricServiceAtomicBatchExecuteE2MRequest) SetRequests(v []E2MEx
 }
 
 func (o Events2MetricServiceAtomicBatchExecuteE2MRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableEvents2MetricServiceAtomicBatchExecuteE2MRequest) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

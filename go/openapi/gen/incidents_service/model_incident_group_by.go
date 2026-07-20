@@ -23,11 +23,11 @@ var _ MappedNullable = &IncidentGroupBy{}
 // IncidentGroupBy struct for IncidentGroupBy
 type IncidentGroupBy struct {
 	// The contextual label to group by.
-	ContextualLabel                                 *string             `json:"contextualLabel,omitempty"`
-	IncidentField                                   *IncidentFields     `json:"incidentField,omitempty"`
-	OrderByDirection                                *V1OrderByDirection `json:"orderByDirection,omitempty"`
-	AdditionalProperties                            map[string]interface{}
-	additionalPropertiesFromUnmarshal               bool
+	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	IncidentField *IncidentFields `json:"incidentField,omitempty"`
+	OrderByDirection *V1OrderByDirection `json:"orderByDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
@@ -147,7 +147,7 @@ func (o *IncidentGroupBy) SetOrderByDirection(v V1OrderByDirection) {
 }
 
 func (o IncidentGroupBy) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -267,3 +267,4 @@ func (v *NullableIncidentGroupBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

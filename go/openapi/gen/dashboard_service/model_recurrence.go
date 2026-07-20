@@ -22,8 +22,8 @@ var _ MappedNullable = &Recurrence{}
 
 // Recurrence Recurrence.
 type Recurrence struct {
-	Weekly                            *WeeklyRecurrence `json:"weekly,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Weekly *WeeklyRecurrence `json:"weekly,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *Recurrence) SetWeekly(v WeeklyRecurrence) {
 }
 
 func (o Recurrence) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableRecurrence) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

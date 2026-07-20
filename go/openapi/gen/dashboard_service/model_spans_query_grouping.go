@@ -27,8 +27,8 @@ type SpansQueryGrouping struct {
 	// List of field names to group the span records
 	GroupBy []SpanField `json:"groupBy,omitempty"`
 	// A list of observation fields definitions to group the records by
-	GroupBys                          []SpanObservationField `json:"groupBys,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	GroupBys []SpanObservationField `json:"groupBys,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *SpansQueryGrouping) SetGroupBys(v []SpanObservationField) {
 }
 
 func (o SpansQueryGrouping) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableSpansQueryGrouping) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

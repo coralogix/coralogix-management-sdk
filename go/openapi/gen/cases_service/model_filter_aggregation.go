@@ -23,9 +23,9 @@ var _ MappedNullable = &FilterAggregation{}
 // FilterAggregation Count of cases matching a single key/value filter combination.
 type FilterAggregation struct {
 	// Number of cases matching this filter
-	Count                             *int64      `json:"count,omitempty"`
-	Filter                            *V1KeyValue `json:"filter,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Count *int64 `json:"count,omitempty"`
+	Filter *V1KeyValue `json:"filter,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *FilterAggregation) SetFilter(v V1KeyValue) {
 }
 
 func (o FilterAggregation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableFilterAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

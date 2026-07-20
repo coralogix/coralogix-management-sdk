@@ -27,8 +27,8 @@ type DashboardFolder struct {
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The parent id. A UUID that must differ from this folder's own id.
-	ParentId                          *string `json:"parentId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
-	AdditionalProperties              map[string]interface{}
+	ParentId *string `json:"parentId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *DashboardFolder) SetParentId(v string) {
 }
 
 func (o DashboardFolder) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableDashboardFolder) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

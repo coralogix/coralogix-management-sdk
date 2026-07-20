@@ -22,8 +22,8 @@ var _ MappedNullable = &LogsNewValueRule{}
 
 // LogsNewValueRule Defines the condition for detecting new values in logs
 type LogsNewValueRule struct {
-	Condition                         *LogsNewValueCondition `json:"condition,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Condition *LogsNewValueCondition `json:"condition,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *LogsNewValueRule) SetCondition(v LogsNewValueCondition) {
 }
 
 func (o LogsNewValueRule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableLogsNewValueRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

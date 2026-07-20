@@ -23,8 +23,8 @@ var _ MappedNullable = &GetTemplateResponse{}
 // GetTemplateResponse Response containing an integration template.
 type GetTemplateResponse struct {
 	// The template url.
-	TemplateUrl                       *string `json:"templateUrl,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TemplateUrl *string `json:"templateUrl,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *GetTemplateResponse) SetTemplateUrl(v string) {
 }
 
 func (o GetTemplateResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableGetTemplateResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

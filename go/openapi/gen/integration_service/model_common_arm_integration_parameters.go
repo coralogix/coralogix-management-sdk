@@ -27,8 +27,8 @@ type CommonARMIntegrationParameters struct {
 	// The cgx domain.
 	CgxDomain *string `json:"cgxDomain,omitempty"`
 	// The logs url.
-	LogsUrl                           *string `json:"logsUrl,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	LogsUrl *string `json:"logsUrl,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *CommonARMIntegrationParameters) SetLogsUrl(v string) {
 }
 
 func (o CommonARMIntegrationParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableCommonARMIntegrationParameters) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

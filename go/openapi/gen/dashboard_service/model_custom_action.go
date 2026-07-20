@@ -23,8 +23,8 @@ var _ MappedNullable = &CustomAction{}
 // CustomAction Custom action.
 type CustomAction struct {
 	// Static URL that may contain variables using {{variable_name}} syntax
-	Url                               *string `json:"url,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Url *string `json:"url,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *CustomAction) SetUrl(v string) {
 }
 
 func (o CustomAction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableCustomAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,8 +22,8 @@ var _ MappedNullable = &ReplaceCustomPresetResponse{}
 
 // ReplaceCustomPresetResponse Response containing the updated custom preset
 type ReplaceCustomPresetResponse struct {
-	Preset                            *Preset `json:"preset,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Preset *Preset `json:"preset,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *ReplaceCustomPresetResponse) SetPreset(v Preset) {
 }
 
 func (o ReplaceCustomPresetResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableReplaceCustomPresetResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

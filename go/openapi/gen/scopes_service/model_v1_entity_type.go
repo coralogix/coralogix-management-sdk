@@ -24,8 +24,8 @@ type V1EntityType string
 // List of v1.EntityType
 const (
 	V1ENTITYTYPE_ENTITY_TYPE_UNSPECIFIED V1EntityType = "ENTITY_TYPE_UNSPECIFIED"
-	V1ENTITYTYPE_ENTITY_TYPE_LOGS        V1EntityType = "ENTITY_TYPE_LOGS"
-	V1ENTITYTYPE_ENTITY_TYPE_SPANS       V1EntityType = "ENTITY_TYPE_SPANS"
+	V1ENTITYTYPE_ENTITY_TYPE_LOGS V1EntityType = "ENTITY_TYPE_LOGS"
+	V1ENTITYTYPE_ENTITY_TYPE_SPANS V1EntityType = "ENTITY_TYPE_SPANS"
 )
 
 // All allowed values of V1EntityType enum
@@ -113,3 +113,4 @@ func (v *NullableV1EntityType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

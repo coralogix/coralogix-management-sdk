@@ -29,11 +29,11 @@ type CreateRuleGroupRequestCreateRuleSubgroupCreateRule struct {
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// Sort order.
-	Order      *int64          `json:"order,omitempty"`
+	Order *int64 `json:"order,omitempty"`
 	Parameters *RuleParameters `json:"parameters,omitempty"`
 	// The source field.
-	SourceField                       *string `json:"sourceField,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SourceField *string `json:"sourceField,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -249,7 +249,7 @@ func (o *CreateRuleGroupRequestCreateRuleSubgroupCreateRule) SetSourceField(v st
 }
 
 func (o CreateRuleGroupRequestCreateRuleSubgroupCreateRule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -347,3 +347,4 @@ func (v *NullableCreateRuleGroupRequestCreateRuleSubgroupCreateRule) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

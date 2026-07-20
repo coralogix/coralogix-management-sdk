@@ -22,9 +22,9 @@ var _ MappedNullable = &QueryMetricsQueryOperator{}
 
 // QueryMetricsQueryOperator Operator.
 type QueryMetricsQueryOperator struct {
-	Equals                            *QueryMetricsQueryEquals    `json:"equals,omitempty"`
-	NotEquals                         *QueryMetricsQueryNotEquals `json:"notEquals,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Equals *QueryMetricsQueryEquals `json:"equals,omitempty"`
+	NotEquals *QueryMetricsQueryNotEquals `json:"notEquals,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *QueryMetricsQueryOperator) SetNotEquals(v QueryMetricsQueryNotEquals) {
 }
 
 func (o QueryMetricsQueryOperator) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableQueryMetricsQueryOperator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

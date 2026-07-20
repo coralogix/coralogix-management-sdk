@@ -23,9 +23,9 @@ var _ MappedNullable = &Assignment{}
 
 // Assignment Details of the user who assigned the incident and the user to whom it was assigned
 type Assignment struct {
-	AssignedBy                        IncidentsV1UserDetails `json:"assignedBy"`
-	AssignedTo                        IncidentsV1UserDetails `json:"assignedTo"`
-	AdditionalProperties              map[string]interface{}
+	AssignedBy IncidentsV1UserDetails `json:"assignedBy"`
+	AssignedTo IncidentsV1UserDetails `json:"assignedTo"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -99,7 +99,7 @@ func (o *Assignment) SetAssignedTo(v IncidentsV1UserDetails) {
 }
 
 func (o Assignment) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -132,10 +132,10 @@ func (o *Assignment) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -199,3 +199,4 @@ func (v *NullableAssignment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

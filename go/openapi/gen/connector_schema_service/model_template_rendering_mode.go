@@ -24,8 +24,8 @@ type TemplateRenderingMode string
 // List of TemplateRenderingMode
 const (
 	TEMPLATERENDERINGMODE_TEMPLATE_RENDERING_MODE_UNSPECIFIED TemplateRenderingMode = "TEMPLATE_RENDERING_MODE_UNSPECIFIED"
-	TEMPLATERENDERINGMODE_RELAXED                             TemplateRenderingMode = "RELAXED"
-	TEMPLATERENDERINGMODE_STRICT                              TemplateRenderingMode = "STRICT"
+	TEMPLATERENDERINGMODE_RELAXED TemplateRenderingMode = "RELAXED"
+	TEMPLATERENDERINGMODE_STRICT TemplateRenderingMode = "STRICT"
 )
 
 // All allowed values of TemplateRenderingMode enum
@@ -113,3 +113,4 @@ func (v *NullableTemplateRenderingMode) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -24,8 +24,8 @@ type FieldConditionConditionType string
 // List of FieldCondition.ConditionType
 const (
 	FIELDCONDITIONCONDITIONTYPE_UNKNOWN FieldConditionConditionType = "UNKNOWN"
-	FIELDCONDITIONCONDITIONTYPE_OR      FieldConditionConditionType = "OR"
-	FIELDCONDITIONCONDITIONTYPE_AND     FieldConditionConditionType = "AND"
+	FIELDCONDITIONCONDITIONTYPE_OR FieldConditionConditionType = "OR"
+	FIELDCONDITIONCONDITIONTYPE_AND FieldConditionConditionType = "AND"
 )
 
 // All allowed values of FieldConditionConditionType enum
@@ -113,3 +113,4 @@ func (v *NullableFieldConditionConditionType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

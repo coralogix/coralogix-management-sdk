@@ -23,10 +23,10 @@ var _ MappedNullable = &UsageCapabilityMeasurement{}
 // UsageCapabilityMeasurement A measurement kind supported by the public data-usage query surface, with its raw unit.
 type UsageCapabilityMeasurement struct {
 	// Short user-facing description of this measurement kind.
-	Description                       *string               `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Kind                              *UsageMeasurementKind `json:"kind,omitempty"`
-	Unit                              *UsageMeasurementUnit `json:"unit,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Kind *UsageMeasurementKind `json:"kind,omitempty"`
+	Unit *UsageMeasurementUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *UsageCapabilityMeasurement) SetUnit(v UsageMeasurementUnit) {
 }
 
 func (o UsageCapabilityMeasurement) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableUsageCapabilityMeasurement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

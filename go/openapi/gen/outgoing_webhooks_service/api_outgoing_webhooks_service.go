@@ -19,12 +19,13 @@ import (
 	"strings"
 )
 
+
 // OutgoingWebhooksServiceAPIService OutgoingWebhooksServiceAPI service
 type OutgoingWebhooksServiceAPIService service
 
 type ApiOutgoingWebhooksServiceCreateOutgoingWebhookRequest struct {
-	ctx                          context.Context
-	ApiService                   *OutgoingWebhooksServiceAPIService
+	ctx context.Context
+	ApiService *OutgoingWebhooksServiceAPIService
 	createOutgoingWebhookRequest *CreateOutgoingWebhookRequest
 }
 
@@ -45,25 +46,24 @@ Creates a new outgoing webhook.
 Requires the following permissions:
 - `outbound-webhooks:UpdateConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiOutgoingWebhooksServiceCreateOutgoingWebhookRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiOutgoingWebhooksServiceCreateOutgoingWebhookRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceCreateOutgoingWebhook(ctx context.Context) ApiOutgoingWebhooksServiceCreateOutgoingWebhookRequest {
 	return ApiOutgoingWebhooksServiceCreateOutgoingWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateOutgoingWebhookResponse
+//  @return CreateOutgoingWebhookResponse
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceCreateOutgoingWebhookExecute(r ApiOutgoingWebhooksServiceCreateOutgoingWebhookRequest) (*CreateOutgoingWebhookResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateOutgoingWebhookResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateOutgoingWebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceCreateOutgoingWebhook")
@@ -125,8 +125,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceCreateOutgoin
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -136,8 +136,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceCreateOutgoin
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -147,8 +147,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceCreateOutgoin
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -166,9 +166,9 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceCreateOutgoin
 }
 
 type ApiOutgoingWebhooksServiceDeleteOutgoingWebhookRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiOutgoingWebhooksServiceDeleteOutgoingWebhookRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -183,27 +183,26 @@ Deletes the outgoing webhook with the specified ID.
 Requires the following permissions:
 - `outbound-webhooks:UpdateConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier.
-	@return ApiOutgoingWebhooksServiceDeleteOutgoingWebhookRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier.
+ @return ApiOutgoingWebhooksServiceDeleteOutgoingWebhookRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceDeleteOutgoingWebhook(ctx context.Context, id string) ApiOutgoingWebhooksServiceDeleteOutgoingWebhookRequest {
 	return ApiOutgoingWebhooksServiceDeleteOutgoingWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceDeleteOutgoingWebhookExecute(r ApiOutgoingWebhooksServiceDeleteOutgoingWebhookRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceDeleteOutgoingWebhook")
@@ -267,8 +266,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceDeleteOutgoin
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -278,8 +277,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceDeleteOutgoin
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -289,8 +288,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceDeleteOutgoin
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -308,9 +307,9 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceDeleteOutgoin
 }
 
 type ApiOutgoingWebhooksServiceGetOutgoingWebhookRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiOutgoingWebhooksServiceGetOutgoingWebhookRequest) Execute() (*GetOutgoingWebhookResponse, *http.Response, error) {
@@ -325,27 +324,26 @@ Returns the details of the specified outgoing webhook.
 Requires the following permissions:
 - `outbound-webhooks:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier of the outgoing webhook.
-	@return ApiOutgoingWebhooksServiceGetOutgoingWebhookRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the outgoing webhook.
+ @return ApiOutgoingWebhooksServiceGetOutgoingWebhookRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWebhook(ctx context.Context, id string) ApiOutgoingWebhooksServiceGetOutgoingWebhookRequest {
 	return ApiOutgoingWebhooksServiceGetOutgoingWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetOutgoingWebhookResponse
+//  @return GetOutgoingWebhookResponse
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWebhookExecute(r ApiOutgoingWebhooksServiceGetOutgoingWebhookRequest) (*GetOutgoingWebhookResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetOutgoingWebhookResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetOutgoingWebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceGetOutgoingWebhook")
@@ -409,8 +407,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -420,8 +418,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -431,8 +429,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -450,9 +448,9 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWe
 }
 
 type ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
-	type_      WebhookType
+	type_ WebhookType
 }
 
 func (r ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest) Execute() (*GetOutgoingWebhookTypeDetailsResponse, *http.Response, error) {
@@ -467,27 +465,26 @@ Returns the details for the specified outgoing webhook type.
 Requires the following permissions:
 - `outbound-webhooks:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param type_ The outgoing webhook type to fetch details for.
-	@return ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param type_ The outgoing webhook type to fetch details for.
+ @return ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWebhookTypeDetails(ctx context.Context, type_ WebhookType) ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest {
 	return ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest{
 		ApiService: a,
-		ctx:        ctx,
-		type_:      type_,
+		ctx: ctx,
+		type_: type_,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetOutgoingWebhookTypeDetailsResponse
+//  @return GetOutgoingWebhookTypeDetailsResponse
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsExecute(r ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest) (*GetOutgoingWebhookTypeDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetOutgoingWebhookTypeDetailsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetOutgoingWebhookTypeDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceGetOutgoingWebhookTypeDetails")
@@ -548,8 +545,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -559,8 +556,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -570,8 +567,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -589,7 +586,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceGetOutgoingWe
 }
 
 type ApiOutgoingWebhooksServiceListAllOutgoingWebhooksRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
 }
 
@@ -605,25 +602,24 @@ Returns all outgoing webhooks for the team.
 Requires the following permissions:
 - `outbound-webhooks:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiOutgoingWebhooksServiceListAllOutgoingWebhooksRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiOutgoingWebhooksServiceListAllOutgoingWebhooksRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListAllOutgoingWebhooks(ctx context.Context) ApiOutgoingWebhooksServiceListAllOutgoingWebhooksRequest {
 	return ApiOutgoingWebhooksServiceListAllOutgoingWebhooksRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListAllOutgoingWebhooksResponse
+//  @return ListAllOutgoingWebhooksResponse
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListAllOutgoingWebhooksExecute(r ApiOutgoingWebhooksServiceListAllOutgoingWebhooksRequest) (*ListAllOutgoingWebhooksResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListAllOutgoingWebhooksResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListAllOutgoingWebhooksResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceListAllOutgoingWebhooks")
@@ -683,8 +679,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListAllOutgoi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -694,8 +690,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListAllOutgoi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -705,8 +701,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListAllOutgoi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -724,7 +720,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListAllOutgoi
 }
 
 type ApiOutgoingWebhooksServiceListOutboundWebhooksSummaryRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
 }
 
@@ -740,25 +736,24 @@ Returns summary information for all outgoing webhooks.
 Requires the following permissions:
 - `outbound-webhooks:ReadSummary`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiOutgoingWebhooksServiceListOutboundWebhooksSummaryRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiOutgoingWebhooksServiceListOutboundWebhooksSummaryRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutboundWebhooksSummary(ctx context.Context) ApiOutgoingWebhooksServiceListOutboundWebhooksSummaryRequest {
 	return ApiOutgoingWebhooksServiceListOutboundWebhooksSummaryRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListOutboundWebhooksSummaryResponse
+//  @return ListOutboundWebhooksSummaryResponse
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutboundWebhooksSummaryExecute(r ApiOutgoingWebhooksServiceListOutboundWebhooksSummaryRequest) (*ListOutboundWebhooksSummaryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListOutboundWebhooksSummaryResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListOutboundWebhooksSummaryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceListOutboundWebhooksSummary")
@@ -818,8 +813,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutboundW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -829,8 +824,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutboundW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -840,8 +835,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutboundW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -859,7 +854,7 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutboundW
 }
 
 type ApiOutgoingWebhooksServiceListOutgoingWebhookTypesRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
 }
 
@@ -875,25 +870,24 @@ Returns all available outgoing webhook types.
 Requires the following permissions:
 - `outbound-webhooks:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiOutgoingWebhooksServiceListOutgoingWebhookTypesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiOutgoingWebhooksServiceListOutgoingWebhookTypesRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingWebhookTypes(ctx context.Context) ApiOutgoingWebhooksServiceListOutgoingWebhookTypesRequest {
 	return ApiOutgoingWebhooksServiceListOutgoingWebhookTypesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListOutgoingWebhookTypesResponse
+//  @return ListOutgoingWebhookTypesResponse
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingWebhookTypesExecute(r ApiOutgoingWebhooksServiceListOutgoingWebhookTypesRequest) (*ListOutgoingWebhookTypesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListOutgoingWebhookTypesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListOutgoingWebhookTypesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceListOutgoingWebhookTypes")
@@ -953,8 +947,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -964,8 +958,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -975,8 +969,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -994,9 +988,9 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 }
 
 type ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
-	type_      *WebhookType
+	type_ *WebhookType
 }
 
 // The outgoing webhook type to filter the listing by.
@@ -1017,25 +1011,24 @@ Returns outgoing webhooks grouped by type.
 Requires the following permissions:
 - `outbound-webhooks:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingWebhooks(ctx context.Context) ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest {
 	return ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListOutgoingWebhooksResponse
+//  @return ListOutgoingWebhooksResponse
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingWebhooksExecute(r ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest) (*ListOutgoingWebhooksResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListOutgoingWebhooksResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListOutgoingWebhooksResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceListOutgoingWebhooks")
@@ -1100,8 +1093,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1111,8 +1104,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1122,8 +1115,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1141,9 +1134,9 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceListOutgoingW
 }
 
 type ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *OutgoingWebhooksServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest) Execute() (*TestOutgoingWebhookResponse, *http.Response, error) {
@@ -1158,27 +1151,26 @@ Tests the specified outgoing webhook.
 Requires the following permissions:
 - `outbound-webhooks:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier.
-	@return ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier.
+ @return ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingOutgoingWebhook(ctx context.Context, id string) ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest {
 	return ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TestOutgoingWebhookResponse
+//  @return TestOutgoingWebhookResponse
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingOutgoingWebhookExecute(r ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest) (*TestOutgoingWebhookResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TestOutgoingWebhookResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TestOutgoingWebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceTestExistingOutgoingWebhook")
@@ -1242,8 +1234,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingO
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1253,8 +1245,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingO
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1264,8 +1256,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingO
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1283,8 +1275,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestExistingO
 }
 
 type ApiOutgoingWebhooksServiceTestOutgoingWebhookRequest struct {
-	ctx                        context.Context
-	ApiService                 *OutgoingWebhooksServiceAPIService
+	ctx context.Context
+	ApiService *OutgoingWebhooksServiceAPIService
 	testOutgoingWebhookRequest *TestOutgoingWebhookRequest
 }
 
@@ -1305,25 +1297,24 @@ Tests an outgoing webhook configuration.
 Requires the following permissions:
 - `outbound-webhooks:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiOutgoingWebhooksServiceTestOutgoingWebhookRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiOutgoingWebhooksServiceTestOutgoingWebhookRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestOutgoingWebhook(ctx context.Context) ApiOutgoingWebhooksServiceTestOutgoingWebhookRequest {
 	return ApiOutgoingWebhooksServiceTestOutgoingWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TestOutgoingWebhookResponse
+//  @return TestOutgoingWebhookResponse
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestOutgoingWebhookExecute(r ApiOutgoingWebhooksServiceTestOutgoingWebhookRequest) (*TestOutgoingWebhookResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TestOutgoingWebhookResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TestOutgoingWebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceTestOutgoingWebhook")
@@ -1385,8 +1376,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestOutgoingW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1396,8 +1387,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestOutgoingW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1407,8 +1398,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestOutgoingW
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1426,8 +1417,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestOutgoingW
 }
 
 type ApiOutgoingWebhooksServiceUpdateOutgoingWebhookRequest struct {
-	ctx                          context.Context
-	ApiService                   *OutgoingWebhooksServiceAPIService
+	ctx context.Context
+	ApiService *OutgoingWebhooksServiceAPIService
 	updateOutgoingWebhookRequest *UpdateOutgoingWebhookRequest
 }
 
@@ -1448,25 +1439,24 @@ Updates an existing outgoing webhook.
 Requires the following permissions:
 - `outbound-webhooks:UpdateConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiOutgoingWebhooksServiceUpdateOutgoingWebhookRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiOutgoingWebhooksServiceUpdateOutgoingWebhookRequest
 */
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceUpdateOutgoingWebhook(ctx context.Context) ApiOutgoingWebhooksServiceUpdateOutgoingWebhookRequest {
 	return ApiOutgoingWebhooksServiceUpdateOutgoingWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceUpdateOutgoingWebhookExecute(r ApiOutgoingWebhooksServiceUpdateOutgoingWebhookRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OutgoingWebhooksServiceAPIService.OutgoingWebhooksServiceUpdateOutgoingWebhook")
@@ -1528,8 +1518,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceUpdateOutgoin
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1539,8 +1529,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceUpdateOutgoin
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1550,8 +1540,8 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceUpdateOutgoin
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

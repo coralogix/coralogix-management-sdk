@@ -23,8 +23,8 @@ var _ MappedNullable = &IntegrationRevisionSingleNumericValue{}
 // IntegrationRevisionSingleNumericValue Single numeric value.
 type IntegrationRevisionSingleNumericValue struct {
 	// The default value.
-	DefaultValue                      *float64 `json:"defaultValue,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	DefaultValue *float64 `json:"defaultValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *IntegrationRevisionSingleNumericValue) SetDefaultValue(v float64) {
 }
 
 func (o IntegrationRevisionSingleNumericValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableIntegrationRevisionSingleNumericValue) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

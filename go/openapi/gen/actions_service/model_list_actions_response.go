@@ -23,8 +23,8 @@ var _ MappedNullable = &ListActionsResponse{}
 // ListActionsResponse This data structure represents the response containing a list of Actions.
 type ListActionsResponse struct {
 	// List of actions.
-	Actions                           []V2Action `json:"actions,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Actions []V2Action `json:"actions,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListActionsResponse) SetActions(v []V2Action) {
 }
 
 func (o ListActionsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListActionsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

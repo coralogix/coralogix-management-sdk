@@ -27,8 +27,8 @@ type LogsQueryGrouping struct {
 	// List of field names to group the query results
 	GroupBy []string `json:"groupBy,omitempty"`
 	// List of observation fields to group the results
-	GroupBys                          []ObservationField `json:"groupBys,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	GroupBys []ObservationField `json:"groupBys,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *LogsQueryGrouping) SetGroupBys(v []ObservationField) {
 }
 
 func (o LogsQueryGrouping) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableLogsQueryGrouping) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -24,8 +24,8 @@ var _ MappedNullable = &ListSlosResponse{}
 // ListSlosResponse Response containing a list of SLOs.
 type ListSlosResponse struct {
 	// The slos.
-	Slos                              []Slo `json:"slos"`
-	AdditionalProperties              map[string]interface{}
+	Slos []Slo `json:"slos"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -74,7 +74,7 @@ func (o *ListSlosResponse) SetSlos(v []Slo) {
 }
 
 func (o ListSlosResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -105,10 +105,10 @@ func (o *ListSlosResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -171,3 +171,4 @@ func (v *NullableListSlosResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

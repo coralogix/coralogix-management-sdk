@@ -24,7 +24,7 @@ type WidgetsCommonDataModeType string
 // List of widgets.common.DataModeType
 const (
 	WIDGETSCOMMONDATAMODETYPE_DATA_MODE_TYPE_HIGH_UNSPECIFIED WidgetsCommonDataModeType = "DATA_MODE_TYPE_HIGH_UNSPECIFIED"
-	WIDGETSCOMMONDATAMODETYPE_DATA_MODE_TYPE_ARCHIVE          WidgetsCommonDataModeType = "DATA_MODE_TYPE_ARCHIVE"
+	WIDGETSCOMMONDATAMODETYPE_DATA_MODE_TYPE_ARCHIVE WidgetsCommonDataModeType = "DATA_MODE_TYPE_ARCHIVE"
 )
 
 // All allowed values of WidgetsCommonDataModeType enum
@@ -111,3 +111,4 @@ func (v *NullableWidgetsCommonDataModeType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -29,8 +29,8 @@ type BulkReplaceAlertDefsResponse struct {
 	// List of alert definition IDs that were not found
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	// List of alert definition IDs that were skipped (no changes detected)
-	SkippedIds                        []string `json:"skippedIds,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SkippedIds []string `json:"skippedIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -182,7 +182,7 @@ func (o *BulkReplaceAlertDefsResponse) SetSkippedIds(v []string) {
 }
 
 func (o BulkReplaceAlertDefsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -272,3 +272,4 @@ func (v *NullableBulkReplaceAlertDefsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

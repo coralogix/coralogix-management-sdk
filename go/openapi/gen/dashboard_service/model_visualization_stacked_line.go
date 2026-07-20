@@ -24,8 +24,8 @@ type VisualizationStackedLine string
 // List of Visualization.StackedLine
 const (
 	VISUALIZATIONSTACKEDLINE_STACKED_LINE_UNSPECIFIED VisualizationStackedLine = "STACKED_LINE_UNSPECIFIED"
-	VISUALIZATIONSTACKEDLINE_STACKED_LINE_ABSOLUTE    VisualizationStackedLine = "STACKED_LINE_ABSOLUTE"
-	VISUALIZATIONSTACKEDLINE_STACKED_LINE_RELATIVE    VisualizationStackedLine = "STACKED_LINE_RELATIVE"
+	VISUALIZATIONSTACKEDLINE_STACKED_LINE_ABSOLUTE VisualizationStackedLine = "STACKED_LINE_ABSOLUTE"
+	VISUALIZATIONSTACKEDLINE_STACKED_LINE_RELATIVE VisualizationStackedLine = "STACKED_LINE_RELATIVE"
 )
 
 // All allowed values of VisualizationStackedLine enum
@@ -113,3 +113,4 @@ func (v *NullableVisualizationStackedLine) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

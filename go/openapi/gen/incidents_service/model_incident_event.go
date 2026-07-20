@@ -23,21 +23,21 @@ var _ MappedNullable = &IncidentEvent{}
 
 // IncidentEvent Incident event.
 type IncidentEvent struct {
-	Acknowledge         *IncidentEventAcknowledge              `json:"acknowledge,omitempty"`
+	Acknowledge *IncidentEventAcknowledge `json:"acknowledge,omitempty"`
 	AdministrativeEvent *IncidentEventOriginatorAdministrative `json:"administrativeEvent,omitempty"`
-	Assignment          *IncidentEventAssign                   `json:"assignment,omitempty"`
-	Close               *IncidentEventClose                    `json:"close,omitempty"`
+	Assignment *IncidentEventAssign `json:"assignment,omitempty"`
+	Close *IncidentEventClose `json:"close,omitempty"`
 	// The ID of the incident event
-	Id                string                              `json:"id"`
-	IncidentEventType IncidentEventType                   `json:"incidentEventType"`
-	OperationalEvent  *IncidentEventOriginatorOperational `json:"operationalEvent,omitempty"`
-	OriginatorType    OriginatorType                      `json:"originatorType"`
-	SnoozeIndicator   *IncidentEventSnoozeIndicator       `json:"snoozeIndicator,omitempty"`
+	Id string `json:"id"`
+	IncidentEventType IncidentEventType `json:"incidentEventType"`
+	OperationalEvent *IncidentEventOriginatorOperational `json:"operationalEvent,omitempty"`
+	OriginatorType OriginatorType `json:"originatorType"`
+	SnoozeIndicator *IncidentEventSnoozeIndicator `json:"snoozeIndicator,omitempty"`
 	// Incident event unassign.
-	Unassign                                        map[string]interface{}    `json:"unassign,omitempty"`
-	UpsertState                                     *IncidentEventUpsertState `json:"upsertState,omitempty"`
-	AdditionalProperties                            map[string]interface{}
-	additionalPropertiesFromUnmarshal               bool
+	Unassign map[string]interface{} `json:"unassign,omitempty"`
+	UpsertState *IncidentEventUpsertState `json:"upsertState,omitempty"`
+	AdditionalProperties map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 	requiredOneOfGroup1FromUnmarshalWithoutKnownArm bool
 }
@@ -393,7 +393,7 @@ func (o *IncidentEvent) SetUpsertState(v IncidentEventUpsertState) {
 }
 
 func (o IncidentEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -520,10 +520,10 @@ func (o *IncidentEvent) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -666,3 +666,4 @@ func (v *NullableIncidentEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

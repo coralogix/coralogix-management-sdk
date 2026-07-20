@@ -26,10 +26,10 @@ type V2MetricField struct {
 	// The aggregations.
 	Aggregations []V2Aggregation `json:"aggregations"`
 	// The source field.
-	SourceField string `json:"sourceField"`
+	SourceField string `json:"sourceField" validate:"regexp=^[\\s\\S]*$"`
 	// The target base metric name.
-	TargetBaseMetricName              string `json:"targetBaseMetricName" validate:"regexp=^[\\\\w\\/-]+$"`
-	AdditionalProperties              map[string]interface{}
+	TargetBaseMetricName string `json:"targetBaseMetricName" validate:"regexp=^[\\\\w\\/-]+$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -128,7 +128,7 @@ func (o *V2MetricField) SetTargetBaseMetricName(v string) {
 }
 
 func (o V2MetricField) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -163,10 +163,10 @@ func (o *V2MetricField) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -231,3 +231,4 @@ func (v *NullableV2MetricField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,9 +23,9 @@ var _ MappedNullable = &MetricTimeWindow{}
 // MetricTimeWindow Metric time window.
 type MetricTimeWindow struct {
 	// The time window as a dynamic value
-	MetricTimeWindowDynamicDuration   *string                `json:"metricTimeWindowDynamicDuration,omitempty"`
-	MetricTimeWindowSpecificValue     *MetricTimeWindowValue `json:"metricTimeWindowSpecificValue,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MetricTimeWindowDynamicDuration *string `json:"metricTimeWindowDynamicDuration,omitempty"`
+	MetricTimeWindowSpecificValue *MetricTimeWindowValue `json:"metricTimeWindowSpecificValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *MetricTimeWindow) SetMetricTimeWindowSpecificValue(v MetricTimeWindowVa
 }
 
 func (o MetricTimeWindow) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -223,3 +223,4 @@ func (v *NullableMetricTimeWindow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

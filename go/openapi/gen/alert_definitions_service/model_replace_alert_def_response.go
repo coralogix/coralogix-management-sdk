@@ -22,8 +22,8 @@ var _ MappedNullable = &ReplaceAlertDefResponse{}
 
 // ReplaceAlertDefResponse A response that contains the updated alert definition
 type ReplaceAlertDefResponse struct {
-	AlertDef                          *AlertDef `json:"alertDef,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AlertDef *AlertDef `json:"alertDef,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *ReplaceAlertDefResponse) SetAlertDef(v AlertDef) {
 }
 
 func (o ReplaceAlertDefResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableReplaceAlertDefResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

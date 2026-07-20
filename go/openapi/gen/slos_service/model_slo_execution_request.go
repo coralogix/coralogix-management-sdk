@@ -22,11 +22,11 @@ var _ MappedNullable = &SloExecutionRequest{}
 
 // SloExecutionRequest Request for executing an SLO operation.
 type SloExecutionRequest struct {
-	CreateSloRequest                                *CreateSloRequest  `json:"createSloRequest,omitempty"`
-	DeleteSloRequest                                *DeleteSloRequest  `json:"deleteSloRequest,omitempty"`
-	ReplaceSloRequest                               *ReplaceSloRequest `json:"replaceSloRequest,omitempty"`
-	AdditionalProperties                            map[string]interface{}
-	additionalPropertiesFromUnmarshal               bool
+	CreateSloRequest *CreateSloRequest `json:"createSloRequest,omitempty"`
+	DeleteSloRequest *DeleteSloRequest `json:"deleteSloRequest,omitempty"`
+	ReplaceSloRequest *ReplaceSloRequest `json:"replaceSloRequest,omitempty"`
+	AdditionalProperties map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
@@ -146,7 +146,7 @@ func (o *SloExecutionRequest) SetReplaceSloRequest(v ReplaceSloRequest) {
 }
 
 func (o SloExecutionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -275,3 +275,4 @@ func (v *NullableSloExecutionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

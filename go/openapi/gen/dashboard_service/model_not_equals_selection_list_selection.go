@@ -23,8 +23,8 @@ var _ MappedNullable = &NotEqualsSelectionListSelection{}
 // NotEqualsSelectionListSelection This data structure represents a selection from a list of specific values.
 type NotEqualsSelectionListSelection struct {
 	// A list of values for the selection.
-	Values                            []string `json:"values,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *NotEqualsSelectionListSelection) SetValues(v []string) {
 }
 
 func (o NotEqualsSelectionListSelection) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableNotEqualsSelectionListSelection) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

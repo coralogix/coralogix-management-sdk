@@ -22,8 +22,8 @@ var _ MappedNullable = &TestTemplateRenderResponse{}
 
 // TestTemplateRenderResponse Response containing the results of a notification template render test.
 type TestTemplateRenderResponse struct {
-	Result                            *TestTemplateRenderResult `json:"result,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Result *TestTemplateRenderResult `json:"result,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *TestTemplateRenderResponse) SetResult(v TestTemplateRenderResult) {
 }
 
 func (o TestTemplateRenderResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableTestTemplateRenderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

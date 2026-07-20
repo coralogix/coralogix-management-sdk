@@ -24,17 +24,17 @@ var _ MappedNullable = &SloFilterField{}
 type SloFilterField struct {
 	ConstFilter *SloConstantFilterField `json:"constFilter,omitempty"`
 	// Filter by a specific SLO label key.
-	LabelName                  *string       `json:"labelName,omitempty"`
+	LabelName *string `json:"labelName,omitempty"`
 	OwnershipEnvironmentValues *StringValues `json:"ownershipEnvironmentValues,omitempty"`
-	OwnershipServiceValues     *StringValues `json:"ownershipServiceValues,omitempty"`
-	OwnershipTeamValues        *StringValues `json:"ownershipTeamValues,omitempty"`
+	OwnershipServiceValues *StringValues `json:"ownershipServiceValues,omitempty"`
+	OwnershipTeamValues *StringValues `json:"ownershipTeamValues,omitempty"`
 	// Filter discriminator for SLO product type values.
 	ProductType *bool `json:"productType,omitempty"`
 	// Filter by service name from the APM SLI services list (not ownership tags). Only valid for APM product SLOs. MUST be used together with a product_type filter that includes APM; the server may reject the request otherwise. To filter by configured ownership service on any SLO type, use ownership_service_values instead.
 	ServiceName *string `json:"serviceName,omitempty"`
 	// Filter discriminator for SLO type values.
-	SloType                           *bool `json:"sloType,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SloType *bool `json:"sloType,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -314,7 +314,7 @@ func (o *SloFilterField) SetSloType(v bool) {
 }
 
 func (o SloFilterField) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -502,3 +502,4 @@ func (v *NullableSloFilterField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

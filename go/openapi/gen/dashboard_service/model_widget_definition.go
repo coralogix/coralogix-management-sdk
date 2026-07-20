@@ -22,16 +22,16 @@ var _ MappedNullable = &WidgetDefinition{}
 
 // WidgetDefinition Definition.
 type WidgetDefinition struct {
-	BarChart                          *BarChart           `json:"barChart,omitempty"`
-	DataTable                         *DataTable          `json:"dataTable,omitempty"`
-	Dynamic                           *WidgetsDynamic     `json:"dynamic,omitempty"`
-	Gauge                             *WidgetsGauge       `json:"gauge,omitempty"`
-	Hexagon                           *Hexagon            `json:"hexagon,omitempty"`
-	HorizontalBarChart                *HorizontalBarChart `json:"horizontalBarChart,omitempty"`
-	LineChart                         *LineChart          `json:"lineChart,omitempty"`
-	Markdown                          *Markdown           `json:"markdown,omitempty"`
-	PieChart                          *WidgetsPieChart    `json:"pieChart,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	BarChart *BarChart `json:"barChart,omitempty"`
+	DataTable *DataTable `json:"dataTable,omitempty"`
+	Dynamic *WidgetsDynamic `json:"dynamic,omitempty"`
+	Gauge *WidgetsGauge `json:"gauge,omitempty"`
+	Hexagon *Hexagon `json:"hexagon,omitempty"`
+	HorizontalBarChart *HorizontalBarChart `json:"horizontalBarChart,omitempty"`
+	LineChart *LineChart `json:"lineChart,omitempty"`
+	Markdown *Markdown `json:"markdown,omitempty"`
+	PieChart *WidgetsPieChart `json:"pieChart,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -343,7 +343,7 @@ func (o *WidgetDefinition) SetPieChart(v WidgetsPieChart) {
 }
 
 func (o WidgetDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -544,3 +544,4 @@ func (v *NullableWidgetDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

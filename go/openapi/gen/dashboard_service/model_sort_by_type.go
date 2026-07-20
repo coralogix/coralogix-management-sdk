@@ -24,8 +24,8 @@ type SortByType string
 // List of SortByType
 const (
 	SORTBYTYPE_SORT_BY_TYPE_UNSPECIFIED SortByType = "SORT_BY_TYPE_UNSPECIFIED"
-	SORTBYTYPE_SORT_BY_TYPE_VALUE       SortByType = "SORT_BY_TYPE_VALUE"
-	SORTBYTYPE_SORT_BY_TYPE_NAME        SortByType = "SORT_BY_TYPE_NAME"
+	SORTBYTYPE_SORT_BY_TYPE_VALUE SortByType = "SORT_BY_TYPE_VALUE"
+	SORTBYTYPE_SORT_BY_TYPE_NAME SortByType = "SORT_BY_TYPE_NAME"
 )
 
 // All allowed values of SortByType enum
@@ -113,3 +113,4 @@ func (v *NullableSortByType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

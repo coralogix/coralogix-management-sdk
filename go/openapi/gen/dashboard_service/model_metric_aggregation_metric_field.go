@@ -24,7 +24,7 @@ type MetricAggregationMetricField string
 // List of MetricAggregation.MetricField
 const (
 	METRICAGGREGATIONMETRICFIELD_METRIC_FIELD_UNSPECIFIED MetricAggregationMetricField = "METRIC_FIELD_UNSPECIFIED"
-	METRICAGGREGATIONMETRICFIELD_METRIC_FIELD_DURATION    MetricAggregationMetricField = "METRIC_FIELD_DURATION"
+	METRICAGGREGATIONMETRICFIELD_METRIC_FIELD_DURATION MetricAggregationMetricField = "METRIC_FIELD_DURATION"
 )
 
 // All allowed values of MetricAggregationMetricField enum
@@ -111,3 +111,4 @@ func (v *NullableMetricAggregationMetricField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

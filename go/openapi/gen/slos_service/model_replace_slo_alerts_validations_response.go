@@ -24,8 +24,8 @@ var _ MappedNullable = &ReplaceSloAlertsValidationsResponse{}
 // ReplaceSloAlertsValidationsResponse Response with validated alerts before replacing an existing SLO.
 type ReplaceSloAlertsValidationsResponse struct {
 	// The alerts validation result.
-	AlertsValidationResult            []SloAlertValidityResult `json:"alertsValidationResult"`
-	AdditionalProperties              map[string]interface{}
+	AlertsValidationResult []SloAlertValidityResult `json:"alertsValidationResult"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -74,7 +74,7 @@ func (o *ReplaceSloAlertsValidationsResponse) SetAlertsValidationResult(v []SloA
 }
 
 func (o ReplaceSloAlertsValidationsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -105,10 +105,10 @@ func (o *ReplaceSloAlertsValidationsResponse) UnmarshalJSON(data []byte) (err er
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -171,3 +171,4 @@ func (v *NullableReplaceSloAlertsValidationsResponse) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

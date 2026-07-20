@@ -24,9 +24,9 @@ var _ MappedNullable = &LineChartDataprimeQuery{}
 type LineChartDataprimeQuery struct {
 	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
 	// List of query filters
-	Filters                           []FilterSource   `json:"filters,omitempty"`
-	TimeFrame                         *TimeFrameSelect `json:"timeFrame,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Filters []FilterSource `json:"filters,omitempty"`
+	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *LineChartDataprimeQuery) SetTimeFrame(v TimeFrameSelect) {
 }
 
 func (o LineChartDataprimeQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableLineChartDataprimeQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

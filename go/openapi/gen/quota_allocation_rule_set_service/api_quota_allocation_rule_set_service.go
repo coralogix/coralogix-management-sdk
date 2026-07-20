@@ -18,12 +18,13 @@ import (
 	"net/url"
 )
 
+
 // QuotaAllocationRuleSetServiceAPIService QuotaAllocationRuleSetServiceAPI service
 type QuotaAllocationRuleSetServiceAPIService service
 
 type ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest struct {
-	ctx                                 context.Context
-	ApiService                          *QuotaAllocationRuleSetServiceAPIService
+	ctx context.Context
+	ApiService *QuotaAllocationRuleSetServiceAPIService
 	createQuotaAllocationRuleSetRequest *CreateQuotaAllocationRuleSetRequest
 }
 
@@ -44,25 +45,24 @@ Creates new quota allocation rules.
 Requires the following permissions:
 - `team-quota-rules:Manage`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest
 */
 func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSet(ctx context.Context) ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest {
 	return ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateQuotaAllocationRuleSetResponse
+//  @return CreateQuotaAllocationRuleSetResponse
 func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetExecute(r ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest) (*CreateQuotaAllocationRuleSetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateQuotaAllocationRuleSetResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateQuotaAllocationRuleSetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaAllocationRuleSetServiceAPIService.QuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSet")
@@ -127,8 +127,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -138,8 +138,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
@@ -149,8 +149,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -160,8 +160,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -179,7 +179,7 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceC
 }
 
 type ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *QuotaAllocationRuleSetServiceAPIService
 }
 
@@ -195,25 +195,24 @@ Deletes the quota allocation rules.
 Requires the following permissions:
 - `team-quota-rules:Manage`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest
 */
 func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSet(ctx context.Context) ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest {
 	return ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DeleteQuotaAllocationRuleSetResponse
+//  @return DeleteQuotaAllocationRuleSetResponse
 func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetExecute(r ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest) (*DeleteQuotaAllocationRuleSetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DeleteQuotaAllocationRuleSetResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DeleteQuotaAllocationRuleSetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaAllocationRuleSetServiceAPIService.QuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSet")
@@ -273,8 +272,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -284,8 +283,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -295,8 +294,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -306,8 +305,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -325,9 +324,9 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceD
 }
 
 type ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *QuotaAllocationRuleSetServiceAPIService
-	id         *string
+	id *string
 }
 
 // Unique identifier.
@@ -348,25 +347,24 @@ Returns the current quota allocation rules.
 Requires the following permissions:
 - `team-quota-rules:Read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest
 */
 func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceGetQuotaAllocationRuleSet(ctx context.Context) ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest {
 	return ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetQuotaAllocationRuleSetResponse
+//  @return GetQuotaAllocationRuleSetResponse
 func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetExecute(r ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest) (*GetQuotaAllocationRuleSetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetQuotaAllocationRuleSetResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetQuotaAllocationRuleSetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaAllocationRuleSetServiceAPIService.QuotaAllocationRuleSetServiceGetQuotaAllocationRuleSet")
@@ -431,8 +429,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -442,8 +440,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -453,8 +451,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -464,8 +462,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -483,8 +481,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceG
 }
 
 type ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest struct {
-	ctx                                  context.Context
-	ApiService                           *QuotaAllocationRuleSetServiceAPIService
+	ctx context.Context
+	ApiService *QuotaAllocationRuleSetServiceAPIService
 	replaceQuotaAllocationRuleSetRequest *ReplaceQuotaAllocationRuleSetRequest
 }
 
@@ -505,25 +503,24 @@ Updates the quota allocation rules.
 Requires the following permissions:
 - `team-quota-rules:Manage`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest
 */
 func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSet(ctx context.Context) ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest {
 	return ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ReplaceQuotaAllocationRuleSetResponse
+//  @return ReplaceQuotaAllocationRuleSetResponse
 func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetExecute(r ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest) (*ReplaceQuotaAllocationRuleSetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ReplaceQuotaAllocationRuleSetResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ReplaceQuotaAllocationRuleSetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaAllocationRuleSetServiceAPIService.QuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSet")
@@ -588,8 +585,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -599,8 +596,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -610,8 +607,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -621,8 +618,8 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -24,8 +24,8 @@ type PresetType string
 // List of PresetType
 const (
 	PRESETTYPE_PRESET_TYPE_UNSPECIFIED PresetType = "PRESET_TYPE_UNSPECIFIED"
-	PRESETTYPE_SYSTEM                  PresetType = "SYSTEM"
-	PRESETTYPE_CUSTOM                  PresetType = "CUSTOM"
+	PRESETTYPE_SYSTEM PresetType = "SYSTEM"
+	PRESETTYPE_CUSTOM PresetType = "CUSTOM"
 )
 
 // All allowed values of PresetType enum
@@ -113,3 +113,4 @@ func (v *NullablePresetType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

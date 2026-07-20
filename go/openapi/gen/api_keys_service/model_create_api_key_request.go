@@ -25,12 +25,12 @@ type CreateApiKeyRequest struct {
 	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups.
 	AccessPolicy *string `json:"accessPolicy,omitempty"`
 	// Whether the value is stored as a one-way hash.
-	Hashed         *bool                              `json:"hashed,omitempty"`
+	Hashed *bool `json:"hashed,omitempty"`
 	KeyPermissions *CreateApiKeyRequestKeyPermissions `json:"keyPermissions,omitempty"`
 	// Display name.
-	Name                              *string `json:"name,omitempty"`
-	Owner                             *Owner  `json:"owner,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Name *string `json:"name,omitempty"`
+	Owner *Owner `json:"owner,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -214,7 +214,7 @@ func (o *CreateApiKeyRequest) SetOwner(v Owner) {
 }
 
 func (o CreateApiKeyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -308,3 +308,4 @@ func (v *NullableCreateApiKeyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

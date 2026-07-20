@@ -24,8 +24,8 @@ type LegendBy string
 // List of LegendBy
 const (
 	LEGENDBY_LEGEND_BY_UNSPECIFIED LegendBy = "LEGEND_BY_UNSPECIFIED"
-	LEGENDBY_LEGEND_BY_THRESHOLDS  LegendBy = "LEGEND_BY_THRESHOLDS"
-	LEGENDBY_LEGEND_BY_GROUPS      LegendBy = "LEGEND_BY_GROUPS"
+	LEGENDBY_LEGEND_BY_THRESHOLDS LegendBy = "LEGEND_BY_THRESHOLDS"
+	LEGENDBY_LEGEND_BY_GROUPS LegendBy = "LEGEND_BY_GROUPS"
 )
 
 // All allowed values of LegendBy enum
@@ -113,3 +113,4 @@ func (v *NullableLegendBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

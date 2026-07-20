@@ -24,8 +24,8 @@ type V2SourceType string
 // List of v2.SourceType
 const (
 	V2SOURCETYPE_SOURCE_TYPE_UNSPECIFIED V2SourceType = "SOURCE_TYPE_UNSPECIFIED"
-	V2SOURCETYPE_SOURCE_TYPE_LOG         V2SourceType = "SOURCE_TYPE_LOG"
-	V2SOURCETYPE_SOURCE_TYPE_DATA_MAP    V2SourceType = "SOURCE_TYPE_DATA_MAP"
+	V2SOURCETYPE_SOURCE_TYPE_LOG V2SourceType = "SOURCE_TYPE_LOG"
+	V2SOURCETYPE_SOURCE_TYPE_DATA_MAP V2SourceType = "SOURCE_TYPE_DATA_MAP"
 )
 
 // All allowed values of V2SourceType enum
@@ -113,3 +113,4 @@ func (v *NullableV2SourceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,10 +23,10 @@ var _ MappedNullable = &IndicatorFilter{}
 // IndicatorFilter Object for filtering signals to be processed by the cases pipeline. The filters will be AND'ed together.
 type IndicatorFilter struct {
 	// Enable/disable this filter
-	Enabled                           *bool                    `json:"enabled,omitempty"`
-	EntityLabels                      *EntityLabelFilter       `json:"entityLabels,omitempty"`
-	Priorities                        *IndicatorPriorityFilter `json:"priorities,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Enabled *bool `json:"enabled,omitempty"`
+	EntityLabels *EntityLabelFilter `json:"entityLabels,omitempty"`
+	Priorities *IndicatorPriorityFilter `json:"priorities,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *IndicatorFilter) SetPriorities(v IndicatorPriorityFilter) {
 }
 
 func (o IndicatorFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableIndicatorFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

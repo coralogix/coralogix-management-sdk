@@ -24,8 +24,8 @@ var _ MappedNullable = &DeliveryFailure{}
 // DeliveryFailure Failed delivery outcome with error details.
 type DeliveryFailure struct {
 	// Error message describing the failure
-	ErrorMessage                      string `json:"errorMessage"`
-	AdditionalProperties              map[string]interface{}
+	ErrorMessage string `json:"errorMessage"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -74,7 +74,7 @@ func (o *DeliveryFailure) SetErrorMessage(v string) {
 }
 
 func (o DeliveryFailure) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -105,10 +105,10 @@ func (o *DeliveryFailure) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -171,3 +171,4 @@ func (v *NullableDeliveryFailure) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

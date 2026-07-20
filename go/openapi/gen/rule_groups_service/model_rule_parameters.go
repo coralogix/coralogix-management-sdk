@@ -22,17 +22,17 @@ var _ MappedNullable = &RuleParameters{}
 
 // RuleParameters Rule parameters.
 type RuleParameters struct {
-	AllowParameters                   *AllowParameters            `json:"allowParameters,omitempty"`
-	BlockParameters                   *BlockParameters            `json:"blockParameters,omitempty"`
-	ExtractParameters                 *ExtractParameters          `json:"extractParameters,omitempty"`
-	ExtractTimestampParameters        *ExtractTimestampParameters `json:"extractTimestampParameters,omitempty"`
-	JsonExtractParameters             *JsonExtractParameters      `json:"jsonExtractParameters,omitempty"`
-	JsonParseParameters               *JsonParseParameters        `json:"jsonParseParameters,omitempty"`
-	JsonStringifyParameters           *JsonStringifyParameters    `json:"jsonStringifyParameters,omitempty"`
-	ParseParameters                   *ParseParameters            `json:"parseParameters,omitempty"`
-	RemoveFieldsParameters            *RemoveFieldsParameters     `json:"removeFieldsParameters,omitempty"`
-	ReplaceParameters                 *ReplaceParameters          `json:"replaceParameters,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AllowParameters *AllowParameters `json:"allowParameters,omitempty"`
+	BlockParameters *BlockParameters `json:"blockParameters,omitempty"`
+	ExtractParameters *ExtractParameters `json:"extractParameters,omitempty"`
+	ExtractTimestampParameters *ExtractTimestampParameters `json:"extractTimestampParameters,omitempty"`
+	JsonExtractParameters *JsonExtractParameters `json:"jsonExtractParameters,omitempty"`
+	JsonParseParameters *JsonParseParameters `json:"jsonParseParameters,omitempty"`
+	JsonStringifyParameters *JsonStringifyParameters `json:"jsonStringifyParameters,omitempty"`
+	ParseParameters *ParseParameters `json:"parseParameters,omitempty"`
+	RemoveFieldsParameters *RemoveFieldsParameters `json:"removeFieldsParameters,omitempty"`
+	ReplaceParameters *ReplaceParameters `json:"replaceParameters,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -376,7 +376,7 @@ func (o *RuleParameters) SetReplaceParameters(v ReplaceParameters) {
 }
 
 func (o RuleParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -590,3 +590,4 @@ func (v *NullableRuleParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

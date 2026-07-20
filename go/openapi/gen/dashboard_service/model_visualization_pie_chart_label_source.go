@@ -24,8 +24,8 @@ type VisualizationPieChartLabelSource string
 // List of Visualization.PieChart.LabelSource
 const (
 	VISUALIZATIONPIECHARTLABELSOURCE_LABEL_SOURCE_UNSPECIFIED VisualizationPieChartLabelSource = "LABEL_SOURCE_UNSPECIFIED"
-	VISUALIZATIONPIECHARTLABELSOURCE_LABEL_SOURCE_INNER       VisualizationPieChartLabelSource = "LABEL_SOURCE_INNER"
-	VISUALIZATIONPIECHARTLABELSOURCE_LABEL_SOURCE_STACK       VisualizationPieChartLabelSource = "LABEL_SOURCE_STACK"
+	VISUALIZATIONPIECHARTLABELSOURCE_LABEL_SOURCE_INNER VisualizationPieChartLabelSource = "LABEL_SOURCE_INNER"
+	VISUALIZATIONPIECHARTLABELSOURCE_LABEL_SOURCE_STACK VisualizationPieChartLabelSource = "LABEL_SOURCE_STACK"
 )
 
 // All allowed values of VisualizationPieChartLabelSource enum
@@ -113,3 +113,4 @@ func (v *NullableVisualizationPieChartLabelSource) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,12 +22,12 @@ var _ MappedNullable = &GetConfigurationResponse{}
 
 // GetConfigurationResponse This data structure is obtained as a response to a request to retrieve the configuration of a SAML service provider and identity provider
 type GetConfigurationResponse struct {
-	IdpDetails    *IDPDetails    `json:"idpDetails,omitempty"`
+	IdpDetails *IDPDetails `json:"idpDetails,omitempty"`
 	IdpParameters *IDPParameters `json:"idpParameters,omitempty"`
-	SpParameters  *SPParameters  `json:"spParameters,omitempty"`
+	SpParameters *SPParameters `json:"spParameters,omitempty"`
 	// The team id.
-	TeamId                            *int64 `json:"teamId,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TeamId *int64 `json:"teamId,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -179,7 +179,7 @@ func (o *GetConfigurationResponse) SetTeamId(v int64) {
 }
 
 func (o GetConfigurationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,3 +269,4 @@ func (v *NullableGetConfigurationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

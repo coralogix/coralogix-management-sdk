@@ -26,8 +26,8 @@ type TimeFrame struct {
 	// The from.
 	From *time.Time `json:"from,omitempty"`
 	// The to.
-	To                                *time.Time `json:"to,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	To *time.Time `json:"to,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -115,7 +115,7 @@ func (o *TimeFrame) SetTo(v time.Time) {
 }
 
 func (o TimeFrame) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,3 +197,4 @@ func (v *NullableTimeFrame) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

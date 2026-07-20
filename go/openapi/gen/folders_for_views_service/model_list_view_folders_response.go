@@ -23,8 +23,8 @@ var _ MappedNullable = &ListViewFoldersResponse{}
 // ListViewFoldersResponse Response containing a list of view folders.
 type ListViewFoldersResponse struct {
 	// The folders.
-	Folders                           []ViewFolder `json:"folders,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Folders []ViewFolder `json:"folders,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListViewFoldersResponse) SetFolders(v []ViewFolder) {
 }
 
 func (o ListViewFoldersResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListViewFoldersResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

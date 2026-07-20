@@ -26,8 +26,8 @@ type UsageBucket struct {
 	// Start of the bucket window, in epoch milliseconds (the rounded-down bucket timestamp).
 	BucketStartMs string `json:"bucketStartMs" validate:"regexp=^-?[0-9]+$"`
 	// Number of bytes the draft policy would match within this bucket.
-	Bytes                             string `json:"bytes" validate:"regexp=^-?[0-9]+$"`
-	AdditionalProperties              map[string]interface{}
+	Bytes string `json:"bytes" validate:"regexp=^-?[0-9]+$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -101,7 +101,7 @@ func (o *UsageBucket) SetBytes(v string) {
 }
 
 func (o UsageBucket) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -134,10 +134,10 @@ func (o *UsageBucket) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,3 +201,4 @@ func (v *NullableUsageBucket) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

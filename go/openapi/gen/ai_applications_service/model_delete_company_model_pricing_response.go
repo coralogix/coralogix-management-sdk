@@ -23,8 +23,8 @@ var _ MappedNullable = &DeleteCompanyModelPricingResponse{}
 // DeleteCompanyModelPricingResponse Response returned after deleting company model pricing.
 type DeleteCompanyModelPricingResponse struct {
 	// Unique identifier of the deleted pricing record.
-	Id                                *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
-	AdditionalProperties              map[string]interface{}
+	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *DeleteCompanyModelPricingResponse) SetId(v string) {
 }
 
 func (o DeleteCompanyModelPricingResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableDeleteCompanyModelPricingResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

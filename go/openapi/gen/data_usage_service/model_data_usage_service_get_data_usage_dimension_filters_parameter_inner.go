@@ -22,12 +22,12 @@ var _ MappedNullable = &DataUsageServiceGetDataUsageDimensionFiltersParameterInn
 
 // DataUsageServiceGetDataUsageDimensionFiltersParameterInner struct for DataUsageServiceGetDataUsageDimensionFiltersParameterInner
 type DataUsageServiceGetDataUsageDimensionFiltersParameterInner struct {
-	GenericDimension                  *GenericDimension    `json:"genericDimension,omitempty"`
-	Pillar                            *V2Pillar            `json:"pillar,omitempty"`
-	Priority                          *V2Priority          `json:"priority,omitempty"`
-	Severity                          *DatausageV2Severity `json:"severity,omitempty"`
-	Tier                              *V2TcoTier           `json:"tier,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	GenericDimension *GenericDimension `json:"genericDimension,omitempty"`
+	Pillar *V2Pillar `json:"pillar,omitempty"`
+	Priority *V2Priority `json:"priority,omitempty"`
+	Severity *DatausageV2Severity `json:"severity,omitempty"`
+	Tier *V2TcoTier `json:"tier,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -211,7 +211,7 @@ func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) SetTier(v V
 }
 
 func (o DataUsageServiceGetDataUsageDimensionFiltersParameterInner) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -360,3 +360,4 @@ func (v *NullableDataUsageServiceGetDataUsageDimensionFiltersParameterInner) Unm
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

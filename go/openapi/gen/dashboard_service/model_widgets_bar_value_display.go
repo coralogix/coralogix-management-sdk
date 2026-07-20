@@ -24,9 +24,9 @@ type WidgetsBarValueDisplay string
 // List of widgets.BarValueDisplay
 const (
 	WIDGETSBARVALUEDISPLAY_BAR_VALUE_DISPLAY_UNSPECIFIED WidgetsBarValueDisplay = "BAR_VALUE_DISPLAY_UNSPECIFIED"
-	WIDGETSBARVALUEDISPLAY_BAR_VALUE_DISPLAY_TOP         WidgetsBarValueDisplay = "BAR_VALUE_DISPLAY_TOP"
-	WIDGETSBARVALUEDISPLAY_BAR_VALUE_DISPLAY_INSIDE      WidgetsBarValueDisplay = "BAR_VALUE_DISPLAY_INSIDE"
-	WIDGETSBARVALUEDISPLAY_BAR_VALUE_DISPLAY_BOTH        WidgetsBarValueDisplay = "BAR_VALUE_DISPLAY_BOTH"
+	WIDGETSBARVALUEDISPLAY_BAR_VALUE_DISPLAY_TOP WidgetsBarValueDisplay = "BAR_VALUE_DISPLAY_TOP"
+	WIDGETSBARVALUEDISPLAY_BAR_VALUE_DISPLAY_INSIDE WidgetsBarValueDisplay = "BAR_VALUE_DISPLAY_INSIDE"
+	WIDGETSBARVALUEDISPLAY_BAR_VALUE_DISPLAY_BOTH WidgetsBarValueDisplay = "BAR_VALUE_DISPLAY_BOTH"
 )
 
 // All allowed values of WidgetsBarValueDisplay enum
@@ -115,3 +115,4 @@ func (v *NullableWidgetsBarValueDisplay) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

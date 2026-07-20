@@ -24,11 +24,11 @@ type CasePriority string
 // List of CasePriority
 const (
 	CASEPRIORITY_CASE_PRIORITY_UNSPECIFIED CasePriority = "CASE_PRIORITY_UNSPECIFIED"
-	CASEPRIORITY_CASE_PRIORITY_P1          CasePriority = "CASE_PRIORITY_P1"
-	CASEPRIORITY_CASE_PRIORITY_P2          CasePriority = "CASE_PRIORITY_P2"
-	CASEPRIORITY_CASE_PRIORITY_P3          CasePriority = "CASE_PRIORITY_P3"
-	CASEPRIORITY_CASE_PRIORITY_P4          CasePriority = "CASE_PRIORITY_P4"
-	CASEPRIORITY_CASE_PRIORITY_P5          CasePriority = "CASE_PRIORITY_P5"
+	CASEPRIORITY_CASE_PRIORITY_P1 CasePriority = "CASE_PRIORITY_P1"
+	CASEPRIORITY_CASE_PRIORITY_P2 CasePriority = "CASE_PRIORITY_P2"
+	CASEPRIORITY_CASE_PRIORITY_P3 CasePriority = "CASE_PRIORITY_P3"
+	CASEPRIORITY_CASE_PRIORITY_P4 CasePriority = "CASE_PRIORITY_P4"
+	CASEPRIORITY_CASE_PRIORITY_P5 CasePriority = "CASE_PRIORITY_P5"
 )
 
 // All allowed values of CasePriority enum
@@ -119,3 +119,4 @@ func (v *NullableCasePriority) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

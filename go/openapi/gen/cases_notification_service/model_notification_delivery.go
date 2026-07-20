@@ -13,8 +13,8 @@ package cases_notification_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -24,15 +24,15 @@ var _ MappedNullable = &NotificationDelivery{}
 
 // NotificationDelivery Delivery results for a single notification.
 type NotificationDelivery struct {
-	Attempted             *RoutedDelivery              `json:"attempted,omitempty"`
+	Attempted *RoutedDelivery `json:"attempted,omitempty"`
 	NoNotificationCreated *NoNotificationCreatedResult `json:"noNotificationCreated,omitempty"`
 	// Indicates that no router matched the notification request.
 	NoRouterMatched map[string]interface{} `json:"noRouterMatched,omitempty"`
 	// The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests
 	RequestNotificationId *string `json:"requestNotificationId,omitempty"`
 	// When the notification was triggered
-	Timestamp                         time.Time `json:"timestamp"`
-	AdditionalProperties              map[string]interface{}
+	Timestamp time.Time `json:"timestamp"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -209,7 +209,7 @@ func (o *NotificationDelivery) SetTimestamp(v time.Time) {
 }
 
 func (o NotificationDelivery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -275,10 +275,10 @@ func (o *NotificationDelivery) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -373,3 +373,4 @@ func (v *NullableNotificationDelivery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

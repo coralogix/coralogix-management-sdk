@@ -23,9 +23,9 @@ var _ MappedNullable = &ExtensionBinary{}
 // ExtensionBinary struct for ExtensionBinary
 type ExtensionBinary struct {
 	// Data payload.
-	Data                              *string                    `json:"data,omitempty"`
-	Type                              *ExtensionBinaryBinaryType `json:"type,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Data *string `json:"data,omitempty"`
+	Type *ExtensionBinaryBinaryType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *ExtensionBinary) SetType(v ExtensionBinaryBinaryType) {
 }
 
 func (o ExtensionBinary) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableExtensionBinary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

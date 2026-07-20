@@ -23,12 +23,12 @@ var _ MappedNullable = &GetLimitsResponse{}
 // GetLimitsResponse Response containing the events-to-metrics quota limits.
 type GetLimitsResponse struct {
 	// The company id.
-	CompanyId *string `json:"companyId,omitempty"`
+	CompanyId *string `json:"companyId,omitempty" validate:"regexp=^[0-9]+$"`
 	// The labels limit.
-	LabelsLimit                       *int32      `json:"labelsLimit,omitempty"`
-	MetricsLimit                      *LimitUsage `json:"metricsLimit,omitempty"`
-	PermutationsLimit                 *LimitUsage `json:"permutationsLimit,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	LabelsLimit *int32 `json:"labelsLimit,omitempty"`
+	MetricsLimit *LimitUsage `json:"metricsLimit,omitempty"`
+	PermutationsLimit *LimitUsage `json:"permutationsLimit,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -180,7 +180,7 @@ func (o *GetLimitsResponse) SetPermutationsLimit(v LimitUsage) {
 }
 
 func (o GetLimitsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,3 +270,4 @@ func (v *NullableGetLimitsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ var _ MappedNullable = &ListManagedIntegrationKeysResponse{}
 // ListManagedIntegrationKeysResponse Response containing a list of managed integration keys.
 type ListManagedIntegrationKeysResponse struct {
 	// The integration keys.
-	IntegrationKeys                   []string `json:"integrationKeys,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IntegrationKeys []string `json:"integrationKeys,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListManagedIntegrationKeysResponse) SetIntegrationKeys(v []string) {
 }
 
 func (o ListManagedIntegrationKeysResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListManagedIntegrationKeysResponse) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

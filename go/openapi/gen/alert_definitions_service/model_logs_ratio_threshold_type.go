@@ -26,19 +26,19 @@ type LogsRatioThresholdType struct {
 	// The alias for the denominator filter, used for display purposes
 	DenominatorAlias *string `json:"denominatorAlias,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
-	EvaluationDelayMs *int32               `json:"evaluationDelayMs,omitempty"`
-	GroupByFor        *LogsRatioGroupByFor `json:"groupByFor,omitempty"`
+	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
+	GroupByFor *LogsRatioGroupByFor `json:"groupByFor,omitempty"`
 	// The configuration for ignoring infinity values in the ratio
 	IgnoreInfinity *bool `json:"ignoreInfinity,omitempty"`
 	// The notification payload filter.
-	NotificationPayloadFilter []string      `json:"notificationPayloadFilter,omitempty"`
-	Numerator                 *V3LogsFilter `json:"numerator,omitempty"`
+	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
+	Numerator *V3LogsFilter `json:"numerator,omitempty"`
 	// The alias for the numerator filter, used for display purposes
 	NumeratorAlias *string `json:"numeratorAlias,omitempty"`
 	// The rules for the ratio alert
-	Rules                             []LogsRatioRules              `json:"rules,omitempty"`
-	UndetectedValuesManagement        *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Rules []LogsRatioRules `json:"rules,omitempty"`
+	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -382,7 +382,7 @@ func (o *LogsRatioThresholdType) SetUndetectedValuesManagement(v V3UndetectedVal
 }
 
 func (o LogsRatioThresholdType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -496,3 +496,4 @@ func (v *NullableLogsRatioThresholdType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

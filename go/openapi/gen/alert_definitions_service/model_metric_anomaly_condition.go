@@ -26,11 +26,11 @@ type MetricAnomalyCondition struct {
 	// The percentage of the metric that must exceed the threshold to trigger the alert
 	ForOverPct *int64 `json:"forOverPct,omitempty"`
 	// The percentage of non-null values required to trigger the alert
-	MinNonNullValuesPct *int64            `json:"minNonNullValuesPct,omitempty"`
-	OfTheLast           *MetricTimeWindow `json:"ofTheLast,omitempty"`
+	MinNonNullValuesPct *int64 `json:"minNonNullValuesPct,omitempty"`
+	OfTheLast *MetricTimeWindow `json:"ofTheLast,omitempty"`
 	// The threshold value for the alert condition
-	Threshold                         *float64 `json:"threshold,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Threshold *float64 `json:"threshold,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -214,7 +214,7 @@ func (o *MetricAnomalyCondition) SetThreshold(v float64) {
 }
 
 func (o MetricAnomalyCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -308,3 +308,4 @@ func (v *NullableMetricAnomalyCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

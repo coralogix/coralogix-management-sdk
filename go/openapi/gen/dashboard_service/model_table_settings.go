@@ -23,9 +23,9 @@ var _ MappedNullable = &TableSettings{}
 // TableSettings Table settings.
 type TableSettings struct {
 	// List of configured column widths
-	ColumnWidths                      []ColumnWidthEntry `json:"columnWidths,omitempty"`
-	RowStyle                          *RowStyle          `json:"rowStyle,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ColumnWidths []ColumnWidthEntry `json:"columnWidths,omitempty"`
+	RowStyle *RowStyle `json:"rowStyle,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *TableSettings) SetRowStyle(v RowStyle) {
 }
 
 func (o TableSettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableTableSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

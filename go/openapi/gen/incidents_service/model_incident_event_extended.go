@@ -13,8 +13,8 @@ package incidents_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -27,10 +27,10 @@ type IncidentEventExtended struct {
 	// The cx event key.
 	CxEventKey string `json:"cxEventKey"`
 	// The cx event timestamp.
-	CxEventTimestamp                  time.Time                      `json:"cxEventTimestamp"`
-	IncidentEvent                     IncidentEvent                  `json:"incidentEvent"`
-	IncidentEventExtendedMetadata     *IncidentEventExtendedMetadata `json:"incidentEventExtendedMetadata,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	CxEventTimestamp time.Time `json:"cxEventTimestamp"`
+	IncidentEvent IncidentEvent `json:"incidentEvent"`
+	IncidentEventExtendedMetadata *IncidentEventExtendedMetadata `json:"incidentEventExtendedMetadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -161,7 +161,7 @@ func (o *IncidentEventExtended) SetIncidentEventExtendedMetadata(v IncidentEvent
 }
 
 func (o IncidentEventExtended) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -199,10 +199,10 @@ func (o *IncidentEventExtended) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -268,3 +268,4 @@ func (v *NullableIncidentEventExtended) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

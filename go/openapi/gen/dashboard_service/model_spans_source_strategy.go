@@ -22,10 +22,10 @@ var _ MappedNullable = &SpansSourceStrategy{}
 
 // SpansSourceStrategy Determines the time strategy for fetching spans (instant snapshot, fixed range, or sliding window).
 type SpansSourceStrategy struct {
-	Duration                          *SpansSourceStrategyDuration `json:"duration,omitempty"`
-	Instant                           *SpansSourceStrategyInstant  `json:"instant,omitempty"`
-	Range                             *SpansSourceStrategyRange    `json:"range,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Duration *SpansSourceStrategyDuration `json:"duration,omitempty"`
+	Instant *SpansSourceStrategyInstant `json:"instant,omitempty"`
+	Range *SpansSourceStrategyRange `json:"range,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *SpansSourceStrategy) SetRange(v SpansSourceStrategyRange) {
 }
 
 func (o SpansSourceStrategy) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,3 +268,4 @@ func (v *NullableSpansSourceStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

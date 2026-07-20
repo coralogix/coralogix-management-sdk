@@ -22,10 +22,10 @@ var _ MappedNullable = &DataprimeSourceStrategy{}
 
 // DataprimeSourceStrategy Determines the time strategy for fetching Dataprime results (instant snapshot, fixed range, or sliding window).
 type DataprimeSourceStrategy struct {
-	Duration                          *DataprimeSourceStrategyDuration `json:"duration,omitempty"`
-	Instant                           *DataprimeSourceStrategyInstant  `json:"instant,omitempty"`
-	Range                             *DataprimeSourceStrategyRange    `json:"range,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Duration *DataprimeSourceStrategyDuration `json:"duration,omitempty"`
+	Instant *DataprimeSourceStrategyInstant `json:"instant,omitempty"`
+	Range *DataprimeSourceStrategyRange `json:"range,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *DataprimeSourceStrategy) SetRange(v DataprimeSourceStrategyRange) {
 }
 
 func (o DataprimeSourceStrategy) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,3 +268,4 @@ func (v *NullableDataprimeSourceStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

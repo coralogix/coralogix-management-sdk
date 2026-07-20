@@ -23,8 +23,8 @@ var _ MappedNullable = &AllowedTopicsConfig{}
 // AllowedTopicsConfig Configuration for the AllowedTopics evaluation.
 type AllowedTopicsConfig struct {
 	// Topics considered allowed.
-	Topics                            []string `json:"topics,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Topics []string `json:"topics,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *AllowedTopicsConfig) SetTopics(v []string) {
 }
 
 func (o AllowedTopicsConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableAllowedTopicsConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

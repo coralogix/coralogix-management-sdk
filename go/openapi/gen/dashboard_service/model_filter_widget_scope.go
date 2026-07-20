@@ -23,9 +23,9 @@ var _ MappedNullable = &FilterWidgetScope{}
 // FilterWidgetScope Annotation.widget scope.
 type FilterWidgetScope struct {
 	// Annotation.widget scope.all widgets.
-	AllWidgets                        map[string]interface{}            `json:"allWidgets,omitempty"`
-	SpecificWidgets                   *FilterWidgetScopeSpecificWidgets `json:"specificWidgets,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AllWidgets map[string]interface{} `json:"allWidgets,omitempty"`
+	SpecificWidgets *FilterWidgetScopeSpecificWidgets `json:"specificWidgets,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *FilterWidgetScope) SetSpecificWidgets(v FilterWidgetScopeSpecificWidget
 }
 
 func (o FilterWidgetScope) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableFilterWidgetScope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

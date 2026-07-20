@@ -22,7 +22,7 @@ var _ MappedNullable = &AlertDefProperties{}
 
 // AlertDefProperties User-configurable properties of an alert definition
 type AlertDefProperties struct {
-	ActiveOn           *ActivitySchedule       `json:"activeOn,omitempty"`
+	ActiveOn *ActivitySchedule `json:"activeOn,omitempty"`
 	AnalyticsImmediate *AnalyticsImmediateType `json:"analyticsImmediate,omitempty"`
 	AnalyticsThreshold *AnalyticsThresholdType `json:"analyticsThreshold,omitempty"`
 	// The sources from which to sample logs
@@ -30,37 +30,37 @@ type AlertDefProperties struct {
 	// Whether the alert has been marked as deleted
 	Deleted *bool `json:"deleted,omitempty"`
 	// A detailed description of what the alert monitors and when it triggers
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether the alert is currently active and monitoring
 	Enabled *bool `json:"enabled,omitempty"`
 	// Labels used to identify and categorize the alert entity
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
-	Flow         *FlowType          `json:"flow,omitempty"`
+	Flow *FlowType `json:"flow,omitempty"`
 	// Keys used to group and aggregate alert data
-	GroupByKeys               []string                       `json:"groupByKeys,omitempty"`
-	IncidentsSettings         *AlertDefIncidentSettings      `json:"incidentsSettings,omitempty"`
-	LogsAnomaly               *LogsAnomalyType               `json:"logsAnomaly,omitempty"`
-	LogsImmediate             *LogsImmediateType             `json:"logsImmediate,omitempty"`
-	LogsNewValue              *LogsNewValueType              `json:"logsNewValue,omitempty"`
-	LogsRatioThreshold        *LogsRatioThresholdType        `json:"logsRatioThreshold,omitempty"`
-	LogsThreshold             *LogsThresholdType             `json:"logsThreshold,omitempty"`
+	GroupByKeys []string `json:"groupByKeys,omitempty"`
+	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
+	LogsAnomaly *LogsAnomalyType `json:"logsAnomaly,omitempty"`
+	LogsImmediate *LogsImmediateType `json:"logsImmediate,omitempty"`
+	LogsNewValue *LogsNewValueType `json:"logsNewValue,omitempty"`
+	LogsRatioThreshold *LogsRatioThresholdType `json:"logsRatioThreshold,omitempty"`
+	LogsThreshold *LogsThresholdType `json:"logsThreshold,omitempty"`
 	LogsTimeRelativeThreshold *LogsTimeRelativeThresholdType `json:"logsTimeRelativeThreshold,omitempty"`
-	LogsUniqueCount           *LogsUniqueCountType           `json:"logsUniqueCount,omitempty"`
-	MetricAnomaly             *MetricAnomalyType             `json:"metricAnomaly,omitempty"`
-	MetricThreshold           *MetricThresholdType           `json:"metricThreshold,omitempty"`
+	LogsUniqueCount *LogsUniqueCountType `json:"logsUniqueCount,omitempty"`
+	MetricAnomaly *MetricAnomalyType `json:"metricAnomaly,omitempty"`
+	MetricThreshold *MetricThresholdType `json:"metricThreshold,omitempty"`
 	// The name of the alert definition
-	Name              *string                    `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
 	// Additional notification groups for alerts (deprecated)
 	NotificationGroupExcess []AlertDefNotificationGroup `json:"notificationGroupExcess,omitempty"`
 	// Whether the alert is in phantom mode (creating incidents or not)
-	PhantomMode                       *bool                 `json:"phantomMode,omitempty"`
-	Priority                          *AlertDefPriority     `json:"priority,omitempty"`
-	SloThreshold                      *SloThresholdType     `json:"sloThreshold,omitempty"`
-	TracingImmediate                  *TracingImmediateType `json:"tracingImmediate,omitempty"`
-	TracingThreshold                  *TracingThresholdType `json:"tracingThreshold,omitempty"`
-	Type                              *AlertDefType         `json:"type,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	PhantomMode *bool `json:"phantomMode,omitempty"`
+	Priority *AlertDefPriority `json:"priority,omitempty"`
+	SloThreshold *SloThresholdType `json:"sloThreshold,omitempty"`
+	TracingImmediate *TracingImmediateType `json:"tracingImmediate,omitempty"`
+	TracingThreshold *TracingThresholdType `json:"tracingThreshold,omitempty"`
+	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -1012,7 +1012,7 @@ func (o *AlertDefProperties) SetType(v AlertDefType) {
 }
 
 func (o AlertDefProperties) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1347,3 +1347,4 @@ func (v *NullableAlertDefProperties) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

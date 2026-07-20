@@ -13,8 +13,8 @@ package incidents_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -51,11 +51,11 @@ type Incident struct {
 	// Metadata labels.
 	MetaLabels []IncidentsV1MetaLabel `json:"metaLabels,omitempty"`
 	// Display name.
-	Name                              *string          `json:"name,omitempty"`
-	Severity                          IncidentSeverity `json:"severity"`
-	State                             IncidentState    `json:"state"`
-	Status                            IncidentStatus   `json:"status"`
-	AdditionalProperties              map[string]interface{}
+	Name *string `json:"name,omitempty"`
+	Severity IncidentSeverity `json:"severity"`
+	State IncidentState `json:"state"`
+	Status IncidentStatus `json:"status"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -539,7 +539,7 @@ func (o *Incident) SetStatus(v IncidentStatus) {
 }
 
 func (o Incident) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -607,10 +607,10 @@ func (o *Incident) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -689,3 +689,4 @@ func (v *NullableIncident) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

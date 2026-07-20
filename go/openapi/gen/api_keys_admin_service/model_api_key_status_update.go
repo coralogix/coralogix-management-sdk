@@ -25,8 +25,8 @@ type ApiKeyStatusUpdate struct {
 	// Whether this resource is active.
 	Active *bool `json:"active,omitempty"`
 	// Key identifier.
-	KeyId                             *string `json:"keyId,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	KeyId *string `json:"keyId,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *ApiKeyStatusUpdate) SetKeyId(v string) {
 }
 
 func (o ApiKeyStatusUpdate) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableApiKeyStatusUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

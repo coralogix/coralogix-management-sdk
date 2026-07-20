@@ -26,8 +26,8 @@ type GetEnrichmentLimitResponse struct {
 	// Limit.
 	Limit int64 `json:"limit"`
 	// The used.
-	Used                              int64 `json:"used"`
-	AdditionalProperties              map[string]interface{}
+	Used int64 `json:"used"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -101,7 +101,7 @@ func (o *GetEnrichmentLimitResponse) SetUsed(v int64) {
 }
 
 func (o GetEnrichmentLimitResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -134,10 +134,10 @@ func (o *GetEnrichmentLimitResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,3 +201,4 @@ func (v *NullableGetEnrichmentLimitResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,8 +22,8 @@ var _ MappedNullable = &TestContextualDataIntegrationRequest{}
 
 // TestContextualDataIntegrationRequest Request for testing a contextual data integration.
 type TestContextualDataIntegrationRequest struct {
-	IntegrationData                   *IntegrationMetadata `json:"integrationData,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IntegrationData *IntegrationMetadata `json:"integrationData,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *TestContextualDataIntegrationRequest) SetIntegrationData(v IntegrationM
 }
 
 func (o TestContextualDataIntegrationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableTestContextualDataIntegrationRequest) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -25,8 +25,8 @@ type ColumnWidthEntry struct {
 	// The column name.
 	ColumnName *string `json:"columnName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The width.
-	Width                             *int32 `json:"width,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Width *int32 `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *ColumnWidthEntry) SetWidth(v int32) {
 }
 
 func (o ColumnWidthEntry) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableColumnWidthEntry) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

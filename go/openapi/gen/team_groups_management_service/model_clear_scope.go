@@ -23,8 +23,8 @@ var _ MappedNullable = &ClearScope{}
 // ClearScope Clear scope.
 type ClearScope struct {
 	// The clear.
-	Clear                             *bool `json:"clear,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Clear *bool `json:"clear,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ClearScope) SetClear(v bool) {
 }
 
 func (o ClearScope) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableClearScope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

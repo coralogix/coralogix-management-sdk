@@ -27,16 +27,16 @@ type IncidentEventQueryFilter struct {
 	// The display labels of the incident
 	DisplayLabels *map[string]DisplayLabelValues `json:"displayLabels,omitempty"`
 	// Indicates if the incident is muted
-	IsMuted *bool         `json:"isMuted,omitempty"`
-	Labels  *LabelsFilter `json:"labels,omitempty"`
+	IsMuted *bool `json:"isMuted,omitempty"`
+	Labels *LabelsFilter `json:"labels,omitempty"`
 	// The name of the incident
 	Name *string `json:"name,omitempty"`
 	// The severity of the incident
 	Severity []IncidentSeverity `json:"severity,omitempty"`
 	// The status of the incident
-	Status                            []IncidentStatus `json:"status,omitempty"`
-	Timestamp                         *V1TimeRange     `json:"timestamp,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Status []IncidentStatus `json:"status,omitempty"`
+	Timestamp *V1TimeRange `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -316,7 +316,7 @@ func (o *IncidentEventQueryFilter) SetTimestamp(v V1TimeRange) {
 }
 
 func (o IncidentEventQueryFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -422,3 +422,4 @@ func (v *NullableIncidentEventQueryFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

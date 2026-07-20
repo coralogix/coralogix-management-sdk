@@ -25,8 +25,8 @@ type SendLogConfig struct {
 	// Raw payload data.
 	Payload *string `json:"payload,omitempty"`
 	// The uuid.
-	Uuid                              *string `json:"uuid,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Uuid *string `json:"uuid,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *SendLogConfig) SetUuid(v string) {
 }
 
 func (o SendLogConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableSendLogConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

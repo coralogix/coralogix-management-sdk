@@ -27,8 +27,8 @@ type CommonThreshold struct {
 	// Minimum bound value of the threshold
 	From *float64 `json:"from,omitempty"`
 	// Optional label of the threshold
-	Label                             *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Label *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *CommonThreshold) SetLabel(v string) {
 }
 
 func (o CommonThreshold) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableCommonThreshold) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

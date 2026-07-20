@@ -19,11 +19,12 @@ import (
 	"strings"
 )
 
+
 // EntitiesServiceAPIService EntitiesServiceAPI service
 type EntitiesServiceAPIService service
 
 type ApiEntitiesServiceListEntitySubTypesRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *EntitiesServiceAPIService
 	entityType NotificationCenterEntityType
 }
@@ -37,27 +38,26 @@ EntitiesServiceListEntitySubTypes List Entity Subtypes
 
 Returns all sub-types for the specified entity type.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param entityType Entity type whose sub-types to list.
-	@return ApiEntitiesServiceListEntitySubTypesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param entityType Entity type whose sub-types to list.
+ @return ApiEntitiesServiceListEntitySubTypesRequest
 */
 func (a *EntitiesServiceAPIService) EntitiesServiceListEntitySubTypes(ctx context.Context, entityType NotificationCenterEntityType) ApiEntitiesServiceListEntitySubTypesRequest {
 	return ApiEntitiesServiceListEntitySubTypesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 		entityType: entityType,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListEntitySubTypesResponse
+//  @return ListEntitySubTypesResponse
 func (a *EntitiesServiceAPIService) EntitiesServiceListEntitySubTypesExecute(r ApiEntitiesServiceListEntitySubTypesRequest) (*ListEntitySubTypesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListEntitySubTypesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListEntitySubTypesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitiesServiceAPIService.EntitiesServiceListEntitySubTypes")
@@ -127,7 +127,7 @@ func (a *EntitiesServiceAPIService) EntitiesServiceListEntitySubTypesExecute(r A
 }
 
 type ApiEntitiesServiceListEntityTypeAttachmentTypesRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *EntitiesServiceAPIService
 	entityType NotificationCenterEntityType
 }
@@ -141,27 +141,26 @@ EntitiesServiceListEntityTypeAttachmentTypes List Entity Type Attachment Types
 
 Returns all supported attachment types for the specified entity type.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param entityType Entity type whose supported attachment types to list.
-	@return ApiEntitiesServiceListEntityTypeAttachmentTypesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param entityType Entity type whose supported attachment types to list.
+ @return ApiEntitiesServiceListEntityTypeAttachmentTypesRequest
 */
 func (a *EntitiesServiceAPIService) EntitiesServiceListEntityTypeAttachmentTypes(ctx context.Context, entityType NotificationCenterEntityType) ApiEntitiesServiceListEntityTypeAttachmentTypesRequest {
 	return ApiEntitiesServiceListEntityTypeAttachmentTypesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 		entityType: entityType,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListEntityTypeAttachmentTypesResponse
+//  @return ListEntityTypeAttachmentTypesResponse
 func (a *EntitiesServiceAPIService) EntitiesServiceListEntityTypeAttachmentTypesExecute(r ApiEntitiesServiceListEntityTypeAttachmentTypesRequest) (*ListEntityTypeAttachmentTypesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListEntityTypeAttachmentTypesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListEntityTypeAttachmentTypesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitiesServiceAPIService.EntitiesServiceListEntityTypeAttachmentTypes")
@@ -231,7 +230,7 @@ func (a *EntitiesServiceAPIService) EntitiesServiceListEntityTypeAttachmentTypes
 }
 
 type ApiEntitiesServiceListEntityTypesRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *EntitiesServiceAPIService
 }
 
@@ -244,25 +243,24 @@ EntitiesServiceListEntityTypes List Entity Types
 
 Returns all available notification entity types.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiEntitiesServiceListEntityTypesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiEntitiesServiceListEntityTypesRequest
 */
 func (a *EntitiesServiceAPIService) EntitiesServiceListEntityTypes(ctx context.Context) ApiEntitiesServiceListEntityTypesRequest {
 	return ApiEntitiesServiceListEntityTypesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListEntityTypesResponse
+//  @return ListEntityTypesResponse
 func (a *EntitiesServiceAPIService) EntitiesServiceListEntityTypesExecute(r ApiEntitiesServiceListEntityTypesRequest) (*ListEntityTypesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListEntityTypesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListEntityTypesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitiesServiceAPIService.EntitiesServiceListEntityTypes")

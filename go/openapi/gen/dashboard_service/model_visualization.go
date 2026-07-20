@@ -22,22 +22,22 @@ var _ MappedNullable = &Visualization{}
 
 // Visualization Visualization.
 type Visualization struct {
-	Gauge                             *VisualizationGauge    `json:"gauge,omitempty"`
-	Geomap                            *Geomap                `json:"geomap,omitempty"`
-	Heatmap                           *Heatmap               `json:"heatmap,omitempty"`
-	HexagonBins                       *HexagonBins           `json:"hexagonBins,omitempty"`
-	HorizontalBars                    *HorizontalBars        `json:"horizontalBars,omitempty"`
-	HorizontalBarsMulti               *HorizontalBarsMulti   `json:"horizontalBarsMulti,omitempty"`
-	PieChart                          *VisualizationPieChart `json:"pieChart,omitempty"`
-	Stat                              *Stat                  `json:"stat,omitempty"`
-	StatCard                          *StatCard              `json:"statCard,omitempty"`
-	Table                             *Table                 `json:"table,omitempty"`
-	TimeSeriesBars                    *TimeSeriesBars        `json:"timeSeriesBars,omitempty"`
-	TimeSeriesLines                   *TimeSeriesLines       `json:"timeSeriesLines,omitempty"`
-	TimeSeriesLinesMulti              *TimeSeriesLinesMulti  `json:"timeSeriesLinesMulti,omitempty"`
-	VerticalBars                      *VerticalBars          `json:"verticalBars,omitempty"`
-	VerticalBarsMulti                 *VerticalBarsMulti     `json:"verticalBarsMulti,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Gauge *VisualizationGauge `json:"gauge,omitempty"`
+	Geomap *Geomap `json:"geomap,omitempty"`
+	Heatmap *Heatmap `json:"heatmap,omitempty"`
+	HexagonBins *HexagonBins `json:"hexagonBins,omitempty"`
+	HorizontalBars *HorizontalBars `json:"horizontalBars,omitempty"`
+	HorizontalBarsMulti *HorizontalBarsMulti `json:"horizontalBarsMulti,omitempty"`
+	PieChart *VisualizationPieChart `json:"pieChart,omitempty"`
+	Stat *Stat `json:"stat,omitempty"`
+	StatCard *StatCard `json:"statCard,omitempty"`
+	Table *Table `json:"table,omitempty"`
+	TimeSeriesBars *TimeSeriesBars `json:"timeSeriesBars,omitempty"`
+	TimeSeriesLines *TimeSeriesLines `json:"timeSeriesLines,omitempty"`
+	TimeSeriesLinesMulti *TimeSeriesLinesMulti `json:"timeSeriesLinesMulti,omitempty"`
+	VerticalBars *VerticalBars `json:"verticalBars,omitempty"`
+	VerticalBarsMulti *VerticalBarsMulti `json:"verticalBarsMulti,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -541,7 +541,7 @@ func (o *Visualization) SetVerticalBarsMulti(v VerticalBarsMulti) {
 }
 
 func (o Visualization) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -820,3 +820,4 @@ func (v *NullableVisualization) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

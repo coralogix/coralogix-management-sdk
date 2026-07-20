@@ -24,8 +24,8 @@ var _ MappedNullable = &TimeFrameSelect{}
 type TimeFrameSelect struct {
 	AbsoluteTimeFrame *TimeFrame `json:"absoluteTimeFrame,omitempty"`
 	// Relative time frame expressed as a duration offset from the current time (e.g., last 15 minutes).
-	RelativeTimeFrame                 *string `json:"relativeTimeFrame,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	RelativeTimeFrame *string `json:"relativeTimeFrame,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *TimeFrameSelect) SetRelativeTimeFrame(v string) {
 }
 
 func (o TimeFrameSelect) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -223,3 +223,4 @@ func (v *NullableTimeFrameSelect) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

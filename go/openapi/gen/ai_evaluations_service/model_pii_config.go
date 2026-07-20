@@ -23,8 +23,8 @@ var _ MappedNullable = &PiiConfig{}
 // PiiConfig Configuration for the PII evaluation.
 type PiiConfig struct {
 	// PII categories to detect.
-	Categories                        []PiiCategory `json:"categories,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Categories []PiiCategory `json:"categories,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *PiiConfig) SetCategories(v []PiiCategory) {
 }
 
 func (o PiiConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullablePiiConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

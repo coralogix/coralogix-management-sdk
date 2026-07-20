@@ -23,8 +23,8 @@ var _ MappedNullable = &ReplaceE2MRequest{}
 
 // ReplaceE2MRequest This data structure is used to replace an existing event to metric definition
 type ReplaceE2MRequest struct {
-	E2m                               E2M `json:"e2m"`
-	AdditionalProperties              map[string]interface{}
+	E2m E2M `json:"e2m"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -73,7 +73,7 @@ func (o *ReplaceE2MRequest) SetE2m(v E2M) {
 }
 
 func (o ReplaceE2MRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +104,10 @@ func (o *ReplaceE2MRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -170,3 +170,4 @@ func (v *NullableReplaceE2MRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

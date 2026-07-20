@@ -27,10 +27,10 @@ type UpdateCustomEnrichmentRequest struct {
 	CustomEnrichmentId int64 `json:"customEnrichmentId"`
 	// New human-readable description of the custom enrichment.
 	Description string `json:"description"`
-	File        File   `json:"file"`
+	File File `json:"file"`
 	// New human-readable name for the custom enrichment.
-	Name                              string `json:"name"`
-	AdditionalProperties              map[string]interface{}
+	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -154,7 +154,7 @@ func (o *UpdateCustomEnrichmentRequest) SetName(v string) {
 }
 
 func (o UpdateCustomEnrichmentRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -191,10 +191,10 @@ func (o *UpdateCustomEnrichmentRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -260,3 +260,4 @@ func (v *NullableUpdateCustomEnrichmentRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

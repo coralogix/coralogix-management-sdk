@@ -24,12 +24,12 @@ var _ MappedNullable = &IncidentSearchQuery{}
 // IncidentSearchQuery Incident search query.
 type IncidentSearchQuery struct {
 	// The contextual label to search in.
-	ContextualLabel *string         `json:"contextualLabel,omitempty"`
-	IncidentField   *IncidentFields `json:"incidentField,omitempty"`
+	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	IncidentField *IncidentFields `json:"incidentField,omitempty"`
 	// The search query
-	Query                                           string `json:"query"`
-	AdditionalProperties                            map[string]interface{}
-	additionalPropertiesFromUnmarshal               bool
+	Query string `json:"query"`
+	AdditionalProperties map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
@@ -142,7 +142,7 @@ func (o *IncidentSearchQuery) SetQuery(v string) {
 }
 
 func (o IncidentSearchQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -201,10 +201,10 @@ func (o *IncidentSearchQuery) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -292,3 +292,4 @@ func (v *NullableIncidentSearchQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

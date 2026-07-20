@@ -22,8 +22,8 @@ var _ MappedNullable = &E2MAggSamples{}
 
 // E2MAggSamples This data structure represents the e2m aggregate samples
 type E2MAggSamples struct {
-	SampleType                        *SampleType `json:"sampleType,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SampleType *SampleType `json:"sampleType,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *E2MAggSamples) SetSampleType(v SampleType) {
 }
 
 func (o E2MAggSamples) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableE2MAggSamples) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

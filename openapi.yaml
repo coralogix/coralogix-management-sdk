@@ -3537,11 +3537,14 @@ paths:
               pageSize:
                 description: Page size.
                 format: int64
+                maximum: 1000
                 minimum: 0
                 type: integer
               pageToken:
                 description: The page token.
-                minLength: 0
+                maxLength: 4096
+                minLength: 1
+                pattern: ^[\s\S]*$
                 type: string
             type: object
         - description: Ordering settings for the list of alert definitions
@@ -3568,6 +3571,7 @@ paths:
                       $ref: '#/components/schemas/AlertDefOrderByFields'
                   title: Alert definition order by
                   type: object
+                maxItems: 20
                 minItems: 1
                 type: array
             title: Alert definition order by list
@@ -3622,7 +3626,10 @@ paths:
                 id:
                   description: Alert definition ID
                   example: 123e4567-e89b-12d3-a456-426614174000
+                  maxLength: 36
                   minLength: 0
+                  pattern: >-
+                    ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
                   type: string
               title: Replace alert definition request
               type: object
@@ -3797,9 +3804,13 @@ paths:
                     - 123e4567-e89b-12d3-a456-426614174000
                   items:
                     description: List of alert definition IDs to delete.
-                    minLength: 0
+                    maxLength: 36
+                    minLength: 1
+                    pattern: >-
+                      ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
                     type: string
-                  minItems: 0
+                  maxItems: 100
+                  minItems: 1
                   type: array
               title: Bulk delete alert definitions request
               type: object
@@ -4012,6 +4023,7 @@ paths:
                   description: List of alert definitions to replace
                   items:
                     $ref: '#/components/schemas/AlertDefToReplace'
+                  maxItems: 1000
                   minItems: 0
                   type: array
               title: Bulk replace alert definitions request
@@ -4064,7 +4076,9 @@ paths:
           schema:
             description: Alert version ID
             example: 123e4567-e89b-12d3-a456-426614174000
+            maxLength: 36
             minLength: 0
+            pattern: ^[\s\S]*$
             type: string
       responses:
         '200':
@@ -4114,7 +4128,10 @@ paths:
           schema:
             description: Alert definition ID
             example: 123e4567-e89b-12d3-a456-426614174000
+            maxLength: 36
             minLength: 0
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
       responses:
         '200':
@@ -4163,7 +4180,10 @@ paths:
           schema:
             description: The unique identifier of the alert definition to delete.
             example: 123e4567-e89b-12d3-a456-426614174000
+            maxLength: 36
             minLength: 0
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
       responses:
         '200':
@@ -10027,6 +10047,9 @@ paths:
                 - required:
                     - spanRules
                   type: object
+                - required:
+                    - rumRules
+                  type: object
                 - not:
                     anyOf:
                       - required:
@@ -10034,6 +10057,9 @@ paths:
                         type: object
                       - required:
                           - spanRules
+                        type: object
+                      - required:
+                          - rumRules
                         type: object
                   type: object
               properties:
@@ -10068,6 +10094,8 @@ paths:
                   $ref: '#/components/schemas/quota.v1.Priority'
                 priorityOverride:
                   $ref: '#/components/schemas/PriorityOverride'
+                rumRules:
+                  $ref: '#/components/schemas/LogRules'
                 spanRules:
                   $ref: '#/components/schemas/SpanRules'
                 subsystemRule:
@@ -10130,6 +10158,9 @@ paths:
                 - required:
                     - spanRules
                   type: object
+                - required:
+                    - rumRules
+                  type: object
                 - not:
                     anyOf:
                       - required:
@@ -10137,6 +10168,9 @@ paths:
                         type: object
                       - required:
                           - spanRules
+                        type: object
+                      - required:
+                          - rumRules
                         type: object
                   type: object
               properties:
@@ -10165,6 +10199,8 @@ paths:
                   $ref: '#/components/schemas/quota.v1.Priority'
                 priorityOverride:
                   $ref: '#/components/schemas/PriorityOverride'
+                rumRules:
+                  $ref: '#/components/schemas/LogRules'
                 spanRules:
                   $ref: '#/components/schemas/SpanRules'
                 subsystemRule:
@@ -10233,6 +10269,9 @@ paths:
                     - required:
                         - spanRules
                       type: object
+                    - required:
+                        - rumRules
+                      type: object
                     - not:
                         anyOf:
                           - required:
@@ -10240,6 +10279,9 @@ paths:
                             type: object
                           - required:
                               - spanRules
+                            type: object
+                          - required:
+                              - rumRules
                             type: object
                       type: object
                 - oneOf:
@@ -10268,6 +10310,8 @@ paths:
                 day:
                   $ref: '#/components/schemas/Day'
                 logRules:
+                  $ref: '#/components/schemas/LogRules'
+                rumRules:
                   $ref: '#/components/schemas/LogRules'
                 spanRules:
                   $ref: '#/components/schemas/SpanRules'
@@ -10592,6 +10636,77 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Internal server error
       summary: Get Policy Priority Settings
+      tags:
+        - Policies Service
+  /dataplans/rum-policies/v1:
+    put:
+      description: Updates RUM data retention policies.
+      externalDocs:
+        url: ''
+      operationId: PoliciesService_AtomicOverwriteRumPolicies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                In an atomic operation delete all existing RUM policies and
+                create the provided list by order.
+              properties:
+                policies:
+                  description: >-
+                    List of RUM policies to create as part of the atomic
+                    overwrite.
+                  items:
+                    $ref: '#/components/schemas/CreateRumPolicyRequest'
+                  maxItems: 10000
+                  minItems: 0
+                  type: array
+              required:
+                - policies
+              title: Atomic Overwrite Rum Policies Request
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                createResponses:
+                  - policy:
+                      companyId: 1234
+                      deleted: false
+                      description: My RUM Policy Description
+                      enabled: true
+                      id: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+                      name: My RUM Policy
+                      order: 1
+                      priority: PRIORITY_TYPE_MEDIUM
+                      rumRules:
+                        severities:
+                          - SEVERITY_ERROR
+                          - SEVERITY_CRITICAL
+              schema:
+                $ref: '#/components/schemas/AtomicOverwriteRumPoliciesResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Atomic Overwrite Rum Policies
       tags:
         - Policies Service
   /dataplans/span-policies/v1:
@@ -11111,12 +11226,16 @@ paths:
                     Optional data source in namespace/dataset_name format. If
                     not set, defaults to the standard logs/spans stream.
                   example: my_namespace/my_dataset
-                  minLength: 0
+                  maxLength: 300
+                  minLength: 1
+                  pattern: ^[\s\S]*$
                   type: string
                 description:
                   description: Human-readable description of this E2M.
                   example: avg and max the latency of catalog service
+                  maxLength: 2000
                   minLength: 0
+                  pattern: ^[\s\S]*$
                   type: string
                 id:
                   description: Unique identifier for this E2M. Required on update requests.
@@ -11124,7 +11243,7 @@ paths:
                   maxLength: 36
                   minLength: 36
                   pattern: >-
-                    ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+                    ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
                   type: string
                 isInternal:
                   description: Indicates whether this E2M is for internal use only.
@@ -11142,12 +11261,15 @@ paths:
                   description: Metric labels to attach to the generated metrics.
                   items:
                     $ref: '#/components/schemas/MetricLabel'
+                  maxItems: 10
                   minItems: 0
                   type: array
                 name:
                   description: Human-readable name for this E2M.
                   example: Service_catalog_latency
-                  minLength: 0
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[\s\S]*$
                   type: string
                 permutations:
                   $ref: '#/components/schemas/E2MPermutations'
@@ -11210,12 +11332,16 @@ paths:
                     Optional data source in namespace/dataset_name format. If
                     not set, defaults to the standard logs/spans stream.
                   example: my_namespace/my_dataset
-                  minLength: 0
+                  maxLength: 300
+                  minLength: 1
+                  pattern: ^[\s\S]*$
                   type: string
                 description:
                   description: Human-readable description for the new E2M.
                   example: avg and max the latency of catalog service
+                  maxLength: 2000
                   minLength: 0
+                  pattern: ^[\s\S]*$
                   type: string
                 logsQuery:
                   $ref: '#/components/schemas/v2.LogsQuery'
@@ -11223,18 +11349,22 @@ paths:
                   description: Metric fields to create and aggregate from the events.
                   items:
                     $ref: '#/components/schemas/v2.MetricField'
+                  maxItems: 10
                   minItems: 0
                   type: array
                 metricLabels:
                   description: Metric labels to attach to the generated metrics.
                   items:
                     $ref: '#/components/schemas/MetricLabel'
+                  maxItems: 10
                   minItems: 0
                   type: array
                 name:
                   description: Human-readable name for the new E2M.
                   example: Service catalog latency
-                  minLength: 0
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[\s\S]*$
                   type: string
                 permutationsLimit:
                   description: >-
@@ -11242,6 +11372,8 @@ paths:
                     this E2M.
                   example: 30000
                   format: int32
+                  maximum: 10000000
+                  minimum: 1
                   type: integer
                 spansQuery:
                   $ref: '#/components/schemas/v2.SpansQuery'
@@ -11280,7 +11412,8 @@ paths:
                   description: The requests.
                   items:
                     $ref: '#/components/schemas/E2MExecutionRequest'
-                  minItems: 0
+                  maxItems: 100
+                  minItems: 1
                   type: array
               type: object
       responses:
@@ -11330,7 +11463,10 @@ paths:
         description: Unique identifier.
         required: true
         schema:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier.
           example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
@@ -11357,8 +11493,11 @@ paths:
                 items:
                   description: The action filters.
                   example: myAction
+                  maxLength: 4096
                   minLength: 0
+                  pattern: ^[\s\S]*$
                   type: string
+                maxItems: 1000
                 minItems: 0
                 type: array
               applicationnameFilters:
@@ -11366,22 +11505,30 @@ paths:
                 items:
                   description: The applicationname filters.
                   example: myApp
+                  maxLength: 4096
                   minLength: 0
+                  pattern: ^[\s\S]*$
                   type: string
+                maxItems: 1000
                 minItems: 0
                 type: array
               lucene:
                 description: The lucene.
                 example: applicationName:myApp
+                maxLength: 10000
                 minLength: 0
+                pattern: ^[\s\S]*$
                 type: string
               serviceFilters:
                 description: The service filters.
                 items:
                   description: The service filters.
                   example: myService
+                  maxLength: 4096
                   minLength: 0
+                  pattern: ^[\s\S]*$
                   type: string
+                maxItems: 1000
                 minItems: 0
                 type: array
               subsystemnameFilters:
@@ -11389,8 +11536,11 @@ paths:
                 items:
                   description: The subsystemname filters.
                   example: mySubsystem
+                  maxLength: 4096
                   minLength: 0
+                  pattern: ^[\s\S]*$
                   type: string
+                maxItems: 1000
                 minItems: 0
                 type: array
             title: SpansQuery
@@ -11409,26 +11559,34 @@ paths:
               alias:
                 description: The alias.
                 example: new_query
-                minLength: 0
+                maxLength: 255
+                minLength: 1
+                pattern: ^[\s\S]*$
                 type: string
               applicationnameFilters:
                 description: The applicationname filters.
                 items:
                   description: The applicationname filters.
                   example: app_name
+                  maxLength: 4096
                   minLength: 0
+                  pattern: ^[\s\S]*$
                   type: string
+                maxItems: 1000
                 minItems: 0
                 type: array
               lucene:
                 description: The lucene.
                 example: 'log_obj.numeric_field: [50 TO 100]'
+                maxLength: 10000
                 minLength: 0
+                pattern: ^[\s\S]*$
                 type: string
               severityFilters:
                 description: The severity filters.
                 items:
                   $ref: '#/components/schemas/logs2metrics.v2.Severity'
+                maxItems: 7
                 minItems: 0
                 type: array
               subsystemnameFilters:
@@ -11436,8 +11594,11 @@ paths:
                 items:
                   description: The subsystemname filters.
                   example: sub_name
+                  maxLength: 4096
                   minLength: 0
+                  pattern: ^[\s\S]*$
                   type: string
+                maxItems: 1000
                 minItems: 0
                 type: array
             title: SpansQuery
@@ -11458,12 +11619,15 @@ paths:
                 sourceField:
                   description: The source field.
                   example: log_obj.string_value
-                  minLength: 0
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[\s\S]*$
                   type: string
                 targetLabel:
                   description: The target label.
                   example: alias_label_name
-                  minLength: 0
+                  maxLength: 255
+                  minLength: 1
                   pattern: ^[\w/-]+$
                   type: string
               required:
@@ -11471,6 +11635,7 @@ paths:
                 - sourceField
               title: Metric Label
               type: object
+            maxItems: 10
             minItems: 0
             type: array
       responses:
@@ -11566,7 +11731,22 @@ paths:
               metaLabels:
                 description: Filters all incidents with the given meta labels
                 items:
-                  $ref: '#/components/schemas/incidents.v1.MetaLabel'
+                  description: Meta label.
+                  externalDocs:
+                    url: ''
+                  properties:
+                    key:
+                      description: The key.
+                      example: key
+                      minLength: 0
+                      type: string
+                    value:
+                      description: The value.
+                      example: value
+                      minLength: 0
+                      type: string
+                  title: Incident meta label
+                  type: object
                 minItems: 0
                 type: array
               metaLabelsOp:
@@ -17848,8 +18028,11 @@ paths:
             description: The ids.
             items:
               description: The ids.
-              minLength: 0
+              maxLength: 36
+              minLength: 1
+              pattern: ^[\s\S]*$
               type: string
+            maxItems: 1000
             minItems: 0
             type: array
         - description: The order bys.
@@ -17865,6 +18048,7 @@ paths:
                 fieldName:
                   $ref: '#/components/schemas/OrderByAlertEventFields'
               type: object
+            maxItems: 20
             minItems: 0
             type: array
       responses:
@@ -17914,7 +18098,9 @@ paths:
           required: true
           schema:
             description: Unique identifier.
-            minLength: 0
+            maxLength: 36
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
         - description: Ordering applied to the alert event occurrences in the response.
           in: query
@@ -17929,6 +18115,7 @@ paths:
                 fieldName:
                   $ref: '#/components/schemas/OrderByAlertEventFields'
               type: object
+            maxItems: 20
             minItems: 0
             type: array
         - description: >-
@@ -17942,11 +18129,14 @@ paths:
               pageSize:
                 description: Page size.
                 format: int64
+                maximum: 1000
                 minimum: 0
                 type: integer
               pageToken:
                 description: The page token.
-                minLength: 0
+                maxLength: 4096
+                minLength: 1
+                pattern: ^[\s\S]*$
                 type: string
             type: object
       responses:
@@ -18314,15 +18504,19 @@ components:
       type: object
       properties:
         isMutedCount:
+          maximum: 4294967295
           minimum: 0
           type: integer
           description: Number of muted items.
           format: int64
         rules:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 1024
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: List of rules.
           description: List of rules.
@@ -18340,7 +18534,8 @@ components:
       type: object
       properties:
         dayOfWeek:
-          minItems: 0
+          maxItems: 7
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/DayOfWeek'
@@ -18391,6 +18586,54 @@ components:
         description: Find out more about enrichments
         url: >-
           https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+    AgentSelectorRequest:
+      type: object
+      properties:
+        attributes:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: >-
+            Flat agent attributes to match. If collectorVersion is set,
+            service.version must match it or is added automatically.
+      description: Agent selector used in requests.
+      externalDocs:
+        url: ''
+    AgentSelectorRequest.AttributesEntry:
+      type: object
+      properties:
+        key:
+          minLength: 0
+          type: string
+        value:
+          minLength: 0
+          type: string
+    AgentSelectorResponse:
+      type: object
+      properties:
+        attributes:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: Flat agent attributes matched by the selector.
+      description: Agent selector returned in responses.
+      externalDocs:
+        url: ''
+    AgentSelectorResponse.AttributesEntry:
+      type: object
+      properties:
+        key:
+          minLength: 0
+          type: string
+        value:
+          minLength: 0
+          type: string
     AggType:
       enum:
         - AGG_TYPE_UNSPECIFIED
@@ -18541,22 +18784,31 @@ components:
         alertDefProperties:
           $ref: '#/components/schemas/AlertDefProperties'
         alertVersionId:
-          minLength: 0
+          maxLength: 36
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The old alert ID
         createdTime:
+          maxLength: 64
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: The time when the alert definition was created
           format: date-time
           example: '2023-10-01T12:00:00.000Z'
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 1
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: The alert definition's persistent ID
           example: 123e4567-e89b-12d3-a456-426614174000
         lastTriggeredTime:
+          maxLength: 64
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: The last time the alert definition was triggered
           format: date-time
@@ -18564,7 +18816,9 @@ components:
         status:
           $ref: '#/components/schemas/AlertDefStatus'
         updatedTime:
+          maxLength: 64
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: The time when the alert definition was last updated
           format: date-time
@@ -18578,11 +18832,15 @@ components:
       type: object
       properties:
         dataSet:
-          minLength: 0
+          maxLength: 300
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: File name of the dataset
         dataSpace:
-          minLength: 0
+          maxLength: 50
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Folder name of the datasource
     AlertDefEnabledFilter:
@@ -18624,10 +18882,14 @@ components:
       type: object
       properties:
         alertId:
+          maxItems: 100
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 100
+            minLength: 1
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: >-
               The alert definition ID(s) to filter by - multiple values are OR'd
@@ -18653,7 +18915,8 @@ components:
       type: object
       properties:
         minutes:
-          minimum: 0
+          maximum: 10080
+          minimum: 1
           type: integer
           description: The time in minutes before the alert can be retriggered
           format: int64
@@ -18688,10 +18951,13 @@ components:
         matcher:
           $ref: '#/components/schemas/alerts.v3.FilterMatcher'
         name:
+          maxItems: 100
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 1024
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: >-
               The name(s) of the alert definition - multiple values are OR'd
@@ -18707,16 +18973,20 @@ components:
       type: object
       properties:
         destinations:
+          maxItems: 100
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/NotificationDestination'
           description: The destinations for notifications.  (Notification Center feature)
         groupByKeys:
+          maxItems: 100
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 1024
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: The keys to group the alerts by
           description: The keys to group the alerts by
@@ -18726,6 +18996,7 @@ components:
         router:
           $ref: '#/components/schemas/NotificationRouter'
         webhooks:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -18767,6 +19038,7 @@ components:
       type: object
       properties:
         orderBys:
+          maxItems: 20
           minItems: 1
           type: array
           items:
@@ -18800,6 +19072,7 @@ components:
         matcher:
           $ref: '#/components/schemas/alerts.v3.FilterMatcher'
         priority:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -18915,6 +19188,7 @@ components:
         analyticsThreshold:
           $ref: '#/components/schemas/AnalyticsThresholdType'
         dataSources:
+          maxItems: 1
           minItems: 0
           type: array
           items:
@@ -18925,7 +19199,9 @@ components:
           description: Whether the alert has been marked as deleted
           example: false
         description:
+          maxLength: 3000
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             A detailed description of what the alert monitors and when it
@@ -18944,10 +19220,13 @@ components:
         flow:
           $ref: '#/components/schemas/FlowType'
         groupByKeys:
+          maxItems: 100
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 1024
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: Keys used to group and aggregate alert data
           description: Keys used to group and aggregate alert data
@@ -18975,13 +19254,16 @@ components:
         metricThreshold:
           $ref: '#/components/schemas/MetricThresholdType'
         name:
-          minLength: 0
+          maxLength: 512
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The name of the alert definition
           example: My Alert
         notificationGroup:
           $ref: '#/components/schemas/AlertDefNotificationGroup'
         notificationGroupExcess:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -19060,10 +19342,14 @@ components:
         matcher:
           $ref: '#/components/schemas/alerts.v3.FilterMatcher'
         sloId:
+          maxItems: 100
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 1
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: The SLO ID(s) to filter by - multiple values are OR'd together
           description: The SLO ID(s) to filter by - multiple values are OR'd together
@@ -19087,6 +19373,7 @@ components:
         matcher:
           $ref: '#/components/schemas/alerts.v3.FilterMatcher'
         status:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -19104,7 +19391,10 @@ components:
         alertDefProperties:
           $ref: '#/components/schemas/AlertDefProperties'
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 1
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: The alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
@@ -19137,6 +19427,7 @@ components:
         matcher:
           $ref: '#/components/schemas/alerts.v3.FilterMatcher'
         type:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -19161,7 +19452,8 @@ components:
         integration:
           $ref: '#/components/schemas/v3.IntegrationType'
         minutes:
-          minimum: 0
+          maximum: 10080
+          minimum: 1
           type: integer
           description: The time in minutes before the alert can be retriggered
           format: int64
@@ -19195,7 +19487,9 @@ components:
         activityAnalysis:
           $ref: '#/components/schemas/ActivityAnalysis'
         alertId:
-          minLength: 0
+          maxLength: 36
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Unique identifier of the alert.
         groupLabels:
@@ -19205,18 +19499,24 @@ components:
             type: string
           description: Labels for the group.
         incidentCorrelationKey:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Key used to correlate incidents.
         payload:
           type: object
           description: Raw payload data.
         payloadType:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Type of the payload.
         permutationId:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Unique identifier of the permutation.
         permutationLabels:
@@ -19226,13 +19526,17 @@ components:
             type: string
           description: Labels for the permutation.
         preGroupingEventId:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Identifier of the event before grouping.
         status:
           $ref: '#/components/schemas/AlertStatus'
         timestamp:
-          minLength: 0
+          maxLength: 64
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Timestamp of the event.
           format: date-time
@@ -19261,6 +19565,7 @@ components:
       type: object
       properties:
         alertEventMultiplePermutation:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -19296,7 +19601,9 @@ components:
         payload:
           type: object
         payloadType:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The payload type.
     AlertFilters:
@@ -19821,8 +20128,8 @@ components:
         dataprimeQuery:
           $ref: '#/components/schemas/DataprimeAlertQuery'
         evaluationDelayMs:
-          maximum: 2147483647
-          minimum: -60000
+          maximum: 10800000
+          minimum: 0
           type: integer
           description: The delay in milliseconds before evaluating the alert condition
           format: int32
@@ -19887,8 +20194,8 @@ components:
         dataprimeQuery:
           $ref: '#/components/schemas/DataprimeAlertQuery'
         evaluationDelayMs:
-          maximum: 2147483647
-          minimum: -60000
+          maximum: 10800000
+          minimum: 0
           type: integer
           description: The delay in milliseconds before evaluating the alert condition
           format: int32
@@ -19905,7 +20212,7 @@ components:
             $ref: '#/components/schemas/AnalyticsThresholdRule'
           description: The per-priority threshold rules
         targetColumn:
-          maxLength: 256
+          maxLength: 255
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
@@ -20193,6 +20500,7 @@ components:
       type: object
       properties:
         percentageOfDeviation:
+          minimum: 0
           type: number
           description: >-
             The percentage of deviation from the baseline for triggering the
@@ -20591,7 +20899,7 @@ components:
         which individual arcs are displayed
       externalDocs:
         url: ''
-    ArchivePublicConfigurationGroupRequest:
+    ArchiveConfigurationGroupRequest:
       type: object
       properties:
         id:
@@ -20604,7 +20912,7 @@ components:
       description: Request to archive a fleet-manager configuration group.
       externalDocs:
         url: ''
-    ArchivePublicConfigurationGroupResponse:
+    ArchiveConfigurationGroupResponse:
       type: object
       additionalProperties: false
       description: >-
@@ -21002,7 +21310,8 @@ components:
       type: object
       properties:
         requests:
-          minItems: 0
+          maxItems: 100
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/E2MExecutionRequest'
@@ -21016,6 +21325,7 @@ components:
       type: object
       properties:
         matchingResponses:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -21112,6 +21422,44 @@ components:
             $ref: '#/components/schemas/CreatePolicyResponse'
           description: The create responses.
       description: This data structue is obtained when overwriting log policies atomically.
+      externalDocs:
+        description: Find out more about quota management.
+        url: >-
+          https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
+    AtomicOverwriteRumPoliciesRequest:
+      title: Atomic Overwrite Rum Policies Request
+      required:
+        - policies
+      type: object
+      properties:
+        policies:
+          maxItems: 10000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateRumPolicyRequest'
+          description: List of RUM policies to create as part of the atomic overwrite.
+      description: >-
+        In an atomic operation delete all existing RUM policies and create the
+        provided list by order.
+      externalDocs:
+        description: Find out more about quota management.
+        url: >-
+          https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
+    AtomicOverwriteRumPoliciesResponse:
+      title: Atomic Overwrite Rum Policies Response
+      type: object
+      properties:
+        createResponses:
+          maxItems: 10000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatePolicyResponse'
+          description: The create responses.
+      description: >-
+        This data structure is obtained when overwriting RUM policies
+        atomically.
       externalDocs:
         description: Find out more about quota management.
         url: >-
@@ -21691,10 +22039,14 @@ components:
       type: object
       properties:
         ids:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 1
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
           example:
             - 123e4567-e89b-12d3-a456-426614174000
@@ -21711,15 +22063,19 @@ components:
             $ref: '#/components/schemas/AlertDef'
           description: Map of alert definition IDs to alert definitions
         notFoundIds:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 1
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: The not found ids.
           description: The not found ids.
           example:
-            - alert-789
+            - 123e4567-e89b-12d3-a456-426614174000
       description: >-
         A response that contains the requested alert definitions and not-found
         alert IDs
@@ -22353,10 +22709,14 @@ components:
       type: object
       properties:
         ids:
-          minItems: 0
+          maxItems: 100
+          minItems: 1
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 1
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: List of alert definition IDs to delete.
           description: List of alert definition IDs to delete.
@@ -22370,20 +22730,28 @@ components:
       type: object
       properties:
         deletedIds:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 1
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: IDs of alert definitions that were successfully deleted
           description: IDs of alert definitions that were successfully deleted
           example:
             - 123e4567-e89b-12d3-a456-426614174000
         notFoundIds:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 1
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: IDs of alert definitions that were not found
           description: IDs of alert definitions that were not found
@@ -22416,6 +22784,7 @@ components:
       type: object
       properties:
         alertDefsToReplace:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -22429,32 +22798,42 @@ components:
       type: object
       properties:
         alertDefs:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/AlertDef'
           description: List of successfully replaced alert definitions
         failedToReplaceAlertDefs:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/FailedToReplaceAlertDef'
           description: List of alert definitions that failed to be replaced
         notFoundIds:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 1
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: List of alert definition IDs that were not found
           description: List of alert definition IDs that were not found
           example:
             - 123e4567-e89b-12d3-a456-426614174000
         skippedIds:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 1
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: >-
               List of alert definition IDs that were skipped (no changes
@@ -23526,6 +23905,18 @@ components:
           description: Version.
       externalDocs:
         url: ''
+    ChartName:
+      title: Fleet-manager chart name
+      enum:
+        - CHART_NAME_UNSPECIFIED
+        - CHART_NAME_OTEL_INTEGRATION
+        - CHART_NAME_OPENTELEMETRY_COLLECTOR
+        - CHART_NAME_OTEL_LINUX_STANDALONE
+        - CHART_NAME_OTEL_WINDOWS_STANDALONE
+        - CHART_NAME_OTEL_MACOS_STANDALONE
+        - CHART_NAME_OTEL_ECS_EC2
+      type: string
+      description: Helm chart name for fleet-manager configuration families.
     CheckDashboardRequest:
       title: Check dashboard request data structure
       type: object
@@ -24207,6 +24598,343 @@ components:
           minLength: 0
           type: string
           description: The value.
+      externalDocs:
+        url: ''
+    ConfigurationFamily:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Whether this family is active.
+        basedOnConfigurationFamilyId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Configuration family UUID v7 this family is based on.
+        chartName:
+          $ref: '#/components/schemas/ChartName'
+        chartVersion:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Helm chart or template version used by this family.
+        collectorVersion:
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          description: >-
+            Collector semantic version this configuration family targets,
+            without a leading v prefix.
+        description:
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable description.
+        id:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Configuration family UUID v7.
+        integrationVersion:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Integration version from the onboarding flow.
+        lastActivatedAt:
+          maxLength: 64
+          minLength: 0
+          type: string
+          description: Time when this family was last activated.
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: Metadata stored with this configuration family.
+        remoteConfigurations:
+          maxItems: 128
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoteConfiguration'
+          description: Remote configurations in this family.
+        version:
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Monotonic version number of this configuration family within its
+            group.
+      description: Configuration family returned by Fleet Manager.
+      externalDocs:
+        url: ''
+    ConfigurationFamily.MetadataEntry:
+      type: object
+      properties:
+        key:
+          minLength: 0
+          type: string
+        value:
+          minLength: 0
+          type: string
+    ConfigurationFamilyCreate:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Whether this family is active.
+        basedOnConfigurationFamilyId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Configuration family UUID v7 this family is based on.
+        collectorVersion:
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          description: >-
+            Collector semantic version this configuration family targets,
+            without a leading v prefix. The service.version selector must match
+            this value or is added automatically.
+        description:
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable description.
+        metadata:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: Metadata stored with this configuration family.
+        remoteConfigurations:
+          maxItems: 128
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoteConfigurationCreate'
+          description: Remote configurations to create in this family.
+      description: Initial configuration family to create.
+      externalDocs:
+        url: ''
+    ConfigurationFamilyCreate.MetadataEntry:
+      type: object
+      properties:
+        key:
+          minLength: 0
+          type: string
+        value:
+          minLength: 0
+          type: string
+    ConfigurationFamilyReplace:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Whether this family is active.
+        collectorVersion:
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          description: >-
+            Collector semantic version this configuration family targets,
+            without a leading v prefix. The service.version selector must match
+            this value or is added automatically.
+        description:
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable description.
+        metadata:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: Metadata stored with this configuration family.
+        remoteConfigurations:
+          maxItems: 128
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoteConfigurationReplace'
+          description: >-
+            Remote configurations to use when creating or replacing family
+            content.
+      description: >-
+        Fields used to update the latest configuration family. Omitted optional
+        fields keep their existing values.
+      externalDocs:
+        url: ''
+    ConfigurationFamilyReplace.MetadataEntry:
+      type: object
+      properties:
+        key:
+          minLength: 0
+          type: string
+        value:
+          minLength: 0
+          type: string
+    ConfigurationGroup:
+      type: object
+      properties:
+        description:
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable description.
+        families:
+          maxItems: 128
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigurationFamily'
+          description: Configuration families in this group.
+        id:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Configuration group UUID v7.
+        name:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Display name.
+        priorityOrder:
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+          description: >-
+            Selection precedence. Higher values win on ties and 0 is the
+            default.
+          format: int32
+        tags:
+          maxItems: 64
+          minItems: 0
+          type: array
+          items:
+            maxLength: 256
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+            description: Tags attached to the configuration group.
+          description: Tags attached to the configuration group.
+      description: Fleet-manager configuration group.
+      externalDocs:
+        url: ''
+    ConfigurationGroupCreate:
+      type: object
+      properties:
+        description:
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable description.
+        family:
+          $ref: '#/components/schemas/ConfigurationFamilyCreate'
+        name:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Display name.
+        priorityOrder:
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+          description: >-
+            Selection precedence. Higher values win on ties and 0 is the
+            default.
+          format: int32
+        tags:
+          maxItems: 64
+          minItems: 0
+          type: array
+          items:
+            maxLength: 256
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+            description: Tags attached to the configuration group.
+          description: Tags attached to the configuration group.
+      description: Payload used to create a fleet-manager configuration group.
+      externalDocs:
+        url: ''
+    ConfigurationGroupReplace:
+      type: object
+      properties:
+        description:
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable description.
+        family:
+          $ref: '#/components/schemas/ConfigurationFamilyReplace'
+        id:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Configuration group UUID v7.
+        name:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Display name.
+        priorityOrder:
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+          description: >-
+            Selection precedence. Higher values win on ties and 0 is the
+            default.
+          format: int32
+        tags:
+          maxItems: 64
+          minItems: 0
+          type: array
+          items:
+            maxLength: 256
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+            description: Tags attached to the configuration group.
+          description: Tags attached to the configuration group.
+      description: >-
+        Fields used to update a fleet-manager configuration group. Omitted
+        optional fields keep their existing values.
       externalDocs:
         url: ''
     ConfigureTenantRequest:
@@ -25166,6 +25894,22 @@ components:
         settings.
       externalDocs:
         url: ''
+    CreateConfigurationGroupRequest:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/ConfigurationGroupCreate'
+      description: Request to create a fleet-manager configuration group.
+      externalDocs:
+        url: ''
+    CreateConfigurationGroupResponse:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/ConfigurationGroup'
+      description: Response containing the created fleet-manager configuration group.
+      externalDocs:
+        url: ''
     CreateConnectorRequest:
       title: Create Connector Request
       type: object
@@ -25593,6 +26337,9 @@ components:
         - required:
             - spanRules
           type: object
+        - required:
+            - rumRules
+          type: object
         - type: object
           not:
             anyOf:
@@ -25601,6 +26348,9 @@ components:
                 type: object
               - required:
                   - spanRules
+                type: object
+              - required:
+                  - rumRules
                 type: object
       properties:
         applicationRule:
@@ -25628,6 +26378,8 @@ components:
           $ref: '#/components/schemas/quota.v1.Priority'
         priorityOverride:
           $ref: '#/components/schemas/PriorityOverride'
+        rumRules:
+          $ref: '#/components/schemas/LogRules'
         spanRules:
           $ref: '#/components/schemas/SpanRules'
         subsystemRule:
@@ -25656,22 +26408,6 @@ components:
         description: Find out more about quota management.
         url: >-
           https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
-    CreatePublicConfigurationGroupRequest:
-      type: object
-      properties:
-        group:
-          $ref: '#/components/schemas/PublicCreateConfigurationGroupRequest'
-      description: Request to create a fleet-manager configuration group.
-      externalDocs:
-        url: ''
-    CreatePublicConfigurationGroupResponse:
-      type: object
-      properties:
-        group:
-          $ref: '#/components/schemas/PublicConfigurationGroup'
-      description: Response containing the created fleet-manager configuration group.
-      externalDocs:
-        url: ''
     CreateQuotaAllocationRuleSetRequest:
       title: Create quota allocation rule set request
       required:
@@ -25692,6 +26428,39 @@ components:
       description: >-
         Response confirming quota allocation rule set has been successfully
         created
+      externalDocs:
+        url: ''
+    CreateRepositoriesRequest:
+      required:
+        - repositories
+      type: object
+      properties:
+        repositories:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RepositorySetting'
+          description: >-
+            Repository settings to add. Each repository must be unique across
+            the list and must not already exist.
+      description: >-
+        Request to add one or more repository settings. Existing settings are
+        never modified or removed; adding a repository that already exists is
+        rejected.
+      externalDocs:
+        url: ''
+    CreateRepositoriesResponse:
+      type: object
+      properties:
+        repositories:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/RepositorySetting'
+          description: The repository settings that were added.
+      description: Response containing the added repository settings.
       externalDocs:
         url: ''
     CreateRoleRequest:
@@ -25890,6 +26659,22 @@ components:
         description: Find out more about recording rules
         url: >-
           https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
+    CreateRumPolicyRequest:
+      title: Create Rum Policy Request
+      required:
+        - policy
+        - rumRules
+      type: object
+      properties:
+        policy:
+          $ref: '#/components/schemas/CreateGenericPolicyRequest'
+        rumRules:
+          $ref: '#/components/schemas/LogRules'
+      description: This data structure is used to create a new RUM policy.
+      externalDocs:
+        description: Find out more about quota management.
+        url: >-
+          https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
     CreateScopeRequest:
       title: Create Scope Request
       required:
@@ -26652,6 +27437,11 @@ components:
       externalDocs:
         url: ''
     DailyTotals:
+      title: Daily Totals
+      required:
+        - cardinality
+        - bytesVolume
+        - unitUsage
       type: object
       oneOf:
         - required:
@@ -26675,18 +27465,28 @@ components:
           minLength: 1
           pattern: ^[0-9]+$
           type: string
+          description: Total bytes volume for the day.
         cardinality:
           maxLength: 20
           minLength: 1
           pattern: ^[0-9]+$
           type: string
+          description: Total cardinality for the day.
         metric:
           $ref: '#/components/schemas/MetricDailyExtra'
         service:
           $ref: '#/components/schemas/ServiceDailyExtra'
         unitUsage:
           type: number
+          description: Total billable unit usage for the day.
           format: float
+      description: >-
+        Daily usage totals. Entity-specific extras (`service` or `metric`) are
+        populated when the resolved entity type has per-entity attributes; for
+        ENTITY_METRIC and ENTITY_SERVICE they are always present when totals are
+        returned. Future entity types may omit extras.
+      externalDocs:
+        url: ''
     Dashboard:
       title: Dashboard
       required:
@@ -27311,8 +28111,8 @@ components:
       type: object
       properties:
         query:
-          maxLength: 10000
-          minLength: 0
+          maxLength: 65535
+          minLength: 1
           pattern: ^[\s\S]*$
           type: string
           description: The DataPrime query string
@@ -27651,7 +28451,10 @@ components:
       type: object
       properties:
         id:
+          maxLength: 36
           minLength: 0
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: The unique identifier of the alert definition to delete.
           example: 123e4567-e89b-12d3-a456-426614174000
@@ -28030,7 +28833,10 @@ components:
       type: object
       properties:
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier.
           example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
@@ -28048,7 +28854,10 @@ components:
       type: object
       properties:
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier.
       description: >-
@@ -28184,6 +28993,46 @@ components:
       description: >-
         Response confirming quota allocation rule set has been successfully
         deleted
+      externalDocs:
+        url: ''
+    DeleteRepositoriesRequest:
+      required:
+        - repositories
+      type: object
+      properties:
+        repositories:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            maxLength: 512
+            minLength: 1
+            pattern: ^[a-zA-Z0-9][a-zA-Z0-9._/-]*$
+            type: string
+            description: >-
+              Repositories to delete. Fails if any repository does not exist; no
+              repositories are deleted in that case.
+          description: >-
+            Repositories to delete. Fails if any repository does not exist; no
+            repositories are deleted in that case.
+      description: Request to delete one or more repository settings by repository.
+      externalDocs:
+        url: ''
+    DeleteRepositoriesResponse:
+      type: object
+      properties:
+        repositories:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            maxLength: 512
+            minLength: 1
+            pattern: ^[a-zA-Z0-9][a-zA-Z0-9._/-]*$
+            type: string
+            description: The repositories whose settings were deleted.
+          description: The repositories whose settings were deleted.
+      description: Response containing the repositories whose settings were deleted.
       externalDocs:
         url: ''
     DeleteRoleRequest:
@@ -29020,21 +29869,26 @@ components:
           description: RFC3339 timestamp of when this E2M was created.
           example: '2022-06-30T12:30:00.000Z'
         dataSource:
-          minLength: 0
+          maxLength: 300
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             Optional data source in namespace/dataset_name format. If not set,
             defaults to the standard logs/spans stream.
           example: my_namespace/my_dataset
         description:
+          maxLength: 2000
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: Human-readable description of this E2M.
           example: avg and max the latency of catalog service
         id:
           maxLength: 36
           minLength: 36
-          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier for this E2M. Required on update requests.
           example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
@@ -29051,13 +29905,16 @@ components:
             $ref: '#/components/schemas/v2.MetricField'
           description: Metric fields to extract and aggregate from the events.
         metricLabels:
+          maxItems: 10
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/MetricLabel'
           description: Metric labels to attach to the generated metrics.
         name:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Human-readable name for this E2M.
           example: Service_catalog_latency
@@ -29082,6 +29939,7 @@ components:
       type: object
       properties:
         buckets:
+          maxItems: 64
           minItems: 0
           type: array
           items:
@@ -29129,37 +29987,47 @@ components:
                 type: object
       properties:
         dataSource:
-          minLength: 0
+          maxLength: 300
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             Optional data source in namespace/dataset_name format. If not set,
             defaults to the standard logs/spans stream.
           example: my_namespace/my_dataset
         description:
+          maxLength: 2000
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: Human-readable description for the new E2M.
           example: avg and max the latency of catalog service
         logsQuery:
           $ref: '#/components/schemas/v2.LogsQuery'
         metricFields:
+          maxItems: 10
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/v2.MetricField'
           description: Metric fields to create and aggregate from the events.
         metricLabels:
+          maxItems: 10
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/MetricLabel'
           description: Metric labels to attach to the generated metrics.
         name:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Human-readable name for the new E2M.
           example: Service catalog latency
         permutationsLimit:
+          maximum: 10000000
+          minimum: 1
           type: integer
           description: Maximum number of unique metric permutations allowed for this E2M.
           format: int32
@@ -29246,6 +30114,8 @@ components:
           type: boolean
           description: The has exceeded limit.
         limit:
+          maximum: 10000000
+          minimum: 1
           type: integer
           description: Limit.
           format: int32
@@ -29289,6 +30159,7 @@ components:
       type: object
       properties:
         count:
+          maximum: 4294967295
           minimum: 0
           type: integer
           description: The count for this enabled status
@@ -29467,18 +30338,23 @@ components:
       type: object
       properties:
         count:
+          maximum: 4294967295
           minimum: 0
           type: integer
           description: The count for this entity label value
           format: int64
           example: 28
         labelKey:
-          minLength: 0
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The entity label key
           example: environment
         labelValue:
-          minLength: 0
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The entity label value
           example: production
@@ -30446,27 +31322,32 @@ components:
         activityAnalysisStats:
           $ref: '#/components/schemas/ActivityAnalysisStats'
         count:
+          maximum: 4294967295
           minimum: 0
           type: integer
           description: Number of items.
           format: int64
         resolvedCount:
+          maximum: 4294967295
           minimum: 0
           type: integer
           description: The resolved count.
           format: int64
         resolvedPermutationsSamples:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/v3.Permutation'
           description: The resolved permutations samples.
         triggeredCount:
+          maximum: 4294967295
           minimum: 0
           type: integer
           description: The triggered count.
           format: int64
         triggeredPermutationsSamples:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -31199,7 +32080,10 @@ components:
       type: object
       properties:
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 1
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: The alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
@@ -31784,30 +32668,35 @@ components:
       type: object
       properties:
         enabledCounts:
+          maxItems: 100
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/EnabledCount'
           description: Counts for different alert enabled statuses
         entityLabelCounts:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/EntityLabelCount'
           description: Counts for different entity label values
         priorityCounts:
+          maxItems: 100
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/PriorityCount'
           description: Counts for different alert priorities
         statusCounts:
+          maxItems: 100
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/StatusCount'
           description: Counts for different alert statuses
         typeCounts:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -31877,10 +32766,13 @@ components:
         matcher:
           $ref: '#/components/schemas/alerts.v3.FilterMatcher'
         name:
+          maxItems: 100
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 1024
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: >-
               The name(s) of the alert definition - multiple values are OR'd
@@ -31899,6 +32791,7 @@ components:
       type: object
       properties:
         priority:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -31936,6 +32829,7 @@ components:
         matcher:
           $ref: '#/components/schemas/alerts.v3.FilterMatcher'
         status:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -31953,6 +32847,7 @@ components:
       type: object
       properties:
         type:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -32062,6 +32957,7 @@ components:
       type: object
       properties:
         alertDefs:
+          maxItems: 30
           minItems: 1
           type: array
           items:
@@ -32079,6 +32975,7 @@ components:
       type: object
       properties:
         groups:
+          maxItems: 30
           minItems: 0
           type: array
           items:
@@ -32092,7 +32989,9 @@ components:
       type: object
       properties:
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
@@ -32111,6 +33010,7 @@ components:
           type: boolean
           description: The enforce suppression.
         stages:
+          maxItems: 30
           minItems: 1
           type: array
           items:
@@ -32149,6 +33049,9 @@ components:
             - required:
                 - spanRules
               type: object
+            - required:
+                - rumRules
+              type: object
             - type: object
               not:
                 anyOf:
@@ -32157,6 +33060,9 @@ components:
                     type: object
                   - required:
                       - spanRules
+                    type: object
+                  - required:
+                      - rumRules
                     type: object
         - oneOf:
             - required:
@@ -32180,6 +33086,8 @@ components:
         day:
           $ref: '#/components/schemas/Day'
         logRules:
+          $ref: '#/components/schemas/LogRules'
+        rumRules:
           $ref: '#/components/schemas/LogRules'
         spanRules:
           $ref: '#/components/schemas/SpanRules'
@@ -32969,7 +33877,9 @@ components:
       type: object
       properties:
         alertVersionId:
+          maxLength: 36
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: Alert version ID
           example: 123e4567-e89b-12d3-a456-426614174000
@@ -32990,7 +33900,10 @@ components:
       type: object
       properties:
         id:
+          maxLength: 36
           minLength: 0
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
@@ -33011,10 +33924,13 @@ components:
       type: object
       properties:
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Unique identifier.
         orderBys:
+          maxItems: 20
           minItems: 0
           type: array
           items:
@@ -33045,7 +33961,9 @@ components:
                 type: object
       properties:
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Unique identifier of the alert event.
         multiplePermutation:
@@ -33062,14 +33980,18 @@ components:
       type: object
       properties:
         ids:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: The ids.
           description: The ids.
         orderBys:
+          maxItems: 20
           minItems: 0
           type: array
           items:
@@ -33618,6 +34540,30 @@ components:
         usage:
           $ref: '#/components/schemas/Counts'
       description: Response containing the company-level rule usage limits.
+      externalDocs:
+        url: ''
+    GetConfigurationGroupRequest:
+      type: object
+      properties:
+        id:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Configuration group UUID v7.
+        latestFamilyOnly:
+          type: boolean
+          description: Return only the latest configuration family when true.
+      description: Request to retrieve a fleet-manager configuration group.
+      externalDocs:
+        url: ''
+    GetConfigurationGroupResponse:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/ConfigurationGroup'
+      description: Response containing the requested fleet-manager configuration group.
       externalDocs:
         url: ''
     GetConfigurationRequest:
@@ -34476,7 +35422,10 @@ components:
       type: object
       properties:
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier.
           example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
@@ -35120,10 +36069,15 @@ components:
       type: object
       properties:
         companyId:
-          minLength: 0
+          maxLength: 20
+          minLength: 1
+          pattern: ^[0-9]+$
           type: string
           description: The company id.
+          example: '123456'
         labelsLimit:
+          maximum: 255
+          minimum: 0
           type: integer
           description: The labels limit.
           format: int32
@@ -35371,6 +36325,12 @@ components:
           type: integer
           format: int32
     GetMetricEntityUsagesRequest:
+      title: Get Metric Entity Usages Request
+      required:
+        - entityType
+        - startDate
+        - endDate
+        - length
       type: object
       properties:
         endDate:
@@ -35378,18 +36338,28 @@ components:
         entityType:
           $ref: '#/components/schemas/metric_usage_service.EntityType'
         filters:
+          maxItems: 6
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/UsageFilter'
+          description: >-
+            Filters applied to usage records (AND-combined). Each item must set
+            exactly one filter variant.
         groupBy:
+          maxItems: 4
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/PillarType'
+          description: >-
+            Pillars to aggregate by. Order is irrelevant; duplicate entries are
+            rejected.
         length:
-          minimum: 0
+          maximum: 1000
+          minimum: 1
           type: integer
+          description: Maximum number of records per day (1-1000).
           format: int64
         orderBy:
           $ref: '#/components/schemas/metric_usage_service.OrderBy'
@@ -35397,20 +36367,36 @@ components:
           $ref: '#/components/schemas/metric_usage_service.Ordering'
         skipTotals:
           type: boolean
+          description: >-
+            When true, daily totals will be omitted and fraction fields will be
+            set to zero.
         startDate:
           $ref: '#/components/schemas/Date'
         startOffset:
+          maximum: 10000000
           minimum: 0
           type: integer
+          description: Pagination offset within each day.
           format: int64
+      description: Request for pillar-based aggregated metric usage.
+      externalDocs:
+        url: ''
     GetMetricEntityUsagesResponse:
+      title: Get Metric Entity Usages Response
+      required:
+        - dailyUsages
       type: object
       properties:
         dailyUsages:
-          minItems: 0
+          maxItems: 7
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/UsageDay'
+          description: One entry per day in the requested range.
+      description: Daily aggregated metric usage results.
+      externalDocs:
+        url: ''
     GetMetricNamesDay:
       type: object
       properties:
@@ -35577,30 +36563,6 @@ components:
         preset:
           $ref: '#/components/schemas/Preset'
       description: Response containing the details of a notification preset.
-      externalDocs:
-        url: ''
-    GetPublicConfigurationGroupRequest:
-      type: object
-      properties:
-        id:
-          maxLength: 36
-          minLength: 36
-          pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-          type: string
-          description: Configuration group UUID v7.
-        latestFamilyOnly:
-          type: boolean
-          description: Return only the latest configuration family when true.
-      description: Request to retrieve a fleet-manager configuration group.
-      externalDocs:
-        url: ''
-    GetPublicConfigurationGroupResponse:
-      type: object
-      properties:
-        group:
-          $ref: '#/components/schemas/PublicConfigurationGroup'
-      description: Response containing the requested fleet-manager configuration group.
       externalDocs:
         url: ''
     GetQueriesRequest:
@@ -40312,12 +41274,16 @@ components:
       type: object
       properties:
         day:
-          minLength: 0
+          maxLength: 10
+          minLength: 10
+          pattern: ^\d{4}-\d{2}-\d{2}$
           type: string
-          description: The day.
+          description: The day, formatted as YYYY-MM-DD.
         permutations:
+          maximum: 2147483647
+          minimum: 0
           type: integer
-          description: List of permutations.
+          description: Number of label permutations for this day.
           format: int32
     Language:
       enum:
@@ -40431,12 +41397,16 @@ components:
       type: object
       properties:
         limit:
+          maximum: 2147483647
+          minimum: 0
           type: integer
           description: Limit.
           format: int32
         used:
+          maximum: 2147483647
+          minimum: 0
           type: integer
-          description: The used.
+          description: Used.
           format: int32
       description: Limit usage.
       externalDocs:
@@ -40969,6 +41939,7 @@ components:
       type: object
       properties:
         alertDefs:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -41230,6 +42201,7 @@ components:
       type: object
       properties:
         e2m:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
@@ -41594,6 +42566,7 @@ components:
         logsQuery:
           $ref: '#/components/schemas/v2.LogsQuery'
         metricLabels:
+          maxItems: 10
           minItems: 0
           type: array
           items:
@@ -41605,6 +42578,7 @@ components:
       type: object
       properties:
         permutations:
+          maxItems: 366
           minItems: 0
           type: array
           items:
@@ -41742,6 +42716,25 @@ components:
             $ref: '#/components/schemas/PresetSummary'
           description: The preset summaries.
       description: Response containing a list of notification preset summaries.
+      externalDocs:
+        url: ''
+    ListRepositoriesRequest:
+      type: object
+      additionalProperties: false
+      description: Request to list the repository settings. Resolved from auth context.
+      externalDocs:
+        url: ''
+    ListRepositoriesResponse:
+      type: object
+      properties:
+        repositories:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/RepositorySetting'
+          description: The repository settings.
+      description: Response containing the repository settings.
       externalDocs:
         url: ''
     ListResponse:
@@ -42238,6 +43231,8 @@ components:
         anomalyAlertSettings:
           $ref: '#/components/schemas/AnomalyAlertSettings'
         evaluationDelayMs:
+          maximum: 10800000
+          minimum: 0
           type: integer
           description: The delay in milliseconds before evaluating the alert condition
           format: int32
@@ -42505,6 +43500,7 @@ components:
         conditionType:
           $ref: '#/components/schemas/LogsRatioConditionType'
         threshold:
+          minimum: 0
           type: number
           description: The threshold value for the alert condition
           format: double
@@ -42545,11 +43541,14 @@ components:
         denominator:
           $ref: '#/components/schemas/v3.LogsFilter'
         denominatorAlias:
+          maxLength: 200
           minLength: 0
           type: string
           description: The alias for the denominator filter, used for display purposes
           example: denominator_alias
         evaluationDelayMs:
+          maximum: 10800000
+          minimum: 0
           type: integer
           description: The delay in milliseconds before evaluating the alert condition
           format: int32
@@ -42573,6 +43572,7 @@ components:
         numerator:
           $ref: '#/components/schemas/v3.LogsFilter'
         numeratorAlias:
+          maxLength: 200
           minLength: 0
           type: string
           description: The alias for the numerator filter, used for display purposes
@@ -42732,6 +43732,7 @@ components:
         conditionType:
           $ref: '#/components/schemas/LogsThresholdConditionType'
         threshold:
+          minimum: 0
           type: number
           description: The threshold value for the alert condition
           format: double
@@ -42787,6 +43788,8 @@ components:
       type: object
       properties:
         evaluationDelayMs:
+          maximum: 10800000
+          minimum: 0
           type: integer
           description: The delay in milliseconds before evaluating the alert condition
           format: int32
@@ -42844,6 +43847,7 @@ components:
         conditionType:
           $ref: '#/components/schemas/LogsTimeRelativeConditionType'
         threshold:
+          minimum: 0
           type: number
           description: The threshold value for the alert condition.
           format: double
@@ -42874,6 +43878,8 @@ components:
       type: object
       properties:
         evaluationDelayMs:
+          maximum: 10800000
+          minimum: 0
           type: integer
           description: The delay in milliseconds before evaluating the alert condition
           format: int32
@@ -42995,7 +44001,7 @@ components:
             $ref: '#/components/schemas/LogsUniqueCountRule'
           description: The rules for the log unique count alert
         uniqueCountKeypath:
-          minLength: 0
+          minLength: 1
           type: string
           description: The keypath in the logs to be used for unique count
           example: obj.field
@@ -43533,6 +44539,7 @@ components:
         conditionType:
           $ref: '#/components/schemas/MetricAnomalyConditionType'
         forOverPct:
+          maximum: 100
           minimum: 0
           type: integer
           description: >-
@@ -43541,6 +44548,7 @@ components:
           format: int64
           example: 20
         minNonNullValuesPct:
+          maximum: 100
           minimum: 0
           type: integer
           description: The percentage of non-null values required to trigger the alert
@@ -43578,6 +44586,8 @@ components:
         anomalyAlertSettings:
           $ref: '#/components/schemas/AnomalyAlertSettings'
         evaluationDelayMs:
+          maximum: 10800000
+          minimum: 0
           type: integer
           description: The delay in milliseconds before evaluating the alert condition
           format: int32
@@ -43597,6 +44607,9 @@ components:
         url: >-
           https://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/anomaly-detection-alerts/
     MetricDailyExtra:
+      title: Metric Daily Extra
+      required:
+        - sampleCount
       type: object
       properties:
         sampleCount:
@@ -43604,6 +44617,10 @@ components:
           minLength: 1
           pattern: ^[0-9]+$
           type: string
+          description: Total sample count for the day.
+      description: Additional daily totals for metric-level queries.
+      externalDocs:
+        url: ''
     MetricEntry:
       type: object
       properties:
@@ -43618,7 +44635,8 @@ components:
       type: object
       properties:
         promql:
-          minLength: 0
+          maxLength: 65535
+          minLength: 1
           type: string
           description: A PromQL filter for metrics
           example: avg_over_time(metric_name[5m]) > 10
@@ -43633,12 +44651,15 @@ components:
       type: object
       properties:
         sourceField:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The source field.
           example: log_obj.string_value
         targetLabel:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
           pattern: ^[\w/-]+$
           type: string
           description: The target label.
@@ -43700,6 +44721,7 @@ components:
                 type: object
       properties:
         minNonNullValuesPct:
+          maximum: 100
           minimum: 0
           type: integer
           description: >-
@@ -43726,27 +44748,41 @@ components:
           pattern: ^[0-9]+$
           type: string
     MetricRecordExtra:
+      title: Metric Record Extra
+      required:
+        - dimensionsCount
+        - variationsCount
+        - sampleCount
+        - fractionOfDailySampleCount
       type: object
       properties:
-        datapointsPerMinute:
-          type: number
-          format: float
         dimensionsCount:
+          maximum: 4294967295
           minimum: 0
           type: integer
+          description: Number of label dimensions.
           format: int64
         fractionOfDailySampleCount:
+          maximum: 1
+          minimum: 0
           type: number
+          description: Share of daily sample count (0 when skip_totals).
           format: float
         sampleCount:
           maxLength: 20
           minLength: 1
           pattern: ^[0-9]+$
           type: string
+          description: Sample count for this metric.
         variationsCount:
+          maximum: 4294967295
           minimum: 0
           type: integer
+          description: Number of variations.
           format: int64
+      description: Additional fields for metric-level usage records.
+      externalDocs:
+        url: ''
     MetricThresholdCondition:
       title: Metric Threshold Condition
       type: object
@@ -43754,6 +44790,7 @@ components:
         conditionType:
           $ref: '#/components/schemas/MetricThresholdConditionType'
         forOverPct:
+          maximum: 100
           minimum: 0
           type: integer
           description: >-
@@ -43822,6 +44859,8 @@ components:
       type: object
       properties:
         evaluationDelayMs:
+          maximum: 10800000
+          minimum: 0
           type: integer
           description: The delay in milliseconds before evaluating the alert condition
           format: int32
@@ -44499,6 +45538,7 @@ components:
       type: object
       properties:
         autoRetireSeconds:
+          minimum: 60
           type: integer
           description: >-
             The timeframe in seconds for auto retiring values that were detected
@@ -44966,6 +46006,7 @@ components:
       type: object
       properties:
         orderBys:
+          maxItems: 20
           minItems: 0
           type: array
           items:
@@ -45553,16 +46594,27 @@ components:
       externalDocs:
         url: ''
     OutputSetStats:
+      title: Output Set Stats
+      required:
+        - matchedCount
+        - datasetLastUpdatedEpochSeconds
       type: object
       properties:
         datasetLastUpdatedEpochSeconds:
+          maximum: 4294967295
           minimum: 0
           type: integer
+          description: Unix epoch seconds when the underlying dataset was last updated.
           format: int64
         matchedCount:
+          maximum: 4294967295
           minimum: 0
           type: integer
+          description: Total distinct keys matching filters before pagination.
           format: int64
+      description: Metadata about a paginated result set.
+      externalDocs:
+        url: ''
     Owner:
       type: object
       oneOf:
@@ -46138,7 +47190,9 @@ components:
         - PILLAR_METRIC_NAME
         - PILLAR_SERVICE_NAME
       type: string
+      description: Dimension to group metric usage aggregates by.
     PillarValue:
+      title: Pillar Value
       type: object
       oneOf:
         - required:
@@ -46170,16 +47224,28 @@ components:
                 type: object
       properties:
         metricName:
+          maxLength: 4096
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
+          description: Metric name.
         priority:
           $ref: '#/components/schemas/metrics.Priority'
         serviceName:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
+          description: Service name from the service_name label.
         source:
-          minLength: 0
+          maxLength: 64
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
+          description: Source indicator (e.g. apm, recording_rules).
+      description: Value for one group-by pillar.
+      externalDocs:
+        url: ''
     PinDashboardRequest:
       title: Pin dashboard request data structure
       required:
@@ -46266,6 +47332,9 @@ components:
         - required:
             - spanRules
           type: object
+        - required:
+            - rumRules
+          type: object
         - type: object
           not:
             anyOf:
@@ -46274,6 +47343,9 @@ components:
                 type: object
               - required:
                   - spanRules
+                type: object
+              - required:
+                  - rumRules
                 type: object
       properties:
         applicationRule:
@@ -46330,6 +47402,8 @@ components:
           $ref: '#/components/schemas/PriorityOverride'
         priorityOverrideStatus:
           $ref: '#/components/schemas/PriorityOverrideStatus'
+        rumRules:
+          $ref: '#/components/schemas/LogRules'
         spanRules:
           $ref: '#/components/schemas/SpanRules'
         subsystemRule:
@@ -46591,6 +47665,7 @@ components:
       type: object
       properties:
         count:
+          maximum: 4294967295
           minimum: 0
           type: integer
           description: The count for this alert priority
@@ -46624,13 +47699,21 @@ components:
       externalDocs:
         url: ''
     PriorityList:
+      title: Priority List
+      required:
+        - priorities
       type: object
       properties:
         priorities:
-          minItems: 0
+          maxItems: 10
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/metrics.Priority'
+          description: Priorities to match.
+      description: List of priorities for filtering.
+      externalDocs:
+        url: ''
     PriorityOverride:
       type: object
       properties:
@@ -47203,499 +48286,6 @@ components:
         - PROVIDER_TYPE_S3
         - PROVIDER_TYPE_IBM_COS
       type: string
-    PublicAgentSelectorRequest:
-      type: object
-      properties:
-        attributes:
-          type: object
-          additionalProperties:
-            maxLength: 4096
-            minLength: 0
-            pattern: ^[\s\S]*$
-            type: string
-          description: >-
-            Flat agent attributes to match. If collectorVersion is set,
-            service.version must match it or is added automatically.
-      description: Agent selector used in requests.
-      externalDocs:
-        url: ''
-    PublicAgentSelectorRequest.AttributesEntry:
-      type: object
-      properties:
-        key:
-          minLength: 0
-          type: string
-        value:
-          minLength: 0
-          type: string
-    PublicAgentSelectorResponse:
-      type: object
-      properties:
-        attributes:
-          type: object
-          additionalProperties:
-            maxLength: 4096
-            minLength: 0
-            pattern: ^[\s\S]*$
-            type: string
-          description: Flat agent attributes matched by the selector.
-      description: Agent selector returned in responses.
-      externalDocs:
-        url: ''
-    PublicAgentSelectorResponse.AttributesEntry:
-      type: object
-      properties:
-        key:
-          minLength: 0
-          type: string
-        value:
-          minLength: 0
-          type: string
-    PublicChartName:
-      title: Fleet-manager chart name
-      enum:
-        - PUBLIC_CHART_NAME_UNSPECIFIED
-        - PUBLIC_CHART_NAME_OTEL_INTEGRATION
-        - PUBLIC_CHART_NAME_OPENTELEMETRY_COLLECTOR
-        - PUBLIC_CHART_NAME_OTEL_LINUX_STANDALONE
-        - PUBLIC_CHART_NAME_OTEL_WINDOWS_STANDALONE
-        - PUBLIC_CHART_NAME_OTEL_MACOS_STANDALONE
-        - PUBLIC_CHART_NAME_OTEL_ECS_EC2
-      type: string
-      description: Helm chart name for fleet-manager configuration families.
-    PublicConfigurationFamilyRequest:
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: Whether this family is active.
-        basedOnConfigurationFamilyId:
-          maxLength: 36
-          minLength: 36
-          pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-          type: string
-          description: Configuration family UUID v7 this family is based on.
-        collectorVersion:
-          maxLength: 256
-          minLength: 5
-          pattern: >-
-            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
-          type: string
-          description: >-
-            Collector semantic version this configuration family targets,
-            without a leading v prefix. The service.version selector must match
-            this value or is added automatically.
-        description:
-          maxLength: 4096
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Human-readable description.
-        metadata:
-          type: object
-          additionalProperties:
-            maxLength: 4096
-            minLength: 0
-            pattern: ^[\s\S]*$
-            type: string
-          description: Metadata stored with this configuration family.
-        remoteConfigurations:
-          maxItems: 128
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicRemoteConfigurationRequest'
-          description: Remote configurations to create in this family.
-      description: Initial configuration family to create.
-      externalDocs:
-        url: ''
-    PublicConfigurationFamilyRequest.MetadataEntry:
-      type: object
-      properties:
-        key:
-          minLength: 0
-          type: string
-        value:
-          minLength: 0
-          type: string
-    PublicConfigurationFamilyResponse:
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: Whether this family is active.
-        basedOnConfigurationFamilyId:
-          maxLength: 36
-          minLength: 36
-          pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-          type: string
-          description: Configuration family UUID v7 this family is based on.
-        chartName:
-          $ref: '#/components/schemas/PublicChartName'
-        chartVersion:
-          maxLength: 256
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Helm chart or template version used by this family.
-        collectorVersion:
-          maxLength: 256
-          minLength: 5
-          pattern: >-
-            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
-          type: string
-          description: >-
-            Collector semantic version this configuration family targets,
-            without a leading v prefix.
-        description:
-          maxLength: 4096
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Human-readable description.
-        id:
-          maxLength: 36
-          minLength: 36
-          pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-          type: string
-          description: Configuration family UUID v7.
-        integrationVersion:
-          maxLength: 256
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Integration version from the onboarding flow.
-        lastActivatedAt:
-          maxLength: 64
-          minLength: 0
-          type: string
-          description: Time when this family was last activated.
-          format: date-time
-        metadata:
-          type: object
-          additionalProperties:
-            maxLength: 4096
-            minLength: 0
-            pattern: ^[\s\S]*$
-            type: string
-          description: Metadata stored with this configuration family.
-        remoteConfigurations:
-          maxItems: 128
-          minItems: 0
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicRemoteConfigurationResponse'
-          description: Remote configurations in this family.
-        version:
-          maxLength: 256
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
-          description: >-
-            Monotonic version number of this configuration family within its
-            group.
-      description: Configuration family returned by Fleet Manager.
-      externalDocs:
-        url: ''
-    PublicConfigurationFamilyResponse.MetadataEntry:
-      type: object
-      properties:
-        key:
-          minLength: 0
-          type: string
-        value:
-          minLength: 0
-          type: string
-    PublicConfigurationGroup:
-      type: object
-      properties:
-        description:
-          maxLength: 4096
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Human-readable description.
-        families:
-          maxItems: 128
-          minItems: 0
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicConfigurationFamilyResponse'
-          description: Configuration families in this group.
-        id:
-          maxLength: 36
-          minLength: 36
-          pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-          type: string
-          description: Configuration group UUID v7.
-        name:
-          maxLength: 256
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Display name.
-        priorityOrder:
-          maximum: 2147483647
-          minimum: -2147483648
-          type: integer
-          description: >-
-            Selection precedence. Higher values win on ties and 0 is the
-            default.
-          format: int32
-        tags:
-          maxItems: 64
-          minItems: 0
-          type: array
-          items:
-            maxLength: 256
-            minLength: 0
-            pattern: ^[\s\S]*$
-            type: string
-            description: Tags attached to the configuration group.
-          description: Tags attached to the configuration group.
-      description: Fleet-manager configuration group.
-      externalDocs:
-        url: ''
-    PublicCreateConfigurationGroupRequest:
-      type: object
-      properties:
-        description:
-          maxLength: 4096
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Human-readable description.
-        families:
-          maxItems: 1
-          minItems: 0
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicConfigurationFamilyRequest'
-          description: >-
-            Initial configuration family to create with this group. At most one
-            item is accepted.
-        name:
-          maxLength: 256
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Display name.
-        priorityOrder:
-          maximum: 2147483647
-          minimum: -2147483648
-          type: integer
-          description: >-
-            Selection precedence. Higher values win on ties and 0 is the
-            default.
-          format: int32
-        tags:
-          maxItems: 64
-          minItems: 0
-          type: array
-          items:
-            maxLength: 256
-            minLength: 0
-            pattern: ^[\s\S]*$
-            type: string
-            description: Tags attached to the configuration group.
-          description: Tags attached to the configuration group.
-      description: Payload used to create a fleet-manager configuration group.
-      externalDocs:
-        url: ''
-    PublicRemoteConfigurationRequest:
-      type: object
-      properties:
-        agentSelector:
-          $ref: '#/components/schemas/PublicAgentSelectorRequest'
-        name:
-          maxLength: 256
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Remote configuration name.
-        rawConfiguration:
-          maxLength: 1048576
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
-          description: >-
-            OpenTelemetry Collector configuration YAML. The supervisor-managed
-            OpAMP extension must not be configured.
-      description: Remote configuration to create.
-      externalDocs:
-        url: ''
-    PublicRemoteConfigurationResponse:
-      type: object
-      properties:
-        agentSelector:
-          $ref: '#/components/schemas/PublicAgentSelectorResponse'
-        createdAt:
-          maxLength: 64
-          minLength: 0
-          type: string
-          description: Time when this remote configuration was created.
-          format: date-time
-        hash:
-          maxLength: 256
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
-          description: SHA-256 hash of the normalized raw configuration content.
-        id:
-          maxLength: 36
-          minLength: 36
-          pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-          type: string
-          description: Remote configuration UUID v7.
-        name:
-          maxLength: 256
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Remote configuration name.
-        rawConfiguration:
-          maxLength: 1048576
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
-          description: Normalized OpenTelemetry Collector configuration YAML.
-        updatedAt:
-          maxLength: 64
-          minLength: 0
-          type: string
-          description: Time when this remote configuration was last updated.
-          format: date-time
-      description: Remote configuration returned by Fleet Manager.
-      externalDocs:
-        url: ''
-    PublicReplaceConfigurationFamilyRequest:
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: Whether this family is active.
-        collectorVersion:
-          maxLength: 256
-          minLength: 5
-          pattern: >-
-            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
-          type: string
-          description: >-
-            Collector semantic version this configuration family targets,
-            without a leading v prefix. The service.version selector must match
-            this value or is added automatically.
-        description:
-          maxLength: 4096
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Human-readable description.
-        metadata:
-          type: object
-          additionalProperties:
-            maxLength: 4096
-            minLength: 0
-            pattern: ^[\s\S]*$
-            type: string
-          description: Metadata stored with this configuration family.
-        remoteConfigurations:
-          maxItems: 128
-          minItems: 0
-          type: array
-          items:
-            $ref: '#/components/schemas/PublicReplaceRemoteConfigurationRequest'
-          description: >-
-            Remote configurations to use when creating or replacing family
-            content.
-      description: >-
-        Fields used to update the latest configuration family. Omitted optional
-        fields keep their existing values.
-      externalDocs:
-        url: ''
-    PublicReplaceConfigurationFamilyRequest.MetadataEntry:
-      type: object
-      properties:
-        key:
-          minLength: 0
-          type: string
-        value:
-          minLength: 0
-          type: string
-    PublicReplaceConfigurationGroupRequest:
-      type: object
-      properties:
-        description:
-          maxLength: 4096
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Human-readable description.
-        family:
-          $ref: '#/components/schemas/PublicReplaceConfigurationFamilyRequest'
-        id:
-          maxLength: 36
-          minLength: 36
-          pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-          type: string
-          description: Configuration group UUID v7.
-        name:
-          maxLength: 256
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Display name.
-        priorityOrder:
-          maximum: 2147483647
-          minimum: -2147483648
-          type: integer
-          description: >-
-            Selection precedence. Higher values win on ties and 0 is the
-            default.
-          format: int32
-        tags:
-          maxItems: 64
-          minItems: 0
-          type: array
-          items:
-            maxLength: 256
-            minLength: 0
-            pattern: ^[\s\S]*$
-            type: string
-            description: Tags attached to the configuration group.
-          description: Tags attached to the configuration group.
-      description: >-
-        Fields used to update a fleet-manager configuration group. Omitted
-        optional fields keep their existing values.
-      externalDocs:
-        url: ''
-    PublicReplaceRemoteConfigurationRequest:
-      type: object
-      properties:
-        agentSelector:
-          $ref: '#/components/schemas/PublicAgentSelectorRequest'
-        name:
-          maxLength: 256
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
-          description: Remote configuration name.
-        rawConfiguration:
-          maxLength: 1048576
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
-          description: >-
-            OpenTelemetry Collector configuration YAML. The supervisor-managed
-            OpAMP extension must not be configured.
-      description: Remote configuration content used in a family update.
-      externalDocs:
-        url: ''
     PushBasedContextualData:
       title: Push based contextual data
       type: object
@@ -48828,10 +49418,13 @@ components:
       type: object
       properties:
         emails:
+          maxItems: 100
           minItems: 1
           type: array
           items:
-            minLength: 0
+            maxLength: 4096
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: The list of email recipients for alert notifications
           description: The list of email recipients for alert notifications
@@ -49021,6 +49614,95 @@ components:
           description: The parameters.
         revisionLifecycle:
           $ref: '#/components/schemas/RevisionLifecycle'
+      externalDocs:
+        url: ''
+    RemoteConfiguration:
+      type: object
+      properties:
+        agentSelector:
+          $ref: '#/components/schemas/AgentSelectorResponse'
+        createdAt:
+          maxLength: 64
+          minLength: 0
+          type: string
+          description: Time when this remote configuration was created.
+          format: date-time
+        hash:
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: SHA-256 hash of the normalized raw configuration content.
+        id:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Remote configuration UUID v7.
+        name:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Remote configuration name.
+        rawConfiguration:
+          maxLength: 1048576
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Normalized OpenTelemetry Collector configuration YAML.
+        updatedAt:
+          maxLength: 64
+          minLength: 0
+          type: string
+          description: Time when this remote configuration was last updated.
+          format: date-time
+      description: Remote configuration returned by Fleet Manager.
+      externalDocs:
+        url: ''
+    RemoteConfigurationCreate:
+      type: object
+      properties:
+        agentSelector:
+          $ref: '#/components/schemas/AgentSelectorRequest'
+        name:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Remote configuration name.
+        rawConfiguration:
+          maxLength: 1048576
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            OpenTelemetry Collector configuration YAML. The supervisor-managed
+            OpAMP extension must not be configured.
+      description: Remote configuration to create.
+      externalDocs:
+        url: ''
+    RemoteConfigurationReplace:
+      type: object
+      properties:
+        agentSelector:
+          $ref: '#/components/schemas/AgentSelectorRequest'
+        name:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Remote configuration name.
+        rawConfiguration:
+          maxLength: 1048576
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            OpenTelemetry Collector configuration YAML. The supervisor-managed
+            OpAMP extension must not be configured.
+      description: Remote configuration content used in a family update.
       externalDocs:
         url: ''
     RemoveCompanyMeasurementsRequest:
@@ -49250,7 +49932,10 @@ components:
         alertDefProperties:
           $ref: '#/components/schemas/AlertDefProperties'
         id:
+          maxLength: 36
           minLength: 0
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
@@ -49326,6 +50011,22 @@ components:
       description: >-
         This data structure represents the response to replace company IP access
         settings.
+      externalDocs:
+        url: ''
+    ReplaceConfigurationGroupRequest:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/ConfigurationGroupReplace'
+      description: Request to update a fleet-manager configuration group.
+      externalDocs:
+        url: ''
+    ReplaceConfigurationGroupResponse:
+      type: object
+      properties:
+        group:
+          $ref: '#/components/schemas/ConfigurationGroup'
+      description: Response containing the updated fleet-manager configuration group.
       externalDocs:
         url: ''
     ReplaceConnectorRequest:
@@ -49578,22 +50279,6 @@ components:
         contains the complete resource including server-generated fields.
       externalDocs:
         url: ''
-    ReplacePublicConfigurationGroupRequest:
-      type: object
-      properties:
-        group:
-          $ref: '#/components/schemas/PublicReplaceConfigurationGroupRequest'
-      description: Request to update a fleet-manager configuration group.
-      externalDocs:
-        url: ''
-    ReplacePublicConfigurationGroupResponse:
-      type: object
-      properties:
-        group:
-          $ref: '#/components/schemas/PublicConfigurationGroup'
-      description: Response containing the updated fleet-manager configuration group.
-      externalDocs:
-        url: ''
     ReplaceQuotaAllocationRuleSetRequest:
       title: Replace quota allocation rule set request
       required:
@@ -49696,6 +50381,30 @@ components:
       properties:
         view:
           $ref: '#/components/schemas/View'
+    RepositoryClassification:
+      enum:
+        - REPOSITORY_CLASSIFICATION_UNSPECIFIED
+        - MANAGED
+        - UNMANAGED
+      type: string
+      description: 'Classification of a repository: MANAGED or UNMANAGED.'
+    RepositorySetting:
+      required:
+        - repository
+        - classification
+      type: object
+      properties:
+        classification:
+          $ref: '#/components/schemas/RepositoryClassification'
+        repository:
+          maxLength: 512
+          minLength: 1
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9._/-]*$
+          type: string
+          description: Repository (bare name, e.g. 'coralogix' or 'coralogix/repo').
+      description: A single repository and its classification.
+      externalDocs:
+        url: ''
     RequestBasedMetricSli:
       title: RequestBasedMetricSli
       type: object
@@ -51292,6 +52001,9 @@ components:
       externalDocs:
         url: ''
     ServiceDailyExtra:
+      title: Service Daily Extra
+      required:
+        - sampleCount
       type: object
       properties:
         sampleCount:
@@ -51299,6 +52011,10 @@ components:
           minLength: 1
           pattern: ^[0-9]+$
           type: string
+          description: Total sample count for the day.
+      description: Additional daily totals for service-level queries.
+      externalDocs:
+        url: ''
     ServiceNow:
       title: ServiceNow resolver
       type: object
@@ -51339,16 +52055,27 @@ components:
       externalDocs:
         url: ''
     ServiceRecordExtra:
+      title: Service Record Extra
+      required:
+        - sampleCount
+        - fractionOfDailySampleCount
       type: object
       properties:
         fractionOfDailySampleCount:
+          maximum: 1
+          minimum: 0
           type: number
+          description: Share of daily sample count (0 when skip_totals).
           format: float
         sampleCount:
           maxLength: 20
           minLength: 1
           pattern: ^[0-9]+$
           type: string
+          description: Sample count for this service.
+      description: Additional fields for service-level usage records.
+      externalDocs:
+        url: ''
     SetCompanyModelPricingRequest:
       required:
         - prices
@@ -52318,6 +53045,7 @@ components:
       type: object
       properties:
         threshold:
+          minimum: 0
           type: number
           description: Threshold value.
           format: double
@@ -53199,6 +53927,7 @@ components:
       type: object
       properties:
         count:
+          maximum: 4294967295
           minimum: 0
           type: integer
           description: The count for this alert status
@@ -54554,7 +55283,7 @@ components:
           pattern: ^[0-9]+$
           type: string
           description: The duration value
-          example: '60'
+          example: '24'
         unit:
           $ref: '#/components/schemas/DurationUnit'
       description: Configuration for time duration
@@ -54615,11 +55344,15 @@ components:
       type: object
       properties:
         hours:
+          maximum: 23
+          minimum: 0
           type: integer
           description: The hours.
           format: int32
           example: 14
         minutes:
+          maximum: 59
+          minimum: 0
           type: integer
           description: The minutes.
           format: int32
@@ -55281,6 +56014,7 @@ components:
         conditionType:
           $ref: '#/components/schemas/TracingThresholdConditionType'
         spanAmount:
+          minimum: 0
           type: number
           description: The threshold value for the alert condition
           format: double
@@ -55406,6 +56140,7 @@ components:
       type: object
       properties:
         count:
+          maximum: 4294967295
           minimum: 0
           type: integer
           description: The count for this alert type
@@ -56300,6 +57035,9 @@ components:
         - required:
             - spanRules
           type: object
+        - required:
+            - rumRules
+          type: object
         - type: object
           not:
             anyOf:
@@ -56308,6 +57046,9 @@ components:
                 type: object
               - required:
                   - spanRules
+                type: object
+              - required:
+                  - rumRules
                 type: object
       properties:
         applicationRule:
@@ -56341,6 +57082,8 @@ components:
           $ref: '#/components/schemas/quota.v1.Priority'
         priorityOverride:
           $ref: '#/components/schemas/PriorityOverride'
+        rumRules:
+          $ref: '#/components/schemas/LogRules'
         spanRules:
           $ref: '#/components/schemas/SpanRules'
         subsystemRule:
@@ -56369,6 +57112,27 @@ components:
         description: Find out more about quota management.
         url: >-
           https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
+    UpdateRepositoryRequest:
+      required:
+        - repository
+      type: object
+      properties:
+        repository:
+          $ref: '#/components/schemas/RepositorySetting'
+      description: >-
+        Request to update a single existing repository setting (changes its
+        classification). The repository is identified by the 'repository' field
+        in the body (see the RPC-style note on the operation).
+      externalDocs:
+        url: ''
+    UpdateRepositoryResponse:
+      type: object
+      properties:
+        repository:
+          $ref: '#/components/schemas/RepositorySetting'
+      description: Response containing the updated repository setting.
+      externalDocs:
+        url: ''
     UpdateRequest:
       title: Update Tenant Request
       type: object
@@ -57077,6 +57841,11 @@ components:
       type: string
       description: Relative day-oriented presets resolved by the server at request time.
     UsageDay:
+      title: Usage Day
+      required:
+        - date
+        - outputSetStats
+        - records
       type: object
       properties:
         date:
@@ -57084,12 +57853,17 @@ components:
         outputSetStats:
           $ref: '#/components/schemas/OutputSetStats'
         records:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/UsageRecord'
+          description: Usage records for this day.
         totals:
           $ref: '#/components/schemas/DailyTotals'
+      description: Aggregated usage for a single calendar day.
+      externalDocs:
+        url: ''
     UsageEntry:
       type: object
       properties:
@@ -57115,6 +57889,7 @@ components:
       externalDocs:
         url: ''
     UsageFilter:
+      title: Usage Filter
       type: object
       oneOf:
         - required:
@@ -57135,47 +57910,48 @@ components:
         - required:
             - metricNameContains
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - sourceIs
-                type: object
-              - required:
-                  - priorityIn
-                type: object
-              - required:
-                  - serviceNameIs
-                type: object
-              - required:
-                  - serviceNameContains
-                type: object
-              - required:
-                  - metricNameIs
-                type: object
-              - required:
-                  - metricNameContains
-                type: object
       properties:
         includeTotals:
           type: boolean
+          description: When true, also narrows daily total aggregates.
         metricNameContains:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
+          description: Substring match on metric name.
         metricNameIs:
+          maxLength: 4096
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
+          description: Exact metric name match.
         priorityIn:
           $ref: '#/components/schemas/PriorityList'
         serviceNameContains:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
+          description: Substring match on service_name.
         serviceNameIs:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
+          description: Exact service_name label match.
         sourceIs:
-          minLength: 0
+          maxLength: 64
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
+          description: Match metrics from this source (e.g. apm).
+      description: >-
+        A single filter applied to usage records. Exactly one of sourceIs,
+        priorityIn, serviceNameIs, serviceNameContains, metricNameIs, or
+        metricNameContains must be set.
+      externalDocs:
+        url: ''
     UsageGroupBy:
       type: object
       properties:
@@ -57374,6 +58150,14 @@ components:
       type: string
       description: Raw unit of a measured amount.
     UsageRecord:
+      title: Usage Record
+      required:
+        - pillars
+        - cardinality
+        - fractionOfDailyCardinality
+        - bytesVolume
+        - unitUsage
+        - fractionOfDailyUsage
       type: object
       oneOf:
         - required:
@@ -57397,29 +58181,49 @@ components:
           minLength: 1
           pattern: ^[0-9]+$
           type: string
+          description: Bytes volume for this record.
         cardinality:
           maxLength: 20
           minLength: 1
           pattern: ^[0-9]+$
           type: string
+          description: Cardinality for this record.
         fractionOfDailyCardinality:
+          maximum: 1
+          minimum: 0
           type: number
+          description: Share of daily cardinality (0 when skip_totals).
           format: float
         fractionOfDailyUsage:
+          maximum: 1
+          minimum: 0
           type: number
+          description: Share of daily usage (0 when skip_totals).
           format: float
         metric:
           $ref: '#/components/schemas/MetricRecordExtra'
         pillars:
+          maxItems: 4
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/PillarValue'
+          description: >-
+            Values for each requested group-by pillar, in canonical pillar
+            order.
         service:
           $ref: '#/components/schemas/ServiceRecordExtra'
         unitUsage:
           type: number
+          description: Billable unit usage for this record.
           format: float
+      description: >-
+        Aggregated usage for one group-by key within a day. Entity-specific
+        extras (`service` or `metric`) are populated when the resolved entity
+        type has per-entity attributes; for ENTITY_METRIC and ENTITY_SERVICE
+        they are always present. Future entity types may omit extras.
+      externalDocs:
+        url: ''
     UsageTier:
       type: object
       properties:
@@ -59190,22 +59994,28 @@ components:
       type: object
       properties:
         pageSize:
+          maximum: 1000
           minimum: 0
           type: integer
           description: Page size.
           format: int64
         pageToken:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The page token.
     alerts.v3.PaginationResponse:
       type: object
       properties:
         nextPageToken:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Token for fetching the next page of results.
         totalSize:
+          maximum: 4294967295
           minimum: 0
           type: integer
           description: Total number of results.
@@ -59833,29 +60643,33 @@ components:
           type: string
     metric_usage_service.EntityType:
       enum:
-        - ENTITY_AUTO
         - ENTITY_METRIC
         - ENTITY_SERVICE
       type: string
+      description: Whether usage is aggregated per metric or per service.
     metric_usage_service.OrderBy:
       enum:
         - USAGE
         - CARDINALITY
         - SAMPLE_COUNT
-        - DATAPOINTS_PER_MINUTE
       type: string
+      description: Field to sort daily usage records by.
     metric_usage_service.Ordering:
       enum:
         - DESCENDING
         - ASCENDING
       type: string
+      description: Sort direction for ordered results.
     metrics.Priority:
+      title: Metric priority
       enum:
         - HIGH
         - MEDIUM
         - LOW
         - BLOCKED
       type: string
+      description: Ingestion priority tier assigned to a metric.
+      example: HIGH
     metrics_blocking_rules.Rule:
       type: object
       properties:
@@ -60607,6 +61421,7 @@ components:
         - SOURCE_TYPE_UNSPECIFIED
         - SOURCE_TYPE_LOGS
         - SOURCE_TYPE_SPANS
+        - SOURCE_TYPE_RUM
       type: string
       description: Source type.
     v1.Span:
@@ -60870,7 +61685,9 @@ components:
         samples:
           $ref: '#/components/schemas/E2MAggSamples'
         targetMetricName:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Name of the target metric produced by this aggregation.
           example: alias_field_name_agg_func
@@ -60915,35 +61732,46 @@ components:
       type: object
       properties:
         alias:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The alias.
           example: new_query
         applicationnameFilters:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
+            maxLength: 4096
             minLength: 0
+            pattern: ^[\s\S]*$
             type: string
             description: The applicationname filters.
             example: app_name
           description: The applicationname filters.
         lucene:
+          maxLength: 10000
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: The lucene.
           example: 'log_obj.numeric_field: [50 TO 100]'
         severityFilters:
+          maxItems: 7
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/logs2metrics.v2.Severity'
           description: The severity filters.
         subsystemnameFilters:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
+            maxLength: 4096
             minLength: 0
+            pattern: ^[\s\S]*$
             type: string
             description: The subsystemname filters.
             example: sub_name
@@ -60962,18 +61790,22 @@ components:
       type: object
       properties:
         aggregations:
+          maxItems: 7
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/v2.Aggregation'
           description: The aggregations.
         sourceField:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The source field.
           example: log_obj.numeric_field
         targetBaseMetricName:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
           pattern: ^[\w/-]+$
           type: string
           description: The target base metric name.
@@ -61078,42 +61910,56 @@ components:
       type: object
       properties:
         actionFilters:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
+            maxLength: 4096
             minLength: 0
+            pattern: ^[\s\S]*$
             type: string
             description: The action filters.
             example: myAction
           description: The action filters.
         applicationnameFilters:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
+            maxLength: 4096
             minLength: 0
+            pattern: ^[\s\S]*$
             type: string
             description: The applicationname filters.
             example: myApp
           description: The applicationname filters.
         lucene:
+          maxLength: 10000
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: The lucene.
           example: applicationName:myApp
         serviceFilters:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
+            maxLength: 4096
             minLength: 0
+            pattern: ^[\s\S]*$
             type: string
             description: The service filters.
             example: myService
           description: The service filters.
         subsystemnameFilters:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
+            maxLength: 4096
             minLength: 0
+            pattern: ^[\s\S]*$
             type: string
             description: The subsystemname filters.
             example: mySubsystem
@@ -61613,7 +62459,10 @@ components:
           description: Whether to enable or disable the alert definition
           example: true
         id:
+          maxLength: 36
           minLength: 0
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: The alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
@@ -61632,7 +62481,8 @@ components:
       type: object
       properties:
         sloId:
-          minLength: 0
+          maxLength: 36
+          minLength: 1
           type: string
           description: The SLO ID
           example: 123e4567-e89b-12d3-a456-426614174000
@@ -61680,12 +62530,16 @@ components:
       type: object
       properties:
         endTime:
-          minLength: 0
+          maxLength: 64
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: End time of the range
           format: date-time
         startTime:
-          minLength: 0
+          maxLength: 64
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Start time of the range
           format: date-time
@@ -62217,7 +63071,7 @@ tags:
     externalDocs:
       url: ''
   - name: Dashboard service
-    description: Manage your dashboards.
+    description: Get information about the Coralogix Dashboard catalog.
     externalDocs:
       url: ''
   - name: Data Usage Query service

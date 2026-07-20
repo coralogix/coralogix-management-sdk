@@ -23,11 +23,11 @@ type DigestType string
 
 // List of DigestType
 const (
-	DIGESTTYPE_UNKNOWN                 DigestType = "UNKNOWN"
+	DIGESTTYPE_UNKNOWN DigestType = "UNKNOWN"
 	DIGESTTYPE_ERROR_AND_CRITICAL_LOGS DigestType = "ERROR_AND_CRITICAL_LOGS"
-	DIGESTTYPE_FLOW_ANOMALIES          DigestType = "FLOW_ANOMALIES"
-	DIGESTTYPE_SPIKE_ANOMALIES         DigestType = "SPIKE_ANOMALIES"
-	DIGESTTYPE_DATA_USAGE              DigestType = "DATA_USAGE"
+	DIGESTTYPE_FLOW_ANOMALIES DigestType = "FLOW_ANOMALIES"
+	DIGESTTYPE_SPIKE_ANOMALIES DigestType = "SPIKE_ANOMALIES"
+	DIGESTTYPE_DATA_USAGE DigestType = "DATA_USAGE"
 )
 
 // All allowed values of DigestType enum
@@ -117,3 +117,4 @@ func (v *NullableDigestType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

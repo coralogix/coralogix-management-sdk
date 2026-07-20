@@ -22,11 +22,11 @@ var _ MappedNullable = &CommentAttachment{}
 
 // CommentAttachment struct for CommentAttachment
 type CommentAttachment struct {
-	CustomWidget                                    *CustomDashboardWidgetAttachment `json:"customWidget,omitempty"`
-	File                                            *FileAttachment                  `json:"file,omitempty"`
-	Log                                             *LogAttachment                   `json:"log,omitempty"`
-	AdditionalProperties                            map[string]interface{}
-	additionalPropertiesFromUnmarshal               bool
+	CustomWidget *CustomDashboardWidgetAttachment `json:"customWidget,omitempty"`
+	File *FileAttachment `json:"file,omitempty"`
+	Log *LogAttachment `json:"log,omitempty"`
+	AdditionalProperties map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
@@ -146,7 +146,7 @@ func (o *CommentAttachment) SetLog(v LogAttachment) {
 }
 
 func (o CommentAttachment) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -275,3 +275,4 @@ func (v *NullableCommentAttachment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

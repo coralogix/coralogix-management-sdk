@@ -22,11 +22,11 @@ var _ MappedNullable = &IntervalResolution{}
 
 // IntervalResolution Configuration for time bucket/interval resolution in time-series widgets. Supports automatic calculation based on widget width and time range, or manual interval specification.
 type IntervalResolution struct {
-	Auto   *AutoIntervalResolution   `json:"auto,omitempty"`
+	Auto *AutoIntervalResolution `json:"auto,omitempty"`
 	Manual *ManualIntervalResolution `json:"manual,omitempty"`
 	// Whether the max. data points and min. interval fields are user-editable. When true, users can modify these constraint fields; when false or unset, they are read-only.
-	UseAdvancedLimit                  *bool `json:"useAdvancedLimit,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UseAdvancedLimit *bool `json:"useAdvancedLimit,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *IntervalResolution) SetUseAdvancedLimit(v bool) {
 }
 
 func (o IntervalResolution) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -260,3 +260,4 @@ func (v *NullableIntervalResolution) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

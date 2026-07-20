@@ -23,8 +23,8 @@ var _ MappedNullable = &TextboxDefaultIntervalValue{}
 // TextboxDefaultIntervalValue Textbox default interval value.
 type TextboxDefaultIntervalValue struct {
 	// The value.
-	Value                             *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *TextboxDefaultIntervalValue) SetValue(v string) {
 }
 
 func (o TextboxDefaultIntervalValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableTextboxDefaultIntervalValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

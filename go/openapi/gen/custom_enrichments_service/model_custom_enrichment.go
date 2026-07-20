@@ -35,8 +35,8 @@ type CustomEnrichment struct {
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// Version number.
-	Version                           *int64 `json:"version,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Version *int64 `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -284,7 +284,7 @@ func (o *CustomEnrichment) SetVersion(v int64) {
 }
 
 func (o CustomEnrichment) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -386,3 +386,4 @@ func (v *NullableCustomEnrichment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

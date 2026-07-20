@@ -23,8 +23,8 @@ var _ MappedNullable = &UserActor{}
 // UserActor Information about the user who initiated the action.
 type UserActor struct {
 	// User ID
-	Id                                *string `json:"id,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *UserActor) SetId(v string) {
 }
 
 func (o UserActor) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableUserActor) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

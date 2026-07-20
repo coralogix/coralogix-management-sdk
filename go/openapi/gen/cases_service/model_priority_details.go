@@ -22,9 +22,9 @@ var _ MappedNullable = &PriorityDetails{}
 
 // PriorityDetails Priority details, including system computed and user override values.
 type PriorityDetails struct {
-	Override                          *CasePriority `json:"override,omitempty"`
-	System                            *CasePriority `json:"system,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Override *CasePriority `json:"override,omitempty"`
+	System *CasePriority `json:"system,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *PriorityDetails) SetSystem(v CasePriority) {
 }
 
 func (o PriorityDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullablePriorityDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

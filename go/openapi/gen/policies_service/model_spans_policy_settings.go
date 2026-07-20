@@ -22,8 +22,8 @@ var _ MappedNullable = &SpansPolicySettings{}
 
 // SpansPolicySettings This data structure is used to define the default priority for spans policies.
 type SpansPolicySettings struct {
-	DefaultPriority                   *QuotaV1Priority `json:"defaultPriority,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	DefaultPriority *QuotaV1Priority `json:"defaultPriority,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *SpansPolicySettings) SetDefaultPriority(v QuotaV1Priority) {
 }
 
 func (o SpansPolicySettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableSpansPolicySettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ var _ MappedNullable = &SingleValue{}
 // SingleValue Single value.
 type SingleValue struct {
 	// The default value.
-	DefaultValue                      *string `json:"defaultValue,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	DefaultValue *string `json:"defaultValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *SingleValue) SetDefaultValue(v string) {
 }
 
 func (o SingleValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableSingleValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,10 +23,10 @@ var _ MappedNullable = &EventRecurrenceSource{}
 // EventRecurrenceSource Annotation source driven by recurring calendar events such as weekly deployments or maintenance windows.
 type EventRecurrenceSource struct {
 	// The message template.
-	MessageTemplate                   *string                        `json:"messageTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Recurrence                        *Recurrence                    `json:"recurrence,omitempty"`
-	Strategy                          *EventRecurrenceSourceStrategy `json:"strategy,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MessageTemplate *string `json:"messageTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Recurrence *Recurrence `json:"recurrence,omitempty"`
+	Strategy *EventRecurrenceSourceStrategy `json:"strategy,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *EventRecurrenceSource) SetStrategy(v EventRecurrenceSourceStrategy) {
 }
 
 func (o EventRecurrenceSource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableEventRecurrenceSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

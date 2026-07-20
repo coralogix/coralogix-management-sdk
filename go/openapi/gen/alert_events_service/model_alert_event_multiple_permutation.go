@@ -23,8 +23,8 @@ var _ MappedNullable = &AlertEventMultiplePermutation{}
 // AlertEventMultiplePermutation Alert event multiple permutation.
 type AlertEventMultiplePermutation struct {
 	// List of alert events for multiple permutations.
-	AlertEventMultiplePermutation     []AlertEvent `json:"alertEventMultiplePermutation,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AlertEventMultiplePermutation []AlertEvent `json:"alertEventMultiplePermutation,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *AlertEventMultiplePermutation) SetAlertEventMultiplePermutation(v []Ale
 }
 
 func (o AlertEventMultiplePermutation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableAlertEventMultiplePermutation) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

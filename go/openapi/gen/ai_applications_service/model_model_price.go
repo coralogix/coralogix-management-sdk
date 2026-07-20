@@ -29,8 +29,8 @@ type ModelPrice struct {
 	// Input token price per one million tokens (USD).
 	InputPricePerMillionTokens *float64 `json:"inputPricePerMillionTokens,omitempty"`
 	// Output token price per one million tokens (USD).
-	OutputPricePerMillionTokens       *float64 `json:"outputPricePerMillionTokens,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	OutputPricePerMillionTokens *float64 `json:"outputPricePerMillionTokens,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -182,7 +182,7 @@ func (o *ModelPrice) SetOutputPricePerMillionTokens(v float64) {
 }
 
 func (o ModelPrice) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -272,3 +272,4 @@ func (v *NullableModelPrice) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

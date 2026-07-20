@@ -23,10 +23,10 @@ var _ MappedNullable = &HorizontalBarChart{}
 // HorizontalBarChart Horizontal bar chart.
 type HorizontalBarChart struct {
 	// Applied color scheme, one of the predefined values
-	ColorScheme *string   `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	ColorsBy    *ColorsBy `json:"colorsBy,omitempty"`
+	ColorScheme *string `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	ColorsBy *ColorsBy `json:"colorsBy,omitempty"`
 	// Custom unit (requires to have unit field set to custom to take effect)
-	CustomUnit   *string                    `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	Decimal *int32 `json:"decimal,omitempty"`
@@ -37,21 +37,21 @@ type HorizontalBarChart struct {
 	// Custom template name for a bar group, can contain variables
 	GroupNameTemplate *string `json:"groupNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to ignore color scheme and derive colors from algorithm
-	HashColors *bool   `json:"hashColors,omitempty"`
-	Legend     *Legend `json:"legend,omitempty"`
+	HashColors *bool `json:"hashColors,omitempty"`
+	Legend *Legend `json:"legend,omitempty"`
 	// Maximum number of bars on a chart
-	MaxBarsPerChart *int32                             `json:"maxBarsPerChart,omitempty"`
-	Query           *HorizontalBarChartQuery           `json:"query,omitempty"`
-	ScaleType       *ScaleType                         `json:"scaleType,omitempty"`
-	SortBy          *SortByType                        `json:"sortBy,omitempty"`
+	MaxBarsPerChart *int32 `json:"maxBarsPerChart,omitempty"`
+	Query *HorizontalBarChartQuery `json:"query,omitempty"`
+	ScaleType *ScaleType `json:"scaleType,omitempty"`
+	SortBy *SortByType `json:"sortBy,omitempty"`
 	StackDefinition *HorizontalBarChartStackDefinition `json:"stackDefinition,omitempty"`
-	Unit            *CommonUnit                        `json:"unit,omitempty"`
+	Unit *CommonUnit `json:"unit,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
-	YAxisMin                          *float32                       `json:"yAxisMin,omitempty"`
-	YAxisViewBy                       *HorizontalBarChartYAxisViewBy `json:"yAxisViewBy,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	YAxisMin *float32 `json:"yAxisMin,omitempty"`
+	YAxisViewBy *HorizontalBarChartYAxisViewBy `json:"yAxisViewBy,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -683,7 +683,7 @@ func (o *HorizontalBarChart) SetYAxisViewBy(v HorizontalBarChartYAxisViewBy) {
 }
 
 func (o HorizontalBarChart) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -833,3 +833,4 @@ func (v *NullableHorizontalBarChart) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

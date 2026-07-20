@@ -22,11 +22,11 @@ var _ MappedNullable = &Section{}
 
 // Section struct for Section
 type Section struct {
-	Id      *UUID           `json:"id,omitempty"`
+	Id *UUID `json:"id,omitempty"`
 	Options *SectionOptions `json:"options,omitempty"`
 	// Definition of a section's rows (one row represents a single row of visualizations)
-	Rows                              []Row `json:"rows,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Rows []Row `json:"rows,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *Section) SetRows(v []Row) {
 }
 
 func (o Section) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableSection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

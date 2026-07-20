@@ -23,8 +23,8 @@ var _ MappedNullable = &DatasetTarget{}
 // DatasetTarget This data structure represents a target for enrichments. It defines a dataset in which the enrichment will be applied to.
 type DatasetTarget struct {
 	// The dataset name in which the enrichment will be applied.
-	Dataset                           *string `json:"dataset,omitempty" validate:"regexp=^[a-zA-Z0-9_][a-zA-Z0-9_.\\/-]*$"`
-	AdditionalProperties              map[string]interface{}
+	Dataset *string `json:"dataset,omitempty" validate:"regexp=^[a-zA-Z0-9_][a-zA-Z0-9_.\\/-]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *DatasetTarget) SetDataset(v string) {
 }
 
 func (o DatasetTarget) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableDatasetTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

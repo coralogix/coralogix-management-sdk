@@ -22,11 +22,11 @@ var _ MappedNullable = &DynamicQuery{}
 
 // DynamicQuery Discriminated union of possible query types for the dynamic widget.
 type DynamicQuery struct {
-	Dataprime                         *Dataprime `json:"dataprime,omitempty"`
-	Logs                              *Logs      `json:"logs,omitempty"`
-	Metrics                           *Metrics   `json:"metrics,omitempty"`
-	Spans                             *Spans     `json:"spans,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Dataprime *Dataprime `json:"dataprime,omitempty"`
+	Logs *Logs `json:"logs,omitempty"`
+	Metrics *Metrics `json:"metrics,omitempty"`
+	Spans *Spans `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -178,7 +178,7 @@ func (o *DynamicQuery) SetSpans(v Spans) {
 }
 
 func (o DynamicQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -314,3 +314,4 @@ func (v *NullableDynamicQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

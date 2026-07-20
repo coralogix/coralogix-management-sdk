@@ -19,12 +19,13 @@ import (
 	"reflect"
 )
 
+
 // DataUsageServiceAPIService DataUsageServiceAPI service
 type DataUsageServiceAPIService service
 
 type ApiDataUsageServiceGetDailyUsageEvaluationTokensRequest struct {
-	ctx                                                  context.Context
-	ApiService                                           *DataUsageServiceAPIService
+	ctx context.Context
+	ApiService *DataUsageServiceAPIService
 	dataUsageServiceGetDailyUsageEvaluationTokensRequest *DataUsageServiceGetDailyUsageEvaluationTokensRequest
 }
 
@@ -42,25 +43,24 @@ DataUsageServiceGetDailyUsageEvaluationTokens Get Daily Usage Evaluation Tokens
 
 Returns daily evaluation token usage data for the specified period.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDataUsageServiceGetDailyUsageEvaluationTokensRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDataUsageServiceGetDailyUsageEvaluationTokensRequest
 */
 func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageEvaluationTokens(ctx context.Context) ApiDataUsageServiceGetDailyUsageEvaluationTokensRequest {
 	return ApiDataUsageServiceGetDailyUsageEvaluationTokensRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetDailyUsageEvaluationTokensResponse
+//  @return GetDailyUsageEvaluationTokensResponse
 func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageEvaluationTokensExecute(r ApiDataUsageServiceGetDailyUsageEvaluationTokensRequest) (*GetDailyUsageEvaluationTokensResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetDailyUsageEvaluationTokensResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetDailyUsageEvaluationTokensResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataUsageServiceAPIService.DataUsageServiceGetDailyUsageEvaluationTokens")
@@ -125,8 +125,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageEvaluationToke
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -136,8 +136,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageEvaluationToke
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -147,8 +147,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageEvaluationToke
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -166,8 +166,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageEvaluationToke
 }
 
 type ApiDataUsageServiceGetDailyUsageProcessedGbsRequest struct {
-	ctx                                              context.Context
-	ApiService                                       *DataUsageServiceAPIService
+	ctx context.Context
+	ApiService *DataUsageServiceAPIService
 	dataUsageServiceGetDailyUsageProcessedGbsRequest *DataUsageServiceGetDailyUsageProcessedGbsRequest
 }
 
@@ -185,25 +185,24 @@ DataUsageServiceGetDailyUsageProcessedGbs Get Daily Usage Processed GBs
 
 Returns daily processed gigabytes usage data for the specified period.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDataUsageServiceGetDailyUsageProcessedGbsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDataUsageServiceGetDailyUsageProcessedGbsRequest
 */
 func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageProcessedGbs(ctx context.Context) ApiDataUsageServiceGetDailyUsageProcessedGbsRequest {
 	return ApiDataUsageServiceGetDailyUsageProcessedGbsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetDailyUsageProcessedGbsResponse
+//  @return GetDailyUsageProcessedGbsResponse
 func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageProcessedGbsExecute(r ApiDataUsageServiceGetDailyUsageProcessedGbsRequest) (*GetDailyUsageProcessedGbsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetDailyUsageProcessedGbsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetDailyUsageProcessedGbsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataUsageServiceAPIService.DataUsageServiceGetDailyUsageProcessedGbs")
@@ -268,8 +267,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageProcessedGbsEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -279,8 +278,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageProcessedGbsEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -290,8 +289,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageProcessedGbsEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -309,8 +308,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageProcessedGbsEx
 }
 
 type ApiDataUsageServiceGetDailyUsageUnitsRequest struct {
-	ctx                                       context.Context
-	ApiService                                *DataUsageServiceAPIService
+	ctx context.Context
+	ApiService *DataUsageServiceAPIService
 	dataUsageServiceGetDailyUsageUnitsRequest *DataUsageServiceGetDailyUsageUnitsRequest
 }
 
@@ -328,25 +327,24 @@ DataUsageServiceGetDailyUsageUnits Get Daily Usage Units
 
 Returns daily units usage data for the specified period.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDataUsageServiceGetDailyUsageUnitsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDataUsageServiceGetDailyUsageUnitsRequest
 */
 func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageUnits(ctx context.Context) ApiDataUsageServiceGetDailyUsageUnitsRequest {
 	return ApiDataUsageServiceGetDailyUsageUnitsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetDailyUsageUnitsResponse
+//  @return GetDailyUsageUnitsResponse
 func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageUnitsExecute(r ApiDataUsageServiceGetDailyUsageUnitsRequest) (*GetDailyUsageUnitsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetDailyUsageUnitsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetDailyUsageUnitsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataUsageServiceAPIService.DataUsageServiceGetDailyUsageUnits")
@@ -411,8 +409,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageUnitsExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -422,8 +420,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageUnitsExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -433,8 +431,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageUnitsExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -452,11 +450,11 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageUnitsExecute(r
 }
 
 type ApiDataUsageServiceGetDataUsageRequest struct {
-	ctx              context.Context
-	ApiService       *DataUsageServiceAPIService
-	dateRange        *DateRange
-	resolution       *string
-	aggregate        *[]AggregateBy
+	ctx context.Context
+	ApiService *DataUsageServiceAPIService
+	dateRange *DateRange
+	resolution *string
+	aggregate *[]AggregateBy
 	dimensionFilters *[]DataUsageServiceGetDataUsageDimensionFiltersParameterInner
 }
 
@@ -493,25 +491,24 @@ DataUsageServiceGetDataUsage Get Data Usage
 
 Returns data usage summary for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDataUsageServiceGetDataUsageRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDataUsageServiceGetDataUsageRequest
 */
 func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsage(ctx context.Context) ApiDataUsageServiceGetDataUsageRequest {
 	return ApiDataUsageServiceGetDataUsageRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetDataUsageResponse
+//  @return GetDataUsageResponse
 func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageExecute(r ApiDataUsageServiceGetDataUsageRequest) (*GetDataUsageResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetDataUsageResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetDataUsageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataUsageServiceAPIService.DataUsageServiceGetDataUsage")
@@ -611,8 +608,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageExecute(r ApiDa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -622,8 +619,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageExecute(r ApiDa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -633,8 +630,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageExecute(r ApiDa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -652,7 +649,7 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageExecute(r ApiDa
 }
 
 type ApiDataUsageServiceGetDataUsageMetricsExportStatusRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *DataUsageServiceAPIService
 }
 
@@ -665,25 +662,24 @@ DataUsageServiceGetDataUsageMetricsExportStatus Get Data Usage Metrics Export St
 
 Returns the current export status for data usage.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDataUsageServiceGetDataUsageMetricsExportStatusRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDataUsageServiceGetDataUsageMetricsExportStatusRequest
 */
 func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageMetricsExportStatus(ctx context.Context) ApiDataUsageServiceGetDataUsageMetricsExportStatusRequest {
 	return ApiDataUsageServiceGetDataUsageMetricsExportStatusRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetDataUsageMetricsExportStatusResponse
+//  @return GetDataUsageMetricsExportStatusResponse
 func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageMetricsExportStatusExecute(r ApiDataUsageServiceGetDataUsageMetricsExportStatusRequest) (*GetDataUsageMetricsExportStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetDataUsageMetricsExportStatusResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetDataUsageMetricsExportStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataUsageServiceAPIService.DataUsageServiceGetDataUsageMetricsExportStatus")
@@ -743,8 +739,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageMetricsExportSt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -754,8 +750,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageMetricsExportSt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -765,8 +761,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageMetricsExportSt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -784,12 +780,12 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDataUsageMetricsExportSt
 }
 
 type ApiDataUsageServiceGetLogsCountRequest struct {
-	ctx                    context.Context
-	ApiService             *DataUsageServiceAPIService
-	dateRange              *DateRange
-	resolution             *string
-	filters                *ScopesFilter
-	subsystemAggregation   *bool
+	ctx context.Context
+	ApiService *DataUsageServiceAPIService
+	dateRange *DateRange
+	resolution *string
+	filters *ScopesFilter
+	subsystemAggregation *bool
 	applicationAggregation *bool
 }
 
@@ -832,25 +828,24 @@ DataUsageServiceGetLogsCount Get Logs Count
 
 Returns the log ingestion count for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDataUsageServiceGetLogsCountRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDataUsageServiceGetLogsCountRequest
 */
 func (a *DataUsageServiceAPIService) DataUsageServiceGetLogsCount(ctx context.Context) ApiDataUsageServiceGetLogsCountRequest {
 	return ApiDataUsageServiceGetLogsCountRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetLogsCountResponse
+//  @return GetLogsCountResponse
 func (a *DataUsageServiceAPIService) DataUsageServiceGetLogsCountExecute(r ApiDataUsageServiceGetLogsCountRequest) (*GetLogsCountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetLogsCountResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetLogsCountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataUsageServiceAPIService.DataUsageServiceGetLogsCount")
@@ -935,8 +930,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetLogsCountExecute(r ApiDa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -946,8 +941,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetLogsCountExecute(r ApiDa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -957,8 +952,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetLogsCountExecute(r ApiDa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -976,11 +971,11 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetLogsCountExecute(r ApiDa
 }
 
 type ApiDataUsageServiceGetSpansCountRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *DataUsageServiceAPIService
-	dateRange  *DateRange
+	dateRange *DateRange
 	resolution *string
-	filters    *ScopesFilter
+	filters *ScopesFilter
 }
 
 // Date interval to query span ingestion counts over.
@@ -1010,25 +1005,24 @@ DataUsageServiceGetSpansCount Get Spans Count
 
 Returns the span ingestion count for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDataUsageServiceGetSpansCountRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDataUsageServiceGetSpansCountRequest
 */
 func (a *DataUsageServiceAPIService) DataUsageServiceGetSpansCount(ctx context.Context) ApiDataUsageServiceGetSpansCountRequest {
 	return ApiDataUsageServiceGetSpansCountRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetSpansCountResponse
+//  @return GetSpansCountResponse
 func (a *DataUsageServiceAPIService) DataUsageServiceGetSpansCountExecute(r ApiDataUsageServiceGetSpansCountRequest) (*GetSpansCountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetSpansCountResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetSpansCountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataUsageServiceAPIService.DataUsageServiceGetSpansCount")
@@ -1103,8 +1097,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetSpansCountExecute(r ApiD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1114,8 +1108,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetSpansCountExecute(r ApiD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1125,8 +1119,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetSpansCountExecute(r ApiD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1144,8 +1138,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetSpansCountExecute(r ApiD
 }
 
 type ApiDataUsageServiceUpdateDataUsageMetricsExportStatusRequest struct {
-	ctx                                       context.Context
-	ApiService                                *DataUsageServiceAPIService
+	ctx context.Context
+	ApiService *DataUsageServiceAPIService
 	updateDataUsageMetricsExportStatusRequest *UpdateDataUsageMetricsExportStatusRequest
 }
 
@@ -1163,25 +1157,24 @@ DataUsageServiceUpdateDataUsageMetricsExportStatus Update Data Usage Metrics Exp
 
 Triggers a data usage export.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDataUsageServiceUpdateDataUsageMetricsExportStatusRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDataUsageServiceUpdateDataUsageMetricsExportStatusRequest
 */
 func (a *DataUsageServiceAPIService) DataUsageServiceUpdateDataUsageMetricsExportStatus(ctx context.Context) ApiDataUsageServiceUpdateDataUsageMetricsExportStatusRequest {
 	return ApiDataUsageServiceUpdateDataUsageMetricsExportStatusRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateDataUsageMetricsExportStatusResponse
+//  @return UpdateDataUsageMetricsExportStatusResponse
 func (a *DataUsageServiceAPIService) DataUsageServiceUpdateDataUsageMetricsExportStatusExecute(r ApiDataUsageServiceUpdateDataUsageMetricsExportStatusRequest) (*UpdateDataUsageMetricsExportStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateDataUsageMetricsExportStatusResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateDataUsageMetricsExportStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataUsageServiceAPIService.DataUsageServiceUpdateDataUsageMetricsExportStatus")
@@ -1243,8 +1236,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceUpdateDataUsageMetricsExpor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1254,8 +1247,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceUpdateDataUsageMetricsExpor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1265,8 +1258,8 @@ func (a *DataUsageServiceAPIService) DataUsageServiceUpdateDataUsageMetricsExpor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

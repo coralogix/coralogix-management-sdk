@@ -23,8 +23,8 @@ var _ MappedNullable = &SqlRestrictedTablesConfig{}
 // SqlRestrictedTablesConfig Configuration for the SqlRestrictedTables evaluation.
 type SqlRestrictedTablesConfig struct {
 	// SQL table names that are not allowed.
-	Tables                            []string `json:"tables,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Tables []string `json:"tables,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *SqlRestrictedTablesConfig) SetTables(v []string) {
 }
 
 func (o SqlRestrictedTablesConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableSqlRestrictedTablesConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -25,8 +25,8 @@ type SlackConfig struct {
 	// The attachments.
 	Attachments []Attachment `json:"attachments,omitempty"`
 	// The digests.
-	Digests                           []Digest `json:"digests,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Digests []Digest `json:"digests,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *SlackConfig) SetDigests(v []Digest) {
 }
 
 func (o SlackConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableSlackConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

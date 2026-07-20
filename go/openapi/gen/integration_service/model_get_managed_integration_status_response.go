@@ -23,9 +23,9 @@ var _ MappedNullable = &GetManagedIntegrationStatusResponse{}
 // GetManagedIntegrationStatusResponse Response containing the status of a managed integration.
 type GetManagedIntegrationStatusResponse struct {
 	// The integration id.
-	IntegrationId                     *string            `json:"integrationId,omitempty"`
-	Status                            *IntegrationStatus `json:"status,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IntegrationId *string `json:"integrationId,omitempty"`
+	Status *IntegrationStatus `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *GetManagedIntegrationStatusResponse) SetStatus(v IntegrationStatus) {
 }
 
 func (o GetManagedIntegrationStatusResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableGetManagedIntegrationStatusResponse) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

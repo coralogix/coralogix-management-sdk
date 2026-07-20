@@ -29,11 +29,11 @@ type GetAllExtensionsResponseRevision struct {
 	// The integration details.
 	IntegrationDetails []IntegrationDetail `json:"integrationDetails,omitempty"`
 	// List of labels.
-	Labels  []string                                 `json:"labels,omitempty"`
+	Labels []string `json:"labels,omitempty"`
 	Summary *GetAllExtensionsResponseRevisionSummary `json:"summary,omitempty"`
 	// Version number.
-	Version                           *string `json:"version,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -249,7 +249,7 @@ func (o *GetAllExtensionsResponseRevision) SetVersion(v string) {
 }
 
 func (o GetAllExtensionsResponseRevision) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -347,3 +347,4 @@ func (v *NullableGetAllExtensionsResponseRevision) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,8 +22,8 @@ var _ MappedNullable = &GetSPParametersResponse{}
 
 // GetSPParametersResponse This data structure is obtained as a response to a request to retrieve the parameters of a SAML service provider
 type GetSPParametersResponse struct {
-	Params                            *SPParameters `json:"params,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Params *SPParameters `json:"params,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetSPParametersResponse) SetParams(v SPParameters) {
 }
 
 func (o GetSPParametersResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetSPParametersResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

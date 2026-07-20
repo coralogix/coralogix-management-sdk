@@ -18,12 +18,13 @@ import (
 	"net/url"
 )
 
+
 // APIKeysServiceAPIService APIKeysServiceAPI service
 type APIKeysServiceAPIService service
 
 type ApiApiKeysServiceCreateApiKeyRequest struct {
-	ctx                 context.Context
-	ApiService          *APIKeysServiceAPIService
+	ctx context.Context
+	ApiService *APIKeysServiceAPIService
 	createApiKeyRequest *CreateApiKeyRequest
 }
 
@@ -41,25 +42,24 @@ ApiKeysServiceCreateApiKey Create API Key
 
 Creates a new API key for the authenticated team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiApiKeysServiceCreateApiKeyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiApiKeysServiceCreateApiKeyRequest
 */
 func (a *APIKeysServiceAPIService) ApiKeysServiceCreateApiKey(ctx context.Context) ApiApiKeysServiceCreateApiKeyRequest {
 	return ApiApiKeysServiceCreateApiKeyRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateApiKeyResponse
+//  @return CreateApiKeyResponse
 func (a *APIKeysServiceAPIService) ApiKeysServiceCreateApiKeyExecute(r ApiApiKeysServiceCreateApiKeyRequest) (*CreateApiKeyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateApiKeyResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateApiKeyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "APIKeysServiceAPIService.ApiKeysServiceCreateApiKey")
@@ -121,8 +121,8 @@ func (a *APIKeysServiceAPIService) ApiKeysServiceCreateApiKeyExecute(r ApiApiKey
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -132,8 +132,8 @@ func (a *APIKeysServiceAPIService) ApiKeysServiceCreateApiKeyExecute(r ApiApiKey
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -143,8 +143,8 @@ func (a *APIKeysServiceAPIService) ApiKeysServiceCreateApiKeyExecute(r ApiApiKey
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

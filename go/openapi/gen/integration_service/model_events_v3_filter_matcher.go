@@ -24,7 +24,7 @@ type EventsV3FilterMatcher string
 // List of events.v3.FilterMatcher
 const (
 	EVENTSV3FILTERMATCHER_FILTER_MATCHER_TEXT_OR_UNSPECIFIED EventsV3FilterMatcher = "FILTER_MATCHER_TEXT_OR_UNSPECIFIED"
-	EVENTSV3FILTERMATCHER_FILTER_MATCHER_REGEXP              EventsV3FilterMatcher = "FILTER_MATCHER_REGEXP"
+	EVENTSV3FILTERMATCHER_FILTER_MATCHER_REGEXP EventsV3FilterMatcher = "FILTER_MATCHER_REGEXP"
 )
 
 // All allowed values of EventsV3FilterMatcher enum
@@ -111,3 +111,4 @@ func (v *NullableEventsV3FilterMatcher) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

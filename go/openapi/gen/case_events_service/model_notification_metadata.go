@@ -23,8 +23,8 @@ var _ MappedNullable = &NotificationMetadata{}
 // NotificationMetadata struct for NotificationMetadata
 type NotificationMetadata struct {
 	// Notification token/reference
-	Token                             *string `json:"token,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Token *string `json:"token,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *NotificationMetadata) SetToken(v string) {
 }
 
 func (o NotificationMetadata) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableNotificationMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

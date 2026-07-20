@@ -24,17 +24,17 @@ var _ MappedNullable = &Geomap{}
 type Geomap struct {
 	Aggregation *GeomapAggregation `json:"aggregation,omitempty"`
 	// Whether to render numeric value with abbreviation
-	AllowAbbreviation *bool              `json:"allowAbbreviation,omitempty"`
-	Color             *GeomapColor       `json:"color,omitempty"`
-	Config            *GeomapFieldConfig `json:"config,omitempty"`
+	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	Color *GeomapColor `json:"color,omitempty"`
+	Config *GeomapFieldConfig `json:"config,omitempty"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
-	DecimalPrecision                  *int32         `json:"decimalPrecision,omitempty"`
-	MinMax                            *MinMax        `json:"minMax,omitempty"`
-	Tooltip                           *GeomapTooltip `json:"tooltip,omitempty"`
-	Unit                              *CommonUnit    `json:"unit,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
+	MinMax *MinMax `json:"minMax,omitempty"`
+	Tooltip *GeomapTooltip `json:"tooltip,omitempty"`
+	Unit *CommonUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -346,7 +346,7 @@ func (o *Geomap) SetUnit(v CommonUnit) {
 }
 
 func (o Geomap) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -456,3 +456,4 @@ func (v *NullableGeomap) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

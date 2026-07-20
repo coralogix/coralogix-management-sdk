@@ -37,8 +37,8 @@ type CaseResolver struct {
 	// Marker indicating that the case was resolved through a Slack integration.
 	Slack map[string]interface{} `json:"slack,omitempty"`
 	// Marker indicating that the case was resolved automatically by the Cases system.
-	System                            map[string]interface{} `json:"system,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	System map[string]interface{} `json:"system,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -318,7 +318,7 @@ func (o *CaseResolver) SetSystem(v map[string]interface{}) {
 }
 
 func (o CaseResolver) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -506,3 +506,4 @@ func (v *NullableCaseResolver) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

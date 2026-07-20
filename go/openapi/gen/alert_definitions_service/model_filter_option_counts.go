@@ -31,8 +31,8 @@ type FilterOptionCounts struct {
 	// Counts for different alert statuses
 	StatusCounts []StatusCount `json:"statusCounts,omitempty"`
 	// Counts for different alert types
-	TypeCounts                        []TypeCount `json:"typeCounts,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TypeCounts []TypeCount `json:"typeCounts,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -216,7 +216,7 @@ func (o *FilterOptionCounts) SetTypeCounts(v []TypeCount) {
 }
 
 func (o FilterOptionCounts) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -310,3 +310,4 @@ func (v *NullableFilterOptionCounts) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

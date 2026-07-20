@@ -24,14 +24,14 @@ type FieldType string
 // List of FieldType
 const (
 	FIELDTYPE_FIELD_TYPE_UNSPECIFIED FieldType = "FIELD_TYPE_UNSPECIFIED"
-	FIELDTYPE_STRING                 FieldType = "STRING"
-	FIELDTYPE_NON_EMPTY_STRING       FieldType = "NON_EMPTY_STRING"
-	FIELDTYPE_KEY_VALUE_PAIRS        FieldType = "KEY_VALUE_PAIRS"
-	FIELDTYPE_JSON_OBJECT            FieldType = "JSON_OBJECT"
-	FIELDTYPE_DATE                   FieldType = "DATE"
-	FIELDTYPE_URL                    FieldType = "URL"
-	FIELDTYPE_ARRAY_OF_STRINGS       FieldType = "ARRAY_OF_STRINGS"
-	FIELDTYPE_BOOLEAN                FieldType = "BOOLEAN"
+	FIELDTYPE_STRING FieldType = "STRING"
+	FIELDTYPE_NON_EMPTY_STRING FieldType = "NON_EMPTY_STRING"
+	FIELDTYPE_KEY_VALUE_PAIRS FieldType = "KEY_VALUE_PAIRS"
+	FIELDTYPE_JSON_OBJECT FieldType = "JSON_OBJECT"
+	FIELDTYPE_DATE FieldType = "DATE"
+	FIELDTYPE_URL FieldType = "URL"
+	FIELDTYPE_ARRAY_OF_STRINGS FieldType = "ARRAY_OF_STRINGS"
+	FIELDTYPE_BOOLEAN FieldType = "BOOLEAN"
 )
 
 // All allowed values of FieldType enum
@@ -125,3 +125,4 @@ func (v *NullableFieldType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

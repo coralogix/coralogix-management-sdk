@@ -24,8 +24,8 @@ var _ MappedNullable = &ReplaceDefaultDashboardRequestDataStructure{}
 // ReplaceDefaultDashboardRequestDataStructure This is a request to replace a default dashboard
 type ReplaceDefaultDashboardRequestDataStructure struct {
 	// Idempotency key for the replace default dashboard request, used to prevent duplicate operations.
-	RequestId                         string `json:"requestId" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	RequestId string `json:"requestId" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -74,7 +74,7 @@ func (o *ReplaceDefaultDashboardRequestDataStructure) SetRequestId(v string) {
 }
 
 func (o ReplaceDefaultDashboardRequestDataStructure) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -105,10 +105,10 @@ func (o *ReplaceDefaultDashboardRequestDataStructure) UnmarshalJSON(data []byte)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -171,3 +171,4 @@ func (v *NullableReplaceDefaultDashboardRequestDataStructure) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

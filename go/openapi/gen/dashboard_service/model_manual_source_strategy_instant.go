@@ -23,11 +23,11 @@ var _ MappedNullable = &ManualSourceStrategyInstant{}
 // ManualSourceStrategyInstant Instant strategy: places the annotation at a specific absolute timestamp value.
 type ManualSourceStrategyInstant struct {
 	// The custom unit.
-	CustomUnit *string     `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Unit       *CommonUnit `json:"unit,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Unit *CommonUnit `json:"unit,omitempty"`
 	// The value.
-	Value                             *float64 `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Value *float64 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *ManualSourceStrategyInstant) SetValue(v float64) {
 }
 
 func (o ManualSourceStrategyInstant) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableManualSourceStrategyInstant) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

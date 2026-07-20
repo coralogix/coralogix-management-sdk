@@ -25,8 +25,8 @@ type AlertFilters struct {
 	// List of alert IDs to filter on. Cases containing any of these alert IDs will be returned (OR logic).
 	AlertIds []string `json:"alertIds,omitempty"`
 	// List of alert version IDs to filter on. Cases containing indicators with any of these alert version IDs will be returned (OR logic).
-	AlertVersions                     []string `json:"alertVersions,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AlertVersions []string `json:"alertVersions,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *AlertFilters) SetAlertVersions(v []string) {
 }
 
 func (o AlertFilters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableAlertFilters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

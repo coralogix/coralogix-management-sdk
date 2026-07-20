@@ -24,15 +24,16 @@ var _ MappedNullable = &ForecastPolicyUsageRequest{}
 type ForecastPolicyUsageRequest struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	// Marker selecting a one-day forecast window.
-	Day           map[string]interface{} `json:"day,omitempty"`
-	LogRules      *LogRules              `json:"logRules,omitempty"`
-	SpanRules     *SpanRules             `json:"spanRules,omitempty"`
-	SubsystemRule *QuotaV1Rule           `json:"subsystemRule,omitempty"`
+	Day map[string]interface{} `json:"day,omitempty"`
+	LogRules *LogRules `json:"logRules,omitempty"`
+	RumRules *LogRules `json:"rumRules,omitempty"`
+	SpanRules *SpanRules `json:"spanRules,omitempty"`
+	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
 	// Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.
 	TimeBucketMs *string `json:"timeBucketMs,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Marker selecting a one-week forecast window.
-	Week                              map[string]interface{} `json:"week,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Week map[string]interface{} `json:"week,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -149,6 +150,38 @@ func (o *ForecastPolicyUsageRequest) HasLogRules() bool {
 // SetLogRules gets a reference to the given LogRules and assigns it to the LogRules field.
 func (o *ForecastPolicyUsageRequest) SetLogRules(v LogRules) {
 	o.LogRules = &v
+}
+
+// GetRumRules returns the RumRules field value if set, zero value otherwise.
+func (o *ForecastPolicyUsageRequest) GetRumRules() LogRules {
+	if o == nil || IsNil(o.RumRules) {
+		var ret LogRules
+		return ret
+	}
+	return *o.RumRules
+}
+
+// GetRumRulesOk returns a tuple with the RumRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ForecastPolicyUsageRequest) GetRumRulesOk() (*LogRules, bool) {
+	if o == nil || IsNil(o.RumRules) {
+		return nil, false
+	}
+	return o.RumRules, true
+}
+
+// HasRumRules returns a boolean if a field has been set.
+func (o *ForecastPolicyUsageRequest) HasRumRules() bool {
+	if o != nil && !IsNil(o.RumRules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRumRules gets a reference to the given LogRules and assigns it to the RumRules field.
+func (o *ForecastPolicyUsageRequest) SetRumRules(v LogRules) {
+	o.RumRules = &v
 }
 
 // GetSpanRules returns the SpanRules field value if set, zero value otherwise.
@@ -280,7 +313,7 @@ func (o *ForecastPolicyUsageRequest) SetWeek(v map[string]interface{}) {
 }
 
 func (o ForecastPolicyUsageRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -297,6 +330,9 @@ func (o ForecastPolicyUsageRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.LogRules) {
 		toSerialize["logRules"] = o.LogRules
+	}
+	if !IsNil(o.RumRules) {
+		toSerialize["rumRules"] = o.RumRules
 	}
 	if !IsNil(o.SpanRules) {
 		toSerialize["spanRules"] = o.SpanRules
@@ -317,8 +353,11 @@ func (o ForecastPolicyUsageRequest) ToMap() (map[string]interface{}, error) {
 	if _, exists := toSerialize["spanRules"]; exists {
 		optionalOneOfGroup0Matches++
 	}
+	if _, exists := toSerialize["rumRules"]; exists {
+		optionalOneOfGroup0Matches++
+	}
 	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logRules, spanRules] may be set"}
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logRules, spanRules, rumRules] may be set"}
 	}
 
 	optionalOneOfGroup1Matches := 0
@@ -337,6 +376,9 @@ func (o ForecastPolicyUsageRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if _, exists := o.AdditionalProperties["spanRules"]; exists {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spanRules must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["rumRules"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field rumRules must be set through the typed field, not AdditionalProperties"}
 	}
 	if _, exists := o.AdditionalProperties["day"]; exists {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field day must be set through the typed field, not AdditionalProperties"}
@@ -374,8 +416,11 @@ func (o *ForecastPolicyUsageRequest) UnmarshalJSON(data []byte) (err error) {
 		if _, exists := additionalProperties["spanRules"]; exists {
 			optionalOneOfGroup0MatchesInPayload++
 		}
+		if _, exists := additionalProperties["rumRules"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
 		if optionalOneOfGroup0MatchesInPayload > 1 {
-			return GenericOpenAPIError{error: "at most one of [logRules, spanRules] may be set"}
+			return GenericOpenAPIError{error: "at most one of [logRules, spanRules, rumRules] may be set"}
 		}
 
 		optionalOneOfGroup1MatchesInPayload := 0
@@ -392,6 +437,7 @@ func (o *ForecastPolicyUsageRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "applicationRule")
 		delete(additionalProperties, "day")
 		delete(additionalProperties, "logRules")
+		delete(additionalProperties, "rumRules")
 		delete(additionalProperties, "spanRules")
 		delete(additionalProperties, "subsystemRule")
 		delete(additionalProperties, "timeBucketMs")
@@ -438,3 +484,4 @@ func (v *NullableForecastPolicyUsageRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

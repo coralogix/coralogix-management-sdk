@@ -22,8 +22,8 @@ var _ MappedNullable = &EvaluationConfig{}
 
 // EvaluationConfig Type-specific configuration for an evaluation. Exactly one variant is set.
 type EvaluationConfig struct {
-	AllowedTopics    *AllowedTopicsConfig    `json:"allowedTopics,omitempty"`
-	Competition      *CompetitionConfig      `json:"competition,omitempty"`
+	AllowedTopics *AllowedTopicsConfig `json:"allowedTopics,omitempty"`
+	Competition *CompetitionConfig `json:"competition,omitempty"`
 	CustomEvaluation *CustomEvaluationConfig `json:"customEvaluation,omitempty"`
 	// Configuration for the HallucinationCompleteness evaluation (no fields).
 	HallucinationCompleteness map[string]interface{} `json:"hallucinationCompleteness,omitempty"`
@@ -36,22 +36,22 @@ type EvaluationConfig struct {
 	// Configuration for the HallucinationTaskAdherence evaluation (no fields).
 	HallucinationTaskAdherence map[string]interface{} `json:"hallucinationTaskAdherence,omitempty"`
 	// Configuration for the LanguageMismatch evaluation (no fields).
-	LanguageMismatch map[string]interface{}  `json:"languageMismatch,omitempty"`
-	Pii              *PiiConfig              `json:"pii,omitempty"`
-	PromptInjection  *PromptInjectionConfig  `json:"promptInjection,omitempty"`
+	LanguageMismatch map[string]interface{} `json:"languageMismatch,omitempty"`
+	Pii *PiiConfig `json:"pii,omitempty"`
+	PromptInjection *PromptInjectionConfig `json:"promptInjection,omitempty"`
 	RestrictedTopics *RestrictedTopicsConfig `json:"restrictedTopics,omitempty"`
 	// Configuration for the Sexism evaluation (no fields).
-	Sexism           map[string]interface{}  `json:"sexism,omitempty"`
+	Sexism map[string]interface{} `json:"sexism,omitempty"`
 	SqlAllowedTables *SqlAllowedTablesConfig `json:"sqlAllowedTables,omitempty"`
 	// Configuration for the SqlHallucination evaluation (no fields).
 	SqlHallucination map[string]interface{} `json:"sqlHallucination,omitempty"`
-	SqlLoad          *SqlLoadConfig         `json:"sqlLoad,omitempty"`
+	SqlLoad *SqlLoadConfig `json:"sqlLoad,omitempty"`
 	// Configuration for the SqlReadOnly evaluation (no fields).
-	SqlReadOnly         map[string]interface{}     `json:"sqlReadOnly,omitempty"`
+	SqlReadOnly map[string]interface{} `json:"sqlReadOnly,omitempty"`
 	SqlRestrictedTables *SqlRestrictedTablesConfig `json:"sqlRestrictedTables,omitempty"`
 	// Configuration for the Toxicity evaluation (no fields).
-	Toxicity                          map[string]interface{} `json:"toxicity,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Toxicity map[string]interface{} `json:"toxicity,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -683,7 +683,7 @@ func (o *EvaluationConfig) SetToxicity(v map[string]interface{}) {
 }
 
 func (o EvaluationConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1014,3 +1014,4 @@ func (v *NullableEvaluationConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

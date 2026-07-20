@@ -22,8 +22,8 @@ var _ MappedNullable = &CreateAlertDefinitionRequest{}
 
 // CreateAlertDefinitionRequest A request to create a new alert definition
 type CreateAlertDefinitionRequest struct {
-	AlertDefProperties                *AlertDefProperties `json:"alertDefProperties,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AlertDefProperties *AlertDefProperties `json:"alertDefProperties,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *CreateAlertDefinitionRequest) SetAlertDefProperties(v AlertDefPropertie
 }
 
 func (o CreateAlertDefinitionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableCreateAlertDefinitionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

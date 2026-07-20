@@ -23,12 +23,12 @@ var _ MappedNullable = &ApmLatencySli{}
 // ApmLatencySli Configuration for latency-based APM SLI
 type ApmLatencySli struct {
 	// Average/mean-based latency measurement
-	Average  map[string]interface{} `json:"average,omitempty"`
-	Quantile *ApmLatencyQuantile    `json:"quantile,omitempty"`
+	Average map[string]interface{} `json:"average,omitempty"`
+	Quantile *ApmLatencyQuantile `json:"quantile,omitempty"`
 	// Threshold in milliseconds. Good when latency <= threshold, bad when latency > threshold.
-	Threshold                         *float32         `json:"threshold,omitempty"`
-	TimeWindow                        *WindowSloWindow `json:"timeWindow,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Threshold *float32 `json:"threshold,omitempty"`
+	TimeWindow *WindowSloWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -180,7 +180,7 @@ func (o *ApmLatencySli) SetTimeWindow(v WindowSloWindow) {
 }
 
 func (o ApmLatencySli) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -298,3 +298,4 @@ func (v *NullableApmLatencySli) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

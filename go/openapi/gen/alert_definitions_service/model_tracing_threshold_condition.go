@@ -24,9 +24,9 @@ var _ MappedNullable = &TracingThresholdCondition{}
 type TracingThresholdCondition struct {
 	ConditionType *TracingThresholdConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
-	SpanAmount                        *float64           `json:"spanAmount,omitempty"`
-	TimeWindow                        *TracingTimeWindow `json:"timeWindow,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SpanAmount *float64 `json:"spanAmount,omitempty"`
+	TimeWindow *TracingTimeWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *TracingThresholdCondition) SetTimeWindow(v TracingTimeWindow) {
 }
 
 func (o TracingThresholdCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableTracingThresholdCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

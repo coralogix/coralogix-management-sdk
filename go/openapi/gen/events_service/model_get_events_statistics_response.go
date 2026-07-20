@@ -25,8 +25,8 @@ type GetEventsStatisticsResponse struct {
 	// The cx event labels field statistics.
 	CxEventLabelsFieldStatistics *map[string]FieldStatistics `json:"cxEventLabelsFieldStatistics,omitempty"`
 	// The cx event metadata field statistics.
-	CxEventMetadataFieldStatistics    *map[string]FieldStatistics `json:"cxEventMetadataFieldStatistics,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	CxEventMetadataFieldStatistics *map[string]FieldStatistics `json:"cxEventMetadataFieldStatistics,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *GetEventsStatisticsResponse) SetCxEventMetadataFieldStatistics(v map[st
 }
 
 func (o GetEventsStatisticsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableGetEventsStatisticsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

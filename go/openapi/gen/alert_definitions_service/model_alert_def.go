@@ -25,17 +25,17 @@ var _ MappedNullable = &AlertDef{}
 type AlertDef struct {
 	AlertDefProperties *AlertDefProperties `json:"alertDefProperties,omitempty"`
 	// The old alert ID
-	AlertVersionId *string `json:"alertVersionId,omitempty"`
+	AlertVersionId *string `json:"alertVersionId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The time when the alert definition was created
-	CreatedTime *time.Time `json:"createdTime,omitempty"`
+	CreatedTime *time.Time `json:"createdTime,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The alert definition's persistent ID
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// The last time the alert definition was triggered
-	LastTriggeredTime *time.Time      `json:"lastTriggeredTime,omitempty"`
-	Status            *AlertDefStatus `json:"status,omitempty"`
+	LastTriggeredTime *time.Time `json:"lastTriggeredTime,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Status *AlertDefStatus `json:"status,omitempty"`
 	// The time when the alert definition was last updated
-	UpdatedTime                       *time.Time `json:"updatedTime,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UpdatedTime *time.Time `json:"updatedTime,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -283,7 +283,7 @@ func (o *AlertDef) SetUpdatedTime(v time.Time) {
 }
 
 func (o AlertDef) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -385,3 +385,4 @@ func (v *NullableAlertDef) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

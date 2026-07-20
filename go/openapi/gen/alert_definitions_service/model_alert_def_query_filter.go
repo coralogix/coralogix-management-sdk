@@ -22,17 +22,17 @@ var _ MappedNullable = &AlertDefQueryFilter{}
 
 // AlertDefQueryFilter Filter configuration for alert defs
 type AlertDefQueryFilter struct {
-	EnabledFilter                     *AlertDefEnabledFilter           `json:"enabledFilter,omitempty"`
-	EntityLabelsFilter                *AlertDefEntityLabelsFilter      `json:"entityLabelsFilter,omitempty"`
-	IdFilter                          *AlertDefIdFilter                `json:"idFilter,omitempty"`
-	LastTriggeredTimeRangeFilter      *AlertDefLastTriggeredTimeFilter `json:"lastTriggeredTimeRangeFilter,omitempty"`
-	ModifiedTimeRangeFilter           *AlertDefModifiedTimeFilter      `json:"modifiedTimeRangeFilter,omitempty"`
-	NameFilter                        *AlertDefNameFilter              `json:"nameFilter,omitempty"`
-	PriorityFilter                    *AlertDefPriorityFilter          `json:"priorityFilter,omitempty"`
-	StatusFilter                      *AlertDefStatusFilter            `json:"statusFilter,omitempty"`
-	TypeFilter                        *AlertDefTypeFilter              `json:"typeFilter,omitempty"`
-	TypeSpecificFilter                *AlertDefTypeSpecificFilter      `json:"typeSpecificFilter,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	EnabledFilter *AlertDefEnabledFilter `json:"enabledFilter,omitempty"`
+	EntityLabelsFilter *AlertDefEntityLabelsFilter `json:"entityLabelsFilter,omitempty"`
+	IdFilter *AlertDefIdFilter `json:"idFilter,omitempty"`
+	LastTriggeredTimeRangeFilter *AlertDefLastTriggeredTimeFilter `json:"lastTriggeredTimeRangeFilter,omitempty"`
+	ModifiedTimeRangeFilter *AlertDefModifiedTimeFilter `json:"modifiedTimeRangeFilter,omitempty"`
+	NameFilter *AlertDefNameFilter `json:"nameFilter,omitempty"`
+	PriorityFilter *AlertDefPriorityFilter `json:"priorityFilter,omitempty"`
+	StatusFilter *AlertDefStatusFilter `json:"statusFilter,omitempty"`
+	TypeFilter *AlertDefTypeFilter `json:"typeFilter,omitempty"`
+	TypeSpecificFilter *AlertDefTypeSpecificFilter `json:"typeSpecificFilter,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -376,7 +376,7 @@ func (o *AlertDefQueryFilter) SetTypeSpecificFilter(v AlertDefTypeSpecificFilter
 }
 
 func (o AlertDefQueryFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -490,3 +490,4 @@ func (v *NullableAlertDefQueryFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

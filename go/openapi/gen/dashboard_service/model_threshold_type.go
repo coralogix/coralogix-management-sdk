@@ -24,8 +24,8 @@ type ThresholdType string
 // List of ThresholdType
 const (
 	THRESHOLDTYPE_THRESHOLD_TYPE_UNSPECIFIED ThresholdType = "THRESHOLD_TYPE_UNSPECIFIED"
-	THRESHOLDTYPE_THRESHOLD_TYPE_RELATIVE    ThresholdType = "THRESHOLD_TYPE_RELATIVE"
-	THRESHOLDTYPE_THRESHOLD_TYPE_ABSOLUTE    ThresholdType = "THRESHOLD_TYPE_ABSOLUTE"
+	THRESHOLDTYPE_THRESHOLD_TYPE_RELATIVE ThresholdType = "THRESHOLD_TYPE_RELATIVE"
+	THRESHOLDTYPE_THRESHOLD_TYPE_ABSOLUTE ThresholdType = "THRESHOLD_TYPE_ABSOLUTE"
 )
 
 // All allowed values of ThresholdType enum
@@ -113,3 +113,4 @@ func (v *NullableThresholdType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

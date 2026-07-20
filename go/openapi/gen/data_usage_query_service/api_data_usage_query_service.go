@@ -18,12 +18,13 @@ import (
 	"net/url"
 )
 
+
 // DataUsageQueryServiceAPIService DataUsageQueryServiceAPI service
 type DataUsageQueryServiceAPIService service
 
 type ApiDataUsageQueryServiceDataUsageRequest struct {
-	ctx                                   context.Context
-	ApiService                            *DataUsageQueryServiceAPIService
+	ctx context.Context
+	ApiService *DataUsageQueryServiceAPIService
 	dataUsageQueryServiceDataUsageRequest *DataUsageQueryServiceDataUsageRequest
 }
 
@@ -44,25 +45,24 @@ Returns billable data usage aggregated into daily or hourly buckets. Supports fi
 Requires the following permissions:
 - `data-usage:Read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDataUsageQueryServiceDataUsageRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDataUsageQueryServiceDataUsageRequest
 */
 func (a *DataUsageQueryServiceAPIService) DataUsageQueryServiceDataUsage(ctx context.Context) ApiDataUsageQueryServiceDataUsageRequest {
 	return ApiDataUsageQueryServiceDataUsageRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DataUsageResponse
+//  @return DataUsageResponse
 func (a *DataUsageQueryServiceAPIService) DataUsageQueryServiceDataUsageExecute(r ApiDataUsageQueryServiceDataUsageRequest) (*DataUsageResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DataUsageResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DataUsageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataUsageQueryServiceAPIService.DataUsageQueryServiceDataUsage")
@@ -136,7 +136,7 @@ func (a *DataUsageQueryServiceAPIService) DataUsageQueryServiceDataUsageExecute(
 }
 
 type ApiDataUsageQueryServiceGetDataUsageCapabilitiesRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *DataUsageQueryServiceAPIService
 }
 
@@ -152,25 +152,24 @@ Returns the labels, measurement kinds, units, and per-request limits supported b
 Requires the following permissions:
 - `data-usage:Read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiDataUsageQueryServiceGetDataUsageCapabilitiesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDataUsageQueryServiceGetDataUsageCapabilitiesRequest
 */
 func (a *DataUsageQueryServiceAPIService) DataUsageQueryServiceGetDataUsageCapabilities(ctx context.Context) ApiDataUsageQueryServiceGetDataUsageCapabilitiesRequest {
 	return ApiDataUsageQueryServiceGetDataUsageCapabilitiesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetDataUsageCapabilitiesResponse
+//  @return GetDataUsageCapabilitiesResponse
 func (a *DataUsageQueryServiceAPIService) DataUsageQueryServiceGetDataUsageCapabilitiesExecute(r ApiDataUsageQueryServiceGetDataUsageCapabilitiesRequest) (*GetDataUsageCapabilitiesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetDataUsageCapabilitiesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetDataUsageCapabilitiesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DataUsageQueryServiceAPIService.DataUsageQueryServiceGetDataUsageCapabilities")

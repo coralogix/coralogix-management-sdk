@@ -23,8 +23,8 @@ var _ MappedNullable = &Metric{}
 // Metric Definition of a metric used in SLOs
 type Metric struct {
 	// Query string.
-	Query                             *string `json:"query,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Query *string `json:"query,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *Metric) SetQuery(v string) {
 }
 
 func (o Metric) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableMetric) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

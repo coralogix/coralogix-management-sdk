@@ -24,10 +24,10 @@ var _ MappedNullable = &TestPoliciesResult{}
 // TestPoliciesResult Result of testing policies.
 type TestPoliciesResult struct {
 	// The matched.
-	Matched                           bool                `json:"matched"`
-	MetaFieldsValues                  LogMetaFieldsValues `json:"metaFieldsValues"`
-	Policy                            Policy              `json:"policy"`
-	AdditionalProperties              map[string]interface{}
+	Matched bool `json:"matched"`
+	MetaFieldsValues LogMetaFieldsValues `json:"metaFieldsValues"`
+	Policy Policy `json:"policy"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -126,7 +126,7 @@ func (o *TestPoliciesResult) SetPolicy(v Policy) {
 }
 
 func (o TestPoliciesResult) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -161,10 +161,10 @@ func (o *TestPoliciesResult) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -229,3 +229,4 @@ func (v *NullableTestPoliciesResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

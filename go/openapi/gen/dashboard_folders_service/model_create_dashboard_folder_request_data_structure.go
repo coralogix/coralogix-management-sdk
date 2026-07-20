@@ -24,8 +24,8 @@ var _ MappedNullable = &CreateDashboardFolderRequestDataStructure{}
 type CreateDashboardFolderRequestDataStructure struct {
 	Folder *DashboardFolder `json:"folder,omitempty"`
 	// The request id.
-	RequestId                         *string `json:"requestId,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	RequestId *string `json:"requestId,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *CreateDashboardFolderRequestDataStructure) SetRequestId(v string) {
 }
 
 func (o CreateDashboardFolderRequestDataStructure) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableCreateDashboardFolderRequestDataStructure) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

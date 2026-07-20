@@ -24,8 +24,8 @@ type SloConstantFilterField string
 // List of SloConstantFilterField
 const (
 	SLOCONSTANTFILTERFIELD_SLO_CONST_FILTER_FIELD_UNSPECIFIED SloConstantFilterField = "SLO_CONST_FILTER_FIELD_UNSPECIFIED"
-	SLOCONSTANTFILTERFIELD_SLO_CONST_FILTER_FIELD_USER_NAME   SloConstantFilterField = "SLO_CONST_FILTER_FIELD_USER_NAME"
-	SLOCONSTANTFILTERFIELD_SLO_CONST_FILTER_FIELD_SLO_NAME    SloConstantFilterField = "SLO_CONST_FILTER_FIELD_SLO_NAME"
+	SLOCONSTANTFILTERFIELD_SLO_CONST_FILTER_FIELD_USER_NAME SloConstantFilterField = "SLO_CONST_FILTER_FIELD_USER_NAME"
+	SLOCONSTANTFILTERFIELD_SLO_CONST_FILTER_FIELD_SLO_NAME SloConstantFilterField = "SLO_CONST_FILTER_FIELD_SLO_NAME"
 )
 
 // All allowed values of SloConstantFilterField enum
@@ -113,3 +113,4 @@ func (v *NullableSloConstantFilterField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

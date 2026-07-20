@@ -24,8 +24,8 @@ type IssueSeverity string
 // List of IssueSeverity
 const (
 	ISSUESEVERITY_SEVERITY_UNSPECIFIED IssueSeverity = "SEVERITY_UNSPECIFIED"
-	ISSUESEVERITY_SEVERITY_ERROR       IssueSeverity = "SEVERITY_ERROR"
-	ISSUESEVERITY_SEVERITY_WARNING     IssueSeverity = "SEVERITY_WARNING"
+	ISSUESEVERITY_SEVERITY_ERROR IssueSeverity = "SEVERITY_ERROR"
+	ISSUESEVERITY_SEVERITY_WARNING IssueSeverity = "SEVERITY_WARNING"
 )
 
 // All allowed values of IssueSeverity enum
@@ -113,3 +113,4 @@ func (v *NullableIssueSeverity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

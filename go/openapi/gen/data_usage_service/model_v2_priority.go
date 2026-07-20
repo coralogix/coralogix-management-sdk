@@ -24,10 +24,10 @@ type V2Priority string
 // List of v2.Priority
 const (
 	V2PRIORITY_PRIORITY_UNSPECIFIED V2Priority = "PRIORITY_UNSPECIFIED"
-	V2PRIORITY_PRIORITY_LOW         V2Priority = "PRIORITY_LOW"
-	V2PRIORITY_PRIORITY_MEDIUM      V2Priority = "PRIORITY_MEDIUM"
-	V2PRIORITY_PRIORITY_HIGH        V2Priority = "PRIORITY_HIGH"
-	V2PRIORITY_PRIORITY_BLOCKED     V2Priority = "PRIORITY_BLOCKED"
+	V2PRIORITY_PRIORITY_LOW V2Priority = "PRIORITY_LOW"
+	V2PRIORITY_PRIORITY_MEDIUM V2Priority = "PRIORITY_MEDIUM"
+	V2PRIORITY_PRIORITY_HIGH V2Priority = "PRIORITY_HIGH"
+	V2PRIORITY_PRIORITY_BLOCKED V2Priority = "PRIORITY_BLOCKED"
 )
 
 // All allowed values of V2Priority enum
@@ -117,3 +117,4 @@ func (v *NullableV2Priority) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

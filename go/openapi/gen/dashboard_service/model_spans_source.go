@@ -25,11 +25,11 @@ type SpansSource struct {
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
 	// The label fields.
 	LabelFields []ObservationField `json:"labelFields,omitempty"`
-	LuceneQuery *LuceneQuery       `json:"luceneQuery,omitempty"`
+	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	// The message template.
-	MessageTemplate                   *string              `json:"messageTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Strategy                          *SpansSourceStrategy `json:"strategy,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MessageTemplate *string `json:"messageTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Strategy *SpansSourceStrategy `json:"strategy,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -213,7 +213,7 @@ func (o *SpansSource) SetStrategy(v SpansSourceStrategy) {
 }
 
 func (o SpansSource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -307,3 +307,4 @@ func (v *NullableSpansSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

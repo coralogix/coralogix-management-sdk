@@ -13,8 +13,8 @@ package data_usage_query_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -27,8 +27,8 @@ type UsageTimestampRange struct {
 	// Exclusive end of the timestamp range, as a UTC timestamp string later than `start`.
 	End time.Time `json:"end"`
 	// Inclusive start of the timestamp range, as a UTC timestamp string.
-	Start                             time.Time `json:"start"`
-	AdditionalProperties              map[string]interface{}
+	Start time.Time `json:"start"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -102,7 +102,7 @@ func (o *UsageTimestampRange) SetStart(v time.Time) {
 }
 
 func (o UsageTimestampRange) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -135,10 +135,10 @@ func (o *UsageTimestampRange) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -202,3 +202,4 @@ func (v *NullableUsageTimestampRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

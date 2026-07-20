@@ -23,8 +23,8 @@ var _ MappedNullable = &GetRuleGroupModelMappingResponse{}
 // GetRuleGroupModelMappingResponse Response containing the model mapping for a parsing rule group.
 type GetRuleGroupModelMappingResponse struct {
 	// The rule definition.
-	RuleDefinition                    map[string]interface{} `json:"ruleDefinition,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	RuleDefinition map[string]interface{} `json:"ruleDefinition,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *GetRuleGroupModelMappingResponse) SetRuleDefinition(v map[string]interf
 }
 
 func (o GetRuleGroupModelMappingResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableGetRuleGroupModelMappingResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -13,8 +13,8 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -29,17 +29,17 @@ type GenericIndicator struct {
 	// Opaque reference to the originating entity in the external system.
 	ExternalId string `json:"externalId" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier of this generic indicator.
-	Id            string               `json:"id" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
+	Id string `json:"id" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	IndicatorType GenericIndicatorType `json:"indicatorType"`
 	// Arbitrary key-value metadata from the originating system.
 	Labels []V1KeyValue `json:"labels,omitempty"`
 	// When present, timestamp when the indicator last resolved.
 	LastResolvedAt *time.Time `json:"lastResolvedAt,omitempty"`
 	// Timestamp when the indicator last triggered.
-	LastTriggeredAt                   time.Time              `json:"lastTriggeredAt"`
-	Priority                          IndicatorPriority      `json:"priority"`
-	Status                            GenericIndicatorStatus `json:"status"`
-	AdditionalProperties              map[string]interface{}
+	LastTriggeredAt time.Time `json:"lastTriggeredAt"`
+	Priority IndicatorPriority `json:"priority"`
+	Status GenericIndicatorStatus `json:"status"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -309,7 +309,7 @@ func (o *GenericIndicator) SetStatus(v GenericIndicatorStatus) {
 }
 
 func (o GenericIndicator) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -359,10 +359,10 @@ func (o *GenericIndicator) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -433,3 +433,4 @@ func (v *NullableGenericIndicator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

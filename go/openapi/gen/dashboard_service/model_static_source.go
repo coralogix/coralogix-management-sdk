@@ -24,9 +24,9 @@ var _ MappedNullable = &StaticSource{}
 type StaticSource struct {
 	AllOption *AllOption `json:"allOption,omitempty"`
 	// List of values.
-	Values                            []ValueLabel    `json:"values,omitempty"`
-	ValuesOrderDirection              *OrderDirection `json:"valuesOrderDirection,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Values []ValueLabel `json:"values,omitempty"`
+	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *StaticSource) SetValuesOrderDirection(v OrderDirection) {
 }
 
 func (o StaticSource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableStaticSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

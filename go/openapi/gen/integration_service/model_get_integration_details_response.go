@@ -22,8 +22,8 @@ var _ MappedNullable = &GetIntegrationDetailsResponse{}
 
 // GetIntegrationDetailsResponse Response containing the details of an integration definition.
 type GetIntegrationDetailsResponse struct {
-	IntegrationDetail                 *IntegrationDetails `json:"integrationDetail,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IntegrationDetail *IntegrationDetails `json:"integrationDetail,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetIntegrationDetailsResponse) SetIntegrationDetail(v IntegrationDetail
 }
 
 func (o GetIntegrationDetailsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetIntegrationDetailsResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,13 +23,13 @@ var _ MappedNullable = &IntegrationDefinition{}
 // IntegrationDefinition This data structure represents a definition of an integration.
 type IntegrationDefinition struct {
 	// The feature flag.
-	FeatureFlag     *string            `json:"featureFlag,omitempty"`
+	FeatureFlag *string `json:"featureFlag,omitempty"`
 	IntegrationType *V1IntegrationType `json:"integrationType,omitempty"`
 	// The key.
 	Key *string `json:"key,omitempty"`
 	// The revisions.
-	Revisions                         []IntegrationRevision `json:"revisions,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Revisions []IntegrationRevision `json:"revisions,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -181,7 +181,7 @@ func (o *IntegrationDefinition) SetRevisions(v []IntegrationRevision) {
 }
 
 func (o IntegrationDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,3 +271,4 @@ func (v *NullableIntegrationDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

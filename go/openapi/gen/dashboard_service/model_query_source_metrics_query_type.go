@@ -22,11 +22,11 @@ var _ MappedNullable = &QuerySourceMetricsQueryType{}
 
 // QuerySourceMetricsQueryType Discriminated union specifying what kind of metric data to fetch: metric names, label names, or label values.
 type QuerySourceMetricsQueryType struct {
-	LabelName                         *QuerySourceMetricsQueryTypeLabelName  `json:"labelName,omitempty"`
-	LabelValue                        *QuerySourceMetricsQueryTypeLabelValue `json:"labelValue,omitempty"`
-	MetricName                        *QuerySourceMetricsQueryTypeMetricName `json:"metricName,omitempty"`
-	PromqlQuery                       *PromqlQuery                           `json:"promqlQuery,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	LabelName *QuerySourceMetricsQueryTypeLabelName `json:"labelName,omitempty"`
+	LabelValue *QuerySourceMetricsQueryTypeLabelValue `json:"labelValue,omitempty"`
+	MetricName *QuerySourceMetricsQueryTypeMetricName `json:"metricName,omitempty"`
+	PromqlQuery *PromqlQuery `json:"promqlQuery,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -178,7 +178,7 @@ func (o *QuerySourceMetricsQueryType) SetPromqlQuery(v PromqlQuery) {
 }
 
 func (o QuerySourceMetricsQueryType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -314,3 +314,4 @@ func (v *NullableQuerySourceMetricsQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

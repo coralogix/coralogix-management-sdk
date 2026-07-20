@@ -24,7 +24,7 @@ type SloProductType string
 // List of SloProductType
 const (
 	SLOPRODUCTTYPE_SLO_PRODUCT_TYPE_UNSPECIFIED SloProductType = "SLO_PRODUCT_TYPE_UNSPECIFIED"
-	SLOPRODUCTTYPE_SLO_PRODUCT_TYPE_APM         SloProductType = "SLO_PRODUCT_TYPE_APM"
+	SLOPRODUCTTYPE_SLO_PRODUCT_TYPE_APM SloProductType = "SLO_PRODUCT_TYPE_APM"
 )
 
 // All allowed values of SloProductType enum
@@ -111,3 +111,4 @@ func (v *NullableSloProductType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,8 +22,8 @@ var _ MappedNullable = &GeomapAwsRegionConfig{}
 
 // GeomapAwsRegionConfig Geomap aws region config.
 type GeomapAwsRegionConfig struct {
-	AwsRegionField                    *ObservationField `json:"awsRegionField,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AwsRegionField *ObservationField `json:"awsRegionField,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GeomapAwsRegionConfig) SetAwsRegionField(v ObservationField) {
 }
 
 func (o GeomapAwsRegionConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGeomapAwsRegionConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

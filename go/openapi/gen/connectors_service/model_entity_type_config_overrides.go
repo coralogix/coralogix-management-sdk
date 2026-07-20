@@ -24,8 +24,8 @@ var _ MappedNullable = &EntityTypeConfigOverrides{}
 type EntityTypeConfigOverrides struct {
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// List of fields.
-	Fields                            []TemplatedConnectorConfigField `json:"fields,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Fields []TemplatedConnectorConfigField `json:"fields,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *EntityTypeConfigOverrides) SetFields(v []TemplatedConnectorConfigField)
 }
 
 func (o EntityTypeConfigOverrides) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableEntityTypeConfigOverrides) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

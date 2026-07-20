@@ -23,8 +23,8 @@ var _ MappedNullable = &ListViewsResponse{}
 // ListViewsResponse Response containing a list of views.
 type ListViewsResponse struct {
 	// The views.
-	Views                             []View `json:"views,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Views []View `json:"views,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListViewsResponse) SetViews(v []View) {
 }
 
 func (o ListViewsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListViewsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

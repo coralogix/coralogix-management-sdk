@@ -25,8 +25,8 @@ type MinMaxCustom struct {
 	// Maximum value.
 	Max *float64 `json:"max,omitempty"`
 	// Minimum value.
-	Min                               *float64 `json:"min,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Min *float64 `json:"min,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *MinMaxCustom) SetMin(v float64) {
 }
 
 func (o MinMaxCustom) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableMinMaxCustom) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

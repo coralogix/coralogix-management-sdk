@@ -16,16 +16,17 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
+
 
 // ScopesServiceAPIService ScopesServiceAPI service
 type ScopesServiceAPIService service
 
 type ApiScopesServiceCreateScopeRequest struct {
-	ctx                context.Context
-	ApiService         *ScopesServiceAPIService
+	ctx context.Context
+	ApiService *ScopesServiceAPIService
 	createScopeRequest *CreateScopeRequest
 }
 
@@ -43,25 +44,24 @@ ScopesServiceCreateScope Create Scope
 
 Creates a new data access scope.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiScopesServiceCreateScopeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiScopesServiceCreateScopeRequest
 */
 func (a *ScopesServiceAPIService) ScopesServiceCreateScope(ctx context.Context) ApiScopesServiceCreateScopeRequest {
 	return ApiScopesServiceCreateScopeRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateScopeResponse
+//  @return CreateScopeResponse
 func (a *ScopesServiceAPIService) ScopesServiceCreateScopeExecute(r ApiScopesServiceCreateScopeRequest) (*CreateScopeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateScopeResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateScopeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScopesServiceAPIService.ScopesServiceCreateScope")
@@ -126,8 +126,8 @@ func (a *ScopesServiceAPIService) ScopesServiceCreateScopeExecute(r ApiScopesSer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -137,8 +137,8 @@ func (a *ScopesServiceAPIService) ScopesServiceCreateScopeExecute(r ApiScopesSer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -148,8 +148,8 @@ func (a *ScopesServiceAPIService) ScopesServiceCreateScopeExecute(r ApiScopesSer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -167,9 +167,9 @@ func (a *ScopesServiceAPIService) ScopesServiceCreateScopeExecute(r ApiScopesSer
 }
 
 type ApiScopesServiceDeleteScopeRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *ScopesServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiScopesServiceDeleteScopeRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -181,27 +181,26 @@ ScopesServiceDeleteScope Delete Scope
 
 Deletes the data access scope with the specified ID.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier.
-	@return ApiScopesServiceDeleteScopeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier.
+ @return ApiScopesServiceDeleteScopeRequest
 */
 func (a *ScopesServiceAPIService) ScopesServiceDeleteScope(ctx context.Context, id string) ApiScopesServiceDeleteScopeRequest {
 	return ApiScopesServiceDeleteScopeRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *ScopesServiceAPIService) ScopesServiceDeleteScopeExecute(r ApiScopesServiceDeleteScopeRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScopesServiceAPIService.ScopesServiceDeleteScope")
@@ -265,8 +264,8 @@ func (a *ScopesServiceAPIService) ScopesServiceDeleteScopeExecute(r ApiScopesSer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -276,8 +275,8 @@ func (a *ScopesServiceAPIService) ScopesServiceDeleteScopeExecute(r ApiScopesSer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -287,8 +286,8 @@ func (a *ScopesServiceAPIService) ScopesServiceDeleteScopeExecute(r ApiScopesSer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -306,7 +305,7 @@ func (a *ScopesServiceAPIService) ScopesServiceDeleteScopeExecute(r ApiScopesSer
 }
 
 type ApiScopesServiceGetTeamScopesRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *ScopesServiceAPIService
 }
 
@@ -319,25 +318,24 @@ ScopesServiceGetTeamScopes Get Team Scopes
 
 Returns all data access scopes for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiScopesServiceGetTeamScopesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiScopesServiceGetTeamScopesRequest
 */
 func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopes(ctx context.Context) ApiScopesServiceGetTeamScopesRequest {
 	return ApiScopesServiceGetTeamScopesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetScopesResponse
+//  @return GetScopesResponse
 func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesExecute(r ApiScopesServiceGetTeamScopesRequest) (*GetScopesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetScopesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetScopesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScopesServiceAPIService.ScopesServiceGetTeamScopes")
@@ -397,8 +395,8 @@ func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesExecute(r ApiScopesS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -408,8 +406,8 @@ func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesExecute(r ApiScopesS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -419,8 +417,8 @@ func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesExecute(r ApiScopesS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -438,9 +436,9 @@ func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesExecute(r ApiScopesS
 }
 
 type ApiScopesServiceGetTeamScopesByIdsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *ScopesServiceAPIService
-	ids        *[]string
+	ids *[]string
 }
 
 // List of team scope identifiers to retrieve.
@@ -458,25 +456,24 @@ ScopesServiceGetTeamScopesByIds Get Team Scopes By Ids
 
 Returns a data access scope by ID.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiScopesServiceGetTeamScopesByIdsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiScopesServiceGetTeamScopesByIdsRequest
 */
 func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesByIds(ctx context.Context) ApiScopesServiceGetTeamScopesByIdsRequest {
 	return ApiScopesServiceGetTeamScopesByIdsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetScopesResponse
+//  @return GetScopesResponse
 func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesByIdsExecute(r ApiScopesServiceGetTeamScopesByIdsRequest) (*GetScopesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetScopesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetScopesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScopesServiceAPIService.ScopesServiceGetTeamScopesByIds")
@@ -551,8 +548,8 @@ func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesByIdsExecute(r ApiSc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -562,8 +559,8 @@ func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesByIdsExecute(r ApiSc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -573,8 +570,8 @@ func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesByIdsExecute(r ApiSc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -592,8 +589,8 @@ func (a *ScopesServiceAPIService) ScopesServiceGetTeamScopesByIdsExecute(r ApiSc
 }
 
 type ApiScopesServiceUpdateScopeRequest struct {
-	ctx                context.Context
-	ApiService         *ScopesServiceAPIService
+	ctx context.Context
+	ApiService *ScopesServiceAPIService
 	updateScopeRequest *UpdateScopeRequest
 }
 
@@ -611,25 +608,24 @@ ScopesServiceUpdateScope Update Scope
 
 Updates an existing data access scope.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiScopesServiceUpdateScopeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiScopesServiceUpdateScopeRequest
 */
 func (a *ScopesServiceAPIService) ScopesServiceUpdateScope(ctx context.Context) ApiScopesServiceUpdateScopeRequest {
 	return ApiScopesServiceUpdateScopeRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateScopeResponse
+//  @return UpdateScopeResponse
 func (a *ScopesServiceAPIService) ScopesServiceUpdateScopeExecute(r ApiScopesServiceUpdateScopeRequest) (*UpdateScopeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateScopeResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateScopeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScopesServiceAPIService.ScopesServiceUpdateScope")
@@ -694,8 +690,8 @@ func (a *ScopesServiceAPIService) ScopesServiceUpdateScopeExecute(r ApiScopesSer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -705,8 +701,8 @@ func (a *ScopesServiceAPIService) ScopesServiceUpdateScopeExecute(r ApiScopesSer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -716,8 +712,8 @@ func (a *ScopesServiceAPIService) ScopesServiceUpdateScopeExecute(r ApiScopesSer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -26,8 +26,8 @@ type CompanyIpAccessSettings struct {
 	// The unique identifier for the company IP access settings. This is typically a company ID.
 	Id *string `json:"id,omitempty"`
 	// The list of IP access entries.
-	IpAccess                          *map[string]IpAccess `json:"ipAccess,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IpAccess *map[string]IpAccess `json:"ipAccess,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *CompanyIpAccessSettings) SetIpAccess(v map[string]IpAccess) {
 }
 
 func (o CompanyIpAccessSettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableCompanyIpAccessSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

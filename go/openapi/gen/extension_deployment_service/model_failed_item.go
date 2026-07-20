@@ -27,8 +27,8 @@ type FailedItem struct {
 	// Reason.
 	Reason *string `json:"reason,omitempty"`
 	// The remote id.
-	RemoteId                          *string `json:"remoteId,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	RemoteId *string `json:"remoteId,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *FailedItem) SetRemoteId(v string) {
 }
 
 func (o FailedItem) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableFailedItem) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

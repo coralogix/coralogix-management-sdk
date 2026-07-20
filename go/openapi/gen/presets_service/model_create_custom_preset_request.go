@@ -22,8 +22,8 @@ var _ MappedNullable = &CreateCustomPresetRequest{}
 
 // CreateCustomPresetRequest Request to create a new custom preset
 type CreateCustomPresetRequest struct {
-	Preset                            *Preset `json:"preset,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Preset *Preset `json:"preset,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *CreateCustomPresetRequest) SetPreset(v Preset) {
 }
 
 func (o CreateCustomPresetRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableCreateCustomPresetRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

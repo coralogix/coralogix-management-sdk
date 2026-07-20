@@ -22,8 +22,8 @@ var _ MappedNullable = &SeverityConstraint{}
 
 // SeverityConstraint Severity constraint.
 type SeverityConstraint struct {
-	Value                             *Value `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Value *Value `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *SeverityConstraint) SetValue(v Value) {
 }
 
 func (o SeverityConstraint) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableSeverityConstraint) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

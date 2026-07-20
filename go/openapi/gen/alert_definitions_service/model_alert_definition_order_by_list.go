@@ -23,8 +23,8 @@ var _ MappedNullable = &AlertDefinitionOrderByList{}
 // AlertDefinitionOrderByList List of fields to order alert definitions by
 type AlertDefinitionOrderByList struct {
 	// Order by fields for alert definitions
-	OrderBys                          []AlertDefinitionOrderBy `json:"orderBys,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	OrderBys []AlertDefinitionOrderBy `json:"orderBys,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *AlertDefinitionOrderByList) SetOrderBys(v []AlertDefinitionOrderBy) {
 }
 
 func (o AlertDefinitionOrderByList) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableAlertDefinitionOrderByList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

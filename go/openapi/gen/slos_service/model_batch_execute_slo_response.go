@@ -24,9 +24,9 @@ var _ MappedNullable = &BatchExecuteSloResponse{}
 // BatchExecuteSloResponse Response containing the results of batch executed SLO operations.
 type BatchExecuteSloResponse struct {
 	// The matching responses.
-	MatchingResponses                 []SloExecutionResponse `json:"matchingResponses"`
-	Status                            *ResponseStatus        `json:"status,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MatchingResponses []SloExecutionResponse `json:"matchingResponses"`
+	Status *ResponseStatus `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -107,7 +107,7 @@ func (o *BatchExecuteSloResponse) SetStatus(v ResponseStatus) {
 }
 
 func (o BatchExecuteSloResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,10 +141,10 @@ func (o *BatchExecuteSloResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -208,3 +208,4 @@ func (v *NullableBatchExecuteSloResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

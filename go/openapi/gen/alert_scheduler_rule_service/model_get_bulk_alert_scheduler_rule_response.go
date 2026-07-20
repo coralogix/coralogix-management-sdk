@@ -26,8 +26,8 @@ type GetBulkAlertSchedulerRuleResponse struct {
 	// The alert scheduler rules.
 	AlertSchedulerRules []AlertSchedulerRuleWithActiveTimeframe `json:"alertSchedulerRules"`
 	// Token for fetching the next page of results.
-	NextPageToken                     *string `json:"nextPageToken,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -108,7 +108,7 @@ func (o *GetBulkAlertSchedulerRuleResponse) SetNextPageToken(v string) {
 }
 
 func (o GetBulkAlertSchedulerRuleResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -142,10 +142,10 @@ func (o *GetBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -209,3 +209,4 @@ func (v *NullableGetBulkAlertSchedulerRuleResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

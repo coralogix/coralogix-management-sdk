@@ -25,8 +25,8 @@ type FieldConditionFieldValue struct {
 	// The field name.
 	FieldName *string `json:"fieldName,omitempty"`
 	// The value pattern.
-	ValuePattern                      *string `json:"valuePattern,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ValuePattern *string `json:"valuePattern,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *FieldConditionFieldValue) SetValuePattern(v string) {
 }
 
 func (o FieldConditionFieldValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableFieldConditionFieldValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

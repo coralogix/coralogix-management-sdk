@@ -22,9 +22,9 @@ var _ MappedNullable = &DeliveryOutcome{}
 
 // DeliveryOutcome Outcome of a notification delivery attempt.
 type DeliveryOutcome struct {
-	Failure                           *DeliveryFailure `json:"failure,omitempty"`
-	Success                           *DeliverySuccess `json:"success,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Failure *DeliveryFailure `json:"failure,omitempty"`
+	Success *DeliverySuccess `json:"success,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *DeliveryOutcome) SetSuccess(v DeliverySuccess) {
 }
 
 func (o DeliveryOutcome) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableDeliveryOutcome) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

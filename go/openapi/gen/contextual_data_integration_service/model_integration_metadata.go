@@ -23,11 +23,11 @@ var _ MappedNullable = &IntegrationMetadata{}
 // IntegrationMetadata This data structure represents the metadata of an integration.
 type IntegrationMetadata struct {
 	// The integration key.
-	IntegrationKey        *string                       `json:"integrationKey,omitempty"`
+	IntegrationKey *string `json:"integrationKey,omitempty"`
 	IntegrationParameters *GenericIntegrationParameters `json:"integrationParameters,omitempty"`
 	// Version number.
-	Version                           *string `json:"version,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *IntegrationMetadata) SetVersion(v string) {
 }
 
 func (o IntegrationMetadata) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableIntegrationMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

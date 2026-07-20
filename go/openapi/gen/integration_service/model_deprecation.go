@@ -25,8 +25,8 @@ type Deprecation struct {
 	// Reason.
 	Reason *string `json:"reason,omitempty"`
 	// The replacement extensions.
-	ReplacementExtensions             []string `json:"replacementExtensions,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ReplacementExtensions []string `json:"replacementExtensions,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *Deprecation) SetReplacementExtensions(v []string) {
 }
 
 func (o Deprecation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableDeprecation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

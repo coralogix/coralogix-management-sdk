@@ -22,8 +22,8 @@ var _ MappedNullable = &AlertDefLastTriggeredTimeFilter{}
 
 // AlertDefLastTriggeredTimeFilter Filter by alert definition last triggered times
 type AlertDefLastTriggeredTimeFilter struct {
-	LastTriggeredAtRange              *V3TimeRange `json:"lastTriggeredAtRange,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	LastTriggeredAtRange *V3TimeRange `json:"lastTriggeredAtRange,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *AlertDefLastTriggeredTimeFilter) SetLastTriggeredAtRange(v V3TimeRange)
 }
 
 func (o AlertDefLastTriggeredTimeFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableAlertDefLastTriggeredTimeFilter) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

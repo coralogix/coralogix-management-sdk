@@ -23,8 +23,8 @@ var _ MappedNullable = &NotificationFailedCaseEvent{}
 // NotificationFailedCaseEvent Notification failed case event.
 type NotificationFailedCaseEvent struct {
 	// Error message for the failed notification
-	Error                             *string `json:"error,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Error *string `json:"error,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *NotificationFailedCaseEvent) SetError(v string) {
 }
 
 func (o NotificationFailedCaseEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableNotificationFailedCaseEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -24,13 +24,13 @@ var _ MappedNullable = &EventsFilter{}
 // EventsFilter This data structure represents an events filter
 type EventsFilter struct {
 	// List of event attribute keys to include when retrieving event data.
-	CxEventKeys            []string `json:"cxEventKeys"`
-	CxEventLabelsFilters   *Filters `json:"cxEventLabelsFilters,omitempty"`
+	CxEventKeys []string `json:"cxEventKeys"`
+	CxEventLabelsFilters *Filters `json:"cxEventLabelsFilters,omitempty"`
 	CxEventMetadataFilters *Filters `json:"cxEventMetadataFilters,omitempty"`
 	// List of event type identifiers to include in the results.
-	CxEventTypes                      []string       `json:"cxEventTypes"`
-	Timestamp                         TimestampRange `json:"timestamp"`
-	AdditionalProperties              map[string]interface{}
+	CxEventTypes []string `json:"cxEventTypes"`
+	Timestamp TimestampRange `json:"timestamp"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -193,7 +193,7 @@ func (o *EventsFilter) SetTimestamp(v TimestampRange) {
 }
 
 func (o EventsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,10 +234,10 @@ func (o *EventsFilter) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -304,3 +304,4 @@ func (v *NullableEventsFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

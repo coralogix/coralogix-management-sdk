@@ -19,12 +19,13 @@ import (
 	"strings"
 )
 
+
 // AlertDefinitionsServiceAPIService AlertDefinitionsServiceAPI service
 type AlertDefinitionsServiceAPIService service
 
 type ApiAlertDefsServiceBulkDeleteAlertDefsRequest struct {
-	ctx                               context.Context
-	ApiService                        *AlertDefinitionsServiceAPIService
+	ctx context.Context
+	ApiService *AlertDefinitionsServiceAPIService
 	bulkDeleteAlertDefinitionsRequest *BulkDeleteAlertDefinitionsRequest
 }
 
@@ -45,25 +46,24 @@ Delete multiple alert definitions by their IDs. The operation is atomic - either
 Requires the following permissions:
 - `alerts:UpdateConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAlertDefsServiceBulkDeleteAlertDefsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAlertDefsServiceBulkDeleteAlertDefsRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkDeleteAlertDefs(ctx context.Context) ApiAlertDefsServiceBulkDeleteAlertDefsRequest {
 	return ApiAlertDefsServiceBulkDeleteAlertDefsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return BulkDeleteAlertDefsResponse
+//  @return BulkDeleteAlertDefsResponse
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkDeleteAlertDefsExecute(r ApiAlertDefsServiceBulkDeleteAlertDefsRequest) (*BulkDeleteAlertDefsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *BulkDeleteAlertDefsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkDeleteAlertDefsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceBulkDeleteAlertDefs")
@@ -125,8 +125,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkDeleteAlertDefsE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -136,8 +136,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkDeleteAlertDefsE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -147,8 +147,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkDeleteAlertDefsE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -166,8 +166,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkDeleteAlertDefsE
 }
 
 type ApiAlertDefsServiceBulkReplaceAlertDefsRequest struct {
-	ctx                                context.Context
-	ApiService                         *AlertDefinitionsServiceAPIService
+	ctx context.Context
+	ApiService *AlertDefinitionsServiceAPIService
 	bulkReplaceAlertDefinitionsRequest *BulkReplaceAlertDefinitionsRequest
 }
 
@@ -188,25 +188,24 @@ Replaces all alert definitions with the provided set.
 Requires the following permissions:
 - `alerts:UpdateConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAlertDefsServiceBulkReplaceAlertDefsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAlertDefsServiceBulkReplaceAlertDefsRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkReplaceAlertDefs(ctx context.Context) ApiAlertDefsServiceBulkReplaceAlertDefsRequest {
 	return ApiAlertDefsServiceBulkReplaceAlertDefsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return BulkReplaceAlertDefsResponse
+//  @return BulkReplaceAlertDefsResponse
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkReplaceAlertDefsExecute(r ApiAlertDefsServiceBulkReplaceAlertDefsRequest) (*BulkReplaceAlertDefsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *BulkReplaceAlertDefsResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkReplaceAlertDefsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceBulkReplaceAlertDefs")
@@ -268,8 +267,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkReplaceAlertDefs
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -279,8 +278,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkReplaceAlertDefs
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -290,8 +289,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkReplaceAlertDefs
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -309,8 +308,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkReplaceAlertDefs
 }
 
 type ApiAlertDefsServiceCreateAlertDefRequest struct {
-	ctx                          context.Context
-	ApiService                   *AlertDefinitionsServiceAPIService
+	ctx context.Context
+	ApiService *AlertDefinitionsServiceAPIService
 	createAlertDefinitionRequest *CreateAlertDefinitionRequest
 }
 
@@ -331,25 +330,24 @@ Creates a new alert definition.
 Requires the following permissions:
 - `alerts:UpdateConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAlertDefsServiceCreateAlertDefRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAlertDefsServiceCreateAlertDefRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceCreateAlertDef(ctx context.Context) ApiAlertDefsServiceCreateAlertDefRequest {
 	return ApiAlertDefsServiceCreateAlertDefRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateAlertDefResponse
+//  @return CreateAlertDefResponse
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceCreateAlertDefExecute(r ApiAlertDefsServiceCreateAlertDefRequest) (*CreateAlertDefResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateAlertDefResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateAlertDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceCreateAlertDef")
@@ -411,8 +409,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceCreateAlertDefExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -422,8 +420,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceCreateAlertDefExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -433,8 +431,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceCreateAlertDefExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -452,9 +450,9 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceCreateAlertDefExecut
 }
 
 type ApiAlertDefsServiceDeleteAlertDefRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AlertDefinitionsServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiAlertDefsServiceDeleteAlertDefRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -469,27 +467,26 @@ Deletes the alert definition with the specified ID.
 Requires the following permissions:
 - `alerts:UpdateConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier of the alert definition to delete.
-	@return ApiAlertDefsServiceDeleteAlertDefRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the alert definition to delete.
+ @return ApiAlertDefsServiceDeleteAlertDefRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDef(ctx context.Context, id string) ApiAlertDefsServiceDeleteAlertDefRequest {
 	return ApiAlertDefsServiceDeleteAlertDefRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDefExecute(r ApiAlertDefsServiceDeleteAlertDefRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceDeleteAlertDef")
@@ -505,6 +502,9 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDefExecut
 	localVarFormParams := url.Values{}
 	if strlen(r.id) < 0 {
 		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header
@@ -553,8 +553,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDefExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -564,8 +564,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDefExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -575,8 +575,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDefExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -594,7 +594,7 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDefExecut
 }
 
 type ApiAlertDefsServiceDownloadAlertsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AlertDefinitionsServiceAPIService
 }
 
@@ -610,25 +610,24 @@ Download a list of all accessible alert definitions in base64-encoded byte forma
 Requires the following permissions:
 - `alerts:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAlertDefsServiceDownloadAlertsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAlertDefsServiceDownloadAlertsRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDownloadAlerts(ctx context.Context) ApiAlertDefsServiceDownloadAlertsRequest {
 	return ApiAlertDefsServiceDownloadAlertsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DownloadAlertsResponse
+//  @return DownloadAlertsResponse
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDownloadAlertsExecute(r ApiAlertDefsServiceDownloadAlertsRequest) (*DownloadAlertsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DownloadAlertsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DownloadAlertsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceDownloadAlerts")
@@ -688,8 +687,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDownloadAlertsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -699,8 +698,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDownloadAlertsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -710,8 +709,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDownloadAlertsExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -729,8 +728,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDownloadAlertsExecut
 }
 
 type ApiAlertDefsServiceFilterOptionCountsRequest struct {
-	ctx         context.Context
-	ApiService  *AlertDefinitionsServiceAPIService
+	ctx context.Context
+	ApiService *AlertDefinitionsServiceAPIService
 	queryFilter *FilterOptionCountsFilter
 }
 
@@ -747,30 +746,29 @@ func (r ApiAlertDefsServiceFilterOptionCountsRequest) Execute() (*FilterOptionCo
 /*
 AlertDefsServiceFilterOptionCounts Get counts for filter options
 
-# Returns counts for different filter options based on the provided filters
+Returns counts for different filter options based on the provided filters
 
 Requires the following permissions:
 - `alerts:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAlertDefsServiceFilterOptionCountsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAlertDefsServiceFilterOptionCountsRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceFilterOptionCounts(ctx context.Context) ApiAlertDefsServiceFilterOptionCountsRequest {
 	return ApiAlertDefsServiceFilterOptionCountsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return FilterOptionCountsResponse
+//  @return FilterOptionCountsResponse
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceFilterOptionCountsExecute(r ApiAlertDefsServiceFilterOptionCountsRequest) (*FilterOptionCountsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FilterOptionCountsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *FilterOptionCountsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceFilterOptionCounts")
@@ -835,8 +833,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceFilterOptionCountsEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -846,8 +844,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceFilterOptionCountsEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -857,8 +855,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceFilterOptionCountsEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -876,9 +874,9 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceFilterOptionCountsEx
 }
 
 type ApiAlertDefsServiceGetAlertDefRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AlertDefinitionsServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiAlertDefsServiceGetAlertDefRequest) Execute() (*GetAlertDefResponse, *http.Response, error) {
@@ -893,27 +891,26 @@ Returns the details of the specified alert definition.
 Requires the following permissions:
 - `alerts:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Alert definition ID
-	@return ApiAlertDefsServiceGetAlertDefRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Alert definition ID
+ @return ApiAlertDefsServiceGetAlertDefRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDef(ctx context.Context, id string) ApiAlertDefsServiceGetAlertDefRequest {
 	return ApiAlertDefsServiceGetAlertDefRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetAlertDefResponse
+//  @return GetAlertDefResponse
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefExecute(r ApiAlertDefsServiceGetAlertDefRequest) (*GetAlertDefResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetAlertDefResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetAlertDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceGetAlertDef")
@@ -929,6 +926,9 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefExecute(r
 	localVarFormParams := url.Values{}
 	if strlen(r.id) < 0 {
 		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header
@@ -977,8 +977,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -988,8 +988,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -999,8 +999,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1018,8 +1018,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefExecute(r
 }
 
 type ApiAlertDefsServiceGetAlertDefByVersionIdRequest struct {
-	ctx            context.Context
-	ApiService     *AlertDefinitionsServiceAPIService
+	ctx context.Context
+	ApiService *AlertDefinitionsServiceAPIService
 	alertVersionId string
 }
 
@@ -1035,27 +1035,26 @@ Returns the alert definition with the specified version ID.
 Requires the following permissions:
 - `alerts:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param alertVersionId Alert version ID
-	@return ApiAlertDefsServiceGetAlertDefByVersionIdRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param alertVersionId Alert version ID
+ @return ApiAlertDefsServiceGetAlertDefByVersionIdRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersionId(ctx context.Context, alertVersionId string) ApiAlertDefsServiceGetAlertDefByVersionIdRequest {
 	return ApiAlertDefsServiceGetAlertDefByVersionIdRequest{
-		ApiService:     a,
-		ctx:            ctx,
+		ApiService: a,
+		ctx: ctx,
 		alertVersionId: alertVersionId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetAlertDefByVersionIdResponse
+//  @return GetAlertDefByVersionIdResponse
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersionIdExecute(r ApiAlertDefsServiceGetAlertDefByVersionIdRequest) (*GetAlertDefByVersionIdResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetAlertDefByVersionIdResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetAlertDefByVersionIdResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceGetAlertDefByVersionId")
@@ -1071,6 +1070,9 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersion
 	localVarFormParams := url.Values{}
 	if strlen(r.alertVersionId) < 0 {
 		return localVarReturnValue, nil, reportError("alertVersionId must have at least 0 elements")
+	}
+	if strlen(r.alertVersionId) > 36 {
+		return localVarReturnValue, nil, reportError("alertVersionId must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header
@@ -1119,8 +1121,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersion
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1130,8 +1132,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersion
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1141,8 +1143,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersion
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1160,11 +1162,11 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersion
 }
 
 type ApiAlertDefsServiceListAlertDefsRequest struct {
-	ctx         context.Context
-	ApiService  *AlertDefinitionsServiceAPIService
+	ctx context.Context
+	ApiService *AlertDefinitionsServiceAPIService
 	queryFilter *AlertDefQueryFilter
-	pagination  *AlertDefsServiceListAlertDefsPaginationParameter
-	orderBys    *AlertDefinitionOrderByList
+	pagination *AlertDefsServiceListAlertDefsPaginationParameter
+	orderBys *AlertDefinitionOrderByList
 }
 
 // Filter to apply to the list of alert definitions
@@ -1197,25 +1199,24 @@ Returns all alert definitions for the team.
 Requires the following permissions:
 - `alerts:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAlertDefsServiceListAlertDefsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAlertDefsServiceListAlertDefsRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceListAlertDefs(ctx context.Context) ApiAlertDefsServiceListAlertDefsRequest {
 	return ApiAlertDefsServiceListAlertDefsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListAlertDefsResponse
+//  @return ListAlertDefsResponse
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceListAlertDefsExecute(r ApiAlertDefsServiceListAlertDefsRequest) (*ListAlertDefsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListAlertDefsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListAlertDefsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceListAlertDefs")
@@ -1290,8 +1291,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceListAlertDefsExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1301,8 +1302,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceListAlertDefsExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1312,8 +1313,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceListAlertDefsExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1331,8 +1332,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceListAlertDefsExecute
 }
 
 type ApiAlertDefsServiceReplaceAlertDefRequest struct {
-	ctx                           context.Context
-	ApiService                    *AlertDefinitionsServiceAPIService
+	ctx context.Context
+	ApiService *AlertDefinitionsServiceAPIService
 	replaceAlertDefinitionRequest *ReplaceAlertDefinitionRequest
 }
 
@@ -1353,25 +1354,24 @@ Updates an existing alert definition.
 Requires the following permissions:
 - `alerts:UpdateConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAlertDefsServiceReplaceAlertDefRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAlertDefsServiceReplaceAlertDefRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceReplaceAlertDef(ctx context.Context) ApiAlertDefsServiceReplaceAlertDefRequest {
 	return ApiAlertDefsServiceReplaceAlertDefRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ReplaceAlertDefResponse
+//  @return ReplaceAlertDefResponse
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceReplaceAlertDefExecute(r ApiAlertDefsServiceReplaceAlertDefRequest) (*ReplaceAlertDefResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ReplaceAlertDefResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ReplaceAlertDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceReplaceAlertDef")
@@ -1433,8 +1433,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceReplaceAlertDefExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1444,8 +1444,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceReplaceAlertDefExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1455,8 +1455,8 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceReplaceAlertDefExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

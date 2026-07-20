@@ -23,9 +23,9 @@ var _ MappedNullable = &NotificationCenterConditionType{}
 // NotificationCenterConditionType Field condition.condition type.
 type NotificationCenterConditionType struct {
 	// Match entity type condition.
-	MatchEntityType                   map[string]interface{}              `json:"matchEntityType,omitempty"`
-	MatchEntityTypeAndSubType         *MatchEntityTypeAndSubTypeCondition `json:"matchEntityTypeAndSubType,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MatchEntityType map[string]interface{} `json:"matchEntityType,omitempty"`
+	MatchEntityTypeAndSubType *MatchEntityTypeAndSubTypeCondition `json:"matchEntityTypeAndSubType,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *NotificationCenterConditionType) SetMatchEntityTypeAndSubType(v MatchEn
 }
 
 func (o NotificationCenterConditionType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -223,3 +223,4 @@ func (v *NullableNotificationCenterConditionType) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

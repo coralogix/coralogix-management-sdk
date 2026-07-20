@@ -22,9 +22,9 @@ var _ MappedNullable = &FallbackTarget{}
 
 // FallbackTarget Defines fallback target for notifications not matching any routing rule
 type FallbackTarget struct {
-	EntityType                        *NotificationCenterEntityType `json:"entityType,omitempty"`
-	Target                            *RoutingTarget                `json:"target,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	Target *RoutingTarget `json:"target,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *FallbackTarget) SetTarget(v RoutingTarget) {
 }
 
 func (o FallbackTarget) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableFallbackTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

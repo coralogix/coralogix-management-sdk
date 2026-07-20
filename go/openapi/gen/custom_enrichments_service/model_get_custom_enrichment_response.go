@@ -23,8 +23,8 @@ var _ MappedNullable = &GetCustomEnrichmentResponse{}
 
 // GetCustomEnrichmentResponse This response data structure is obtained when a custom enrichment is retrieved
 type GetCustomEnrichmentResponse struct {
-	CustomEnrichment                  CustomEnrichment `json:"customEnrichment"`
-	AdditionalProperties              map[string]interface{}
+	CustomEnrichment CustomEnrichment `json:"customEnrichment"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -73,7 +73,7 @@ func (o *GetCustomEnrichmentResponse) SetCustomEnrichment(v CustomEnrichment) {
 }
 
 func (o GetCustomEnrichmentResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +104,10 @@ func (o *GetCustomEnrichmentResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -170,3 +170,4 @@ func (v *NullableGetCustomEnrichmentResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

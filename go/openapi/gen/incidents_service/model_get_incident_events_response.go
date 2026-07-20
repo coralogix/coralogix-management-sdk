@@ -23,8 +23,8 @@ var _ MappedNullable = &GetIncidentEventsResponse{}
 // GetIncidentEventsResponse Response containing all events associated with the requested incident
 type GetIncidentEventsResponse struct {
 	// List of incident events
-	IncidentEvents                    []IncidentEvent `json:"incidentEvents,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IncidentEvents []IncidentEvent `json:"incidentEvents,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *GetIncidentEventsResponse) SetIncidentEvents(v []IncidentEvent) {
 }
 
 func (o GetIncidentEventsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableGetIncidentEventsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

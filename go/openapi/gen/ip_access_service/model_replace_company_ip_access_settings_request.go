@@ -26,8 +26,8 @@ type ReplaceCompanyIPAccessSettingsRequest struct {
 	// Unique identifier of the existing IP access settings resource to replace.
 	Id *string `json:"id,omitempty"`
 	// List of IP access entries to replace.
-	IpAccess                          []IpAccess `json:"ipAccess,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IpAccess []IpAccess `json:"ipAccess,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *ReplaceCompanyIPAccessSettingsRequest) SetIpAccess(v []IpAccess) {
 }
 
 func (o ReplaceCompanyIPAccessSettingsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableReplaceCompanyIPAccessSettingsRequest) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

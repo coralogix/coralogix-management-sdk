@@ -23,8 +23,8 @@ var _ MappedNullable = &RowAppearance{}
 // RowAppearance Appearance.
 type RowAppearance struct {
 	// Height of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etc
-	Height                            *int32 `json:"height,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Height *int32 `json:"height,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *RowAppearance) SetHeight(v int32) {
 }
 
 func (o RowAppearance) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableRowAppearance) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

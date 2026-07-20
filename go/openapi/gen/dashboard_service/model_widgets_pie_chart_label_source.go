@@ -24,8 +24,8 @@ type WidgetsPieChartLabelSource string
 // List of widgets.PieChart.LabelSource
 const (
 	WIDGETSPIECHARTLABELSOURCE_LABEL_SOURCE_UNSPECIFIED WidgetsPieChartLabelSource = "LABEL_SOURCE_UNSPECIFIED"
-	WIDGETSPIECHARTLABELSOURCE_LABEL_SOURCE_INNER       WidgetsPieChartLabelSource = "LABEL_SOURCE_INNER"
-	WIDGETSPIECHARTLABELSOURCE_LABEL_SOURCE_STACK       WidgetsPieChartLabelSource = "LABEL_SOURCE_STACK"
+	WIDGETSPIECHARTLABELSOURCE_LABEL_SOURCE_INNER WidgetsPieChartLabelSource = "LABEL_SOURCE_INNER"
+	WIDGETSPIECHARTLABELSOURCE_LABEL_SOURCE_STACK WidgetsPieChartLabelSource = "LABEL_SOURCE_STACK"
 )
 
 // All allowed values of WidgetsPieChartLabelSource enum
@@ -113,3 +113,4 @@ func (v *NullableWidgetsPieChartLabelSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

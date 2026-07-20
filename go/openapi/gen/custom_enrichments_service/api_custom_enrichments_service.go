@@ -16,16 +16,17 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
+
 
 // CustomEnrichmentsServiceAPIService CustomEnrichmentsServiceAPI service
 type CustomEnrichmentsServiceAPIService service
 
 type ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest struct {
-	ctx                           context.Context
-	ApiService                    *CustomEnrichmentsServiceAPIService
+	ctx context.Context
+	ApiService *CustomEnrichmentsServiceAPIService
 	createCustomEnrichmentRequest *CreateCustomEnrichmentRequest
 }
 
@@ -43,25 +44,24 @@ CustomEnrichmentServiceCreateCustomEnrichment Create Custom Enrichments
 
 Creates a new custom enrichment rule.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest
 */
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceCreateCustomEnrichment(ctx context.Context) ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest {
 	return ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateCustomEnrichmentResponse
+//  @return CreateCustomEnrichmentResponse
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceCreateCustomEnrichmentExecute(r ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest) (*CreateCustomEnrichmentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateCustomEnrichmentResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateCustomEnrichmentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomEnrichmentsServiceAPIService.CustomEnrichmentServiceCreateCustomEnrichment")
@@ -135,9 +135,9 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceCreateCustom
 }
 
 type ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *CustomEnrichmentsServiceAPIService
-	id         int64
+	id int64
 }
 
 func (r ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest) Execute() (*DeleteCustomEnrichmentResponse, *http.Response, error) {
@@ -149,27 +149,26 @@ CustomEnrichmentServiceDeleteCustomEnrichment Delete Custom Enrichments
 
 Deletes the custom enrichment rule with the specified ID.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier of the custom enrichment rule to delete.
-	@return ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the custom enrichment rule to delete.
+ @return ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest
 */
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceDeleteCustomEnrichment(ctx context.Context, id int64) ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest {
 	return ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DeleteCustomEnrichmentResponse
+//  @return DeleteCustomEnrichmentResponse
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceDeleteCustomEnrichmentExecute(r ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest) (*DeleteCustomEnrichmentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DeleteCustomEnrichmentResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DeleteCustomEnrichmentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomEnrichmentsServiceAPIService.CustomEnrichmentServiceDeleteCustomEnrichment")
@@ -242,9 +241,9 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceDeleteCustom
 }
 
 type ApiCustomEnrichmentServiceGetCustomEnrichmentRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *CustomEnrichmentsServiceAPIService
-	id         int64
+	id int64
 }
 
 func (r ApiCustomEnrichmentServiceGetCustomEnrichmentRequest) Execute() (*GetCustomEnrichmentResponse, *http.Response, error) {
@@ -256,27 +255,26 @@ CustomEnrichmentServiceGetCustomEnrichment Get Custom Enrichment
 
 Returns the details of the specified custom enrichment rule.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier of the custom enrichment rule.
-	@return ApiCustomEnrichmentServiceGetCustomEnrichmentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the custom enrichment rule.
+ @return ApiCustomEnrichmentServiceGetCustomEnrichmentRequest
 */
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnrichment(ctx context.Context, id int64) ApiCustomEnrichmentServiceGetCustomEnrichmentRequest {
 	return ApiCustomEnrichmentServiceGetCustomEnrichmentRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCustomEnrichmentResponse
+//  @return GetCustomEnrichmentResponse
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnrichmentExecute(r ApiCustomEnrichmentServiceGetCustomEnrichmentRequest) (*GetCustomEnrichmentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetCustomEnrichmentResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetCustomEnrichmentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomEnrichmentsServiceAPIService.CustomEnrichmentServiceGetCustomEnrichment")
@@ -349,7 +347,7 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnr
 }
 
 type ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *CustomEnrichmentsServiceAPIService
 }
 
@@ -362,25 +360,24 @@ CustomEnrichmentServiceGetCustomEnrichments Get Custom Enrichments
 
 Returns all custom enrichment rules.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest
 */
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnrichments(ctx context.Context) ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest {
 	return ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCustomEnrichmentsResponse
+//  @return GetCustomEnrichmentsResponse
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnrichmentsExecute(r ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest) (*GetCustomEnrichmentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetCustomEnrichmentsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetCustomEnrichmentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomEnrichmentsServiceAPIService.CustomEnrichmentServiceGetCustomEnrichments")
@@ -449,8 +446,8 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnr
 }
 
 type ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest struct {
-	ctx           context.Context
-	ApiService    *CustomEnrichmentsServiceAPIService
+	ctx context.Context
+	ApiService *CustomEnrichmentsServiceAPIService
 	searchClauses *[]SearchClause
 }
 
@@ -469,25 +466,24 @@ CustomEnrichmentServiceSearchCustomEnrichmentData Search Custom Enrichment Data
 
 Returns the contents of all custom enrichment data.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest
 */
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceSearchCustomEnrichmentData(ctx context.Context) ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest {
 	return ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return SearchCustomEnrichmentDataResponse
+//  @return SearchCustomEnrichmentDataResponse
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceSearchCustomEnrichmentDataExecute(r ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest) (*SearchCustomEnrichmentDataResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *SearchCustomEnrichmentDataResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SearchCustomEnrichmentDataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomEnrichmentsServiceAPIService.CustomEnrichmentServiceSearchCustomEnrichmentData")
@@ -571,8 +567,8 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceSearchCustom
 }
 
 type ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest struct {
-	ctx                           context.Context
-	ApiService                    *CustomEnrichmentsServiceAPIService
+	ctx context.Context
+	ApiService *CustomEnrichmentsServiceAPIService
 	updateCustomEnrichmentRequest *UpdateCustomEnrichmentRequest
 }
 
@@ -590,25 +586,24 @@ CustomEnrichmentServiceUpdateCustomEnrichment Update Custom Enrichment
 
 Updates a custom enrichment rule.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest
 */
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceUpdateCustomEnrichment(ctx context.Context) ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest {
 	return ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateCustomEnrichmentResponse
+//  @return UpdateCustomEnrichmentResponse
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceUpdateCustomEnrichmentExecute(r ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest) (*UpdateCustomEnrichmentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateCustomEnrichmentResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateCustomEnrichmentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomEnrichmentsServiceAPIService.CustomEnrichmentServiceUpdateCustomEnrichment")

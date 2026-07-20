@@ -24,20 +24,20 @@ var _ MappedNullable = &WidgetsGauge{}
 type WidgetsGauge struct {
 	ArcDisplay *ArcDisplay `json:"arcDisplay,omitempty"`
 	// Custom unit (requires to have unit field set as 'custom' to take effect)
-	CustomUnit   *string                    `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	Decimal *int32 `json:"decimal,omitempty"`
 	// Whether to render numeric value without abbreviation
 	DecimalPrecision *bool `json:"decimalPrecision,omitempty"`
 	// (multigauge display only) Whether to show the series names above the value
-	DisplaySeriesName *bool     `json:"displaySeriesName,omitempty"`
-	Legend            *Legend   `json:"legend,omitempty"`
-	LegendBy          *LegendBy `json:"legendBy,omitempty"`
+	DisplaySeriesName *bool `json:"displaySeriesName,omitempty"`
+	Legend *Legend `json:"legend,omitempty"`
+	LegendBy *LegendBy `json:"legendBy,omitempty"`
 	// A maximum gauge value used in percentage threshold calculation and for visual value representation
 	Max *float64 `json:"max,omitempty"`
 	// A minimum gauge value used in percentage threshold calculation and for visual value representation
-	Min   *float64    `json:"min,omitempty"`
+	Min *float64 `json:"min,omitempty"`
 	Query *GaugeQuery `json:"query,omitempty"`
 	// Deprecated: use arcDisplay.valueArc instead. Whether to show the inner arc of gauge which graphically represents the value
 	// Deprecated
@@ -46,13 +46,13 @@ type WidgetsGauge struct {
 	ShowMinMax *bool `json:"showMinMax,omitempty"`
 	// Deprecated: use arcDisplay.thresholdArc instead. Whether to show the outer arc of gauge which graphically represents the min/max range
 	// Deprecated
-	ShowOuterArc  *bool             `json:"showOuterArc,omitempty"`
-	ThresholdBy   *GaugeThresholdBy `json:"thresholdBy,omitempty"`
-	ThresholdType *ThresholdType    `json:"thresholdType,omitempty"`
+	ShowOuterArc *bool `json:"showOuterArc,omitempty"`
+	ThresholdBy *GaugeThresholdBy `json:"thresholdBy,omitempty"`
+	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	// List of value thresholds, each with a certain color and an optional name label
-	Thresholds                        []GaugeThreshold `json:"thresholds,omitempty"`
-	Unit                              *GaugeUnit       `json:"unit,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Thresholds []GaugeThreshold `json:"thresholds,omitempty"`
+	Unit *GaugeUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -658,7 +658,7 @@ func (o *WidgetsGauge) SetUnit(v GaugeUnit) {
 }
 
 func (o WidgetsGauge) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -804,3 +804,4 @@ func (v *NullableWidgetsGauge) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

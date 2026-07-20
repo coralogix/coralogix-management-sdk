@@ -19,12 +19,13 @@ import (
 	"reflect"
 )
 
+
 // EnrichmentsServiceAPIService EnrichmentsServiceAPI service
 type EnrichmentsServiceAPIService service
 
 type ApiEnrichmentServiceAddEnrichmentsRequest struct {
-	ctx                        context.Context
-	ApiService                 *EnrichmentsServiceAPIService
+	ctx context.Context
+	ApiService *EnrichmentsServiceAPIService
 	enrichmentsCreationRequest *EnrichmentsCreationRequest
 }
 
@@ -42,25 +43,24 @@ EnrichmentServiceAddEnrichments Add Enrichments
 
 Creates new enrichment rules.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiEnrichmentServiceAddEnrichmentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiEnrichmentServiceAddEnrichmentsRequest
 */
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceAddEnrichments(ctx context.Context) ApiEnrichmentServiceAddEnrichmentsRequest {
 	return ApiEnrichmentServiceAddEnrichmentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return AddEnrichmentsResponse
+//  @return AddEnrichmentsResponse
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceAddEnrichmentsExecute(r ApiEnrichmentServiceAddEnrichmentsRequest) (*AddEnrichmentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *AddEnrichmentsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AddEnrichmentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnrichmentsServiceAPIService.EnrichmentServiceAddEnrichments")
@@ -134,8 +134,8 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceAddEnrichmentsExecute(r 
 }
 
 type ApiEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest struct {
-	ctx                                                   context.Context
-	ApiService                                            *EnrichmentsServiceAPIService
+	ctx context.Context
+	ApiService *EnrichmentsServiceAPIService
 	enrichmentServiceAtomicOverwriteAllEnrichmentsRequest *EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest
 }
 
@@ -153,25 +153,24 @@ EnrichmentServiceAtomicOverwriteAllEnrichments Atomic Overwrite for ALL types of
 
 Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest
 */
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceAtomicOverwriteAllEnrichments(ctx context.Context) ApiEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest {
 	return ApiEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return AtomicOverwriteAllEnrichmentsResponse
+//  @return AtomicOverwriteAllEnrichmentsResponse
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceAtomicOverwriteAllEnrichmentsExecute(r ApiEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest) (*AtomicOverwriteAllEnrichmentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *AtomicOverwriteAllEnrichmentsResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AtomicOverwriteAllEnrichmentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnrichmentsServiceAPIService.EnrichmentServiceAtomicOverwriteAllEnrichments")
@@ -242,8 +241,8 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceAtomicOverwriteAllEnrich
 }
 
 type ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest struct {
-	ctx                                                context.Context
-	ApiService                                         *EnrichmentsServiceAPIService
+	ctx context.Context
+	ApiService *EnrichmentsServiceAPIService
 	enrichmentServiceAtomicOverwriteEnrichmentsRequest *EnrichmentServiceAtomicOverwriteEnrichmentsRequest
 }
 
@@ -261,25 +260,24 @@ EnrichmentServiceAtomicOverwriteEnrichments Atomic Overwrite for CustomEnrichmen
 
 Updates enrichment rules.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest
 */
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceAtomicOverwriteEnrichments(ctx context.Context) ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest {
 	return ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return AtomicOverwriteEnrichmentsResponse
+//  @return AtomicOverwriteEnrichmentsResponse
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceAtomicOverwriteEnrichmentsExecute(r ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest) (*AtomicOverwriteEnrichmentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *AtomicOverwriteEnrichmentsResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AtomicOverwriteEnrichmentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnrichmentsServiceAPIService.EnrichmentServiceAtomicOverwriteEnrichments")
@@ -350,7 +348,7 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceAtomicOverwriteEnrichmen
 }
 
 type ApiEnrichmentServiceGetCompanyEnrichmentSettingsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *EnrichmentsServiceAPIService
 }
 
@@ -363,25 +361,24 @@ EnrichmentServiceGetCompanyEnrichmentSettings Get Company Enrichment Settings
 
 Returns the current enrichment settings for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiEnrichmentServiceGetCompanyEnrichmentSettingsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiEnrichmentServiceGetCompanyEnrichmentSettingsRequest
 */
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetCompanyEnrichmentSettings(ctx context.Context) ApiEnrichmentServiceGetCompanyEnrichmentSettingsRequest {
 	return ApiEnrichmentServiceGetCompanyEnrichmentSettingsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCompanyEnrichmentSettingsResponse
+//  @return GetCompanyEnrichmentSettingsResponse
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetCompanyEnrichmentSettingsExecute(r ApiEnrichmentServiceGetCompanyEnrichmentSettingsRequest) (*GetCompanyEnrichmentSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetCompanyEnrichmentSettingsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetCompanyEnrichmentSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnrichmentsServiceAPIService.EnrichmentServiceGetCompanyEnrichmentSettings")
@@ -450,7 +447,7 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetCompanyEnrichmentSett
 }
 
 type ApiEnrichmentServiceGetEnrichmentLimitRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *EnrichmentsServiceAPIService
 }
 
@@ -463,25 +460,24 @@ EnrichmentServiceGetEnrichmentLimit Get Enrichment Limit
 
 Returns the maximum number of enrichment rules allowed.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiEnrichmentServiceGetEnrichmentLimitRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiEnrichmentServiceGetEnrichmentLimitRequest
 */
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetEnrichmentLimit(ctx context.Context) ApiEnrichmentServiceGetEnrichmentLimitRequest {
 	return ApiEnrichmentServiceGetEnrichmentLimitRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetEnrichmentLimitResponse
+//  @return GetEnrichmentLimitResponse
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetEnrichmentLimitExecute(r ApiEnrichmentServiceGetEnrichmentLimitRequest) (*GetEnrichmentLimitResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetEnrichmentLimitResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetEnrichmentLimitResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnrichmentsServiceAPIService.EnrichmentServiceGetEnrichmentLimit")
@@ -550,7 +546,7 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetEnrichmentLimitExecut
 }
 
 type ApiEnrichmentServiceGetEnrichmentsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *EnrichmentsServiceAPIService
 }
 
@@ -563,25 +559,24 @@ EnrichmentServiceGetEnrichments Get Enrichments
 
 Returns all enrichment rules for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiEnrichmentServiceGetEnrichmentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiEnrichmentServiceGetEnrichmentsRequest
 */
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetEnrichments(ctx context.Context) ApiEnrichmentServiceGetEnrichmentsRequest {
 	return ApiEnrichmentServiceGetEnrichmentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetEnrichmentsResponse
+//  @return GetEnrichmentsResponse
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetEnrichmentsExecute(r ApiEnrichmentServiceGetEnrichmentsRequest) (*GetEnrichmentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetEnrichmentsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetEnrichmentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnrichmentsServiceAPIService.EnrichmentServiceGetEnrichments")
@@ -650,8 +645,8 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceGetEnrichmentsExecute(r 
 }
 
 type ApiEnrichmentServiceRemoveEnrichmentsRequest struct {
-	ctx           context.Context
-	ApiService    *EnrichmentsServiceAPIService
+	ctx context.Context
+	ApiService *EnrichmentsServiceAPIService
 	enrichmentIds *[]int64
 }
 
@@ -670,25 +665,24 @@ EnrichmentServiceRemoveEnrichments Delete Enrichments
 
 Deletes all enrichment rules for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiEnrichmentServiceRemoveEnrichmentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiEnrichmentServiceRemoveEnrichmentsRequest
 */
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceRemoveEnrichments(ctx context.Context) ApiEnrichmentServiceRemoveEnrichmentsRequest {
 	return ApiEnrichmentServiceRemoveEnrichmentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return RemoveEnrichmentsResponse
+//  @return RemoveEnrichmentsResponse
 func (a *EnrichmentsServiceAPIService) EnrichmentServiceRemoveEnrichmentsExecute(r ApiEnrichmentServiceRemoveEnrichmentsRequest) (*RemoveEnrichmentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *RemoveEnrichmentsResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RemoveEnrichmentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnrichmentsServiceAPIService.EnrichmentServiceRemoveEnrichments")

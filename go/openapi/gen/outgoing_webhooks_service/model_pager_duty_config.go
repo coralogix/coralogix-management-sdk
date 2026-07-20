@@ -23,8 +23,8 @@ var _ MappedNullable = &PagerDutyConfig{}
 // PagerDutyConfig Pager duty config.
 type PagerDutyConfig struct {
 	// The service key.
-	ServiceKey                        *string `json:"serviceKey,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ServiceKey *string `json:"serviceKey,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *PagerDutyConfig) SetServiceKey(v string) {
 }
 
 func (o PagerDutyConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullablePagerDutyConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

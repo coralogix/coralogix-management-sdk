@@ -27,8 +27,8 @@ type SqlLoadConfig struct {
 	// Maximum CTEs allowed in a query.
 	CteLimit *string `json:"cteLimit,omitempty" validate:"regexp=^[0-9]+$"`
 	// Maximum JOINs allowed in a query.
-	JoinLimit                         *string `json:"joinLimit,omitempty" validate:"regexp=^[0-9]+$"`
-	AdditionalProperties              map[string]interface{}
+	JoinLimit *string `json:"joinLimit,omitempty" validate:"regexp=^[0-9]+$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *SqlLoadConfig) SetJoinLimit(v string) {
 }
 
 func (o SqlLoadConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableSqlLoadConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

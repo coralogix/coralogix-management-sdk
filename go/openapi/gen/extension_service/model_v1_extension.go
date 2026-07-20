@@ -25,8 +25,8 @@ type V1Extension struct {
 	// The changelog.
 	Changelog []ChangelogEntry `json:"changelog,omitempty"`
 	// The dark mode image.
-	DarkModeImage *string      `json:"darkModeImage,omitempty"`
-	Deprecation   *Deprecation `json:"deprecation,omitempty"`
+	DarkModeImage *string `json:"darkModeImage,omitempty"`
+	Deprecation *Deprecation `json:"deprecation,omitempty"`
 	// Unique identifier of the extension.
 	Id *string `json:"id,omitempty"`
 	// Image reference.
@@ -42,8 +42,8 @@ type V1Extension struct {
 	// The permission denied revisions.
 	PermissionDeniedRevisions []ExtensionRevision `json:"permissionDeniedRevisions,omitempty"`
 	// The revisions.
-	Revisions                         []ExtensionRevision `json:"revisions,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Revisions []ExtensionRevision `json:"revisions,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -419,7 +419,7 @@ func (o *V1Extension) SetRevisions(v []ExtensionRevision) {
 }
 
 func (o V1Extension) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -537,3 +537,4 @@ func (v *NullableV1Extension) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

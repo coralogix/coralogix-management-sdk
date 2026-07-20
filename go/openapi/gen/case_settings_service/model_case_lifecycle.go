@@ -23,13 +23,13 @@ var _ MappedNullable = &CaseLifecycle{}
 // CaseLifecycle Team-level configuration options for the lifecycle of case, such as suppression and snooze periods.
 type CaseLifecycle struct {
 	AlertSuppressionStrategy *AlertSuppressionStrategy `json:"alertSuppressionStrategy,omitempty"`
-	AutoResolve              *AutoResolveConfig        `json:"autoResolve,omitempty"`
-	Kpi                      *CaseKPIs                 `json:"kpi,omitempty"`
+	AutoResolve *AutoResolveConfig `json:"autoResolve,omitempty"`
+	Kpi *CaseKPIs `json:"kpi,omitempty"`
 	// Period after resolution during which new cases are snoozed.
 	ResolutionSnoozePeriod *string `json:"resolutionSnoozePeriod,omitempty"`
 	// Default period during which duplicate or related cases are suppressed.
-	SuppressionPeriod                 *string `json:"suppressionPeriod,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SuppressionPeriod *string `json:"suppressionPeriod,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -213,7 +213,7 @@ func (o *CaseLifecycle) SetSuppressionPeriod(v string) {
 }
 
 func (o CaseLifecycle) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -307,3 +307,4 @@ func (v *NullableCaseLifecycle) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

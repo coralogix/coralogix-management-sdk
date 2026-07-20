@@ -23,8 +23,8 @@ var _ MappedNullable = &UsageMeasurementCxQuotaUnits{}
 // UsageMeasurementCxQuotaUnits Billable units charged for this measurement. The decimal magnitude is carried as a string in the `value` field of this object.
 type UsageMeasurementCxQuotaUnits struct {
 	// Decimal value encoded as a string, using optional sign, fraction, and exponent notation.
-	Value                             *string `json:"value,omitempty" validate:"regexp=^[+-]?(?:\\\\d+(?:\\\\.\\\\d*)?|\\\\.\\\\d+)(?:[eE][+-]?\\\\d+)?$"`
-	AdditionalProperties              map[string]interface{}
+	Value *string `json:"value,omitempty" validate:"regexp=^[+-]?(?:\\\\d+(?:\\\\.\\\\d*)?|\\\\.\\\\d+)(?:[eE][+-]?\\\\d+)?$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *UsageMeasurementCxQuotaUnits) SetValue(v string) {
 }
 
 func (o UsageMeasurementCxQuotaUnits) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableUsageMeasurementCxQuotaUnits) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

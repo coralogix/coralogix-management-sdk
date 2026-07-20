@@ -24,8 +24,8 @@ var _ MappedNullable = &AlertDefNameFilter{}
 type AlertDefNameFilter struct {
 	Matcher *AlertsV3FilterMatcher `json:"matcher,omitempty"`
 	// The name(s) of the alert definition - multiple values are OR'd together
-	Name                              []string `json:"name,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Name []string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *AlertDefNameFilter) SetName(v []string) {
 }
 
 func (o AlertDefNameFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableAlertDefNameFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

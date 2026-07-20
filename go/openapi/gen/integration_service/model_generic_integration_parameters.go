@@ -23,8 +23,8 @@ var _ MappedNullable = &GenericIntegrationParameters{}
 // GenericIntegrationParameters Generic integration parameters.
 type GenericIntegrationParameters struct {
 	// The parameters.
-	Parameters                        []Parameter `json:"parameters,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Parameters []Parameter `json:"parameters,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *GenericIntegrationParameters) SetParameters(v []Parameter) {
 }
 
 func (o GenericIntegrationParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableGenericIntegrationParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

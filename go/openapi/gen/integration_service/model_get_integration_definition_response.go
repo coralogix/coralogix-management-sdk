@@ -22,8 +22,8 @@ var _ MappedNullable = &GetIntegrationDefinitionResponse{}
 
 // GetIntegrationDefinitionResponse This data structure represents a list of outgoing webhook types.
 type GetIntegrationDefinitionResponse struct {
-	IntegrationDefinition             *IntegrationDefinition `json:"integrationDefinition,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IntegrationDefinition *IntegrationDefinition `json:"integrationDefinition,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetIntegrationDefinitionResponse) SetIntegrationDefinition(v Integratio
 }
 
 func (o GetIntegrationDefinitionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetIntegrationDefinitionResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

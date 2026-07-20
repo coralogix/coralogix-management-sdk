@@ -24,7 +24,7 @@ type SloType string
 // List of SloType
 const (
 	SLOTYPE_SLO_TYPE_REQUEST SloType = "SLO_TYPE_REQUEST"
-	SLOTYPE_SLO_TYPE_WINDOW  SloType = "SLO_TYPE_WINDOW"
+	SLOTYPE_SLO_TYPE_WINDOW SloType = "SLO_TYPE_WINDOW"
 )
 
 // All allowed values of SloType enum
@@ -111,3 +111,4 @@ func (v *NullableSloType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

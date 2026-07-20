@@ -25,8 +25,8 @@ type MetricLabelSource struct {
 	// The label.
 	Label *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The metric name.
-	MetricName                        *string `json:"metricName,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	MetricName *string `json:"metricName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *MetricLabelSource) SetMetricName(v string) {
 }
 
 func (o MetricLabelSource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableMetricLabelSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

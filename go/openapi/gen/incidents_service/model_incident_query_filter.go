@@ -29,19 +29,19 @@ type IncidentQueryFilter struct {
 	Assignee []string `json:"assignee,omitempty"`
 	// Filter by contextual labels
 	ContextualLabels *map[string]ContextualLabelValues `json:"contextualLabels,omitempty"`
-	CreatedAtRange   *V1TimeRange                      `json:"createdAtRange,omitempty"`
+	CreatedAtRange *V1TimeRange `json:"createdAtRange,omitempty"`
 	// Filter by display labels
 	DisplayLabels *map[string]DisplayLabelValues `json:"displayLabels,omitempty"`
 	// Filters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)
 	// Deprecated
-	EndTime               *time.Time   `json:"endTime,omitempty"`
+	EndTime *time.Time `json:"endTime,omitempty"`
 	IncidentDurationRange *V1TimeRange `json:"incidentDurationRange,omitempty"`
 	// Indicates if the incident is muted
 	IsMuted *bool `json:"isMuted,omitempty"`
 	// Filters all incidents with the given meta labels
-	MetaLabels   []IncidentsV1MetaLabel `json:"metaLabels,omitempty"`
-	MetaLabelsOp *V1FilterOperator      `json:"metaLabelsOp,omitempty"`
-	SearchQuery  *IncidentSearchQuery   `json:"searchQuery,omitempty"`
+	MetaLabels []IncidentMetaLabel `json:"metaLabels,omitempty"`
+	MetaLabelsOp *V1FilterOperator `json:"metaLabelsOp,omitempty"`
+	SearchQuery *IncidentSearchQuery `json:"searchQuery,omitempty"`
 	// Filter by incident severity
 	Severity []IncidentSeverity `json:"severity,omitempty"`
 	// Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)
@@ -52,8 +52,8 @@ type IncidentQueryFilter struct {
 	// Filter by incident status
 	Status []IncidentStatus `json:"status,omitempty"`
 	// Filter by subsystem names
-	SubsystemName                     []string `json:"subsystemName,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SubsystemName []string `json:"subsystemName,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -336,9 +336,9 @@ func (o *IncidentQueryFilter) SetIsMuted(v bool) {
 }
 
 // GetMetaLabels returns the MetaLabels field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetMetaLabels() []IncidentsV1MetaLabel {
+func (o *IncidentQueryFilter) GetMetaLabels() []IncidentMetaLabel {
 	if o == nil || IsNil(o.MetaLabels) {
-		var ret []IncidentsV1MetaLabel
+		var ret []IncidentMetaLabel
 		return ret
 	}
 	return o.MetaLabels
@@ -346,7 +346,7 @@ func (o *IncidentQueryFilter) GetMetaLabels() []IncidentsV1MetaLabel {
 
 // GetMetaLabelsOk returns a tuple with the MetaLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetMetaLabelsOk() ([]IncidentsV1MetaLabel, bool) {
+func (o *IncidentQueryFilter) GetMetaLabelsOk() ([]IncidentMetaLabel, bool) {
 	if o == nil || IsNil(o.MetaLabels) {
 		return nil, false
 	}
@@ -362,8 +362,8 @@ func (o *IncidentQueryFilter) HasMetaLabels() bool {
 	return false
 }
 
-// SetMetaLabels gets a reference to the given []IncidentsV1MetaLabel and assigns it to the MetaLabels field.
-func (o *IncidentQueryFilter) SetMetaLabels(v []IncidentsV1MetaLabel) {
+// SetMetaLabels gets a reference to the given []IncidentMetaLabel and assigns it to the MetaLabels field.
+func (o *IncidentQueryFilter) SetMetaLabels(v []IncidentMetaLabel) {
 	o.MetaLabels = v
 }
 
@@ -595,7 +595,7 @@ func (o *IncidentQueryFilter) SetSubsystemName(v []string) {
 }
 
 func (o IncidentQueryFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -733,3 +733,4 @@ func (v *NullableIncidentQueryFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

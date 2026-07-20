@@ -37,8 +37,8 @@ type RuleGroupsServiceGetRuleGroupModelMappingRequest struct {
 	// List of rule matchers that determine which logs this group applies to.
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
 	// List of rule subgroups defining the ordered set of rules in this group.
-	RuleSubgroups                     []GetRuleGroupModelMappingRequestCreateRuleSubgroup `json:"ruleSubgroups,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	RuleSubgroups []GetRuleGroupModelMappingRequestCreateRuleSubgroup `json:"ruleSubgroups,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -318,7 +318,7 @@ func (o *RuleGroupsServiceGetRuleGroupModelMappingRequest) SetRuleSubgroups(v []
 }
 
 func (o RuleGroupsServiceGetRuleGroupModelMappingRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -424,3 +424,4 @@ func (v *NullableRuleGroupsServiceGetRuleGroupModelMappingRequest) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

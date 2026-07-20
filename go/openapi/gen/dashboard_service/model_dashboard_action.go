@@ -23,7 +23,7 @@ var _ MappedNullable = &DashboardAction{}
 // DashboardAction Public actions that are always available within specific dashboard's context.
 type DashboardAction struct {
 	DataSource *ActionDataSourceType `json:"dataSource,omitempty"`
-	Definition *ActionDefinition     `json:"definition,omitempty"`
+	Definition *ActionDefinition `json:"definition,omitempty"`
 	// A unique identifier of the action
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// The display name of the action
@@ -33,8 +33,8 @@ type DashboardAction struct {
 	// Defines if the action should open in a new window or current window in the browser
 	ShouldOpenInNewWindow *bool `json:"shouldOpenInNewWindow,omitempty"`
 	// Reference to specific widget within a dashboard, can be null if the action is dashboard wide
-	WidgetId                          *string `json:"widgetId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
-	AdditionalProperties              map[string]interface{}
+	WidgetId *string `json:"widgetId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -282,7 +282,7 @@ func (o *DashboardAction) SetWidgetId(v string) {
 }
 
 func (o DashboardAction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -384,3 +384,4 @@ func (v *NullableDashboardAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

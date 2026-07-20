@@ -22,9 +22,9 @@ var _ MappedNullable = &TestRoutingConditionValidResponse{}
 
 // TestRoutingConditionValidResponse Response which specifies condition evaluation result or error
 type TestRoutingConditionValidResponse struct {
-	Failure                           *TestRoutingConditionValidResponseFailure `json:"failure,omitempty"`
-	Success                           *TestRoutingConditionValidResponseSuccess `json:"success,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Failure *TestRoutingConditionValidResponseFailure `json:"failure,omitempty"`
+	Success *TestRoutingConditionValidResponseSuccess `json:"success,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *TestRoutingConditionValidResponse) SetSuccess(v TestRoutingConditionVal
 }
 
 func (o TestRoutingConditionValidResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableTestRoutingConditionValidResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

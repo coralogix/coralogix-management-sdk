@@ -22,9 +22,9 @@ var _ MappedNullable = &MultipleValues{}
 
 // MultipleValues struct for MultipleValues
 type MultipleValues struct {
-	Matcher                           *EventsV3FilterMatcher `json:"matcher,omitempty"`
-	Values                            []string               `json:"values,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Matcher *EventsV3FilterMatcher `json:"matcher,omitempty"`
+	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *MultipleValues) SetValues(v []string) {
 }
 
 func (o MultipleValues) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableMultipleValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

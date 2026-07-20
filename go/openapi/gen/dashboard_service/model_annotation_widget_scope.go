@@ -23,9 +23,9 @@ var _ MappedNullable = &AnnotationWidgetScope{}
 // AnnotationWidgetScope Widget scope.
 type AnnotationWidgetScope struct {
 	// Indicates that the annotation applies to all widgets in the dashboard.
-	AllWidgets                        map[string]interface{}                `json:"allWidgets,omitempty"`
-	SpecificWidgets                   *AnnotationWidgetScopeSpecificWidgets `json:"specificWidgets,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AllWidgets map[string]interface{} `json:"allWidgets,omitempty"`
+	SpecificWidgets *AnnotationWidgetScopeSpecificWidgets `json:"specificWidgets,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *AnnotationWidgetScope) SetSpecificWidgets(v AnnotationWidgetScopeSpecif
 }
 
 func (o AnnotationWidgetScope) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -223,3 +223,4 @@ func (v *NullableAnnotationWidgetScope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
