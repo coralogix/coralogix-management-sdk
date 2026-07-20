@@ -26,9 +26,9 @@ type DetailedDailyEvaluationTokens struct {
 	// The evaluations.
 	Evaluations []Evaluation `json:"evaluations,omitempty"`
 	// The stats date.
-	StatsDate                         *time.Time `json:"statsDate,omitempty"`
-	TotalTokens                       *Token     `json:"totalTokens,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	StatsDate *time.Time `json:"statsDate,omitempty"`
+	TotalTokens *Token `json:"totalTokens,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *DetailedDailyEvaluationTokens) SetTotalTokens(v Token) {
 }
 
 func (o DetailedDailyEvaluationTokens) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableDetailedDailyEvaluationTokens) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

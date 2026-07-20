@@ -23,8 +23,8 @@ var _ MappedNullable = &DefaultIntegrationDetails{}
 // DefaultIntegrationDetails Default integration details.
 type DefaultIntegrationDetails struct {
 	// The registered.
-	Registered                        []RegisteredInstance `json:"registered,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Registered []RegisteredInstance `json:"registered,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *DefaultIntegrationDetails) SetRegistered(v []RegisteredInstance) {
 }
 
 func (o DefaultIntegrationDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableDefaultIntegrationDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,9 +23,9 @@ var _ MappedNullable = &Tooltip{}
 // Tooltip Tooltip.
 type Tooltip struct {
 	// The show labels.
-	ShowLabels                        *bool        `json:"showLabels,omitempty"`
-	Type                              *TooltipType `json:"type,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ShowLabels *bool `json:"showLabels,omitempty"`
+	Type *TooltipType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *Tooltip) SetType(v TooltipType) {
 }
 
 func (o Tooltip) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableTooltip) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

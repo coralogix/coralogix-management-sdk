@@ -24,10 +24,10 @@ var _ MappedNullable = &OllyAnalysis{}
 // OllyAnalysis Result of an automated Olly analysis attached to a case.
 type OllyAnalysis struct {
 	// When the analysis attempt completed.
-	CompletedAt                       *time.Time           `json:"completedAt,omitempty"`
-	Payload                           *OllyAnalysisPayload `json:"payload,omitempty"`
-	Status                            *OllyAnalysisStatus  `json:"status,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	CompletedAt *time.Time `json:"completedAt,omitempty"`
+	Payload *OllyAnalysisPayload `json:"payload,omitempty"`
+	Status *OllyAnalysisStatus `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *OllyAnalysis) SetStatus(v OllyAnalysisStatus) {
 }
 
 func (o OllyAnalysis) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableOllyAnalysis) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

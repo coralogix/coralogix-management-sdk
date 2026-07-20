@@ -22,8 +22,8 @@ var _ MappedNullable = &IntervalValue{}
 
 // IntervalValue Interval value.
 type IntervalValue struct {
-	Value                             *StringValueLabel `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Value *StringValueLabel `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *IntervalValue) SetValue(v StringValueLabel) {
 }
 
 func (o IntervalValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableIntervalValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

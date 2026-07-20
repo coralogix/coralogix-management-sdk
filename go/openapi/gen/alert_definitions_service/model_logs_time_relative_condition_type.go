@@ -24,7 +24,7 @@ type LogsTimeRelativeConditionType string
 // List of LogsTimeRelativeConditionType
 const (
 	LOGSTIMERELATIVECONDITIONTYPE_LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED LogsTimeRelativeConditionType = "LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED"
-	LOGSTIMERELATIVECONDITIONTYPE_LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN                LogsTimeRelativeConditionType = "LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN"
+	LOGSTIMERELATIVECONDITIONTYPE_LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN LogsTimeRelativeConditionType = "LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN"
 )
 
 // All allowed values of LogsTimeRelativeConditionType enum
@@ -111,3 +111,4 @@ func (v *NullableLogsTimeRelativeConditionType) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

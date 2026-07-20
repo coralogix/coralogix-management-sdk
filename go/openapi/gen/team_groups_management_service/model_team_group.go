@@ -30,18 +30,18 @@ type TeamGroup struct {
 	// Group external identifier. Applies if team is externally defined.
 	ExternalId *string `json:"externalId,omitempty"`
 	// Unique team group identifier
-	GroupId     *int64       `json:"groupId,omitempty"`
+	GroupId *int64 `json:"groupId,omitempty"`
 	GroupOrigin *GroupOrigin `json:"groupOrigin,omitempty"`
-	GroupType   *GroupType   `json:"groupType,omitempty"`
+	GroupType *GroupType `json:"groupType,omitempty"`
 	// Unique name
-	Name  *string  `json:"name,omitempty"`
-	Role  *Role    `json:"role,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Role *Role `json:"role,omitempty"`
 	Scope *V2Scope `json:"scope,omitempty"`
 	// Team this group belongs to
 	TeamId *int64 `json:"teamId,omitempty"`
 	// Last-updated timestamp.
-	UpdatedAt                         *time.Time `json:"updatedAt,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -417,7 +417,7 @@ func (o *TeamGroup) SetUpdatedAt(v time.Time) {
 }
 
 func (o TeamGroup) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -535,3 +535,4 @@ func (v *NullableTeamGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

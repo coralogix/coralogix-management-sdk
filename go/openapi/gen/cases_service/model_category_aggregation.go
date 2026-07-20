@@ -24,8 +24,8 @@ var _ MappedNullable = &CategoryAggregation{}
 type CategoryAggregation struct {
 	Category *CaseCategory `json:"category,omitempty"`
 	// Number of cases in this category
-	Count                             *int64 `json:"count,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Count *int64 `json:"count,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *CategoryAggregation) SetCount(v int64) {
 }
 
 func (o CategoryAggregation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableCategoryAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

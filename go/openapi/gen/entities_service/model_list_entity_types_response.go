@@ -23,8 +23,8 @@ var _ MappedNullable = &ListEntityTypesResponse{}
 // ListEntityTypesResponse Response containing a list of notification entity types.
 type ListEntityTypesResponse struct {
 	// The supported payload types.
-	EntityTypes                       []NotificationCenterEntityType `json:"entityTypes,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	EntityTypes []NotificationCenterEntityType `json:"entityTypes,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListEntityTypesResponse) SetEntityTypes(v []NotificationCenterEntityTyp
 }
 
 func (o ListEntityTypesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListEntityTypesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

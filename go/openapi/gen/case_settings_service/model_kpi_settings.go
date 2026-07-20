@@ -23,12 +23,12 @@ var _ MappedNullable = &KPISettings{}
 // KPISettings Single KPI breach threshold for a specific case priority.
 type KPISettings struct {
 	// Enable or disable this threshold entry.
-	Enabled  *bool         `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 	Priority *CasePriority `json:"priority,omitempty"`
 	// Elapsed time after which the KPI is considered breached.
-	Threshold                         *string  `json:"threshold,omitempty"`
-	Type                              *KPIType `json:"type,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Threshold *string `json:"threshold,omitempty"`
+	Type *KPIType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -180,7 +180,7 @@ func (o *KPISettings) SetType(v KPIType) {
 }
 
 func (o KPISettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,3 +270,4 @@ func (v *NullableKPISettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

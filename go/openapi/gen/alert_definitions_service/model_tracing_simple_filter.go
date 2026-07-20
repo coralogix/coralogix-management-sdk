@@ -23,9 +23,9 @@ var _ MappedNullable = &TracingSimpleFilter{}
 // TracingSimpleFilter Basic filter configuration using a latency threshold and label filters
 type TracingSimpleFilter struct {
 	// The latency threshold to filter traces in milliseconds
-	LatencyThresholdMs                *string              `json:"latencyThresholdMs,omitempty" validate:"regexp=^[0-9]+$"`
-	TracingLabelFilters               *TracingLabelFilters `json:"tracingLabelFilters,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	LatencyThresholdMs *string `json:"latencyThresholdMs,omitempty" validate:"regexp=^[0-9]+$"`
+	TracingLabelFilters *TracingLabelFilters `json:"tracingLabelFilters,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *TracingSimpleFilter) SetTracingLabelFilters(v TracingLabelFilters) {
 }
 
 func (o TracingSimpleFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableTracingSimpleFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

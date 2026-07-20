@@ -22,11 +22,11 @@ var _ MappedNullable = &Metrics{}
 
 // Metrics A metrics variant of the query
 type Metrics struct {
-	EditorMode                        *MetricsQueryEditorMode `json:"editorMode,omitempty"`
-	PromqlQuery                       *PromQlQuery            `json:"promqlQuery,omitempty"`
-	PromqlQueryType                   *PromQLQueryType        `json:"promqlQueryType,omitempty"`
-	SeriesLimitType                   *MetricsSeriesLimitType `json:"seriesLimitType,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
+	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
+	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
+	SeriesLimitType *MetricsSeriesLimitType `json:"seriesLimitType,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -178,7 +178,7 @@ func (o *Metrics) SetSeriesLimitType(v MetricsSeriesLimitType) {
 }
 
 func (o Metrics) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,3 +268,4 @@ func (v *NullableMetrics) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

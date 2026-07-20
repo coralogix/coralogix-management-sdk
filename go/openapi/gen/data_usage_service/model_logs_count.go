@@ -26,14 +26,14 @@ type LogsCount struct {
 	// The application name.
 	ApplicationName *string `json:"applicationName,omitempty"`
 	// The logs count.
-	LogsCount *string              `json:"logsCount,omitempty" validate:"regexp=^[0-9]+$"`
-	Priority  *V2Priority          `json:"priority,omitempty"`
-	Severity  *DatausageV2Severity `json:"severity,omitempty"`
+	LogsCount *string `json:"logsCount,omitempty" validate:"regexp=^[0-9]+$"`
+	Priority *V2Priority `json:"priority,omitempty"`
+	Severity *DatausageV2Severity `json:"severity,omitempty"`
 	// The subsystem name.
 	SubsystemName *string `json:"subsystemName,omitempty"`
 	// Timestamp.
-	Timestamp                         *time.Time `json:"timestamp,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Timestamp *time.Time `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -249,7 +249,7 @@ func (o *LogsCount) SetTimestamp(v time.Time) {
 }
 
 func (o LogsCount) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -347,3 +347,4 @@ func (v *NullableLogsCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

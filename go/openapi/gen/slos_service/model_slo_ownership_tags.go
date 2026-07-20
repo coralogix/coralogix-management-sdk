@@ -22,10 +22,10 @@ var _ MappedNullable = &SloOwnershipTags{}
 
 // SloOwnershipTags Service, environment, and team ownership for the SLO group. At most one SloOwnershipTag per dimension; omit a dimension when unset.
 type SloOwnershipTags struct {
-	Environment                       *SloOwnershipTag `json:"environment,omitempty"`
-	Service                           *SloOwnershipTag `json:"service,omitempty"`
-	Team                              *SloOwnershipTag `json:"team,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Environment *SloOwnershipTag `json:"environment,omitempty"`
+	Service *SloOwnershipTag `json:"service,omitempty"`
+	Team *SloOwnershipTag `json:"team,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *SloOwnershipTags) SetTeam(v SloOwnershipTag) {
 }
 
 func (o SloOwnershipTags) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -231,3 +231,4 @@ func (v *NullableSloOwnershipTags) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

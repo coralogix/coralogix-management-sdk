@@ -25,12 +25,12 @@ type DataUsageQueryServiceDataUsageRequest struct {
 	Daily *UsageDailyQuery `json:"daily,omitempty"`
 	// Label predicates applied before aggregation.
 	Filters []UsageLabelFilter `json:"filters,omitempty"`
-	GroupBy *UsageGroupBy      `json:"groupBy,omitempty"`
-	Hourly  *UsageHourlyQuery  `json:"hourly,omitempty"`
-	Limit   *UsageLimit        `json:"limit,omitempty"`
+	GroupBy *UsageGroupBy `json:"groupBy,omitempty"`
+	Hourly *UsageHourlyQuery `json:"hourly,omitempty"`
+	Limit *UsageLimit `json:"limit,omitempty"`
 	// Measurement kind filter applied before aggregation. Omit (or pass an empty list) to include all supported measurement kinds.
-	MeasurementKindFilter             []UsageMeasurementKind `json:"measurementKindFilter,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MeasurementKindFilter []UsageMeasurementKind `json:"measurementKindFilter,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -246,7 +246,7 @@ func (o *DataUsageQueryServiceDataUsageRequest) SetMeasurementKindFilter(v []Usa
 }
 
 func (o DataUsageQueryServiceDataUsageRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -372,3 +372,4 @@ func (v *NullableDataUsageQueryServiceDataUsageRequest) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

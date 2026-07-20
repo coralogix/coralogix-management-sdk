@@ -27,26 +27,26 @@ type Heatmap struct {
 	// Optional number indicating the max value for gradient color axis. Automatically calculated from data if not provided.
 	ColorAxisMax *float32 `json:"colorAxisMax,omitempty"`
 	// Optional number indicating the lowest value for gradient color axis. Automatically calculated from data if not provided.
-	ColorAxisMin *float32           `json:"colorAxisMin,omitempty"`
-	ColorRange   *ColorGradientType `json:"colorRange,omitempty"`
+	ColorAxisMin *float32 `json:"colorAxisMin,omitempty"`
+	ColorRange *ColorGradientType `json:"colorRange,omitempty"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
-	DecimalPrecision    *int32                      `json:"decimalPrecision,omitempty"`
+	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	HistogramBucketUnit *HeatmapHistogramBucketUnit `json:"histogramBucketUnit,omitempty"`
-	Preset              *HeatmapColorPreset         `json:"preset,omitempty"`
-	ScaleType           *ScaleType                  `json:"scaleType,omitempty"`
+	Preset *HeatmapColorPreset `json:"preset,omitempty"`
+	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	// Whether to render numeric values inside the heatmap tiles
-	ShowNumbers *bool             `json:"showNumbers,omitempty"`
-	Tooltip     *HeatmapTooltip   `json:"tooltip,omitempty"`
-	Unit        *CommonUnit       `json:"unit,omitempty"`
-	ValueField  *ObservationField `json:"valueField,omitempty"`
+	ShowNumbers *bool `json:"showNumbers,omitempty"`
+	Tooltip *HeatmapTooltip `json:"tooltip,omitempty"`
+	Unit *CommonUnit `json:"unit,omitempty"`
+	ValueField *ObservationField `json:"valueField,omitempty"`
 	// List of observation fields used as x-axis categories in the heatmap grid.
-	XAxisFields     []ObservationField `json:"xAxisFields,omitempty"`
-	XAxisTimeFormat *XAxisTimeFormat   `json:"xAxisTimeFormat,omitempty"`
+	XAxisFields []ObservationField `json:"xAxisFields,omitempty"`
+	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	// List of observation fields used as y-axis categories in the heatmap grid.
-	YAxisFields                       []ObservationField `json:"yAxisFields,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	YAxisFields []ObservationField `json:"yAxisFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -582,7 +582,7 @@ func (o *Heatmap) SetYAxisFields(v []ObservationField) {
 }
 
 func (o Heatmap) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -748,3 +748,4 @@ func (v *NullableHeatmap) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

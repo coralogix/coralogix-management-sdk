@@ -23,8 +23,8 @@ var _ MappedNullable = &GetApiKeysResponse{}
 // GetApiKeysResponse This data structure is the response obtained when retrieving all API keys.
 type GetApiKeysResponse struct {
 	// The keys.
-	Keys                              []KeyInfo `json:"keys,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Keys []KeyInfo `json:"keys,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *GetApiKeysResponse) SetKeys(v []KeyInfo) {
 }
 
 func (o GetApiKeysResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableGetApiKeysResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

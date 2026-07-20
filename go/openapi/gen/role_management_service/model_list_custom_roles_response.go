@@ -23,8 +23,8 @@ var _ MappedNullable = &ListCustomRolesResponse{}
 // ListCustomRolesResponse Response containing a list of custom roles.
 type ListCustomRolesResponse struct {
 	// List of roles.
-	Roles                             []CustomRole `json:"roles,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Roles []CustomRole `json:"roles,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListCustomRolesResponse) SetRoles(v []CustomRole) {
 }
 
 func (o ListCustomRolesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListCustomRolesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

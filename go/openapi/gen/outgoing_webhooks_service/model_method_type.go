@@ -24,9 +24,9 @@ type MethodType string
 // List of MethodType
 const (
 	METHODTYPE_UNKNOWN MethodType = "UNKNOWN"
-	METHODTYPE_GET     MethodType = "GET"
-	METHODTYPE_POST    MethodType = "POST"
-	METHODTYPE_PUT     MethodType = "PUT"
+	METHODTYPE_GET MethodType = "GET"
+	METHODTYPE_POST MethodType = "POST"
+	METHODTYPE_PUT MethodType = "PUT"
 )
 
 // All allowed values of MethodType enum
@@ -115,3 +115,4 @@ func (v *NullableMethodType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

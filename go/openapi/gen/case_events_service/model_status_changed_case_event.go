@@ -22,9 +22,9 @@ var _ MappedNullable = &StatusChangedCaseEvent{}
 
 // StatusChangedCaseEvent Status changed case event.
 type StatusChangedCaseEvent struct {
-	NewStatus                         *CaseStatus `json:"newStatus,omitempty"`
-	OldStatus                         *CaseStatus `json:"oldStatus,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	NewStatus *CaseStatus `json:"newStatus,omitempty"`
+	OldStatus *CaseStatus `json:"oldStatus,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *StatusChangedCaseEvent) SetOldStatus(v CaseStatus) {
 }
 
 func (o StatusChangedCaseEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableStatusChangedCaseEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

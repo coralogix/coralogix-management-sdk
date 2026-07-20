@@ -22,9 +22,9 @@ var _ MappedNullable = &SloFilter{}
 
 // SloFilter A filter for SLOs, consisting of a field and a predicate
 type SloFilter struct {
-	Field                             *SloFilterField     `json:"field,omitempty"`
-	Predicate                         *SloFilterPredicate `json:"predicate,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Field *SloFilterField `json:"field,omitempty"`
+	Predicate *SloFilterPredicate `json:"predicate,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *SloFilter) SetPredicate(v SloFilterPredicate) {
 }
 
 func (o SloFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableSloFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

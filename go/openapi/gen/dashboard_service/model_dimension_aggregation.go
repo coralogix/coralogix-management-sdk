@@ -22,9 +22,9 @@ var _ MappedNullable = &DimensionAggregation{}
 
 // DimensionAggregation Dimension aggregation.
 type DimensionAggregation struct {
-	AggregationType                   *DimensionAggregationType `json:"aggregationType,omitempty"`
-	DimensionField                    *DimensionField           `json:"dimensionField,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AggregationType *DimensionAggregationType `json:"aggregationType,omitempty"`
+	DimensionField *DimensionField `json:"dimensionField,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *DimensionAggregation) SetDimensionField(v DimensionField) {
 }
 
 func (o DimensionAggregation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableDimensionAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

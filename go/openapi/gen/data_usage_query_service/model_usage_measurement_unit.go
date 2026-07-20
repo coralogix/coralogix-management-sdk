@@ -24,9 +24,9 @@ type UsageMeasurementUnit string
 // List of UsageMeasurementUnit
 const (
 	USAGEMEASUREMENTUNIT_MEASUREMENT_UNIT_UNSPECIFIED UsageMeasurementUnit = "MEASUREMENT_UNIT_UNSPECIFIED"
-	USAGEMEASUREMENTUNIT_MEASUREMENT_UNIT_BYTES       UsageMeasurementUnit = "MEASUREMENT_UNIT_BYTES"
-	USAGEMEASUREMENTUNIT_MEASUREMENT_UNIT_TOKENS      UsageMeasurementUnit = "MEASUREMENT_UNIT_TOKENS"
-	USAGEMEASUREMENTUNIT_MEASUREMENT_UNIT_EVENTS      UsageMeasurementUnit = "MEASUREMENT_UNIT_EVENTS"
+	USAGEMEASUREMENTUNIT_MEASUREMENT_UNIT_BYTES UsageMeasurementUnit = "MEASUREMENT_UNIT_BYTES"
+	USAGEMEASUREMENTUNIT_MEASUREMENT_UNIT_TOKENS UsageMeasurementUnit = "MEASUREMENT_UNIT_TOKENS"
+	USAGEMEASUREMENTUNIT_MEASUREMENT_UNIT_EVENTS UsageMeasurementUnit = "MEASUREMENT_UNIT_EVENTS"
 )
 
 // All allowed values of UsageMeasurementUnit enum
@@ -115,3 +115,4 @@ func (v *NullableUsageMeasurementUnit) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

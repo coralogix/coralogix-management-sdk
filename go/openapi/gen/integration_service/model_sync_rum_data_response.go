@@ -26,8 +26,8 @@ type SyncRumDataResponse struct {
 	// The sync executed.
 	SyncExecuted *bool `json:"syncExecuted,omitempty"`
 	// The synced at.
-	SyncedAt                          *time.Time `json:"syncedAt,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SyncedAt *time.Time `json:"syncedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -115,7 +115,7 @@ func (o *SyncRumDataResponse) SetSyncedAt(v time.Time) {
 }
 
 func (o SyncRumDataResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,3 +197,4 @@ func (v *NullableSyncRumDataResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

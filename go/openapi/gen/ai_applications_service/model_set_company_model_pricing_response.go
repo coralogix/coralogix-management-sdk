@@ -22,8 +22,8 @@ var _ MappedNullable = &SetCompanyModelPricingResponse{}
 
 // SetCompanyModelPricingResponse Response containing the updated company model pricing.
 type SetCompanyModelPricingResponse struct {
-	Pricing                           *CompanyModelPricing `json:"pricing,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Pricing *CompanyModelPricing `json:"pricing,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *SetCompanyModelPricingResponse) SetPricing(v CompanyModelPricing) {
 }
 
 func (o SetCompanyModelPricingResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableSetCompanyModelPricingResponse) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

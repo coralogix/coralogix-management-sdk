@@ -23,11 +23,11 @@ var _ MappedNullable = &CommentCaseEvent{}
 // CommentCaseEvent Event recorded when a user posts a comment on a case.
 type CommentCaseEvent struct {
 	// Attachments to the comment
-	Attachments []CommentAttachment   `json:"attachments,omitempty"`
-	Slack       *SlackCommentMetadata `json:"slack,omitempty"`
+	Attachments []CommentAttachment `json:"attachments,omitempty"`
+	Slack *SlackCommentMetadata `json:"slack,omitempty"`
 	// Comment text
-	UnsafeText                        *string `json:"unsafeText,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UnsafeText *string `json:"unsafeText,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *CommentCaseEvent) SetUnsafeText(v string) {
 }
 
 func (o CommentCaseEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableCommentCaseEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

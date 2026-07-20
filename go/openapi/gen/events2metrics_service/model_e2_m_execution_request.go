@@ -22,10 +22,10 @@ var _ MappedNullable = &E2MExecutionRequest{}
 
 // E2MExecutionRequest struct for E2MExecutionRequest
 type E2MExecutionRequest struct {
-	Create                            *CreateE2MRequest  `json:"create,omitempty"`
-	Delete                            *DeleteE2MRequest  `json:"delete,omitempty"`
-	Replace                           *ReplaceE2MRequest `json:"replace,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Create *CreateE2MRequest `json:"create,omitempty"`
+	Delete *DeleteE2MRequest `json:"delete,omitempty"`
+	Replace *ReplaceE2MRequest `json:"replace,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *E2MExecutionRequest) SetReplace(v ReplaceE2MRequest) {
 }
 
 func (o E2MExecutionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,3 +268,4 @@ func (v *NullableE2MExecutionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

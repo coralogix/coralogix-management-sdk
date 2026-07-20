@@ -23,8 +23,8 @@ var _ MappedNullable = &DownloadAlertsResponse{}
 // DownloadAlertsResponse A response containing the downloaded alert data
 type DownloadAlertsResponse struct {
 	// Base64-encoded binary data of the alert definitions
-	Content                           *string `json:"content,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Content *string `json:"content,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *DownloadAlertsResponse) SetContent(v string) {
 }
 
 func (o DownloadAlertsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableDownloadAlertsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

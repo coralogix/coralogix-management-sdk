@@ -22,8 +22,8 @@ var _ MappedNullable = &TestIntegrationResponse{}
 
 // TestIntegrationResponse Response containing the results of an integration test.
 type TestIntegrationResponse struct {
-	Result                            *TestIntegrationResult `json:"result,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Result *TestIntegrationResult `json:"result,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *TestIntegrationResponse) SetResult(v TestIntegrationResult) {
 }
 
 func (o TestIntegrationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableTestIntegrationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

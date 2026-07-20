@@ -18,13 +18,14 @@ import (
 	"net/url"
 )
 
+
 // SAMLConfigurationServiceAPIService SAMLConfigurationServiceAPI service
 type SAMLConfigurationServiceAPIService service
 
 type ApiSamlConfigurationServiceGetConfigurationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *SAMLConfigurationServiceAPIService
-	teamId     *int64
+	teamId *int64
 }
 
 // The unique identifier of the team whose SAML configuration to retrieve.
@@ -42,25 +43,24 @@ SamlConfigurationServiceGetConfiguration Get SAML Configuration
 
 Returns the current SAML configuration for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiSamlConfigurationServiceGetConfigurationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSamlConfigurationServiceGetConfigurationRequest
 */
 func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetConfiguration(ctx context.Context) ApiSamlConfigurationServiceGetConfigurationRequest {
 	return ApiSamlConfigurationServiceGetConfigurationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetConfigurationResponse
+//  @return GetConfigurationResponse
 func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetConfigurationExecute(r ApiSamlConfigurationServiceGetConfigurationRequest) (*GetConfigurationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetConfigurationResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetConfigurationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SAMLConfigurationServiceAPIService.SamlConfigurationServiceGetConfiguration")
@@ -125,8 +125,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetConfigur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -136,8 +136,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetConfigur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -147,8 +147,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetConfigur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -166,9 +166,9 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetConfigur
 }
 
 type ApiSamlConfigurationServiceGetSPParametersRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *SAMLConfigurationServiceAPIService
-	teamId     *int64
+	teamId *int64
 }
 
 // Team identifier.
@@ -186,25 +186,24 @@ SamlConfigurationServiceGetSPParameters Get SP Parameters
 
 Returns the service provider parameters for SAML.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiSamlConfigurationServiceGetSPParametersRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSamlConfigurationServiceGetSPParametersRequest
 */
 func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetSPParameters(ctx context.Context) ApiSamlConfigurationServiceGetSPParametersRequest {
 	return ApiSamlConfigurationServiceGetSPParametersRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetSPParametersResponse
+//  @return GetSPParametersResponse
 func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetSPParametersExecute(r ApiSamlConfigurationServiceGetSPParametersRequest) (*GetSPParametersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetSPParametersResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetSPParametersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SAMLConfigurationServiceAPIService.SamlConfigurationServiceGetSPParameters")
@@ -269,8 +268,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetSPParame
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -280,8 +279,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetSPParame
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -291,8 +290,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetSPParame
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -310,8 +309,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceGetSPParame
 }
 
 type ApiSamlConfigurationServiceSetActiveRequest struct {
-	ctx              context.Context
-	ApiService       *SAMLConfigurationServiceAPIService
+	ctx context.Context
+	ApiService *SAMLConfigurationServiceAPIService
 	setActiveRequest *SetActiveRequest
 }
 
@@ -329,25 +328,24 @@ SamlConfigurationServiceSetActive Activate/Deactivate SAML
 
 Activates or deactivates SAML for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiSamlConfigurationServiceSetActiveRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSamlConfigurationServiceSetActiveRequest
 */
 func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetActive(ctx context.Context) ApiSamlConfigurationServiceSetActiveRequest {
 	return ApiSamlConfigurationServiceSetActiveRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetActiveExecute(r ApiSamlConfigurationServiceSetActiveRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SAMLConfigurationServiceAPIService.SamlConfigurationServiceSetActive")
@@ -409,8 +407,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetActiveEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -420,8 +418,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetActiveEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -431,8 +429,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetActiveEx
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -450,8 +448,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetActiveEx
 }
 
 type ApiSamlConfigurationServiceSetIDPParametersRequest struct {
-	ctx                     context.Context
-	ApiService              *SAMLConfigurationServiceAPIService
+	ctx context.Context
+	ApiService *SAMLConfigurationServiceAPIService
 	setIDPParametersRequest *SetIDPParametersRequest
 }
 
@@ -469,25 +467,24 @@ SamlConfigurationServiceSetIDPParameters Set IDP Parameters
 
 Sets the identity provider parameters for SAML.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiSamlConfigurationServiceSetIDPParametersRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSamlConfigurationServiceSetIDPParametersRequest
 */
 func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetIDPParameters(ctx context.Context) ApiSamlConfigurationServiceSetIDPParametersRequest {
 	return ApiSamlConfigurationServiceSetIDPParametersRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetIDPParametersExecute(r ApiSamlConfigurationServiceSetIDPParametersRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SAMLConfigurationServiceAPIService.SamlConfigurationServiceSetIDPParameters")
@@ -549,8 +546,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetIDPParam
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -560,8 +557,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetIDPParam
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -571,8 +568,8 @@ func (a *SAMLConfigurationServiceAPIService) SamlConfigurationServiceSetIDPParam
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

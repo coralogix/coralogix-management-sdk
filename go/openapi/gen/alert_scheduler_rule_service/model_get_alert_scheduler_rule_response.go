@@ -23,8 +23,8 @@ var _ MappedNullable = &GetAlertSchedulerRuleResponse{}
 
 // GetAlertSchedulerRuleResponse This is a response sent to get an alert scheduler rule
 type GetAlertSchedulerRuleResponse struct {
-	AlertSchedulerRule                AlertSchedulerRule `json:"alertSchedulerRule"`
-	AdditionalProperties              map[string]interface{}
+	AlertSchedulerRule AlertSchedulerRule `json:"alertSchedulerRule"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -73,7 +73,7 @@ func (o *GetAlertSchedulerRuleResponse) SetAlertSchedulerRule(v AlertSchedulerRu
 }
 
 func (o GetAlertSchedulerRuleResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +104,10 @@ func (o *GetAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -170,3 +170,4 @@ func (v *NullableGetAlertSchedulerRuleResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

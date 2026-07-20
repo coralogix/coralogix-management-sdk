@@ -23,9 +23,9 @@ var _ MappedNullable = &StatusCount{}
 // StatusCount Count for a specific alert status
 type StatusCount struct {
 	// The count for this alert status
-	Count                             *int64          `json:"count,omitempty"`
-	Status                            *AlertDefStatus `json:"status,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Count *int64 `json:"count,omitempty"`
+	Status *AlertDefStatus `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *StatusCount) SetStatus(v AlertDefStatus) {
 }
 
 func (o StatusCount) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableStatusCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

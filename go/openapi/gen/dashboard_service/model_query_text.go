@@ -22,9 +22,9 @@ var _ MappedNullable = &QueryText{}
 
 // QueryText Query text.
 type QueryText struct {
-	DataModeType                      *V1CommonDataModeType `json:"dataModeType,omitempty"`
-	Query                             *CommonDataprimeQuery `json:"query,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
+	Query *CommonDataprimeQuery `json:"query,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *QueryText) SetQuery(v CommonDataprimeQuery) {
 }
 
 func (o QueryText) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableQueryText) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

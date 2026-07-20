@@ -23,8 +23,8 @@ var _ MappedNullable = &GetDailyUsageProcessedGbsResponse{}
 // GetDailyUsageProcessedGbsResponse Response containing daily processed gigabytes usage data.
 type GetDailyUsageProcessedGbsResponse struct {
 	// The gbs.
-	Gbs                               []DetailedDailyProcessedGbs `json:"gbs,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Gbs []DetailedDailyProcessedGbs `json:"gbs,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *GetDailyUsageProcessedGbsResponse) SetGbs(v []DetailedDailyProcessedGbs
 }
 
 func (o GetDailyUsageProcessedGbsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableGetDailyUsageProcessedGbsResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

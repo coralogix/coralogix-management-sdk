@@ -23,9 +23,9 @@ var _ MappedNullable = &EntityLabelFilter{}
 // EntityLabelFilter Select all items from a specific list of EntityLabels (Key/Values).
 type EntityLabelFilter struct {
 	// Represents selection of all items in the filter
-	All                               map[string]interface{}   `json:"all,omitempty"`
-	Values                            *EntityLabelFilterValues `json:"values,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	All map[string]interface{} `json:"all,omitempty"`
+	Values *EntityLabelFilterValues `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *EntityLabelFilter) SetValues(v EntityLabelFilterValues) {
 }
 
 func (o EntityLabelFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -223,3 +223,4 @@ func (v *NullableEntityLabelFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

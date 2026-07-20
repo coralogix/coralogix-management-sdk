@@ -27,8 +27,8 @@ type IpAccess struct {
 	// The IP range in CIDR notation.
 	IpRange *string `json:"ipRange,omitempty"`
 	// The name of the IP access entry.
-	Name                              *string `json:"name,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *IpAccess) SetName(v string) {
 }
 
 func (o IpAccess) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableIpAccess) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

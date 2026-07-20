@@ -24,8 +24,8 @@ var _ MappedNullable = &AlertDefPriorityFilter{}
 type AlertDefPriorityFilter struct {
 	Matcher *AlertsV3FilterMatcher `json:"matcher,omitempty"`
 	// The priority(ies) of the alert definition - multiple values are OR'd together
-	Priority                          []AlertDefPriority `json:"priority,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Priority []AlertDefPriority `json:"priority,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *AlertDefPriorityFilter) SetPriority(v []AlertDefPriority) {
 }
 
 func (o AlertDefPriorityFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableAlertDefPriorityFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

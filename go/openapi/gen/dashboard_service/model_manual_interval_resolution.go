@@ -28,8 +28,8 @@ type ManualIntervalResolution struct {
 	// Maximum number of data points constraint.
 	MaximumDataPoints *int32 `json:"maximumDataPoints,omitempty"`
 	// Minimum interval duration constraint. The selected interval will not be smaller than this value.
-	MinimumInterval                   *string `json:"minimumInterval,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	MinimumInterval *string `json:"minimumInterval,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -142,7 +142,7 @@ func (o *ManualIntervalResolution) SetMinimumInterval(v string) {
 }
 
 func (o ManualIntervalResolution) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -179,10 +179,10 @@ func (o *ManualIntervalResolution) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -247,3 +247,4 @@ func (v *NullableManualIntervalResolution) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

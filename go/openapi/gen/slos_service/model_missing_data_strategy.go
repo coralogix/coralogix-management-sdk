@@ -24,8 +24,8 @@ type MissingDataStrategy string
 // List of MissingDataStrategy
 const (
 	MISSINGDATASTRATEGY_MISSING_DATA_STRATEGY_UNCOUNTED MissingDataStrategy = "MISSING_DATA_STRATEGY_UNCOUNTED"
-	MISSINGDATASTRATEGY_MISSING_DATA_STRATEGY_GOOD      MissingDataStrategy = "MISSING_DATA_STRATEGY_GOOD"
-	MISSINGDATASTRATEGY_MISSING_DATA_STRATEGY_BAD       MissingDataStrategy = "MISSING_DATA_STRATEGY_BAD"
+	MISSINGDATASTRATEGY_MISSING_DATA_STRATEGY_GOOD MissingDataStrategy = "MISSING_DATA_STRATEGY_GOOD"
+	MISSINGDATASTRATEGY_MISSING_DATA_STRATEGY_BAD MissingDataStrategy = "MISSING_DATA_STRATEGY_BAD"
 )
 
 // All allowed values of MissingDataStrategy enum
@@ -113,3 +113,4 @@ func (v *NullableMissingDataStrategy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -25,8 +25,8 @@ type EventsServiceListAlertEventsPaginationParameter struct {
 	// Maximum number of results to return per page.
 	PageSize *int64 `json:"pageSize,omitempty"`
 	// Opaque token for fetching the next page of results.
-	PageToken                         *string `json:"pageToken,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	PageToken *string `json:"pageToken,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *EventsServiceListAlertEventsPaginationParameter) SetPageToken(v string)
 }
 
 func (o EventsServiceListAlertEventsPaginationParameter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableEventsServiceListAlertEventsPaginationParameter) UnmarshalJSON(
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

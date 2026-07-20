@@ -23,9 +23,9 @@ var _ MappedNullable = &V3IntegrationType{}
 // V3IntegrationType Defines the type of integration to use for notifications
 type V3IntegrationType struct {
 	// The integration ID for the notification
-	IntegrationId                     *int64      `json:"integrationId,omitempty"`
-	Recipients                        *Recipients `json:"recipients,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IntegrationId *int64 `json:"integrationId,omitempty"`
+	Recipients *Recipients `json:"recipients,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *V3IntegrationType) SetRecipients(v Recipients) {
 }
 
 func (o V3IntegrationType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -223,3 +223,4 @@ func (v *NullableV3IntegrationType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

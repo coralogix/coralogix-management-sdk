@@ -23,8 +23,8 @@ var _ MappedNullable = &PromptInjectionConfig{}
 // PromptInjectionConfig Configuration for the PromptInjection evaluation.
 type PromptInjectionConfig struct {
 	// Additional context passed to the LLM evaluator.
-	AdditionalContext                 *string `json:"additionalContext,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	AdditionalContext *string `json:"additionalContext,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *PromptInjectionConfig) SetAdditionalContext(v string) {
 }
 
 func (o PromptInjectionConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullablePromptInjectionConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

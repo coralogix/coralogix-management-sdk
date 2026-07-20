@@ -24,7 +24,7 @@ type DimensionField string
 // List of DimensionField
 const (
 	DIMENSIONFIELD_DIMENSION_FIELD_UNSPECIFIED DimensionField = "DIMENSION_FIELD_UNSPECIFIED"
-	DIMENSIONFIELD_DIMENSION_FIELD_TRACE_ID    DimensionField = "DIMENSION_FIELD_TRACE_ID"
+	DIMENSIONFIELD_DIMENSION_FIELD_TRACE_ID DimensionField = "DIMENSION_FIELD_TRACE_ID"
 )
 
 // All allowed values of DimensionField enum
@@ -111,3 +111,4 @@ func (v *NullableDimensionField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

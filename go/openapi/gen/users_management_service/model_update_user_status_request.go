@@ -24,8 +24,8 @@ var _ MappedNullable = &UpdateUserStatusRequest{}
 type UpdateUserStatusRequest struct {
 	Status *UserStatus `json:"status,omitempty"`
 	// List of user account IDs to update. All users will be set to the same status.
-	UserAccountIds                    []int64 `json:"userAccountIds,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UserAccountIds []int64 `json:"userAccountIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *UpdateUserStatusRequest) SetUserAccountIds(v []int64) {
 }
 
 func (o UpdateUserStatusRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableUpdateUserStatusRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

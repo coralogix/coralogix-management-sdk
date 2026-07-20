@@ -23,12 +23,12 @@ var _ MappedNullable = &MultiSelect{}
 // MultiSelect A dashboard variable that allows selecting one or more values from a dynamically or statically populated list.
 type MultiSelect struct {
 	// The selected values.
-	Selected                          []string                  `json:"selected,omitempty"`
-	Selection                         *MultiSelectSelection     `json:"selection,omitempty"`
-	SelectionOptions                  *VariableSelectionOptions `json:"selectionOptions,omitempty"`
-	Source                            *MultiSelectSource        `json:"source,omitempty"`
-	ValuesOrderDirection              *OrderDirection           `json:"valuesOrderDirection,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Selected []string `json:"selected,omitempty"`
+	Selection *MultiSelectSelection `json:"selection,omitempty"`
+	SelectionOptions *VariableSelectionOptions `json:"selectionOptions,omitempty"`
+	Source *MultiSelectSource `json:"source,omitempty"`
+	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -212,7 +212,7 @@ func (o *MultiSelect) SetValuesOrderDirection(v OrderDirection) {
 }
 
 func (o MultiSelect) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,3 +306,4 @@ func (v *NullableMultiSelect) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ var _ MappedNullable = &ActionsServiceAtomicBatchExecuteActionsRequest{}
 // ActionsServiceAtomicBatchExecuteActionsRequest This data structure represents a request to execute a batch of Action operations atomically.
 type ActionsServiceAtomicBatchExecuteActionsRequest struct {
 	// The requests.
-	Requests                          []ActionExecutionRequest `json:"requests,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Requests []ActionExecutionRequest `json:"requests,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ActionsServiceAtomicBatchExecuteActionsRequest) SetRequests(v []ActionE
 }
 
 func (o ActionsServiceAtomicBatchExecuteActionsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableActionsServiceAtomicBatchExecuteActionsRequest) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

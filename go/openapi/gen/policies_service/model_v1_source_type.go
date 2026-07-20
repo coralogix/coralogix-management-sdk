@@ -24,8 +24,9 @@ type V1SourceType string
 // List of v1.SourceType
 const (
 	V1SOURCETYPE_SOURCE_TYPE_UNSPECIFIED V1SourceType = "SOURCE_TYPE_UNSPECIFIED"
-	V1SOURCETYPE_SOURCE_TYPE_LOGS        V1SourceType = "SOURCE_TYPE_LOGS"
-	V1SOURCETYPE_SOURCE_TYPE_SPANS       V1SourceType = "SOURCE_TYPE_SPANS"
+	V1SOURCETYPE_SOURCE_TYPE_LOGS V1SourceType = "SOURCE_TYPE_LOGS"
+	V1SOURCETYPE_SOURCE_TYPE_SPANS V1SourceType = "SOURCE_TYPE_SPANS"
+	V1SOURCETYPE_SOURCE_TYPE_RUM V1SourceType = "SOURCE_TYPE_RUM"
 )
 
 // All allowed values of V1SourceType enum
@@ -33,6 +34,7 @@ var AllowedV1SourceTypeEnumValues = []V1SourceType{
 	"SOURCE_TYPE_UNSPECIFIED",
 	"SOURCE_TYPE_LOGS",
 	"SOURCE_TYPE_SPANS",
+	"SOURCE_TYPE_RUM",
 }
 
 func (v *V1SourceType) UnmarshalJSON(src []byte) error {
@@ -113,3 +115,4 @@ func (v *NullableV1SourceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

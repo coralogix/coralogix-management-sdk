@@ -22,16 +22,16 @@ var _ MappedNullable = &EventActor{}
 
 // EventActor Actor that initiated the event.
 type EventActor struct {
-	ApiKey                 *ApiKeyActor                 `json:"apiKey,omitempty"`
-	MicrosoftTeams         *MicrosoftTeamsActor         `json:"microsoftTeams,omitempty"`
-	PagerDuty              *PagerDutyActor              `json:"pagerDuty,omitempty"`
+	ApiKey *ApiKeyActor `json:"apiKey,omitempty"`
+	MicrosoftTeams *MicrosoftTeamsActor `json:"microsoftTeams,omitempty"`
+	PagerDuty *PagerDutyActor `json:"pagerDuty,omitempty"`
 	PrometheusAlertManager *PrometheusAlertManagerActor `json:"prometheusAlertManager,omitempty"`
-	ServiceNow             *ServiceNowActor             `json:"serviceNow,omitempty"`
-	Slack                  *SlackActor                  `json:"slack,omitempty"`
+	ServiceNow *ServiceNowActor `json:"serviceNow,omitempty"`
+	Slack *SlackActor `json:"slack,omitempty"`
 	// Empty message indicating system-initiated action.
-	System                            map[string]interface{} `json:"system,omitempty"`
-	User                              *UserActor             `json:"user,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	System map[string]interface{} `json:"system,omitempty"`
+	User *UserActor `json:"user,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -311,7 +311,7 @@ func (o *EventActor) SetUser(v UserActor) {
 }
 
 func (o EventActor) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -499,3 +499,4 @@ func (v *NullableEventActor) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

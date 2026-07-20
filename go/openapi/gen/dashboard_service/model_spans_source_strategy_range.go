@@ -22,9 +22,9 @@ var _ MappedNullable = &SpansSourceStrategyRange{}
 
 // SpansSourceStrategyRange Range strategy: uses start and end timestamp fields to define the annotation span.
 type SpansSourceStrategyRange struct {
-	EndTimestampField                 *ObservationField `json:"endTimestampField,omitempty"`
-	StartTimestampField               *ObservationField `json:"startTimestampField,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	EndTimestampField *ObservationField `json:"endTimestampField,omitempty"`
+	StartTimestampField *ObservationField `json:"startTimestampField,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *SpansSourceStrategyRange) SetStartTimestampField(v ObservationField) {
 }
 
 func (o SpansSourceStrategyRange) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableSpansSourceStrategyRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

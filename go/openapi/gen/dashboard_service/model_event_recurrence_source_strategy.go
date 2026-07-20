@@ -22,9 +22,9 @@ var _ MappedNullable = &EventRecurrenceSourceStrategy{}
 
 // EventRecurrenceSourceStrategy Determines how the recurrence event is rendered: as an instant point or a sliding window duration.
 type EventRecurrenceSourceStrategy struct {
-	Duration                          *EventRecurrenceSourceStrategyDuration `json:"duration,omitempty"`
-	Instant                           *EventRecurrenceSourceStrategyInstant  `json:"instant,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Duration *EventRecurrenceSourceStrategyDuration `json:"duration,omitempty"`
+	Instant *EventRecurrenceSourceStrategyInstant `json:"instant,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *EventRecurrenceSourceStrategy) SetInstant(v EventRecurrenceSourceStrate
 }
 
 func (o EventRecurrenceSourceStrategy) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableEventRecurrenceSourceStrategy) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

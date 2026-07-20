@@ -22,11 +22,11 @@ var _ MappedNullable = &GaugeQuery{}
 
 // GaugeQuery Discriminated union of possible query types for the gauge widget.
 type GaugeQuery struct {
-	Dataprime                         *GaugeDataprimeQuery `json:"dataprime,omitempty"`
-	Logs                              *GaugeLogsQuery      `json:"logs,omitempty"`
-	Metrics                           *GaugeMetricsQuery   `json:"metrics,omitempty"`
-	Spans                             *GaugeSpansQuery     `json:"spans,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Dataprime *GaugeDataprimeQuery `json:"dataprime,omitempty"`
+	Logs *GaugeLogsQuery `json:"logs,omitempty"`
+	Metrics *GaugeMetricsQuery `json:"metrics,omitempty"`
+	Spans *GaugeSpansQuery `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -178,7 +178,7 @@ func (o *GaugeQuery) SetSpans(v GaugeSpansQuery) {
 }
 
 func (o GaugeQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -314,3 +314,4 @@ func (v *NullableGaugeQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

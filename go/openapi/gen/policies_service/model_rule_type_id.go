@@ -24,10 +24,10 @@ type RuleTypeId string
 // List of RuleTypeId
 const (
 	RULETYPEID_RULE_TYPE_ID_UNSPECIFIED RuleTypeId = "RULE_TYPE_ID_UNSPECIFIED"
-	RULETYPEID_RULE_TYPE_ID_IS          RuleTypeId = "RULE_TYPE_ID_IS"
-	RULETYPEID_RULE_TYPE_ID_IS_NOT      RuleTypeId = "RULE_TYPE_ID_IS_NOT"
-	RULETYPEID_RULE_TYPE_ID_START_WITH  RuleTypeId = "RULE_TYPE_ID_START_WITH"
-	RULETYPEID_RULE_TYPE_ID_INCLUDES    RuleTypeId = "RULE_TYPE_ID_INCLUDES"
+	RULETYPEID_RULE_TYPE_ID_IS RuleTypeId = "RULE_TYPE_ID_IS"
+	RULETYPEID_RULE_TYPE_ID_IS_NOT RuleTypeId = "RULE_TYPE_ID_IS_NOT"
+	RULETYPEID_RULE_TYPE_ID_START_WITH RuleTypeId = "RULE_TYPE_ID_START_WITH"
+	RULETYPEID_RULE_TYPE_ID_INCLUDES RuleTypeId = "RULE_TYPE_ID_INCLUDES"
 )
 
 // All allowed values of RuleTypeId enum
@@ -117,3 +117,4 @@ func (v *NullableRuleTypeId) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

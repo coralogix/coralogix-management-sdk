@@ -25,15 +25,15 @@ var _ MappedNullable = &OutgoingWebhook{}
 type OutgoingWebhook struct {
 	AwsEventBridge *AwsEventBridgeConfig `json:"awsEventBridge,omitempty"`
 	// Creation timestamp.
-	CreatedAt  *time.Time        `json:"createdAt,omitempty"`
-	Demisto    *DemistoConfig    `json:"demisto,omitempty"`
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	Demisto *DemistoConfig `json:"demisto,omitempty"`
 	EmailGroup *EmailGroupConfig `json:"emailGroup,omitempty"`
 	// External identifier.
-	ExternalId            *int64                       `json:"externalId,omitempty"`
-	GenericWebhook        *GenericWebhookConfig        `json:"genericWebhook,omitempty"`
+	ExternalId *int64 `json:"externalId,omitempty"`
+	GenericWebhook *GenericWebhookConfig `json:"genericWebhook,omitempty"`
 	IbmEventNotifications *IbmEventNotificationsConfig `json:"ibmEventNotifications,omitempty"`
 	// Unique identifier.
-	Id   *string     `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Jira *JiraConfig `json:"jira,omitempty"`
 	// Microsoft teams config.
 	MicrosoftTeams map[string]interface{} `json:"microsoftTeams,omitempty"`
@@ -42,16 +42,16 @@ type OutgoingWebhook struct {
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// Opsgenie config.
-	Opsgenie  map[string]interface{} `json:"opsgenie,omitempty"`
-	PagerDuty *PagerDutyConfig       `json:"pagerDuty,omitempty"`
-	SendLog   *SendLogConfig         `json:"sendLog,omitempty"`
-	Slack     *SlackConfig           `json:"slack,omitempty"`
-	Type      *WebhookType           `json:"type,omitempty"`
+	Opsgenie map[string]interface{} `json:"opsgenie,omitempty"`
+	PagerDuty *PagerDutyConfig `json:"pagerDuty,omitempty"`
+	SendLog *SendLogConfig `json:"sendLog,omitempty"`
+	Slack *SlackConfig `json:"slack,omitempty"`
+	Type *WebhookType `json:"type,omitempty"`
 	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// URL.
-	Url                               *string `json:"url,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -683,7 +683,7 @@ func (o *OutgoingWebhook) SetUrl(v string) {
 }
 
 func (o OutgoingWebhook) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -951,3 +951,4 @@ func (v *NullableOutgoingWebhook) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

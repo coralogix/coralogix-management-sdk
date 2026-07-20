@@ -24,8 +24,8 @@ var _ MappedNullable = &TracingFilterType{}
 type TracingFilterType struct {
 	Operation *TracingFilterOperationType `json:"operation,omitempty"`
 	// The values of the label to filter by
-	Values                            []string `json:"values,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *TracingFilterType) SetValues(v []string) {
 }
 
 func (o TracingFilterType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableTracingFilterType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

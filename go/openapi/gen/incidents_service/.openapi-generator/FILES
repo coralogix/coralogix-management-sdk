@@ -53,6 +53,7 @@ model_incident_event_upsert_state.go
 model_incident_field_one_of.go
 model_incident_fields.go
 model_incident_group_by.go
+model_incident_meta_label.go
 model_incident_meta_labels_count.go
 model_incident_meta_labels_with_count.go
 model_incident_query_filter.go

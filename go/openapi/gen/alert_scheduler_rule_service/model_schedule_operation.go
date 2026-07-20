@@ -24,8 +24,8 @@ type ScheduleOperation string
 // List of ScheduleOperation
 const (
 	SCHEDULEOPERATION_SCHEDULE_OPERATION_UNSPECIFIED ScheduleOperation = "SCHEDULE_OPERATION_UNSPECIFIED"
-	SCHEDULEOPERATION_SCHEDULE_OPERATION_MUTE        ScheduleOperation = "SCHEDULE_OPERATION_MUTE"
-	SCHEDULEOPERATION_SCHEDULE_OPERATION_ACTIVATE    ScheduleOperation = "SCHEDULE_OPERATION_ACTIVATE"
+	SCHEDULEOPERATION_SCHEDULE_OPERATION_MUTE ScheduleOperation = "SCHEDULE_OPERATION_MUTE"
+	SCHEDULEOPERATION_SCHEDULE_OPERATION_ACTIVATE ScheduleOperation = "SCHEDULE_OPERATION_ACTIVATE"
 )
 
 // All allowed values of ScheduleOperation enum
@@ -113,3 +113,4 @@ func (v *NullableScheduleOperation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

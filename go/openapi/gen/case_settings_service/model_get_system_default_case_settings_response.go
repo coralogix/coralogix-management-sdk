@@ -23,9 +23,9 @@ var _ MappedNullable = &GetSystemDefaultCaseSettingsResponse{}
 
 // GetSystemDefaultCaseSettingsResponse Response containing platform-wide default case settings team configuration values.
 type GetSystemDefaultCaseSettingsResponse struct {
-	CaseLifecycle                     *CaseLifecycle          `json:"caseLifecycle,omitempty"`
-	GlobalIndicatorSettings           GlobalIndicatorSettings `json:"globalIndicatorSettings"`
-	AdditionalProperties              map[string]interface{}
+	CaseLifecycle *CaseLifecycle `json:"caseLifecycle,omitempty"`
+	GlobalIndicatorSettings GlobalIndicatorSettings `json:"globalIndicatorSettings"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -106,7 +106,7 @@ func (o *GetSystemDefaultCaseSettingsResponse) SetGlobalIndicatorSettings(v Glob
 }
 
 func (o GetSystemDefaultCaseSettingsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -140,10 +140,10 @@ func (o *GetSystemDefaultCaseSettingsResponse) UnmarshalJSON(data []byte) (err e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -207,3 +207,4 @@ func (v *NullableGetSystemDefaultCaseSettingsResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

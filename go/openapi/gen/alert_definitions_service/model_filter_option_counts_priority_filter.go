@@ -23,8 +23,8 @@ var _ MappedNullable = &FilterOptionCountsPriorityFilter{}
 // FilterOptionCountsPriorityFilter Filter by alert definition priorities
 type FilterOptionCountsPriorityFilter struct {
 	// The alert priorities to include in the count
-	Priority                          []AlertDefPriority `json:"priority,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Priority []AlertDefPriority `json:"priority,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *FilterOptionCountsPriorityFilter) SetPriority(v []AlertDefPriority) {
 }
 
 func (o FilterOptionCountsPriorityFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableFilterOptionCountsPriorityFilter) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

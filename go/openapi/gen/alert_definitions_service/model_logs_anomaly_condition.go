@@ -24,9 +24,9 @@ var _ MappedNullable = &LogsAnomalyCondition{}
 type LogsAnomalyCondition struct {
 	ConditionType *LogsAnomalyConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
-	MinimumThreshold                  *float64        `json:"minimumThreshold,omitempty"`
-	TimeWindow                        *LogsTimeWindow `json:"timeWindow,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MinimumThreshold *float64 `json:"minimumThreshold,omitempty"`
+	TimeWindow *LogsTimeWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *LogsAnomalyCondition) SetTimeWindow(v LogsTimeWindow) {
 }
 
 func (o LogsAnomalyCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableLogsAnomalyCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

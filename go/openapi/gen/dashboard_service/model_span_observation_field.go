@@ -23,10 +23,10 @@ var _ MappedNullable = &SpanObservationField{}
 // SpanObservationField Span observation field.
 type SpanObservationField struct {
 	// The keypath.
-	Keypath                           []string          `json:"keypath,omitempty"`
-	RelationType                      *SpanRelationType `json:"relationType,omitempty"`
-	Scope                             *DatasetScope     `json:"scope,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Keypath []string `json:"keypath,omitempty"`
+	RelationType *SpanRelationType `json:"relationType,omitempty"`
+	Scope *DatasetScope `json:"scope,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *SpanObservationField) SetScope(v DatasetScope) {
 }
 
 func (o SpanObservationField) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableSpanObservationField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

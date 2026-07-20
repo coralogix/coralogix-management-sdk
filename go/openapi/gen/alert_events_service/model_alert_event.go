@@ -25,25 +25,25 @@ var _ MappedNullable = &AlertEvent{}
 type AlertEvent struct {
 	ActivityAnalysis *ActivityAnalysis `json:"activityAnalysis,omitempty"`
 	// Unique identifier of the alert.
-	AlertId *string `json:"alertId,omitempty"`
+	AlertId *string `json:"alertId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Labels for the group.
 	GroupLabels *map[string]string `json:"groupLabels,omitempty"`
 	// Key used to correlate incidents.
-	IncidentCorrelationKey *string `json:"incidentCorrelationKey,omitempty"`
+	IncidentCorrelationKey *string `json:"incidentCorrelationKey,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Raw payload data.
 	Payload map[string]interface{} `json:"payload,omitempty"`
 	// Type of the payload.
-	PayloadType *string `json:"payloadType,omitempty"`
+	PayloadType *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier of the permutation.
-	PermutationId *string `json:"permutationId,omitempty"`
+	PermutationId *string `json:"permutationId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Labels for the permutation.
 	PermutationLabels *map[string]string `json:"permutationLabels,omitempty"`
 	// Identifier of the event before grouping.
-	PreGroupingEventId *string      `json:"preGroupingEventId,omitempty"`
-	Status             *AlertStatus `json:"status,omitempty"`
+	PreGroupingEventId *string `json:"preGroupingEventId,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Status *AlertStatus `json:"status,omitempty"`
 	// Timestamp of the event.
-	Timestamp                         *time.Time `json:"timestamp,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Timestamp *time.Time `json:"timestamp,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -419,7 +419,7 @@ func (o *AlertEvent) SetTimestamp(v time.Time) {
 }
 
 func (o AlertEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -537,3 +537,4 @@ func (v *NullableAlertEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

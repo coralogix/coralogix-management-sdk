@@ -23,10 +23,10 @@ var _ MappedNullable = &ConfigOverrides{}
 // ConfigOverrides struct for ConfigOverrides
 type ConfigOverrides struct {
 	ConditionType *NotificationCenterConditionType `json:"conditionType,omitempty"`
-	MessageConfig *MessageConfig                   `json:"messageConfig,omitempty"`
+	MessageConfig *MessageConfig `json:"messageConfig,omitempty"`
 	// Connector payload schema type.
-	PayloadType                       *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	PayloadType *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *ConfigOverrides) SetPayloadType(v string) {
 }
 
 func (o ConfigOverrides) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableConfigOverrides) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

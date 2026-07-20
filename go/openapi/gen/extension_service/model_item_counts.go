@@ -41,8 +41,8 @@ type ItemCounts struct {
 	// The parsing rules.
 	ParsingRules *int64 `json:"parsingRules,omitempty"`
 	// The saved views.
-	SavedViews                        *int64 `json:"savedViews,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SavedViews *int64 `json:"savedViews,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -386,7 +386,7 @@ func (o *ItemCounts) SetSavedViews(v int64) {
 }
 
 func (o ItemCounts) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -500,3 +500,4 @@ func (v *NullableItemCounts) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

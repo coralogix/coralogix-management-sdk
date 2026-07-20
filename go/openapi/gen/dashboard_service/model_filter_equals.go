@@ -22,8 +22,8 @@ var _ MappedNullable = &FilterEquals{}
 
 // FilterEquals This data structure represents an equality comparison operation.
 type FilterEquals struct {
-	Selection                         *EqualsSelection `json:"selection,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Selection *EqualsSelection `json:"selection,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *FilterEquals) SetSelection(v EqualsSelection) {
 }
 
 func (o FilterEquals) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableFilterEquals) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -28,11 +28,11 @@ type GaugeSpansQuery struct {
 	// List of field names to group the span records
 	GroupBy []SpanField `json:"groupBy,omitempty"`
 	// A list of observation fields to group the records by
-	GroupBys                          []SpanObservationField `json:"groupBys,omitempty"`
-	LuceneQuery                       *LuceneQuery           `json:"luceneQuery,omitempty"`
-	SpansAggregation                  *SpansAggregation      `json:"spansAggregation,omitempty"`
-	TimeFrame                         *TimeFrameSelect       `json:"timeFrame,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	GroupBys []SpanObservationField `json:"groupBys,omitempty"`
+	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	SpansAggregation *SpansAggregation `json:"spansAggregation,omitempty"`
+	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -280,7 +280,7 @@ func (o *GaugeSpansQuery) SetTimeFrame(v TimeFrameSelect) {
 }
 
 func (o GaugeSpansQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -382,3 +382,4 @@ func (v *NullableGaugeSpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,9 +22,9 @@ var _ MappedNullable = &AlertDefinitionOrderBy{}
 
 // AlertDefinitionOrderBy A data structure that specifies the field and direction for ordering alert definitions
 type AlertDefinitionOrderBy struct {
-	Direction                         *AlertDefOrderByDirection `json:"direction,omitempty"`
-	FieldName                         *AlertDefOrderByFields    `json:"fieldName,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Direction *AlertDefOrderByDirection `json:"direction,omitempty"`
+	FieldName *AlertDefOrderByFields `json:"fieldName,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *AlertDefinitionOrderBy) SetFieldName(v AlertDefOrderByFields) {
 }
 
 func (o AlertDefinitionOrderBy) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableAlertDefinitionOrderBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

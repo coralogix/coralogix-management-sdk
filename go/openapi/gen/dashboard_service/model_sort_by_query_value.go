@@ -23,8 +23,8 @@ var _ MappedNullable = &SortByQueryValue{}
 // SortByQueryValue Sort by query value.
 type SortByQueryValue struct {
 	// Reference to the query id from Dynamic.query_display_settings
-	QueryId                           *string `json:"queryId,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	QueryId *string `json:"queryId,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *SortByQueryValue) SetQueryId(v string) {
 }
 
 func (o SortByQueryValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableSortByQueryValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ var _ MappedNullable = &MatchEntityTypeAndSubTypeCondition{}
 // MatchEntityTypeAndSubTypeCondition Match entity type and sub type condition.
 type MatchEntityTypeAndSubTypeCondition struct {
 	// The entity sub type.
-	EntitySubType                     *string `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	EntitySubType *string `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *MatchEntityTypeAndSubTypeCondition) SetEntitySubType(v string) {
 }
 
 func (o MatchEntityTypeAndSubTypeCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableMatchEntityTypeAndSubTypeCondition) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

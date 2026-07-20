@@ -25,8 +25,8 @@ type BatchGetConnectorsResponse struct {
 	// The connectors.
 	Connectors *map[string]Connector `json:"connectors,omitempty"`
 	// The not found ids.
-	NotFoundIds                       []string `json:"notFoundIds,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	NotFoundIds []string `json:"notFoundIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *BatchGetConnectorsResponse) SetNotFoundIds(v []string) {
 }
 
 func (o BatchGetConnectorsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableBatchGetConnectorsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

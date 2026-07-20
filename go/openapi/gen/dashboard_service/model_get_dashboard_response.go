@@ -30,9 +30,9 @@ type GetDashboardResponse struct {
 	// The author name.
 	AuthorName *string `json:"authorName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Creation timestamp.
-	CreatedAt         *time.Time       `json:"createdAt,omitempty"`
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	CreatedOriginType *TokenOriginType `json:"createdOriginType,omitempty"`
-	Dashboard         *Dashboard       `json:"dashboard,omitempty"`
+	Dashboard *Dashboard `json:"dashboard,omitempty"`
 	// The is locked.
 	IsLocked *bool `json:"isLocked,omitempty"`
 	// The locker author id.
@@ -42,13 +42,13 @@ type GetDashboardResponse struct {
 	// Map of resolved widget references for widgets with references in the dashboard
 	ResolvedWidgets *map[string]Widget `json:"resolvedWidgets,omitempty"`
 	// Last-updated timestamp.
-	UpdatedAt         *time.Time       `json:"updatedAt,omitempty"`
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	UpdatedOriginType *TokenOriginType `json:"updatedOriginType,omitempty"`
 	// The updater author id.
 	UpdaterAuthorId *string `json:"updaterAuthorId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The updater name.
-	UpdaterName                       *string `json:"updaterName,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	UpdaterName *string `json:"updaterName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -520,7 +520,7 @@ func (o *GetDashboardResponse) SetUpdaterName(v string) {
 }
 
 func (o GetDashboardResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -650,3 +650,4 @@ func (v *NullableGetDashboardResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

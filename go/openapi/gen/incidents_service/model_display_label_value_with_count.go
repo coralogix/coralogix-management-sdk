@@ -26,8 +26,8 @@ type DisplayLabelValueWithCount struct {
 	// Number of items.
 	Count int32 `json:"count"`
 	// The display label value.
-	DisplayLabelValue                 string `json:"displayLabelValue"`
-	AdditionalProperties              map[string]interface{}
+	DisplayLabelValue string `json:"displayLabelValue"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -101,7 +101,7 @@ func (o *DisplayLabelValueWithCount) SetDisplayLabelValue(v string) {
 }
 
 func (o DisplayLabelValueWithCount) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -134,10 +134,10 @@ func (o *DisplayLabelValueWithCount) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,3 +201,4 @@ func (v *NullableDisplayLabelValueWithCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

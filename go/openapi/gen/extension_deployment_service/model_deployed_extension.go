@@ -29,11 +29,11 @@ type DeployedExtension struct {
 	// The item ids.
 	ItemIds []string `json:"itemIds,omitempty"`
 	// The subsystems.
-	Subsystems []string                  `json:"subsystems,omitempty"`
-	Summary    *DeployedExtensionSummary `json:"summary,omitempty"`
+	Subsystems []string `json:"subsystems,omitempty"`
+	Summary *DeployedExtensionSummary `json:"summary,omitempty"`
 	// Version number.
-	Version                           *string `json:"version,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -249,7 +249,7 @@ func (o *DeployedExtension) SetVersion(v string) {
 }
 
 func (o DeployedExtension) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -347,3 +347,4 @@ func (v *NullableDeployedExtension) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

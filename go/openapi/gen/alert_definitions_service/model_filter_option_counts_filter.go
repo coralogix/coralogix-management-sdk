@@ -22,13 +22,13 @@ var _ MappedNullable = &FilterOptionCountsFilter{}
 
 // FilterOptionCountsFilter Filter configuration for counting filter options
 type FilterOptionCountsFilter struct {
-	EnabledFilter                     *FilterOptionCountsEnabledFilter      `json:"enabledFilter,omitempty"`
-	EntityLabelsFilter                *FilterOptionCountsEntityLabelsFilter `json:"entityLabelsFilter,omitempty"`
-	NameFilter                        *FilterOptionCountsNameFilter         `json:"nameFilter,omitempty"`
-	PriorityFilter                    *FilterOptionCountsPriorityFilter     `json:"priorityFilter,omitempty"`
-	StatusFilter                      *FilterOptionCountsStatusFilter       `json:"statusFilter,omitempty"`
-	TypeFilter                        *FilterOptionCountsTypeFilter         `json:"typeFilter,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	EnabledFilter *FilterOptionCountsEnabledFilter `json:"enabledFilter,omitempty"`
+	EntityLabelsFilter *FilterOptionCountsEntityLabelsFilter `json:"entityLabelsFilter,omitempty"`
+	NameFilter *FilterOptionCountsNameFilter `json:"nameFilter,omitempty"`
+	PriorityFilter *FilterOptionCountsPriorityFilter `json:"priorityFilter,omitempty"`
+	StatusFilter *FilterOptionCountsStatusFilter `json:"statusFilter,omitempty"`
+	TypeFilter *FilterOptionCountsTypeFilter `json:"typeFilter,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -244,7 +244,7 @@ func (o *FilterOptionCountsFilter) SetTypeFilter(v FilterOptionCountsTypeFilter)
 }
 
 func (o FilterOptionCountsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -342,3 +342,4 @@ func (v *NullableFilterOptionCountsFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

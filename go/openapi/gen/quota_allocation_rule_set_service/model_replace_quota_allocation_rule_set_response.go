@@ -22,8 +22,8 @@ var _ MappedNullable = &ReplaceQuotaAllocationRuleSetResponse{}
 
 // ReplaceQuotaAllocationRuleSetResponse Response confirming quota allocation rule set has been successfully replaced
 type ReplaceQuotaAllocationRuleSetResponse struct {
-	RuleSet                           *QuotaAllocationEntityTypeRuleSet `json:"ruleSet,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	RuleSet *QuotaAllocationEntityTypeRuleSet `json:"ruleSet,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *ReplaceQuotaAllocationRuleSetResponse) SetRuleSet(v QuotaAllocationEnti
 }
 
 func (o ReplaceQuotaAllocationRuleSetResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableReplaceQuotaAllocationRuleSetResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

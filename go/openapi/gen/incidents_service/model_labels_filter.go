@@ -24,9 +24,9 @@ var _ MappedNullable = &LabelsFilter{}
 // LabelsFilter Filter configuration for incident events based on meta labels and their combination operator.
 type LabelsFilter struct {
 	// The meta labels of the incident
-	MetaLabels                        []IncidentsV1MetaLabel `json:"metaLabels"`
-	Operator                          *V1FilterOperator      `json:"operator,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MetaLabels []IncidentsV1MetaLabel `json:"metaLabels"`
+	Operator *V1FilterOperator `json:"operator,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -107,7 +107,7 @@ func (o *LabelsFilter) SetOperator(v V1FilterOperator) {
 }
 
 func (o LabelsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,10 +141,10 @@ func (o *LabelsFilter) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -208,3 +208,4 @@ func (v *NullableLabelsFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

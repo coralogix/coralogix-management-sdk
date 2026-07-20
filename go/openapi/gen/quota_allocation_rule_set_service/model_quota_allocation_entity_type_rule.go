@@ -24,7 +24,7 @@ var _ MappedNullable = &QuotaAllocationEntityTypeRule{}
 // QuotaAllocationEntityTypeRule Defines quota allocation rule for a specific entity type
 type QuotaAllocationEntityTypeRule struct {
 	// The allocation.
-	Allocation     float32              `json:"allocation"`
+	Allocation float32 `json:"allocation"`
 	AllocationType *QuotaAllocationType `json:"allocationType,omitempty"`
 	// The can overflow.
 	CanOverflow bool `json:"canOverflow"`
@@ -33,8 +33,8 @@ type QuotaAllocationEntityTypeRule struct {
 	// Whether this resource is enabled.
 	Enabled bool `json:"enabled"`
 	// The entity type.
-	EntityType                        string `json:"entityType"`
-	AdditionalProperties              map[string]interface{}
+	EntityType string `json:"entityType"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -222,7 +222,7 @@ func (o *QuotaAllocationEntityTypeRule) SetEntityType(v string) {
 }
 
 func (o QuotaAllocationEntityTypeRule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -265,10 +265,10 @@ func (o *QuotaAllocationEntityTypeRule) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -336,3 +336,4 @@ func (v *NullableQuotaAllocationEntityTypeRule) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

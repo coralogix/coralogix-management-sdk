@@ -27,12 +27,12 @@ type V2SpansQuery struct {
 	// The applicationname filters.
 	ApplicationnameFilters []string `json:"applicationnameFilters,omitempty"`
 	// The lucene.
-	Lucene *string `json:"lucene,omitempty"`
+	Lucene *string `json:"lucene,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The service filters.
 	ServiceFilters []string `json:"serviceFilters,omitempty"`
 	// The subsystemname filters.
-	SubsystemnameFilters              []string `json:"subsystemnameFilters,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SubsystemnameFilters []string `json:"subsystemnameFilters,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -216,7 +216,7 @@ func (o *V2SpansQuery) SetSubsystemnameFilters(v []string) {
 }
 
 func (o V2SpansQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -310,3 +310,4 @@ func (v *NullableV2SpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

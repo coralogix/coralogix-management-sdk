@@ -26,9 +26,9 @@ type ConnectorDetails struct {
 	// Unique identifier of the connector
 	ConnectorId string `json:"connectorId"`
 	// Display name of the connector
-	ConnectorName                     string          `json:"connectorName"`
-	ConnectorType                     V1ConnectorType `json:"connectorType"`
-	AdditionalProperties              map[string]interface{}
+	ConnectorName string `json:"connectorName"`
+	ConnectorType V1ConnectorType `json:"connectorType"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -127,7 +127,7 @@ func (o *ConnectorDetails) SetConnectorType(v V1ConnectorType) {
 }
 
 func (o ConnectorDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -162,10 +162,10 @@ func (o *ConnectorDetails) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -230,3 +230,4 @@ func (v *NullableConnectorDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

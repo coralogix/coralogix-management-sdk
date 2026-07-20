@@ -25,8 +25,8 @@ type VariableSourceV2ValueDisplayOptions struct {
 	// The label regex.
 	LabelRegex *string `json:"labelRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The value regex.
-	ValueRegex                        *string `json:"valueRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	ValueRegex *string `json:"valueRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *VariableSourceV2ValueDisplayOptions) SetValueRegex(v string) {
 }
 
 func (o VariableSourceV2ValueDisplayOptions) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableVariableSourceV2ValueDisplayOptions) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

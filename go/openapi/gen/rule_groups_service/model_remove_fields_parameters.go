@@ -23,8 +23,8 @@ var _ MappedNullable = &RemoveFieldsParameters{}
 // RemoveFieldsParameters Remove fields parameters.
 type RemoveFieldsParameters struct {
 	// List of fields.
-	Fields                            []string `json:"fields,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Fields []string `json:"fields,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *RemoveFieldsParameters) SetFields(v []string) {
 }
 
 func (o RemoveFieldsParameters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableRemoveFieldsParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

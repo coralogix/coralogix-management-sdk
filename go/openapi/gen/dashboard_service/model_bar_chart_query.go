@@ -22,11 +22,11 @@ var _ MappedNullable = &BarChartQuery{}
 
 // BarChartQuery Query.
 type BarChartQuery struct {
-	Dataprime                         *BarChartDataprimeQuery `json:"dataprime,omitempty"`
-	Logs                              *BarChartLogsQuery      `json:"logs,omitempty"`
-	Metrics                           *BarChartMetricsQuery   `json:"metrics,omitempty"`
-	Spans                             *BarChartSpansQuery     `json:"spans,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Dataprime *BarChartDataprimeQuery `json:"dataprime,omitempty"`
+	Logs *BarChartLogsQuery `json:"logs,omitempty"`
+	Metrics *BarChartMetricsQuery `json:"metrics,omitempty"`
+	Spans *BarChartSpansQuery `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -178,7 +178,7 @@ func (o *BarChartQuery) SetSpans(v BarChartSpansQuery) {
 }
 
 func (o BarChartQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -314,3 +314,4 @@ func (v *NullableBarChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

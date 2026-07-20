@@ -23,8 +23,8 @@ var _ MappedNullable = &CommonDataprimeQuery{}
 // CommonDataprimeQuery Line chart.dataprime query.
 type CommonDataprimeQuery struct {
 	// The text.
-	Text                              *string `json:"text,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Text *string `json:"text,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *CommonDataprimeQuery) SetText(v string) {
 }
 
 func (o CommonDataprimeQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableCommonDataprimeQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

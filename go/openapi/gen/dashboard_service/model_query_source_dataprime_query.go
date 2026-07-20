@@ -22,8 +22,8 @@ var _ MappedNullable = &QuerySourceDataprimeQuery{}
 
 // QuerySourceDataprimeQuery Variable query source that executes a Dataprime query to populate variable values.
 type QuerySourceDataprimeQuery struct {
-	Type                              *DataprimeQueryType `json:"type,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Type *DataprimeQueryType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *QuerySourceDataprimeQuery) SetType(v DataprimeQueryType) {
 }
 
 func (o QuerySourceDataprimeQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableQuerySourceDataprimeQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

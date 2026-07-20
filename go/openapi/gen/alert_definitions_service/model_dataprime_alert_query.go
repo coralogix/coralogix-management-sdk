@@ -23,8 +23,8 @@ var _ MappedNullable = &DataprimeAlertQuery{}
 // DataprimeAlertQuery A DataPrime query
 type DataprimeAlertQuery struct {
 	// The DataPrime query string
-	Query                             *string `json:"query,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Query *string `json:"query,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *DataprimeAlertQuery) SetQuery(v string) {
 }
 
 func (o DataprimeAlertQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableDataprimeAlertQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

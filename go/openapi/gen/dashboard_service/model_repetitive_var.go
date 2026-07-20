@@ -23,8 +23,8 @@ var _ MappedNullable = &RepetitiveVar{}
 // RepetitiveVar Repetitive var.
 type RepetitiveVar struct {
 	// Variable name that can be applied on section making it repetitive section
-	Name                              *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *RepetitiveVar) SetName(v string) {
 }
 
 func (o RepetitiveVar) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableRepetitiveVar) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -24,8 +24,8 @@ var _ MappedNullable = &IncidentsV1UserDetails{}
 // IncidentsV1UserDetails User details.
 type IncidentsV1UserDetails struct {
 	// The user id.
-	UserId                            string `json:"userId"`
-	AdditionalProperties              map[string]interface{}
+	UserId string `json:"userId"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -74,7 +74,7 @@ func (o *IncidentsV1UserDetails) SetUserId(v string) {
 }
 
 func (o IncidentsV1UserDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -105,10 +105,10 @@ func (o *IncidentsV1UserDetails) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -171,3 +171,4 @@ func (v *NullableIncidentsV1UserDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,7 +23,7 @@ type GenericIndicatorType string
 
 // List of GenericIndicatorType
 const (
-	GENERICINDICATORTYPE_GENERIC_INDICATOR_TYPE_UNSPECIFIED    GenericIndicatorType = "GENERIC_INDICATOR_TYPE_UNSPECIFIED"
+	GENERICINDICATORTYPE_GENERIC_INDICATOR_TYPE_UNSPECIFIED GenericIndicatorType = "GENERIC_INDICATOR_TYPE_UNSPECIFIED"
 	GENERICINDICATORTYPE_GENERIC_INDICATOR_TYPE_ERROR_TRACKING GenericIndicatorType = "GENERIC_INDICATOR_TYPE_ERROR_TRACKING"
 )
 
@@ -111,3 +111,4 @@ func (v *NullableGenericIndicatorType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

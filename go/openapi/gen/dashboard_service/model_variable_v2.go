@@ -27,14 +27,14 @@ type VariableV2 struct {
 	// The display full row.
 	DisplayFullRow *bool `json:"displayFullRow,omitempty"`
 	// The display name.
-	DisplayName *string                `json:"displayName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	DisplayName *string `json:"displayName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	DisplayType *VariableDisplayTypeV2 `json:"displayType,omitempty"`
-	Id          *UUID                  `json:"id,omitempty"`
+	Id *UUID `json:"id,omitempty"`
 	// Display name.
-	Name                              *string           `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Source                            *VariableSourceV2 `json:"source,omitempty"`
-	Value                             *VariableValueV2  `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Source *VariableSourceV2 `json:"source,omitempty"`
+	Value *VariableValueV2 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -314,7 +314,7 @@ func (o *VariableV2) SetValue(v VariableValueV2) {
 }
 
 func (o VariableV2) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -420,3 +420,4 @@ func (v *NullableVariableV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

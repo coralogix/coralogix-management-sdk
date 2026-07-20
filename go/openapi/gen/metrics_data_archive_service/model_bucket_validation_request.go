@@ -22,10 +22,10 @@ var _ MappedNullable = &BucketValidationRequest{}
 
 // BucketValidationRequest This data structure is used to validate a bucket.
 type BucketValidationRequest struct {
-	Gcs                               *GcsConfig   `json:"gcs,omitempty"`
-	Ibm                               *IbmConfigV2 `json:"ibm,omitempty"`
-	S3                                *S3Config    `json:"s3,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Gcs *GcsConfig `json:"gcs,omitempty"`
+	Ibm *IbmConfigV2 `json:"ibm,omitempty"`
+	S3 *S3Config `json:"s3,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *BucketValidationRequest) SetS3(v S3Config) {
 }
 
 func (o BucketValidationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,3 +268,4 @@ func (v *NullableBucketValidationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

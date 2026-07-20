@@ -23,8 +23,8 @@ var _ MappedNullable = &CreateE2MRequest{}
 
 // CreateE2MRequest This is used to create a new event to metric definition
 type CreateE2MRequest struct {
-	E2m                               E2MCreateParams `json:"e2m"`
-	AdditionalProperties              map[string]interface{}
+	E2m E2MCreateParams `json:"e2m"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -73,7 +73,7 @@ func (o *CreateE2MRequest) SetE2m(v E2MCreateParams) {
 }
 
 func (o CreateE2MRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +104,10 @@ func (o *CreateE2MRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -170,3 +170,4 @@ func (v *NullableCreateE2MRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

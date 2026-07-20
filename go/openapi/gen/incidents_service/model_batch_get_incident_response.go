@@ -26,8 +26,8 @@ type BatchGetIncidentResponse struct {
 	// Map of incident IDs to their corresponding incidents
 	Incidents map[string]Incident `json:"incidents"`
 	// List of IDs that were not found
-	NotFoundIds                       []string `json:"notFoundIds"`
-	AdditionalProperties              map[string]interface{}
+	NotFoundIds []string `json:"notFoundIds"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -101,7 +101,7 @@ func (o *BatchGetIncidentResponse) SetNotFoundIds(v []string) {
 }
 
 func (o BatchGetIncidentResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -134,10 +134,10 @@ func (o *BatchGetIncidentResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -201,3 +201,4 @@ func (v *NullableBatchGetIncidentResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

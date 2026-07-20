@@ -26,9 +26,9 @@ type ResolutionDetails struct {
 	// Resolution reason
 	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Timestamp when the case was resolved
-	ResolveTime                       *time.Time    `json:"resolveTime,omitempty"`
-	ResolvedBy                        *CaseResolver `json:"resolvedBy,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ResolveTime *time.Time `json:"resolveTime,omitempty"`
+	ResolvedBy *CaseResolver `json:"resolvedBy,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *ResolutionDetails) SetResolvedBy(v CaseResolver) {
 }
 
 func (o ResolutionDetails) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableResolutionDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

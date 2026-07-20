@@ -22,9 +22,9 @@ var _ MappedNullable = &DataUsageServiceGetDailyUsageUnitsRequest{}
 
 // DataUsageServiceGetDailyUsageUnitsRequest Request for daily units usage data for the specified period.
 type DataUsageServiceGetDailyUsageUnitsRequest struct {
-	DateRange                         *V2DateRange `json:"dateRange,omitempty"`
-	Range                             *V2Range     `json:"range,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	DateRange *V2DateRange `json:"dateRange,omitempty"`
+	Range *V2Range `json:"range,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *DataUsageServiceGetDailyUsageUnitsRequest) SetRange(v V2Range) {
 }
 
 func (o DataUsageServiceGetDailyUsageUnitsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableDataUsageServiceGetDailyUsageUnitsRequest) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

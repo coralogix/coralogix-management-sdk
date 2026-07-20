@@ -22,9 +22,9 @@ var _ MappedNullable = &CaseOrderBy{}
 
 // CaseOrderBy Defines how cases should be sorted in the response. By default, cases are sorted by creation time and id in descending order. With this field, one can specify the primary sorting field and direction.
 type CaseOrderBy struct {
-	Direction                         *CaseOrderByDirection `json:"direction,omitempty"`
-	Field                             *CaseOrderByField     `json:"field,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Direction *CaseOrderByDirection `json:"direction,omitempty"`
+	Field *CaseOrderByField `json:"field,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *CaseOrderBy) SetField(v CaseOrderByField) {
 }
 
 func (o CaseOrderBy) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableCaseOrderBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

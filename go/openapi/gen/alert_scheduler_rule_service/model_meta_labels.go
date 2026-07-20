@@ -23,8 +23,8 @@ var _ MappedNullable = &MetaLabels{}
 // MetaLabels Meta labels.
 type MetaLabels struct {
 	// The value.
-	Value                             []MetaLabelsProtobufV1MetaLabel `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Value []MetaLabelsProtobufV1MetaLabel `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *MetaLabels) SetValue(v []MetaLabelsProtobufV1MetaLabel) {
 }
 
 func (o MetaLabels) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableMetaLabels) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

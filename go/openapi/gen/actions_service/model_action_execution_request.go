@@ -22,10 +22,10 @@ var _ MappedNullable = &ActionExecutionRequest{}
 
 // ActionExecutionRequest This data structure represents a request to execute an Action operation.
 type ActionExecutionRequest struct {
-	Create                            *CreateActionRequest  `json:"create,omitempty"`
-	Delete                            *DeleteActionRequest  `json:"delete,omitempty"`
-	Replace                           *ReplaceActionRequest `json:"replace,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Create *CreateActionRequest `json:"create,omitempty"`
+	Delete *DeleteActionRequest `json:"delete,omitempty"`
+	Replace *ReplaceActionRequest `json:"replace,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *ActionExecutionRequest) SetReplace(v ReplaceActionRequest) {
 }
 
 func (o ActionExecutionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,3 +268,4 @@ func (v *NullableActionExecutionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

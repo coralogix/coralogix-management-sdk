@@ -23,8 +23,8 @@ var _ MappedNullable = &IncidentEventOriginatorAdministrative{}
 // IncidentEventOriginatorAdministrative Incident event originator administrative.
 type IncidentEventOriginatorAdministrative struct {
 	// The user id.
-	UserId                            *string `json:"userId,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UserId *string `json:"userId,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *IncidentEventOriginatorAdministrative) SetUserId(v string) {
 }
 
 func (o IncidentEventOriginatorAdministrative) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableIncidentEventOriginatorAdministrative) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -26,8 +26,8 @@ type QuotaBasedStatus struct {
 	// The current usage.
 	CurrentUsage *float64 `json:"currentUsage,omitempty"`
 	// The daily limit.
-	DailyLimit                        *float64 `json:"dailyLimit,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	DailyLimit *float64 `json:"dailyLimit,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *QuotaBasedStatus) SetDailyLimit(v float64) {
 }
 
 func (o QuotaBasedStatus) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableQuotaBasedStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

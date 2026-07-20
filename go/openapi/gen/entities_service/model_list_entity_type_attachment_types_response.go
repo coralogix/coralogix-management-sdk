@@ -23,8 +23,8 @@ var _ MappedNullable = &ListEntityTypeAttachmentTypesResponse{}
 // ListEntityTypeAttachmentTypesResponse Response containing a list of supported attachment types for the entity type.
 type ListEntityTypeAttachmentTypesResponse struct {
 	// The supported attachment types.
-	SupportedAttachmentTypes          []EntityTypeAttachmentType `json:"supportedAttachmentTypes,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SupportedAttachmentTypes []EntityTypeAttachmentType `json:"supportedAttachmentTypes,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListEntityTypeAttachmentTypesResponse) SetSupportedAttachmentTypes(v []
 }
 
 func (o ListEntityTypeAttachmentTypesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListEntityTypeAttachmentTypesResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

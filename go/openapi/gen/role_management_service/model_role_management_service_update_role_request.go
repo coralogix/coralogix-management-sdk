@@ -25,9 +25,9 @@ type RoleManagementServiceUpdateRoleRequest struct {
 	// The new description.
 	NewDescription *string `json:"newDescription,omitempty"`
 	// The new name.
-	NewName                           *string        `json:"newName,omitempty"`
-	NewPermissions                    *V2Permissions `json:"newPermissions,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	NewName *string `json:"newName,omitempty"`
+	NewPermissions *V2Permissions `json:"newPermissions,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *RoleManagementServiceUpdateRoleRequest) SetNewPermissions(v V2Permissio
 }
 
 func (o RoleManagementServiceUpdateRoleRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableRoleManagementServiceUpdateRoleRequest) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

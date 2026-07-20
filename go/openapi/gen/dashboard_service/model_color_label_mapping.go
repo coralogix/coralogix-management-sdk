@@ -22,11 +22,11 @@ var _ MappedNullable = &ColorLabelMapping{}
 
 // ColorLabelMapping Reusable color and label mapping configuration supporting range, value, and regex-based mappings
 type ColorLabelMapping struct {
-	ColorBy                           *ColorApplyTarget              `json:"colorBy,omitempty"`
-	Range                             *RangeMapping                  `json:"range,omitempty"`
-	Regex                             *RegexMapping                  `json:"regex,omitempty"`
-	Value                             *ColorLabelMappingValueMapping `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ColorBy *ColorApplyTarget `json:"colorBy,omitempty"`
+	Range *RangeMapping `json:"range,omitempty"`
+	Regex *RegexMapping `json:"regex,omitempty"`
+	Value *ColorLabelMappingValueMapping `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -178,7 +178,7 @@ func (o *ColorLabelMapping) SetValue(v ColorLabelMappingValueMapping) {
 }
 
 func (o ColorLabelMapping) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -305,3 +305,4 @@ func (v *NullableColorLabelMapping) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

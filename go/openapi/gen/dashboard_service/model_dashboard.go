@@ -36,11 +36,11 @@ type Dashboard struct {
 	Filters []FiltersFilter `json:"filters,omitempty"`
 	// Auto refresh five minutes.
 	FiveMinutes map[string]interface{} `json:"fiveMinutes,omitempty"`
-	FolderId    *UUID                  `json:"folderId,omitempty"`
-	FolderPath  *FolderPath            `json:"folderPath,omitempty"`
+	FolderId *UUID `json:"folderId,omitempty"`
+	FolderPath *FolderPath `json:"folderPath,omitempty"`
 	// A unique identifier of the dashboard
-	Id     *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Layout Layout  `json:"layout"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Layout Layout `json:"layout"`
 	// The display name of the dashboard
 	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	// Auto refresh off.
@@ -56,8 +56,8 @@ type Dashboard struct {
 	// A list of variables that can be used within the dashboard for dynamic content
 	Variables []Variable `json:"variables,omitempty"`
 	// A list of variables that can be used within the dashboard for dynamic content
-	VariablesV2                       []VariableV2 `json:"variablesV2,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	VariablesV2 []VariableV2 `json:"variablesV2,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -675,7 +675,7 @@ func (o *Dashboard) SetVariablesV2(v []VariableV2) {
 }
 
 func (o Dashboard) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -811,10 +811,10 @@ func (o *Dashboard) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -957,3 +957,4 @@ func (v *NullableDashboard) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

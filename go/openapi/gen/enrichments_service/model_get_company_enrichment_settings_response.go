@@ -22,8 +22,8 @@ var _ MappedNullable = &GetCompanyEnrichmentSettingsResponse{}
 
 // GetCompanyEnrichmentSettingsResponse Response containing the company-level enrichment settings.
 type GetCompanyEnrichmentSettingsResponse struct {
-	EnrichmentSettings                *CompanyEnrichmentSettings `json:"enrichmentSettings,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	EnrichmentSettings *CompanyEnrichmentSettings `json:"enrichmentSettings,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetCompanyEnrichmentSettingsResponse) SetEnrichmentSettings(v CompanyEn
 }
 
 func (o GetCompanyEnrichmentSettingsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetCompanyEnrichmentSettingsResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

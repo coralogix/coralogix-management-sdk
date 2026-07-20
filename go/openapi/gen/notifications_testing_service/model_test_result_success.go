@@ -23,8 +23,8 @@ var _ MappedNullable = &TestResultSuccess{}
 // TestResultSuccess Indicates the notification test succeeded.
 type TestResultSuccess struct {
 	// Metadata.
-	Metadata                          *map[string]string `json:"metadata,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Metadata *map[string]string `json:"metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *TestResultSuccess) SetMetadata(v map[string]string) {
 }
 
 func (o TestResultSuccess) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableTestResultSuccess) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

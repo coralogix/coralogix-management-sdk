@@ -27,8 +27,8 @@ type CreateApiKeyResponse struct {
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// The value.
-	Value                             *string `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *CreateApiKeyResponse) SetValue(v string) {
 }
 
 func (o CreateApiKeyResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableCreateApiKeyResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

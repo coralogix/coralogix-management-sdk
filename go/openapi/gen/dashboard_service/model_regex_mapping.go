@@ -23,8 +23,8 @@ var _ MappedNullable = &RegexMapping{}
 // RegexMapping Regex pattern-based color and label mapping
 type RegexMapping struct {
 	// List of regex pattern-to-display mapping sections
-	Sections                          []MappingSection `json:"sections,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Sections []MappingSection `json:"sections,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *RegexMapping) SetSections(v []MappingSection) {
 }
 
 func (o RegexMapping) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableRegexMapping) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

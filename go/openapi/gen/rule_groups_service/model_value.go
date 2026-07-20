@@ -24,11 +24,11 @@ type Value string
 // List of Value
 const (
 	VALUE_VALUE_DEBUG_OR_UNSPECIFIED Value = "VALUE_DEBUG_OR_UNSPECIFIED"
-	VALUE_VALUE_VERBOSE              Value = "VALUE_VERBOSE"
-	VALUE_VALUE_INFO                 Value = "VALUE_INFO"
-	VALUE_VALUE_WARNING              Value = "VALUE_WARNING"
-	VALUE_VALUE_ERROR                Value = "VALUE_ERROR"
-	VALUE_VALUE_CRITICAL             Value = "VALUE_CRITICAL"
+	VALUE_VALUE_VERBOSE Value = "VALUE_VERBOSE"
+	VALUE_VALUE_INFO Value = "VALUE_INFO"
+	VALUE_VALUE_WARNING Value = "VALUE_WARNING"
+	VALUE_VALUE_ERROR Value = "VALUE_ERROR"
+	VALUE_VALUE_CRITICAL Value = "VALUE_CRITICAL"
 )
 
 // All allowed values of Value enum
@@ -119,3 +119,4 @@ func (v *NullableValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

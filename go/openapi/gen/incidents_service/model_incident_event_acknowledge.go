@@ -22,8 +22,8 @@ var _ MappedNullable = &IncidentEventAcknowledge{}
 
 // IncidentEventAcknowledge Incident event acknowledge.
 type IncidentEventAcknowledge struct {
-	AcknowledgedBy                    *IncidentsV1UserDetails `json:"acknowledgedBy,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AcknowledgedBy *IncidentsV1UserDetails `json:"acknowledgedBy,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *IncidentEventAcknowledge) SetAcknowledgedBy(v IncidentsV1UserDetails) {
 }
 
 func (o IncidentEventAcknowledge) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableIncidentEventAcknowledge) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

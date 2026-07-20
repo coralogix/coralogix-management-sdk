@@ -24,8 +24,8 @@ type AlertStatus string
 // List of AlertStatus
 const (
 	ALERTSTATUS_ALERT_STATUS_RESOLVED_OR_UNSPECIFIED AlertStatus = "ALERT_STATUS_RESOLVED_OR_UNSPECIFIED"
-	ALERTSTATUS_ALERT_STATUS_TRIGGERED               AlertStatus = "ALERT_STATUS_TRIGGERED"
-	ALERTSTATUS_ALERT_STATUS_NO_DATA                 AlertStatus = "ALERT_STATUS_NO_DATA"
+	ALERTSTATUS_ALERT_STATUS_TRIGGERED AlertStatus = "ALERT_STATUS_TRIGGERED"
+	ALERTSTATUS_ALERT_STATUS_NO_DATA AlertStatus = "ALERT_STATUS_NO_DATA"
 )
 
 // All allowed values of AlertStatus enum
@@ -113,3 +113,4 @@ func (v *NullableAlertStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

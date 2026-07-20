@@ -27,8 +27,8 @@ type RetentionPolicyRequest struct {
 	// The one hour resolution.
 	OneHourResolution *int64 `json:"oneHourResolution,omitempty"`
 	// The raw resolution.
-	RawResolution                     *int64 `json:"rawResolution,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	RawResolution *int64 `json:"rawResolution,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *RetentionPolicyRequest) SetRawResolution(v int64) {
 }
 
 func (o RetentionPolicyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableRetentionPolicyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -24,11 +24,11 @@ var _ MappedNullable = &MetricThresholdCondition{}
 type MetricThresholdCondition struct {
 	ConditionType *MetricThresholdConditionType `json:"conditionType,omitempty"`
 	// The percentage of values that must exceed the threshold to trigger the alert
-	ForOverPct *int64            `json:"forOverPct,omitempty"`
-	OfTheLast  *MetricTimeWindow `json:"ofTheLast,omitempty"`
+	ForOverPct *int64 `json:"forOverPct,omitempty"`
+	OfTheLast *MetricTimeWindow `json:"ofTheLast,omitempty"`
 	// The threshold value for the alert condition
-	Threshold                         *float64 `json:"threshold,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Threshold *float64 `json:"threshold,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -180,7 +180,7 @@ func (o *MetricThresholdCondition) SetThreshold(v float64) {
 }
 
 func (o MetricThresholdCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,3 +270,4 @@ func (v *NullableMetricThresholdCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

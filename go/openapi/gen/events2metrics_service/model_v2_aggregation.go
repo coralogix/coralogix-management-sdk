@@ -24,14 +24,14 @@ var _ MappedNullable = &V2Aggregation{}
 type V2Aggregation struct {
 	AggType *AggType `json:"aggType,omitempty"`
 	// Whether this resource is enabled.
-	Enabled   *bool            `json:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty"`
 	Histogram *E2MAggHistogram `json:"histogram,omitempty"`
 	// Marker indicating no additional metadata is needed for this aggregation type.
-	None    map[string]interface{} `json:"none,omitempty"`
-	Samples *E2MAggSamples         `json:"samples,omitempty"`
+	None map[string]interface{} `json:"none,omitempty"`
+	Samples *E2MAggSamples `json:"samples,omitempty"`
 	// Name of the target metric produced by this aggregation.
-	TargetMetricName                  *string `json:"targetMetricName,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TargetMetricName *string `json:"targetMetricName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -247,7 +247,7 @@ func (o *V2Aggregation) SetTargetMetricName(v string) {
 }
 
 func (o V2Aggregation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -382,3 +382,4 @@ func (v *NullableV2Aggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -25,8 +25,8 @@ type AssignedCaseEvent struct {
 	// New assignee user ID
 	AssigneeUserId *string `json:"assigneeUserId,omitempty"`
 	// Previous assignee user ID (if any)
-	PreviousAssigneeUserId            *string `json:"previousAssigneeUserId,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	PreviousAssigneeUserId *string `json:"previousAssigneeUserId,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *AssignedCaseEvent) SetPreviousAssigneeUserId(v string) {
 }
 
 func (o AssignedCaseEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableAssignedCaseEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

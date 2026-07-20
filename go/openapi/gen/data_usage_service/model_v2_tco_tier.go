@@ -24,10 +24,10 @@ type V2TcoTier string
 // List of v2.TcoTier
 const (
 	V2TCOTIER_TCO_TIER_UNSPECIFIED V2TcoTier = "TCO_TIER_UNSPECIFIED"
-	V2TCOTIER_TCO_TIER_LOW         V2TcoTier = "TCO_TIER_LOW"
-	V2TCOTIER_TCO_TIER_MEDIUM      V2TcoTier = "TCO_TIER_MEDIUM"
-	V2TCOTIER_TCO_TIER_HIGH        V2TcoTier = "TCO_TIER_HIGH"
-	V2TCOTIER_TCO_TIER_BLOCKED     V2TcoTier = "TCO_TIER_BLOCKED"
+	V2TCOTIER_TCO_TIER_LOW V2TcoTier = "TCO_TIER_LOW"
+	V2TCOTIER_TCO_TIER_MEDIUM V2TcoTier = "TCO_TIER_MEDIUM"
+	V2TCOTIER_TCO_TIER_HIGH V2TcoTier = "TCO_TIER_HIGH"
+	V2TCOTIER_TCO_TIER_BLOCKED V2TcoTier = "TCO_TIER_BLOCKED"
 )
 
 // All allowed values of V2TcoTier enum
@@ -117,3 +117,4 @@ func (v *NullableV2TcoTier) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

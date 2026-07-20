@@ -23,8 +23,8 @@ var _ MappedNullable = &ListCustomEvaluationsForApplicationResponse{}
 // ListCustomEvaluationsForApplicationResponse Response containing custom evaluations linked to the application.
 type ListCustomEvaluationsForApplicationResponse struct {
 	// Custom evaluations linked to the application.
-	Items                             []CustomEvaluation `json:"items,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Items []CustomEvaluation `json:"items,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListCustomEvaluationsForApplicationResponse) SetItems(v []CustomEvaluat
 }
 
 func (o ListCustomEvaluationsForApplicationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListCustomEvaluationsForApplicationResponse) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

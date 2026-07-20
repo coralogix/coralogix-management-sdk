@@ -25,8 +25,8 @@ type MetricMissingValues struct {
 	// If set, specifies the minimum percentage of non-null values required for the alert to be triggered
 	MinNonNullValuesPct *int64 `json:"minNonNullValuesPct,omitempty"`
 	// If set to true, missing values will be replaced with zero
-	ReplaceWithZero                   *bool `json:"replaceWithZero,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ReplaceWithZero *bool `json:"replaceWithZero,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *MetricMissingValues) SetReplaceWithZero(v bool) {
 }
 
 func (o MetricMissingValues) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -224,3 +224,4 @@ func (v *NullableMetricMissingValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -13,8 +13,8 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -37,13 +37,13 @@ type PrometheusAlert struct {
 	// URL of the system that generated the alert.
 	GeneratorUrl string `json:"generatorUrl" validate:"regexp=^[\\s\\S]*$"`
 	// Labels attached to the alert.
-	Labels   map[string]string     `json:"labels"`
-	Priority IndicatorPriority     `json:"priority"`
-	Query    *PrometheusAlertQuery `json:"query,omitempty"`
-	Status   PrometheusAlertStatus `json:"status"`
+	Labels map[string]string `json:"labels"`
+	Priority IndicatorPriority `json:"priority"`
+	Query *PrometheusAlertQuery `json:"query,omitempty"`
+	Status PrometheusAlertStatus `json:"status"`
 	// Timestamp when the alert was last updated.
-	UpdatedAt                         time.Time `json:"updatedAt"`
-	AdditionalProperties              map[string]interface{}
+	UpdatedAt time.Time `json:"updatedAt"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -349,7 +349,7 @@ func (o *PrometheusAlert) SetUpdatedAt(v time.Time) {
 }
 
 func (o PrometheusAlert) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -401,10 +401,10 @@ func (o *PrometheusAlert) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -477,3 +477,4 @@ func (v *NullablePrometheusAlert) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

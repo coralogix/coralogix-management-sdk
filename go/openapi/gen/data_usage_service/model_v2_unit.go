@@ -23,8 +23,8 @@ var _ MappedNullable = &V2Unit{}
 // V2Unit A quantity expressed in units of data consumption.
 type V2Unit struct {
 	// Numeric value representing the amount in units.
-	Value                             *float32 `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Value *float32 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *V2Unit) SetValue(v float32) {
 }
 
 func (o V2Unit) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableV2Unit) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -25,11 +25,11 @@ type AlertDefNotificationGroup struct {
 	// The destinations for notifications.  (Notification Center feature)
 	Destinations []NotificationDestination `json:"destinations,omitempty"`
 	// The keys to group the alerts by
-	GroupByKeys []string            `json:"groupByKeys,omitempty"`
-	Router      *NotificationRouter `json:"router,omitempty"`
+	GroupByKeys []string `json:"groupByKeys,omitempty"`
+	Router *NotificationRouter `json:"router,omitempty"`
 	// The settings for webhooks associated with the alert definition
-	Webhooks                          []AlertDefWebhooksSettings `json:"webhooks,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Webhooks []AlertDefWebhooksSettings `json:"webhooks,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -181,7 +181,7 @@ func (o *AlertDefNotificationGroup) SetWebhooks(v []AlertDefWebhooksSettings) {
 }
 
 func (o AlertDefNotificationGroup) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,3 +271,4 @@ func (v *NullableAlertDefNotificationGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

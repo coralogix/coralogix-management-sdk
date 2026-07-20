@@ -23,10 +23,10 @@ var _ MappedNullable = &ActivitySchedule{}
 // ActivitySchedule Defines when an alert should be active based on days of the week and time windows
 type ActivitySchedule struct {
 	// Day of the week.
-	DayOfWeek                         []DayOfWeek `json:"dayOfWeek,omitempty"`
-	EndTime                           *TimeOfDay  `json:"endTime,omitempty"`
-	StartTime                         *TimeOfDay  `json:"startTime,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	DayOfWeek []DayOfWeek `json:"dayOfWeek,omitempty"`
+	EndTime *TimeOfDay `json:"endTime,omitempty"`
+	StartTime *TimeOfDay `json:"startTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *ActivitySchedule) SetStartTime(v TimeOfDay) {
 }
 
 func (o ActivitySchedule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableActivitySchedule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

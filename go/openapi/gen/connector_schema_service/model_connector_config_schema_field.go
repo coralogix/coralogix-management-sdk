@@ -31,11 +31,11 @@ type ConnectorConfigSchemaField struct {
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The field name.
-	FieldName *string    `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	FieldName *string `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	FieldType *FieldType `json:"fieldType,omitempty"`
 	// The required.
-	Required                          *bool `json:"required,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Required *bool `json:"required,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -283,7 +283,7 @@ func (o *ConnectorConfigSchemaField) SetRequired(v bool) {
 }
 
 func (o ConnectorConfigSchemaField) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -385,3 +385,4 @@ func (v *NullableConnectorConfigSchemaField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

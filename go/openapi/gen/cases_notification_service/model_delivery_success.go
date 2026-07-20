@@ -23,8 +23,8 @@ var _ MappedNullable = &DeliverySuccess{}
 // DeliverySuccess Successful delivery outcome with an optional evidence URL.
 type DeliverySuccess struct {
 	// URL to the delivered notification, if available (e.g. Slack message, ServiceNow record)
-	EvidenceUrl                       *string `json:"evidenceUrl,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	EvidenceUrl *string `json:"evidenceUrl,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *DeliverySuccess) SetEvidenceUrl(v string) {
 }
 
 func (o DeliverySuccess) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableDeliverySuccess) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

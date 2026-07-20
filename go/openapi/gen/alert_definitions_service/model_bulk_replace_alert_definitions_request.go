@@ -23,8 +23,8 @@ var _ MappedNullable = &BulkReplaceAlertDefinitionsRequest{}
 // BulkReplaceAlertDefinitionsRequest A request to bulk replace multiple alert definitions
 type BulkReplaceAlertDefinitionsRequest struct {
 	// List of alert definitions to replace
-	AlertDefsToReplace                []AlertDefToReplace `json:"alertDefsToReplace,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AlertDefsToReplace []AlertDefToReplace `json:"alertDefsToReplace,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *BulkReplaceAlertDefinitionsRequest) SetAlertDefsToReplace(v []AlertDefT
 }
 
 func (o BulkReplaceAlertDefinitionsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableBulkReplaceAlertDefinitionsRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

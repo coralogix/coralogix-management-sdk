@@ -25,9 +25,9 @@ type Issue struct {
 	// Location of the issue within the dashboard as an RFC 6901 JSON Pointer (e.g. \"/sections/0/rows/1/widgets/2\"). Empty or omitted for root-level issues.
 	Location *string `json:"location,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Human-readable description of the issue
-	Message                           *string        `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Severity                          *IssueSeverity `json:"severity,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Severity *IssueSeverity `json:"severity,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *Issue) SetSeverity(v IssueSeverity) {
 }
 
 func (o Issue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableIssue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

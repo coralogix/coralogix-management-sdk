@@ -23,13 +23,13 @@ var _ MappedNullable = &StatVisualElement{}
 // StatVisualElement A configurable display element that can show either a query field value or the result of color label mapping, with an optional display name template
 type StatVisualElement struct {
 	// Mapped values.
-	MappedValues     map[string]interface{} `json:"mappedValues,omitempty"`
-	ObservationField *ObservationField      `json:"observationField,omitempty"`
+	MappedValues map[string]interface{} `json:"mappedValues,omitempty"`
+	ObservationField *ObservationField `json:"observationField,omitempty"`
 	// Optional display name template with variable support, e.g. 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'
 	TemplateText *string `json:"templateText,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Variables available for use in the display name template, each referencing either a datashape field or mapped values
-	TemplateVariables                 []DisplayNameTemplateVariable `json:"templateVariables,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TemplateVariables []DisplayNameTemplateVariable `json:"templateVariables,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -181,7 +181,7 @@ func (o *StatVisualElement) SetTemplateVariables(v []DisplayNameTemplateVariable
 }
 
 func (o StatVisualElement) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -299,3 +299,4 @@ func (v *NullableStatVisualElement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

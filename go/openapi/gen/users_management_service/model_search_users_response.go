@@ -27,8 +27,8 @@ type SearchUsersResponse struct {
 	// Total number of users matching the search criteria across all pages
 	TotalCount *int64 `json:"totalCount,omitempty"`
 	// List of users matching the search criteria
-	Users                             []RbacV2User `json:"users,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Users []RbacV2User `json:"users,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *SearchUsersResponse) SetUsers(v []RbacV2User) {
 }
 
 func (o SearchUsersResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableSearchUsersResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

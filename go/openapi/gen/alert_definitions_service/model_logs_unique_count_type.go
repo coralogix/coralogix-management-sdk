@@ -30,8 +30,8 @@ type LogsUniqueCountType struct {
 	// The rules for the log unique count alert
 	Rules []LogsUniqueCountRule `json:"rules,omitempty"`
 	// The keypath in the logs to be used for unique count
-	UniqueCountKeypath                *string `json:"uniqueCountKeypath,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UniqueCountKeypath *string `json:"uniqueCountKeypath,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -215,7 +215,7 @@ func (o *LogsUniqueCountType) SetUniqueCountKeypath(v string) {
 }
 
 func (o LogsUniqueCountType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -309,3 +309,4 @@ func (v *NullableLogsUniqueCountType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

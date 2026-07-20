@@ -79,6 +79,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *PoliciesServiceAPI* | [**PoliciesServiceAtomicOverwriteLogPolicies**](docs/PoliciesServiceAPI.md#policiesserviceatomicoverwritelogpolicies) | **Put** /dataplans/log-policies/v1 | Atomic Overwrite Log Policies
+*PoliciesServiceAPI* | [**PoliciesServiceAtomicOverwriteRumPolicies**](docs/PoliciesServiceAPI.md#policiesserviceatomicoverwriterumpolicies) | **Put** /dataplans/rum-policies/v1 | Atomic Overwrite Rum Policies
 *PoliciesServiceAPI* | [**PoliciesServiceAtomicOverwriteSpanPolicies**](docs/PoliciesServiceAPI.md#policiesserviceatomicoverwritespanpolicies) | **Put** /dataplans/span-policies/v1 | Atomic Overwrite Span Policies
 *PoliciesServiceAPI* | [**PoliciesServiceBulkTestLogPolicies**](docs/PoliciesServiceAPI.md#policiesservicebulktestlogpolicies) | **Post** /dataplans/policies/v1/all/test-policies | Bulk Test Log Policies
 *PoliciesServiceAPI* | [**PoliciesServiceCreatePolicy**](docs/PoliciesServiceAPI.md#policiesservicecreatepolicy) | **Post** /dataplans/policies/v1 | Create Policy
@@ -97,6 +98,8 @@ Class | Method | HTTP request | Description
  - [ArchiveRetention](docs/ArchiveRetention.md)
  - [AtomicOverwriteLogPoliciesRequest](docs/AtomicOverwriteLogPoliciesRequest.md)
  - [AtomicOverwriteLogPoliciesResponse](docs/AtomicOverwriteLogPoliciesResponse.md)
+ - [AtomicOverwriteRumPoliciesRequest](docs/AtomicOverwriteRumPoliciesRequest.md)
+ - [AtomicOverwriteRumPoliciesResponse](docs/AtomicOverwriteRumPoliciesResponse.md)
  - [AtomicOverwriteSpanPoliciesRequest](docs/AtomicOverwriteSpanPoliciesRequest.md)
  - [AtomicOverwriteSpanPoliciesResponse](docs/AtomicOverwriteSpanPoliciesResponse.md)
  - [BulkTestLogPoliciesRequest](docs/BulkTestLogPoliciesRequest.md)
@@ -105,6 +108,7 @@ Class | Method | HTTP request | Description
  - [CreateLogPolicyRequest](docs/CreateLogPolicyRequest.md)
  - [CreatePolicyRequest](docs/CreatePolicyRequest.md)
  - [CreatePolicyResponse](docs/CreatePolicyResponse.md)
+ - [CreateRumPolicyRequest](docs/CreateRumPolicyRequest.md)
  - [CreateSpanPolicyRequest](docs/CreateSpanPolicyRequest.md)
  - [DeletePolicyResponse](docs/DeletePolicyResponse.md)
  - [Error](docs/Error.md)

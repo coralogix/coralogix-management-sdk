@@ -23,8 +23,8 @@ var _ MappedNullable = &ListGlobalRoutersResponse{}
 // ListGlobalRoutersResponse Response containing requested global routers
 type ListGlobalRoutersResponse struct {
 	// The routers.
-	Routers                           []GlobalRouter `json:"routers,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Routers []GlobalRouter `json:"routers,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListGlobalRoutersResponse) SetRouters(v []GlobalRouter) {
 }
 
 func (o ListGlobalRoutersResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListGlobalRoutersResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

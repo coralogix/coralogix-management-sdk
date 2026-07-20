@@ -23,8 +23,8 @@ var _ MappedNullable = &ApmLatencyQuantile{}
 // ApmLatencyQuantile Quantile/percentile-based latency measurement
 type ApmLatencyQuantile struct {
 	// Percentile for latency SLOs (0.95 = P95, 0.99 = P99)
-	Percentile                        *float32 `json:"percentile,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Percentile *float32 `json:"percentile,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ApmLatencyQuantile) SetPercentile(v float32) {
 }
 
 func (o ApmLatencyQuantile) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableApmLatencyQuantile) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -25,9 +25,9 @@ type Table struct {
 	// List of columns.
 	Columns []TableColumn `json:"columns,omitempty"`
 	// List of rules.
-	Rules                             []TableRule    `json:"rules,omitempty"`
-	Settings                          *TableSettings `json:"settings,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Rules []TableRule `json:"rules,omitempty"`
+	Settings *TableSettings `json:"settings,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *Table) SetSettings(v TableSettings) {
 }
 
 func (o Table) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableTable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

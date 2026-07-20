@@ -22,13 +22,13 @@ var _ MappedNullable = &VariableValueV2{}
 
 // VariableValueV2 Discriminated union representing the current runtime value of a dashboard variable (string, numeric, regex, Lucene, or interval).
 type VariableValueV2 struct {
-	Interval                          *IntervalValue                     `json:"interval,omitempty"`
-	Lucene                            *LuceneQueryValue                  `json:"lucene,omitempty"`
-	MultiString                       *MultiStringValue                  `json:"multiString,omitempty"`
-	Regex                             *RegexValue                        `json:"regex,omitempty"`
-	SingleNumeric                     *VariableValueV2SingleNumericValue `json:"singleNumeric,omitempty"`
-	SingleString                      *SingleStringValue                 `json:"singleString,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Interval *IntervalValue `json:"interval,omitempty"`
+	Lucene *LuceneQueryValue `json:"lucene,omitempty"`
+	MultiString *MultiStringValue `json:"multiString,omitempty"`
+	Regex *RegexValue `json:"regex,omitempty"`
+	SingleNumeric *VariableValueV2SingleNumericValue `json:"singleNumeric,omitempty"`
+	SingleString *SingleStringValue `json:"singleString,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -244,7 +244,7 @@ func (o *VariableValueV2) SetSingleString(v SingleStringValue) {
 }
 
 func (o VariableValueV2) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -406,3 +406,4 @@ func (v *NullableVariableValueV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

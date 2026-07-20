@@ -23,8 +23,8 @@ var _ MappedNullable = &AtomicOverwriteEnrichmentsResponse{}
 // AtomicOverwriteEnrichmentsResponse Response returned after atomically updating enrichment rules.
 type AtomicOverwriteEnrichmentsResponse struct {
 	// List of enrichments.
-	Enrichments                       []Enrichment `json:"enrichments,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Enrichments []Enrichment `json:"enrichments,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *AtomicOverwriteEnrichmentsResponse) SetEnrichments(v []Enrichment) {
 }
 
 func (o AtomicOverwriteEnrichmentsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableAtomicOverwriteEnrichmentsResponse) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

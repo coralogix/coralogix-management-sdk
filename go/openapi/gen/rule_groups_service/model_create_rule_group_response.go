@@ -22,8 +22,8 @@ var _ MappedNullable = &CreateRuleGroupResponse{}
 
 // CreateRuleGroupResponse Response returned after successfully creating a parsing rule group.
 type CreateRuleGroupResponse struct {
-	RuleGroup                         *RuleGroup `json:"ruleGroup,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	RuleGroup *RuleGroup `json:"ruleGroup,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *CreateRuleGroupResponse) SetRuleGroup(v RuleGroup) {
 }
 
 func (o CreateRuleGroupResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableCreateRuleGroupResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

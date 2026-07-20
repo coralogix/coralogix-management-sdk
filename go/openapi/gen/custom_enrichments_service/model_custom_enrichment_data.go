@@ -23,11 +23,11 @@ var _ MappedNullable = &CustomEnrichmentData{}
 // CustomEnrichmentData Custom enrichment data including definition and raw content.
 type CustomEnrichmentData struct {
 	// Binary content of the enrichment data file encoded as base64.
-	Binary     *string           `json:"binary,omitempty"`
+	Binary *string `json:"binary,omitempty"`
 	Definition *CustomEnrichment `json:"definition,omitempty"`
 	// Textual content of the enrichment data file as a UTF-8 string.
-	Textual                           *string `json:"textual,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Textual *string `json:"textual,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *CustomEnrichmentData) SetTextual(v string) {
 }
 
 func (o CustomEnrichmentData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -261,3 +261,4 @@ func (v *NullableCustomEnrichmentData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ var _ MappedNullable = &SetPriorityOverrideRequest{}
 
 // SetPriorityOverrideRequest Request to override a case's computed priority with a specific value.
 type SetPriorityOverrideRequest struct {
-	Priority                          CasePriority `json:"priority"`
-	AdditionalProperties              map[string]interface{}
+	Priority CasePriority `json:"priority"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -73,7 +73,7 @@ func (o *SetPriorityOverrideRequest) SetPriority(v CasePriority) {
 }
 
 func (o SetPriorityOverrideRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -104,10 +104,10 @@ func (o *SetPriorityOverrideRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -170,3 +170,4 @@ func (v *NullableSetPriorityOverrideRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

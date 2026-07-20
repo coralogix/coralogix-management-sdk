@@ -24,7 +24,7 @@ type OrderByAlertEventFields string
 // List of OrderByAlertEventFields
 const (
 	ORDERBYALERTEVENTFIELDS_ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED OrderByAlertEventFields = "ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED"
-	ORDERBYALERTEVENTFIELDS_ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP   OrderByAlertEventFields = "ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP"
+	ORDERBYALERTEVENTFIELDS_ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP OrderByAlertEventFields = "ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP"
 )
 
 // All allowed values of OrderByAlertEventFields enum
@@ -111,3 +111,4 @@ func (v *NullableOrderByAlertEventFields) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

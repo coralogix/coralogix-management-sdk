@@ -24,7 +24,7 @@ type LogsThresholdConditionType string
 // List of LogsThresholdConditionType
 const (
 	LOGSTHRESHOLDCONDITIONTYPE_LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED LogsThresholdConditionType = "LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED"
-	LOGSTHRESHOLDCONDITIONTYPE_LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN                LogsThresholdConditionType = "LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN"
+	LOGSTHRESHOLDCONDITIONTYPE_LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN LogsThresholdConditionType = "LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN"
 )
 
 // All allowed values of LogsThresholdConditionType enum
@@ -111,3 +111,4 @@ func (v *NullableLogsThresholdConditionType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

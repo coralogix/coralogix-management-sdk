@@ -24,8 +24,8 @@ var _ MappedNullable = &ImpactedEntityLink{}
 type ImpactedEntityLink struct {
 	Entity *ImpactedEntity `json:"entity,omitempty"`
 	// Absolute URL to the entity drilldown view.
-	Url                               *string `json:"url,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *ImpactedEntityLink) SetUrl(v string) {
 }
 
 func (o ImpactedEntityLink) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableImpactedEntityLink) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

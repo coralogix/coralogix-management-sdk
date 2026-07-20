@@ -22,9 +22,9 @@ var _ MappedNullable = &PrometheusAlertStatus{}
 
 // PrometheusAlertStatus Lifecycle status of a Prometheus alert or alert group.
 type PrometheusAlertStatus struct {
-	Resolved                          *Resolved  `json:"resolved,omitempty"`
-	Triggered                         *Triggered `json:"triggered,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Resolved *Resolved `json:"resolved,omitempty"`
+	Triggered *Triggered `json:"triggered,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *PrometheusAlertStatus) SetTriggered(v Triggered) {
 }
 
 func (o PrometheusAlertStatus) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullablePrometheusAlertStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

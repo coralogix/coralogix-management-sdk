@@ -16,16 +16,17 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
+
 
 // GlobalRoutersServiceAPIService GlobalRoutersServiceAPI service
 type GlobalRoutersServiceAPIService service
 
 type ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest struct {
-	ctx             context.Context
-	ApiService      *GlobalRoutersServiceAPIService
+	ctx context.Context
+	ApiService *GlobalRoutersServiceAPIService
 	globalRouterIds *[]string
 }
 
@@ -44,25 +45,24 @@ GlobalRoutersServiceBatchGetGlobalRouters Batch Get Global Routers
 
 Returns summary information for all notification routers.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest
 */
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceBatchGetGlobalRouters(ctx context.Context) ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest {
 	return ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return BatchGetGlobalRoutersResponse
+//  @return BatchGetGlobalRoutersResponse
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceBatchGetGlobalRoutersExecute(r ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest) (*BatchGetGlobalRoutersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *BatchGetGlobalRoutersResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BatchGetGlobalRoutersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GlobalRoutersServiceAPIService.GlobalRoutersServiceBatchGetGlobalRouters")
@@ -146,8 +146,8 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceBatchGetGlobalRoute
 }
 
 type ApiGlobalRoutersServiceCreateGlobalRouterRequest struct {
-	ctx                       context.Context
-	ApiService                *GlobalRoutersServiceAPIService
+	ctx context.Context
+	ApiService *GlobalRoutersServiceAPIService
 	createGlobalRouterRequest *CreateGlobalRouterRequest
 }
 
@@ -165,25 +165,24 @@ GlobalRoutersServiceCreateGlobalRouter Create Global Router
 
 Creates a new notification router.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGlobalRoutersServiceCreateGlobalRouterRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGlobalRoutersServiceCreateGlobalRouterRequest
 */
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceCreateGlobalRouter(ctx context.Context) ApiGlobalRoutersServiceCreateGlobalRouterRequest {
 	return ApiGlobalRoutersServiceCreateGlobalRouterRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateGlobalRouterResponse
+//  @return CreateGlobalRouterResponse
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceCreateGlobalRouterExecute(r ApiGlobalRoutersServiceCreateGlobalRouterRequest) (*CreateGlobalRouterResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateGlobalRouterResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateGlobalRouterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GlobalRoutersServiceAPIService.GlobalRoutersServiceCreateGlobalRouter")
@@ -254,9 +253,9 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceCreateGlobalRouterE
 }
 
 type ApiGlobalRoutersServiceDeleteGlobalRouterRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *GlobalRoutersServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiGlobalRoutersServiceDeleteGlobalRouterRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -268,27 +267,26 @@ GlobalRoutersServiceDeleteGlobalRouter Delete Global Router
 
 Deletes the notification router with the specified ID.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier.
-	@return ApiGlobalRoutersServiceDeleteGlobalRouterRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier.
+ @return ApiGlobalRoutersServiceDeleteGlobalRouterRequest
 */
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceDeleteGlobalRouter(ctx context.Context, id string) ApiGlobalRoutersServiceDeleteGlobalRouterRequest {
 	return ApiGlobalRoutersServiceDeleteGlobalRouterRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceDeleteGlobalRouterExecute(r ApiGlobalRoutersServiceDeleteGlobalRouterRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GlobalRoutersServiceAPIService.GlobalRoutersServiceDeleteGlobalRouter")
@@ -364,9 +362,9 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceDeleteGlobalRouterE
 }
 
 type ApiGlobalRoutersServiceGetGlobalRouterRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *GlobalRoutersServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiGlobalRoutersServiceGetGlobalRouterRequest) Execute() (*GetGlobalRouterResponse, *http.Response, error) {
@@ -378,27 +376,26 @@ GlobalRoutersServiceGetGlobalRouter Get Global Router
 
 Returns the details of the specified notification router.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id The unique identifier of the global router to retrieve.
-	@return ApiGlobalRoutersServiceGetGlobalRouterRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The unique identifier of the global router to retrieve.
+ @return ApiGlobalRoutersServiceGetGlobalRouterRequest
 */
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceGetGlobalRouter(ctx context.Context, id string) ApiGlobalRoutersServiceGetGlobalRouterRequest {
 	return ApiGlobalRoutersServiceGetGlobalRouterRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetGlobalRouterResponse
+//  @return GetGlobalRouterResponse
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceGetGlobalRouterExecute(r ApiGlobalRoutersServiceGetGlobalRouterRequest) (*GetGlobalRouterResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetGlobalRouterResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetGlobalRouterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GlobalRoutersServiceAPIService.GlobalRoutersServiceGetGlobalRouter")
@@ -474,9 +471,9 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceGetGlobalRouterExec
 }
 
 type ApiGlobalRoutersServiceListGlobalRoutersRequest struct {
-	ctx                context.Context
-	ApiService         *GlobalRoutersServiceAPIService
-	entityType         *NotificationCenterEntityType
+	ctx context.Context
+	ApiService *GlobalRoutersServiceAPIService
+	entityType *NotificationCenterEntityType
 	sourceEntityLabels *map[string]GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue
 }
 
@@ -501,25 +498,24 @@ GlobalRoutersServiceListGlobalRouters List Global Routers
 
 Returns all notification routers for the team.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGlobalRoutersServiceListGlobalRoutersRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGlobalRoutersServiceListGlobalRoutersRequest
 */
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceListGlobalRouters(ctx context.Context) ApiGlobalRoutersServiceListGlobalRoutersRequest {
 	return ApiGlobalRoutersServiceListGlobalRoutersRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListGlobalRoutersResponse
+//  @return ListGlobalRoutersResponse
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceListGlobalRoutersExecute(r ApiGlobalRoutersServiceListGlobalRoutersRequest) (*ListGlobalRoutersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListGlobalRoutersResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListGlobalRoutersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GlobalRoutersServiceAPIService.GlobalRoutersServiceListGlobalRouters")
@@ -598,8 +594,8 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceListGlobalRoutersEx
 }
 
 type ApiGlobalRoutersServiceReplaceGlobalRouterRequest struct {
-	ctx                        context.Context
-	ApiService                 *GlobalRoutersServiceAPIService
+	ctx context.Context
+	ApiService *GlobalRoutersServiceAPIService
 	replaceGlobalRouterRequest *ReplaceGlobalRouterRequest
 }
 
@@ -617,25 +613,24 @@ GlobalRoutersServiceReplaceGlobalRouter Replace Global Router
 
 Updates an existing notification router.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGlobalRoutersServiceReplaceGlobalRouterRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGlobalRoutersServiceReplaceGlobalRouterRequest
 */
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceReplaceGlobalRouter(ctx context.Context) ApiGlobalRoutersServiceReplaceGlobalRouterRequest {
 	return ApiGlobalRoutersServiceReplaceGlobalRouterRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ReplaceGlobalRouterResponse
+//  @return ReplaceGlobalRouterResponse
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceReplaceGlobalRouterExecute(r ApiGlobalRoutersServiceReplaceGlobalRouterRequest) (*ReplaceGlobalRouterResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ReplaceGlobalRouterResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ReplaceGlobalRouterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GlobalRoutersServiceAPIService.GlobalRoutersServiceReplaceGlobalRouter")
@@ -706,8 +701,8 @@ func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceReplaceGlobalRouter
 }
 
 type ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest struct {
-	ctx                context.Context
-	ApiService         *GlobalRoutersServiceAPIService
+	ctx context.Context
+	ApiService *GlobalRoutersServiceAPIService
 	entityLabelMatcher *map[string]string
 }
 
@@ -726,25 +721,24 @@ GlobalRoutersServiceValidateEntityLabelMatcher Validate Entity Label Matcher
 
 Validates a notification router matcher configuration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest
 */
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceValidateEntityLabelMatcher(ctx context.Context) ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest {
 	return ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ValidateEntityLabelMatcherResponse
+//  @return ValidateEntityLabelMatcherResponse
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceValidateEntityLabelMatcherExecute(r ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest) (*ValidateEntityLabelMatcherResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ValidateEntityLabelMatcherResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ValidateEntityLabelMatcherResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GlobalRoutersServiceAPIService.GlobalRoutersServiceValidateEntityLabelMatcher")

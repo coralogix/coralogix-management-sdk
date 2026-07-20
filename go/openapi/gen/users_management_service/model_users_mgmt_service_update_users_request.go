@@ -23,9 +23,9 @@ var _ MappedNullable = &UsersMgmtServiceUpdateUsersRequest{}
 // UsersMgmtServiceUpdateUsersRequest struct for UsersMgmtServiceUpdateUsersRequest
 type UsersMgmtServiceUpdateUsersRequest struct {
 	// User account ID of the user to update
-	UserAccountId                     *int64        `json:"userAccountId,omitempty"`
-	UserTemplate                      *UserTemplate `json:"userTemplate,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UserAccountId *int64 `json:"userAccountId,omitempty"`
+	UserTemplate *UserTemplate `json:"userTemplate,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *UsersMgmtServiceUpdateUsersRequest) SetUserTemplate(v UserTemplate) {
 }
 
 func (o UsersMgmtServiceUpdateUsersRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableUsersMgmtServiceUpdateUsersRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

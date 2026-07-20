@@ -22,11 +22,11 @@ var _ MappedNullable = &RumVersionDataVersion{}
 
 // RumVersionDataVersion struct for RumVersionDataVersion
 type RumVersionDataVersion struct {
-	LogMetadata       *LogMetadata       `json:"logMetadata,omitempty"`
+	LogMetadata *LogMetadata `json:"logMetadata,omitempty"`
 	SourceMapMetadata *SourceMapMetadata `json:"sourceMapMetadata,omitempty"`
 	// Version number.
-	Version                           *string `json:"version,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *RumVersionDataVersion) SetVersion(v string) {
 }
 
 func (o RumVersionDataVersion) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableRumVersionDataVersion) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

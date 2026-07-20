@@ -24,8 +24,8 @@ type EventsV3OrderByDirection string
 // List of events.v3.OrderByDirection
 const (
 	EVENTSV3ORDERBYDIRECTION_ORDER_BY_DIRECTION_UNSPECIFIED EventsV3OrderByDirection = "ORDER_BY_DIRECTION_UNSPECIFIED"
-	EVENTSV3ORDERBYDIRECTION_ORDER_BY_DIRECTION_ASC         EventsV3OrderByDirection = "ORDER_BY_DIRECTION_ASC"
-	EVENTSV3ORDERBYDIRECTION_ORDER_BY_DIRECTION_DESC        EventsV3OrderByDirection = "ORDER_BY_DIRECTION_DESC"
+	EVENTSV3ORDERBYDIRECTION_ORDER_BY_DIRECTION_ASC EventsV3OrderByDirection = "ORDER_BY_DIRECTION_ASC"
+	EVENTSV3ORDERBYDIRECTION_ORDER_BY_DIRECTION_DESC EventsV3OrderByDirection = "ORDER_BY_DIRECTION_DESC"
 )
 
 // All allowed values of EventsV3OrderByDirection enum
@@ -113,3 +113,4 @@ func (v *NullableEventsV3OrderByDirection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

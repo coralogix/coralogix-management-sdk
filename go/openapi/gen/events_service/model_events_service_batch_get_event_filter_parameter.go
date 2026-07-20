@@ -22,8 +22,8 @@ var _ MappedNullable = &EventsServiceBatchGetEventFilterParameter{}
 
 // EventsServiceBatchGetEventFilterParameter struct for EventsServiceBatchGetEventFilterParameter
 type EventsServiceBatchGetEventFilterParameter struct {
-	Timestamp                         *TimestampRange `json:"timestamp,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Timestamp *TimestampRange `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *EventsServiceBatchGetEventFilterParameter) SetTimestamp(v TimestampRang
 }
 
 func (o EventsServiceBatchGetEventFilterParameter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableEventsServiceBatchGetEventFilterParameter) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

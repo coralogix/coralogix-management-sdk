@@ -23,11 +23,11 @@ var _ MappedNullable = &DataTableSpansQuery{}
 // DataTableSpansQuery A spans variant of the query
 type DataTableSpansQuery struct {
 	// List of span query filters
-	Filters                           []SpansFilter       `json:"filters,omitempty"`
-	Grouping                          *SpansQueryGrouping `json:"grouping,omitempty"`
-	LuceneQuery                       *LuceneQuery        `json:"luceneQuery,omitempty"`
-	TimeFrame                         *TimeFrameSelect    `json:"timeFrame,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Filters []SpansFilter `json:"filters,omitempty"`
+	Grouping *SpansQueryGrouping `json:"grouping,omitempty"`
+	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -179,7 +179,7 @@ func (o *DataTableSpansQuery) SetTimeFrame(v TimeFrameSelect) {
 }
 
 func (o DataTableSpansQuery) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,3 +269,4 @@ func (v *NullableDataTableSpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

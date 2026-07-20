@@ -22,11 +22,11 @@ var _ MappedNullable = &AlertSchedulerRuleProtobufV1Filter{}
 
 // AlertSchedulerRuleProtobufV1Filter Alert scheduler rule protobuf.v1.filter.
 type AlertSchedulerRuleProtobufV1Filter struct {
-	AlertMetaLabels *MetaLabels     `json:"alertMetaLabels,omitempty"`
-	AlertUniqueIds  *AlertUniqueIds `json:"alertUniqueIds,omitempty"`
+	AlertMetaLabels *MetaLabels `json:"alertMetaLabels,omitempty"`
+	AlertUniqueIds *AlertUniqueIds `json:"alertUniqueIds,omitempty"`
 	// Dataprime expression that filters the alerts by group-by values.
-	WhatExpression                    *string `json:"whatExpression,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	WhatExpression *string `json:"whatExpression,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *AlertSchedulerRuleProtobufV1Filter) SetWhatExpression(v string) {
 }
 
 func (o AlertSchedulerRuleProtobufV1Filter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -260,3 +260,4 @@ func (v *NullableAlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

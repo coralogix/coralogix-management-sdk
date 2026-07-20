@@ -23,8 +23,8 @@ var _ MappedNullable = &GoToDashboardTemplateAction{}
 // GoToDashboardTemplateAction Go to dashboard template action.
 type GoToDashboardTemplateAction struct {
 	// Reference to specific dashboard
-	DashboardId                       *string `json:"dashboardId,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	DashboardId *string `json:"dashboardId,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *GoToDashboardTemplateAction) SetDashboardId(v string) {
 }
 
 func (o GoToDashboardTemplateAction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableGoToDashboardTemplateAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

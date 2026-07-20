@@ -25,8 +25,8 @@ type SearchClause struct {
 	// Search by the numeric ID of the custom enrichment.
 	Id *int64 `json:"id,omitempty"`
 	// Search by the name of the custom enrichment.
-	Name                              *string `json:"name,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *SearchClause) SetName(v string) {
 }
 
 func (o SearchClause) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -224,3 +224,4 @@ func (v *NullableSearchClause) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -24,8 +24,8 @@ type SampleType string
 // List of SampleType
 const (
 	SAMPLETYPE_SAMPLE_TYPE_UNSPECIFIED SampleType = "SAMPLE_TYPE_UNSPECIFIED"
-	SAMPLETYPE_SAMPLE_TYPE_MIN         SampleType = "SAMPLE_TYPE_MIN"
-	SAMPLETYPE_SAMPLE_TYPE_MAX         SampleType = "SAMPLE_TYPE_MAX"
+	SAMPLETYPE_SAMPLE_TYPE_MIN SampleType = "SAMPLE_TYPE_MIN"
+	SAMPLETYPE_SAMPLE_TYPE_MAX SampleType = "SAMPLE_TYPE_MAX"
 )
 
 // All allowed values of SampleType enum
@@ -113,3 +113,4 @@ func (v *NullableSampleType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

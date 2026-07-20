@@ -22,10 +22,10 @@ var _ MappedNullable = &QueryMetricsQueryMetricsLabelFilter{}
 
 // QueryMetricsQueryMetricsLabelFilter struct for QueryMetricsQueryMetricsLabelFilter
 type QueryMetricsQueryMetricsLabelFilter struct {
-	Label                             *QueryMetricsQueryStringOrVariable `json:"label,omitempty"`
-	Metric                            *QueryMetricsQueryStringOrVariable `json:"metric,omitempty"`
-	Operator                          *QueryMetricsQueryOperator         `json:"operator,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Label *QueryMetricsQueryStringOrVariable `json:"label,omitempty"`
+	Metric *QueryMetricsQueryStringOrVariable `json:"metric,omitempty"`
+	Operator *QueryMetricsQueryOperator `json:"operator,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *QueryMetricsQueryMetricsLabelFilter) SetOperator(v QueryMetricsQueryOpe
 }
 
 func (o QueryMetricsQueryMetricsLabelFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -231,3 +231,4 @@ func (v *NullableQueryMetricsQueryMetricsLabelFilter) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

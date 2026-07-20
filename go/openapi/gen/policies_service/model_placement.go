@@ -25,8 +25,8 @@ type Placement struct {
 	// First.
 	First map[string]interface{} `json:"first,omitempty"`
 	// Last.
-	Last                              map[string]interface{} `json:"last,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Last map[string]interface{} `json:"last,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *Placement) SetLast(v map[string]interface{}) {
 }
 
 func (o Placement) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -224,3 +224,4 @@ func (v *NullablePlacement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -13,8 +13,8 @@ package cases_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -27,20 +27,20 @@ type AlertIndicator struct {
 	// The unique alert ID (stable across versions).
 	AlertId string `json:"alertId" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Array of all alert version IDs for this indicator in the case. Includes the latest_alert_version.
-	AlertVersions []string          `json:"alertVersions"`
-	GroupingType  AlertGroupingType `json:"groupingType"`
+	AlertVersions []string `json:"alertVersions"`
+	GroupingType AlertGroupingType `json:"groupingType"`
 	// Last seen version ID of the triggered alert definition.
 	LatestAlertVersion string `json:"latestAlertVersion" validate:"regexp=^[\\s\\S]*$"`
 	// Array of the alert permutations.
 	Permutations []AlertIndicatorPermutation `json:"permutations"`
-	Priority     IndicatorPriority           `json:"priority"`
+	Priority IndicatorPriority `json:"priority"`
 	// When present, timestamp when the alert resolved.
-	ResolveTime *time.Time        `json:"resolveTime,omitempty"`
-	State       IndicatorState    `json:"state"`
+	ResolveTime *time.Time `json:"resolveTime,omitempty"`
+	State IndicatorState `json:"state"`
 	Suppression *AlertSuppression `json:"suppression,omitempty"`
 	// Timestamp when the alert triggered.
-	TriggerTime                       time.Time `json:"triggerTime"`
-	AdditionalProperties              map[string]interface{}
+	TriggerTime time.Time `json:"triggerTime"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -328,7 +328,7 @@ func (o *AlertIndicator) SetTriggerTime(v time.Time) {
 }
 
 func (o AlertIndicator) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -379,10 +379,10 @@ func (o *AlertIndicator) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -454,3 +454,4 @@ func (v *NullableAlertIndicator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

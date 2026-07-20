@@ -22,8 +22,8 @@ var _ MappedNullable = &GetCaseFilterValuesRequest{}
 
 // GetCaseFilterValuesRequest Request to retrieve available filter and aggregation values for cases.
 type GetCaseFilterValuesRequest struct {
-	Filters                           *CaseFilters `json:"filters,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Filters *CaseFilters `json:"filters,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetCaseFilterValuesRequest) SetFilters(v CaseFilters) {
 }
 
 func (o GetCaseFilterValuesRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetCaseFilterValuesRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

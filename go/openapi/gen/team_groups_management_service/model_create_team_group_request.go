@@ -25,18 +25,18 @@ type CreateTeamGroupRequest struct {
 	// Human-readable description of the team group.
 	Description *string `json:"description,omitempty"`
 	// External identifier for the group, used when the group is managed by an external identity provider.
-	ExternalId *string    `json:"externalId,omitempty"`
-	GroupType  *GroupType `json:"groupType,omitempty"`
+	ExternalId *string `json:"externalId,omitempty"`
+	GroupType *GroupType `json:"groupType,omitempty"`
 	// Unique display name for the new team group.
 	Name *string `json:"name,omitempty"`
 	// Identifier of the role to assign to this group.
-	RoleId *int64   `json:"roleId,omitempty"`
-	Scope  *V2Scope `json:"scope,omitempty"`
+	RoleId *int64 `json:"roleId,omitempty"`
+	Scope *V2Scope `json:"scope,omitempty"`
 	// Team to associate the group with. If not set, uses the authenticated team.
 	TeamId *int64 `json:"teamId,omitempty"`
 	// The user ids.
-	UserIds                           []string `json:"userIds,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UserIds []string `json:"userIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -316,7 +316,7 @@ func (o *CreateTeamGroupRequest) SetUserIds(v []string) {
 }
 
 func (o CreateTeamGroupRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -422,3 +422,4 @@ func (v *NullableCreateTeamGroupRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

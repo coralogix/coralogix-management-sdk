@@ -22,8 +22,8 @@ var _ MappedNullable = &GetAiApplicationByIdResponse{}
 
 // GetAiApplicationByIdResponse Response containing the requested AI application.
 type GetAiApplicationByIdResponse struct {
-	AiApplication                     *AiApplication `json:"aiApplication,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AiApplication *AiApplication `json:"aiApplication,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetAiApplicationByIdResponse) SetAiApplication(v AiApplication) {
 }
 
 func (o GetAiApplicationByIdResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetAiApplicationByIdResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

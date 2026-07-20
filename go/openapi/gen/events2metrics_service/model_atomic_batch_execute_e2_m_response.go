@@ -23,8 +23,8 @@ var _ MappedNullable = &AtomicBatchExecuteE2MResponse{}
 // AtomicBatchExecuteE2MResponse Response returned after atomically executing a batch of events-to-metrics rules.
 type AtomicBatchExecuteE2MResponse struct {
 	// The matching responses.
-	MatchingResponses                 []E2MExecutionResponse `json:"matchingResponses,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MatchingResponses []E2MExecutionResponse `json:"matchingResponses,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *AtomicBatchExecuteE2MResponse) SetMatchingResponses(v []E2MExecutionRes
 }
 
 func (o AtomicBatchExecuteE2MResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableAtomicBatchExecuteE2MResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ var _ MappedNullable = &TestTemplateRenderResultSuccess{}
 // TestTemplateRenderResultSuccess Success.
 type TestTemplateRenderResultSuccess struct {
 	// The rendered value.
-	RenderedValue                     *string `json:"renderedValue,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	RenderedValue *string `json:"renderedValue,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *TestTemplateRenderResultSuccess) SetRenderedValue(v string) {
 }
 
 func (o TestTemplateRenderResultSuccess) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableTestTemplateRenderResultSuccess) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

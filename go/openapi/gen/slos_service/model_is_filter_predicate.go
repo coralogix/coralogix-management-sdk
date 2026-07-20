@@ -22,10 +22,10 @@ var _ MappedNullable = &IsFilterPredicate{}
 
 // IsFilterPredicate Predicate for SLO filters that checks if a field is equal to one of multiple values
 type IsFilterPredicate struct {
-	ProductTypeValues                 *ProductTypeValues `json:"productTypeValues,omitempty"`
-	StringValues                      *StringValues      `json:"stringValues,omitempty"`
-	TypeValues                        *TypeValues        `json:"typeValues,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ProductTypeValues *ProductTypeValues `json:"productTypeValues,omitempty"`
+	StringValues *StringValues `json:"stringValues,omitempty"`
+	TypeValues *TypeValues `json:"typeValues,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *IsFilterPredicate) SetTypeValues(v TypeValues) {
 }
 
 func (o IsFilterPredicate) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,3 +268,4 @@ func (v *NullableIsFilterPredicate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

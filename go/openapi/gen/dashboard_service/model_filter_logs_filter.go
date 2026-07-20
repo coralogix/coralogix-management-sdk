@@ -23,10 +23,10 @@ var _ MappedNullable = &FilterLogsFilter{}
 // FilterLogsFilter This data structure represents the filter criteria for logs.
 type FilterLogsFilter struct {
 	// The log field to which the filter is applied.
-	Field                             *string           `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	ObservationField                  *ObservationField `json:"observationField,omitempty"`
-	Operator                          *FilterOperator   `json:"operator,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Field *string `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	ObservationField *ObservationField `json:"observationField,omitempty"`
+	Operator *FilterOperator `json:"operator,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *FilterLogsFilter) SetOperator(v FilterOperator) {
 }
 
 func (o FilterLogsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableFilterLogsFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

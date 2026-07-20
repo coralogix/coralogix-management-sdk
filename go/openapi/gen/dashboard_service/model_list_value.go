@@ -23,8 +23,8 @@ var _ MappedNullable = &ListValue{}
 // ListValue List value.
 type ListValue struct {
 	// List of values.
-	Values                            []SingleStringValue `json:"values,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Values []SingleStringValue `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *ListValue) SetValues(v []SingleStringValue) {
 }
 
 func (o ListValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableListValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

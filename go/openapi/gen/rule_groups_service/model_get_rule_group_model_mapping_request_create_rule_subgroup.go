@@ -27,8 +27,8 @@ type GetRuleGroupModelMappingRequestCreateRuleSubgroup struct {
 	// Sort order.
 	Order *int64 `json:"order,omitempty"`
 	// List of rules.
-	Rules                             []GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule `json:"rules,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Rules []GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule `json:"rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *GetRuleGroupModelMappingRequestCreateRuleSubgroup) SetRules(v []GetRule
 }
 
 func (o GetRuleGroupModelMappingRequestCreateRuleSubgroup) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableGetRuleGroupModelMappingRequestCreateRuleSubgroup) UnmarshalJSO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

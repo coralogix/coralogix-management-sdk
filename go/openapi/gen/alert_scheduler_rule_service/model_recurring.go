@@ -23,9 +23,9 @@ var _ MappedNullable = &Recurring{}
 // Recurring Recurring schedule that activates the alert scheduler rule on a repeating cadence.
 type Recurring struct {
 	// Always.
-	AlwaysActive                      map[string]interface{} `json:"alwaysActive,omitempty"`
-	Schedule                          *RecurringDynamic      `json:"schedule,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AlwaysActive map[string]interface{} `json:"alwaysActive,omitempty"`
+	Schedule *RecurringDynamic `json:"schedule,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *Recurring) SetSchedule(v RecurringDynamic) {
 }
 
 func (o Recurring) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -223,3 +223,4 @@ func (v *NullableRecurring) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

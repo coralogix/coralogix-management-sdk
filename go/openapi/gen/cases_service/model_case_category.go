@@ -23,8 +23,8 @@ type CaseCategory string
 
 // List of CaseCategory
 const (
-	CASECATEGORY_CASE_CATEGORY_UNSPECIFIED  CaseCategory = "CASE_CATEGORY_UNSPECIFIED"
-	CASECATEGORY_CASE_CATEGORY_SECURITY     CaseCategory = "CASE_CATEGORY_SECURITY"
+	CASECATEGORY_CASE_CATEGORY_UNSPECIFIED CaseCategory = "CASE_CATEGORY_UNSPECIFIED"
+	CASECATEGORY_CASE_CATEGORY_SECURITY CaseCategory = "CASE_CATEGORY_SECURITY"
 	CASECATEGORY_CASE_CATEGORY_AVAILABILITY CaseCategory = "CASE_CATEGORY_AVAILABILITY"
 )
 
@@ -113,3 +113,4 @@ func (v *NullableCaseCategory) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

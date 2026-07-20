@@ -23,15 +23,15 @@ var _ MappedNullable = &NotificationDestination{}
 // NotificationDestination Configuration for where and how alert notifications should be sent
 type NotificationDestination struct {
 	// The connector ID used to send notifications
-	ConnectorId *string   `json:"connectorId,omitempty"`
-	NotifyOn    *NotifyOn `json:"notifyOn,omitempty"`
+	ConnectorId *string `json:"connectorId,omitempty"`
+	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
 	// Optional preset ID for the notification destination
-	PresetId               *string              `json:"presetId,omitempty"`
+	PresetId *string `json:"presetId,omitempty"`
 	ResolvedRouteOverrides *NotificationRouting `json:"resolvedRouteOverrides,omitempty"`
 	// The time in minutes before a new notification is sent for this destination
-	RetriggeringPeriodMinutes         *int64               `json:"retriggeringPeriodMinutes,omitempty"`
-	TriggeredRoutingOverrides         *NotificationRouting `json:"triggeredRoutingOverrides,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	RetriggeringPeriodMinutes *int64 `json:"retriggeringPeriodMinutes,omitempty"`
+	TriggeredRoutingOverrides *NotificationRouting `json:"triggeredRoutingOverrides,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -247,7 +247,7 @@ func (o *NotificationDestination) SetTriggeredRoutingOverrides(v NotificationRou
 }
 
 func (o NotificationDestination) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -345,3 +345,4 @@ func (v *NullableNotificationDestination) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

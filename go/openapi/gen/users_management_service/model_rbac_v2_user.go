@@ -25,15 +25,15 @@ type RbacV2User struct {
 	// User first name
 	FirstName *string `json:"firstName,omitempty"`
 	// User last name
-	LastName *string     `json:"lastName,omitempty"`
-	Status   *UserStatus `json:"status,omitempty"`
+	LastName *string `json:"lastName,omitempty"`
+	Status *UserStatus `json:"status,omitempty"`
 	// Associated account id. An account can have many users.
 	UserAccountId *int64 `json:"userAccountId,omitempty"`
 	// Unique user id
 	UserId *string `json:"userId,omitempty"`
 	// Unique username
-	Username                          *string `json:"username,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Username *string `json:"username,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -249,7 +249,7 @@ func (o *RbacV2User) SetUsername(v string) {
 }
 
 func (o RbacV2User) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -347,3 +347,4 @@ func (v *NullableRbacV2User) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

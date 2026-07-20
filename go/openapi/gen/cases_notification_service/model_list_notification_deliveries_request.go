@@ -24,8 +24,8 @@ var _ MappedNullable = &ListNotificationDeliveriesRequest{}
 // ListNotificationDeliveriesRequest Request to retrieve notification delivery records for one or more cases.
 type ListNotificationDeliveriesRequest struct {
 	// Case IDs to retrieve notification deliveries for
-	CaseIds                           []string `json:"caseIds"`
-	AdditionalProperties              map[string]interface{}
+	CaseIds []string `json:"caseIds"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -74,7 +74,7 @@ func (o *ListNotificationDeliveriesRequest) SetCaseIds(v []string) {
 }
 
 func (o ListNotificationDeliveriesRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -105,10 +105,10 @@ func (o *ListNotificationDeliveriesRequest) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -171,3 +171,4 @@ func (v *NullableListNotificationDeliveriesRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

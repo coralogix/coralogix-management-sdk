@@ -25,8 +25,8 @@ type DataTableColumn struct {
 	// Name of the field to display in the column
 	Field *string `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Custom width of the column, by default it's automatically adjusted
-	Width                             *int32 `json:"width,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Width *int32 `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *DataTableColumn) SetWidth(v int32) {
 }
 
 func (o DataTableColumn) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableDataTableColumn) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

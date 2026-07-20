@@ -32,8 +32,8 @@ type OutRule struct {
 	// The last eval duration ms.
 	LastEvalDurationMs *string `json:"lastEvalDurationMs,omitempty" validate:"regexp=^[0-9]+$"`
 	// Record.
-	Record                            string `json:"record" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Record string `json:"record" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -196,7 +196,7 @@ func (o *OutRule) SetRecord(v string) {
 }
 
 func (o OutRule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -237,10 +237,10 @@ func (o *OutRule) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -307,3 +307,4 @@ func (v *NullableOutRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

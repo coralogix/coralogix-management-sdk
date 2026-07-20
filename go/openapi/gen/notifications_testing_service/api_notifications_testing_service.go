@@ -18,12 +18,13 @@ import (
 	"net/url"
 )
 
+
 // NotificationsTestingServiceAPIService NotificationsTestingServiceAPI service
 type NotificationsTestingServiceAPIService service
 
 type ApiTestingServiceTestConnectorConfigRequest struct {
-	ctx                        context.Context
-	ApiService                 *NotificationsTestingServiceAPIService
+	ctx context.Context
+	ApiService *NotificationsTestingServiceAPIService
 	testConnectorConfigRequest *TestConnectorConfigRequest
 }
 
@@ -41,25 +42,24 @@ TestingServiceTestConnectorConfig Test Connector Config
 
 Tests a notification connector configuration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiTestingServiceTestConnectorConfigRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTestingServiceTestConnectorConfigRequest
 */
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestConnectorConfig(ctx context.Context) ApiTestingServiceTestConnectorConfigRequest {
 	return ApiTestingServiceTestConnectorConfigRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TestConnectorConfigResponse
+//  @return TestConnectorConfigResponse
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestConnectorConfigExecute(r ApiTestingServiceTestConnectorConfigRequest) (*TestConnectorConfigResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TestConnectorConfigResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TestConnectorConfigResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NotificationsTestingServiceAPIService.TestingServiceTestConnectorConfig")
@@ -130,8 +130,8 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestConnectorConfi
 }
 
 type ApiTestingServiceTestDestinationRequest struct {
-	ctx                                  context.Context
-	ApiService                           *NotificationsTestingServiceAPIService
+	ctx context.Context
+	ApiService *NotificationsTestingServiceAPIService
 	testingServiceTestDestinationRequest *TestingServiceTestDestinationRequest
 }
 
@@ -149,25 +149,24 @@ TestingServiceTestDestination Test Destination
 
 Tests a notification destination.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiTestingServiceTestDestinationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTestingServiceTestDestinationRequest
 */
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestDestination(ctx context.Context) ApiTestingServiceTestDestinationRequest {
 	return ApiTestingServiceTestDestinationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TestDestinationResponse
+//  @return TestDestinationResponse
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestDestinationExecute(r ApiTestingServiceTestDestinationRequest) (*TestDestinationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TestDestinationResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TestDestinationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NotificationsTestingServiceAPIService.TestingServiceTestDestination")
@@ -238,8 +237,8 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestDestinationExe
 }
 
 type ApiTestingServiceTestExistingConnectorRequest struct {
-	ctx                                        context.Context
-	ApiService                                 *NotificationsTestingServiceAPIService
+	ctx context.Context
+	ApiService *NotificationsTestingServiceAPIService
 	testingServiceTestExistingConnectorRequest *TestingServiceTestExistingConnectorRequest
 }
 
@@ -257,25 +256,24 @@ TestingServiceTestExistingConnector Test Existing Connector
 
 Sends a test notification.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiTestingServiceTestExistingConnectorRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTestingServiceTestExistingConnectorRequest
 */
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestExistingConnector(ctx context.Context) ApiTestingServiceTestExistingConnectorRequest {
 	return ApiTestingServiceTestExistingConnectorRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TestExistingConnectorResponse
+//  @return TestExistingConnectorResponse
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestExistingConnectorExecute(r ApiTestingServiceTestExistingConnectorRequest) (*TestExistingConnectorResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TestExistingConnectorResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TestExistingConnectorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NotificationsTestingServiceAPIService.TestingServiceTestExistingConnector")
@@ -346,8 +344,8 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestExistingConnec
 }
 
 type ApiTestingServiceTestExistingPresetRequest struct {
-	ctx                                     context.Context
-	ApiService                              *NotificationsTestingServiceAPIService
+	ctx context.Context
+	ApiService *NotificationsTestingServiceAPIService
 	testingServiceTestExistingPresetRequest *TestingServiceTestExistingPresetRequest
 }
 
@@ -365,25 +363,24 @@ TestingServiceTestExistingPreset Test Existing Preset
 
 Tests an existing notification preset.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiTestingServiceTestExistingPresetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTestingServiceTestExistingPresetRequest
 */
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestExistingPreset(ctx context.Context) ApiTestingServiceTestExistingPresetRequest {
 	return ApiTestingServiceTestExistingPresetRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TestExistingPresetResponse
+//  @return TestExistingPresetResponse
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestExistingPresetExecute(r ApiTestingServiceTestExistingPresetRequest) (*TestExistingPresetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TestExistingPresetResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TestExistingPresetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NotificationsTestingServiceAPIService.TestingServiceTestExistingPreset")
@@ -454,8 +451,8 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestExistingPreset
 }
 
 type ApiTestingServiceTestPresetConfigRequest struct {
-	ctx                                   context.Context
-	ApiService                            *NotificationsTestingServiceAPIService
+	ctx context.Context
+	ApiService *NotificationsTestingServiceAPIService
 	testingServiceTestPresetConfigRequest *TestingServiceTestPresetConfigRequest
 }
 
@@ -473,25 +470,24 @@ TestingServiceTestPresetConfig Test Preset Config
 
 Tests a notification preset configuration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiTestingServiceTestPresetConfigRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTestingServiceTestPresetConfigRequest
 */
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestPresetConfig(ctx context.Context) ApiTestingServiceTestPresetConfigRequest {
 	return ApiTestingServiceTestPresetConfigRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TestPresetConfigResponse
+//  @return TestPresetConfigResponse
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestPresetConfigExecute(r ApiTestingServiceTestPresetConfigRequest) (*TestPresetConfigResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TestPresetConfigResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TestPresetConfigResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NotificationsTestingServiceAPIService.TestingServiceTestPresetConfig")
@@ -562,8 +558,8 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestPresetConfigEx
 }
 
 type ApiTestingServiceTestRoutingConditionValidRequest struct {
-	ctx                              context.Context
-	ApiService                       *NotificationsTestingServiceAPIService
+	ctx context.Context
+	ApiService *NotificationsTestingServiceAPIService
 	testRoutingConditionValidRequest *TestRoutingConditionValidRequest
 }
 
@@ -581,25 +577,24 @@ TestingServiceTestRoutingConditionValid Test Routing Condition Valid
 
 Tests notification routing conditions.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiTestingServiceTestRoutingConditionValidRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTestingServiceTestRoutingConditionValidRequest
 */
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestRoutingConditionValid(ctx context.Context) ApiTestingServiceTestRoutingConditionValidRequest {
 	return ApiTestingServiceTestRoutingConditionValidRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TestRoutingConditionValidResponse
+//  @return TestRoutingConditionValidResponse
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestRoutingConditionValidExecute(r ApiTestingServiceTestRoutingConditionValidRequest) (*TestRoutingConditionValidResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TestRoutingConditionValidResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TestRoutingConditionValidResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NotificationsTestingServiceAPIService.TestingServiceTestRoutingConditionValid")
@@ -670,8 +665,8 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestRoutingConditi
 }
 
 type ApiTestingServiceTestTemplateRenderRequest struct {
-	ctx                                     context.Context
-	ApiService                              *NotificationsTestingServiceAPIService
+	ctx context.Context
+	ApiService *NotificationsTestingServiceAPIService
 	testingServiceTestTemplateRenderRequest *TestingServiceTestTemplateRenderRequest
 }
 
@@ -689,25 +684,24 @@ TestingServiceTestTemplateRender Test Template Render
 
 Tests the rendering of a notification template.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiTestingServiceTestTemplateRenderRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiTestingServiceTestTemplateRenderRequest
 */
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestTemplateRender(ctx context.Context) ApiTestingServiceTestTemplateRenderRequest {
 	return ApiTestingServiceTestTemplateRenderRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TestTemplateRenderResponse
+//  @return TestTemplateRenderResponse
 func (a *NotificationsTestingServiceAPIService) TestingServiceTestTemplateRenderExecute(r ApiTestingServiceTestTemplateRenderRequest) (*TestTemplateRenderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TestTemplateRenderResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TestTemplateRenderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NotificationsTestingServiceAPIService.TestingServiceTestTemplateRender")

@@ -22,8 +22,8 @@ var _ MappedNullable = &CreateCompanyIpAccessSettingsResponse{}
 
 // CreateCompanyIpAccessSettingsResponse This data structure represents the response to create company IP access settings.
 type CreateCompanyIpAccessSettingsResponse struct {
-	Settings                          *CompanyIpAccessSettings `json:"settings,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Settings *CompanyIpAccessSettings `json:"settings,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *CreateCompanyIpAccessSettingsResponse) SetSettings(v CompanyIpAccessSet
 }
 
 func (o CreateCompanyIpAccessSettingsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableCreateCompanyIpAccessSettingsResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

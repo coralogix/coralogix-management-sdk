@@ -22,8 +22,8 @@ var _ MappedNullable = &GetContextualDataIntegrationDetailsResponse{}
 
 // GetContextualDataIntegrationDetailsResponse Response containing the details of a contextual data integration.
 type GetContextualDataIntegrationDetailsResponse struct {
-	IntegrationDetail                 *IntegrationDetails `json:"integrationDetail,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IntegrationDetail *IntegrationDetails `json:"integrationDetail,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetContextualDataIntegrationDetailsResponse) SetIntegrationDetail(v Int
 }
 
 func (o GetContextualDataIntegrationDetailsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetContextualDataIntegrationDetailsResponse) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

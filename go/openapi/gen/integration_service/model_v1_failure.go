@@ -23,8 +23,8 @@ var _ MappedNullable = &V1Failure{}
 // V1Failure Failure.
 type V1Failure struct {
 	// The error message.
-	ErrorMessage                      *string `json:"errorMessage,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ErrorMessage *string `json:"errorMessage,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *V1Failure) SetErrorMessage(v string) {
 }
 
 func (o V1Failure) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableV1Failure) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

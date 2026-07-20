@@ -23,9 +23,9 @@ var _ MappedNullable = &UpdateContextualDataIntegrationRequest{}
 // UpdateContextualDataIntegrationRequest Request for updating a contextual data integration.
 type UpdateContextualDataIntegrationRequest struct {
 	// ID of the contextual data integration to update.
-	IntegrationId                     *string              `json:"integrationId,omitempty"`
-	Metadata                          *IntegrationMetadata `json:"metadata,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IntegrationId *string `json:"integrationId,omitempty"`
+	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *UpdateContextualDataIntegrationRequest) SetMetadata(v IntegrationMetada
 }
 
 func (o UpdateContextualDataIntegrationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableUpdateContextualDataIntegrationRequest) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

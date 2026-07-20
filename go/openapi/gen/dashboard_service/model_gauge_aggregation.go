@@ -24,11 +24,11 @@ type GaugeAggregation string
 // List of Gauge.Aggregation
 const (
 	GAUGEAGGREGATION_AGGREGATION_UNSPECIFIED GaugeAggregation = "AGGREGATION_UNSPECIFIED"
-	GAUGEAGGREGATION_AGGREGATION_LAST        GaugeAggregation = "AGGREGATION_LAST"
-	GAUGEAGGREGATION_AGGREGATION_MIN         GaugeAggregation = "AGGREGATION_MIN"
-	GAUGEAGGREGATION_AGGREGATION_MAX         GaugeAggregation = "AGGREGATION_MAX"
-	GAUGEAGGREGATION_AGGREGATION_AVG         GaugeAggregation = "AGGREGATION_AVG"
-	GAUGEAGGREGATION_AGGREGATION_SUM         GaugeAggregation = "AGGREGATION_SUM"
+	GAUGEAGGREGATION_AGGREGATION_LAST GaugeAggregation = "AGGREGATION_LAST"
+	GAUGEAGGREGATION_AGGREGATION_MIN GaugeAggregation = "AGGREGATION_MIN"
+	GAUGEAGGREGATION_AGGREGATION_MAX GaugeAggregation = "AGGREGATION_MAX"
+	GAUGEAGGREGATION_AGGREGATION_AVG GaugeAggregation = "AGGREGATION_AVG"
+	GAUGEAGGREGATION_AGGREGATION_SUM GaugeAggregation = "AGGREGATION_SUM"
 )
 
 // All allowed values of GaugeAggregation enum
@@ -119,3 +119,4 @@ func (v *NullableGaugeAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

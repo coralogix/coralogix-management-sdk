@@ -27,8 +27,8 @@ type GetTeamGroupsResponse struct {
 	// Token for fetching the next page of results.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 	// The total count.
-	TotalCount                        *int64 `json:"totalCount,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TotalCount *int64 `json:"totalCount,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *GetTeamGroupsResponse) SetTotalCount(v int64) {
 }
 
 func (o GetTeamGroupsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableGetTeamGroupsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

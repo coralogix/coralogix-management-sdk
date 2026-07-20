@@ -22,8 +22,8 @@ var _ MappedNullable = &RegexValue{}
 
 // RegexValue Regex value.
 type RegexValue struct {
-	Value                             *StringValueLabel `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Value *StringValueLabel `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *RegexValue) SetValue(v StringValueLabel) {
 }
 
 func (o RegexValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableRegexValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

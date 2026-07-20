@@ -23,10 +23,10 @@ var _ MappedNullable = &AlertsV3PaginationResponse{}
 // AlertsV3PaginationResponse Pagination response.
 type AlertsV3PaginationResponse struct {
 	// Token for fetching the next page of results.
-	NextPageToken *string `json:"nextPageToken,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Total number of results.
-	TotalSize                         *int64 `json:"totalSize,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TotalSize *int64 `json:"totalSize,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *AlertsV3PaginationResponse) SetTotalSize(v int64) {
 }
 
 func (o AlertsV3PaginationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableAlertsV3PaginationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

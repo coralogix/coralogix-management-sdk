@@ -22,9 +22,9 @@ var _ MappedNullable = &Property{}
 
 // Property Property.
 type Property struct {
-	Definition                        *PropertyDefinition `json:"definition,omitempty"`
-	Id                                *UUID               `json:"id,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Definition *PropertyDefinition `json:"definition,omitempty"`
+	Id *UUID `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *Property) SetId(v UUID) {
 }
 
 func (o Property) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableProperty) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

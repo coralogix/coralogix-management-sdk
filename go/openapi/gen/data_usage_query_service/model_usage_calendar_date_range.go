@@ -23,9 +23,9 @@ var _ MappedNullable = &UsageCalendarDateRange{}
 
 // UsageCalendarDateRange Half-open UTC calendar date interval `[start, end)`. Both bounds are required full calendar dates.
 type UsageCalendarDateRange struct {
-	End                               Date `json:"end"`
-	Start                             Date `json:"start"`
-	AdditionalProperties              map[string]interface{}
+	End Date `json:"end"`
+	Start Date `json:"start"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -99,7 +99,7 @@ func (o *UsageCalendarDateRange) SetStart(v Date) {
 }
 
 func (o UsageCalendarDateRange) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -132,10 +132,10 @@ func (o *UsageCalendarDateRange) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -199,3 +199,4 @@ func (v *NullableUsageCalendarDateRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

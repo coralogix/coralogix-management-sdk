@@ -22,8 +22,8 @@ var _ MappedNullable = &SpansSourceStrategyInstant{}
 
 // SpansSourceStrategyInstant Instant snapshot strategy: uses a single timestamp field to define the annotation point.
 type SpansSourceStrategyInstant struct {
-	TimestampField                    *ObservationField `json:"timestampField,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TimestampField *ObservationField `json:"timestampField,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *SpansSourceStrategyInstant) SetTimestampField(v ObservationField) {
 }
 
 func (o SpansSourceStrategyInstant) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableSpansSourceStrategyInstant) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

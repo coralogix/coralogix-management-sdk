@@ -19,11 +19,12 @@ import (
 	"strings"
 )
 
+
 // AIEvaluationsServiceAPIService AIEvaluationsServiceAPI service
 type AIEvaluationsServiceAPIService service
 
 type ApiAiEvaluationsServiceCountAiAppsPerEvalTypeRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AIEvaluationsServiceAPIService
 }
 
@@ -36,25 +37,24 @@ AiEvaluationsServiceCountAiAppsPerEvalType Count applications per evaluation typ
 
 Returns the count of AI applications grouped by evaluation type.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAiEvaluationsServiceCountAiAppsPerEvalTypeRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAiEvaluationsServiceCountAiAppsPerEvalTypeRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceCountAiAppsPerEvalType(ctx context.Context) ApiAiEvaluationsServiceCountAiAppsPerEvalTypeRequest {
 	return ApiAiEvaluationsServiceCountAiAppsPerEvalTypeRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CountAiAppsPerEvalTypeResponse
+//  @return CountAiAppsPerEvalTypeResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceCountAiAppsPerEvalTypeExecute(r ApiAiEvaluationsServiceCountAiAppsPerEvalTypeRequest) (*CountAiAppsPerEvalTypeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CountAiAppsPerEvalTypeResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CountAiAppsPerEvalTypeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceCountAiAppsPerEvalType")
@@ -123,8 +123,8 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceCountAiAppsPerEvalT
 }
 
 type ApiAiEvaluationsServiceCreateAiEvaluationRequest struct {
-	ctx                                           context.Context
-	ApiService                                    *AIEvaluationsServiceAPIService
+	ctx context.Context
+	ApiService *AIEvaluationsServiceAPIService
 	aiEvaluationsServiceCreateAiEvaluationRequest *AiEvaluationsServiceCreateAiEvaluationRequest
 }
 
@@ -142,25 +142,24 @@ AiEvaluationsServiceCreateAiEvaluation Create AI evaluation
 
 Creates a new AI evaluation for an application.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAiEvaluationsServiceCreateAiEvaluationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAiEvaluationsServiceCreateAiEvaluationRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceCreateAiEvaluation(ctx context.Context) ApiAiEvaluationsServiceCreateAiEvaluationRequest {
 	return ApiAiEvaluationsServiceCreateAiEvaluationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateAiEvaluationResponse
+//  @return CreateAiEvaluationResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceCreateAiEvaluationExecute(r ApiAiEvaluationsServiceCreateAiEvaluationRequest) (*CreateAiEvaluationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateAiEvaluationResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateAiEvaluationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceCreateAiEvaluation")
@@ -231,8 +230,8 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceCreateAiEvaluationE
 }
 
 type ApiAiEvaluationsServiceCreateCustomEvaluationRequest struct {
-	ctx                                               context.Context
-	ApiService                                        *AIEvaluationsServiceAPIService
+	ctx context.Context
+	ApiService *AIEvaluationsServiceAPIService
 	aiEvaluationsServiceCreateCustomEvaluationRequest *AiEvaluationsServiceCreateCustomEvaluationRequest
 }
 
@@ -250,25 +249,24 @@ AiEvaluationsServiceCreateCustomEvaluation Create custom evaluation
 
 Creates a new custom evaluation in the catalog.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAiEvaluationsServiceCreateCustomEvaluationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAiEvaluationsServiceCreateCustomEvaluationRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceCreateCustomEvaluation(ctx context.Context) ApiAiEvaluationsServiceCreateCustomEvaluationRequest {
 	return ApiAiEvaluationsServiceCreateCustomEvaluationRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateCustomEvaluationResponse
+//  @return CreateCustomEvaluationResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceCreateCustomEvaluationExecute(r ApiAiEvaluationsServiceCreateCustomEvaluationRequest) (*CreateCustomEvaluationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateCustomEvaluationResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CreateCustomEvaluationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceCreateCustomEvaluation")
@@ -339,9 +337,9 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceCreateCustomEvaluat
 }
 
 type ApiAiEvaluationsServiceDeleteAiEvaluationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AIEvaluationsServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiAiEvaluationsServiceDeleteAiEvaluationRequest) Execute() (*DeleteAiEvaluationResponse, *http.Response, error) {
@@ -353,27 +351,26 @@ AiEvaluationsServiceDeleteAiEvaluation Delete AI evaluation
 
 Deletes an AI evaluation by its unique identifier.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier of the AI evaluation to delete.
-	@return ApiAiEvaluationsServiceDeleteAiEvaluationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier of the AI evaluation to delete.
+ @return ApiAiEvaluationsServiceDeleteAiEvaluationRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceDeleteAiEvaluation(ctx context.Context, id string) ApiAiEvaluationsServiceDeleteAiEvaluationRequest {
 	return ApiAiEvaluationsServiceDeleteAiEvaluationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DeleteAiEvaluationResponse
+//  @return DeleteAiEvaluationResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceDeleteAiEvaluationExecute(r ApiAiEvaluationsServiceDeleteAiEvaluationRequest) (*DeleteAiEvaluationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DeleteAiEvaluationResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DeleteAiEvaluationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceDeleteAiEvaluation")
@@ -449,9 +446,9 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceDeleteAiEvaluationE
 }
 
 type ApiAiEvaluationsServiceDeleteCustomEvaluationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AIEvaluationsServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiAiEvaluationsServiceDeleteCustomEvaluationRequest) Execute() (*DeleteCustomEvaluationResponse, *http.Response, error) {
@@ -463,27 +460,26 @@ AiEvaluationsServiceDeleteCustomEvaluation Delete custom evaluation
 
 Deletes a custom evaluation from the catalog.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier of the custom evaluation to delete.
-	@return ApiAiEvaluationsServiceDeleteCustomEvaluationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier of the custom evaluation to delete.
+ @return ApiAiEvaluationsServiceDeleteCustomEvaluationRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceDeleteCustomEvaluation(ctx context.Context, id string) ApiAiEvaluationsServiceDeleteCustomEvaluationRequest {
 	return ApiAiEvaluationsServiceDeleteCustomEvaluationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DeleteCustomEvaluationResponse
+//  @return DeleteCustomEvaluationResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceDeleteCustomEvaluationExecute(r ApiAiEvaluationsServiceDeleteCustomEvaluationRequest) (*DeleteCustomEvaluationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DeleteCustomEvaluationResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DeleteCustomEvaluationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceDeleteCustomEvaluation")
@@ -559,9 +555,9 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceDeleteCustomEvaluat
 }
 
 type ApiAiEvaluationsServiceGetAiEvaluationRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AIEvaluationsServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiAiEvaluationsServiceGetAiEvaluationRequest) Execute() (*GetAiEvaluationResponse, *http.Response, error) {
@@ -573,27 +569,26 @@ AiEvaluationsServiceGetAiEvaluation Get AI evaluation
 
 Gets an AI evaluation by its unique identifier.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier of the AI evaluation.
-	@return ApiAiEvaluationsServiceGetAiEvaluationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier of the AI evaluation.
+ @return ApiAiEvaluationsServiceGetAiEvaluationRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceGetAiEvaluation(ctx context.Context, id string) ApiAiEvaluationsServiceGetAiEvaluationRequest {
 	return ApiAiEvaluationsServiceGetAiEvaluationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetAiEvaluationResponse
+//  @return GetAiEvaluationResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceGetAiEvaluationExecute(r ApiAiEvaluationsServiceGetAiEvaluationRequest) (*GetAiEvaluationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetAiEvaluationResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetAiEvaluationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceGetAiEvaluation")
@@ -669,7 +664,7 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceGetAiEvaluationExec
 }
 
 type ApiAiEvaluationsServiceGetCustomEvaluationsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AIEvaluationsServiceAPIService
 }
 
@@ -682,25 +677,24 @@ AiEvaluationsServiceGetCustomEvaluations List custom evaluations
 
 Lists all custom evaluations defined in the catalog.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAiEvaluationsServiceGetCustomEvaluationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAiEvaluationsServiceGetCustomEvaluationsRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceGetCustomEvaluations(ctx context.Context) ApiAiEvaluationsServiceGetCustomEvaluationsRequest {
 	return ApiAiEvaluationsServiceGetCustomEvaluationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCustomEvaluationsResponse
+//  @return GetCustomEvaluationsResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceGetCustomEvaluationsExecute(r ApiAiEvaluationsServiceGetCustomEvaluationsRequest) (*GetCustomEvaluationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetCustomEvaluationsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetCustomEvaluationsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceGetCustomEvaluations")
@@ -769,9 +763,9 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceGetCustomEvaluation
 }
 
 type ApiAiEvaluationsServiceLinkCustomEvaluationRequest struct {
-	ctx           context.Context
-	ApiService    *AIEvaluationsServiceAPIService
-	id            string
+	ctx context.Context
+	ApiService *AIEvaluationsServiceAPIService
+	id string
 	applicationId string
 }
 
@@ -784,29 +778,28 @@ AiEvaluationsServiceLinkCustomEvaluation Link custom evaluation to application
 
 Associates a custom evaluation with an AI application.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier of the custom evaluation.
-	@param applicationId Unique identifier of the AI application to link to.
-	@return ApiAiEvaluationsServiceLinkCustomEvaluationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier of the custom evaluation.
+ @param applicationId Unique identifier of the AI application to link to.
+ @return ApiAiEvaluationsServiceLinkCustomEvaluationRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceLinkCustomEvaluation(ctx context.Context, id string, applicationId string) ApiAiEvaluationsServiceLinkCustomEvaluationRequest {
 	return ApiAiEvaluationsServiceLinkCustomEvaluationRequest{
-		ApiService:    a,
-		ctx:           ctx,
-		id:            id,
+		ApiService: a,
+		ctx: ctx,
+		id: id,
 		applicationId: applicationId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return LinkCustomEvaluationResponse
+//  @return LinkCustomEvaluationResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceLinkCustomEvaluationExecute(r ApiAiEvaluationsServiceLinkCustomEvaluationRequest) (*LinkCustomEvaluationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *LinkCustomEvaluationResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *LinkCustomEvaluationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceLinkCustomEvaluation")
@@ -889,13 +882,13 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceLinkCustomEvaluatio
 }
 
 type ApiAiEvaluationsServiceListAiEvaluationsRequest struct {
-	ctx            context.Context
-	ApiService     *AIEvaluationsServiceAPIService
-	application    *string
-	subsystem      *string
+	ctx context.Context
+	ApiService *AIEvaluationsServiceAPIService
+	application *string
+	subsystem *string
 	evaluationType *EvaluationType
-	pageSize       *int32
-	pageOffset     *int64
+	pageSize *int32
+	pageOffset *int64
 }
 
 // Filter by application name.
@@ -937,25 +930,24 @@ AiEvaluationsServiceListAiEvaluations List AI evaluations
 
 Lists AI evaluations, optionally filtered by application, subsystem, or evaluation type.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAiEvaluationsServiceListAiEvaluationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAiEvaluationsServiceListAiEvaluationsRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceListAiEvaluations(ctx context.Context) ApiAiEvaluationsServiceListAiEvaluationsRequest {
 	return ApiAiEvaluationsServiceListAiEvaluationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListAiEvaluationsResponse
+//  @return ListAiEvaluationsResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceListAiEvaluationsExecute(r ApiAiEvaluationsServiceListAiEvaluationsRequest) (*ListAiEvaluationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListAiEvaluationsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListAiEvaluationsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceListAiEvaluations")
@@ -1049,8 +1041,8 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceListAiEvaluationsEx
 }
 
 type ApiAiEvaluationsServiceListCustomEvaluationsForApplicationRequest struct {
-	ctx           context.Context
-	ApiService    *AIEvaluationsServiceAPIService
+	ctx context.Context
+	ApiService *AIEvaluationsServiceAPIService
 	applicationId string
 }
 
@@ -1063,27 +1055,26 @@ AiEvaluationsServiceListCustomEvaluationsForApplication List custom evaluations 
 
 Lists custom evaluations linked to a specific AI application.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param applicationId Unique identifier of the AI application.
-	@return ApiAiEvaluationsServiceListCustomEvaluationsForApplicationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param applicationId Unique identifier of the AI application.
+ @return ApiAiEvaluationsServiceListCustomEvaluationsForApplicationRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceListCustomEvaluationsForApplication(ctx context.Context, applicationId string) ApiAiEvaluationsServiceListCustomEvaluationsForApplicationRequest {
 	return ApiAiEvaluationsServiceListCustomEvaluationsForApplicationRequest{
-		ApiService:    a,
-		ctx:           ctx,
+		ApiService: a,
+		ctx: ctx,
 		applicationId: applicationId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListCustomEvaluationsForApplicationResponse
+//  @return ListCustomEvaluationsForApplicationResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceListCustomEvaluationsForApplicationExecute(r ApiAiEvaluationsServiceListCustomEvaluationsForApplicationRequest) (*ListCustomEvaluationsForApplicationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListCustomEvaluationsForApplicationResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListCustomEvaluationsForApplicationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceListCustomEvaluationsForApplication")
@@ -1159,9 +1150,9 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceListCustomEvaluatio
 }
 
 type ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest struct {
-	ctx           context.Context
-	ApiService    *AIEvaluationsServiceAPIService
-	id            string
+	ctx context.Context
+	ApiService *AIEvaluationsServiceAPIService
+	id string
 	applicationId string
 }
 
@@ -1174,29 +1165,28 @@ AiEvaluationsServiceUnlinkCustomEvaluationFromApp Unlink custom evaluation from 
 
 Removes the association between a custom evaluation and an AI application.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier of the custom evaluation.
-	@param applicationId Unique identifier of the AI application to unlink from.
-	@return ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier of the custom evaluation.
+ @param applicationId Unique identifier of the AI application to unlink from.
+ @return ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUnlinkCustomEvaluationFromApp(ctx context.Context, id string, applicationId string) ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest {
 	return ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest{
-		ApiService:    a,
-		ctx:           ctx,
-		id:            id,
+		ApiService: a,
+		ctx: ctx,
+		id: id,
 		applicationId: applicationId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UnlinkCustomEvaluationFromAppResponse
+//  @return UnlinkCustomEvaluationFromAppResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUnlinkCustomEvaluationFromAppExecute(r ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest) (*UnlinkCustomEvaluationFromAppResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UnlinkCustomEvaluationFromAppResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UnlinkCustomEvaluationFromAppResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceUnlinkCustomEvaluationFromApp")
@@ -1279,9 +1269,9 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUnlinkCustomEvaluat
 }
 
 type ApiAiEvaluationsServiceUpdateAiEvaluationRequest struct {
-	ctx                                           context.Context
-	ApiService                                    *AIEvaluationsServiceAPIService
-	id                                            string
+	ctx context.Context
+	ApiService *AIEvaluationsServiceAPIService
+	id string
 	aiEvaluationsServiceUpdateAiEvaluationRequest *AiEvaluationsServiceUpdateAiEvaluationRequest
 }
 
@@ -1299,27 +1289,26 @@ AiEvaluationsServiceUpdateAiEvaluation Update AI evaluation
 
 Updates one or more fields of an existing AI evaluation.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier of the AI evaluation to update.
-	@return ApiAiEvaluationsServiceUpdateAiEvaluationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier of the AI evaluation to update.
+ @return ApiAiEvaluationsServiceUpdateAiEvaluationRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUpdateAiEvaluation(ctx context.Context, id string) ApiAiEvaluationsServiceUpdateAiEvaluationRequest {
 	return ApiAiEvaluationsServiceUpdateAiEvaluationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateAiEvaluationResponse
+//  @return UpdateAiEvaluationResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUpdateAiEvaluationExecute(r ApiAiEvaluationsServiceUpdateAiEvaluationRequest) (*UpdateAiEvaluationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateAiEvaluationResponse
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateAiEvaluationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceUpdateAiEvaluation")
@@ -1397,9 +1386,9 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUpdateAiEvaluationE
 }
 
 type ApiAiEvaluationsServiceUpdateCustomEvaluationRequest struct {
-	ctx                                               context.Context
-	ApiService                                        *AIEvaluationsServiceAPIService
-	id                                                string
+	ctx context.Context
+	ApiService *AIEvaluationsServiceAPIService
+	id string
 	aiEvaluationsServiceUpdateCustomEvaluationRequest *AiEvaluationsServiceUpdateCustomEvaluationRequest
 }
 
@@ -1417,27 +1406,26 @@ AiEvaluationsServiceUpdateCustomEvaluation Update custom evaluation
 
 Updates one or more fields of an existing custom evaluation.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier of the custom evaluation to update.
-	@return ApiAiEvaluationsServiceUpdateCustomEvaluationRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier of the custom evaluation to update.
+ @return ApiAiEvaluationsServiceUpdateCustomEvaluationRequest
 */
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUpdateCustomEvaluation(ctx context.Context, id string) ApiAiEvaluationsServiceUpdateCustomEvaluationRequest {
 	return ApiAiEvaluationsServiceUpdateCustomEvaluationRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateCustomEvaluationResponse
+//  @return UpdateCustomEvaluationResponse
 func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUpdateCustomEvaluationExecute(r ApiAiEvaluationsServiceUpdateCustomEvaluationRequest) (*UpdateCustomEvaluationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPatch
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateCustomEvaluationResponse
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateCustomEvaluationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIEvaluationsServiceAPIService.AiEvaluationsServiceUpdateCustomEvaluation")

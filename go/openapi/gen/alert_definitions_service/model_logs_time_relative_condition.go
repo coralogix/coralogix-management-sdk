@@ -22,11 +22,11 @@ var _ MappedNullable = &LogsTimeRelativeCondition{}
 
 // LogsTimeRelativeCondition Defines conditions for time-relative comparison alerts
 type LogsTimeRelativeCondition struct {
-	ComparedTo    *LogsTimeRelativeComparedTo    `json:"comparedTo,omitempty"`
+	ComparedTo *LogsTimeRelativeComparedTo `json:"comparedTo,omitempty"`
 	ConditionType *LogsTimeRelativeConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition.
-	Threshold                         *float64 `json:"threshold,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Threshold *float64 `json:"threshold,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *LogsTimeRelativeCondition) SetThreshold(v float64) {
 }
 
 func (o LogsTimeRelativeCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableLogsTimeRelativeCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,15 +22,15 @@ var _ MappedNullable = &VariableSourceV2QuerySource{}
 
 // VariableSourceV2QuerySource Variable source backed by a query against logs, metrics, spans, or Dataprime data.
 type VariableSourceV2QuerySource struct {
-	AllOption                         *AllOption                           `json:"allOption,omitempty"`
-	DataprimeQuery                    *QuerySourceDataprimeQuery           `json:"dataprimeQuery,omitempty"`
-	LogsQuery                         *QuerySourceLogsQuery                `json:"logsQuery,omitempty"`
-	MetricsQuery                      *QuerySourceMetricsQuery             `json:"metricsQuery,omitempty"`
-	RefreshStrategy                   *VariableSourceV2RefreshStrategy     `json:"refreshStrategy,omitempty"`
-	SpansQuery                        *QuerySourceSpansQuery               `json:"spansQuery,omitempty"`
-	ValueDisplayOptions               *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
-	ValuesOrderDirection              *OrderDirection                      `json:"valuesOrderDirection,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AllOption *AllOption `json:"allOption,omitempty"`
+	DataprimeQuery *QuerySourceDataprimeQuery `json:"dataprimeQuery,omitempty"`
+	LogsQuery *QuerySourceLogsQuery `json:"logsQuery,omitempty"`
+	MetricsQuery *QuerySourceMetricsQuery `json:"metricsQuery,omitempty"`
+	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`
+	SpansQuery *QuerySourceSpansQuery `json:"spansQuery,omitempty"`
+	ValueDisplayOptions *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
+	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -310,7 +310,7 @@ func (o *VariableSourceV2QuerySource) SetValuesOrderDirection(v OrderDirection) 
 }
 
 func (o VariableSourceV2QuerySource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -462,3 +462,4 @@ func (v *NullableVariableSourceV2QuerySource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

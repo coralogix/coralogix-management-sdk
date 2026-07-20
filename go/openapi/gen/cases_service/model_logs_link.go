@@ -23,8 +23,8 @@ var _ MappedNullable = &LogsLink{}
 // LogsLink Deep link to explore logs related to an alert indicator on a case.
 type LogsLink struct {
 	// Explore logs URL pre-filtered to the alert query and case time window.
-	Logs                              *string `json:"logs,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Logs *string `json:"logs,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *LogsLink) SetLogs(v string) {
 }
 
 func (o LogsLink) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableLogsLink) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

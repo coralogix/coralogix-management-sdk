@@ -22,10 +22,10 @@ var _ MappedNullable = &MultiSelectQuerySource{}
 
 // MultiSelectQuerySource Variable source that populates multi-select values by executing a query against logs, metrics, or spans.
 type MultiSelectQuerySource struct {
-	Query                             *MultiSelectQuery               `json:"query,omitempty"`
-	RefreshStrategy                   *MultiSelectRefreshStrategy     `json:"refreshStrategy,omitempty"`
-	ValueDisplayOptions               *MultiSelectValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Query *MultiSelectQuery `json:"query,omitempty"`
+	RefreshStrategy *MultiSelectRefreshStrategy `json:"refreshStrategy,omitempty"`
+	ValueDisplayOptions *MultiSelectValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *MultiSelectQuerySource) SetValueDisplayOptions(v MultiSelectValueDispla
 }
 
 func (o MultiSelectQuerySource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -231,3 +231,4 @@ func (v *NullableMultiSelectQuerySource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

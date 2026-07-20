@@ -23,9 +23,9 @@ var _ MappedNullable = &FilterOptionCountsEntityLabelsFilter{}
 // FilterOptionCountsEntityLabelsFilter Filter by alert definition entity labels with And/Or options
 type FilterOptionCountsEntityLabelsFilter struct {
 	// The entity label key-value pairs to filter by
-	EntityLabels                      *map[string]string    `json:"entityLabels,omitempty"`
-	ValuesOperator                    *FilterValuesOperator `json:"valuesOperator,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	ValuesOperator *FilterValuesOperator `json:"valuesOperator,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *FilterOptionCountsEntityLabelsFilter) SetValuesOperator(v FilterValuesO
 }
 
 func (o FilterOptionCountsEntityLabelsFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableFilterOptionCountsEntityLabelsFilter) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

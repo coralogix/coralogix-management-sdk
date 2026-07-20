@@ -24,8 +24,8 @@ var _ MappedNullable = &FieldCondition{}
 type FieldCondition struct {
 	Type *FieldConditionConditionType `json:"type,omitempty"`
 	// List of values.
-	Values                            []FieldConditionFieldValue `json:"values,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Values []FieldConditionFieldValue `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *FieldCondition) SetValues(v []FieldConditionFieldValue) {
 }
 
 func (o FieldCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableFieldCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

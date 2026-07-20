@@ -24,7 +24,7 @@ type NextOp string
 // List of NextOp
 const (
 	NEXTOP_NEXT_OP_AND_OR_UNSPECIFIED NextOp = "NEXT_OP_AND_OR_UNSPECIFIED"
-	NEXTOP_NEXT_OP_OR                 NextOp = "NEXT_OP_OR"
+	NEXTOP_NEXT_OP_OR NextOp = "NEXT_OP_OR"
 )
 
 // All allowed values of NextOp enum
@@ -111,3 +111,4 @@ func (v *NullableNextOp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

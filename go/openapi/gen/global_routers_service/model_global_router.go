@@ -30,8 +30,8 @@ type GlobalRouter struct {
 	// The disabled.
 	Disabled *bool `json:"disabled,omitempty"`
 	// The entity labels.
-	EntityLabels *map[string]string            `json:"entityLabels,omitempty"`
-	EntityType   *NotificationCenterEntityType `json:"entityType,omitempty"`
+	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// The fallback destinations to be used if no rule matches.
 	Fallback []RoutingTarget `json:"fallback,omitempty"`
 	// The fallback targets.
@@ -39,13 +39,13 @@ type GlobalRouter struct {
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name.
-	Name          *string        `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	RoutingLabels *RoutingLabels `json:"routingLabels,omitempty"`
 	// List of rules.
 	Rules []RoutingRule `json:"rules,omitempty"`
 	// Timestamp of the last update.
-	UpdateTime                        *time.Time `json:"updateTime,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -453,7 +453,7 @@ func (o *GlobalRouter) SetUpdateTime(v time.Time) {
 }
 
 func (o GlobalRouter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -575,3 +575,4 @@ func (v *NullableGlobalRouter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

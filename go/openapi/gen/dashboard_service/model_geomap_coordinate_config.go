@@ -22,9 +22,9 @@ var _ MappedNullable = &GeomapCoordinateConfig{}
 
 // GeomapCoordinateConfig Geomap coordinate config.
 type GeomapCoordinateConfig struct {
-	LatitudeField                     *ObservationField `json:"latitudeField,omitempty"`
-	LongitudeField                    *ObservationField `json:"longitudeField,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	LatitudeField *ObservationField `json:"latitudeField,omitempty"`
+	LongitudeField *ObservationField `json:"longitudeField,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *GeomapCoordinateConfig) SetLongitudeField(v ObservationField) {
 }
 
 func (o GeomapCoordinateConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,3 +194,4 @@ func (v *NullableGeomapCoordinateConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

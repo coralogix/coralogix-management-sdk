@@ -22,11 +22,11 @@ var _ MappedNullable = &KPIBreachedCaseEvent{}
 
 // KPIBreachedCaseEvent Kpi breached case event.
 type KPIBreachedCaseEvent struct {
-	KpiType  *KPIType      `json:"kpiType,omitempty"`
+	KpiType *KPIType `json:"kpiType,omitempty"`
 	Priority *CasePriority `json:"priority,omitempty"`
 	// Duration after which the KPI threshold was set to breach
-	Threshold                         *string `json:"threshold,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Threshold *string `json:"threshold,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *KPIBreachedCaseEvent) SetThreshold(v string) {
 }
 
 func (o KPIBreachedCaseEvent) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableKPIBreachedCaseEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

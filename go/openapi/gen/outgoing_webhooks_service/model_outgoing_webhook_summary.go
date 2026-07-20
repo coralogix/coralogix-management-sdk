@@ -34,8 +34,8 @@ type OutgoingWebhookSummary struct {
 	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// URL.
-	Url                               *string `json:"url,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -251,7 +251,7 @@ func (o *OutgoingWebhookSummary) SetUrl(v string) {
 }
 
 func (o OutgoingWebhookSummary) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -349,3 +349,4 @@ func (v *NullableOutgoingWebhookSummary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

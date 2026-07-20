@@ -24,9 +24,9 @@ type Variant string
 // List of Variant
 const (
 	VARIANT_DEFAULT Variant = "DEFAULT"
-	VARIANT_GCP     Variant = "GCP"
-	VARIANT_OAUTH   Variant = "OAUTH"
-	VARIANT_CUSTOM  Variant = "CUSTOM"
+	VARIANT_GCP Variant = "GCP"
+	VARIANT_OAUTH Variant = "OAUTH"
+	VARIANT_CUSTOM Variant = "CUSTOM"
 )
 
 // All allowed values of Variant enum
@@ -115,3 +115,4 @@ func (v *NullableVariant) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

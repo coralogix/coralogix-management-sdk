@@ -23,8 +23,8 @@ type AttachmentConfigPolicy string
 
 // List of AttachmentConfigPolicy
 const (
-	ATTACHMENTCONFIGPOLICY_AUTO     AttachmentConfigPolicy = "AUTO"
-	ATTACHMENTCONFIGPOLICY_ENABLED  AttachmentConfigPolicy = "ENABLED"
+	ATTACHMENTCONFIGPOLICY_AUTO AttachmentConfigPolicy = "AUTO"
+	ATTACHMENTCONFIGPOLICY_ENABLED AttachmentConfigPolicy = "ENABLED"
 	ATTACHMENTCONFIGPOLICY_DISABLED AttachmentConfigPolicy = "DISABLED"
 )
 
@@ -113,3 +113,4 @@ func (v *NullableAttachmentConfigPolicy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

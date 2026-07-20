@@ -23,9 +23,9 @@ var _ MappedNullable = &LogsUniqueCountCondition{}
 // LogsUniqueCountCondition Defines conditions for unique count alerts
 type LogsUniqueCountCondition struct {
 	// The maximum unique count
-	MaxUniqueCount                    *string                    `json:"maxUniqueCount,omitempty" validate:"regexp=^-?[0-9]+$"`
-	TimeWindow                        *LogsUniqueValueTimeWindow `json:"timeWindow,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	MaxUniqueCount *string `json:"maxUniqueCount,omitempty" validate:"regexp=^-?[0-9]+$"`
+	TimeWindow *LogsUniqueValueTimeWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *LogsUniqueCountCondition) SetTimeWindow(v LogsUniqueValueTimeWindow) {
 }
 
 func (o LogsUniqueCountCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableLogsUniqueCountCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

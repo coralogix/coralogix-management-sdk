@@ -23,8 +23,8 @@ var _ MappedNullable = &CasesV1PaginationResponse{}
 // CasesV1PaginationResponse Pagination information for list responses.
 type CasesV1PaginationResponse struct {
 	// Token for the next page of results
-	NextPageToken                     *string `json:"nextPageToken,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	NextPageToken *string `json:"nextPageToken,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *CasesV1PaginationResponse) SetNextPageToken(v string) {
 }
 
 func (o CasesV1PaginationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableCasesV1PaginationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

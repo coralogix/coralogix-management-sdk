@@ -25,23 +25,23 @@ var _ MappedNullable = &Connector{}
 type Connector struct {
 	// The config overrides.
 	ConfigOverrides []EntityTypeConfigOverrides `json:"configOverrides,omitempty"`
-	ConnectorConfig *ConnectorConfig            `json:"connectorConfig,omitempty"`
+	ConnectorConfig *ConnectorConfig `json:"connectorConfig,omitempty"`
 	// The create time.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Human-readable description.
-	Description *string      `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Diagnostics *Diagnostics `json:"diagnostics,omitempty"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name.
-	Name                    *string          `json:"name,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	ResolvedConnectorConfig *ConnectorConfig `json:"resolvedConnectorConfig,omitempty"`
 	// Team identifier.
-	TeamId *int64                           `json:"teamId,omitempty"`
-	Type   *NotificationCenterConnectorType `json:"type,omitempty"`
+	TeamId *int64 `json:"teamId,omitempty"`
+	Type *NotificationCenterConnectorType `json:"type,omitempty"`
 	// Timestamp of the last update.
-	UpdateTime                        *time.Time `json:"updateTime,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -417,7 +417,7 @@ func (o *Connector) SetUpdateTime(v time.Time) {
 }
 
 func (o Connector) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -535,3 +535,4 @@ func (v *NullableConnector) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

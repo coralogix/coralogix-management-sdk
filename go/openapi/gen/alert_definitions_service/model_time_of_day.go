@@ -25,8 +25,8 @@ type TimeOfDay struct {
 	// The hours.
 	Hours *int32 `json:"hours,omitempty"`
 	// The minutes.
-	Minutes                           *int32 `json:"minutes,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Minutes *int32 `json:"minutes,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *TimeOfDay) SetMinutes(v int32) {
 }
 
 func (o TimeOfDay) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableTimeOfDay) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

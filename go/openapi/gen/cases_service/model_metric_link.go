@@ -23,8 +23,8 @@ var _ MappedNullable = &MetricLink{}
 // MetricLink Deep link to explore metrics related to an alert indicator on a case.
 type MetricLink struct {
 	// Explore metrics URL pre-filtered to the alert query and case time window.
-	Metrics                           *string `json:"metrics,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Metrics *string `json:"metrics,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *MetricLink) SetMetrics(v string) {
 }
 
 func (o MetricLink) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableMetricLink) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

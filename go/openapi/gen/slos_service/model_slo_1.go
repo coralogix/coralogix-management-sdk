@@ -23,36 +23,36 @@ var _ MappedNullable = &Slo1{}
 
 // Slo1 Definition of an SLO
 type Slo1 struct {
-	ApmSli         *ApmSli `json:"apmSli,omitempty"`
+	ApmSli *ApmSli `json:"apmSli,omitempty"`
 	ApmSliMetadata *ApmSli `json:"apmSliMetadata,omitempty"`
 	// RFC3339 timestamp of when the SLO was created.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Email or identifier of the user who created the SLO.
 	Creator *string `json:"creator,omitempty"`
 	// Human-readable description of the SLO.
-	Description *string     `json:"description,omitempty"`
-	Grouping    *V1Grouping `json:"grouping,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Grouping *V1Grouping `json:"grouping,omitempty"`
 	// Unique identifier of the SLO.
 	Id *string `json:"id,omitempty"`
 	// List of labels.
 	Labels *map[string]string `json:"labels,omitempty"`
 	// Human-readable display name for the SLO.
-	Name                  *string                `json:"name,omitempty"`
-	OwnershipTags         *SloOwnershipTags      `json:"ownershipTags,omitempty"`
-	ProductType           *SloProductType        `json:"productType,omitempty"`
+	Name *string `json:"name,omitempty"`
+	OwnershipTags *SloOwnershipTags `json:"ownershipTags,omitempty"`
+	ProductType *SloProductType `json:"productType,omitempty"`
 	RequestBasedMetricSli *RequestBasedMetricSli `json:"requestBasedMetricSli,omitempty"`
-	Revision              *V1Revision            `json:"revision,omitempty"`
-	SloTimeFrame          *SloTimeFrame          `json:"sloTimeFrame,omitempty"`
-	SloType               *SloType               `json:"sloType,omitempty"`
+	Revision *V1Revision `json:"revision,omitempty"`
+	SloTimeFrame *SloTimeFrame `json:"sloTimeFrame,omitempty"`
+	SloType *SloType `json:"sloType,omitempty"`
 	// Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).
 	TargetThresholdPercentage *float32 `json:"targetThresholdPercentage,omitempty"`
 	// Deprecated: SLO type string. Use slo_type instead.
 	// Deprecated
 	Type *string `json:"type,omitempty"`
 	// Timestamp of the last update.
-	UpdateTime                        *time.Time            `json:"updateTime,omitempty"`
-	WindowBasedMetricSli              *WindowBasedMetricSli `json:"windowBasedMetricSli,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	WindowBasedMetricSli *WindowBasedMetricSli `json:"windowBasedMetricSli,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -687,7 +687,7 @@ func (o *Slo1) SetWindowBasedMetricSli(v WindowBasedMetricSli) {
 }
 
 func (o Slo1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -874,3 +874,4 @@ func (v *NullableSlo1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

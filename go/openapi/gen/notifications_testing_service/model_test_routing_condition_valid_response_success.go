@@ -23,8 +23,8 @@ var _ MappedNullable = &TestRoutingConditionValidResponseSuccess{}
 // TestRoutingConditionValidResponseSuccess Indicates the routing condition is valid, with the evaluated result.
 type TestRoutingConditionValidResponseSuccess struct {
 	// Result.
-	Result                            *bool `json:"result,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Result *bool `json:"result,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *TestRoutingConditionValidResponseSuccess) SetResult(v bool) {
 }
 
 func (o TestRoutingConditionValidResponseSuccess) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableTestRoutingConditionValidResponseSuccess) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

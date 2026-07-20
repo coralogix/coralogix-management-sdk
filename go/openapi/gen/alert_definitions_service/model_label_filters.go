@@ -27,8 +27,8 @@ type LabelFilters struct {
 	// The severities.
 	Severities []LogSeverity `json:"severities,omitempty"`
 	// The subsystem name.
-	SubsystemName                     []LabelFilterType `json:"subsystemName,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SubsystemName []LabelFilterType `json:"subsystemName,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *LabelFilters) SetSubsystemName(v []LabelFilterType) {
 }
 
 func (o LabelFilters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableLabelFilters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

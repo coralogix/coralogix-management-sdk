@@ -24,9 +24,9 @@ var _ MappedNullable = &ActionExecutionResponse{}
 type ActionExecutionResponse struct {
 	Create *CreateActionResponse `json:"create,omitempty"`
 	// This data structure represents the response to delete an Action.
-	Delete                            map[string]interface{} `json:"delete,omitempty"`
-	Replace                           *ReplaceActionResponse `json:"replace,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Delete map[string]interface{} `json:"delete,omitempty"`
+	Replace *ReplaceActionResponse `json:"replace,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *ActionExecutionResponse) SetReplace(v ReplaceActionResponse) {
 }
 
 func (o ActionExecutionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -269,3 +269,4 @@ func (v *NullableActionExecutionResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

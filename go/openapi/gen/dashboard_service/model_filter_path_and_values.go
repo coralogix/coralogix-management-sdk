@@ -23,11 +23,11 @@ var _ MappedNullable = &FilterPathAndValues{}
 
 // FilterPathAndValues This data structure represents a filter path and values
 type FilterPathAndValues struct {
-	Filters                                         *Filters        `json:"filters,omitempty"`
-	MultipleValues                                  *MultipleValues `json:"multipleValues,omitempty"`
-	Path                                            string          `json:"path"`
-	AdditionalProperties                            map[string]interface{}
-	additionalPropertiesFromUnmarshal               bool
+	Filters *Filters `json:"filters,omitempty"`
+	MultipleValues *MultipleValues `json:"multipleValues,omitempty"`
+	Path string `json:"path"`
+	AdditionalProperties map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
@@ -140,7 +140,7 @@ func (o *FilterPathAndValues) SetPath(v string) {
 }
 
 func (o FilterPathAndValues) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -199,10 +199,10 @@ func (o *FilterPathAndValues) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -290,3 +290,4 @@ func (v *NullableFilterPathAndValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

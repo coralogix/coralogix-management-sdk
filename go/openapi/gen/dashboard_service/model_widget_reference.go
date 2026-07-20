@@ -23,9 +23,9 @@ var _ MappedNullable = &WidgetReference{}
 // WidgetReference Reference to a widget from another dashboard
 type WidgetReference struct {
 	// Dashboard ID containing the referenced widget (21-char NanoIds)
-	DashboardId                       *string `json:"dashboardId,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	WidgetId                          *UUID   `json:"widgetId,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	DashboardId *string `json:"dashboardId,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	WidgetId *UUID `json:"widgetId,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *WidgetReference) SetWidgetId(v UUID) {
 }
 
 func (o WidgetReference) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableWidgetReference) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

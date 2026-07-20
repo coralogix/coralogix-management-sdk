@@ -25,9 +25,9 @@ type OutgoingWebhookType struct {
 	// Number of items.
 	Count *int64 `json:"count,omitempty"`
 	// The label.
-	Label                             *string      `json:"label,omitempty"`
-	Type                              *WebhookType `json:"type,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Label *string `json:"label,omitempty"`
+	Type *WebhookType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *OutgoingWebhookType) SetType(v WebhookType) {
 }
 
 func (o OutgoingWebhookType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableOutgoingWebhookType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

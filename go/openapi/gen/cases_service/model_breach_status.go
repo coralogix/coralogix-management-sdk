@@ -24,8 +24,8 @@ type BreachStatus string
 // List of BreachStatus
 const (
 	BREACHSTATUS_BREACH_STATUS_UNSPECIFIED BreachStatus = "BREACH_STATUS_UNSPECIFIED"
-	BREACHSTATUS_BREACH_STATUS_BREACHED    BreachStatus = "BREACH_STATUS_BREACHED"
-	BREACHSTATUS_BREACH_STATUS_MITIGATED   BreachStatus = "BREACH_STATUS_MITIGATED"
+	BREACHSTATUS_BREACH_STATUS_BREACHED BreachStatus = "BREACH_STATUS_BREACHED"
+	BREACHSTATUS_BREACH_STATUS_MITIGATED BreachStatus = "BREACH_STATUS_MITIGATED"
 )
 
 // All allowed values of BreachStatus enum
@@ -113,3 +113,4 @@ func (v *NullableBreachStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

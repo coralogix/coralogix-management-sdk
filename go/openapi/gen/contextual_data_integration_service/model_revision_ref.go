@@ -25,8 +25,8 @@ type RevisionRef struct {
 	// The description md.
 	DescriptionMd *string `json:"descriptionMd,omitempty"`
 	// Version number.
-	Version                           *string `json:"version,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *RevisionRef) SetVersion(v string) {
 }
 
 func (o RevisionRef) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableRevisionRef) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

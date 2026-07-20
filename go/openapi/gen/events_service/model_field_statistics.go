@@ -23,8 +23,8 @@ var _ MappedNullable = &FieldStatistics{}
 // FieldStatistics struct for FieldStatistics
 type FieldStatistics struct {
 	// The field statistics.
-	FieldStatistics                   *map[string]string `json:"fieldStatistics,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	FieldStatistics *map[string]string `json:"fieldStatistics,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *FieldStatistics) SetFieldStatistics(v map[string]string) {
 }
 
 func (o FieldStatistics) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableFieldStatistics) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

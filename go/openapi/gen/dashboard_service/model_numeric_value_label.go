@@ -25,8 +25,8 @@ type NumericValueLabel struct {
 	// The label.
 	Label *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The value.
-	Value                             *float32 `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Value *float32 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *NumericValueLabel) SetValue(v float32) {
 }
 
 func (o NumericValueLabel) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableNumericValueLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,8 +22,8 @@ var _ MappedNullable = &GetTenantConfigResponseV2{}
 
 // GetTenantConfigResponseV2 Response containing the current metrics tenant configuration.
 type GetTenantConfigResponseV2 struct {
-	TenantConfig                      *TenantConfigV2 `json:"tenantConfig,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	TenantConfig *TenantConfigV2 `json:"tenantConfig,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetTenantConfigResponseV2) SetTenantConfig(v TenantConfigV2) {
 }
 
 func (o GetTenantConfigResponseV2) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetTenantConfigResponseV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,9 +22,9 @@ var _ MappedNullable = &ActionDefinition{}
 
 // ActionDefinition Defines the behavior of a dashboard action, either a custom URL or a built-in template.
 type ActionDefinition struct {
-	CustomAction                      *CustomAction                `json:"customAction,omitempty"`
-	GoToDashboardAction               *GoToDashboardTemplateAction `json:"goToDashboardAction,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	CustomAction *CustomAction `json:"customAction,omitempty"`
+	GoToDashboardAction *GoToDashboardTemplateAction `json:"goToDashboardAction,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *ActionDefinition) SetGoToDashboardAction(v GoToDashboardTemplateAction)
 }
 
 func (o ActionDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableActionDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

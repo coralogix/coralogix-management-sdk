@@ -23,8 +23,8 @@ var _ MappedNullable = &SubsystemNameConstraint{}
 // SubsystemNameConstraint Subsystem name constraint.
 type SubsystemNameConstraint struct {
 	// The value.
-	Value                             *string `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *SubsystemNameConstraint) SetValue(v string) {
 }
 
 func (o SubsystemNameConstraint) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableSubsystemNameConstraint) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

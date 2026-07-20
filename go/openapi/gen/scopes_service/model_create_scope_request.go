@@ -30,8 +30,8 @@ type CreateScopeRequest struct {
 	// The display name.
 	DisplayName string `json:"displayName"`
 	// List of filters.
-	Filters                           []ScopesV1Filter `json:"filters"`
-	AdditionalProperties              map[string]interface{}
+	Filters []ScopesV1Filter `json:"filters"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -169,7 +169,7 @@ func (o *CreateScopeRequest) SetFilters(v []ScopesV1Filter) {
 }
 
 func (o CreateScopeRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -208,10 +208,10 @@ func (o *CreateScopeRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -277,3 +277,4 @@ func (v *NullableCreateScopeRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

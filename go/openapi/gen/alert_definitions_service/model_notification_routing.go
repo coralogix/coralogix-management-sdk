@@ -22,8 +22,8 @@ var _ MappedNullable = &NotificationRouting{}
 
 // NotificationRouting Notification routing.
 type NotificationRouting struct {
-	ConfigOverrides                   *V3SourceOverrides `json:"configOverrides,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ConfigOverrides *V3SourceOverrides `json:"configOverrides,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *NotificationRouting) SetConfigOverrides(v V3SourceOverrides) {
 }
 
 func (o NotificationRouting) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableNotificationRouting) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

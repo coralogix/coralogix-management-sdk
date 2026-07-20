@@ -16,18 +16,19 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
+
 
 // AlertEventsServiceAPIService AlertEventsServiceAPI service
 type AlertEventsServiceAPIService service
 
 type ApiAlertEventServiceGetAlertEventRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AlertEventsServiceAPIService
-	id         string
-	orderBys   *[]AlertEventServiceGetAlertEventsStatsOrderBysParameterInner
+	id string
+	orderBys *[]AlertEventServiceGetAlertEventsStatsOrderBysParameterInner
 	pagination *AlertEventServiceGetAlertEventPaginationParameter
 }
 
@@ -55,27 +56,26 @@ Returns the alert event with the specified ID.
 Requires the following permissions:
 - `alerts:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier.
-	@return ApiAlertEventServiceGetAlertEventRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier.
+ @return ApiAlertEventServiceGetAlertEventRequest
 */
 func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEvent(ctx context.Context, id string) ApiAlertEventServiceGetAlertEventRequest {
 	return ApiAlertEventServiceGetAlertEventRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetAlertEventResponse
+//  @return GetAlertEventResponse
 func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventExecute(r ApiAlertEventServiceGetAlertEventRequest) (*GetAlertEventResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetAlertEventResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetAlertEventResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertEventsServiceAPIService.AlertEventServiceGetAlertEvent")
@@ -89,8 +89,11 @@ func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 0 {
-		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	if strlen(r.id) < 1 {
+		return localVarReturnValue, nil, reportError("id must have at least 1 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
 	if r.orderBys != nil {
@@ -159,8 +162,8 @@ func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -170,8 +173,8 @@ func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -181,8 +184,8 @@ func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -200,10 +203,10 @@ func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventExecute(r A
 }
 
 type ApiAlertEventServiceGetAlertEventsStatsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *AlertEventsServiceAPIService
-	ids        *[]string
-	orderBys   *[]AlertEventServiceGetAlertEventsStatsOrderBysParameterInner
+	ids *[]string
+	orderBys *[]AlertEventServiceGetAlertEventsStatsOrderBysParameterInner
 }
 
 // The ids.
@@ -230,25 +233,24 @@ Returns statistical data for alert events.
 Requires the following permissions:
 - `alerts:ReadConfig`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiAlertEventServiceGetAlertEventsStatsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAlertEventServiceGetAlertEventsStatsRequest
 */
 func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventsStats(ctx context.Context) ApiAlertEventServiceGetAlertEventsStatsRequest {
 	return ApiAlertEventServiceGetAlertEventsStatsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetAlertEventStatsResponse
+//  @return GetAlertEventStatsResponse
 func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventsStatsExecute(r ApiAlertEventServiceGetAlertEventsStatsRequest) (*GetAlertEventStatsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetAlertEventStatsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetAlertEventStatsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertEventsServiceAPIService.AlertEventServiceGetAlertEventsStats")
@@ -338,8 +340,8 @@ func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventsStatsExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -349,8 +351,8 @@ func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventsStatsExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -360,8 +362,8 @@ func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEventsStatsExecu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

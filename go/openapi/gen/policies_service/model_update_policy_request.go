@@ -23,24 +23,25 @@ var _ MappedNullable = &UpdatePolicyRequest{}
 
 // UpdatePolicyRequest This data structue is used to update an existing policy.
 type UpdatePolicyRequest struct {
-	ApplicationRule  *QuotaV1Rule      `json:"applicationRule,omitempty"`
+	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
 	// Optional free-text description of the policy's purpose.
 	Description *string `json:"description,omitempty"`
 	// Indicates whether the policy should be actively evaluated and applied.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Unique identifier of the policy to update.
-	Id       string    `json:"id"`
+	Id string `json:"id"`
 	LogRules *LogRules `json:"logRules,omitempty"`
 	// Human-readable name for the policy.
-	Name             *string           `json:"name,omitempty"`
-	Priority         *QuotaV1Priority  `json:"priority,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Priority *QuotaV1Priority `json:"priority,omitempty"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
-	SpanRules        *SpanRules        `json:"spanRules,omitempty"`
-	SubsystemRule    *QuotaV1Rule      `json:"subsystemRule,omitempty"`
+	RumRules *LogRules `json:"rumRules,omitempty"`
+	SpanRules *SpanRules `json:"spanRules,omitempty"`
+	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
 	// List of data targets/destinations to which this policy routes data.
-	Targets                           []V1Target `json:"targets,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Targets []V1Target `json:"targets,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -344,6 +345,38 @@ func (o *UpdatePolicyRequest) SetPriorityOverride(v PriorityOverride) {
 	o.PriorityOverride = &v
 }
 
+// GetRumRules returns the RumRules field value if set, zero value otherwise.
+func (o *UpdatePolicyRequest) GetRumRules() LogRules {
+	if o == nil || IsNil(o.RumRules) {
+		var ret LogRules
+		return ret
+	}
+	return *o.RumRules
+}
+
+// GetRumRulesOk returns a tuple with the RumRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePolicyRequest) GetRumRulesOk() (*LogRules, bool) {
+	if o == nil || IsNil(o.RumRules) {
+		return nil, false
+	}
+	return o.RumRules, true
+}
+
+// HasRumRules returns a boolean if a field has been set.
+func (o *UpdatePolicyRequest) HasRumRules() bool {
+	if o != nil && !IsNil(o.RumRules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRumRules gets a reference to the given LogRules and assigns it to the RumRules field.
+func (o *UpdatePolicyRequest) SetRumRules(v LogRules) {
+	o.RumRules = &v
+}
+
 // GetSpanRules returns the SpanRules field value if set, zero value otherwise.
 func (o *UpdatePolicyRequest) GetSpanRules() SpanRules {
 	if o == nil || IsNil(o.SpanRules) {
@@ -441,7 +474,7 @@ func (o *UpdatePolicyRequest) SetTargets(v []V1Target) {
 }
 
 func (o UpdatePolicyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -475,6 +508,9 @@ func (o UpdatePolicyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PriorityOverride) {
 		toSerialize["priorityOverride"] = o.PriorityOverride
 	}
+	if !IsNil(o.RumRules) {
+		toSerialize["rumRules"] = o.RumRules
+	}
 	if !IsNil(o.SpanRules) {
 		toSerialize["spanRules"] = o.SpanRules
 	}
@@ -491,8 +527,11 @@ func (o UpdatePolicyRequest) ToMap() (map[string]interface{}, error) {
 	if _, exists := toSerialize["spanRules"]; exists {
 		optionalOneOfGroup0Matches++
 	}
+	if _, exists := toSerialize["rumRules"]; exists {
+		optionalOneOfGroup0Matches++
+	}
 	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logRules, spanRules] may be set"}
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logRules, spanRules, rumRules] may be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["logRules"]; exists {
@@ -500,6 +539,9 @@ func (o UpdatePolicyRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if _, exists := o.AdditionalProperties["spanRules"]; exists {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field spanRules must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["rumRules"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field rumRules must be set through the typed field, not AdditionalProperties"}
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -522,10 +564,10 @@ func (o *UpdatePolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -538,8 +580,11 @@ func (o *UpdatePolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	if _, exists := allProperties["spanRules"]; exists {
 		optionalOneOfGroup0Matches++
 	}
+	if _, exists := allProperties["rumRules"]; exists {
+		optionalOneOfGroup0Matches++
+	}
 	if optionalOneOfGroup0Matches > 1 {
-		return GenericOpenAPIError{error: "at most one of [logRules, spanRules] may be set"}
+		return GenericOpenAPIError{error: "at most one of [logRules, spanRules, rumRules] may be set"}
 	}
 
 	varUpdatePolicyRequest := _UpdatePolicyRequest{}
@@ -563,8 +608,11 @@ func (o *UpdatePolicyRequest) UnmarshalJSON(data []byte) (err error) {
 		if _, exists := additionalProperties["spanRules"]; exists {
 			optionalOneOfGroup0MatchesInPayload++
 		}
+		if _, exists := additionalProperties["rumRules"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
 		if optionalOneOfGroup0MatchesInPayload > 1 {
-			return GenericOpenAPIError{error: "at most one of [logRules, spanRules] may be set"}
+			return GenericOpenAPIError{error: "at most one of [logRules, spanRules, rumRules] may be set"}
 		}
 
 		delete(additionalProperties, "applicationRule")
@@ -576,6 +624,7 @@ func (o *UpdatePolicyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "priority")
 		delete(additionalProperties, "priorityOverride")
+		delete(additionalProperties, "rumRules")
 		delete(additionalProperties, "spanRules")
 		delete(additionalProperties, "subsystemRule")
 		delete(additionalProperties, "targets")
@@ -621,3 +670,4 @@ func (v *NullableUpdatePolicyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

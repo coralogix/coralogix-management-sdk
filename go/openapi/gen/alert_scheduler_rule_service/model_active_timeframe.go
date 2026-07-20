@@ -27,8 +27,8 @@ type ActiveTimeframe struct {
 	// Start time.
 	StartTime *string `json:"startTime,omitempty"`
 	// Timezone.
-	Timezone                          *string `json:"timezone,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Timezone *string `json:"timezone,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -148,7 +148,7 @@ func (o *ActiveTimeframe) SetTimezone(v string) {
 }
 
 func (o ActiveTimeframe) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,3 +234,4 @@ func (v *NullableActiveTimeframe) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

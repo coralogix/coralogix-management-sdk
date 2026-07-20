@@ -23,14 +23,14 @@ var _ MappedNullable = &DataTable{}
 // DataTable Data table.
 type DataTable struct {
 	// List of column definitions. At least one column is required when the query is a logs query.
-	Columns      []DataTableColumn          `json:"columns,omitempty"`
+	Columns []DataTableColumn `json:"columns,omitempty"`
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
-	OrderBy      *OrderingField             `json:"orderBy,omitempty"`
-	Query        *DataTableQuery            `json:"query,omitempty"`
+	OrderBy *OrderingField `json:"orderBy,omitempty"`
+	Query *DataTableQuery `json:"query,omitempty"`
 	// How many results are displayed per table page
-	ResultsPerPage                    *int32    `json:"resultsPerPage,omitempty"`
-	RowStyle                          *RowStyle `json:"rowStyle,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ResultsPerPage *int32 `json:"resultsPerPage,omitempty"`
+	RowStyle *RowStyle `json:"rowStyle,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -246,7 +246,7 @@ func (o *DataTable) SetRowStyle(v RowStyle) {
 }
 
 func (o DataTable) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -344,3 +344,4 @@ func (v *NullableDataTable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

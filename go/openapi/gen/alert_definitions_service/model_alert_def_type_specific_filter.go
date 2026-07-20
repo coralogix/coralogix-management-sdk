@@ -22,8 +22,8 @@ var _ MappedNullable = &AlertDefTypeSpecificFilter{}
 
 // AlertDefTypeSpecificFilter Filter by fields specific to alert type definitions
 type AlertDefTypeSpecificFilter struct {
-	SloFilter                         *AlertDefSloSpecificFilter `json:"sloFilter,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SloFilter *AlertDefSloSpecificFilter `json:"sloFilter,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *AlertDefTypeSpecificFilter) SetSloFilter(v AlertDefSloSpecificFilter) {
 }
 
 func (o AlertDefTypeSpecificFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableAlertDefTypeSpecificFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -25,8 +25,8 @@ type FlowType struct {
 	// The enforce suppression.
 	EnforceSuppression *bool `json:"enforceSuppression,omitempty"`
 	// The stages of the flow alert.
-	Stages                            []FlowStages `json:"stages,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Stages []FlowStages `json:"stages,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *FlowType) SetStages(v []FlowStages) {
 }
 
 func (o FlowType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableFlowType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -31,10 +31,10 @@ type Parameter struct {
 	NumericValue *float64 `json:"numericValue,omitempty"`
 	// Sensitive data placeholder.
 	SensitiveData map[string]interface{} `json:"sensitiveData,omitempty"`
-	StringList    *StringList            `json:"stringList,omitempty"`
+	StringList *StringList `json:"stringList,omitempty"`
 	// String value for this integration parameter.
-	StringValue                       *string `json:"stringValue,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	StringValue *string `json:"stringValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -282,7 +282,7 @@ func (o *Parameter) SetStringValue(v string) {
 }
 
 func (o Parameter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -448,3 +448,4 @@ func (v *NullableParameter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ type EvaluationTarget string
 
 // List of EvaluationTarget
 const (
-	EVALUATIONTARGET_PROMPT       EvaluationTarget = "PROMPT"
-	EVALUATIONTARGET_RESPONSE     EvaluationTarget = "RESPONSE"
+	EVALUATIONTARGET_PROMPT EvaluationTarget = "PROMPT"
+	EVALUATIONTARGET_RESPONSE EvaluationTarget = "RESPONSE"
 	EVALUATIONTARGET_CONVERSATION EvaluationTarget = "CONVERSATION"
 )
 
@@ -113,3 +113,4 @@ func (v *NullableEvaluationTarget) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

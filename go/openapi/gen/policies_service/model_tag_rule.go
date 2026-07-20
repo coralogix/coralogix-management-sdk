@@ -27,8 +27,8 @@ type TagRule struct {
 	// The tag name.
 	TagName string `json:"tagName"`
 	// The tag value.
-	TagValue                          string `json:"tagValue"`
-	AdditionalProperties              map[string]interface{}
+	TagValue string `json:"tagValue"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -127,7 +127,7 @@ func (o *TagRule) SetTagValue(v string) {
 }
 
 func (o TagRule) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -162,10 +162,10 @@ func (o *TagRule) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -230,3 +230,4 @@ func (v *NullableTagRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

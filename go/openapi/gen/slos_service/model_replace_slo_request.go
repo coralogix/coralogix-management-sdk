@@ -25,9 +25,9 @@ var _ MappedNullable = &ReplaceSloRequest{}
 type ReplaceSloRequest struct {
 	// Whether to silence data validations.
 	// Deprecated
-	SilenceDataValidations            *bool `json:"silenceDataValidations,omitempty"`
-	Slo                               Slo   `json:"slo"`
-	AdditionalProperties              map[string]interface{}
+	SilenceDataValidations *bool `json:"silenceDataValidations,omitempty"`
+	Slo Slo `json:"slo"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -111,7 +111,7 @@ func (o *ReplaceSloRequest) SetSlo(v Slo) {
 }
 
 func (o ReplaceSloRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -145,10 +145,10 @@ func (o *ReplaceSloRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -212,3 +212,4 @@ func (v *NullableReplaceSloRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

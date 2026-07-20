@@ -24,8 +24,8 @@ var _ MappedNullable = &LabelFilterType{}
 type LabelFilterType struct {
 	Operation *LogFilterOperationType `json:"operation,omitempty"`
 	// The value of the label to filter by
-	Value                             *string `json:"value,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *LabelFilterType) SetValue(v string) {
 }
 
 func (o LabelFilterType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableLabelFilterType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

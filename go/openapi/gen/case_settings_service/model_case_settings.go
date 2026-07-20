@@ -25,15 +25,15 @@ var _ MappedNullable = &CaseSettings{}
 type CaseSettings struct {
 	CaseLifecycle *CaseLifecycle `json:"caseLifecycle,omitempty"`
 	// Timestamp when the team configuration was created
-	CreateTime              *time.Time               `json:"createTime,omitempty"`
+	CreateTime *time.Time `json:"createTime,omitempty"`
 	GlobalIndicatorSettings *GlobalIndicatorSettings `json:"globalIndicatorSettings,omitempty"`
 	// Unique identifier for the team configuration
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Human-readable name for the team configuration
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Timestamp when the team configuration was last updated
-	UpdateTime                        *time.Time `json:"updateTime,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -249,7 +249,7 @@ func (o *CaseSettings) SetUpdateTime(v time.Time) {
 }
 
 func (o CaseSettings) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -347,3 +347,4 @@ func (v *NullableCaseSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

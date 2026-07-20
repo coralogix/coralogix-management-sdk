@@ -27,11 +27,11 @@ type DeployedIntegrationInformation struct {
 	// The definition version.
 	DefinitionVersion *string `json:"definitionVersion,omitempty"`
 	// Unique identifier.
-	Id                *string            `json:"id,omitempty"`
+	Id *string `json:"id,omitempty"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
 	// The parameters.
-	Parameters                        []Parameter `json:"parameters,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Parameters []Parameter `json:"parameters,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -215,7 +215,7 @@ func (o *DeployedIntegrationInformation) SetParameters(v []Parameter) {
 }
 
 func (o DeployedIntegrationInformation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -309,3 +309,4 @@ func (v *NullableDeployedIntegrationInformation) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

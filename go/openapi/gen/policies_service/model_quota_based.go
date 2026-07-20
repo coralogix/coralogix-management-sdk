@@ -23,8 +23,8 @@ var _ MappedNullable = &QuotaBased{}
 // QuotaBased Quota based.
 type QuotaBased struct {
 	// Ordered list of usage tiers that map daily quota consumption percentages to priority levels.
-	UsageTiers                        []UsageTier `json:"usageTiers,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UsageTiers []UsageTier `json:"usageTiers,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *QuotaBased) SetUsageTiers(v []UsageTier) {
 }
 
 func (o QuotaBased) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableQuotaBased) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

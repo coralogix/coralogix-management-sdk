@@ -23,8 +23,8 @@ var _ MappedNullable = &SaveIntegrationResponse{}
 // SaveIntegrationResponse Response returned after successfully saving an integration deployment.
 type SaveIntegrationResponse struct {
 	// The integration id.
-	IntegrationId                     *string `json:"integrationId,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	IntegrationId *string `json:"integrationId,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *SaveIntegrationResponse) SetIntegrationId(v string) {
 }
 
 func (o SaveIntegrationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableSaveIntegrationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

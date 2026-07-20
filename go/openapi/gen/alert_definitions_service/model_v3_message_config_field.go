@@ -25,8 +25,8 @@ type V3MessageConfigField struct {
 	// The name of the configuration field
 	FieldName *string `json:"fieldName,omitempty"`
 	// The template for the configuration field
-	Template                          *string `json:"template,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Template *string `json:"template,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *V3MessageConfigField) SetTemplate(v string) {
 }
 
 func (o V3MessageConfigField) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableV3MessageConfigField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

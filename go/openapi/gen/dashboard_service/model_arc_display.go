@@ -25,8 +25,8 @@ type ArcDisplay struct {
 	// Whether to show the threshold arc which graphically represents the threshold bands over the min/max range (replaces the deprecated showOuterArc)
 	ThresholdArc *bool `json:"thresholdArc,omitempty"`
 	// Whether to show the value arc which graphically represents the current value (replaces the deprecated showInnerArc)
-	ValueArc                          *bool `json:"valueArc,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ValueArc *bool `json:"valueArc,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *ArcDisplay) SetValueArc(v bool) {
 }
 
 func (o ArcDisplay) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableArcDisplay) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

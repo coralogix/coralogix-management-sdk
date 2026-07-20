@@ -24,9 +24,9 @@ var _ MappedNullable = &ListAlertEventsResponse{}
 // ListAlertEventsResponse Response containing events associated with the alert
 type ListAlertEventsResponse struct {
 	// List of events.
-	Events                            []CxEvent                   `json:"events"`
-	Pagination                        *EventsV3PaginationResponse `json:"pagination,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Events []CxEvent `json:"events"`
+	Pagination *EventsV3PaginationResponse `json:"pagination,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -107,7 +107,7 @@ func (o *ListAlertEventsResponse) SetPagination(v EventsV3PaginationResponse) {
 }
 
 func (o ListAlertEventsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -141,10 +141,10 @@ func (o *ListAlertEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -208,3 +208,4 @@ func (v *NullableListAlertEventsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

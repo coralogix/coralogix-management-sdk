@@ -22,10 +22,10 @@ var _ MappedNullable = &FilterSource{}
 
 // FilterSource Defines the type of data the filter applies to.
 type FilterSource struct {
-	Logs                              *FilterLogsFilter `json:"logs,omitempty"`
-	Metrics                           *MetricsFilter    `json:"metrics,omitempty"`
-	Spans                             *SpansFilter      `json:"spans,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Logs *FilterLogsFilter `json:"logs,omitempty"`
+	Metrics *MetricsFilter `json:"metrics,omitempty"`
+	Spans *SpansFilter `json:"spans,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -145,7 +145,7 @@ func (o *FilterSource) SetSpans(v SpansFilter) {
 }
 
 func (o FilterSource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,3 +268,4 @@ func (v *NullableFilterSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

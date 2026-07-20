@@ -22,8 +22,8 @@ var _ MappedNullable = &GetTeamGroupResponse{}
 
 // GetTeamGroupResponse Response containing the complete details of a requested team group, including its members, assigned roles, and scope configuration.
 type GetTeamGroupResponse struct {
-	Group                             *TeamGroup `json:"group,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Group *TeamGroup `json:"group,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetTeamGroupResponse) SetGroup(v TeamGroup) {
 }
 
 func (o GetTeamGroupResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetTeamGroupResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -24,9 +24,9 @@ var _ MappedNullable = &ListIncidentsRequest{}
 type ListIncidentsRequest struct {
 	Filter *IncidentQueryFilter `json:"filter,omitempty"`
 	// Order by fields
-	OrderBys                          []V1OrderBy                   `json:"orderBys,omitempty"`
-	Pagination                        *IncidentsV1PaginationRequest `json:"pagination,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	OrderBys []V1OrderBy `json:"orderBys,omitempty"`
+	Pagination *IncidentsV1PaginationRequest `json:"pagination,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *ListIncidentsRequest) SetPagination(v IncidentsV1PaginationRequest) {
 }
 
 func (o ListIncidentsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableListIncidentsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,13 +22,13 @@ var _ MappedNullable = &WindowBasedMetricSli{}
 
 // WindowBasedMetricSli Definition of a window-based SLI based on metrics
 type WindowBasedMetricSli struct {
-	ComparisonOperator  *ComparisonOperator  `json:"comparisonOperator,omitempty"`
+	ComparisonOperator *ComparisonOperator `json:"comparisonOperator,omitempty"`
 	MissingDataStrategy *MissingDataStrategy `json:"missingDataStrategy,omitempty"`
-	Query               *Metric              `json:"query,omitempty"`
+	Query *Metric `json:"query,omitempty"`
 	// Threshold value.
-	Threshold                         *float32         `json:"threshold,omitempty"`
-	Window                            *WindowSloWindow `json:"window,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Threshold *float32 `json:"threshold,omitempty"`
+	Window *WindowSloWindow `json:"window,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -212,7 +212,7 @@ func (o *WindowBasedMetricSli) SetWindow(v WindowSloWindow) {
 }
 
 func (o WindowBasedMetricSli) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,3 +306,4 @@ func (v *NullableWindowBasedMetricSli) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ var _ MappedNullable = &V2Permissions{}
 // V2Permissions Permissions.
 type V2Permissions struct {
 	// List of permissions.
-	Permissions                       []string `json:"permissions,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Permissions []string `json:"permissions,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *V2Permissions) SetPermissions(v []string) {
 }
 
 func (o V2Permissions) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableV2Permissions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

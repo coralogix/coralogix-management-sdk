@@ -22,8 +22,8 @@ var _ MappedNullable = &VariableSelectionOptions{}
 
 // VariableSelectionOptions Variable selection options.
 type VariableSelectionOptions struct {
-	SelectionType                     *SelectionType `json:"selectionType,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SelectionType *SelectionType `json:"selectionType,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *VariableSelectionOptions) SetSelectionType(v SelectionType) {
 }
 
 func (o VariableSelectionOptions) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableVariableSelectionOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

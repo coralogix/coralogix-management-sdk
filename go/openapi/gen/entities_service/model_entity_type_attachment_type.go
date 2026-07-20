@@ -25,8 +25,8 @@ type EntityTypeAttachmentType struct {
 	// Whether this attachment type is included by default when policy is Auto.
 	DefaultEnabled *bool `json:"defaultEnabled,omitempty"`
 	// Attachment type identifier (e.g. 'alert_graph', 'log_example').
-	Name                              *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *EntityTypeAttachmentType) SetName(v string) {
 }
 
 func (o EntityTypeAttachmentType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableEntityTypeAttachmentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,10 +23,10 @@ var _ MappedNullable = &FlowStagesGroupsAlertDefs{}
 // FlowStagesGroupsAlertDefs Alert definitions for a flow stage group
 type FlowStagesGroupsAlertDefs struct {
 	// The alert definition ID
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to negate the alert definition or not.
-	Not                               *bool `json:"not,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Not *bool `json:"not,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *FlowStagesGroupsAlertDefs) SetNot(v bool) {
 }
 
 func (o FlowStagesGroupsAlertDefs) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableFlowStagesGroupsAlertDefs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

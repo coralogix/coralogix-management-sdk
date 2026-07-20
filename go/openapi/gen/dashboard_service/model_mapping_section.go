@@ -26,8 +26,8 @@ type MappingSection struct {
 	// Display text to map the matched value to
 	MapTo *string `json:"mapTo,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Value to match (exact string for value mapping, regex pattern for regex mapping)
-	Value                             *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *MappingSection) SetValue(v string) {
 }
 
 func (o MappingSection) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableMappingSection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

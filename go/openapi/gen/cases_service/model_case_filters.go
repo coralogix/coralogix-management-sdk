@@ -26,13 +26,13 @@ type CaseFilters struct {
 	// List of case assignees to filter on
 	Assignees []AssigneeOption `json:"assignees,omitempty"`
 	// KPI-based filters applied to cases. When absent, KPI filter is not applied at all.
-	Breached         []KPIFilter       `json:"breached,omitempty"`
+	Breached []KPIFilter `json:"breached,omitempty"`
 	CaseLabelsFilter *CaseLabelsFilter `json:"caseLabelsFilter,omitempty"`
 	// List of case categories to filter on
 	Categories []CaseCategory `json:"categories,omitempty"`
 	// Connector type filters applied to cases, including cases with no connector linked.
 	ConnectorTypeFilters []ConnectorTypeFilter `json:"connectorTypeFilters,omitempty"`
-	DateRange            *DateRangeFilter      `json:"dateRange,omitempty"`
+	DateRange *DateRangeFilter `json:"dateRange,omitempty"`
 	// Grouping-based filters (e.g., service, subsystem)
 	Groupings []FilterGroup `json:"groupings,omitempty"`
 	// List of indicator types to filter on
@@ -44,8 +44,8 @@ type CaseFilters struct {
 	// List of case statuses to filter on
 	Statuses []CaseStatus `json:"statuses,omitempty"`
 	// Test search query applied to case titles
-	TextSearch                        *string `json:"textSearch,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	TextSearch *string `json:"textSearch,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -485,7 +485,7 @@ func (o *CaseFilters) SetTextSearch(v string) {
 }
 
 func (o CaseFilters) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -611,3 +611,4 @@ func (v *NullableCaseFilters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

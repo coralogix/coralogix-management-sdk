@@ -24,8 +24,8 @@ type V1OrderByDirection string
 // List of v1.OrderByDirection
 const (
 	V1ORDERBYDIRECTION_ORDER_BY_DIRECTION_UNSPECIFIED V1OrderByDirection = "ORDER_BY_DIRECTION_UNSPECIFIED"
-	V1ORDERBYDIRECTION_ORDER_BY_DIRECTION_ASC         V1OrderByDirection = "ORDER_BY_DIRECTION_ASC"
-	V1ORDERBYDIRECTION_ORDER_BY_DIRECTION_DESC        V1OrderByDirection = "ORDER_BY_DIRECTION_DESC"
+	V1ORDERBYDIRECTION_ORDER_BY_DIRECTION_ASC V1OrderByDirection = "ORDER_BY_DIRECTION_ASC"
+	V1ORDERBYDIRECTION_ORDER_BY_DIRECTION_DESC V1OrderByDirection = "ORDER_BY_DIRECTION_DESC"
 )
 
 // All allowed values of V1OrderByDirection enum
@@ -113,3 +113,4 @@ func (v *NullableV1OrderByDirection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

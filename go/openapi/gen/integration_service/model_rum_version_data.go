@@ -26,8 +26,8 @@ type RumVersionData struct {
 	// The synced at.
 	SyncedAt *time.Time `json:"syncedAt,omitempty"`
 	// The versions.
-	Versions                          []RumVersionDataVersion `json:"versions,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Versions []RumVersionDataVersion `json:"versions,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -115,7 +115,7 @@ func (o *RumVersionData) SetVersions(v []RumVersionDataVersion) {
 }
 
 func (o RumVersionData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,3 +197,4 @@ func (v *NullableRumVersionData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

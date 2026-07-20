@@ -23,9 +23,9 @@ var _ MappedNullable = &AlertDefIdFilter{}
 // AlertDefIdFilter Filter by alert definition IDs
 type AlertDefIdFilter struct {
 	// The alert definition ID(s) to filter by - multiple values are OR'd together
-	AlertId                           []string                   `json:"alertId,omitempty"`
-	MatchType                         *AlertDefIdFilterMatchType `json:"matchType,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AlertId []string `json:"alertId,omitempty"`
+	MatchType *AlertDefIdFilterMatchType `json:"matchType,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -113,7 +113,7 @@ func (o *AlertDefIdFilter) SetMatchType(v AlertDefIdFilterMatchType) {
 }
 
 func (o AlertDefIdFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,3 +195,4 @@ func (v *NullableAlertDefIdFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,8 +22,8 @@ var _ MappedNullable = &TracingFilter{}
 
 // TracingFilter Filter configuration for tracing-based alerts
 type TracingFilter struct {
-	SimpleFilter                      *TracingSimpleFilter `json:"simpleFilter,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	SimpleFilter *TracingSimpleFilter `json:"simpleFilter,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *TracingFilter) SetSimpleFilter(v TracingSimpleFilter) {
 }
 
 func (o TracingFilter) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableTracingFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

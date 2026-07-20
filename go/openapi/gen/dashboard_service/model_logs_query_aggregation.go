@@ -28,8 +28,8 @@ type LogsQueryAggregation struct {
 	// Whether the aggregation is visible in the table
 	IsVisible *bool `json:"isVisible,omitempty"`
 	// Aggregation name
-	Name                              *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -181,7 +181,7 @@ func (o *LogsQueryAggregation) SetName(v string) {
 }
 
 func (o LogsQueryAggregation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,3 +271,4 @@ func (v *NullableLogsQueryAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

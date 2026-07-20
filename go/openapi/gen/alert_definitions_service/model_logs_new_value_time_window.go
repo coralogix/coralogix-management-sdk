@@ -23,8 +23,8 @@ var _ MappedNullable = &LogsNewValueTimeWindow{}
 // LogsNewValueTimeWindow Time window configuration for log-based new value alerts
 type LogsNewValueTimeWindow struct {
 	LogsNewValueTimeWindowSpecificValue *LogsNewValueTimeWindowValue `json:"logsNewValueTimeWindowSpecificValue,omitempty"`
-	AdditionalProperties                map[string]interface{}
-	additionalPropertiesFromUnmarshal   bool
+	AdditionalProperties map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 }
 
 type _LogsNewValueTimeWindow LogsNewValueTimeWindow
@@ -79,7 +79,7 @@ func (o *LogsNewValueTimeWindow) SetLogsNewValueTimeWindowSpecificValue(v LogsNe
 }
 
 func (o LogsNewValueTimeWindow) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableLogsNewValueTimeWindow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

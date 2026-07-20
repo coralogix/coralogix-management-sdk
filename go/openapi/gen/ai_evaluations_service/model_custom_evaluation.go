@@ -23,15 +23,15 @@ var _ MappedNullable = &CustomEvaluation{}
 // CustomEvaluation A custom evaluation defined in the catalog.
 type CustomEvaluation struct {
 	// IDs of AI applications this custom evaluation is linked to.
-	ApplicationIds []string                `json:"applicationIds,omitempty"`
-	Config         *CustomEvaluationConfig `json:"config,omitempty"`
+	ApplicationIds []string `json:"applicationIds,omitempty"`
+	Config *CustomEvaluationConfig `json:"config,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier of the custom evaluation.
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Display name of the custom evaluation.
-	Name                              *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]+$"`
-	AdditionalProperties              map[string]interface{}
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -215,7 +215,7 @@ func (o *CustomEvaluation) SetName(v string) {
 }
 
 func (o CustomEvaluation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -309,3 +309,4 @@ func (v *NullableCustomEvaluation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

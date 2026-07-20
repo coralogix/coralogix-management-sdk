@@ -26,8 +26,8 @@ type LogsNewValueType struct {
 	// The filter to specify which fields to include in the notification payload.
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	// The rules for the log new value alert.
-	Rules                             []LogsNewValueRule `json:"rules,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Rules []LogsNewValueRule `json:"rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -147,7 +147,7 @@ func (o *LogsNewValueType) SetRules(v []LogsNewValueRule) {
 }
 
 func (o LogsNewValueType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,3 +233,4 @@ func (v *NullableLogsNewValueType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

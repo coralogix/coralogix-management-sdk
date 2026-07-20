@@ -16,17 +16,18 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
+	"reflect"
 )
+
 
 // IncidentsServiceAPIService IncidentsServiceAPI service
 type IncidentsServiceAPIService service
 
 type ApiIncidentsServiceAcknowledgeIncidentByEventIdRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	eventId    string
+	eventId string
 }
 
 func (r ApiIncidentsServiceAcknowledgeIncidentByEventIdRequest) Execute() (*AcknowledgeIncidentByEventIdResponse, *http.Response, error) {
@@ -41,27 +42,26 @@ Mark incident as acknowledged by event id.
 Requires the following permissions:
 - `incidents:acknowledge`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param eventId Event ID associated to the Incident to acknowledge
-	@return ApiIncidentsServiceAcknowledgeIncidentByEventIdRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param eventId Event ID associated to the Incident to acknowledge
+ @return ApiIncidentsServiceAcknowledgeIncidentByEventIdRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventId(ctx context.Context, eventId string) ApiIncidentsServiceAcknowledgeIncidentByEventIdRequest {
 	return ApiIncidentsServiceAcknowledgeIncidentByEventIdRequest{
 		ApiService: a,
-		ctx:        ctx,
-		eventId:    eventId,
+		ctx: ctx,
+		eventId: eventId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return AcknowledgeIncidentByEventIdResponse
+//  @return AcknowledgeIncidentByEventIdResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventIdExecute(r ApiIncidentsServiceAcknowledgeIncidentByEventIdRequest) (*AcknowledgeIncidentByEventIdResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *AcknowledgeIncidentByEventIdResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AcknowledgeIncidentByEventIdResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceAcknowledgeIncidentByEventId")
@@ -125,8 +125,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -136,8 +136,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -147,8 +147,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -166,8 +166,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventI
 }
 
 type ApiIncidentsServiceAcknowledgeIncidentsRequest struct {
-	ctx                         context.Context
-	ApiService                  *IncidentsServiceAPIService
+	ctx context.Context
+	ApiService *IncidentsServiceAPIService
 	acknowledgeIncidentsRequest *AcknowledgeIncidentsRequest
 }
 
@@ -188,25 +188,24 @@ Mark one or more incidents as acknowledged.
 Requires the following permissions:
 - `incidents:acknowledge`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceAcknowledgeIncidentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceAcknowledgeIncidentsRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidents(ctx context.Context) ApiIncidentsServiceAcknowledgeIncidentsRequest {
 	return ApiIncidentsServiceAcknowledgeIncidentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return AcknowledgeIncidentsResponse
+//  @return AcknowledgeIncidentsResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentsExecute(r ApiIncidentsServiceAcknowledgeIncidentsRequest) (*AcknowledgeIncidentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *AcknowledgeIncidentsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AcknowledgeIncidentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceAcknowledgeIncidents")
@@ -271,8 +270,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentsExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -282,8 +281,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentsExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -293,8 +292,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentsExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -312,8 +311,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentsExecute
 }
 
 type ApiIncidentsServiceAssignIncidentsRequest struct {
-	ctx                    context.Context
-	ApiService             *IncidentsServiceAPIService
+	ctx context.Context
+	ApiService *IncidentsServiceAPIService
 	assignIncidentsRequest *AssignIncidentsRequest
 }
 
@@ -334,25 +333,24 @@ Assign one or more incidents to a specific user.
 Requires the following permissions:
 - `incidents:assign`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceAssignIncidentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceAssignIncidentsRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceAssignIncidents(ctx context.Context) ApiIncidentsServiceAssignIncidentsRequest {
 	return ApiIncidentsServiceAssignIncidentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return AssignIncidentsResponse
+//  @return AssignIncidentsResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceAssignIncidentsExecute(r ApiIncidentsServiceAssignIncidentsRequest) (*AssignIncidentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *AssignIncidentsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AssignIncidentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceAssignIncidents")
@@ -417,8 +415,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAssignIncidentsExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -428,8 +426,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAssignIncidentsExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -439,8 +437,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAssignIncidentsExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -458,9 +456,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAssignIncidentsExecute(r Ap
 }
 
 type ApiIncidentsServiceBatchGetIncidentRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	ids        *[]string
+	ids *[]string
 }
 
 // The ids.
@@ -481,25 +479,24 @@ Retrieve multiple incidents by their IDs in a single request.
 Requires the following permissions:
 - `incidents:read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceBatchGetIncidentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceBatchGetIncidentRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceBatchGetIncident(ctx context.Context) ApiIncidentsServiceBatchGetIncidentRequest {
 	return ApiIncidentsServiceBatchGetIncidentRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return BatchGetIncidentResponse
+//  @return BatchGetIncidentResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceBatchGetIncidentExecute(r ApiIncidentsServiceBatchGetIncidentRequest) (*BatchGetIncidentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *BatchGetIncidentResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BatchGetIncidentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceBatchGetIncident")
@@ -574,8 +571,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceBatchGetIncidentExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -585,8 +582,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceBatchGetIncidentExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -596,8 +593,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceBatchGetIncidentExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -615,8 +612,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceBatchGetIncidentExecute(r A
 }
 
 type ApiIncidentsServiceCloseIncidentsRequest struct {
-	ctx                   context.Context
-	ApiService            *IncidentsServiceAPIService
+	ctx context.Context
+	ApiService *IncidentsServiceAPIService
 	closeIncidentsRequest *CloseIncidentsRequest
 }
 
@@ -637,25 +634,24 @@ Closes all incidents matching the given criteria.
 Requires the following permissions:
 - `incidents:close`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceCloseIncidentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceCloseIncidentsRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceCloseIncidents(ctx context.Context) ApiIncidentsServiceCloseIncidentsRequest {
 	return ApiIncidentsServiceCloseIncidentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CloseIncidentsResponse
+//  @return CloseIncidentsResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceCloseIncidentsExecute(r ApiIncidentsServiceCloseIncidentsRequest) (*CloseIncidentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CloseIncidentsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CloseIncidentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceCloseIncidents")
@@ -720,8 +716,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceCloseIncidentsExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -731,8 +727,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceCloseIncidentsExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -742,8 +738,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceCloseIncidentsExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -761,8 +757,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceCloseIncidentsExecute(r Api
 }
 
 type ApiIncidentsServiceGetFilterValuesRequest struct {
-	ctx                    context.Context
-	ApiService             *IncidentsServiceAPIService
+	ctx context.Context
+	ApiService *IncidentsServiceAPIService
 	getFilterValuesRequest *GetFilterValuesRequest
 }
 
@@ -783,25 +779,24 @@ Returns filter values for incidents based on the provided criteria.
 Requires the following permissions:
 - `incidents:read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceGetFilterValuesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceGetFilterValuesRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValues(ctx context.Context) ApiIncidentsServiceGetFilterValuesRequest {
 	return ApiIncidentsServiceGetFilterValuesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return IncidentsV1GetFilterValuesResponse
+//  @return IncidentsV1GetFilterValuesResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValuesExecute(r ApiIncidentsServiceGetFilterValuesRequest) (*IncidentsV1GetFilterValuesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *IncidentsV1GetFilterValuesResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *IncidentsV1GetFilterValuesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceGetFilterValues")
@@ -863,8 +858,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValuesExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -874,8 +869,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValuesExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -885,8 +880,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValuesExecute(r Ap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -904,9 +899,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetFilterValuesExecute(r Ap
 }
 
 type ApiIncidentsServiceGetIncidentRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	id         string
+	id string
 }
 
 func (r ApiIncidentsServiceGetIncidentRequest) Execute() (*GetIncidentResponse, *http.Response, error) {
@@ -921,27 +916,26 @@ Retrieve detailed information about a single incident by its unique identifier.
 Requires the following permissions:
 - `incidents:read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Unique identifier.
-	@return ApiIncidentsServiceGetIncidentRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier.
+ @return ApiIncidentsServiceGetIncidentRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceGetIncident(ctx context.Context, id string) ApiIncidentsServiceGetIncidentRequest {
 	return ApiIncidentsServiceGetIncidentRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetIncidentResponse
+//  @return GetIncidentResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentExecute(r ApiIncidentsServiceGetIncidentRequest) (*GetIncidentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetIncidentResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetIncidentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceGetIncident")
@@ -1005,8 +999,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentExecute(r ApiInc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1016,8 +1010,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentExecute(r ApiInc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1027,8 +1021,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentExecute(r ApiInc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1046,9 +1040,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentExecute(r ApiInc
 }
 
 type ApiIncidentsServiceGetIncidentByEventIdRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	eventId    string
+	eventId string
 }
 
 func (r ApiIncidentsServiceGetIncidentByEventIdRequest) Execute() (*GetIncidentByEventIdResponse, *http.Response, error) {
@@ -1063,27 +1057,26 @@ Retrieve detailed information about a single incident by related alert event id.
 Requires the following permissions:
 - `incidents:read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param eventId Event ID associated to the Incident to acknowledge
-	@return ApiIncidentsServiceGetIncidentByEventIdRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param eventId Event ID associated to the Incident to acknowledge
+ @return ApiIncidentsServiceGetIncidentByEventIdRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentByEventId(ctx context.Context, eventId string) ApiIncidentsServiceGetIncidentByEventIdRequest {
 	return ApiIncidentsServiceGetIncidentByEventIdRequest{
 		ApiService: a,
-		ctx:        ctx,
-		eventId:    eventId,
+		ctx: ctx,
+		eventId: eventId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetIncidentByEventIdResponse
+//  @return GetIncidentByEventIdResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentByEventIdExecute(r ApiIncidentsServiceGetIncidentByEventIdRequest) (*GetIncidentByEventIdResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetIncidentByEventIdResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetIncidentByEventIdResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceGetIncidentByEventId")
@@ -1147,8 +1140,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentByEventIdExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1158,8 +1151,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentByEventIdExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1169,8 +1162,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentByEventIdExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1188,7 +1181,7 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentByEventIdExecute
 }
 
 type ApiIncidentsServiceGetIncidentEventsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IncidentsServiceAPIService
 	incidentId string
 }
@@ -1205,27 +1198,26 @@ Retrieve a chronological list of all events associated with a specific incident.
 Requires the following permissions:
 - `incidents:read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param incidentId ID of the incident to retrieve events for
-	@return ApiIncidentsServiceGetIncidentEventsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param incidentId ID of the incident to retrieve events for
+ @return ApiIncidentsServiceGetIncidentEventsRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentEvents(ctx context.Context, incidentId string) ApiIncidentsServiceGetIncidentEventsRequest {
 	return ApiIncidentsServiceGetIncidentEventsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 		incidentId: incidentId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetIncidentEventsResponse
+//  @return GetIncidentEventsResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentEventsExecute(r ApiIncidentsServiceGetIncidentEventsRequest) (*GetIncidentEventsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetIncidentEventsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetIncidentEventsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceGetIncidentEvents")
@@ -1289,8 +1281,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentEventsExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1300,8 +1292,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentEventsExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1311,8 +1303,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentEventsExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1330,10 +1322,10 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentEventsExecute(r 
 }
 
 type ApiIncidentsServiceListIncidentAggregationsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	filter     *IncidentQueryFilter
-	groupBys   *[]IncidentGroupBy
+	filter *IncidentQueryFilter
+	groupBys *[]IncidentGroupBy
 	pagination *PaginationRequest
 }
 
@@ -1367,25 +1359,24 @@ Retrieve aggregated incident data with support for grouping and filtering.
 Requires the following permissions:
 - `incidents:read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceListIncidentAggregationsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceListIncidentAggregationsRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentAggregations(ctx context.Context) ApiIncidentsServiceListIncidentAggregationsRequest {
 	return ApiIncidentsServiceListIncidentAggregationsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIncidentAggregationsResponse
+//  @return ListIncidentAggregationsResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentAggregationsExecute(r ApiIncidentsServiceListIncidentAggregationsRequest) (*ListIncidentAggregationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIncidentAggregationsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIncidentAggregationsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceListIncidentAggregations")
@@ -1470,8 +1461,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentAggregationsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1481,8 +1472,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentAggregationsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1492,8 +1483,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentAggregationsExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1511,11 +1502,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentAggregationsExe
 }
 
 type ApiIncidentsServiceListIncidentEventsRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	filter     *IncidentEventQueryFilter
+	filter *IncidentEventQueryFilter
 	pagination *PaginationRequest
-	orderBy    *ListIncidentEventsOrderByRequest
+	orderBy *ListIncidentEventsOrderByRequest
 }
 
 // Filter for incident events
@@ -1548,25 +1539,24 @@ List incident events with support for filtering, pagination, and ordering.
 Requires the following permissions:
 - `incidents:read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceListIncidentEventsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceListIncidentEventsRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEvents(ctx context.Context) ApiIncidentsServiceListIncidentEventsRequest {
 	return ApiIncidentsServiceListIncidentEventsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIncidentEventsResponse
+//  @return ListIncidentEventsResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsExecute(r ApiIncidentsServiceListIncidentEventsRequest) (*ListIncidentEventsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIncidentEventsResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIncidentEventsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceListIncidentEvents")
@@ -1641,8 +1631,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1652,8 +1642,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1663,8 +1653,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsExecute(r
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1682,9 +1672,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsExecute(r
 }
 
 type ApiIncidentsServiceListIncidentEventsFilterValuesRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	filter     *IncidentEventQueryFilter
+	filter *IncidentEventQueryFilter
 }
 
 // Filter for incident events
@@ -1705,25 +1695,24 @@ Returns available filter values for incident events.
 Requires the following permissions:
 - `incidents:read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceListIncidentEventsFilterValuesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceListIncidentEventsFilterValuesRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsFilterValues(ctx context.Context) ApiIncidentsServiceListIncidentEventsFilterValuesRequest {
 	return ApiIncidentsServiceListIncidentEventsFilterValuesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIncidentEventsFilterValuesResponse
+//  @return ListIncidentEventsFilterValuesResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsFilterValuesExecute(r ApiIncidentsServiceListIncidentEventsFilterValuesRequest) (*ListIncidentEventsFilterValuesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIncidentEventsFilterValuesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIncidentEventsFilterValuesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceListIncidentEventsFilterValues")
@@ -1788,8 +1777,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsFilterVal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1799,8 +1788,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsFilterVal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1810,8 +1799,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsFilterVal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1829,9 +1818,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsFilterVal
 }
 
 type ApiIncidentsServiceListIncidentEventsTotalCountRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	filter     *IncidentEventQueryFilter
+	filter *IncidentEventQueryFilter
 }
 
 // Filter for incident events
@@ -1852,25 +1841,24 @@ Retrieve the total count of incident events matching a filter.
 Requires the following permissions:
 - `incidents:read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceListIncidentEventsTotalCountRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceListIncidentEventsTotalCountRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsTotalCount(ctx context.Context) ApiIncidentsServiceListIncidentEventsTotalCountRequest {
 	return ApiIncidentsServiceListIncidentEventsTotalCountRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIncidentEventsTotalCountResponse
+//  @return ListIncidentEventsTotalCountResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsTotalCountExecute(r ApiIncidentsServiceListIncidentEventsTotalCountRequest) (*ListIncidentEventsTotalCountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIncidentEventsTotalCountResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIncidentEventsTotalCountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceListIncidentEventsTotalCount")
@@ -1935,8 +1923,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsTotalCoun
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1946,8 +1934,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsTotalCoun
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1957,8 +1945,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsTotalCoun
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1976,8 +1964,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsTotalCoun
 }
 
 type ApiIncidentsServiceListIncidentsRequest struct {
-	ctx                  context.Context
-	ApiService           *IncidentsServiceAPIService
+	ctx context.Context
+	ApiService *IncidentsServiceAPIService
 	listIncidentsRequest *ListIncidentsRequest
 }
 
@@ -1998,25 +1986,24 @@ Lists all available incidents based on specified filters and order. The list is 
 Requires the following permissions:
 - `incidents:read`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceListIncidentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceListIncidentsRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceListIncidents(ctx context.Context) ApiIncidentsServiceListIncidentsRequest {
 	return ApiIncidentsServiceListIncidentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ListIncidentsResponse
+//  @return ListIncidentsResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentsExecute(r ApiIncidentsServiceListIncidentsRequest) (*ListIncidentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ListIncidentsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListIncidentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceListIncidents")
@@ -2078,8 +2065,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentsExecute(r ApiI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2089,8 +2076,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentsExecute(r ApiI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2100,8 +2087,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentsExecute(r ApiI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2119,9 +2106,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentsExecute(r ApiI
 }
 
 type ApiIncidentsServiceResolveIncidentByEventIdRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	eventId    string
+	eventId string
 }
 
 func (r ApiIncidentsServiceResolveIncidentByEventIdRequest) Execute() (*ResolveIncidentByEventIdResponse, *http.Response, error) {
@@ -2136,27 +2123,26 @@ Mark incident as resolved by event id.
 Requires the following permissions:
 - `incidents:close`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param eventId Event ID associated to the Incident to resolve
-	@return ApiIncidentsServiceResolveIncidentByEventIdRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param eventId Event ID associated to the Incident to resolve
+ @return ApiIncidentsServiceResolveIncidentByEventIdRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventId(ctx context.Context, eventId string) ApiIncidentsServiceResolveIncidentByEventIdRequest {
 	return ApiIncidentsServiceResolveIncidentByEventIdRequest{
 		ApiService: a,
-		ctx:        ctx,
-		eventId:    eventId,
+		ctx: ctx,
+		eventId: eventId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResolveIncidentByEventIdResponse
+//  @return ResolveIncidentByEventIdResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventIdExecute(r ApiIncidentsServiceResolveIncidentByEventIdRequest) (*ResolveIncidentByEventIdResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResolveIncidentByEventIdResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResolveIncidentByEventIdResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceResolveIncidentByEventId")
@@ -2220,8 +2206,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventIdExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2231,8 +2217,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventIdExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2242,8 +2228,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventIdExe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2261,8 +2247,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventIdExe
 }
 
 type ApiIncidentsServiceResolveIncidentsRequest struct {
-	ctx                     context.Context
-	ApiService              *IncidentsServiceAPIService
+	ctx context.Context
+	ApiService *IncidentsServiceAPIService
 	resolveIncidentsRequest *ResolveIncidentsRequest
 }
 
@@ -2283,25 +2269,24 @@ Mark one or more incidents as resolved.
 Requires the following permissions:
 - `incidents:close`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceResolveIncidentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceResolveIncidentsRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidents(ctx context.Context) ApiIncidentsServiceResolveIncidentsRequest {
 	return ApiIncidentsServiceResolveIncidentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ResolveIncidentsResponse
+//  @return ResolveIncidentsResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentsExecute(r ApiIncidentsServiceResolveIncidentsRequest) (*ResolveIncidentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ResolveIncidentsResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ResolveIncidentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceResolveIncidents")
@@ -2366,8 +2351,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentsExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2377,8 +2362,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentsExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2388,8 +2373,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentsExecute(r A
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2407,8 +2392,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentsExecute(r A
 }
 
 type ApiIncidentsServiceUnassignIncidentsRequest struct {
-	ctx         context.Context
-	ApiService  *IncidentsServiceAPIService
+	ctx context.Context
+	ApiService *IncidentsServiceAPIService
 	incidentIds *[]string
 }
 
@@ -2430,25 +2415,24 @@ Remove user assignments from one or more incidents.
 Requires the following permissions:
 - `incidents:assign`
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiIncidentsServiceUnassignIncidentsRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiIncidentsServiceUnassignIncidentsRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceUnassignIncidents(ctx context.Context) ApiIncidentsServiceUnassignIncidentsRequest {
 	return ApiIncidentsServiceUnassignIncidentsRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UnassignIncidentsResponse
+//  @return UnassignIncidentsResponse
 func (a *IncidentsServiceAPIService) IncidentsServiceUnassignIncidentsExecute(r ApiIncidentsServiceUnassignIncidentsRequest) (*UnassignIncidentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UnassignIncidentsResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UnassignIncidentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IncidentsServiceAPIService.IncidentsServiceUnassignIncidents")
@@ -2523,8 +2507,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceUnassignIncidentsExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2534,8 +2518,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceUnassignIncidentsExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2545,8 +2529,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceUnassignIncidentsExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

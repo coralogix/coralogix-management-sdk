@@ -25,8 +25,8 @@ type QueryMetricsQueryStringOrVariable struct {
 	// A literal string value.
 	StringValue *string `json:"stringValue,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The name of a dashboard variable whose current value will be substituted.
-	VariableName                      *string `json:"variableName,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	VariableName *string `json:"variableName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *QueryMetricsQueryStringOrVariable) SetVariableName(v string) {
 }
 
 func (o QueryMetricsQueryStringOrVariable) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -224,3 +224,4 @@ func (v *NullableQueryMetricsQueryStringOrVariable) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,11 +23,11 @@ var _ MappedNullable = &V2Target{}
 
 // V2Target This data structure represents a target to archive logs.
 type V2Target struct {
-	ArchiveSpec                                     ArchiveSpec       `json:"archiveSpec"`
-	IbmCos                                          *IBMCosTargetSpec `json:"ibmCos,omitempty"`
-	S3                                              *S3TargetSpec     `json:"s3,omitempty"`
-	AdditionalProperties                            map[string]interface{}
-	additionalPropertiesFromUnmarshal               bool
+	ArchiveSpec ArchiveSpec `json:"archiveSpec"`
+	IbmCos *IBMCosTargetSpec `json:"ibmCos,omitempty"`
+	S3 *S3TargetSpec `json:"s3,omitempty"`
+	AdditionalProperties map[string]interface{}
+	additionalPropertiesFromUnmarshal bool
 	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
@@ -140,7 +140,7 @@ func (o *V2Target) SetS3(v S3TargetSpec) {
 }
 
 func (o V2Target) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -199,10 +199,10 @@ func (o *V2Target) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -290,3 +290,4 @@ func (v *NullableV2Target) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

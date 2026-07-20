@@ -25,8 +25,8 @@ type TimeSeriesTooltip struct {
 	// Type of the tooltip display, can be showing single series value or all series values at once
 	ShowAllSeries *bool `json:"showAllSeries,omitempty"`
 	// The show labels.
-	ShowLabels                        *bool `json:"showLabels,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ShowLabels *bool `json:"showLabels,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -114,7 +114,7 @@ func (o *TimeSeriesTooltip) SetShowLabels(v bool) {
 }
 
 func (o TimeSeriesTooltip) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,3 +196,4 @@ func (v *NullableTimeSeriesTooltip) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

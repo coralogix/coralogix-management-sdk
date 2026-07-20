@@ -22,8 +22,8 @@ var _ MappedNullable = &GetSystemDefaultPresetSummaryResponse{}
 
 // GetSystemDefaultPresetSummaryResponse Response containing a summary of the system default notification preset.
 type GetSystemDefaultPresetSummaryResponse struct {
-	PresetSummary                     *PresetSummary `json:"presetSummary,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	PresetSummary *PresetSummary `json:"presetSummary,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *GetSystemDefaultPresetSummaryResponse) SetPresetSummary(v PresetSummary
 }
 
 func (o GetSystemDefaultPresetSummaryResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableGetSystemDefaultPresetSummaryResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

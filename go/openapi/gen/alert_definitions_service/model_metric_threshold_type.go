@@ -23,14 +23,14 @@ var _ MappedNullable = &MetricThresholdType{}
 // MetricThresholdType Configuration for alerts based on metric threshold violations
 type MetricThresholdType struct {
 	// The delay in milliseconds before evaluating the alert condition
-	EvaluationDelayMs *int32               `json:"evaluationDelayMs,omitempty"`
-	MetricFilter      *MetricFilter        `json:"metricFilter,omitempty"`
-	MissingValues     *MetricMissingValues `json:"missingValues,omitempty"`
-	NoDataPolicy      *NoDataPolicy        `json:"noDataPolicy,omitempty"`
+	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
+	MetricFilter *MetricFilter `json:"metricFilter,omitempty"`
+	MissingValues *MetricMissingValues `json:"missingValues,omitempty"`
+	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	// The rules for the metric threshold alert
-	Rules                             []MetricThresholdRule         `json:"rules,omitempty"`
-	UndetectedValuesManagement        *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Rules []MetricThresholdRule `json:"rules,omitempty"`
+	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -246,7 +246,7 @@ func (o *MetricThresholdType) SetUndetectedValuesManagement(v V3UndetectedValues
 }
 
 func (o MetricThresholdType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -344,3 +344,4 @@ func (v *NullableMetricThresholdType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

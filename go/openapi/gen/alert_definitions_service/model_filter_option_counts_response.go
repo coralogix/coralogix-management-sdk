@@ -22,8 +22,8 @@ var _ MappedNullable = &FilterOptionCountsResponse{}
 
 // FilterOptionCountsResponse Response containing counts for different filter options
 type FilterOptionCountsResponse struct {
-	Counts                            *FilterOptionCounts `json:"counts,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Counts *FilterOptionCounts `json:"counts,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -79,7 +79,7 @@ func (o *FilterOptionCountsResponse) SetCounts(v FilterOptionCounts) {
 }
 
 func (o FilterOptionCountsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -157,3 +157,4 @@ func (v *NullableFilterOptionCountsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

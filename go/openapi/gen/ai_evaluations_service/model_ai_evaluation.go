@@ -26,8 +26,8 @@ type AiEvaluation struct {
 	// Name of the AI application this evaluation belongs to.
 	Application *string `json:"application,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Company that owns this evaluation.
-	CompanyId *string           `json:"companyId,omitempty" validate:"regexp=^[\\s\\S]+$"`
-	Config    *EvaluationConfig `json:"config,omitempty"`
+	CompanyId *string `json:"companyId,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	Config *EvaluationConfig `json:"config,omitempty"`
 	// RFC3339 timestamp when the evaluation was created.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// UUID of the user who created this evaluation. Set automatically by the server from the authenticated identity; not provided by the client.
@@ -37,13 +37,13 @@ type AiEvaluation struct {
 	// Whether the evaluation is currently active.
 	IsEnabled *bool `json:"isEnabled,omitempty"`
 	// Subsystem within the application.
-	Subsystem *string           `json:"subsystem,omitempty" validate:"regexp=^[\\s\\S]+$"`
-	Target    *EvaluationTarget `json:"target,omitempty"`
+	Subsystem *string `json:"subsystem,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	Target *EvaluationTarget `json:"target,omitempty"`
 	// Score threshold. Must be between 0.0 and 1.0 inclusive.
 	Threshold *float64 `json:"threshold,omitempty"`
 	// RFC3339 timestamp when the evaluation was last updated.
-	UpdatedAt                         *time.Time `json:"updatedAt,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -419,7 +419,7 @@ func (o *AiEvaluation) SetUpdatedAt(v time.Time) {
 }
 
 func (o AiEvaluation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -537,3 +537,4 @@ func (v *NullableAiEvaluation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

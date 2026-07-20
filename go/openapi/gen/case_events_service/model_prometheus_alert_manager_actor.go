@@ -23,8 +23,8 @@ var _ MappedNullable = &PrometheusAlertManagerActor{}
 // PrometheusAlertManagerActor Information about the Prometheus Alert Manager instance that initiated the action.
 type PrometheusAlertManagerActor struct {
 	// Prometheus Alert Manager receiver name
-	ReceiverName                      *string `json:"receiverName,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	ReceiverName *string `json:"receiverName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *PrometheusAlertManagerActor) SetReceiverName(v string) {
 }
 
 func (o PrometheusAlertManagerActor) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullablePrometheusAlertManagerActor) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -22,9 +22,9 @@ var _ MappedNullable = &GeomapFieldConfig{}
 
 // GeomapFieldConfig Geomap field config.
 type GeomapFieldConfig struct {
-	AwsRegionConfig                   *GeomapAwsRegionConfig  `json:"awsRegionConfig,omitempty"`
-	CoordinateConfig                  *GeomapCoordinateConfig `json:"coordinateConfig,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	AwsRegionConfig *GeomapAwsRegionConfig `json:"awsRegionConfig,omitempty"`
+	CoordinateConfig *GeomapCoordinateConfig `json:"coordinateConfig,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *GeomapFieldConfig) SetCoordinateConfig(v GeomapCoordinateConfig) {
 }
 
 func (o GeomapFieldConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableGeomapFieldConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

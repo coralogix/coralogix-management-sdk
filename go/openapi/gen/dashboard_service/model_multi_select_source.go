@@ -22,12 +22,12 @@ var _ MappedNullable = &MultiSelectSource{}
 
 // MultiSelectSource Source.
 type MultiSelectSource struct {
-	ConstantList                      *ConstantListSource     `json:"constantList,omitempty"`
-	LogsPath                          *LogsPathSource         `json:"logsPath,omitempty"`
-	MetricLabel                       *MetricLabelSource      `json:"metricLabel,omitempty"`
-	Query                             *MultiSelectQuerySource `json:"query,omitempty"`
-	SpanField                         *SpanFieldSource        `json:"spanField,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ConstantList *ConstantListSource `json:"constantList,omitempty"`
+	LogsPath *LogsPathSource `json:"logsPath,omitempty"`
+	MetricLabel *MetricLabelSource `json:"metricLabel,omitempty"`
+	Query *MultiSelectQuerySource `json:"query,omitempty"`
+	SpanField *SpanFieldSource `json:"spanField,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -211,7 +211,7 @@ func (o *MultiSelectSource) SetSpanField(v SpanFieldSource) {
 }
 
 func (o MultiSelectSource) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -360,3 +360,4 @@ func (v *NullableMultiSelectSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -18,12 +18,13 @@ import (
 	"net/url"
 )
 
+
 // MetricsDataArchiveServiceAPIService MetricsDataArchiveServiceAPI service
 type MetricsDataArchiveServiceAPIService service
 
 type ApiMetricsConfiguratorPublicServiceConfigureTenantRequest struct {
-	ctx                    context.Context
-	ApiService             *MetricsDataArchiveServiceAPIService
+	ctx context.Context
+	ApiService *MetricsDataArchiveServiceAPIService
 	configureTenantRequest *ConfigureTenantRequest
 }
 
@@ -41,25 +42,24 @@ MetricsConfiguratorPublicServiceConfigureTenant Configure Tenant
 
 Creates the metrics storage configuration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiMetricsConfiguratorPublicServiceConfigureTenantRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiMetricsConfiguratorPublicServiceConfigureTenantRequest
 */
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceConfigureTenant(ctx context.Context) ApiMetricsConfiguratorPublicServiceConfigureTenantRequest {
 	return ApiMetricsConfiguratorPublicServiceConfigureTenantRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceConfigureTenantExecute(r ApiMetricsConfiguratorPublicServiceConfigureTenantRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsDataArchiveServiceAPIService.MetricsConfiguratorPublicServiceConfigureTenant")
@@ -124,8 +124,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -135,8 +135,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -146,8 +146,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -165,7 +165,7 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceCo
 }
 
 type ApiMetricsConfiguratorPublicServiceDisableArchiveRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *MetricsDataArchiveServiceAPIService
 }
 
@@ -178,25 +178,24 @@ MetricsConfiguratorPublicServiceDisableArchive Disable Metrics Archive
 
 Disables the metrics storage configuration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiMetricsConfiguratorPublicServiceDisableArchiveRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiMetricsConfiguratorPublicServiceDisableArchiveRequest
 */
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceDisableArchive(ctx context.Context) ApiMetricsConfiguratorPublicServiceDisableArchiveRequest {
 	return ApiMetricsConfiguratorPublicServiceDisableArchiveRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceDisableArchiveExecute(r ApiMetricsConfiguratorPublicServiceDisableArchiveRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsDataArchiveServiceAPIService.MetricsConfiguratorPublicServiceDisableArchive")
@@ -256,8 +255,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceDi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -267,8 +266,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceDi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -278,8 +277,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceDi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -297,7 +296,7 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceDi
 }
 
 type ApiMetricsConfiguratorPublicServiceEnableArchiveRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *MetricsDataArchiveServiceAPIService
 }
 
@@ -310,25 +309,24 @@ MetricsConfiguratorPublicServiceEnableArchive Enable Metrics Archive
 
 Enables the metrics storage configuration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiMetricsConfiguratorPublicServiceEnableArchiveRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiMetricsConfiguratorPublicServiceEnableArchiveRequest
 */
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceEnableArchive(ctx context.Context) ApiMetricsConfiguratorPublicServiceEnableArchiveRequest {
 	return ApiMetricsConfiguratorPublicServiceEnableArchiveRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceEnableArchiveExecute(r ApiMetricsConfiguratorPublicServiceEnableArchiveRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsDataArchiveServiceAPIService.MetricsConfiguratorPublicServiceEnableArchive")
@@ -388,8 +386,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceEn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -399,8 +397,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceEn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -410,8 +408,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceEn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -429,7 +427,7 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceEn
 }
 
 type ApiMetricsConfiguratorPublicServiceGetTenantConfigRequest struct {
-	ctx        context.Context
+	ctx context.Context
 	ApiService *MetricsDataArchiveServiceAPIService
 }
 
@@ -442,25 +440,24 @@ MetricsConfiguratorPublicServiceGetTenantConfig Get Metrics Storage Configuratio
 
 Returns the current metrics storage configuration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiMetricsConfiguratorPublicServiceGetTenantConfigRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiMetricsConfiguratorPublicServiceGetTenantConfigRequest
 */
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceGetTenantConfig(ctx context.Context) ApiMetricsConfiguratorPublicServiceGetTenantConfigRequest {
 	return ApiMetricsConfiguratorPublicServiceGetTenantConfigRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetTenantConfigResponseV2
+//  @return GetTenantConfigResponseV2
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceGetTenantConfigExecute(r ApiMetricsConfiguratorPublicServiceGetTenantConfigRequest) (*GetTenantConfigResponseV2, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetTenantConfigResponseV2
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetTenantConfigResponseV2
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsDataArchiveServiceAPIService.MetricsConfiguratorPublicServiceGetTenantConfig")
@@ -520,8 +517,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceGe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -531,8 +528,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceGe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -542,8 +539,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceGe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -561,8 +558,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceGe
 }
 
 type ApiMetricsConfiguratorPublicServiceUpdateRequest struct {
-	ctx                 context.Context
-	ApiService          *MetricsDataArchiveServiceAPIService
+	ctx context.Context
+	ApiService *MetricsDataArchiveServiceAPIService
 	updateTenantRequest *UpdateTenantRequest
 }
 
@@ -580,25 +577,24 @@ MetricsConfiguratorPublicServiceUpdate Update Metrics Storage Configuration
 
 Updates the metrics storage configuration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiMetricsConfiguratorPublicServiceUpdateRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiMetricsConfiguratorPublicServiceUpdateRequest
 */
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceUpdate(ctx context.Context) ApiMetricsConfiguratorPublicServiceUpdateRequest {
 	return ApiMetricsConfiguratorPublicServiceUpdateRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceUpdateExecute(r ApiMetricsConfiguratorPublicServiceUpdateRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsDataArchiveServiceAPIService.MetricsConfiguratorPublicServiceUpdate")
@@ -663,8 +659,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceUp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -674,8 +670,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceUp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -685,8 +681,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceUp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -704,8 +700,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceUp
 }
 
 type ApiMetricsConfiguratorPublicServiceValidateBucketRequest struct {
-	ctx                     context.Context
-	ApiService              *MetricsDataArchiveServiceAPIService
+	ctx context.Context
+	ApiService *MetricsDataArchiveServiceAPIService
 	bucketValidationRequest *BucketValidationRequest
 }
 
@@ -723,25 +719,24 @@ MetricsConfiguratorPublicServiceValidateBucket Validate Metrics Storage Bucket
 
 Validates the provided metrics storage configuration.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiMetricsConfiguratorPublicServiceValidateBucketRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiMetricsConfiguratorPublicServiceValidateBucketRequest
 */
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceValidateBucket(ctx context.Context) ApiMetricsConfiguratorPublicServiceValidateBucketRequest {
 	return ApiMetricsConfiguratorPublicServiceValidateBucketRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return map[string]interface{}
+//  @return map[string]interface{}
 func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceValidateBucketExecute(r ApiMetricsConfiguratorPublicServiceValidateBucketRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsDataArchiveServiceAPIService.MetricsConfiguratorPublicServiceValidateBucket")
@@ -806,8 +801,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceVa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -817,8 +812,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceVa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -828,8 +823,8 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceVa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

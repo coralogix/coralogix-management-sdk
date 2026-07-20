@@ -23,17 +23,17 @@ var _ MappedNullable = &TextboxDefaultValue{}
 // TextboxDefaultValue Textbox default value.
 type TextboxDefaultValue struct {
 	DefaultIntervalValue *TextboxDefaultIntervalValue `json:"defaultIntervalValue,omitempty"`
-	DefaultLuceneValue   *TextboxDefaultLuceneValue   `json:"defaultLuceneValue,omitempty"`
-	DefaultNumericValue  *TextboxDefaultNumericValue  `json:"defaultNumericValue,omitempty"`
-	DefaultRegexValue    *TextboxDefaultRegexValue    `json:"defaultRegexValue,omitempty"`
-	DefaultStringValue   *TextboxDefaultStringValue   `json:"defaultStringValue,omitempty"`
+	DefaultLuceneValue *TextboxDefaultLuceneValue `json:"defaultLuceneValue,omitempty"`
+	DefaultNumericValue *TextboxDefaultNumericValue `json:"defaultNumericValue,omitempty"`
+	DefaultRegexValue *TextboxDefaultRegexValue `json:"defaultRegexValue,omitempty"`
+	DefaultStringValue *TextboxDefaultStringValue `json:"defaultStringValue,omitempty"`
 	// Deprecated. Default numeric value for the textbox variable.
 	// Deprecated
 	SingleNumeric *float32 `json:"singleNumeric,omitempty"`
 	// Deprecated. Default string value for the textbox variable.
 	// Deprecated
-	SingleString                      *string `json:"singleString,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	SingleString *string `json:"singleString,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -287,7 +287,7 @@ func (o *TextboxDefaultValue) SetSingleString(v string) {
 }
 
 func (o TextboxDefaultValue) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -462,3 +462,4 @@ func (v *NullableTextboxDefaultValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

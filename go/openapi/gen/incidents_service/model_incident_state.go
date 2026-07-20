@@ -24,8 +24,8 @@ type IncidentState string
 // List of IncidentState
 const (
 	INCIDENTSTATE_INCIDENT_STATE_UNSPECIFIED IncidentState = "INCIDENT_STATE_UNSPECIFIED"
-	INCIDENTSTATE_INCIDENT_STATE_TRIGGERED   IncidentState = "INCIDENT_STATE_TRIGGERED"
-	INCIDENTSTATE_INCIDENT_STATE_RESOLVED    IncidentState = "INCIDENT_STATE_RESOLVED"
+	INCIDENTSTATE_INCIDENT_STATE_TRIGGERED IncidentState = "INCIDENT_STATE_TRIGGERED"
+	INCIDENTSTATE_INCIDENT_STATE_RESOLVED IncidentState = "INCIDENT_STATE_RESOLVED"
 )
 
 // All allowed values of IncidentState enum
@@ -113,3 +113,4 @@ func (v *NullableIncidentState) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

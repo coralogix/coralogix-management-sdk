@@ -24,10 +24,10 @@ var _ MappedNullable = &ScopeUpdateAction{}
 // ScopeUpdateAction Set scope id.
 type ScopeUpdateAction struct {
 	// Discriminator indicating the scope update action type (set_scope_id or clear).
-	ActionType                        string      `json:"actionType"`
-	Clear                             *ClearScope `json:"clear,omitempty"`
-	SetScopeId                        *SetScopeId `json:"setScopeId,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	ActionType string `json:"actionType"`
+	Clear *ClearScope `json:"clear,omitempty"`
+	SetScopeId *SetScopeId `json:"setScopeId,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -140,7 +140,7 @@ func (o *ScopeUpdateAction) SetSetScopeId(v SetScopeId) {
 }
 
 func (o ScopeUpdateAction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -194,10 +194,10 @@ func (o *ScopeUpdateAction) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -284,3 +284,4 @@ func (v *NullableScopeUpdateAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

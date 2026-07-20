@@ -22,9 +22,9 @@ var _ MappedNullable = &SpansAggregation{}
 
 // SpansAggregation Spans aggregation.
 type SpansAggregation struct {
-	DimensionAggregation              *DimensionAggregation `json:"dimensionAggregation,omitempty"`
-	MetricAggregation                 *MetricAggregation    `json:"metricAggregation,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	DimensionAggregation *DimensionAggregation `json:"dimensionAggregation,omitempty"`
+	MetricAggregation *MetricAggregation `json:"metricAggregation,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -112,7 +112,7 @@ func (o *SpansAggregation) SetMetricAggregation(v MetricAggregation) {
 }
 
 func (o SpansAggregation) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -222,3 +222,4 @@ func (v *NullableSpansAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

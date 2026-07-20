@@ -24,8 +24,8 @@ type CommonThresholdBy string
 // List of common.ThresholdBy
 const (
 	COMMONTHRESHOLDBY_THRESHOLD_BY_UNSPECIFIED CommonThresholdBy = "THRESHOLD_BY_UNSPECIFIED"
-	COMMONTHRESHOLDBY_THRESHOLD_BY_VALUE       CommonThresholdBy = "THRESHOLD_BY_VALUE"
-	COMMONTHRESHOLDBY_THRESHOLD_BY_BACKGROUND  CommonThresholdBy = "THRESHOLD_BY_BACKGROUND"
+	COMMONTHRESHOLDBY_THRESHOLD_BY_VALUE CommonThresholdBy = "THRESHOLD_BY_VALUE"
+	COMMONTHRESHOLDBY_THRESHOLD_BY_BACKGROUND CommonThresholdBy = "THRESHOLD_BY_BACKGROUND"
 )
 
 // All allowed values of CommonThresholdBy enum
@@ -113,3 +113,4 @@ func (v *NullableCommonThresholdBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -23,8 +23,8 @@ var _ MappedNullable = &CreateDashboardResponse{}
 // CreateDashboardResponse This is a response received when a custom dashboard is successfully created
 type CreateDashboardResponse struct {
 	// The dashboard id.
-	DashboardId                       *string `json:"dashboardId,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	DashboardId *string `json:"dashboardId,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *CreateDashboardResponse) SetDashboardId(v string) {
 }
 
 func (o CreateDashboardResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableCreateDashboardResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

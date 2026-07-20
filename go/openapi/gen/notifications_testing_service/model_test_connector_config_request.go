@@ -26,9 +26,9 @@ type TestConnectorConfigRequest struct {
 	// Fields.
 	Fields []NotificationCenterConnectorConfigField `json:"fields,omitempty"`
 	// Payload type to use when testing the connector.
-	PayloadType                       *string                          `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Type                              *NotificationCenterConnectorType `json:"type,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	PayloadType *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Type *NotificationCenterConnectorType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -180,7 +180,7 @@ func (o *TestConnectorConfigRequest) SetType(v NotificationCenterConnectorType) 
 }
 
 func (o TestConnectorConfigRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,3 +270,4 @@ func (v *NullableTestConnectorConfigRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

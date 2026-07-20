@@ -24,8 +24,8 @@ type MetricsQueryEditorMode string
 // List of MetricsQueryEditorMode
 const (
 	METRICSQUERYEDITORMODE_METRICS_QUERY_EDITOR_MODE_UNSPECIFIED MetricsQueryEditorMode = "METRICS_QUERY_EDITOR_MODE_UNSPECIFIED"
-	METRICSQUERYEDITORMODE_METRICS_QUERY_EDITOR_MODE_TEXT        MetricsQueryEditorMode = "METRICS_QUERY_EDITOR_MODE_TEXT"
-	METRICSQUERYEDITORMODE_METRICS_QUERY_EDITOR_MODE_BUILDER     MetricsQueryEditorMode = "METRICS_QUERY_EDITOR_MODE_BUILDER"
+	METRICSQUERYEDITORMODE_METRICS_QUERY_EDITOR_MODE_TEXT MetricsQueryEditorMode = "METRICS_QUERY_EDITOR_MODE_TEXT"
+	METRICSQUERYEDITORMODE_METRICS_QUERY_EDITOR_MODE_BUILDER MetricsQueryEditorMode = "METRICS_QUERY_EDITOR_MODE_BUILDER"
 )
 
 // All allowed values of MetricsQueryEditorMode enum
@@ -113,3 +113,4 @@ func (v *NullableMetricsQueryEditorMode) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

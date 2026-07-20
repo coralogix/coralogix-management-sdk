@@ -23,8 +23,8 @@ var _ MappedNullable = &AnnotationWidgetScopeSpecificWidgets{}
 // AnnotationWidgetScopeSpecificWidgets Specific widgets.
 type AnnotationWidgetScopeSpecificWidgets struct {
 	// The widget ids.
-	WidgetIds                         []string `json:"widgetIds,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	WidgetIds []string `json:"widgetIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -80,7 +80,7 @@ func (o *AnnotationWidgetScopeSpecificWidgets) SetWidgetIds(v []string) {
 }
 
 func (o AnnotationWidgetScopeSpecificWidgets) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,3 +158,4 @@ func (v *NullableAnnotationWidgetScopeSpecificWidgets) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

@@ -24,9 +24,9 @@ var _ MappedNullable = &LogsRatioCondition{}
 type LogsRatioCondition struct {
 	ConditionType *LogsRatioConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
-	Threshold                         *float64             `json:"threshold,omitempty"`
-	TimeWindow                        *LogsRatioTimeWindow `json:"timeWindow,omitempty"`
-	AdditionalProperties              map[string]interface{}
+	Threshold *float64 `json:"threshold,omitempty"`
+	TimeWindow *LogsRatioTimeWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -146,7 +146,7 @@ func (o *LogsRatioCondition) SetTimeWindow(v LogsRatioTimeWindow) {
 }
 
 func (o LogsRatioCondition) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,3 +232,4 @@ func (v *NullableLogsRatioCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+

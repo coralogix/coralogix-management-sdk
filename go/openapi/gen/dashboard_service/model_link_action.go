@@ -28,8 +28,8 @@ type LinkAction struct {
 	// Defines if the link action should open in a new window or current window in the browser
 	ShouldOpenInNewWindow *bool `json:"shouldOpenInNewWindow,omitempty"`
 	// Static URL that may contain variables using {{variable_name}} syntax
-	Url                               *string `json:"url,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	AdditionalProperties              map[string]interface{}
+	Url *string `json:"url,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
@@ -181,7 +181,7 @@ func (o *LinkAction) SetUrl(v string) {
 }
 
 func (o LinkAction) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -271,3 +271,4 @@ func (v *NullableLinkAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
