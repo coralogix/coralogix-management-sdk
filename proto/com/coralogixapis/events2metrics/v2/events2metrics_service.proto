@@ -127,7 +127,9 @@ message CreateE2MRequest {
 
 // represents e2m create response
 message CreateE2MResponse {
-  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {json_schema: {description: "Create e2m response."}};
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {description: "Create e2m response."}
+  };
 
   E2M e2m = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The e2m."}];
 }
@@ -285,7 +287,9 @@ message E2MExecutionRequest {
 
 // an atomic list of e2m action that are executed in the same request
 message AtomicBatchExecuteE2MRequest {
-  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {json_schema: {description: "Request containing an atomic list of events-to-metrics actions to execute."}};
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {description: "Request containing an atomic list of events-to-metrics actions to execute."}
+  };
   repeated E2MExecutionRequest requests = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The requests."
     min_items: 1
@@ -304,7 +308,9 @@ message E2MExecutionResponse {
 
 // represents a response to atomic list of e2m actions
 message AtomicBatchExecuteE2MResponse {
-  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {json_schema: {description: "Response returned after atomically executing a batch of events-to-metrics rules."}};
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {description: "Response returned after atomically executing a batch of events-to-metrics rules."}
+  };
   repeated E2MExecutionResponse matching_responses = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The matching responses."
     min_items: 0
@@ -342,7 +348,9 @@ message LabelsPermutationsCardinalityDay {
 
 // response  represented by list of labels permutation cardinality
 message ListLabelsCardinalityResponse {
-  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {json_schema: {description: "Response containing label cardinality data for events-to-metrics rules."}};
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {description: "Response containing label cardinality data for events-to-metrics rules."}
+  };
   repeated LabelsPermutationsCardinalityDay permutations = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "List of permutations."
     min_items: 0
@@ -355,9 +363,13 @@ message GetLimitsRequest {}
 
 // get e2m limits response
 message GetLimitsResponse {
-  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {json_schema: {description: "Response containing the events-to-metrics quota limits."}};
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {description: "Response containing the events-to-metrics quota limits."}
+  };
   message LimitUsage {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {json_schema: {description: "Limit usage."}};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+      json_schema: {description: "Limit usage."}
+    };
 
     // the limit number of e2m creation
     google.protobuf.Int32Value limit = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
