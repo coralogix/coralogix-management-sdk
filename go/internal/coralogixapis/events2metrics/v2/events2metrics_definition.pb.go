@@ -12,6 +12,7 @@ import (
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
@@ -219,7 +220,10 @@ type E2M struct {
 	//	*E2M_LogsQuery
 	Query isE2M_Query `protobuf_oneof:"query"`
 	// A flag that represents if the e2m is for internal usage
-	IsInternal    *wrapperspb.BoolValue `protobuf:"bytes,12,opt,name=is_internal,json=isInternal,proto3" json:"is_internal,omitempty"`
+	IsInternal *wrapperspb.BoolValue `protobuf:"bytes,12,opt,name=is_internal,json=isInternal,proto3" json:"is_internal,omitempty"`
+	// Optional data source in "<namespace>/<dataset_name>" format (e.g. "my_namespace/my_dataset").
+	// If not set, defaults to the standard logs/spans stream.
+	DataSource    *wrapperspb.StringValue `protobuf:"bytes,13,opt,name=data_source,json=dataSource,proto3" json:"data_source,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -349,6 +353,13 @@ func (x *E2M) GetIsInternal() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *E2M) GetDataSource() *wrapperspb.StringValue {
+	if x != nil {
+		return x.DataSource
+	}
+	return nil
+}
+
 type isE2M_Query interface {
 	isE2M_Query()
 }
@@ -388,7 +399,10 @@ type E2MCreateParams struct {
 	//
 	//	*E2MCreateParams_SpansQuery
 	//	*E2MCreateParams_LogsQuery
-	Query         isE2MCreateParams_Query `protobuf_oneof:"query"`
+	Query isE2MCreateParams_Query `protobuf_oneof:"query"`
+	// Optional data source in "<namespace>/<dataset_name>" format (e.g. "my_namespace/my_dataset").
+	// If not set, defaults to the standard logs/spans stream.
+	DataSource    *wrapperspb.StringValue `protobuf:"bytes,9,opt,name=data_source,json=dataSource,proto3" json:"data_source,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -486,6 +500,13 @@ func (x *E2MCreateParams) GetLogsQuery() *v21.LogsQuery {
 		if x, ok := x.Query.(*E2MCreateParams_LogsQuery); ok {
 			return x.LogsQuery
 		}
+	}
+	return nil
+}
+
+func (x *E2MCreateParams) GetDataSource() *wrapperspb.StringValue {
+	if x != nil {
+		return x.DataSource
 	}
 	return nil
 }
@@ -695,6 +716,7 @@ type Aggregation struct {
 	//
 	// Types that are valid to be assigned to AggMetadata:
 	//
+	//	*Aggregation_None
 	//	*Aggregation_Samples
 	//	*Aggregation_Histogram
 	AggMetadata   isAggregation_AggMetadata `protobuf_oneof:"agg_metadata"`
@@ -760,6 +782,15 @@ func (x *Aggregation) GetAggMetadata() isAggregation_AggMetadata {
 	return nil
 }
 
+func (x *Aggregation) GetNone() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.AggMetadata.(*Aggregation_None); ok {
+			return x.None
+		}
+	}
+	return nil
+}
+
 func (x *Aggregation) GetSamples() *E2MAggSamples {
 	if x != nil {
 		if x, ok := x.AggMetadata.(*Aggregation_Samples); ok {
@@ -782,6 +813,11 @@ type isAggregation_AggMetadata interface {
 	isAggregation_AggMetadata()
 }
 
+type Aggregation_None struct {
+	// No metadata needed for simple aggregations (MIN, MAX, COUNT, AVG, SUM)
+	None *emptypb.Empty `protobuf:"bytes,6,opt,name=none,proto3,oneof"`
+}
+
 type Aggregation_Samples struct {
 	// E2M sample type metadata
 	Samples *E2MAggSamples `protobuf:"bytes,4,opt,name=samples,proto3,oneof"`
@@ -791,6 +827,8 @@ type Aggregation_Histogram struct {
 	// E2M aggregate histogram type metadata
 	Histogram *E2MAggHistogram `protobuf:"bytes,5,opt,name=histogram,proto3,oneof"`
 }
+
+func (*Aggregation_None) isAggregation_AggMetadata() {}
 
 func (*Aggregation_Samples) isAggregation_AggMetadata() {}
 
@@ -892,69 +930,74 @@ var File_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto pro
 
 const file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_rawDesc = "" +
 	"\n" +
-	"Ccom/coralogixapis/events2metrics/v2/events2metrics_definition.proto\x12#com.coralogixapis.events2metrics.v2\x1a2com/coralogixapis/logs2metrics/v2/logs_query.proto\x1a4com/coralogixapis/spans2metrics/v2/spans_query.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xbb\n" +
-	"\n" +
-	"\x03E2M\x12\xa6\x01\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBx\x9aAuJ&\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\x02id\x12P\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1bJ\x19\"Service_catalog_latency\"R\x04name\x12q\n" +
-	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB1\x9aA.J,\"avg and max the latency of catalog service\"R\vdescription\x12[\n" +
-	"\vcreate_time\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x9aA\x19J\x17\"2022-06-30T12:30:00Z'\"R\n" +
-	"createTime\x12[\n" +
-	"\vupdate_time\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x9aA\x19J\x17\"2022-06-30T12:30:00Z'\"R\n" +
+	"Ccom/coralogixapis/events2metrics/v2/events2metrics_definition.proto\x12#com.coralogixapis.events2metrics.v2\x1a2com/coralogixapis/logs2metrics/v2/logs_query.proto\x1a4com/coralogixapis/spans2metrics/v2/spans_query.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x8d\x10\n" +
+	"\x03E2M\x12\xf5\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\xc6\x01\x9aA\xc2\x012<Unique identifier for this E2M. Required on update requests.J&\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\"x$\x80\x01$\x8a\x01M^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\xa2\x02\x04uuidR\x02id\x12\x85\x01\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBS\x9aAP2!Human-readable name for this E2M.J\x19\"Service_catalog_latency\"x\xff\x01\x80\x01\x01\x8a\x01\t^[\\s\\S]*$R\x04name\x12\xa9\x01\n" +
+	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueBi\x9aAf2'Human-readable description of this E2M.J,\"avg and max the latency of catalog service\"x\xd0\x0f\x8a\x01\t^[\\s\\S]*$R\vdescription\x12\x97\x01\n" +
+	"\vcreate_time\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueBX\x9aAU2/RFC3339 timestamp of when this E2M was created.J\x16\"2022-06-30T12:30:00Z\"\xa2\x02\tdate-timeR\n" +
+	"createTime\x12\x9c\x01\n" +
+	"\vupdate_time\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB]\x9aAZ24RFC3339 timestamp of when this E2M was last updated.J\x16\"2022-06-30T12:30:00Z\"\xa2\x02\tdate-timeR\n" +
 	"updateTime\x12X\n" +
-	"\fpermutations\x18\x06 \x01(\v24.com.coralogixapis.events2metrics.v2.E2MPermutationsR\fpermutations\x12U\n" +
-	"\rmetric_labels\x18\a \x03(\v20.com.coralogixapis.events2metrics.v2.MetricLabelR\fmetricLabels\x12]\n" +
-	"\rmetric_fields\x18\b \x03(\v20.com.coralogixapis.events2metrics.v2.MetricFieldB\x06\x9aA\x03\xa0\x01\n" +
+	"\fpermutations\x18\x06 \x01(\v24.com.coralogixapis.events2metrics.v2.E2MPermutationsR\fpermutations\x12\x90\x01\n" +
+	"\rmetric_labels\x18\a \x03(\v20.com.coralogixapis.events2metrics.v2.MetricLabelB9\x9aA621Metric labels to attach to the generated metrics.\xa0\x01\n" +
+	"R\fmetricLabels\x12\x96\x01\n" +
+	"\rmetric_fields\x18\b \x03(\v20.com.coralogixapis.events2metrics.v2.MetricFieldB?\x9aA<27Metric fields to extract and aggregate from the events.\xa0\x01\n" +
 	"R\fmetricFields\x12@\n" +
 	"\x04type\x18\t \x01(\x0e2,.com.coralogixapis.events2metrics.v2.E2MTypeR\x04type\x12Q\n" +
 	"\vspans_query\x18\n" +
 	" \x01(\v2..com.coralogixapis.spans2metrics.v2.SpansQueryH\x00R\n" +
 	"spansQuery\x12M\n" +
 	"\n" +
-	"logs_query\x18\v \x01(\v2,.com.coralogixapis.logs2metrics.v2.LogsQueryH\x00R\tlogsQuery\x12;\n" +
-	"\vis_internal\x18\f \x01(\v2\x1a.google.protobuf.BoolValueR\n" +
-	"isInternal:\xd1\x01\x9aA\xcd\x01\n" +
+	"logs_query\x18\v \x01(\v2,.com.coralogixapis.logs2metrics.v2.LogsQueryH\x00R\tlogsQuery\x12v\n" +
+	"\vis_internal\x18\f \x01(\v2\x1a.google.protobuf.BoolValueB9\x9aA624Indicates whether this E2M is for internal use only.R\n" +
+	"isInternal\x12\xe1\x01\n" +
+	"\vdata_source\x18\r \x01(\v2\x1c.google.protobuf.StringValueB\xa1\x01\x9aA\x9d\x012nOptional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.J\x19\"my_namespace/my_dataset\"x\xac\x02\x80\x01\x01\x8a\x01\t^[\\s\\S]*$R\n" +
+	"dataSource:\xd1\x01\x9aA\xcd\x01\n" +
 	"U*\x03E2M2@This data structure represents an Event to Metrics (E2M) object.\xd2\x01\x04name\xd2\x01\x04type*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/B\a\n" +
-	"\x05query\"\xaa\a\n" +
-	"\x0fE2MCreateParams\x12P\n" +
-	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1bJ\x19\"Service catalog latency\"R\x04name\x12q\n" +
-	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB1\x9aA.J,\"avg and max the latency of catalog service\"R\vdescription\x12V\n" +
-	"\x12permutations_limit\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueB\n" +
-	"\x9aA\aJ\x0530000R\x11permutationsLimit\x12U\n" +
-	"\rmetric_labels\x18\x04 \x03(\v20.com.coralogixapis.events2metrics.v2.MetricLabelR\fmetricLabels\x12U\n" +
-	"\rmetric_fields\x18\x05 \x03(\v20.com.coralogixapis.events2metrics.v2.MetricFieldR\fmetricFields\x12@\n" +
+	"\x05query\"\xd8\v\n" +
+	"\x0fE2MCreateParams\x12\x88\x01\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBV\x9aAS2$Human-readable name for the new E2M.J\x19\"Service catalog latency\"x\xff\x01\x80\x01\x01\x8a\x01\t^[\\s\\S]*$R\x04name\x12\xad\x01\n" +
+	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBm\x9aAj2+Human-readable description for the new E2M.J,\"avg and max the latency of catalog service\"x\xd0\x0f\x8a\x01\t^[\\s\\S]*$R\vdescription\x12\xac\x01\n" +
+	"\x12permutations_limit\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueB`\x9aA]2BMaximum number of unique metric permutations allowed for this E2M.J\x0530000Y\x00\x00\x00\x00\xd0\x12cAi\x00\x00\x00\x00\x00\x00\xf0?R\x11permutationsLimit\x12\x90\x01\n" +
+	"\rmetric_labels\x18\x04 \x03(\v20.com.coralogixapis.events2metrics.v2.MetricLabelB9\x9aA621Metric labels to attach to the generated metrics.\xa0\x01\n" +
+	"R\fmetricLabels\x12\x95\x01\n" +
+	"\rmetric_fields\x18\x05 \x03(\v20.com.coralogixapis.events2metrics.v2.MetricFieldB>\x9aA;26Metric fields to create and aggregate from the events.\xa0\x01\n" +
+	"R\fmetricFields\x12@\n" +
 	"\x04type\x18\x06 \x01(\x0e2,.com.coralogixapis.events2metrics.v2.E2MTypeR\x04type\x12Q\n" +
 	"\vspans_query\x18\a \x01(\v2..com.coralogixapis.spans2metrics.v2.SpansQueryH\x00R\n" +
 	"spansQuery\x12M\n" +
 	"\n" +
-	"logs_query\x18\b \x01(\v2,.com.coralogixapis.logs2metrics.v2.LogsQueryH\x00R\tlogsQuery:\xde\x01\x9aA\xda\x01\n" +
+	"logs_query\x18\b \x01(\v2,.com.coralogixapis.logs2metrics.v2.LogsQueryH\x00R\tlogsQuery\x12\xe1\x01\n" +
+	"\vdata_source\x18\t \x01(\v2\x1c.google.protobuf.StringValueB\xa1\x01\x9aA\x9d\x012nOptional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.J\x19\"my_namespace/my_dataset\"x\xac\x02\x80\x01\x01\x8a\x01\t^[\\s\\S]*$R\n" +
+	"dataSource:\xde\x01\x9aA\xda\x01\n" +
 	"b*\x11E2M Create Params2FThis data structure is used to create a new event to metric definition\xd2\x01\x04name*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/B\a\n" +
-	"\x05query\"\xf7\x02\n" +
-	"\x0fE2MPermutations\x12 \n" +
-	"\x05limit\x18\x01 \x01(\x05B\n" +
-	"\x9aA\aJ\x0530000R\x05limit\x12,\n" +
-	"\x12has_exceeded_limit\x18\x02 \x01(\bR\x10hasExceededLimit:\x93\x02\x9aA\x8f\x02\n" +
+	"\x05query\"\xaf\x03\n" +
+	"\x0fE2MPermutations\x12:\n" +
+	"\x05limit\x18\x01 \x01(\x05B$\x9aA!2\x06Limit.J\x0530000Y\x00\x00\x00\x00\xd0\x12cAi\x00\x00\x00\x00\x00\x00\xf0?R\x05limit\x12J\n" +
+	"\x12has_exceeded_limit\x18\x02 \x01(\bB\x1c\x9aA\x192\x17The has exceeded limit.R\x10hasExceededLimit:\x93\x02\x9aA\x8f\x02\n" +
 	"\x96\x01*\x10E2M Permutations2eThis data structure represents the limit of events2metrics permutations and if the limit was exceeded\xd2\x01\x05limit\xd2\x01\x12has_exceeded_limit*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xab\x03\n" +
-	"\vMetricLabel\x12d\n" +
-	"\ftarget_label\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB#\x9aA J\x12\"alias_label_name\"\x8a\x01\t^[\\w/-]+$R\vtargetLabel\x12\\\n" +
-	"\fsource_field\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1b\x9aA\x18J\x16\"log_obj.string_value\"R\vsourceField:\xd7\x01\x9aA\xd3\x01\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xea\x03\n" +
+	"\vMetricLabel\x12}\n" +
+	"\ftarget_label\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB<\x9aA92\x11The target label.J\x12\"alias_label_name\"x\xff\x01\x80\x01\x01\x8a\x01\t^[\\w/-]+$R\vtargetLabel\x12\x81\x01\n" +
+	"\fsource_field\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB@\x9aA=2\x11The source field.J\x16\"log_obj.string_value\"x\xff\x01\x80\x01\x01\x8a\x01\t^[\\s\\S]*$R\vsourceField:\xd7\x01\x9aA\xd3\x01\n" +
 	"[*\fMetric Label2-This data structure represents a metric label\xd2\x01\ftarget_label\xd2\x01\fsource_field*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xb0\x04\n" +
-	"\vMetricField\x12x\n" +
-	"\x17target_base_metric_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB#\x9aA J\x12\"alias_field_name\"\x8a\x01\t^[\\w/-]+$R\x14targetBaseMetricName\x12]\n" +
-	"\fsource_field\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x9aA\x19J\x17\"log_obj.numeric_field\"R\vsourceField\x12T\n" +
-	"\faggregations\x18\a \x03(\v20.com.coralogixapis.events2metrics.v2.AggregationR\faggregations:\xf1\x01\x9aA\xed\x01\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\x96\x05\n" +
+	"\vMetricField\x12\x9c\x01\n" +
+	"\x17target_base_metric_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBG\x9aAD2\x1cThe target base metric name.J\x12\"alias_field_name\"x\xff\x01\x80\x01\x01\x8a\x01\t^[\\w/-]+$R\x14targetBaseMetricName\x12\x82\x01\n" +
+	"\fsource_field\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBA\x9aA>2\x11The source field.J\x17\"log_obj.numeric_field\"x\xff\x01\x80\x01\x01\x8a\x01\t^[\\s\\S]*$R\vsourceField\x12o\n" +
+	"\faggregations\x18\a \x03(\v20.com.coralogixapis.events2metrics.v2.AggregationB\x19\x9aA\x162\x11The aggregations.\xa0\x01\aR\faggregations:\xf1\x01\x9aA\xed\x01\n" +
 	"u*\fMetric Field2-This data structure represents a metric field\xd2\x01\x17target_base_metric_name\xd2\x01\fsource_field\xd2\x01\faggregations*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\x9d\x06\n" +
-	"\vAggregation\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabled\x12S\n" +
-	"\bagg_type\x18\x02 \x01(\x0e28.com.coralogixapis.events2metrics.v2.Aggregation.AggTypeR\aaggType\x12N\n" +
-	"\x12target_metric_name\x18\x03 \x01(\tB \x9aA\x1dJ\x1b\"alias_field_name_agg_func\"R\x10targetMetricName\x12N\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xa4\b\n" +
+	"\vAggregation\x12@\n" +
+	"\aenabled\x18\x01 \x01(\bB&\x9aA#2!Whether this resource is enabled.R\aenabled\x12S\n" +
+	"\bagg_type\x18\x02 \x01(\x0e28.com.coralogixapis.events2metrics.v2.Aggregation.AggTypeR\aaggType\x12\x99\x01\n" +
+	"\x12target_metric_name\x18\x03 \x01(\tBk\x9aAh27Name of the target metric produced by this aggregation.J\x1b\"alias_field_name_agg_func\"x\xff\x01\x80\x01\x01\x8a\x01\t^[\\s\\S]*$R\x10targetMetricName\x12\x80\x01\n" +
+	"\x04none\x18\x06 \x01(\v2\x16.google.protobuf.EmptyBR\x9aAO2MMarker indicating no additional metadata is needed for this aggregation type.H\x00R\x04none\x12N\n" +
 	"\asamples\x18\x04 \x01(\v22.com.coralogixapis.events2metrics.v2.E2MAggSamplesH\x00R\asamples\x12\x83\x01\n" +
-	"\thistogram\x18\x05 \x01(\v24.com.coralogixapis.events2metrics.v2.E2MAggHistogramB-\x9aA*2%e2m aggregate histogram type metadata\xa8\x01\x01H\x00R\thistogram\"\xad\x01\n" +
+	"\thistogram\x18\x05 \x01(\v24.com.coralogixapis.events2metrics.v2.E2MAggHistogramB-\x9aA*2%e2m aggregate histogram type metadata\xa8\x01\x01H\x00R\thistogram\"\xbd\x01\n" +
 	"\aAggType\x12\x18\n" +
 	"\x14AGG_TYPE_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fAGG_TYPE_MIN\x10\x01\x12\x10\n" +
@@ -963,28 +1006,32 @@ const file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_r
 	"\fAGG_TYPE_AVG\x10\x04\x12\x10\n" +
 	"\fAGG_TYPE_SUM\x10\x05\x12\x16\n" +
 	"\x12AGG_TYPE_HISTOGRAM\x10\x06\x12\x14\n" +
-	"\x10AGG_TYPE_SAMPLES\x10\a:\xb8\x01\x9aA\xb4\x01\n" +
+	"\x10AGG_TYPE_SAMPLES\x10\a\x1a\x0e\x9aA\v\n" +
+	"\tAgg type.:\xb8\x01\x9aA\xb4\x01\n" +
 	"<*\vAggregation2-This data structure represents an aggregation*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/B\x0e\n" +
-	"\fagg_metadata\"\x94\x03\n" +
+	"\fagg_metadata\"\xa7\x03\n" +
 	"\rE2MAggSamples\x12^\n" +
 	"\vsample_type\x18\x02 \x01(\x0e2=.com.coralogixapis.events2metrics.v2.E2MAggSamples.SampleTypeR\n" +
-	"sampleType\"S\n" +
+	"sampleType\"f\n" +
 	"\n" +
 	"SampleType\x12\x1b\n" +
 	"\x17SAMPLE_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fSAMPLE_TYPE_MIN\x10\x01\x12\x13\n" +
-	"\x0fSAMPLE_TYPE_MAX\x10\x02:\xcd\x01\x9aA\xc9\x01\n" +
+	"\x0fSAMPLE_TYPE_MAX\x10\x02\x1a\x11\x9aA\x0e\n" +
+	"\fSample type.:\xcd\x01\x9aA\xc9\x01\n" +
 	"Q*\x15E2M Aggregate Samples28This data structure represents the e2m aggregate samples*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\x87\x02\n" +
-	"\x0fE2MAggHistogram\x12 \n" +
-	"\abuckets\x18\x01 \x03(\x02B\x06\x9aA\x03J\x012R\abuckets:\xd1\x01\x9aA\xcd\x01\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\x98\x02\n" +
+	"\x0fE2MAggHistogram\x121\n" +
+	"\abuckets\x18\x01 \x03(\x02B\x17\x9aA\x142\fThe buckets.J\x012\xa0\x01@R\abuckets:\xd1\x01\x9aA\xcd\x01\n" +
 	"U*\x17E2M Aggregate Histogram2:This data structure represents the e2m aggregate histogram*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/*Z\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/*k\n" +
 	"\aE2MType\x12\x18\n" +
 	"\x14E2M_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15E2M_TYPE_LOGS2METRICS\x10\x01\x12\x1a\n" +
-	"\x16E2M_TYPE_SPANS2METRICS\x10\x02b\x06proto3"
+	"\x16E2M_TYPE_SPANS2METRICS\x10\x02\x1a\x0f\x9aA\f\n" +
+	"\n" +
+	"E2 m type.b\x06proto3"
 
 var (
 	file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_rawDescOnce sync.Once
@@ -1017,6 +1064,7 @@ var file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_goT
 	(*v21.LogsQuery)(nil),          // 13: com.coralogixapis.logs2metrics.v2.LogsQuery
 	(*wrapperspb.BoolValue)(nil),   // 14: google.protobuf.BoolValue
 	(*wrapperspb.Int32Value)(nil),  // 15: google.protobuf.Int32Value
+	(*emptypb.Empty)(nil),          // 16: google.protobuf.Empty
 }
 var file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_depIdxs = []int32{
 	11, // 0: com.coralogixapis.events2metrics.v2.E2M.id:type_name -> google.protobuf.StringValue
@@ -1031,28 +1079,31 @@ var file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_dep
 	12, // 9: com.coralogixapis.events2metrics.v2.E2M.spans_query:type_name -> com.coralogixapis.spans2metrics.v2.SpansQuery
 	13, // 10: com.coralogixapis.events2metrics.v2.E2M.logs_query:type_name -> com.coralogixapis.logs2metrics.v2.LogsQuery
 	14, // 11: com.coralogixapis.events2metrics.v2.E2M.is_internal:type_name -> google.protobuf.BoolValue
-	11, // 12: com.coralogixapis.events2metrics.v2.E2MCreateParams.name:type_name -> google.protobuf.StringValue
-	11, // 13: com.coralogixapis.events2metrics.v2.E2MCreateParams.description:type_name -> google.protobuf.StringValue
-	15, // 14: com.coralogixapis.events2metrics.v2.E2MCreateParams.permutations_limit:type_name -> google.protobuf.Int32Value
-	6,  // 15: com.coralogixapis.events2metrics.v2.E2MCreateParams.metric_labels:type_name -> com.coralogixapis.events2metrics.v2.MetricLabel
-	7,  // 16: com.coralogixapis.events2metrics.v2.E2MCreateParams.metric_fields:type_name -> com.coralogixapis.events2metrics.v2.MetricField
-	0,  // 17: com.coralogixapis.events2metrics.v2.E2MCreateParams.type:type_name -> com.coralogixapis.events2metrics.v2.E2MType
-	12, // 18: com.coralogixapis.events2metrics.v2.E2MCreateParams.spans_query:type_name -> com.coralogixapis.spans2metrics.v2.SpansQuery
-	13, // 19: com.coralogixapis.events2metrics.v2.E2MCreateParams.logs_query:type_name -> com.coralogixapis.logs2metrics.v2.LogsQuery
-	11, // 20: com.coralogixapis.events2metrics.v2.MetricLabel.target_label:type_name -> google.protobuf.StringValue
-	11, // 21: com.coralogixapis.events2metrics.v2.MetricLabel.source_field:type_name -> google.protobuf.StringValue
-	11, // 22: com.coralogixapis.events2metrics.v2.MetricField.target_base_metric_name:type_name -> google.protobuf.StringValue
-	11, // 23: com.coralogixapis.events2metrics.v2.MetricField.source_field:type_name -> google.protobuf.StringValue
-	8,  // 24: com.coralogixapis.events2metrics.v2.MetricField.aggregations:type_name -> com.coralogixapis.events2metrics.v2.Aggregation
-	1,  // 25: com.coralogixapis.events2metrics.v2.Aggregation.agg_type:type_name -> com.coralogixapis.events2metrics.v2.Aggregation.AggType
-	9,  // 26: com.coralogixapis.events2metrics.v2.Aggregation.samples:type_name -> com.coralogixapis.events2metrics.v2.E2MAggSamples
-	10, // 27: com.coralogixapis.events2metrics.v2.Aggregation.histogram:type_name -> com.coralogixapis.events2metrics.v2.E2MAggHistogram
-	2,  // 28: com.coralogixapis.events2metrics.v2.E2MAggSamples.sample_type:type_name -> com.coralogixapis.events2metrics.v2.E2MAggSamples.SampleType
-	29, // [29:29] is the sub-list for method output_type
-	29, // [29:29] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	11, // 12: com.coralogixapis.events2metrics.v2.E2M.data_source:type_name -> google.protobuf.StringValue
+	11, // 13: com.coralogixapis.events2metrics.v2.E2MCreateParams.name:type_name -> google.protobuf.StringValue
+	11, // 14: com.coralogixapis.events2metrics.v2.E2MCreateParams.description:type_name -> google.protobuf.StringValue
+	15, // 15: com.coralogixapis.events2metrics.v2.E2MCreateParams.permutations_limit:type_name -> google.protobuf.Int32Value
+	6,  // 16: com.coralogixapis.events2metrics.v2.E2MCreateParams.metric_labels:type_name -> com.coralogixapis.events2metrics.v2.MetricLabel
+	7,  // 17: com.coralogixapis.events2metrics.v2.E2MCreateParams.metric_fields:type_name -> com.coralogixapis.events2metrics.v2.MetricField
+	0,  // 18: com.coralogixapis.events2metrics.v2.E2MCreateParams.type:type_name -> com.coralogixapis.events2metrics.v2.E2MType
+	12, // 19: com.coralogixapis.events2metrics.v2.E2MCreateParams.spans_query:type_name -> com.coralogixapis.spans2metrics.v2.SpansQuery
+	13, // 20: com.coralogixapis.events2metrics.v2.E2MCreateParams.logs_query:type_name -> com.coralogixapis.logs2metrics.v2.LogsQuery
+	11, // 21: com.coralogixapis.events2metrics.v2.E2MCreateParams.data_source:type_name -> google.protobuf.StringValue
+	11, // 22: com.coralogixapis.events2metrics.v2.MetricLabel.target_label:type_name -> google.protobuf.StringValue
+	11, // 23: com.coralogixapis.events2metrics.v2.MetricLabel.source_field:type_name -> google.protobuf.StringValue
+	11, // 24: com.coralogixapis.events2metrics.v2.MetricField.target_base_metric_name:type_name -> google.protobuf.StringValue
+	11, // 25: com.coralogixapis.events2metrics.v2.MetricField.source_field:type_name -> google.protobuf.StringValue
+	8,  // 26: com.coralogixapis.events2metrics.v2.MetricField.aggregations:type_name -> com.coralogixapis.events2metrics.v2.Aggregation
+	1,  // 27: com.coralogixapis.events2metrics.v2.Aggregation.agg_type:type_name -> com.coralogixapis.events2metrics.v2.Aggregation.AggType
+	16, // 28: com.coralogixapis.events2metrics.v2.Aggregation.none:type_name -> google.protobuf.Empty
+	9,  // 29: com.coralogixapis.events2metrics.v2.Aggregation.samples:type_name -> com.coralogixapis.events2metrics.v2.E2MAggSamples
+	10, // 30: com.coralogixapis.events2metrics.v2.Aggregation.histogram:type_name -> com.coralogixapis.events2metrics.v2.E2MAggHistogram
+	2,  // 31: com.coralogixapis.events2metrics.v2.E2MAggSamples.sample_type:type_name -> com.coralogixapis.events2metrics.v2.E2MAggSamples.SampleType
+	32, // [32:32] is the sub-list for method output_type
+	32, // [32:32] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_init() }
@@ -1069,6 +1120,7 @@ func file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_in
 		(*E2MCreateParams_LogsQuery)(nil),
 	}
 	file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_msgTypes[5].OneofWrappers = []any{
+		(*Aggregation_None)(nil),
 		(*Aggregation_Samples)(nil),
 		(*Aggregation_Histogram)(nil),
 	}

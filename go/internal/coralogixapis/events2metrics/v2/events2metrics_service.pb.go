@@ -995,7 +995,7 @@ type GetLimitsResponse struct {
 	LabelsLimit int32 `protobuf:"varint,2,opt,name=labels_limit,json=labelsLimit,proto3" json:"labels_limit,omitempty"`
 	// permutation limit/used
 	PermutationsLimit *GetLimitsResponse_LimitUsage `protobuf:"bytes,3,opt,name=permutations_limit,json=permutationsLimit,proto3" json:"permutations_limit,omitempty"`
-	// metrics limit/used5
+	// metrics limit/used
 	MetricsLimit  *GetLimitsResponse_LimitUsage `protobuf:"bytes,4,opt,name=metrics_limit,json=metricsLimit,proto3" json:"metrics_limit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1117,109 +1117,123 @@ var File_com_coralogixapis_events2metrics_v2_events2metrics_service_proto protor
 
 const file_com_coralogixapis_events2metrics_v2_events2metrics_service_proto_rawDesc = "" +
 	"\n" +
-	"@com/coralogixapis/events2metrics/v2/events2metrics_service.proto\x12#com.coralogixapis.events2metrics.v2\x1a+com/coralogixapis/common/v1/audit_log.proto\x1aCcom/coralogixapis/events2metrics/v2/events2metrics_definition.proto\x1a2com/coralogixapis/logs2metrics/v2/logs_query.proto\x1a4com/coralogixapis/spans2metrics/v2/spans_query.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xac\x02\n" +
-	"\x10CreateE2MRequest\x12F\n" +
-	"\x03e2m\x18\x01 \x01(\v24.com.coralogixapis.events2metrics.v2.E2MCreateParamsR\x03e2m:\xcf\x01\x9aA\xcb\x01\n" +
+	"@com/coralogixapis/events2metrics/v2/events2metrics_service.proto\x12#com.coralogixapis.events2metrics.v2\x1a+com/coralogixapis/common/v1/audit_log.proto\x1aCcom/coralogixapis/events2metrics/v2/events2metrics_definition.proto\x1a2com/coralogixapis/logs2metrics/v2/logs_query.proto\x1a4com/coralogixapis/spans2metrics/v2/spans_query.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xbb\x02\n" +
+	"\x10CreateE2MRequest\x12U\n" +
+	"\x03e2m\x18\x01 \x01(\v24.com.coralogixapis.events2metrics.v2.E2MCreateParamsB\r\x9aA\n" +
+	"2\bThe e2m.R\x03e2m:\xcf\x01\x9aA\xcb\x01\n" +
 	"S*\x12Create E2M Request27This is used to create a new event to metric definition\xd2\x01\x03e2m*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"O\n" +
-	"\x11CreateE2MResponse\x12:\n" +
-	"\x03e2m\x18\x01 \x01(\v2(.com.coralogixapis.events2metrics.v2.E2MR\x03e2m\"\x10\n" +
-	"\x0eListE2MRequest\"\xb1\x02\n" +
-	"\x0fListE2MResponse\x12:\n" +
-	"\x03e2m\x18\x01 \x03(\v2(.com.coralogixapis.events2metrics.v2.E2MR\x03e2m:\xe1\x01\x9aA\xdd\x01\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"{\n" +
+	"\x11CreateE2MResponse\x12I\n" +
+	"\x03e2m\x18\x01 \x01(\v2(.com.coralogixapis.events2metrics.v2.E2MB\r\x9aA\n" +
+	"2\bThe e2m.R\x03e2m:\x1b\x9aA\x18\n" +
+	"\x162\x14Create e2m response.\"\x10\n" +
+	"\x0eListE2MRequest\"\xc4\x02\n" +
+	"\x0fListE2MResponse\x12M\n" +
+	"\x03e2m\x18\x01 \x03(\v2(.com.coralogixapis.events2metrics.v2.E2MB\x11\x9aA\x0e2\bThe e2m.\xa0\x01\x90NR\x03e2m:\xe1\x01\x9aA\xdd\x01\n" +
 	"e*\x11List E2M Response2JThis is the response obtained when listing all event to metric definitions\xd2\x01\x03e2m*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xb8\x02\n" +
-	"\x11ReplaceE2MRequest\x12:\n" +
-	"\x03e2m\x18\x01 \x01(\v2(.com.coralogixapis.events2metrics.v2.E2MR\x03e2m:\xe6\x01\x9aA\xe2\x01\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xc7\x02\n" +
+	"\x11ReplaceE2MRequest\x12I\n" +
+	"\x03e2m\x18\x01 \x01(\v2(.com.coralogixapis.events2metrics.v2.E2MB\r\x9aA\n" +
+	"2\bThe e2m.R\x03e2m:\xe6\x01\x9aA\xe2\x01\n" +
 	"j*\x13Replace E2M Request2MThis data structure is used to replace an existing event to metric definition\xd2\x01\x03e2m*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xc2\x02\n" +
-	"\x12ReplaceE2MResponse\x12:\n" +
-	"\x03e2m\x18\x01 \x01(\v2(.com.coralogixapis.events2metrics.v2.E2MR\x03e2m:\xef\x01\x9aA\xeb\x01\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xd1\x02\n" +
+	"\x12ReplaceE2MResponse\x12I\n" +
+	"\x03e2m\x18\x01 \x01(\v2(.com.coralogixapis.events2metrics.v2.E2MB\r\x9aA\n" +
+	"2\bThe e2m.R\x03e2m:\xef\x01\x9aA\xeb\x01\n" +
 	"s*\x14Replace E2M Response2UThis data structure is obtained when replacing an existing event to metric definition\xd2\x01\x03e2m*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xd0\x02\n" +
-	"\rGetE2MRequest\x12Y\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\"R\x02id:\xe3\x01\x9aA\xdf\x01\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xc3\x03\n" +
+	"\rGetE2MRequest\x12\xcb\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x9c\x01\x9aA\x98\x012\x12Unique identifier.J&\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\"x$\x80\x01$\x8a\x01M^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\xa2\x02\x04uuidR\x02id:\xe3\x01\x9aA\xdf\x01\n" +
 	"g*\x10Get E2M Response2NThis data structure is used to retrieve an existing event to metric definition\xd2\x01\x02id*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xbb\x02\n" +
-	"\x0eGetE2MResponse\x12:\n" +
-	"\x03e2m\x18\x01 \x01(\v2(.com.coralogixapis.events2metrics.v2.E2MR\x03e2m:\xec\x01\x9aA\xe8\x01\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xca\x02\n" +
+	"\x0eGetE2MResponse\x12I\n" +
+	"\x03e2m\x18\x01 \x01(\v2(.com.coralogixapis.events2metrics.v2.E2MB\r\x9aA\n" +
+	"2\bThe e2m.R\x03e2m:\xec\x01\x9aA\xe8\x01\n" +
 	"p*\x10Get E2M Response2VThis data structure is obtained when retrieving an existing event to metric definition\xd2\x01\x03e2m*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xd3\x02\n" +
-	"\x10DeleteE2MRequest\x12Y\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\"R\x02id:\xe3\x01\x9aA\xdf\x01\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xc6\x03\n" +
+	"\x10DeleteE2MRequest\x12\xcb\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x9c\x01\x9aA\x98\x012\x12Unique identifier.J&\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\"x$\x80\x01$\x8a\x01M^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\xa2\x02\x04uuidR\x02id:\xe3\x01\x9aA\xdf\x01\n" +
 	"g*\x12Delete E2M Request2LThis data structure is used to delete an existing event to metric definition\xd2\x01\x02id*t\n" +
-	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xaf\x02\n" +
-	"\x11DeleteE2MResponse\x12,\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id:\xeb\x01\x9aA\xe7\x01\n" +
+	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xa5\x03\n" +
+	"\x11DeleteE2MResponse\x12\xa1\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBs\x9aAp2\x12Unique identifier.x$\x80\x01$\x8a\x01M^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$\xa2\x02\x04uuidR\x02id:\xeb\x01\x9aA\xe7\x01\n" +
 	"o*\x12Delete E2M Request2TThis data structure is obtained when deleting an existing event to metric definition\xd2\x01\x02id*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\x96\x02\n" +
 	"\x13E2MExecutionRequest\x12O\n" +
 	"\x06create\x18\x01 \x01(\v25.com.coralogixapis.events2metrics.v2.CreateE2MRequestH\x00R\x06create\x12R\n" +
 	"\areplace\x18\x02 \x01(\v26.com.coralogixapis.events2metrics.v2.ReplaceE2MRequestH\x00R\areplace\x12O\n" +
 	"\x06delete\x18\x03 \x01(\v25.com.coralogixapis.events2metrics.v2.DeleteE2MRequestH\x00R\x06deleteB\t\n" +
-	"\arequest\"t\n" +
-	"\x1cAtomicBatchExecuteE2MRequest\x12T\n" +
-	"\brequests\x18\x01 \x03(\v28.com.coralogixapis.events2metrics.v2.E2MExecutionRequestR\brequests\"\xa1\x02\n" +
+	"\arequest\"\xe1\x01\n" +
+	"\x1cAtomicBatchExecuteE2MRequest\x12n\n" +
+	"\brequests\x18\x01 \x03(\v28.com.coralogixapis.events2metrics.v2.E2MExecutionRequestB\x18\x9aA\x152\rThe requests.\xa0\x01d\xa8\x01\x01R\brequests:Q\x9aAN\n" +
+	"L2JRequest containing an atomic list of events-to-metrics actions to execute.\"\xa1\x02\n" +
 	"\x14E2MExecutionResponse\x12R\n" +
 	"\acreated\x18\x01 \x01(\v26.com.coralogixapis.events2metrics.v2.CreateE2MResponseH\x00R\acreated\x12U\n" +
 	"\breplaced\x18\x02 \x01(\v27.com.coralogixapis.events2metrics.v2.ReplaceE2MResponseH\x00R\breplaced\x12R\n" +
 	"\adeleted\x18\x03 \x01(\v26.com.coralogixapis.events2metrics.v2.DeleteE2MResponseH\x00R\adeletedB\n" +
 	"\n" +
-	"\bresponse\"\x89\x01\n" +
-	"\x1dAtomicBatchExecuteE2MResponse\x12h\n" +
-	"\x12matching_responses\x18\x01 \x03(\v29.com.coralogixapis.events2metrics.v2.E2MExecutionResponseR\x11matchingResponses\"\xa0\x02\n" +
-	"\x1cListLabelsCardinalityRequest\x12Q\n" +
-	"\vspans_query\x18\x01 \x01(\v2..com.coralogixapis.spans2metrics.v2.SpansQueryH\x00R\n" +
-	"spansQuery\x12M\n" +
+	"\bresponse\"\x84\x02\n" +
+	"\x1dAtomicBatchExecuteE2MResponse\x12\x89\x01\n" +
+	"\x12matching_responses\x18\x01 \x03(\v29.com.coralogixapis.events2metrics.v2.E2MExecutionResponseB\x1f\x9aA\x1c2\x17The matching responses.\xa0\x01dR\x11matchingResponses:W\x9aAT\n" +
+	"R2PResponse returned after atomically executing a batch of events-to-metrics rules.\"\xd2\x03\n" +
+	"\x1cListLabelsCardinalityRequest\x12\x8d\x01\n" +
+	"\vspans_query\x18\x01 \x01(\v2..com.coralogixapis.spans2metrics.v2.SpansQueryB:\x9aA725Spans-based query used to evaluate label cardinality.H\x00R\n" +
+	"spansQuery\x12\x88\x01\n" +
 	"\n" +
-	"logs_query\x18\x02 \x01(\v2,.com.coralogixapis.logs2metrics.v2.LogsQueryH\x00R\tlogsQuery\x12U\n" +
-	"\rmetric_labels\x18\x03 \x03(\v20.com.coralogixapis.events2metrics.v2.MetricLabelR\fmetricLabelsB\a\n" +
-	"\x05query\"X\n" +
-	" LabelsPermutationsCardinalityDay\x12\x10\n" +
-	"\x03day\x18\x01 \x01(\tR\x03day\x12\"\n" +
-	"\fpermutations\x18\x02 \x01(\x05R\fpermutations\"\x8a\x01\n" +
-	"\x1dListLabelsCardinalityResponse\x12i\n" +
-	"\fpermutations\x18\x01 \x03(\v2E.com.coralogixapis.events2metrics.v2.LabelsPermutationsCardinalityDayR\fpermutations\"\x12\n" +
-	"\x10GetLimitsRequest\"\xbf\x03\n" +
-	"\x11GetLimitsResponse\x12;\n" +
+	"logs_query\x18\x02 \x01(\v2,.com.coralogixapis.logs2metrics.v2.LogsQueryB9\x9aA624Logs-based query used to evaluate label cardinality.H\x00R\tlogsQuery\x12\x8d\x01\n" +
+	"\rmetric_labels\x18\x03 \x03(\v20.com.coralogixapis.events2metrics.v2.MetricLabelB6\x9aA32.The metric labels to evaluate cardinality for.\xa0\x01\n" +
+	"R\fmetricLabelsB\a\n" +
+	"\x05query\"\xd5\x01\n" +
+	" LabelsPermutationsCardinalityDay\x12S\n" +
+	"\x03day\x18\x01 \x01(\tBA\x9aA>2!The day, formatted as YYYY-MM-DD.x\n" +
+	"\x80\x01\n" +
+	"\x8a\x01\x13^\\d{4}-\\d{2}-\\d{2}$R\x03day\x12\\\n" +
+	"\fpermutations\x18\x02 \x01(\x05B8\x9aA52*Number of label permutations for this day.Y\x00\x00\xc0\xff\xff\xff\xdfAR\fpermutations\"\xfb\x01\n" +
+	"\x1dListLabelsCardinalityResponse\x12\x89\x01\n" +
+	"\fpermutations\x18\x01 \x03(\v2E.com.coralogixapis.events2metrics.v2.LabelsPermutationsCardinalityDayB\x1e\x9aA\x1b2\x15List of permutations.\xa0\x01\xee\x02R\fpermutations:N\x9aAK\n" +
+	"I2GResponse containing label cardinality data for events-to-metrics rules.\"\x12\n" +
+	"\x10GetLimitsRequest\"\x91\x05\n" +
+	"\x11GetLimitsResponse\x12k\n" +
 	"\n" +
-	"company_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\tcompanyId\x12!\n" +
-	"\flabels_limit\x18\x02 \x01(\x05R\vlabelsLimit\x12p\n" +
+	"company_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB.\x9aA+2\x0fThe company id.J\b\"123456\"x\x14\x80\x01\x01\x8a\x01\b^[0-9]+$R\tcompanyId\x12B\n" +
+	"\flabels_limit\x18\x02 \x01(\x05B\x1f\x9aA\x1c2\x11The labels limit.Y\x00\x00\x00\x00\x00\xe0o@R\vlabelsLimit\x12p\n" +
 	"\x12permutations_limit\x18\x03 \x01(\v2A.com.coralogixapis.events2metrics.v2.GetLimitsResponse.LimitUsageR\x11permutationsLimit\x12f\n" +
-	"\rmetrics_limit\x18\x04 \x01(\v2A.com.coralogixapis.events2metrics.v2.GetLimitsResponse.LimitUsageR\fmetricsLimit\x1ap\n" +
+	"\rmetrics_limit\x18\x04 \x01(\v2A.com.coralogixapis.events2metrics.v2.GetLimitsResponse.LimitUsageR\fmetricsLimit\x1a\xb0\x01\n" +
 	"\n" +
-	"LimitUsage\x121\n" +
-	"\x05limit\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x05limit\x12/\n" +
-	"\x04used\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04used2\x99\x12\n" +
-	"\x14Events2MetricService\x12\x86\x02\n" +
-	"\tCreateE2M\x125.com.coralogixapis.events2metrics.v2.CreateE2MRequest\x1a6.com.coralogixapis.events2metrics.v2.CreateE2MResponse\"\x89\x01\x9aA*\n" +
-	"\x16Events2Metrics Service\x12\x10Create a new E2Mʸ\x02\x10\n" +
-	"\x0eCreate new E2M\x82\xd3\xe4\x93\x02B:\x03e2mZ\x18\"\x16/api/v2/events2metrics\"!/events2metrics/events2metrics/v2\x12\xf1\x01\n" +
-	"\aListE2M\x123.com.coralogixapis.events2metrics.v2.ListE2MRequest\x1a4.com.coralogixapis.events2metrics.v2.ListE2MResponse\"{\x9aA#\n" +
-	"\x16Events2Metrics Service\x12\tList E2Msʸ\x02\x0e\n" +
-	"\fList all E2M\x82\xd3\xe4\x93\x02=Z\x18\x12\x16/api/v2/events2metrics\x12!/events2metrics/events2metrics/v2\x12\x84\x02\n" +
+	"LimitUsage\x12G\n" +
+	"\x05limit\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\x14\x9aA\x112\x06Limit.Y\x00\x00\xc0\xff\xff\xff\xdfAR\x05limit\x12D\n" +
+	"\x04used\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\x13\x9aA\x102\x05Used.Y\x00\x00\xc0\xff\xff\xff\xdfAR\x04used:\x13\x9aA\x10\n" +
+	"\x0e2\fLimit usage.:>\x9aA;\n" +
+	"927Response containing the events-to-metrics quota limits.2\xad\x13\n" +
+	"\x14Events2MetricService\x12\x93\x02\n" +
+	"\tCreateE2M\x125.com.coralogixapis.events2metrics.v2.CreateE2MRequest\x1a6.com.coralogixapis.events2metrics.v2.CreateE2MResponse\"\x96\x01\x9aAQ\n" +
+	"\x16Events2Metrics Service\x12\x10Create a new E2M\x1a%Creates a new events-to-metrics rule.ʸ\x02\x10\n" +
+	"\x0eCreate new E2M\x82\xd3\xe4\x93\x02(:\x03e2m\"!/events2metrics/events2metrics/v2\x12\x8b\x02\n" +
+	"\aListE2M\x123.com.coralogixapis.events2metrics.v2.ListE2MRequest\x1a4.com.coralogixapis.events2metrics.v2.ListE2MResponse\"\x94\x01\x9aAV\n" +
+	"\x16Events2Metrics Service\x12\tList E2Ms\x1a1Returns all events-to-metrics rules for the team.ʸ\x02\x0e\n" +
+	"\fList all E2M\x82\xd3\xe4\x93\x02#\x12!/events2metrics/events2metrics/v2\x12\x97\x02\n" +
 	"\n" +
-	"ReplaceE2M\x126.com.coralogixapis.events2metrics.v2.ReplaceE2MRequest\x1a7.com.coralogixapis.events2metrics.v2.ReplaceE2MResponse\"\x84\x01\x9aA(\n" +
-	"\x16Events2Metrics Service\x12\x0eReplace an E2Mʸ\x02\r\n" +
-	"\vReplace E2M\x82\xd3\xe4\x93\x02B:\x03e2mZ\x18\x1a\x16/api/v2/events2metrics\x1a!/events2metrics/events2metrics/v2\x12\xf5\x01\n" +
-	"\x06GetE2M\x122.com.coralogixapis.events2metrics.v2.GetE2MRequest\x1a3.com.coralogixapis.events2metrics.v2.GetE2MResponse\"\x81\x01\x9aA$\n" +
+	"ReplaceE2M\x126.com.coralogixapis.events2metrics.v2.ReplaceE2MRequest\x1a7.com.coralogixapis.events2metrics.v2.ReplaceE2MResponse\"\x97\x01\x9aAU\n" +
+	"\x16Events2Metrics Service\x12\x0eReplace an E2M\x1a+Updates an existing events-to-metrics rule.ʸ\x02\r\n" +
+	"\vReplace E2M\x82\xd3\xe4\x93\x02(:\x03e2m\x1a!/events2metrics/events2metrics/v2\x12\x94\x02\n" +
+	"\x06GetE2M\x122.com.coralogixapis.events2metrics.v2.GetE2MRequest\x1a3.com.coralogixapis.events2metrics.v2.GetE2MResponse\"\xa0\x01\x9aAb\n" +
 	"\x16Events2Metrics Service\x12\n" +
-	"Get an E2Mʸ\x02\t\n" +
-	"\aGet E2M\x82\xd3\xe4\x93\x02GZ\x1d\x12\x1b/api/v2/events2metrics/{id}\x12&/events2metrics/events2metrics/v2/{id}\x12\x84\x02\n" +
-	"\tDeleteE2M\x125.com.coralogixapis.events2metrics.v2.DeleteE2MRequest\x1a6.com.coralogixapis.events2metrics.v2.DeleteE2MResponse\"\x87\x01\x9aA'\n" +
-	"\x16Events2Metrics Service\x12\rDelete an E2Mʸ\x02\f\n" +
+	"Get an E2M\x1a<Returns the details of the specified events-to-metrics rule.ʸ\x02\t\n" +
+	"\aGet E2M\x82\xd3\xe4\x93\x02(\x12&/events2metrics/events2metrics/v2/{id}\x12\xa0\x02\n" +
+	"\tDeleteE2M\x125.com.coralogixapis.events2metrics.v2.DeleteE2MRequest\x1a6.com.coralogixapis.events2metrics.v2.DeleteE2MResponse\"\xa3\x01\x9aAb\n" +
+	"\x16Events2Metrics Service\x12\rDelete an E2M\x1a9Deletes the events-to-metrics rule with the specified ID.ʸ\x02\f\n" +
 	"\n" +
-	"Delete E2M\x82\xd3\xe4\x93\x02GZ\x1d*\x1b/api/v2/events2metrics/{id}*&/events2metrics/events2metrics/v2/{id}\x12\xd5\x02\n" +
-	"\x15AtomicBatchExecuteE2M\x12A.com.coralogixapis.events2metrics.v2.AtomicBatchExecuteE2MRequest\x1aB.com.coralogixapis.events2metrics.v2.AtomicBatchExecuteE2MResponse\"\xb4\x01\x9aA2\n" +
-	"\x16Events2Metrics Service\x12\x18Atomic Batch Execute E2Mʸ\x02\x1a\n" +
-	"\x18Atomic Batch Execute E2M\x82\xd3\xe4\x93\x02[:\x01*Z-\"+/api/v2/events2metrics/atomic_batch_execute\"'/events2metrics/events2metrics/v2/batch\x12\xdf\x02\n" +
-	"\x15ListLabelsCardinality\x12A.com.coralogixapis.events2metrics.v2.ListLabelsCardinalityRequest\x1aB.com.coralogixapis.events2metrics.v2.ListLabelsCardinalityResponse\"\xbe\x01\x9aA5\n" +
-	"\x16Events2Metrics Service\x12\x1bList E2M Labels Cardinalityʸ\x02\x19\n" +
-	"\x17List Labels Cardinality\x82\xd3\xe4\x93\x02cZ+\x12)/api/v2/events2metrics/labels_cardinality\x124/events2metrics/events2metrics/v2/labels:cardinality\x12\x89\x02\n" +
-	"\tGetLimits\x125.com.coralogixapis.events2metrics.v2.GetLimitsRequest\x1a6.com.coralogixapis.events2metrics.v2.GetLimitsResponse\"\x8c\x01\x9aA(\n" +
-	"\x16Events2Metrics Service\x12\x0eGet E2M Limitsʸ\x02\f\n" +
+	"Delete E2M\x82\xd3\xe4\x93\x02(*&/events2metrics/events2metrics/v2/{id}\x12\xe5\x02\n" +
+	"\x15AtomicBatchExecuteE2M\x12A.com.coralogixapis.events2metrics.v2.AtomicBatchExecuteE2MRequest\x1aB.com.coralogixapis.events2metrics.v2.AtomicBatchExecuteE2MResponse\"\xc4\x01\x9aAk\n" +
+	"\x16Events2Metrics Service\x12\x18Atomic Batch Execute E2M\x1a7Atomically executes a batch of events-to-metrics rules.ʸ\x02\x1a\n" +
+	"\x18Atomic Batch Execute E2M\x82\xd3\xe4\x93\x022:\x01*\"-/events2metrics/events2metrics/v2/all/execute\x12\xe4\x02\n" +
+	"\x15ListLabelsCardinality\x12A.com.coralogixapis.events2metrics.v2.ListLabelsCardinalityRequest\x1aB.com.coralogixapis.events2metrics.v2.ListLabelsCardinalityResponse\"\xc3\x01\x9aAt\n" +
+	"\x16Events2Metrics Service\x12\x1bList E2M Labels Cardinality\x1a=Returns cardinality information for events-to-metrics labels.ʸ\x02\x19\n" +
+	"\x17List Labels Cardinality\x82\xd3\xe4\x93\x02)\x12'/events2metrics/labels/v2/cardinalities\x12\x93\x02\n" +
+	"\tGetLimits\x125.com.coralogixapis.events2metrics.v2.GetLimitsRequest\x1a6.com.coralogixapis.events2metrics.v2.GetLimitsResponse\"\x96\x01\x9aAb\n" +
+	"\x16Events2Metrics Service\x12\x0eGet E2M Limits\x1a8Returns the events-to-metrics quota limits for the team.ʸ\x02\f\n" +
 	"\n" +
-	"get limits\x82\xd3\xe4\x93\x02KZ\x1f\x12\x1d/api/v2/events2metrics/limits\x12(/events2metrics/events2metrics/v2/limits\x1a8\x9aA5\n" +
+	"get limits\x82\xd3\xe4\x93\x02\x1b\x12\x19/events2metrics/limits/v2\x1a8\x9aA5\n" +
 	"\x16Events2Metrics Service\x12\x1bManage your events2metrics.b\x06proto3"
 
 var (
