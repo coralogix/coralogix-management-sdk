@@ -4,11 +4,14 @@ package com.coralogixapis.events2metrics.v2;
 
 import "com/coralogixapis/logs2metrics/v2/logs_query.proto";
 import "com/coralogixapis/spans2metrics/v2/spans_query.proto";
+import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
 // Enum defining e2m type
 enum E2MType {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_enum) = {description: "E2 m type."};
+
   E2M_TYPE_UNSPECIFIED = 0;
   E2M_TYPE_LOGS2METRICS = 1;
   E2M_TYPE_SPANS2METRICS = 2;
@@ -32,26 +35,54 @@ message E2M {
   };
   //E2M unique ID, required on update requests
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Unique identifier for this E2M. Required on update requests."
     format: "uuid"
     min_length: 36
     max_length: 36
     example: "\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\""
-    pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
   }];
   // Name of the E2M
-  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Service_catalog_latency\""}];
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Human-readable name for this E2M."
+    example: "\"Service_catalog_latency\""
+    min_length: 1
+    max_length: 255
+    pattern: "^[\\s\\S]*$"
+  }];
   // Description of the E2M
-  google.protobuf.StringValue description = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"avg and max the latency of catalog service\""}];
+  google.protobuf.StringValue description = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Human-readable description of this E2M."
+    example: "\"avg and max the latency of catalog service\""
+    min_length: 0
+    max_length: 2000
+    pattern: "^[\\s\\S]*$"
+  }];
   // E2M create time
-  google.protobuf.StringValue create_time = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2022-06-30T12:30:00Z'\""}];
+  google.protobuf.StringValue create_time = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "RFC3339 timestamp of when this E2M was created."
+    example: "\"2022-06-30T12:30:00Z\""
+    format: "date-time"
+  }];
   // E2M update time
-  google.protobuf.StringValue update_time = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2022-06-30T12:30:00Z'\""}];
+  google.protobuf.StringValue update_time = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "RFC3339 timestamp of when this E2M was last updated."
+    example: "\"2022-06-30T12:30:00Z\""
+    format: "date-time"
+  }];
   // Represents the limit of the permutations and if the limit was exceeded
   E2MPermutations permutations = 6;
   // E2M metric labels
-  repeated MetricLabel metric_labels = 7;
+  repeated MetricLabel metric_labels = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Metric labels to attach to the generated metrics."
+    min_items: 0
+    max_items: 10
+  }];
   // E2M metric fields
-  repeated MetricField metric_fields = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {max_items: 10}];
+  repeated MetricField metric_fields = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Metric fields to extract and aggregate from the events."
+    max_items: 10
+  }];
   // E2M type logs2metrics/spans2metrics
   E2MType type = 9;
   // Spans or logs type query
@@ -62,7 +93,16 @@ message E2M {
     com.coralogixapis.logs2metrics.v2.LogsQuery logs_query = 11;
   }
   // A flag that represents if the e2m is for internal usage
-  google.protobuf.BoolValue is_internal = 12;
+  google.protobuf.BoolValue is_internal = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Indicates whether this E2M is for internal use only."}];
+  // Optional data source in "<namespace>/<dataset_name>" format (e.g. "my_namespace/my_dataset").
+  // If not set, defaults to the standard logs/spans stream.
+  google.protobuf.StringValue data_source = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream."
+    example: "\"my_namespace/my_dataset\""
+    min_length: 1
+    max_length: 300
+    pattern: "^[\\s\\S]*$"
+  }];
 }
 
 // E2M Create message
@@ -80,15 +120,40 @@ message E2MCreateParams {
   };
 
   // Name of E2M to create
-  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Service catalog latency\""}];
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Human-readable name for the new E2M."
+    example: "\"Service catalog latency\""
+    min_length: 1
+    max_length: 255
+    pattern: "^[\\s\\S]*$"
+  }];
   // Description of E2M to create
-  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"avg and max the latency of catalog service\""}];
+  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Human-readable description for the new E2M."
+    example: "\"avg and max the latency of catalog service\""
+    min_length: 0
+    max_length: 2000
+    pattern: "^[\\s\\S]*$"
+  }];
   // The permutation limit of the E2M
-  google.protobuf.Int32Value permutations_limit = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "30000"}];
+  google.protobuf.Int32Value permutations_limit = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Maximum number of unique metric permutations allowed for this E2M."
+    example: "30000"
+    minimum: 1
+    maximum: 10000000
+  }];
   // E2M metric labels
-  repeated MetricLabel metric_labels = 4;
+  repeated MetricLabel metric_labels = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Metric labels to attach to the generated metrics."
+    min_items: 0
+    max_items: 10
+  }];
   // E2M metric fields
-  repeated MetricField metric_fields = 5;
+  repeated MetricField metric_fields = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Metric fields to create and aggregate from the events."
+    min_items: 0
+    max_items: 10
+  }];
   // E2M type
   E2MType type = 6;
   // E2M spans or logs query type
@@ -98,6 +163,15 @@ message E2MCreateParams {
     // E2M logs query
     com.coralogixapis.logs2metrics.v2.LogsQuery logs_query = 8;
   }
+  // Optional data source in "<namespace>/<dataset_name>" format (e.g. "my_namespace/my_dataset").
+  // If not set, defaults to the standard logs/spans stream.
+  google.protobuf.StringValue data_source = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream."
+    example: "\"my_namespace/my_dataset\""
+    min_length: 1
+    max_length: 300
+    pattern: "^[\\s\\S]*$"
+  }];
 }
 
 // Represents e2m permutation limit
@@ -117,9 +191,14 @@ message E2MPermutations {
     }
   };
   // E2M permutation limit
-  int32 limit = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "30000"}];
+  int32 limit = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "30000"
+    description: "Limit."
+    minimum: 1
+    maximum: 10000000
+  }];
   // Flag to indicate if limit was exceeded
-  bool has_exceeded_limit = 2;
+  bool has_exceeded_limit = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The has exceeded limit."}];
 }
 
 // E2M metric label
@@ -142,9 +221,18 @@ message MetricLabel {
   google.protobuf.StringValue target_label = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     pattern: "^[\\w/-]+$"
     example: "\"alias_label_name\""
+    description: "The target label."
+    min_length: 1
+    max_length: 255
   }];
   // Metric label source field
-  google.protobuf.StringValue source_field = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"log_obj.string_value\""}];
+  google.protobuf.StringValue source_field = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"log_obj.string_value\""
+    description: "The source field."
+    min_length: 1
+    max_length: 255
+    pattern: "^[\\s\\S]*$"
+  }];
 }
 
 //E2M metric field
@@ -168,11 +256,24 @@ message MetricField {
   google.protobuf.StringValue target_base_metric_name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     pattern: "^[\\w/-]+$"
     example: "\"alias_field_name\""
+    description: "The target base metric name."
+    min_length: 1
+    max_length: 255
   }];
   // Source field
-  google.protobuf.StringValue source_field = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"log_obj.numeric_field\""}];
+  google.protobuf.StringValue source_field = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"log_obj.numeric_field\""
+    description: "The source field."
+    min_length: 1
+    max_length: 255
+    pattern: "^[\\s\\S]*$"
+  }];
   // Represents Aggregation type list
-  repeated Aggregation aggregations = 7;
+  repeated Aggregation aggregations = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The aggregations."
+    min_items: 0
+    max_items: 7
+  }];
 }
 
 // E2M aggregation
@@ -190,6 +291,8 @@ message Aggregation {
   };
   // Enum - Aggregation type
   enum AggType {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_enum) = {description: "Agg type."};
+
     AGG_TYPE_UNSPECIFIED = 0;
     AGG_TYPE_MIN = 1;
     AGG_TYPE_MAX = 2;
@@ -200,13 +303,21 @@ message Aggregation {
     AGG_TYPE_SAMPLES = 7;
   }
   // Is enabled
-  bool enabled = 1;
+  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Whether this resource is enabled."}];
   // Aggregation type
   AggType agg_type = 2;
   // Target metric field alias name
-  string target_metric_name = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"alias_field_name_agg_func\""}];
+  string target_metric_name = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"alias_field_name_agg_func\""
+    description: "Name of the target metric produced by this aggregation."
+    min_length: 1
+    max_length: 255
+    pattern: "^[\\s\\S]*$"
+  }];
   // Aggregate metadata, samples or histogram type
   oneof agg_metadata {
+    // No metadata needed for simple aggregations (MIN, MAX, COUNT, AVG, SUM)
+    google.protobuf.Empty none = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Marker indicating no additional metadata is needed for this aggregation type."}];
     // E2M sample type metadata
     E2MAggSamples samples = 4;
     // E2M aggregate histogram type metadata
@@ -232,6 +343,8 @@ message E2MAggSamples {
   };
   // Enum of aggregate type
   enum SampleType {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_enum) = {description: "Sample type."};
+
     SAMPLE_TYPE_UNSPECIFIED = 0;
     SAMPLE_TYPE_MIN = 1;
     SAMPLE_TYPE_MAX = 2;
@@ -254,5 +367,10 @@ message E2MAggHistogram {
     }
   };
   // Buckets of the E2M
-  repeated float buckets = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "2"}];
+  repeated float buckets = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "2"
+    description: "The buckets."
+    min_items: 0
+    max_items: 64
+  }];
 }
