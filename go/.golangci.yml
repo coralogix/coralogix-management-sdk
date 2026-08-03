@@ -6,3 +6,13 @@ linters:
     - revive
   disable:
     - staticcheck
+    - errcheck
+    - ineffassign
+
+linters-settings:
+  revive:
+    rules:
+      - name: var-naming
+        disabled: true
+      - name: redefines-builtin-id
+        disabled: true

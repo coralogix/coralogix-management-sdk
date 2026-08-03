@@ -41,7 +41,6 @@ jobs:
         with:
           version: v2.12.2
           working-directory: go
-          skip-go-installation: true
   run_examples:
     name: "[Go SDK - Linux] Run Examples"
     runs-on: ubuntu-latest
