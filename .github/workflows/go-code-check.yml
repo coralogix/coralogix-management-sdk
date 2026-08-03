@@ -37,8 +37,9 @@ jobs:
           make build
         env:
           GOPRIVATE: ${{ secrets.GOPRIVATE }}
-      - uses: golangci/golangci-lint-action@v2
+      - uses: golangci/golangci-lint-action@v7
         with:
+          version: v2.12.2
           working-directory: go
           skip-go-installation: true
   run_examples:
