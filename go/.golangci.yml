@@ -7,3 +7,8 @@ linters:
   disable:
     - staticcheck
     - errcheck
+  settings:
+    revive:
+      rules:
+        - name: package-comments
+          disabled: true
