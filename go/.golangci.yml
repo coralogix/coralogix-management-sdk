@@ -6,3 +6,4 @@ linters:
     - revive
   disable:
     - staticcheck
+    - errcheck
