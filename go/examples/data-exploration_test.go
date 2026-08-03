@@ -61,7 +61,7 @@ func TestViews(t *testing.T) {
 
 	assertNilAndPrintError(t, e)
 
-	c.Delete(context.Background(), &cxsdk.DeleteViewRequest{
+	_, _ = c.Delete(context.Background(), &cxsdk.DeleteViewRequest{
 		Id: view.View.Id,
 	})
 }

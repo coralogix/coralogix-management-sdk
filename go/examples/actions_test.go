@@ -65,7 +65,7 @@ func TestActions(t *testing.T) {
 
 	assert.Equal(t, updated.Action.Url.Value, "https://www.bing.com/search?q={{$p.selected_value}}")
 
-	c.Delete(context.Background(), &cxsdk.DeleteActionRequest{
+	_, _ = c.Delete(context.Background(), &cxsdk.DeleteActionRequest{
 		Id: action.Action.Id,
 	})
 }
