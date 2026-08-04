@@ -199,7 +199,7 @@ func CreateTracingThresholdAlert() *alerts.AlertDefProperties {
 	}
 }
 
-func CreateFlowAlert(alertId string) *alerts.AlertDefProperties {
+func CreateFlowAlert(alertID string) *alerts.AlertDefProperties {
 	name := "Standard alert example"
 	startHour := int32(8)
 	startMinute := int32(30)
@@ -248,7 +248,7 @@ func CreateFlowAlert(alertId string) *alerts.AlertDefProperties {
 							{
 								AlertDefs: []alerts.FlowStagesGroupsAlertDefs{
 									{
-										Id: &alertId,
+										Id: &alertID,
 									},
 								},
 							},

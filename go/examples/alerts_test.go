@@ -121,7 +121,7 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 	}
 }
 
-func CreateBurnRateSloAlert(sloId string) *cxsdk.AlertDefProperties {
+func CreateBurnRateSloAlert(sloID string) *cxsdk.AlertDefProperties {
 
 	notifyOn := cxsdk.AlertNotifyOnTriggeredAndResolved
 	return &cxsdk.AlertDefProperties{
@@ -176,7 +176,7 @@ func CreateBurnRateSloAlert(sloId string) *cxsdk.AlertDefProperties {
 		TypeDefinition: &cxsdk.AlertDefPropertiesSlo{
 			SloThreshold: &cxsdk.SloThresholdType{
 				SloDefinition: &cxsdk.AlertSloDefinition{
-					SloId: &wrapperspb.StringValue{Value: sloId},
+					SloId: &wrapperspb.StringValue{Value: sloID},
 				},
 				Threshold: &cxsdk.SloBurnRateThresholdType{
 					BurnRate: &cxsdk.SloBurnRateThreshold{
@@ -206,7 +206,7 @@ func CreateBurnRateSloAlert(sloId string) *cxsdk.AlertDefProperties {
 	}
 }
 
-func CreateErrorBudgetSloAlert(sloId string) *cxsdk.AlertDefProperties {
+func CreateErrorBudgetSloAlert(sloID string) *cxsdk.AlertDefProperties {
 	notifyOn := cxsdk.AlertNotifyOnTriggeredAndResolved
 	return &cxsdk.AlertDefProperties{
 		Name:              wrapperspb.String("Standard alert example"),
@@ -260,7 +260,7 @@ func CreateErrorBudgetSloAlert(sloId string) *cxsdk.AlertDefProperties {
 		TypeDefinition: &cxsdk.AlertDefPropertiesSlo{
 			SloThreshold: &cxsdk.SloThresholdType{
 				SloDefinition: &cxsdk.AlertSloDefinition{
-					SloId: &wrapperspb.StringValue{Value: sloId},
+					SloId: &wrapperspb.StringValue{Value: sloID},
 				},
 				Threshold: &cxsdk.SloBurnRateThresholdType{
 					BurnRate: &cxsdk.SloBurnRateThreshold{
@@ -563,10 +563,10 @@ func TestAlertScheduler(t *testing.T) {
 
 	assert.Equal(t, getAlertSchedulerResponse.AlertSchedulerRule.Name, "MyAlertUpdated")
 
-	_, error := a.Delete(context.Background(), &cxsdk.DeleteAlertSchedulerRuleRequest{
+	_, deleteErr := a.Delete(context.Background(), &cxsdk.DeleteAlertSchedulerRuleRequest{
 		AlertSchedulerRuleId: *updateAlertSchedulerResponse.AlertSchedulerRule.UniqueIdentifier,
 	})
-	assertNilAndPrintError(t, error)
+	assertNilAndPrintError(t, deleteErr)
 
 	_, e = c.Delete(context.Background(), &cxsdk.DeleteAlertDefRequest{
 		Id: createdAlertDef.AlertDef.Id,

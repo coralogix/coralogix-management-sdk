@@ -485,14 +485,14 @@ func TestGlobalRouter(t *testing.T) {
 		CreateConnectorRequest(*getHttpsConnector(fmt.Sprintf("TestConnector-%v", uuid.NewString()))).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	connectorId := createdConnector.Connector.Id
+	connectorID := createdConnector.Connector.Id
 
 	createdPreset, httpResp, err := presetsClient.
 		PresetsServiceCreateCustomPreset(context.Background()).
 		CreateCustomPresetRequest(*getHttpsPreset(fmt.Sprintf("TestGoHttpsPreset-%v", uuid.NewString()))).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	presetId := createdPreset.Preset.Id
+	presetID := createdPreset.Preset.Id
 
 	router := globalrouters.GlobalRouter{
 		Name: globalrouters.PtrString("global router" + uuid.NewString()),
@@ -508,8 +508,8 @@ func TestGlobalRouter(t *testing.T) {
 				Condition: globalrouters.PtrString("alertDef.priority == \"P1\""),
 				Targets: []globalrouters.RoutingTarget{
 					{
-						ConnectorId: connectorId,
-						PresetId:    presetId,
+						ConnectorId: connectorID,
+						PresetId:    presetID,
 					},
 				},
 			},
@@ -570,12 +570,12 @@ func TestGlobalRouter(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = connectorsClient.
-		ConnectorsServiceDeleteConnector(context.Background(), *connectorId).
+		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = presetsClient.
-		PresetsServiceDeleteCustomPreset(context.Background(), *presetId).
+		PresetsServiceDeleteCustomPreset(context.Background(), *presetID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
@@ -595,14 +595,14 @@ func TestGlobalRouterDisabledAndFallbackTargets(t *testing.T) {
 		CreateConnectorRequest(*getHttpsConnector(fmt.Sprintf("TestConnector-%v", uuid.NewString()))).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	connectorId := createdConnector.Connector.Id
+	connectorID := createdConnector.Connector.Id
 
 	createdPreset, httpResp, err := presetsClient.
 		PresetsServiceCreateCustomPreset(context.Background()).
 		CreateCustomPresetRequest(*getHttpsPreset(fmt.Sprintf("TestGoHttpsPreset-%v", uuid.NewString()))).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	presetId := createdPreset.Preset.Id
+	presetID := createdPreset.Preset.Id
 
 	// Note: the top-level GlobalRouter.EntityType is reserved for the default router
 	// ("router_default"); it cannot be set on a regular (labeled) router. The per-rule
@@ -623,8 +623,8 @@ func TestGlobalRouterDisabledAndFallbackTargets(t *testing.T) {
 				Condition:  globalrouters.PtrString("alertDef.priority == \"P1\""),
 				Targets: []globalrouters.RoutingTarget{
 					{
-						ConnectorId: connectorId,
-						PresetId:    presetId,
+						ConnectorId: connectorID,
+						PresetId:    presetID,
 					},
 				},
 			},
@@ -635,7 +635,7 @@ func TestGlobalRouterDisabledAndFallbackTargets(t *testing.T) {
 			{
 				EntityType: globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
 				Target: &globalrouters.RoutingTarget{
-					ConnectorId: connectorId,
+					ConnectorId: connectorID,
 				},
 			},
 		},
@@ -664,12 +664,12 @@ func TestGlobalRouterDisabledAndFallbackTargets(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = connectorsClient.
-		ConnectorsServiceDeleteConnector(context.Background(), *connectorId).
+		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = presetsClient.
-		PresetsServiceDeleteCustomPreset(context.Background(), *presetId).
+		PresetsServiceDeleteCustomPreset(context.Background(), *presetID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }

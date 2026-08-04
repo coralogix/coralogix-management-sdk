@@ -89,7 +89,7 @@ func TestRuleGroups(t *testing.T) {
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
-	_, httpResp, err = client.
+	_, _, err = client.
 		RuleGroupsServiceGetRuleGroup(ctx, *groupID).
 		Execute()
 	require.Error(t, err, "expected error after deleting rule group")

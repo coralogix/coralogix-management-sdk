@@ -1,10 +1,16 @@
+version: "2"
+
 linters:
+  default: standard
   enable:
     - revive
   disable:
     - staticcheck
-
-issues:
-  include:
-    - EXC0012
-    - EXC0014
+  settings:
+    errcheck:
+      exclude-functions:
+        - (*google.golang.org/grpc.ClientConn).Close
+    revive:
+      rules:
+        - name: package-comments
+          disabled: true

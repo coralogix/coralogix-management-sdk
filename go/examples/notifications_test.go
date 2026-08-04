@@ -77,10 +77,10 @@ func TestHttpsConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	connectorId := createRes.Connector.Id
+	connectorID := createRes.Connector.Id
 
 	connector, err := c.GetConnector(context.Background(), &cxsdk.GetConnectorRequest{
-		Id: *connectorId,
+		Id: *connectorID,
 	})
 
 	if err != nil {
@@ -90,7 +90,7 @@ func TestHttpsConnector(t *testing.T) {
 	assert.Equal(t, connector.Connector.Name, name)
 
 	_, err = c.TestExistingConnector(context.Background(), &cxsdk.TestExistingConnectorRequest{
-		ConnectorId: *connectorId,
+		ConnectorId: *connectorID,
 		PayloadType: "generic_https_default",
 	})
 
@@ -99,7 +99,7 @@ func TestHttpsConnector(t *testing.T) {
 	}
 
 	_, err = c.DeleteConnector(context.Background(), &cxsdk.DeleteConnectorRequest{
-		Id: *connectorId,
+		Id: *connectorID,
 	})
 
 	if err != nil {
@@ -142,10 +142,10 @@ func TestPagerdutyConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	connectorId := createRes.Connector.Id
+	connectorID := createRes.Connector.Id
 
 	connector, err := c.GetConnector(context.Background(), &cxsdk.GetConnectorRequest{
-		Id: *connectorId,
+		Id: *connectorID,
 	})
 
 	if err != nil {
@@ -159,7 +159,7 @@ func TestPagerdutyConnector(t *testing.T) {
 	}
 
 	_, err = c.DeleteConnector(context.Background(), &cxsdk.DeleteConnectorRequest{
-		Id: *connectorId,
+		Id: *connectorID,
 	})
 
 	if err != nil {
@@ -175,7 +175,7 @@ func TestHttpsPreset(t *testing.T) {
 	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewNotificationsClient(creator)
-	newPreset := CreateHttpsPreset("TestGoHttpsPreset")
+	newPreset := CreateHTTPSPreset("TestGoHttpsPreset")
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
 		Preset: newPreset,
 	})
@@ -183,9 +183,9 @@ func TestHttpsPreset(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	presetId := createRes.Preset.Id
+	presetID := createRes.Preset.Id
 	preset, err := c.GetPreset(context.Background(), &cxsdk.GetPresetRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -194,7 +194,7 @@ func TestHttpsPreset(t *testing.T) {
 	assert.Equal(t, preset.Preset.Name, newPreset.Name)
 
 	_, err = c.SetPresetAsDefault(context.Background(), &cxsdk.SetPresetAsDefaultRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 
 	if err != nil {
@@ -214,7 +214,7 @@ func TestHttpsPreset(t *testing.T) {
 	assert.Equal(t, defaultPreset.PresetSummary.Name, newPreset.Name)
 
 	_, err = c.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 
 	if err != nil {
@@ -239,9 +239,9 @@ func TestSlackPreset(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	presetId := createRes.Preset.Id
+	presetID := createRes.Preset.Id
 	preset, err := c.GetPreset(context.Background(), &cxsdk.GetPresetRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -250,7 +250,7 @@ func TestSlackPreset(t *testing.T) {
 	assert.Equal(t, preset.Preset.Name, newPreset.Name)
 
 	_, err = c.SetPresetAsDefault(context.Background(), &cxsdk.SetPresetAsDefaultRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 
 	if err != nil {
@@ -270,7 +270,7 @@ func TestSlackPreset(t *testing.T) {
 	assert.Equal(t, defaultPreset.PresetSummary.Name, newPreset.Name)
 
 	_, err = c.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 
 	if err != nil {
@@ -294,9 +294,9 @@ func TestPagerdutyPreset(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	presetId := createRes.Preset.Id
+	presetID := createRes.Preset.Id
 	preset, err := c.GetPreset(context.Background(), &cxsdk.GetPresetRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -305,7 +305,7 @@ func TestPagerdutyPreset(t *testing.T) {
 	assert.Equal(t, preset.Preset.Name, newPreset.Name)
 
 	_, err = c.SetPresetAsDefault(context.Background(), &cxsdk.SetPresetAsDefaultRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 
 	if err != nil {
@@ -325,7 +325,7 @@ func TestPagerdutyPreset(t *testing.T) {
 	assert.Equal(t, defaultPreset.PresetSummary.Name, newPreset.Name)
 
 	_, err = c.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 
 	if err != nil {
@@ -350,7 +350,7 @@ func TestGlobalRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	routerId := "router_default"
+	routerID := "router_default"
 	name := fmt.Sprintf("TestConnector-%v", uuid.NewString())
 	connectorRaw := cxsdk.Connector{
 		Type:        cxsdk.ConnectorTypeGenericHTTPS,
@@ -373,13 +373,13 @@ func TestGlobalRouter(t *testing.T) {
 	}
 
 	createPresetResponse, err := notificationCenterClient.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
-		Preset: CreateHttpsPreset("TestGoHttpsPreset"),
+		Preset: CreateHTTPSPreset("TestGoHttpsPreset"),
 	})
 
 	if err != nil {
 		t.Fatal(err)
 	}
-	presetId := createPresetResponse.Preset.Id
+	presetID := createPresetResponse.Preset.Id
 
 	createConnectorResponse, err := notificationCenterClient.CreateConnector(context.Background(), &cxsdk.CreateConnectorRequest{
 		Connector: &connectorRaw,
@@ -390,11 +390,11 @@ func TestGlobalRouter(t *testing.T) {
 	}
 
 	routingRuleName := "TestRoutingRule"
-	connectorId := createConnectorResponse.Connector.Id
+	connectorID := createConnectorResponse.Connector.Id
 
 	createOrReplaceRes, err := notificationCenterClient.CreateOrReplaceGlobalRouter(context.Background(), &cxsdk.CreateOrReplaceGlobalRouterRequest{
 		Router: &cxsdk.GlobalRouter{
-			Id:          &routerId,
+			Id:          &routerID,
 			Name:        "global router",
 			EntityType:  cxsdk.EntityTypeAlerts.Enum(),
 			Description: "global router example",
@@ -404,8 +404,8 @@ func TestGlobalRouter(t *testing.T) {
 					Condition: "alertDef.priority == \"P1\"",
 					Targets: []*cxsdk.RoutingTarget{
 						{
-							ConnectorId: *connectorId,
-							PresetId:    presetId,
+							ConnectorId: *connectorID,
+							PresetId:    presetID,
 						},
 					},
 				},
@@ -430,9 +430,9 @@ func TestGlobalRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	alertId := createdAlertDefWithRouter.AlertDef.Id
+	alertID := createdAlertDefWithRouter.AlertDef.Id
 	_, err = alertsClient.Delete(context.Background(), &cxsdk.DeleteAlertDefRequest{
-		Id: alertId,
+		Id: alertID,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -440,8 +440,8 @@ func TestGlobalRouter(t *testing.T) {
 
 	_, err = notificationCenterClient.TestDestination(context.Background(), &cxsdk.TestDestinationRequest{
 		EntityType:  cxsdk.EntityTypeAlerts,
-		ConnectorId: *connectorId,
-		PresetId:    *presetId,
+		ConnectorId: *connectorID,
+		PresetId:    *presetID,
 		PayloadType: "generic_https_default",
 	})
 
@@ -457,14 +457,14 @@ func TestGlobalRouter(t *testing.T) {
 	}
 
 	_, err = notificationCenterClient.DeleteConnector(context.Background(), &cxsdk.DeleteConnectorRequest{
-		Id: *connectorId,
+		Id: *connectorID,
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	_, err = notificationCenterClient.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -506,13 +506,13 @@ func TestCreateAlertWithDestination(t *testing.T) {
 	}
 
 	createPresetResponse, err := notificationCenterClient.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
-		Preset: CreateHttpsPreset("TestGoHttpsPreset"),
+		Preset: CreateHTTPSPreset("TestGoHttpsPreset"),
 	})
 
 	if err != nil {
 		t.Fatal(err)
 	}
-	presetId := createPresetResponse.Preset.Id
+	presetID := createPresetResponse.Preset.Id
 
 	createConnectorResponse, err := notificationCenterClient.CreateConnector(context.Background(), &cxsdk.CreateConnectorRequest{
 		Connector: &connectorRaw,
@@ -522,12 +522,12 @@ func TestCreateAlertWithDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	connectorId := createConnectorResponse.Connector.Id
+	connectorID := createConnectorResponse.Connector.Id
 
 	createdAlertDefWithDestination, err := alertsClient.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
 		AlertDefProperties: CreateAlertWithDestination(
-			*connectorId,
-			presetId,
+			*connectorID,
+			presetID,
 		),
 	})
 
@@ -537,8 +537,8 @@ func TestCreateAlertWithDestination(t *testing.T) {
 
 	_, err = notificationCenterClient.TestDestination(context.Background(), &cxsdk.TestDestinationRequest{
 		EntityType:  cxsdk.EntityTypeAlerts,
-		ConnectorId: *connectorId,
-		PresetId:    *presetId,
+		ConnectorId: *connectorID,
+		PresetId:    *presetID,
 		PayloadType: "generic_https_default",
 	})
 
@@ -546,22 +546,22 @@ func TestCreateAlertWithDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	alertId := createdAlertDefWithDestination.AlertDef.Id
+	alertID := createdAlertDefWithDestination.AlertDef.Id
 	_, err = alertsClient.Delete(context.Background(), &cxsdk.DeleteAlertDefRequest{
-		Id: alertId,
+		Id: alertID,
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	_, err = notificationCenterClient.DeleteConnector(context.Background(), &cxsdk.DeleteConnectorRequest{
-		Id: *connectorId,
+		Id: *connectorID,
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	_, err = notificationCenterClient.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
-		Id: *presetId,
+		Id: *presetID,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -569,11 +569,11 @@ func TestCreateAlertWithDestination(t *testing.T) {
 
 }
 
-func CreateAlertWithDestination(connectorId string, presetId *string) *cxsdk.AlertDefProperties {
+func CreateAlertWithDestination(connectorID string, presetID *string) *cxsdk.AlertDefProperties {
 	notifyOn := cxsdk.AlertNotifyOnTriggeredAndResolved
 	notificationDestination := cxsdk.NotificationDestination{
-		ConnectorId: connectorId,
-		PresetId:    presetId,
+		ConnectorId: connectorID,
+		PresetId:    presetID,
 	}
 	return &cxsdk.AlertDefProperties{
 		Name:              wrapperspb.String("Standard alert example"),
@@ -771,16 +771,16 @@ func CreateAlertWithRouter() *cxsdk.AlertDefProperties {
 	}
 }
 
-func CreateHttpsPreset(presetName string) *cxsdk.Preset {
+func CreateHTTPSPreset(presetName string) *cxsdk.Preset {
 	name := fmt.Sprintf("%v-%v", presetName, uuid.NewString())
 	presetType := cxsdk.PresetTypeCustom
-	parentId := "preset_system_generic_https_alerts_empty"
+	parentID := "preset_system_generic_https_alerts_empty"
 	return &cxsdk.Preset{
 		Name:          name,
 		Description:   "This is the preset to use for Notification Center testing.",
 		PresetType:    &presetType,
 		EntityType:    cxsdk.EntityTypeAlerts,
-		ParentId:      &parentId,
+		ParentId:      &parentID,
 		ConnectorType: cxsdk.ConnectorTypeGenericHTTPS,
 		ConfigOverrides: []*cxsdk.ConfigOverrides{
 			{
@@ -810,13 +810,13 @@ func CreateHttpsPreset(presetName string) *cxsdk.Preset {
 
 func CreateSlackPreset(presetName string) *cxsdk.Preset {
 	presetType := cxsdk.PresetTypeCustom
-	parentId := "preset_system_slack_alerts_basic"
+	parentID := "preset_system_slack_alerts_basic"
 	return &cxsdk.Preset{
 		Name:          presetName,
 		Description:   "This is the preset to use for Notification Center testing.",
 		PresetType:    &presetType,
 		EntityType:    cxsdk.EntityTypeAlerts,
-		ParentId:      &parentId,
+		ParentId:      &parentID,
 		ConnectorType: cxsdk.ConnectorTypeSlack,
 		ConfigOverrides: []*cxsdk.ConfigOverrides{
 			{
@@ -846,13 +846,13 @@ func CreateSlackPreset(presetName string) *cxsdk.Preset {
 
 func CreatePagerDutyPreset(presetName string) *cxsdk.Preset {
 	presetType := cxsdk.PresetTypeCustom
-	parentId := "preset_system_pagerduty_alerts_basic"
+	parentID := "preset_system_pagerduty_alerts_basic"
 	return &cxsdk.Preset{
 		Name:          presetName,
 		Description:   "This is the preset to use for Notification Center testing.",
 		PresetType:    &presetType,
 		EntityType:    cxsdk.EntityTypeAlerts,
-		ParentId:      &parentId,
+		ParentId:      &parentID,
 		ConnectorType: cxsdk.ConnectorTypePagerDuty,
 		ConfigOverrides: []*cxsdk.ConfigOverrides{
 			{

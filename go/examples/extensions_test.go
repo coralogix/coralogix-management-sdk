@@ -40,52 +40,53 @@ func TestExtensions(t *testing.T) {
 
 	assert.NotEmpty(t, extensionsDescriptors)
 
-	var extensionToDeployId *wrapperspb.StringValue
+	var extensionToDeployID *wrapperspb.StringValue
 
 	for _, extension := range extensionsDescriptors {
 		if extension.Name.Value == "Kubernetes Observability" {
-			extensionToDeployId = extension.Id
+			extensionToDeployID = extension.Id
 			break
 		}
 	}
 
-	assert.NotNil(t, extensionToDeployId)
+	assert.NotNil(t, extensionToDeployID)
 
 	getDeployedExtensionsResponse, err := client.GetDeployed(context.Background(), &cxsdk.GetDeployedExtensionsRequest{})
 	assertNilAndPrintError(t, err)
 
 	for _, deployedExtension := range getDeployedExtensionsResponse.DeployedExtensions {
-		if deployedExtension.Id.Value == extensionToDeployId.Value {
-			client.Undeploy(context.Background(), &cxsdk.UndeployExtensionRequest{
+		if deployedExtension.Id.Value == extensionToDeployID.Value {
+			_, err = client.Undeploy(context.Background(), &cxsdk.UndeployExtensionRequest{
 				Id: deployedExtension.Id,
 			})
+			assert.NoError(t, err)
 		}
 	}
 
 	getExtensionReponse, err := client.Get(context.Background(), &cxsdk.GetExtensionRequest{
-		Id: extensionToDeployId,
+		Id: extensionToDeployID,
 	})
 
 	assertNilAndPrintError(t, err)
 
 	extensionToDeploy := getExtensionReponse.Extension
 
-	var itemIds []*wrapperspb.StringValue
+	var itemIDs []*wrapperspb.StringValue
 
 	for _, revision := range extensionToDeploy.Revisions {
 		if revision.Version.Value == "0.0.2" {
 			for _, item := range revision.Items {
 				if item.TargetDomain != cxsdk.TargetDomainParsingRule {
-					itemIds = append(itemIds, item.Id)
+					itemIDs = append(itemIDs, item.Id)
 				}
 			}
 		}
 	}
 
 	_, err = client.Deploy(context.Background(), &cxsdk.DeployExtensionRequest{
-		Id:      extensionToDeployId,
+		Id:      extensionToDeployID,
 		Version: &wrapperspb.StringValue{Value: "0.0.2"},
-		ItemIds: itemIds,
+		ItemIds: itemIDs,
 	})
 
 	assertNilAndPrintError(t, err)
