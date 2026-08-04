@@ -61,9 +61,10 @@ func TestViews(t *testing.T) {
 
 	assertNilAndPrintError(t, e)
 
-	_, _ = c.Delete(context.Background(), &cxsdk.DeleteViewRequest{
+	_, e = c.Delete(context.Background(), &cxsdk.DeleteViewRequest{
 		Id: view.View.Id,
 	})
+	assert.NoError(t, e)
 }
 
 func TestViewFolders(t *testing.T) {
@@ -103,9 +104,10 @@ func TestViewFolders(t *testing.T) {
 	assertNilAndPrintError(t, e)
 	assert.Equal(t, numOfFolders+1, len(allFoldersWithNewFolder.Folders))
 
-	c.Delete(context.Background(), &cxsdk.DeleteViewFolderRequest{
+	_, e = c.Delete(context.Background(), &cxsdk.DeleteViewFolderRequest{
 		Id: createResponse.Folder.Id,
 	})
+	assert.NoError(t, e)
 
 	assertNilAndPrintError(t, e)
 

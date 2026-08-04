@@ -56,9 +56,10 @@ func TestExtensions(t *testing.T) {
 
 	for _, deployedExtension := range getDeployedExtensionsResponse.DeployedExtensions {
 		if deployedExtension.Id.Value == extensionToDeployID.Value {
-			_, _ = client.Undeploy(context.Background(), &cxsdk.UndeployExtensionRequest{
+			_, err = client.Undeploy(context.Background(), &cxsdk.UndeployExtensionRequest{
 				Id: deployedExtension.Id,
 			})
+			assert.NoError(t, err)
 		}
 	}
 

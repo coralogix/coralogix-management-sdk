@@ -24,6 +24,7 @@ import (
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestApiKeys(t *testing.T) {
@@ -51,10 +52,11 @@ func TestApiKeys(t *testing.T) {
 	assertNilAndPrintError(t, e)
 
 	newName := "new-name"
-	_, _ = k.Update(context.Background(), &cxsdk.UpdateAPIKeyRequest{
+	_, err = k.Update(context.Background(), &cxsdk.UpdateAPIKeyRequest{
 		KeyId:   key.KeyId,
 		NewName: &newName,
 	})
+	require.NoError(t, err)
 
 	updated, _ := k.Get(context.Background(), &cxsdk.GetAPIKeyRequest{
 		KeyId: key.KeyId,
@@ -62,9 +64,10 @@ func TestApiKeys(t *testing.T) {
 
 	assert.Equal(t, updated.KeyInfo.Name, newName)
 
-	_, _ = k.Delete(context.Background(), &cxsdk.DeleteAPIKeyRequest{
+	_, err = k.Delete(context.Background(), &cxsdk.DeleteAPIKeyRequest{
 		KeyId: key.KeyId,
 	})
+	assert.NoError(t, err)
 }
 
 func TestUsers(t *testing.T) {
@@ -153,9 +156,10 @@ func TestScopes(t *testing.T) {
 
 	assert.Equal(t, "Updated Test Data Access Rule", updated.Scopes[0].DisplayName)
 
-	_, _ = c.Delete(context.Background(), &cxsdk.DeleteScopeRequest{
+	_, err = c.Delete(context.Background(), &cxsdk.DeleteScopeRequest{
 		Id: result.Scope.Id,
 	})
+	assert.NoError(t, err)
 
 	scopes, err := c.List(context.Background(), &cxsdk.GetTeamScopesRequest{})
 	assert.Nil(t, err)
@@ -311,7 +315,8 @@ func TestSamlConfigurationRetrieval(t *testing.T) {
 	_, e = c.GetConfiguration(context.Background(), &cxsdk.GetSamlConfigurationRequest{TeamId: uint32(teamID)})
 	assertNilAndPrintError(t, e)
 
-	_, _ = c.SetActive(context.Background(), &cxsdk.SetSamlActiveRequest{TeamId: uint32(teamID), IsActive: false})
+	_, err = c.SetActive(context.Background(), &cxsdk.SetSamlActiveRequest{TeamId: uint32(teamID), IsActive: false})
+	assert.NoError(t, err)
 }
 
 func TestSamlSetUpWithContent(t *testing.T) {

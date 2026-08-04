@@ -98,7 +98,8 @@ func TestDataSets(t *testing.T) {
 
 	assert.Equal(t, updated.CustomEnrichment.Description, fetched.CustomEnrichment.Description)
 	assert.Equal(t, data.CustomEnrichment.Version+1, fetched.CustomEnrichment.Version)
-	c.Delete(context.Background(), &cxsdk.DeleteDataSetRequest{
+	_, e = c.Delete(context.Background(), &cxsdk.DeleteDataSetRequest{
 		CustomEnrichmentId: wrapperspb.UInt32(fetched.CustomEnrichment.Id),
 	})
+	assert.NoError(t, e)
 }

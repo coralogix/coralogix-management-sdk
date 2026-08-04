@@ -75,7 +75,7 @@ func (c *RestClient) Request(ctx context.Context, method, path, contentType stri
 	if err != nil {
 		return "", status.Convert(err).Err()
 	}
-	defer func() { _ = response.Body.Close() }()
+	defer response.Body.Close()
 
 	if response.StatusCode >= http.StatusOK && response.StatusCode < http.StatusMultipleChoices {
 
