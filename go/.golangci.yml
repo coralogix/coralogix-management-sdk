@@ -10,7 +10,6 @@ linters:
     errcheck:
       exclude-functions:
         - (*google.golang.org/grpc.ClientConn).Close
-        - (net/http.Response).Body.Close
     revive:
       rules:
         - name: package-comments
