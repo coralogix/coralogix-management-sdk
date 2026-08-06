@@ -50,8 +50,8 @@ func TestCoralogixGrpcEndpointFromDomain(t *testing.T) {
 func TestCoralogixRestEndpointFromRegion(t *testing.T) {
 	cases := map[string]string{
 		"eu2":                    RestEU2,
-		"acme.coralogix.com":     "https://ng-api-http.acme.coralogix.com",
-		"api.acme.coralogix.com": "https://ng-api-http.acme.coralogix.com",
+		"acme.coralogix.com":     "https://api.acme.coralogix.com",
+		"api.acme.coralogix.com": "https://api.acme.coralogix.com",
 	}
 	for in, want := range cases {
 		if got := CoralogixRestEndpointFromRegion(in); got != want {
@@ -62,8 +62,8 @@ func TestCoralogixRestEndpointFromRegion(t *testing.T) {
 
 func TestCoralogixRestEndpointFromDomain(t *testing.T) {
 	cases := map[string]string{
-		"acme.coralogix.com":     "https://ng-api-http.acme.coralogix.com",
-		"api.acme.coralogix.com": "https://ng-api-http.acme.coralogix.com",
+		"acme.coralogix.com":     "https://api.acme.coralogix.com",
+		"api.acme.coralogix.com": "https://api.acme.coralogix.com",
 	}
 	for in, want := range cases {
 		if got := CoralogixRestEndpointFromDomain(in); got != want {

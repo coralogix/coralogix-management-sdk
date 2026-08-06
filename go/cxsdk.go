@@ -37,16 +37,17 @@ const (
 	GrpcAP3 = "ng-api-grpc.ap3.coralogix.com:443"
 )
 
-// RESt URLs for the Coralogix regions.
+// REST URLs for the Coralogix regions. These are served from the same api.<domain>
+// host as the OpenAPI endpoints, so a tenant only needs that one host resolvable.
 const (
-	RestUS1 = "https://ng-api-http.coralogix.us"
-	RestUS2 = "https://ng-api-http.cx498.coralogix.com"
-	RestUS3 = "https://ng-api-http.us3.coralogix.com"
-	RestEU1 = "https://ng-api-http.coralogix.com"
-	RestEU2 = "https://ng-api-http.eu2.coralogix.com"
-	RestAP1 = "https://ng-api-http.app.coralogix.in"
-	RestAP2 = "https://ng-api-http.coralogixsg.com"
-	RestAP3 = "https://ng-api-http.ap3.coralogix.com"
+	RestUS1 = "https://api.coralogix.us"
+	RestUS2 = "https://api.cx498.coralogix.com"
+	RestUS3 = "https://api.us3.coralogix.com"
+	RestEU1 = "https://api.coralogix.com"
+	RestEU2 = "https://api.eu2.coralogix.com"
+	RestAP1 = "https://api.app.coralogix.in"
+	RestAP2 = "https://api.coralogixsg.com"
+	RestAP3 = "https://api.ap3.coralogix.com"
 )
 
 // SdkAPIError is an error that occurs in the Coralogix SDK.
@@ -375,12 +376,11 @@ func CoralogixGrpcEndpointFromRegion(regionIdentifier string) string {
 }
 
 // normalizeCoralogixDomain reduces a Coralogix domain to its base form by
-// stripping a leading "api." label. The OpenAPI/REST client identifies a
-// tenant by its API host (e.g. "api.eu2.coralogix.com"), whereas the gRPC and
-// ng-api REST endpoints are derived by prefixing the base domain
-// (e.g. "eu2.coralogix.com") with "ng-api-grpc." / "ng-api-http.". Normalizing
-// here lets callers pass either form interchangeably and still reach the
-// correct host for every protocol.
+// stripping a leading "api." label. Callers identify a tenant by its API host
+// (e.g. "api.eu2.coralogix.com"), while endpoints are derived by prefixing the
+// base domain (e.g. "eu2.coralogix.com") with "api." for REST and
+// "ng-api-grpc." for gRPC. Normalizing here lets callers pass either form
+// interchangeably and still reach the correct host for every protocol.
 func normalizeCoralogixDomain(domain string) string {
 	return strings.TrimPrefix(domain, "api.")
 }
@@ -417,12 +417,12 @@ func CoralogixRestEndpointFromRegion(regionIdentifier string) string {
 	}
 }
 
-// CoralogixRestEndpointFromDomain returns the ng-api REST endpoint for a custom
+// CoralogixRestEndpointFromDomain returns the REST endpoint for a custom
 // Coralogix domain (e.g. "eu2.coralogix.com" or "mycompany.coralogix.com").
 // A leading "api." is tolerated so the same domain value used to configure the
 // OpenAPI client also yields the correct REST host.
 func CoralogixRestEndpointFromDomain(domain string) string {
-	return fmt.Sprintf("https://ng-api-http.%s", normalizeCoralogixDomain(domain))
+	return fmt.Sprintf("https://api.%s", normalizeCoralogixDomain(domain))
 }
 
 // AuthContext is a struct that holds the API keys for the Coralogix SDK.
