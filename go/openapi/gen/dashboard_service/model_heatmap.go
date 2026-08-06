@@ -28,21 +28,27 @@ type Heatmap struct {
 	ColorAxisMax *float32 `json:"colorAxisMax,omitempty"`
 	// Optional number indicating the lowest value for gradient color axis. Automatically calculated from data if not provided.
 	ColorAxisMin *float32 `json:"colorAxisMin,omitempty"`
+	// Color configuration for the heatmap
 	ColorRange *ColorGradientType `json:"colorRange,omitempty"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
+	// Unit used to format histogram bucket boundaries when a heatmap axis represents cumulative histogram buckets
 	HistogramBucketUnit *HeatmapHistogramBucketUnit `json:"histogramBucketUnit,omitempty"`
 	Preset *HeatmapColorPreset `json:"preset,omitempty"`
+	// Scale type - linear/logarithmic
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	// Whether to render numeric values inside the heatmap tiles
 	ShowNumbers *bool `json:"showNumbers,omitempty"`
+	// Tooltip settings for the widget
 	Tooltip *HeatmapTooltip `json:"tooltip,omitempty"`
+	// Unit of the query results - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	// List of observation fields used as x-axis categories in the heatmap grid.
 	XAxisFields []ObservationField `json:"xAxisFields,omitempty"`
+	// Time format for the X axis (only applicable when X axis contains timestamp fields)
 	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	// List of observation fields used as y-axis categories in the heatmap grid.
 	YAxisFields []ObservationField `json:"yAxisFields,omitempty"`

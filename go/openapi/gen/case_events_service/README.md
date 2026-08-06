@@ -111,6 +111,7 @@ Class | Method | HTTP request | Description
  - [KPIType](docs/KPIType.md)
  - [LogAttachment](docs/LogAttachment.md)
  - [MicrosoftTeamsActor](docs/MicrosoftTeamsActor.md)
+ - [MicrosoftTeamsCommentMetadata](docs/MicrosoftTeamsCommentMetadata.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [NotificationFailedCaseEvent](docs/NotificationFailedCaseEvent.md)
  - [NotificationMetadata](docs/NotificationMetadata.md)

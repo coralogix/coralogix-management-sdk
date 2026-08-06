@@ -30,34 +30,84 @@
               "type": "object",
               "properties": {
                 "enabledFilter": {
-                  "$ref": "#/components/schemas/AlertDefEnabledFilter"
+                  "description": "Filter by AlertDef enabled status",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AlertDefEnabledFilter"
+                    }
+                  ]
                 },
                 "entityLabelsFilter": {
-                  "$ref": "#/components/schemas/AlertDefEntityLabelsFilter"
+                  "description": "Filter by AlertDef entity labels",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AlertDefEntityLabelsFilter"
+                    }
+                  ]
                 },
                 "idFilter": {
-                  "$ref": "#/components/schemas/AlertDefIdFilter"
+                  "description": "Filter by alert definition IDs to include or exclude",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AlertDefIdFilter"
+                    }
+                  ]
                 },
                 "lastTriggeredTimeRangeFilter": {
-                  "$ref": "#/components/schemas/AlertDefLastTriggeredTimeFilter"
+                  "description": "Filters all alerts that were triggered at the given time range",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AlertDefLastTriggeredTimeFilter"
+                    }
+                  ]
                 },
                 "modifiedTimeRangeFilter": {
-                  "$ref": "#/components/schemas/AlertDefModifiedTimeFilter"
+                  "description": "Filters all alerts that were modified at the given time range",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AlertDefModifiedTimeFilter"
+                    }
+                  ]
                 },
                 "nameFilter": {
-                  "$ref": "#/components/schemas/AlertDefNameFilter"
+                  "description": "Filter by name",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AlertDefNameFilter"
+                    }
+                  ]
                 },
                 "priorityFilter": {
-                  "$ref": "#/components/schemas/AlertDefPriorityFilter"
+                  "description": "Filter by AlertDef priority",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AlertDefPriorityFilter"
+                    }
+                  ]
                 },
                 "statusFilter": {
-                  "$ref": "#/components/schemas/AlertDefStatusFilter"
+                  "description": "Filter by alert definition status",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AlertDefStatusFilter"
+                    }
+                  ]
                 },
                 "typeFilter": {
-                  "$ref": "#/components/schemas/AlertDefTypeFilter"
+                  "description": "Filter by AlertDef type",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AlertDefTypeFilter"
+                    }
+                  ]
                 },
                 "typeSpecificFilter": {
-                  "$ref": "#/components/schemas/AlertDefTypeSpecificFilter"
+                  "description": "Filter by fields specific to alert type definitions",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AlertDefTypeSpecificFilter"
+                    }
+                  ]
                 }
               }
             },
@@ -112,10 +162,22 @@
                     "type": "object",
                     "properties": {
                       "direction": {
-                        "$ref": "#/components/schemas/AlertDefOrderByDirection"
+                        "example": "ALERT_DEF_ORDER_BY_DIRECTION_DESC",
+                        "description": "Direction for ordering",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/AlertDefOrderByDirection"
+                          }
+                        ]
                       },
                       "fieldName": {
-                        "$ref": "#/components/schemas/AlertDefOrderByFields"
+                        "example": "ALERT_DEF_ORDER_BY_FIELDS_UPDATED_TIME",
+                        "description": "Field name to order by",
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/AlertDefOrderByFields"
+                          }
+                        ]
                       }
                     }
                   },
@@ -123,6 +185,16 @@
                   "maxItems": 20
                 }
               }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "include_access_permissions",
+            "description": "When true, populate the response's per-alert access map with the caller's access decision and each alert's raw access policy. Defaults to false.",
+            "schema": {
+              "description": "When true, populate the response's per-alert access map with the caller's access decision and each alert's raw access policy. Defaults to false.",
+              "type": "boolean"
             },
             "style": "form"
           }
@@ -191,8 +263,21 @@
                 "description": "A request to replace an existing alert definition",
                 "type": "object",
                 "properties": {
+                  "accessPolicy": {
+                    "description": "Change to the alert's access policy: upsert a raw policy, or delete (remove) the existing one. Optional; if omitted, the existing policy is left unchanged. Changing the access policy requires the alerts:UpdateAccessPolicy permission.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AccessPolicyAction"
+                      }
+                    ]
+                  },
                   "alertDefProperties": {
-                    "$ref": "#/components/schemas/AlertDefProperties"
+                    "description": "The properties of the alert definition",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AlertDefProperties"
+                      }
+                    ]
                   },
                   "id": {
                     "example": "123e4567-e89b-12d3-a456-426614174000",
@@ -271,8 +356,20 @@
                 "description": "A request to create a new alert definition",
                 "type": "object",
                 "properties": {
+                  "accessPolicy": {
+                    "description": "The access policy for the alert as a raw JSON string. Optional; requires the alerts:UpdateAccessPolicy permission to set. If omitted, the alert is created without an access policy.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65536
+                  },
                   "alertDefProperties": {
-                    "$ref": "#/components/schemas/AlertDefProperties"
+                    "description": "The properties of the alert definition",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AlertDefProperties"
+                      }
+                    ]
                   }
                 }
               }
@@ -351,22 +448,52 @@
               "type": "object",
               "properties": {
                 "enabledFilter": {
-                  "$ref": "#/components/schemas/FilterOptionCountsEnabledFilter"
+                  "description": "Filter by alert definition enabled status",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/FilterOptionCountsEnabledFilter"
+                    }
+                  ]
                 },
                 "entityLabelsFilter": {
-                  "$ref": "#/components/schemas/FilterOptionCountsEntityLabelsFilter"
+                  "description": "Filter by alert definition entity labels",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/FilterOptionCountsEntityLabelsFilter"
+                    }
+                  ]
                 },
                 "nameFilter": {
-                  "$ref": "#/components/schemas/FilterOptionCountsNameFilter"
+                  "description": "Filter by alert definition names",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/FilterOptionCountsNameFilter"
+                    }
+                  ]
                 },
                 "priorityFilter": {
-                  "$ref": "#/components/schemas/FilterOptionCountsPriorityFilter"
+                  "description": "Filter by alert definition priorities",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/FilterOptionCountsPriorityFilter"
+                    }
+                  ]
                 },
                 "statusFilter": {
-                  "$ref": "#/components/schemas/FilterOptionCountsStatusFilter"
+                  "description": "Filter by alert definition status",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/FilterOptionCountsStatusFilter"
+                    }
+                  ]
                 },
                 "typeFilter": {
-                  "$ref": "#/components/schemas/FilterOptionCountsTypeFilter"
+                  "description": "Filter by alert definition types",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/FilterOptionCountsTypeFilter"
+                    }
+                  ]
                 }
               }
             },
@@ -420,13 +547,120 @@
         ]
       }
     },
+    "/alerts/alerts/v3/all/create": {
+      "post": {
+        "tags": [
+          "Alert definitions service"
+        ],
+        "summary": "Bulk create alert definitions",
+        "description": "Creates multiple alert definitions in a single request. The operation is best-effort - definitions that fail to be created are reported in the response and do not prevent creation of the others. Limited to 100 alert definitions per request.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertDefsService_BulkCreateAlertDefs",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Bulk create alert definitions request",
+                "description": "A request to create multiple alert definitions",
+                "type": "object",
+                "properties": {
+                  "alertDefsToCreate": {
+                    "description": "List of alert definitions to create. Limited to 100 alert definitions per request.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/AlertDefToCreate"
+                    },
+                    "minItems": 1,
+                    "maxItems": 100
+                  }
+                },
+                "required": [
+                  "alertDefsToCreate"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkCreateAlertDefsResponse"
+                },
+                "example": {
+                  "alertDefs": [
+                    {
+                      "alertDefProperties": {
+                        "description": "Fires when the error rate exceeds the threshold.",
+                        "enabled": true,
+                        "name": "High error rate",
+                        "priority": "ALERT_DEF_PRIORITY_P2",
+                        "type": "ALERT_DEF_TYPE_LOGS_THRESHOLD"
+                      },
+                      "alertVersionId": "223e4567-e89b-12d3-a456-426614174000",
+                      "createdTime": "2026-07-01T08:30:00.000Z",
+                      "id": "123e4567-e89b-12d3-a456-426614174000",
+                      "updatedTime": "2026-07-01T08:30:00.000Z"
+                    }
+                  ],
+                  "failedToCreateAlertDefs": [
+                    {
+                      "index": 1,
+                      "reason": "Alert definition name must not be empty."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "alerts:UpdateConfig"
+        ]
+      }
+    },
     "/alerts/alerts/v3/all/delete": {
       "post": {
         "tags": [
           "Alert definitions service"
         ],
         "summary": "Bulk delete alert definitions",
-        "description": "Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
+        "description": "Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are. Limited to 100 alert definitions per request.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -513,11 +747,35 @@
           "Alert definitions service"
         ],
         "summary": "Download alerts",
-        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
+        "description": "Download alert definitions in base64-encoded byte format. When ids are provided, only those alert definitions are downloaded; otherwise all accessible alert definitions are downloaded.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
         "operationId": "AlertDefsService_DownloadAlerts",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ids",
+            "description": "Optional list of alert definition IDs to download. When empty, all accessible alert definitions are downloaded. IDs that are not found or not accessible are omitted from the download and reported in the response notFoundIds (no error is returned for them).",
+            "schema": {
+              "example": [
+                "123e4567-e89b-12d3-a456-426614174000"
+              ],
+              "description": "Optional list of alert definition IDs to download. When empty, all accessible alert definitions are downloaded. IDs that are not found or not accessible are omitted from the download and reported in the response notFoundIds (no error is returned for them).",
+              "type": "array",
+              "items": {
+                "description": "Optional list of alert definition IDs to download. When empty, all accessible alert definitions are downloaded. IDs that are not found or not accessible are omitted from the download and reported in the response notFoundIds (no error is returned for them).",
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                "minLength": 0,
+                "maxLength": 36
+              },
+              "minItems": 0,
+              "maxItems": 1000
+            },
+            "style": "form"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -571,7 +829,7 @@
           "Alert definitions service"
         ],
         "summary": "Bulk replace alert definitions",
-        "description": "Replaces all alert definitions with the provided set.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
+        "description": "Replaces multiple alert definitions in a single request. Each entry updates the existing alert definition with the matching ID; alert definitions not referenced in the request are left unchanged. The operation is best-effort - entries that fail are reported in the response and do not prevent other entries from being applied. Limited to 100 alert definitions per request.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -585,13 +843,13 @@
                 "type": "object",
                 "properties": {
                   "alertDefsToReplace": {
-                    "description": "List of alert definitions to replace",
+                    "description": "List of alert definitions to replace. Limited to 100 alert definitions per request.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/AlertDefToReplace"
                     },
                     "minItems": 0,
-                    "maxItems": 1000
+                    "maxItems": 100
                   }
                 }
               }
@@ -671,6 +929,16 @@
               "maxLength": 36
             },
             "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "include_access_permissions",
+            "description": "When true, populate the response's access field with the caller's access decision and the alert's raw access policy. Defaults to false.",
+            "schema": {
+              "description": "When true, populate the response's access field with the caller's access decision and the alert's raw access policy. Defaults to false.",
+              "type": "boolean"
+            },
+            "style": "form"
           }
         ],
         "responses": {
@@ -746,6 +1014,16 @@
               "maxLength": 36
             },
             "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "include_access_permissions",
+            "description": "When true, populate the response's access field with the caller's access decision and the alert's raw access policy. Defaults to false.",
+            "schema": {
+              "description": "When true, populate the response's access field with the caller's access decision and the alert's raw access policy. Defaults to false.",
+              "type": "boolean"
+            },
+            "style": "form"
           }
         ],
         "responses": {
@@ -871,6 +1149,64 @@
   },
   "components": {
     "schemas": {
+      "AccessPolicyAction": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Access policy action",
+        "description": "A change to the alert's access policy: upsert a raw policy, or delete (remove) the existing policy. Changing the access policy requires the alerts:UpdateAccessPolicy permission.",
+        "type": "object",
+        "properties": {
+          "delete": {
+            "description": "Remove the alert's access policy entirely; a new policy and policy owner can be assigned afterward",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeleteAccessPolicy"
+              }
+            ]
+          },
+          "upsert": {
+            "description": "Raw access policy JSON to set on the alert",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65536
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "upsert"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "delete"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "upsert"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "delete"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
       "ActivitySchedule": {
         "externalDocs": {
           "url": ""
@@ -893,10 +1229,20 @@
             "maxItems": 7
           },
           "endTime": {
-            "$ref": "#/components/schemas/TimeOfDay"
+            "description": "End time of the alert activity",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeOfDay"
+              }
+            ]
           },
           "startTime": {
-            "$ref": "#/components/schemas/TimeOfDay"
+            "description": "Start time of the alert activity",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeOfDay"
+              }
+            ]
           }
         }
       },
@@ -910,7 +1256,12 @@
         "type": "object",
         "properties": {
           "alertDefProperties": {
-            "$ref": "#/components/schemas/AlertDefProperties"
+            "description": "The alert definition's properties",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefProperties"
+              }
+            ]
           },
           "alertVersionId": {
             "description": "The old alert ID",
@@ -946,7 +1297,13 @@
             "maxLength": 64
           },
           "status": {
-            "$ref": "#/components/schemas/AlertDefStatus"
+            "example": "ALERT_DEF_STATUS_OK",
+            "description": "The current status of the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefStatus"
+              }
+            ]
           },
           "updatedTime": {
             "example": "2023-10-01T12:00:00.000Z",
@@ -956,6 +1313,31 @@
             "pattern": "^[\\s\\S]*$",
             "minLength": 0,
             "maxLength": 64
+          }
+        }
+      },
+      "AlertDefAccess": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition access",
+        "description": "The caller's access decision for an alert together with the alert's raw access policy",
+        "type": "object",
+        "properties": {
+          "accessPolicy": {
+            "description": "The alert's raw access policy as an opaque JSON string. Present only when the caller may read it (alerts:ReadAccessPolicy granted)",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65536
+          },
+          "permissions": {
+            "description": "The caller's access decision (permission booleans) for the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefPermissions"
+              }
+            ]
           }
         }
       },
@@ -1009,7 +1391,12 @@
             }
           },
           "valuesOperator": {
-            "$ref": "#/components/schemas/FilterValuesOperator"
+            "description": "Whether all labels must match (AND) or any label can match (OR)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterValuesOperator"
+              }
+            ]
           }
         }
       },
@@ -1038,7 +1425,12 @@
             "maxItems": 100
           },
           "matchType": {
-            "$ref": "#/components/schemas/AlertDefIdFilterMatchType"
+            "description": "Whether to include or exclude the specified alert definition IDs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefIdFilterMatchType"
+              }
+            ]
           }
         }
       },
@@ -1067,7 +1459,13 @@
             "maximum": 10080
           },
           "notifyOn": {
-            "$ref": "#/components/schemas/NotifyOn"
+            "example": "NOTIFY_ON_TRIGGERED_AND_RESOLVED",
+            "description": "The condition to notify about the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotifyOn"
+              }
+            ]
           }
         }
       },
@@ -1106,7 +1504,12 @@
         "type": "object",
         "properties": {
           "matcher": {
-            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+            "description": "The filter operator (EQUALS, NOT_EQUALS, CONTAINS)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+              }
+            ]
           },
           "name": {
             "description": "The name(s) of the alert definition - multiple values are OR'd together",
@@ -1158,7 +1561,12 @@
             "maxItems": 100
           },
           "router": {
-            "$ref": "#/components/schemas/NotificationRouter"
+            "description": "The router for notifications.  (Notification Center feature)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotificationRouter"
+              }
+            ]
           },
           "webhooks": {
             "description": "The settings for webhooks associated with the alert definition",
@@ -1199,7 +1607,39 @@
         "type": "object",
         "properties": {
           "priority": {
-            "$ref": "#/components/schemas/AlertDefPriority"
+            "example": "ALERT_DEF_PRIORITY_P3",
+            "description": "The priority of the alert definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefPriority"
+              }
+            ]
+          }
+        }
+      },
+      "AlertDefPermissions": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition permissions",
+        "description": "The calling user's access decision for an alert",
+        "type": "object",
+        "properties": {
+          "canManage": {
+            "description": "Whether the caller may edit or delete this alert — granted the update-config permission for the alert's data pillar (logs / metrics / spans / flow / SLO)",
+            "type": "boolean"
+          },
+          "canRead": {
+            "description": "Whether the caller may view this alert — granted the read-config permission for the alert's data pillar (logs / metrics / spans / flow / SLO)",
+            "type": "boolean"
+          },
+          "canReadAccessPolicy": {
+            "description": "Whether the caller may view this alert's access policy / permissions (alerts:ReadAccessPolicy granted)",
+            "type": "boolean"
+          },
+          "canUpdateAccessPolicy": {
+            "description": "Whether the caller may change this alert's access policy (alerts:UpdateAccessPolicy granted)",
+            "type": "boolean"
           }
         }
       },
@@ -1223,7 +1663,12 @@
         "type": "object",
         "properties": {
           "matcher": {
-            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+            "description": "The filter operator (EQUALS, NOT_EQUALS)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+              }
+            ]
           },
           "priority": {
             "description": "The priority(ies) of the alert definition - multiple values are OR'd together",
@@ -1245,13 +1690,28 @@
         "type": "object",
         "properties": {
           "activeOn": {
-            "$ref": "#/components/schemas/ActivitySchedule"
+            "description": "The schedule defining when the alert should be active",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ActivitySchedule"
+              }
+            ]
           },
           "analyticsImmediate": {
-            "$ref": "#/components/schemas/AnalyticsImmediateType"
+            "description": "Configuration for analytics immediate alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnalyticsImmediateType"
+              }
+            ]
           },
           "analyticsThreshold": {
-            "$ref": "#/components/schemas/AnalyticsThresholdType"
+            "description": "Configuration for analytics threshold alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnalyticsThresholdType"
+              }
+            ]
           },
           "dataSources": {
             "description": "The sources from which to sample logs",
@@ -1289,7 +1749,12 @@
             }
           },
           "flow": {
-            "$ref": "#/components/schemas/FlowType"
+            "description": "Configuration for flow-based alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FlowType"
+              }
+            ]
           },
           "groupByKeys": {
             "example": [
@@ -1309,34 +1774,84 @@
             "maxItems": 100
           },
           "incidentsSettings": {
-            "$ref": "#/components/schemas/AlertDefIncidentSettings"
+            "description": "Incident creation and management settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefIncidentSettings"
+              }
+            ]
           },
           "logsAnomaly": {
-            "$ref": "#/components/schemas/LogsAnomalyType"
+            "description": "Configuration for log-based anomaly detection alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsAnomalyType"
+              }
+            ]
           },
           "logsImmediate": {
-            "$ref": "#/components/schemas/LogsImmediateType"
+            "description": "Configuration for immediate log-based alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsImmediateType"
+              }
+            ]
           },
           "logsNewValue": {
-            "$ref": "#/components/schemas/LogsNewValueType"
+            "description": "Configuration for alerts triggered by new log values",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsNewValueType"
+              }
+            ]
           },
           "logsRatioThreshold": {
-            "$ref": "#/components/schemas/LogsRatioThresholdType"
+            "description": "Configuration for log-based ratio threshold alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsRatioThresholdType"
+              }
+            ]
           },
           "logsThreshold": {
-            "$ref": "#/components/schemas/LogsThresholdType"
+            "description": "Configuration for log-based threshold alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsThresholdType"
+              }
+            ]
           },
           "logsTimeRelativeThreshold": {
-            "$ref": "#/components/schemas/LogsTimeRelativeThresholdType"
+            "description": "Configuration for time-relative log threshold alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsTimeRelativeThresholdType"
+              }
+            ]
           },
           "logsUniqueCount": {
-            "$ref": "#/components/schemas/LogsUniqueCountType"
+            "description": "Configuration for alerts based on unique log value counts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsUniqueCountType"
+              }
+            ]
           },
           "metricAnomaly": {
-            "$ref": "#/components/schemas/MetricAnomalyType"
+            "description": "Configuration for metric-based anomaly detection alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricAnomalyType"
+              }
+            ]
           },
           "metricThreshold": {
-            "$ref": "#/components/schemas/MetricThresholdType"
+            "description": "Configuration for metric-based threshold alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricThresholdType"
+              }
+            ]
           },
           "name": {
             "example": "My Alert",
@@ -1347,9 +1862,15 @@
             "maxLength": 512
           },
           "notificationGroup": {
-            "$ref": "#/components/schemas/AlertDefNotificationGroup"
+            "description": "Primary notification group for alert events",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefNotificationGroup"
+              }
+            ]
           },
           "notificationGroupExcess": {
+            "deprecated": true,
             "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
@@ -1364,19 +1885,46 @@
             "type": "boolean"
           },
           "priority": {
-            "$ref": "#/components/schemas/AlertDefPriority"
+            "example": "ALERT_DEF_PRIORITY_P4",
+            "description": "The priority level of the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefPriority"
+              }
+            ]
           },
           "sloThreshold": {
-            "$ref": "#/components/schemas/SloThresholdType"
+            "description": "Configuration for SLO-based alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SloThresholdType"
+              }
+            ]
           },
           "tracingImmediate": {
-            "$ref": "#/components/schemas/TracingImmediateType"
+            "description": "Configuration for immediate tracing-based alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingImmediateType"
+              }
+            ]
           },
           "tracingThreshold": {
-            "$ref": "#/components/schemas/TracingThresholdType"
+            "description": "Configuration for tracing-based threshold alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingThresholdType"
+              }
+            ]
           },
           "type": {
-            "$ref": "#/components/schemas/AlertDefType"
+            "example": "ALERT_DEF_TYPE_METRIC_THRESHOLD",
+            "description": "Alert type",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefType"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -1578,7 +2126,12 @@
         "type": "object",
         "properties": {
           "matcher": {
-            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+            "description": "The filter operator (EQUALS, NOT_EQUALS)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+              }
+            ]
           },
           "sloId": {
             "example": [
@@ -1617,7 +2170,12 @@
         "type": "object",
         "properties": {
           "matcher": {
-            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+            "description": "The filter operator (EQUALS, NOT_EQUALS)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+              }
+            ]
           },
           "status": {
             "description": "The status(es) of the alert definition - multiple values are OR'd together",
@@ -1630,6 +2188,34 @@
           }
         }
       },
+      "AlertDefToCreate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Alert definition to create",
+        "description": "A single alert definition to create as part of a bulk create request",
+        "type": "object",
+        "properties": {
+          "accessPolicy": {
+            "description": "The access policy for the alert as a raw JSON string. Optional; requires the alerts:UpdateAccessPolicy permission to set. If omitted, the alert is created without an access policy.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65536
+          },
+          "alertDefProperties": {
+            "description": "The properties of the alert definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefProperties"
+              }
+            ]
+          }
+        },
+        "required": [
+          "alertDefProperties"
+        ]
+      },
       "AlertDefToReplace": {
         "externalDocs": {
           "url": ""
@@ -1638,8 +2224,21 @@
         "description": "An alert definition along with its ID for replacement",
         "type": "object",
         "properties": {
+          "accessPolicy": {
+            "description": "Change to the alert's access policy: upsert a raw policy, or delete (remove) the existing one. Optional; if omitted, the existing policy is left unchanged. Changing the access policy requires the alerts:UpdateAccessPolicy permission.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccessPolicyAction"
+              }
+            ]
+          },
           "alertDefProperties": {
-            "$ref": "#/components/schemas/AlertDefProperties"
+            "description": "The properties of the alert definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefProperties"
+              }
+            ]
           },
           "id": {
             "example": "123e4567-e89b-12d3-a456-426614174000",
@@ -1681,7 +2280,12 @@
         "type": "object",
         "properties": {
           "matcher": {
-            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+            "description": "The filter operator (EQUALS, NOT_EQUALS)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+              }
+            ]
           },
           "type": {
             "description": "The alert type(s) - multiple values are OR'd together",
@@ -1703,7 +2307,12 @@
         "type": "object",
         "properties": {
           "sloFilter": {
-            "$ref": "#/components/schemas/AlertDefSloSpecificFilter"
+            "description": "Filter SLO-based alerts by SLO-specific fields",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefSloSpecificFilter"
+              }
+            ]
           }
         }
       },
@@ -1716,7 +2325,12 @@
         "type": "object",
         "properties": {
           "integration": {
-            "$ref": "#/components/schemas/v3.IntegrationType"
+            "description": "The integration type for webhook notifications",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.IntegrationType"
+              }
+            ]
           },
           "minutes": {
             "example": 15,
@@ -1727,7 +2341,13 @@
             "maximum": 10080
           },
           "notifyOn": {
-            "$ref": "#/components/schemas/NotifyOn"
+            "example": "NOTIFY_ON_TRIGGERED_AND_RESOLVED",
+            "description": "The condition under which the alert should be notified",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotifyOn"
+              }
+            ]
           }
         }
       },
@@ -1748,7 +2368,12 @@
         "type": "object",
         "properties": {
           "dataprimeQuery": {
-            "$ref": "#/components/schemas/DataprimeAlertQuery"
+            "description": "The DataPrime query to evaluate",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataprimeAlertQuery"
+              }
+            ]
           },
           "evaluationDelayMs": {
             "example": 300000,
@@ -1759,7 +2384,12 @@
             "maximum": 10800000
           },
           "noDataPolicy": {
-            "$ref": "#/components/schemas/NoDataPolicy"
+            "description": "Configuration for how to treat and what state to give to an alert with no data",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NoDataPolicy"
+              }
+            ]
           },
           "timeframeMinutes": {
             "example": 60,
@@ -1796,10 +2426,20 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/AnalyticsThresholdRuleCondition"
+            "description": "The condition for the threshold rule",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnalyticsThresholdRuleCondition"
+              }
+            ]
           },
           "override": {
-            "$ref": "#/components/schemas/AlertDefOverride"
+            "description": "The override settings for the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefOverride"
+              }
+            ]
           }
         }
       },
@@ -1828,7 +2468,12 @@
         "type": "object",
         "properties": {
           "dataprimeQuery": {
-            "$ref": "#/components/schemas/DataprimeAlertQuery"
+            "description": "The DataPrime query to evaluate",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataprimeAlertQuery"
+              }
+            ]
           },
           "evaluationDelayMs": {
             "example": 300000,
@@ -1839,10 +2484,21 @@
             "maximum": 10800000
           },
           "noDataPolicy": {
-            "$ref": "#/components/schemas/NoDataPolicy"
+            "description": "Configuration for how to treat and what state to give to an alert with no data",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NoDataPolicy"
+              }
+            ]
           },
           "operator": {
-            "$ref": "#/components/schemas/AnalyticsThresholdOperator"
+            "example": "ANALYTICS_THRESHOLD_OPERATOR_MORE_THAN_OR_UNSPECIFIED",
+            "description": "The comparison operator applied to all threshold rules",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnalyticsThresholdOperator"
+              }
+            ]
           },
           "rules": {
             "description": "The per-priority threshold rules",
@@ -1892,6 +2548,34 @@
           }
         }
       },
+      "BulkCreateAlertDefsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Bulk create alert definitions response",
+        "description": "A response that contains the results of the bulk create operation",
+        "type": "object",
+        "properties": {
+          "alertDefs": {
+            "description": "List of successfully created alert definitions, returned in the order of their corresponding request entries. Request entries that failed to be created are omitted here and reported by index in failedToCreateAlertDefs.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDef"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "failedToCreateAlertDefs": {
+            "description": "List of request entries that failed to be created, each identified by its zero-based index in the request list",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FailedToCreateAlertDef"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          }
+        }
+      },
       "BulkDeleteAlertDefsResponse": {
         "externalDocs": {
           "url": ""
@@ -1914,7 +2598,7 @@
               "maxLength": 36
             },
             "minItems": 0,
-            "maxItems": 1000
+            "maxItems": 100
           },
           "notFoundIds": {
             "example": [
@@ -1930,7 +2614,7 @@
               "maxLength": 36
             },
             "minItems": 0,
-            "maxItems": 1000
+            "maxItems": 100
           }
         }
       },
@@ -1949,7 +2633,7 @@
               "$ref": "#/components/schemas/AlertDef"
             },
             "minItems": 0,
-            "maxItems": 1000
+            "maxItems": 100
           },
           "failedToReplaceAlertDefs": {
             "description": "List of alert definitions that failed to be replaced",
@@ -1958,7 +2642,7 @@
               "$ref": "#/components/schemas/FailedToReplaceAlertDef"
             },
             "minItems": 0,
-            "maxItems": 1000
+            "maxItems": 100
           },
           "notFoundIds": {
             "example": [
@@ -1974,7 +2658,7 @@
               "maxLength": 36
             },
             "minItems": 0,
-            "maxItems": 1000
+            "maxItems": 100
           },
           "skippedIds": {
             "example": [
@@ -1990,7 +2674,7 @@
               "maxLength": 36
             },
             "minItems": 0,
-            "maxItems": 1000
+            "maxItems": 100
           }
         }
       },
@@ -2003,7 +2687,12 @@
         "type": "object",
         "properties": {
           "dual": {
-            "$ref": "#/components/schemas/BurnRateTypeDual"
+            "description": "Burn rate type dual",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BurnRateTypeDual"
+              }
+            ]
           },
           "rules": {
             "description": "The rules for the burn rate threshold",
@@ -2015,7 +2704,12 @@
             "maxItems": 5
           },
           "single": {
-            "$ref": "#/components/schemas/BurnRateTypeSingle"
+            "description": "Burn rate type single",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BurnRateTypeSingle"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -2087,7 +2781,12 @@
         "type": "object",
         "properties": {
           "alertDef": {
-            "$ref": "#/components/schemas/AlertDef"
+            "description": "The newly created alert definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDef"
+              }
+            ]
           }
         }
       },
@@ -2121,6 +2820,15 @@
           "DAY_OF_WEEK_SUNDAY"
         ]
       },
+      "DeleteAccessPolicy": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Delete access policy",
+        "description": "Marker to remove the alert's access policy entirely; carries no fields. Removal does not assign any replacement — a new access policy and policy owner can be assigned afterward.",
+        "type": "object",
+        "additionalProperties": false
+      },
       "DeleteAlertDefResponse": {
         "externalDocs": {
           "url": ""
@@ -2144,6 +2852,22 @@
             "type": "string",
             "format": "byte",
             "minLength": 0
+          },
+          "notFoundIds": {
+            "example": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
+            "description": "Requested alert definition IDs that were not included in the download because they were not found or are not accessible. Populated on the first streamed message.",
+            "type": "array",
+            "items": {
+              "description": "Requested alert definition IDs that were not included in the download because they were not found or are not accessible. Populated on the first streamed message.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 0,
+              "maxLength": 36
+            },
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -2251,6 +2975,36 @@
           }
         }
       },
+      "FailedToCreateAlertDef": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Failed to create alert definition",
+        "description": "A reference to an alert definition in the request that failed to be created",
+        "type": "object",
+        "properties": {
+          "index": {
+            "example": 0,
+            "description": "Zero-based index of the alert definition in the request list that failed to be created",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 99
+          },
+          "reason": {
+            "example": "Alert definition name must not be empty.",
+            "description": "Human-readable explanation of why the alert definition failed to be created",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "index",
+          "reason"
+        ]
+      },
       "FailedToReplaceAlertDef": {
         "externalDocs": {
           "url": ""
@@ -2266,6 +3020,14 @@
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "minLength": 1,
             "maxLength": 36
+          },
+          "reason": {
+            "example": "Alert definition failed validation.",
+            "description": "Human-readable explanation of why the alert definition failed to be replaced. May be omitted when no further detail is available.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -2356,7 +3118,13 @@
             }
           },
           "valuesOperator": {
-            "$ref": "#/components/schemas/FilterValuesOperator"
+            "example": "FILTER_VALUES_OPERATOR_AND",
+            "description": "Whether all labels must match (AND) or any label can match (OR)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterValuesOperator"
+              }
+            ]
           }
         }
       },
@@ -2369,7 +3137,13 @@
         "type": "object",
         "properties": {
           "matcher": {
-            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+            "example": "FILTER_MATCHER_CONTAINS",
+            "description": "The filter operator (EQUALS, NOT_EQUALS, CONTAINS)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+              }
+            ]
           },
           "name": {
             "example": [
@@ -2423,7 +3197,12 @@
         "type": "object",
         "properties": {
           "counts": {
-            "$ref": "#/components/schemas/FilterOptionCounts"
+            "description": "The counts for different filter options",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterOptionCounts"
+              }
+            ]
           }
         }
       },
@@ -2436,7 +3215,13 @@
         "type": "object",
         "properties": {
           "matcher": {
-            "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+            "example": "FILTER_MATCHER_EQUALS",
+            "description": "The filter operator (EQUALS, NOT_EQUALS)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/alerts.v3.FilterMatcher"
+              }
+            ]
           },
           "status": {
             "example": [
@@ -2488,7 +3273,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -2534,7 +3324,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -2557,7 +3352,12 @@
         "type": "object",
         "properties": {
           "flowStagesGroups": {
-            "$ref": "#/components/schemas/FlowStagesGroups"
+            "description": "The flow stages groups.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FlowStagesGroups"
+              }
+            ]
           },
           "timeframeMs": {
             "description": "The timeframe ms.",
@@ -2567,7 +3367,13 @@
             "maxLength": 20
           },
           "timeframeType": {
-            "$ref": "#/components/schemas/TimeframeType"
+            "example": "TIMEFRAME_TYPE_UP_TO",
+            "description": "The type of timeframe for the flow alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeframeType"
+              }
+            ]
           }
         }
       },
@@ -2589,10 +3395,22 @@
             "maxItems": 30
           },
           "alertsOp": {
-            "$ref": "#/components/schemas/AlertsOp"
+            "example": "ALERTS_OP_OR",
+            "description": "The logical operation to apply to the alerts in the group.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertsOp"
+              }
+            ]
           },
           "nextOp": {
-            "$ref": "#/components/schemas/NextOp"
+            "example": "NEXT_OP_OR",
+            "description": "The logical operation to apply to the next stage.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NextOp"
+              }
+            ]
           }
         }
       },
@@ -2670,8 +3488,21 @@
         "description": "A response that contains an alert definition for the requested version",
         "type": "object",
         "properties": {
+          "access": {
+            "description": "The caller's access decision and the alert's raw access policy",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefAccess"
+              }
+            ]
+          },
           "alertDef": {
-            "$ref": "#/components/schemas/AlertDef"
+            "description": "The requested alert definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDef"
+              }
+            ]
           }
         }
       },
@@ -2683,8 +3514,21 @@
         "description": "A response containing the requested alert definition",
         "type": "object",
         "properties": {
+          "access": {
+            "description": "The caller's access decision and the alert's raw access policy",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefAccess"
+              }
+            ]
+          },
           "alertDef": {
-            "$ref": "#/components/schemas/AlertDef"
+            "description": "The requested alert definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDef"
+              }
+            ]
           }
         }
       },
@@ -2697,7 +3541,13 @@
         "type": "object",
         "properties": {
           "operation": {
-            "$ref": "#/components/schemas/LogFilterOperationType"
+            "example": "LOG_FILTER_OPERATION_TYPE_INCLUDES",
+            "description": "The operation to perform on the label value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogFilterOperationType"
+              }
+            ]
           },
           "value": {
             "example": "my-app",
@@ -2749,6 +3599,13 @@
         "description": "A response that contains a list of alert definitions",
         "type": "object",
         "properties": {
+          "access": {
+            "description": "The caller's access decision and raw access policy per alert, keyed by alert definition ID",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AlertDefAccess"
+            }
+          },
           "alertDefs": {
             "description": "List of alert definitions",
             "type": "array",
@@ -2759,7 +3616,12 @@
             "maxItems": 1000
           },
           "pagination": {
-            "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
+            "description": "Pagination settings for the list of alert definitions",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
+              }
+            ]
           }
         }
       },
@@ -2793,7 +3655,13 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "$ref": "#/components/schemas/LogsAnomalyConditionType"
+            "example": "LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
+            "description": "The type of condition for the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsAnomalyConditionType"
+              }
+            ]
           },
           "minimumThreshold": {
             "example": 10,
@@ -2802,7 +3670,12 @@
             "format": "double"
           },
           "timeWindow": {
-            "$ref": "#/components/schemas/LogsTimeWindow"
+            "description": "The time window for the alert condition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsTimeWindow"
+              }
+            ]
           }
         }
       },
@@ -2822,7 +3695,12 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/LogsAnomalyCondition"
+            "description": "The condition for the threshold alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsAnomalyCondition"
+              }
+            ]
           }
         }
       },
@@ -2836,7 +3714,12 @@
         "type": "object",
         "properties": {
           "anomalyAlertSettings": {
-            "$ref": "#/components/schemas/AnomalyAlertSettings"
+            "description": "Anomaly alert settings configuration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnomalyAlertSettings"
+              }
+            ]
           },
           "evaluationDelayMs": {
             "example": 60000,
@@ -2883,7 +3766,12 @@
         "type": "object",
         "properties": {
           "logsFilter": {
-            "$ref": "#/components/schemas/v3.LogsFilter"
+            "description": "The filter to match log entries for immediate alerts.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.LogsFilter"
+              }
+            ]
           },
           "notificationPayloadFilter": {
             "example": [
@@ -2915,7 +3803,12 @@
             "minLength": 0
           },
           "timeWindow": {
-            "$ref": "#/components/schemas/LogsNewValueTimeWindow"
+            "description": "The time window for detecting new values",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsNewValueTimeWindow"
+              }
+            ]
           }
         }
       },
@@ -2928,7 +3821,12 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/LogsNewValueCondition"
+            "description": "The condition for detecting new values in logs.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsNewValueCondition"
+              }
+            ]
           }
         }
       },
@@ -2941,7 +3839,13 @@
         "type": "object",
         "properties": {
           "logsNewValueTimeWindowSpecificValue": {
-            "$ref": "#/components/schemas/LogsNewValueTimeWindowValue"
+            "example": "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED",
+            "description": "A time window defined by a specific value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsNewValueTimeWindowValue"
+              }
+            ]
           }
         }
       },
@@ -2968,7 +3872,12 @@
         "type": "object",
         "properties": {
           "logsFilter": {
-            "$ref": "#/components/schemas/v3.LogsFilter"
+            "description": "The filter to match log entries for the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.LogsFilter"
+              }
+            ]
           },
           "notificationPayloadFilter": {
             "example": [
@@ -3003,7 +3912,13 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "$ref": "#/components/schemas/LogsRatioConditionType"
+            "example": "LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
+            "description": "The type of condition for the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsRatioConditionType"
+              }
+            ]
           },
           "threshold": {
             "example": 10,
@@ -3013,7 +3928,13 @@
             "minimum": 0
           },
           "timeWindow": {
-            "$ref": "#/components/schemas/LogsRatioTimeWindow"
+            "example": 10,
+            "description": "The time window for the alert condition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsRatioTimeWindow"
+              }
+            ]
           }
         }
       },
@@ -3043,10 +3964,20 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/LogsRatioCondition"
+            "description": "The condition for the ratio alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsRatioCondition"
+              }
+            ]
           },
           "override": {
-            "$ref": "#/components/schemas/AlertDefOverride"
+            "description": "The override settings for the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefOverride"
+              }
+            ]
           }
         }
       },
@@ -3060,7 +3991,12 @@
         "type": "object",
         "properties": {
           "denominator": {
-            "$ref": "#/components/schemas/v3.LogsFilter"
+            "description": "The filter to match log entries for the denominator of the ratio",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.LogsFilter"
+              }
+            ]
           },
           "denominatorAlias": {
             "example": "denominator_alias",
@@ -3078,7 +4014,13 @@
             "maximum": 10800000
           },
           "groupByFor": {
-            "$ref": "#/components/schemas/LogsRatioGroupByFor"
+            "example": "LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY",
+            "description": "The group by settings for the numerator and denominator filters",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsRatioGroupByFor"
+              }
+            ]
           },
           "ignoreInfinity": {
             "example": true,
@@ -3099,7 +4041,12 @@
             "minItems": 0
           },
           "numerator": {
-            "$ref": "#/components/schemas/v3.LogsFilter"
+            "description": "The filter to match log entries for the numerator of the ratio",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.LogsFilter"
+              }
+            ]
           },
           "numeratorAlias": {
             "example": "numerator_alias",
@@ -3118,7 +4065,12 @@
             "maxItems": 5
           },
           "undetectedValuesManagement": {
-            "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+            "description": "Configuration for handling the undetected values in the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+              }
+            ]
           }
         }
       },
@@ -3132,7 +4084,13 @@
         "type": "object",
         "properties": {
           "logsRatioTimeWindowSpecificValue": {
-            "$ref": "#/components/schemas/LogsRatioTimeWindowValue"
+            "example": "LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
+            "description": "Specifies the time window for the ratio alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsRatioTimeWindowValue"
+              }
+            ]
           }
         }
       },
@@ -3180,7 +4138,13 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "$ref": "#/components/schemas/LogsThresholdConditionType"
+            "example": "LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
+            "description": "The type of condition for the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsThresholdConditionType"
+              }
+            ]
           },
           "threshold": {
             "example": 100,
@@ -3190,7 +4154,12 @@
             "minimum": 0
           },
           "timeWindow": {
-            "$ref": "#/components/schemas/LogsTimeWindow"
+            "description": "The time window for the alert condition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsTimeWindow"
+              }
+            ]
           }
         }
       },
@@ -3211,10 +4180,20 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/LogsThresholdCondition"
+            "description": "The condition for the threshold alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsThresholdCondition"
+              }
+            ]
           },
           "override": {
-            "$ref": "#/components/schemas/AlertDefOverride"
+            "description": "The override settings for the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefOverride"
+              }
+            ]
           }
         }
       },
@@ -3236,10 +4215,20 @@
             "maximum": 10800000
           },
           "logsFilter": {
-            "$ref": "#/components/schemas/v3.LogsFilter"
+            "description": "The filter to match log entries for threshold alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.LogsFilter"
+              }
+            ]
           },
           "noDataPolicy": {
-            "$ref": "#/components/schemas/NoDataPolicy"
+            "description": "User configuration to decide how to treat and what state to give to an alert with no data.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NoDataPolicy"
+              }
+            ]
           },
           "notificationPayloadFilter": {
             "example": [
@@ -3264,7 +4253,12 @@
             "maxItems": 5
           },
           "undetectedValuesManagement": {
-            "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+            "description": "Configuration for handling the undetected values in the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+              }
+            ]
           }
         }
       },
@@ -3289,10 +4283,22 @@
         "type": "object",
         "properties": {
           "comparedTo": {
-            "$ref": "#/components/schemas/LogsTimeRelativeComparedTo"
+            "example": "LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY",
+            "description": "The time frame to compare the current value against",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsTimeRelativeComparedTo"
+              }
+            ]
           },
           "conditionType": {
-            "$ref": "#/components/schemas/LogsTimeRelativeConditionType"
+            "example": "LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
+            "description": "The type of condition for the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsTimeRelativeConditionType"
+              }
+            ]
           },
           "threshold": {
             "description": "The threshold value for the alert condition.",
@@ -3319,10 +4325,20 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/LogsTimeRelativeCondition"
+            "description": "The condition for the time-relative alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsTimeRelativeCondition"
+              }
+            ]
           },
           "override": {
-            "$ref": "#/components/schemas/AlertDefOverride"
+            "description": "The override settings for the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefOverride"
+              }
+            ]
           }
         }
       },
@@ -3349,7 +4365,12 @@
             "type": "boolean"
           },
           "logsFilter": {
-            "$ref": "#/components/schemas/v3.LogsFilter"
+            "description": "The filter to match log entries for the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.LogsFilter"
+              }
+            ]
           },
           "notificationPayloadFilter": {
             "example": [
@@ -3374,7 +4395,12 @@
             "maxItems": 5
           },
           "undetectedValuesManagement": {
-            "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+            "description": "Configuration for handling the undetected values in the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+              }
+            ]
           }
         }
       },
@@ -3387,7 +4413,13 @@
         "type": "object",
         "properties": {
           "logsTimeWindowSpecificValue": {
-            "$ref": "#/components/schemas/LogsTimeWindowValue"
+            "example": "LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
+            "description": "A time window defined by a specific value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsTimeWindowValue"
+              }
+            ]
           }
         }
       },
@@ -3426,7 +4458,12 @@
             "maxLength": 20
           },
           "timeWindow": {
-            "$ref": "#/components/schemas/LogsUniqueValueTimeWindow"
+            "description": "The time window for the unique count alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsUniqueValueTimeWindow"
+              }
+            ]
           }
         }
       },
@@ -3439,7 +4476,12 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/LogsUniqueCountCondition"
+            "description": "The condition for detecting unique counts in logs.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsUniqueCountCondition"
+              }
+            ]
           }
         }
       },
@@ -3453,7 +4495,12 @@
         "type": "object",
         "properties": {
           "logsFilter": {
-            "$ref": "#/components/schemas/v3.LogsFilter"
+            "description": "The filter to match log entries for the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.LogsFilter"
+              }
+            ]
           },
           "maxUniqueCountPerGroupByKey": {
             "example": "100",
@@ -3502,7 +4549,13 @@
         "type": "object",
         "properties": {
           "logsUniqueValueTimeWindowSpecificValue": {
-            "$ref": "#/components/schemas/LogsUniqueValueTimeWindowValue"
+            "example": "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12",
+            "description": "A time window defined by a specific value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsUniqueValueTimeWindowValue"
+              }
+            ]
           }
         }
       },
@@ -3534,7 +4587,13 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "$ref": "#/components/schemas/MetricAnomalyConditionType"
+            "example": "METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL",
+            "description": "The type of condition for the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricAnomalyConditionType"
+              }
+            ]
           },
           "forOverPct": {
             "example": 20,
@@ -3553,7 +4612,12 @@
             "maximum": 100
           },
           "ofTheLast": {
-            "$ref": "#/components/schemas/MetricTimeWindow"
+            "description": "The time window for the alert condition.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricTimeWindow"
+              }
+            ]
           },
           "threshold": {
             "example": 10,
@@ -3580,7 +4644,12 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/MetricAnomalyCondition"
+            "description": "The condition for the metric anomaly alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricAnomalyCondition"
+              }
+            ]
           }
         }
       },
@@ -3594,7 +4663,12 @@
         "type": "object",
         "properties": {
           "anomalyAlertSettings": {
-            "$ref": "#/components/schemas/AnomalyAlertSettings"
+            "description": "Configuration for anomaly alert settings.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnomalyAlertSettings"
+              }
+            ]
           },
           "evaluationDelayMs": {
             "example": 60000,
@@ -3605,7 +4679,12 @@
             "maximum": 10800000
           },
           "metricFilter": {
-            "$ref": "#/components/schemas/MetricFilter"
+            "description": "The filter to match metric entries for the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricFilter"
+              }
+            ]
           },
           "rules": {
             "description": "The rules for the metric anomaly alert.",
@@ -3700,7 +4779,13 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "$ref": "#/components/schemas/MetricThresholdConditionType"
+            "example": "METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS",
+            "description": "The type of the alert condition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricThresholdConditionType"
+              }
+            ]
           },
           "forOverPct": {
             "example": 80,
@@ -3711,7 +4796,12 @@
             "maximum": 100
           },
           "ofTheLast": {
-            "$ref": "#/components/schemas/MetricTimeWindow"
+            "description": "The time window for the alert condition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricTimeWindow"
+              }
+            ]
           },
           "threshold": {
             "example": 100,
@@ -3740,10 +4830,20 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/MetricThresholdCondition"
+            "description": "The condition for the metric threshold alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricThresholdCondition"
+              }
+            ]
           },
           "override": {
-            "$ref": "#/components/schemas/AlertDefOverride"
+            "description": "Alert override settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefOverride"
+              }
+            ]
           }
         }
       },
@@ -3765,13 +4865,28 @@
             "maximum": 10800000
           },
           "metricFilter": {
-            "$ref": "#/components/schemas/MetricFilter"
+            "description": "The filter to match metric entries for the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricFilter"
+              }
+            ]
           },
           "missingValues": {
-            "$ref": "#/components/schemas/MetricMissingValues"
+            "description": "Configuration for handling missing values in the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricMissingValues"
+              }
+            ]
           },
           "noDataPolicy": {
-            "$ref": "#/components/schemas/NoDataPolicy"
+            "description": "User configuration to decide how to treat and what state to give to an alert with no data.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NoDataPolicy"
+              }
+            ]
           },
           "rules": {
             "description": "The rules for the metric threshold alert",
@@ -3783,7 +4898,12 @@
             "maxItems": 5
           },
           "undetectedValuesManagement": {
-            "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+            "description": "Configuration for handling undetected values in the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
+              }
+            ]
           }
         }
       },
@@ -3802,7 +4922,13 @@
             "minLength": 0
           },
           "metricTimeWindowSpecificValue": {
-            "$ref": "#/components/schemas/MetricTimeWindowValue"
+            "example": "METRIC_TIME_WINDOW_VALUE_MINUTES_5",
+            "description": "The time window as a specific value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricTimeWindowValue"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -3897,7 +5023,13 @@
             "minimum": 60
           },
           "state": {
-            "$ref": "#/components/schemas/NoDataPolicyState"
+            "example": "NO_DATA_POLICY_STATE_ALERTING",
+            "description": "The state to which the alert falls back to when theres no data (replaces UndetectedValuesManagement - this feature is being released gradually and might not be available for all customers yet)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NoDataPolicyState"
+              }
+            ]
           }
         }
       },
@@ -3928,7 +5060,13 @@
             "minLength": 0
           },
           "notifyOn": {
-            "$ref": "#/components/schemas/NotifyOn"
+            "example": "NOTIFY_ON_TRIGGERED_AND_RESOLVED",
+            "description": "The condition under which the notification should be sent",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotifyOn"
+              }
+            ]
           },
           "presetId": {
             "example": "preset_id_example",
@@ -3937,7 +5075,12 @@
             "minLength": 0
           },
           "resolvedRouteOverrides": {
-            "$ref": "#/components/schemas/NotificationRouting"
+            "description": "Optional routing configuration to override from the connector/preset for resolved notifications.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotificationRouting"
+              }
+            ]
           },
           "retriggeringPeriodMinutes": {
             "example": 600,
@@ -3947,7 +5090,12 @@
             "minimum": 0
           },
           "triggeredRoutingOverrides": {
-            "$ref": "#/components/schemas/NotificationRouting"
+            "description": "The routing configuration to override from the connector/preset for triggered notifications.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotificationRouting"
+              }
+            ]
           }
         }
       },
@@ -3966,7 +5114,13 @@
             "minLength": 0
           },
           "notifyOn": {
-            "$ref": "#/components/schemas/NotifyOn"
+            "example": "NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED",
+            "description": "The condition under which the notification should be sent",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotifyOn"
+              }
+            ]
           }
         }
       },
@@ -3979,7 +5133,12 @@
         "type": "object",
         "properties": {
           "configOverrides": {
-            "$ref": "#/components/schemas/v3.SourceOverrides"
+            "description": "Configuration for routing notifications",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.SourceOverrides"
+              }
+            ]
           }
         }
       },
@@ -4008,7 +5167,13 @@
             "maximum": 4294967295
           },
           "priority": {
-            "$ref": "#/components/schemas/AlertDefPriority"
+            "example": "ALERT_DEF_PRIORITY_P1",
+            "description": "The alert priority",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefPriority"
+              }
+            ]
           }
         }
       },
@@ -4047,7 +5212,12 @@
         "type": "object",
         "properties": {
           "alertDef": {
-            "$ref": "#/components/schemas/AlertDef"
+            "description": "The updated alert definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDef"
+              }
+            ]
           }
         }
       },
@@ -4076,10 +5246,20 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/SloThresholdCondition"
+            "description": "Condition for the SLO threshold rule",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SloThresholdCondition"
+              }
+            ]
           },
           "override": {
-            "$ref": "#/components/schemas/AlertDefOverride"
+            "description": "The override settings for the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefOverride"
+              }
+            ]
           }
         }
       },
@@ -4092,13 +5272,28 @@
         "type": "object",
         "properties": {
           "burnRate": {
-            "$ref": "#/components/schemas/BurnRateThreshold"
+            "description": "Burn rate threshold",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BurnRateThreshold"
+              }
+            ]
           },
           "errorBudget": {
-            "$ref": "#/components/schemas/ErrorBudgetThreshold"
+            "description": "Error budget threshold",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ErrorBudgetThreshold"
+              }
+            ]
           },
           "sloDefinition": {
-            "$ref": "#/components/schemas/v3.SloDefinition"
+            "description": "SLO definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.SloDefinition"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -4152,7 +5347,13 @@
             "maximum": 4294967295
           },
           "status": {
-            "$ref": "#/components/schemas/AlertDefStatus"
+            "example": "ALERT_DEF_STATUS_ALERTING",
+            "description": "The alert status",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefStatus"
+              }
+            ]
           }
         }
       },
@@ -4173,7 +5374,13 @@
             "maxLength": 20
           },
           "unit": {
-            "$ref": "#/components/schemas/DurationUnit"
+            "example": "DURATION_UNIT_HOURS",
+            "description": "The unit of the duration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DurationUnit"
+              }
+            ]
           }
         }
       },
@@ -4220,7 +5427,12 @@
         "type": "object",
         "properties": {
           "simpleFilter": {
-            "$ref": "#/components/schemas/TracingSimpleFilter"
+            "description": "Simple filter using latency threshold and label filters",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingSimpleFilter"
+              }
+            ]
           }
         }
       },
@@ -4244,7 +5456,13 @@
         "type": "object",
         "properties": {
           "operation": {
-            "$ref": "#/components/schemas/TracingFilterOperationType"
+            "example": "TRACING_FILTER_OPERATION_TYPE_STARTS_WITH",
+            "description": "The operation to perform on the label value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingFilterOperationType"
+              }
+            ]
           },
           "values": {
             "example": [
@@ -4285,7 +5503,12 @@
             "minItems": 0
           },
           "tracingFilter": {
-            "$ref": "#/components/schemas/TracingFilter"
+            "description": "A filter to match trace entries for immediate alerts",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingFilter"
+              }
+            ]
           }
         }
       },
@@ -4356,7 +5579,12 @@
             "maxLength": 20
           },
           "tracingLabelFilters": {
-            "$ref": "#/components/schemas/TracingLabelFilters"
+            "description": "Trace label filters",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingLabelFilters"
+              }
+            ]
           }
         }
       },
@@ -4369,7 +5597,12 @@
         "type": "object",
         "properties": {
           "filterType": {
-            "$ref": "#/components/schemas/TracingFilterType"
+            "description": "The FilterType to filter by.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingFilterType"
+              }
+            ]
           },
           "key": {
             "example": "span.field.key",
@@ -4388,7 +5621,13 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "$ref": "#/components/schemas/TracingThresholdConditionType"
+            "example": "TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
+            "description": "The type of condition for the alert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingThresholdConditionType"
+              }
+            ]
           },
           "spanAmount": {
             "example": 100,
@@ -4398,7 +5637,12 @@
             "minimum": 0
           },
           "timeWindow": {
-            "$ref": "#/components/schemas/TracingTimeWindow"
+            "description": "The time window for the alert condition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingTimeWindow"
+              }
+            ]
           }
         }
       },
@@ -4418,7 +5662,12 @@
         "type": "object",
         "properties": {
           "condition": {
-            "$ref": "#/components/schemas/TracingThresholdCondition"
+            "description": "The condition for the threshold alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingThresholdCondition"
+              }
+            ]
           }
         }
       },
@@ -4454,7 +5703,12 @@
             "maxItems": 1
           },
           "tracingFilter": {
-            "$ref": "#/components/schemas/TracingFilter"
+            "description": "The filter to match trace entries for the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingFilter"
+              }
+            ]
           }
         }
       },
@@ -4467,7 +5721,13 @@
         "type": "object",
         "properties": {
           "tracingTimeWindowValue": {
-            "$ref": "#/components/schemas/TracingTimeWindowValue"
+            "example": "TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
+            "description": "A time window defined by a specific value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TracingTimeWindowValue"
+              }
+            ]
           }
         }
       },
@@ -4506,7 +5766,13 @@
             "maximum": 4294967295
           },
           "type": {
-            "$ref": "#/components/schemas/AlertDefType"
+            "example": "ALERT_DEF_TYPE_LOGS_THRESHOLD",
+            "description": "The alert type",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefType"
+              }
+            ]
           }
         }
       },
@@ -4608,7 +5874,12 @@
             "minimum": 0
           },
           "recipients": {
-            "$ref": "#/components/schemas/Recipients"
+            "description": "The recipients for the notification.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Recipients"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -4654,7 +5925,12 @@
         "type": "object",
         "properties": {
           "simpleFilter": {
-            "$ref": "#/components/schemas/LogsSimpleFilter"
+            "description": "A simple filter that uses a Lucene query and label filters",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsSimpleFilter"
+              }
+            ]
           }
         }
       },
@@ -4764,7 +6040,13 @@
         "type": "object",
         "properties": {
           "autoRetireTimeframe": {
-            "$ref": "#/components/schemas/v3.AutoRetireTimeframe"
+            "example": "AUTO_RETIRE_TIMEFRAME_HOURS_24",
+            "description": "The timeframe for auto-retiring the alert when undetected values are detected",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.AutoRetireTimeframe"
+              }
+            ]
           },
           "triggerUndetectedValues": {
             "example": true,

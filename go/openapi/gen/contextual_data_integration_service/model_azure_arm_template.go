@@ -23,7 +23,7 @@ var _ MappedNullable = &AzureArmTemplate{}
 // AzureArmTemplate This data structure represents an azure ARM template.
 type AzureArmTemplate struct {
 	// The template url.
-	TemplateUrl *string `json:"templateUrl,omitempty"`
+	TemplateUrl *string `json:"templateUrl,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

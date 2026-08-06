@@ -27,6 +27,7 @@ const (
 	NOTIFICATIONCENTERENTITYTYPE_ALERTS NotificationCenterEntityType = "ALERTS"
 	NOTIFICATIONCENTERENTITYTYPE_TEST_NOTIFICATIONS NotificationCenterEntityType = "TEST_NOTIFICATIONS"
 	NOTIFICATIONCENTERENTITYTYPE_CASES NotificationCenterEntityType = "CASES"
+	NOTIFICATIONCENTERENTITYTYPE_OLLY_SCHEDULED_TASKS NotificationCenterEntityType = "OLLY_SCHEDULED_TASKS"
 )
 
 // All allowed values of NotificationCenterEntityType enum
@@ -35,6 +36,7 @@ var AllowedNotificationCenterEntityTypeEnumValues = []NotificationCenterEntityTy
 	"ALERTS",
 	"TEST_NOTIFICATIONS",
 	"CASES",
+	"OLLY_SCHEDULED_TASKS",
 }
 
 func (v *NotificationCenterEntityType) UnmarshalJSON(src []byte) error {

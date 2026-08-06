@@ -22,21 +22,25 @@ var _ MappedNullable = &LogsRatioThresholdType{}
 
 // LogsRatioThresholdType Configuration for alerts based on the ratio between two log queries
 type LogsRatioThresholdType struct {
+	// The filter to match log entries for the denominator of the ratio
 	Denominator *V3LogsFilter `json:"denominator,omitempty"`
 	// The alias for the denominator filter, used for display purposes
 	DenominatorAlias *string `json:"denominatorAlias,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
+	// The group by settings for the numerator and denominator filters
 	GroupByFor *LogsRatioGroupByFor `json:"groupByFor,omitempty"`
 	// The configuration for ignoring infinity values in the ratio
 	IgnoreInfinity *bool `json:"ignoreInfinity,omitempty"`
 	// The notification payload filter.
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
+	// The filter to match log entries for the numerator of the ratio
 	Numerator *V3LogsFilter `json:"numerator,omitempty"`
 	// The alias for the numerator filter, used for display purposes
 	NumeratorAlias *string `json:"numeratorAlias,omitempty"`
 	// The rules for the ratio alert
 	Rules []LogsRatioRules `json:"rules,omitempty"`
+	// Configuration for handling the undetected values in the alert
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

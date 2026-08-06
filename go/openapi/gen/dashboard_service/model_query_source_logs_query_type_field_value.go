@@ -13,6 +13,7 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,9 +21,9 @@ var _ = bytes.MinRead
 // checks if the QuerySourceLogsQueryTypeFieldValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceLogsQueryTypeFieldValue{}
 
-// QuerySourceLogsQueryTypeFieldValue Query.logs query.type.field value.
+// QuerySourceLogsQueryTypeFieldValue Fetches distinct values for a specific log observation field. observationField is required and must be set.
 type QuerySourceLogsQueryTypeFieldValue struct {
-	ObservationField *ObservationField `json:"observationField,omitempty"`
+	ObservationField ObservationField `json:"observationField"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -33,8 +34,9 @@ type _QuerySourceLogsQueryTypeFieldValue QuerySourceLogsQueryTypeFieldValue
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQuerySourceLogsQueryTypeFieldValue() *QuerySourceLogsQueryTypeFieldValue {
+func NewQuerySourceLogsQueryTypeFieldValue(observationField ObservationField) *QuerySourceLogsQueryTypeFieldValue {
 	this := QuerySourceLogsQueryTypeFieldValue{}
+	this.ObservationField = observationField
 	return &this
 }
 
@@ -46,36 +48,28 @@ func NewQuerySourceLogsQueryTypeFieldValueWithDefaults() *QuerySourceLogsQueryTy
 	return &this
 }
 
-// GetObservationField returns the ObservationField field value if set, zero value otherwise.
+// GetObservationField returns the ObservationField field value
 func (o *QuerySourceLogsQueryTypeFieldValue) GetObservationField() ObservationField {
-	if o == nil || IsNil(o.ObservationField) {
+	if o == nil {
 		var ret ObservationField
 		return ret
 	}
-	return *o.ObservationField
+
+	return o.ObservationField
 }
 
-// GetObservationFieldOk returns a tuple with the ObservationField field value if set, nil otherwise
+// GetObservationFieldOk returns a tuple with the ObservationField field value
 // and a boolean to check if the value has been set.
 func (o *QuerySourceLogsQueryTypeFieldValue) GetObservationFieldOk() (*ObservationField, bool) {
-	if o == nil || IsNil(o.ObservationField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ObservationField, true
+	return &o.ObservationField, true
 }
 
-// HasObservationField returns a boolean if a field has been set.
-func (o *QuerySourceLogsQueryTypeFieldValue) HasObservationField() bool {
-	if o != nil && !IsNil(o.ObservationField) {
-		return true
-	}
-
-	return false
-}
-
-// SetObservationField gets a reference to the given ObservationField and assigns it to the ObservationField field.
+// SetObservationField sets field value
 func (o *QuerySourceLogsQueryTypeFieldValue) SetObservationField(v ObservationField) {
-	o.ObservationField = &v
+	o.ObservationField = v
 }
 
 func (o QuerySourceLogsQueryTypeFieldValue) MarshalJSON() ([]byte, error) {
@@ -88,9 +82,7 @@ func (o QuerySourceLogsQueryTypeFieldValue) MarshalJSON() ([]byte, error) {
 
 func (o QuerySourceLogsQueryTypeFieldValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ObservationField) {
-		toSerialize["observationField"] = o.ObservationField
-	}
+	toSerialize["observationField"] = o.ObservationField
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -100,6 +92,27 @@ func (o QuerySourceLogsQueryTypeFieldValue) ToMap() (map[string]interface{}, err
 }
 
 func (o *QuerySourceLogsQueryTypeFieldValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"observationField",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varQuerySourceLogsQueryTypeFieldValue := _QuerySourceLogsQueryTypeFieldValue{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

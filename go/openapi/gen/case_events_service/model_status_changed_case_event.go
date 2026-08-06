@@ -22,7 +22,9 @@ var _ MappedNullable = &StatusChangedCaseEvent{}
 
 // StatusChangedCaseEvent Status changed case event.
 type StatusChangedCaseEvent struct {
+	// New status
 	NewStatus *CaseStatus `json:"newStatus,omitempty"`
+	// Previous status
 	OldStatus *CaseStatus `json:"oldStatus,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

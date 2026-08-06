@@ -22,7 +22,9 @@ var _ MappedNullable = &LogsRatioRules{}
 
 // LogsRatioRules Defines the rules for log-based ratio alerts
 type LogsRatioRules struct {
+	// The condition for the ratio alert
 	Condition *LogsRatioCondition `json:"condition,omitempty"`
+	// The override settings for the alert
 	Override *AlertDefOverride `json:"override,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

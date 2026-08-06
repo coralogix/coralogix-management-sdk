@@ -23,7 +23,7 @@ var _ MappedNullable = &EnrichmentsCreationRequest{}
 
 // EnrichmentsCreationRequest This response data structure represents a collection of enrichments
 type EnrichmentsCreationRequest struct {
-	// The request enrichments.
+	// The request enrichments. The total number of enrichment rules is limited by the account's enrichment limit (5 by default).
 	RequestEnrichments []EnrichmentRequestModel `json:"requestEnrichments"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

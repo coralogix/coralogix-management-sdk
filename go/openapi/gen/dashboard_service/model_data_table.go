@@ -24,11 +24,15 @@ var _ MappedNullable = &DataTable{}
 type DataTable struct {
 	// List of column definitions. At least one column is required when the query is a logs query.
 	Columns []DataTableColumn `json:"columns,omitempty"`
+	// Data mode type, either high or archive
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
+	// Defines how to order the results in the table
 	OrderBy *OrderingField `json:"orderBy,omitempty"`
+	// A query object containing query definition
 	Query *DataTableQuery `json:"query,omitempty"`
 	// How many results are displayed per table page
 	ResultsPerPage *int32 `json:"resultsPerPage,omitempty"`
+	// Specifies how rows are displayed
 	RowStyle *RowStyle `json:"rowStyle,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

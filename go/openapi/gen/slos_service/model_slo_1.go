@@ -24,6 +24,7 @@ var _ MappedNullable = &Slo1{}
 // Slo1 Definition of an SLO
 type Slo1 struct {
 	ApmSli *ApmSli `json:"apmSli,omitempty"`
+	// APM SLI metadata parallel to materialized metric queries (product_type APM).
 	ApmSliMetadata *ApmSli `json:"apmSliMetadata,omitempty"`
 	// RFC3339 timestamp of when the SLO was created.
 	CreateTime *time.Time `json:"createTime,omitempty"`
@@ -38,7 +39,9 @@ type Slo1 struct {
 	Labels *map[string]string `json:"labels,omitempty"`
 	// Human-readable display name for the SLO.
 	Name *string `json:"name,omitempty"`
+	// Service, environment, and team ownership configuration for the SLO group and its permutations.
 	OwnershipTags *SloOwnershipTags `json:"ownershipTags,omitempty"`
+	// Product type: APM for application performance monitoring SLOs, UNSPECIFIED for manual/custom SLOs
 	ProductType *SloProductType `json:"productType,omitempty"`
 	RequestBasedMetricSli *RequestBasedMetricSli `json:"requestBasedMetricSli,omitempty"`
 	Revision *V1Revision `json:"revision,omitempty"`

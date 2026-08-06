@@ -23,6 +23,7 @@ var _ MappedNullable = &CreateE2MRequest{}
 
 // CreateE2MRequest This is used to create a new event to metric definition
 type CreateE2MRequest struct {
+	// The e2m.
 	E2m E2MCreateParams `json:"e2m"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

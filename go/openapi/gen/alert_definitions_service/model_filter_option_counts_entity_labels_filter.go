@@ -24,6 +24,7 @@ var _ MappedNullable = &FilterOptionCountsEntityLabelsFilter{}
 type FilterOptionCountsEntityLabelsFilter struct {
 	// The entity label key-value pairs to filter by
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	// Whether all labels must match (AND) or any label can match (OR)
 	ValuesOperator *FilterValuesOperator `json:"valuesOperator,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

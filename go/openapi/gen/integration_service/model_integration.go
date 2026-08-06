@@ -23,18 +23,18 @@ var _ MappedNullable = &Integration{}
 // Integration This data structure represents an integration
 type Integration struct {
 	// The dark icon.
-	DarkIcon *string `json:"darkIcon,omitempty"`
+	DarkIcon *string `json:"darkIcon,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The feature flag.
-	FeatureFlag *string `json:"featureFlag,omitempty"`
+	FeatureFlag *string `json:"featureFlag,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Icon identifier.
-	Icon *string `json:"icon,omitempty"`
+	Icon *string `json:"icon,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	IntegrationType *V1IntegrationType `json:"integrationType,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The revisions.
 	Revisions []V1RevisionSummary `json:"revisions,omitempty"`
 	// List of tags.

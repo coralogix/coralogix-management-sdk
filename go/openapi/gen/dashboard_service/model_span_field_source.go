@@ -22,6 +22,7 @@ var _ MappedNullable = &SpanFieldSource{}
 
 // SpanFieldSource Span field source.
 type SpanFieldSource struct {
+	// The value.
 	Value *SpanField `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

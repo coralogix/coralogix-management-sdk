@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsAnomalyRule{}
 
 // LogsAnomalyRule Defines a rule for detecting log anomalies
 type LogsAnomalyRule struct {
+	// The condition for the threshold alert
 	Condition *LogsAnomalyCondition `json:"condition,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

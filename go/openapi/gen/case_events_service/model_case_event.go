@@ -24,9 +24,11 @@ var _ MappedNullable = &CaseEvent{}
 
 // CaseEvent Represents an immutable entry in a case's event timeline.
 type CaseEvent struct {
+	// Actor that produced the event (system or user)
 	Actor EventActor `json:"actor"`
 	// Server-side insertion time
 	CreateTime time.Time `json:"createTime"`
+	// Event payload (assignment, comment, status change, etc.)
 	EventData CaseEventData `json:"eventData"`
 	// Unique identifier of the event
 	EventId string `json:"eventId"`

@@ -22,6 +22,7 @@ var _ MappedNullable = &CreateCustomEvaluationResponse{}
 
 // CreateCustomEvaluationResponse Response returned after creating a custom evaluation.
 type CreateCustomEvaluationResponse struct {
+	// The newly created custom evaluation.
 	Item *CustomEvaluation `json:"item,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,6 +22,7 @@ var _ MappedNullable = &UserTemplate{}
 
 // UserTemplate Template containing all user properties that can be set when creating or updating a user. Includes personal information, status, authentication methods, and access duration.
 type UserTemplate struct {
+	// Access type configuration - defines whether user access is permanent or temporary with expiration
 	AccessType *AccessType `json:"accessType,omitempty"`
 	// List of allowed login modes. Can include SSO, local authentication, or both. Not supported in invite onboarding mode
 	AllowedLoginMode []AllowedLoginMode `json:"allowedLoginMode,omitempty"`
@@ -29,6 +30,7 @@ type UserTemplate struct {
 	FirstName *string `json:"firstName,omitempty"`
 	// User's last name
 	LastName *string `json:"lastName,omitempty"`
+	// User status: Active (user can access the system) or Inactive (user access is disabled)
 	Status *UserStatus `json:"status,omitempty"`
 	// Unique username for the user. Must be unique within the system. Updating username for existing users is not supported and ignored.
 	Username *string `json:"username,omitempty"`

@@ -22,6 +22,7 @@ var _ MappedNullable = &TracingSpanFieldsFilterType{}
 
 // TracingSpanFieldsFilterType A filter for span fields in trace entries
 type TracingSpanFieldsFilterType struct {
+	// The FilterType to filter by.
 	FilterType *TracingFilterType `json:"filterType,omitempty"`
 	// The key of the span field to filter by
 	Key *string `json:"key,omitempty"`

@@ -22,10 +22,13 @@ var _ MappedNullable = &AnalyticsThresholdType{}
 
 // AnalyticsThresholdType Configuration for alerts that fire when a numeric column in a DataPrime query result violates a threshold
 type AnalyticsThresholdType struct {
+	// The DataPrime query to evaluate
 	DataprimeQuery *DataprimeAlertQuery `json:"dataprimeQuery,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
+	// Configuration for how to treat and what state to give to an alert with no data
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
+	// The comparison operator applied to all threshold rules
 	Operator *AnalyticsThresholdOperator `json:"operator,omitempty"`
 	// The per-priority threshold rules
 	Rules []AnalyticsThresholdRule `json:"rules,omitempty"`

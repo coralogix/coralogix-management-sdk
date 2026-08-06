@@ -25,19 +25,19 @@ type CreateActionRequest struct {
 	// The application names.
 	ApplicationNames []string `json:"applicationNames,omitempty"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The dpxl filter.
-	DpxlFilter *string `json:"dpxlFilter,omitempty"`
+	DpxlFilter *string `json:"dpxlFilter,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The is private.
 	IsPrivate *bool `json:"isPrivate,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	SourceType *V2SourceType `json:"sourceType,omitempty"`
 	// The subsystem names.
 	SubsystemNames []string `json:"subsystemNames,omitempty"`
-	// URL.
-	Url *string `json:"url,omitempty"`
-	// The url fields.
+	// URL. Must start with http:// or https://.
+	Url *string `json:"url,omitempty" validate:"regexp=^https?:\\/\\/.*$"`
+	// The url fields. Each field requires both name and required, and names must be unique within the list.
 	UrlFields []UrlField `json:"urlFields,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

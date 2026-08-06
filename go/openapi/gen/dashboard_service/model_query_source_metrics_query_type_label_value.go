@@ -13,6 +13,7 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,11 +21,11 @@ var _ = bytes.MinRead
 // checks if the QuerySourceMetricsQueryTypeLabelValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryTypeLabelValue{}
 
-// QuerySourceMetricsQueryTypeLabelValue Query.metrics query.type.label value.
+// QuerySourceMetricsQueryTypeLabelValue Fetches distinct values of a metric label. labelName is required and must be non-empty; metricName selects the metric to read the label from.
 type QuerySourceMetricsQueryTypeLabelValue struct {
 	// The label filters.
 	LabelFilters []QuerySourceMetricsQueryMetricsLabelFilter `json:"labelFilters,omitempty"`
-	LabelName *QuerySourceMetricsQueryStringOrVariable `json:"labelName,omitempty"`
+	LabelName QuerySourceMetricsQueryStringOrVariable `json:"labelName"`
 	MetricName *QuerySourceMetricsQueryStringOrVariable `json:"metricName,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -36,8 +37,9 @@ type _QuerySourceMetricsQueryTypeLabelValue QuerySourceMetricsQueryTypeLabelValu
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQuerySourceMetricsQueryTypeLabelValue() *QuerySourceMetricsQueryTypeLabelValue {
+func NewQuerySourceMetricsQueryTypeLabelValue(labelName QuerySourceMetricsQueryStringOrVariable) *QuerySourceMetricsQueryTypeLabelValue {
 	this := QuerySourceMetricsQueryTypeLabelValue{}
+	this.LabelName = labelName
 	return &this
 }
 
@@ -81,36 +83,28 @@ func (o *QuerySourceMetricsQueryTypeLabelValue) SetLabelFilters(v []QuerySourceM
 	o.LabelFilters = v
 }
 
-// GetLabelName returns the LabelName field value if set, zero value otherwise.
+// GetLabelName returns the LabelName field value
 func (o *QuerySourceMetricsQueryTypeLabelValue) GetLabelName() QuerySourceMetricsQueryStringOrVariable {
-	if o == nil || IsNil(o.LabelName) {
+	if o == nil {
 		var ret QuerySourceMetricsQueryStringOrVariable
 		return ret
 	}
-	return *o.LabelName
+
+	return o.LabelName
 }
 
-// GetLabelNameOk returns a tuple with the LabelName field value if set, nil otherwise
+// GetLabelNameOk returns a tuple with the LabelName field value
 // and a boolean to check if the value has been set.
 func (o *QuerySourceMetricsQueryTypeLabelValue) GetLabelNameOk() (*QuerySourceMetricsQueryStringOrVariable, bool) {
-	if o == nil || IsNil(o.LabelName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LabelName, true
+	return &o.LabelName, true
 }
 
-// HasLabelName returns a boolean if a field has been set.
-func (o *QuerySourceMetricsQueryTypeLabelValue) HasLabelName() bool {
-	if o != nil && !IsNil(o.LabelName) {
-		return true
-	}
-
-	return false
-}
-
-// SetLabelName gets a reference to the given QuerySourceMetricsQueryStringOrVariable and assigns it to the LabelName field.
+// SetLabelName sets field value
 func (o *QuerySourceMetricsQueryTypeLabelValue) SetLabelName(v QuerySourceMetricsQueryStringOrVariable) {
-	o.LabelName = &v
+	o.LabelName = v
 }
 
 // GetMetricName returns the MetricName field value if set, zero value otherwise.
@@ -158,9 +152,7 @@ func (o QuerySourceMetricsQueryTypeLabelValue) ToMap() (map[string]interface{}, 
 	if !IsNil(o.LabelFilters) {
 		toSerialize["labelFilters"] = o.LabelFilters
 	}
-	if !IsNil(o.LabelName) {
-		toSerialize["labelName"] = o.LabelName
-	}
+	toSerialize["labelName"] = o.LabelName
 	if !IsNil(o.MetricName) {
 		toSerialize["metricName"] = o.MetricName
 	}
@@ -173,6 +165,27 @@ func (o QuerySourceMetricsQueryTypeLabelValue) ToMap() (map[string]interface{}, 
 }
 
 func (o *QuerySourceMetricsQueryTypeLabelValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"labelName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varQuerySourceMetricsQueryTypeLabelValue := _QuerySourceMetricsQueryTypeLabelValue{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

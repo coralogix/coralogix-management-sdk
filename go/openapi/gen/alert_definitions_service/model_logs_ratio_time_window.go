@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsRatioTimeWindow{}
 
 // LogsRatioTimeWindow Time window configuration for ratio alerts
 type LogsRatioTimeWindow struct {
+	// Specifies the time window for the ratio alert
 	LogsRatioTimeWindowSpecificValue *LogsRatioTimeWindowValue `json:"logsRatioTimeWindowSpecificValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

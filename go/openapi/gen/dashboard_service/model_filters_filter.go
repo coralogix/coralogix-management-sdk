@@ -28,8 +28,11 @@ type FiltersFilter struct {
 	DisplayName *string `json:"displayName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Indicates if the filter is currently enabled or not.
 	Enabled *bool `json:"enabled,omitempty"`
+	// Filter's unique identifier
 	Id *UUID `json:"id,omitempty"`
+	// Scope of the filter, defining which widgets the filter applies to.
 	Scope *FilterWidgetScope `json:"scope,omitempty"`
+	// The source of the filter, which can be logs, spans, or metrics.
 	Source *FilterSource `json:"source,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

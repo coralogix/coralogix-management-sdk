@@ -22,6 +22,7 @@ var _ MappedNullable = &GetAiEvaluationResponse{}
 
 // GetAiEvaluationResponse Response containing the requested AI evaluation.
 type GetAiEvaluationResponse struct {
+	// The requested AI evaluation.
 	AiEvaluation *AiEvaluation `json:"aiEvaluation,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

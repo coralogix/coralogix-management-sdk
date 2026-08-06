@@ -22,7 +22,9 @@ var _ MappedNullable = &AnalyticsThresholdRule{}
 
 // AnalyticsThresholdRule A rule that defines a threshold condition and its priority override
 type AnalyticsThresholdRule struct {
+	// The condition for the threshold rule
 	Condition *AnalyticsThresholdRuleCondition `json:"condition,omitempty"`
+	// The override settings for the alert
 	Override *AlertDefOverride `json:"override,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

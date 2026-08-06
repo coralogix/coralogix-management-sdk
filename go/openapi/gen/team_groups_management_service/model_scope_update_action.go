@@ -25,6 +25,7 @@ var _ MappedNullable = &ScopeUpdateAction{}
 type ScopeUpdateAction struct {
 	// Discriminator indicating the scope update action type (set_scope_id or clear).
 	ActionType string `json:"actionType"`
+	// The clear.
 	Clear *ClearScope `json:"clear,omitempty"`
 	SetScopeId *SetScopeId `json:"setScopeId,omitempty"`
 	AdditionalProperties map[string]interface{}

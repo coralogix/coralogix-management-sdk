@@ -24,6 +24,8 @@ var _ MappedNullable = &FailedToReplaceAlertDef{}
 type FailedToReplaceAlertDef struct {
 	// The alert definition ID
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
+	// Human-readable explanation of why the alert definition failed to be replaced. May be omitted when no further detail is available.
+	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -79,6 +81,38 @@ func (o *FailedToReplaceAlertDef) SetId(v string) {
 	o.Id = &v
 }
 
+// GetReason returns the Reason field value if set, zero value otherwise.
+func (o *FailedToReplaceAlertDef) GetReason() string {
+	if o == nil || IsNil(o.Reason) {
+		var ret string
+		return ret
+	}
+	return *o.Reason
+}
+
+// GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FailedToReplaceAlertDef) GetReasonOk() (*string, bool) {
+	if o == nil || IsNil(o.Reason) {
+		return nil, false
+	}
+	return o.Reason, true
+}
+
+// HasReason returns a boolean if a field has been set.
+func (o *FailedToReplaceAlertDef) HasReason() bool {
+	if o != nil && !IsNil(o.Reason) {
+		return true
+	}
+
+	return false
+}
+
+// SetReason gets a reference to the given string and assigns it to the Reason field.
+func (o *FailedToReplaceAlertDef) SetReason(v string) {
+	o.Reason = &v
+}
+
 func (o FailedToReplaceAlertDef) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -91,6 +125,9 @@ func (o FailedToReplaceAlertDef) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Reason) {
+		toSerialize["reason"] = o.Reason
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -116,6 +153,7 @@ func (o *FailedToReplaceAlertDef) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "reason")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

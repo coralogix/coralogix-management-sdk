@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsUniqueCountType{}
 
 // LogsUniqueCountType Configuration for alerts based on unique value counts in logs
 type LogsUniqueCountType struct {
+	// The filter to match log entries for the alert.
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	// The maximum unique count per group by key
 	MaxUniqueCountPerGroupByKey *string `json:"maxUniqueCountPerGroupByKey,omitempty" validate:"regexp=^-?[0-9]+$"`

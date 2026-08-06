@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsAnomalyType{}
 
 // LogsAnomalyType Configuration for alerts triggered by anomalous log patterns
 type LogsAnomalyType struct {
+	// Anomaly alert settings configuration
 	AnomalyAlertSettings *AnomalyAlertSettings `json:"anomalyAlertSettings,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`

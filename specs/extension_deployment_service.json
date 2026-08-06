@@ -80,7 +80,9 @@
             "schema": {
               "description": "Unique identifier.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 65535
             },
             "style": "form"
           },
@@ -91,7 +93,9 @@
             "schema": {
               "description": "Version number.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 65535
             },
             "style": "form"
           },
@@ -107,7 +111,8 @@
                 "type": "string",
                 "minLength": 0
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 10000
             },
             "style": "form"
           },
@@ -123,7 +128,8 @@
                 "type": "string",
                 "minLength": 0
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 10000
             },
             "style": "form"
           },
@@ -139,7 +145,8 @@
                 "type": "string",
                 "minLength": 0
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 10000
             },
             "style": "form"
           },
@@ -163,12 +170,15 @@
                     "type": "string",
                     "minLength": 0
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 10000
                 },
                 "id": {
                   "description": "Unique identifier.",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 0,
+                  "maxLength": 65535
                 },
                 "itemIds": {
                   "description": "The item ids.",
@@ -178,7 +188,8 @@
                     "type": "string",
                     "minLength": 0
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 10000
                 },
                 "subsystems": {
                   "description": "The subsystems.",
@@ -188,12 +199,15 @@
                     "type": "string",
                     "minLength": 0
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 10000
                 },
                 "version": {
                   "description": "Version number.",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 0,
+                  "maxLength": 65535
                 }
               }
             },
@@ -264,7 +278,9 @@
             "schema": {
               "description": "Unique identifier.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 65535
             },
             "style": "form"
           },
@@ -275,7 +291,9 @@
             "schema": {
               "description": "Version number.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 65535
             },
             "style": "form"
           },
@@ -291,7 +309,8 @@
                 "type": "string",
                 "minLength": 0
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 10000
             },
             "style": "form"
           },
@@ -307,7 +326,8 @@
                 "type": "string",
                 "minLength": 0
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 10000
             },
             "style": "form"
           },
@@ -323,7 +343,8 @@
                 "type": "string",
                 "minLength": 0
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 10000
             },
             "style": "form"
           },
@@ -347,12 +368,15 @@
                     "type": "string",
                     "minLength": 0
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 10000
                 },
                 "id": {
                   "description": "Unique identifier.",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 0,
+                  "maxLength": 65535
                 },
                 "itemIds": {
                   "description": "The item ids.",
@@ -362,7 +386,8 @@
                     "type": "string",
                     "minLength": 0
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 10000
                 },
                 "subsystems": {
                   "description": "The subsystems.",
@@ -372,12 +397,15 @@
                     "type": "string",
                     "minLength": 0
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 10000
                 },
                 "version": {
                   "description": "Version number.",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 0,
+                  "maxLength": 65535
                 }
               }
             },
@@ -451,7 +479,9 @@
                   "id": {
                     "description": "Unique identifier.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65535
                   },
                   "keptExtensionItems": {
                     "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
@@ -461,7 +491,8 @@
                       "type": "string",
                       "minLength": 0
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 10000
                   }
                 }
               }
@@ -546,12 +577,15 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "itemIds": {
             "description": "The item ids.",
@@ -561,7 +595,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "subsystems": {
             "description": "The subsystems.",
@@ -571,7 +606,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "summary": {
             "$ref": "#/components/schemas/DeployedExtensionSummary"
@@ -579,7 +615,9 @@
           "version": {
             "description": "Version number.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -632,12 +670,15 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "itemIds": {
             "description": "The item ids.",
@@ -647,7 +688,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "subsystems": {
             "description": "The subsystems.",
@@ -657,12 +699,15 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "version": {
             "description": "Version number.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -676,17 +721,23 @@
           "itemId": {
             "description": "The item id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "reason": {
             "description": "Reason.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "remoteId": {
             "description": "The remote id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -699,7 +750,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -737,7 +793,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -765,7 +826,8 @@
             "items": {
               "$ref": "#/components/schemas/DeployedExtension"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -781,61 +843,71 @@
             "description": "List of actions.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "alerts": {
             "description": "List of alerts.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "customDashboards": {
             "description": "The custom dashboards.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "enrichments": {
             "description": "List of enrichments.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "eventsToMetrics": {
             "description": "The events to metrics.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "grafanaDashboards": {
             "description": "The grafana dashboards.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "kibanaDashboards": {
             "description": "The kibana dashboards.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "metricsRuleGroup": {
             "description": "The metrics rule group.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "parsingRules": {
             "description": "The parsing rules.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "savedViews": {
             "description": "The saved views.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           }
         }
       },
@@ -872,7 +944,8 @@
             "items": {
               "$ref": "#/components/schemas/FailedItem"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },

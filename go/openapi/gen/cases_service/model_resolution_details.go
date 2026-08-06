@@ -27,6 +27,7 @@ type ResolutionDetails struct {
 	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Timestamp when the case was resolved
 	ResolveTime *time.Time `json:"resolveTime,omitempty"`
+	// Entity that resolved the case
 	ResolvedBy *CaseResolver `json:"resolvedBy,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

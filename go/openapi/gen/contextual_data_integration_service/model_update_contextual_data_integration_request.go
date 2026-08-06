@@ -23,7 +23,7 @@ var _ MappedNullable = &UpdateContextualDataIntegrationRequest{}
 // UpdateContextualDataIntegrationRequest Request for updating a contextual data integration.
 type UpdateContextualDataIntegrationRequest struct {
 	// ID of the contextual data integration to update.
-	IntegrationId *string `json:"integrationId,omitempty"`
+	IntegrationId *string `json:"integrationId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

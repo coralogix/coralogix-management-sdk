@@ -22,6 +22,7 @@ var _ MappedNullable = &GeomapAwsRegionConfig{}
 
 // GeomapAwsRegionConfig Geomap aws region config.
 type GeomapAwsRegionConfig struct {
+	// Data for this field should always return valid AWS region strings (e.g. us-east-1, us-west-2).
 	AwsRegionField *ObservationField `json:"awsRegionField,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

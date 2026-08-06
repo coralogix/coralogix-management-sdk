@@ -664,7 +664,12 @@
         "type": "object",
         "properties": {
           "actor": {
-            "$ref": "#/components/schemas/EventActor"
+            "description": "Actor that produced the event (system or user)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EventActor"
+              }
+            ]
           },
           "createTime": {
             "example": "2025-09-22T10:30:00.000Z",
@@ -674,7 +679,12 @@
             "minLength": 0
           },
           "eventData": {
-            "$ref": "#/components/schemas/CaseEventData"
+            "description": "Event payload (assignment, comment, status change, etc.)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseEventData"
+              }
+            ]
           },
           "eventId": {
             "example": "ef51d3d9-a301-496b-aa7d-9a6e519ba0d5",
@@ -713,40 +723,100 @@
         "type": "object",
         "properties": {
           "assigned": {
-            "$ref": "#/components/schemas/AssignedCaseEvent"
+            "description": "Case assigned to a user",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssignedCaseEvent"
+              }
+            ]
           },
           "changeAssigneeFailed": {
-            "$ref": "#/components/schemas/ChangeAssigneeFailedEvent"
+            "description": "Change assignee failed case event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChangeAssigneeFailedEvent"
+              }
+            ]
           },
           "comment": {
-            "$ref": "#/components/schemas/CommentCaseEvent"
+            "description": "User comment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommentCaseEvent"
+              }
+            ]
           },
           "created": {
-            "$ref": "#/components/schemas/CreatedCaseEvent"
+            "description": "Created case event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CreatedCaseEvent"
+              }
+            ]
           },
           "kpiBreached": {
-            "$ref": "#/components/schemas/KPIBreachedCaseEvent"
+            "description": "KPI breach detected for the case",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KPIBreachedCaseEvent"
+              }
+            ]
           },
           "notificationFailed": {
-            "$ref": "#/components/schemas/NotificationFailedCaseEvent"
+            "description": "Notification failure",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotificationFailedCaseEvent"
+              }
+            ]
           },
           "notificationSent": {
-            "$ref": "#/components/schemas/NotificationSentCaseEvent"
+            "description": "Notification(s) sent",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotificationSentCaseEvent"
+              }
+            ]
           },
           "priorityDetailsChanged": {
-            "$ref": "#/components/schemas/PriorityDetailsChangedCaseEvent"
+            "description": "Priority details changed case event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriorityDetailsChangedCaseEvent"
+              }
+            ]
           },
           "resolutionReasonChangedEvent": {
-            "$ref": "#/components/schemas/ResolutionReasonChangedCaseEvent"
+            "description": "Resolution reason changed case event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResolutionReasonChangedCaseEvent"
+              }
+            ]
           },
           "statusChanged": {
-            "$ref": "#/components/schemas/StatusChangedCaseEvent"
+            "description": "Status changed",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusChangedCaseEvent"
+              }
+            ]
           },
           "titleChangedEvent": {
-            "$ref": "#/components/schemas/TitleChangedCaseEvent"
+            "description": "Title changed case event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TitleChangedCaseEvent"
+              }
+            ]
           },
           "unassigned": {
-            "$ref": "#/components/schemas/UnassignedCaseEvent"
+            "description": "Case unassigned from a user",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UnassignedCaseEvent"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -936,7 +1006,12 @@
         "type": "object",
         "properties": {
           "unknownAssigneeError": {
-            "$ref": "#/components/schemas/UnknownAssigneeError"
+            "description": "Error for unknown assignee",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UnknownAssigneeError"
+              }
+            ]
           }
         }
       },
@@ -948,13 +1023,28 @@
         "type": "object",
         "properties": {
           "customWidget": {
-            "$ref": "#/components/schemas/CustomDashboardWidgetAttachment"
+            "description": "Custom dashboard widget attachment with screenshot",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomDashboardWidgetAttachment"
+              }
+            ]
           },
           "file": {
-            "$ref": "#/components/schemas/FileAttachment"
+            "description": "Generic file attachment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FileAttachment"
+              }
+            ]
           },
           "log": {
-            "$ref": "#/components/schemas/LogAttachment"
+            "description": "Log entry attachment with content and metadata",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogAttachment"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -994,8 +1084,21 @@
             },
             "minItems": 0
           },
+          "microsoftTeams": {
+            "description": "Microsoft Teams-specific comment metadata",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MicrosoftTeamsCommentMetadata"
+              }
+            ]
+          },
           "slack": {
-            "$ref": "#/components/schemas/SlackCommentMetadata"
+            "description": "Slack-specific comment metadata",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SlackCommentMetadata"
+              }
+            ]
           },
           "unsafeText": {
             "example": "Looking into DB timeouts",
@@ -1003,7 +1106,40 @@
             "type": "string",
             "minLength": 0
           }
-        }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "slack"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "microsoftTeams"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "slack"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "microsoftTeams"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
       },
       "CreateCommentResponse": {
         "externalDocs": {
@@ -1014,7 +1150,12 @@
         "type": "object",
         "properties": {
           "event": {
-            "$ref": "#/components/schemas/CaseEvent"
+            "description": "The created event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseEvent"
+              }
+            ]
           }
         },
         "required": [
@@ -1030,7 +1171,13 @@
         "type": "object",
         "properties": {
           "priority": {
-            "$ref": "#/components/schemas/CasePriority"
+            "example": "CASE_PRIORITY_P3",
+            "description": "Previous priority",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CasePriority"
+              }
+            ]
           }
         }
       },
@@ -1061,7 +1208,12 @@
             "minLength": 0
           },
           "widgetScreenshot": {
-            "$ref": "#/components/schemas/FileAttachment"
+            "description": "Screenshot of the widget at the time of attachment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FileAttachment"
+              }
+            ]
           }
         },
         "required": [
@@ -1108,28 +1260,68 @@
         "type": "object",
         "properties": {
           "apiKey": {
-            "$ref": "#/components/schemas/ApiKeyActor"
+            "description": "API Key generated event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyActor"
+              }
+            ]
           },
           "microsoftTeams": {
-            "$ref": "#/components/schemas/MicrosoftTeamsActor"
+            "description": "Microsoft Teams generated event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MicrosoftTeamsActor"
+              }
+            ]
           },
           "pagerDuty": {
-            "$ref": "#/components/schemas/PagerDutyActor"
+            "description": "PagerDuty generated event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PagerDutyActor"
+              }
+            ]
           },
           "prometheusAlertManager": {
-            "$ref": "#/components/schemas/PrometheusAlertManagerActor"
+            "description": "Prometheus Alert Manager generated event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PrometheusAlertManagerActor"
+              }
+            ]
           },
           "serviceNow": {
-            "$ref": "#/components/schemas/ServiceNowActor"
+            "description": "Service Now generated event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServiceNowActor"
+              }
+            ]
           },
           "slack": {
-            "$ref": "#/components/schemas/SlackActor"
+            "description": "Slack generated event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SlackActor"
+              }
+            ]
           },
           "system": {
-            "$ref": "#/components/schemas/SystemActor"
+            "description": "System-generated event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SystemActor"
+              }
+            ]
           },
           "user": {
-            "$ref": "#/components/schemas/UserActor"
+            "description": "User-generated event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserActor"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -1279,7 +1471,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -1317,7 +1514,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -1340,10 +1542,22 @@
         "type": "object",
         "properties": {
           "kpiType": {
-            "$ref": "#/components/schemas/KPIType"
+            "example": "KPI_TYPE_TIME_TO_ACKNOWLEDGE",
+            "description": "Type of KPI that was breached",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KPIType"
+              }
+            ]
           },
           "priority": {
-            "$ref": "#/components/schemas/CasePriority"
+            "example": "CASE_PRIORITY_P2",
+            "description": "Case priority at the time of the breach",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CasePriority"
+              }
+            ]
           },
           "threshold": {
             "example": "300s",
@@ -1442,6 +1656,72 @@
             "pattern": "^[\\s\\S]*$",
             "minLength": 1,
             "maxLength": 256
+          }
+        }
+      },
+      "MicrosoftTeamsCommentMetadata": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Microsoft Teams comment metadata",
+        "description": "Microsoft Teams source metadata attached to a comment that was synced from Microsoft Teams.",
+        "type": "object",
+        "properties": {
+          "channelId": {
+            "example": "19:0123456789abcdef0123456789abcdef@thread.tacv2",
+            "description": "Microsoft Teams channel ID",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "messageId": {
+            "example": "1616990892312",
+            "description": "Microsoft Teams message ID",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "messageUrl": {
+            "example": "https://teams.microsoft.com/l/message/19:abcdef@thread.tacv2/1616990892312",
+            "description": "Deep link URL to the Microsoft Teams message",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "teamId": {
+            "example": "19:abcdef1234567890abcdef1234567890@thread.tacv2",
+            "description": "Microsoft Teams team ID",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "tenantId": {
+            "example": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+            "description": "Microsoft Teams tenant ID",
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "userEmail": {
+            "example": "john.doe@example.com",
+            "description": "Email of the Microsoft Teams user",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "userId": {
+            "example": "29:1IqRc0iDN0jXaDs0zc5j9dEcLpFXKh9sHg",
+            "description": "Microsoft Teams user ID",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           }
         }
       },
@@ -1567,10 +1847,20 @@
         "type": "object",
         "properties": {
           "override": {
-            "$ref": "#/components/schemas/CasePriority"
+            "description": "Optional override set by user",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CasePriority"
+              }
+            ]
           },
           "system": {
-            "$ref": "#/components/schemas/CasePriority"
+            "description": "System computed priority",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CasePriority"
+              }
+            ]
           }
         }
       },
@@ -1583,10 +1873,20 @@
         "type": "object",
         "properties": {
           "from": {
-            "$ref": "#/components/schemas/PriorityDetails"
+            "description": "Previous priority details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriorityDetails"
+              }
+            ]
           },
           "to": {
-            "$ref": "#/components/schemas/PriorityDetails"
+            "description": "New priority details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriorityDetails"
+              }
+            ]
           }
         }
       },
@@ -1744,10 +2044,22 @@
         "type": "object",
         "properties": {
           "newStatus": {
-            "$ref": "#/components/schemas/CaseStatus"
+            "example": "CASE_STATUS_ACKNOWLEDGED",
+            "description": "New status",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseStatus"
+              }
+            ]
           },
           "oldStatus": {
-            "$ref": "#/components/schemas/CaseStatus"
+            "example": "CASE_STATUS_ACTIVE",
+            "description": "Previous status",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseStatus"
+              }
+            ]
           }
         }
       },
@@ -1837,7 +2149,12 @@
         "type": "object",
         "properties": {
           "event": {
-            "$ref": "#/components/schemas/CaseEvent"
+            "description": "Updated comment event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseEvent"
+              }
+            ]
           }
         },
         "required": [
@@ -1876,7 +2193,12 @@
         "type": "object",
         "properties": {
           "event": {
-            "$ref": "#/components/schemas/CaseEvent"
+            "description": "The requested event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseEvent"
+              }
+            ]
           }
         },
         "required": [

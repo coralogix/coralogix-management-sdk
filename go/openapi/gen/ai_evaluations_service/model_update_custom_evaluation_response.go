@@ -22,6 +22,7 @@ var _ MappedNullable = &UpdateCustomEvaluationResponse{}
 
 // UpdateCustomEvaluationResponse Response returned after updating a custom evaluation.
 type UpdateCustomEvaluationResponse struct {
+	// The updated custom evaluation.
 	Item *CustomEvaluation `json:"item,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

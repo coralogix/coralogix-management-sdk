@@ -22,6 +22,7 @@ var _ MappedNullable = &ReplaceCompanyIpAccessSettingsResponse{}
 
 // ReplaceCompanyIpAccessSettingsResponse This data structure represents the response to replace company IP access settings.
 type ReplaceCompanyIpAccessSettingsResponse struct {
+	// The replaced company IP access settings.
 	Settings *CompanyIpAccessSettings `json:"settings,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

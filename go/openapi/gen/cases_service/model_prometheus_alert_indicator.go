@@ -32,11 +32,13 @@ type PrometheusAlertIndicator struct {
 	ExternalUrl string `json:"externalUrl" validate:"regexp=^[\\s\\S]*$"`
 	// Labels used to group the alerts.
 	GroupLabels map[string]string `json:"groupLabels"`
+	// Priority of the Prometheus alert group.
 	Priority IndicatorPriority `json:"priority"`
 	// Timestamp when the alert group was first received.
 	ReceivedAt time.Time `json:"receivedAt"`
 	// Name of the Alertmanager receiver that handled the group.
 	Receiver string `json:"receiver" validate:"regexp=^[\\s\\S]*$"`
+	// Current status of the Prometheus alert group.
 	Status PrometheusAlertStatus `json:"status"`
 	// Timestamp when the alert group was last updated.
 	UpdatedAt time.Time `json:"updatedAt"`

@@ -22,6 +22,7 @@ var _ MappedNullable = &AlertDefTypeSpecificFilter{}
 
 // AlertDefTypeSpecificFilter Filter by fields specific to alert type definitions
 type AlertDefTypeSpecificFilter struct {
+	// Filter SLO-based alerts by SLO-specific fields
 	SloFilter *AlertDefSloSpecificFilter `json:"sloFilter,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

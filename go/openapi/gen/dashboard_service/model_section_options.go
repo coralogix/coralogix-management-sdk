@@ -22,6 +22,7 @@ var _ MappedNullable = &SectionOptions{}
 
 // SectionOptions Section options.
 type SectionOptions struct {
+	// Options for a custom section
 	Custom *CustomSectionOptions `json:"custom,omitempty"`
 	// Internal section options.
 	Internal map[string]interface{} `json:"internal,omitempty"`

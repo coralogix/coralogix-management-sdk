@@ -26,6 +26,7 @@ type PropertyThresholds struct {
 	Max *float64 `json:"max,omitempty"`
 	// A minimum value used in relative thresholds to calculate the threshold levels
 	Min *float64 `json:"min,omitempty"`
+	// Type of the threshold, can be relative or absolute
 	Type *ThresholdType `json:"type,omitempty"`
 	// List of thresholds
 	Values []CommonThreshold `json:"values,omitempty"`

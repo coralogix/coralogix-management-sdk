@@ -24,11 +24,13 @@ var _ MappedNullable = &Logs{}
 type Logs struct {
 	// Aggregation function
 	Aggregation []LogsAggregation `json:"aggregation,omitempty"`
+	// Data mode type
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// List of filters that narrow down query results
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
 	// A list of observation fields by which to group the results
 	GroupBy []ObservationField `json:"groupBy,omitempty"`
+	// A Lucene query string to search logs
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

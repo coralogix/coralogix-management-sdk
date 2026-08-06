@@ -24,26 +24,26 @@ var _ MappedNullable = &V2Action{}
 type V2Action struct {
 	// The application names.
 	ApplicationNames []string `json:"applicationNames,omitempty"`
-	// The created by.
-	CreatedBy *string `json:"createdBy,omitempty"`
+	// The creating user's username. Set by the server; ignored on requests.
+	CreatedBy *string `json:"createdBy,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The dpxl filter.
-	DpxlFilter *string `json:"dpxlFilter,omitempty"`
+	DpxlFilter *string `json:"dpxlFilter,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// The is hidden.
 	IsHidden *bool `json:"isHidden,omitempty"`
 	// The is private.
 	IsPrivate *bool `json:"isPrivate,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	SourceType *V2SourceType `json:"sourceType,omitempty"`
 	// The subsystem names.
 	SubsystemNames []string `json:"subsystemNames,omitempty"`
-	// URL.
-	Url *string `json:"url,omitempty"`
-	// The url fields.
+	// URL. Must start with http:// or https://.
+	Url *string `json:"url,omitempty" validate:"regexp=^https?:\\/\\/.*$"`
+	// The url fields. Each field requires both name and required, and names must be unique within the list.
 	UrlFields []UrlField `json:"urlFields,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

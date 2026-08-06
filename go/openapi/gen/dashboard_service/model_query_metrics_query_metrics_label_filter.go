@@ -22,6 +22,7 @@ var _ MappedNullable = &QueryMetricsQueryMetricsLabelFilter{}
 
 // QueryMetricsQueryMetricsLabelFilter struct for QueryMetricsQueryMetricsLabelFilter
 type QueryMetricsQueryMetricsLabelFilter struct {
+	// The label.
 	Label *QueryMetricsQueryStringOrVariable `json:"label,omitempty"`
 	Metric *QueryMetricsQueryStringOrVariable `json:"metric,omitempty"`
 	Operator *QueryMetricsQueryOperator `json:"operator,omitempty"`

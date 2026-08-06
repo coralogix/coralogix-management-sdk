@@ -22,8 +22,9 @@ var _ MappedNullable = &SortStrategy{}
 
 // SortStrategy Strategy for determining sort key
 type SortStrategy struct {
-	// Sort by category.
+	// Order by category (e.g. bar label)
 	Category map[string]interface{} `json:"category,omitempty"`
+	// Order by values from a specific query
 	QueryValue *SortByQueryValue `json:"queryValue,omitempty"`
 	// Discriminator field - STRATEGY_TYPE_CATEGORY or STRATEGY_TYPE_QUERY_VALUE
 	StrategyType *string `json:"strategyType,omitempty" validate:"regexp=^[\\s\\S]*$"`

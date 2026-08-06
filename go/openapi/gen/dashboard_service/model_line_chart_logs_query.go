@@ -30,7 +30,9 @@ type LineChartLogsQuery struct {
 	GroupBy []string `json:"groupBy,omitempty"`
 	// A list of observation fields to group the query results
 	GroupBys []ObservationField `json:"groupBys,omitempty"`
+	// A Lucene query string to search logs
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	// Specifies the time period for which the results should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

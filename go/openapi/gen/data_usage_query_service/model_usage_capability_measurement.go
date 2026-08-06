@@ -24,7 +24,9 @@ var _ MappedNullable = &UsageCapabilityMeasurement{}
 type UsageCapabilityMeasurement struct {
 	// Short user-facing description of this measurement kind.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Server-defined measurement kind.
 	Kind *UsageMeasurementKind `json:"kind,omitempty"`
+	// Raw unit returned for this measurement kind.
 	Unit *UsageMeasurementUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -23,11 +23,11 @@ var _ MappedNullable = &ConfigurationBlock{}
 // ConfigurationBlock struct for ConfigurationBlock
 type ConfigurationBlock struct {
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The value.
-	Value *string `json:"value,omitempty"`
+	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

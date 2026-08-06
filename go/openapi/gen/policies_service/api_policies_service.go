@@ -781,8 +781,11 @@ func (a *PoliciesServiceAPIService) PoliciesServiceDeletePolicyExecute(r ApiPoli
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 0 {
-		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	if strlen(r.id) < 36 {
+		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header
@@ -1216,8 +1219,11 @@ func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicyExecute(r ApiPolicie
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 0 {
-		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	if strlen(r.id) < 36 {
+		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header

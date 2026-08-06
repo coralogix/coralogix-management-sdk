@@ -25,12 +25,12 @@ type V1Extension struct {
 	// The changelog.
 	Changelog []ChangelogEntry `json:"changelog,omitempty"`
 	// The dark mode image.
-	DarkModeImage *string `json:"darkModeImage,omitempty"`
+	DarkModeImage *string `json:"darkModeImage,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Deprecation *Deprecation `json:"deprecation,omitempty"`
 	// Unique identifier of the extension.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Image reference.
-	Image *string `json:"image,omitempty"`
+	Image *string `json:"image,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The integrations.
 	Integrations []string `json:"integrations,omitempty"`
 	// The is hidden.
@@ -38,7 +38,7 @@ type V1Extension struct {
 	// The keywords.
 	Keywords []string `json:"keywords,omitempty"`
 	// Display name of the extension.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The permission denied revisions.
 	PermissionDeniedRevisions []ExtensionRevision `json:"permissionDeniedRevisions,omitempty"`
 	// The revisions.

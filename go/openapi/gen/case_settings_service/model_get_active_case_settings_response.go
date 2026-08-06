@@ -23,6 +23,7 @@ var _ MappedNullable = &GetActiveCaseSettingsResponse{}
 
 // GetActiveCaseSettingsResponse Response containing the case settings team configuration currently active for the caller.
 type GetActiveCaseSettingsResponse struct {
+	// The active case settings
 	CaseSettings CaseSettings `json:"caseSettings"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

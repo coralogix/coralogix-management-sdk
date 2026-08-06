@@ -22,9 +22,11 @@ var _ MappedNullable = &FlowStages{}
 
 // FlowStages Defines stages in a flow alert
 type FlowStages struct {
+	// The flow stages groups.
 	FlowStagesGroups *FlowStagesGroups `json:"flowStagesGroups,omitempty"`
 	// The timeframe ms.
 	TimeframeMs *string `json:"timeframeMs,omitempty" validate:"regexp=^-?[0-9]+$"`
+	// The type of timeframe for the flow alert.
 	TimeframeType *TimeframeType `json:"timeframeType,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

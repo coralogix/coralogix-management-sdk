@@ -23,7 +23,7 @@ var _ MappedNullable = &GetManagedIntegrationStatusResponse{}
 // GetManagedIntegrationStatusResponse Response containing the status of a managed integration.
 type GetManagedIntegrationStatusResponse struct {
 	// The integration id.
-	IntegrationId *string `json:"integrationId,omitempty"`
+	IntegrationId *string `json:"integrationId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Status *IntegrationStatus `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

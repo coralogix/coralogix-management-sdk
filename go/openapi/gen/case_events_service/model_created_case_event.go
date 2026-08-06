@@ -22,6 +22,7 @@ var _ MappedNullable = &CreatedCaseEvent{}
 
 // CreatedCaseEvent Created case event.
 type CreatedCaseEvent struct {
+	// Previous priority
 	Priority *CasePriority `json:"priority,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

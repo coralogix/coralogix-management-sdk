@@ -24,6 +24,7 @@ var _ MappedNullable = &WidgetReference{}
 type WidgetReference struct {
 	// Dashboard ID containing the referenced widget (21-char NanoIds)
 	DashboardId *string `json:"dashboardId,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Widget ID within the referenced dashboard
 	WidgetId *UUID `json:"widgetId,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -28,8 +28,11 @@ type Case struct {
 	AcknowledgeTime *time.Time `json:"acknowledgeTime,omitempty"`
 	// AI summary of the case
 	AiSummary *string `json:"aiSummary,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Assigned user details
 	Assignee *CasesV1UserDetails `json:"assignee,omitempty"`
+	// Grouped case indicators
 	CaseIndicators *CaseIndicators `json:"caseIndicators,omitempty"`
+	// Category of the case
 	Category CaseCategory `json:"category"`
 	// When the case was created
 	CreateTime time.Time `json:"createTime"`
@@ -41,15 +44,21 @@ type Case struct {
 	Id string `json:"id" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Impacted entities (e.g., service, database)
 	ImpactedEntities []ImpactedEntity `json:"impactedEntities"`
+	// KPI breaches
 	KpiBreaches *KPIBreaches `json:"kpiBreaches,omitempty"`
 	// User-defined labels for the case
 	Labels []V1KeyValue `json:"labels"`
+	// Automated Olly analysis attached to the case.
 	OllyAnalysis *OllyAnalysis `json:"ollyAnalysis,omitempty"`
+	// Priority of the case
 	Priority CasePriority `json:"priority"`
+	// System and override priority details
 	PriorityDetails *PriorityDetails `json:"priorityDetails,omitempty"`
 	// Readable identifier of the case, available only for the cases that became Active. May be used interchangeably with `id` when calling Cases APIs that target a specific case.
 	ReadableId *string `json:"readableId,omitempty" validate:"regexp=^[A-Z]+-[0-9]+$"`
+	// Resolution metadata
 	ResolutionDetails *ResolutionDetails `json:"resolutionDetails,omitempty"`
+	// Current status of the case
 	Status CaseStatus `json:"status"`
 	// Case title
 	Title string `json:"title" validate:"regexp=^[\\s\\S]*$"`

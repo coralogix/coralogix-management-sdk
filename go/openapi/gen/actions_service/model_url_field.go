@@ -13,6 +13,7 @@ package actions_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,9 +24,9 @@ var _ MappedNullable = &UrlField{}
 // UrlField Declares a URL field that may be required for the Action to be invokable on a log.
 type UrlField struct {
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	// The required.
-	Required *bool `json:"required,omitempty"`
+	Required bool `json:"required"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -36,8 +37,10 @@ type _UrlField UrlField
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUrlField() *UrlField {
+func NewUrlField(name string, required bool) *UrlField {
 	this := UrlField{}
+	this.Name = name
+	this.Required = required
 	return &this
 }
 
@@ -49,68 +52,52 @@ func NewUrlFieldWithDefaults() *UrlField {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *UrlField) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *UrlField) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *UrlField) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *UrlField) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetRequired returns the Required field value if set, zero value otherwise.
+// GetRequired returns the Required field value
 func (o *UrlField) GetRequired() bool {
-	if o == nil || IsNil(o.Required) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Required
+
+	return o.Required
 }
 
-// GetRequiredOk returns a tuple with the Required field value if set, nil otherwise
+// GetRequiredOk returns a tuple with the Required field value
 // and a boolean to check if the value has been set.
 func (o *UrlField) GetRequiredOk() (*bool, bool) {
-	if o == nil || IsNil(o.Required) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Required, true
+	return &o.Required, true
 }
 
-// HasRequired returns a boolean if a field has been set.
-func (o *UrlField) HasRequired() bool {
-	if o != nil && !IsNil(o.Required) {
-		return true
-	}
-
-	return false
-}
-
-// SetRequired gets a reference to the given bool and assigns it to the Required field.
+// SetRequired sets field value
 func (o *UrlField) SetRequired(v bool) {
-	o.Required = &v
+	o.Required = v
 }
 
 func (o UrlField) MarshalJSON() ([]byte, error) {
@@ -123,12 +110,8 @@ func (o UrlField) MarshalJSON() ([]byte, error) {
 
 func (o UrlField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Required) {
-		toSerialize["required"] = o.Required
-	}
+	toSerialize["name"] = o.Name
+	toSerialize["required"] = o.Required
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -138,6 +121,28 @@ func (o UrlField) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *UrlField) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"required",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varUrlField := _UrlField{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

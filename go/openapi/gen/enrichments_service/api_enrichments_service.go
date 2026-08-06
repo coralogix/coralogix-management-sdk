@@ -695,8 +695,17 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceRemoveEnrichmentsExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.enrichmentIds == nil {
+		return localVarReturnValue, nil, reportError("enrichmentIds is required and must be specified")
+	}
+	if len(*r.enrichmentIds) < 0 {
+		return localVarReturnValue, nil, reportError("enrichmentIds must have at least 0 elements")
+	}
+	if len(*r.enrichmentIds) > 1000 {
+		return localVarReturnValue, nil, reportError("enrichmentIds must have less than 1000 elements")
+	}
 
-	if r.enrichmentIds != nil {
+	{
 		t := *r.enrichmentIds
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)

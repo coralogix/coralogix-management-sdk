@@ -23,7 +23,9 @@ var _ MappedNullable = &DeliveryAttempt{}
 
 // DeliveryAttempt A single delivery attempt to a specific connector.
 type DeliveryAttempt struct {
+	// The connector that the delivery was sent to
 	Connector ConnectorDetails `json:"connector"`
+	// Outcome of the delivery attempt
 	Outcome DeliveryOutcome `json:"outcome"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

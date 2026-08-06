@@ -23,11 +23,11 @@ var _ MappedNullable = &Link{}
 // Link struct for Link
 type Link struct {
 	// The key.
-	Key *string `json:"key,omitempty"`
+	Key *string `json:"key,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The text.
-	Text *string `json:"text,omitempty"`
+	Text *string `json:"text,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// URL.
-	Url *string `json:"url,omitempty"`
+	Url *string `json:"url,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

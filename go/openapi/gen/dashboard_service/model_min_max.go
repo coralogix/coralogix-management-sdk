@@ -22,8 +22,9 @@ var _ MappedNullable = &MinMax{}
 
 // MinMax Definition of min/max value configuration, can be automatically derived from data or custom
 type MinMax struct {
-	// Min max auto.
+	// An empty value to determine min/max limits to be automatically derived from data
 	Auto map[string]interface{} `json:"auto,omitempty"`
+	// Define min and/or max limits with custom values to affect widget scaling and/or colors
 	Custom *MinMaxCustom `json:"custom,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

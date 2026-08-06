@@ -23,7 +23,7 @@ var _ MappedNullable = &ExternalUrl{}
 // ExternalUrl External url.
 type ExternalUrl struct {
 	// URL.
-	Url *string `json:"url,omitempty"`
+	Url *string `json:"url,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -23,6 +23,7 @@ var _ MappedNullable = &GetIncidentResponse{}
 
 // GetIncidentResponse Response containing the requested incident
 type GetIncidentResponse struct {
+	// The requested incident
 	Incident Incident `json:"incident"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

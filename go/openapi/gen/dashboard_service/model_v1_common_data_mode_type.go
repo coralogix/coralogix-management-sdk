@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V1CommonDataModeType Data mode type.
+// V1CommonDataModeType Data mode type. Omitted or DATA_MODE_TYPE_HIGH_UNSPECIFIED queries high-priority ('Frequent Search') data; DATA_MODE_TYPE_ARCHIVE queries archive ('Monitoring') data.
 type V1CommonDataModeType string
 
 // List of v1.common.DataModeType

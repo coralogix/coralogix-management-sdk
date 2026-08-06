@@ -24,8 +24,8 @@ var _ MappedNullable = &PolicyOrder{}
 // PolicyOrder Order of a policy.
 type PolicyOrder struct {
 	// Unique identifier.
-	Id string `json:"id"`
-	// Sort order.
+	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
+	// Sort order. Must be a positive number.
 	Order int32 `json:"order"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

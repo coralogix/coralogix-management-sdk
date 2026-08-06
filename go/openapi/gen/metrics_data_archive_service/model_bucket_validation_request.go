@@ -22,8 +22,11 @@ var _ MappedNullable = &BucketValidationRequest{}
 
 // BucketValidationRequest This data structure is used to validate a bucket.
 type BucketValidationRequest struct {
+	// Google Cloud Storage configuration.
 	Gcs *GcsConfig `json:"gcs,omitempty"`
+	// IBM Cloud Object Storage configuration.
 	Ibm *IbmConfigV2 `json:"ibm,omitempty"`
+	// AWS S3 storage configuration.
 	S3 *S3Config `json:"s3,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,6 +22,7 @@ var _ MappedNullable = &LabelFilterType{}
 
 // LabelFilterType Label filter type for log entries
 type LabelFilterType struct {
+	// The operation to perform on the label value
 	Operation *LogFilterOperationType `json:"operation,omitempty"`
 	// The value of the label to filter by
 	Value *string `json:"value,omitempty"`

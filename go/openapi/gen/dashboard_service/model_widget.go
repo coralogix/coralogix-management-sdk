@@ -23,15 +23,21 @@ var _ MappedNullable = &Widget{}
 
 // Widget This data structure represents a dashboard widget.
 type Widget struct {
+	// Deprecated
 	Appearance *WidgetAppearance `json:"appearance,omitempty"`
 	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// Definition of the widget type and details
 	Definition *WidgetDefinition `json:"definition,omitempty"`
 	// Short description of the widget
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// When true, this widget is marked as highlighted for all users of the dashboard. Not allowed on a widget reference.
+	Highlighted *bool `json:"highlighted,omitempty"`
+	// Widget unique identifier
 	Id *UUID `json:"id,omitempty"`
 	// Number of columns occupied by the widget in the dashboard layout
 	LayoutColumns *int32 `json:"layoutColumns,omitempty"`
+	// Reference to a widget from another dashboard
 	Reference *WidgetReference `json:"reference,omitempty"`
 	// Name of the widget
 	Title *string `json:"title,omitempty" validate:"regexp=^[\\s\\S]*$"`
@@ -61,6 +67,7 @@ func NewWidgetWithDefaults() *Widget {
 }
 
 // GetAppearance returns the Appearance field value if set, zero value otherwise.
+// Deprecated
 func (o *Widget) GetAppearance() WidgetAppearance {
 	if o == nil || IsNil(o.Appearance) {
 		var ret WidgetAppearance
@@ -71,6 +78,7 @@ func (o *Widget) GetAppearance() WidgetAppearance {
 
 // GetAppearanceOk returns a tuple with the Appearance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Widget) GetAppearanceOk() (*WidgetAppearance, bool) {
 	if o == nil || IsNil(o.Appearance) {
 		return nil, false
@@ -88,6 +96,7 @@ func (o *Widget) HasAppearance() bool {
 }
 
 // SetAppearance gets a reference to the given WidgetAppearance and assigns it to the Appearance field.
+// Deprecated
 func (o *Widget) SetAppearance(v WidgetAppearance) {
 	o.Appearance = &v
 }
@@ -186,6 +195,38 @@ func (o *Widget) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *Widget) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetHighlighted returns the Highlighted field value if set, zero value otherwise.
+func (o *Widget) GetHighlighted() bool {
+	if o == nil || IsNil(o.Highlighted) {
+		var ret bool
+		return ret
+	}
+	return *o.Highlighted
+}
+
+// GetHighlightedOk returns a tuple with the Highlighted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Widget) GetHighlightedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Highlighted) {
+		return nil, false
+	}
+	return o.Highlighted, true
+}
+
+// HasHighlighted returns a boolean if a field has been set.
+func (o *Widget) HasHighlighted() bool {
+	if o != nil && !IsNil(o.Highlighted) {
+		return true
+	}
+
+	return false
+}
+
+// SetHighlighted gets a reference to the given bool and assigns it to the Highlighted field.
+func (o *Widget) SetHighlighted(v bool) {
+	o.Highlighted = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -370,6 +411,9 @@ func (o Widget) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	if !IsNil(o.Highlighted) {
+		toSerialize["highlighted"] = o.Highlighted
+	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -412,6 +456,7 @@ func (o *Widget) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "definition")
 		delete(additionalProperties, "description")
+		delete(additionalProperties, "highlighted")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "layoutColumns")
 		delete(additionalProperties, "reference")

@@ -23,7 +23,9 @@ var _ MappedNullable = &UsageMeasurement{}
 // UsageMeasurement Raw measurement of a single kind for the parent usage row.
 type UsageMeasurement struct {
 	CxQuotaUnits *UsageMeasurementCxQuotaUnits `json:"cxQuotaUnits,omitempty"`
+	// Server-defined measurement kind for this row.
 	Kind *UsageMeasurementKind `json:"kind,omitempty"`
+	// Unit of the raw measured amount.
 	MeasuredUnit *UsageMeasurementUnit `json:"measuredUnit,omitempty"`
 	// Raw measured amount for this usage row, in the unit indicated by `measuredUnit`.
 	MeasuredValue *string `json:"measuredValue,omitempty" validate:"regexp=^[0-9]+$"`

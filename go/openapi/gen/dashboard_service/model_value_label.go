@@ -13,6 +13,7 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,14 +21,14 @@ var _ = bytes.MinRead
 // checks if the ValueLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ValueLabel{}
 
-// ValueLabel struct for ValueLabel
+// ValueLabel A value/label pair for a static source. Both value and label must be set; clients typically default the label to the value.
 type ValueLabel struct {
 	// The is default.
 	IsDefault *bool `json:"isDefault,omitempty"`
 	// The label.
-	Label *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Label string `json:"label" validate:"regexp=^[\\s\\S]*$"`
 	// The value.
-	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Value string `json:"value" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -38,8 +39,10 @@ type _ValueLabel ValueLabel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValueLabel() *ValueLabel {
+func NewValueLabel(label string, value string) *ValueLabel {
 	this := ValueLabel{}
+	this.Label = label
+	this.Value = value
 	return &this
 }
 
@@ -83,68 +86,52 @@ func (o *ValueLabel) SetIsDefault(v bool) {
 	o.IsDefault = &v
 }
 
-// GetLabel returns the Label field value if set, zero value otherwise.
+// GetLabel returns the Label field value
 func (o *ValueLabel) GetLabel() string {
-	if o == nil || IsNil(o.Label) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Label
+
+	return o.Label
 }
 
-// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
+// GetLabelOk returns a tuple with the Label field value
 // and a boolean to check if the value has been set.
 func (o *ValueLabel) GetLabelOk() (*string, bool) {
-	if o == nil || IsNil(o.Label) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Label, true
+	return &o.Label, true
 }
 
-// HasLabel returns a boolean if a field has been set.
-func (o *ValueLabel) HasLabel() bool {
-	if o != nil && !IsNil(o.Label) {
-		return true
-	}
-
-	return false
-}
-
-// SetLabel gets a reference to the given string and assigns it to the Label field.
+// SetLabel sets field value
 func (o *ValueLabel) SetLabel(v string) {
-	o.Label = &v
+	o.Label = v
 }
 
-// GetValue returns the Value field value if set, zero value otherwise.
+// GetValue returns the Value field value
 func (o *ValueLabel) GetValue() string {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Value
+
+	return o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
 func (o *ValueLabel) GetValueOk() (*string, bool) {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Value, true
+	return &o.Value, true
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *ValueLabel) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given string and assigns it to the Value field.
+// SetValue sets field value
 func (o *ValueLabel) SetValue(v string) {
-	o.Value = &v
+	o.Value = v
 }
 
 func (o ValueLabel) MarshalJSON() ([]byte, error) {
@@ -160,12 +147,8 @@ func (o ValueLabel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsDefault) {
 		toSerialize["isDefault"] = o.IsDefault
 	}
-	if !IsNil(o.Label) {
-		toSerialize["label"] = o.Label
-	}
-	if !IsNil(o.Value) {
-		toSerialize["value"] = o.Value
-	}
+	toSerialize["label"] = o.Label
+	toSerialize["value"] = o.Value
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -175,6 +158,28 @@ func (o ValueLabel) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ValueLabel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"label",
+		"value",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varValueLabel := _ValueLabel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

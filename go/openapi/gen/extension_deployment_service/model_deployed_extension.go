@@ -25,14 +25,14 @@ type DeployedExtension struct {
 	// The applications.
 	Applications []string `json:"applications,omitempty"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The item ids.
 	ItemIds []string `json:"itemIds,omitempty"`
 	// The subsystems.
 	Subsystems []string `json:"subsystems,omitempty"`
 	Summary *DeployedExtensionSummary `json:"summary,omitempty"`
 	// Version number.
-	Version *string `json:"version,omitempty"`
+	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -24,6 +24,7 @@ var _ MappedNullable = &NoDataPolicy{}
 type NoDataPolicy struct {
 	// The timeframe in seconds for auto retiring values that were detected as no-data. accepts only multiples of 60 seconds
 	AutoRetireSeconds *int32 `json:"autoRetireSeconds,omitempty"`
+	// The state to which the alert falls back to when theres no data (replaces UndetectedValuesManagement - this feature is being released gradually and might not be available for all customers yet)
 	State *NoDataPolicyState `json:"state,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

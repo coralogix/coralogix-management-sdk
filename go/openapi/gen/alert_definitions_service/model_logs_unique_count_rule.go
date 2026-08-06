@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsUniqueCountRule{}
 
 // LogsUniqueCountRule Defines the rule for detecting unique counts in logs
 type LogsUniqueCountRule struct {
+	// The condition for detecting unique counts in logs.
 	Condition *LogsUniqueCountCondition `json:"condition,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

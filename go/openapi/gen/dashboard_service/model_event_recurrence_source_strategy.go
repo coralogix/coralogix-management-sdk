@@ -22,6 +22,7 @@ var _ MappedNullable = &EventRecurrenceSourceStrategy{}
 
 // EventRecurrenceSourceStrategy Determines how the recurrence event is rendered: as an instant point or a sliding window duration.
 type EventRecurrenceSourceStrategy struct {
+	// Duration.
 	Duration *EventRecurrenceSourceStrategyDuration `json:"duration,omitempty"`
 	Instant *EventRecurrenceSourceStrategyInstant `json:"instant,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -25,8 +25,10 @@ type DataUsageQueryServiceDataUsageRequest struct {
 	Daily *UsageDailyQuery `json:"daily,omitempty"`
 	// Label predicates applied before aggregation.
 	Filters []UsageLabelFilter `json:"filters,omitempty"`
+	// Label keys to group results by. Supported keys are listed by the capabilities endpoint.
 	GroupBy *UsageGroupBy `json:"groupBy,omitempty"`
 	Hourly *UsageHourlyQuery `json:"hourly,omitempty"`
+	// Per-bucket result-size cap. The server may reject queries whose pre-cap size still exceeds its hard limits.
 	Limit *UsageLimit `json:"limit,omitempty"`
 	// Measurement kind filter applied before aggregation. Omit (or pass an empty list) to include all supported measurement kinds.
 	MeasurementKindFilter []UsageMeasurementKind `json:"measurementKindFilter,omitempty"`

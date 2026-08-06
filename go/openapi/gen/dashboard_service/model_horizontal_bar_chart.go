@@ -24,9 +24,11 @@ var _ MappedNullable = &HorizontalBarChart{}
 type HorizontalBarChart struct {
 	// Applied color scheme, one of the predefined values
 	ColorScheme *string `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// How the bar colors should be organized
 	ColorsBy *ColorsBy `json:"colorsBy,omitempty"`
 	// Custom unit (requires to have unit field set to custom to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Data mode type, either high or archive
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	Decimal *int32 `json:"decimal,omitempty"`
@@ -38,18 +40,25 @@ type HorizontalBarChart struct {
 	GroupNameTemplate *string `json:"groupNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to ignore color scheme and derive colors from algorithm
 	HashColors *bool `json:"hashColors,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
 	// Maximum number of bars on a chart
 	MaxBarsPerChart *int32 `json:"maxBarsPerChart,omitempty"`
+	// Query object
 	Query *HorizontalBarChartQuery `json:"query,omitempty"`
+	// Scale type - linear/logarithmic
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
+	// Sort type, by name or by value
 	SortBy *SortByType `json:"sortBy,omitempty"`
+	// Configuration of stacked bars
 	StackDefinition *HorizontalBarChartStackDefinition `json:"stackDefinition,omitempty"`
+	// Unit of the query results - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
 	YAxisMin *float32 `json:"yAxisMin,omitempty"`
+	// Specifies how to organize the y-axis view
 	YAxisViewBy *HorizontalBarChartYAxisViewBy `json:"yAxisViewBy,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

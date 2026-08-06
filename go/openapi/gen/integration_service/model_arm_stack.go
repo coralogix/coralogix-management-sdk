@@ -23,9 +23,9 @@ var _ MappedNullable = &ARMStack{}
 // ARMStack This data structure represents an Azure Resource Manager stack.
 type ARMStack struct {
 	// The resource group name.
-	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The subscription id.
-	SubscriptionId *string `json:"subscriptionId,omitempty"`
+	SubscriptionId *string `json:"subscriptionId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

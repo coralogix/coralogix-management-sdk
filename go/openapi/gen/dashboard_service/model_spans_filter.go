@@ -22,8 +22,11 @@ var _ MappedNullable = &SpansFilter{}
 
 // SpansFilter This data structure represents the filter criteria for spans.
 type SpansFilter struct {
+	// The span field to which the filter is applied.
 	Field *SpanField `json:"field,omitempty"`
+	// The observation span field to which the filter is applied. Relation type is only supported in spans widget filters. (Not supported in global dashboard filters)
 	ObservationField *SpanObservationField `json:"observationField,omitempty"`
+	// An operator used for filtering the spans.
 	Operator *FilterOperator `json:"operator,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

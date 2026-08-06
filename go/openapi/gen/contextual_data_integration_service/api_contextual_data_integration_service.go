@@ -77,6 +77,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	if strlen(r.id) < 0 {
 		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
 	}
+	if strlen(r.id) > 65535 {
+		return localVarReturnValue, nil, reportError("id must have less than 65535 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -224,6 +227,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	localVarFormParams := url.Values{}
 	if strlen(r.id) < 0 {
 		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
+	if strlen(r.id) > 65535 {
+		return localVarReturnValue, nil, reportError("id must have less than 65535 elements")
 	}
 
 	if r.includeTestingIntegrations != nil {
@@ -377,6 +383,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	localVarFormParams := url.Values{}
 	if strlen(r.id) < 0 {
 		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
+	if strlen(r.id) > 65535 {
+		return localVarReturnValue, nil, reportError("id must have less than 65535 elements")
 	}
 
 	if r.includeTestingRevisions != nil {
@@ -817,6 +826,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	localVarFormParams := url.Values{}
 	if strlen(r.integrationId) < 0 {
 		return localVarReturnValue, nil, reportError("integrationId must have at least 0 elements")
+	}
+	if strlen(r.integrationId) > 65535 {
+		return localVarReturnValue, nil, reportError("integrationId must have less than 65535 elements")
 	}
 
 	// to determine the Content-Type header

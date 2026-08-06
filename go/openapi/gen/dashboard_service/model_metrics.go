@@ -22,9 +22,13 @@ var _ MappedNullable = &Metrics{}
 
 // Metrics A metrics variant of the query
 type Metrics struct {
+	// Type of the query editor used to generate the query, can be text or builder based
 	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
+	// PromQL query string for querying metrics
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
+	// Type of the PromQL query, can be Range or Instant
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
+	// How to limit the result using series_count_limit parameter
 	SeriesLimitType *MetricsSeriesLimitType `json:"seriesLimitType,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

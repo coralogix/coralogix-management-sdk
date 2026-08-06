@@ -28,15 +28,21 @@ type AlertIndicator struct {
 	AlertId string `json:"alertId" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Array of all alert version IDs for this indicator in the case. Includes the latest_alert_version.
 	AlertVersions []string `json:"alertVersions"`
+	// How this indicator relates to other alerts (composite/combination/none).
 	GroupingType AlertGroupingType `json:"groupingType"`
 	// Last seen version ID of the triggered alert definition.
 	LatestAlertVersion string `json:"latestAlertVersion" validate:"regexp=^[\\s\\S]*$"`
 	// Array of the alert permutations.
 	Permutations []AlertIndicatorPermutation `json:"permutations"`
+	// Priority of the alert at trigger time.
 	Priority IndicatorPriority `json:"priority"`
 	// When present, timestamp when the alert resolved.
 	ResolveTime *time.Time `json:"resolveTime,omitempty"`
+	// When true or omitted, indicates that Case will be resolved together with signal. Otherwise, Case will stay open and wait for manual resolution.
+	ResolveWithSignal *bool `json:"resolveWithSignal,omitempty"`
+	// Current lifecycle state of the indicator.
 	State IndicatorState `json:"state"`
+	// When present, details about the suppression status of the alert indicator.
 	Suppression *AlertSuppression `json:"suppression,omitempty"`
 	// Timestamp when the alert triggered.
 	TriggerTime time.Time `json:"triggerTime"`
@@ -247,6 +253,38 @@ func (o *AlertIndicator) SetResolveTime(v time.Time) {
 	o.ResolveTime = &v
 }
 
+// GetResolveWithSignal returns the ResolveWithSignal field value if set, zero value otherwise.
+func (o *AlertIndicator) GetResolveWithSignal() bool {
+	if o == nil || IsNil(o.ResolveWithSignal) {
+		var ret bool
+		return ret
+	}
+	return *o.ResolveWithSignal
+}
+
+// GetResolveWithSignalOk returns a tuple with the ResolveWithSignal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertIndicator) GetResolveWithSignalOk() (*bool, bool) {
+	if o == nil || IsNil(o.ResolveWithSignal) {
+		return nil, false
+	}
+	return o.ResolveWithSignal, true
+}
+
+// HasResolveWithSignal returns a boolean if a field has been set.
+func (o *AlertIndicator) HasResolveWithSignal() bool {
+	if o != nil && !IsNil(o.ResolveWithSignal) {
+		return true
+	}
+
+	return false
+}
+
+// SetResolveWithSignal gets a reference to the given bool and assigns it to the ResolveWithSignal field.
+func (o *AlertIndicator) SetResolveWithSignal(v bool) {
+	o.ResolveWithSignal = &v
+}
+
 // GetState returns the State field value
 func (o *AlertIndicator) GetState() IndicatorState {
 	if o == nil {
@@ -346,6 +384,9 @@ func (o AlertIndicator) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ResolveTime) {
 		toSerialize["resolveTime"] = o.ResolveTime
 	}
+	if !IsNil(o.ResolveWithSignal) {
+		toSerialize["resolveWithSignal"] = o.ResolveWithSignal
+	}
 	toSerialize["state"] = o.State
 	if !IsNil(o.Suppression) {
 		toSerialize["suppression"] = o.Suppression
@@ -409,6 +450,7 @@ func (o *AlertIndicator) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "permutations")
 		delete(additionalProperties, "priority")
 		delete(additionalProperties, "resolveTime")
+		delete(additionalProperties, "resolveWithSignal")
 		delete(additionalProperties, "state")
 		delete(additionalProperties, "suppression")
 		delete(additionalProperties, "triggerTime")

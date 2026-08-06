@@ -23,6 +23,7 @@ var _ MappedNullable = &AssignCaseResponse{}
 
 // AssignCaseResponse Response containing the case after a user assignment.
 type AssignCaseResponse struct {
+	// Case after assigning a user to it.
 	Case Case `json:"case"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

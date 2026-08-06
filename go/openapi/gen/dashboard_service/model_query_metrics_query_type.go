@@ -24,6 +24,7 @@ var _ MappedNullable = &QueryMetricsQueryType{}
 type QueryMetricsQueryType struct {
 	LabelName *QueryMetricsQueryTypeLabelName `json:"labelName,omitempty"`
 	LabelValue *QueryMetricsQueryTypeLabelValue `json:"labelValue,omitempty"`
+	// The metric name.
 	MetricName *QueryMetricsQueryTypeMetricName `json:"metricName,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,19 +22,24 @@ var _ MappedNullable = &CaseFilters{}
 
 // CaseFilters Filters applied when querying cases, including statuses, priorities, categories, groupings, and labels.
 type CaseFilters struct {
+	// Alert-based filters applied to cases. When absent, alert ID aggregations are not computed.
 	AlertFilters *AlertFilters `json:"alertFilters,omitempty"`
 	// List of case assignees to filter on
 	Assignees []AssigneeOption `json:"assignees,omitempty"`
 	// KPI-based filters applied to cases. When absent, KPI filter is not applied at all.
 	Breached []KPIFilter `json:"breached,omitempty"`
+	// Filter based on entity labels associated with cases
 	CaseLabelsFilter *CaseLabelsFilter `json:"caseLabelsFilter,omitempty"`
 	// List of case categories to filter on
 	Categories []CaseCategory `json:"categories,omitempty"`
 	// Connector type filters applied to cases, including cases with no connector linked.
 	ConnectorTypeFilters []ConnectorTypeFilter `json:"connectorTypeFilters,omitempty"`
+	// Date range filter applied to case active time
 	DateRange *DateRangeFilter `json:"dateRange,omitempty"`
 	// Grouping-based filters (e.g., service, subsystem)
 	Groupings []FilterGroup `json:"groupings,omitempty"`
+	// Impacted APM entity filters. A case is returned if it impacts ANY of these entities (OR logic). An empty list applies no filtering.
+	ImpactedEntities []ImpactedEntityFilter `json:"impactedEntities,omitempty"`
 	// List of indicator types to filter on
 	IndicatorTypes []IndicatorType `json:"indicatorTypes,omitempty"`
 	// Label-based filters applied to cases
@@ -324,6 +329,38 @@ func (o *CaseFilters) SetGroupings(v []FilterGroup) {
 	o.Groupings = v
 }
 
+// GetImpactedEntities returns the ImpactedEntities field value if set, zero value otherwise.
+func (o *CaseFilters) GetImpactedEntities() []ImpactedEntityFilter {
+	if o == nil || IsNil(o.ImpactedEntities) {
+		var ret []ImpactedEntityFilter
+		return ret
+	}
+	return o.ImpactedEntities
+}
+
+// GetImpactedEntitiesOk returns a tuple with the ImpactedEntities field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseFilters) GetImpactedEntitiesOk() ([]ImpactedEntityFilter, bool) {
+	if o == nil || IsNil(o.ImpactedEntities) {
+		return nil, false
+	}
+	return o.ImpactedEntities, true
+}
+
+// HasImpactedEntities returns a boolean if a field has been set.
+func (o *CaseFilters) HasImpactedEntities() bool {
+	if o != nil && !IsNil(o.ImpactedEntities) {
+		return true
+	}
+
+	return false
+}
+
+// SetImpactedEntities gets a reference to the given []ImpactedEntityFilter and assigns it to the ImpactedEntities field.
+func (o *CaseFilters) SetImpactedEntities(v []ImpactedEntityFilter) {
+	o.ImpactedEntities = v
+}
+
 // GetIndicatorTypes returns the IndicatorTypes field value if set, zero value otherwise.
 func (o *CaseFilters) GetIndicatorTypes() []IndicatorType {
 	if o == nil || IsNil(o.IndicatorTypes) {
@@ -518,6 +555,9 @@ func (o CaseFilters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Groupings) {
 		toSerialize["groupings"] = o.Groupings
 	}
+	if !IsNil(o.ImpactedEntities) {
+		toSerialize["impactedEntities"] = o.ImpactedEntities
+	}
 	if !IsNil(o.IndicatorTypes) {
 		toSerialize["indicatorTypes"] = o.IndicatorTypes
 	}
@@ -564,6 +604,7 @@ func (o *CaseFilters) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "connectorTypeFilters")
 		delete(additionalProperties, "dateRange")
 		delete(additionalProperties, "groupings")
+		delete(additionalProperties, "impactedEntities")
 		delete(additionalProperties, "indicatorTypes")
 		delete(additionalProperties, "labels")
 		delete(additionalProperties, "priorities")

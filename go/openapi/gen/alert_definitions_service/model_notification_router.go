@@ -24,6 +24,7 @@ var _ MappedNullable = &NotificationRouter{}
 type NotificationRouter struct {
 	// The ID of the notification router
 	Id *string `json:"id,omitempty"`
+	// The condition under which the notification should be sent
 	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

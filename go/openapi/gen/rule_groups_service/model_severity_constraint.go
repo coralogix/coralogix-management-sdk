@@ -22,6 +22,7 @@ var _ MappedNullable = &SeverityConstraint{}
 
 // SeverityConstraint Severity constraint.
 type SeverityConstraint struct {
+	// The value.
 	Value *Value `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

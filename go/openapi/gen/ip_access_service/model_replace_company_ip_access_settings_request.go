@@ -22,6 +22,7 @@ var _ MappedNullable = &ReplaceCompanyIPAccessSettingsRequest{}
 
 // ReplaceCompanyIPAccessSettingsRequest This data structure represents the request to replace company IP access settings.
 type ReplaceCompanyIPAccessSettingsRequest struct {
+	// The Coralogix customer support access setting. Defaults to DISABLED if not provided.
 	EnableCoralogixCustomerSupportAccess *CoralogixCustomerSupportAccess `json:"enableCoralogixCustomerSupportAccess,omitempty"`
 	// Unique identifier of the existing IP access settings resource to replace.
 	Id *string `json:"id,omitempty"`

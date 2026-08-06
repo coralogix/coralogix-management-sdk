@@ -25,6 +25,7 @@ var _ MappedNullable = &CasesV1GetFilterValuesResponse{}
 type CasesV1GetFilterValuesResponse struct {
 	// Aggregated case counts per alert definition ID. Only populated when alert_filters is provided in the request.
 	AlertIdAggregations []AlertIdAggregation `json:"alertIdAggregations"`
+	// Aggregated case counts grouped by assignee.
 	AssigneeAggregations *AssigneeAggregation `json:"assigneeAggregations,omitempty"`
 	// Aggregated case counts grouped by category.
 	CategoryAggregations []CategoryAggregation `json:"categoryAggregations"`

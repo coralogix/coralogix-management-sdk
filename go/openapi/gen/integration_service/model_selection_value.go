@@ -23,7 +23,7 @@ var _ MappedNullable = &SelectionValue{}
 // SelectionValue Selection value.
 type SelectionValue struct {
 	// The default value.
-	DefaultValue *string `json:"defaultValue,omitempty"`
+	DefaultValue *string `json:"defaultValue,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Options.
 	Options []string `json:"options,omitempty"`
 	AdditionalProperties map[string]interface{}

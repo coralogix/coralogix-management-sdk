@@ -24,6 +24,7 @@ var _ MappedNullable = &TypeCount{}
 type TypeCount struct {
 	// The count for this alert type
 	Count *int64 `json:"count,omitempty"`
+	// The alert type
 	Type *AlertDefType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

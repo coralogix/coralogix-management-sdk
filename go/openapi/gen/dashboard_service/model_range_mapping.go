@@ -22,7 +22,9 @@ var _ MappedNullable = &RangeMapping{}
 
 // RangeMapping Range-based color mapping using min/max bounds and color thresholds
 type RangeMapping struct {
+	// Min/max range configuration, auto-derived from data or custom values
 	MinMax *MinMax `json:"minMax,omitempty"`
+	// Type of the threshold, relative or absolute
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	// List of color thresholds defining color ranges
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`

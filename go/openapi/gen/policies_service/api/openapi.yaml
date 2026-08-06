@@ -30,7 +30,8 @@
                     "items": {
                       "$ref": "#/components/schemas/CreateLogPolicyRequest"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 200
                   }
                 },
                 "required": [
@@ -113,7 +114,12 @@
             "name": "source_type",
             "description": "Filter policies by data source type (for example logs or spans).",
             "schema": {
-              "$ref": "#/components/schemas/v1.SourceType"
+              "description": "Filter policies by data source type (for example logs or spans).",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/v1.SourceType"
+                }
+              ]
             },
             "style": "form"
           }
@@ -187,9 +193,11 @@
                   },
                   "description": {
                     "example": "My Policy Description",
-                    "description": "Optional free-text description of the policy's purpose.",
+                    "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\x00-\\xFF]*$",
+                    "minLength": 0,
+                    "maxLength": 255
                   },
                   "enabled": {
                     "example": true,
@@ -197,19 +205,23 @@
                     "type": "boolean"
                   },
                   "id": {
-                    "example": "policy_id",
+                    "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
                     "description": "Unique identifier of the policy to update.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "minLength": 36,
+                    "maxLength": 36
                   },
                   "logRules": {
                     "$ref": "#/components/schemas/LogRules"
                   },
                   "name": {
                     "example": "My Policy",
-                    "description": "Human-readable name for the policy.",
+                    "description": "Human-readable name for the policy. Only Latin-1 characters are accepted.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\x00-\\xFF]*$",
+                    "minLength": 1,
+                    "maxLength": 255
                   },
                   "priority": {
                     "$ref": "#/components/schemas/quota.v1.Priority"
@@ -232,7 +244,8 @@
                     "items": {
                       "$ref": "#/components/schemas/v1.Target"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 5
                   }
                 },
                 "required": [
@@ -346,7 +359,7 @@
             "application/json": {
               "schema": {
                 "title": "Create Policy Request",
-                "description": "This data structue is used to create a new policy.",
+                "description": "This data structue is used to create a new policy. The number of policies per source type is limited per account (200 by default).",
                 "type": "object",
                 "properties": {
                   "applicationRule": {
@@ -357,9 +370,11 @@
                   },
                   "description": {
                     "example": "My Policy Description",
-                    "description": "Optional free-text description of the policy's purpose.",
+                    "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\x00-\\xFF]*$",
+                    "minLength": 0,
+                    "maxLength": 255
                   },
                   "disabled": {
                     "description": "When true, the policy is disabled and will not be evaluated.",
@@ -370,9 +385,11 @@
                   },
                   "name": {
                     "example": "My Policy",
-                    "description": "Human-readable name for the policy.",
+                    "description": "Human-readable name for the policy. Only Latin-1 characters are accepted.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\x00-\\xFF]*$",
+                    "minLength": 1,
+                    "maxLength": 255
                   },
                   "placement": {
                     "$ref": "#/components/schemas/Placement"
@@ -393,12 +410,23 @@
                     "$ref": "#/components/schemas/quota.v1.Rule"
                   },
                   "targets": {
+                    "example": [
+                      {
+                        "archive_retention": {
+                          "id": "archive_retention_id"
+                        },
+                        "dataset": "dataset1",
+                        "name": "My Target",
+                        "priority": "PRIORITY_TYPE_HIGH"
+                      }
+                    ],
                     "description": "List of data targets/destinations to which this policy routes data.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/v1.Target"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 5
                   }
                 },
                 "required": [
@@ -709,7 +737,8 @@
                     "items": {
                       "$ref": "#/components/schemas/PolicyOrder"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 200
                   },
                   "sourceType": {
                     "$ref": "#/components/schemas/v1.SourceType"
@@ -793,7 +822,8 @@
                     "items": {
                       "$ref": "#/components/schemas/LogMetaFieldsValues"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 50
                   }
                 },
                 "required": [
@@ -866,10 +896,12 @@
             "description": "The unique identifier of the data policy to retrieve.",
             "required": true,
             "schema": {
-              "example": "id",
+              "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
               "description": "The unique identifier of the data policy to retrieve.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
             },
             "style": "simple"
           }
@@ -934,10 +966,12 @@
             "description": "The unique identifier of the data policy to delete.",
             "required": true,
             "schema": {
-              "example": "id",
+              "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
               "description": "The unique identifier of the data policy to delete.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
             },
             "style": "simple"
           }
@@ -1243,7 +1277,8 @@
                     "items": {
                       "$ref": "#/components/schemas/CreateSpanPolicyRequest"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 200
                   }
                 },
                 "required": [
@@ -1311,7 +1346,9 @@
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         }
       },
@@ -1330,7 +1367,8 @@
             "items": {
               "$ref": "#/components/schemas/CreatePolicyResponse"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 200
           }
         }
       },
@@ -1369,7 +1407,8 @@
             "items": {
               "$ref": "#/components/schemas/CreatePolicyResponse"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 200
           }
         }
       },
@@ -1388,7 +1427,8 @@
             "items": {
               "$ref": "#/components/schemas/TestPoliciesResult"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         },
         "required": [
@@ -1412,9 +1452,11 @@
           },
           "description": {
             "example": "My Policy Description",
-            "description": "Human-readable description.",
+            "description": "Human-readable description. Only Latin-1 characters are accepted.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\x00-\\xFF]*$",
+            "minLength": 0,
+            "maxLength": 255
           },
           "disabled": {
             "description": "The disabled.",
@@ -1422,9 +1464,11 @@
           },
           "name": {
             "example": "My Policy",
-            "description": "Display name.",
+            "description": "Display name. Only Latin-1 characters are accepted.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\x00-\\xFF]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
@@ -1441,7 +1485,8 @@
             "items": {
               "$ref": "#/components/schemas/v1.Target"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 5
           }
         },
         "required": [
@@ -1549,10 +1594,12 @@
         "type": "object",
         "properties": {
           "id": {
-            "example": "id",
+            "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         },
         "required": [
@@ -1588,7 +1635,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -1626,7 +1678,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -1694,7 +1751,8 @@
             "items": {
               "$ref": "#/components/schemas/Policy"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 30000
           }
         },
         "required": [
@@ -1752,19 +1810,25 @@
             "example": "application_name",
             "description": "The application name values.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1024
           },
           "severityValues": {
             "example": "severity",
             "description": "The severity values.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1024
           },
           "subsystemNameValues": {
             "example": "subsystem_name",
             "description": "The subsystem name values.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1024
           }
         },
         "required": [
@@ -1785,7 +1849,9 @@
           "dpxlExpression": {
             "description": "The dpxl expression.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 65535
           },
           "severities": {
             "description": "The severities.",
@@ -1793,7 +1859,8 @@
             "items": {
               "$ref": "#/components/schemas/quota.v1.Severity"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 6
           }
         },
         "required": [
@@ -1896,13 +1963,17 @@
             "example": 1234,
             "description": "Internal Coralogix company/team identifier that owns this policy.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
           },
           "createdAt": {
             "example": "2021-01-01T00:00:00.000Z",
             "description": "Timestamp (RFC 3339) when the policy was created.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 64
           },
           "deleted": {
             "example": false,
@@ -1911,9 +1982,11 @@
           },
           "description": {
             "example": "My Policy Description",
-            "description": "Optional free-text description of the policy's purpose.",
+            "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\x00-\\xFF]*$",
+            "minLength": 0,
+            "maxLength": 255
           },
           "enabled": {
             "example": true,
@@ -1921,25 +1994,31 @@
             "type": "boolean"
           },
           "id": {
-            "example": "policy_id",
+            "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
             "description": "Unique identifier for the policy.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "logRules": {
             "$ref": "#/components/schemas/LogRules"
           },
           "name": {
             "example": "My Policy",
-            "description": "Human-readable name for the policy.",
+            "description": "Human-readable name for the policy. Only Latin-1 characters are accepted.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\x00-\\xFF]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "order": {
             "example": 1,
-            "description": "Ordering priority that determines the sequence in which policies are evaluated.",
+            "description": "Ordering priority that determines the sequence in which policies are evaluated. Can be negative for policies placed first.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": -2147483648,
+            "maximum": 2147483647
           },
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
@@ -1960,18 +2039,31 @@
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
           "targets": {
+            "example": [
+              {
+                "archive_retention": {
+                  "id": "archive_retention_id"
+                },
+                "dataset": "dataset1",
+                "name": "My Target",
+                "priority": "PRIORITY_TYPE_HIGH"
+              }
+            ],
             "description": "List of data targets/destinations to which this policy routes data.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.Target"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 5
           },
           "updatedAt": {
             "example": "2021-01-01T00:00:00.000Z",
             "description": "Timestamp (RFC 3339) when the policy was last updated.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 64
           }
         },
         "required": [
@@ -2039,16 +2131,20 @@
         "type": "object",
         "properties": {
           "id": {
-            "example": "id",
+            "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "order": {
             "example": 1,
-            "description": "Sort order.",
+            "description": "Sort order. Must be a positive number.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
           }
         },
         "required": [
@@ -2088,12 +2184,19 @@
         "type": "object",
         "properties": {
           "usageTiers": {
-            "description": "Ordered list of usage tiers that map daily quota consumption percentages to priority levels.",
+            "example": [
+              {
+                "daily_quota_percentage": 80,
+                "priority": "PRIORITY_TYPE_HIGH"
+              }
+            ],
+            "description": "Ordered list of usage tiers that map daily quota consumption percentages to priority levels. Percentages must be strictly increasing and priorities strictly decreasing, using only LOW, MEDIUM, or HIGH.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UsageTier"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 3
           }
         }
       },
@@ -2134,7 +2237,8 @@
             "items": {
               "$ref": "#/components/schemas/PolicyOrder"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 200
           }
         },
         "required": [
@@ -2183,7 +2287,7 @@
             "type": "string",
             "pattern": "^[\\s\\S]*$",
             "minLength": 1,
-            "maxLength": 4096
+            "maxLength": 65535
           },
           "serviceRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
@@ -2194,7 +2298,8 @@
             "items": {
               "$ref": "#/components/schemas/TagRule"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -2221,19 +2326,28 @@
         "type": "object",
         "properties": {
           "ruleTypeId": {
-            "$ref": "#/components/schemas/RuleTypeId"
+            "example": "rule_type_id",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RuleTypeId"
+              }
+            ]
           },
           "tagName": {
-            "example": "tag_name",
-            "description": "The tag name.",
+            "example": "tags.environment",
+            "description": "The tag name. Must start with \"tags.\".",
             "type": "string",
-            "minLength": 0
+            "pattern": "^tags\\..*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "tagValue": {
             "example": "tag_value",
-            "description": "The tag value.",
+            "description": "The tag value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 65535
           }
         },
         "required": [
@@ -2321,12 +2435,19 @@
         "properties": {
           "dailyQuotaPercentage": {
             "example": 80,
-            "description": "The daily quota percentage.",
+            "description": "The daily quota percentage. Must be between 0 and 100.",
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "minimum": 0,
+            "maximum": 100
           },
           "priority": {
-            "$ref": "#/components/schemas/quota.v1.Priority"
+            "example": "PRIORITY_TYPE_HIGH",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/quota.v1.Priority"
+              }
+            ]
           }
         }
       },
@@ -2365,9 +2486,11 @@
         "type": "object",
         "properties": {
           "name": {
-            "description": "Display name.",
+            "description": "The value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 65535
           },
           "ruleTypeId": {
             "$ref": "#/components/schemas/RuleTypeId"
@@ -2406,13 +2529,20 @@
         "type": "object",
         "properties": {
           "archiveRetention": {
-            "$ref": "#/components/schemas/ArchiveRetention"
+            "description": "Optional archive retention configuration for the target.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ArchiveRetention"
+              }
+            ]
           },
           "dataset": {
             "example": "dataset1",
             "description": "The dataset.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 512
           },
           "dataspace": {
             "example": "dataspace1",
@@ -2423,10 +2553,21 @@
             "maxLength": 50
           },
           "priority": {
-            "$ref": "#/components/schemas/quota.v1.Priority"
+            "example": "PRIORITY_TYPE_MEDIUM",
+            "description": "The base priority for the target.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/quota.v1.Priority"
+              }
+            ]
           },
           "priorityOverride": {
-            "$ref": "#/components/schemas/PriorityOverride"
+            "description": "Optional quota-based tiered priority override for the target.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriorityOverride"
+              }
+            ]
           }
         }
       },

@@ -24,11 +24,14 @@ var _ MappedNullable = &TenantConfigV2{}
 type TenantConfigV2 struct {
 	// Whether metrics archiving is disabled for this tenant.
 	Disabled *bool `json:"disabled,omitempty"`
+	// Google Cloud Storage configuration.
 	Gcs *GcsConfig `json:"gcs,omitempty"`
+	// IBM Cloud Object Storage configuration.
 	Ibm *IbmConfigV2 `json:"ibm,omitempty"`
 	// Storage path prefix applied to all archived objects.
 	Prefix *string `json:"prefix,omitempty"`
 	RetentionPolicy *RetentionPolicyRequest `json:"retentionPolicy,omitempty"`
+	// AWS S3 storage configuration.
 	S3 *S3Config `json:"s3,omitempty"`
 	// Tenant identifier.
 	TenantId *int64 `json:"tenantId,omitempty"`

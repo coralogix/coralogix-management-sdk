@@ -25,7 +25,12 @@
                 "type": "object",
                 "properties": {
                   "dashboard": {
-                    "$ref": "#/components/schemas/Dashboard"
+                    "description": "Dashboard definition to validate",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Dashboard"
+                      }
+                    ]
                   },
                   "dashboardId": {
                     "description": "Id of an existing dashboard to load and validate",
@@ -997,10 +1002,20 @@
         "type": "object",
         "properties": {
           "customAction": {
-            "$ref": "#/components/schemas/CustomAction"
+            "description": "Object defining action defined by the user",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomAction"
+              }
+            ]
           },
           "goToDashboardAction": {
-            "$ref": "#/components/schemas/GoToDashboardTemplateAction"
+            "description": "Object defining one of the pre-defined template actions - go to specific dashboard",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GoToDashboardTemplateAction"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -1041,11 +1056,11 @@
         "externalDocs": {
           "url": ""
         },
-        "description": "All option.",
+        "description": "Synthetic 'All' option configuration. Required for static and query sources; never present for textbox sources.",
         "type": "object",
         "properties": {
           "includeAll": {
-            "description": "The include all.",
+            "description": "Whether the 'All' option is offered. Must be set explicitly — send false when the option is disabled, do not omit it.",
             "type": "boolean"
           },
           "label": {
@@ -1055,7 +1070,10 @@
             "minLength": 1,
             "maxLength": 255
           }
-        }
+        },
+        "required": [
+          "includeAll"
+        ]
       },
       "AllValue": {
         "externalDocs": {
@@ -1437,7 +1455,12 @@
         "type": "object",
         "properties": {
           "barValueDisplay": {
-            "$ref": "#/components/schemas/widgets.BarValueDisplay"
+            "description": "Specifies where to display the bar value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.BarValueDisplay"
+              }
+            ]
           },
           "colorScheme": {
             "example": "classic",
@@ -1448,7 +1471,12 @@
             "maxLength": 255
           },
           "colorsBy": {
-            "$ref": "#/components/schemas/ColorsBy"
+            "description": "How the bar colors should be organized",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorsBy"
+              }
+            ]
           },
           "customUnit": {
             "example": "mph",
@@ -1459,7 +1487,12 @@
             "maxLength": 255
           },
           "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
+            "description": "Data mode type, either high or archive",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.common.DataModeType"
+              }
+            ]
           },
           "decimal": {
             "example": 4,
@@ -1488,7 +1521,12 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "maxBarsPerChart": {
             "example": 20,
@@ -1499,25 +1537,62 @@
             "maximum": 2147483647
           },
           "query": {
-            "$ref": "#/components/schemas/BarChart.Query"
+            "description": "Query object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BarChart.Query"
+              }
+            ]
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "sortBy": {
-            "$ref": "#/components/schemas/SortByType"
+            "example": "1",
+            "description": "Sort type, by name or by value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SortByType"
+              }
+            ]
           },
           "stackDefinition": {
-            "$ref": "#/components/schemas/BarChart.StackDefinition"
+            "description": "Configuration of stacked bars",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BarChart.StackDefinition"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "xAxis": {
-            "$ref": "#/components/schemas/XAxis"
+            "description": "Specifies how to organize the x axis of the chart",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/XAxis"
+              }
+            ]
           },
           "xAxisTimeFormat": {
-            "$ref": "#/components/schemas/XAxisTimeFormat"
+            "description": "Time format for the X axis (only applicable when X axis is time-based)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/XAxisTimeFormat"
+              }
+            ]
           },
           "yAxisMax": {
             "example": 1000,
@@ -1542,7 +1617,12 @@
         "type": "object",
         "properties": {
           "dataprimeQuery": {
-            "$ref": "#/components/schemas/common.DataprimeQuery"
+            "description": "Dataprime query text",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.DataprimeQuery"
+              }
+            ]
           },
           "filters": {
             "description": "List of query filters",
@@ -1574,7 +1654,12 @@
             "maxLength": 4096
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -1587,7 +1672,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/LogsAggregation"
+            "description": "Query aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsAggregation"
+              }
+            ]
           },
           "filters": {
             "description": "List of filters that narrow down query results",
@@ -1621,7 +1711,12 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search logs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "stackedGroupName": {
             "description": "Field name by which results are stacked in individual group",
@@ -1631,10 +1726,20 @@
             "maxLength": 4096
           },
           "stackedGroupNameField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "Observation field by results are stacked in a group",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the results should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -1647,10 +1752,21 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/common.Aggregation"
+            "description": "Aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Aggregation"
+              }
+            ]
           },
           "editorMode": {
-            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+            "example": "1",
+            "description": "Type of the query editor used to generate the query, can be text or builder mode",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsQueryEditorMode"
+              }
+            ]
           },
           "filters": {
             "description": "List of metrics filters",
@@ -1675,10 +1791,20 @@
             "maxItems": 1000
           },
           "promqlQuery": {
-            "$ref": "#/components/schemas/PromQlQuery"
+            "description": "PromQL query string for querying metrics",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQlQuery"
+              }
+            ]
           },
           "promqlQueryType": {
-            "$ref": "#/components/schemas/PromQLQueryType"
+            "description": "Type of the PromQL query, can be Range or Instant",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQLQueryType"
+              }
+            ]
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
@@ -1688,7 +1814,12 @@
             "maxLength": 4096
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the result should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -1779,7 +1910,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/SpansAggregation"
+            "description": "Span query aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpansAggregation"
+              }
+            ]
           },
           "filters": {
             "description": "List of span query filters",
@@ -1809,16 +1945,36 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search span records",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "stackedGroupName": {
-            "$ref": "#/components/schemas/SpanField"
+            "description": "Field name by which results are stacked in individual group",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanField"
+              }
+            ]
           },
           "stackedGroupNameField": {
-            "$ref": "#/components/schemas/SpanObservationField"
+            "description": "Observation field definition by which groups are divided into subgroups",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanObservationField"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -1899,16 +2055,36 @@
         "type": "object",
         "properties": {
           "colorBy": {
-            "$ref": "#/components/schemas/ColorApplyTarget"
+            "description": "Determines which element to colorize - value text or background",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorApplyTarget"
+              }
+            ]
           },
           "range": {
-            "$ref": "#/components/schemas/RangeMapping"
+            "description": "Range-based color mapping using min/max and thresholds",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RangeMapping"
+              }
+            ]
           },
           "regex": {
-            "$ref": "#/components/schemas/RegexMapping"
+            "description": "Regex pattern-based color mapping",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RegexMapping"
+              }
+            ]
           },
           "value": {
-            "$ref": "#/components/schemas/ColorLabelMapping.ValueMapping"
+            "description": "Exact value-based color mapping",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorLabelMapping.ValueMapping"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -2255,7 +2431,12 @@
             "type": "boolean"
           },
           "color": {
-            "$ref": "#/components/schemas/SectionColor"
+            "description": "Color of the section header",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SectionColor"
+              }
+            ]
           },
           "description": {
             "description": "Short description of a section",
@@ -2272,7 +2453,12 @@
             "maxLength": 4096
           },
           "repetitiveVar": {
-            "$ref": "#/components/schemas/RepetitiveVar"
+            "description": "Variable name that can be applied on section making it repetitive section and other metadata",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RepetitiveVar"
+              }
+            ]
           }
         }
       },
@@ -2286,7 +2472,12 @@
         "type": "object",
         "properties": {
           "absoluteTimeFrame": {
-            "$ref": "#/components/schemas/TimeFrame"
+            "description": "Absolute time frame specifying a fixed start and end time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrame"
+              }
+            ]
           },
           "actions": {
             "description": "A list of public actions that are available within the dashboard context",
@@ -2330,7 +2521,12 @@
             "$ref": "#/components/schemas/AutoRefreshFiveMinutes"
           },
           "folderId": {
-            "$ref": "#/components/schemas/UUID"
+            "description": "The folder id.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UUID"
+              }
+            ]
           },
           "folderPath": {
             "$ref": "#/components/schemas/FolderPath"
@@ -2344,7 +2540,12 @@
             "maxLength": 21
           },
           "layout": {
-            "$ref": "#/components/schemas/Layout"
+            "description": "The layout configuration for the dashboard's visual elements.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Layout"
+              }
+            ]
           },
           "name": {
             "example": "Example Name",
@@ -2379,6 +2580,7 @@
             "$ref": "#/components/schemas/AutoRefreshTwoMinutes"
           },
           "variables": {
+            "deprecated": true,
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
@@ -2520,10 +2722,20 @@
         "type": "object",
         "properties": {
           "dataSource": {
-            "$ref": "#/components/schemas/ActionDataSourceType"
+            "description": "Defines the data source type of the action, if applicable",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ActionDataSourceType"
+              }
+            ]
           },
           "definition": {
-            "$ref": "#/components/schemas/ActionDefinition"
+            "description": "Definition of the action",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ActionDefinition"
+              }
+            ]
           },
           "id": {
             "description": "A unique identifier of the action",
@@ -2687,13 +2899,28 @@
             "maxItems": 1000
           },
           "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
+            "description": "Data mode type, either high or archive",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.common.DataModeType"
+              }
+            ]
           },
           "orderBy": {
-            "$ref": "#/components/schemas/OrderingField"
+            "description": "Defines how to order the results in the table",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OrderingField"
+              }
+            ]
           },
           "query": {
-            "$ref": "#/components/schemas/DataTable.Query"
+            "description": "A query object containing query definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataTable.Query"
+              }
+            ]
           },
           "resultsPerPage": {
             "example": 10,
@@ -2704,7 +2931,12 @@
             "maximum": 2147483647
           },
           "rowStyle": {
-            "$ref": "#/components/schemas/RowStyle"
+            "description": "Specifies how rows are displayed",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RowStyle"
+              }
+            ]
           }
         }
       },
@@ -2736,7 +2968,12 @@
         "type": "object",
         "properties": {
           "dataprimeQuery": {
-            "$ref": "#/components/schemas/common.DataprimeQuery"
+            "description": "Dataprime query text",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.DataprimeQuery"
+              }
+            ]
           },
           "filters": {
             "description": "List of query filters",
@@ -2748,7 +2985,12 @@
             "maxItems": 1000
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -2770,13 +3012,28 @@
             "maxItems": 1000
           },
           "grouping": {
-            "$ref": "#/components/schemas/LogsQuery.Grouping"
+            "description": "Definition of grouping and aggregations",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsQuery.Grouping"
+              }
+            ]
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search logs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the results should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -2789,7 +3046,13 @@
         "type": "object",
         "properties": {
           "editorMode": {
-            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+            "example": "2",
+            "description": "Type of the query editor used to generate the query, can be text or builder based",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsQueryEditorMode"
+              }
+            ]
           },
           "filters": {
             "description": "List of metrics filters",
@@ -2801,13 +3064,28 @@
             "maxItems": 1000
           },
           "promqlQuery": {
-            "$ref": "#/components/schemas/PromQlQuery"
+            "description": "PromQL query string for querying metrics",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQlQuery"
+              }
+            ]
           },
           "promqlQueryType": {
-            "$ref": "#/components/schemas/PromQLQueryType"
+            "description": "Type of the PromQL query, can be Range or Instant",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQLQueryType"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the result should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -2907,13 +3185,28 @@
             "maxItems": 1000
           },
           "grouping": {
-            "$ref": "#/components/schemas/SpansQuery.Grouping"
+            "description": "Definition of grouping and aggregations",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpansQuery.Grouping"
+              }
+            ]
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search span records",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -2926,10 +3219,20 @@
         "type": "object",
         "properties": {
           "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
+            "description": "Data mode type",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.common.DataModeType"
+              }
+            ]
           },
           "dataprimeQuery": {
-            "$ref": "#/components/schemas/common.DataprimeQuery"
+            "description": "Dataprime query text",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.DataprimeQuery"
+              }
+            ]
           }
         }
       },
@@ -2990,7 +3293,12 @@
         "type": "object",
         "properties": {
           "duration": {
-            "$ref": "#/components/schemas/DataprimeSource.Strategy.Duration"
+            "description": "Duration.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataprimeSource.Strategy.Duration"
+              }
+            ]
           },
           "instant": {
             "$ref": "#/components/schemas/DataprimeSource.Strategy.Instant"
@@ -3148,10 +3456,20 @@
         "type": "object",
         "properties": {
           "mappedValues": {
-            "$ref": "#/components/schemas/MappedValues"
+            "description": "Resolve the variable from the color label mapping result",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MappedValues"
+              }
+            ]
           },
           "observationField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "Resolve the variable from a query datashape field",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -3289,7 +3607,12 @@
             "maxLength": 255
           },
           "query": {
-            "$ref": "#/components/schemas/Dynamic.Query"
+            "description": "Query object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Dynamic.Query"
+              }
+            ]
           }
         },
         "required": [
@@ -3306,10 +3629,20 @@
         "type": "object",
         "properties": {
           "all": {
-            "$ref": "#/components/schemas/Equals.Selection.AllSelection"
+            "description": "Represents a selection of all values.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Equals.Selection.AllSelection"
+              }
+            ]
           },
           "list": {
-            "$ref": "#/components/schemas/Equals.Selection.ListSelection"
+            "description": "Represents a selection from a list of values.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Equals.Selection.ListSelection"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -3428,7 +3761,12 @@
         "type": "object",
         "properties": {
           "duration": {
-            "$ref": "#/components/schemas/EventRecurrenceSource.Strategy.Duration"
+            "description": "Duration.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EventRecurrenceSource.Strategy.Duration"
+              }
+            ]
           },
           "instant": {
             "$ref": "#/components/schemas/EventRecurrenceSource.Strategy.Instant"
@@ -3532,7 +3870,12 @@
         "type": "object",
         "properties": {
           "selection": {
-            "$ref": "#/components/schemas/Equals.Selection"
+            "description": "The selection criteria for the equality comparison.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Equals.Selection"
+              }
+            ]
           }
         }
       },
@@ -3552,10 +3895,20 @@
             "maxLength": 4096
           },
           "observationField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "The observation log field to which the filter is applied.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           },
           "operator": {
-            "$ref": "#/components/schemas/Filter.Operator"
+            "description": "An operator used for filtering the logs.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filter.Operator"
+              }
+            ]
           }
         }
       },
@@ -3568,7 +3921,12 @@
         "type": "object",
         "properties": {
           "selection": {
-            "$ref": "#/components/schemas/NotEquals.Selection"
+            "description": "The selection criteria for the non-equality comparison.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotEquals.Selection"
+              }
+            ]
           }
         }
       },
@@ -3581,10 +3939,20 @@
         "type": "object",
         "properties": {
           "equals": {
-            "$ref": "#/components/schemas/Filter.Equals"
+            "description": "Equality comparison.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filter.Equals"
+              }
+            ]
           },
           "notEquals": {
-            "$ref": "#/components/schemas/Filter.NotEquals"
+            "description": "Non-equality comparison.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filter.NotEquals"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -3630,13 +3998,28 @@
         "type": "object",
         "properties": {
           "logs": {
-            "$ref": "#/components/schemas/Filter.LogsFilter"
+            "description": "Filter configuration for logs.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filter.LogsFilter"
+              }
+            ]
           },
           "metrics": {
-            "$ref": "#/components/schemas/MetricsFilter"
+            "description": "Filter configuration for metrics.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsFilter"
+              }
+            ]
           },
           "spans": {
-            "$ref": "#/components/schemas/SpansFilter"
+            "description": "Filter configuration for spans.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpansFilter"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -3735,7 +4118,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -3773,7 +4161,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -3830,7 +4223,12 @@
         "type": "object",
         "properties": {
           "dataprimeQuery": {
-            "$ref": "#/components/schemas/common.DataprimeQuery"
+            "description": "Dataprime query text",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.DataprimeQuery"
+              }
+            ]
           },
           "filters": {
             "description": "List of query filters",
@@ -3842,7 +4240,12 @@
             "maxItems": 1000
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -3855,7 +4258,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/Gauge.Aggregation"
+            "deprecated": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Gauge.Aggregation"
+              }
+            ]
           },
           "filters": {
             "description": "List of filters that narrow down query results",
@@ -3876,13 +4284,28 @@
             "maxItems": 1000
           },
           "logsAggregation": {
-            "$ref": "#/components/schemas/LogsAggregation"
+            "description": "Aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsAggregation"
+              }
+            ]
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search logs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the result should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -3895,10 +4318,21 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/Gauge.Aggregation"
+            "description": "Aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Gauge.Aggregation"
+              }
+            ]
           },
           "editorMode": {
-            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+            "example": "2",
+            "description": "Type of the query editor used to generate the query, can be text or builder based",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsQueryEditorMode"
+              }
+            ]
           },
           "filters": {
             "description": "List of metrics filters",
@@ -3910,13 +4344,28 @@
             "maxItems": 1000
           },
           "promqlQuery": {
-            "$ref": "#/components/schemas/PromQlQuery"
+            "description": "PromQL query string for querying metrics",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQlQuery"
+              }
+            ]
           },
           "promqlQueryType": {
-            "$ref": "#/components/schemas/PromQLQueryType"
+            "description": "Type of the PromQL query, can be Range or Instant",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQLQueryType"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the result should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -4007,7 +4456,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/Gauge.Aggregation"
+            "deprecated": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Gauge.Aggregation"
+              }
+            ]
           },
           "filters": {
             "description": "List of span query filters",
@@ -4037,13 +4491,28 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "Lucene query string to search span records",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "spansAggregation": {
-            "$ref": "#/components/schemas/SpansAggregation"
+            "description": "Span query aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpansAggregation"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -4122,7 +4591,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/GeomapAggregation"
+            "description": "Determines how data clusters on the geomap will display values. Default should always be set to count to simply provide number of nodes in cluster as a value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapAggregation"
+              }
+            ]
           },
           "allowAbbreviation": {
             "example": false,
@@ -4130,10 +4604,20 @@
             "type": "boolean"
           },
           "color": {
-            "$ref": "#/components/schemas/GeomapColor"
+            "description": "Color options for the nodes on the geomap, affects cluster scaling as well.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapColor"
+              }
+            ]
           },
           "config": {
-            "$ref": "#/components/schemas/GeomapFieldConfig"
+            "description": "Defines columns which provide required geographic information for the geomap from the query results. Affects location and grouping of the data displayed.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapFieldConfig"
+              }
+            ]
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
@@ -4151,13 +4635,29 @@
             "maximum": 15
           },
           "minMax": {
-            "$ref": "#/components/schemas/MinMax"
+            "description": "Defines min/max values range for the geomap, will affect color and cluster scaling.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MinMax"
+              }
+            ]
           },
           "tooltip": {
-            "$ref": "#/components/schemas/GeomapTooltip"
+            "description": "Tooltip settings for the widget",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapTooltip"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           }
         }
       },
@@ -4169,19 +4669,44 @@
         "type": "object",
         "properties": {
           "avg": {
-            "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+            "description": "Option that will use selected field in data results, perform AVG aggregation on it across all nodes in a cluster and display that value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+              }
+            ]
           },
           "count": {
-            "$ref": "#/components/schemas/GeomapAggregationSimple"
+            "description": "Option that will make geomap clusters simply count the number of nodes in each cluster.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapAggregationSimple"
+              }
+            ]
           },
           "max": {
-            "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+            "description": "Option that will use selected field in data results, perform MAX aggregation on it across all nodes in a cluster and display that value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+              }
+            ]
           },
           "min": {
-            "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+            "description": "Option that will use selected field in data results, perform MIN aggregation on it across all nodes in a cluster and display that value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+              }
+            ]
           },
           "sum": {
-            "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+            "description": "Option that will use selected field in data results, perform SUM aggregation on it across all nodes in a cluster and display that value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapAggregationFieldBased"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -4282,7 +4807,12 @@
         "type": "object",
         "properties": {
           "awsRegionField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "Data for this field should always return valid AWS region strings (e.g. us-east-1, us-west-2).",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           }
         }
       },
@@ -4294,10 +4824,20 @@
         "type": "object",
         "properties": {
           "colorRange": {
-            "$ref": "#/components/schemas/ColorGradientType"
+            "description": "Geomap clusters will have same size, but gradient color will be applied to distinguish data values and/or applied aggregation",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorGradientType"
+              }
+            ]
           },
           "size": {
-            "$ref": "#/components/schemas/ColorSolidType"
+            "description": "Geomap clusters will scale according to data values and/or applied aggregation, using a solid color",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorSolidType"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -4342,10 +4882,20 @@
         "type": "object",
         "properties": {
           "latitudeField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "Data for this field should always return valid numeric coordinate (e.g. 45.756).",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           },
           "longitudeField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "Data for this field should always return valid numeric coordinate (e.g. -122.4194).",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           }
         }
       },
@@ -4357,10 +4907,20 @@
         "type": "object",
         "properties": {
           "awsRegionConfig": {
-            "$ref": "#/components/schemas/GeomapAwsRegionConfig"
+            "description": "Alternative way to provide geographic information, by specifying AWS region field from the query results.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapAwsRegionConfig"
+              }
+            ]
           },
           "coordinateConfig": {
-            "$ref": "#/components/schemas/GeomapCoordinateConfig"
+            "description": "Default way to provide geographic information, by specifying latitude and longitude fields from the query results.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapCoordinateConfig"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -4665,7 +5225,12 @@
             "format": "float"
           },
           "colorRange": {
-            "$ref": "#/components/schemas/ColorGradientType"
+            "description": "Color configuration for the heatmap",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorGradientType"
+              }
+            ]
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
@@ -4683,23 +5248,44 @@
             "maximum": 15
           },
           "histogramBucketUnit": {
-            "$ref": "#/components/schemas/HeatmapHistogramBucketUnit"
+            "description": "Unit used to format histogram bucket boundaries when a heatmap axis represents cumulative histogram buckets",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HeatmapHistogramBucketUnit"
+              }
+            ]
           },
           "preset": {
             "$ref": "#/components/schemas/HeatmapColorPreset"
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "showNumbers": {
             "description": "Whether to render numeric values inside the heatmap tiles",
             "type": "boolean"
           },
           "tooltip": {
-            "$ref": "#/components/schemas/HeatmapTooltip"
+            "description": "Tooltip settings for the widget",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HeatmapTooltip"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -4714,7 +5300,12 @@
             "maxItems": 1000
           },
           "xAxisTimeFormat": {
-            "$ref": "#/components/schemas/XAxisTimeFormat"
+            "description": "Time format for the X axis (only applicable when X axis contains timestamp fields)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/XAxisTimeFormat"
+              }
+            ]
           },
           "yAxisFields": {
             "description": "List of observation fields used as y-axis categories in the heatmap grid.",
@@ -4834,7 +5425,12 @@
             "maxLength": 255
           },
           "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
+            "description": "Data mode type, either high or archive",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.common.DataModeType"
+              }
+            ]
           },
           "decimal": {
             "example": 2,
@@ -4850,10 +5446,20 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "legendBy": {
-            "$ref": "#/components/schemas/LegendBy"
+            "description": "Indicates how to group the legend elements, either by thresholds or by query groups",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LegendBy"
+              }
+            ]
           },
           "max": {
             "example": 150000,
@@ -4868,10 +5474,20 @@
             "format": "double"
           },
           "query": {
-            "$ref": "#/components/schemas/Hexagon.Query"
+            "description": "A query object containing query definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexagon.Query"
+              }
+            ]
           },
           "thresholdType": {
-            "$ref": "#/components/schemas/ThresholdType"
+            "description": "Type of the threshold, relative or absolute",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ThresholdType"
+              }
+            ]
           },
           "thresholds": {
             "description": "List of value thresholds, each with a certain color and an optional name label",
@@ -4883,7 +5499,13 @@
             "maxItems": 1000
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "17",
+            "description": "Unit of the value - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           }
         }
       },
@@ -4896,7 +5518,12 @@
         "type": "object",
         "properties": {
           "dataprimeQuery": {
-            "$ref": "#/components/schemas/common.DataprimeQuery"
+            "description": "Dataprime query text",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.DataprimeQuery"
+              }
+            ]
           },
           "filters": {
             "description": "List of query filters",
@@ -4908,7 +5535,12 @@
             "maxItems": 1000
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -4939,13 +5571,28 @@
             "maxItems": 1000
           },
           "logsAggregation": {
-            "$ref": "#/components/schemas/LogsAggregation"
+            "description": "Aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsAggregation"
+              }
+            ]
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search logs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the result should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -4958,10 +5605,21 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/common.Aggregation"
+            "description": "Aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Aggregation"
+              }
+            ]
           },
           "editorMode": {
-            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+            "example": "1",
+            "description": "Type of the query editor used to generate the query, can be text or builder based",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsQueryEditorMode"
+              }
+            ]
           },
           "filters": {
             "description": "List of metrics filters",
@@ -4973,13 +5631,28 @@
             "maxItems": 1000
           },
           "promqlQuery": {
-            "$ref": "#/components/schemas/PromQlQuery"
+            "description": "PromQL query string for querying metrics",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQlQuery"
+              }
+            ]
           },
           "promqlQueryType": {
-            "$ref": "#/components/schemas/PromQLQueryType"
+            "description": "Type of the PromQL query, can be Range or Instant",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQLQueryType"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the result should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -5097,13 +5770,28 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "Lucene query string to search span records",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "spansAggregation": {
-            "$ref": "#/components/schemas/SpansAggregation"
+            "description": "Span query aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpansAggregation"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -5144,10 +5832,20 @@
             "maximum": 15
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "legendBy": {
-            "$ref": "#/components/schemas/LegendBy"
+            "description": "Indicates how to group the legend elements, either by thresholds or by query groups",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LegendBy"
+              }
+            ]
           },
           "max": {
             "example": 150000,
@@ -5162,7 +5860,12 @@
             "format": "double"
           },
           "thresholdType": {
-            "$ref": "#/components/schemas/ThresholdType"
+            "description": "Type of the threshold, relative or absolute",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ThresholdType"
+              }
+            ]
           },
           "thresholds": {
             "description": "List of value thresholds, each with a certain color and an optional name label",
@@ -5174,7 +5877,13 @@
             "maxItems": 1000
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the value - one from a predefined list, or 'custom'",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -5196,7 +5905,12 @@
             "maxLength": 255
           },
           "colorsBy": {
-            "$ref": "#/components/schemas/ColorsBy"
+            "description": "How the bar colors should be organized",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorsBy"
+              }
+            ]
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
@@ -5206,7 +5920,12 @@
             "maxLength": 255
           },
           "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
+            "description": "Data mode type, either high or archive",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.common.DataModeType"
+              }
+            ]
           },
           "decimal": {
             "example": 4,
@@ -5238,7 +5957,12 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "maxBarsPerChart": {
             "example": 20,
@@ -5249,19 +5973,46 @@
             "maximum": 2147483647
           },
           "query": {
-            "$ref": "#/components/schemas/HorizontalBarChart.Query"
+            "description": "Query object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HorizontalBarChart.Query"
+              }
+            ]
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "sortBy": {
-            "$ref": "#/components/schemas/SortByType"
+            "example": "1",
+            "description": "Sort type, by name or by value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SortByType"
+              }
+            ]
           },
           "stackDefinition": {
-            "$ref": "#/components/schemas/HorizontalBarChart.StackDefinition"
+            "description": "Configuration of stacked bars",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HorizontalBarChart.StackDefinition"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "yAxisMax": {
             "example": 1000,
@@ -5276,7 +6027,12 @@
             "format": "float"
           },
           "yAxisViewBy": {
-            "$ref": "#/components/schemas/HorizontalBarChart.YAxisViewBy"
+            "description": "Specifies how to organize the y-axis view",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HorizontalBarChart.YAxisViewBy"
+              }
+            ]
           }
         }
       },
@@ -5289,7 +6045,12 @@
         "type": "object",
         "properties": {
           "dataprimeQuery": {
-            "$ref": "#/components/schemas/common.DataprimeQuery"
+            "description": "Dataprime query text",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.DataprimeQuery"
+              }
+            ]
           },
           "filters": {
             "description": "List of query filters",
@@ -5321,7 +6082,12 @@
             "maxLength": 4096
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -5334,7 +6100,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/LogsAggregation"
+            "description": "Query aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsAggregation"
+              }
+            ]
           },
           "filters": {
             "description": "List of filters that narrow down query results",
@@ -5368,7 +6139,12 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search logs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "stackedGroupName": {
             "description": "Field name by which results are stacked in individual group",
@@ -5378,10 +6154,20 @@
             "maxLength": 4096
           },
           "stackedGroupNameField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "Observation field by results are stacked in a group",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the results should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -5394,10 +6180,21 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/common.Aggregation"
+            "description": "Aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Aggregation"
+              }
+            ]
           },
           "editorMode": {
-            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+            "example": "2",
+            "description": "Type of the query editor used to generate the query, can be text or builder mode",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsQueryEditorMode"
+              }
+            ]
           },
           "filters": {
             "description": "List of metrics filters",
@@ -5422,10 +6219,20 @@
             "maxItems": 1000
           },
           "promqlQuery": {
-            "$ref": "#/components/schemas/PromQlQuery"
+            "description": "PromQL query string for querying metrics",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQlQuery"
+              }
+            ]
           },
           "promqlQueryType": {
-            "$ref": "#/components/schemas/PromQLQueryType"
+            "description": "Type of the PromQL query, can be Range or Instant",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQLQueryType"
+              }
+            ]
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
@@ -5435,7 +6242,12 @@
             "maxLength": 4096
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the result should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -5526,7 +6338,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/SpansAggregation"
+            "description": "Span query aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpansAggregation"
+              }
+            ]
           },
           "filters": {
             "description": "List of span query filters",
@@ -5556,16 +6373,36 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search span records",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "stackedGroupName": {
-            "$ref": "#/components/schemas/SpanField"
+            "description": "Field name by which results are stacked in individual group",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanField"
+              }
+            ]
           },
           "stackedGroupNameField": {
-            "$ref": "#/components/schemas/SpanObservationField"
+            "description": "Observation field definition by which groups are divided into subgroups",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanObservationField"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -5600,10 +6437,20 @@
         "type": "object",
         "properties": {
           "category": {
-            "$ref": "#/components/schemas/YAxisViewByCategory"
+            "description": "Y axis scale divided by individual groups",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/YAxisViewByCategory"
+              }
+            ]
           },
           "value": {
-            "$ref": "#/components/schemas/YAxisViewByValue"
+            "description": "Y axis scale divided into value buckets",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/YAxisViewByValue"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -5669,7 +6516,12 @@
             "maxLength": 128
           },
           "colorsBy": {
-            "$ref": "#/components/schemas/ColorsBy"
+            "description": "How the bar colors should be organized",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorsBy"
+              }
+            ]
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
@@ -5703,7 +6555,12 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "maxBarsPerChart": {
             "example": 20,
@@ -5721,10 +6578,21 @@
             "maximum": 2147483647
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "sortBy": {
-            "$ref": "#/components/schemas/SortByType"
+            "example": "1",
+            "description": "Sort type, by name or by value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SortByType"
+              }
+            ]
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual stack",
@@ -5743,7 +6611,13 @@
             "maxItems": 1000
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -5761,7 +6635,12 @@
             "format": "float"
           },
           "yAxisViewBy": {
-            "$ref": "#/components/schemas/HorizontalBars.YAxisViewBy"
+            "description": "Specifies how to organize the y-axis view",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HorizontalBars.YAxisViewBy"
+              }
+            ]
           }
         }
       },
@@ -5803,7 +6682,12 @@
             "maxLength": 128
           },
           "colorsBy": {
-            "$ref": "#/components/schemas/ColorsBy"
+            "description": "How the bar colors should be organized",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorsBy"
+              }
+            ]
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
@@ -5837,7 +6721,12 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "maxBarsPerChart": {
             "example": 20,
@@ -5857,13 +6746,29 @@
             "maxItems": 1000
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "sortOrder": {
-            "$ref": "#/components/schemas/Visualization.SortOrder"
+            "description": "Sort order for bars - by category or by a specific observation field",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Visualization.SortOrder"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "yAxisMax": {
             "example": 1000,
@@ -5878,7 +6783,12 @@
             "format": "float"
           },
           "yAxisViewBy": {
-            "$ref": "#/components/schemas/HorizontalBarsMulti.YAxisViewBy"
+            "description": "Specifies how to organize the y-axis view",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HorizontalBarsMulti.YAxisViewBy"
+              }
+            ]
           }
         }
       },
@@ -5898,7 +6808,12 @@
             "maxLength": 255
           },
           "valueField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "Numeric field for this query - each bar gets one value column",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           }
         },
         "required": [
@@ -6005,7 +6920,12 @@
         "type": "object",
         "properties": {
           "value": {
-            "$ref": "#/components/schemas/StringValueLabel"
+            "description": "The value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringValueLabel"
+              }
+            ]
           }
         }
       },
@@ -6027,7 +6947,12 @@
             "maxLength": 4096
           },
           "severity": {
-            "$ref": "#/components/schemas/IssueSeverity"
+            "description": "Severity of the issue",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IssueSeverity"
+              }
+            ]
           }
         }
       },
@@ -6088,7 +7013,12 @@
             "type": "boolean"
           },
           "placement": {
-            "$ref": "#/components/schemas/LegendPlacement"
+            "description": "Location of the legend in the widget",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LegendPlacement"
+              }
+            ]
           }
         }
       },
@@ -6139,7 +7069,12 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "queryDefinitions": {
             "description": "Definitions of widget queries",
@@ -6151,10 +7086,20 @@
             "maxItems": 1000
           },
           "stackedLine": {
-            "$ref": "#/components/schemas/LineChart.StackedLine"
+            "description": "Type of stacked line, can be undefined, absolute or relative",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LineChart.StackedLine"
+              }
+            ]
           },
           "tooltip": {
-            "$ref": "#/components/schemas/Tooltip"
+            "description": "Tooltip settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Tooltip"
+              }
+            ]
           },
           "useDataTimeRange": {
             "example": false,
@@ -6162,7 +7107,12 @@
             "type": "boolean"
           },
           "xAxisTimeFormat": {
-            "$ref": "#/components/schemas/XAxisTimeFormat"
+            "description": "Time format for the X axis",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/XAxisTimeFormat"
+              }
+            ]
           }
         },
         "required": [
@@ -6178,7 +7128,12 @@
         "type": "object",
         "properties": {
           "dataprimeQuery": {
-            "$ref": "#/components/schemas/common.DataprimeQuery"
+            "description": "Dataprime query string to search",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.DataprimeQuery"
+              }
+            ]
           },
           "filters": {
             "description": "List of query filters",
@@ -6190,7 +7145,12 @@
             "maxItems": 1000
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -6242,10 +7202,20 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search logs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the results should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -6257,7 +7227,13 @@
         "type": "object",
         "properties": {
           "editorMode": {
-            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+            "example": "1",
+            "description": "Type of the query editor used to generate the query, can be text or builder based",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsQueryEditorMode"
+              }
+            ]
           },
           "filters": {
             "description": "List of metrics filters",
@@ -6269,13 +7245,29 @@
             "maxItems": 1000
           },
           "promqlQuery": {
-            "$ref": "#/components/schemas/PromQlQuery"
+            "description": "PromQL query string for querying metrics",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQlQuery"
+              }
+            ]
           },
           "seriesLimitType": {
-            "$ref": "#/components/schemas/MetricsSeriesLimitType"
+            "example": "1",
+            "description": "How to limit the result using series_count_limit parameter",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsSeriesLimitType"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the results should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -6380,7 +7372,12 @@
             "maxLength": 255
           },
           "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
+            "description": "Data mode type, either high or archive",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.common.DataModeType"
+              }
+            ]
           },
           "decimal": {
             "example": 4,
@@ -6408,7 +7405,12 @@
             "maxLength": 255
           },
           "intervalResolution": {
-            "$ref": "#/components/schemas/IntervalResolution"
+            "description": "Interval resolution settings for time bucket calculations, supporting auto or manual modes",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntervalResolution"
+              }
+            ]
           },
           "isVisible": {
             "example": true,
@@ -6423,13 +7425,29 @@
             "maxLength": 255
           },
           "query": {
-            "$ref": "#/components/schemas/LineChart.Query"
+            "description": "Query object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LineChart.Query"
+              }
+            ]
           },
           "resolution": {
-            "$ref": "#/components/schemas/LineChart.Resolution"
+            "deprecated": true,
+            "description": "Resolution settings of the query values (deprecated, use interval_resolution instead)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LineChart.Resolution"
+              }
+            ]
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "seriesCountLimit": {
             "description": "Max count of the series per query",
@@ -6446,7 +7464,13 @@
             "maxLength": 4096
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "yAxisMax": {
             "example": 1000,
@@ -6534,10 +7558,20 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "Lucene query string to search span records",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -6554,7 +7588,12 @@
         "type": "object",
         "properties": {
           "id": {
-            "$ref": "#/components/schemas/UUID"
+            "description": "Unique id of the link action",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UUID"
+              }
+            ]
           },
           "name": {
             "description": "Name of the link action",
@@ -6612,7 +7651,12 @@
             "maxItems": 1000
           },
           "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
+            "description": "Data mode type",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.common.DataModeType"
+              }
+            ]
           },
           "filters": {
             "description": "List of filters that narrow down query results",
@@ -6633,7 +7677,12 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search logs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           }
         }
       },
@@ -6787,7 +7836,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/LogsAggregation"
+            "description": "Type of aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsAggregation"
+              }
+            ]
           },
           "id": {
             "description": "Aggregation unique identifier",
@@ -6891,7 +7945,12 @@
         "type": "object",
         "properties": {
           "duration": {
-            "$ref": "#/components/schemas/LogsSource.Strategy.Duration"
+            "description": "Duration.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsSource.Strategy.Duration"
+              }
+            ]
           },
           "instant": {
             "$ref": "#/components/schemas/LogsSource.Strategy.Instant"
@@ -7012,7 +8071,12 @@
         "type": "object",
         "properties": {
           "value": {
-            "$ref": "#/components/schemas/StringValueLabel"
+            "description": "The value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringValueLabel"
+              }
+            ]
           }
         }
       },
@@ -7191,7 +8255,12 @@
         "type": "object",
         "properties": {
           "color": {
-            "$ref": "#/components/schemas/ColorSolidType"
+            "description": "Color for this mapping section",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorSolidType"
+              }
+            ]
           },
           "mapTo": {
             "description": "Display text to map the matched value to",
@@ -7331,16 +8400,38 @@
         "type": "object",
         "properties": {
           "editorMode": {
-            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+            "example": "2",
+            "description": "Type of the query editor used to generate the query, can be text or builder based",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsQueryEditorMode"
+              }
+            ]
           },
           "promqlQuery": {
-            "$ref": "#/components/schemas/PromQlQuery"
+            "description": "PromQL query string for querying metrics",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQlQuery"
+              }
+            ]
           },
           "promqlQueryType": {
-            "$ref": "#/components/schemas/PromQLQueryType"
+            "description": "Type of the PromQL query, can be Range or Instant",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQLQueryType"
+              }
+            ]
           },
           "seriesLimitType": {
-            "$ref": "#/components/schemas/MetricsSeriesLimitType"
+            "example": "1",
+            "description": "How to limit the result using series_count_limit parameter",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsSeriesLimitType"
+              }
+            ]
           }
         }
       },
@@ -7367,7 +8458,12 @@
             "maxLength": 4096
           },
           "operator": {
-            "$ref": "#/components/schemas/Filter.Operator"
+            "description": "An operator used for filtering the metrics.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filter.Operator"
+              }
+            ]
           }
         }
       },
@@ -7470,10 +8566,20 @@
         "type": "object",
         "properties": {
           "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
+            "description": "An empty value to determine min/max limits to be automatically derived from data",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MinMaxAuto"
+              }
+            ]
           },
           "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
+            "description": "Define min and/or max limits with custom values to affect widget scaling and/or colors",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MinMaxCustom"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -7545,6 +8651,7 @@
         "type": "object",
         "properties": {
           "selected": {
+            "deprecated": true,
             "description": "The selected values.",
             "type": "array",
             "items": {
@@ -7957,7 +9064,12 @@
         "type": "object",
         "properties": {
           "list": {
-            "$ref": "#/components/schemas/NotEquals.Selection.ListSelection"
+            "description": "Represents a selection from a list of values.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotEquals.Selection.ListSelection"
+              }
+            ]
           }
         }
       },
@@ -8055,7 +9167,13 @@
             "maxLength": 4096
           },
           "orderDirection": {
-            "$ref": "#/components/schemas/OrderDirection"
+            "example": "1",
+            "description": "Order direction, ascending or descending",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OrderDirection"
+              }
+            ]
           }
         }
       },
@@ -8092,7 +9210,12 @@
         "type": "object",
         "properties": {
           "dataprimeQuery": {
-            "$ref": "#/components/schemas/common.DataprimeQuery"
+            "description": "Dataprime query text",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.DataprimeQuery"
+              }
+            ]
           },
           "filters": {
             "description": "List of query filters",
@@ -8124,7 +9247,12 @@
             "maxLength": 4096
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -8137,7 +9265,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/LogsAggregation"
+            "description": "Query aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogsAggregation"
+              }
+            ]
           },
           "filters": {
             "description": "List of filters that narrow down query results",
@@ -8171,7 +9304,12 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search logs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "stackedGroupName": {
             "description": "Field name by which results are stacked in individual group",
@@ -8181,10 +9319,20 @@
             "maxLength": 4096
           },
           "stackedGroupNameField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "Observation field by results are stacked in a group",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the results should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -8197,10 +9345,21 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/common.Aggregation"
+            "description": "Aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Aggregation"
+              }
+            ]
           },
           "editorMode": {
-            "$ref": "#/components/schemas/MetricsQueryEditorMode"
+            "example": "1",
+            "description": "Type of the query editor used to generate the query, can be text or builder mode",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetricsQueryEditorMode"
+              }
+            ]
           },
           "filters": {
             "description": "List of metrics filters",
@@ -8225,10 +9384,20 @@
             "maxItems": 1000
           },
           "promqlQuery": {
-            "$ref": "#/components/schemas/PromQlQuery"
+            "description": "PromQL query string for querying metrics",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQlQuery"
+              }
+            ]
           },
           "promqlQueryType": {
-            "$ref": "#/components/schemas/PromQLQueryType"
+            "description": "Type of the PromQL query, can be Range or Instant",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQLQueryType"
+              }
+            ]
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
@@ -8238,7 +9407,12 @@
             "maxLength": 4096
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the result should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -8329,7 +9503,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/SpansAggregation"
+            "description": "Span query aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpansAggregation"
+              }
+            ]
           },
           "filters": {
             "description": "List of span query filters",
@@ -8359,16 +9538,36 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "A Lucene query string to search span records",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           },
           "stackedGroupName": {
-            "$ref": "#/components/schemas/SpanField"
+            "description": "Field name by which results are stacked in individual group",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanField"
+              }
+            ]
           },
           "stackedGroupNameField": {
-            "$ref": "#/components/schemas/SpanObservationField"
+            "description": "Observation field definition by which groups are divided into subgroups",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanObservationField"
+              }
+            ]
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Specifies the time period for which the records should be returned",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           }
         }
       },
@@ -8438,10 +9637,20 @@
         "type": "object",
         "properties": {
           "promqlQueryType": {
-            "$ref": "#/components/schemas/PromQLQueryType"
+            "description": "Whether to execute the PromQL query as an instant or a range query. Defaults to instant for variable use cases.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQLQueryType"
+              }
+            ]
           },
           "query": {
-            "$ref": "#/components/schemas/PromQlQuery"
+            "description": "PromQL query string used to fetch the values for this dashboard variable",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromQlQuery"
+              }
+            ]
           }
         }
       },
@@ -8479,7 +9688,12 @@
             "maxLength": 255
           },
           "link": {
-            "$ref": "#/components/schemas/PropertyLinks"
+            "description": "Link property (see PropertyLinks for full reference)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PropertyLinks"
+              }
+            ]
           },
           "regexExtract": {
             "example": "gr[ae]y",
@@ -8649,7 +9863,13 @@
             "format": "double"
           },
           "type": {
-            "$ref": "#/components/schemas/ThresholdType"
+            "example": "1",
+            "description": "Type of the threshold, can be relative or absolute",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ThresholdType"
+              }
+            ]
           },
           "values": {
             "description": "List of thresholds",
@@ -8699,7 +9919,13 @@
             "format": "double"
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           }
         }
       },
@@ -8859,7 +10085,12 @@
         "type": "object",
         "properties": {
           "label": {
-            "$ref": "#/components/schemas/Query.MetricsQuery.StringOrVariable"
+            "description": "The label.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Query.MetricsQuery.StringOrVariable"
+              }
+            ]
           },
           "metric": {
             "$ref": "#/components/schemas/Query.MetricsQuery.StringOrVariable"
@@ -9029,7 +10260,12 @@
             "$ref": "#/components/schemas/Query.MetricsQuery.Type.LabelValue"
           },
           "metricName": {
-            "$ref": "#/components/schemas/Query.MetricsQuery.Type.MetricName"
+            "description": "The metric name.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Query.MetricsQuery.Type.MetricName"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -9114,7 +10350,12 @@
             "$ref": "#/components/schemas/Query.MetricsQuery.StringOrVariable"
           },
           "metricName": {
-            "$ref": "#/components/schemas/Query.MetricsQuery.StringOrVariable"
+            "description": "The metric name.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Query.MetricsQuery.StringOrVariable"
+              }
+            ]
           }
         }
       },
@@ -9221,7 +10462,12 @@
             "$ref": "#/components/schemas/ObservationField"
           },
           "value": {
-            "$ref": "#/components/schemas/SpanField"
+            "description": "The value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanField"
+              }
+            ]
           }
         }
       },
@@ -9282,7 +10528,12 @@
             "maxLength": 255
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "seriesCountLimit": {
             "description": "Max count of the series per query",
@@ -9299,10 +10550,21 @@
             "maxLength": 4096
           },
           "temporalField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "Temporal field for time series data",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "valueFields": {
             "description": "A list of numeric/value observation fields to display from the query results",
@@ -9422,13 +10684,16 @@
         "externalDocs": {
           "url": ""
         },
-        "description": "Query.logs query.type.field value.",
+        "description": "Fetches distinct values for a specific log observation field. observationField is required and must be set.",
         "type": "object",
         "properties": {
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
           }
-        }
+        },
+        "required": [
+          "observationField"
+        ]
       },
       "QuerySource.MetricsQuery": {
         "externalDocs": {
@@ -9458,7 +10723,12 @@
         "type": "object",
         "properties": {
           "label": {
-            "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
+            "description": "The label.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
+              }
+            ]
           },
           "metric": {
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
@@ -9712,7 +10982,7 @@
         "externalDocs": {
           "url": ""
         },
-        "description": "Query.metrics query.type.label value.",
+        "description": "Fetches distinct values of a metric label. labelName is required and must be non-empty; metricName selects the metric to read the label from.",
         "type": "object",
         "properties": {
           "labelFilters": {
@@ -9730,7 +11000,10 @@
           "metricName": {
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
           }
-        }
+        },
+        "required": [
+          "labelName"
+        ]
       },
       "QuerySource.MetricsQuery.Type.MetricName": {
         "externalDocs": {
@@ -9828,14 +11101,25 @@
         "externalDocs": {
           "url": ""
         },
-        "description": "Fetches distinct values for a specific span observation field.",
+        "description": "Fetches distinct values for a specific span field. Set observationField to choose the field; value is a deprecated legacy alternative — prefer observationField and avoid setting both.",
         "type": "object",
         "properties": {
           "observationField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "The span observation field to fetch values for. Preferred over value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           },
           "value": {
-            "$ref": "#/components/schemas/SpanField"
+            "deprecated": true,
+            "description": "Deprecated. Legacy span field addressing. Use observationField instead; do not set both.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanField"
+              }
+            ]
           }
         }
       },
@@ -9847,7 +11131,12 @@
         "type": "object",
         "properties": {
           "dataModeType": {
-            "$ref": "#/components/schemas/v1.common.DataModeType"
+            "description": "Data mode. Omitted or DATA_MODE_TYPE_HIGH_UNSPECIFIED queries high-priority ('Frequent Search') data; DATA_MODE_TYPE_ARCHIVE queries archive ('Monitoring') data.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.common.DataModeType"
+              }
+            ]
           },
           "query": {
             "$ref": "#/components/schemas/common.DataprimeQuery"
@@ -9863,10 +11152,20 @@
         "type": "object",
         "properties": {
           "minMax": {
-            "$ref": "#/components/schemas/MinMax"
+            "description": "Min/max range configuration, auto-derived from data or custom values",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MinMax"
+              }
+            ]
           },
           "thresholdType": {
-            "$ref": "#/components/schemas/ThresholdType"
+            "description": "Type of the threshold, relative or absolute",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ThresholdType"
+              }
+            ]
           },
           "thresholds": {
             "description": "List of color thresholds defining color ranges",
@@ -9918,7 +11217,12 @@
         "type": "object",
         "properties": {
           "value": {
-            "$ref": "#/components/schemas/StringValueLabel"
+            "description": "The value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringValueLabel"
+              }
+            ]
           }
         }
       },
@@ -9963,10 +11267,20 @@
         "type": "object",
         "properties": {
           "appearance": {
-            "$ref": "#/components/schemas/Row.Appearance"
+            "description": "Row appearance configuration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Row.Appearance"
+              }
+            ]
           },
           "id": {
-            "$ref": "#/components/schemas/UUID"
+            "description": "Row unique identifier",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UUID"
+              }
+            ]
           },
           "widgets": {
             "description": "The list of widgets in the row",
@@ -10087,10 +11401,20 @@
         "type": "object",
         "properties": {
           "id": {
-            "$ref": "#/components/schemas/UUID"
+            "description": "Section unique identifier",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UUID"
+              }
+            ]
           },
           "options": {
-            "$ref": "#/components/schemas/SectionOptions"
+            "description": "Section's options",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SectionOptions"
+              }
+            ]
           },
           "rows": {
             "description": "Definition of a section's rows (one row represents a single row of visualizations)",
@@ -10123,7 +11447,12 @@
         "type": "object",
         "properties": {
           "custom": {
-            "$ref": "#/components/schemas/CustomSectionOptions"
+            "description": "Options for a custom section",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomSectionOptions"
+              }
+            ]
           },
           "internal": {
             "$ref": "#/components/schemas/InternalSectionOptions"
@@ -10203,7 +11532,12 @@
         "type": "object",
         "properties": {
           "value": {
-            "$ref": "#/components/schemas/StringValueLabel"
+            "description": "The value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringValueLabel"
+              }
+            ]
           }
         }
       },
@@ -10252,10 +11586,20 @@
         "type": "object",
         "properties": {
           "category": {
-            "$ref": "#/components/schemas/SortByCategory"
+            "description": "Order by category (e.g. bar label)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SortByCategory"
+              }
+            ]
           },
           "queryValue": {
-            "$ref": "#/components/schemas/SortByQueryValue"
+            "description": "Order by values from a specific query",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SortByQueryValue"
+              }
+            ]
           },
           "strategyType": {
             "example": "STRATEGY_TYPE_CATEGORY",
@@ -10379,7 +11723,12 @@
         "type": "object",
         "properties": {
           "value": {
-            "$ref": "#/components/schemas/SpanField"
+            "description": "The value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanField"
+              }
+            ]
           }
         }
       },
@@ -10439,7 +11788,12 @@
             "maxItems": 1000
           },
           "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
+            "description": "Data mode type",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.common.DataModeType"
+              }
+            ]
           },
           "filters": {
             "description": "List of span query filters",
@@ -10460,7 +11814,12 @@
             "maxItems": 1000
           },
           "luceneQuery": {
-            "$ref": "#/components/schemas/LuceneQuery"
+            "description": "Lucene query string to search span records",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQuery"
+              }
+            ]
           }
         }
       },
@@ -10521,13 +11880,28 @@
         "type": "object",
         "properties": {
           "field": {
-            "$ref": "#/components/schemas/SpanField"
+            "description": "The span field to which the filter is applied.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanField"
+              }
+            ]
           },
           "observationField": {
-            "$ref": "#/components/schemas/SpanObservationField"
+            "description": "The observation span field to which the filter is applied. Relation type is only supported in spans widget filters. (Not supported in global dashboard filters)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpanObservationField"
+              }
+            ]
           },
           "operator": {
-            "$ref": "#/components/schemas/Filter.Operator"
+            "description": "An operator used for filtering the spans.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filter.Operator"
+              }
+            ]
           }
         }
       },
@@ -10535,7 +11909,12 @@
         "type": "object",
         "properties": {
           "aggregation": {
-            "$ref": "#/components/schemas/SpansAggregation"
+            "description": "Type of spans aggregation function",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpansAggregation"
+              }
+            ]
           },
           "id": {
             "description": "Aggregation unique identifier",
@@ -10635,7 +12014,12 @@
         "type": "object",
         "properties": {
           "duration": {
-            "$ref": "#/components/schemas/SpansSource.Strategy.Duration"
+            "description": "Duration.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpansSource.Strategy.Duration"
+              }
+            ]
           },
           "instant": {
             "$ref": "#/components/schemas/SpansSource.Strategy.Instant"
@@ -10781,10 +12165,20 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "legendBy": {
-            "$ref": "#/components/schemas/LegendBy"
+            "description": "Indicates how to group the legend elements, either by thresholds or by query groups",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LegendBy"
+              }
+            ]
           },
           "max": {
             "example": 150000,
@@ -10799,10 +12193,20 @@
             "format": "double"
           },
           "thresholdBy": {
-            "$ref": "#/components/schemas/common.ThresholdBy"
+            "description": "Indicates which widget element should be colorized as the threshold, either the value or the background",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.ThresholdBy"
+              }
+            ]
           },
           "thresholdType": {
-            "$ref": "#/components/schemas/ThresholdType"
+            "description": "Type of the threshold, relative or absolute",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ThresholdType"
+              }
+            ]
           },
           "thresholds": {
             "description": "List of value thresholds, each with a certain color and an optional name label",
@@ -10814,10 +12218,21 @@
             "maxItems": 1000
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the value - one from a predefined list, or 'custom'",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "valueField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "deprecated": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           },
           "valueFields": {
             "description": "The value fields.",
@@ -10853,7 +12268,12 @@
             "maxItems": 1000
           },
           "colorLabelMapping": {
-            "$ref": "#/components/schemas/ColorLabelMapping"
+            "description": "Color and label mapping configuration for the stat card values",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorLabelMapping"
+              }
+            ]
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
@@ -10871,22 +12291,53 @@
             "maximum": 15
           },
           "label": {
-            "$ref": "#/components/schemas/StatVisualElement"
+            "description": "Optional label display configuration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatVisualElement"
+              }
+            ]
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "legendBy": {
-            "$ref": "#/components/schemas/LegendBy"
+            "description": "Indicates how to group the legend elements, either by thresholds or by query groups",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LegendBy"
+              }
+            ]
           },
           "primaryValue": {
-            "$ref": "#/components/schemas/StatVisualElement"
+            "description": "Primary value display configuration (required)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatVisualElement"
+              }
+            ]
           },
           "title": {
-            "$ref": "#/components/schemas/StatVisualElement"
+            "description": "Optional title display configuration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatVisualElement"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the value - one from a predefined list, or 'custom'",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "valueFields": {
             "description": "Fields to use for the stat card value",
@@ -10908,10 +12359,20 @@
         "type": "object",
         "properties": {
           "mappedValues": {
-            "$ref": "#/components/schemas/MappedValues"
+            "description": "Display the result of the color label mapping",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MappedValues"
+              }
+            ]
           },
           "observationField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "A field from the query datashape to display",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           },
           "templateText": {
             "description": "Optional display name template with variable support, e.g. 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'",
@@ -10968,7 +12429,7 @@
         "externalDocs": {
           "url": ""
         },
-        "description": "Static source.",
+        "description": "Static source — a fixed list of values defined directly on the variable. valuesOrderDirection is required and must be a concrete value — ORDER_DIRECTION_UNSPECIFIED is rejected.",
         "type": "object",
         "properties": {
           "allOption": {
@@ -10984,9 +12445,19 @@
             "maxItems": 1000
           },
           "valuesOrderDirection": {
-            "$ref": "#/components/schemas/OrderDirection"
+            "description": "Values sort order. A concrete value is required — ORDER_DIRECTION_UNSPECIFIED is rejected.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OrderDirection"
+              }
+            ]
           }
-        }
+        },
+        "required": [
+          "values",
+          "valuesOrderDirection",
+          "allOption"
+        ]
       },
       "StringValueLabel": {
         "externalDocs": {
@@ -11083,7 +12554,12 @@
             "maxLength": 4096
           },
           "id": {
-            "$ref": "#/components/schemas/UUID"
+            "description": "Unique identifier.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UUID"
+              }
+            ]
           },
           "name": {
             "description": "Display name.",
@@ -11123,7 +12599,13 @@
             "maxItems": 1000
           },
           "rowStyle": {
-            "$ref": "#/components/schemas/RowStyle"
+            "example": "1",
+            "description": "Type of row view style in the table",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RowStyle"
+              }
+            ]
           }
         }
       },
@@ -11161,7 +12643,12 @@
         "type": "object",
         "properties": {
           "dataModeType": {
-            "$ref": "#/components/schemas/v1.common.DataModeType"
+            "description": "Data mode. Omitted or DATA_MODE_TYPE_HIGH_UNSPECIFIED queries high-priority ('Frequent Search') data; DATA_MODE_TYPE_ARCHIVE queries archive ('Monitoring') data.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.common.DataModeType"
+              }
+            ]
           },
           "value": {
             "description": "The value.",
@@ -11472,7 +12959,13 @@
             "type": "boolean"
           },
           "barValueDisplay": {
-            "$ref": "#/components/schemas/Visualization.BarValueDisplay"
+            "example": "1",
+            "description": "Specifies where to display the bar value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Visualization.BarValueDisplay"
+              }
+            ]
           },
           "categoryFields": {
             "description": "The category fields.",
@@ -11511,7 +13004,12 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "maxSlicesPerBar": {
             "description": "How many slices can fit in a single bar",
@@ -11521,7 +13019,12 @@
             "maximum": 2147483647
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "seriesNameTemplate": {
             "description": "Custom template for the series name",
@@ -11531,16 +13034,33 @@
             "maxLength": 4096
           },
           "sortBy": {
-            "$ref": "#/components/schemas/SortByType"
+            "example": "1",
+            "description": "Sort type, by name or by value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SortByType"
+              }
+            ]
           },
           "temporalField": {
             "$ref": "#/components/schemas/ObservationField"
           },
           "tooltip": {
-            "$ref": "#/components/schemas/TimeSeriesTooltip"
+            "description": "Tooltip settings for the widget",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeSeriesTooltip"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "valueFields": {
             "description": "The value fields.",
@@ -11552,7 +13072,12 @@
             "maxItems": 1000
           },
           "xAxisTimeFormat": {
-            "$ref": "#/components/schemas/XAxisTimeFormat"
+            "description": "Time format for the X axis",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/XAxisTimeFormat"
+              }
+            ]
           },
           "yAxisMax": {
             "example": 1000,
@@ -11622,10 +13147,20 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "seriesCountLimit": {
             "description": "Max count of the series per query",
@@ -11642,16 +13177,32 @@
             "maxLength": 4096
           },
           "stackedLine": {
-            "$ref": "#/components/schemas/Visualization.StackedLine"
+            "description": "Type of stacked line, can be undefined, absolute or relative",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Visualization.StackedLine"
+              }
+            ]
           },
           "temporalField": {
             "$ref": "#/components/schemas/ObservationField"
           },
           "tooltip": {
-            "$ref": "#/components/schemas/TimeSeriesTooltip"
+            "description": "Tooltip settings for the widget",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeSeriesTooltip"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "useDataTimeRange": {
             "example": false,
@@ -11668,7 +13219,12 @@
             "maxItems": 1000
           },
           "xAxisTimeFormat": {
-            "$ref": "#/components/schemas/XAxisTimeFormat"
+            "description": "Time format for the X axis",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/XAxisTimeFormat"
+              }
+            ]
           },
           "yAxisMax": {
             "example": 1000,
@@ -11697,7 +13253,12 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "queryDisplaySettings": {
             "description": "Definitions of widget queries",
@@ -11709,10 +13270,20 @@
             "maxItems": 1000
           },
           "stackedLine": {
-            "$ref": "#/components/schemas/Visualization.StackedLine"
+            "description": "Type of stacked line, can be undefined, absolute or relative",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Visualization.StackedLine"
+              }
+            ]
           },
           "tooltip": {
-            "$ref": "#/components/schemas/TimeSeriesTooltip"
+            "description": "Tooltip settings for the widget",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeSeriesTooltip"
+              }
+            ]
           },
           "useDataTimeRange": {
             "example": false,
@@ -11720,7 +13291,12 @@
             "type": "boolean"
           },
           "xAxisTimeFormat": {
-            "$ref": "#/components/schemas/XAxisTimeFormat"
+            "description": "Time format for the X axis",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/XAxisTimeFormat"
+              }
+            ]
           }
         }
       },
@@ -11765,7 +13341,12 @@
             "type": "boolean"
           },
           "type": {
-            "$ref": "#/components/schemas/TooltipType"
+            "description": "Type of the tooltip display, can be showing single series value or all series values at once",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TooltipType"
+              }
+            ]
           }
         }
       },
@@ -11805,6 +13386,10 @@
         "additionalProperties": false
       },
       "ValueLabel": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A value/label pair for a static source. Both value and label must be set; clients typically default the label to the value.",
         "type": "object",
         "properties": {
           "isDefault": {
@@ -11825,7 +13410,11 @@
             "minLength": 1,
             "maxLength": 4096
           }
-        }
+        },
+        "required": [
+          "value",
+          "label"
+        ]
       },
       "ValuesMappingType": {
         "description": "Values mapping type.",
@@ -11876,7 +13465,12 @@
         "type": "object",
         "properties": {
           "constant": {
-            "$ref": "#/components/schemas/Constant"
+            "deprecated": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Constant"
+              }
+            ]
           },
           "multiSelect": {
             "$ref": "#/components/schemas/MultiSelect"
@@ -11927,7 +13521,7 @@
         ]
       },
       "VariableDisplayTypeV2": {
-        "description": "Variable display type v2.",
+        "description": "Variable display type v2. A concrete value is required — VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED is rejected by the API.",
         "type": "string",
         "enum": [
           "VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED",
@@ -12015,7 +13609,7 @@
         "externalDocs": {
           "url": ""
         },
-        "description": "Variable source backed by a query against logs, metrics, spans, or Dataprime data.",
+        "description": "Variable source backed by a query against logs, metrics, spans, or Dataprime data. Exactly one of logsQuery, metricsQuery, spansQuery, or dataprimeQuery must be set — the service rejects an object with no query arm (this exactly-one rule is enforced by the API, not by the OpenAPI oneOf schema). valuesOrderDirection is required and must be a concrete value — ORDER_DIRECTION_UNSPECIFIED is rejected. PromQL (metricsQuery.type.promqlQuery) and Dataprime (dataprimeQuery.type.queryText) query text is syntax-checked only by POST /dashboards/check/v1 — create and replace accept it without compiling.",
         "type": "object",
         "properties": {
           "allOption": {
@@ -12040,9 +13634,18 @@
             "$ref": "#/components/schemas/VariableSourceV2.ValueDisplayOptions"
           },
           "valuesOrderDirection": {
-            "$ref": "#/components/schemas/OrderDirection"
+            "description": "Values sort order. A concrete value is required — ORDER_DIRECTION_UNSPECIFIED is rejected.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OrderDirection"
+              }
+            ]
           }
         },
+        "required": [
+          "valuesOrderDirection",
+          "allOption"
+        ],
         "oneOf": [
           {
             "type": "object",
@@ -12134,6 +13737,10 @@
         }
       },
       "VariableV2": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Dashboard variable (v2). displayFullRow may be true only when source is a textbox; it is rejected for static and query sources.",
         "type": "object",
         "properties": {
           "description": {
@@ -12155,13 +13762,23 @@
             "maxLength": 100
           },
           "displayType": {
-            "$ref": "#/components/schemas/VariableDisplayTypeV2"
+            "description": "How the variable is rendered in the dashboard header. A concrete value is required — VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED is rejected.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariableDisplayTypeV2"
+              }
+            ]
           },
           "id": {
-            "$ref": "#/components/schemas/UUID"
+            "description": "Variable's unique identifier",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UUID"
+              }
+            ]
           },
           "name": {
-            "description": "Display name.",
+            "description": "Variable name, used to reference the variable in widget queries. Should match ^[a-zA-Z0-9_]+$ and be unique within the dashboard.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
             "minLength": 1,
@@ -12173,7 +13790,15 @@
           "value": {
             "$ref": "#/components/schemas/VariableValueV2"
           }
-        }
+        },
+        "required": [
+          "id",
+          "name",
+          "displayName",
+          "displayType",
+          "source",
+          "value"
+        ]
       },
       "VariableValueV2": {
         "externalDocs": {
@@ -12186,7 +13811,12 @@
             "$ref": "#/components/schemas/IntervalValue"
           },
           "lucene": {
-            "$ref": "#/components/schemas/LuceneQueryValue"
+            "description": "The lucene.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LuceneQueryValue"
+              }
+            ]
           },
           "multiString": {
             "$ref": "#/components/schemas/MultiStringValue"
@@ -12291,7 +13921,12 @@
         "type": "object",
         "properties": {
           "value": {
-            "$ref": "#/components/schemas/NumericValueLabel"
+            "description": "The value.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericValueLabel"
+              }
+            ]
           }
         }
       },
@@ -12308,7 +13943,12 @@
             "type": "boolean"
           },
           "barValueDisplay": {
-            "$ref": "#/components/schemas/Visualization.BarValueDisplay"
+            "description": "Specifies where to display the bar value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Visualization.BarValueDisplay"
+              }
+            ]
           },
           "categoryFields": {
             "description": "The category fields.",
@@ -12327,7 +13967,12 @@
             "maxLength": 128
           },
           "colorsBy": {
-            "$ref": "#/components/schemas/ColorsBy"
+            "description": "How the bar colors should be organized",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorsBy"
+              }
+            ]
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
@@ -12357,7 +14002,12 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "maxBarsPerChart": {
             "example": 20,
@@ -12375,10 +14025,21 @@
             "maximum": 2147483647
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "sortBy": {
-            "$ref": "#/components/schemas/SortByType"
+            "example": "1",
+            "description": "Sort type, by name or by value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SortByType"
+              }
+            ]
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual stack",
@@ -12397,7 +14058,13 @@
             "maxItems": 1000
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -12429,7 +14096,12 @@
             "type": "boolean"
           },
           "barValueDisplay": {
-            "$ref": "#/components/schemas/Visualization.BarValueDisplay"
+            "description": "Specifies where to display the bar value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Visualization.BarValueDisplay"
+              }
+            ]
           },
           "categoryFields": {
             "description": "The category fields.",
@@ -12448,7 +14120,12 @@
             "maxLength": 128
           },
           "colorsBy": {
-            "$ref": "#/components/schemas/ColorsBy"
+            "description": "How the bar colors should be organized",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ColorsBy"
+              }
+            ]
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
@@ -12478,7 +14155,12 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "maxBarsPerChart": {
             "example": 20,
@@ -12498,13 +14180,29 @@
             "maxItems": 1000
           },
           "scaleType": {
-            "$ref": "#/components/schemas/ScaleType"
+            "description": "Scale type - linear/logarithmic",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScaleType"
+              }
+            ]
           },
           "sortOrder": {
-            "$ref": "#/components/schemas/Visualization.SortOrder"
+            "description": "Sort order for bars - by category or by a specific observation field",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Visualization.SortOrder"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the query results - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "yAxisMax": {
             "example": 1000,
@@ -12536,7 +14234,12 @@
             "maxLength": 255
           },
           "valueField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "description": "Numeric field for this query - each bar gets one value column",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           }
         },
         "required": [
@@ -12584,7 +14287,12 @@
             "$ref": "#/components/schemas/TimeSeriesBars"
           },
           "timeSeriesLines": {
-            "$ref": "#/components/schemas/TimeSeriesLines"
+            "deprecated": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeSeriesLines"
+              }
+            ]
           },
           "timeSeriesLinesMulti": {
             "$ref": "#/components/schemas/TimeSeriesLinesMulti"
@@ -12809,7 +14517,12 @@
             "type": "boolean"
           },
           "arcDisplay": {
-            "$ref": "#/components/schemas/ArcDisplay"
+            "description": "Arc display settings; set this object to show the gauge arcs and control the value and threshold arcs, or omit it to hide all arcs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ArcDisplay"
+              }
+            ]
           },
           "categoryFields": {
             "description": "List of observation fields used to split gauge into multiple gauge instances.",
@@ -12840,10 +14553,20 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "legendBy": {
-            "$ref": "#/components/schemas/LegendBy"
+            "description": "Indicates how to group the legend elements, either by thresholds or by query groups",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LegendBy"
+              }
+            ]
           },
           "max": {
             "example": 150000,
@@ -12875,7 +14598,12 @@
             "type": "boolean"
           },
           "thresholdType": {
-            "$ref": "#/components/schemas/ThresholdType"
+            "description": "Type of the threshold, relative or absolute",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ThresholdType"
+              }
+            ]
           },
           "thresholds": {
             "description": "List of value thresholds, each with a certain color and an optional name label",
@@ -12887,10 +14615,21 @@
             "maxItems": 1000
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "3",
+            "description": "Unit of the value - one from a predefined list, or 'custom'",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "valueField": {
-            "$ref": "#/components/schemas/ObservationField"
+            "deprecated": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
           },
           "valueFields": {
             "description": "The value fields.",
@@ -12959,10 +14698,20 @@
             "type": "boolean"
           },
           "labelDefinition": {
-            "$ref": "#/components/schemas/Visualization.PieChart.LabelDefinition"
+            "description": "Settings for slice labels",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Visualization.PieChart.LabelDefinition"
+              }
+            ]
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "maxSlicesPerChart": {
             "example": 24,
@@ -13009,7 +14758,13 @@
             "maxItems": 1000
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "0",
+            "description": "Unit of the value - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -13028,7 +14783,12 @@
             "type": "boolean"
           },
           "labelSource": {
-            "$ref": "#/components/schemas/Visualization.PieChart.LabelSource"
+            "description": "Source of the label",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Visualization.PieChart.LabelSource"
+              }
+            ]
           },
           "showName": {
             "description": "Whether to show the name of slice in the label",
@@ -13062,10 +14822,21 @@
         "type": "object",
         "properties": {
           "orderDirection": {
-            "$ref": "#/components/schemas/OrderDirection"
+            "example": "1",
+            "description": "Order direction, ascending or descending",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OrderDirection"
+              }
+            ]
           },
           "strategy": {
-            "$ref": "#/components/schemas/SortStrategy"
+            "description": "How to determine sort key - by category or by query value",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SortStrategy"
+              }
+            ]
           }
         }
       },
@@ -13119,7 +14890,12 @@
         "type": "object",
         "properties": {
           "appearance": {
-            "$ref": "#/components/schemas/Widget.Appearance"
+            "deprecated": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Widget.Appearance"
+              }
+            ]
           },
           "createdAt": {
             "description": "Creation timestamp.",
@@ -13129,7 +14905,12 @@
             "maxLength": 30
           },
           "definition": {
-            "$ref": "#/components/schemas/Widget.Definition"
+            "description": "Definition of the widget type and details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Widget.Definition"
+              }
+            ]
           },
           "description": {
             "description": "Short description of the widget",
@@ -13138,8 +14919,17 @@
             "minLength": 0,
             "maxLength": 4096
           },
+          "highlighted": {
+            "description": "When true, this widget is marked as highlighted for all users of the dashboard. Not allowed on a widget reference.",
+            "type": "boolean"
+          },
           "id": {
-            "$ref": "#/components/schemas/UUID"
+            "description": "Widget unique identifier",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UUID"
+              }
+            ]
           },
           "layoutColumns": {
             "description": "Number of columns occupied by the widget in the dashboard layout",
@@ -13149,7 +14939,12 @@
             "maximum": 2147483647
           },
           "reference": {
-            "$ref": "#/components/schemas/WidgetReference"
+            "description": "Reference to a widget from another dashboard",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WidgetReference"
+              }
+            ]
           },
           "title": {
             "description": "Name of the widget",
@@ -13191,31 +14986,76 @@
         "type": "object",
         "properties": {
           "barChart": {
-            "$ref": "#/components/schemas/BarChart"
+            "description": "Vertical bar chart widget definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BarChart"
+              }
+            ]
           },
           "dataTable": {
-            "$ref": "#/components/schemas/DataTable"
+            "description": "Data table widget definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataTable"
+              }
+            ]
           },
           "dynamic": {
-            "$ref": "#/components/schemas/widgets.Dynamic"
+            "description": "Dynamic widget definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.Dynamic"
+              }
+            ]
           },
           "gauge": {
-            "$ref": "#/components/schemas/widgets.Gauge"
+            "description": "Gauge widget definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.Gauge"
+              }
+            ]
           },
           "hexagon": {
-            "$ref": "#/components/schemas/Hexagon"
+            "description": "Hexagon widget definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Hexagon"
+              }
+            ]
           },
           "horizontalBarChart": {
-            "$ref": "#/components/schemas/HorizontalBarChart"
+            "description": "Horizontal bar chart widget definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HorizontalBarChart"
+              }
+            ]
           },
           "lineChart": {
-            "$ref": "#/components/schemas/LineChart"
+            "description": "Line chart widget definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LineChart"
+              }
+            ]
           },
           "markdown": {
-            "$ref": "#/components/schemas/Markdown"
+            "description": "Markdown widget definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Markdown"
+              }
+            ]
           },
           "pieChart": {
-            "$ref": "#/components/schemas/widgets.PieChart"
+            "description": "Pie chart widget definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.PieChart"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -13352,7 +15192,12 @@
             "maxLength": 21
           },
           "widgetId": {
-            "$ref": "#/components/schemas/UUID"
+            "description": "Widget ID within the referenced dashboard",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UUID"
+              }
+            ]
           }
         }
       },
@@ -13364,13 +15209,29 @@
         "type": "object",
         "properties": {
           "time": {
-            "$ref": "#/components/schemas/XAxisByTime"
+            "deprecated": true,
+            "description": "X axis scale divided into time buckets (deprecated, use time_buckets instead)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/XAxisByTime"
+              }
+            ]
           },
           "timeBuckets": {
-            "$ref": "#/components/schemas/IntervalResolution"
+            "description": "X axis interval resolution settings for time bucket calculations, supporting auto or manual modes",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntervalResolution"
+              }
+            ]
           },
           "value": {
-            "$ref": "#/components/schemas/XAxisByValue"
+            "description": "X axis scale showing individual group values",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/XAxisByValue"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -13608,18 +15469,33 @@
             "type": "boolean"
           },
           "id": {
-            "$ref": "#/components/schemas/UUID"
+            "description": "Filter's unique identifier",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UUID"
+              }
+            ]
           },
           "scope": {
-            "$ref": "#/components/schemas/Filter.WidgetScope"
+            "description": "Scope of the filter, defining which widgets the filter applies to.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filter.WidgetScope"
+              }
+            ]
           },
           "source": {
-            "$ref": "#/components/schemas/Filter.Source"
+            "description": "The source of the filter, which can be logs, spans, or metrics.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filter.Source"
+              }
+            ]
           }
         }
       },
       "v1.common.DataModeType": {
-        "description": "Data mode type.",
+        "description": "Data mode type. Omitted or DATA_MODE_TYPE_HIGH_UNSPECIFIED queries high-priority ('Frequent Search') data; DATA_MODE_TYPE_ARCHIVE queries archive ('Monitoring') data.",
         "type": "string",
         "enum": [
           "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
@@ -13652,10 +15528,22 @@
         "type": "object",
         "properties": {
           "interpretation": {
-            "$ref": "#/components/schemas/Interpretation"
+            "deprecated": true,
+            "description": "Interpretation of the query results (deprecated, use visualization instead)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Interpretation"
+              }
+            ]
           },
           "query": {
-            "$ref": "#/components/schemas/Dynamic.Query"
+            "deprecated": true,
+            "description": "A query object describing how to retrieve data",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Dynamic.Query"
+              }
+            ]
           },
           "queryDefinitions": {
             "description": "Definitions of widget queries. At least one query definition is required unless the deprecated query field is set.",
@@ -13667,10 +15555,20 @@
             "maxItems": 1000
           },
           "timeFrame": {
-            "$ref": "#/components/schemas/TimeFrameSelect"
+            "description": "Time frame which overrides the dashboard time frame",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeFrameSelect"
+              }
+            ]
           },
           "visualization": {
-            "$ref": "#/components/schemas/Visualization"
+            "description": "Specifies how the query results should be visualized",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Visualization"
+              }
+            ]
           }
         }
       },
@@ -13682,7 +15580,12 @@
         "type": "object",
         "properties": {
           "arcDisplay": {
-            "$ref": "#/components/schemas/ArcDisplay"
+            "description": "Arc display settings; set this object to show the gauge arcs and control the value and threshold arcs, or omit it to hide all arcs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ArcDisplay"
+              }
+            ]
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as 'custom' to take effect)",
@@ -13692,7 +15595,12 @@
             "maxLength": 255
           },
           "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
+            "description": "Data mode type, either high or archive",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.common.DataModeType"
+              }
+            ]
           },
           "decimal": {
             "example": 3,
@@ -13712,10 +15620,20 @@
             "type": "boolean"
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "legendBy": {
-            "$ref": "#/components/schemas/LegendBy"
+            "description": "(multigauge display only) Indicates how to group the legend elements, either by thresholds or by standard groups",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LegendBy"
+              }
+            ]
           },
           "max": {
             "example": 150000,
@@ -13730,7 +15648,12 @@
             "format": "double"
           },
           "query": {
-            "$ref": "#/components/schemas/Gauge.Query"
+            "description": "A query object containing query definition",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Gauge.Query"
+              }
+            ]
           },
           "showInnerArc": {
             "deprecated": true,
@@ -13750,10 +15673,20 @@
             "type": "boolean"
           },
           "thresholdBy": {
-            "$ref": "#/components/schemas/Gauge.ThresholdBy"
+            "description": "Indicates which widget element should be colorized as the threshold, either the value or the background",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Gauge.ThresholdBy"
+              }
+            ]
           },
           "thresholdType": {
-            "$ref": "#/components/schemas/ThresholdType"
+            "description": "Type of the threshold, relative or absolute",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ThresholdType"
+              }
+            ]
           },
           "thresholds": {
             "description": "List of value thresholds, each with a certain color and an optional name label",
@@ -13765,7 +15698,13 @@
             "maxItems": 1000
           },
           "unit": {
-            "$ref": "#/components/schemas/Gauge.Unit"
+            "example": "3",
+            "description": "Unit of the value - one from a predefined list, or 'custom'",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Gauge.Unit"
+              }
+            ]
           }
         }
       },
@@ -13791,7 +15730,12 @@
             "maxLength": 255
           },
           "dataModeType": {
-            "$ref": "#/components/schemas/widgets.common.DataModeType"
+            "description": "Data mode type, either high or archive",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.common.DataModeType"
+              }
+            ]
           },
           "decimal": {
             "example": 5,
@@ -13819,10 +15763,20 @@
             "type": "boolean"
           },
           "labelDefinition": {
-            "$ref": "#/components/schemas/widgets.PieChart.LabelDefinition"
+            "description": "Settings for slice labels",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.PieChart.LabelDefinition"
+              }
+            ]
           },
           "legend": {
-            "$ref": "#/components/schemas/Legend"
+            "description": "Widget's legend settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Legend"
+              }
+            ]
           },
           "maxSlicesPerChart": {
             "example": 24,
@@ -13841,7 +15795,12 @@
             "maximum": 100
           },
           "query": {
-            "$ref": "#/components/schemas/PieChart.Query"
+            "description": "Query object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PieChart.Query"
+              }
+            ]
           },
           "showLegend": {
             "description": "Indicates whether to display the legend",
@@ -13853,10 +15812,21 @@
             "type": "boolean"
           },
           "stackDefinition": {
-            "$ref": "#/components/schemas/PieChart.StackDefinition"
+            "description": "Configuration of stacked slices",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PieChart.StackDefinition"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/common.Unit"
+            "example": "0",
+            "description": "Unit of the value - one from a predefined list, or custom",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/common.Unit"
+              }
+            ]
           }
         }
       },
@@ -13872,7 +15842,12 @@
             "type": "boolean"
           },
           "labelSource": {
-            "$ref": "#/components/schemas/widgets.PieChart.LabelSource"
+            "description": "Source of the label",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/widgets.PieChart.LabelSource"
+              }
+            ]
           },
           "showName": {
             "description": "Whether to show the name of slice in the label",

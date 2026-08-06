@@ -25,13 +25,17 @@ var _ MappedNullable = &LineChart{}
 type LineChart struct {
 	// Whether the line should remain connected instead of producing scattered points when null values are present in between
 	ConnectNulls *bool `json:"connectNulls,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
 	// Definitions of widget queries
 	QueryDefinitions []LineChartQueryDefinition `json:"queryDefinitions"`
+	// Type of stacked line, can be undefined, absolute or relative
 	StackedLine *LineChartStackedLine `json:"stackedLine,omitempty"`
+	// Tooltip settings
 	Tooltip *Tooltip `json:"tooltip,omitempty"`
 	// When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.
 	UseDataTimeRange *bool `json:"useDataTimeRange,omitempty"`
+	// Time format for the X axis
 	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -26,7 +26,7 @@ type HelmChart struct {
 	Commands []CommandInformation `json:"commands,omitempty"`
 	Guide *IntegrationGuide `json:"guide,omitempty"`
 	// The template.
-	Template *string `json:"template,omitempty"`
+	Template *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

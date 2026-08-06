@@ -22,11 +22,13 @@ var _ MappedNullable = &MetricAnomalyCondition{}
 
 // MetricAnomalyCondition Metric anomaly condition.
 type MetricAnomalyCondition struct {
+	// The type of condition for the alert.
 	ConditionType *MetricAnomalyConditionType `json:"conditionType,omitempty"`
 	// The percentage of the metric that must exceed the threshold to trigger the alert
 	ForOverPct *int64 `json:"forOverPct,omitempty"`
 	// The percentage of non-null values required to trigger the alert
 	MinNonNullValuesPct *int64 `json:"minNonNullValuesPct,omitempty"`
+	// The time window for the alert condition.
 	OfTheLast *MetricTimeWindow `json:"ofTheLast,omitempty"`
 	// The threshold value for the alert condition
 	Threshold *float64 `json:"threshold,omitempty"`

@@ -24,6 +24,7 @@ var _ MappedNullable = &OrderingField{}
 type OrderingField struct {
 	// Field name to order by
 	Field *string `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Order direction, ascending or descending
 	OrderDirection *OrderDirection `json:"orderDirection,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

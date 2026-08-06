@@ -30,6 +30,7 @@ type GenericIndicator struct {
 	ExternalId string `json:"externalId" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier of this generic indicator.
 	Id string `json:"id" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
+	// Sub-type identifying the originating system.
 	IndicatorType GenericIndicatorType `json:"indicatorType"`
 	// Arbitrary key-value metadata from the originating system.
 	Labels []V1KeyValue `json:"labels,omitempty"`
@@ -37,7 +38,9 @@ type GenericIndicator struct {
 	LastResolvedAt *time.Time `json:"lastResolvedAt,omitempty"`
 	// Timestamp when the indicator last triggered.
 	LastTriggeredAt time.Time `json:"lastTriggeredAt"`
+	// Priority of the indicator at trigger time.
 	Priority IndicatorPriority `json:"priority"`
+	// Current lifecycle status of the indicator.
 	Status GenericIndicatorStatus `json:"status"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

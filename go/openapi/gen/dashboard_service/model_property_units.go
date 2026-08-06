@@ -32,6 +32,7 @@ type PropertyUnits struct {
 	Max *float64 `json:"max,omitempty"`
 	// A minimum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value
 	Min *float64 `json:"min,omitempty"`
+	// Unit of the query results - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

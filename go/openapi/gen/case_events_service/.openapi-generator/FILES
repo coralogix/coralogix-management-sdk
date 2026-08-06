@@ -30,6 +30,7 @@ model_kpi_breached_case_event.go
 model_kpi_type.go
 model_log_attachment.go
 model_microsoft_teams_actor.go
+model_microsoft_teams_comment_metadata.go
 model_multiple_values.go
 model_notification_failed_case_event.go
 model_notification_metadata.go

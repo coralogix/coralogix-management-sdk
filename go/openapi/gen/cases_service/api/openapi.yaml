@@ -25,7 +25,12 @@
                 "type": "object",
                 "properties": {
                   "actor": {
-                    "$ref": "#/components/schemas/cases.v1.UserDetails"
+                    "description": "User performing the acknowledgment",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/cases.v1.UserDetails"
+                      }
+                    ]
                   },
                   "ids": {
                     "example": [
@@ -269,7 +274,12 @@
                 "type": "object",
                 "properties": {
                   "assignee": {
-                    "$ref": "#/components/schemas/cases.v1.UserDetails"
+                    "description": "User to assign the cases to",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/cases.v1.UserDetails"
+                      }
+                    ]
                   },
                   "ids": {
                     "example": [
@@ -463,7 +473,12 @@
                 "type": "object",
                 "properties": {
                   "assignee": {
-                    "$ref": "#/components/schemas/cases.v1.UserDetails"
+                    "description": "User to assign the case to",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/cases.v1.UserDetails"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -614,13 +629,28 @@
                 "type": "object",
                 "properties": {
                   "filters": {
-                    "$ref": "#/components/schemas/CaseFilters"
+                    "description": "Filters to apply when listing cases",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CaseFilters"
+                      }
+                    ]
                   },
                   "orderBy": {
-                    "$ref": "#/components/schemas/CaseOrderBy"
+                    "description": "Sorting parameters to control the order of returned cases. Supports single-field sorting only. Example: sort by priority in descending order to show highest priority cases first.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CaseOrderBy"
+                      }
+                    ]
                   },
                   "pagination": {
-                    "$ref": "#/components/schemas/cases.v1.PaginationRequest"
+                    "description": "Pagination parameters",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/cases.v1.PaginationRequest"
+                      }
+                    ]
                   }
                 }
               }
@@ -1113,7 +1143,12 @@
                 "type": "object",
                 "properties": {
                   "filters": {
-                    "$ref": "#/components/schemas/CaseFilters"
+                    "description": "Filters to apply when computing available values",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CaseFilters"
+                      }
+                    ]
                   }
                 }
               }
@@ -1359,7 +1394,13 @@
                     "maxItems": 1000
                   },
                   "priority": {
-                    "$ref": "#/components/schemas/CasePriority"
+                    "example": "CASE_PRIORITY_P3",
+                    "description": "Priority value to override with",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CasePriority"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -1519,7 +1560,13 @@
                 "type": "object",
                 "properties": {
                   "priority": {
-                    "$ref": "#/components/schemas/CasePriority"
+                    "example": "CASE_PRIORITY_P1",
+                    "description": "Priority value to override with",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CasePriority"
+                      }
+                    ]
                   }
                 },
                 "required": [
@@ -1858,7 +1905,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "Case after acknowledgment.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -2019,7 +2071,13 @@
             "maxItems": 1000
           },
           "groupingType": {
-            "$ref": "#/components/schemas/AlertGroupingType"
+            "example": "GROUPING_TYPE_COMPOSITE_ALERT",
+            "description": "How this indicator relates to other alerts (composite/combination/none).",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertGroupingType"
+              }
+            ]
           },
           "latestAlertVersion": {
             "example": "1eae3615-79e7-4b54-88e0-6a77def653bf",
@@ -2030,6 +2088,20 @@
             "maxLength": 64
           },
           "permutations": {
+            "example": [
+              {
+                "permutation": {
+                  "cluster": "prod",
+                  "service": "payments"
+                }
+              },
+              {
+                "permutation": {
+                  "cluster": "prod",
+                  "service": "billing"
+                }
+              }
+            ],
             "description": "Array of the alert permutations.",
             "type": "array",
             "items": {
@@ -2039,7 +2111,13 @@
             "maxItems": 1000
           },
           "priority": {
-            "$ref": "#/components/schemas/IndicatorPriority"
+            "example": "ALERT_PRIORITY_P2",
+            "description": "Priority of the alert at trigger time.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IndicatorPriority"
+              }
+            ]
           },
           "resolveTime": {
             "example": "2025-09-22T11:05:00.000Z",
@@ -2049,11 +2127,27 @@
             "minLength": 20,
             "maxLength": 30
           },
+          "resolveWithSignal": {
+            "example": true,
+            "description": "When true or omitted, indicates that Case will be resolved together with signal. Otherwise, Case will stay open and wait for manual resolution.",
+            "type": "boolean"
+          },
           "state": {
-            "$ref": "#/components/schemas/IndicatorState"
+            "example": "ALERT_INDICATOR_STATE_TRIGGERED",
+            "description": "Current lifecycle state of the indicator.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IndicatorState"
+              }
+            ]
           },
           "suppression": {
-            "$ref": "#/components/schemas/AlertSuppression"
+            "description": "When present, details about the suppression status of the alert indicator.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertSuppression"
+              }
+            ]
           },
           "triggerTime": {
             "example": "2025-09-22T10:30:00.000Z",
@@ -2275,6 +2369,27 @@
           }
         }
       },
+      "ApmDatabaseEntityFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "APM database entity filter",
+        "description": "Selects cases impacting the APM database with this name (matched case-insensitively).",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "orders-db",
+            "description": "Name of the impacted database to filter on",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
       "ApmServiceEntity": {
         "externalDocs": {
           "url": ""
@@ -2301,6 +2416,27 @@
           }
         }
       },
+      "ApmServiceEntityFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "APM service entity filter",
+        "description": "Selects cases impacting the APM service with this name (matched case-insensitively).",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "payments-api",
+            "description": "Name of the impacted APM service to filter on",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
       "AssignCaseResponse": {
         "externalDocs": {
           "url": ""
@@ -2310,7 +2446,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "Case after assigning a user to it.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -2387,7 +2528,12 @@
             "maxLength": 256
           },
           "unassigned": {
-            "$ref": "#/components/schemas/Unassigned"
+            "description": "Selects cases that have no assignee",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Unassigned"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -2443,7 +2589,13 @@
         "type": "object",
         "properties": {
           "breachStatus": {
-            "$ref": "#/components/schemas/BreachStatus"
+            "example": "BREACH_STATUS_BREACHED",
+            "description": "Current status of the KPI breach",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BreachStatus"
+              }
+            ]
           },
           "breachedAt": {
             "example": "2025-09-22T11:00:00.000Z",
@@ -2454,7 +2606,13 @@
             "maxLength": 30
           },
           "casePriority": {
-            "$ref": "#/components/schemas/KPIPriority"
+            "example": "KPI_PRIORITY_P1",
+            "description": "KPI (Case) priority at the time of KPI breach",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KPIPriority"
+              }
+            ]
           },
           "createdAt": {
             "example": "2025-09-22T11:00:00.000Z",
@@ -2473,7 +2631,13 @@
             "maxLength": 36
           },
           "kpiType": {
-            "$ref": "#/components/schemas/KPIType"
+            "example": "KPI_TYPE_TIME_TO_ACKNOWLEDGE",
+            "description": "Type of the breached KPI",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KPIType"
+              }
+            ]
           }
         },
         "required": [
@@ -2662,13 +2826,29 @@
             "maxLength": 4096
           },
           "assignee": {
-            "$ref": "#/components/schemas/cases.v1.UserDetails"
+            "description": "Assigned user details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/cases.v1.UserDetails"
+              }
+            ]
           },
           "caseIndicators": {
-            "$ref": "#/components/schemas/CaseIndicators"
+            "description": "Grouped case indicators",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseIndicators"
+              }
+            ]
           },
           "category": {
-            "$ref": "#/components/schemas/CaseCategory"
+            "example": "CASE_CATEGORY_AVAILABILITY",
+            "description": "Category of the case",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseCategory"
+              }
+            ]
           },
           "createTime": {
             "example": "2025-09-22T10:30:00.000Z",
@@ -2712,9 +2892,20 @@
             "maxItems": 1000
           },
           "kpiBreaches": {
-            "$ref": "#/components/schemas/KPIBreaches"
+            "description": "KPI breaches",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KPIBreaches"
+              }
+            ]
           },
           "labels": {
+            "example": [
+              {
+                "key": "team",
+                "value": "backend"
+              }
+            ],
             "description": "User-defined labels for the case",
             "type": "array",
             "items": {
@@ -2724,13 +2915,29 @@
             "maxItems": 1000
           },
           "ollyAnalysis": {
-            "$ref": "#/components/schemas/OllyAnalysis"
+            "description": "Automated Olly analysis attached to the case.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OllyAnalysis"
+              }
+            ]
           },
           "priority": {
-            "$ref": "#/components/schemas/CasePriority"
+            "example": "CASE_PRIORITY_P2",
+            "description": "Priority of the case",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CasePriority"
+              }
+            ]
           },
           "priorityDetails": {
-            "$ref": "#/components/schemas/PriorityDetails"
+            "description": "System and override priority details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriorityDetails"
+              }
+            ]
           },
           "readableId": {
             "example": "CASE-123",
@@ -2741,10 +2948,21 @@
             "maxLength": 64
           },
           "resolutionDetails": {
-            "$ref": "#/components/schemas/ResolutionDetails"
+            "description": "Resolution metadata",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResolutionDetails"
+              }
+            ]
           },
           "status": {
-            "$ref": "#/components/schemas/CaseStatus"
+            "example": "CASE_STATUS_ACKNOWLEDGED",
+            "description": "Current status of the case",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseStatus"
+              }
+            ]
           },
           "title": {
             "example": "Database outage investigation",
@@ -2823,9 +3041,19 @@
         "type": "object",
         "properties": {
           "alertFilters": {
-            "$ref": "#/components/schemas/AlertFilters"
+            "description": "Alert-based filters applied to cases. When absent, alert ID aggregations are not computed.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertFilters"
+              }
+            ]
           },
           "assignees": {
+            "example": [
+              {
+                "unassigned": {}
+              }
+            ],
             "description": "List of case assignees to filter on",
             "type": "array",
             "items": {
@@ -2847,7 +3075,12 @@
             "maxItems": 1000
           },
           "caseLabelsFilter": {
-            "$ref": "#/components/schemas/CaseLabelsFilter"
+            "description": "Filter based on entity labels associated with cases",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseLabelsFilter"
+              }
+            ]
           },
           "categories": {
             "example": [
@@ -2863,6 +3096,14 @@
             "maxItems": 1000
           },
           "connectorTypeFilters": {
+            "example": [
+              {
+                "connector_type": "CONNECTOR_TYPE_SLACK"
+              },
+              {
+                "no_connector": {}
+              }
+            ],
             "description": "Connector type filters applied to cases, including cases with no connector linked.",
             "type": "array",
             "items": {
@@ -2872,13 +3113,48 @@
             "maxItems": 1000
           },
           "dateRange": {
-            "$ref": "#/components/schemas/DateRangeFilter"
+            "description": "Date range filter applied to case active time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DateRangeFilter"
+              }
+            ]
           },
           "groupings": {
+            "example": [
+              {
+                "key": "service",
+                "values": [
+                  "payments",
+                  "auth"
+                ]
+              }
+            ],
             "description": "Grouping-based filters (e.g., service, subsystem)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterGroup"
+            },
+            "minItems": 0,
+            "maxItems": 1000
+          },
+          "impactedEntities": {
+            "example": [
+              {
+                "apmService": {
+                  "name": "payments-api"
+                }
+              },
+              {
+                "apmDatabase": {
+                  "name": "orders-db"
+                }
+              }
+            ],
+            "description": "Impacted APM entity filters. A case is returned if it impacts ANY of these entities (OR logic). An empty list applies no filtering.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImpactedEntityFilter"
             },
             "minItems": 0,
             "maxItems": 1000
@@ -2893,6 +3169,14 @@
             "maxItems": 1000
           },
           "labels": {
+            "example": [
+              {
+                "key": "team",
+                "values": [
+                  "backend"
+                ]
+              }
+            ],
             "description": "Label-based filters applied to cases",
             "type": "array",
             "items": {
@@ -2982,6 +3266,12 @@
         "type": "object",
         "properties": {
           "flatLabels": {
+            "example": [
+              {
+                "key": "region",
+                "value": "us-west-1"
+              }
+            ],
             "description": "List of case key:value labels to filter on",
             "type": "array",
             "items": {
@@ -3001,10 +3291,22 @@
         "type": "object",
         "properties": {
           "direction": {
-            "$ref": "#/components/schemas/CaseOrderByDirection"
+            "example": "CASE_ORDER_BY_DIRECTION_DESCENDING",
+            "description": "Order of sorting by field.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseOrderByDirection"
+              }
+            ]
           },
           "field": {
-            "$ref": "#/components/schemas/CaseOrderByField"
+            "example": "CASE_ORDER_BY_FIELD_PRIORITY",
+            "description": "Field by which primary sorting will be performed.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseOrderByField"
+              }
+            ]
           }
         }
       },
@@ -3053,7 +3355,12 @@
         "type": "object",
         "properties": {
           "apiKey": {
-            "$ref": "#/components/schemas/CaseResolver.ApiKey"
+            "description": "The api key.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseResolver.ApiKey"
+              }
+            ]
           },
           "cxUser": {
             "$ref": "#/components/schemas/CoralogixUser"
@@ -3213,7 +3520,12 @@
         "type": "object",
         "properties": {
           "category": {
-            "$ref": "#/components/schemas/CaseCategory"
+            "description": "Case category",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseCategory"
+              }
+            ]
           },
           "count": {
             "example": 13,
@@ -3234,7 +3546,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "Case after removing the priority override.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -3250,7 +3567,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "Case after closing it.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -3332,7 +3654,13 @@
             "maxLength": 30
           },
           "mode": {
-            "$ref": "#/components/schemas/DateRangeMode"
+            "example": "DATE_RANGE_MODE_ACTIVE_WINDOW",
+            "description": "Determines how the date range is applied. ACTIVE_WINDOW (default) returns cases active during the range. CREATED_AT returns cases created within the range.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DateRangeMode"
+              }
+            ]
           },
           "to": {
             "example": "2025-09-22T10:30:00.000Z",
@@ -3415,7 +3743,12 @@
             "maximum": 1000000000
           },
           "filter": {
-            "$ref": "#/components/schemas/v1.KeyValue"
+            "description": "Key/value filter that this count corresponds to",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.KeyValue"
+              }
+            ]
           }
         }
       },
@@ -3496,7 +3829,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -3534,7 +3872,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -3582,9 +3925,21 @@
             "maxLength": 36
           },
           "indicatorType": {
-            "$ref": "#/components/schemas/GenericIndicatorType"
+            "example": "GENERIC_INDICATOR_TYPE_ERROR_TRACKING",
+            "description": "Sub-type identifying the originating system.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GenericIndicatorType"
+              }
+            ]
           },
           "labels": {
+            "example": [
+              {
+                "key": "service",
+                "value": "auth"
+              }
+            ],
             "description": "Arbitrary key-value metadata from the originating system.",
             "type": "array",
             "items": {
@@ -3610,10 +3965,22 @@
             "maxLength": 30
           },
           "priority": {
-            "$ref": "#/components/schemas/IndicatorPriority"
+            "example": "INDICATOR_PRIORITY_P2",
+            "description": "Priority of the indicator at trigger time.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IndicatorPriority"
+              }
+            ]
           },
           "status": {
-            "$ref": "#/components/schemas/GenericIndicatorStatus"
+            "example": "GENERIC_INDICATOR_STATUS_TRIGGERED",
+            "description": "Current lifecycle status of the indicator.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GenericIndicatorStatus"
+              }
+            ]
           }
         },
         "required": [
@@ -3653,7 +4020,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "The case associated with the indicator.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -3669,7 +4041,12 @@
         "type": "object",
         "properties": {
           "deepLinks": {
-            "$ref": "#/components/schemas/CaseDeepLinks"
+            "description": "Deep links for the case.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseDeepLinks"
+              }
+            ]
           }
         },
         "required": [
@@ -3685,7 +4062,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "The requested case",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -3774,6 +4156,36 @@
           }
         ]
       },
+      "ImpactedEntityFilter": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Impacted entity filter",
+        "description": "Selects cases by an impacted APM entity (service or database).",
+        "type": "object",
+        "properties": {
+          "apmDatabase": {
+            "$ref": "#/components/schemas/ApmDatabaseEntityFilter"
+          },
+          "apmService": {
+            "$ref": "#/components/schemas/ApmServiceEntityFilter"
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "apmService"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "apmDatabase"
+            ]
+          }
+        ]
+      },
       "ImpactedEntityLink": {
         "externalDocs": {
           "url": ""
@@ -3783,7 +4195,12 @@
         "type": "object",
         "properties": {
           "entity": {
-            "$ref": "#/components/schemas/ImpactedEntity"
+            "description": "The impacted entity.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ImpactedEntity"
+              }
+            ]
           },
           "url": {
             "description": "Absolute URL to the entity drilldown view.",
@@ -3834,6 +4251,13 @@
         "type": "object",
         "properties": {
           "breachedKpis": {
+            "example": [
+              {
+                "case_priority": "CASE_PRIORITY_P1",
+                "kpi_type": "KPI_TYPE_TIME_TO_ACKNOWLEDGE",
+                "resolution_breached_at": "2025-09-22T11:00:00.000Z"
+              }
+            ],
             "description": "List of breached KPIs for the case",
             "type": "array",
             "items": {
@@ -3898,7 +4322,16 @@
             "maxItems": 1000
           },
           "pagination": {
-            "$ref": "#/components/schemas/cases.v1.PaginationResponse"
+            "description": "Pagination cursor for retrieving the next page of cases.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/cases.v1.PaginationResponse"
+              }
+            ]
+          },
+          "pbacTruncated": {
+            "description": "Indicates whether the list of cases was truncated due to PBAC (Policy-Based Access Control) restrictions. If true, the user may not have access to all cases that match the filters.",
+            "type": "boolean"
           }
         },
         "required": [
@@ -3986,10 +4419,21 @@
             "maxLength": 30
           },
           "payload": {
-            "$ref": "#/components/schemas/OllyAnalysisPayload"
+            "description": "Typed analysis payload returned by Olly. Present only when status = STATUS_OK.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OllyAnalysisPayload"
+              }
+            ]
           },
           "status": {
-            "$ref": "#/components/schemas/OllyAnalysisStatus"
+            "example": "STATUS_OK",
+            "description": "Outcome of the analysis attempt.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OllyAnalysisStatus"
+              }
+            ]
           }
         }
       },
@@ -4043,7 +4487,13 @@
             "maxLength": 4096
           },
           "rootCauseConfidence": {
-            "$ref": "#/components/schemas/OllyAnalysisRootCauseConfidence"
+            "example": "OLLY_ANALYSIS_ROOT_CAUSE_CONFIDENCE_HIGH",
+            "description": "Confidence level Olly assigns to the root-cause hypothesis.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OllyAnalysisRootCauseConfidence"
+              }
+            ]
           }
         }
       },
@@ -4093,7 +4543,12 @@
             "maximum": 1000000000
           },
           "priority": {
-            "$ref": "#/components/schemas/CasePriority"
+            "description": "Case priority",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CasePriority"
+              }
+            ]
           }
         }
       },
@@ -4106,10 +4561,20 @@
         "type": "object",
         "properties": {
           "override": {
-            "$ref": "#/components/schemas/CasePriority"
+            "description": "Optional override set by user",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CasePriority"
+              }
+            ]
           },
           "system": {
-            "$ref": "#/components/schemas/CasePriority"
+            "description": "System computed priority",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CasePriority"
+              }
+            ]
           }
         }
       },
@@ -4178,13 +4643,29 @@
             }
           },
           "priority": {
-            "$ref": "#/components/schemas/IndicatorPriority"
+            "example": "INDICATOR_PRIORITY_P2",
+            "description": "Priority of the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IndicatorPriority"
+              }
+            ]
           },
           "query": {
-            "$ref": "#/components/schemas/PrometheusAlertQuery"
+            "description": "When present, the PromQL query backing the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PrometheusAlertQuery"
+              }
+            ]
           },
           "status": {
-            "$ref": "#/components/schemas/PrometheusAlertStatus"
+            "description": "Current status of the alert.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PrometheusAlertStatus"
+              }
+            ]
           },
           "updatedAt": {
             "example": "2025-09-22T11:05:00.000Z",
@@ -4250,7 +4731,13 @@
             }
           },
           "priority": {
-            "$ref": "#/components/schemas/IndicatorPriority"
+            "example": "INDICATOR_PRIORITY_P2",
+            "description": "Priority of the Prometheus alert group.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IndicatorPriority"
+              }
+            ]
           },
           "receivedAt": {
             "example": "2025-09-22T10:30:00.000Z",
@@ -4269,7 +4756,12 @@
             "maxLength": 256
           },
           "status": {
-            "$ref": "#/components/schemas/PrometheusAlertStatus"
+            "description": "Current status of the Prometheus alert group.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PrometheusAlertStatus"
+              }
+            ]
           },
           "updatedAt": {
             "example": "2025-09-22T11:05:00.000Z",
@@ -4426,7 +4918,12 @@
             "maxLength": 30
           },
           "resolvedBy": {
-            "$ref": "#/components/schemas/CaseResolver"
+            "description": "Entity that resolved the case",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseResolver"
+              }
+            ]
           }
         }
       },
@@ -4439,7 +4936,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "Case after resolution.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -4509,7 +5011,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "Case after applying the priority override.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -4556,7 +5063,12 @@
             "maximum": 1000000000
           },
           "status": {
-            "$ref": "#/components/schemas/CaseStatus"
+            "description": "Case status",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseStatus"
+              }
+            ]
           }
         }
       },
@@ -4614,7 +5126,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "Case after acknowledgment was removed.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -4630,7 +5147,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "Case after removing its assignee.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -4655,7 +5177,12 @@
         "type": "object",
         "properties": {
           "case": {
-            "$ref": "#/components/schemas/Case"
+            "description": "Updated case",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Case"
+              }
+            ]
           }
         },
         "required": [
@@ -4706,7 +5233,12 @@
             "maxItems": 1000
           },
           "assigneeAggregations": {
-            "$ref": "#/components/schemas/AssigneeAggregation"
+            "description": "Aggregated case counts grouped by assignee.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssigneeAggregation"
+              }
+            ]
           },
           "categoryAggregations": {
             "description": "Aggregated case counts grouped by category.",

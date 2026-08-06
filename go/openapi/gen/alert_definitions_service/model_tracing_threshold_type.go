@@ -26,6 +26,7 @@ type TracingThresholdType struct {
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	// The rules for the trace threshold alert.
 	Rules []TracingThresholdRule `json:"rules,omitempty"`
+	// The filter to match trace entries for the alert.
 	TracingFilter *TracingFilter `json:"tracingFilter,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

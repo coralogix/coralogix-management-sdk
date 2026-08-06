@@ -22,6 +22,7 @@ var _ MappedNullable = &AlertDefStatusFilter{}
 
 // AlertDefStatusFilter Filter by alert definition status
 type AlertDefStatusFilter struct {
+	// The filter operator (EQUALS, NOT_EQUALS)
 	Matcher *AlertsV3FilterMatcher `json:"matcher,omitempty"`
 	// The status(es) of the alert definition - multiple values are OR'd together
 	Status []AlertDefStatus `json:"status,omitempty"`

@@ -23,17 +23,17 @@ var _ MappedNullable = &CustomEnrichment{}
 // CustomEnrichment Custom enrichment.
 type CustomEnrichment struct {
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The file name.
-	FileName *string `json:"fileName,omitempty"`
+	FileName *string `json:"fileName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The file size.
 	FileSize *int64 `json:"fileSize,omitempty"`
 	// Unique identifier.
 	Id *int64 `json:"id,omitempty"`
 	// The is query only.
 	IsQueryOnly *bool `json:"isQueryOnly,omitempty"`
-	// Display name.
-	Name *string `json:"name,omitempty"`
+	// Display name. May contain only letters, digits, and underscores.
+	Name *string `json:"name,omitempty" validate:"regexp=^\\\\w+$"`
 	// Version number.
 	Version *int64 `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}

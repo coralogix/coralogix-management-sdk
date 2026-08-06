@@ -22,6 +22,7 @@ var _ MappedNullable = &IntervalValue{}
 
 // IntervalValue Interval value.
 type IntervalValue struct {
+	// The value.
 	Value *StringValueLabel `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,8 +22,11 @@ var _ MappedNullable = &AlertDefProperties{}
 
 // AlertDefProperties User-configurable properties of an alert definition
 type AlertDefProperties struct {
+	// The schedule defining when the alert should be active
 	ActiveOn *ActivitySchedule `json:"activeOn,omitempty"`
+	// Configuration for analytics immediate alerts
 	AnalyticsImmediate *AnalyticsImmediateType `json:"analyticsImmediate,omitempty"`
+	// Configuration for analytics threshold alerts
 	AnalyticsThreshold *AnalyticsThresholdType `json:"analyticsThreshold,omitempty"`
 	// The sources from which to sample logs
 	DataSources []AlertDefDataSource `json:"dataSources,omitempty"`
@@ -35,30 +38,48 @@ type AlertDefProperties struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// Labels used to identify and categorize the alert entity
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	// Configuration for flow-based alerts
 	Flow *FlowType `json:"flow,omitempty"`
 	// Keys used to group and aggregate alert data
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
+	// Incident creation and management settings
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
+	// Configuration for log-based anomaly detection alerts
 	LogsAnomaly *LogsAnomalyType `json:"logsAnomaly,omitempty"`
+	// Configuration for immediate log-based alerts
 	LogsImmediate *LogsImmediateType `json:"logsImmediate,omitempty"`
+	// Configuration for alerts triggered by new log values
 	LogsNewValue *LogsNewValueType `json:"logsNewValue,omitempty"`
+	// Configuration for log-based ratio threshold alerts
 	LogsRatioThreshold *LogsRatioThresholdType `json:"logsRatioThreshold,omitempty"`
+	// Configuration for log-based threshold alerts
 	LogsThreshold *LogsThresholdType `json:"logsThreshold,omitempty"`
+	// Configuration for time-relative log threshold alerts
 	LogsTimeRelativeThreshold *LogsTimeRelativeThresholdType `json:"logsTimeRelativeThreshold,omitempty"`
+	// Configuration for alerts based on unique log value counts
 	LogsUniqueCount *LogsUniqueCountType `json:"logsUniqueCount,omitempty"`
+	// Configuration for metric-based anomaly detection alerts
 	MetricAnomaly *MetricAnomalyType `json:"metricAnomaly,omitempty"`
+	// Configuration for metric-based threshold alerts
 	MetricThreshold *MetricThresholdType `json:"metricThreshold,omitempty"`
 	// The name of the alert definition
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Primary notification group for alert events
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
 	// Additional notification groups for alerts (deprecated)
+	// Deprecated
 	NotificationGroupExcess []AlertDefNotificationGroup `json:"notificationGroupExcess,omitempty"`
 	// Whether the alert is in phantom mode (creating incidents or not)
 	PhantomMode *bool `json:"phantomMode,omitempty"`
+	// The priority level of the alert
 	Priority *AlertDefPriority `json:"priority,omitempty"`
+	// Configuration for SLO-based alerts
 	SloThreshold *SloThresholdType `json:"sloThreshold,omitempty"`
+	// Configuration for immediate tracing-based alerts
 	TracingImmediate *TracingImmediateType `json:"tracingImmediate,omitempty"`
+	// Configuration for tracing-based threshold alerts
 	TracingThreshold *TracingThresholdType `json:"tracingThreshold,omitempty"`
+	// Alert type
 	Type *AlertDefType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -788,6 +809,7 @@ func (o *AlertDefProperties) SetNotificationGroup(v AlertDefNotificationGroup) {
 }
 
 // GetNotificationGroupExcess returns the NotificationGroupExcess field value if set, zero value otherwise.
+// Deprecated
 func (o *AlertDefProperties) GetNotificationGroupExcess() []AlertDefNotificationGroup {
 	if o == nil || IsNil(o.NotificationGroupExcess) {
 		var ret []AlertDefNotificationGroup
@@ -798,6 +820,7 @@ func (o *AlertDefProperties) GetNotificationGroupExcess() []AlertDefNotification
 
 // GetNotificationGroupExcessOk returns a tuple with the NotificationGroupExcess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *AlertDefProperties) GetNotificationGroupExcessOk() ([]AlertDefNotificationGroup, bool) {
 	if o == nil || IsNil(o.NotificationGroupExcess) {
 		return nil, false
@@ -815,6 +838,7 @@ func (o *AlertDefProperties) HasNotificationGroupExcess() bool {
 }
 
 // SetNotificationGroupExcess gets a reference to the given []AlertDefNotificationGroup and assigns it to the NotificationGroupExcess field.
+// Deprecated
 func (o *AlertDefProperties) SetNotificationGroupExcess(v []AlertDefNotificationGroup) {
 	o.NotificationGroupExcess = v
 }

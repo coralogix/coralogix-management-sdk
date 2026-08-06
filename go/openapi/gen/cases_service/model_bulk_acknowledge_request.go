@@ -23,6 +23,7 @@ var _ MappedNullable = &BulkAcknowledgeRequest{}
 
 // BulkAcknowledgeRequest Request to acknowledge multiple cases
 type BulkAcknowledgeRequest struct {
+	// User performing the acknowledgment
 	Actor CasesV1UserDetails `json:"actor"`
 	// IDs of the cases to acknowledge. Each entry accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
 	Ids []string `json:"ids"`

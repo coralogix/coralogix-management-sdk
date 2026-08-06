@@ -25,6 +25,7 @@ type QueryMetricsQueryTypeLabelValue struct {
 	// The label filters.
 	LabelFilters []QueryMetricsQueryMetricsLabelFilter `json:"labelFilters,omitempty"`
 	LabelName *QueryMetricsQueryStringOrVariable `json:"labelName,omitempty"`
+	// The metric name.
 	MetricName *QueryMetricsQueryStringOrVariable `json:"metricName,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

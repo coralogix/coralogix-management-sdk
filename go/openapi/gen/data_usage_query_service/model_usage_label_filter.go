@@ -25,6 +25,7 @@ var _ MappedNullable = &UsageLabelFilter{}
 type UsageLabelFilter struct {
 	// Label key to filter on. Supported keys are listed by the capabilities endpoint.
 	Key string `json:"key" validate:"regexp=^[A-Za-z][A-Za-z0-9_]*$"`
+	// How `values` is matched against the label.
 	Operator UsageLabelFilterFilterOperator `json:"operator"`
 	// Values to match against `key`. Required and must be non-empty when an `operator` is set.
 	Values []string `json:"values"`

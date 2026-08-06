@@ -25,6 +25,7 @@ var _ MappedNullable = &IncidentSearchQuery{}
 type IncidentSearchQuery struct {
 	// The contextual label to search in.
 	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	// The field to search in
 	IncidentField *IncidentFields `json:"incidentField,omitempty"`
 	// The search query
 	Query string `json:"query"`

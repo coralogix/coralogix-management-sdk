@@ -23,6 +23,7 @@ var _ MappedNullable = &VariableValueV2{}
 // VariableValueV2 Discriminated union representing the current runtime value of a dashboard variable (string, numeric, regex, Lucene, or interval).
 type VariableValueV2 struct {
 	Interval *IntervalValue `json:"interval,omitempty"`
+	// The lucene.
 	Lucene *LuceneQueryValue `json:"lucene,omitempty"`
 	MultiString *MultiStringValue `json:"multiString,omitempty"`
 	Regex *RegexValue `json:"regex,omitempty"`

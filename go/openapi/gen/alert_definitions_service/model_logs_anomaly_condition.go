@@ -22,9 +22,11 @@ var _ MappedNullable = &LogsAnomalyCondition{}
 
 // LogsAnomalyCondition Defines conditions for detecting log anomalies
 type LogsAnomalyCondition struct {
+	// The type of condition for the alert
 	ConditionType *LogsAnomalyConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
 	MinimumThreshold *float64 `json:"minimumThreshold,omitempty"`
+	// The time window for the alert condition
 	TimeWindow *LogsTimeWindow `json:"timeWindow,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

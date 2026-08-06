@@ -24,6 +24,7 @@ var _ MappedNullable = &StatusCount{}
 type StatusCount struct {
 	// The count for this alert status
 	Count *int64 `json:"count,omitempty"`
+	// The alert status
 	Status *AlertDefStatus `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

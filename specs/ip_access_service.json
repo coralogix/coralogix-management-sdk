@@ -91,7 +91,13 @@
                 "type": "object",
                 "properties": {
                   "enableCoralogixCustomerSupportAccess": {
-                    "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
+                    "example": "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED",
+                    "description": "The Coralogix customer support access setting. Defaults to DISABLED if not provided.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
+                      }
+                    ]
                   },
                   "id": {
                     "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
@@ -174,7 +180,13 @@
                 "type": "object",
                 "properties": {
                   "enableCoralogixCustomerSupportAccess": {
-                    "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
+                    "example": "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED",
+                    "description": "The Coralogix customer support access setting.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
+                      }
+                    ]
                   },
                   "ipAccess": {
                     "description": "List of IP access entries to create.",
@@ -312,7 +324,13 @@
         "type": "object",
         "properties": {
           "enableCoralogixCustomerSupportAccess": {
-            "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
+            "example": "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED",
+            "description": "The Coralogix customer support access setting.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
+              }
+            ]
           },
           "id": {
             "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
@@ -347,7 +365,12 @@
         "type": "object",
         "properties": {
           "settings": {
-            "$ref": "#/components/schemas/CompanyIpAccessSettings"
+            "description": "The created company IP access settings.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CompanyIpAccessSettings"
+              }
+            ]
           }
         }
       },
@@ -389,7 +412,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -427,7 +455,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -450,7 +483,12 @@
         "type": "object",
         "properties": {
           "settings": {
-            "$ref": "#/components/schemas/CompanyIpAccessSettings"
+            "description": "The company IP access settings.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CompanyIpAccessSettings"
+              }
+            ]
           }
         }
       },
@@ -507,7 +545,12 @@
         "type": "object",
         "properties": {
           "settings": {
-            "$ref": "#/components/schemas/CompanyIpAccessSettings"
+            "description": "The replaced company IP access settings.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CompanyIpAccessSettings"
+              }
+            ]
           }
         }
       },

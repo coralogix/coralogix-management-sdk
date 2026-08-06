@@ -38,8 +38,11 @@ type PrometheusAlert struct {
 	GeneratorUrl string `json:"generatorUrl" validate:"regexp=^[\\s\\S]*$"`
 	// Labels attached to the alert.
 	Labels map[string]string `json:"labels"`
+	// Priority of the alert.
 	Priority IndicatorPriority `json:"priority"`
+	// When present, the PromQL query backing the alert.
 	Query *PrometheusAlertQuery `json:"query,omitempty"`
+	// Current status of the alert.
 	Status PrometheusAlertStatus `json:"status"`
 	// Timestamp when the alert was last updated.
 	UpdatedAt time.Time `json:"updatedAt"`

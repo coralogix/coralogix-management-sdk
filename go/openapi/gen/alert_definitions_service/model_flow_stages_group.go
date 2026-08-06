@@ -24,7 +24,9 @@ var _ MappedNullable = &FlowStagesGroup{}
 type FlowStagesGroup struct {
 	// The alert definitions for the flow stage group.
 	AlertDefs []FlowStagesGroupsAlertDefs `json:"alertDefs,omitempty"`
+	// The logical operation to apply to the alerts in the group.
 	AlertsOp *AlertsOp `json:"alertsOp,omitempty"`
+	// The logical operation to apply to the next stage.
 	NextOp *NextOp `json:"nextOp,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

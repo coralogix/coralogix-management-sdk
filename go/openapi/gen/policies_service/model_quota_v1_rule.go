@@ -22,8 +22,8 @@ var _ MappedNullable = &QuotaV1Rule{}
 
 // QuotaV1Rule Rule.
 type QuotaV1Rule struct {
-	// Display name.
-	Name *string `json:"name,omitempty"`
+	// The value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	RuleTypeId *RuleTypeId `json:"ruleTypeId,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

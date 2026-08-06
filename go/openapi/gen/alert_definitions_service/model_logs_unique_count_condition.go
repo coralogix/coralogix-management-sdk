@@ -24,6 +24,7 @@ var _ MappedNullable = &LogsUniqueCountCondition{}
 type LogsUniqueCountCondition struct {
 	// The maximum unique count
 	MaxUniqueCount *string `json:"maxUniqueCount,omitempty" validate:"regexp=^-?[0-9]+$"`
+	// The time window for the unique count alert.
 	TimeWindow *LogsUniqueValueTimeWindow `json:"timeWindow,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

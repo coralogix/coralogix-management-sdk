@@ -23,9 +23,9 @@ var _ MappedNullable = &IntegrationRevisionGroup{}
 // IntegrationRevisionGroup struct for IntegrationRevisionGroup
 type IntegrationRevisionGroup struct {
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

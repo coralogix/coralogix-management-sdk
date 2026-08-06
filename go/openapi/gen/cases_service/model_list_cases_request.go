@@ -22,8 +22,11 @@ var _ MappedNullable = &ListCasesRequest{}
 
 // ListCasesRequest Request to list cases with filtering and pagination
 type ListCasesRequest struct {
+	// Filters to apply when listing cases
 	Filters *CaseFilters `json:"filters,omitempty"`
+	// Sorting parameters to control the order of returned cases. Supports single-field sorting only. Example: sort by priority in descending order to show highest priority cases first.
 	OrderBy *CaseOrderBy `json:"orderBy,omitempty"`
+	// Pagination parameters
 	Pagination *CasesV1PaginationRequest `json:"pagination,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

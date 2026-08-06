@@ -24,6 +24,7 @@ var _ MappedNullable = &V3IntegrationType{}
 type V3IntegrationType struct {
 	// The integration ID for the notification
 	IntegrationId *int64 `json:"integrationId,omitempty"`
+	// The recipients for the notification.
 	Recipients *Recipients `json:"recipients,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

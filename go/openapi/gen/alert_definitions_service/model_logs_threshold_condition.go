@@ -22,9 +22,11 @@ var _ MappedNullable = &LogsThresholdCondition{}
 
 // LogsThresholdCondition LogsThresholdCondition is a message that defines the condition for log-based threshold alerts.
 type LogsThresholdCondition struct {
+	// The type of condition for the alert
 	ConditionType *LogsThresholdConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
 	Threshold *float64 `json:"threshold,omitempty"`
+	// The time window for the alert condition
 	TimeWindow *LogsTimeWindow `json:"timeWindow,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

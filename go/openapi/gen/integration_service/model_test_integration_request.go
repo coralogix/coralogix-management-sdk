@@ -24,7 +24,7 @@ var _ MappedNullable = &TestIntegrationRequest{}
 type TestIntegrationRequest struct {
 	IntegrationData *IntegrationMetadata `json:"integrationData,omitempty"`
 	// ID of the existing integration instance to test.
-	IntegrationId *string `json:"integrationId,omitempty"`
+	IntegrationId *string `json:"integrationId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

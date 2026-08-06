@@ -22,8 +22,9 @@ var _ MappedNullable = &EqualsSelection{}
 
 // EqualsSelection This data structure defines the values for the equality comparison.
 type EqualsSelection struct {
-	// This data structure indicates that all values are selected.
+	// Represents a selection of all values.
 	All map[string]interface{} `json:"all,omitempty"`
+	// Represents a selection from a list of values.
 	List *EqualsSelectionListSelection `json:"list,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

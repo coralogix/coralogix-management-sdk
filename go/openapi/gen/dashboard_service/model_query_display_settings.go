@@ -37,12 +37,15 @@ type QueryDisplaySettings struct {
 	HashColors *bool `json:"hashColors,omitempty"`
 	// Reference to the query id from Dynamic.query_display_settings
 	QueryId string `json:"queryId" validate:"regexp=^[\\s\\S]*$"`
+	// Scale type - linear/logarithmic
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	// Max count of the series per query
 	SeriesCountLimit *string `json:"seriesCountLimit,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Custom template for the series name
 	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Temporal field for time series data
 	TemporalField *ObservationField `json:"temporalField,omitempty"`
+	// Unit of the query results - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	// A list of numeric/value observation fields to display from the query results
 	ValueFields []ObservationField `json:"valueFields,omitempty"`

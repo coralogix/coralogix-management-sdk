@@ -23,6 +23,7 @@ var _ MappedNullable = &Dashboard{}
 
 // Dashboard Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.
 type Dashboard struct {
+	// Absolute time frame specifying a fixed start and end time
 	AbsoluteTimeFrame *TimeFrame `json:"absoluteTimeFrame,omitempty"`
 	// A list of public actions that are available within the dashboard context
 	Actions []DashboardAction `json:"actions,omitempty"`
@@ -36,10 +37,12 @@ type Dashboard struct {
 	Filters []FiltersFilter `json:"filters,omitempty"`
 	// Auto refresh five minutes.
 	FiveMinutes map[string]interface{} `json:"fiveMinutes,omitempty"`
+	// The folder id.
 	FolderId *UUID `json:"folderId,omitempty"`
 	FolderPath *FolderPath `json:"folderPath,omitempty"`
 	// A unique identifier of the dashboard
 	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// The layout configuration for the dashboard's visual elements.
 	Layout Layout `json:"layout"`
 	// The display name of the dashboard
 	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
@@ -54,6 +57,7 @@ type Dashboard struct {
 	// Auto refresh two minutes.
 	TwoMinutes map[string]interface{} `json:"twoMinutes,omitempty"`
 	// A list of variables that can be used within the dashboard for dynamic content
+	// Deprecated
 	Variables []Variable `json:"variables,omitempty"`
 	// A list of variables that can be used within the dashboard for dynamic content
 	VariablesV2 []VariableV2 `json:"variablesV2,omitempty"`
@@ -611,6 +615,7 @@ func (o *Dashboard) SetTwoMinutes(v map[string]interface{}) {
 }
 
 // GetVariables returns the Variables field value if set, zero value otherwise.
+// Deprecated
 func (o *Dashboard) GetVariables() []Variable {
 	if o == nil || IsNil(o.Variables) {
 		var ret []Variable
@@ -621,6 +626,7 @@ func (o *Dashboard) GetVariables() []Variable {
 
 // GetVariablesOk returns a tuple with the Variables field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Dashboard) GetVariablesOk() ([]Variable, bool) {
 	if o == nil || IsNil(o.Variables) {
 		return nil, false
@@ -638,6 +644,7 @@ func (o *Dashboard) HasVariables() bool {
 }
 
 // SetVariables gets a reference to the given []Variable and assigns it to the Variables field.
+// Deprecated
 func (o *Dashboard) SetVariables(v []Variable) {
 	o.Variables = v
 }

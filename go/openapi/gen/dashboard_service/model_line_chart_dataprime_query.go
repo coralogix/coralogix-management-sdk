@@ -22,9 +22,11 @@ var _ MappedNullable = &LineChartDataprimeQuery{}
 
 // LineChartDataprimeQuery A Dataprime variant of the query
 type LineChartDataprimeQuery struct {
+	// Dataprime query string to search
 	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
 	// List of query filters
 	Filters []FilterSource `json:"filters,omitempty"`
+	// Specifies the time period for which the records should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

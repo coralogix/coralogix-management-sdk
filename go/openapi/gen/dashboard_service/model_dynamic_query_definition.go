@@ -27,6 +27,7 @@ type DynamicQueryDefinition struct {
 	Id string `json:"id" validate:"regexp=^[\\s\\S]*$"`
 	// Custom name of the query
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Query object
 	Query DynamicQuery `json:"query"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

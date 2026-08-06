@@ -22,11 +22,15 @@ var _ MappedNullable = &GeomapAggregation{}
 
 // GeomapAggregation Geomap aggregation.
 type GeomapAggregation struct {
+	// Option that will use selected field in data results, perform AVG aggregation on it across all nodes in a cluster and display that value.
 	Avg *GeomapAggregationFieldBased `json:"avg,omitempty"`
-	// Geomap aggregation simple.
+	// Option that will make geomap clusters simply count the number of nodes in each cluster.
 	Count map[string]interface{} `json:"count,omitempty"`
+	// Option that will use selected field in data results, perform MAX aggregation on it across all nodes in a cluster and display that value.
 	Max *GeomapAggregationFieldBased `json:"max,omitempty"`
+	// Option that will use selected field in data results, perform MIN aggregation on it across all nodes in a cluster and display that value.
 	Min *GeomapAggregationFieldBased `json:"min,omitempty"`
+	// Option that will use selected field in data results, perform SUM aggregation on it across all nodes in a cluster and display that value.
 	Sum *GeomapAggregationFieldBased `json:"sum,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

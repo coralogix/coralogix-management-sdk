@@ -23,6 +23,7 @@ var _ MappedNullable = &FilterPathAndValues{}
 
 // FilterPathAndValues This data structure represents a filter path and values
 type FilterPathAndValues struct {
+	// The filters.
 	Filters *Filters `json:"filters,omitempty"`
 	MultipleValues *MultipleValues `json:"multipleValues,omitempty"`
 	Path string `json:"path"`

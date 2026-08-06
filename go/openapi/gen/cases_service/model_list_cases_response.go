@@ -25,7 +25,10 @@ var _ MappedNullable = &ListCasesResponse{}
 type ListCasesResponse struct {
 	// Cases matching the provided filters.
 	Cases []Case `json:"cases"`
+	// Pagination cursor for retrieving the next page of cases.
 	Pagination CasesV1PaginationResponse `json:"pagination"`
+	// Indicates whether the list of cases was truncated due to PBAC (Policy-Based Access Control) restrictions. If true, the user may not have access to all cases that match the filters.
+	PbacTruncated *bool `json:"pbacTruncated,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -99,6 +102,38 @@ func (o *ListCasesResponse) SetPagination(v CasesV1PaginationResponse) {
 	o.Pagination = v
 }
 
+// GetPbacTruncated returns the PbacTruncated field value if set, zero value otherwise.
+func (o *ListCasesResponse) GetPbacTruncated() bool {
+	if o == nil || IsNil(o.PbacTruncated) {
+		var ret bool
+		return ret
+	}
+	return *o.PbacTruncated
+}
+
+// GetPbacTruncatedOk returns a tuple with the PbacTruncated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListCasesResponse) GetPbacTruncatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.PbacTruncated) {
+		return nil, false
+	}
+	return o.PbacTruncated, true
+}
+
+// HasPbacTruncated returns a boolean if a field has been set.
+func (o *ListCasesResponse) HasPbacTruncated() bool {
+	if o != nil && !IsNil(o.PbacTruncated) {
+		return true
+	}
+
+	return false
+}
+
+// SetPbacTruncated gets a reference to the given bool and assigns it to the PbacTruncated field.
+func (o *ListCasesResponse) SetPbacTruncated(v bool) {
+	o.PbacTruncated = &v
+}
+
 func (o ListCasesResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -111,6 +146,9 @@ func (o ListCasesResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cases"] = o.Cases
 	toSerialize["pagination"] = o.Pagination
+	if !IsNil(o.PbacTruncated) {
+		toSerialize["pbacTruncated"] = o.PbacTruncated
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -158,6 +196,7 @@ func (o *ListCasesResponse) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "cases")
 		delete(additionalProperties, "pagination")
+		delete(additionalProperties, "pbacTruncated")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

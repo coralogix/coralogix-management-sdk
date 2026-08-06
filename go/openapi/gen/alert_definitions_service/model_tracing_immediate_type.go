@@ -24,6 +24,7 @@ var _ MappedNullable = &TracingImmediateType{}
 type TracingImmediateType struct {
 	// Notification payload field filter
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
+	// A filter to match trace entries for immediate alerts
 	TracingFilter *TracingFilter `json:"tracingFilter,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

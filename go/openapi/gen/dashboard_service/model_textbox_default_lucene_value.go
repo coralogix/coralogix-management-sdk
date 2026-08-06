@@ -22,6 +22,7 @@ var _ MappedNullable = &TextboxDefaultLuceneValue{}
 
 // TextboxDefaultLuceneValue Textbox default lucene value.
 type TextboxDefaultLuceneValue struct {
+	// Data mode. Omitted or DATA_MODE_TYPE_HIGH_UNSPECIFIED queries high-priority ('Frequent Search') data; DATA_MODE_TYPE_ARCHIVE queries archive ('Monitoring') data.
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
 	// The value.
 	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`

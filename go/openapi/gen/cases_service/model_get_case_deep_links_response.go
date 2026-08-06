@@ -23,6 +23,7 @@ var _ MappedNullable = &GetCaseDeepLinksResponse{}
 
 // GetCaseDeepLinksResponse Response containing the deep links for the requested case
 type GetCaseDeepLinksResponse struct {
+	// Deep links for the case.
 	DeepLinks CaseDeepLinks `json:"deepLinks"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

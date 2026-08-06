@@ -22,14 +22,21 @@ var _ MappedNullable = &EventActor{}
 
 // EventActor Actor that initiated the event.
 type EventActor struct {
+	// API Key generated event
 	ApiKey *ApiKeyActor `json:"apiKey,omitempty"`
+	// Microsoft Teams generated event
 	MicrosoftTeams *MicrosoftTeamsActor `json:"microsoftTeams,omitempty"`
+	// PagerDuty generated event
 	PagerDuty *PagerDutyActor `json:"pagerDuty,omitempty"`
+	// Prometheus Alert Manager generated event
 	PrometheusAlertManager *PrometheusAlertManagerActor `json:"prometheusAlertManager,omitempty"`
+	// Service Now generated event
 	ServiceNow *ServiceNowActor `json:"serviceNow,omitempty"`
+	// Slack generated event
 	Slack *SlackActor `json:"slack,omitempty"`
-	// Empty message indicating system-initiated action.
+	// System-generated event
 	System map[string]interface{} `json:"system,omitempty"`
+	// User-generated event
 	User *UserActor `json:"user,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

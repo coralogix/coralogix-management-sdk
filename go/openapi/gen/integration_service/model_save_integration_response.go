@@ -23,7 +23,7 @@ var _ MappedNullable = &SaveIntegrationResponse{}
 // SaveIntegrationResponse Response returned after successfully saving an integration deployment.
 type SaveIntegrationResponse struct {
 	// The integration id.
-	IntegrationId *string `json:"integrationId,omitempty"`
+	IntegrationId *string `json:"integrationId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

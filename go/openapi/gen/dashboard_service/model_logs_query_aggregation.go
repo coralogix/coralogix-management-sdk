@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsQueryAggregation{}
 
 // LogsQueryAggregation Aggregation.
 type LogsQueryAggregation struct {
+	// Type of aggregation function
 	Aggregation *LogsAggregation `json:"aggregation,omitempty"`
 	// Aggregation unique identifier
 	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`

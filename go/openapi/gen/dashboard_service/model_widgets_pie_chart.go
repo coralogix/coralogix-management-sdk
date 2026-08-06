@@ -26,6 +26,7 @@ type WidgetsPieChart struct {
 	ColorScheme *string `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Custom unit (requires the unit field to be set to custom to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Data mode type, either high or archive
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	Decimal *int32 `json:"decimal,omitempty"`
@@ -35,18 +36,23 @@ type WidgetsPieChart struct {
 	GroupNameTemplate *string `json:"groupNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to ignore color scheme and derive colors from algorithm
 	HashColors *bool `json:"hashColors,omitempty"`
+	// Settings for slice labels
 	LabelDefinition *WidgetsPieChartLabelDefinition `json:"labelDefinition,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
 	// Maximum number of slices on a chart
 	MaxSlicesPerChart *int32 `json:"maxSlicesPerChart,omitempty"`
 	// Minimum percentage threshold for slices to be displayed
 	MinSlicePercentage *int32 `json:"minSlicePercentage,omitempty"`
+	// Query object
 	Query *PieChartQuery `json:"query,omitempty"`
 	// Indicates whether to display the legend
 	ShowLegend *bool `json:"showLegend,omitempty"`
 	// Whether to show the total amount as a title
 	ShowTotal *bool `json:"showTotal,omitempty"`
+	// Configuration of stacked slices
 	StackDefinition *PieChartStackDefinition `json:"stackDefinition,omitempty"`
+	// Unit of the value - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

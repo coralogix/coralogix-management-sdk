@@ -25,6 +25,7 @@ type V2Aggregation struct {
 	AggType *AggType `json:"aggType,omitempty"`
 	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
+	// e2m aggregate histogram type metadata
 	Histogram *E2MAggHistogram `json:"histogram,omitempty"`
 	// Marker indicating no additional metadata is needed for this aggregation type.
 	None map[string]interface{} `json:"none,omitempty"`

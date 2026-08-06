@@ -23,7 +23,7 @@ var _ MappedNullable = &RevertDeploymentOfExtensionRequest{}
 // RevertDeploymentOfExtensionRequest Request for undeploying an extension.
 type RevertDeploymentOfExtensionRequest struct {
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// List of extension item IDs to retain after undeploying; all other items will be removed.
 	KeptExtensionItems []string `json:"keptExtensionItems,omitempty"`
 	AdditionalProperties map[string]interface{}

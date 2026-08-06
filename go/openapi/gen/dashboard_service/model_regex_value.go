@@ -22,6 +22,7 @@ var _ MappedNullable = &RegexValue{}
 
 // RegexValue Regex value.
 type RegexValue struct {
+	// The value.
 	Value *StringValueLabel `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

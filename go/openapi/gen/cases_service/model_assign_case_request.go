@@ -23,6 +23,7 @@ var _ MappedNullable = &AssignCaseRequest{}
 
 // AssignCaseRequest Request to assign a case to a specific user.
 type AssignCaseRequest struct {
+	// User to assign the case to
 	Assignee CasesV1UserDetails `json:"assignee"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

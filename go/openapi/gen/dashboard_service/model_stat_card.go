@@ -26,16 +26,23 @@ type StatCard struct {
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
 	// Fields to use for categorizing the stat card data
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
+	// Color and label mapping configuration for the stat card values
 	ColorLabelMapping *ColorLabelMapping `json:"colorLabelMapping,omitempty"`
 	// Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
+	// Optional label display configuration
 	Label *StatVisualElement `json:"label,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
+	// Indicates how to group the legend elements, either by thresholds or by query groups
 	LegendBy *LegendBy `json:"legendBy,omitempty"`
+	// Primary value display configuration (required)
 	PrimaryValue *StatVisualElement `json:"primaryValue,omitempty"`
+	// Optional title display configuration
 	Title *StatVisualElement `json:"title,omitempty"`
+	// Unit of the value - one from a predefined list, or 'custom'
 	Unit *CommonUnit `json:"unit,omitempty"`
 	// Fields to use for the stat card value
 	ValueFields []ObservationField `json:"valueFields,omitempty"`

@@ -24,6 +24,7 @@ var _ MappedNullable = &UsersMgmtServiceUpdateUsersRequest{}
 type UsersMgmtServiceUpdateUsersRequest struct {
 	// User account ID of the user to update
 	UserAccountId *int64 `json:"userAccountId,omitempty"`
+	// Template containing updated user properties. Only provided fields will be updated.
 	UserTemplate *UserTemplate `json:"userTemplate,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

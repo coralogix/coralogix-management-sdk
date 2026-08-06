@@ -22,14 +22,23 @@ var _ MappedNullable = &WidgetDefinition{}
 
 // WidgetDefinition Definition.
 type WidgetDefinition struct {
+	// Vertical bar chart widget definition
 	BarChart *BarChart `json:"barChart,omitempty"`
+	// Data table widget definition
 	DataTable *DataTable `json:"dataTable,omitempty"`
+	// Dynamic widget definition
 	Dynamic *WidgetsDynamic `json:"dynamic,omitempty"`
+	// Gauge widget definition
 	Gauge *WidgetsGauge `json:"gauge,omitempty"`
+	// Hexagon widget definition
 	Hexagon *Hexagon `json:"hexagon,omitempty"`
+	// Horizontal bar chart widget definition
 	HorizontalBarChart *HorizontalBarChart `json:"horizontalBarChart,omitempty"`
+	// Line chart widget definition
 	LineChart *LineChart `json:"lineChart,omitempty"`
+	// Markdown widget definition
 	Markdown *Markdown `json:"markdown,omitempty"`
+	// Pie chart widget definition
 	PieChart *WidgetsPieChart `json:"pieChart,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

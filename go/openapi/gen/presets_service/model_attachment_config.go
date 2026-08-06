@@ -22,6 +22,7 @@ var _ MappedNullable = &AttachmentConfig{}
 
 // AttachmentConfig Attachment config.
 type AttachmentConfig struct {
+	// Default policy applied to all attachment types.
 	Policy *AttachmentConfigPolicy `json:"policy,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

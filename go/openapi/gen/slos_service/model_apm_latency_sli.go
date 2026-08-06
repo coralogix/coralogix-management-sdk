@@ -27,6 +27,7 @@ type ApmLatencySli struct {
 	Quantile *ApmLatencyQuantile `json:"quantile,omitempty"`
 	// Threshold in milliseconds. Good when latency <= threshold, bad when latency > threshold.
 	Threshold *float32 `json:"threshold,omitempty"`
+	// Time window for latency calculations
 	TimeWindow *WindowSloWindow `json:"timeWindow,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

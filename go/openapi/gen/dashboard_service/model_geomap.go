@@ -22,17 +22,23 @@ var _ MappedNullable = &Geomap{}
 
 // Geomap Geomap.
 type Geomap struct {
+	// Determines how data clusters on the geomap will display values. Default should always be set to count to simply provide number of nodes in cluster as a value.
 	Aggregation *GeomapAggregation `json:"aggregation,omitempty"`
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	// Color options for the nodes on the geomap, affects cluster scaling as well.
 	Color *GeomapColor `json:"color,omitempty"`
+	// Defines columns which provide required geographic information for the geomap from the query results. Affects location and grouping of the data displayed.
 	Config *GeomapFieldConfig `json:"config,omitempty"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
+	// Defines min/max values range for the geomap, will affect color and cluster scaling.
 	MinMax *MinMax `json:"minMax,omitempty"`
+	// Tooltip settings for the widget
 	Tooltip *GeomapTooltip `json:"tooltip,omitempty"`
+	// Unit of the query results - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

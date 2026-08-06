@@ -24,6 +24,7 @@ var _ MappedNullable = &TimeDuration{}
 type TimeDuration struct {
 	// The duration value
 	Duration *string `json:"duration,omitempty" validate:"regexp=^[0-9]+$"`
+	// The unit of the duration
 	Unit *DurationUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -24,6 +24,7 @@ var _ MappedNullable = &PriorityCount{}
 type PriorityCount struct {
 	// The count for this alert priority
 	Count *int64 `json:"count,omitempty"`
+	// The alert priority
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -23,6 +23,7 @@ var _ MappedNullable = &ResolveCaseResponse{}
 
 // ResolveCaseResponse Response containing the case after it has been resolved.
 type ResolveCaseResponse struct {
+	// Case after resolution.
 	Case Case `json:"case"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

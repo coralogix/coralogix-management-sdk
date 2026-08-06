@@ -27,21 +27,21 @@ type ExtensionItem struct {
 	// Data payload.
 	Data map[string]interface{} `json:"data,omitempty"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The extended internal id.
-	ExtendedInternalId *string `json:"extendedInternalId,omitempty"`
+	ExtendedInternalId *string `json:"extendedInternalId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The is mandatory.
 	IsMandatory *bool `json:"isMandatory,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	PermissionResource *PermissionResource `json:"permissionResource,omitempty"`
 	// The stable id.
-	StableId *string `json:"stableId,omitempty"`
+	StableId *string `json:"stableId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	TargetDomain *TargetDomain `json:"targetDomain,omitempty"`
 	// The unique id.
-	UniqueId *string `json:"uniqueId,omitempty"`
+	UniqueId *string `json:"uniqueId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -78,6 +78,7 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AlertDefinitionsServiceAPI* | [**AlertDefsServiceBulkCreateAlertDefs**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicebulkcreatealertdefs) | **Post** /alerts/alerts/v3/all/create | Bulk create alert definitions
 *AlertDefinitionsServiceAPI* | [**AlertDefsServiceBulkDeleteAlertDefs**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicebulkdeletealertdefs) | **Post** /alerts/alerts/v3/all/delete | Bulk delete alert definitions
 *AlertDefinitionsServiceAPI* | [**AlertDefsServiceBulkReplaceAlertDefs**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicebulkreplacealertdefs) | **Put** /alerts/alerts/v3/all/replace | Bulk replace alert definitions
 *AlertDefinitionsServiceAPI* | [**AlertDefsServiceCreateAlertDef**](docs/AlertDefinitionsServiceAPI.md#alertdefsservicecreatealertdef) | **Post** /alerts/alerts/v3 | Create an alert
@@ -92,8 +93,10 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AccessPolicyAction](docs/AccessPolicyAction.md)
  - [ActivitySchedule](docs/ActivitySchedule.md)
  - [AlertDef](docs/AlertDef.md)
+ - [AlertDefAccess](docs/AlertDefAccess.md)
  - [AlertDefDataSource](docs/AlertDefDataSource.md)
  - [AlertDefEnabledFilter](docs/AlertDefEnabledFilter.md)
  - [AlertDefEntityLabelsFilter](docs/AlertDefEntityLabelsFilter.md)
@@ -107,6 +110,7 @@ Class | Method | HTTP request | Description
  - [AlertDefOrderByDirection](docs/AlertDefOrderByDirection.md)
  - [AlertDefOrderByFields](docs/AlertDefOrderByFields.md)
  - [AlertDefOverride](docs/AlertDefOverride.md)
+ - [AlertDefPermissions](docs/AlertDefPermissions.md)
  - [AlertDefPriority](docs/AlertDefPriority.md)
  - [AlertDefPriorityFilter](docs/AlertDefPriorityFilter.md)
  - [AlertDefProperties](docs/AlertDefProperties.md)
@@ -114,6 +118,7 @@ Class | Method | HTTP request | Description
  - [AlertDefSloSpecificFilter](docs/AlertDefSloSpecificFilter.md)
  - [AlertDefStatus](docs/AlertDefStatus.md)
  - [AlertDefStatusFilter](docs/AlertDefStatusFilter.md)
+ - [AlertDefToCreate](docs/AlertDefToCreate.md)
  - [AlertDefToReplace](docs/AlertDefToReplace.md)
  - [AlertDefType](docs/AlertDefType.md)
  - [AlertDefTypeFilter](docs/AlertDefTypeFilter.md)
@@ -131,6 +136,8 @@ Class | Method | HTTP request | Description
  - [AnalyticsThresholdRuleCondition](docs/AnalyticsThresholdRuleCondition.md)
  - [AnalyticsThresholdType](docs/AnalyticsThresholdType.md)
  - [AnomalyAlertSettings](docs/AnomalyAlertSettings.md)
+ - [BulkCreateAlertDefinitionsRequest](docs/BulkCreateAlertDefinitionsRequest.md)
+ - [BulkCreateAlertDefsResponse](docs/BulkCreateAlertDefsResponse.md)
  - [BulkDeleteAlertDefinitionsRequest](docs/BulkDeleteAlertDefinitionsRequest.md)
  - [BulkDeleteAlertDefsResponse](docs/BulkDeleteAlertDefsResponse.md)
  - [BulkReplaceAlertDefinitionsRequest](docs/BulkReplaceAlertDefinitionsRequest.md)
@@ -149,6 +156,7 @@ Class | Method | HTTP request | Description
  - [Error](docs/Error.md)
  - [ErrorBudgetThreshold](docs/ErrorBudgetThreshold.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
+ - [FailedToCreateAlertDef](docs/FailedToCreateAlertDef.md)
  - [FailedToReplaceAlertDef](docs/FailedToReplaceAlertDef.md)
  - [FilterOptionCounts](docs/FilterOptionCounts.md)
  - [FilterOptionCountsEnabledFilter](docs/FilterOptionCountsEnabledFilter.md)

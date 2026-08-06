@@ -23,9 +23,9 @@ var _ MappedNullable = &IntegrationDoc{}
 // IntegrationDoc This data structure represents integration documentation.
 type IntegrationDoc struct {
 	// Link.
-	Link *string `json:"link,omitempty"`
+	Link *string `json:"link,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -26,6 +26,7 @@ type AlertDefNotificationGroup struct {
 	Destinations []NotificationDestination `json:"destinations,omitempty"`
 	// The keys to group the alerts by
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
+	// The router for notifications.  (Notification Center feature)
 	Router *NotificationRouter `json:"router,omitempty"`
 	// The settings for webhooks associated with the alert definition
 	Webhooks []AlertDefWebhooksSettings `json:"webhooks,omitempty"`

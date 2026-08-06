@@ -22,6 +22,7 @@ var _ MappedNullable = &LinkAction{}
 
 // LinkAction struct for LinkAction
 type LinkAction struct {
+	// Unique id of the link action
 	Id *UUID `json:"id,omitempty"`
 	// Name of the link action
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`

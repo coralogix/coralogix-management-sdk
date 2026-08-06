@@ -185,6 +185,9 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceDeleteCustom
 	if r.id < 0 {
 		return localVarReturnValue, nil, reportError("id must be greater than 0")
 	}
+	if r.id > 2147483647 {
+		return localVarReturnValue, nil, reportError("id must be less than 2147483647")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -290,6 +293,9 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnr
 	localVarFormParams := url.Values{}
 	if r.id < 0 {
 		return localVarReturnValue, nil, reportError("id must be greater than 0")
+	}
+	if r.id > 2147483647 {
+		return localVarReturnValue, nil, reportError("id must be less than 2147483647")
 	}
 
 	// to determine the Content-Type header

@@ -22,6 +22,7 @@ var _ MappedNullable = &CompanyIpAccessSettings{}
 
 // CompanyIpAccessSettings This data structure represents the IP access settings for a company.
 type CompanyIpAccessSettings struct {
+	// The Coralogix customer support access setting.
 	EnableCoralogixCustomerSupportAccess *CoralogixCustomerSupportAccess `json:"enableCoralogixCustomerSupportAccess,omitempty"`
 	// The unique identifier for the company IP access settings. This is typically a company ID.
 	Id *string `json:"id,omitempty"`

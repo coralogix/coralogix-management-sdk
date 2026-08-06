@@ -23,7 +23,9 @@ var _ MappedNullable = &GetSystemDefaultCaseSettingsResponse{}
 
 // GetSystemDefaultCaseSettingsResponse Response containing platform-wide default case settings team configuration values.
 type GetSystemDefaultCaseSettingsResponse struct {
+	// System-wide default Case lifecycle settings for case settings team configurations
 	CaseLifecycle *CaseLifecycle `json:"caseLifecycle,omitempty"`
+	// System-wide default settings for case settings team configurations
 	GlobalIndicatorSettings GlobalIndicatorSettings `json:"globalIndicatorSettings"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

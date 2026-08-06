@@ -22,8 +22,9 @@ var _ MappedNullable = &DisplayNameTemplateVariable{}
 
 // DisplayNameTemplateVariable A variable that can be referenced inside the display name template, backed by either an observation field or mapped values
 type DisplayNameTemplateVariable struct {
-	// Mapped values.
+	// Resolve the variable from the color label mapping result
 	MappedValues map[string]interface{} `json:"mappedValues,omitempty"`
+	// Resolve the variable from a query datashape field
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

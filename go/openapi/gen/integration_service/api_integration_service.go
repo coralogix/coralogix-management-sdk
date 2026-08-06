@@ -77,6 +77,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceDeleteIntegrationExecut
 	if strlen(r.integrationId) < 0 {
 		return localVarReturnValue, nil, reportError("integrationId must have at least 0 elements")
 	}
+	if strlen(r.integrationId) > 65535 {
+		return localVarReturnValue, nil, reportError("integrationId must have less than 65535 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -217,6 +220,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetDeployedIntegrationE
 	localVarFormParams := url.Values{}
 	if strlen(r.integrationId) < 0 {
 		return localVarReturnValue, nil, reportError("integrationId must have at least 0 elements")
+	}
+	if strlen(r.integrationId) > 65535 {
+		return localVarReturnValue, nil, reportError("integrationId must have less than 65535 elements")
 	}
 
 	// to determine the Content-Type header
@@ -365,6 +371,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetIntegrationDefinitio
 	localVarFormParams := url.Values{}
 	if strlen(r.id) < 0 {
 		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
+	if strlen(r.id) > 65535 {
+		return localVarReturnValue, nil, reportError("id must have less than 65535 elements")
 	}
 
 	if r.includeTestingRevision != nil {
@@ -518,6 +527,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetIntegrationDetailsEx
 	localVarFormParams := url.Values{}
 	if strlen(r.id) < 0 {
 		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
+	if strlen(r.id) > 65535 {
+		return localVarReturnValue, nil, reportError("id must have less than 65535 elements")
 	}
 
 	if r.includeTestingRevision != nil {
@@ -810,6 +822,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetManagedIntegrationSt
 	localVarFormParams := url.Values{}
 	if strlen(r.integrationId) < 0 {
 		return localVarReturnValue, nil, reportError("integrationId must have at least 0 elements")
+	}
+	if strlen(r.integrationId) > 65535 {
+		return localVarReturnValue, nil, reportError("integrationId must have less than 65535 elements")
 	}
 
 	// to determine the Content-Type header

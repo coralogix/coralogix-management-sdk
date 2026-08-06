@@ -22,11 +22,17 @@ var _ MappedNullable = &WidgetsDynamic{}
 
 // WidgetsDynamic Dynamic.
 type WidgetsDynamic struct {
+	// Interpretation of the query results (deprecated, use visualization instead)
+	// Deprecated
 	Interpretation *Interpretation `json:"interpretation,omitempty"`
+	// A query object describing how to retrieve data
+	// Deprecated
 	Query *DynamicQuery `json:"query,omitempty"`
 	// Definitions of widget queries. At least one query definition is required unless the deprecated query field is set.
 	QueryDefinitions []DynamicQueryDefinition `json:"queryDefinitions,omitempty"`
+	// Time frame which overrides the dashboard time frame
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	// Specifies how the query results should be visualized
 	Visualization *Visualization `json:"visualization,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -52,6 +58,7 @@ func NewWidgetsDynamicWithDefaults() *WidgetsDynamic {
 }
 
 // GetInterpretation returns the Interpretation field value if set, zero value otherwise.
+// Deprecated
 func (o *WidgetsDynamic) GetInterpretation() Interpretation {
 	if o == nil || IsNil(o.Interpretation) {
 		var ret Interpretation
@@ -62,6 +69,7 @@ func (o *WidgetsDynamic) GetInterpretation() Interpretation {
 
 // GetInterpretationOk returns a tuple with the Interpretation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *WidgetsDynamic) GetInterpretationOk() (*Interpretation, bool) {
 	if o == nil || IsNil(o.Interpretation) {
 		return nil, false
@@ -79,11 +87,13 @@ func (o *WidgetsDynamic) HasInterpretation() bool {
 }
 
 // SetInterpretation gets a reference to the given Interpretation and assigns it to the Interpretation field.
+// Deprecated
 func (o *WidgetsDynamic) SetInterpretation(v Interpretation) {
 	o.Interpretation = &v
 }
 
 // GetQuery returns the Query field value if set, zero value otherwise.
+// Deprecated
 func (o *WidgetsDynamic) GetQuery() DynamicQuery {
 	if o == nil || IsNil(o.Query) {
 		var ret DynamicQuery
@@ -94,6 +104,7 @@ func (o *WidgetsDynamic) GetQuery() DynamicQuery {
 
 // GetQueryOk returns a tuple with the Query field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *WidgetsDynamic) GetQueryOk() (*DynamicQuery, bool) {
 	if o == nil || IsNil(o.Query) {
 		return nil, false
@@ -111,6 +122,7 @@ func (o *WidgetsDynamic) HasQuery() bool {
 }
 
 // SetQuery gets a reference to the given DynamicQuery and assigns it to the Query field.
+// Deprecated
 func (o *WidgetsDynamic) SetQuery(v DynamicQuery) {
 	o.Query = &v
 }

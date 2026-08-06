@@ -23,6 +23,7 @@ var _ MappedNullable = &AlertDef{}
 
 // AlertDef This data structure represents an alert definition
 type AlertDef struct {
+	// The alert definition's properties
 	AlertDefProperties *AlertDefProperties `json:"alertDefProperties,omitempty"`
 	// The old alert ID
 	AlertVersionId *string `json:"alertVersionId,omitempty" validate:"regexp=^[\\s\\S]*$"`
@@ -32,6 +33,7 @@ type AlertDef struct {
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// The last time the alert definition was triggered
 	LastTriggeredTime *time.Time `json:"lastTriggeredTime,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// The current status of the alert
 	Status *AlertDefStatus `json:"status,omitempty"`
 	// The time when the alert definition was last updated
 	UpdatedTime *time.Time `json:"updatedTime,omitempty" validate:"regexp=^[\\s\\S]*$"`

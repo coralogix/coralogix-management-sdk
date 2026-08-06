@@ -25,7 +25,7 @@ type SearchClause struct {
 	// Search by the numeric ID of the custom enrichment.
 	Id *int64 `json:"id,omitempty"`
 	// Search by the name of the custom enrichment.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^\\\\w+$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

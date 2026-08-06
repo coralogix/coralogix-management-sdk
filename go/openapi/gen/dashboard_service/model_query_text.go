@@ -22,6 +22,7 @@ var _ MappedNullable = &QueryText{}
 
 // QueryText Query text.
 type QueryText struct {
+	// Data mode. Omitted or DATA_MODE_TYPE_HIGH_UNSPECIFIED queries high-priority ('Frequent Search') data; DATA_MODE_TYPE_ARCHIVE queries archive ('Monitoring') data.
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
 	Query *CommonDataprimeQuery `json:"query,omitempty"`
 	AdditionalProperties map[string]interface{}

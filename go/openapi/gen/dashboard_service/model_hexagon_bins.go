@@ -30,15 +30,19 @@ type HexagonBins struct {
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
+	// Indicates how to group the legend elements, either by thresholds or by query groups
 	LegendBy *LegendBy `json:"legendBy,omitempty"`
 	// A maximum gauge value used in percentage threshold calculation and for visual value representation
 	Max *float64 `json:"max,omitempty"`
 	// A minimum gauge value used in percentage threshold calculation and for visual value representation
 	Min *float64 `json:"min,omitempty"`
+	// Type of the threshold, relative or absolute
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	// List of value thresholds, each with a certain color and an optional name label
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
+	// Unit of the value - one from a predefined list, or 'custom'
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -22,6 +22,7 @@ var _ MappedNullable = &UpdateUserStatusRequest{}
 
 // UpdateUserStatusRequest Request to activate or revoke (deactivate) one or more users within a team. This operation changes the user status to either Active (enables access) or Inactive (disables access).
 type UpdateUserStatusRequest struct {
+	// New status for the users: Active (enables system access) or Inactive (disables system access)
 	Status *UserStatus `json:"status,omitempty"`
 	// List of user account IDs to update. All users will be set to the same status.
 	UserAccountIds []int64 `json:"userAccountIds,omitempty"`

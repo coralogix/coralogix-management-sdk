@@ -13,6 +13,7 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,12 +21,13 @@ var _ = bytes.MinRead
 // checks if the StaticSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StaticSource{}
 
-// StaticSource Static source.
+// StaticSource Static source — a fixed list of values defined directly on the variable. valuesOrderDirection is required and must be a concrete value — ORDER_DIRECTION_UNSPECIFIED is rejected.
 type StaticSource struct {
-	AllOption *AllOption `json:"allOption,omitempty"`
+	AllOption AllOption `json:"allOption"`
 	// List of values.
-	Values []ValueLabel `json:"values,omitempty"`
-	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	Values []ValueLabel `json:"values"`
+	// Values sort order. A concrete value is required — ORDER_DIRECTION_UNSPECIFIED is rejected.
+	ValuesOrderDirection OrderDirection `json:"valuesOrderDirection"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -36,8 +38,11 @@ type _StaticSource StaticSource
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStaticSource() *StaticSource {
+func NewStaticSource(allOption AllOption, values []ValueLabel, valuesOrderDirection OrderDirection) *StaticSource {
 	this := StaticSource{}
+	this.AllOption = allOption
+	this.Values = values
+	this.ValuesOrderDirection = valuesOrderDirection
 	return &this
 }
 
@@ -49,100 +54,76 @@ func NewStaticSourceWithDefaults() *StaticSource {
 	return &this
 }
 
-// GetAllOption returns the AllOption field value if set, zero value otherwise.
+// GetAllOption returns the AllOption field value
 func (o *StaticSource) GetAllOption() AllOption {
-	if o == nil || IsNil(o.AllOption) {
+	if o == nil {
 		var ret AllOption
 		return ret
 	}
-	return *o.AllOption
+
+	return o.AllOption
 }
 
-// GetAllOptionOk returns a tuple with the AllOption field value if set, nil otherwise
+// GetAllOptionOk returns a tuple with the AllOption field value
 // and a boolean to check if the value has been set.
 func (o *StaticSource) GetAllOptionOk() (*AllOption, bool) {
-	if o == nil || IsNil(o.AllOption) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AllOption, true
+	return &o.AllOption, true
 }
 
-// HasAllOption returns a boolean if a field has been set.
-func (o *StaticSource) HasAllOption() bool {
-	if o != nil && !IsNil(o.AllOption) {
-		return true
-	}
-
-	return false
-}
-
-// SetAllOption gets a reference to the given AllOption and assigns it to the AllOption field.
+// SetAllOption sets field value
 func (o *StaticSource) SetAllOption(v AllOption) {
-	o.AllOption = &v
+	o.AllOption = v
 }
 
-// GetValues returns the Values field value if set, zero value otherwise.
+// GetValues returns the Values field value
 func (o *StaticSource) GetValues() []ValueLabel {
-	if o == nil || IsNil(o.Values) {
+	if o == nil {
 		var ret []ValueLabel
 		return ret
 	}
+
 	return o.Values
 }
 
-// GetValuesOk returns a tuple with the Values field value if set, nil otherwise
+// GetValuesOk returns a tuple with the Values field value
 // and a boolean to check if the value has been set.
 func (o *StaticSource) GetValuesOk() ([]ValueLabel, bool) {
-	if o == nil || IsNil(o.Values) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Values, true
 }
 
-// HasValues returns a boolean if a field has been set.
-func (o *StaticSource) HasValues() bool {
-	if o != nil && !IsNil(o.Values) {
-		return true
-	}
-
-	return false
-}
-
-// SetValues gets a reference to the given []ValueLabel and assigns it to the Values field.
+// SetValues sets field value
 func (o *StaticSource) SetValues(v []ValueLabel) {
 	o.Values = v
 }
 
-// GetValuesOrderDirection returns the ValuesOrderDirection field value if set, zero value otherwise.
+// GetValuesOrderDirection returns the ValuesOrderDirection field value
 func (o *StaticSource) GetValuesOrderDirection() OrderDirection {
-	if o == nil || IsNil(o.ValuesOrderDirection) {
+	if o == nil {
 		var ret OrderDirection
 		return ret
 	}
-	return *o.ValuesOrderDirection
+
+	return o.ValuesOrderDirection
 }
 
-// GetValuesOrderDirectionOk returns a tuple with the ValuesOrderDirection field value if set, nil otherwise
+// GetValuesOrderDirectionOk returns a tuple with the ValuesOrderDirection field value
 // and a boolean to check if the value has been set.
 func (o *StaticSource) GetValuesOrderDirectionOk() (*OrderDirection, bool) {
-	if o == nil || IsNil(o.ValuesOrderDirection) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ValuesOrderDirection, true
+	return &o.ValuesOrderDirection, true
 }
 
-// HasValuesOrderDirection returns a boolean if a field has been set.
-func (o *StaticSource) HasValuesOrderDirection() bool {
-	if o != nil && !IsNil(o.ValuesOrderDirection) {
-		return true
-	}
-
-	return false
-}
-
-// SetValuesOrderDirection gets a reference to the given OrderDirection and assigns it to the ValuesOrderDirection field.
+// SetValuesOrderDirection sets field value
 func (o *StaticSource) SetValuesOrderDirection(v OrderDirection) {
-	o.ValuesOrderDirection = &v
+	o.ValuesOrderDirection = v
 }
 
 func (o StaticSource) MarshalJSON() ([]byte, error) {
@@ -155,15 +136,9 @@ func (o StaticSource) MarshalJSON() ([]byte, error) {
 
 func (o StaticSource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AllOption) {
-		toSerialize["allOption"] = o.AllOption
-	}
-	if !IsNil(o.Values) {
-		toSerialize["values"] = o.Values
-	}
-	if !IsNil(o.ValuesOrderDirection) {
-		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
-	}
+	toSerialize["allOption"] = o.AllOption
+	toSerialize["values"] = o.Values
+	toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -173,6 +148,29 @@ func (o StaticSource) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *StaticSource) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"allOption",
+		"values",
+		"valuesOrderDirection",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varStaticSource := _StaticSource{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

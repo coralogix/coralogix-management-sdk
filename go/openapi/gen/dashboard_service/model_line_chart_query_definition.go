@@ -27,6 +27,7 @@ type LineChartQueryDefinition struct {
 	ColorScheme *string `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Data mode type, either high or archive
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	Decimal *int32 `json:"decimal,omitempty"`
@@ -36,18 +37,24 @@ type LineChartQueryDefinition struct {
 	HashColors *bool `json:"hashColors,omitempty"`
 	// Unique id of the query definition. If empty or omitted, it is auto-replaced with a generated UUID.
 	Id string `json:"id" validate:"regexp=^[\\s\\S]*$"`
+	// Interval resolution settings for time bucket calculations, supporting auto or manual modes
 	IntervalResolution *IntervalResolution `json:"intervalResolution,omitempty"`
 	// Is the query visible
 	IsVisible *bool `json:"isVisible,omitempty"`
 	// Custom name of the query
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Query object
 	Query LineChartQuery `json:"query"`
+	// Resolution settings of the query values (deprecated, use interval_resolution instead)
+	// Deprecated
 	Resolution *LineChartResolution `json:"resolution,omitempty"`
+	// Scale type - linear/logarithmic
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	// Max count of the series per query
 	SeriesCountLimit *string `json:"seriesCountLimit,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Custom template for the series name
 	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Unit of the query results - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
@@ -415,6 +422,7 @@ func (o *LineChartQueryDefinition) SetQuery(v LineChartQuery) {
 }
 
 // GetResolution returns the Resolution field value if set, zero value otherwise.
+// Deprecated
 func (o *LineChartQueryDefinition) GetResolution() LineChartResolution {
 	if o == nil || IsNil(o.Resolution) {
 		var ret LineChartResolution
@@ -425,6 +433,7 @@ func (o *LineChartQueryDefinition) GetResolution() LineChartResolution {
 
 // GetResolutionOk returns a tuple with the Resolution field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *LineChartQueryDefinition) GetResolutionOk() (*LineChartResolution, bool) {
 	if o == nil || IsNil(o.Resolution) {
 		return nil, false
@@ -442,6 +451,7 @@ func (o *LineChartQueryDefinition) HasResolution() bool {
 }
 
 // SetResolution gets a reference to the given LineChartResolution and assigns it to the Resolution field.
+// Deprecated
 func (o *LineChartQueryDefinition) SetResolution(v LineChartResolution) {
 	o.Resolution = &v
 }

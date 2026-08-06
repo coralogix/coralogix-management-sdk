@@ -24,10 +24,10 @@ var _ MappedNullable = &CreateCustomEnrichmentRequest{}
 // CreateCustomEnrichmentRequest This request data structure is used to create a custom enrichment
 type CreateCustomEnrichmentRequest struct {
 	// Human-readable description of the custom enrichment.
-	Description string `json:"description"`
+	Description string `json:"description" validate:"regexp=^[\\s\\S]*$"`
 	File File `json:"file"`
-	// Human-readable name for the custom enrichment.
-	Name string `json:"name"`
+	// Human-readable name for the custom enrichment. May contain only letters, digits, and underscores.
+	Name string `json:"name" validate:"regexp=^\\\\w+$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

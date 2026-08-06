@@ -22,7 +22,9 @@ var _ MappedNullable = &ListIncidentEventsOrderByRequest{}
 
 // ListIncidentEventsOrderByRequest struct for ListIncidentEventsOrderByRequest
 type ListIncidentEventsOrderByRequest struct {
+	// Sort direction (ascending or descending)
 	Direction *V1OrderByDirection `json:"direction,omitempty"`
+	// Field to order by
 	Field *IncidentEventOrderByFieldType `json:"field,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

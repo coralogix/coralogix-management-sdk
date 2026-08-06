@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsTimeWindow{}
 
 // LogsTimeWindow Time window configuration for log-based alerts
 type LogsTimeWindow struct {
+	// A time window defined by a specific value
 	LogsTimeWindowSpecificValue *LogsTimeWindowValue `json:"logsTimeWindowSpecificValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

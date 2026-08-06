@@ -27,6 +27,7 @@ type ConnectorDetails struct {
 	ConnectorId string `json:"connectorId"`
 	// Display name of the connector
 	ConnectorName string `json:"connectorName"`
+	// Type of the connector
 	ConnectorType V1ConnectorType `json:"connectorType"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

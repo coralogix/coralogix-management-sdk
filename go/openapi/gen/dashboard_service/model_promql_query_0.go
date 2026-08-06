@@ -22,7 +22,9 @@ var _ MappedNullable = &PromqlQuery{}
 
 // PromqlQuery Variable query source that executes a PromQL query to populate variable values.
 type PromqlQuery struct {
+	// Whether to execute the PromQL query as an instant or a range query. Defaults to instant for variable use cases.
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
+	// PromQL query string used to fetch the values for this dashboard variable
 	Query *PromQlQuery `json:"query,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

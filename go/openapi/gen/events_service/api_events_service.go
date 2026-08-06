@@ -446,11 +446,12 @@ func (a *EventsServiceAPIService) EventsServiceGetEventsStatisticsExecute(r ApiE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.filter == nil {
+		return localVarReturnValue, nil, reportError("filter is required and must be specified")
+	}
 
-	if r.filter != nil {
-		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", ""); err != nil {
-			return localVarReturnValue, nil, err
-		}
+	if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", ""); err != nil {
+		return localVarReturnValue, nil, err
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -617,8 +618,17 @@ func (a *EventsServiceAPIService) EventsServiceListAlertEventsExecute(r ApiEvent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.alertIds == nil {
+		return localVarReturnValue, nil, reportError("alertIds is required and must be specified")
+	}
+	if len(*r.alertIds) < 0 {
+		return localVarReturnValue, nil, reportError("alertIds must have at least 0 elements")
+	}
+	if r.timestampRange == nil {
+		return localVarReturnValue, nil, reportError("timestampRange is required and must be specified")
+	}
 
-	if r.alertIds != nil {
+	{
 		t := *r.alertIds
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
@@ -633,10 +643,8 @@ func (a *EventsServiceAPIService) EventsServiceListAlertEventsExecute(r ApiEvent
 			}
 		}
 	}
-	if r.timestampRange != nil {
-		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "timestamp_range", r.timestampRange, "form", ""); err != nil {
-			return localVarReturnValue, nil, err
-		}
+	if err := parameterAddToHeaderOrQuery(localVarQueryParams, "timestamp_range", r.timestampRange, "form", ""); err != nil {
+		return localVarReturnValue, nil, err
 	}
 	if r.cxEventLabels != nil {
 		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "cx_event_labels", r.cxEventLabels, "form", ""); err != nil {
@@ -753,8 +761,8 @@ type ApiEventsServiceListEventsRequest struct {
 	ctx context.Context
 	ApiService *EventsServiceAPIService
 	filter *EventsFilter
-	orderBys *[]EventsServiceListAlertEventsOrderBysParameterInner
 	pagination *EventsServiceListAlertEventsPaginationParameter
+	orderBys *[]EventsServiceListAlertEventsOrderBysParameterInner
 }
 
 // Filter criteria for events.
@@ -763,15 +771,15 @@ func (r ApiEventsServiceListEventsRequest) Filter(filter EventsFilter) ApiEvents
 	return r
 }
 
-// Ordering criteria for the returned events.
-func (r ApiEventsServiceListEventsRequest) OrderBys(orderBys []EventsServiceListAlertEventsOrderBysParameterInner) ApiEventsServiceListEventsRequest {
-	r.orderBys = &orderBys
-	return r
-}
-
 // Pagination parameters for the response.
 func (r ApiEventsServiceListEventsRequest) Pagination(pagination EventsServiceListAlertEventsPaginationParameter) ApiEventsServiceListEventsRequest {
 	r.pagination = &pagination
+	return r
+}
+
+// Ordering criteria for the returned events.
+func (r ApiEventsServiceListEventsRequest) OrderBys(orderBys []EventsServiceListAlertEventsOrderBysParameterInner) ApiEventsServiceListEventsRequest {
+	r.orderBys = &orderBys
 	return r
 }
 
@@ -814,11 +822,18 @@ func (a *EventsServiceAPIService) EventsServiceListEventsExecute(r ApiEventsServ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.filter == nil {
+		return localVarReturnValue, nil, reportError("filter is required and must be specified")
+	}
+	if r.pagination == nil {
+		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
+	}
 
-	if r.filter != nil {
-		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", ""); err != nil {
-			return localVarReturnValue, nil, err
-		}
+	if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", ""); err != nil {
+		return localVarReturnValue, nil, err
+	}
+	if err := parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", ""); err != nil {
+		return localVarReturnValue, nil, err
 	}
 	if r.orderBys != nil {
 		t := *r.orderBys
@@ -833,11 +848,6 @@ func (a *EventsServiceAPIService) EventsServiceListEventsExecute(r ApiEventsServ
 			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi"); err != nil {
 				return localVarReturnValue, nil, err
 			}
-		}
-	}
-	if r.pagination != nil {
-		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", ""); err != nil {
-			return localVarReturnValue, nil, err
 		}
 	}
 	// to determine the Content-Type header
@@ -977,11 +987,12 @@ func (a *EventsServiceAPIService) EventsServiceListEventsCountExecute(r ApiEvent
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.filter == nil {
+		return localVarReturnValue, nil, reportError("filter is required and must be specified")
+	}
 
-	if r.filter != nil {
-		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", ""); err != nil {
-			return localVarReturnValue, nil, err
-		}
+	if err := parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", ""); err != nil {
+		return localVarReturnValue, nil, err
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

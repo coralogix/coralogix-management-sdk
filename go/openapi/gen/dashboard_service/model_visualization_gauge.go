@@ -24,6 +24,7 @@ var _ MappedNullable = &VisualizationGauge{}
 type VisualizationGauge struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	// Arc display settings; set this object to show the gauge arcs and control the value and threshold arcs, or omit it to hide all arcs
 	ArcDisplay *ArcDisplay `json:"arcDisplay,omitempty"`
 	// List of observation fields used to split gauge into multiple gauge instances.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
@@ -33,7 +34,9 @@ type VisualizationGauge struct {
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// (multigauge display only) Whether to show the series names above the value
 	DisplaySeriesName *bool `json:"displaySeriesName,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
+	// Indicates how to group the legend elements, either by thresholds or by query groups
 	LegendBy *LegendBy `json:"legendBy,omitempty"`
 	// A maximum gauge value used in percentage threshold calculation and for visual value representation
 	Max *float64 `json:"max,omitempty"`
@@ -47,10 +50,13 @@ type VisualizationGauge struct {
 	// Deprecated: use arcDisplay.thresholdArc instead. Whether to show the outer arc of gauge which graphically represents the min/max range
 	// Deprecated
 	ShowOuterArc *bool `json:"showOuterArc,omitempty"`
+	// Type of the threshold, relative or absolute
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	// List of value thresholds, each with a certain color and an optional name label
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
+	// Unit of the value - one from a predefined list, or 'custom'
 	Unit *CommonUnit `json:"unit,omitempty"`
+	// Deprecated
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	// The value fields.
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
@@ -596,6 +602,7 @@ func (o *VisualizationGauge) SetUnit(v CommonUnit) {
 }
 
 // GetValueField returns the ValueField field value if set, zero value otherwise.
+// Deprecated
 func (o *VisualizationGauge) GetValueField() ObservationField {
 	if o == nil || IsNil(o.ValueField) {
 		var ret ObservationField
@@ -606,6 +613,7 @@ func (o *VisualizationGauge) GetValueField() ObservationField {
 
 // GetValueFieldOk returns a tuple with the ValueField field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *VisualizationGauge) GetValueFieldOk() (*ObservationField, bool) {
 	if o == nil || IsNil(o.ValueField) {
 		return nil, false
@@ -623,6 +631,7 @@ func (o *VisualizationGauge) HasValueField() bool {
 }
 
 // SetValueField gets a reference to the given ObservationField and assigns it to the ValueField field.
+// Deprecated
 func (o *VisualizationGauge) SetValueField(v ObservationField) {
 	o.ValueField = &v
 }

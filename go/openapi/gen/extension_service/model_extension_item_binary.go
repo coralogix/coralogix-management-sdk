@@ -23,9 +23,9 @@ var _ MappedNullable = &ExtensionItemBinary{}
 // ExtensionItemBinary struct for ExtensionItemBinary
 type ExtensionItemBinary struct {
 	// Data payload.
-	Data *string `json:"data,omitempty"`
+	Data *string `json:"data,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The file name.
-	FileName *string `json:"fileName,omitempty"`
+	FileName *string `json:"fileName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Type *ExtensionItemBinaryBinaryType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

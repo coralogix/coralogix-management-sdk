@@ -22,7 +22,9 @@ var _ MappedNullable = &UpdateCaseSettingsRequest{}
 
 // UpdateCaseSettingsRequest Request to update an existing case settings team configuration.
 type UpdateCaseSettingsRequest struct {
+	// Case lifecycle settings to apply
 	CaseLifecycle *CaseLifecycle `json:"caseLifecycle,omitempty"`
+	// New configuration settings to apply
 	GlobalIndicatorSettings *GlobalIndicatorSettings `json:"globalIndicatorSettings,omitempty"`
 	// New display name for the case settings team configuration
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`

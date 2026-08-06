@@ -22,6 +22,7 @@ var _ MappedNullable = &ListIncidentEventsFilterValuesResponse{}
 
 // ListIncidentEventsFilterValuesResponse A response containing available filter values for incident events
 type ListIncidentEventsFilterValuesResponse struct {
+	// Available filter values for incident events
 	FiltersValues *IncidentQueryFiltersValues `json:"filtersValues,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

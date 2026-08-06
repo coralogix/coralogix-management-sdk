@@ -7,8 +7,10 @@ api_alert_definitions_service.go
 client.go
 configuration.go
 git_push.sh
+model_access_policy_action.go
 model_activity_schedule.go
 model_alert_def.go
+model_alert_def_access.go
 model_alert_def_data_source.go
 model_alert_def_enabled_filter.go
 model_alert_def_entity_labels_filter.go
@@ -22,6 +24,7 @@ model_alert_def_notification_group.go
 model_alert_def_order_by_direction.go
 model_alert_def_order_by_fields.go
 model_alert_def_override.go
+model_alert_def_permissions.go
 model_alert_def_priority.go
 model_alert_def_priority_filter.go
 model_alert_def_properties.go
@@ -29,6 +32,7 @@ model_alert_def_query_filter.go
 model_alert_def_slo_specific_filter.go
 model_alert_def_status.go
 model_alert_def_status_filter.go
+model_alert_def_to_create.go
 model_alert_def_to_replace.go
 model_alert_def_type.go
 model_alert_def_type_filter.go
@@ -46,6 +50,8 @@ model_analytics_threshold_rule.go
 model_analytics_threshold_rule_condition.go
 model_analytics_threshold_type.go
 model_anomaly_alert_settings.go
+model_bulk_create_alert_definitions_request.go
+model_bulk_create_alert_defs_response.go
 model_bulk_delete_alert_definitions_request.go
 model_bulk_delete_alert_defs_response.go
 model_bulk_replace_alert_definitions_request.go
@@ -64,6 +70,7 @@ model_entity_label_count.go
 model_error.go
 model_error_budget_threshold.go
 model_events_v3_filter_matcher.go
+model_failed_to_create_alert_def.go
 model_failed_to_replace_alert_def.go
 model_filter_option_counts.go
 model_filter_option_counts_enabled_filter.go

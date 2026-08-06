@@ -22,6 +22,7 @@ var _ MappedNullable = &GaugeSpansQuery{}
 
 // GaugeSpansQuery A spans variant of the query
 type GaugeSpansQuery struct {
+	// Deprecated
 	Aggregation *GaugeAggregation `json:"aggregation,omitempty"`
 	// List of span query filters
 	Filters []SpansFilter `json:"filters,omitempty"`
@@ -29,8 +30,11 @@ type GaugeSpansQuery struct {
 	GroupBy []SpanField `json:"groupBy,omitempty"`
 	// A list of observation fields to group the records by
 	GroupBys []SpanObservationField `json:"groupBys,omitempty"`
+	// Lucene query string to search span records
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	// Span query aggregation function
 	SpansAggregation *SpansAggregation `json:"spansAggregation,omitempty"`
+	// Specifies the time period for which the records should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -56,6 +60,7 @@ func NewGaugeSpansQueryWithDefaults() *GaugeSpansQuery {
 }
 
 // GetAggregation returns the Aggregation field value if set, zero value otherwise.
+// Deprecated
 func (o *GaugeSpansQuery) GetAggregation() GaugeAggregation {
 	if o == nil || IsNil(o.Aggregation) {
 		var ret GaugeAggregation
@@ -66,6 +71,7 @@ func (o *GaugeSpansQuery) GetAggregation() GaugeAggregation {
 
 // GetAggregationOk returns a tuple with the Aggregation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *GaugeSpansQuery) GetAggregationOk() (*GaugeAggregation, bool) {
 	if o == nil || IsNil(o.Aggregation) {
 		return nil, false
@@ -83,6 +89,7 @@ func (o *GaugeSpansQuery) HasAggregation() bool {
 }
 
 // SetAggregation gets a reference to the given GaugeAggregation and assigns it to the Aggregation field.
+// Deprecated
 func (o *GaugeSpansQuery) SetAggregation(v GaugeAggregation) {
 	o.Aggregation = &v
 }

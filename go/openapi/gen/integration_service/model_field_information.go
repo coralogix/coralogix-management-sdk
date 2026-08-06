@@ -23,18 +23,18 @@ var _ MappedNullable = &FieldInformation{}
 // FieldInformation struct for FieldInformation
 type FieldInformation struct {
 	// Regular expression pattern that the field value must match for validation.
-	AllowedPattern *string `json:"allowedPattern,omitempty"`
+	AllowedPattern *string `json:"allowedPattern,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	ApplicableIf *FieldCondition `json:"applicableIf,omitempty"`
 	// Link to documentation providing more information about this field.
-	DocumentationReference *string `json:"documentationReference,omitempty"`
+	DocumentationReference *string `json:"documentationReference,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Identifier of the UI group this field belongs to for form layout purposes.
-	GroupId *string `json:"groupId,omitempty"`
+	GroupId *string `json:"groupId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	MultiText *ListTextValue `json:"multiText,omitempty"`
 	MultipleSelection *MultipleSelectionValue `json:"multipleSelection,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Placeholder text shown in the input field before a value is entered.
-	Placeholder *string `json:"placeholder,omitempty"`
+	Placeholder *string `json:"placeholder,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether this field has a predefined value that is suggested to the user.
 	Predefined *bool `json:"predefined,omitempty"`
 	// Whether this field is read-only and cannot be modified by the user.
@@ -46,12 +46,12 @@ type FieldInformation struct {
 	SingleBoolean *SingleBooleanValue `json:"singleBoolean,omitempty"`
 	SingleNumber *IntegrationRevisionSingleNumericValue `json:"singleNumber,omitempty"`
 	// Name of the template parameter this field maps to in the deployment template.
-	TemplateParamName *string `json:"templateParamName,omitempty"`
+	TemplateParamName *string `json:"templateParamName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Tooltip text displayed on hover to provide additional context for this field.
-	Tooltip *string `json:"tooltip,omitempty"`
+	Tooltip *string `json:"tooltip,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Type *InputType `json:"type,omitempty"`
 	// Notice displayed to users when an upgrade is required to use this field.
-	UpgradeNotice *string `json:"upgradeNotice,omitempty"`
+	UpgradeNotice *string `json:"upgradeNotice,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether this field is visible in the integration configuration UI.
 	Visible *bool `json:"visible,omitempty"`
 	AdditionalProperties map[string]interface{}

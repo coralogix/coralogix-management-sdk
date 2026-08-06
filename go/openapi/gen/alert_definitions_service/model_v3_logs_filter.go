@@ -22,6 +22,7 @@ var _ MappedNullable = &V3LogsFilter{}
 
 // V3LogsFilter Filter configuration for log-based alerts
 type V3LogsFilter struct {
+	// A simple filter that uses a Lucene query and label filters
 	SimpleFilter *LogsSimpleFilter `json:"simpleFilter,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

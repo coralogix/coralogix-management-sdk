@@ -23,6 +23,7 @@ var _ MappedNullable = &CloseCaseResponse{}
 
 // CloseCaseResponse Response containing the case after it has been closed.
 type CloseCaseResponse struct {
+	// Case after closing it.
 	Case Case `json:"case"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -23,9 +23,9 @@ var _ MappedNullable = &ApiKeyData{}
 // ApiKeyData Api key data.
 type ApiKeyData struct {
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The value.
-	Value *string `json:"value,omitempty"`
+	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

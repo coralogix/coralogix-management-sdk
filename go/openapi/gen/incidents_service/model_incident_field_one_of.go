@@ -37,8 +37,11 @@ type IncidentFieldOneOf struct {
 	LastStateUpdateTime *time.Time `json:"lastStateUpdateTime,omitempty"`
 	// Display name of the incident.
 	Name *string `json:"name,omitempty"`
+	// Severity level of the incident.
 	Severity *IncidentSeverity `json:"severity,omitempty"`
+	// Current internal state of the incident.
 	State *IncidentState `json:"state,omitempty"`
+	// Current status of the incident.
 	Status *IncidentStatus `json:"status,omitempty"`
 	// Subsystem associated with the incident.
 	SubsystemName *string `json:"subsystemName,omitempty"`

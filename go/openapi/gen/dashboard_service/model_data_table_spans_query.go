@@ -24,8 +24,11 @@ var _ MappedNullable = &DataTableSpansQuery{}
 type DataTableSpansQuery struct {
 	// List of span query filters
 	Filters []SpansFilter `json:"filters,omitempty"`
+	// Definition of grouping and aggregations
 	Grouping *SpansQueryGrouping `json:"grouping,omitempty"`
+	// A Lucene query string to search span records
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	// Specifies the time period for which the records should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

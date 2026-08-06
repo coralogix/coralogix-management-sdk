@@ -23,7 +23,7 @@ var _ MappedNullable = &V1Failure{}
 // V1Failure Failure.
 type V1Failure struct {
 	// The error message.
-	ErrorMessage *string `json:"errorMessage,omitempty"`
+	ErrorMessage *string `json:"errorMessage,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

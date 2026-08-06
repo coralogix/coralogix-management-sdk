@@ -22,6 +22,9 @@ var _ MappedNullable = &AlertDefToReplace{}
 
 // AlertDefToReplace An alert definition along with its ID for replacement
 type AlertDefToReplace struct {
+	// Change to the alert's access policy: upsert a raw policy, or delete (remove) the existing one. Optional; if omitted, the existing policy is left unchanged. Changing the access policy requires the alerts:UpdateAccessPolicy permission.
+	AccessPolicy *AccessPolicyAction `json:"accessPolicy,omitempty"`
+	// The properties of the alert definition
 	AlertDefProperties *AlertDefProperties `json:"alertDefProperties,omitempty"`
 	// The alert definition ID
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
@@ -46,6 +49,38 @@ func NewAlertDefToReplace() *AlertDefToReplace {
 func NewAlertDefToReplaceWithDefaults() *AlertDefToReplace {
 	this := AlertDefToReplace{}
 	return &this
+}
+
+// GetAccessPolicy returns the AccessPolicy field value if set, zero value otherwise.
+func (o *AlertDefToReplace) GetAccessPolicy() AccessPolicyAction {
+	if o == nil || IsNil(o.AccessPolicy) {
+		var ret AccessPolicyAction
+		return ret
+	}
+	return *o.AccessPolicy
+}
+
+// GetAccessPolicyOk returns a tuple with the AccessPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefToReplace) GetAccessPolicyOk() (*AccessPolicyAction, bool) {
+	if o == nil || IsNil(o.AccessPolicy) {
+		return nil, false
+	}
+	return o.AccessPolicy, true
+}
+
+// HasAccessPolicy returns a boolean if a field has been set.
+func (o *AlertDefToReplace) HasAccessPolicy() bool {
+	if o != nil && !IsNil(o.AccessPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessPolicy gets a reference to the given AccessPolicyAction and assigns it to the AccessPolicy field.
+func (o *AlertDefToReplace) SetAccessPolicy(v AccessPolicyAction) {
+	o.AccessPolicy = &v
 }
 
 // GetAlertDefProperties returns the AlertDefProperties field value if set, zero value otherwise.
@@ -122,6 +157,9 @@ func (o AlertDefToReplace) MarshalJSON() ([]byte, error) {
 
 func (o AlertDefToReplace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AccessPolicy) {
+		toSerialize["accessPolicy"] = o.AccessPolicy
+	}
 	if !IsNil(o.AlertDefProperties) {
 		toSerialize["alertDefProperties"] = o.AlertDefProperties
 	}
@@ -151,6 +189,7 @@ func (o *AlertDefToReplace) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "accessPolicy")
 		delete(additionalProperties, "alertDefProperties")
 		delete(additionalProperties, "id")
 		o.AdditionalProperties = additionalProperties

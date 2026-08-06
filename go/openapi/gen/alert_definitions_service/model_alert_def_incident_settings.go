@@ -24,6 +24,7 @@ var _ MappedNullable = &AlertDefIncidentSettings{}
 type AlertDefIncidentSettings struct {
 	// The time in minutes before the alert can be retriggered
 	Minutes *int64 `json:"minutes,omitempty"`
+	// The condition to notify about the alert
 	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

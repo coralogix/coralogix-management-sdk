@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsSourceStrategy{}
 
 // LogsSourceStrategy Determines the time strategy for fetching logs (instant snapshot, fixed range, or sliding window).
 type LogsSourceStrategy struct {
+	// Duration.
 	Duration *LogsSourceStrategyDuration `json:"duration,omitempty"`
 	Instant *LogsSourceStrategyInstant `json:"instant,omitempty"`
 	Range *LogsSourceStrategyRange `json:"range,omitempty"`

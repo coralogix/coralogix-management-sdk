@@ -22,7 +22,9 @@ var _ MappedNullable = &GeomapColor{}
 
 // GeomapColor Geomap color.
 type GeomapColor struct {
+	// Geomap clusters will have same size, but gradient color will be applied to distinguish data values and/or applied aggregation
 	ColorRange *ColorGradientType `json:"colorRange,omitempty"`
+	// Geomap clusters will scale according to data values and/or applied aggregation, using a solid color
 	Size *ColorSolidType `json:"size,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

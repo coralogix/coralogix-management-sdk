@@ -21,17 +21,17 @@ var _ = bytes.MinRead
 // checks if the CreatePolicyRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreatePolicyRequest{}
 
-// CreatePolicyRequest This data structue is used to create a new policy.
+// CreatePolicyRequest This data structue is used to create a new policy. The number of policies per source type is limited per account (200 by default).
 type CreatePolicyRequest struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
-	// Optional free-text description of the policy's purpose.
-	Description *string `json:"description,omitempty"`
+	// Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
 	// When true, the policy is disabled and will not be evaluated.
 	Disabled *bool `json:"disabled,omitempty"`
 	LogRules *LogRules `json:"logRules,omitempty"`
-	// Human-readable name for the policy.
-	Name string `json:"name"`
+	// Human-readable name for the policy. Only Latin-1 characters are accepted.
+	Name string `json:"name" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
 	Placement *Placement `json:"placement,omitempty"`
 	Priority QuotaV1Priority `json:"priority"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`

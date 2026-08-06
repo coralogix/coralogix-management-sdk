@@ -22,6 +22,7 @@ var _ MappedNullable = &GetCompanyIpAccessSettingsResponse{}
 
 // GetCompanyIpAccessSettingsResponse This data structure represents the response to get company IP access settings.
 type GetCompanyIpAccessSettingsResponse struct {
+	// The company IP access settings.
 	Settings *CompanyIpAccessSettings `json:"settings,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

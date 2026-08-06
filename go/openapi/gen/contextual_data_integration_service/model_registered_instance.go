@@ -26,11 +26,11 @@ type RegisteredInstance struct {
 	Arm *ARMStack `json:"arm,omitempty"`
 	Cloudformation *CloudFormationStack `json:"cloudformation,omitempty"`
 	// The definition version.
-	DefinitionVersion *string `json:"definitionVersion,omitempty"`
+	DefinitionVersion *string `json:"definitionVersion,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// This data structure represents an integration that does not require deployment.
 	Empty map[string]interface{} `json:"empty,omitempty"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
 	// Whether this is a testing instance used for validation purposes only.
 	IsTesting *bool `json:"isTesting,omitempty"`

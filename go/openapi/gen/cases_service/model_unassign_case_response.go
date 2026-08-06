@@ -23,6 +23,7 @@ var _ MappedNullable = &UnassignCaseResponse{}
 
 // UnassignCaseResponse Response containing the case after removing its assignee.
 type UnassignCaseResponse struct {
+	// Case after removing its assignee.
 	Case Case `json:"case"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

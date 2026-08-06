@@ -25,6 +25,7 @@ var _ MappedNullable = &VerticalBarsMultiQueryFieldSettings{}
 type VerticalBarsMultiQueryFieldSettings struct {
 	// Reference to the query id from Dynamic.query_display_settings
 	QueryId string `json:"queryId" validate:"regexp=^[\\s\\S]*$"`
+	// Numeric field for this query - each bar gets one value column
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,7 +22,7 @@ var _ MappedNullable = &CaseResolver{}
 
 // CaseResolver Entity responsible for resolving the case.
 type CaseResolver struct {
-	// Marker indicating that the case was resolved using an API key.
+	// The api key.
 	ApiKey map[string]interface{} `json:"apiKey,omitempty"`
 	// Marker indicating that the case was resolved by a Coralogix user.
 	CxUser map[string]interface{} `json:"cxUser,omitempty"`

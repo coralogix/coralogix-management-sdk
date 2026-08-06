@@ -32,17 +32,23 @@ type Stat struct {
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// (multi-stat display only) Whether to show the series names above the value
 	DisplaySeriesName *bool `json:"displaySeriesName,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
+	// Indicates how to group the legend elements, either by thresholds or by query groups
 	LegendBy *LegendBy `json:"legendBy,omitempty"`
 	// A maximum gauge value used in percentage threshold calculation and for visual value representation
 	Max *float64 `json:"max,omitempty"`
 	// A minimum gauge value used in percentage threshold calculation and for visual value representation
 	Min *float64 `json:"min,omitempty"`
+	// Indicates which widget element should be colorized as the threshold, either the value or the background
 	ThresholdBy *CommonThresholdBy `json:"thresholdBy,omitempty"`
+	// Type of the threshold, relative or absolute
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	// List of value thresholds, each with a certain color and an optional name label
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
+	// Unit of the value - one from a predefined list, or 'custom'
 	Unit *CommonUnit `json:"unit,omitempty"`
+	// Deprecated
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	// The value fields.
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
@@ -486,6 +492,7 @@ func (o *Stat) SetUnit(v CommonUnit) {
 }
 
 // GetValueField returns the ValueField field value if set, zero value otherwise.
+// Deprecated
 func (o *Stat) GetValueField() ObservationField {
 	if o == nil || IsNil(o.ValueField) {
 		var ret ObservationField
@@ -496,6 +503,7 @@ func (o *Stat) GetValueField() ObservationField {
 
 // GetValueFieldOk returns a tuple with the ValueField field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Stat) GetValueFieldOk() (*ObservationField, bool) {
 	if o == nil || IsNil(o.ValueField) {
 		return nil, false
@@ -513,6 +521,7 @@ func (o *Stat) HasValueField() bool {
 }
 
 // SetValueField gets a reference to the given ObservationField and assigns it to the ValueField field.
+// Deprecated
 func (o *Stat) SetValueField(v ObservationField) {
 	o.ValueField = &v
 }

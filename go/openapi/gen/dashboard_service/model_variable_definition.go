@@ -22,6 +22,7 @@ var _ MappedNullable = &VariableDefinition{}
 
 // VariableDefinition Discriminated union defining the variable type: either a constant value or a multi-select query-driven variable.
 type VariableDefinition struct {
+	// Deprecated
 	Constant *Constant `json:"constant,omitempty"`
 	MultiSelect *MultiSelect `json:"multiSelect,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -48,6 +49,7 @@ func NewVariableDefinitionWithDefaults() *VariableDefinition {
 }
 
 // GetConstant returns the Constant field value if set, zero value otherwise.
+// Deprecated
 func (o *VariableDefinition) GetConstant() Constant {
 	if o == nil || IsNil(o.Constant) {
 		var ret Constant
@@ -58,6 +60,7 @@ func (o *VariableDefinition) GetConstant() Constant {
 
 // GetConstantOk returns a tuple with the Constant field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *VariableDefinition) GetConstantOk() (*Constant, bool) {
 	if o == nil || IsNil(o.Constant) {
 		return nil, false
@@ -75,6 +78,7 @@ func (o *VariableDefinition) HasConstant() bool {
 }
 
 // SetConstant gets a reference to the given Constant and assigns it to the Constant field.
+// Deprecated
 func (o *VariableDefinition) SetConstant(v Constant) {
 	o.Constant = &v
 }

@@ -26,6 +26,7 @@ var _ MappedNullable = &DateRangeFilter{}
 type DateRangeFilter struct {
 	// Timestamp marking the start of the date range
 	From time.Time `json:"from"`
+	// Determines how the date range is applied. ACTIVE_WINDOW (default) returns cases active during the range. CREATED_AT returns cases created within the range.
 	Mode *DateRangeMode `json:"mode,omitempty"`
 	// Timestamp marking the end of the date range
 	To time.Time `json:"to"`

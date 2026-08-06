@@ -22,6 +22,7 @@ var _ MappedNullable = &TracingFilter{}
 
 // TracingFilter Filter configuration for tracing-based alerts
 type TracingFilter struct {
+	// Simple filter using latency threshold and label filters
 	SimpleFilter *TracingSimpleFilter `json:"simpleFilter,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

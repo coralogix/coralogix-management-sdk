@@ -23,9 +23,9 @@ var _ MappedNullable = &GetEnrichmentLimitResponse{}
 
 // GetEnrichmentLimitResponse This response data structure represents the enrichments limit
 type GetEnrichmentLimitResponse struct {
-	// Limit.
+	// Maximum number of enrichment rules allowed for the account. Defaults to 5.
 	Limit int64 `json:"limit"`
-	// The used.
+	// Number of enrichment rules currently in use.
 	Used int64 `json:"used"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -23,7 +23,7 @@ var _ MappedNullable = &DeleteActionRequest{}
 // DeleteActionRequest This data structure represents the request to delete an Action.
 type DeleteActionRequest struct {
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

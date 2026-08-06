@@ -22,15 +22,25 @@ var _ MappedNullable = &AlertDefQueryFilter{}
 
 // AlertDefQueryFilter Filter configuration for alert defs
 type AlertDefQueryFilter struct {
+	// Filter by AlertDef enabled status
 	EnabledFilter *AlertDefEnabledFilter `json:"enabledFilter,omitempty"`
+	// Filter by AlertDef entity labels
 	EntityLabelsFilter *AlertDefEntityLabelsFilter `json:"entityLabelsFilter,omitempty"`
+	// Filter by alert definition IDs to include or exclude
 	IdFilter *AlertDefIdFilter `json:"idFilter,omitempty"`
+	// Filters all alerts that were triggered at the given time range
 	LastTriggeredTimeRangeFilter *AlertDefLastTriggeredTimeFilter `json:"lastTriggeredTimeRangeFilter,omitempty"`
+	// Filters all alerts that were modified at the given time range
 	ModifiedTimeRangeFilter *AlertDefModifiedTimeFilter `json:"modifiedTimeRangeFilter,omitempty"`
+	// Filter by name
 	NameFilter *AlertDefNameFilter `json:"nameFilter,omitempty"`
+	// Filter by AlertDef priority
 	PriorityFilter *AlertDefPriorityFilter `json:"priorityFilter,omitempty"`
+	// Filter by alert definition status
 	StatusFilter *AlertDefStatusFilter `json:"statusFilter,omitempty"`
+	// Filter by AlertDef type
 	TypeFilter *AlertDefTypeFilter `json:"typeFilter,omitempty"`
+	// Filter by fields specific to alert type definitions
 	TypeSpecificFilter *AlertDefTypeSpecificFilter `json:"typeSpecificFilter,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

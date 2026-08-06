@@ -22,6 +22,7 @@ var _ MappedNullable = &PieChartSpansQuery{}
 
 // PieChartSpansQuery A spans variant of the query
 type PieChartSpansQuery struct {
+	// Span query aggregation function
 	Aggregation *SpansAggregation `json:"aggregation,omitempty"`
 	// List of span query filters
 	Filters []SpansFilter `json:"filters,omitempty"`
@@ -29,9 +30,13 @@ type PieChartSpansQuery struct {
 	GroupNames []SpanField `json:"groupNames,omitempty"`
 	// A list of observation fields definitions to group the records by
 	GroupNamesFields []SpanObservationField `json:"groupNamesFields,omitempty"`
+	// A Lucene query string to search span records
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	// Field name by which results are stacked in individual group
 	StackedGroupName *SpanField `json:"stackedGroupName,omitempty"`
+	// Observation field definition by which groups are divided into subgroups
 	StackedGroupNameField *SpanObservationField `json:"stackedGroupNameField,omitempty"`
+	// Specifies the time period for which the records should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

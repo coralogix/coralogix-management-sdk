@@ -24,6 +24,7 @@ var _ MappedNullable = &LogsNewValueCondition{}
 type LogsNewValueCondition struct {
 	// The keypath to track for new values
 	KeypathToTrack *string `json:"keypathToTrack,omitempty"`
+	// The time window for detecting new values
 	TimeWindow *LogsNewValueTimeWindow `json:"timeWindow,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

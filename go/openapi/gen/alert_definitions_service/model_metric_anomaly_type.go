@@ -22,9 +22,11 @@ var _ MappedNullable = &MetricAnomalyType{}
 
 // MetricAnomalyType Configuration for alerts triggered by anomalous metric patterns
 type MetricAnomalyType struct {
+	// Configuration for anomaly alert settings.
 	AnomalyAlertSettings *AnomalyAlertSettings `json:"anomalyAlertSettings,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
+	// The filter to match metric entries for the alert.
 	MetricFilter *MetricFilter `json:"metricFilter,omitempty"`
 	// The rules for the metric anomaly alert.
 	Rules []MetricAnomalyRule `json:"rules,omitempty"`
