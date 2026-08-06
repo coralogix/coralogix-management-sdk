@@ -25,8 +25,11 @@ type SloFilterField struct {
 	ConstFilter *SloConstantFilterField `json:"constFilter,omitempty"`
 	// Filter by a specific SLO label key.
 	LabelName *string `json:"labelName,omitempty"`
+	// Filter by the SLO ownership environment tag (static or resolved). IN semantics: match if the value equals any of the given strings. Applies whenever the SLO has ownership configured for environment; not limited to a specific product type.
 	OwnershipEnvironmentValues *StringValues `json:"ownershipEnvironmentValues,omitempty"`
+	// Filter by the SLO ownership service tag (static or resolved). IN semantics: match if the value equals any of the given strings. Applies whenever the SLO has ownership configured for service; not limited to a specific product type.
 	OwnershipServiceValues *StringValues `json:"ownershipServiceValues,omitempty"`
+	// Filter by the SLO ownership team tag (static or resolved). IN semantics: match if the value equals any of the given strings. Applies whenever the SLO has ownership configured for team; not limited to a specific product type.
 	OwnershipTeamValues *StringValues `json:"ownershipTeamValues,omitempty"`
 	// Filter discriminator for SLO product type values.
 	ProductType *bool `json:"productType,omitempty"`

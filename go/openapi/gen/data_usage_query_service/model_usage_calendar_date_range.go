@@ -23,7 +23,9 @@ var _ MappedNullable = &UsageCalendarDateRange{}
 
 // UsageCalendarDateRange Half-open UTC calendar date interval `[start, end)`. Both bounds are required full calendar dates.
 type UsageCalendarDateRange struct {
+	// Exclusive end of the range, as a full UTC calendar date later than `start`.
 	End Date `json:"end"`
+	// Inclusive start of the range, as a full UTC calendar date.
 	Start Date `json:"start"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

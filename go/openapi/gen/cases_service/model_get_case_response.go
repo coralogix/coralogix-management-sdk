@@ -23,6 +23,7 @@ var _ MappedNullable = &GetCaseResponse{}
 
 // GetCaseResponse Response containing the requested case
 type GetCaseResponse struct {
+	// The requested case
 	Case Case `json:"case"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

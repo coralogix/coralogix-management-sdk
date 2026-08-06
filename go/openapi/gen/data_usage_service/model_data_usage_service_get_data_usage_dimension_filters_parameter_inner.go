@@ -26,6 +26,7 @@ type DataUsageServiceGetDataUsageDimensionFiltersParameterInner struct {
 	Pillar *V2Pillar `json:"pillar,omitempty"`
 	Priority *V2Priority `json:"priority,omitempty"`
 	Severity *DatausageV2Severity `json:"severity,omitempty"`
+	// Deprecated
 	Tier *V2TcoTier `json:"tier,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -179,6 +180,7 @@ func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) SetSeverity
 }
 
 // GetTier returns the Tier field value if set, zero value otherwise.
+// Deprecated
 func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetTier() V2TcoTier {
 	if o == nil || IsNil(o.Tier) {
 		var ret V2TcoTier
@@ -189,6 +191,7 @@ func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetTier() V
 
 // GetTierOk returns a tuple with the Tier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) GetTierOk() (*V2TcoTier, bool) {
 	if o == nil || IsNil(o.Tier) {
 		return nil, false
@@ -206,6 +209,7 @@ func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) HasTier() b
 }
 
 // SetTier gets a reference to the given V2TcoTier and assigns it to the Tier field.
+// Deprecated
 func (o *DataUsageServiceGetDataUsageDimensionFiltersParameterInner) SetTier(v V2TcoTier) {
 	o.Tier = &v
 }

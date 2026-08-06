@@ -25,6 +25,7 @@ var _ MappedNullable = &LabelsFilter{}
 type LabelsFilter struct {
 	// The meta labels of the incident
 	MetaLabels []IncidentsV1MetaLabel `json:"metaLabels"`
+	// The operator for the labels filter
 	Operator *V1FilterOperator `json:"operator,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

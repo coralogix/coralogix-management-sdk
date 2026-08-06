@@ -23,6 +23,7 @@ var _ MappedNullable = &SetPriorityOverrideResponse{}
 
 // SetPriorityOverrideResponse Response containing the case with its updated priority override.
 type SetPriorityOverrideResponse struct {
+	// Case after applying the priority override.
 	Case Case `json:"case"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,8 +22,13 @@ var _ MappedNullable = &CaseLifecycle{}
 
 // CaseLifecycle Team-level configuration options for the lifecycle of case, such as suppression and snooze periods.
 type CaseLifecycle struct {
+	// Configuration for how cases process suppressed alerts.
 	AlertSuppressionStrategy *AlertSuppressionStrategy `json:"alertSuppressionStrategy,omitempty"`
+	// Configuration for automatically closing resolved cases after a certain period. If not defined, it will fallback to auto closure after 1 week.
+	AutoClose *AutoCloseConfig `json:"autoClose,omitempty"`
+	// Configuration for inactive cases resolution.
 	AutoResolve *AutoResolveConfig `json:"autoResolve,omitempty"`
+	// KPI thresholds for acknowledgement and resolution, grouped by case priority.
 	Kpi *CaseKPIs `json:"kpi,omitempty"`
 	// Period after resolution during which new cases are snoozed.
 	ResolutionSnoozePeriod *string `json:"resolutionSnoozePeriod,omitempty"`
@@ -82,6 +87,38 @@ func (o *CaseLifecycle) HasAlertSuppressionStrategy() bool {
 // SetAlertSuppressionStrategy gets a reference to the given AlertSuppressionStrategy and assigns it to the AlertSuppressionStrategy field.
 func (o *CaseLifecycle) SetAlertSuppressionStrategy(v AlertSuppressionStrategy) {
 	o.AlertSuppressionStrategy = &v
+}
+
+// GetAutoClose returns the AutoClose field value if set, zero value otherwise.
+func (o *CaseLifecycle) GetAutoClose() AutoCloseConfig {
+	if o == nil || IsNil(o.AutoClose) {
+		var ret AutoCloseConfig
+		return ret
+	}
+	return *o.AutoClose
+}
+
+// GetAutoCloseOk returns a tuple with the AutoClose field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseLifecycle) GetAutoCloseOk() (*AutoCloseConfig, bool) {
+	if o == nil || IsNil(o.AutoClose) {
+		return nil, false
+	}
+	return o.AutoClose, true
+}
+
+// HasAutoClose returns a boolean if a field has been set.
+func (o *CaseLifecycle) HasAutoClose() bool {
+	if o != nil && !IsNil(o.AutoClose) {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoClose gets a reference to the given AutoCloseConfig and assigns it to the AutoClose field.
+func (o *CaseLifecycle) SetAutoClose(v AutoCloseConfig) {
+	o.AutoClose = &v
 }
 
 // GetAutoResolve returns the AutoResolve field value if set, zero value otherwise.
@@ -225,6 +262,9 @@ func (o CaseLifecycle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AlertSuppressionStrategy) {
 		toSerialize["alertSuppressionStrategy"] = o.AlertSuppressionStrategy
 	}
+	if !IsNil(o.AutoClose) {
+		toSerialize["autoClose"] = o.AutoClose
+	}
 	if !IsNil(o.AutoResolve) {
 		toSerialize["autoResolve"] = o.AutoResolve
 	}
@@ -261,6 +301,7 @@ func (o *CaseLifecycle) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "alertSuppressionStrategy")
+		delete(additionalProperties, "autoClose")
 		delete(additionalProperties, "autoResolve")
 		delete(additionalProperties, "kpi")
 		delete(additionalProperties, "resolutionSnoozePeriod")

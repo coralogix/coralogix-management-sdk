@@ -44,7 +44,12 @@
                     "minimum": 0
                   },
                   "userTemplate": {
-                    "$ref": "#/components/schemas/UserTemplate"
+                    "description": "Template containing updated user properties. Only provided fields will be updated.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/UserTemplate"
+                      }
+                    ]
                   }
                 }
               }
@@ -136,10 +141,20 @@
                 "type": "object",
                 "properties": {
                   "onboardingMode": {
-                    "$ref": "#/components/schemas/OnboardingMode"
+                    "description": "Onboarding mode determines whether the user receives an invite link or is created without one",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OnboardingMode"
+                      }
+                    ]
                   },
                   "userTemplate": {
-                    "$ref": "#/components/schemas/UserTemplate"
+                    "description": "Template containing all user properties to set during creation",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/UserTemplate"
+                      }
+                    ]
                   }
                 }
               }
@@ -338,7 +353,12 @@
                 "type": "object",
                 "properties": {
                   "status": {
-                    "$ref": "#/components/schemas/UserStatus"
+                    "description": "New status for the users: Active (enables system access) or Inactive (disables system access)",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/UserStatus"
+                      }
+                    ]
                   },
                   "userAccountIds": {
                     "description": "List of user account IDs to update. All users will be set to the same status.",
@@ -451,7 +471,12 @@
             "name": "status",
             "description": "Optional filter by user status (e.g., 'active', 'inactive')",
             "schema": {
-              "$ref": "#/components/schemas/UserStatus"
+              "description": "Optional filter by user status (e.g., 'active', 'inactive')",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/UserStatus"
+                }
+              ]
             },
             "style": "form"
           },
@@ -554,10 +579,20 @@
             "minLength": 0
           },
           "permanentAccess": {
-            "$ref": "#/components/schemas/PermanentAccess"
+            "description": "Permanent access configuration - user has indefinite access",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PermanentAccess"
+              }
+            ]
           },
           "temporaryAccess": {
-            "$ref": "#/components/schemas/TemporaryAccess"
+            "description": "Temporary access configuration - user access expires at a specified time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TemporaryAccess"
+              }
+            ]
           }
         },
         "required": [
@@ -644,7 +679,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -682,7 +722,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -706,7 +751,12 @@
         "type": "object",
         "properties": {
           "user": {
-            "$ref": "#/components/schemas/rbac.v2.User"
+            "description": "Complete user details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/rbac.v2.User"
+              }
+            ]
           }
         }
       },
@@ -855,7 +905,12 @@
         "type": "object",
         "properties": {
           "accessType": {
-            "$ref": "#/components/schemas/AccessType"
+            "description": "Access type configuration - defines whether user access is permanent or temporary with expiration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccessType"
+              }
+            ]
           },
           "allowedLoginMode": {
             "description": "List of allowed login modes. Can include SSO, local authentication, or both. Not supported in invite onboarding mode",
@@ -876,7 +931,12 @@
             "minLength": 0
           },
           "status": {
-            "$ref": "#/components/schemas/UserStatus"
+            "description": "User status: Active (user can access the system) or Inactive (user access is disabled)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserStatus"
+              }
+            ]
           },
           "username": {
             "description": "Unique username for the user. Must be unique within the system. Updating username for existing users is not supported and ignored.",
@@ -911,7 +971,12 @@
             "minLength": 0
           },
           "status": {
-            "$ref": "#/components/schemas/UserStatus"
+            "description": "User status: [Active, Inactive]",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserStatus"
+              }
+            ]
           },
           "userAccountId": {
             "description": "Associated account id. An account can have many users.",

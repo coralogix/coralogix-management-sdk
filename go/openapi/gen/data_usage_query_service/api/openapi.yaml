@@ -90,13 +90,23 @@
                     "maxItems": 16
                   },
                   "groupBy": {
-                    "$ref": "#/components/schemas/UsageGroupBy"
+                    "description": "Label keys to group results by. Supported keys are listed by the capabilities endpoint.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/UsageGroupBy"
+                      }
+                    ]
                   },
                   "hourly": {
                     "$ref": "#/components/schemas/UsageHourlyQuery"
                   },
                   "limit": {
-                    "$ref": "#/components/schemas/UsageLimit"
+                    "description": "Per-bucket result-size cap. The server may reject queries whose pre-cap size still exceeds its hard limits.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/UsageLimit"
+                      }
+                    ]
                   },
                   "measurementKindFilter": {
                     "description": "Measurement kind filter applied before aggregation. Omit (or pass an empty list) to include all supported measurement kinds.",
@@ -217,7 +227,12 @@
             "maxItems": 100000
           },
           "range": {
-            "$ref": "#/components/schemas/UsageTimestampRange"
+            "description": "Half-open timestamp range for this bucket.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UsageTimestampRange"
+              }
+            ]
           }
         }
       },
@@ -238,7 +253,12 @@
             "maxItems": 1827
           },
           "queryRange": {
-            "$ref": "#/components/schemas/UsageTimestampRange"
+            "description": "Resolved half-open timestamp range of the query after applying absolute or relative interval semantics.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UsageTimestampRange"
+              }
+            ]
           }
         }
       },
@@ -286,7 +306,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -324,7 +349,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -417,10 +447,20 @@
         "type": "object",
         "properties": {
           "end": {
-            "$ref": "#/components/schemas/Date"
+            "description": "Exclusive end of the range, as a full UTC calendar date later than `start`.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
           },
           "start": {
-            "$ref": "#/components/schemas/Date"
+            "description": "Inclusive start of the range, as a full UTC calendar date.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
           }
         },
         "required": [
@@ -504,10 +544,20 @@
             "maxLength": 4096
           },
           "kind": {
-            "$ref": "#/components/schemas/UsageMeasurementKind"
+            "description": "Server-defined measurement kind.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UsageMeasurementKind"
+              }
+            ]
           },
           "unit": {
-            "$ref": "#/components/schemas/UsageMeasurementUnit"
+            "description": "Raw unit returned for this measurement kind.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UsageMeasurementUnit"
+              }
+            ]
           }
         }
       },
@@ -730,7 +780,12 @@
             "maxLength": 256
           },
           "operator": {
-            "$ref": "#/components/schemas/UsageLabelFilter.FilterOperator"
+            "description": "How `values` is matched against the label.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UsageLabelFilter.FilterOperator"
+              }
+            ]
           },
           "values": {
             "example": [
@@ -805,10 +860,20 @@
             }
           },
           "kind": {
-            "$ref": "#/components/schemas/UsageMeasurementKind"
+            "description": "Server-defined measurement kind for this row.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UsageMeasurementKind"
+              }
+            ]
           },
           "measuredUnit": {
-            "$ref": "#/components/schemas/UsageMeasurementUnit"
+            "description": "Unit of the raw measured amount.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UsageMeasurementUnit"
+              }
+            ]
           },
           "measuredValue": {
             "description": "Raw measured amount for this usage row, in the unit indicated by `measuredUnit`.",

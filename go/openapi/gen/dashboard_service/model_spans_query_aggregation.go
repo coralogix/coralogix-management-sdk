@@ -22,6 +22,7 @@ var _ MappedNullable = &SpansQueryAggregation{}
 
 // SpansQueryAggregation struct for SpansQueryAggregation
 type SpansQueryAggregation struct {
+	// Type of spans aggregation function
 	Aggregation *SpansAggregation `json:"aggregation,omitempty"`
 	// Aggregation unique identifier
 	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`

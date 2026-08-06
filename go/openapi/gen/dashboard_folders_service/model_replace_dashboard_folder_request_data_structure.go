@@ -22,6 +22,7 @@ var _ MappedNullable = &ReplaceDashboardFolderRequestDataStructure{}
 
 // ReplaceDashboardFolderRequestDataStructure Request to replace an existing dashboard folder.
 type ReplaceDashboardFolderRequestDataStructure struct {
+	// The folder.
 	Folder *DashboardFolder `json:"folder,omitempty"`
 	// Idempotency key for the replace folder request, used to prevent duplicate updates.
 	RequestId *string `json:"requestId,omitempty" validate:"regexp=^[\\s\\S]*$"`

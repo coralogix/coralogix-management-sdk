@@ -24,9 +24,11 @@ var _ MappedNullable = &KPISettings{}
 type KPISettings struct {
 	// Enable or disable this threshold entry.
 	Enabled *bool `json:"enabled,omitempty"`
+	// Case priority level for which this threshold applies.
 	Priority *CasePriority `json:"priority,omitempty"`
 	// Elapsed time after which the KPI is considered breached.
 	Threshold *string `json:"threshold,omitempty"`
+	// Type of KPI this threshold applies to (acknowledgement or resolution).
 	Type *KPIType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

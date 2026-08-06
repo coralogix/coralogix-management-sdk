@@ -22,7 +22,9 @@ var _ MappedNullable = &SloThresholdRule{}
 
 // SloThresholdRule SLO threshold rule definition
 type SloThresholdRule struct {
+	// Condition for the SLO threshold rule
 	Condition *SloThresholdCondition `json:"condition,omitempty"`
+	// The override settings for the alert
 	Override *AlertDefOverride `json:"override,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

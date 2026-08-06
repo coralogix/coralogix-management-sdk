@@ -22,7 +22,7 @@ var _ MappedNullable = &QuotaBased{}
 
 // QuotaBased Quota based.
 type QuotaBased struct {
-	// Ordered list of usage tiers that map daily quota consumption percentages to priority levels.
+	// Ordered list of usage tiers that map daily quota consumption percentages to priority levels. Percentages must be strictly increasing and priorities strictly decreasing, using only LOW, MEDIUM, or HIGH.
 	UsageTiers []UsageTier `json:"usageTiers,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

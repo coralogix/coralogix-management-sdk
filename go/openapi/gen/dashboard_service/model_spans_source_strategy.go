@@ -22,6 +22,7 @@ var _ MappedNullable = &SpansSourceStrategy{}
 
 // SpansSourceStrategy Determines the time strategy for fetching spans (instant snapshot, fixed range, or sliding window).
 type SpansSourceStrategy struct {
+	// Duration.
 	Duration *SpansSourceStrategyDuration `json:"duration,omitempty"`
 	Instant *SpansSourceStrategyInstant `json:"instant,omitempty"`
 	Range *SpansSourceStrategyRange `json:"range,omitempty"`

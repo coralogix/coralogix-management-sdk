@@ -23,6 +23,7 @@ var _ MappedNullable = &CreateCommentResponse{}
 
 // CreateCommentResponse Response returned after successfully creating a comment.
 type CreateCommentResponse struct {
+	// The created event
 	Event CaseEvent `json:"event"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

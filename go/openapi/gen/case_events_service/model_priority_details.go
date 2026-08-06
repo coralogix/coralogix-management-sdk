@@ -22,7 +22,9 @@ var _ MappedNullable = &PriorityDetails{}
 
 // PriorityDetails Priority details, including system computed and user override values.
 type PriorityDetails struct {
+	// Optional override set by user
 	Override *CasePriority `json:"override,omitempty"`
+	// System computed priority
 	System *CasePriority `json:"system,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

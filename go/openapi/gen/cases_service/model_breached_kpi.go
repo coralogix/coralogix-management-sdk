@@ -24,14 +24,17 @@ var _ MappedNullable = &BreachedKPI{}
 
 // BreachedKPI Breached KPI details, including the type of KPI, the case priority at the time of breach, and when the breach occurred together with current status. This information helps understand which KPIs were not met for a case and when.
 type BreachedKPI struct {
+	// Current status of the KPI breach
 	BreachStatus BreachStatus `json:"breachStatus"`
 	// When the KPI breach occurred
 	BreachedAt time.Time `json:"breachedAt"`
+	// KPI (Case) priority at the time of KPI breach
 	CasePriority KPIPriority `json:"casePriority"`
 	// When the breached KPI record was created
 	CreatedAt time.Time `json:"createdAt"`
 	// Unique identifier for the breached KPI
 	Id string `json:"id" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
+	// Type of the breached KPI
 	KpiType KPIType `json:"kpiType"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

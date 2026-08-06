@@ -22,7 +22,13 @@
             "name": "entity_type",
             "description": "Deprecated. Filter routers by entity type.",
             "schema": {
-              "$ref": "#/components/schemas/notification_center.EntityType"
+              "deprecated": true,
+              "description": "Deprecated. Filter routers by entity type.",
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/notification_center.EntityType"
+                }
+              ]
             },
             "style": "form"
           },
@@ -393,7 +399,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -431,7 +442,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -494,9 +510,15 @@
             }
           },
           "entityType": {
-            "$ref": "#/components/schemas/notification_center.EntityType"
+            "deprecated": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/notification_center.EntityType"
+              }
+            ]
           },
           "fallback": {
+            "deprecated": true,
             "description": "The fallback destinations to be used if no rule matches.",
             "type": "array",
             "items": {
@@ -658,7 +680,12 @@
             }
           },
           "entityType": {
-            "$ref": "#/components/schemas/notification_center.EntityType"
+            "example": "ALERTS",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/notification_center.EntityType"
+              }
+            ]
           },
           "name": {
             "description": "Display name.",
@@ -819,7 +846,8 @@
           "ENTITY_TYPE_UNSPECIFIED",
           "ALERTS",
           "TEST_NOTIFICATIONS",
-          "CASES"
+          "CASES",
+          "OLLY_SCHEDULED_TASKS"
         ]
       },
       "v3.FilterOperator": {

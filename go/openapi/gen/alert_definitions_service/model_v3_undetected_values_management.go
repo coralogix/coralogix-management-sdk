@@ -22,6 +22,7 @@ var _ MappedNullable = &V3UndetectedValuesManagement{}
 
 // V3UndetectedValuesManagement Configuration for handling undetected values in alerts
 type V3UndetectedValuesManagement struct {
+	// The timeframe for auto-retiring the alert when undetected values are detected
 	AutoRetireTimeframe *V3AutoRetireTimeframe `json:"autoRetireTimeframe,omitempty"`
 	// Should trigger the alert when undetected values are detected
 	TriggerUndetectedValues *bool `json:"triggerUndetectedValues,omitempty"`

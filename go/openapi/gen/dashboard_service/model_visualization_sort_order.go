@@ -22,7 +22,9 @@ var _ MappedNullable = &VisualizationSortOrder{}
 
 // VisualizationSortOrder Sort order with direction and strategy - either by category or by query value
 type VisualizationSortOrder struct {
+	// Order direction, ascending or descending
 	OrderDirection *OrderDirection `json:"orderDirection,omitempty"`
+	// How to determine sort key - by category or by query value
 	Strategy *SortStrategy `json:"strategy,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

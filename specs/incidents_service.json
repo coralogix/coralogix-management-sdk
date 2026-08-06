@@ -57,7 +57,12 @@
                   }
                 },
                 "createdAtRange": {
-                  "$ref": "#/components/schemas/v1.TimeRange"
+                  "description": "Filters all incidents created at the given time range",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/v1.TimeRange"
+                    }
+                  ]
                 },
                 "displayLabels": {
                   "description": "Filter by display labels",
@@ -74,7 +79,12 @@
                   "minLength": 0
                 },
                 "incidentDurationRange": {
-                  "$ref": "#/components/schemas/v1.TimeRange"
+                  "description": "Filters all active) incidents with the given duration range",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/v1.TimeRange"
+                    }
+                  ]
                 },
                 "isMuted": {
                   "description": "Indicates if the incident is muted",
@@ -84,34 +94,25 @@
                   "description": "Filters all incidents with the given meta labels",
                   "type": "array",
                   "items": {
-                    "externalDocs": {
-                      "url": ""
-                    },
-                    "title": "Incident meta label",
-                    "description": "Meta label.",
-                    "type": "object",
-                    "properties": {
-                      "key": {
-                        "example": "key",
-                        "description": "The key.",
-                        "type": "string",
-                        "minLength": 0
-                      },
-                      "value": {
-                        "example": "value",
-                        "description": "The value.",
-                        "type": "string",
-                        "minLength": 0
-                      }
-                    }
+                    "$ref": "#/components/schemas/incidents.v1.MetaLabel"
                   },
                   "minItems": 0
                 },
                 "metaLabelsOp": {
-                  "$ref": "#/components/schemas/v1.FilterOperator"
+                  "description": "The operator for the meta labels filter",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/v1.FilterOperator"
+                    }
+                  ]
                 },
                 "searchQuery": {
-                  "$ref": "#/components/schemas/IncidentSearchQuery"
+                  "description": "Search query for incidents",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/IncidentSearchQuery"
+                    }
+                  ]
                 },
                 "severity": {
                   "description": "Filter by incident severity",
@@ -178,10 +179,22 @@
                     "minLength": 0
                   },
                   "incidentField": {
-                    "$ref": "#/components/schemas/IncidentFields"
+                    "example": "INCIDENTS_FIELDS_ID",
+                    "description": "The field to group by",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/IncidentFields"
+                      }
+                    ]
                   },
                   "orderByDirection": {
-                    "$ref": "#/components/schemas/v1.OrderByDirection"
+                    "example": "ORDER_BY_DIRECTION_ASC",
+                    "description": "The order by direction.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/v1.OrderByDirection"
+                      }
+                    ]
                   }
                 },
                 "oneOf": [
@@ -326,7 +339,12 @@
                   "type": "boolean"
                 },
                 "labels": {
-                  "$ref": "#/components/schemas/LabelsFilter"
+                  "description": "The labels of the incident",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/LabelsFilter"
+                    }
+                  ]
                 },
                 "name": {
                   "description": "The name of the incident",
@@ -350,7 +368,12 @@
                   "minItems": 0
                 },
                 "timestamp": {
-                  "$ref": "#/components/schemas/v1.TimeRange"
+                  "description": "The time range of the incident",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/v1.TimeRange"
+                    }
+                  ]
                 }
               }
             },
@@ -400,10 +423,22 @@
               "type": "object",
               "properties": {
                 "direction": {
-                  "$ref": "#/components/schemas/v1.OrderByDirection"
+                  "example": "ORDER_BY_DIRECTION_ASC",
+                  "description": "Sort direction (ascending or descending)",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/v1.OrderByDirection"
+                    }
+                  ]
                 },
                 "field": {
-                  "$ref": "#/components/schemas/IncidentEventOrderByFieldType"
+                  "example": "INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED",
+                  "description": "Field to order by",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/IncidentEventOrderByFieldType"
+                    }
+                  ]
                 }
               }
             },
@@ -500,7 +535,12 @@
                   "type": "boolean"
                 },
                 "labels": {
-                  "$ref": "#/components/schemas/LabelsFilter"
+                  "description": "The labels of the incident",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/LabelsFilter"
+                    }
+                  ]
                 },
                 "name": {
                   "description": "The name of the incident",
@@ -524,7 +564,12 @@
                   "minItems": 0
                 },
                 "timestamp": {
-                  "$ref": "#/components/schemas/v1.TimeRange"
+                  "description": "The time range of the incident",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/v1.TimeRange"
+                    }
+                  ]
                 }
               }
             },
@@ -817,7 +862,12 @@
                 "type": "object",
                 "properties": {
                   "filter": {
-                    "$ref": "#/components/schemas/IncidentQueryFilter"
+                    "description": "Filter for incidents",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/IncidentQueryFilter"
+                      }
+                    ]
                   }
                 }
               }
@@ -914,7 +964,12 @@
                   "type": "boolean"
                 },
                 "labels": {
-                  "$ref": "#/components/schemas/LabelsFilter"
+                  "description": "The labels of the incident",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/LabelsFilter"
+                    }
+                  ]
                 },
                 "name": {
                   "description": "The name of the incident",
@@ -938,7 +993,12 @@
                   "minItems": 0
                 },
                 "timestamp": {
-                  "$ref": "#/components/schemas/v1.TimeRange"
+                  "description": "The time range of the incident",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/v1.TimeRange"
+                    }
+                  ]
                 }
               }
             },
@@ -1086,7 +1146,12 @@
                 "type": "object",
                 "properties": {
                   "filter": {
-                    "$ref": "#/components/schemas/IncidentQueryFilter"
+                    "description": "Filter for incidents",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/IncidentQueryFilter"
+                      }
+                    ]
                   },
                   "orderBys": {
                     "description": "Order by fields",
@@ -1097,7 +1162,12 @@
                     "minItems": 0
                   },
                   "pagination": {
-                    "$ref": "#/components/schemas/incidents.v1.PaginationRequest"
+                    "description": "Pagination parameters",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/incidents.v1.PaginationRequest"
+                      }
+                    ]
                   }
                 }
               }
@@ -1260,7 +1330,12 @@
                 "type": "object",
                 "properties": {
                   "assignedTo": {
-                    "$ref": "#/components/schemas/incidents.v1.UserDetails"
+                    "description": "User to assign the incidents to",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/incidents.v1.UserDetails"
+                      }
+                    ]
                   },
                   "incidentIds": {
                     "example": [
@@ -1347,6 +1422,7 @@
             "in": "query",
             "name": "incident_ids",
             "description": "List of incident IDs to unassign",
+            "required": true,
             "schema": {
               "example": [
                 "incident_id_1",
@@ -1747,7 +1823,12 @@
         "type": "object",
         "properties": {
           "incident": {
-            "$ref": "#/components/schemas/Incident"
+            "description": "Incident after acknowledgment",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Incident"
+              }
+            ]
           }
         },
         "required": [
@@ -2088,7 +2169,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -2126,7 +2212,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -2149,7 +2240,12 @@
         "type": "object",
         "properties": {
           "incident": {
-            "$ref": "#/components/schemas/Incident"
+            "description": "The requested incident",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Incident"
+              }
+            ]
           }
         },
         "required": [
@@ -2183,7 +2279,12 @@
         "type": "object",
         "properties": {
           "incident": {
-            "$ref": "#/components/schemas/Incident"
+            "description": "The requested incident",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Incident"
+              }
+            ]
           }
         },
         "required": [
@@ -2194,7 +2295,12 @@
         "type": "object",
         "properties": {
           "contextualLabels": {
-            "$ref": "#/components/schemas/ContextualLabels"
+            "description": "The contextual labels.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContextualLabels"
+              }
+            ]
           },
           "incidentField": {
             "$ref": "#/components/schemas/IncidentFieldOneOf"
@@ -2341,7 +2447,12 @@
             "$ref": "#/components/schemas/IncidentSeverity"
           },
           "state": {
-            "$ref": "#/components/schemas/IncidentState"
+            "description": "The incident's current internal state, usually derived from the operational events of the incident",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IncidentState"
+              }
+            ]
           },
           "status": {
             "$ref": "#/components/schemas/IncidentStatus"
@@ -2516,13 +2627,23 @@
             "minLength": 0
           },
           "incidentEventType": {
-            "$ref": "#/components/schemas/IncidentEventType"
+            "example": "INCIDENT_EVENT_TYPE_ACKNOWLEDGE",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IncidentEventType"
+              }
+            ]
           },
           "operationalEvent": {
             "$ref": "#/components/schemas/IncidentEventOriginatorOperational"
           },
           "originatorType": {
-            "$ref": "#/components/schemas/OriginatorType"
+            "example": "ORIGINATOR_TYPE_OPERATIONAL",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OriginatorType"
+              }
+            ]
           },
           "snoozeIndicator": {
             "$ref": "#/components/schemas/IncidentEventSnoozeIndicator"
@@ -2895,13 +3016,28 @@
             "minLength": 0
           },
           "severity": {
-            "$ref": "#/components/schemas/IncidentSeverity"
+            "description": "Severity level of the incident.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IncidentSeverity"
+              }
+            ]
           },
           "state": {
-            "$ref": "#/components/schemas/IncidentState"
+            "description": "Current internal state of the incident.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IncidentState"
+              }
+            ]
           },
           "status": {
-            "$ref": "#/components/schemas/IncidentStatus"
+            "description": "Current status of the incident.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IncidentStatus"
+              }
+            ]
           },
           "subsystemName": {
             "description": "Subsystem associated with the incident.",
@@ -3150,7 +3286,12 @@
             }
           },
           "createdAtRange": {
-            "$ref": "#/components/schemas/v1.TimeRange"
+            "description": "Filters all incidents created at the given time range",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.TimeRange"
+              }
+            ]
           },
           "displayLabels": {
             "description": "Filter by display labels",
@@ -3167,7 +3308,12 @@
             "minLength": 0
           },
           "incidentDurationRange": {
-            "$ref": "#/components/schemas/v1.TimeRange"
+            "description": "Filters all active) incidents with the given duration range",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.TimeRange"
+              }
+            ]
           },
           "isMuted": {
             "description": "Indicates if the incident is muted",
@@ -3182,10 +3328,20 @@
             "minItems": 0
           },
           "metaLabelsOp": {
-            "$ref": "#/components/schemas/v1.FilterOperator"
+            "description": "The operator for the meta labels filter",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.FilterOperator"
+              }
+            ]
           },
           "searchQuery": {
-            "$ref": "#/components/schemas/IncidentSearchQuery"
+            "description": "Search query for incidents",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IncidentSearchQuery"
+              }
+            ]
           },
           "severity": {
             "description": "Filter by incident severity",
@@ -3321,7 +3477,13 @@
             "minLength": 0
           },
           "incidentField": {
-            "$ref": "#/components/schemas/IncidentFields"
+            "example": "INCIDENTS_FIELDS_STATUS",
+            "description": "The field to search in",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IncidentFields"
+              }
+            ]
           },
           "query": {
             "example": "error",
@@ -3451,7 +3613,12 @@
             "format": "int32"
           },
           "state": {
-            "$ref": "#/components/schemas/IncidentState"
+            "description": "The state.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IncidentState"
+              }
+            ]
           }
         },
         "required": [
@@ -3506,7 +3673,12 @@
             "format": "int32"
           },
           "status": {
-            "$ref": "#/components/schemas/IncidentStatus"
+            "example": "incident_status",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IncidentStatus"
+              }
+            ]
           }
         },
         "required": [
@@ -3531,7 +3703,12 @@
             "minItems": 0
           },
           "operator": {
-            "$ref": "#/components/schemas/v1.FilterOperator"
+            "description": "The operator for the labels filter",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.FilterOperator"
+              }
+            ]
           }
         },
         "required": [
@@ -3555,7 +3732,12 @@
             "minItems": 0
           },
           "pagination": {
-            "$ref": "#/components/schemas/incidents.v1.PaginationResponse"
+            "description": "Pagination information for the response",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/incidents.v1.PaginationResponse"
+              }
+            ]
           }
         },
         "required": [
@@ -3572,7 +3754,12 @@
         "type": "object",
         "properties": {
           "filtersValues": {
-            "$ref": "#/components/schemas/IncidentQueryFiltersValues"
+            "description": "Available filter values for incident events",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IncidentQueryFiltersValues"
+              }
+            ]
           }
         }
       },
@@ -3593,7 +3780,12 @@
             "minItems": 0
           },
           "pagination": {
-            "$ref": "#/components/schemas/incidents.v1.PaginationResponse"
+            "description": "Pagination information for the response",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/incidents.v1.PaginationResponse"
+              }
+            ]
           }
         },
         "required": [
@@ -3682,7 +3874,12 @@
         "type": "object",
         "properties": {
           "incident": {
-            "$ref": "#/components/schemas/Incident"
+            "description": "Incident after resolution",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Incident"
+              }
+            ]
           }
         },
         "required": [

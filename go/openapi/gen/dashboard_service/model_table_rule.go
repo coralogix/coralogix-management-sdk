@@ -24,6 +24,7 @@ var _ MappedNullable = &TableRule{}
 type TableRule struct {
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Unique identifier.
 	Id *UUID `json:"id,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`

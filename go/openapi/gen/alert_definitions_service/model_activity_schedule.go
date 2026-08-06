@@ -24,7 +24,9 @@ var _ MappedNullable = &ActivitySchedule{}
 type ActivitySchedule struct {
 	// Day of the week.
 	DayOfWeek []DayOfWeek `json:"dayOfWeek,omitempty"`
+	// End time of the alert activity
 	EndTime *TimeOfDay `json:"endTime,omitempty"`
+	// Start time of the alert activity
 	StartTime *TimeOfDay `json:"startTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

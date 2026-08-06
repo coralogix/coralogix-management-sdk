@@ -150,19 +150,26 @@
                     "items": {
                       "description": "The application names.",
                       "type": "string",
-                      "minLength": 0
+                      "pattern": "^[\\s\\S]*$",
+                      "minLength": 0,
+                      "maxLength": 1024
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 1000
                   },
                   "description": {
                     "description": "Human-readable description.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65535
                   },
                   "dpxlFilter": {
                     "description": "The dpxl filter.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65535
                   },
                   "isPrivate": {
                     "description": "The is private.",
@@ -171,7 +178,9 @@
                   "name": {
                     "description": "Display name.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 50
                   },
                   "sourceType": {
                     "$ref": "#/components/schemas/v2.SourceType"
@@ -182,22 +191,28 @@
                     "items": {
                       "description": "The subsystem names.",
                       "type": "string",
-                      "minLength": 0
+                      "pattern": "^[\\s\\S]*$",
+                      "minLength": 0,
+                      "maxLength": 1024
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 1000
                   },
                   "url": {
-                    "description": "URL.",
+                    "description": "URL. Must start with http:// or https://.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^https?://.*$",
+                    "minLength": 1,
+                    "maxLength": 32768
                   },
                   "urlFields": {
-                    "description": "The url fields.",
+                    "description": "The url fields. Each field requires both name and required, and names must be unique within the list.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/UrlField"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 1000
                   }
                 }
               }
@@ -364,7 +379,9 @@
           "schema": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "style": "simple"
         }
@@ -394,7 +411,8 @@
                     "items": {
                       "$ref": "#/components/schemas/ActionExecutionRequest"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 1000
                   }
                 }
               }
@@ -469,7 +487,8 @@
                     "additionalProperties": {
                       "type": "integer",
                       "format": "int64",
-                      "minimum": 0
+                      "minimum": 0,
+                      "maximum": 4294967295
                     }
                   },
                   "sharedActionsOrder": {
@@ -478,7 +497,8 @@
                     "additionalProperties": {
                       "type": "integer",
                       "format": "int64",
-                      "minimum": 0
+                      "minimum": 0,
+                      "maximum": 4294967295
                     }
                   }
                 }
@@ -672,7 +692,8 @@
             "items": {
               "$ref": "#/components/schemas/ActionExecutionResponse"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -689,19 +710,26 @@
             "items": {
               "description": "The application names.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 1024
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "dpxlFilter": {
             "description": "The dpxl filter.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "isPrivate": {
             "description": "The is private.",
@@ -710,7 +738,9 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 50
           },
           "sourceType": {
             "$ref": "#/components/schemas/v2.SourceType"
@@ -721,22 +751,28 @@
             "items": {
               "description": "The subsystem names.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 1024
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "url": {
-            "description": "URL.",
+            "description": "URL. Must start with http:// or https://.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^https?://.*$",
+            "minLength": 1,
+            "maxLength": 32768
           },
           "urlFields": {
-            "description": "The url fields.",
+            "description": "The url fields. Each field requires both name and required, and names must be unique within the list.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UrlField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -762,7 +798,9 @@
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         }
       },
@@ -803,7 +841,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -841,7 +884,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -880,7 +928,8 @@
             "items": {
               "$ref": "#/components/schemas/v2.Action"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -942,13 +991,19 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1024
           },
           "required": {
             "description": "The required.",
             "type": "boolean"
           }
-        }
+        },
+        "required": [
+          "name",
+          "required"
+        ]
       },
       "events.v3.FilterMatcher": {
         "type": "string",
@@ -970,29 +1025,40 @@
             "items": {
               "description": "The application names.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 1024
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "createdBy": {
-            "description": "The created by.",
+            "description": "The creating user's username. Set by the server; ignored on requests.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 255
           },
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "dpxlFilter": {
             "description": "The dpxl filter.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "isHidden": {
             "description": "The is hidden.",
@@ -1005,7 +1071,9 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 50
           },
           "sourceType": {
             "$ref": "#/components/schemas/v2.SourceType"
@@ -1016,22 +1084,28 @@
             "items": {
               "description": "The subsystem names.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 1024
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "url": {
-            "description": "URL.",
+            "description": "URL. Must start with http:// or https://.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^https?://.*$",
+            "minLength": 1,
+            "maxLength": 32768
           },
           "urlFields": {
-            "description": "The url fields.",
+            "description": "The url fields. Each field requires both name and required, and names must be unique within the list.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UrlField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },

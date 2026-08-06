@@ -22,6 +22,7 @@ var _ MappedNullable = &UpdateAiEvaluationResponse{}
 
 // UpdateAiEvaluationResponse Response returned after updating an AI evaluation.
 type UpdateAiEvaluationResponse struct {
+	// The updated AI evaluation.
 	AiEvaluation *AiEvaluation `json:"aiEvaluation,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,9 +22,11 @@ var _ MappedNullable = &BurnRateThreshold{}
 
 // BurnRateThreshold Burn rate threshold definition
 type BurnRateThreshold struct {
+	// Burn rate type dual
 	Dual *BurnRateTypeDual `json:"dual,omitempty"`
 	// The rules for the burn rate threshold
 	Rules []SloThresholdRule `json:"rules,omitempty"`
+	// Burn rate type single
 	Single *BurnRateTypeSingle `json:"single,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

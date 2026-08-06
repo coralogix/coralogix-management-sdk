@@ -22,8 +22,11 @@ var _ MappedNullable = &CommentAttachment{}
 
 // CommentAttachment struct for CommentAttachment
 type CommentAttachment struct {
+	// Custom dashboard widget attachment with screenshot
 	CustomWidget *CustomDashboardWidgetAttachment `json:"customWidget,omitempty"`
+	// Generic file attachment
 	File *FileAttachment `json:"file,omitempty"`
+	// Log entry attachment with content and metadata
 	Log *LogAttachment `json:"log,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

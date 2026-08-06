@@ -24,6 +24,7 @@ var _ MappedNullable = &TableSettings{}
 type TableSettings struct {
 	// List of configured column widths
 	ColumnWidths []ColumnWidthEntry `json:"columnWidths,omitempty"`
+	// Type of row view style in the table
 	RowStyle *RowStyle `json:"rowStyle,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

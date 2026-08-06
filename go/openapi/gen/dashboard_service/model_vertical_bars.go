@@ -24,11 +24,13 @@ var _ MappedNullable = &VerticalBars{}
 type VerticalBars struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	// Specifies where to display the bar value
 	BarValueDisplay *VisualizationBarValueDisplay `json:"barValueDisplay,omitempty"`
 	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme, one of the predefined values
 	ColorScheme *string `json:"colorScheme,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// How the bar colors should be organized
 	ColorsBy *ColorsBy `json:"colorsBy,omitempty"`
 	// Custom unit (requires to have unit field set to custom to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
@@ -38,17 +40,21 @@ type VerticalBars struct {
 	GroupNameTemplate *string `json:"groupNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to ignore color scheme and derive colors from algorithm
 	HashColors *bool `json:"hashColors,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
 	// Maximum number of bars on a chart
 	MaxBarsPerChart *int32 `json:"maxBarsPerChart,omitempty"`
 	// How many slices can fit in a single bar
 	MaxSlicesPerBar *int32 `json:"maxSlicesPerBar,omitempty"`
+	// Scale type - linear/logarithmic
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
+	// Sort type, by name or by value
 	SortBy *SortByType `json:"sortBy,omitempty"`
 	// Custom template name of an individual stack
 	StackNameTemplate *string `json:"stackNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The sub category fields.
 	SubCategoryFields []ObservationField `json:"subCategoryFields,omitempty"`
+	// Unit of the query results - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	// Number indicating the upper band for y axis

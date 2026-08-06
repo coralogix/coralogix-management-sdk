@@ -26,10 +26,10 @@ type UpdateCustomEnrichmentRequest struct {
 	// The custom enrichment id.
 	CustomEnrichmentId int64 `json:"customEnrichmentId"`
 	// New human-readable description of the custom enrichment.
-	Description string `json:"description"`
+	Description string `json:"description" validate:"regexp=^[\\s\\S]*$"`
 	File File `json:"file"`
-	// New human-readable name for the custom enrichment.
-	Name string `json:"name"`
+	// New human-readable name for the custom enrichment. May contain only letters, digits, and underscores.
+	Name string `json:"name" validate:"regexp=^\\\\w+$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

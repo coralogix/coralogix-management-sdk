@@ -22,7 +22,9 @@ var _ MappedNullable = &UsersMgmtServiceCreateUsersRequest{}
 
 // UsersMgmtServiceCreateUsersRequest struct for UsersMgmtServiceCreateUsersRequest
 type UsersMgmtServiceCreateUsersRequest struct {
+	// Onboarding mode determines whether the user receives an invite link or is created without one
 	OnboardingMode *OnboardingMode `json:"onboardingMode,omitempty"`
+	// Template containing all user properties to set during creation
 	UserTemplate *UserTemplate `json:"userTemplate,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

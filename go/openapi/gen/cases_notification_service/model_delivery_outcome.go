@@ -22,7 +22,9 @@ var _ MappedNullable = &DeliveryOutcome{}
 
 // DeliveryOutcome Outcome of a notification delivery attempt.
 type DeliveryOutcome struct {
+	// Delivery failed
 	Failure *DeliveryFailure `json:"failure,omitempty"`
+	// Delivery succeeded
 	Success *DeliverySuccess `json:"success,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -25,14 +25,14 @@ type IntegrationRevision struct {
 	AzureArmTemplate *AzureArmTemplate `json:"azureArmTemplate,omitempty"`
 	CloudFormation *CloudFormationTemplate `json:"cloudFormation,omitempty"`
 	// The feature flag.
-	FeatureFlag *string `json:"featureFlag,omitempty"`
+	FeatureFlag *string `json:"featureFlag,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Configuration fields that users must fill in to deploy this integration revision.
 	Fields []FieldInformation `json:"fields,omitempty"`
 	// UI groups used to organize configuration fields into logical sections.
 	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
 	HelmChart *HelmChart `json:"helmChart,omitempty"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// This data structure represents a managed service.
 	ManagedService map[string]interface{} `json:"managedService,omitempty"`
 	// Whether this revision supports automated deployment through the Coralogix platform.
@@ -40,7 +40,7 @@ type IntegrationRevision struct {
 	Rum *Rum `json:"rum,omitempty"`
 	Terraform *Terraform `json:"terraform,omitempty"`
 	// Markdown-formatted upgrade instructions shown when upgrading from a previous revision.
-	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
+	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

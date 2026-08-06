@@ -24,7 +24,9 @@ var _ MappedNullable = &FilterLogsFilter{}
 type FilterLogsFilter struct {
 	// The log field to which the filter is applied.
 	Field *string `json:"field,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// The observation log field to which the filter is applied.
 	ObservationField *ObservationField `json:"observationField,omitempty"`
+	// An operator used for filtering the logs.
 	Operator *FilterOperator `json:"operator,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -95,7 +95,9 @@
                   "integrationId": {
                     "description": "ID of the contextual data integration to update.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 65535
                   },
                   "metadata": {
                     "$ref": "#/components/schemas/IntegrationMetadata"
@@ -244,7 +246,9 @@
             "schema": {
               "description": "The unique identifier of the contextual data integration definition.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 65535
             },
             "style": "simple"
           },
@@ -326,7 +330,9 @@
             "schema": {
               "description": "The unique identifier of the contextual data integration to test.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 65535
             },
             "style": "simple"
           }
@@ -415,7 +421,9 @@
               "example": "076f4188-05e0-4ed3-afeb-653ad182ccb7",
               "description": "The unique identifier of the contextual data integration.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 65535
             },
             "style": "simple"
           },
@@ -496,7 +504,9 @@
               "example": "076f4188-05e0-4ed3-afeb-653ad182ccb7",
               "description": "The integration id.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 65535
             },
             "style": "simple"
           }
@@ -563,12 +573,16 @@
           "resourceGroupName": {
             "description": "The resource group name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "subscriptionId": {
             "description": "The subscription id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -583,12 +597,16 @@
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1048576
           }
         }
       },
@@ -612,7 +630,9 @@
           "templateUrl": {
             "description": "The template url.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -626,12 +646,16 @@
           "descriptionMd": {
             "description": "The description md.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1048576
           },
           "version": {
             "description": "Version.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -647,12 +671,16 @@
           "arn": {
             "description": "The arn.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "region": {
             "description": "Region.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -670,7 +698,8 @@
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "parameters": {
             "description": "The parameters.",
@@ -691,7 +720,9 @@
           "templateUrl": {
             "description": "The template url.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -714,12 +745,16 @@
           "command": {
             "description": "The command.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1048576
           },
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "language": {
             "$ref": "#/components/schemas/Language"
@@ -730,17 +765,22 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "tooltipText": {
             "description": "The tooltip text.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -754,17 +794,23 @@
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1048576
           }
         }
       },
@@ -801,7 +847,8 @@
             "items": {
               "$ref": "#/components/schemas/RegisteredInstance"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -825,7 +872,9 @@
           "reason": {
             "description": "Reason.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "replacementExtensions": {
             "description": "The replacement extensions.",
@@ -835,7 +884,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -869,7 +919,9 @@
           "data": {
             "description": "Data payload.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 5000000
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
@@ -896,7 +948,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionItemBinary"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "data": {
             "description": "Data payload.",
@@ -905,17 +958,23 @@
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "extendedInternalId": {
             "description": "The extended internal id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "isMandatory": {
             "description": "The is mandatory.",
@@ -924,7 +983,9 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "permissionResource": {
             "$ref": "#/components/schemas/PermissionResource"
@@ -932,7 +993,9 @@
           "stableId": {
             "description": "The stable id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 63
           },
           "targetDomain": {
             "$ref": "#/components/schemas/TargetDomain"
@@ -940,7 +1003,9 @@
           "uniqueId": {
             "description": "The unique id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -954,12 +1019,16 @@
           "data": {
             "description": "Data payload.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 5000000
           },
           "fileName": {
             "description": "The file name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
@@ -990,17 +1059,22 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionBinary"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "excerpt": {
             "description": "The excerpt.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "integrationDetails": {
             "description": "The integration details.",
@@ -1008,7 +1082,8 @@
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "isTesting": {
             "description": "The is testing.",
@@ -1020,7 +1095,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "labels": {
             "description": "List of labels.",
@@ -1030,7 +1106,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "permissionDeniedItems": {
             "description": "The permission denied items.",
@@ -1038,12 +1115,15 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "version": {
             "description": "Version.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -1058,7 +1138,9 @@
           "url": {
             "description": "URL.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -1079,7 +1161,8 @@
             "items": {
               "$ref": "#/components/schemas/FieldCondition.FieldValue"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -1102,12 +1185,16 @@
           "fieldName": {
             "description": "The field name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "valuePattern": {
             "description": "The value pattern.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -1121,7 +1208,9 @@
           "allowedPattern": {
             "description": "Regular expression pattern that the field value must match for validation.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "applicableIf": {
             "$ref": "#/components/schemas/FieldCondition"
@@ -1129,12 +1218,16 @@
           "documentationReference": {
             "description": "Link to documentation providing more information about this field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "groupId": {
             "description": "Identifier of the UI group this field belongs to for form layout purposes.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "multiText": {
             "$ref": "#/components/schemas/ListTextValue"
@@ -1145,12 +1238,16 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "placeholder": {
             "description": "Placeholder text shown in the input field before a value is entered.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "predefined": {
             "description": "Whether this field has a predefined value that is suggested to the user.",
@@ -1179,12 +1276,16 @@
           "templateParamName": {
             "description": "Name of the template parameter this field maps to in the deployment template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "tooltip": {
             "description": "Tooltip text displayed on hover to provide additional context for this field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "type": {
             "$ref": "#/components/schemas/InputType"
@@ -1192,7 +1293,9 @@
           "upgradeNotice": {
             "description": "Notice displayed to users when an upgrade is required to use this field.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "visible": {
             "description": "Whether this field is visible in the integration configuration UI.",
@@ -1290,7 +1393,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -1328,7 +1436,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -1356,7 +1469,8 @@
             "items": {
               "$ref": "#/components/schemas/Parameter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -1409,7 +1523,8 @@
             "items": {
               "$ref": "#/components/schemas/GetContextualDataIntegrationsResponse.IntegrationWithCounts"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -1424,7 +1539,8 @@
             "description": "The amount integrations.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 4294967295
           },
           "errors": {
             "description": "List of errors.",
@@ -1434,7 +1550,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "integration": {
             "$ref": "#/components/schemas/Integration"
@@ -1467,7 +1584,8 @@
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "guide": {
             "$ref": "#/components/schemas/IntegrationGuide"
@@ -1475,7 +1593,9 @@
           "template": {
             "description": "The template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1048576
           }
         }
       },
@@ -1509,27 +1629,37 @@
           "darkIcon": {
             "description": "The dark icon.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "featureFlag": {
             "description": "The feature flag.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "icon": {
             "description": "Icon identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "integrationType": {
             "$ref": "#/components/schemas/v1.IntegrationType"
@@ -1537,7 +1667,9 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "revisions": {
             "description": "The revisions.",
@@ -1545,7 +1677,8 @@
             "items": {
               "$ref": "#/components/schemas/v1.RevisionSummary"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "tags": {
             "description": "List of tags.",
@@ -1555,7 +1688,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "versions": {
             "description": "The versions.",
@@ -1565,7 +1699,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -1580,7 +1715,9 @@
           "featureFlag": {
             "description": "The feature flag.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "integrationType": {
             "$ref": "#/components/schemas/v1.IntegrationType"
@@ -1588,7 +1725,9 @@
           "key": {
             "description": "The key.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "revisions": {
             "description": "The revisions.",
@@ -1596,7 +1735,8 @@
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -1610,12 +1750,16 @@
           "link": {
             "description": "Link.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -1636,7 +1780,8 @@
             "items": {
               "$ref": "#/components/schemas/IntegrationDoc"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "extensions": {
             "description": "Extensions bundled with this integration for pre-built dashboards and alerts.",
@@ -1644,7 +1789,8 @@
             "items": {
               "$ref": "#/components/schemas/v1.Extension"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "external": {
             "$ref": "#/components/schemas/ExternalUrl"
@@ -1701,12 +1847,16 @@
           "link": {
             "description": "Link.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -1721,12 +1871,16 @@
           "installationRequirements": {
             "description": "The installation requirements.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1048576
           },
           "introduction": {
             "description": "The introduction.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1048576
           }
         }
       },
@@ -1741,7 +1895,9 @@
           "integrationKey": {
             "description": "The integration key.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "integrationParameters": {
             "$ref": "#/components/schemas/GenericIntegrationParameters"
@@ -1749,7 +1905,9 @@
           "version": {
             "description": "Version number.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -1770,7 +1928,9 @@
           "featureFlag": {
             "description": "The feature flag.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "fields": {
             "description": "Configuration fields that users must fill in to deploy this integration revision.",
@@ -1778,7 +1938,8 @@
             "items": {
               "$ref": "#/components/schemas/FieldInformation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "groups": {
             "description": "UI groups used to organize configuration fields into logical sections.",
@@ -1786,7 +1947,8 @@
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision.Group"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "helmChart": {
             "$ref": "#/components/schemas/HelmChart"
@@ -1794,7 +1956,9 @@
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "managedService": {
             "$ref": "#/components/schemas/ManagedService"
@@ -1812,7 +1976,9 @@
           "upgradeInstructionsMd": {
             "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1048576
           }
         },
         "oneOf": [
@@ -1907,12 +2073,16 @@
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -1958,7 +2128,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -1981,17 +2152,23 @@
           "key": {
             "description": "The key.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "text": {
             "description": "The text.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "url": {
             "description": "URL.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -2011,7 +2188,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "options": {
             "description": "Options.",
@@ -2021,7 +2199,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -2039,7 +2218,8 @@
             "items": {
               "$ref": "#/components/schemas/RevisionRef"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -2081,7 +2261,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -2127,7 +2308,9 @@
           "key": {
             "description": "The key.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "numericValue": {
             "description": "Numeric value for this integration parameter.",
@@ -2143,7 +2326,9 @@
           "stringValue": {
             "description": "String value for this integration parameter.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1048576
           }
         },
         "oneOf": [
@@ -2274,7 +2459,9 @@
           "definitionVersion": {
             "description": "The definition version.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "empty": {
             "$ref": "#/components/schemas/NoDeployment"
@@ -2282,7 +2469,9 @@
           "id": {
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "integrationStatus": {
             "$ref": "#/components/schemas/IntegrationStatus"
@@ -2303,7 +2492,8 @@
             "items": {
               "$ref": "#/components/schemas/Parameter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "revisionLifecycle": {
             "$ref": "#/components/schemas/RevisionLifecycle"
@@ -2377,12 +2567,16 @@
           "descriptionMd": {
             "description": "The description md.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 1048576
           },
           "version": {
             "description": "Version number.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -2400,7 +2594,8 @@
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "sourceMapCommands": {
             "description": "The source map commands.",
@@ -2408,7 +2603,8 @@
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -2423,7 +2619,9 @@
           "integrationId": {
             "description": "The integration id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -2438,7 +2636,9 @@
           "defaultValue": {
             "description": "The default value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "options": {
             "description": "Options.",
@@ -2448,7 +2648,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -2486,7 +2687,9 @@
           "defaultValue": {
             "description": "The default value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -2506,7 +2709,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -2541,7 +2745,8 @@
             "items": {
               "$ref": "#/components/schemas/ConfigurationBlock"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -2665,12 +2870,15 @@
             "items": {
               "$ref": "#/components/schemas/ChangelogEntry"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "darkModeImage": {
             "description": "The dark mode image.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "deprecation": {
             "$ref": "#/components/schemas/Deprecation"
@@ -2678,12 +2886,16 @@
           "id": {
             "description": "Unique identifier of the extension.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "image": {
             "description": "Image reference.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "integrations": {
             "description": "The integrations.",
@@ -2693,7 +2905,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "isHidden": {
             "description": "The is hidden.",
@@ -2707,12 +2920,15 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "name": {
             "description": "Display name of the extension.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           },
           "permissionDeniedRevisions": {
             "description": "The permission denied revisions.",
@@ -2720,7 +2936,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "revisions": {
             "description": "The revisions.",
@@ -2728,7 +2945,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -2743,7 +2961,9 @@
           "errorMessage": {
             "description": "The error message.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },
@@ -2880,7 +3100,9 @@
           "version": {
             "description": "Version number.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 65535
           }
         }
       },

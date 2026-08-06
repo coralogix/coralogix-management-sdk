@@ -13,6 +13,7 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,10 +21,10 @@ var _ = bytes.MinRead
 // checks if the AllOption type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AllOption{}
 
-// AllOption All option.
+// AllOption Synthetic 'All' option configuration. Required for static and query sources; never present for textbox sources.
 type AllOption struct {
-	// The include all.
-	IncludeAll *bool `json:"includeAll,omitempty"`
+	// Whether the 'All' option is offered. Must be set explicitly — send false when the option is disabled, do not omit it.
+	IncludeAll bool `json:"includeAll"`
 	// The label.
 	Label *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
@@ -36,8 +37,9 @@ type _AllOption AllOption
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAllOption() *AllOption {
+func NewAllOption(includeAll bool) *AllOption {
 	this := AllOption{}
+	this.IncludeAll = includeAll
 	return &this
 }
 
@@ -49,36 +51,28 @@ func NewAllOptionWithDefaults() *AllOption {
 	return &this
 }
 
-// GetIncludeAll returns the IncludeAll field value if set, zero value otherwise.
+// GetIncludeAll returns the IncludeAll field value
 func (o *AllOption) GetIncludeAll() bool {
-	if o == nil || IsNil(o.IncludeAll) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IncludeAll
+
+	return o.IncludeAll
 }
 
-// GetIncludeAllOk returns a tuple with the IncludeAll field value if set, nil otherwise
+// GetIncludeAllOk returns a tuple with the IncludeAll field value
 // and a boolean to check if the value has been set.
 func (o *AllOption) GetIncludeAllOk() (*bool, bool) {
-	if o == nil || IsNil(o.IncludeAll) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IncludeAll, true
+	return &o.IncludeAll, true
 }
 
-// HasIncludeAll returns a boolean if a field has been set.
-func (o *AllOption) HasIncludeAll() bool {
-	if o != nil && !IsNil(o.IncludeAll) {
-		return true
-	}
-
-	return false
-}
-
-// SetIncludeAll gets a reference to the given bool and assigns it to the IncludeAll field.
+// SetIncludeAll sets field value
 func (o *AllOption) SetIncludeAll(v bool) {
-	o.IncludeAll = &v
+	o.IncludeAll = v
 }
 
 // GetLabel returns the Label field value if set, zero value otherwise.
@@ -123,9 +117,7 @@ func (o AllOption) MarshalJSON() ([]byte, error) {
 
 func (o AllOption) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IncludeAll) {
-		toSerialize["includeAll"] = o.IncludeAll
-	}
+	toSerialize["includeAll"] = o.IncludeAll
 	if !IsNil(o.Label) {
 		toSerialize["label"] = o.Label
 	}
@@ -138,6 +130,27 @@ func (o AllOption) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AllOption) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"includeAll",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varAllOption := _AllOption{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

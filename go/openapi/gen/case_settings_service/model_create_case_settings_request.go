@@ -23,7 +23,9 @@ var _ MappedNullable = &CreateCaseSettingsRequest{}
 
 // CreateCaseSettingsRequest Request to create a new case settings team configuration.
 type CreateCaseSettingsRequest struct {
+	// Case lifecycle settings for the team
 	CaseLifecycle *CaseLifecycle `json:"caseLifecycle,omitempty"`
+	// Configuration settings
 	GlobalIndicatorSettings GlobalIndicatorSettings `json:"globalIndicatorSettings"`
 	// Optional display name for the case settings team configuration
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`

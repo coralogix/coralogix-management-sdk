@@ -22,7 +22,9 @@ var _ MappedNullable = &LogsThresholdRule{}
 
 // LogsThresholdRule LogsThresholdRule is a message that defines a rule for log-based threshold alerts.
 type LogsThresholdRule struct {
+	// The condition for the threshold alert
 	Condition *LogsThresholdCondition `json:"condition,omitempty"`
+	// The override settings for the alert
 	Override *AlertDefOverride `json:"override,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

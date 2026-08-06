@@ -22,9 +22,11 @@ var _ MappedNullable = &WidgetsGauge{}
 
 // WidgetsGauge Gauge.
 type WidgetsGauge struct {
+	// Arc display settings; set this object to show the gauge arcs and control the value and threshold arcs, or omit it to hide all arcs
 	ArcDisplay *ArcDisplay `json:"arcDisplay,omitempty"`
 	// Custom unit (requires to have unit field set as 'custom' to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Data mode type, either high or archive
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	Decimal *int32 `json:"decimal,omitempty"`
@@ -32,12 +34,15 @@ type WidgetsGauge struct {
 	DecimalPrecision *bool `json:"decimalPrecision,omitempty"`
 	// (multigauge display only) Whether to show the series names above the value
 	DisplaySeriesName *bool `json:"displaySeriesName,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
+	// (multigauge display only) Indicates how to group the legend elements, either by thresholds or by standard groups
 	LegendBy *LegendBy `json:"legendBy,omitempty"`
 	// A maximum gauge value used in percentage threshold calculation and for visual value representation
 	Max *float64 `json:"max,omitempty"`
 	// A minimum gauge value used in percentage threshold calculation and for visual value representation
 	Min *float64 `json:"min,omitempty"`
+	// A query object containing query definition
 	Query *GaugeQuery `json:"query,omitempty"`
 	// Deprecated: use arcDisplay.valueArc instead. Whether to show the inner arc of gauge which graphically represents the value
 	// Deprecated
@@ -47,10 +52,13 @@ type WidgetsGauge struct {
 	// Deprecated: use arcDisplay.thresholdArc instead. Whether to show the outer arc of gauge which graphically represents the min/max range
 	// Deprecated
 	ShowOuterArc *bool `json:"showOuterArc,omitempty"`
+	// Indicates which widget element should be colorized as the threshold, either the value or the background
 	ThresholdBy *GaugeThresholdBy `json:"thresholdBy,omitempty"`
+	// Type of the threshold, relative or absolute
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	// List of value thresholds, each with a certain color and an optional name label
 	Thresholds []GaugeThreshold `json:"thresholds,omitempty"`
+	// Unit of the value - one from a predefined list, or 'custom'
 	Unit *GaugeUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

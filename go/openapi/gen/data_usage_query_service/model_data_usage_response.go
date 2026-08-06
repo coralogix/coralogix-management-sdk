@@ -24,6 +24,7 @@ var _ MappedNullable = &DataUsageResponse{}
 type DataUsageResponse struct {
 	// Bucket-first usage results. Daily queries yield one bucket per UTC calendar day; hourly queries yield one bucket per UTC hour.
 	Buckets []Bucket `json:"buckets,omitempty"`
+	// Resolved half-open timestamp range of the query after applying absolute or relative interval semantics.
 	QueryRange *UsageTimestampRange `json:"queryRange,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

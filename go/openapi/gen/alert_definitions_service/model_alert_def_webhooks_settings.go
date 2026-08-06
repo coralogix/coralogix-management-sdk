@@ -22,9 +22,11 @@ var _ MappedNullable = &AlertDefWebhooksSettings{}
 
 // AlertDefWebhooksSettings Configuration for webhook notifications for an alert
 type AlertDefWebhooksSettings struct {
+	// The integration type for webhook notifications
 	Integration *V3IntegrationType `json:"integration,omitempty"`
 	// The time in minutes before the alert can be retriggered
 	Minutes *int64 `json:"minutes,omitempty"`
+	// The condition under which the alert should be notified
 	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

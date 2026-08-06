@@ -22,6 +22,7 @@ var _ MappedNullable = &EventsServiceBatchGetEventFilterParameter{}
 
 // EventsServiceBatchGetEventFilterParameter struct for EventsServiceBatchGetEventFilterParameter
 type EventsServiceBatchGetEventFilterParameter struct {
+	// Time range to filter events by their occurrence timestamp.
 	Timestamp *TimestampRange `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

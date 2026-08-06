@@ -24,11 +24,15 @@ var _ MappedNullable = &MetricThresholdType{}
 type MetricThresholdType struct {
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
+	// The filter to match metric entries for the alert.
 	MetricFilter *MetricFilter `json:"metricFilter,omitempty"`
+	// Configuration for handling missing values in the alert.
 	MissingValues *MetricMissingValues `json:"missingValues,omitempty"`
+	// User configuration to decide how to treat and what state to give to an alert with no data.
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	// The rules for the metric threshold alert
 	Rules []MetricThresholdRule `json:"rules,omitempty"`
+	// Configuration for handling undetected values in the alert.
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

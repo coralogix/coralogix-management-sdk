@@ -22,6 +22,7 @@ var _ MappedNullable = &FilterOptionCountsStatusFilter{}
 
 // FilterOptionCountsStatusFilter Filter by alert definition status for counting options
 type FilterOptionCountsStatusFilter struct {
+	// The filter operator (EQUALS, NOT_EQUALS)
 	Matcher *AlertsV3FilterMatcher `json:"matcher,omitempty"`
 	// The alert statuses to include in the count
 	Status []AlertDefStatus `json:"status,omitempty"`

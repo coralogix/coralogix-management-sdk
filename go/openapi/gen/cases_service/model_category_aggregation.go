@@ -22,6 +22,7 @@ var _ MappedNullable = &CategoryAggregation{}
 
 // CategoryAggregation Count of cases grouped by case category.
 type CategoryAggregation struct {
+	// Case category
 	Category *CaseCategory `json:"category,omitempty"`
 	// Number of cases in this category
 	Count *int64 `json:"count,omitempty"`

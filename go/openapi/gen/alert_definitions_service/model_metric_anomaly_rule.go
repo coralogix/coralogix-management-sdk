@@ -22,6 +22,7 @@ var _ MappedNullable = &MetricAnomalyRule{}
 
 // MetricAnomalyRule A rule for metric-based anomaly detection alerts
 type MetricAnomalyRule struct {
+	// The condition for the metric anomaly alert.
 	Condition *MetricAnomalyCondition `json:"condition,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -23,6 +23,7 @@ var _ MappedNullable = &AssignIncidentsRequest{}
 
 // AssignIncidentsRequest Request to assign one or more incidents to a user
 type AssignIncidentsRequest struct {
+	// User to assign the incidents to
 	AssignedTo IncidentsV1UserDetails `json:"assignedTo"`
 	// List of incident IDs to assign
 	IncidentIds []string `json:"incidentIds"`

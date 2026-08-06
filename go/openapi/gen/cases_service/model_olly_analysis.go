@@ -25,7 +25,9 @@ var _ MappedNullable = &OllyAnalysis{}
 type OllyAnalysis struct {
 	// When the analysis attempt completed.
 	CompletedAt *time.Time `json:"completedAt,omitempty"`
+	// Typed analysis payload returned by Olly. Present only when status = STATUS_OK.
 	Payload *OllyAnalysisPayload `json:"payload,omitempty"`
+	// Outcome of the analysis attempt.
 	Status *OllyAnalysisStatus `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

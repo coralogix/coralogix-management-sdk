@@ -22,6 +22,7 @@ var _ MappedNullable = &MappingSection{}
 
 // MappingSection A single mapping entry that maps a value (exact or regex) to a display text and color
 type MappingSection struct {
+	// Color for this mapping section
 	Color *ColorSolidType `json:"color,omitempty"`
 	// Display text to map the matched value to
 	MapTo *string `json:"mapTo,omitempty" validate:"regexp=^[\\s\\S]*$"`

@@ -24,6 +24,7 @@ var _ MappedNullable = &TimeSeriesBars{}
 type TimeSeriesBars struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	// Specifies where to display the bar value
 	BarValueDisplay *VisualizationBarValueDisplay `json:"barValueDisplay,omitempty"`
 	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
@@ -35,18 +36,24 @@ type TimeSeriesBars struct {
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// Whether to ignore color scheme and derive colors from algorithm
 	HashColors *bool `json:"hashColors,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
 	// How many slices can fit in a single bar
 	MaxSlicesPerBar *int32 `json:"maxSlicesPerBar,omitempty"`
+	// Scale type - linear/logarithmic
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	// Custom template for the series name
 	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Sort type, by name or by value
 	SortBy *SortByType `json:"sortBy,omitempty"`
 	TemporalField *ObservationField `json:"temporalField,omitempty"`
+	// Tooltip settings for the widget
 	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
+	// Unit of the query results - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	// The value fields.
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
+	// Time format for the X axis
 	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`

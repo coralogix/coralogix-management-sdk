@@ -23,9 +23,9 @@ var _ MappedNullable = &EnrichmentFieldDefinition{}
 // EnrichmentFieldDefinition struct for EnrichmentFieldDefinition
 type EnrichmentFieldDefinition struct {
 	// The enriched field name.
-	EnrichedFieldName *string `json:"enrichedFieldName,omitempty"`
+	EnrichedFieldName *string `json:"enrichedFieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The field name.
-	FieldName *string `json:"fieldName,omitempty"`
+	FieldName *string `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The selected columns.
 	SelectedColumns []string `json:"selectedColumns,omitempty"`
 	// The targets for the enrichment

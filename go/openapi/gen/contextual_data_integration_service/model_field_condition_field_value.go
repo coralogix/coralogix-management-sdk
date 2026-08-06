@@ -23,9 +23,9 @@ var _ MappedNullable = &FieldConditionFieldValue{}
 // FieldConditionFieldValue struct for FieldConditionFieldValue
 type FieldConditionFieldValue struct {
 	// The field name.
-	FieldName *string `json:"fieldName,omitempty"`
+	FieldName *string `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The value pattern.
-	ValuePattern *string `json:"valuePattern,omitempty"`
+	ValuePattern *string `json:"valuePattern,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

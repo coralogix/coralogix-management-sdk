@@ -24,21 +24,27 @@ var _ MappedNullable = &Hexagon{}
 type Hexagon struct {
 	// Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)
 	CustomUnit *string `json:"customUnit,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Data mode type, either high or archive
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	Decimal *int32 `json:"decimal,omitempty"`
 	// Whether to render numeric value without abbreviation
 	DecimalPrecision *bool `json:"decimalPrecision,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
+	// Indicates how to group the legend elements, either by thresholds or by query groups
 	LegendBy *LegendBy `json:"legendBy,omitempty"`
 	// A maximum value used in percentage threshold calculation and for visual value representation
 	Max *float64 `json:"max,omitempty"`
 	// A minimum value used in percentage threshold calculation and for visual value representation
 	Min *float64 `json:"min,omitempty"`
+	// A query object containing query definition
 	Query *HexagonQuery `json:"query,omitempty"`
+	// Type of the threshold, relative or absolute
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	// List of value thresholds, each with a certain color and an optional name label
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
+	// Unit of the value - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

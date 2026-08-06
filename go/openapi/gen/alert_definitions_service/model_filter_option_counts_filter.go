@@ -22,11 +22,17 @@ var _ MappedNullable = &FilterOptionCountsFilter{}
 
 // FilterOptionCountsFilter Filter configuration for counting filter options
 type FilterOptionCountsFilter struct {
+	// Filter by alert definition enabled status
 	EnabledFilter *FilterOptionCountsEnabledFilter `json:"enabledFilter,omitempty"`
+	// Filter by alert definition entity labels
 	EntityLabelsFilter *FilterOptionCountsEntityLabelsFilter `json:"entityLabelsFilter,omitempty"`
+	// Filter by alert definition names
 	NameFilter *FilterOptionCountsNameFilter `json:"nameFilter,omitempty"`
+	// Filter by alert definition priorities
 	PriorityFilter *FilterOptionCountsPriorityFilter `json:"priorityFilter,omitempty"`
+	// Filter by alert definition status
 	StatusFilter *FilterOptionCountsStatusFilter `json:"statusFilter,omitempty"`
+	// Filter by alert definition types
 	TypeFilter *FilterOptionCountsTypeFilter `json:"typeFilter,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

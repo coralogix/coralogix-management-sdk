@@ -29,7 +29,7 @@ type CloudFormationTemplate struct {
 	// The post installation steps.
 	PostInstallationSteps *map[string]string `json:"postInstallationSteps,omitempty"`
 	// The template url.
-	TemplateUrl *string `json:"templateUrl,omitempty"`
+	TemplateUrl *string `json:"templateUrl,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -22,7 +22,9 @@ var _ MappedNullable = &Section{}
 
 // Section struct for Section
 type Section struct {
+	// Section unique identifier
 	Id *UUID `json:"id,omitempty"`
+	// Section's options
 	Options *SectionOptions `json:"options,omitempty"`
 	// Definition of a section's rows (one row represents a single row of visualizations)
 	Rows []Row `json:"rows,omitempty"`

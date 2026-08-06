@@ -22,17 +22,29 @@ var _ MappedNullable = &CaseEventData{}
 
 // CaseEventData One-of wrapper for concrete case event types.
 type CaseEventData struct {
+	// Case assigned to a user
 	Assigned *AssignedCaseEvent `json:"assigned,omitempty"`
+	// Change assignee failed case event
 	ChangeAssigneeFailed *ChangeAssigneeFailedEvent `json:"changeAssigneeFailed,omitempty"`
+	// User comment
 	Comment *CommentCaseEvent `json:"comment,omitempty"`
+	// Created case event
 	Created *CreatedCaseEvent `json:"created,omitempty"`
+	// KPI breach detected for the case
 	KpiBreached *KPIBreachedCaseEvent `json:"kpiBreached,omitempty"`
+	// Notification failure
 	NotificationFailed *NotificationFailedCaseEvent `json:"notificationFailed,omitempty"`
+	// Notification(s) sent
 	NotificationSent *NotificationSentCaseEvent `json:"notificationSent,omitempty"`
+	// Priority details changed case event
 	PriorityDetailsChanged *PriorityDetailsChangedCaseEvent `json:"priorityDetailsChanged,omitempty"`
+	// Resolution reason changed case event
 	ResolutionReasonChangedEvent *ResolutionReasonChangedCaseEvent `json:"resolutionReasonChangedEvent,omitempty"`
+	// Status changed
 	StatusChanged *StatusChangedCaseEvent `json:"statusChanged,omitempty"`
+	// Title changed case event
 	TitleChangedEvent *TitleChangedCaseEvent `json:"titleChangedEvent,omitempty"`
+	// Case unassigned from a user
 	Unassigned *UnassignedCaseEvent `json:"unassigned,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

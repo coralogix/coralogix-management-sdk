@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsNewValueType{}
 
 // LogsNewValueType Configuration for alerts triggered by new values appearing in logs
 type LogsNewValueType struct {
+	// The filter to match log entries for the alert.
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	// The filter to specify which fields to include in the notification payload.
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`

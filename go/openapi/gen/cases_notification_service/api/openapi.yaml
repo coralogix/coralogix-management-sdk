@@ -139,7 +139,12 @@
             "minLength": 0
           },
           "connectorType": {
-            "$ref": "#/components/schemas/v1.ConnectorType"
+            "description": "Type of the connector",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.ConnectorType"
+              }
+            ]
           }
         },
         "required": [
@@ -157,10 +162,20 @@
         "type": "object",
         "properties": {
           "connector": {
-            "$ref": "#/components/schemas/ConnectorDetails"
+            "description": "The connector that the delivery was sent to",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConnectorDetails"
+              }
+            ]
           },
           "outcome": {
-            "$ref": "#/components/schemas/DeliveryOutcome"
+            "description": "Outcome of the delivery attempt",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliveryOutcome"
+              }
+            ]
           }
         },
         "required": [
@@ -196,10 +211,20 @@
         "type": "object",
         "properties": {
           "failure": {
-            "$ref": "#/components/schemas/DeliveryFailure"
+            "description": "Delivery failed",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliveryFailure"
+              }
+            ]
           },
           "success": {
-            "$ref": "#/components/schemas/DeliverySuccess"
+            "description": "Delivery succeeded",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliverySuccess"
+              }
+            ]
           }
         },
         "oneOf": [
@@ -281,7 +306,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -319,7 +349,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -408,13 +443,28 @@
         "type": "object",
         "properties": {
           "attempted": {
-            "$ref": "#/components/schemas/RoutedDelivery"
+            "description": "Delivery was attempted through a router to one or more connectors",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutedDelivery"
+              }
+            ]
           },
           "noNotificationCreated": {
-            "$ref": "#/components/schemas/NoNotificationCreatedResult"
+            "description": "Routers matched but no notification was created",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NoNotificationCreatedResult"
+              }
+            ]
           },
           "noRouterMatched": {
-            "$ref": "#/components/schemas/NoRouterMatchedResult"
+            "description": "No router matched the notification request",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NoRouterMatchedResult"
+              }
+            ]
           },
           "requestNotificationId": {
             "example": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
@@ -496,7 +546,12 @@
             "minItems": 0
           },
           "router": {
-            "$ref": "#/components/schemas/RouterInfo"
+            "description": "The router that handled the notification",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RouterInfo"
+              }
+            ]
           }
         },
         "required": [

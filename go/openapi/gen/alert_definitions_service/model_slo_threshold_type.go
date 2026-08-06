@@ -22,8 +22,11 @@ var _ MappedNullable = &SloThresholdType{}
 
 // SloThresholdType SLO threshold type definition
 type SloThresholdType struct {
+	// Burn rate threshold
 	BurnRate *BurnRateThreshold `json:"burnRate,omitempty"`
+	// Error budget threshold
 	ErrorBudget *ErrorBudgetThreshold `json:"errorBudget,omitempty"`
+	// SLO definition
 	SloDefinition *V3SloDefinition `json:"sloDefinition,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

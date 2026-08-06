@@ -24,6 +24,7 @@ var _ MappedNullable = &Tooltip{}
 type Tooltip struct {
 	// The show labels.
 	ShowLabels *bool `json:"showLabels,omitempty"`
+	// Type of the tooltip display, can be showing single series value or all series values at once
 	Type *TooltipType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

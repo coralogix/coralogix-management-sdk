@@ -23,6 +23,7 @@ var _ MappedNullable = &BulkAssignRequest{}
 
 // BulkAssignRequest Request to assign multiple cases to a user
 type BulkAssignRequest struct {
+	// User to assign the cases to
 	Assignee CasesV1UserDetails `json:"assignee"`
 	// IDs of the cases to assign. Each entry accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
 	Ids []string `json:"ids"`

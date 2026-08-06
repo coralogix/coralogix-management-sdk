@@ -36,20 +36,26 @@ type TimeSeriesLines struct {
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
 	// Whether to ignore color scheme and derive colors from algorithm
 	HashColors *bool `json:"hashColors,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
+	// Scale type - linear/logarithmic
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	// Max count of the series per query
 	SeriesCountLimit *string `json:"seriesCountLimit,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Custom template for the series name
 	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Type of stacked line, can be undefined, absolute or relative
 	StackedLine *VisualizationStackedLine `json:"stackedLine,omitempty"`
 	TemporalField *ObservationField `json:"temporalField,omitempty"`
+	// Tooltip settings for the widget
 	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
+	// Unit of the query results - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	// When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.
 	UseDataTimeRange *bool `json:"useDataTimeRange,omitempty"`
 	// The value fields.
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
+	// Time format for the X axis
 	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`

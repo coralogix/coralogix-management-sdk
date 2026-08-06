@@ -22,6 +22,7 @@ var _ MappedNullable = &HorizontalBarChartLogsQuery{}
 
 // HorizontalBarChartLogsQuery A logs variant of the query
 type HorizontalBarChartLogsQuery struct {
+	// Query aggregation function
 	Aggregation *LogsAggregation `json:"aggregation,omitempty"`
 	// List of filters that narrow down query results
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
@@ -29,10 +30,13 @@ type HorizontalBarChartLogsQuery struct {
 	GroupNames []string `json:"groupNames,omitempty"`
 	// List of observation fields to group the results
 	GroupNamesFields []ObservationField `json:"groupNamesFields,omitempty"`
+	// A Lucene query string to search logs
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	// Field name by which results are stacked in individual group
 	StackedGroupName *string `json:"stackedGroupName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Observation field by results are stacked in a group
 	StackedGroupNameField *ObservationField `json:"stackedGroupNameField,omitempty"`
+	// Specifies the time period for which the results should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

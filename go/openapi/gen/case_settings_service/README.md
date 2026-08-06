@@ -89,6 +89,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [AlertSuppressionStrategy](docs/AlertSuppressionStrategy.md)
+ - [AutoCloseConfig](docs/AutoCloseConfig.md)
  - [AutoResolveConfig](docs/AutoResolveConfig.md)
  - [CaseKPIs](docs/CaseKPIs.md)
  - [CaseLifecycle](docs/CaseLifecycle.md)

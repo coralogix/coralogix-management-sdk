@@ -22,17 +22,17 @@ var _ MappedNullable = &CompanyEnrichmentSettings{}
 
 // CompanyEnrichmentSettings Company enrichment settings.
 type CompanyEnrichmentSettings struct {
-	// The enrichment amount limit.
+	// Maximum number of enrichment rules allowed for the account.
 	EnrichmentAmountLimit *int64 `json:"enrichmentAmountLimit,omitempty"`
-	// The enrichments in use.
+	// Number of enrichment rules currently in use by the account.
 	EnrichmentsInUse *int64 `json:"enrichmentsInUse,omitempty"`
-	// The query only row limit.
+	// Row count above which a custom enrichment becomes query-only (usable in queries but not applied at ingest time). Defaults to 10000.
 	QueryOnlyRowLimit *int64 `json:"queryOnlyRowLimit,omitempty"`
-	// The query only size limit bytes.
+	// File size in bytes above which a custom enrichment becomes query-only (usable in queries but not applied at ingest time). Defaults to 524288 (512 KiB).
 	QueryOnlySizeLimitBytes *string `json:"queryOnlySizeLimitBytes,omitempty" validate:"regexp=^[0-9]+$"`
-	// The row limit.
+	// Maximum number of rows allowed in a custom enrichment file. Defaults to 150000.
 	RowLimit *int64 `json:"rowLimit,omitempty"`
-	// The size limit bytes.
+	// Maximum custom enrichment file size in bytes. Defaults to 20971520 (20 MiB).
 	SizeLimitBytes *string `json:"sizeLimitBytes,omitempty" validate:"regexp=^[0-9]+$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

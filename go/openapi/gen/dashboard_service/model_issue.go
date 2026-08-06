@@ -26,6 +26,7 @@ type Issue struct {
 	Location *string `json:"location,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Human-readable description of the issue
 	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Severity of the issue
 	Severity *IssueSeverity `json:"severity,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

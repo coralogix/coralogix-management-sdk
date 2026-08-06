@@ -23,6 +23,7 @@ var _ MappedNullable = &UnacknowledgeCaseResponse{}
 
 // UnacknowledgeCaseResponse Response containing the case after acknowledgment was removed.
 type UnacknowledgeCaseResponse struct {
+	// Case after acknowledgment was removed.
 	Case Case `json:"case"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

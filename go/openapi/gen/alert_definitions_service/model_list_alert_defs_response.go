@@ -22,8 +22,11 @@ var _ MappedNullable = &ListAlertDefsResponse{}
 
 // ListAlertDefsResponse A response that contains a list of alert definitions
 type ListAlertDefsResponse struct {
+	// The caller's access decision and raw access policy per alert, keyed by alert definition ID
+	Access *map[string]AlertDefAccess `json:"access,omitempty"`
 	// List of alert definitions
 	AlertDefs []AlertDef `json:"alertDefs,omitempty"`
+	// Pagination settings for the list of alert definitions
 	Pagination *AlertsV3PaginationResponse `json:"pagination,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -46,6 +49,38 @@ func NewListAlertDefsResponse() *ListAlertDefsResponse {
 func NewListAlertDefsResponseWithDefaults() *ListAlertDefsResponse {
 	this := ListAlertDefsResponse{}
 	return &this
+}
+
+// GetAccess returns the Access field value if set, zero value otherwise.
+func (o *ListAlertDefsResponse) GetAccess() map[string]AlertDefAccess {
+	if o == nil || IsNil(o.Access) {
+		var ret map[string]AlertDefAccess
+		return ret
+	}
+	return *o.Access
+}
+
+// GetAccessOk returns a tuple with the Access field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListAlertDefsResponse) GetAccessOk() (*map[string]AlertDefAccess, bool) {
+	if o == nil || IsNil(o.Access) {
+		return nil, false
+	}
+	return o.Access, true
+}
+
+// HasAccess returns a boolean if a field has been set.
+func (o *ListAlertDefsResponse) HasAccess() bool {
+	if o != nil && !IsNil(o.Access) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccess gets a reference to the given map[string]AlertDefAccess and assigns it to the Access field.
+func (o *ListAlertDefsResponse) SetAccess(v map[string]AlertDefAccess) {
+	o.Access = &v
 }
 
 // GetAlertDefs returns the AlertDefs field value if set, zero value otherwise.
@@ -122,6 +157,9 @@ func (o ListAlertDefsResponse) MarshalJSON() ([]byte, error) {
 
 func (o ListAlertDefsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Access) {
+		toSerialize["access"] = o.Access
+	}
 	if !IsNil(o.AlertDefs) {
 		toSerialize["alertDefs"] = o.AlertDefs
 	}
@@ -151,6 +189,7 @@ func (o *ListAlertDefsResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access")
 		delete(additionalProperties, "alertDefs")
 		delete(additionalProperties, "pagination")
 		o.AdditionalProperties = additionalProperties

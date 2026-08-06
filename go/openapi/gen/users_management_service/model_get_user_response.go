@@ -22,6 +22,7 @@ var _ MappedNullable = &GetUserResponse{}
 
 // GetUserResponse Response containing the complete details of the requested user, including account information, status, login modes, and access configuration.
 type GetUserResponse struct {
+	// Complete user details
 	User *RbacV2User `json:"user,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

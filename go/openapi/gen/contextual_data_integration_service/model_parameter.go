@@ -26,14 +26,14 @@ type Parameter struct {
 	// Boolean value for this integration parameter.
 	BooleanValue *bool `json:"booleanValue,omitempty"`
 	// The key.
-	Key *string `json:"key,omitempty"`
+	Key *string `json:"key,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Numeric value for this integration parameter.
 	NumericValue *float64 `json:"numericValue,omitempty"`
 	// Sensitive data placeholder.
 	SensitiveData map[string]interface{} `json:"sensitiveData,omitempty"`
 	StringList *StringList `json:"stringList,omitempty"`
 	// String value for this integration parameter.
-	StringValue *string `json:"stringValue,omitempty"`
+	StringValue *string `json:"stringValue,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

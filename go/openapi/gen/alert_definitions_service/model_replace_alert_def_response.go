@@ -22,6 +22,7 @@ var _ MappedNullable = &ReplaceAlertDefResponse{}
 
 // ReplaceAlertDefResponse A response that contains the updated alert definition
 type ReplaceAlertDefResponse struct {
+	// The updated alert definition
 	AlertDef *AlertDef `json:"alertDef,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

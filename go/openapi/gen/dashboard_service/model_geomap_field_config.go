@@ -22,7 +22,9 @@ var _ MappedNullable = &GeomapFieldConfig{}
 
 // GeomapFieldConfig Geomap field config.
 type GeomapFieldConfig struct {
+	// Alternative way to provide geographic information, by specifying AWS region field from the query results.
 	AwsRegionConfig *GeomapAwsRegionConfig `json:"awsRegionConfig,omitempty"`
+	// Default way to provide geographic information, by specifying latitude and longitude fields from the query results.
 	CoordinateConfig *GeomapCoordinateConfig `json:"coordinateConfig,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

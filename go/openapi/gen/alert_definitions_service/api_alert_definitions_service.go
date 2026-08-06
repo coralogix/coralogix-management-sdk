@@ -17,11 +17,157 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
 // AlertDefinitionsServiceAPIService AlertDefinitionsServiceAPI service
 type AlertDefinitionsServiceAPIService service
+
+type ApiAlertDefsServiceBulkCreateAlertDefsRequest struct {
+	ctx context.Context
+	ApiService *AlertDefinitionsServiceAPIService
+	bulkCreateAlertDefinitionsRequest *BulkCreateAlertDefinitionsRequest
+}
+
+func (r ApiAlertDefsServiceBulkCreateAlertDefsRequest) BulkCreateAlertDefinitionsRequest(bulkCreateAlertDefinitionsRequest BulkCreateAlertDefinitionsRequest) ApiAlertDefsServiceBulkCreateAlertDefsRequest {
+	r.bulkCreateAlertDefinitionsRequest = &bulkCreateAlertDefinitionsRequest
+	return r
+}
+
+func (r ApiAlertDefsServiceBulkCreateAlertDefsRequest) Execute() (*BulkCreateAlertDefsResponse, *http.Response, error) {
+	return r.ApiService.AlertDefsServiceBulkCreateAlertDefsExecute(r)
+}
+
+/*
+AlertDefsServiceBulkCreateAlertDefs Bulk create alert definitions
+
+Creates multiple alert definitions in a single request. The operation is best-effort - definitions that fail to be created are reported in the response and do not prevent creation of the others. Limited to 100 alert definitions per request.
+
+Requires the following permissions:
+- `alerts:UpdateConfig`
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAlertDefsServiceBulkCreateAlertDefsRequest
+*/
+func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkCreateAlertDefs(ctx context.Context) ApiAlertDefsServiceBulkCreateAlertDefsRequest {
+	return ApiAlertDefsServiceBulkCreateAlertDefsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BulkCreateAlertDefsResponse
+func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkCreateAlertDefsExecute(r ApiAlertDefsServiceBulkCreateAlertDefsRequest) (*BulkCreateAlertDefsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkCreateAlertDefsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceBulkCreateAlertDefs")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/alerts/alerts/v3/all/create"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.bulkCreateAlertDefinitionsRequest == nil {
+		return localVarReturnValue, nil, reportError("bulkCreateAlertDefinitionsRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkCreateAlertDefinitionsRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ApiAlertDefsServiceBulkDeleteAlertDefsRequest struct {
 	ctx context.Context
@@ -41,7 +187,7 @@ func (r ApiAlertDefsServiceBulkDeleteAlertDefsRequest) Execute() (*BulkDeleteAle
 /*
 AlertDefsServiceBulkDeleteAlertDefs Bulk delete alert definitions
 
-Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are.
+Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are. Limited to 100 alert definitions per request.
 
 Requires the following permissions:
 - `alerts:UpdateConfig`
@@ -183,7 +329,7 @@ func (r ApiAlertDefsServiceBulkReplaceAlertDefsRequest) Execute() (*BulkReplaceA
 /*
 AlertDefsServiceBulkReplaceAlertDefs Bulk replace alert definitions
 
-Replaces all alert definitions with the provided set.
+Replaces multiple alert definitions in a single request. Each entry updates the existing alert definition with the matching ID; alert definitions not referenced in the request are left unchanged. The operation is best-effort - entries that fail are reported in the response and do not prevent other entries from being applied. Limited to 100 alert definitions per request.
 
 Requires the following permissions:
 - `alerts:UpdateConfig`
@@ -596,6 +742,13 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDefExecut
 type ApiAlertDefsServiceDownloadAlertsRequest struct {
 	ctx context.Context
 	ApiService *AlertDefinitionsServiceAPIService
+	ids *[]string
+}
+
+// Optional list of alert definition IDs to download. When empty, all accessible alert definitions are downloaded. IDs that are not found or not accessible are omitted from the download and reported in the response notFoundIds (no error is returned for them).
+func (r ApiAlertDefsServiceDownloadAlertsRequest) Ids(ids []string) ApiAlertDefsServiceDownloadAlertsRequest {
+	r.ids = &ids
+	return r
 }
 
 func (r ApiAlertDefsServiceDownloadAlertsRequest) Execute() (*DownloadAlertsResponse, *http.Response, error) {
@@ -605,7 +758,7 @@ func (r ApiAlertDefsServiceDownloadAlertsRequest) Execute() (*DownloadAlertsResp
 /*
 AlertDefsServiceDownloadAlerts Download alerts
 
-Download a list of all accessible alert definitions in base64-encoded byte format.
+Download alert definitions in base64-encoded byte format. When ids are provided, only those alert definitions are downloaded; otherwise all accessible alert definitions are downloaded.
 
 Requires the following permissions:
 - `alerts:ReadConfig`
@@ -641,6 +794,21 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDownloadAlertsExecut
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.ids != nil {
+		t := *r.ids
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
+			}
+		} else {
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -877,6 +1045,13 @@ type ApiAlertDefsServiceGetAlertDefRequest struct {
 	ctx context.Context
 	ApiService *AlertDefinitionsServiceAPIService
 	id string
+	includeAccessPermissions *bool
+}
+
+// When true, populate the response&#39;s access field with the caller&#39;s access decision and the alert&#39;s raw access policy. Defaults to false.
+func (r ApiAlertDefsServiceGetAlertDefRequest) IncludeAccessPermissions(includeAccessPermissions bool) ApiAlertDefsServiceGetAlertDefRequest {
+	r.includeAccessPermissions = &includeAccessPermissions
+	return r
 }
 
 func (r ApiAlertDefsServiceGetAlertDefRequest) Execute() (*GetAlertDefResponse, *http.Response, error) {
@@ -931,6 +1106,11 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefExecute(r
 		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
+	if r.includeAccessPermissions != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_access_permissions", r.includeAccessPermissions, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1021,6 +1201,13 @@ type ApiAlertDefsServiceGetAlertDefByVersionIdRequest struct {
 	ctx context.Context
 	ApiService *AlertDefinitionsServiceAPIService
 	alertVersionId string
+	includeAccessPermissions *bool
+}
+
+// When true, populate the response&#39;s access field with the caller&#39;s access decision and the alert&#39;s raw access policy. Defaults to false.
+func (r ApiAlertDefsServiceGetAlertDefByVersionIdRequest) IncludeAccessPermissions(includeAccessPermissions bool) ApiAlertDefsServiceGetAlertDefByVersionIdRequest {
+	r.includeAccessPermissions = &includeAccessPermissions
+	return r
 }
 
 func (r ApiAlertDefsServiceGetAlertDefByVersionIdRequest) Execute() (*GetAlertDefByVersionIdResponse, *http.Response, error) {
@@ -1075,6 +1262,11 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersion
 		return localVarReturnValue, nil, reportError("alertVersionId must have less than 36 elements")
 	}
 
+	if r.includeAccessPermissions != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_access_permissions", r.includeAccessPermissions, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1167,6 +1359,7 @@ type ApiAlertDefsServiceListAlertDefsRequest struct {
 	queryFilter *AlertDefQueryFilter
 	pagination *AlertDefsServiceListAlertDefsPaginationParameter
 	orderBys *AlertDefinitionOrderByList
+	includeAccessPermissions *bool
 }
 
 // Filter to apply to the list of alert definitions
@@ -1184,6 +1377,12 @@ func (r ApiAlertDefsServiceListAlertDefsRequest) Pagination(pagination AlertDefs
 // Ordering settings for the list of alert definitions
 func (r ApiAlertDefsServiceListAlertDefsRequest) OrderBys(orderBys AlertDefinitionOrderByList) ApiAlertDefsServiceListAlertDefsRequest {
 	r.orderBys = &orderBys
+	return r
+}
+
+// When true, populate the response&#39;s per-alert access map with the caller&#39;s access decision and each alert&#39;s raw access policy. Defaults to false.
+func (r ApiAlertDefsServiceListAlertDefsRequest) IncludeAccessPermissions(includeAccessPermissions bool) ApiAlertDefsServiceListAlertDefsRequest {
+	r.includeAccessPermissions = &includeAccessPermissions
 	return r
 }
 
@@ -1242,6 +1441,11 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceListAlertDefsExecute
 	}
 	if r.orderBys != nil {
 		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", r.orderBys, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
+	if r.includeAccessPermissions != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_access_permissions", r.includeAccessPermissions, "form", ""); err != nil {
 			return localVarReturnValue, nil, err
 		}
 	}

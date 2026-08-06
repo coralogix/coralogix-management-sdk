@@ -22,6 +22,7 @@ var _ MappedNullable = &Diagnostics{}
 
 // Diagnostics Allows to configure rules for data written into 'notification.deliveries' dataset
 type Diagnostics struct {
+	// Allows to configure what notification data should be written into a dataset.
 	Delivery *Delivery `json:"delivery,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

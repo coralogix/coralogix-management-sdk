@@ -22,6 +22,7 @@ var _ MappedNullable = &ImpactedEntityLink{}
 
 // ImpactedEntityLink An impacted entity decorated with a deep link into the relevant product view.
 type ImpactedEntityLink struct {
+	// The impacted entity.
 	Entity *ImpactedEntity `json:"entity,omitempty"`
 	// Absolute URL to the entity drilldown view.
 	Url *string `json:"url,omitempty"`

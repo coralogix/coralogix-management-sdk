@@ -24,10 +24,10 @@ var _ MappedNullable = &TagRule{}
 // TagRule Tag rule for a policy.
 type TagRule struct {
 	RuleTypeId RuleTypeId `json:"ruleTypeId"`
-	// The tag name.
-	TagName string `json:"tagName"`
-	// The tag value.
-	TagValue string `json:"tagValue"`
+	// The tag name. Must start with \"tags.\".
+	TagName string `json:"tagName" validate:"regexp=^tags\\\\..*$"`
+	// The tag value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.
+	TagValue string `json:"tagValue" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

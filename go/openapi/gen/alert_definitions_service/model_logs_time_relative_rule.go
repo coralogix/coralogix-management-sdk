@@ -22,7 +22,9 @@ var _ MappedNullable = &LogsTimeRelativeRule{}
 
 // LogsTimeRelativeRule LogsTimeRelativeRule is a message that defines a rule for log-based time-relative alerts
 type LogsTimeRelativeRule struct {
+	// The condition for the time-relative alert.
 	Condition *LogsTimeRelativeCondition `json:"condition,omitempty"`
+	// The override settings for the alert.
 	Override *AlertDefOverride `json:"override,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

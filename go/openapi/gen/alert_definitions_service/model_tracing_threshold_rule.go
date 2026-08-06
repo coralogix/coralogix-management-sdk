@@ -22,6 +22,7 @@ var _ MappedNullable = &TracingThresholdRule{}
 
 // TracingThresholdRule A rule for trace-based threshold alerts
 type TracingThresholdRule struct {
+	// The condition for the threshold alert.
 	Condition *TracingThresholdCondition `json:"condition,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

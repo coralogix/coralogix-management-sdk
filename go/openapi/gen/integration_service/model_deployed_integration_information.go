@@ -23,11 +23,11 @@ var _ MappedNullable = &DeployedIntegrationInformation{}
 // DeployedIntegrationInformation Deployed integration information.
 type DeployedIntegrationInformation struct {
 	// The definition key.
-	DefinitionKey *string `json:"definitionKey,omitempty"`
+	DefinitionKey *string `json:"definitionKey,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The definition version.
-	DefinitionVersion *string `json:"definitionVersion,omitempty"`
+	DefinitionVersion *string `json:"definitionVersion,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
 	// The parameters.
 	Parameters []Parameter `json:"parameters,omitempty"`

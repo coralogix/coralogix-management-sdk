@@ -24,7 +24,7 @@ var _ MappedNullable = &LogRules{}
 // LogRules Log rules for a policy.
 type LogRules struct {
 	// The dpxl expression.
-	DpxlExpression *string `json:"dpxlExpression,omitempty"`
+	DpxlExpression *string `json:"dpxlExpression,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The severities.
 	Severities []QuotaV1Severity `json:"severities"`
 	AdditionalProperties map[string]interface{}

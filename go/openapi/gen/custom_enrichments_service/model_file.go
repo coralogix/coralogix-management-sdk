@@ -22,16 +22,16 @@ var _ MappedNullable = &File{}
 
 // File This data structure represents a file
 type File struct {
-	// Binary content of the file encoded as base64.
+	// Binary content of the file encoded as base64. The account's enrichment file size limit applies to the decoded byte size (20971520 bytes / 20 MiB by default); maxLength bounds the base64-encoded string.
 	Binary *string `json:"binary,omitempty"`
-	// File extension indicating the file format (e.g., csv, json).
-	Extension *string `json:"extension,omitempty"`
+	// File extension indicating the file format. Only \"csv\" is currently supported.
+	Extension *string `json:"extension,omitempty" validate:"regexp=^csv$"`
 	// Name of the file.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Size of the file in bytes.
 	Size *int64 `json:"size,omitempty"`
-	// Textual content of the file as a UTF-8 string.
-	Textual *string `json:"textual,omitempty"`
+	// Textual content of the file as a UTF-8 string. The account's enrichment file size limit applies to the UTF-8 byte size of the content (20971520 bytes / 20 MiB by default); maxLength is an upper bound in characters.
+	Textual *string `json:"textual,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

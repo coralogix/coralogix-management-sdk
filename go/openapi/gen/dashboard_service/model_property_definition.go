@@ -25,6 +25,7 @@ type PropertyDefinition struct {
 	Alignment *TextAlignment `json:"alignment,omitempty"`
 	// Column display name property, allows renaming the column header name
 	ColumnDisplayName *string `json:"columnDisplayName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Link property (see PropertyLinks for full reference)
 	Link *PropertyLinks `json:"link,omitempty"`
 	// Value of Regex Extract property, a regex string
 	RegexExtract *string `json:"regexExtract,omitempty" validate:"regexp=^[\\s\\S]*$"`

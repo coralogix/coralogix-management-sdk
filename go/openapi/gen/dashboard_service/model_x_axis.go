@@ -22,9 +22,12 @@ var _ MappedNullable = &XAxis{}
 
 // XAxis X axis.
 type XAxis struct {
+	// X axis scale divided into time buckets (deprecated, use time_buckets instead)
+	// Deprecated
 	Time *XAxisByTime `json:"time,omitempty"`
+	// X axis interval resolution settings for time bucket calculations, supporting auto or manual modes
 	TimeBuckets *IntervalResolution `json:"timeBuckets,omitempty"`
-	// X axis by value.
+	// X axis scale showing individual group values
 	Value map[string]interface{} `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -50,6 +53,7 @@ func NewXAxisWithDefaults() *XAxis {
 }
 
 // GetTime returns the Time field value if set, zero value otherwise.
+// Deprecated
 func (o *XAxis) GetTime() XAxisByTime {
 	if o == nil || IsNil(o.Time) {
 		var ret XAxisByTime
@@ -60,6 +64,7 @@ func (o *XAxis) GetTime() XAxisByTime {
 
 // GetTimeOk returns a tuple with the Time field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *XAxis) GetTimeOk() (*XAxisByTime, bool) {
 	if o == nil || IsNil(o.Time) {
 		return nil, false
@@ -77,6 +82,7 @@ func (o *XAxis) HasTime() bool {
 }
 
 // SetTime gets a reference to the given XAxisByTime and assigns it to the Time field.
+// Deprecated
 func (o *XAxis) SetTime(v XAxisByTime) {
 	o.Time = &v
 }

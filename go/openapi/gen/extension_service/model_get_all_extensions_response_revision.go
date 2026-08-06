@@ -23,16 +23,16 @@ var _ MappedNullable = &GetAllExtensionsResponseRevision{}
 // GetAllExtensionsResponseRevision struct for GetAllExtensionsResponseRevision
 type GetAllExtensionsResponseRevision struct {
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The excerpt.
-	Excerpt *string `json:"excerpt,omitempty"`
+	Excerpt *string `json:"excerpt,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The integration details.
 	IntegrationDetails []IntegrationDetail `json:"integrationDetails,omitempty"`
 	// List of labels.
 	Labels []string `json:"labels,omitempty"`
 	Summary *GetAllExtensionsResponseRevisionSummary `json:"summary,omitempty"`
 	// Version number.
-	Version *string `json:"version,omitempty"`
+	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

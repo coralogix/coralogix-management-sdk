@@ -22,9 +22,11 @@ var _ MappedNullable = &MetricThresholdCondition{}
 
 // MetricThresholdCondition Defines conditions for metric threshold alerts
 type MetricThresholdCondition struct {
+	// The type of the alert condition
 	ConditionType *MetricThresholdConditionType `json:"conditionType,omitempty"`
 	// The percentage of values that must exceed the threshold to trigger the alert
 	ForOverPct *int64 `json:"forOverPct,omitempty"`
+	// The time window for the alert condition
 	OfTheLast *MetricTimeWindow `json:"ofTheLast,omitempty"`
 	// The threshold value for the alert condition
 	Threshold *float64 `json:"threshold,omitempty"`

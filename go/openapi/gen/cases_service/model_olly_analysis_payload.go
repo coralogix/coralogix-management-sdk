@@ -31,6 +31,7 @@ type OllyAnalysisPayload struct {
 	RemediationRecommendations []string `json:"remediationRecommendations,omitempty"`
 	// Olly's hypothesised root cause for the case.
 	RootCause *string `json:"rootCause,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Confidence level Olly assigns to the root-cause hypothesis.
 	RootCauseConfidence *OllyAnalysisRootCauseConfidence `json:"rootCauseConfidence,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

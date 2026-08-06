@@ -24,6 +24,7 @@ var _ MappedNullable = &FilterAggregation{}
 type FilterAggregation struct {
 	// Number of cases matching this filter
 	Count *int64 `json:"count,omitempty"`
+	// Key/value filter that this count corresponds to
 	Filter *V1KeyValue `json:"filter,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -25,10 +25,13 @@ var _ MappedNullable = &EventsFilter{}
 type EventsFilter struct {
 	// List of event attribute keys to include when retrieving event data.
 	CxEventKeys []string `json:"cxEventKeys"`
+	// Filters applied to event label fields.
 	CxEventLabelsFilters *Filters `json:"cxEventLabelsFilters,omitempty"`
+	// Filters applied to event metadata fields.
 	CxEventMetadataFilters *Filters `json:"cxEventMetadataFilters,omitempty"`
 	// List of event type identifiers to include in the results.
 	CxEventTypes []string `json:"cxEventTypes"`
+	// Time range to filter events by their occurrence timestamp.
 	Timestamp TimestampRange `json:"timestamp"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

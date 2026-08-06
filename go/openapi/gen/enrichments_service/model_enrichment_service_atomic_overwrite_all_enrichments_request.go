@@ -22,7 +22,7 @@ var _ MappedNullable = &EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest{}
 
 // EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest Request to atomically replace all enrichment rules.
 type EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest struct {
-	// Complete list of enrichment rules to replace all existing rules.
+	// Complete list of enrichment rules to replace all existing rules. The total number of enrichment rules is limited by the account's enrichment limit (5 by default).
 	RequestEnrichments []EnrichmentRequestModel `json:"requestEnrichments,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

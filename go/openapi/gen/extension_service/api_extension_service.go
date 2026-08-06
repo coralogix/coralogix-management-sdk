@@ -233,6 +233,9 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetExtensionExecute(r ApiEx
 	if strlen(r.id) < 0 {
 		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
 	}
+	if strlen(r.id) > 65535 {
+		return localVarReturnValue, nil, reportError("id must have less than 65535 elements")
+	}
 
 	if r.includeDashboardBinaries != nil {
 		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_dashboard_binaries", r.includeDashboardBinaries, "form", ""); err != nil {

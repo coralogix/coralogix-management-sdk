@@ -25,8 +25,9 @@ var _ MappedNullable = &AccessType{}
 type AccessType struct {
 	// Type of access: 'permanent' or 'temporary'
 	AccessType string `json:"accessType"`
-	// User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.
+	// Permanent access configuration - user has indefinite access
 	PermanentAccess map[string]interface{} `json:"permanentAccess,omitempty"`
+	// Temporary access configuration - user access expires at a specified time
 	TemporaryAccess *TemporaryAccess `json:"temporaryAccess,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

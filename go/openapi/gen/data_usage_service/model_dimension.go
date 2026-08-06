@@ -26,6 +26,7 @@ type Dimension struct {
 	Pillar *V2Pillar `json:"pillar,omitempty"`
 	Priority *V2Priority `json:"priority,omitempty"`
 	Severity *DatausageV2Severity `json:"severity,omitempty"`
+	// Deprecated
 	Tier *V2TcoTier `json:"tier,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -179,6 +180,7 @@ func (o *Dimension) SetSeverity(v DatausageV2Severity) {
 }
 
 // GetTier returns the Tier field value if set, zero value otherwise.
+// Deprecated
 func (o *Dimension) GetTier() V2TcoTier {
 	if o == nil || IsNil(o.Tier) {
 		var ret V2TcoTier
@@ -189,6 +191,7 @@ func (o *Dimension) GetTier() V2TcoTier {
 
 // GetTierOk returns a tuple with the Tier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Dimension) GetTierOk() (*V2TcoTier, bool) {
 	if o == nil || IsNil(o.Tier) {
 		return nil, false
@@ -206,6 +209,7 @@ func (o *Dimension) HasTier() bool {
 }
 
 // SetTier gets a reference to the given V2TcoTier and assigns it to the Tier field.
+// Deprecated
 func (o *Dimension) SetTier(v V2TcoTier) {
 	o.Tier = &v
 }

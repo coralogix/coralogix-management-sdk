@@ -23,9 +23,11 @@ var _ MappedNullable = &CaseSettings{}
 
 // CaseSettings Team-level configuration entity for case management.
 type CaseSettings struct {
+	// Case lifecycle settings for the team
 	CaseLifecycle *CaseLifecycle `json:"caseLifecycle,omitempty"`
 	// Timestamp when the team configuration was created
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	// Settings for the team
 	GlobalIndicatorSettings *GlobalIndicatorSettings `json:"globalIndicatorSettings,omitempty"`
 	// Unique identifier for the team configuration
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`

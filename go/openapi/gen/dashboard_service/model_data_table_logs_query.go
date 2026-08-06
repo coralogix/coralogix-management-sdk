@@ -24,8 +24,11 @@ var _ MappedNullable = &DataTableLogsQuery{}
 type DataTableLogsQuery struct {
 	// List of filters that narrow down query results
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
+	// Definition of grouping and aggregations
 	Grouping *LogsQueryGrouping `json:"grouping,omitempty"`
+	// A Lucene query string to search logs
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	// Specifies the time period for which the results should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

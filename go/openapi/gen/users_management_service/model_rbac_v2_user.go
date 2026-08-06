@@ -26,6 +26,7 @@ type RbacV2User struct {
 	FirstName *string `json:"firstName,omitempty"`
 	// User last name
 	LastName *string `json:"lastName,omitempty"`
+	// User status: [Active, Inactive]
 	Status *UserStatus `json:"status,omitempty"`
 	// Associated account id. An account can have many users.
 	UserAccountId *int64 `json:"userAccountId,omitempty"`

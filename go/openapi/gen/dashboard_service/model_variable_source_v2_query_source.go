@@ -13,6 +13,7 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,16 +21,17 @@ var _ = bytes.MinRead
 // checks if the VariableSourceV2QuerySource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2QuerySource{}
 
-// VariableSourceV2QuerySource Variable source backed by a query against logs, metrics, spans, or Dataprime data.
+// VariableSourceV2QuerySource Variable source backed by a query against logs, metrics, spans, or Dataprime data. Exactly one of logsQuery, metricsQuery, spansQuery, or dataprimeQuery must be set — the service rejects an object with no query arm (this exactly-one rule is enforced by the API, not by the OpenAPI oneOf schema). valuesOrderDirection is required and must be a concrete value — ORDER_DIRECTION_UNSPECIFIED is rejected. PromQL (metricsQuery.type.promqlQuery) and Dataprime (dataprimeQuery.type.queryText) query text is syntax-checked only by POST /dashboards/check/v1 — create and replace accept it without compiling.
 type VariableSourceV2QuerySource struct {
-	AllOption *AllOption `json:"allOption,omitempty"`
+	AllOption AllOption `json:"allOption"`
 	DataprimeQuery *QuerySourceDataprimeQuery `json:"dataprimeQuery,omitempty"`
 	LogsQuery *QuerySourceLogsQuery `json:"logsQuery,omitempty"`
 	MetricsQuery *QuerySourceMetricsQuery `json:"metricsQuery,omitempty"`
 	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`
 	SpansQuery *QuerySourceSpansQuery `json:"spansQuery,omitempty"`
 	ValueDisplayOptions *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
-	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	// Values sort order. A concrete value is required — ORDER_DIRECTION_UNSPECIFIED is rejected.
+	ValuesOrderDirection OrderDirection `json:"valuesOrderDirection"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -40,8 +42,10 @@ type _VariableSourceV2QuerySource VariableSourceV2QuerySource
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableSourceV2QuerySource() *VariableSourceV2QuerySource {
+func NewVariableSourceV2QuerySource(allOption AllOption, valuesOrderDirection OrderDirection) *VariableSourceV2QuerySource {
 	this := VariableSourceV2QuerySource{}
+	this.AllOption = allOption
+	this.ValuesOrderDirection = valuesOrderDirection
 	return &this
 }
 
@@ -53,36 +57,28 @@ func NewVariableSourceV2QuerySourceWithDefaults() *VariableSourceV2QuerySource {
 	return &this
 }
 
-// GetAllOption returns the AllOption field value if set, zero value otherwise.
+// GetAllOption returns the AllOption field value
 func (o *VariableSourceV2QuerySource) GetAllOption() AllOption {
-	if o == nil || IsNil(o.AllOption) {
+	if o == nil {
 		var ret AllOption
 		return ret
 	}
-	return *o.AllOption
+
+	return o.AllOption
 }
 
-// GetAllOptionOk returns a tuple with the AllOption field value if set, nil otherwise
+// GetAllOptionOk returns a tuple with the AllOption field value
 // and a boolean to check if the value has been set.
 func (o *VariableSourceV2QuerySource) GetAllOptionOk() (*AllOption, bool) {
-	if o == nil || IsNil(o.AllOption) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AllOption, true
+	return &o.AllOption, true
 }
 
-// HasAllOption returns a boolean if a field has been set.
-func (o *VariableSourceV2QuerySource) HasAllOption() bool {
-	if o != nil && !IsNil(o.AllOption) {
-		return true
-	}
-
-	return false
-}
-
-// SetAllOption gets a reference to the given AllOption and assigns it to the AllOption field.
+// SetAllOption sets field value
 func (o *VariableSourceV2QuerySource) SetAllOption(v AllOption) {
-	o.AllOption = &v
+	o.AllOption = v
 }
 
 // GetDataprimeQuery returns the DataprimeQuery field value if set, zero value otherwise.
@@ -277,36 +273,28 @@ func (o *VariableSourceV2QuerySource) SetValueDisplayOptions(v VariableSourceV2V
 	o.ValueDisplayOptions = &v
 }
 
-// GetValuesOrderDirection returns the ValuesOrderDirection field value if set, zero value otherwise.
+// GetValuesOrderDirection returns the ValuesOrderDirection field value
 func (o *VariableSourceV2QuerySource) GetValuesOrderDirection() OrderDirection {
-	if o == nil || IsNil(o.ValuesOrderDirection) {
+	if o == nil {
 		var ret OrderDirection
 		return ret
 	}
-	return *o.ValuesOrderDirection
+
+	return o.ValuesOrderDirection
 }
 
-// GetValuesOrderDirectionOk returns a tuple with the ValuesOrderDirection field value if set, nil otherwise
+// GetValuesOrderDirectionOk returns a tuple with the ValuesOrderDirection field value
 // and a boolean to check if the value has been set.
 func (o *VariableSourceV2QuerySource) GetValuesOrderDirectionOk() (*OrderDirection, bool) {
-	if o == nil || IsNil(o.ValuesOrderDirection) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ValuesOrderDirection, true
+	return &o.ValuesOrderDirection, true
 }
 
-// HasValuesOrderDirection returns a boolean if a field has been set.
-func (o *VariableSourceV2QuerySource) HasValuesOrderDirection() bool {
-	if o != nil && !IsNil(o.ValuesOrderDirection) {
-		return true
-	}
-
-	return false
-}
-
-// SetValuesOrderDirection gets a reference to the given OrderDirection and assigns it to the ValuesOrderDirection field.
+// SetValuesOrderDirection sets field value
 func (o *VariableSourceV2QuerySource) SetValuesOrderDirection(v OrderDirection) {
-	o.ValuesOrderDirection = &v
+	o.ValuesOrderDirection = v
 }
 
 func (o VariableSourceV2QuerySource) MarshalJSON() ([]byte, error) {
@@ -319,9 +307,7 @@ func (o VariableSourceV2QuerySource) MarshalJSON() ([]byte, error) {
 
 func (o VariableSourceV2QuerySource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AllOption) {
-		toSerialize["allOption"] = o.AllOption
-	}
+	toSerialize["allOption"] = o.AllOption
 	if !IsNil(o.DataprimeQuery) {
 		toSerialize["dataprimeQuery"] = o.DataprimeQuery
 	}
@@ -340,9 +326,7 @@ func (o VariableSourceV2QuerySource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValueDisplayOptions) {
 		toSerialize["valueDisplayOptions"] = o.ValueDisplayOptions
 	}
-	if !IsNil(o.ValuesOrderDirection) {
-		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
-	}
+	toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["logsQuery"]; exists {
 		optionalOneOfGroup0Matches++
@@ -381,6 +365,45 @@ func (o VariableSourceV2QuerySource) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *VariableSourceV2QuerySource) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"allOption",
+		"valuesOrderDirection",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["logsQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["metricsQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["spansQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["dataprimeQuery"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [logsQuery, metricsQuery, spansQuery, dataprimeQuery] may be set"}
+	}
+
 	varVariableSourceV2QuerySource := _VariableSourceV2QuerySource{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

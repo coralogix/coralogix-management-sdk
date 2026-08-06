@@ -28,6 +28,7 @@ type Legend struct {
 	GroupByQuery *bool `json:"groupByQuery,omitempty"`
 	// Is the legend visible in the widget
 	IsVisible *bool `json:"isVisible,omitempty"`
+	// Location of the legend in the widget
 	Placement *LegendPlacement `json:"placement,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

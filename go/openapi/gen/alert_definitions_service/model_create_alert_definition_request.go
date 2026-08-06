@@ -22,6 +22,9 @@ var _ MappedNullable = &CreateAlertDefinitionRequest{}
 
 // CreateAlertDefinitionRequest A request to create a new alert definition
 type CreateAlertDefinitionRequest struct {
+	// The access policy for the alert as a raw JSON string. Optional; requires the alerts:UpdateAccessPolicy permission to set. If omitted, the alert is created without an access policy.
+	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// The properties of the alert definition
 	AlertDefProperties *AlertDefProperties `json:"alertDefProperties,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -44,6 +47,38 @@ func NewCreateAlertDefinitionRequest() *CreateAlertDefinitionRequest {
 func NewCreateAlertDefinitionRequestWithDefaults() *CreateAlertDefinitionRequest {
 	this := CreateAlertDefinitionRequest{}
 	return &this
+}
+
+// GetAccessPolicy returns the AccessPolicy field value if set, zero value otherwise.
+func (o *CreateAlertDefinitionRequest) GetAccessPolicy() string {
+	if o == nil || IsNil(o.AccessPolicy) {
+		var ret string
+		return ret
+	}
+	return *o.AccessPolicy
+}
+
+// GetAccessPolicyOk returns a tuple with the AccessPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAlertDefinitionRequest) GetAccessPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessPolicy) {
+		return nil, false
+	}
+	return o.AccessPolicy, true
+}
+
+// HasAccessPolicy returns a boolean if a field has been set.
+func (o *CreateAlertDefinitionRequest) HasAccessPolicy() bool {
+	if o != nil && !IsNil(o.AccessPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessPolicy gets a reference to the given string and assigns it to the AccessPolicy field.
+func (o *CreateAlertDefinitionRequest) SetAccessPolicy(v string) {
+	o.AccessPolicy = &v
 }
 
 // GetAlertDefProperties returns the AlertDefProperties field value if set, zero value otherwise.
@@ -88,6 +123,9 @@ func (o CreateAlertDefinitionRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateAlertDefinitionRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AccessPolicy) {
+		toSerialize["accessPolicy"] = o.AccessPolicy
+	}
 	if !IsNil(o.AlertDefProperties) {
 		toSerialize["alertDefProperties"] = o.AlertDefProperties
 	}
@@ -114,6 +152,7 @@ func (o *CreateAlertDefinitionRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "accessPolicy")
 		delete(additionalProperties, "alertDefProperties")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

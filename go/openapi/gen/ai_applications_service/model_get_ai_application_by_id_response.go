@@ -22,6 +22,7 @@ var _ MappedNullable = &GetAiApplicationByIdResponse{}
 
 // GetAiApplicationByIdResponse Response containing the requested AI application.
 type GetAiApplicationByIdResponse struct {
+	// The AI application.
 	AiApplication *AiApplication `json:"aiApplication,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

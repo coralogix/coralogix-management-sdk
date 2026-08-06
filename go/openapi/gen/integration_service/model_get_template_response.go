@@ -23,7 +23,7 @@ var _ MappedNullable = &GetTemplateResponse{}
 // GetTemplateResponse Response containing an integration template.
 type GetTemplateResponse struct {
 	// The template url.
-	TemplateUrl *string `json:"templateUrl,omitempty"`
+	TemplateUrl *string `json:"templateUrl,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

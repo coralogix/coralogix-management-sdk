@@ -22,7 +22,9 @@ var _ MappedNullable = &GeomapCoordinateConfig{}
 
 // GeomapCoordinateConfig Geomap coordinate config.
 type GeomapCoordinateConfig struct {
+	// Data for this field should always return valid numeric coordinate (e.g. 45.756).
 	LatitudeField *ObservationField `json:"latitudeField,omitempty"`
+	// Data for this field should always return valid numeric coordinate (e.g. -122.4194).
 	LongitudeField *ObservationField `json:"longitudeField,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

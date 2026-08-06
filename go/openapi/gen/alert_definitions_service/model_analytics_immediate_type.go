@@ -22,9 +22,11 @@ var _ MappedNullable = &AnalyticsImmediateType{}
 
 // AnalyticsImmediateType Configuration for analytics alerts that fire immediately when a DataPrime query returns a result
 type AnalyticsImmediateType struct {
+	// The DataPrime query to evaluate
 	DataprimeQuery *DataprimeAlertQuery `json:"dataprimeQuery,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
+	// Configuration for how to treat and what state to give to an alert with no data
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	// The evaluation window duration in minutes
 	TimeframeMinutes *int32 `json:"timeframeMinutes,omitempty"`

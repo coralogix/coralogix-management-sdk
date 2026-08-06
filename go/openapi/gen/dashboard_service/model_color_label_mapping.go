@@ -22,9 +22,13 @@ var _ MappedNullable = &ColorLabelMapping{}
 
 // ColorLabelMapping Reusable color and label mapping configuration supporting range, value, and regex-based mappings
 type ColorLabelMapping struct {
+	// Determines which element to colorize - value text or background
 	ColorBy *ColorApplyTarget `json:"colorBy,omitempty"`
+	// Range-based color mapping using min/max and thresholds
 	Range *RangeMapping `json:"range,omitempty"`
+	// Regex pattern-based color mapping
 	Regex *RegexMapping `json:"regex,omitempty"`
+	// Exact value-based color mapping
 	Value *ColorLabelMappingValueMapping `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

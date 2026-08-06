@@ -22,6 +22,7 @@ var _ MappedNullable = &FilterNotEquals{}
 
 // FilterNotEquals This data structure represents a non-equality comparison operation.
 type FilterNotEquals struct {
+	// The selection criteria for the non-equality comparison.
 	Selection *NotEqualsSelection `json:"selection,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

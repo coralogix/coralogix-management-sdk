@@ -22,12 +22,17 @@ var _ MappedNullable = &GaugeMetricsQuery{}
 
 // GaugeMetricsQuery A metrics variant of the query
 type GaugeMetricsQuery struct {
+	// Aggregation function
 	Aggregation *GaugeAggregation `json:"aggregation,omitempty"`
+	// Type of the query editor used to generate the query, can be text or builder based
 	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
 	// List of metrics filters
 	Filters []MetricsFilter `json:"filters,omitempty"`
+	// PromQL query string for querying metrics
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
+	// Type of the PromQL query, can be Range or Instant
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
+	// Specifies the time period for which the result should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

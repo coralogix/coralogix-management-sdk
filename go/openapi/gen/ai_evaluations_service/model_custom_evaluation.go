@@ -24,6 +24,7 @@ var _ MappedNullable = &CustomEvaluation{}
 type CustomEvaluation struct {
 	// IDs of AI applications this custom evaluation is linked to.
 	ApplicationIds []string `json:"applicationIds,omitempty"`
+	// Evaluation policy details (instructions, examples, etc.).
 	Config *CustomEvaluationConfig `json:"config,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`

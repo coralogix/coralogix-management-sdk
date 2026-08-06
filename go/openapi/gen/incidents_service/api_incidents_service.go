@@ -2445,8 +2445,14 @@ func (a *IncidentsServiceAPIService) IncidentsServiceUnassignIncidentsExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.incidentIds == nil {
+		return localVarReturnValue, nil, reportError("incidentIds is required and must be specified")
+	}
+	if len(*r.incidentIds) < 0 {
+		return localVarReturnValue, nil, reportError("incidentIds must have at least 0 elements")
+	}
 
-	if r.incidentIds != nil {
+	{
 		t := *r.incidentIds
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)

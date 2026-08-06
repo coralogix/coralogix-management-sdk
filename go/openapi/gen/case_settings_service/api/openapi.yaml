@@ -25,10 +25,20 @@
                 "type": "object",
                 "properties": {
                   "caseLifecycle": {
-                    "$ref": "#/components/schemas/CaseLifecycle"
+                    "description": "Case lifecycle settings for the team",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CaseLifecycle"
+                      }
+                    ]
                   },
                   "globalIndicatorSettings": {
-                    "$ref": "#/components/schemas/GlobalIndicatorSettings"
+                    "description": "Configuration settings",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/GlobalIndicatorSettings"
+                      }
+                    ]
                   },
                   "name": {
                     "example": "Primary Case Settings",
@@ -337,10 +347,20 @@
                 "type": "object",
                 "properties": {
                   "caseLifecycle": {
-                    "$ref": "#/components/schemas/CaseLifecycle"
+                    "description": "Case lifecycle settings to apply",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CaseLifecycle"
+                      }
+                    ]
                   },
                   "globalIndicatorSettings": {
-                    "$ref": "#/components/schemas/GlobalIndicatorSettings"
+                    "description": "New configuration settings to apply",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/GlobalIndicatorSettings"
+                      }
+                    ]
                   },
                   "name": {
                     "example": "SRE Case Settings",
@@ -569,6 +589,27 @@
         "type": "object",
         "additionalProperties": false
       },
+      "AutoCloseConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Auto Close config",
+        "description": "Configuration for automatically closing cases after a certain period past resolution.",
+        "type": "object",
+        "properties": {
+          "postResolutionPeriod": {
+            "example": "3600s",
+            "description": "Period after which resolved cases are automatically closed.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 2,
+            "maxLength": 30
+          }
+        },
+        "required": [
+          "postResolutionPeriod"
+        ]
+      },
       "AutoResolveConfig": {
         "externalDocs": {
           "url": ""
@@ -616,13 +657,37 @@
         "type": "object",
         "properties": {
           "alertSuppressionStrategy": {
-            "$ref": "#/components/schemas/AlertSuppressionStrategy"
+            "example": "ALERT_SUPPRESSION_STRATEGY_IGNORE",
+            "description": "Configuration for how cases process suppressed alerts.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertSuppressionStrategy"
+              }
+            ]
+          },
+          "autoClose": {
+            "description": "Configuration for automatically closing resolved cases after a certain period. If not defined, it will fallback to auto closure after 1 week.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutoCloseConfig"
+              }
+            ]
           },
           "autoResolve": {
-            "$ref": "#/components/schemas/AutoResolveConfig"
+            "description": "Configuration for inactive cases resolution.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutoResolveConfig"
+              }
+            ]
           },
           "kpi": {
-            "$ref": "#/components/schemas/CaseKPIs"
+            "description": "KPI thresholds for acknowledgement and resolution, grouped by case priority.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseKPIs"
+              }
+            ]
           },
           "resolutionSnoozePeriod": {
             "example": "600s",
@@ -659,7 +724,12 @@
         "type": "object",
         "properties": {
           "caseLifecycle": {
-            "$ref": "#/components/schemas/CaseLifecycle"
+            "description": "Case lifecycle settings for the team",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseLifecycle"
+              }
+            ]
           },
           "createTime": {
             "example": "2025-09-22T10:30:00.000Z",
@@ -670,7 +740,12 @@
             "maxLength": 30
           },
           "globalIndicatorSettings": {
-            "$ref": "#/components/schemas/GlobalIndicatorSettings"
+            "description": "Settings for the team",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GlobalIndicatorSettings"
+              }
+            ]
           },
           "id": {
             "example": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
@@ -706,7 +781,12 @@
         "type": "object",
         "properties": {
           "caseSettings": {
-            "$ref": "#/components/schemas/CaseSettings"
+            "description": "The created case settings team configuration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseSettings"
+              }
+            ]
           }
         },
         "required": [
@@ -817,7 +897,12 @@
         "type": "object",
         "properties": {
           "filters": {
-            "$ref": "#/components/schemas/Filters"
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
@@ -855,7 +940,12 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/v3.FilterOperator"
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
           },
           "pathAndValues": {
             "type": "array",
@@ -878,7 +968,12 @@
         "type": "object",
         "properties": {
           "caseSettings": {
-            "$ref": "#/components/schemas/CaseSettings"
+            "description": "The active case settings",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseSettings"
+              }
+            ]
           }
         },
         "required": [
@@ -894,7 +989,12 @@
         "type": "object",
         "properties": {
           "caseSettings": {
-            "$ref": "#/components/schemas/CaseSettings"
+            "description": "The requested case settings team configuration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseSettings"
+              }
+            ]
           }
         },
         "required": [
@@ -910,10 +1010,20 @@
         "type": "object",
         "properties": {
           "caseLifecycle": {
-            "$ref": "#/components/schemas/CaseLifecycle"
+            "description": "System-wide default Case lifecycle settings for case settings team configurations",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseLifecycle"
+              }
+            ]
           },
           "globalIndicatorSettings": {
-            "$ref": "#/components/schemas/GlobalIndicatorSettings"
+            "description": "System-wide default settings for case settings team configurations",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GlobalIndicatorSettings"
+              }
+            ]
           }
         },
         "required": [
@@ -955,10 +1065,20 @@
             "type": "boolean"
           },
           "entityLabels": {
-            "$ref": "#/components/schemas/EntityLabelFilter"
+            "description": "Selected entity labels for filtering",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EntityLabelFilter"
+              }
+            ]
           },
           "priorities": {
-            "$ref": "#/components/schemas/IndicatorPriorityFilter"
+            "description": "Selected priorities for filtering",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IndicatorPriorityFilter"
+              }
+            ]
           }
         }
       },
@@ -1055,7 +1175,13 @@
             "type": "boolean"
           },
           "priority": {
-            "$ref": "#/components/schemas/CasePriority"
+            "example": "P1",
+            "description": "Case priority level for which this threshold applies.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CasePriority"
+              }
+            ]
           },
           "threshold": {
             "example": "300s",
@@ -1064,7 +1190,13 @@
             "minLength": 0
           },
           "type": {
-            "$ref": "#/components/schemas/KPIType"
+            "example": "KPI_TYPE_ACKNOWLEDGEMENT",
+            "description": "Type of KPI this threshold applies to (acknowledgement or resolution).",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KPIType"
+              }
+            ]
           }
         }
       },
@@ -1103,7 +1235,12 @@
         "type": "object",
         "properties": {
           "caseSettings": {
-            "$ref": "#/components/schemas/CaseSettings"
+            "description": "The updated case settings team configuration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CaseSettings"
+              }
+            ]
           }
         },
         "required": [

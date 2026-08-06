@@ -22,7 +22,9 @@ var _ MappedNullable = &Dataprime{}
 
 // Dataprime A Dataprime variant of the query
 type Dataprime struct {
+	// Data mode type
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
+	// Dataprime query text
 	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

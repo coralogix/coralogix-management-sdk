@@ -22,7 +22,9 @@ var _ MappedNullable = &MetricThresholdRule{}
 
 // MetricThresholdRule Defines a rule for metric-based threshold alerts
 type MetricThresholdRule struct {
+	// The condition for the metric threshold alert
 	Condition *MetricThresholdCondition `json:"condition,omitempty"`
+	// Alert override settings
 	Override *AlertDefOverride `json:"override,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,6 +22,7 @@ var _ MappedNullable = &CreateDashboardFolderRequestDataStructure{}
 
 // CreateDashboardFolderRequestDataStructure Request to create a new dashboard folder.
 type CreateDashboardFolderRequestDataStructure struct {
+	// The folder.
 	Folder *DashboardFolder `json:"folder,omitempty"`
 	// The request id.
 	RequestId *string `json:"requestId,omitempty" validate:"regexp=^[\\s\\S]*$"`

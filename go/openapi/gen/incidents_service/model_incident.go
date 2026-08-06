@@ -53,6 +53,7 @@ type Incident struct {
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	Severity IncidentSeverity `json:"severity"`
+	// The incident's current internal state, usually derived from the operational events of the incident
 	State IncidentState `json:"state"`
 	Status IncidentStatus `json:"status"`
 	AdditionalProperties map[string]interface{}

@@ -24,9 +24,11 @@ var _ MappedNullable = &NotificationDelivery{}
 
 // NotificationDelivery Delivery results for a single notification.
 type NotificationDelivery struct {
+	// Delivery was attempted through a router to one or more connectors
 	Attempted *RoutedDelivery `json:"attempted,omitempty"`
+	// Routers matched but no notification was created
 	NoNotificationCreated *NoNotificationCreatedResult `json:"noNotificationCreated,omitempty"`
-	// Indicates that no router matched the notification request.
+	// No router matched the notification request
 	NoRouterMatched map[string]interface{} `json:"noRouterMatched,omitempty"`
 	// The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests
 	RequestNotificationId *string `json:"requestNotificationId,omitempty"`

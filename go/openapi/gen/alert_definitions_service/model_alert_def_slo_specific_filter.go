@@ -22,6 +22,7 @@ var _ MappedNullable = &AlertDefSloSpecificFilter{}
 
 // AlertDefSloSpecificFilter Filter SLO-based alerts by SLO-specific fields
 type AlertDefSloSpecificFilter struct {
+	// The filter operator (EQUALS, NOT_EQUALS)
 	Matcher *AlertsV3FilterMatcher `json:"matcher,omitempty"`
 	// The SLO ID(s) to filter by - multiple values are OR'd together
 	SloId []string `json:"sloId,omitempty"`

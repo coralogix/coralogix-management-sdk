@@ -26,6 +26,7 @@ type MetricsFilter struct {
 	Label *string `json:"label,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The name of the metric to which the filter is applied.
 	Metric *string `json:"metric,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// An operator used for filtering the metrics.
 	Operator *FilterOperator `json:"operator,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

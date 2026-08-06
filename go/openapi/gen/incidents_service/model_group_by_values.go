@@ -22,6 +22,7 @@ var _ MappedNullable = &GroupByValues{}
 
 // GroupByValues struct for GroupByValues
 type GroupByValues struct {
+	// The contextual labels.
 	ContextualLabels *ContextualLabels `json:"contextualLabels,omitempty"`
 	IncidentField *IncidentFieldOneOf `json:"incidentField,omitempty"`
 	AdditionalProperties map[string]interface{}

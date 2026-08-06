@@ -29,6 +29,7 @@ type CustomDashboardWidgetAttachment struct {
 	QueryLinkSuffix *string `json:"queryLinkSuffix,omitempty"`
 	// Unique identifier of the widget within the dashboard
 	WidgetId string `json:"widgetId"`
+	// Screenshot of the widget at the time of attachment
 	WidgetScreenshot FileAttachment `json:"widgetScreenshot"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

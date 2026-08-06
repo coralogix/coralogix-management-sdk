@@ -27,6 +27,7 @@ type AiEvaluation struct {
 	Application *string `json:"application,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Company that owns this evaluation.
 	CompanyId *string `json:"companyId,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	// Type-specific configuration for the evaluation (oneof).
 	Config *EvaluationConfig `json:"config,omitempty"`
 	// RFC3339 timestamp when the evaluation was created.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
@@ -38,6 +39,7 @@ type AiEvaluation struct {
 	IsEnabled *bool `json:"isEnabled,omitempty"`
 	// Subsystem within the application.
 	Subsystem *string `json:"subsystem,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	// What the evaluation runs against: PROMPT, RESPONSE, or CONVERSATION.
 	Target *EvaluationTarget `json:"target,omitempty"`
 	// Score threshold. Must be between 0.0 and 1.0 inclusive.
 	Threshold *float64 `json:"threshold,omitempty"`

@@ -24,11 +24,13 @@ var _ MappedNullable = &CustomSectionOptions{}
 type CustomSectionOptions struct {
 	// Indicator if the section is collapsed
 	Collapsed *bool `json:"collapsed,omitempty"`
+	// Color of the section header
 	Color *SectionColor `json:"color,omitempty"`
 	// Short description of a section
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Section custom name
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Variable name that can be applied on section making it repetitive section and other metadata
 	RepetitiveVar *RepetitiveVar `json:"repetitiveVar,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

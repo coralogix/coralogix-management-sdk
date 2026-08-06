@@ -22,9 +22,9 @@ var _ MappedNullable = &HorizontalBarChartYAxisViewBy{}
 
 // HorizontalBarChartYAxisViewBy Horizontal bar chart.y axis view by.
 type HorizontalBarChartYAxisViewBy struct {
-	// Y axis view by category.
+	// Y axis scale divided by individual groups
 	Category map[string]interface{} `json:"category,omitempty"`
-	// Y axis view by value.
+	// Y axis scale divided into value buckets
 	Value map[string]interface{} `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

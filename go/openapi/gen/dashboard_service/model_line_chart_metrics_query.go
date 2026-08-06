@@ -22,11 +22,15 @@ var _ MappedNullable = &LineChartMetricsQuery{}
 
 // LineChartMetricsQuery Metrics query.
 type LineChartMetricsQuery struct {
+	// Type of the query editor used to generate the query, can be text or builder based
 	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
 	// List of metrics filters
 	Filters []MetricsFilter `json:"filters,omitempty"`
+	// PromQL query string for querying metrics
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
+	// How to limit the result using series_count_limit parameter
 	SeriesLimitType *MetricsSeriesLimitType `json:"seriesLimitType,omitempty"`
+	// Specifies the time period for which the results should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

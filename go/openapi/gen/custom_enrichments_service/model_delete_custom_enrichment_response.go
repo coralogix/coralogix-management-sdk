@@ -25,7 +25,7 @@ type DeleteCustomEnrichmentResponse struct {
 	// The custom enrichment id.
 	CustomEnrichmentId *int64 `json:"customEnrichmentId,omitempty"`
 	// Human-readable message.
-	Message *string `json:"message,omitempty"`
+	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -22,8 +22,11 @@ var _ MappedNullable = &FilterSource{}
 
 // FilterSource Defines the type of data the filter applies to.
 type FilterSource struct {
+	// Filter configuration for logs.
 	Logs *FilterLogsFilter `json:"logs,omitempty"`
+	// Filter configuration for metrics.
 	Metrics *MetricsFilter `json:"metrics,omitempty"`
+	// Filter configuration for spans.
 	Spans *SpansFilter `json:"spans,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

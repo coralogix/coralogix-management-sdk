@@ -23,9 +23,9 @@ var _ MappedNullable = &IntegrationGuide{}
 // IntegrationGuide Integration guide.
 type IntegrationGuide struct {
 	// The installation requirements.
-	InstallationRequirements *string `json:"installationRequirements,omitempty"`
+	InstallationRequirements *string `json:"installationRequirements,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The introduction.
-	Introduction *string `json:"introduction,omitempty"`
+	Introduction *string `json:"introduction,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

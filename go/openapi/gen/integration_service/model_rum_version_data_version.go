@@ -25,7 +25,7 @@ type RumVersionDataVersion struct {
 	LogMetadata *LogMetadata `json:"logMetadata,omitempty"`
 	SourceMapMetadata *SourceMapMetadata `json:"sourceMapMetadata,omitempty"`
 	// Version number.
-	Version *string `json:"version,omitempty"`
+	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -22,8 +22,8 @@ var _ MappedNullable = &AwsType{}
 
 // AwsType Aws type.
 type AwsType struct {
-	// The resource type.
-	ResourceType *string `json:"resourceType,omitempty"`
+	// The resource type. Must be one of the AWS resource types available for the account.
+	ResourceType *string `json:"resourceType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -23,6 +23,7 @@ var _ MappedNullable = &ReplaceE2MResponse{}
 
 // ReplaceE2MResponse This data structure is obtained when replacing an existing event to metric definition
 type ReplaceE2MResponse struct {
+	// The e2m.
 	E2m E2M `json:"e2m"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

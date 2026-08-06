@@ -24,6 +24,7 @@ var _ MappedNullable = &StatusAggregation{}
 type StatusAggregation struct {
 	// Number of cases with this status
 	Count *int64 `json:"count,omitempty"`
+	// Case status
 	Status *CaseStatus `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

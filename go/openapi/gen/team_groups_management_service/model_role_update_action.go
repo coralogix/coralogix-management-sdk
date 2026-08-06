@@ -25,6 +25,7 @@ var _ MappedNullable = &RoleUpdateAction{}
 type RoleUpdateAction struct {
 	// Discriminator indicating the role update action type (set_role_id or clear).
 	ActionType string `json:"actionType"`
+	// The clear.
 	Clear *ClearRole `json:"clear,omitempty"`
 	SetRoleId *SetRoleId `json:"setRoleId,omitempty"`
 	AdditionalProperties map[string]interface{}

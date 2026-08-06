@@ -22,6 +22,7 @@ var _ MappedNullable = &LuceneQueryValue{}
 
 // LuceneQueryValue Lucene query value.
 type LuceneQueryValue struct {
+	// The value.
 	Value *StringValueLabel `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -25,9 +25,9 @@ type ExtensionRevision struct {
 	// The binaries.
 	Binaries []ExtensionBinary `json:"binaries,omitempty"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The excerpt.
-	Excerpt *string `json:"excerpt,omitempty"`
+	Excerpt *string `json:"excerpt,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The integration details.
 	IntegrationDetails []IntegrationDetail `json:"integrationDetails,omitempty"`
 	// The is testing.
@@ -39,7 +39,7 @@ type ExtensionRevision struct {
 	// The permission denied items.
 	PermissionDeniedItems []ExtensionItem `json:"permissionDeniedItems,omitempty"`
 	// Version.
-	Version *string `json:"version,omitempty"`
+	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -22,7 +22,9 @@ var _ MappedNullable = &DashboardAction{}
 
 // DashboardAction Public actions that are always available within specific dashboard's context.
 type DashboardAction struct {
+	// Defines the data source type of the action, if applicable
 	DataSource *ActionDataSourceType `json:"dataSource,omitempty"`
+	// Definition of the action
 	Definition *ActionDefinition `json:"definition,omitempty"`
 	// A unique identifier of the action
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`

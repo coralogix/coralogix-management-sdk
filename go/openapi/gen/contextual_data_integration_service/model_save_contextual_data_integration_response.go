@@ -23,7 +23,7 @@ var _ MappedNullable = &SaveContextualDataIntegrationResponse{}
 // SaveContextualDataIntegrationResponse Response returned after successfully saving a contextual data integration.
 type SaveContextualDataIntegrationResponse struct {
 	// The integration id.
-	IntegrationId *string `json:"integrationId,omitempty"`
+	IntegrationId *string `json:"integrationId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

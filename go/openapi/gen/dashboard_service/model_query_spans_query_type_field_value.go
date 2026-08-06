@@ -23,6 +23,7 @@ var _ MappedNullable = &QuerySpansQueryTypeFieldValue{}
 // QuerySpansQueryTypeFieldValue Fetches distinct values for a specific span observation field.
 type QuerySpansQueryTypeFieldValue struct {
 	ObservationField *ObservationField `json:"observationField,omitempty"`
+	// The value.
 	Value *SpanField `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -24,7 +24,9 @@ var _ MappedNullable = &IncidentGroupBy{}
 type IncidentGroupBy struct {
 	// The contextual label to group by.
 	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	// The field to group by
 	IncidentField *IncidentFields `json:"incidentField,omitempty"`
+	// The order by direction.
 	OrderByDirection *V1OrderByDirection `json:"orderByDirection,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

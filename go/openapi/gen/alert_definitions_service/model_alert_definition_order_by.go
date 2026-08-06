@@ -22,7 +22,9 @@ var _ MappedNullable = &AlertDefinitionOrderBy{}
 
 // AlertDefinitionOrderBy A data structure that specifies the field and direction for ordering alert definitions
 type AlertDefinitionOrderBy struct {
+	// Direction for ordering
 	Direction *AlertDefOrderByDirection `json:"direction,omitempty"`
+	// Field name to order by
 	FieldName *AlertDefOrderByFields `json:"fieldName,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -24,6 +24,7 @@ var _ MappedNullable = &MetricTimeWindow{}
 type MetricTimeWindow struct {
 	// The time window as a dynamic value
 	MetricTimeWindowDynamicDuration *string `json:"metricTimeWindowDynamicDuration,omitempty"`
+	// The time window as a specific value
 	MetricTimeWindowSpecificValue *MetricTimeWindowValue `json:"metricTimeWindowSpecificValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

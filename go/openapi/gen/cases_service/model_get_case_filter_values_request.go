@@ -22,6 +22,7 @@ var _ MappedNullable = &GetCaseFilterValuesRequest{}
 
 // GetCaseFilterValuesRequest Request to retrieve available filter and aggregation values for cases.
 type GetCaseFilterValuesRequest struct {
+	// Filters to apply when computing available values
 	Filters *CaseFilters `json:"filters,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

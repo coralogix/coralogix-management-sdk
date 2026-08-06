@@ -22,6 +22,9 @@ var _ MappedNullable = &GetAlertDefResponse{}
 
 // GetAlertDefResponse A response containing the requested alert definition
 type GetAlertDefResponse struct {
+	// The caller's access decision and the alert's raw access policy
+	Access *AlertDefAccess `json:"access,omitempty"`
+	// The requested alert definition
 	AlertDef *AlertDef `json:"alertDef,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -44,6 +47,38 @@ func NewGetAlertDefResponse() *GetAlertDefResponse {
 func NewGetAlertDefResponseWithDefaults() *GetAlertDefResponse {
 	this := GetAlertDefResponse{}
 	return &this
+}
+
+// GetAccess returns the Access field value if set, zero value otherwise.
+func (o *GetAlertDefResponse) GetAccess() AlertDefAccess {
+	if o == nil || IsNil(o.Access) {
+		var ret AlertDefAccess
+		return ret
+	}
+	return *o.Access
+}
+
+// GetAccessOk returns a tuple with the Access field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetAlertDefResponse) GetAccessOk() (*AlertDefAccess, bool) {
+	if o == nil || IsNil(o.Access) {
+		return nil, false
+	}
+	return o.Access, true
+}
+
+// HasAccess returns a boolean if a field has been set.
+func (o *GetAlertDefResponse) HasAccess() bool {
+	if o != nil && !IsNil(o.Access) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccess gets a reference to the given AlertDefAccess and assigns it to the Access field.
+func (o *GetAlertDefResponse) SetAccess(v AlertDefAccess) {
+	o.Access = &v
 }
 
 // GetAlertDef returns the AlertDef field value if set, zero value otherwise.
@@ -88,6 +123,9 @@ func (o GetAlertDefResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetAlertDefResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Access) {
+		toSerialize["access"] = o.Access
+	}
 	if !IsNil(o.AlertDef) {
 		toSerialize["alertDef"] = o.AlertDef
 	}
@@ -114,6 +152,7 @@ func (o *GetAlertDefResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access")
 		delete(additionalProperties, "alertDef")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

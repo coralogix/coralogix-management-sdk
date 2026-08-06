@@ -22,6 +22,7 @@ var _ MappedNullable = &GetCompanyModelPricingResponse{}
 
 // GetCompanyModelPricingResponse Response containing the company's custom model pricing.
 type GetCompanyModelPricingResponse struct {
+	// The company's custom model pricing.
 	Pricing *CompanyModelPricing `json:"pricing,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

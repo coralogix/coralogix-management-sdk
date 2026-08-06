@@ -24,10 +24,10 @@ var _ MappedNullable = &EnrichmentRequestModel{}
 // EnrichmentRequestModel The enrichment request model
 type EnrichmentRequestModel struct {
 	// The enriched field name.
-	EnrichedFieldName *string `json:"enrichedFieldName,omitempty"`
+	EnrichedFieldName *string `json:"enrichedFieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	EnrichmentType EnrichmentType `json:"enrichmentType"`
 	// The field name.
-	FieldName string `json:"fieldName"`
+	FieldName string `json:"fieldName" validate:"regexp=^[\\s\\S]*$"`
 	// The selected columns.
 	SelectedColumns []string `json:"selectedColumns,omitempty"`
 	// The targets for the enrichment

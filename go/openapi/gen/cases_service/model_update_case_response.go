@@ -23,6 +23,7 @@ var _ MappedNullable = &UpdateCaseResponse{}
 
 // UpdateCaseResponse Response containing the updated case
 type UpdateCaseResponse struct {
+	// Updated case
 	Case Case `json:"case"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

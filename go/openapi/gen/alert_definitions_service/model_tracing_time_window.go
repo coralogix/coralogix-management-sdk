@@ -22,6 +22,7 @@ var _ MappedNullable = &TracingTimeWindow{}
 
 // TracingTimeWindow Tracing time window.
 type TracingTimeWindow struct {
+	// A time window defined by a specific value
 	TracingTimeWindowValue *TracingTimeWindowValue `json:"tracingTimeWindowValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

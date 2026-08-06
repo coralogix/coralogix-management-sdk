@@ -22,6 +22,7 @@ var _ MappedNullable = &DataprimeSourceStrategy{}
 
 // DataprimeSourceStrategy Determines the time strategy for fetching Dataprime results (instant snapshot, fixed range, or sliding window).
 type DataprimeSourceStrategy struct {
+	// Duration.
 	Duration *DataprimeSourceStrategyDuration `json:"duration,omitempty"`
 	Instant *DataprimeSourceStrategyInstant `json:"instant,omitempty"`
 	Range *DataprimeSourceStrategyRange `json:"range,omitempty"`

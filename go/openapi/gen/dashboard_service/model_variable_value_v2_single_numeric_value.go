@@ -22,6 +22,7 @@ var _ MappedNullable = &VariableValueV2SingleNumericValue{}
 
 // VariableValueV2SingleNumericValue Integration revision.single numeric value.
 type VariableValueV2SingleNumericValue struct {
+	// The value.
 	Value *NumericValueLabel `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

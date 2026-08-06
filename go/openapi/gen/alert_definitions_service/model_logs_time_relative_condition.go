@@ -22,7 +22,9 @@ var _ MappedNullable = &LogsTimeRelativeCondition{}
 
 // LogsTimeRelativeCondition Defines conditions for time-relative comparison alerts
 type LogsTimeRelativeCondition struct {
+	// The time frame to compare the current value against
 	ComparedTo *LogsTimeRelativeComparedTo `json:"comparedTo,omitempty"`
+	// The type of condition for the alert
 	ConditionType *LogsTimeRelativeConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition.
 	Threshold *float64 `json:"threshold,omitempty"`

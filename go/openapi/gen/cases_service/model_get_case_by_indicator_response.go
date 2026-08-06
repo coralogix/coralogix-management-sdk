@@ -23,6 +23,7 @@ var _ MappedNullable = &GetCaseByIndicatorResponse{}
 
 // GetCaseByIndicatorResponse Response containing the case associated with the given indicator.
 type GetCaseByIndicatorResponse struct {
+	// The case associated with the indicator.
 	Case Case `json:"case"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

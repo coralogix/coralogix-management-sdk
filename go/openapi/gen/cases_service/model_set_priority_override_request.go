@@ -23,6 +23,7 @@ var _ MappedNullable = &SetPriorityOverrideRequest{}
 
 // SetPriorityOverrideRequest Request to override a case's computed priority with a specific value.
 type SetPriorityOverrideRequest struct {
+	// Priority value to override with
 	Priority CasePriority `json:"priority"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

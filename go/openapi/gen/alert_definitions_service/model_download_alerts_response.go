@@ -24,6 +24,8 @@ var _ MappedNullable = &DownloadAlertsResponse{}
 type DownloadAlertsResponse struct {
 	// Base64-encoded binary data of the alert definitions
 	Content *string `json:"content,omitempty"`
+	// Requested alert definition IDs that were not included in the download because they were not found or are not accessible. Populated on the first streamed message.
+	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -79,6 +81,38 @@ func (o *DownloadAlertsResponse) SetContent(v string) {
 	o.Content = &v
 }
 
+// GetNotFoundIds returns the NotFoundIds field value if set, zero value otherwise.
+func (o *DownloadAlertsResponse) GetNotFoundIds() []string {
+	if o == nil || IsNil(o.NotFoundIds) {
+		var ret []string
+		return ret
+	}
+	return o.NotFoundIds
+}
+
+// GetNotFoundIdsOk returns a tuple with the NotFoundIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DownloadAlertsResponse) GetNotFoundIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.NotFoundIds) {
+		return nil, false
+	}
+	return o.NotFoundIds, true
+}
+
+// HasNotFoundIds returns a boolean if a field has been set.
+func (o *DownloadAlertsResponse) HasNotFoundIds() bool {
+	if o != nil && !IsNil(o.NotFoundIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotFoundIds gets a reference to the given []string and assigns it to the NotFoundIds field.
+func (o *DownloadAlertsResponse) SetNotFoundIds(v []string) {
+	o.NotFoundIds = v
+}
+
 func (o DownloadAlertsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -91,6 +125,9 @@ func (o DownloadAlertsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Content) {
 		toSerialize["content"] = o.Content
+	}
+	if !IsNil(o.NotFoundIds) {
+		toSerialize["notFoundIds"] = o.NotFoundIds
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -116,6 +153,7 @@ func (o *DownloadAlertsResponse) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "content")
+		delete(additionalProperties, "notFoundIds")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

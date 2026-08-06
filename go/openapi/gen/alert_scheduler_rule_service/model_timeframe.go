@@ -27,6 +27,8 @@ type Timeframe struct {
 	EndTime *string `json:"endTime,omitempty"`
 	// Start time.
 	StartTime *string `json:"startTime,omitempty"`
+	// The start time as submitted in the request, before the service normalized it to the next valid occurrence. Populated only in create and update responses; ignored in requests and omitted from read responses.
+	SubmittedStartTime *string `json:"submittedStartTime,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Timezone.
 	Timezone *string `json:"timezone,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -148,6 +150,38 @@ func (o *Timeframe) SetStartTime(v string) {
 	o.StartTime = &v
 }
 
+// GetSubmittedStartTime returns the SubmittedStartTime field value if set, zero value otherwise.
+func (o *Timeframe) GetSubmittedStartTime() string {
+	if o == nil || IsNil(o.SubmittedStartTime) {
+		var ret string
+		return ret
+	}
+	return *o.SubmittedStartTime
+}
+
+// GetSubmittedStartTimeOk returns a tuple with the SubmittedStartTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Timeframe) GetSubmittedStartTimeOk() (*string, bool) {
+	if o == nil || IsNil(o.SubmittedStartTime) {
+		return nil, false
+	}
+	return o.SubmittedStartTime, true
+}
+
+// HasSubmittedStartTime returns a boolean if a field has been set.
+func (o *Timeframe) HasSubmittedStartTime() bool {
+	if o != nil && !IsNil(o.SubmittedStartTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubmittedStartTime gets a reference to the given string and assigns it to the SubmittedStartTime field.
+func (o *Timeframe) SetSubmittedStartTime(v string) {
+	o.SubmittedStartTime = &v
+}
+
 // GetTimezone returns the Timezone field value if set, zero value otherwise.
 func (o *Timeframe) GetTimezone() string {
 	if o == nil || IsNil(o.Timezone) {
@@ -198,6 +232,9 @@ func (o Timeframe) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.StartTime) {
 		toSerialize["startTime"] = o.StartTime
+	}
+	if !IsNil(o.SubmittedStartTime) {
+		toSerialize["submittedStartTime"] = o.SubmittedStartTime
 	}
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
@@ -256,6 +293,7 @@ func (o *Timeframe) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "duration")
 		delete(additionalProperties, "endTime")
 		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "submittedStartTime")
 		delete(additionalProperties, "timezone")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

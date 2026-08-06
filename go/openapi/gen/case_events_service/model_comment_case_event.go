@@ -24,6 +24,9 @@ var _ MappedNullable = &CommentCaseEvent{}
 type CommentCaseEvent struct {
 	// Attachments to the comment
 	Attachments []CommentAttachment `json:"attachments,omitempty"`
+	// Microsoft Teams-specific comment metadata
+	MicrosoftTeams *MicrosoftTeamsCommentMetadata `json:"microsoftTeams,omitempty"`
+	// Slack-specific comment metadata
 	Slack *SlackCommentMetadata `json:"slack,omitempty"`
 	// Comment text
 	UnsafeText *string `json:"unsafeText,omitempty"`
@@ -80,6 +83,38 @@ func (o *CommentCaseEvent) HasAttachments() bool {
 // SetAttachments gets a reference to the given []CommentAttachment and assigns it to the Attachments field.
 func (o *CommentCaseEvent) SetAttachments(v []CommentAttachment) {
 	o.Attachments = v
+}
+
+// GetMicrosoftTeams returns the MicrosoftTeams field value if set, zero value otherwise.
+func (o *CommentCaseEvent) GetMicrosoftTeams() MicrosoftTeamsCommentMetadata {
+	if o == nil || IsNil(o.MicrosoftTeams) {
+		var ret MicrosoftTeamsCommentMetadata
+		return ret
+	}
+	return *o.MicrosoftTeams
+}
+
+// GetMicrosoftTeamsOk returns a tuple with the MicrosoftTeams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CommentCaseEvent) GetMicrosoftTeamsOk() (*MicrosoftTeamsCommentMetadata, bool) {
+	if o == nil || IsNil(o.MicrosoftTeams) {
+		return nil, false
+	}
+	return o.MicrosoftTeams, true
+}
+
+// HasMicrosoftTeams returns a boolean if a field has been set.
+func (o *CommentCaseEvent) HasMicrosoftTeams() bool {
+	if o != nil && !IsNil(o.MicrosoftTeams) {
+		return true
+	}
+
+	return false
+}
+
+// SetMicrosoftTeams gets a reference to the given MicrosoftTeamsCommentMetadata and assigns it to the MicrosoftTeams field.
+func (o *CommentCaseEvent) SetMicrosoftTeams(v MicrosoftTeamsCommentMetadata) {
+	o.MicrosoftTeams = &v
 }
 
 // GetSlack returns the Slack field value if set, zero value otherwise.
@@ -159,11 +194,31 @@ func (o CommentCaseEvent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Attachments) {
 		toSerialize["attachments"] = o.Attachments
 	}
+	if !IsNil(o.MicrosoftTeams) {
+		toSerialize["microsoftTeams"] = o.MicrosoftTeams
+	}
 	if !IsNil(o.Slack) {
 		toSerialize["slack"] = o.Slack
 	}
 	if !IsNil(o.UnsafeText) {
 		toSerialize["unsafeText"] = o.UnsafeText
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["slack"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["microsoftTeams"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [slack, microsoftTeams] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["slack"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field slack must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["microsoftTeams"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field microsoftTeams must be set through the typed field, not AdditionalProperties"}
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -188,7 +243,19 @@ func (o *CommentCaseEvent) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["slack"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if _, exists := additionalProperties["microsoftTeams"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [slack, microsoftTeams] may be set"}
+		}
+
 		delete(additionalProperties, "attachments")
+		delete(additionalProperties, "microsoftTeams")
 		delete(additionalProperties, "slack")
 		delete(additionalProperties, "unsafeText")
 		o.AdditionalProperties = additionalProperties

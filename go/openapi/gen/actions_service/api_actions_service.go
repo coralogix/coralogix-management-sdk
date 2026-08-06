@@ -349,8 +349,11 @@ func (a *ActionsServiceAPIService) ActionsServiceDeleteActionExecute(r ApiAction
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 0 {
-		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	if strlen(r.id) < 36 {
+		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header
@@ -487,8 +490,11 @@ func (a *ActionsServiceAPIService) ActionsServiceGetActionExecute(r ApiActionsSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 0 {
-		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	if strlen(r.id) < 36 {
+		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header

@@ -31,11 +31,15 @@ type TeamGroup struct {
 	ExternalId *string `json:"externalId,omitempty"`
 	// Unique team group identifier
 	GroupId *int64 `json:"groupId,omitempty"`
+	// Origin of the group: built-in (system-managed) or user-defined
 	GroupOrigin *GroupOrigin `json:"groupOrigin,omitempty"`
+	// Group type defines the level of access to the group itself
 	GroupType *GroupType `json:"groupType,omitempty"`
 	// Unique name
 	Name *string `json:"name,omitempty"`
+	// Role assigned to this group
 	Role *Role `json:"role,omitempty"`
+	// Scope assigned to this group
 	Scope *V2Scope `json:"scope,omitempty"`
 	// Team this group belongs to
 	TeamId *int64 `json:"teamId,omitempty"`

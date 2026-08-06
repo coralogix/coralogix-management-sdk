@@ -22,6 +22,7 @@ var _ MappedNullable = &GetDashboardFolderResponse{}
 
 // GetDashboardFolderResponse Response containing the details of a dashboard folder.
 type GetDashboardFolderResponse struct {
+	// The folder.
 	Folder *DashboardFolder `json:"folder,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

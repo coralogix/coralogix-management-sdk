@@ -25,6 +25,7 @@ var _ MappedNullable = &IncidentStateWithCount{}
 type IncidentStateWithCount struct {
 	// Number of items.
 	Count int32 `json:"count"`
+	// The state.
 	State IncidentState `json:"state"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

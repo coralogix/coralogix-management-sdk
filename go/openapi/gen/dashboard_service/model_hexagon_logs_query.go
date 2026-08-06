@@ -26,8 +26,11 @@ type HexagonLogsQuery struct {
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
 	// A list of observation fields by which to group the results
 	GroupBy []ObservationField `json:"groupBy,omitempty"`
+	// Aggregation function
 	LogsAggregation *LogsAggregation `json:"logsAggregation,omitempty"`
+	// A Lucene query string to search logs
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	// Specifies the time period for which the result should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

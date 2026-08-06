@@ -22,6 +22,7 @@ var _ MappedNullable = &FilterOptionCountsResponse{}
 
 // FilterOptionCountsResponse Response containing counts for different filter options
 type FilterOptionCountsResponse struct {
+	// The counts for different filter options
 	Counts *FilterOptionCounts `json:"counts,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

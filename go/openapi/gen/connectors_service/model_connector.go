@@ -30,11 +30,13 @@ type Connector struct {
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Deprecated
 	Diagnostics *Diagnostics `json:"diagnostics,omitempty"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	// Read-only full effective config, including backend auto-resolved fields.
 	ResolvedConnectorConfig *ConnectorConfig `json:"resolvedConnectorConfig,omitempty"`
 	// Team identifier.
 	TeamId *int64 `json:"teamId,omitempty"`
@@ -193,6 +195,7 @@ func (o *Connector) SetDescription(v string) {
 }
 
 // GetDiagnostics returns the Diagnostics field value if set, zero value otherwise.
+// Deprecated
 func (o *Connector) GetDiagnostics() Diagnostics {
 	if o == nil || IsNil(o.Diagnostics) {
 		var ret Diagnostics
@@ -203,6 +206,7 @@ func (o *Connector) GetDiagnostics() Diagnostics {
 
 // GetDiagnosticsOk returns a tuple with the Diagnostics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Connector) GetDiagnosticsOk() (*Diagnostics, bool) {
 	if o == nil || IsNil(o.Diagnostics) {
 		return nil, false
@@ -220,6 +224,7 @@ func (o *Connector) HasDiagnostics() bool {
 }
 
 // SetDiagnostics gets a reference to the given Diagnostics and assigns it to the Diagnostics field.
+// Deprecated
 func (o *Connector) SetDiagnostics(v Diagnostics) {
 	o.Diagnostics = &v
 }

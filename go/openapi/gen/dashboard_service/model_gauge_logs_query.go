@@ -22,13 +22,17 @@ var _ MappedNullable = &GaugeLogsQuery{}
 
 // GaugeLogsQuery A logs variant of the query
 type GaugeLogsQuery struct {
+	// Deprecated
 	Aggregation *GaugeAggregation `json:"aggregation,omitempty"`
 	// List of filters that narrow down query results
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
 	// A list of observation fields by which to group the results
 	GroupBy []ObservationField `json:"groupBy,omitempty"`
+	// Aggregation function
 	LogsAggregation *LogsAggregation `json:"logsAggregation,omitempty"`
+	// A Lucene query string to search logs
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	// Specifies the time period for which the result should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -54,6 +58,7 @@ func NewGaugeLogsQueryWithDefaults() *GaugeLogsQuery {
 }
 
 // GetAggregation returns the Aggregation field value if set, zero value otherwise.
+// Deprecated
 func (o *GaugeLogsQuery) GetAggregation() GaugeAggregation {
 	if o == nil || IsNil(o.Aggregation) {
 		var ret GaugeAggregation
@@ -64,6 +69,7 @@ func (o *GaugeLogsQuery) GetAggregation() GaugeAggregation {
 
 // GetAggregationOk returns a tuple with the Aggregation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *GaugeLogsQuery) GetAggregationOk() (*GaugeAggregation, bool) {
 	if o == nil || IsNil(o.Aggregation) {
 		return nil, false
@@ -81,6 +87,7 @@ func (o *GaugeLogsQuery) HasAggregation() bool {
 }
 
 // SetAggregation gets a reference to the given GaugeAggregation and assigns it to the Aggregation field.
+// Deprecated
 func (o *GaugeLogsQuery) SetAggregation(v GaugeAggregation) {
 	o.Aggregation = &v
 }

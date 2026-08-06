@@ -23,6 +23,7 @@ var _ MappedNullable = &UpdateCaseSettingsResponse{}
 
 // UpdateCaseSettingsResponse Response containing the updated case settings team configuration.
 type UpdateCaseSettingsResponse struct {
+	// The updated case settings team configuration
 	CaseSettings CaseSettings `json:"caseSettings"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

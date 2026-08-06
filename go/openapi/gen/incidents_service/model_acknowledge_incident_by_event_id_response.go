@@ -23,6 +23,7 @@ var _ MappedNullable = &AcknowledgeIncidentByEventIdResponse{}
 
 // AcknowledgeIncidentByEventIdResponse Response containing the updated incident after acknowledgment
 type AcknowledgeIncidentByEventIdResponse struct {
+	// Incident after acknowledgment
 	Incident Incident `json:"incident"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

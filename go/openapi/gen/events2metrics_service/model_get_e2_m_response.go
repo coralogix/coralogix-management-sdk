@@ -23,6 +23,7 @@ var _ MappedNullable = &GetE2MResponse{}
 
 // GetE2MResponse This data structure is obtained when retrieving an existing event to metric definition
 type GetE2MResponse struct {
+	// The e2m.
 	E2m E2M `json:"e2m"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsNewValueRule{}
 
 // LogsNewValueRule Defines the condition for detecting new values in logs
 type LogsNewValueRule struct {
+	// The condition for detecting new values in logs.
 	Condition *LogsNewValueCondition `json:"condition,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

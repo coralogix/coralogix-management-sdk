@@ -22,6 +22,7 @@ var _ MappedNullable = &AlertDefPriorityFilter{}
 
 // AlertDefPriorityFilter Filter by alert definition priorities
 type AlertDefPriorityFilter struct {
+	// The filter operator (EQUALS, NOT_EQUALS)
 	Matcher *AlertsV3FilterMatcher `json:"matcher,omitempty"`
 	// The priority(ies) of the alert definition - multiple values are OR'd together
 	Priority []AlertDefPriority `json:"priority,omitempty"`

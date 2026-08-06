@@ -24,6 +24,7 @@ var _ MappedNullable = &ActivityAnalysis{}
 type ActivityAnalysis struct {
 	// List of rules.
 	Rules []string `json:"rules,omitempty"`
+	// Status.
 	Status *ActivityAnalysisStatus `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

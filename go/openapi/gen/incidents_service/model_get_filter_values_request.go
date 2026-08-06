@@ -22,6 +22,7 @@ var _ MappedNullable = &GetFilterValuesRequest{}
 
 // GetFilterValuesRequest Request to get available filter values for incidents
 type GetFilterValuesRequest struct {
+	// Filter for incidents
 	Filter *IncidentQueryFilter `json:"filter,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

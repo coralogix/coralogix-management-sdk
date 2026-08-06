@@ -22,9 +22,11 @@ var _ MappedNullable = &TracingThresholdCondition{}
 
 // TracingThresholdCondition Tracing threshold condition.
 type TracingThresholdCondition struct {
+	// The type of condition for the alert
 	ConditionType *TracingThresholdConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition
 	SpanAmount *float64 `json:"spanAmount,omitempty"`
+	// The time window for the alert condition
 	TimeWindow *TracingTimeWindow `json:"timeWindow,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

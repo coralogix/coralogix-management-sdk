@@ -25,6 +25,7 @@ var _ MappedNullable = &BulkOverridePriorityRequest{}
 type BulkOverridePriorityRequest struct {
 	// IDs of the cases to override priority for. Each entry accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
 	Ids []string `json:"ids"`
+	// Priority value to override with
 	Priority CasePriority `json:"priority"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

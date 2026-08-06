@@ -22,7 +22,7 @@ var _ MappedNullable = &BulkReplaceAlertDefinitionsRequest{}
 
 // BulkReplaceAlertDefinitionsRequest A request to bulk replace multiple alert definitions
 type BulkReplaceAlertDefinitionsRequest struct {
-	// List of alert definitions to replace
+	// List of alert definitions to replace. Limited to 100 alert definitions per request.
 	AlertDefsToReplace []AlertDefToReplace `json:"alertDefsToReplace,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

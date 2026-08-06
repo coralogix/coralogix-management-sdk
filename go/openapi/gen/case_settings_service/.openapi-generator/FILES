@@ -8,6 +8,7 @@ client.go
 configuration.go
 git_push.sh
 model_alert_suppression_strategy.go
+model_auto_close_config.go
 model_auto_resolve_config.go
 model_case_kpis.go
 model_case_lifecycle.go

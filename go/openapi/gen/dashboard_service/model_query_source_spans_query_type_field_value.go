@@ -20,9 +20,12 @@ var _ = bytes.MinRead
 // checks if the QuerySourceSpansQueryTypeFieldValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceSpansQueryTypeFieldValue{}
 
-// QuerySourceSpansQueryTypeFieldValue Fetches distinct values for a specific span observation field.
+// QuerySourceSpansQueryTypeFieldValue Fetches distinct values for a specific span field. Set observationField to choose the field; value is a deprecated legacy alternative — prefer observationField and avoid setting both.
 type QuerySourceSpansQueryTypeFieldValue struct {
+	// The span observation field to fetch values for. Preferred over value.
 	ObservationField *ObservationField `json:"observationField,omitempty"`
+	// Deprecated. Legacy span field addressing. Use observationField instead; do not set both.
+	// Deprecated
 	Value *SpanField `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -80,6 +83,7 @@ func (o *QuerySourceSpansQueryTypeFieldValue) SetObservationField(v ObservationF
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
+// Deprecated
 func (o *QuerySourceSpansQueryTypeFieldValue) GetValue() SpanField {
 	if o == nil || IsNil(o.Value) {
 		var ret SpanField
@@ -90,6 +94,7 @@ func (o *QuerySourceSpansQueryTypeFieldValue) GetValue() SpanField {
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *QuerySourceSpansQueryTypeFieldValue) GetValueOk() (*SpanField, bool) {
 	if o == nil || IsNil(o.Value) {
 		return nil, false
@@ -107,6 +112,7 @@ func (o *QuerySourceSpansQueryTypeFieldValue) HasValue() bool {
 }
 
 // SetValue gets a reference to the given SpanField and assigns it to the Value field.
+// Deprecated
 func (o *QuerySourceSpansQueryTypeFieldValue) SetValue(v SpanField) {
 	o.Value = &v
 }

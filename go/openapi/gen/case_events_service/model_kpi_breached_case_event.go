@@ -22,7 +22,9 @@ var _ MappedNullable = &KPIBreachedCaseEvent{}
 
 // KPIBreachedCaseEvent Kpi breached case event.
 type KPIBreachedCaseEvent struct {
+	// Type of KPI that was breached
 	KpiType *KPIType `json:"kpiType,omitempty"`
+	// Case priority at the time of the breach
 	Priority *CasePriority `json:"priority,omitempty"`
 	// Duration after which the KPI threshold was set to breach
 	Threshold *string `json:"threshold,omitempty"`

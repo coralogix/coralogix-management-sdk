@@ -23,6 +23,7 @@ var _ MappedNullable = &UpdateCommentResponse{}
 
 // UpdateCommentResponse Response returned after successfully updating a comment.
 type UpdateCommentResponse struct {
+	// Updated comment event
 	Event CaseEvent `json:"event"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

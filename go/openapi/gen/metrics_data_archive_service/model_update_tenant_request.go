@@ -22,10 +22,13 @@ var _ MappedNullable = &UpdateTenantRequest{}
 
 // UpdateTenantRequest This data structure is used to update the configuration of a tenant.
 type UpdateTenantRequest struct {
+	// Google Cloud Storage configuration.
 	Gcs *GcsConfig `json:"gcs,omitempty"`
+	// IBM Cloud Object Storage configuration.
 	Ibm *IbmConfigV2 `json:"ibm,omitempty"`
 	// Archive retention period in days.
 	RetentionDays *int64 `json:"retentionDays,omitempty"`
+	// AWS S3 storage configuration.
 	S3 *S3Config `json:"s3,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

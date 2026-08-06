@@ -22,6 +22,7 @@ var _ MappedNullable = &CreateE2MResponse{}
 
 // CreateE2MResponse Create e2m response.
 type CreateE2MResponse struct {
+	// The e2m.
 	E2m *E2M `json:"e2m,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

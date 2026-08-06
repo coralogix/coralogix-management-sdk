@@ -40,6 +40,7 @@ type AlertEvent struct {
 	PermutationLabels *map[string]string `json:"permutationLabels,omitempty"`
 	// Identifier of the event before grouping.
 	PreGroupingEventId *string `json:"preGroupingEventId,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Status.
 	Status *AlertStatus `json:"status,omitempty"`
 	// Timestamp of the event.
 	Timestamp *time.Time `json:"timestamp,omitempty" validate:"regexp=^[\\s\\S]*$"`

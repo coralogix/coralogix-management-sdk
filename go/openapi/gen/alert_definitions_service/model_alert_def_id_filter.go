@@ -24,6 +24,7 @@ var _ MappedNullable = &AlertDefIdFilter{}
 type AlertDefIdFilter struct {
 	// The alert definition ID(s) to filter by - multiple values are OR'd together
 	AlertId []string `json:"alertId,omitempty"`
+	// Whether to include or exclude the specified alert definition IDs
 	MatchType *AlertDefIdFilterMatchType `json:"matchType,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

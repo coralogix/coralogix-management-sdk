@@ -25,15 +25,15 @@ var _ MappedNullable = &UpdatePolicyRequest{}
 type UpdatePolicyRequest struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
-	// Optional free-text description of the policy's purpose.
-	Description *string `json:"description,omitempty"`
+	// Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
 	// Indicates whether the policy should be actively evaluated and applied.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Unique identifier of the policy to update.
-	Id string `json:"id"`
+	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	LogRules *LogRules `json:"logRules,omitempty"`
-	// Human-readable name for the policy.
-	Name *string `json:"name,omitempty"`
+	// Human-readable name for the policy. Only Latin-1 characters are accepted.
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
 	Priority *QuotaV1Priority `json:"priority,omitempty"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
 	RumRules *LogRules `json:"rumRules,omitempty"`

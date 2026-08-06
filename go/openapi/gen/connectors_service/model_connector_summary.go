@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the ConnectorSummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConnectorSummary{}
 
-// ConnectorSummary struct for ConnectorSummary
+// ConnectorSummary A summary of a connector, excluding sensitive configuration values.
 type ConnectorSummary struct {
 	// The config overrides.
 	ConfigOverrides []EntityTypeConfigOverrides `json:"configOverrides,omitempty"`
@@ -34,6 +34,7 @@ type ConnectorSummary struct {
 	Id *string `json:"id,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	// Read-only full effective config, including backend auto-resolved fields.
 	ResolvedConnectorConfig *ConnectorConfig `json:"resolvedConnectorConfig,omitempty"`
 	// The team id.
 	TeamId *int64 `json:"teamId,omitempty"`

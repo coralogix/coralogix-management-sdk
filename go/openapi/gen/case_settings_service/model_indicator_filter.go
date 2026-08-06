@@ -24,7 +24,9 @@ var _ MappedNullable = &IndicatorFilter{}
 type IndicatorFilter struct {
 	// Enable/disable this filter
 	Enabled *bool `json:"enabled,omitempty"`
+	// Selected entity labels for filtering
 	EntityLabels *EntityLabelFilter `json:"entityLabels,omitempty"`
+	// Selected priorities for filtering
 	Priorities *IndicatorPriorityFilter `json:"priorities,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

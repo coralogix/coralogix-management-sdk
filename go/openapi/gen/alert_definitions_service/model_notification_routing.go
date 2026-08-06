@@ -22,6 +22,7 @@ var _ MappedNullable = &NotificationRouting{}
 
 // NotificationRouting Notification routing.
 type NotificationRouting struct {
+	// Configuration for routing notifications
 	ConfigOverrides *V3SourceOverrides `json:"configOverrides,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

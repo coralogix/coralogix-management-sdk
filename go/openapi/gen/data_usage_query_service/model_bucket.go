@@ -24,6 +24,7 @@ var _ MappedNullable = &Bucket{}
 type Bucket struct {
 	// Usage entries inside this bucket, one per unique combination of `groupBy` values.
 	Entries []UsageEntry `json:"entries,omitempty"`
+	// Half-open timestamp range for this bucket.
 	Range *UsageTimestampRange `json:"range,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

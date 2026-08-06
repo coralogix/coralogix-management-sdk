@@ -28,6 +28,7 @@ type IncidentEventQueryFilter struct {
 	DisplayLabels *map[string]DisplayLabelValues `json:"displayLabels,omitempty"`
 	// Indicates if the incident is muted
 	IsMuted *bool `json:"isMuted,omitempty"`
+	// The labels of the incident
 	Labels *LabelsFilter `json:"labels,omitempty"`
 	// The name of the incident
 	Name *string `json:"name,omitempty"`
@@ -35,6 +36,7 @@ type IncidentEventQueryFilter struct {
 	Severity []IncidentSeverity `json:"severity,omitempty"`
 	// The status of the incident
 	Status []IncidentStatus `json:"status,omitempty"`
+	// The time range of the incident
 	Timestamp *V1TimeRange `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

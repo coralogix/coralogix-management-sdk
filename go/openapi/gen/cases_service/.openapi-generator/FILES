@@ -17,7 +17,9 @@ model_alert_indicator_deep_link.go
 model_alert_indicator_permutation.go
 model_alert_suppression.go
 model_apm_database_entity.go
+model_apm_database_entity_filter.go
 model_apm_service_entity.go
+model_apm_service_entity_filter.go
 model_assign_case_request.go
 model_assign_case_response.go
 model_assignee_aggregation.go
@@ -78,6 +80,7 @@ model_get_case_filter_values_request.go
 model_get_case_response.go
 model_get_grouping_keys_response.go
 model_impacted_entity.go
+model_impacted_entity_filter.go
 model_impacted_entity_link.go
 model_indicator_priority.go
 model_indicator_state.go

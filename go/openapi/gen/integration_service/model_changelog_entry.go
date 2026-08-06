@@ -23,9 +23,9 @@ var _ MappedNullable = &ChangelogEntry{}
 // ChangelogEntry struct for ChangelogEntry
 type ChangelogEntry struct {
 	// The description md.
-	DescriptionMd *string `json:"descriptionMd,omitempty"`
+	DescriptionMd *string `json:"descriptionMd,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Version.
-	Version *string `json:"version,omitempty"`
+	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

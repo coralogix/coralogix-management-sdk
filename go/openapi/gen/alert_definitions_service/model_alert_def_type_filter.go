@@ -22,6 +22,7 @@ var _ MappedNullable = &AlertDefTypeFilter{}
 
 // AlertDefTypeFilter Filter by alert definition types
 type AlertDefTypeFilter struct {
+	// The filter operator (EQUALS, NOT_EQUALS)
 	Matcher *AlertsV3FilterMatcher `json:"matcher,omitempty"`
 	// The alert type(s) - multiple values are OR'd together
 	Type []AlertDefType `json:"type,omitempty"`

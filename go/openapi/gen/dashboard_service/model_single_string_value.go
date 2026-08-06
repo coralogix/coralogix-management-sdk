@@ -22,6 +22,7 @@ var _ MappedNullable = &SingleStringValue{}
 
 // SingleStringValue Single string value.
 type SingleStringValue struct {
+	// The value.
 	Value *StringValueLabel `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

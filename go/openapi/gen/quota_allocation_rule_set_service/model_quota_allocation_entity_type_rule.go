@@ -25,6 +25,7 @@ var _ MappedNullable = &QuotaAllocationEntityTypeRule{}
 type QuotaAllocationEntityTypeRule struct {
 	// The allocation.
 	Allocation float32 `json:"allocation"`
+	// Determines whether allocation is interpreted as a percentage or locked units. Unspecified defaults to percentage for backwards compatibility.
 	AllocationType *QuotaAllocationType `json:"allocationType,omitempty"`
 	// The can overflow.
 	CanOverflow bool `json:"canOverflow"`

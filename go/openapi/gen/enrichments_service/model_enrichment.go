@@ -24,10 +24,10 @@ var _ MappedNullable = &Enrichment{}
 // Enrichment This data structure represents an enrichment
 type Enrichment struct {
 	// The enriched field name.
-	EnrichedFieldName *string `json:"enrichedFieldName,omitempty"`
+	EnrichedFieldName *string `json:"enrichedFieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	EnrichmentType EnrichmentType `json:"enrichmentType"`
 	// The field name.
-	FieldName string `json:"fieldName"`
+	FieldName string `json:"fieldName" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier.
 	Id int64 `json:"id"`
 	// The selected columns.

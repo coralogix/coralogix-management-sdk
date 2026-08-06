@@ -23,7 +23,7 @@ var _ MappedNullable = &SingleValue{}
 // SingleValue Single value.
 type SingleValue struct {
 	// The default value.
-	DefaultValue *string `json:"defaultValue,omitempty"`
+	DefaultValue *string `json:"defaultValue,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

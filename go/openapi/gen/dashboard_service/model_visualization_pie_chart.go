@@ -36,7 +36,9 @@ type VisualizationPieChart struct {
 	GroupNameTemplate *string `json:"groupNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to ignore color scheme and derive colors from algorithm
 	HashColors *bool `json:"hashColors,omitempty"`
+	// Settings for slice labels
 	LabelDefinition *VisualizationPieChartLabelDefinition `json:"labelDefinition,omitempty"`
+	// Widget's legend settings
 	Legend *Legend `json:"legend,omitempty"`
 	// Maximum number of slices on a chart
 	MaxSlicesPerChart *int32 `json:"maxSlicesPerChart,omitempty"`
@@ -50,6 +52,7 @@ type VisualizationPieChart struct {
 	StackNameTemplate *string `json:"stackNameTemplate,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The sub category fields.
 	SubCategoryFields []ObservationField `json:"subCategoryFields,omitempty"`
+	// Unit of the value - one from a predefined list, or custom
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	AdditionalProperties map[string]interface{}

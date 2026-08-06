@@ -22,7 +22,7 @@ var _ MappedNullable = &UsageTier{}
 
 // UsageTier struct for UsageTier
 type UsageTier struct {
-	// The daily quota percentage.
+	// The daily quota percentage. Must be between 0 and 100.
 	DailyQuotaPercentage *float64 `json:"dailyQuotaPercentage,omitempty"`
 	Priority *QuotaV1Priority `json:"priority,omitempty"`
 	AdditionalProperties map[string]interface{}

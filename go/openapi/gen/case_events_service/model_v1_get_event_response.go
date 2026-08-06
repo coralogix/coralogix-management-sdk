@@ -23,6 +23,7 @@ var _ MappedNullable = &V1GetEventResponse{}
 
 // V1GetEventResponse Response containing the details of a case event.
 type V1GetEventResponse struct {
+	// The requested event
 	Event CaseEvent `json:"event"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

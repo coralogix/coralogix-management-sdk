@@ -22,6 +22,7 @@ var _ MappedNullable = &TracingFilterType{}
 
 // TracingFilterType Filter type for trace entries
 type TracingFilterType struct {
+	// The operation to perform on the label value
 	Operation *TracingFilterOperationType `json:"operation,omitempty"`
 	// The values of the label to filter by
 	Values []string `json:"values,omitempty"`

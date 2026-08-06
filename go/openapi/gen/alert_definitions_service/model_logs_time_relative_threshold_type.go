@@ -26,11 +26,13 @@ type LogsTimeRelativeThresholdType struct {
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
 	// Ignore infinity values in the alert
 	IgnoreInfinity *bool `json:"ignoreInfinity,omitempty"`
+	// The filter to match log entries for the alert.
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	// The notification payload filter.
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	// The rules for the time-relative alert
 	Rules []LogsTimeRelativeRule `json:"rules,omitempty"`
+	// Configuration for handling the undetected values in the alert.
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,6 +22,7 @@ var _ MappedNullable = &ChangeAssigneeFailedEvent{}
 
 // ChangeAssigneeFailedEvent Event recorded when an attempt to reassign a case fails.
 type ChangeAssigneeFailedEvent struct {
+	// Error for unknown assignee
 	UnknownAssigneeError *UnknownAssigneeError `json:"unknownAssigneeError,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

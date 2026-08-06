@@ -24,7 +24,7 @@ var _ MappedNullable = &V1RevisionSummary{}
 type V1RevisionSummary struct {
 	Lifecycle *RevisionLifecycle `json:"lifecycle,omitempty"`
 	// Version number.
-	Version *string `json:"version,omitempty"`
+	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -22,7 +22,9 @@ var _ MappedNullable = &FilterOperator{}
 
 // FilterOperator This data structure defines the comparison operation for the filter.
 type FilterOperator struct {
+	// Equality comparison.
 	Equals *FilterEquals `json:"equals,omitempty"`
+	// Non-equality comparison.
 	NotEquals *FilterNotEquals `json:"notEquals,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

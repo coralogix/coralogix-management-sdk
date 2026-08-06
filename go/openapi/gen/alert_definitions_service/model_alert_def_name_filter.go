@@ -22,6 +22,7 @@ var _ MappedNullable = &AlertDefNameFilter{}
 
 // AlertDefNameFilter Filter by alert definition names
 type AlertDefNameFilter struct {
+	// The filter operator (EQUALS, NOT_EQUALS, CONTAINS)
 	Matcher *AlertsV3FilterMatcher `json:"matcher,omitempty"`
 	// The name(s) of the alert definition - multiple values are OR'd together
 	Name []string `json:"name,omitempty"`

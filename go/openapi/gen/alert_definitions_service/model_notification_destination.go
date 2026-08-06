@@ -24,12 +24,15 @@ var _ MappedNullable = &NotificationDestination{}
 type NotificationDestination struct {
 	// The connector ID used to send notifications
 	ConnectorId *string `json:"connectorId,omitempty"`
+	// The condition under which the notification should be sent
 	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
 	// Optional preset ID for the notification destination
 	PresetId *string `json:"presetId,omitempty"`
+	// Optional routing configuration to override from the connector/preset for resolved notifications.
 	ResolvedRouteOverrides *NotificationRouting `json:"resolvedRouteOverrides,omitempty"`
 	// The time in minutes before a new notification is sent for this destination
 	RetriggeringPeriodMinutes *int64 `json:"retriggeringPeriodMinutes,omitempty"`
+	// The routing configuration to override from the connector/preset for triggered notifications.
 	TriggeredRoutingOverrides *NotificationRouting `json:"triggeredRoutingOverrides,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

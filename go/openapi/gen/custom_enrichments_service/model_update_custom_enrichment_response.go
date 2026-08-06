@@ -24,7 +24,7 @@ var _ MappedNullable = &UpdateCustomEnrichmentResponse{}
 type UpdateCustomEnrichmentResponse struct {
 	CustomEnrichment *CustomEnrichment `json:"customEnrichment,omitempty"`
 	// Human-readable message.
-	Message *string `json:"message,omitempty"`
+	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

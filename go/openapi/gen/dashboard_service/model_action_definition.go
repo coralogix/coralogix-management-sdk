@@ -22,7 +22,9 @@ var _ MappedNullable = &ActionDefinition{}
 
 // ActionDefinition Defines the behavior of a dashboard action, either a custom URL or a built-in template.
 type ActionDefinition struct {
+	// Object defining action defined by the user
 	CustomAction *CustomAction `json:"customAction,omitempty"`
+	// Object defining one of the pre-defined template actions - go to specific dashboard
 	GoToDashboardAction *GoToDashboardTemplateAction `json:"goToDashboardAction,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

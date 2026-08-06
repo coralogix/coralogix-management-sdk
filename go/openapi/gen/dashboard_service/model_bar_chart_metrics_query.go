@@ -22,16 +22,21 @@ var _ MappedNullable = &BarChartMetricsQuery{}
 
 // BarChartMetricsQuery A metrics variant of the query
 type BarChartMetricsQuery struct {
+	// Aggregation function
 	Aggregation *CommonAggregation `json:"aggregation,omitempty"`
+	// Type of the query editor used to generate the query, can be text or builder mode
 	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
 	// List of metrics filters
 	Filters []MetricsFilter `json:"filters,omitempty"`
 	// List of field names by which metric results are grouped
 	GroupNames []string `json:"groupNames,omitempty"`
+	// PromQL query string for querying metrics
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
+	// Type of the PromQL query, can be Range or Instant
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
 	// Field name by which results in groups are divided into subgroups
 	StackedGroupName *string `json:"stackedGroupName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Specifies the time period for which the result should be returned
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

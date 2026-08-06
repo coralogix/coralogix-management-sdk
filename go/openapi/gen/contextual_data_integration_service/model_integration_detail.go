@@ -23,9 +23,9 @@ var _ MappedNullable = &IntegrationDetail{}
 // IntegrationDetail struct for IntegrationDetail
 type IntegrationDetail struct {
 	// Link.
-	Link *string `json:"link,omitempty"`
+	Link *string `json:"link,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

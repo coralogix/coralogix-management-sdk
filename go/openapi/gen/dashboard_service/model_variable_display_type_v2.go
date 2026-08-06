@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// VariableDisplayTypeV2 Variable display type v2.
+// VariableDisplayTypeV2 Variable display type v2. A concrete value is required — VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED is rejected by the API.
 type VariableDisplayTypeV2 string
 
 // List of VariableDisplayTypeV2

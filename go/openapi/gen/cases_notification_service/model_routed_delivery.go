@@ -25,6 +25,7 @@ var _ MappedNullable = &RoutedDelivery{}
 type RoutedDelivery struct {
 	// Individual delivery attempts to connectors
 	Attempts []DeliveryAttempt `json:"attempts"`
+	// The router that handled the notification
 	Router RouterInfo `json:"router"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -22,7 +22,9 @@ var _ MappedNullable = &PriorityDetailsChangedCaseEvent{}
 
 // PriorityDetailsChangedCaseEvent Priority details changed case event.
 type PriorityDetailsChangedCaseEvent struct {
+	// Previous priority details
 	From *PriorityDetails `json:"from,omitempty"`
+	// New priority details
 	To *PriorityDetails `json:"to,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

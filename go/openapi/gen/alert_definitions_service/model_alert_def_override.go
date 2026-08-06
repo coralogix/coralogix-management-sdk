@@ -22,6 +22,7 @@ var _ MappedNullable = &AlertDefOverride{}
 
 // AlertDefOverride Alert def override.
 type AlertDefOverride struct {
+	// The priority of the alert definition
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

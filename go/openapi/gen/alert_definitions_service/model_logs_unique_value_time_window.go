@@ -22,6 +22,7 @@ var _ MappedNullable = &LogsUniqueValueTimeWindow{}
 
 // LogsUniqueValueTimeWindow Time window configuration for log-based unique value alerts
 type LogsUniqueValueTimeWindow struct {
+	// A time window defined by a specific value
 	LogsUniqueValueTimeWindowSpecificValue *LogsUniqueValueTimeWindowValue `json:"logsUniqueValueTimeWindowSpecificValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

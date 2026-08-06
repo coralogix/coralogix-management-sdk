@@ -13,6 +13,7 @@ package dashboard_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,20 +21,22 @@ var _ = bytes.MinRead
 // checks if the VariableV2 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableV2{}
 
-// VariableV2 struct for VariableV2
+// VariableV2 Dashboard variable (v2). displayFullRow may be true only when source is a textbox; it is rejected for static and query sources.
 type VariableV2 struct {
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The display full row.
 	DisplayFullRow *bool `json:"displayFullRow,omitempty"`
 	// The display name.
-	DisplayName *string `json:"displayName,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	DisplayType *VariableDisplayTypeV2 `json:"displayType,omitempty"`
-	Id *UUID `json:"id,omitempty"`
-	// Display name.
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Source *VariableSourceV2 `json:"source,omitempty"`
-	Value *VariableValueV2 `json:"value,omitempty"`
+	DisplayName string `json:"displayName" validate:"regexp=^[\\s\\S]*$"`
+	// How the variable is rendered in the dashboard header. A concrete value is required — VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED is rejected.
+	DisplayType VariableDisplayTypeV2 `json:"displayType"`
+	// Variable's unique identifier
+	Id UUID `json:"id"`
+	// Variable name, used to reference the variable in widget queries. Should match ^[a-zA-Z0-9_]+$ and be unique within the dashboard.
+	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
+	Source VariableSourceV2 `json:"source"`
+	Value VariableValueV2 `json:"value"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -44,8 +47,14 @@ type _VariableV2 VariableV2
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableV2() *VariableV2 {
+func NewVariableV2(displayName string, displayType VariableDisplayTypeV2, id UUID, name string, source VariableSourceV2, value VariableValueV2) *VariableV2 {
 	this := VariableV2{}
+	this.DisplayName = displayName
+	this.DisplayType = displayType
+	this.Id = id
+	this.Name = name
+	this.Source = source
+	this.Value = value
 	return &this
 }
 
@@ -121,196 +130,148 @@ func (o *VariableV2) SetDisplayFullRow(v bool) {
 	o.DisplayFullRow = &v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+// GetDisplayName returns the DisplayName field value
 func (o *VariableV2) GetDisplayName() string {
-	if o == nil || IsNil(o.DisplayName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DisplayName
+
+	return o.DisplayName
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// GetDisplayNameOk returns a tuple with the DisplayName field value
 // and a boolean to check if the value has been set.
 func (o *VariableV2) GetDisplayNameOk() (*string, bool) {
-	if o == nil || IsNil(o.DisplayName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DisplayName, true
+	return &o.DisplayName, true
 }
 
-// HasDisplayName returns a boolean if a field has been set.
-func (o *VariableV2) HasDisplayName() bool {
-	if o != nil && !IsNil(o.DisplayName) {
-		return true
-	}
-
-	return false
-}
-
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+// SetDisplayName sets field value
 func (o *VariableV2) SetDisplayName(v string) {
-	o.DisplayName = &v
+	o.DisplayName = v
 }
 
-// GetDisplayType returns the DisplayType field value if set, zero value otherwise.
+// GetDisplayType returns the DisplayType field value
 func (o *VariableV2) GetDisplayType() VariableDisplayTypeV2 {
-	if o == nil || IsNil(o.DisplayType) {
+	if o == nil {
 		var ret VariableDisplayTypeV2
 		return ret
 	}
-	return *o.DisplayType
+
+	return o.DisplayType
 }
 
-// GetDisplayTypeOk returns a tuple with the DisplayType field value if set, nil otherwise
+// GetDisplayTypeOk returns a tuple with the DisplayType field value
 // and a boolean to check if the value has been set.
 func (o *VariableV2) GetDisplayTypeOk() (*VariableDisplayTypeV2, bool) {
-	if o == nil || IsNil(o.DisplayType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DisplayType, true
+	return &o.DisplayType, true
 }
 
-// HasDisplayType returns a boolean if a field has been set.
-func (o *VariableV2) HasDisplayType() bool {
-	if o != nil && !IsNil(o.DisplayType) {
-		return true
-	}
-
-	return false
-}
-
-// SetDisplayType gets a reference to the given VariableDisplayTypeV2 and assigns it to the DisplayType field.
+// SetDisplayType sets field value
 func (o *VariableV2) SetDisplayType(v VariableDisplayTypeV2) {
-	o.DisplayType = &v
+	o.DisplayType = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *VariableV2) GetId() UUID {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret UUID
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *VariableV2) GetIdOk() (*UUID, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *VariableV2) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given UUID and assigns it to the Id field.
+// SetId sets field value
 func (o *VariableV2) SetId(v UUID) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *VariableV2) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *VariableV2) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *VariableV2) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *VariableV2) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetSource returns the Source field value if set, zero value otherwise.
+// GetSource returns the Source field value
 func (o *VariableV2) GetSource() VariableSourceV2 {
-	if o == nil || IsNil(o.Source) {
+	if o == nil {
 		var ret VariableSourceV2
 		return ret
 	}
-	return *o.Source
+
+	return o.Source
 }
 
-// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
+// GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
 func (o *VariableV2) GetSourceOk() (*VariableSourceV2, bool) {
-	if o == nil || IsNil(o.Source) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Source, true
+	return &o.Source, true
 }
 
-// HasSource returns a boolean if a field has been set.
-func (o *VariableV2) HasSource() bool {
-	if o != nil && !IsNil(o.Source) {
-		return true
-	}
-
-	return false
-}
-
-// SetSource gets a reference to the given VariableSourceV2 and assigns it to the Source field.
+// SetSource sets field value
 func (o *VariableV2) SetSource(v VariableSourceV2) {
-	o.Source = &v
+	o.Source = v
 }
 
-// GetValue returns the Value field value if set, zero value otherwise.
+// GetValue returns the Value field value
 func (o *VariableV2) GetValue() VariableValueV2 {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		var ret VariableValueV2
 		return ret
 	}
-	return *o.Value
+
+	return o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
 func (o *VariableV2) GetValueOk() (*VariableValueV2, bool) {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Value, true
+	return &o.Value, true
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *VariableV2) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given VariableValueV2 and assigns it to the Value field.
+// SetValue sets field value
 func (o *VariableV2) SetValue(v VariableValueV2) {
-	o.Value = &v
+	o.Value = v
 }
 
 func (o VariableV2) MarshalJSON() ([]byte, error) {
@@ -329,24 +290,12 @@ func (o VariableV2) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DisplayFullRow) {
 		toSerialize["displayFullRow"] = o.DisplayFullRow
 	}
-	if !IsNil(o.DisplayName) {
-		toSerialize["displayName"] = o.DisplayName
-	}
-	if !IsNil(o.DisplayType) {
-		toSerialize["displayType"] = o.DisplayType
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Source) {
-		toSerialize["source"] = o.Source
-	}
-	if !IsNil(o.Value) {
-		toSerialize["value"] = o.Value
-	}
+	toSerialize["displayName"] = o.DisplayName
+	toSerialize["displayType"] = o.DisplayType
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["source"] = o.Source
+	toSerialize["value"] = o.Value
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -356,6 +305,32 @@ func (o VariableV2) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *VariableV2) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"displayName",
+		"displayType",
+		"id",
+		"name",
+		"source",
+		"value",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varVariableV2 := _VariableV2{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

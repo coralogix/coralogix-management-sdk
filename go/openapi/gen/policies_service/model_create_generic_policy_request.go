@@ -25,12 +25,12 @@ var _ MappedNullable = &CreateGenericPolicyRequest{}
 type CreateGenericPolicyRequest struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
-	// Human-readable description.
-	Description string `json:"description"`
+	// Human-readable description. Only Latin-1 characters are accepted.
+	Description string `json:"description" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
 	// The disabled.
 	Disabled *bool `json:"disabled,omitempty"`
-	// Display name.
-	Name string `json:"name"`
+	// Display name. Only Latin-1 characters are accepted.
+	Name string `json:"name" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
 	Priority QuotaV1Priority `json:"priority"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`

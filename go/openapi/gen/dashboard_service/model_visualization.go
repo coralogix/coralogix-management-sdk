@@ -33,6 +33,7 @@ type Visualization struct {
 	StatCard *StatCard `json:"statCard,omitempty"`
 	Table *Table `json:"table,omitempty"`
 	TimeSeriesBars *TimeSeriesBars `json:"timeSeriesBars,omitempty"`
+	// Deprecated
 	TimeSeriesLines *TimeSeriesLines `json:"timeSeriesLines,omitempty"`
 	TimeSeriesLinesMulti *TimeSeriesLinesMulti `json:"timeSeriesLinesMulti,omitempty"`
 	VerticalBars *VerticalBars `json:"verticalBars,omitempty"`
@@ -413,6 +414,7 @@ func (o *Visualization) SetTimeSeriesBars(v TimeSeriesBars) {
 }
 
 // GetTimeSeriesLines returns the TimeSeriesLines field value if set, zero value otherwise.
+// Deprecated
 func (o *Visualization) GetTimeSeriesLines() TimeSeriesLines {
 	if o == nil || IsNil(o.TimeSeriesLines) {
 		var ret TimeSeriesLines
@@ -423,6 +425,7 @@ func (o *Visualization) GetTimeSeriesLines() TimeSeriesLines {
 
 // GetTimeSeriesLinesOk returns a tuple with the TimeSeriesLines field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Visualization) GetTimeSeriesLinesOk() (*TimeSeriesLines, bool) {
 	if o == nil || IsNil(o.TimeSeriesLines) {
 		return nil, false
@@ -440,6 +443,7 @@ func (o *Visualization) HasTimeSeriesLines() bool {
 }
 
 // SetTimeSeriesLines gets a reference to the given TimeSeriesLines and assigns it to the TimeSeriesLines field.
+// Deprecated
 func (o *Visualization) SetTimeSeriesLines(v TimeSeriesLines) {
 	o.TimeSeriesLines = &v
 }

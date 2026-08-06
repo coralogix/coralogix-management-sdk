@@ -24,6 +24,7 @@ var _ MappedNullable = &WidgetsPieChartLabelDefinition{}
 type WidgetsPieChartLabelDefinition struct {
 	// Are labels visible
 	IsVisible *bool `json:"isVisible,omitempty"`
+	// Source of the label
 	LabelSource *WidgetsPieChartLabelSource `json:"labelSource,omitempty"`
 	// Whether to show the name of slice in the label
 	ShowName *bool `json:"showName,omitempty"`

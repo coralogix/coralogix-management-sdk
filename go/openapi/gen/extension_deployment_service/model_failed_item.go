@@ -23,11 +23,11 @@ var _ MappedNullable = &FailedItem{}
 // FailedItem struct for FailedItem
 type FailedItem struct {
 	// The item id.
-	ItemId *string `json:"itemId,omitempty"`
+	ItemId *string `json:"itemId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Reason.
-	Reason *string `json:"reason,omitempty"`
+	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The remote id.
-	RemoteId *string `json:"remoteId,omitempty"`
+	RemoteId *string `json:"remoteId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

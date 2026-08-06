@@ -23,9 +23,9 @@ var _ MappedNullable = &RevisionRef{}
 // RevisionRef struct for RevisionRef
 type RevisionRef struct {
 	// The description md.
-	DescriptionMd *string `json:"descriptionMd,omitempty"`
+	DescriptionMd *string `json:"descriptionMd,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Version number.
-	Version *string `json:"version,omitempty"`
+	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

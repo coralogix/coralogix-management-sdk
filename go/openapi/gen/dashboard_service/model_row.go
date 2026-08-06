@@ -22,7 +22,9 @@ var _ MappedNullable = &Row{}
 
 // Row struct for Row
 type Row struct {
+	// Row appearance configuration
 	Appearance *RowAppearance `json:"appearance,omitempty"`
+	// Row unique identifier
 	Id *UUID `json:"id,omitempty"`
 	// The list of widgets in the row
 	Widgets []Widget `json:"widgets,omitempty"`

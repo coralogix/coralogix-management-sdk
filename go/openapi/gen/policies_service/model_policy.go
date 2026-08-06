@@ -28,19 +28,19 @@ type Policy struct {
 	// Internal Coralogix company/team identifier that owns this policy.
 	CompanyId int32 `json:"companyId"`
 	// Timestamp (RFC 3339) when the policy was created.
-	CreatedAt *string `json:"createdAt,omitempty"`
+	CreatedAt *string `json:"createdAt,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Soft-delete marker; when true the policy has been deleted and is no longer applied.
 	Deleted bool `json:"deleted"`
-	// Optional free-text description of the policy's purpose.
-	Description *string `json:"description,omitempty"`
+	// Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
 	// Indicates whether the policy is actively evaluated and applied.
 	Enabled bool `json:"enabled"`
 	// Unique identifier for the policy.
-	Id string `json:"id"`
+	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	LogRules *LogRules `json:"logRules,omitempty"`
-	// Human-readable name for the policy.
-	Name string `json:"name"`
-	// Ordering priority that determines the sequence in which policies are evaluated.
+	// Human-readable name for the policy. Only Latin-1 characters are accepted.
+	Name string `json:"name" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
+	// Ordering priority that determines the sequence in which policies are evaluated. Can be negative for policies placed first.
 	Order int32 `json:"order"`
 	Priority QuotaV1Priority `json:"priority"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
@@ -51,7 +51,7 @@ type Policy struct {
 	// List of data targets/destinations to which this policy routes data.
 	Targets []V1Target `json:"targets,omitempty"`
 	// Timestamp (RFC 3339) when the policy was last updated.
-	UpdatedAt *string `json:"updatedAt,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

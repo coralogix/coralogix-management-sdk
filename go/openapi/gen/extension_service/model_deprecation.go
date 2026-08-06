@@ -23,7 +23,7 @@ var _ MappedNullable = &Deprecation{}
 // Deprecation Deprecation.
 type Deprecation struct {
 	// Reason.
-	Reason *string `json:"reason,omitempty"`
+	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The replacement extensions.
 	ReplacementExtensions []string `json:"replacementExtensions,omitempty"`
 	AdditionalProperties map[string]interface{}
