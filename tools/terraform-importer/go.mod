@@ -1,6 +1,6 @@
 module github.com/coralogix/coralogix-management-sdk/tools/terraform-importer
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/PaesslerAG/jsonpath v0.1.1
