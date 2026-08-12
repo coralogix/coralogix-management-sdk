@@ -1863,6 +1863,308 @@ paths:
       summary: Delete company IP access settings
       tags:
         - IP access service
+  /aaa/teams/v2:
+    get:
+      deprecated: true
+      description: >-
+        Deprecated. Returns every team in the calling user's organization,
+        together with the organization's default team.
+      externalDocs:
+        url: ''
+      operationId: TeamService_ListTeams
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                defaultTeam:
+                  dailyQuota: 10
+                  retention: 30
+                  teamId:
+                    id: 1001
+                  teamName: Default
+                teams:
+                  - dailyQuota: 10
+                    retention: 30
+                    teamId:
+                      id: 1001
+                    teamName: Default
+                  - dailyQuota: 2.5
+                    retention: 7
+                    teamId:
+                      id: 1002
+                    teamName: Platform
+              schema:
+                $ref: '#/components/schemas/ListTeamsResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: List teams
+      tags:
+        - Teams Service
+    post:
+      deprecated: true
+      description: >-
+        Deprecated. Creates a team in the calling user's organization and
+        returns its identifier.
+      externalDocs:
+        url: ''
+      operationId: TeamService_CreateTeamInOrg
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Request to create a team in the calling user's organization.
+              properties:
+                dailyQuota:
+                  description: >-
+                    Daily quota to assign to the new team, in quota units per
+                    day. Defaults to 0.01 when omitted.
+                  format: double
+                  type: number
+                teamAdminsEmail:
+                  description: >-
+                    Email addresses of the users to add to the new team as
+                    administrators.
+                  items:
+                    description: >-
+                      Email addresses of the users to add to the new team as
+                      administrators.
+                    maxLength: 320
+                    minLength: 1
+                    pattern: ^[^@\s]+@[^@\s]+$
+                    type: string
+                  maxItems: 100
+                  minItems: 0
+                  type: array
+                teamName:
+                  description: Display name of the team to create.
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+              required:
+                - teamName
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                teamId:
+                  id: 1002
+              schema:
+                $ref: '#/components/schemas/CreateTeamInOrgResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A team with the same name already exists
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Create team
+      tags:
+        - Teams Service
+  /aaa/teams/v2/{team_id}:
+    get:
+      deprecated: true
+      description: Deprecated. Returns a single team by its identifier.
+      externalDocs:
+        url: ''
+      operationId: TeamService_GetTeam
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                dailyQuota: 2.5
+                retention: 7
+                teamId:
+                  id: 1002
+                teamName: Platform
+              schema:
+                $ref: '#/components/schemas/GetTeamResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Team not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Get team
+      tags:
+        - Teams Service
+    put:
+      deprecated: true
+      description: Deprecated. Updates a team.
+      externalDocs:
+        url: ''
+      operationId: TeamService_UpdateTeam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                Request to update a team. Omitted optional fields keep their
+                existing values.
+              properties:
+                dailyQuota:
+                  description: >-
+                    New daily quota for the team, in quota units per day. Omit
+                    to keep the current quota.
+                  format: double
+                  type: number
+                teamName:
+                  description: >-
+                    New display name for the team. Omit to keep the current
+                    name.
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example: {}
+              schema:
+                $ref: '#/components/schemas/UpdateTeamResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Team not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update team
+      tags:
+        - Teams Service
+    delete:
+      deprecated: true
+      description: >-
+        Deprecated. Deletes a team and releases its daily quota back to the
+        organization.
+      externalDocs:
+        url: ''
+      operationId: TeamService_DeleteTeam
+      responses:
+        '200':
+          content:
+            application/json:
+              example: {}
+              schema:
+                $ref: '#/components/schemas/DeleteTeamResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Team not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Delete team
+      tags:
+        - Teams Service
+    parameters:
+      - name: team_id
+        in: path
+        description: Unique team identifier.
+        required: true
+        schema:
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+          description: Unique team identifier.
+          format: int64
   /aaa/teams/v2/{team_id}/members:
     put:
       description: Updates team members for the specified team.
@@ -31164,6 +31466,28 @@ components:
         description: Find out more about recording rules
         url: >-
           https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
+    DeleteSaasStatusSubscriptionRequest:
+      type: object
+      properties:
+        providerId:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9._:\-]+$
+          type: string
+          description: Identifier of the provider whose subscription to delete.
+    DeleteSaasStatusSubscriptionResponse:
+      type: object
+      properties:
+        subscriptions:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusSubscription'
+          description: The team's remaining provider subscriptions after the delete.
+      description: The team's remaining SaaS-status subscriptions after the delete.
+      externalDocs:
+        url: ''
     DeleteScopeRequest:
       title: Delete Scope Request
       required:
@@ -39498,6 +39822,22 @@ components:
       description: Response containing the details of a notification preset.
       externalDocs:
         url: ''
+    GetProviderCatalogRequest:
+      type: object
+      additionalProperties: false
+    GetProviderCatalogResponse:
+      type: object
+      properties:
+        providers:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusProvider'
+          description: Providers available for SaaS-status monitoring.
+      description: The catalog of providers available for SaaS-status monitoring.
+      externalDocs:
+        url: ''
     GetQueriesRequest:
       type: object
       properties:
@@ -39852,6 +40192,49 @@ components:
         description: Find out more about enrichments
         url: >-
           https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+    GetSaasStatusRequest:
+      type: object
+      properties:
+        providerIds:
+          maxItems: 100
+          minItems: 0
+          type: array
+          items:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9._:\-]+$
+            type: string
+            description: >-
+              Restrict the response to these provider identifiers. Omitting the
+              field or sending an empty array both mean all subscribed
+              providers.
+          description: >-
+            Restrict the response to these provider identifiers. Omitting the
+            field or sending an empty array both mean all subscribed providers.
+        uptimeWindow:
+          maxLength: 16
+          minLength: 0
+          pattern: ^[1-9][0-9]*[smhdw]$
+          type: string
+          description: >-
+            Window over which uptime is computed, e.g. '24h', '7d', '30d'. Omit
+            to use the server default (24h).
+          example: 24h
+    GetSaasStatusResponse:
+      type: object
+      properties:
+        providers:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusProviderStatus'
+          description: >-
+            Per-provider live status. Empty when no subscribed provider matched
+            the request.
+      description: Live aggregated status for the requested subscribed providers.
+      externalDocs:
+        url: ''
     GetScopesResponse:
       title: Get Scopes Response
       required:
@@ -46463,6 +46846,22 @@ components:
             $ref: '#/components/schemas/RuleGroup'
           description: The rule groups.
       description: Response containing a list of parsing rule groups.
+      externalDocs:
+        url: ''
+    ListSaasStatusSubscriptionsRequest:
+      type: object
+      additionalProperties: false
+    ListSaasStatusSubscriptionsResponse:
+      type: object
+      properties:
+        subscriptions:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusSubscription'
+          description: The team's provider subscriptions.
+      description: The team's current SaaS-status provider subscriptions.
       externalDocs:
         url: ''
     ListSlosRequest:
@@ -55826,6 +56225,507 @@ components:
         description: Find out more about enrichments
         url: >-
           https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+    SaasStatusAvailabilityMode:
+      enum:
+        - AVAILABILITY_MODE_UNSPECIFIED
+        - AVAILABILITY_MODE_ONLY
+        - AVAILABILITY_MODE_EXCEPT
+      type: string
+      description: >-
+        Whether the region list a component is available in is an allow-list
+        (only) or a deny-list (except). AVAILABILITY_MODE_UNSPECIFIED means no
+        region restriction: the component is available in all of the provider's
+        regions.
+    SaasStatusComponent:
+      required:
+        - key
+      type: object
+      properties:
+        availability:
+          allOf:
+            - $ref: '#/components/schemas/SaasStatusComponentRegionAvailability'
+          description: >-
+            Which regions the component is available in. Unset (mode
+            AVAILABILITY_MODE_UNSPECIFIED) means available in all of the
+            provider's regions.
+        description:
+          maxLength: 1024
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Optional longer description of the component.
+        displayName:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable component name.
+        key:
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Stable component key, unique within the provider.
+      description: A single component of a provider, optionally scoped to a set of regions.
+      externalDocs:
+        url: ''
+    SaasStatusComponentRegionAvailability:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/SaasStatusAvailabilityMode'
+        regions:
+          maxItems: 256
+          minItems: 0
+          type: array
+          items:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9._:\-]+$
+            type: string
+            description: Region keys the mode applies to.
+          description: Region keys the mode applies to.
+      description: >-
+        Scopes a component to a region set, either as an allow-list or a
+        deny-list.
+      externalDocs:
+        url: ''
+    SaasStatusComponentRow:
+      required:
+        - key
+      type: object
+      properties:
+        displayName:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable component name.
+        key:
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Component key.
+        region:
+          maxLength: 128
+          minLength: 0
+          pattern: ^[a-zA-Z0-9._:\-]*$
+          type: string
+          description: >-
+            Region key this row reports on. Omitted or empty means the provider
+            has no region axis (the component is region-less / global). When
+            present, it uses the same key format as catalog and subscription
+            regions.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/SaasStatusComponentStatus'
+          description: Component health. UNSPECIFIED when it could not be determined.
+        uptimePercent:
+          maximum: 100
+          minimum: 0
+          type: number
+          description: >-
+            Uptime percentage for the component over the requested window. 0 is
+            a genuine 0% value; the field is omitted when uptime could not be
+            computed (treat omitted as not-computed, not as 0).
+          format: double
+      description: Live status of a single provider component in a single region.
+      externalDocs:
+        url: ''
+    SaasStatusComponentSelection:
+      required:
+        - key
+      type: object
+      properties:
+        key:
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Component key to monitor.
+        regions:
+          maxItems: 256
+          minItems: 0
+          type: array
+          items:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9._:\-]+$
+            type: string
+            description: >-
+              Region keys to monitor. Omitting the field or sending an empty
+              array both mean all regions of the component.
+          description: >-
+            Region keys to monitor. Omitting the field or sending an empty array
+            both mean all regions of the component.
+      description: A selected component and the regions of it to monitor.
+      externalDocs:
+        url: ''
+    SaasStatusComponentStatus:
+      enum:
+        - SAAS_STATUS_COMPONENT_STATUS_UNSPECIFIED
+        - SAAS_STATUS_COMPONENT_STATUS_OPERATIONAL
+        - SAAS_STATUS_COMPONENT_STATUS_MAINTENANCE
+        - SAAS_STATUS_COMPONENT_STATUS_UNSCOPED_OUTAGE
+        - SAAS_STATUS_COMPONENT_STATUS_DEGRADED
+        - SAAS_STATUS_COMPONENT_STATUS_PARTIAL_OUTAGE
+        - SAAS_STATUS_COMPONENT_STATUS_MAJOR_OUTAGE
+      type: string
+      description: Health of a provider or component, from operational to major outage.
+    SaasStatusEvent:
+      required:
+        - id
+      type: object
+      properties:
+        affectedComponents:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            maxLength: 256
+            minLength: 1
+            pattern: ^[\s\S]*$
+            type: string
+            description: >-
+              Component keys affected by the event. Omitted or empty means the
+              event affects the whole provider (all components). Events are
+              reported at provider/component granularity and are not
+              region-scoped: an affected component applies across all of the
+              provider's regions.
+          description: >-
+            Component keys affected by the event. Omitted or empty means the
+            event affects the whole provider (all components). Events are
+            reported at provider/component granularity and are not
+            region-scoped: an affected component applies across all of the
+            provider's regions.
+        id:
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Provider-assigned event identifier.
+        impact:
+          maxLength: 128
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Provider-reported impact level, e.g. minor or major.
+        link:
+          maxLength: 2048
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: URL to the provider's event page.
+        resolved:
+          type: boolean
+          description: >-
+            Whether the event has been resolved. Present and true means
+            resolved; omitted or false means not yet resolved (an incident in
+            progress, or a scheduled maintenance that is upcoming or in
+            progress).
+        resolvedAt:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: >-
+            When the event was resolved, as a UTC timestamp string. Absent while
+            unresolved.
+          format: date-time
+          example: '2025-09-22T12:30:00.000Z'
+        startedAt:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: >-
+            When the event started, as a UTC timestamp string. Omitted if the
+            provider did not report a start time.
+          format: date-time
+          example: '2025-09-22T11:00:00.000Z'
+        status:
+          maxLength: 128
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Provider-reported event status, e.g. investigating or resolved.
+        title:
+          maxLength: 1024
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Event title.
+        updates:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusEventUpdate'
+          description: >-
+            Chronological updates posted on the event. Empty when the provider
+            posted no updates.
+      description: An incident or scheduled maintenance reported by a provider.
+      externalDocs:
+        url: ''
+    SaasStatusEventUpdate:
+      type: object
+      properties:
+        body:
+          maxLength: 8192
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Update text posted by the provider.
+        createdAt:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: >-
+            When the update was posted, as a UTC timestamp string. Omitted if
+            the provider did not report a timestamp.
+          format: date-time
+          example: '2025-09-22T11:15:00.000Z'
+        status:
+          maxLength: 128
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Event status at the time of this update.
+      description: >-
+        A single update posted on a provider event. Contentless updates are not
+        returned; each update carries at least a status, body, or timestamp.
+      externalDocs:
+        url: ''
+    SaasStatusParserType:
+      enum:
+        - PARSER_TYPE_UNSPECIFIED
+        - PARSER_TYPE_STATUSPAGE_V2
+        - PARSER_TYPE_AWS
+        - PARSER_TYPE_GCP
+        - PARSER_TYPE_AZURE_RSS
+        - PARSER_TYPE_RSS_ATOM
+        - PARSER_TYPE_SLACK
+      type: string
+      description: Upstream status source format the provider is scraped with.
+    SaasStatusProvider:
+      required:
+        - id
+      type: object
+      properties:
+        category:
+          maxLength: 128
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Provider category, e.g. cloud or developer tools.
+        components:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusComponent'
+          description: Components the provider reports status for.
+        displayName:
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable provider name.
+        icon:
+          maxLength: 2048
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: URL of the provider icon.
+        id:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9._:\-]+$
+          type: string
+          description: Stable provider identifier.
+        parserType:
+          $ref: '#/components/schemas/SaasStatusParserType'
+        regions:
+          maxItems: 256
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusRegion'
+          description: Regions the provider reports status for.
+        statusUrl:
+          maxLength: 2048
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Public status page URL for the provider.
+        tier:
+          $ref: '#/components/schemas/SaasStatusTier'
+      description: A monitorable SaaS provider and the components and regions it exposes.
+      externalDocs:
+        url: ''
+    SaasStatusProviderStatus:
+      required:
+        - providerId
+      type: object
+      properties:
+        category:
+          maxLength: 128
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Provider category.
+        components:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusComponentRow'
+          description: >-
+            Per-component status rows. Empty when the provider exposes no
+            per-component detail.
+        displayName:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable provider name.
+        incidents:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusEvent'
+          description: >-
+            Active or recent incidents affecting the provider. Empty when there
+            are none.
+        lastChecked:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: >-
+            When the provider status was last checked, as a UTC timestamp
+            string. Omitted when the provider has not been checked yet.
+          format: date-time
+          example: '2025-09-22T11:00:00.000Z'
+        providerId:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9._:\-]+$
+          type: string
+          description: Identifier of the provider.
+        scheduledMaintenances:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusEvent'
+          description: >-
+            Scheduled maintenance windows for the provider. Empty when there are
+            none.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/SaasStatusComponentStatus'
+          description: >-
+            Aggregated provider health. UNSPECIFIED when it could not be
+            determined.
+        statusReachable:
+          type: boolean
+          description: >-
+            Whether the provider's upstream status source was reachable at the
+            last check. Present and true means it was reached; omitted or false
+            means it was not reachable, so `status` and `components` reflect the
+            last known state and may be stale.
+        tier:
+          allOf:
+            - $ref: '#/components/schemas/SaasStatusTier'
+          description: Monitoring tier. UNSPECIFIED when unknown.
+        uptimePercent:
+          maximum: 100
+          minimum: 0
+          type: number
+          description: >-
+            Aggregated uptime percentage over the requested window. 0 is a
+            genuine 0% value; the field is omitted when uptime could not be
+            computed (treat omitted as not-computed, not as 0).
+          format: double
+      description: Live aggregated status, uptime, and incidents for a single provider.
+      externalDocs:
+        url: ''
+    SaasStatusRegion:
+      required:
+        - key
+      type: object
+      properties:
+        displayName:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Human-readable region name.
+        key:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9._:\-]+$
+          type: string
+          description: Stable region key.
+      description: A region a provider reports status for.
+      externalDocs:
+        url: ''
+    SaasStatusSubscription:
+      required:
+        - providerId
+      type: object
+      properties:
+        components:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusComponentSelection'
+          description: >-
+            Selected components being monitored. Omitting the field or sending
+            an empty array both mean all components of the provider.
+        providerId:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9._:\-]+$
+          type: string
+          description: Identifier of the subscribed provider.
+      description: A team's subscription to a provider and its selected components.
+      externalDocs:
+        url: ''
+    SaasStatusSubscriptionInput:
+      required:
+        - providerId
+      type: object
+      properties:
+        components:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusComponentSelection'
+          description: >-
+            Selected components to monitor. Omitting the field or sending an
+            empty array both mean all components of the provider. Duplicate
+            component keys are rejected.
+        providerId:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9._:\-]+$
+          type: string
+          description: Identifier of the provider to subscribe to.
+      description: >-
+        A provider subscription to create or update, with its selected
+        components.
+      externalDocs:
+        url: ''
+    SaasStatusTier:
+      enum:
+        - TIER_UNSPECIFIED
+        - TIER_1
+        - TIER_2
+      type: string
+      description: Monitoring tier that governs how frequently the provider is polled.
     Sample:
       type: object
       properties:
@@ -62563,6 +63463,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Measurement'
+    UpsertSaasStatusSubscriptionRequest:
+      required:
+        - subscriptions
+      type: object
+      properties:
+        subscriptions:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusSubscriptionInput'
+          description: Provider subscriptions to create or update.
+      description: Batch of provider subscriptions to create or update.
+      externalDocs:
+        url: ''
+    UpsertSaasStatusSubscriptionResponse:
+      type: object
+      properties:
+        subscriptions:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SaasStatusSubscription'
+          description: >-
+            The subscriptions from the request as stored after the upsert.
+            Subscriptions for providers not in the request are left unchanged
+            and are not returned.
+      description: The provider subscriptions after the upsert.
+      externalDocs:
+        url: ''
     UrlField:
       required:
         - name
@@ -68554,6 +69485,12 @@ tags:
         https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
   - name: Team Groups Management Service
     description: Manage Team Groups.
+    externalDocs:
+      url: ''
+  - name: Teams Service
+    description: >-
+      Deprecated. Read and manage the teams in an organization and the daily
+      quota assigned to each of them.
     externalDocs:
       url: ''
   - name: Users Management Service

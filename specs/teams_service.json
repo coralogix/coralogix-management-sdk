@@ -1,0 +1,720 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/aaa/teams/v2": {
+      "get": {
+        "tags": [
+          "Teams Service"
+        ],
+        "summary": "List teams",
+        "description": "Deprecated. Returns every team in the calling user's organization, together with the organization's default team.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamService_ListTeams",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListTeamsResponse"
+                },
+                "example": {
+                  "defaultTeam": {
+                    "dailyQuota": 10,
+                    "retention": 30,
+                    "teamId": {
+                      "id": 1001
+                    },
+                    "teamName": "Default"
+                  },
+                  "teams": [
+                    {
+                      "dailyQuota": 10,
+                      "retention": 30,
+                      "teamId": {
+                        "id": 1001
+                      },
+                      "teamName": "Default"
+                    },
+                    {
+                      "dailyQuota": 2.5,
+                      "retention": 7,
+                      "teamId": {
+                        "id": 1002
+                      },
+                      "teamName": "Platform"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      },
+      "post": {
+        "tags": [
+          "Teams Service"
+        ],
+        "summary": "Create team",
+        "description": "Deprecated. Creates a team in the calling user's organization and returns its identifier.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamService_CreateTeamInOrg",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to create a team in the calling user's organization.",
+                "type": "object",
+                "properties": {
+                  "dailyQuota": {
+                    "description": "Daily quota to assign to the new team, in quota units per day. Defaults to 0.01 when omitted.",
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "teamAdminsEmail": {
+                    "description": "Email addresses of the users to add to the new team as administrators.",
+                    "type": "array",
+                    "items": {
+                      "description": "Email addresses of the users to add to the new team as administrators.",
+                      "type": "string",
+                      "pattern": "^[^@\\s]+@[^@\\s]+$",
+                      "minLength": 1,
+                      "maxLength": 320
+                    },
+                    "minItems": 0,
+                    "maxItems": 100
+                  },
+                  "teamName": {
+                    "description": "Display name of the team to create.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 255
+                  }
+                },
+                "required": [
+                  "teamName"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTeamInOrgResponse"
+                },
+                "example": {
+                  "teamId": {
+                    "id": 1002
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A team with the same name already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/aaa/teams/v2/{team_id}": {
+      "get": {
+        "tags": [
+          "Teams Service"
+        ],
+        "summary": "Get team",
+        "description": "Deprecated. Returns a single team by its identifier.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamService_GetTeam",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTeamResponse"
+                },
+                "example": {
+                  "dailyQuota": 2.5,
+                  "retention": 7,
+                  "teamId": {
+                    "id": 1002
+                  },
+                  "teamName": "Platform"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      },
+      "put": {
+        "tags": [
+          "Teams Service"
+        ],
+        "summary": "Update team",
+        "description": "Deprecated. Updates a team.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamService_UpdateTeam",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to update a team. Omitted optional fields keep their existing values.",
+                "type": "object",
+                "properties": {
+                  "dailyQuota": {
+                    "description": "New daily quota for the team, in quota units per day. Omit to keep the current quota.",
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "teamName": {
+                    "description": "New display name for the team. Omit to keep the current name.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 255
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTeamResponse"
+                },
+                "example": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      },
+      "delete": {
+        "tags": [
+          "Teams Service"
+        ],
+        "summary": "Delete team",
+        "description": "Deprecated. Deletes a team and releases its daily quota back to the organization.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamService_DeleteTeam",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteTeamResponse"
+                },
+                "example": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "team_id",
+          "description": "Unique team identifier.",
+          "required": true,
+          "schema": {
+            "description": "Unique team identifier.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "style": "simple"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateTeamInOrgResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the identifier of the created team.",
+        "type": "object",
+        "properties": {
+          "teamId": {
+            "description": "Identifier of the created team.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v2.TeamId"
+              }
+            ]
+          }
+        }
+      },
+      "DeleteTeamResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Empty response returned after deleting a team.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "example": "FILTER_OPERATOR_OR",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetTeamResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the requested team.",
+        "type": "object",
+        "properties": {
+          "dailyQuota": {
+            "description": "Daily quota assigned to the team, in quota units per day.",
+            "type": "number",
+            "format": "double"
+          },
+          "retention": {
+            "description": "Retention period of the team's data, in days.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "teamId": {
+            "description": "Identifier of the team.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v2.TeamId"
+              }
+            ]
+          },
+          "teamName": {
+            "description": "Display name of the team.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 255
+          }
+        }
+      },
+      "ListTeamsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the teams in the calling user's organization.",
+        "type": "object",
+        "properties": {
+          "defaultTeam": {
+            "description": "The organization's default team.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ListTeamsResponse.TeamInfo"
+              }
+            ]
+          },
+          "teams": {
+            "description": "Every team in the organization, including the default team.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListTeamsResponse.TeamInfo"
+            },
+            "minItems": 0,
+            "maxItems": 10000
+          }
+        }
+      },
+      "ListTeamsResponse.TeamInfo": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A team and the quota and retention settings assigned to it.",
+        "type": "object",
+        "properties": {
+          "dailyQuota": {
+            "description": "Daily quota assigned to the team, in quota units per day.",
+            "type": "number",
+            "format": "double"
+          },
+          "retention": {
+            "description": "Retention period of the team's data, in days.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "teamId": {
+            "description": "The team id.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v2.TeamId"
+              }
+            ]
+          },
+          "teamName": {
+            "description": "Display name of the team.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 255
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "UpdateTeamResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Empty response returned after updating a team.",
+        "type": "object",
+        "additionalProperties": false
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v2.TeamId": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Team id.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Unique team identifier.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        }
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    }
+  }
+}
