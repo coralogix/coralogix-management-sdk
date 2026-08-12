@@ -24,14 +24,14 @@ var _ MappedNullable = &LogAttachment{}
 
 // LogAttachment Attachment containing log data and related information
 type LogAttachment struct {
-	// Raw content of the log entry
-	LogContent string `json:"logContent"`
+	// Raw content of the log entry. Leading and trailing whitespace is trimmed before the length limits are applied.
+	LogContent string `json:"logContent" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	// Unique identifier of the log entry
-	LogId string `json:"logId"`
+	LogId string `json:"logId" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Timestamp when the log entry was created
 	LogTimestamp time.Time `json:"logTimestamp"`
 	// URL suffix for querying related logs (not including the Coralogix domain part)
-	QueryLinkSuffix *string `json:"queryLinkSuffix,omitempty"`
+	QueryLinkSuffix *string `json:"queryLinkSuffix,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

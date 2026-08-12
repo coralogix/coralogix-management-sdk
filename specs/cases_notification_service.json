@@ -34,9 +34,12 @@
                     "items": {
                       "description": "Case IDs to retrieve notification deliveries for",
                       "type": "string",
-                      "minLength": 0
+                      "pattern": "^[\\s\\S]*$",
+                      "minLength": 1,
+                      "maxLength": 64
                     },
-                    "minItems": 0
+                    "minItems": 1,
+                    "maxItems": 1000
                   }
                 },
                 "required": [
@@ -111,7 +114,8 @@
             "items": {
               "$ref": "#/components/schemas/NotificationDelivery"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "required": [
@@ -130,13 +134,17 @@
             "example": "c1d2e3f4-5678-90ab-cdef-1234567890ab",
             "description": "Unique identifier of the connector",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "connectorName": {
             "example": "Production Slack",
             "description": "Display name of the connector",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "connectorType": {
             "description": "Type of the connector",
@@ -195,7 +203,9 @@
             "example": "Connection timeout after 30s",
             "description": "Error message describing the failure",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         },
         "required": [
@@ -273,7 +283,9 @@
             "example": "https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456",
             "description": "URL to the delivered notification, if available (e.g. Slack message, ServiceNow record)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2048
           }
         }
       },
@@ -418,7 +430,8 @@
             "items": {
               "$ref": "#/components/schemas/RouterInfo"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "required": [
@@ -470,14 +483,17 @@
             "example": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
             "description": "The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "timestamp": {
             "example": "2025-09-22T10:30:00.000Z",
             "description": "When the notification was triggered",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           }
         },
         "required": [
@@ -543,7 +559,8 @@
             "items": {
               "$ref": "#/components/schemas/DeliveryAttempt"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "router": {
             "description": "The router that handled the notification",
@@ -571,13 +588,17 @@
             "example": "d4e5f678-90ab-cdef-1234-567890abcdef",
             "description": "Unique identifier of the router",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "routerName": {
             "example": "Production alerts router",
             "description": "Display name of the router",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           }
         },
         "required": [

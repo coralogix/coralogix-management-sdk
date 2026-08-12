@@ -24,11 +24,11 @@ var _ MappedNullable = &IncidentSearchQuery{}
 // IncidentSearchQuery Incident search query.
 type IncidentSearchQuery struct {
 	// The contextual label to search in.
-	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	ContextualLabel *string `json:"contextualLabel,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The field to search in
 	IncidentField *IncidentFields `json:"incidentField,omitempty"`
 	// The search query
-	Query string `json:"query"`
+	Query string `json:"query" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool

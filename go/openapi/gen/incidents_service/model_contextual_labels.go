@@ -24,9 +24,9 @@ var _ MappedNullable = &ContextualLabels{}
 // ContextualLabels Contextual labels.
 type ContextualLabels struct {
 	// The field name.
-	FieldName string `json:"fieldName"`
+	FieldName string `json:"fieldName" validate:"regexp=^[\\s\\S]*$"`
 	// The field value.
-	FieldValue string `json:"fieldValue"`
+	FieldValue string `json:"fieldValue" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

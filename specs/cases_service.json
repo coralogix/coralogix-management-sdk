@@ -890,19 +890,19 @@
                 "properties": {
                   "resolutionReason": {
                     "example": "False alarm",
-                    "description": "New case resolution reason",
+                    "description": "New case resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied.",
                     "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
                     "minLength": 1,
-                    "maxLength": 4096
+                    "maxLength": 500
                   },
                   "title": {
                     "example": "Database connection investigation",
-                    "description": "New case title",
+                    "description": "New case title. Leading and trailing whitespace is trimmed before the length limits are applied.",
                     "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
                     "minLength": 1,
-                    "maxLength": 4096
+                    "maxLength": 512
                   }
                 }
               }
@@ -2070,6 +2070,22 @@
             "minItems": 0,
             "maxItems": 1000
           },
+          "customDataprimeQueries": {
+            "example": [
+              "source logs | filter $d.severity == 'ERROR'"
+            ],
+            "description": "Array of custom DataPrime queries configured on the alert definition.",
+            "type": "array",
+            "items": {
+              "description": "Array of custom DataPrime queries configured on the alert definition.",
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 65535
+            },
+            "minItems": 0,
+            "maxItems": 1000
+          },
           "groupingType": {
             "example": "GROUPING_TYPE_COMPOSITE_ALERT",
             "description": "How this indicator relates to other alerts (composite/combination/none).",
@@ -2198,7 +2214,9 @@
           "alertDef": {
             "description": "URL to the alert definition that triggered the indicator. Empty when not available.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 2048
           },
           "logs": {
             "$ref": "#/components/schemas/LogsLink"
@@ -2819,11 +2837,11 @@
             "maxLength": 30
           },
           "aiSummary": {
-            "description": "AI summary of the case",
+            "description": "AI summary of the case. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
             "minLength": 1,
-            "maxLength": 4096
+            "maxLength": 10000
           },
           "assignee": {
             "description": "Assigned user details",
@@ -2966,11 +2984,11 @@
           },
           "title": {
             "example": "Database outage investigation",
-            "description": "Case title",
+            "description": "Case title. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
             "minLength": 1,
-            "maxLength": 4096
+            "maxLength": 512
           },
           "updateTime": {
             "description": "When the case was last updated",
@@ -3020,7 +3038,9 @@
           "detail": {
             "description": "Absolute URL to the case detail page.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2048
           },
           "impactedEntities": {
             "description": "Per-impacted-entity drilldown links.",
@@ -3028,7 +3048,8 @@
             "items": {
               "$ref": "#/components/schemas/ImpactedEntityLink"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -4205,7 +4226,9 @@
           "url": {
             "description": "Absolute URL to the entity drilldown view.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2048
           }
         }
       },
@@ -4350,7 +4373,9 @@
           "logs": {
             "description": "Explore logs URL pre-filtered to the alert query and case time window.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2048
           }
         }
       },
@@ -4365,7 +4390,9 @@
           "metrics": {
             "description": "Explore metrics URL pre-filtered to the alert query and case time window.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2048
           }
         }
       },
@@ -4989,7 +5016,9 @@
           "rum": {
             "description": "RUM errors URL pre-filtered to the alert applications and case time window.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2048
           }
         }
       },
@@ -5043,7 +5072,9 @@
           "slo": {
             "description": "SLO overview URL with the permutation preselected.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2048
           }
         }
       },
@@ -5092,7 +5123,9 @@
           "tracing": {
             "description": "Explore traces URL pre-filtered to the alert query and case time window.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2048
           }
         }
       },
@@ -5407,13 +5440,17 @@
             "example": "service",
             "description": "Key of the pair (e.g., label or grouping name)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "value": {
             "example": "payments",
             "description": "Value associated with the key",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         },
         "required": [

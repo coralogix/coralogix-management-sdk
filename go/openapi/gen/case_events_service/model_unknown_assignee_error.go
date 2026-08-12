@@ -23,7 +23,7 @@ var _ MappedNullable = &UnknownAssigneeError{}
 // UnknownAssigneeError Change assignee failed event.
 type UnknownAssigneeError struct {
 	// Email of the assignee that could not be found
-	UnknownAssigneeEmail *string `json:"unknownAssigneeEmail,omitempty"`
+	UnknownAssigneeEmail *string `json:"unknownAssigneeEmail,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -23,7 +23,7 @@ var _ MappedNullable = &IncidentGroupBy{}
 // IncidentGroupBy struct for IncidentGroupBy
 type IncidentGroupBy struct {
 	// The contextual label to group by.
-	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	ContextualLabel *string `json:"contextualLabel,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The field to group by
 	IncidentField *IncidentFields `json:"incidentField,omitempty"`
 	// The order by direction.

@@ -26,7 +26,7 @@ type DisplayLabelValueWithCount struct {
 	// Number of items.
 	Count int32 `json:"count"`
 	// The display label value.
-	DisplayLabelValue string `json:"displayLabelValue"`
+	DisplayLabelValue string `json:"displayLabelValue" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -25,11 +25,11 @@ type IncidentEventExtendedMetadata struct {
 	// The alert group by fields.
 	AlertGroupByFields []string `json:"alertGroupByFields,omitempty"`
 	// Unique identifier of the alert.
-	AlertId *string `json:"alertId,omitempty"`
+	AlertId *string `json:"alertId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The alert labels.
 	AlertLabels []IncidentsV1MetaLabel `json:"alertLabels,omitempty"`
 	// The alert name.
-	AlertName *string `json:"alertName,omitempty"`
+	AlertName *string `json:"alertName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AlertType *IncidentEventAlertType `json:"alertType,omitempty"`
 	// The incident permutation.
 	IncidentPermutation *map[string]string `json:"incidentPermutation,omitempty"`

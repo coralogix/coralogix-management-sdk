@@ -23,7 +23,7 @@ var _ MappedNullable = &NotificationSentCaseEvent{}
 // NotificationSentCaseEvent Notification sent case event.
 type NotificationSentCaseEvent struct {
 	// The notification request ID, as sent to the notifications center.
-	NotificationRequestId *string `json:"notificationRequestId,omitempty"`
+	NotificationRequestId *string `json:"notificationRequestId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// List of notifications produced by this action
 	Notifications []NotificationMetadata `json:"notifications,omitempty"`
 	AdditionalProperties map[string]interface{}

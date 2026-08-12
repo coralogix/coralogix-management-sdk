@@ -23,7 +23,7 @@ var _ MappedNullable = &DeliverySuccess{}
 // DeliverySuccess Successful delivery outcome with an optional evidence URL.
 type DeliverySuccess struct {
 	// URL to the delivered notification, if available (e.g. Slack message, ServiceNow record)
-	EvidenceUrl *string `json:"evidenceUrl,omitempty"`
+	EvidenceUrl *string `json:"evidenceUrl,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

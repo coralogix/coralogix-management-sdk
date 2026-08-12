@@ -23,7 +23,7 @@ var _ MappedNullable = &NotificationMetadata{}
 // NotificationMetadata struct for NotificationMetadata
 type NotificationMetadata struct {
 	// Notification token/reference
-	Token *string `json:"token,omitempty"`
+	Token *string `json:"token,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

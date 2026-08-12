@@ -25,7 +25,7 @@ type CaseDeepLinks struct {
 	// Per-alert-indicator deep links, keyed by alert_indicator_id.
 	AlertIndicators *map[string]AlertIndicatorDeepLink `json:"alertIndicators,omitempty"`
 	// Absolute URL to the case detail page.
-	Detail *string `json:"detail,omitempty"`
+	Detail *string `json:"detail,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Per-impacted-entity drilldown links.
 	ImpactedEntities []ImpactedEntityLink `json:"impactedEntities,omitempty"`
 	AdditionalProperties map[string]interface{}

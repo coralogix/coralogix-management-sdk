@@ -23,7 +23,7 @@ var _ MappedNullable = &IncidentEventOriginatorAdministrative{}
 // IncidentEventOriginatorAdministrative Incident event originator administrative.
 type IncidentEventOriginatorAdministrative struct {
 	// The user id.
-	UserId *string `json:"userId,omitempty"`
+	UserId *string `json:"userId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -23,7 +23,7 @@ var _ MappedNullable = &TracingLink{}
 // TracingLink Deep link to explore traces related to an alert indicator on a case.
 type TracingLink struct {
 	// Explore traces URL pre-filtered to the alert query and case time window.
-	Tracing *string `json:"tracing,omitempty"`
+	Tracing *string `json:"tracing,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

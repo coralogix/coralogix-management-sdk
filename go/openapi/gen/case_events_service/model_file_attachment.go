@@ -24,9 +24,9 @@ var _ MappedNullable = &FileAttachment{}
 // FileAttachment Attachment representing a file with metadata
 type FileAttachment struct {
 	// Unique identifier of the file (same id as used in blobset flow)
-	FileId string `json:"fileId"`
-	// Original name of the attached file
-	FileName string `json:"fileName"`
+	FileId string `json:"fileId" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
+	// Original name of the attached file. Leading and trailing whitespace is trimmed before the length limits are applied.
+	FileName string `json:"fileName" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	// Flag indicating whether the file has been marked as deleted
 	IsDeleted bool `json:"isDeleted"`
 	AdditionalProperties map[string]interface{}

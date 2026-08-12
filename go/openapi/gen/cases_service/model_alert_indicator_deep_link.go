@@ -23,7 +23,7 @@ var _ MappedNullable = &AlertIndicatorDeepLink{}
 // AlertIndicatorDeepLink Deep links derived from a single alert indicator on a case.
 type AlertIndicatorDeepLink struct {
 	// URL to the alert definition that triggered the indicator. Empty when not available.
-	AlertDef *string `json:"alertDef,omitempty"`
+	AlertDef *string `json:"alertDef,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Logs *LogsLink `json:"logs,omitempty"`
 	Metric *MetricLink `json:"metric,omitempty"`
 	Rum *RumLink `json:"rum,omitempty"`

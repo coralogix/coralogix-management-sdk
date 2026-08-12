@@ -22,10 +22,10 @@ var _ MappedNullable = &TitleChangedCaseEvent{}
 
 // TitleChangedCaseEvent Title changed case event.
 type TitleChangedCaseEvent struct {
-	// Previous case title
-	From *string `json:"from,omitempty"`
-	// New case title
-	To *string `json:"to,omitempty"`
+	// Previous case title. Leading and trailing whitespace is trimmed before the length limits are applied.
+	From *string `json:"from,omitempty" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
+	// New case title. Leading and trailing whitespace is trimmed before the length limits are applied.
+	To *string `json:"to,omitempty" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

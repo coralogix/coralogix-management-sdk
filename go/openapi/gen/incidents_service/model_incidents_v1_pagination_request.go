@@ -23,10 +23,10 @@ var _ MappedNullable = &IncidentsV1PaginationRequest{}
 
 // IncidentsV1PaginationRequest Pagination parameters for list requests
 type IncidentsV1PaginationRequest struct {
-	// Number of items to return per page
+	// Number of items to return per page.
 	PageSize int64 `json:"pageSize"`
 	// Token for the next page of results
-	PageToken *string `json:"pageToken,omitempty"`
+	PageToken *string `json:"pageToken,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

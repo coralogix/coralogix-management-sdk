@@ -25,7 +25,7 @@ type ImpactedEntityLink struct {
 	// The impacted entity.
 	Entity *ImpactedEntity `json:"entity,omitempty"`
 	// Absolute URL to the entity drilldown view.
-	Url *string `json:"url,omitempty"`
+	Url *string `json:"url,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

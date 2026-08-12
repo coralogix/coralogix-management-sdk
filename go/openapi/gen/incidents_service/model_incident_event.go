@@ -28,7 +28,7 @@ type IncidentEvent struct {
 	Assignment *IncidentEventAssign `json:"assignment,omitempty"`
 	Close *IncidentEventClose `json:"close,omitempty"`
 	// The ID of the incident event
-	Id string `json:"id"`
+	Id string `json:"id" validate:"regexp=^[\\s\\S]*$"`
 	IncidentEventType IncidentEventType `json:"incidentEventType"`
 	OperationalEvent *IncidentEventOriginatorOperational `json:"operationalEvent,omitempty"`
 	OriginatorType OriginatorType `json:"originatorType"`

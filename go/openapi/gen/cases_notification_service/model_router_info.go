@@ -24,9 +24,9 @@ var _ MappedNullable = &RouterInfo{}
 // RouterInfo Information about a notification router.
 type RouterInfo struct {
 	// Unique identifier of the router
-	RouterId string `json:"routerId"`
+	RouterId string `json:"routerId" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name of the router
-	RouterName string `json:"routerName"`
+	RouterName string `json:"routerName" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -75,8 +75,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.eventId) < 0 {
-		return localVarReturnValue, nil, reportError("eventId must have at least 0 elements")
+	if strlen(r.eventId) < 1 {
+		return localVarReturnValue, nil, reportError("eventId must have at least 1 elements")
+	}
+	if strlen(r.eventId) > 64 {
+		return localVarReturnValue, nil, reportError("eventId must have less than 64 elements")
 	}
 
 	// to determine the Content-Type header
@@ -949,8 +952,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentExecute(r ApiInc
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 0 {
-		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	if strlen(r.id) < 36 {
+		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header
@@ -1090,8 +1096,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentByEventIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.eventId) < 0 {
-		return localVarReturnValue, nil, reportError("eventId must have at least 0 elements")
+	if strlen(r.eventId) < 1 {
+		return localVarReturnValue, nil, reportError("eventId must have at least 1 elements")
+	}
+	if strlen(r.eventId) > 64 {
+		return localVarReturnValue, nil, reportError("eventId must have less than 64 elements")
 	}
 
 	// to determine the Content-Type header
@@ -1231,8 +1240,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentEventsExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.incidentId) < 0 {
-		return localVarReturnValue, nil, reportError("incidentId must have at least 0 elements")
+	if strlen(r.incidentId) < 36 {
+		return localVarReturnValue, nil, reportError("incidentId must have at least 36 elements")
+	}
+	if strlen(r.incidentId) > 36 {
+		return localVarReturnValue, nil, reportError("incidentId must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header
@@ -1515,7 +1527,7 @@ func (r ApiIncidentsServiceListIncidentEventsRequest) Filter(filter IncidentEven
 	return r
 }
 
-// Pagination parameters
+// Pagination parameters. This request accepts at most 1000 items per page, and defaults to 100 when pageSize is omitted; the shared maximum of 10000 does not apply here.
 func (r ApiIncidentsServiceListIncidentEventsRequest) Pagination(pagination PaginationRequest) ApiIncidentsServiceListIncidentEventsRequest {
 	r.pagination = &pagination
 	return r
@@ -1534,7 +1546,7 @@ func (r ApiIncidentsServiceListIncidentEventsRequest) Execute() (*ListIncidentEv
 /*
 IncidentsServiceListIncidentEvents List incident events with filters
 
-List incident events with support for filtering, pagination, and ordering.
+List incident events with support for filtering, pagination, and ordering. This operation accepts a page size of at most 1000 (it defaults to 100 when pageSize is omitted) and rejects larger values, even though the shared pagination schema documents a maximum of 10000.
 
 Requires the following permissions:
 - `incidents:read`
@@ -2156,8 +2168,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.eventId) < 0 {
-		return localVarReturnValue, nil, reportError("eventId must have at least 0 elements")
+	if strlen(r.eventId) < 1 {
+		return localVarReturnValue, nil, reportError("eventId must have at least 1 elements")
+	}
+	if strlen(r.eventId) > 64 {
+		return localVarReturnValue, nil, reportError("eventId must have less than 64 elements")
 	}
 
 	// to determine the Content-Type header
@@ -2448,8 +2463,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceUnassignIncidentsExecute(r 
 	if r.incidentIds == nil {
 		return localVarReturnValue, nil, reportError("incidentIds is required and must be specified")
 	}
-	if len(*r.incidentIds) < 0 {
-		return localVarReturnValue, nil, reportError("incidentIds must have at least 0 elements")
+	if len(*r.incidentIds) < 1 {
+		return localVarReturnValue, nil, reportError("incidentIds must have at least 1 elements")
+	}
+	if len(*r.incidentIds) > 10000 {
+		return localVarReturnValue, nil, reportError("incidentIds must have less than 10000 elements")
 	}
 
 	{

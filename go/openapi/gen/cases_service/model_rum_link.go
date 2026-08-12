@@ -23,7 +23,7 @@ var _ MappedNullable = &RumLink{}
 // RumLink Deep link to the RUM errors view scoped to an alert indicator on a case.
 type RumLink struct {
 	// RUM errors URL pre-filtered to the alert applications and case time window.
-	Rum *string `json:"rum,omitempty"`
+	Rum *string `json:"rum,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

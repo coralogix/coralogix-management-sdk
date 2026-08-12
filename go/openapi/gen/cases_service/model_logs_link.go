@@ -23,7 +23,7 @@ var _ MappedNullable = &LogsLink{}
 // LogsLink Deep link to explore logs related to an alert indicator on a case.
 type LogsLink struct {
 	// Explore logs URL pre-filtered to the alert query and case time window.
-	Logs *string `json:"logs,omitempty"`
+	Logs *string `json:"logs,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

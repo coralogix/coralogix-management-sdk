@@ -984,7 +984,8 @@
           "SERVICE_NOW",
           "EMAIL",
           "PAGERDUTY_INCIDENTS",
-          "MICROSOFT_TEAMS"
+          "MICROSOFT_TEAMS",
+          "EVENTBRIDGE"
         ]
       },
       "notification_center.EntityType": {

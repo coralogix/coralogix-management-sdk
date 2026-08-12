@@ -31,7 +31,7 @@ type CaseEvent struct {
 	// Event payload (assignment, comment, status change, etc.)
 	EventData CaseEventData `json:"eventData"`
 	// Unique identifier of the event
-	EventId string `json:"eventId"`
+	EventId string `json:"eventId" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Logical occurrence time of the event
 	EventTime time.Time `json:"eventTime"`
 	// If edited, last modification time of the event

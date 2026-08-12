@@ -24,7 +24,7 @@ var _ MappedNullable = &IncidentFieldOneOf{}
 // IncidentFieldOneOf Incident field one of.
 type IncidentFieldOneOf struct {
 	// Application associated with the incident.
-	ApplicationName *string `json:"applicationName,omitempty"`
+	ApplicationName *string `json:"applicationName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Timestamp when the incident was closed.
 	ClosedAt *time.Time `json:"closedAt,omitempty"`
 	// Timestamp when the incident was created.
@@ -32,11 +32,11 @@ type IncidentFieldOneOf struct {
 	// Duration.
 	Duration *string `json:"duration,omitempty"`
 	// Unique identifier of the incident.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Timestamp of the most recent state change.
 	LastStateUpdateTime *time.Time `json:"lastStateUpdateTime,omitempty"`
 	// Display name of the incident.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Severity level of the incident.
 	Severity *IncidentSeverity `json:"severity,omitempty"`
 	// Current internal state of the incident.
@@ -44,7 +44,7 @@ type IncidentFieldOneOf struct {
 	// Current status of the incident.
 	Status *IncidentStatus `json:"status,omitempty"`
 	// Subsystem associated with the incident.
-	SubsystemName *string `json:"subsystemName,omitempty"`
+	SubsystemName *string `json:"subsystemName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

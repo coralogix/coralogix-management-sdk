@@ -23,7 +23,7 @@ var _ MappedNullable = &UnassignedCaseEvent{}
 // UnassignedCaseEvent Unassigned case event.
 type UnassignedCaseEvent struct {
 	// User ID that was unassigned
-	PreviousAssigneeUserId *string `json:"previousAssigneeUserId,omitempty"`
+	PreviousAssigneeUserId *string `json:"previousAssigneeUserId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

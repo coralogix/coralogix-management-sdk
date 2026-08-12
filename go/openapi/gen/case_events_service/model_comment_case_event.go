@@ -28,8 +28,8 @@ type CommentCaseEvent struct {
 	MicrosoftTeams *MicrosoftTeamsCommentMetadata `json:"microsoftTeams,omitempty"`
 	// Slack-specific comment metadata
 	Slack *SlackCommentMetadata `json:"slack,omitempty"`
-	// Comment text
-	UnsafeText *string `json:"unsafeText,omitempty"`
+	// Comment text. Leading and trailing whitespace is trimmed before the length limits are applied.
+	UnsafeText *string `json:"unsafeText,omitempty" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

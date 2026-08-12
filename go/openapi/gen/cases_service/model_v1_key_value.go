@@ -24,9 +24,9 @@ var _ MappedNullable = &V1KeyValue{}
 // V1KeyValue Represents a simple key-value pair, often used for labels or groupings in cases.
 type V1KeyValue struct {
 	// Key of the pair (e.g., label or grouping name)
-	Key string `json:"key"`
+	Key string `json:"key" validate:"regexp=^[\\s\\S]*$"`
 	// Value associated with the key
-	Value string `json:"value"`
+	Value string `json:"value" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -23,9 +23,9 @@ var _ MappedNullable = &ApiKeyActor{}
 // ApiKeyActor Information about the API key that initiated the action.
 type ApiKeyActor struct {
 	// API key ID
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// API key name
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

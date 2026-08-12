@@ -31,7 +31,7 @@ type IncidentEventQueryFilter struct {
 	// The labels of the incident
 	Labels *LabelsFilter `json:"labels,omitempty"`
 	// The name of the incident
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The severity of the incident
 	Severity []IncidentSeverity `json:"severity,omitempty"`
 	// The status of the incident

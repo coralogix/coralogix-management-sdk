@@ -23,7 +23,7 @@ var _ MappedNullable = &IncidentEventOriginatorOperational{}
 // IncidentEventOriginatorOperational Incident event originator operational.
 type IncidentEventOriginatorOperational struct {
 	// The system name.
-	SystemName *string `json:"systemName,omitempty"`
+	SystemName *string `json:"systemName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

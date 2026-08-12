@@ -22,10 +22,10 @@ var _ MappedNullable = &CasePatch{}
 
 // CasePatch Partial set of fields to update on the case
 type CasePatch struct {
-	// New case resolution reason
-	ResolutionReason *string `json:"resolutionReason,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// New case title
-	Title *string `json:"title,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// New case resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied.
+	ResolutionReason *string `json:"resolutionReason,omitempty" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
+	// New case title. Leading and trailing whitespace is trimmed before the length limits are applied.
+	Title *string `json:"title,omitempty" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

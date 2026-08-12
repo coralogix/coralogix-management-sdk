@@ -22,8 +22,8 @@ var _ MappedNullable = &UpsertIncidentStatePayload{}
 
 // UpsertIncidentStatePayload Upsert incident state payload.
 type UpsertIncidentStatePayload struct {
-	// The cx event key.
-	CxEventKey *string `json:"cxEventKey,omitempty"`
+	// The CX event key.
+	CxEventKey *string `json:"cxEventKey,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
