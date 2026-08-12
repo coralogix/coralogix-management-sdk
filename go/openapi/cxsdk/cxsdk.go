@@ -42,6 +42,7 @@ import (
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_groups_management_service"
+	teams "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/teams_service"
 
 	// slo (no plural) is the legacy service. slos (plural) is the new one.
 	recordingrules "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/recording_rules_service"
@@ -85,6 +86,7 @@ type ClientSet struct {
 	webhooks             *webhooks.OutgoingWebhooksServiceAPIService
 	views                *views.ViewsServiceAPIService
 	viewsFolders         *viewsfolders.FoldersForViewsServiceAPIService
+	teams                *teams.TeamsServiceAPIService
 }
 
 // Actions returns the ActionsServiceAPIService client.
@@ -247,6 +249,11 @@ func (c *ClientSet) ViewsFolders() *viewsfolders.FoldersForViewsServiceAPIServic
 	return c.viewsFolders
 }
 
+// Teams returns the TeamsServiceAPIService client.
+func (c *ClientSet) Teams() *teams.TeamsServiceAPIService {
+	return c.teams
+}
+
 // NewClientSet builds a ClientSet from CallPropertiesCreator.
 func NewClientSet(c *Config) *ClientSet {
 	return &ClientSet{
@@ -282,6 +289,7 @@ func NewClientSet(c *Config) *ClientSet {
 		webhooks:             NewWebhooksClient(c),
 		views:                NewViewsClient(c),
 		viewsFolders:         NewViewsFoldersClient(c),
+		teams:                NewTeamsClient(c),
 	}
 }
 
@@ -700,4 +708,17 @@ func NewArchiveRetentionsClient(c *Config) *archiveretention.RetentionsServiceAP
 		cfg.AddDefaultHeader(k, v)
 	}
 	return archiveretention.NewAPIClient(cfg).RetentionsServiceAPI
+}
+
+// NewTeamsClient builds a new TeamsServiceAPIService from CallPropertiesCreator.
+func NewTeamsClient(c *Config) *teams.TeamsServiceAPIService {
+	cfg := teams.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = teams.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return teams.NewAPIClient(cfg).TeamsServiceAPI
 }
