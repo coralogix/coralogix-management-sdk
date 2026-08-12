@@ -24,7 +24,7 @@ var _ MappedNullable = &DeliveryFailure{}
 // DeliveryFailure Failed delivery outcome with error details.
 type DeliveryFailure struct {
 	// Error message describing the failure
-	ErrorMessage string `json:"errorMessage"`
+	ErrorMessage string `json:"errorMessage" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

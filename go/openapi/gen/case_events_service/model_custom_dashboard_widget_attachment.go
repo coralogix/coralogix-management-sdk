@@ -23,12 +23,12 @@ var _ MappedNullable = &CustomDashboardWidgetAttachment{}
 
 // CustomDashboardWidgetAttachment Attachment containing custom dashboard widget data and screenshot
 type CustomDashboardWidgetAttachment struct {
-	// Unique identifier of the custom dashboard
-	CustomDashboardId string `json:"customDashboardId"`
+	// Unique identifier of the custom dashboard. Leading and trailing whitespace is trimmed before the length limits are applied.
+	CustomDashboardId string `json:"customDashboardId" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	// URL suffix for accessing the widget (not including the Coralogix domain part)
-	QueryLinkSuffix *string `json:"queryLinkSuffix,omitempty"`
-	// Unique identifier of the widget within the dashboard
-	WidgetId string `json:"widgetId"`
+	QueryLinkSuffix *string `json:"queryLinkSuffix,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Unique identifier of the widget within the dashboard. Leading and trailing whitespace is trimmed before the length limits are applied.
+	WidgetId string `json:"widgetId" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	// Screenshot of the widget at the time of attachment
 	WidgetScreenshot FileAttachment `json:"widgetScreenshot"`
 	AdditionalProperties map[string]interface{}

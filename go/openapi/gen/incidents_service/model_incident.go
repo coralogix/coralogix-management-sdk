@@ -33,7 +33,7 @@ type Incident struct {
 	// Creation timestamp.
 	CreatedAt time.Time `json:"createdAt"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The display labels.
 	DisplayLabels map[string]string `json:"displayLabels"`
 	// Duration.
@@ -41,17 +41,17 @@ type Incident struct {
 	// List of events.
 	Events []IncidentEvent `json:"events"`
 	// Unique identifier.
-	Id string `json:"id"`
+	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// The is muted.
 	IsMuted *bool `json:"isMuted,omitempty"`
 	// The last state update key.
-	LastStateUpdateKey string `json:"lastStateUpdateKey"`
+	LastStateUpdateKey string `json:"lastStateUpdateKey" validate:"regexp=^[\\s\\S]*$"`
 	// The last state update time.
 	LastStateUpdateTime time.Time `json:"lastStateUpdateTime"`
 	// Metadata labels.
 	MetaLabels []IncidentsV1MetaLabel `json:"metaLabels,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Severity IncidentSeverity `json:"severity"`
 	// The incident's current internal state, usually derived from the operational events of the incident
 	State IncidentState `json:"state"`

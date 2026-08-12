@@ -23,13 +23,13 @@ var _ MappedNullable = &ServiceNowActor{}
 // ServiceNowActor Information about the user who initiated the action in Service Now platform
 type ServiceNowActor struct {
 	// If the Service Now user is linked to a Coralogix user, this field contains the Coralogix user ID.
-	CoralogixUserId *string `json:"coralogixUserId,omitempty"`
+	CoralogixUserId *string `json:"coralogixUserId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// User ID
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Mail of the user
-	UserEmail *string `json:"userEmail,omitempty"`
+	UserEmail *string `json:"userEmail,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Username
-	Username *string `json:"username,omitempty"`
+	Username *string `json:"username,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

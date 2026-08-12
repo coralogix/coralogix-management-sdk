@@ -26,8 +26,8 @@ var _ MappedNullable = &Case{}
 type Case struct {
 	// When the case was acknowledged
 	AcknowledgeTime *time.Time `json:"acknowledgeTime,omitempty"`
-	// AI summary of the case
-	AiSummary *string `json:"aiSummary,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// AI summary of the case. Leading and trailing whitespace is trimmed before the length limits are applied.
+	AiSummary *string `json:"aiSummary,omitempty" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	// Assigned user details
 	Assignee *CasesV1UserDetails `json:"assignee,omitempty"`
 	// Grouped case indicators
@@ -60,8 +60,8 @@ type Case struct {
 	ResolutionDetails *ResolutionDetails `json:"resolutionDetails,omitempty"`
 	// Current status of the case
 	Status CaseStatus `json:"status"`
-	// Case title
-	Title string `json:"title" validate:"regexp=^[\\s\\S]*$"`
+	// Case title. Leading and trailing whitespace is trimmed before the length limits are applied.
+	Title string `json:"title" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	// When the case was last updated
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}

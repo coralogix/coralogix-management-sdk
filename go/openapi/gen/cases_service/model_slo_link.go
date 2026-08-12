@@ -23,7 +23,7 @@ var _ MappedNullable = &SloLink{}
 // SloLink Deep link to the SLO overview for an alert indicator on a case.
 type SloLink struct {
 	// SLO overview URL with the permutation preselected.
-	Slo *string `json:"slo,omitempty"`
+	Slo *string `json:"slo,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -23,15 +23,15 @@ var _ MappedNullable = &SlackCommentMetadata{}
 // SlackCommentMetadata Comment case event.
 type SlackCommentMetadata struct {
 	// Slack channel ID
-	ChannelId *string `json:"channelId,omitempty"`
+	ChannelId *string `json:"channelId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Slack thread ID
-	ThreadId *string `json:"threadId,omitempty"`
+	ThreadId *string `json:"threadId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Email of the Slack user
-	UserEmail *string `json:"userEmail,omitempty"`
+	UserEmail *string `json:"userEmail,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Slack user ID
-	UserId *string `json:"userId,omitempty"`
+	UserId *string `json:"userId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Slack workspace ID
-	WorkspaceId *string `json:"workspaceId,omitempty"`
+	WorkspaceId *string `json:"workspaceId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

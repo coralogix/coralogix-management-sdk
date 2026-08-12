@@ -28,6 +28,8 @@ type AlertIndicator struct {
 	AlertId string `json:"alertId" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Array of all alert version IDs for this indicator in the case. Includes the latest_alert_version.
 	AlertVersions []string `json:"alertVersions"`
+	// Array of custom DataPrime queries configured on the alert definition.
+	CustomDataprimeQueries []string `json:"customDataprimeQueries,omitempty"`
 	// How this indicator relates to other alerts (composite/combination/none).
 	GroupingType AlertGroupingType `json:"groupingType"`
 	// Last seen version ID of the triggered alert definition.
@@ -123,6 +125,38 @@ func (o *AlertIndicator) GetAlertVersionsOk() ([]string, bool) {
 // SetAlertVersions sets field value
 func (o *AlertIndicator) SetAlertVersions(v []string) {
 	o.AlertVersions = v
+}
+
+// GetCustomDataprimeQueries returns the CustomDataprimeQueries field value if set, zero value otherwise.
+func (o *AlertIndicator) GetCustomDataprimeQueries() []string {
+	if o == nil || IsNil(o.CustomDataprimeQueries) {
+		var ret []string
+		return ret
+	}
+	return o.CustomDataprimeQueries
+}
+
+// GetCustomDataprimeQueriesOk returns a tuple with the CustomDataprimeQueries field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertIndicator) GetCustomDataprimeQueriesOk() ([]string, bool) {
+	if o == nil || IsNil(o.CustomDataprimeQueries) {
+		return nil, false
+	}
+	return o.CustomDataprimeQueries, true
+}
+
+// HasCustomDataprimeQueries returns a boolean if a field has been set.
+func (o *AlertIndicator) HasCustomDataprimeQueries() bool {
+	if o != nil && !IsNil(o.CustomDataprimeQueries) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomDataprimeQueries gets a reference to the given []string and assigns it to the CustomDataprimeQueries field.
+func (o *AlertIndicator) SetCustomDataprimeQueries(v []string) {
+	o.CustomDataprimeQueries = v
 }
 
 // GetGroupingType returns the GroupingType field value
@@ -377,6 +411,9 @@ func (o AlertIndicator) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["alertId"] = o.AlertId
 	toSerialize["alertVersions"] = o.AlertVersions
+	if !IsNil(o.CustomDataprimeQueries) {
+		toSerialize["customDataprimeQueries"] = o.CustomDataprimeQueries
+	}
 	toSerialize["groupingType"] = o.GroupingType
 	toSerialize["latestAlertVersion"] = o.LatestAlertVersion
 	toSerialize["permutations"] = o.Permutations
@@ -445,6 +482,7 @@ func (o *AlertIndicator) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "alertId")
 		delete(additionalProperties, "alertVersions")
+		delete(additionalProperties, "customDataprimeQueries")
 		delete(additionalProperties, "groupingType")
 		delete(additionalProperties, "latestAlertVersion")
 		delete(additionalProperties, "permutations")

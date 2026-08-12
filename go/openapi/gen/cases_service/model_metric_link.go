@@ -23,7 +23,7 @@ var _ MappedNullable = &MetricLink{}
 // MetricLink Deep link to explore metrics related to an alert indicator on a case.
 type MetricLink struct {
 	// Explore metrics URL pre-filtered to the alert query and case time window.
-	Metrics *string `json:"metrics,omitempty"`
+	Metrics *string `json:"metrics,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -31,7 +31,7 @@ type NotificationDelivery struct {
 	// No router matched the notification request
 	NoRouterMatched map[string]interface{} `json:"noRouterMatched,omitempty"`
 	// The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests
-	RequestNotificationId *string `json:"requestNotificationId,omitempty"`
+	RequestNotificationId *string `json:"requestNotificationId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// When the notification was triggered
 	Timestamp time.Time `json:"timestamp"`
 	AdditionalProperties map[string]interface{}

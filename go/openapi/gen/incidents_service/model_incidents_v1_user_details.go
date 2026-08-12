@@ -24,7 +24,7 @@ var _ MappedNullable = &IncidentsV1UserDetails{}
 // IncidentsV1UserDetails User details.
 type IncidentsV1UserDetails struct {
 	// The user id.
-	UserId string `json:"userId"`
+	UserId string `json:"userId" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

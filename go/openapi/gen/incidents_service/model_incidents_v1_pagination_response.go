@@ -24,7 +24,7 @@ var _ MappedNullable = &IncidentsV1PaginationResponse{}
 // IncidentsV1PaginationResponse Pagination information for list responses
 type IncidentsV1PaginationResponse struct {
 	// Token for the next page of results
-	NextPageToken *string `json:"nextPageToken,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Total number of items available
 	TotalSize int64 `json:"totalSize"`
 	AdditionalProperties map[string]interface{}

@@ -6346,12 +6346,17 @@ paths:
                   description: Attachments to the comment
                   items:
                     $ref: '#/components/schemas/CommentAttachment'
+                  maxItems: 100
                   minItems: 0
                   type: array
                 text:
-                  description: Comment text to update
+                  description: >-
+                    Comment text to update. Leading and trailing whitespace is
+                    trimmed before the length limits are applied.
                   example: This is updated text
-                  minLength: 0
+                  maxLength: 10000
+                  minLength: 1
+                  pattern: ^[\s\S]*\S[\s\S]*$
                   type: string
               required:
                 - text
@@ -6686,18 +6691,22 @@ paths:
               description: Partial set of fields to update on the case
               properties:
                 resolutionReason:
-                  description: New case resolution reason
+                  description: >-
+                    New case resolution reason. Leading and trailing whitespace
+                    is trimmed before the length limits are applied.
                   example: False alarm
-                  maxLength: 4096
+                  maxLength: 500
                   minLength: 1
-                  pattern: ^[\s\S]*$
+                  pattern: ^[\s\S]*\S[\s\S]*$
                   type: string
                 title:
-                  description: New case title
+                  description: >-
+                    New case title. Leading and trailing whitespace is trimmed
+                    before the length limits are applied.
                   example: Database connection investigation
-                  maxLength: 4096
+                  maxLength: 512
                   minLength: 1
-                  pattern: ^[\s\S]*$
+                  pattern: ^[\s\S]*\S[\s\S]*$
                   type: string
               title: Case patch
               type: object
@@ -6880,7 +6889,10 @@ paths:
           schema:
             description: ID of the event to fetch
             example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
       responses:
         '200':
@@ -6942,7 +6954,10 @@ paths:
           schema:
             description: ID of the comment event to update
             example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
       requestBody:
         content:
@@ -6954,12 +6969,17 @@ paths:
                   description: Attachments to the comment
                   items:
                     $ref: '#/components/schemas/CommentAttachment'
+                  maxItems: 100
                   minItems: 0
                   type: array
                 text:
-                  description: Comment text to update
+                  description: >-
+                    Comment text to update. Leading and trailing whitespace is
+                    trimmed before the length limits are applied.
                   example: This is updated text
-                  minLength: 0
+                  maxLength: 10000
+                  minLength: 1
+                  pattern: ^[\s\S]*\S[\s\S]*$
                   type: string
               required:
                 - text
@@ -7025,7 +7045,10 @@ paths:
           schema:
             description: ID of the comment event to delete
             example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
       responses:
         '200':
@@ -7266,9 +7289,12 @@ paths:
                     - a1b2c3d4-e5f6-7890-abcd-ef1234567890
                   items:
                     description: Case IDs to retrieve notification deliveries for
-                    minLength: 0
+                    maxLength: 64
+                    minLength: 1
+                    pattern: ^[\s\S]*$
                     type: string
-                  minItems: 0
+                  maxItems: 1000
+                  minItems: 1
                   type: array
               required:
                 - caseIds
@@ -12137,16 +12163,22 @@ paths:
                 description: Filter by application names
                 items:
                   description: Filter by application names
-                  minLength: 0
+                  maxLength: 256
+                  minLength: 1
+                  pattern: ^[\s\S]*$
                   type: string
+                maxItems: 1000
                 minItems: 0
                 type: array
               assignee:
                 description: Filter by assignee
                 items:
                   description: Filter by assignee
-                  minLength: 0
+                  maxLength: 300
+                  minLength: 1
+                  pattern: ^[\s\S]*$
                   type: string
+                maxItems: 1000
                 minItems: 0
                 type: array
               contextualLabels:
@@ -12182,6 +12214,7 @@ paths:
                 description: Filters all incidents with the given meta labels
                 items:
                   $ref: '#/components/schemas/incidents.v1.MetaLabel'
+                maxItems: 1000
                 minItems: 0
                 type: array
               metaLabelsOp:
@@ -12196,6 +12229,7 @@ paths:
                 description: Filter by incident severity
                 items:
                   $ref: '#/components/schemas/IncidentSeverity'
+                maxItems: 1000
                 minItems: 0
                 type: array
               startTime:
@@ -12210,20 +12244,25 @@ paths:
                 description: Filter by incident state
                 items:
                   $ref: '#/components/schemas/IncidentState'
+                maxItems: 1000
                 minItems: 0
                 type: array
               status:
                 description: Filter by incident status
                 items:
                   $ref: '#/components/schemas/IncidentStatus'
+                maxItems: 1000
                 minItems: 0
                 type: array
               subsystemName:
                 description: Filter by subsystem names
                 items:
                   description: Filter by subsystem names
-                  minLength: 0
+                  maxLength: 256
+                  minLength: 1
+                  pattern: ^[\s\S]*$
                   type: string
+                maxItems: 1000
                 minItems: 0
                 type: array
             title: Incident query filter
@@ -12247,7 +12286,9 @@ paths:
               properties:
                 contextualLabel:
                   description: The contextual label to group by.
-                  minLength: 0
+                  maxLength: 256
+                  minLength: 1
+                  pattern: ^[\s\S]*$
                   type: string
                 incidentField:
                   allOf:
@@ -12261,6 +12302,7 @@ paths:
                   example: ORDER_BY_DIRECTION_ASC
               title: Incident group by
               type: object
+            maxItems: 100
             minItems: 0
             type: array
         - description: Pagination parameters
@@ -12273,15 +12315,18 @@ paths:
               url: ''
             properties:
               pageSize:
-                description: Number of items to return per page
+                description: Number of items to return per page.
                 example: 10
                 format: int64
-                minimum: 0
+                maximum: 10000
+                minimum: 1
                 type: integer
               pageToken:
                 description: Token for the next page of results
                 example: next_page_token
-                minLength: 0
+                maxLength: 4096
+                minLength: 1
+                pattern: ^[\s\S]*$
                 type: string
             required:
               - pageSize
@@ -12321,7 +12366,9 @@ paths:
     get:
       description: >-
         List incident events with support for filtering, pagination, and
-        ordering.
+        ordering. This operation accepts a page size of at most 1000 (it
+        defaults to 100 when pageSize is omitted) and rejects larger values,
+        even though the shared pagination schema documents a maximum of 10000.
 
 
         Requires the following permissions:
@@ -12359,18 +12406,22 @@ paths:
                 description: The labels of the incident
               name:
                 description: The name of the incident
-                minLength: 0
+                maxLength: 500
+                minLength: 1
+                pattern: ^[\s\S]*$
                 type: string
               severity:
                 description: The severity of the incident
                 items:
                   $ref: '#/components/schemas/IncidentSeverity'
+                maxItems: 1000
                 minItems: 0
                 type: array
               status:
                 description: The status of the incident
                 items:
                   $ref: '#/components/schemas/IncidentStatus'
+                maxItems: 1000
                 minItems: 0
                 type: array
               timestamp:
@@ -12379,7 +12430,10 @@ paths:
                 description: The time range of the incident
             title: Incident event query filter
             type: object
-        - description: Pagination parameters
+        - description: >-
+            Pagination parameters. This request accepts at most 1000 items per
+            page, and defaults to 100 when pageSize is omitted; the shared
+            maximum of 10000 does not apply here.
           in: query
           name: pagination
           required: false
@@ -12389,15 +12443,18 @@ paths:
               url: ''
             properties:
               pageSize:
-                description: Number of items to return per page
+                description: Number of items to return per page.
                 example: 10
                 format: int64
-                minimum: 0
+                maximum: 10000
+                minimum: 1
                 type: integer
               pageToken:
                 description: Token for the next page of results
                 example: next_page_token
-                minLength: 0
+                maxLength: 4096
+                minLength: 1
+                pattern: ^[\s\S]*$
                 type: string
             required:
               - pageSize
@@ -12492,18 +12549,22 @@ paths:
                 description: The labels of the incident
               name:
                 description: The name of the incident
-                minLength: 0
+                maxLength: 500
+                minLength: 1
+                pattern: ^[\s\S]*$
                 type: string
               severity:
                 description: The severity of the incident
                 items:
                   $ref: '#/components/schemas/IncidentSeverity'
+                maxItems: 1000
                 minItems: 0
                 type: array
               status:
                 description: The status of the incident
                 items:
                   $ref: '#/components/schemas/IncidentStatus'
+                maxItems: 1000
                 minItems: 0
                 type: array
               timestamp:
@@ -12563,7 +12624,9 @@ paths:
           schema:
             description: Event ID associated to the Incident to acknowledge
             example: event_id_1
-            minLength: 0
+            maxLength: 64
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
       responses:
         '200':
@@ -12613,7 +12676,9 @@ paths:
           schema:
             description: Event ID associated to the Incident to acknowledge
             example: event_id_1
-            minLength: 0
+            maxLength: 64
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
       responses:
         '200':
@@ -12663,7 +12728,9 @@ paths:
           schema:
             description: Event ID associated to the Incident to resolve
             example: event_id_1
-            minLength: 0
+            maxLength: 64
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
       responses:
         '200':
@@ -12786,18 +12853,22 @@ paths:
                 description: The labels of the incident
               name:
                 description: The name of the incident
-                minLength: 0
+                maxLength: 500
+                minLength: 1
+                pattern: ^[\s\S]*$
                 type: string
               severity:
                 description: The severity of the incident
                 items:
                   $ref: '#/components/schemas/IncidentSeverity'
+                maxItems: 1000
                 minItems: 0
                 type: array
               status:
                 description: The status of the incident
                 items:
                   $ref: '#/components/schemas/IncidentStatus'
+                maxItems: 1000
                 minItems: 0
                 type: array
               timestamp:
@@ -12855,9 +12926,13 @@ paths:
             description: The ids.
             items:
               description: The ids.
-              minLength: 0
+              maxLength: 36
+              minLength: 36
+              pattern: >-
+                ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
               type: string
-            minItems: 0
+            maxItems: 10000
+            minItems: 1
             type: array
       responses:
         '200':
@@ -12917,6 +12992,7 @@ paths:
                   description: Order by fields
                   items:
                     $ref: '#/components/schemas/v1.OrderBy'
+                  maxItems: 100
                   minItems: 0
                   type: array
                 pagination:
@@ -12974,13 +13050,17 @@ paths:
                 incidentIds:
                   description: List of incident IDs to acknowledge
                   example:
-                    - incident_id_1
-                    - incident_id_2
+                    - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+                    - 9c858901-8a57-4791-81fe-4c455b099bc9
                   items:
                     description: List of incident IDs to acknowledge
-                    minLength: 0
+                    maxLength: 36
+                    minLength: 36
+                    pattern: >-
+                      ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
                     type: string
-                  minItems: 0
+                  maxItems: 10000
+                  minItems: 1
                   type: array
               required:
                 - incidentIds
@@ -13040,13 +13120,17 @@ paths:
                 incidentIds:
                   description: List of incident IDs to assign
                   example:
-                    - incident_id_1
-                    - incident_id_2
+                    - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+                    - 9c858901-8a57-4791-81fe-4c455b099bc9
                   items:
                     description: List of incident IDs to assign
-                    minLength: 0
+                    maxLength: 36
+                    minLength: 36
+                    pattern: >-
+                      ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
                     type: string
-                  minItems: 0
+                  maxItems: 10000
+                  minItems: 1
                   type: array
               required:
                 - incidentIds
@@ -13101,13 +13185,17 @@ paths:
           schema:
             description: List of incident IDs to unassign
             example:
-              - incident_id_1
-              - incident_id_2
+              - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+              - 9c858901-8a57-4791-81fe-4c455b099bc9
             items:
               description: List of incident IDs to unassign
-              minLength: 0
+              maxLength: 36
+              minLength: 36
+              pattern: >-
+                ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
               type: string
-            minItems: 0
+            maxItems: 10000
+            minItems: 1
             type: array
       responses:
         '200':
@@ -13158,13 +13246,17 @@ paths:
                 incidentIds:
                   description: List of incident IDs to close
                   example:
-                    - incident_id_1
-                    - incident_id_2
+                    - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+                    - 9c858901-8a57-4791-81fe-4c455b099bc9
                   items:
                     description: List of incident IDs to close
-                    minLength: 0
+                    maxLength: 36
+                    minLength: 36
+                    pattern: >-
+                      ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
                     type: string
-                  minItems: 0
+                  maxItems: 10000
+                  minItems: 1
                   type: array
               required:
                 - incidentIds
@@ -13220,13 +13312,17 @@ paths:
                 incidentIds:
                   description: List of incident IDs to resolve
                   example:
-                    - incident_id_1
-                    - incident_id_2
+                    - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+                    - 9c858901-8a57-4791-81fe-4c455b099bc9
                   items:
                     description: List of incident IDs to resolve
-                    minLength: 0
+                    maxLength: 36
+                    minLength: 36
+                    pattern: >-
+                      ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
                     type: string
-                  minItems: 0
+                  maxItems: 10000
+                  minItems: 1
                   type: array
               required:
                 - incidentIds
@@ -13283,8 +13379,11 @@ paths:
           required: true
           schema:
             description: Unique identifier.
-            example: incident_id
-            minLength: 0
+            example: 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
       responses:
         '200':
@@ -13337,8 +13436,11 @@ paths:
           required: true
           schema:
             description: ID of the incident to retrieve events for
-            example: incident_id
-            minLength: 0
+            example: 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
       responses:
         '200':
@@ -18996,7 +19098,9 @@ components:
       type: object
       properties:
         eventId:
-          minLength: 0
+          maxLength: 64
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Event ID associated to the Incident to acknowledge
           example: event_id_1
@@ -19023,16 +19127,20 @@ components:
       type: object
       properties:
         incidentIds:
-          minItems: 0
+          maxItems: 10000
+          minItems: 1
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: List of incident IDs to acknowledge
           description: List of incident IDs to acknowledge
           example:
-            - incident_id_1
-            - incident_id_2
+            - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+            - 9c858901-8a57-4791-81fe-4c455b099bc9
       description: Request to acknowledge one or more incidents
       externalDocs:
         url: ''
@@ -19043,6 +19151,7 @@ components:
       type: object
       properties:
         incidents:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
@@ -19508,6 +19617,25 @@ components:
       description: AI Application
       externalDocs:
         url: ''
+    AiCenterProduct:
+      enum:
+        - AI_CENTER_PRODUCT_UNSPECIFIED
+        - CLAUDE_CODE
+        - GITHUB_COPILOT
+        - CURSOR
+        - CODEX
+        - OPENCLAW
+        - OPENCODE
+        - CLAUDE_AI
+        - CHATGPT
+      type: string
+      description: >-
+        The AI product whose usage data reaches Coralogix. The AI Center Code
+        Agents view tracks these together, so the set spans coding agents and
+        the chat products of the same vendors - CLAUDE_AI alongside CLAUDE_CODE,
+        CHATGPT alongside CODEX - because a team adopting one usually adopts the
+        other and both arrive through the same vendor integrations. New values
+        are added over time; clients must tolerate values they do not recognize.
     AiEvaluation:
       type: object
       properties:
@@ -20711,6 +20839,23 @@ components:
           example:
             - 1eae3615-79e7-4b54-88e0-6a77def653bf
             - 2fbf4726-8af8-5c65-99f1-7b88ef764c0g
+        customDataprimeQueries:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            maxLength: 65535
+            minLength: 1
+            pattern: ^[\s\S]*$
+            type: string
+            description: >-
+              Array of custom DataPrime queries configured on the alert
+              definition.
+          description: >-
+            Array of custom DataPrime queries configured on the alert
+            definition.
+          example:
+            - source logs | filter $d.severity == 'ERROR'
         groupingType:
           allOf:
             - $ref: '#/components/schemas/AlertGroupingType'
@@ -20835,7 +20980,9 @@ components:
                 type: object
       properties:
         alertDef:
+          maxLength: 2048
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             URL to the alert definition that triggered the indicator. Empty when
@@ -21198,6 +21345,7 @@ components:
         - ANALYTICS_THRESHOLD_OPERATOR_MORE_THAN_OR_EQUALS
         - ANALYTICS_THRESHOLD_OPERATOR_LESS_THAN_OR_EQUALS
         - ANALYTICS_THRESHOLD_OPERATOR_EQUALS
+        - ANALYTICS_THRESHOLD_OPERATOR_NOT_EQUALS
       type: string
       description: The comparison operator applied to analytics threshold rules.
     AnalyticsThresholdRule:
@@ -21565,12 +21713,16 @@ components:
       type: object
       properties:
         id:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: API key ID
           example: 2b1c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e
         name:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: API key name
           example: Incident Management Integration Key
@@ -22193,16 +22345,20 @@ components:
             - $ref: '#/components/schemas/incidents.v1.UserDetails'
           description: User to assign the incidents to
         incidentIds:
-          minItems: 0
+          maxItems: 10000
+          minItems: 1
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: List of incident IDs to assign
           description: List of incident IDs to assign
           example:
-            - incident_id_1
-            - incident_id_2
+            - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+            - 9c858901-8a57-4791-81fe-4c455b099bc9
       description: Request to assign one or more incidents to a user
       externalDocs:
         url: ''
@@ -22213,6 +22369,7 @@ components:
       type: object
       properties:
         incidents:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
@@ -22226,12 +22383,18 @@ components:
       type: object
       properties:
         assigneeUserId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: New assignee user ID
           example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
         previousAssigneeUserId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Previous assignee user ID (if any)
       description: Assigned case event.
@@ -22322,11 +22485,15 @@ components:
       type: object
       properties:
         assignee:
-          minLength: 0
+          maxLength: 300
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Assignee.
           example: assignee
         count:
+          maximum: 1000000000
+          minimum: 0
           type: integer
           description: Number of items.
           format: int32
@@ -23502,10 +23669,14 @@ components:
       type: object
       properties:
         ids:
-          minItems: 0
+          maxItems: 10000
+          minItems: 1
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: The ids.
           description: The ids.
@@ -23525,16 +23696,20 @@ components:
             $ref: '#/components/schemas/Incident'
           description: Map of incident IDs to their corresponding incidents
         notFoundIds:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: List of IDs that were not found
           description: List of IDs that were not found
           example:
-            - not_found_id_1
-            - not_found_id_2
+            - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+            - 9c858901-8a57-4791-81fe-4c455b099bc9
       description: >-
         Response containing the requested incidents and any IDs that weren't
         found
@@ -24463,11 +24638,13 @@ components:
           description: When the case was acknowledged
           format: date-time
         aiSummary:
-          maxLength: 4096
+          maxLength: 10000
           minLength: 1
-          pattern: ^[\s\S]*$
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: AI summary of the case
+          description: >-
+            AI summary of the case. Leading and trailing whitespace is trimmed
+            before the length limits are applied.
         assignee:
           allOf:
             - $ref: '#/components/schemas/cases.v1.UserDetails'
@@ -24562,11 +24739,13 @@ components:
           description: Current status of the case
           example: CASE_STATUS_ACKNOWLEDGED
         title:
-          maxLength: 4096
+          maxLength: 512
           minLength: 1
-          pattern: ^[\s\S]*$
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: Case title
+          description: >-
+            Case title. Leading and trailing whitespace is trimmed before the
+            length limits are applied.
           example: Database outage investigation
         updateTime:
           maxLength: 30
@@ -24595,10 +24774,13 @@ components:
             $ref: '#/components/schemas/AlertIndicatorDeepLink'
           description: Per-alert-indicator deep links, keyed by alert_indicator_id.
         detail:
-          minLength: 0
+          maxLength: 2048
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Absolute URL to the case detail page.
         impactedEntities:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -24632,7 +24814,10 @@ components:
             - $ref: '#/components/schemas/CaseEventData'
           description: Event payload (assignment, comment, status change, etc.)
         eventId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier of the event
           example: ef51d3d9-a301-496b-aa7d-9a6e519ba0d5
@@ -25026,6 +25211,7 @@ components:
       type: object
       properties:
         notificationDeliveries:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -25079,18 +25265,22 @@ components:
       type: object
       properties:
         resolutionReason:
-          maxLength: 4096
+          maxLength: 500
           minLength: 1
-          pattern: ^[\s\S]*$
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: New case resolution reason
+          description: >-
+            New case resolution reason. Leading and trailing whitespace is
+            trimmed before the length limits are applied.
           example: False alarm
         title:
-          maxLength: 4096
+          maxLength: 512
           minLength: 1
-          pattern: ^[\s\S]*$
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: New case title
+          description: >-
+            New case title. Leading and trailing whitespace is trimmed before
+            the length limits are applied.
           example: Database connection investigation
       description: Partial set of fields to update on the case
       externalDocs:
@@ -25480,16 +25670,20 @@ components:
       type: object
       properties:
         incidentIds:
-          minItems: 0
+          maxItems: 10000
+          minItems: 1
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: List of incident IDs to close
           description: List of incident IDs to close
           example:
-            - incident_id_1
-            - incident_id_2
+            - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+            - 9c858901-8a57-4791-81fe-4c455b099bc9
       description: Request to close one or more incidents
       externalDocs:
         url: ''
@@ -25500,6 +25694,7 @@ components:
       type: object
       properties:
         incidents:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
@@ -25589,6 +25784,51 @@ components:
         - UNAVAILABLE
         - DATA_LOSS
       type: string
+    CodeAgentIntegration:
+      type: object
+      properties:
+        integrationTypes:
+          maxItems: 25
+          minItems: 1
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeAgentIntegrationType'
+          description: >-
+            The integration types this product is marked for, ordered by name; a
+            team may have only some of them. Never empty and never contains
+            CODE_AGENT_INTEGRATION_TYPE_UNSPECIFIED.
+        product:
+          allOf:
+            - $ref: '#/components/schemas/AiCenterProduct'
+          description: The AI product this entry describes.
+      description: >-
+        A single AI product that is marked as successfully integrated for the
+        team, together with the integration types it is integrated through.
+      externalDocs:
+        url: ''
+    CodeAgentIntegrationType:
+      enum:
+        - CODE_AGENT_INTEGRATION_TYPE_UNSPECIFIED
+        - NATIVE_OTLP
+        - CORALOGIX_HOOK
+        - VENDOR_ADMIN_API
+        - VENDOR_ANALYTICS_API
+        - VENDOR_GITHUB_APP
+        - VENDOR_COMPLIANCE_API
+        - VENDOR_ORG_API
+        - VENDOR_AGENT_API
+        - CORALOGIX_TRANSCRIPT_COLLECTOR
+        - VENDOR_TEAM_API
+      type: string
+      description: >-
+        How an AI product's usage data reaches Coralogix. Values are generic and
+        read together with the product: VENDOR_ANALYTICS_API is the Anthropic
+        Analytics key under CLAUDE_CODE and the OpenAI Codex Analytics key under
+        CODEX. Any accepted product may be paired with any integration type;
+        which combinations carry data depends on the integrations that exist at
+        the time, not on this contract. New values are added over time; clients
+        must tolerate values they do not recognize.
     ColorApplyTarget:
       enum:
         - COLOR_APPLY_TARGET_UNSPECIFIED
@@ -25867,6 +26107,7 @@ components:
                 type: object
       properties:
         attachments:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -25881,9 +26122,13 @@ components:
             - $ref: '#/components/schemas/SlackCommentMetadata'
           description: Slack-specific comment metadata
         unsafeText:
-          minLength: 0
+          maxLength: 10000
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: Comment text
+          description: >-
+            Comment text. Leading and trailing whitespace is trimmed before the
+            length limits are applied.
           example: Looking into DB timeouts
       description: Event recorded when a user posts a comment on a case.
       externalDocs:
@@ -26652,12 +26897,16 @@ components:
       type: object
       properties:
         connectorId:
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
           type: string
           description: Unique identifier of the connector
           example: c1d2e3f4-5678-90ab-cdef-1234567890ab
         connectorName:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Display name of the connector
           example: Production Slack
@@ -26905,11 +27154,15 @@ components:
       type: object
       properties:
         contextualLabelValue:
+          maxLength: 4096
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: The contextual label value.
           example: contextual_label_value
         count:
+          maximum: 1000000000
+          minimum: 0
           type: integer
           description: Number of items.
           format: int32
@@ -26923,10 +27176,13 @@ components:
       type: object
       properties:
         contextualLabelValues:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
+            maxLength: 4096
             minLength: 0
+            pattern: ^[\s\S]*$
             type: string
             description: The contextual label values.
           description: The contextual label values.
@@ -26940,6 +27196,7 @@ components:
       type: object
       properties:
         valuesWithCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -26955,12 +27212,16 @@ components:
       type: object
       properties:
         fieldName:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The field name.
           example: field_name
         fieldValue:
+          maxLength: 4096
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: The field value.
           example: field_value
@@ -27416,6 +27677,7 @@ components:
       type: object
       properties:
         attachments:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -27433,9 +27695,13 @@ components:
             `readable_id` field, e.g. `CASE-123`).
           example: 3f166e9f-3c88-4af2-b52e-138f339dab3e
         text:
-          minLength: 0
+          maxLength: 10000
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: Comment text to update
+          description: >-
+            Comment text to update. Leading and trailing whitespace is trimmed
+            before the length limits are applied.
           example: This is updated text
       description: Request for creating a comment on a case.
       externalDocs:
@@ -28459,25 +28725,50 @@ components:
         url: >-
           https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
     CreateTeamInOrgRequest:
+      required:
+        - teamName
       type: object
       properties:
         dailyQuota:
           type: number
+          description: >-
+            Daily quota to assign to the new team, in quota units per day.
+            Defaults to 0.01 when omitted.
           format: double
         teamAdminsEmail:
+          maxItems: 100
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 320
+            minLength: 1
+            pattern: ^[^@\s]+@[^@\s]+$
             type: string
+            description: >-
+              Email addresses of the users to add to the new team as
+              administrators.
+          description: >-
+            Email addresses of the users to add to the new team as
+            administrators.
         teamName:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
+          description: Display name of the team to create.
+      description: Request to create a team in the calling user's organization.
+      externalDocs:
+        url: ''
     CreateTeamInOrgResponse:
       type: object
       properties:
         teamId:
-          $ref: '#/components/schemas/v2.TeamId'
+          allOf:
+            - $ref: '#/components/schemas/v2.TeamId'
+          description: Identifier of the created team.
+      description: Response containing the identifier of the created team.
+      externalDocs:
+        url: ''
     CreateUserRequest:
       type: object
       properties:
@@ -28643,21 +28934,31 @@ components:
       type: object
       properties:
         customDashboardId:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: Unique identifier of the custom dashboard
+          description: >-
+            Unique identifier of the custom dashboard. Leading and trailing
+            whitespace is trimmed before the length limits are applied.
           example: dashboard_3f166e9f-3c88-4af2-b52e-138f339dab3e
         queryLinkSuffix:
+          maxLength: 4096
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             URL suffix for accessing the widget (not including the Coralogix
             domain part)
           example: /dashboards/custom/123/widgets/456?time=123456789
         widgetId:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: Unique identifier of the widget within the dashboard
+          description: >-
+            Unique identifier of the widget within the dashboard. Leading and
+            trailing whitespace is trimmed before the length limits are applied.
           example: widget_a1b2c3d4-e5f6-7890-abcd-ef1234567890
         widgetScreenshot:
           allOf:
@@ -30342,7 +30643,10 @@ components:
       type: object
       properties:
         eventId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: ID of the comment event to delete
           example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
@@ -30946,10 +31250,18 @@ components:
       type: object
       properties:
         teamId:
-          $ref: '#/components/schemas/v2.TeamId'
+          allOf:
+            - $ref: '#/components/schemas/v2.TeamId'
+          description: Identifier of the team to delete.
+      description: Request to delete a team.
+      externalDocs:
+        url: ''
     DeleteTeamResponse:
       type: object
       additionalProperties: false
+      description: Empty response returned after deleting a team.
+      externalDocs:
+        url: ''
     DeleteViewFolderRequest:
       type: object
       properties:
@@ -31022,7 +31334,9 @@ components:
       type: object
       properties:
         errorMessage:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Error message describing the failure
           example: Connection timeout after 30s
@@ -31065,7 +31379,9 @@ components:
       type: object
       properties:
         evidenceUrl:
-          minLength: 0
+          maxLength: 2048
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             URL to the delivered notification, if available (e.g. Slack message,
@@ -31470,12 +31786,16 @@ components:
       type: object
       properties:
         count:
+          maximum: 1000000000
+          minimum: 0
           type: integer
           description: Number of items.
           format: int32
           example: 10
         displayLabelValue:
+          maxLength: 4096
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: The display label value.
           example: display_label_value
@@ -31488,10 +31808,13 @@ components:
       type: object
       properties:
         displayLabelValues:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
+            maxLength: 4096
             minLength: 0
+            pattern: ^[\s\S]*$
             type: string
             description: The display label values.
           description: The display label values.
@@ -31505,6 +31828,7 @@ components:
       type: object
       properties:
         valuesWithCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -32803,6 +33127,33 @@ components:
           type: string
           description: The to.
           format: date-time
+    EventMetricEquals:
+      type: object
+      properties:
+        avgValueAcrossThreshold:
+          type: number
+          format: float
+        fromTimestamp:
+          minLength: 0
+          type: string
+          format: date-time
+        isDeadman:
+          type: boolean
+        maxValueAcrossThreshold:
+          type: number
+          format: float
+        minValueAcrossThreshold:
+          type: number
+          format: float
+        percentageOverThreshold:
+          type: number
+          format: float
+        severity:
+          $ref: '#/components/schemas/AlertDefSeverity'
+        toTimestamp:
+          minLength: 0
+          type: string
+          format: date-time
     EventMetricLessThan:
       type: object
       properties:
@@ -32892,6 +33243,33 @@ components:
           minLength: 0
           type: string
           format: date-time
+        maxValueAcrossThreshold:
+          type: number
+          format: float
+        minValueAcrossThreshold:
+          type: number
+          format: float
+        percentageOverThreshold:
+          type: number
+          format: float
+        severity:
+          $ref: '#/components/schemas/AlertDefSeverity'
+        toTimestamp:
+          minLength: 0
+          type: string
+          format: date-time
+    EventMetricNotEquals:
+      type: object
+      properties:
+        avgValueAcrossThreshold:
+          type: number
+          format: float
+        fromTimestamp:
+          minLength: 0
+          type: string
+          format: date-time
+        isDeadman:
+          type: boolean
         maxValueAcrossThreshold:
           type: number
           format: float
@@ -33140,6 +33518,26 @@ components:
         start hour.
       externalDocs:
         url: ''
+    EventStandardEquals:
+      type: object
+      properties:
+        fromTimestamp:
+          minLength: 0
+          type: string
+          format: date-time
+        hitValue:
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+        isDeadman:
+          type: boolean
+        severity:
+          $ref: '#/components/schemas/AlertDefSeverity'
+        toTimestamp:
+          minLength: 0
+          type: string
+          format: date-time
     EventStandardImmediate:
       type: object
       properties:
@@ -33213,6 +33611,26 @@ components:
           $ref: '#/components/schemas/v5.EventStandardMoreThanUsual'
         prediction:
           $ref: '#/components/schemas/v5.Prediction'
+    EventStandardNotEquals:
+      type: object
+      properties:
+        fromTimestamp:
+          minLength: 0
+          type: string
+          format: date-time
+        hitValue:
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+        isDeadman:
+          type: boolean
+        severity:
+          $ref: '#/components/schemas/AlertDefSeverity'
+        toTimestamp:
+          minLength: 0
+          type: string
+          format: date-time
     EventStandardUnusualPayload:
       type: object
       properties:
@@ -34516,14 +34934,21 @@ components:
       type: object
       properties:
         fileId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier of the file (same id as used in blobset flow)
-          example: file_a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          example: 3f2504e0-4f89-11d3-9a0c-0305e82c3301
         fileName:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: Original name of the attached file
+          description: >-
+            Original name of the attached file. Leading and trailing whitespace
+            is trimmed before the length limits are applied.
           example: screenshot_2025-09-22.png
         isDeleted:
           type: boolean
@@ -36139,6 +36564,31 @@ components:
             - $ref: '#/components/schemas/AiApplication'
           description: The AI application.
       description: Response containing the requested AI application.
+      externalDocs:
+        url: ''
+    GetAiCenterCodeAgentsRequest:
+      type: object
+      additionalProperties: false
+      description: >-
+        Request to get the code agents already marked as successfully
+        integrated. Team is resolved from auth context.
+      externalDocs:
+        url: ''
+    GetAiCenterCodeAgentsResponse:
+      type: object
+      properties:
+        codeAgents:
+          maxItems: 50
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeAgentIntegration'
+          description: >-
+            The code agents marked as successfully integrated, each with its
+            marked integration types.
+      description: >-
+        Response containing the code agents already marked as successfully
+        integrated, each with its marked integration types.
       externalDocs:
         url: ''
     GetAiEvaluationRequest:
@@ -38094,7 +38544,9 @@ components:
       type: object
       properties:
         eventId:
-          minLength: 0
+          maxLength: 64
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Event ID associated to the Incident to acknowledge
           example: event_id_1
@@ -38120,10 +38572,13 @@ components:
       type: object
       properties:
         incidentId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: ID of the incident to retrieve events for
-          example: incident_id
+          example: 3f2504e0-4f89-11d3-9a0c-0305e82c3301
       description: Request to get all events associated with a specific incident
       externalDocs:
         url: ''
@@ -38132,6 +38587,7 @@ components:
       type: object
       properties:
         incidentEvents:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
@@ -38147,10 +38603,13 @@ components:
       type: object
       properties:
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier.
-          example: incident_id
+          example: 3f2504e0-4f89-11d3-9a0c-0305e82c3301
       externalDocs:
         url: ''
     GetIncidentResponse:
@@ -38174,12 +38633,15 @@ components:
       type: object
       properties:
         correlationKey:
-          minLength: 0
+          maxLength: 36
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Correlation key to identify the incident
           example: correlation_key_123
         incidentPointInTime:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: Timestamp to identify the specific point in time for the incident
           format: date-time
@@ -39794,37 +40256,68 @@ components:
       type: object
       properties:
         teamId:
-          $ref: '#/components/schemas/v2.TeamId'
+          allOf:
+            - $ref: '#/components/schemas/v2.TeamId'
+          description: Identifier of the team whose quota is retrieved.
+      description: Request to retrieve the quota settings of a team.
+      externalDocs:
+        url: ''
     GetTeamQuotaResponse:
       type: object
       properties:
         quota:
           type: number
+          description: Daily quota assigned to the team, in quota units per day.
           format: float
         retention:
+          maximum: 2147483647
+          minimum: 0
           type: integer
+          description: Retention period of the team's data, in days.
           format: int32
         teamId:
-          $ref: '#/components/schemas/v2.TeamId'
+          allOf:
+            - $ref: '#/components/schemas/v2.TeamId'
+          description: Identifier of the team.
+      description: Response containing the quota settings of a team.
+      externalDocs:
+        url: ''
     GetTeamRequest:
       type: object
       properties:
         teamId:
-          $ref: '#/components/schemas/v2.TeamId'
+          allOf:
+            - $ref: '#/components/schemas/v2.TeamId'
+          description: Identifier of the team to retrieve.
+      description: Request to retrieve a single team.
+      externalDocs:
+        url: ''
     GetTeamResponse:
       type: object
       properties:
         dailyQuota:
           type: number
+          description: Daily quota assigned to the team, in quota units per day.
           format: double
         retention:
+          maximum: 2147483647
+          minimum: 0
           type: integer
+          description: Retention period of the team's data, in days.
           format: int32
         teamId:
-          $ref: '#/components/schemas/v2.TeamId'
+          allOf:
+            - $ref: '#/components/schemas/v2.TeamId'
+          description: Identifier of the team.
         teamName:
+          maxLength: 255
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
+          description: Display name of the team.
+      description: Response containing the requested team.
+      externalDocs:
+        url: ''
     GetTeamScopesByIdsRequest:
       title: Get Team Scopes By Ids Request
       required:
@@ -40022,6 +40515,7 @@ components:
             Enable/disable this setting. When this is disabled, no alerts will
             be processed for cases.
         filteringConditions:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -40146,7 +40640,9 @@ components:
           type: object
       properties:
         contextualLabel:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The contextual label to group by.
         incidentField:
@@ -41708,7 +42204,9 @@ components:
             - $ref: '#/components/schemas/ImpactedEntity'
           description: The impacted entity.
         url:
-          minLength: 0
+          maxLength: 2048
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Absolute URL to the entity drilldown view.
       description: >-
@@ -41833,13 +42331,15 @@ components:
       type: object
       properties:
         assignments:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/Assignment'
           description: The assignments.
         closedAt:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: The closed at.
           format: date-time
@@ -41851,13 +42351,16 @@ components:
             type: string
           description: The contextual labels.
         createdAt:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: Creation timestamp.
           format: date-time
           example: '2024-01-01T00:00:00.000Z'
         description:
-          minLength: 0
+          maxLength: 2000
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Human-readable description.
           example: incident_description
@@ -41872,39 +42375,49 @@ components:
           type: string
           description: Duration.
         events:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentEvent'
           description: List of events.
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier.
-          example: incident_id
+          example: 3f2504e0-4f89-11d3-9a0c-0305e82c3301
         isMuted:
           type: boolean
           description: The is muted.
           example: false
         lastStateUpdateKey:
-          minLength: 0
+          maxLength: 2000
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The last state update key.
           example: last_state_update_key
         lastStateUpdateTime:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: The last state update time.
           format: date-time
           example: '2024-01-01T00:00:00.000Z'
         metaLabels:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/incidents.v1.MetaLabel'
           description: Metadata labels.
         name:
-          minLength: 0
+          maxLength: 500
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Display name.
           example: incident_name
@@ -41956,66 +42469,80 @@ components:
       type: object
       properties:
         aggAssignmentsCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentAssignmentCount'
           description: The agg assignments count.
         aggMetaLabelsCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentMetaLabelsCount'
           description: The agg meta labels count.
         aggSeverityCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentSeverityCount'
           description: The agg severity count.
         aggStateCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentStateCount'
           description: The agg state count.
         aggStatusCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentStatusCount'
           description: The agg status count.
         allValuesCount:
+          maximum: 1000000000
           minimum: 0
           type: integer
           description: The all values count.
           format: int64
         firstCreatedAt:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: The first created at.
           format: date-time
         groupBysValue:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/GroupByValues'
           description: The group bys value.
         lastClosedAt:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: The last closed at.
           format: date-time
         lastStateUpdateTime:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: The last state update time.
           format: date-time
         listIncidentsId:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: The list incidents id.
           description: The list incidents id.
@@ -42031,6 +42558,7 @@ components:
         assignedTo:
           $ref: '#/components/schemas/incidents.v1.UserDetails'
         count:
+          maximum: 1000000000
           minimum: 0
           type: integer
           description: Number of items.
@@ -42082,7 +42610,9 @@ components:
         close:
           $ref: '#/components/schemas/IncidentEventClose'
         id:
-          minLength: 0
+          maxLength: 64
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The ID of the incident event
           example: incident_event_id
@@ -42152,7 +42682,9 @@ components:
       type: object
       properties:
         cxEventKey:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The cx event key.
         cxEventTimestamp:
@@ -42170,25 +42702,33 @@ components:
       type: object
       properties:
         alertGroupByFields:
+          maxItems: 100
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 256
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: The alert group by fields.
           description: The alert group by fields.
         alertId:
-          minLength: 0
+          maxLength: 64
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Unique identifier of the alert.
         alertLabels:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/incidents.v1.MetaLabel'
           description: The alert labels.
         alertName:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The alert name.
         alertType:
@@ -42220,7 +42760,9 @@ components:
       type: object
       properties:
         userId:
-          minLength: 0
+          maxLength: 300
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The user id.
       description: Incident event originator administrative.
@@ -42230,7 +42772,9 @@ components:
       type: object
       properties:
         systemName:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The system name.
       description: Incident event originator operational.
@@ -42258,16 +42802,20 @@ components:
             - $ref: '#/components/schemas/LabelsFilter'
           description: The labels of the incident
         name:
-          minLength: 0
+          maxLength: 500
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The name of the incident
         severity:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentSeverity'
           description: The severity of the incident
         status:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -42301,8 +42849,10 @@ components:
       type: object
       properties:
         durationMinutes:
+          maximum: 525960
+          minimum: 1
           type: integer
-          description: The duration minutes.
+          description: Duration of the snooze in minutes.
           format: int32
         startTime:
           minLength: 0
@@ -42310,7 +42860,9 @@ components:
           description: Start time.
           format: date-time
         userId:
-          minLength: 0
+          maxLength: 300
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The user id.
       description: Incident event snooze indicator.
@@ -42425,16 +42977,20 @@ components:
                 type: object
       properties:
         applicationName:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Application associated with the incident.
         closedAt:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: Timestamp when the incident was closed.
           format: date-time
         createdAt:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: Timestamp when the incident was created.
           format: date-time
@@ -42443,16 +42999,22 @@ components:
           type: string
           description: Duration.
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier of the incident.
         lastStateUpdateTime:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: Timestamp of the most recent state change.
           format: date-time
         name:
-          minLength: 0
+          maxLength: 500
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Display name of the incident.
         severity:
@@ -42468,7 +43030,9 @@ components:
             - $ref: '#/components/schemas/IncidentStatus'
           description: Current status of the incident.
         subsystemName:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Subsystem associated with the incident.
       description: Incident field one of.
@@ -42498,6 +43062,7 @@ components:
       type: object
       properties:
         count:
+          maximum: 1000000000
           minimum: 0
           type: integer
           description: Number of items.
@@ -42515,6 +43080,8 @@ components:
       type: object
       properties:
         count:
+          maximum: 1000000000
+          minimum: 0
           type: integer
           description: Number of items.
           format: int32
@@ -42537,18 +43104,24 @@ components:
       type: object
       properties:
         applicationName:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 256
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: Filter by application names
           description: Filter by application names
         assignee:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 300
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: Filter by assignee
           description: Filter by assignee
@@ -42582,6 +43155,7 @@ components:
           type: boolean
           description: Indicates if the incident is muted
         metaLabels:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -42596,6 +43170,7 @@ components:
             - $ref: '#/components/schemas/IncidentSearchQuery'
           description: Search query for incidents
         severity:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -42610,22 +43185,27 @@ components:
           format: date-time
           deprecated: true
         state:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentState'
           description: Filter by incident state
         status:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentStatus'
           description: Filter by incident status
         subsystemName:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
-            minLength: 0
+            maxLength: 256
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: Filter by subsystem names
           description: Filter by subsystem names
@@ -42662,6 +43242,7 @@ components:
       type: object
       properties:
         assigneeWithCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -42680,24 +43261,28 @@ components:
         metaLabelsOp:
           $ref: '#/components/schemas/v1.FilterOperator'
         metaLabelsWithCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentMetaLabelsWithCount'
           description: The meta labels with count.
         severityWithCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentSeverityWithCount'
           description: The severity with count.
         stateWithCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/IncidentStateWithCount'
           description: The state with count.
         statusWithCount:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -42736,7 +43321,9 @@ components:
           type: object
       properties:
         contextualLabel:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The contextual label to search in.
         incidentField:
@@ -42745,7 +43332,9 @@ components:
           description: The field to search in
           example: INCIDENTS_FIELDS_STATUS
         query:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The search query
           example: error
@@ -42770,6 +43359,7 @@ components:
       type: object
       properties:
         count:
+          maximum: 1000000000
           minimum: 0
           type: integer
           description: Number of items.
@@ -42787,6 +43377,8 @@ components:
       type: object
       properties:
         count:
+          maximum: 1000000000
+          minimum: 0
           type: integer
           description: Number of items.
           format: int32
@@ -42810,6 +43402,7 @@ components:
       type: object
       properties:
         count:
+          maximum: 1000000000
           minimum: 0
           type: integer
           description: Number of items.
@@ -42827,6 +43420,8 @@ components:
       type: object
       properties:
         count:
+          maximum: 1000000000
+          minimum: 0
           type: integer
           description: Number of items.
           format: int32
@@ -42853,6 +43448,7 @@ components:
       type: object
       properties:
         count:
+          maximum: 1000000000
           minimum: 0
           type: integer
           description: Number of items.
@@ -42870,6 +43466,8 @@ components:
       type: object
       properties:
         count:
+          maximum: 1000000000
+          minimum: 0
           type: integer
           description: Number of items.
           format: int32
@@ -44187,6 +44785,7 @@ components:
       type: object
       properties:
         metaLabels:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -45441,6 +46040,7 @@ components:
             - $ref: '#/components/schemas/IncidentQueryFilter'
           description: Filter for incidents
         groupBys:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -45463,6 +46063,7 @@ components:
       type: object
       properties:
         incidentAggs:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
@@ -45528,7 +46129,10 @@ components:
         pagination:
           allOf:
             - $ref: '#/components/schemas/incidents.v1.PaginationRequest'
-          description: Pagination parameters
+          description: >-
+            Pagination parameters. This request accepts at most 1000 items per
+            page, and defaults to 100 when pageSize is omitted; the shared
+            maximum of 10000 does not apply here.
       description: >-
         Request to list incident events with filtering, pagination and ordering
         options
@@ -45541,6 +46145,7 @@ components:
       type: object
       properties:
         items:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -45595,6 +46200,7 @@ components:
             - $ref: '#/components/schemas/IncidentQueryFilter'
           description: Filter for incidents
         orderBys:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -45617,6 +46223,7 @@ components:
       type: object
       properties:
         incidents:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
@@ -45700,10 +46307,13 @@ components:
       type: object
       properties:
         caseIds:
-          minItems: 0
+          maxItems: 1000
+          minItems: 1
           type: array
           items:
-            minLength: 0
+            maxLength: 64
+            minLength: 1
+            pattern: ^[\s\S]*$
             type: string
             description: Case IDs to retrieve notification deliveries for
           description: Case IDs to retrieve notification deliveries for
@@ -45901,32 +46511,52 @@ components:
     ListTeamsRequest:
       type: object
       additionalProperties: false
+      description: Request to list the teams in the calling user's organization.
+      externalDocs:
+        url: ''
     ListTeamsResponse:
       type: object
       properties:
         defaultTeam:
-          $ref: '#/components/schemas/ListTeamsResponse.TeamInfo'
+          allOf:
+            - $ref: '#/components/schemas/ListTeamsResponse.TeamInfo'
+          description: The organization's default team.
         teams:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/ListTeamsResponse.TeamInfo'
+          description: Every team in the organization, including the default team.
+      description: Response containing the teams in the calling user's organization.
+      externalDocs:
+        url: ''
     ListTeamsResponse.TeamInfo:
       type: object
       properties:
         dailyQuota:
           type: number
+          description: Daily quota assigned to the team, in quota units per day.
           format: double
         retention:
+          maximum: 2147483647
+          minimum: 0
           type: integer
+          description: Retention period of the team's data, in days.
           format: int32
         teamId:
           allOf:
             - $ref: '#/components/schemas/v2.TeamId'
           description: The team id.
         teamName:
+          maxLength: 255
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
+          description: Display name of the team.
+      description: A team and the quota and retention settings assigned to it.
+      externalDocs:
+        url: ''
     ListTenantConfigsRequest:
       type: object
       additionalProperties: false
@@ -46076,15 +46706,22 @@ components:
       type: object
       properties:
         logContent:
-          minLength: 0
+          maxLength: 10000
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: Raw content of the log entry
+          description: >-
+            Raw content of the log entry. Leading and trailing whitespace is
+            trimmed before the length limits are applied.
           example: 'ERROR: Database connection timeout after 30 seconds'
         logId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: Unique identifier of the log entry
-          example: log_4f8b1a2c3d5e6f7g8h9i0j1k2l3m4n5o
+          example: 9c858901-8a57-4791-81fe-4c455b099bc9
         logTimestamp:
           minLength: 0
           type: string
@@ -46092,7 +46729,9 @@ components:
           format: date-time
           example: '2025-09-22T10:30:00.000Z'
         queryLinkSuffix:
+          maxLength: 4096
           minLength: 0
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             URL suffix for querying related logs (not including the Coralogix
@@ -46456,7 +47095,9 @@ components:
       type: object
       properties:
         logs:
-          minLength: 0
+          maxLength: 2048
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             Explore logs URL pre-filtered to the alert query and case time
@@ -46912,6 +47553,8 @@ components:
       enum:
         - LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
         - LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN
+        - LOGS_THRESHOLD_CONDITION_TYPE_EQUALS
+        - LOGS_THRESHOLD_CONDITION_TYPE_NOT_EQUALS
       type: string
       description: Logs threshold condition type.
     LogsThresholdNotification:
@@ -47910,7 +48553,9 @@ components:
       type: object
       properties:
         metrics:
-          minLength: 0
+          maxLength: 2048
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             Explore metrics URL pre-filtered to the alert query and case time
@@ -48037,6 +48682,8 @@ components:
         - METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN
         - METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS
         - METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS
+        - METRIC_THRESHOLD_CONDITION_TYPE_EQUALS
+        - METRIC_THRESHOLD_CONDITION_TYPE_NOT_EQUALS
       type: string
       description: Metric threshold condition type.
     MetricThresholdNotification:
@@ -48517,24 +49164,51 @@ components:
       type: object
       additionalProperties: false
     MoveQuotaRequest:
+      required:
+        - destinationTeam
+        - unitsToMove
       type: object
       properties:
         destinationTeam:
-          $ref: '#/components/schemas/v2.TeamId'
+          allOf:
+            - $ref: '#/components/schemas/v2.TeamId'
+          description: Identifier of the team the quota is given to.
         sourceTeam:
-          $ref: '#/components/schemas/v2.TeamId'
+          allOf:
+            - $ref: '#/components/schemas/v2.TeamId'
+          description: Identifier of the team the quota is taken from.
         unitsToMove:
+          minimum: 0
+          exclusiveMinimum: true
           type: number
+          description: >-
+            Amount of daily quota to move, in quota units per day. Must be
+            greater than zero; to move quota the other way, call the operation
+            on the other team.
           format: double
+      description: >-
+        Request to move daily quota from one team to another within the same
+        organization.
+      externalDocs:
+        url: ''
     MoveQuotaResponse:
       type: object
       properties:
         destinationTeamQuota:
           type: number
+          description: >-
+            Daily quota of the destination team after the move, in quota units
+            per day.
           format: double
         sourceTeamQuota:
           type: number
+          description: >-
+            Daily quota of the source team after the move, in quota units per
+            day.
           format: double
+      description: Response containing the daily quota of both teams after the move.
+      externalDocs:
+        url: ''
     MultiGroup:
       type: object
       properties:
@@ -48904,6 +49578,7 @@ components:
       type: object
       properties:
         matchedRouters:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -48993,14 +49668,18 @@ components:
             - $ref: '#/components/schemas/NoRouterMatchedResult'
           description: No router matched the notification request
         requestNotificationId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: >-
             The notification request ID that triggered this delivery, used to
             correlate delivery outcomes with their originating requests
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
         timestamp:
-          minLength: 0
+          maxLength: 30
+          minLength: 20
           type: string
           description: When the notification was triggered
           format: date-time
@@ -49057,7 +49736,9 @@ components:
       type: object
       properties:
         error:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Error message for the failed notification
           example: 'Slack API: channel_not_found'
@@ -49069,7 +49750,9 @@ components:
       type: object
       properties:
         token:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Notification token/reference
           example: 4c8ba1ec-acee-4bc7-ad6c-d35476b58541
@@ -49108,11 +49791,15 @@ components:
       type: object
       properties:
         notificationRequestId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: The notification request ID, as sent to the notifications center.
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
         notifications:
+          maxItems: 1000
           minItems: 0
           type: array
           items:
@@ -54077,13 +54764,21 @@ components:
       type: object
       properties:
         from:
-          minLength: 0
+          maxLength: 500
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: Previous resolution reason
+          description: >-
+            Previous resolution reason. Leading and trailing whitespace is
+            trimmed before the length limits are applied.
         to:
-          minLength: 0
+          maxLength: 500
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: New resolution reason
+          description: >-
+            New resolution reason. Leading and trailing whitespace is trimmed
+            before the length limits are applied.
       description: Resolution reason changed case event.
       externalDocs:
         url: ''
@@ -54134,7 +54829,9 @@ components:
       type: object
       properties:
         eventId:
-          minLength: 0
+          maxLength: 64
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Event ID associated to the Incident to resolve
           example: event_id_1
@@ -54161,16 +54858,20 @@ components:
       type: object
       properties:
         incidentIds:
-          minItems: 0
+          maxItems: 10000
+          minItems: 1
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: List of incident IDs to resolve
           description: List of incident IDs to resolve
           example:
-            - incident_id_1
-            - incident_id_2
+            - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+            - 9c858901-8a57-4791-81fe-4c455b099bc9
       description: Request to resolve one or more incidents
       externalDocs:
         url: ''
@@ -54181,6 +54882,7 @@ components:
       type: object
       properties:
         incidents:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
@@ -54432,6 +55134,7 @@ components:
       type: object
       properties:
         attempts:
+          maxItems: 100
           minItems: 0
           type: array
           items:
@@ -54454,12 +55157,16 @@ components:
       type: object
       properties:
         routerId:
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
           type: string
           description: Unique identifier of the router
           example: d4e5f678-90ab-cdef-1234-567890abcdef
         routerName:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Display name of the router
           example: Production alerts router
@@ -54943,7 +55650,9 @@ components:
       type: object
       properties:
         rum:
-          minLength: 0
+          maxLength: 2048
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             RUM errors URL pre-filtered to the alert applications and case time
@@ -55684,24 +56393,33 @@ components:
       type: object
       properties:
         coralogixUserId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: >-
             If the Service Now user is linked to a Coralogix user, this field
             contains the Coralogix user ID.
           example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
         id:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: User ID
           example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
         userEmail:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Mail of the user
           example: example@coralogix.com
         username:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Username
       description: >-
@@ -55729,6 +56447,67 @@ components:
           type: string
           description: Sample count for this service.
       description: Additional fields for service-level usage records.
+      externalDocs:
+        url: ''
+    SetAiCenterCodeAgentsRequest:
+      required:
+        - pairs
+      type: object
+      properties:
+        pairs:
+          maxItems: 100
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/SetCodeAgentPair'
+          description: >-
+            The product and integration type pairs to mark as successfully
+            integrated. Duplicate pairs are accepted and collapsed.
+      description: >-
+        Request to mark one or more product and integration type pairs as
+        successfully integrated. Team is resolved from auth context. Idempotent:
+        pairs that are already marked succeed unchanged.
+      externalDocs:
+        url: ''
+    SetAiCenterCodeAgentsResponse:
+      type: object
+      properties:
+        codeAgents:
+          maxItems: 50
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeAgentIntegration'
+          description: >-
+            The full, updated list of code agents marked as successfully
+            integrated, each with its marked integration types. This is the
+            team's whole set, not just the pairs sent.
+      description: >-
+        Response containing the full, updated list of code agents marked as
+        successfully integrated, each with its marked integration types.
+      externalDocs:
+        url: ''
+    SetCodeAgentPair:
+      required:
+        - product
+        - integrationType
+      type: object
+      properties:
+        integrationType:
+          allOf:
+            - $ref: '#/components/schemas/CodeAgentIntegrationType'
+          description: >-
+            How this product's data reaches Coralogix.
+            CODE_AGENT_INTEGRATION_TYPE_UNSPECIFIED is rejected with HTTP 400.
+        product:
+          allOf:
+            - $ref: '#/components/schemas/AiCenterProduct'
+          description: >-
+            The AI product to mark as successfully integrated.
+            AI_CENTER_PRODUCT_UNSPECIFIED is rejected with HTTP 400.
+      description: >-
+        A single product and integration type pair to mark as successfully
+        integrated.
       externalDocs:
         url: ''
     SetCompanyModelPricingRequest:
@@ -55778,16 +56557,28 @@ components:
       externalDocs:
         url: ''
     SetDailyQuotaRequest:
+      required:
+        - targetDailyQuota
       type: object
       properties:
         targetDailyQuota:
+          minimum: 0
           type: number
+          description: Daily quota to assign to the team, in quota units per day.
           format: float
         teamId:
-          $ref: '#/components/schemas/v2.TeamId'
+          allOf:
+            - $ref: '#/components/schemas/v2.TeamId'
+          description: Identifier of the team whose daily quota is set.
+      description: Request to set the daily quota of a team.
+      externalDocs:
+        url: ''
     SetDailyQuotaResponse:
       type: object
       additionalProperties: false
+      description: Empty response returned after setting a team's daily quota.
+      externalDocs:
+        url: ''
     SetExternalTargetRequest:
       title: Set External Target Request
       required:
@@ -56066,24 +56857,33 @@ components:
       type: object
       properties:
         coralogixUserId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: >-
             If the Slack user is linked to a Coralogix user, this field contains
             the Coralogix user ID.
           example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
         displayName:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Slack display name
           example: John Doe
         slackUserId:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Slack user ID
           example: U012AB3CD
         userEmail:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Email of the Slack user
           example: john.doe@example.com
@@ -56095,27 +56895,37 @@ components:
       type: object
       properties:
         channelId:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Slack channel ID
           example: C012AB3CD
         threadId:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Slack thread ID
           example: '1234567890.123456'
         userEmail:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Email of the Slack user
           example: john.doe@example.com
         userId:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Slack user ID
           example: U012AB3CD
         workspaceId:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Slack workspace ID
           example: T012AB3CD
@@ -56544,7 +57354,9 @@ components:
       type: object
       properties:
         slo:
-          minLength: 0
+          maxLength: 2048
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: SLO overview URL with the permutation preselected.
       description: Deep link to the SLO overview for an alert indicator on a case.
@@ -59637,13 +60449,21 @@ components:
       type: object
       properties:
         from:
-          minLength: 0
+          maxLength: 512
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: Previous case title
+          description: >-
+            Previous case title. Leading and trailing whitespace is trimmed
+            before the length limits are applied.
         to:
-          minLength: 0
+          maxLength: 512
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: New case title
+          description: >-
+            New case title. Leading and trailing whitespace is trimmed before
+            the length limits are applied.
       description: Title changed case event.
       externalDocs:
         url: ''
@@ -59887,7 +60707,9 @@ components:
       type: object
       properties:
         tracing:
-          minLength: 0
+          maxLength: 2048
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: >-
             Explore traces URL pre-filtered to the alert query and case time
@@ -60184,16 +61006,20 @@ components:
       type: object
       properties:
         incidentIds:
-          minItems: 0
+          maxItems: 10000
+          minItems: 1
           type: array
           items:
-            minLength: 0
+            maxLength: 36
+            minLength: 36
+            pattern: >-
+              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
             type: string
             description: List of incident IDs to unassign
           description: List of incident IDs to unassign
           example:
-            - incident_id_1
-            - incident_id_2
+            - 3f2504e0-4f89-11d3-9a0c-0305e82c3301
+            - 9c858901-8a57-4791-81fe-4c455b099bc9
       description: Request to remove assignments from one or more incidents
       externalDocs:
         url: ''
@@ -60204,6 +61030,7 @@ components:
       type: object
       properties:
         incidents:
+          maxItems: 10000
           minItems: 0
           type: array
           items:
@@ -60224,7 +61051,10 @@ components:
       type: object
       properties:
         previousAssigneeUserId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: User ID that was unassigned
       description: Unassigned case event.
@@ -60280,7 +61110,9 @@ components:
       type: object
       properties:
         unknownAssigneeEmail:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Email of the assignee that could not be found
           example: unknown
@@ -60677,20 +61509,28 @@ components:
       type: object
       properties:
         attachments:
+          maxItems: 100
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/CommentAttachment'
           description: Attachments to the comment
         eventId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: ID of the comment event to update
           example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
         text:
-          minLength: 0
+          maxLength: 10000
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: Comment text to update
+          description: >-
+            Comment text to update. Leading and trailing whitespace is trimmed
+            before the length limits are applied.
           example: This is updated text
       description: Request for updating a comment on a case event.
       externalDocs:
@@ -61408,15 +62248,31 @@ components:
       properties:
         dailyQuota:
           type: number
+          description: >-
+            New daily quota for the team, in quota units per day. Omit to keep
+            the current quota.
           format: double
         teamId:
-          $ref: '#/components/schemas/v2.TeamId'
+          allOf:
+            - $ref: '#/components/schemas/v2.TeamId'
+          description: Identifier of the team to update.
         teamName:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
+          description: New display name for the team. Omit to keep the current name.
+      description: >-
+        Request to update a team. Omitted optional fields keep their existing
+        values.
+      externalDocs:
+        url: ''
     UpdateTeamResponse:
       type: object
       additionalProperties: false
+      description: Empty response returned after updating a team.
+      externalDocs:
+        url: ''
     UpdateUserRequest:
       type: object
       properties:
@@ -61636,9 +62492,11 @@ components:
       type: object
       properties:
         cxEventKey:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
-          description: The cx event key.
+          description: The CX event key.
       description: Upsert incident state payload.
       externalDocs:
         url: ''
@@ -62337,7 +63195,10 @@ components:
       type: object
       properties:
         id:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: User ID
           example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
@@ -64063,6 +64924,65 @@ components:
         - WINDOW_SLO_WINDOW_5_MINUTES
       type: string
       description: Window slo window.
+    WithdrawAiCenterCodeAgentsRequest:
+      required:
+        - pairs
+      type: object
+      properties:
+        pairs:
+          maxItems: 100
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/WithdrawCodeAgentPair'
+          description: >-
+            The product and integration type pairs to withdraw. Duplicate pairs
+            are accepted and collapsed; pairs that were never marked are
+            ignored.
+      description: >-
+        Request to withdraw one or more product and integration type pairs. Team
+        is resolved from auth context. Idempotent: pairs that are not marked
+        succeed unchanged.
+      externalDocs:
+        url: ''
+    WithdrawAiCenterCodeAgentsResponse:
+      type: object
+      properties:
+        codeAgents:
+          maxItems: 50
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeAgentIntegration'
+          description: >-
+            The full, remaining list of code agents marked as successfully
+            integrated. Empty when the last pair was withdrawn.
+      description: >-
+        Response containing the full, remaining list of code agents marked as
+        successfully integrated, each with its marked integration types.
+      externalDocs:
+        url: ''
+    WithdrawCodeAgentPair:
+      required:
+        - product
+        - integrationType
+      type: object
+      properties:
+        integrationType:
+          allOf:
+            - $ref: '#/components/schemas/CodeAgentIntegrationType'
+          description: >-
+            Which of this product's integration types to withdraw.
+            CODE_AGENT_INTEGRATION_TYPE_UNSPECIFIED is rejected with HTTP 400.
+        product:
+          allOf:
+            - $ref: '#/components/schemas/AiCenterProduct'
+          description: >-
+            The AI product to withdraw. AI_CENTER_PRODUCT_UNSPECIFIED is
+            rejected with HTTP 400.
+      description: A single product and integration type pair to withdraw.
+      externalDocs:
+        url: ''
     XAxis:
       type: object
       oneOf:
@@ -64769,12 +65689,16 @@ components:
       type: object
       properties:
         key:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The key.
           example: key
         value:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The value.
           example: value
@@ -64788,13 +65712,16 @@ components:
       type: object
       properties:
         pageSize:
-          minimum: 0
+          maximum: 10000
+          minimum: 1
           type: integer
-          description: Number of items to return per page
+          description: Number of items to return per page.
           format: int64
           example: 10
         pageToken:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Token for the next page of results
           example: next_page_token
@@ -64808,11 +65735,14 @@ components:
       type: object
       properties:
         nextPageToken:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Token for the next page of results
           example: next_page_token
         totalSize:
+          maximum: 1000000000
           minimum: 0
           type: integer
           description: Total number of items available
@@ -64828,7 +65758,9 @@ components:
       type: object
       properties:
         userId:
-          minLength: 0
+          maxLength: 300
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: The user id.
           example: user_id
@@ -64995,6 +65927,7 @@ components:
         - EMAIL
         - PAGERDUTY_INCIDENTS
         - MICROSOFT_TEAMS
+        - EVENTBRIDGE
       type: string
       description: Connector type.
     notification_center.EntityType:
@@ -65393,7 +66326,10 @@ components:
       type: object
       properties:
         eventId:
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
           description: ID of the event to fetch
           example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
@@ -65502,12 +66438,16 @@ components:
       type: object
       properties:
         key:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Key of the pair (e.g., label or grouping name)
           example: service
         value:
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: Value associated with the key
           example: payments
@@ -65573,7 +66513,9 @@ components:
           type: object
       properties:
         contextualLabel:
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
           type: string
           description: A contextual label key to order by.
         direction:
@@ -66335,9 +67277,10 @@ components:
       type: object
       properties:
         id:
+          maximum: 4294967295
           minimum: 0
           type: integer
-          description: Unique identifier.
+          description: Unique team identifier.
           format: int64
       description: Team id.
       externalDocs:

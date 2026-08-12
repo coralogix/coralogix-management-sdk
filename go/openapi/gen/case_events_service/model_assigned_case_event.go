@@ -23,9 +23,9 @@ var _ MappedNullable = &AssignedCaseEvent{}
 // AssignedCaseEvent Assigned case event.
 type AssignedCaseEvent struct {
 	// New assignee user ID
-	AssigneeUserId *string `json:"assigneeUserId,omitempty"`
+	AssigneeUserId *string `json:"assigneeUserId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Previous assignee user ID (if any)
-	PreviousAssigneeUserId *string `json:"previousAssigneeUserId,omitempty"`
+	PreviousAssigneeUserId *string `json:"previousAssigneeUserId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

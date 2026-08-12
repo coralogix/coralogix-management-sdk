@@ -23,12 +23,12 @@ var _ MappedNullable = &IncidentEventSnoozeIndicator{}
 
 // IncidentEventSnoozeIndicator Incident event snooze indicator.
 type IncidentEventSnoozeIndicator struct {
-	// The duration minutes.
+	// Duration of the snooze in minutes.
 	DurationMinutes *int32 `json:"durationMinutes,omitempty"`
 	// Start time.
 	StartTime *time.Time `json:"startTime,omitempty"`
 	// The user id.
-	UserId *string `json:"userId,omitempty"`
+	UserId *string `json:"userId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

@@ -23,7 +23,7 @@ var _ MappedNullable = &NotificationFailedCaseEvent{}
 // NotificationFailedCaseEvent Notification failed case event.
 type NotificationFailedCaseEvent struct {
 	// Error message for the failed notification
-	Error *string `json:"error,omitempty"`
+	Error *string `json:"error,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

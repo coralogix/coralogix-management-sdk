@@ -1048,7 +1048,8 @@
             "items": {
               "$ref": "#/components/schemas/IndicatorFilter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -1266,13 +1267,17 @@
             "example": "service",
             "description": "Key of the pair (e.g., label or grouping name)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "value": {
             "example": "payments",
             "description": "Value associated with the key",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         },
         "required": [

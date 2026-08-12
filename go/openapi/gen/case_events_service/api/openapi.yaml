@@ -47,13 +47,16 @@
                     "items": {
                       "$ref": "#/components/schemas/CommentAttachment"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 100
                   },
                   "text": {
                     "example": "This is updated text",
-                    "description": "Comment text to update",
+                    "description": "Comment text to update. Leading and trailing whitespace is trimmed before the length limits are applied.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 10000
                   }
                 },
                 "required": [
@@ -322,7 +325,9 @@
               "example": "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
               "description": "ID of the event to fetch",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
             },
             "style": "simple"
           }
@@ -415,7 +420,9 @@
               "example": "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
               "description": "ID of the comment event to update",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
             },
             "style": "simple"
           }
@@ -434,13 +441,16 @@
                     "items": {
                       "$ref": "#/components/schemas/CommentAttachment"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 100
                   },
                   "text": {
                     "example": "This is updated text",
-                    "description": "Comment text to update",
+                    "description": "Comment text to update. Leading and trailing whitespace is trimmed before the length limits are applied.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 10000
                   }
                 },
                 "required": [
@@ -537,7 +547,9 @@
               "example": "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
               "description": "ID of the comment event to delete",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
             },
             "style": "simple"
           }
@@ -624,13 +636,17 @@
             "example": "2b1c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e",
             "description": "API key ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "name": {
             "example": "Incident Management Integration Key",
             "description": "API key name",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           }
         }
       },
@@ -646,12 +662,16 @@
             "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "New assignee user ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "previousAssigneeUserId": {
             "description": "Previous assignee user ID (if any)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         }
       },
@@ -690,7 +710,9 @@
             "example": "ef51d3d9-a301-496b-aa7d-9a6e519ba0d5",
             "description": "Unique identifier of the event",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "eventTime": {
             "example": "2025-09-22T10:29:45.000Z",
@@ -1082,7 +1104,8 @@
             "items": {
               "$ref": "#/components/schemas/CommentAttachment"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "microsoftTeams": {
             "description": "Microsoft Teams-specific comment metadata",
@@ -1102,9 +1125,11 @@
           },
           "unsafeText": {
             "example": "Looking into DB timeouts",
-            "description": "Comment text",
+            "description": "Comment text. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
           }
         },
         "oneOf": [
@@ -1191,21 +1216,27 @@
         "properties": {
           "customDashboardId": {
             "example": "dashboard_3f166e9f-3c88-4af2-b52e-138f339dab3e",
-            "description": "Unique identifier of the custom dashboard",
+            "description": "Unique identifier of the custom dashboard. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "queryLinkSuffix": {
             "example": "/dashboards/custom/123/widgets/456?time=123456789",
             "description": "URL suffix for accessing the widget (not including the Coralogix domain part)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "widgetId": {
             "example": "widget_a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-            "description": "Unique identifier of the widget within the dashboard",
+            "description": "Unique identifier of the widget within the dashboard. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "widgetScreenshot": {
             "description": "Screenshot of the widget at the time of attachment",
@@ -1439,16 +1470,20 @@
         "type": "object",
         "properties": {
           "fileId": {
-            "example": "file_a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
             "description": "Unique identifier of the file (same id as used in blobset flow)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "fileName": {
             "example": "screenshot_2025-09-22.png",
-            "description": "Original name of the attached file",
+            "description": "Original name of the attached file. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "isDeleted": {
             "example": false,
@@ -1587,15 +1622,19 @@
         "properties": {
           "logContent": {
             "example": "ERROR: Database connection timeout after 30 seconds",
-            "description": "Raw content of the log entry",
+            "description": "Raw content of the log entry. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
           },
           "logId": {
-            "example": "log_4f8b1a2c3d5e6f7g8h9i0j1k2l3m4n5o",
+            "example": "9c858901-8a57-4791-81fe-4c455b099bc9",
             "description": "Unique identifier of the log entry",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "logTimestamp": {
             "example": "2025-09-22T10:30:00.000Z",
@@ -1608,7 +1647,9 @@
             "example": "/logs/query?time=123456789&query=error",
             "description": "URL suffix for querying related logs (not including the Coralogix domain part)",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           }
         },
         "required": [
@@ -1753,7 +1794,9 @@
             "example": "Slack API: channel_not_found",
             "description": "Error message for the failed notification",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -1768,7 +1811,9 @@
             "example": "4c8ba1ec-acee-4bc7-ad6c-d35476b58541",
             "description": "Notification token/reference",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -1784,7 +1829,9 @@
             "example": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
             "description": "The notification request ID, as sent to the notifications center.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "notifications": {
             "description": "List of notifications produced by this action",
@@ -1792,7 +1839,8 @@
             "items": {
               "$ref": "#/components/schemas/NotificationMetadata"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -1917,14 +1965,18 @@
         "type": "object",
         "properties": {
           "from": {
-            "description": "Previous resolution reason",
+            "description": "Previous resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 500
           },
           "to": {
-            "description": "New resolution reason",
+            "description": "New resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 500
           }
         }
       },
@@ -1940,24 +1992,32 @@
             "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "If the Service Now user is linked to a Coralogix user, this field contains the Coralogix user ID.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "id": {
             "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "User ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "userEmail": {
             "example": "example@coralogix.com",
             "description": "Mail of the user",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "username": {
             "description": "Username",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           }
         }
       },
@@ -1973,25 +2033,33 @@
             "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "If the Slack user is linked to a Coralogix user, this field contains the Coralogix user ID.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "displayName": {
             "example": "John Doe",
             "description": "Slack display name",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "slackUserId": {
             "example": "U012AB3CD",
             "description": "Slack user ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "userEmail": {
             "example": "john.doe@example.com",
             "description": "Email of the Slack user",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           }
         }
       },
@@ -2007,31 +2075,41 @@
             "example": "C012AB3CD",
             "description": "Slack channel ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "threadId": {
             "example": "1234567890.123456",
             "description": "Slack thread ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "userEmail": {
             "example": "john.doe@example.com",
             "description": "Email of the Slack user",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "userId": {
             "example": "U012AB3CD",
             "description": "Slack user ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "workspaceId": {
             "example": "T012AB3CD",
             "description": "Slack workspace ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           }
         }
       },
@@ -2098,14 +2176,18 @@
         "type": "object",
         "properties": {
           "from": {
-            "description": "Previous case title",
+            "description": "Previous case title. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 512
           },
           "to": {
-            "description": "New case title",
+            "description": "New case title. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 512
           }
         }
       },
@@ -2120,7 +2202,9 @@
           "previousAssigneeUserId": {
             "description": "User ID that was unassigned",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         }
       },
@@ -2136,7 +2220,9 @@
             "example": "unknown",
             "description": "Email of the assignee that could not be found",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           }
         }
       },
@@ -2173,7 +2259,9 @@
             "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "User ID",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           }
         }
       },

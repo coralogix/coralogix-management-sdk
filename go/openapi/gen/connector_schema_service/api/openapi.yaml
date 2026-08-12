@@ -366,7 +366,8 @@
           "SERVICE_NOW",
           "EMAIL",
           "PAGERDUTY_INCIDENTS",
-          "MICROSOFT_TEAMS"
+          "MICROSOFT_TEAMS",
+          "EVENTBRIDGE"
         ]
       },
       "v3.FilterOperator": {

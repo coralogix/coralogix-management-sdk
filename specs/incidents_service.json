@@ -35,9 +35,12 @@
                   "items": {
                     "description": "Filter by application names",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 256
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "assignee": {
                   "description": "Filter by assignee",
@@ -45,9 +48,12 @@
                   "items": {
                     "description": "Filter by assignee",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 300
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "contextualLabels": {
                   "description": "Filter by contextual labels",
@@ -96,7 +102,8 @@
                   "items": {
                     "$ref": "#/components/schemas/incidents.v1.MetaLabel"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "metaLabelsOp": {
                   "description": "The operator for the meta labels filter",
@@ -120,7 +127,8 @@
                   "items": {
                     "$ref": "#/components/schemas/IncidentSeverity"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "startTime": {
                   "deprecated": true,
@@ -135,7 +143,8 @@
                   "items": {
                     "$ref": "#/components/schemas/IncidentState"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "status": {
                   "description": "Filter by incident status",
@@ -143,7 +152,8 @@
                   "items": {
                     "$ref": "#/components/schemas/IncidentStatus"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "subsystemName": {
                   "description": "Filter by subsystem names",
@@ -151,9 +161,12 @@
                   "items": {
                     "description": "Filter by subsystem names",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 256
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 }
               }
             },
@@ -176,7 +189,9 @@
                   "contextualLabel": {
                     "description": "The contextual label to group by.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 256
                   },
                   "incidentField": {
                     "example": "INCIDENTS_FIELDS_ID",
@@ -212,7 +227,8 @@
                   }
                 ]
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 100
             },
             "style": "form"
           },
@@ -230,16 +246,19 @@
               "properties": {
                 "pageSize": {
                   "example": 10,
-                  "description": "Number of items to return per page",
+                  "description": "Number of items to return per page.",
                   "type": "integer",
                   "format": "int64",
-                  "minimum": 0
+                  "minimum": 1,
+                  "maximum": 10000
                 },
                 "pageToken": {
                   "example": "next_page_token",
                   "description": "Token for the next page of results",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 1,
+                  "maxLength": 4096
                 }
               },
               "required": [
@@ -302,7 +321,7 @@
           "Incidents service"
         ],
         "summary": "List incident events with filters",
-        "description": "List incident events with support for filtering, pagination, and ordering.\n\nRequires the following permissions:\n- `incidents:read`",
+        "description": "List incident events with support for filtering, pagination, and ordering. This operation accepts a page size of at most 1000 (it defaults to 100 when pageSize is omitted) and rejects larger values, even though the shared pagination schema documents a maximum of 10000.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -349,7 +368,9 @@
                 "name": {
                   "description": "The name of the incident",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 1,
+                  "maxLength": 500
                 },
                 "severity": {
                   "description": "The severity of the incident",
@@ -357,7 +378,8 @@
                   "items": {
                     "$ref": "#/components/schemas/IncidentSeverity"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "status": {
                   "description": "The status of the incident",
@@ -365,7 +387,8 @@
                   "items": {
                     "$ref": "#/components/schemas/IncidentStatus"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "timestamp": {
                   "description": "The time range of the incident",
@@ -382,7 +405,7 @@
           {
             "in": "query",
             "name": "pagination",
-            "description": "Pagination parameters",
+            "description": "Pagination parameters. This request accepts at most 1000 items per page, and defaults to 100 when pageSize is omitted; the shared maximum of 10000 does not apply here.",
             "schema": {
               "externalDocs": {
                 "url": ""
@@ -393,16 +416,19 @@
               "properties": {
                 "pageSize": {
                   "example": 10,
-                  "description": "Number of items to return per page",
+                  "description": "Number of items to return per page.",
                   "type": "integer",
                   "format": "int64",
-                  "minimum": 0
+                  "minimum": 1,
+                  "maximum": 10000
                 },
                 "pageToken": {
                   "example": "next_page_token",
                   "description": "Token for the next page of results",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 1,
+                  "maxLength": 4096
                 }
               },
               "required": [
@@ -545,7 +571,9 @@
                 "name": {
                   "description": "The name of the incident",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 1,
+                  "maxLength": 500
                 },
                 "severity": {
                   "description": "The severity of the incident",
@@ -553,7 +581,8 @@
                   "items": {
                     "$ref": "#/components/schemas/IncidentSeverity"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "status": {
                   "description": "The status of the incident",
@@ -561,7 +590,8 @@
                   "items": {
                     "$ref": "#/components/schemas/IncidentStatus"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "timestamp": {
                   "description": "The time range of the incident",
@@ -644,7 +674,9 @@
               "example": "event_id_1",
               "description": "Event ID associated to the Incident to acknowledge",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 64
             },
             "style": "simple"
           }
@@ -717,7 +749,9 @@
               "example": "event_id_1",
               "description": "Event ID associated to the Incident to acknowledge",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 64
             },
             "style": "simple"
           }
@@ -790,7 +824,9 @@
               "example": "event_id_1",
               "description": "Event ID associated to the Incident to resolve",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 64
             },
             "style": "simple"
           }
@@ -974,7 +1010,9 @@
                 "name": {
                   "description": "The name of the incident",
                   "type": "string",
-                  "minLength": 0
+                  "pattern": "^[\\s\\S]*$",
+                  "minLength": 1,
+                  "maxLength": 500
                 },
                 "severity": {
                   "description": "The severity of the incident",
@@ -982,7 +1020,8 @@
                   "items": {
                     "$ref": "#/components/schemas/IncidentSeverity"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "status": {
                   "description": "The status of the incident",
@@ -990,7 +1029,8 @@
                   "items": {
                     "$ref": "#/components/schemas/IncidentStatus"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "maxItems": 1000
                 },
                 "timestamp": {
                   "description": "The time range of the incident",
@@ -1074,9 +1114,12 @@
               "items": {
                 "description": "The ids.",
                 "type": "string",
-                "minLength": 0
+                "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                "minLength": 36,
+                "maxLength": 36
               },
-              "minItems": 0
+              "minItems": 1,
+              "maxItems": 10000
             },
             "style": "form"
           }
@@ -1159,7 +1202,8 @@
                     "items": {
                       "$ref": "#/components/schemas/v1.OrderBy"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 100
                   },
                   "pagination": {
                     "description": "Pagination parameters",
@@ -1242,17 +1286,20 @@
                 "properties": {
                   "incidentIds": {
                     "example": [
-                      "incident_id_1",
-                      "incident_id_2"
+                      "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+                      "9c858901-8a57-4791-81fe-4c455b099bc9"
                     ],
                     "description": "List of incident IDs to acknowledge",
                     "type": "array",
                     "items": {
                       "description": "List of incident IDs to acknowledge",
                       "type": "string",
-                      "minLength": 0
+                      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                      "minLength": 36,
+                      "maxLength": 36
                     },
-                    "minItems": 0
+                    "minItems": 1,
+                    "maxItems": 10000
                   }
                 },
                 "required": [
@@ -1339,17 +1386,20 @@
                   },
                   "incidentIds": {
                     "example": [
-                      "incident_id_1",
-                      "incident_id_2"
+                      "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+                      "9c858901-8a57-4791-81fe-4c455b099bc9"
                     ],
                     "description": "List of incident IDs to assign",
                     "type": "array",
                     "items": {
                       "description": "List of incident IDs to assign",
                       "type": "string",
-                      "minLength": 0
+                      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                      "minLength": 36,
+                      "maxLength": 36
                     },
-                    "minItems": 0
+                    "minItems": 1,
+                    "maxItems": 10000
                   }
                 },
                 "required": [
@@ -1425,17 +1475,20 @@
             "required": true,
             "schema": {
               "example": [
-                "incident_id_1",
-                "incident_id_2"
+                "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+                "9c858901-8a57-4791-81fe-4c455b099bc9"
               ],
               "description": "List of incident IDs to unassign",
               "type": "array",
               "items": {
                 "description": "List of incident IDs to unassign",
                 "type": "string",
-                "minLength": 0
+                "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                "minLength": 36,
+                "maxLength": 36
               },
-              "minItems": 0
+              "minItems": 1,
+              "maxItems": 10000
             },
             "style": "form"
           }
@@ -1508,17 +1561,20 @@
                 "properties": {
                   "incidentIds": {
                     "example": [
-                      "incident_id_1",
-                      "incident_id_2"
+                      "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+                      "9c858901-8a57-4791-81fe-4c455b099bc9"
                     ],
                     "description": "List of incident IDs to close",
                     "type": "array",
                     "items": {
                       "description": "List of incident IDs to close",
                       "type": "string",
-                      "minLength": 0
+                      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                      "minLength": 36,
+                      "maxLength": 36
                     },
-                    "minItems": 0
+                    "minItems": 1,
+                    "maxItems": 10000
                   }
                 },
                 "required": [
@@ -1597,17 +1653,20 @@
                 "properties": {
                   "incidentIds": {
                     "example": [
-                      "incident_id_1",
-                      "incident_id_2"
+                      "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+                      "9c858901-8a57-4791-81fe-4c455b099bc9"
                     ],
                     "description": "List of incident IDs to resolve",
                     "type": "array",
                     "items": {
                       "description": "List of incident IDs to resolve",
                       "type": "string",
-                      "minLength": 0
+                      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                      "minLength": 36,
+                      "maxLength": 36
                     },
-                    "minItems": 0
+                    "minItems": 1,
+                    "maxItems": 10000
                   }
                 },
                 "required": [
@@ -1683,10 +1742,12 @@
             "description": "Unique identifier.",
             "required": true,
             "schema": {
-              "example": "incident_id",
+              "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
               "description": "Unique identifier.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
             },
             "style": "simple"
           }
@@ -1756,10 +1817,12 @@
             "description": "ID of the incident to retrieve events for",
             "required": true,
             "schema": {
-              "example": "incident_id",
+              "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
               "description": "ID of the incident to retrieve events for",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
             },
             "style": "simple"
           }
@@ -1849,7 +1912,8 @@
             "items": {
               "$ref": "#/components/schemas/Incident"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         },
         "required": [
@@ -1870,7 +1934,8 @@
             "items": {
               "$ref": "#/components/schemas/Incident"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         },
         "required": [
@@ -1888,13 +1953,17 @@
             "example": "assignee",
             "description": "Assignee.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 300
           },
           "count": {
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000000000
           }
         },
         "required": [
@@ -1939,17 +2008,20 @@
           },
           "notFoundIds": {
             "example": [
-              "not_found_id_1",
-              "not_found_id_2"
+              "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+              "9c858901-8a57-4791-81fe-4c455b099bc9"
             ],
             "description": "List of IDs that were not found",
             "type": "array",
             "items": {
               "description": "List of IDs that were not found",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         },
         "required": [
@@ -1971,7 +2043,8 @@
             "items": {
               "$ref": "#/components/schemas/Incident"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         },
         "required": [
@@ -1989,13 +2062,17 @@
             "example": "contextual_label_value",
             "description": "The contextual label value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "count": {
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000000000
           }
         },
         "required": [
@@ -2017,9 +2094,12 @@
             "items": {
               "description": "The contextual label values.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "required": [
@@ -2039,7 +2119,8 @@
             "items": {
               "$ref": "#/components/schemas/ContextualLabelValueWithCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "required": [
@@ -2058,13 +2139,17 @@
             "example": "field_name",
             "description": "The field name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "fieldValue": {
             "example": "field_value",
             "description": "The field value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           }
         },
         "required": [
@@ -2083,13 +2168,17 @@
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000000000
           },
           "displayLabelValue": {
             "example": "display_label_value",
             "description": "The display label value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           }
         },
         "required": [
@@ -2111,9 +2200,12 @@
             "items": {
               "description": "The display label values.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "required": [
@@ -2133,7 +2225,8 @@
             "items": {
               "$ref": "#/components/schemas/DisplayLabelValueWithCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "required": [
@@ -2266,7 +2359,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentEvent"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         }
       },
@@ -2354,14 +2448,16 @@
             "items": {
               "$ref": "#/components/schemas/Assignment"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "closedAt": {
             "example": "2024-01-01T00:00:00.000Z",
             "description": "The closed at.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "contextualLabels": {
             "description": "The contextual labels.",
@@ -2376,13 +2472,16 @@
             "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "description": {
             "example": "incident_description",
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2000
           },
           "displayLabels": {
             "description": "The display labels.",
@@ -2403,13 +2502,16 @@
             "items": {
               "$ref": "#/components/schemas/IncidentEvent"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "id": {
-            "example": "incident_id",
+            "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "isMuted": {
             "example": false,
@@ -2420,14 +2522,17 @@
             "example": "last_state_update_key",
             "description": "The last state update key.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2000
           },
           "lastStateUpdateTime": {
             "example": "2024-01-01T00:00:00.000Z",
             "description": "The last state update time.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "metaLabels": {
             "description": "Metadata labels.",
@@ -2435,13 +2540,16 @@
             "items": {
               "$ref": "#/components/schemas/incidents.v1.MetaLabel"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "name": {
             "example": "incident_name",
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 500
           },
           "severity": {
             "$ref": "#/components/schemas/IncidentSeverity"
@@ -2486,7 +2594,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentAssignmentCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "aggMetaLabelsCount": {
             "description": "The agg meta labels count.",
@@ -2494,7 +2603,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentMetaLabelsCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "aggSeverityCount": {
             "description": "The agg severity count.",
@@ -2502,7 +2612,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentSeverityCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "aggStateCount": {
             "description": "The agg state count.",
@@ -2510,7 +2621,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentStateCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "aggStatusCount": {
             "description": "The agg status count.",
@@ -2518,19 +2630,22 @@
             "items": {
               "$ref": "#/components/schemas/IncidentStatusCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "allValuesCount": {
             "description": "The all values count.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 1000000000
           },
           "firstCreatedAt": {
             "description": "The first created at.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "groupBysValue": {
             "description": "The group bys value.",
@@ -2538,19 +2653,22 @@
             "items": {
               "$ref": "#/components/schemas/GroupByValues"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "lastClosedAt": {
             "description": "The last closed at.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "lastStateUpdateTime": {
             "description": "The last state update time.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "listIncidentsId": {
             "description": "The list incidents id.",
@@ -2558,9 +2676,12 @@
             "items": {
               "description": "The list incidents id.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "required": [
@@ -2592,7 +2713,8 @@
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 1000000000
           }
         },
         "required": [
@@ -2624,7 +2746,9 @@
             "example": "incident_event_id",
             "description": "The ID of the incident event",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 64
           },
           "incidentEventType": {
             "example": "INCIDENT_EVENT_TYPE_ACKNOWLEDGE",
@@ -2781,7 +2905,9 @@
           "cxEventKey": {
             "description": "The cx event key.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "cxEventTimestamp": {
             "description": "The cx event timestamp.",
@@ -2815,14 +2941,19 @@
             "items": {
               "description": "The alert group by fields.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 256
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "alertId": {
             "description": "Unique identifier of the alert.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 64
           },
           "alertLabels": {
             "description": "The alert labels.",
@@ -2830,12 +2961,15 @@
             "items": {
               "$ref": "#/components/schemas/incidents.v1.MetaLabel"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "alertName": {
             "description": "The alert name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "alertType": {
             "$ref": "#/components/schemas/IncidentEventAlertType"
@@ -2880,7 +3014,9 @@
           "userId": {
             "description": "The user id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 300
           }
         }
       },
@@ -2894,7 +3030,9 @@
           "systemName": {
             "description": "The system name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           }
         }
       },
@@ -2907,9 +3045,11 @@
         "type": "object",
         "properties": {
           "durationMinutes": {
-            "description": "The duration minutes.",
+            "description": "Duration of the snooze in minutes.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 525960
           },
           "startTime": {
             "description": "Start time.",
@@ -2920,7 +3060,9 @@
           "userId": {
             "description": "The user id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 300
           }
         }
       },
@@ -2980,19 +3122,23 @@
           "applicationName": {
             "description": "Application associated with the incident.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "closedAt": {
             "description": "Timestamp when the incident was closed.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "createdAt": {
             "description": "Timestamp when the incident was created.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "duration": {
             "description": "Duration.",
@@ -3002,18 +3148,23 @@
           "id": {
             "description": "Unique identifier of the incident.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "lastStateUpdateTime": {
             "description": "Timestamp of the most recent state change.",
             "type": "string",
             "format": "date-time",
-            "minLength": 0
+            "minLength": 20,
+            "maxLength": 30
           },
           "name": {
             "description": "Display name of the incident.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 500
           },
           "severity": {
             "description": "Severity level of the incident.",
@@ -3042,7 +3193,9 @@
           "subsystemName": {
             "description": "Subsystem associated with the incident.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           }
         },
         "oneOf": [
@@ -3217,7 +3370,8 @@
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 1000000000
           },
           "metaLabel": {
             "$ref": "#/components/schemas/incidents.v1.MetaLabel"
@@ -3239,7 +3393,9 @@
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000000000
           },
           "metaLabel": {
             "$ref": "#/components/schemas/incidents.v1.MetaLabel"
@@ -3264,9 +3420,12 @@
             "items": {
               "description": "Filter by application names",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 256
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "assignee": {
             "description": "Filter by assignee",
@@ -3274,9 +3433,12 @@
             "items": {
               "description": "Filter by assignee",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 300
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "contextualLabels": {
             "description": "Filter by contextual labels",
@@ -3325,7 +3487,8 @@
             "items": {
               "$ref": "#/components/schemas/incidents.v1.MetaLabel"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "metaLabelsOp": {
             "description": "The operator for the meta labels filter",
@@ -3349,7 +3512,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentSeverity"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "startTime": {
             "deprecated": true,
@@ -3364,7 +3528,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentState"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "status": {
             "description": "Filter by incident status",
@@ -3372,7 +3537,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentStatus"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "subsystemName": {
             "description": "Filter by subsystem names",
@@ -3380,9 +3546,12 @@
             "items": {
               "description": "Filter by subsystem names",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 256
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         }
       },
@@ -3400,7 +3569,8 @@
             "items": {
               "$ref": "#/components/schemas/AssigneeWithCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "contextualLabels": {
             "description": "The contextual labels.",
@@ -3425,7 +3595,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentMetaLabelsWithCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "severityWithCount": {
             "description": "The severity with count.",
@@ -3433,7 +3604,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentSeverityWithCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "stateWithCount": {
             "description": "The state with count.",
@@ -3441,7 +3613,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentStateWithCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "statusWithCount": {
             "description": "The status with count.",
@@ -3449,7 +3622,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentStatusWithCount"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           }
         },
         "required": [
@@ -3474,7 +3648,9 @@
           "contextualLabel": {
             "description": "The contextual label to search in.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "incidentField": {
             "example": "INCIDENTS_FIELDS_STATUS",
@@ -3489,7 +3665,9 @@
             "example": "error",
             "description": "The search query",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         },
         "required": [
@@ -3534,7 +3712,8 @@
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 1000000000
           },
           "severity": {
             "$ref": "#/components/schemas/IncidentSeverity"
@@ -3556,7 +3735,9 @@
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000000000
           },
           "severity": {
             "$ref": "#/components/schemas/IncidentSeverity"
@@ -3588,7 +3769,8 @@
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 1000000000
           },
           "state": {
             "$ref": "#/components/schemas/IncidentState"
@@ -3610,7 +3792,9 @@
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000000000
           },
           "state": {
             "description": "The state.",
@@ -3648,7 +3832,8 @@
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 1000000000
           },
           "status": {
             "$ref": "#/components/schemas/IncidentStatus"
@@ -3670,7 +3855,9 @@
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000000000
           },
           "status": {
             "example": "incident_status",
@@ -3700,7 +3887,8 @@
             "items": {
               "$ref": "#/components/schemas/incidents.v1.MetaLabel"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "operator": {
             "description": "The operator for the labels filter",
@@ -3729,7 +3917,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentAggregation"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "pagination": {
             "description": "Pagination information for the response",
@@ -3777,7 +3966,8 @@
             "items": {
               "$ref": "#/components/schemas/IncidentEventExtended"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 1000
           },
           "pagination": {
             "description": "Pagination information for the response",
@@ -3829,7 +4019,8 @@
             "items": {
               "$ref": "#/components/schemas/Incident"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           },
           "pagination": {
             "$ref": "#/components/schemas/incidents.v1.PaginationResponse"
@@ -3900,7 +4091,8 @@
             "items": {
               "$ref": "#/components/schemas/Incident"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         },
         "required": [
@@ -3921,7 +4113,8 @@
             "items": {
               "$ref": "#/components/schemas/Incident"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10000
           }
         },
         "required": [
@@ -3936,9 +4129,11 @@
         "type": "object",
         "properties": {
           "cxEventKey": {
-            "description": "The cx event key.",
+            "description": "The CX event key.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         }
       },
@@ -3986,13 +4181,17 @@
             "example": "key",
             "description": "The key.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           },
           "value": {
             "example": "value",
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
           }
         }
       },
@@ -4006,16 +4205,19 @@
         "properties": {
           "pageSize": {
             "example": 10,
-            "description": "Number of items to return per page",
+            "description": "Number of items to return per page.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 1,
+            "maximum": 10000
           },
           "pageToken": {
             "example": "next_page_token",
             "description": "Token for the next page of results",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           }
         },
         "required": [
@@ -4034,14 +4236,17 @@
             "example": "next_page_token",
             "description": "Token for the next page of results",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "totalSize": {
             "example": 100,
             "description": "Total number of items available",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 1000000000
           }
         },
         "required": [
@@ -4060,7 +4265,9 @@
             "example": "user_id",
             "description": "The user id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 300
           }
         },
         "required": [
@@ -4085,7 +4292,9 @@
           "contextualLabel": {
             "description": "A contextual label key to order by.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "direction": {
             "$ref": "#/components/schemas/v1.OrderByDirection"

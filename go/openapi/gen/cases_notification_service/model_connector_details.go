@@ -24,9 +24,9 @@ var _ MappedNullable = &ConnectorDetails{}
 // ConnectorDetails Details of a notification connector.
 type ConnectorDetails struct {
 	// Unique identifier of the connector
-	ConnectorId string `json:"connectorId"`
+	ConnectorId string `json:"connectorId" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name of the connector
-	ConnectorName string `json:"connectorName"`
+	ConnectorName string `json:"connectorName" validate:"regexp=^[\\s\\S]*$"`
 	// Type of the connector
 	ConnectorType V1ConnectorType `json:"connectorType"`
 	AdditionalProperties map[string]interface{}

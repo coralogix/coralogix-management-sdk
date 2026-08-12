@@ -22,10 +22,10 @@ var _ MappedNullable = &ResolutionReasonChangedCaseEvent{}
 
 // ResolutionReasonChangedCaseEvent Resolution reason changed case event.
 type ResolutionReasonChangedCaseEvent struct {
-	// Previous resolution reason
-	From *string `json:"from,omitempty"`
-	// New resolution reason
-	To *string `json:"to,omitempty"`
+	// Previous resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied.
+	From *string `json:"from,omitempty" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
+	// New resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied.
+	To *string `json:"to,omitempty" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

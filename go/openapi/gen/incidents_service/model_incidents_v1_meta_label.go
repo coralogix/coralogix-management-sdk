@@ -23,9 +23,9 @@ var _ MappedNullable = &IncidentsV1MetaLabel{}
 // IncidentsV1MetaLabel Meta label.
 type IncidentsV1MetaLabel struct {
 	// The key.
-	Key *string `json:"key,omitempty"`
+	Key *string `json:"key,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The value.
-	Value *string `json:"value,omitempty"`
+	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

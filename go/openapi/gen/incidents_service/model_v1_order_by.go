@@ -24,7 +24,7 @@ var _ MappedNullable = &V1OrderBy{}
 // V1OrderBy struct for V1OrderBy
 type V1OrderBy struct {
 	// A contextual label key to order by.
-	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	ContextualLabel *string `json:"contextualLabel,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Direction V1OrderByDirection `json:"direction"`
 	IncidentField *IncidentFields `json:"incidentField,omitempty"`
 	AdditionalProperties map[string]interface{}

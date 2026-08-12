@@ -23,13 +23,13 @@ var _ MappedNullable = &SlackActor{}
 // SlackActor Information about the Slack user who initiated the action.
 type SlackActor struct {
 	// If the Slack user is linked to a Coralogix user, this field contains the Coralogix user ID.
-	CoralogixUserId *string `json:"coralogixUserId,omitempty"`
+	CoralogixUserId *string `json:"coralogixUserId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Slack display name
-	DisplayName *string `json:"displayName,omitempty"`
+	DisplayName *string `json:"displayName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Slack user ID
-	SlackUserId *string `json:"slackUserId,omitempty"`
+	SlackUserId *string `json:"slackUserId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Email of the Slack user
-	UserEmail *string `json:"userEmail,omitempty"`
+	UserEmail *string `json:"userEmail,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

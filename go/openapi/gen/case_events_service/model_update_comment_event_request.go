@@ -25,8 +25,8 @@ var _ MappedNullable = &UpdateCommentEventRequest{}
 type UpdateCommentEventRequest struct {
 	// Attachments to the comment
 	Attachments []CommentAttachment `json:"attachments,omitempty"`
-	// Comment text to update
-	Text string `json:"text"`
+	// Comment text to update. Leading and trailing whitespace is trimmed before the length limits are applied.
+	Text string `json:"text" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }

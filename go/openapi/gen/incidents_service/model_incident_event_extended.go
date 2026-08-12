@@ -25,7 +25,7 @@ var _ MappedNullable = &IncidentEventExtended{}
 // IncidentEventExtended struct for IncidentEventExtended
 type IncidentEventExtended struct {
 	// The cx event key.
-	CxEventKey string `json:"cxEventKey"`
+	CxEventKey string `json:"cxEventKey" validate:"regexp=^[\\s\\S]*$"`
 	// The cx event timestamp.
 	CxEventTimestamp time.Time `json:"cxEventTimestamp"`
 	IncidentEvent IncidentEvent `json:"incidentEvent"`
