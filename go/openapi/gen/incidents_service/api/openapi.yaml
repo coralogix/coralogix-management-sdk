@@ -100,7 +100,30 @@
                   "description": "Filters all incidents with the given meta labels",
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/incidents.v1.MetaLabel"
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "title": "Incident meta label",
+                    "description": "Meta label.",
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "example": "key",
+                        "description": "The key.",
+                        "type": "string",
+                        "pattern": "^[\\s\\S]*$",
+                        "minLength": 1,
+                        "maxLength": 255
+                      },
+                      "value": {
+                        "example": "value",
+                        "description": "The value.",
+                        "type": "string",
+                        "pattern": "^[\\s\\S]*$",
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    }
                   },
                   "minItems": 0,
                   "maxItems": 1000
@@ -114,10 +137,53 @@
                   ]
                 },
                 "searchQuery": {
-                  "description": "Search query for incidents",
-                  "allOf": [
+                  "externalDocs": {
+                    "url": ""
+                  },
+                  "title": "Incident search query",
+                  "description": "Incident search query.",
+                  "type": "object",
+                  "properties": {
+                    "contextualLabel": {
+                      "description": "The contextual label to search in.",
+                      "type": "string",
+                      "pattern": "^[\\s\\S]*$",
+                      "minLength": 1,
+                      "maxLength": 256
+                    },
+                    "incidentField": {
+                      "example": "INCIDENTS_FIELDS_STATUS",
+                      "description": "The field to search in",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/IncidentFields"
+                        }
+                      ]
+                    },
+                    "query": {
+                      "example": "error",
+                      "description": "The search query",
+                      "type": "string",
+                      "pattern": "^[\\s\\S]*$",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "oneOf": [
                     {
-                      "$ref": "#/components/schemas/IncidentSearchQuery"
+                      "type": "object",
+                      "required": [
+                        "incidentField"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "contextualLabel"
+                      ]
                     }
                   ]
                 },
