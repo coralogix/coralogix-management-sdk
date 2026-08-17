@@ -145,6 +145,7 @@ Class | Method | HTTP request | Description
  - [IncidentFieldOneOf](docs/IncidentFieldOneOf.md)
  - [IncidentFields](docs/IncidentFields.md)
  - [IncidentGroupBy](docs/IncidentGroupBy.md)
+ - [IncidentMetaLabel](docs/IncidentMetaLabel.md)
  - [IncidentMetaLabelsCount](docs/IncidentMetaLabelsCount.md)
  - [IncidentMetaLabelsWithCount](docs/IncidentMetaLabelsWithCount.md)
  - [IncidentQueryFilter](docs/IncidentQueryFilter.md)

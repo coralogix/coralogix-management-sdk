@@ -9963,670 +9963,6 @@ paths:
         - Quota Allocation Rule Set service
       x-coralogixPermissions:
         - team-quota-rules:Manage
-  /dataplans/data-usage/v2:
-    get:
-      description: Returns data usage summary for the team.
-      externalDocs:
-        url: ''
-      operationId: DataUsageService_GetDataUsage
-      parameters:
-        - description: Date interval to query data usage over.
-          in: query
-          name: date_range
-          required: false
-          schema:
-            description: This data structure represents a date range.
-            externalDocs:
-              description: Find out more about data usage.
-              url: >-
-                https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
-            properties:
-              fromDate:
-                description: The from date.
-                example: '2021-01-01T00:00:00.000Z'
-                format: date-time
-                minLength: 0
-                type: string
-              toDate:
-                description: The to date.
-                example: '2021-01-01T00:00:00.000Z'
-                format: date-time
-                minLength: 0
-                type: string
-            title: Date Range
-            type: object
-        - description: >-
-            Aggregation resolution. Minimum supported value is 1h. Must be
-            between 1 hour and the date_range interval.
-          in: query
-          name: resolution
-          required: false
-          schema:
-            description: >-
-              Aggregation resolution. Minimum supported value is 1h. Must be
-              between 1 hour and the date_range interval.
-            minLength: 0
-            type: string
-        - description: >-
-            List of fields to aggregate results by (for example pillar and
-            priority).
-          in: query
-          name: aggregate
-          required: false
-          schema:
-            description: >-
-              List of fields to aggregate results by (for example pillar and
-              priority).
-            items:
-              $ref: '#/components/schemas/AggregateBy'
-            minItems: 0
-            type: array
-        - description: >-
-            Dimensions to filter results by; only entries that contain all
-            listed dimensions are returned.
-          in: query
-          name: dimension_filters
-          required: false
-          schema:
-            description: >-
-              Dimensions to filter results by; only entries that contain all
-              listed dimensions are returned.
-            items:
-              oneOf:
-                - required:
-                    - pillar
-                  type: object
-                - required:
-                    - genericDimension
-                  type: object
-                - required:
-                    - tier
-                  type: object
-                - required:
-                    - severity
-                  type: object
-                - required:
-                    - priority
-                  type: object
-                - not:
-                    anyOf:
-                      - required:
-                          - pillar
-                        type: object
-                      - required:
-                          - genericDimension
-                        type: object
-                      - required:
-                          - tier
-                        type: object
-                      - required:
-                          - severity
-                        type: object
-                      - required:
-                          - priority
-                        type: object
-                  type: object
-              properties:
-                genericDimension:
-                  description: This data structure represents a generic dimension.
-                  externalDocs:
-                    description: Find out more about data usage.
-                    url: >-
-                      https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
-                  properties:
-                    key:
-                      description: The key.
-                      example: key
-                      minLength: 0
-                      type: string
-                    value:
-                      description: The value.
-                      example: value
-                      minLength: 0
-                      type: string
-                  title: Generic Dimension
-                  type: object
-                pillar:
-                  $ref: '#/components/schemas/v2.Pillar'
-                priority:
-                  $ref: '#/components/schemas/v2.Priority'
-                severity:
-                  $ref: '#/components/schemas/datausage.v2.Severity'
-                tier:
-                  allOf:
-                    - $ref: '#/components/schemas/v2.TcoTier'
-                  deprecated: true
-              type: object
-            minItems: 0
-            type: array
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetDataUsageResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Get Data Usage
-      tags:
-        - Data Usage Service
-  /dataplans/data-usage/v2/daily/evaluation-tokens:
-    post:
-      description: Returns daily evaluation token usage data for the specified period.
-      externalDocs:
-        url: ''
-      operationId: DataUsageService_GetDailyUsageEvaluationTokens
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: >-
-                Request for daily evaluation token usage data for the specified
-                period.
-              oneOf:
-                - required:
-                    - range
-                  type: object
-                - required:
-                    - dateRange
-                  type: object
-                - not:
-                    anyOf:
-                      - required:
-                          - range
-                        type: object
-                      - required:
-                          - dateRange
-                        type: object
-                  type: object
-              properties:
-                dateRange:
-                  $ref: '#/components/schemas/v2.DateRange'
-                range:
-                  $ref: '#/components/schemas/v2.Range'
-              type: object
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetDailyUsageEvaluationTokensResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Get Daily Usage Evaluation Tokens
-      tags:
-        - Data Usage Service
-  /dataplans/data-usage/v2/daily/processed-gbs:
-    post:
-      description: Returns daily processed gigabytes usage data for the specified period.
-      externalDocs:
-        url: ''
-      operationId: DataUsageService_GetDailyUsageProcessedGbs
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: >-
-                Request for daily processed gigabytes usage data for the
-                specified period.
-              oneOf:
-                - required:
-                    - range
-                  type: object
-                - required:
-                    - dateRange
-                  type: object
-                - not:
-                    anyOf:
-                      - required:
-                          - range
-                        type: object
-                      - required:
-                          - dateRange
-                        type: object
-                  type: object
-              properties:
-                dateRange:
-                  $ref: '#/components/schemas/v2.DateRange'
-                range:
-                  $ref: '#/components/schemas/v2.Range'
-              type: object
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetDailyUsageProcessedGbsResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Get Daily Usage Processed GBs
-      tags:
-        - Data Usage Service
-  /dataplans/data-usage/v2/daily/units:
-    post:
-      description: Returns daily units usage data for the specified period.
-      externalDocs:
-        url: ''
-      operationId: DataUsageService_GetDailyUsageUnits
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: Request for daily units usage data for the specified period.
-              oneOf:
-                - required:
-                    - range
-                  type: object
-                - required:
-                    - dateRange
-                  type: object
-                - not:
-                    anyOf:
-                      - required:
-                          - range
-                        type: object
-                      - required:
-                          - dateRange
-                        type: object
-                  type: object
-              properties:
-                dateRange:
-                  $ref: '#/components/schemas/v2.DateRange'
-                range:
-                  $ref: '#/components/schemas/v2.Range'
-              type: object
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetDailyUsageUnitsResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Get Daily Usage Units
-      tags:
-        - Data Usage Service
-  /dataplans/data-usage/v2/export-status:
-    get:
-      description: Returns the current export status for data usage.
-      externalDocs:
-        url: ''
-      operationId: DataUsageService_GetDataUsageMetricsExportStatus
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetDataUsageMetricsExportStatusResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Get Data Usage Metrics Export Status
-      tags:
-        - Data Usage Service
-    post:
-      description: Triggers a data usage export.
-      externalDocs:
-        url: ''
-      operationId: DataUsageService_UpdateDataUsageMetricsExportStatus
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: >-
-                This data structure is used to update data usage metrics export
-                status.
-              properties:
-                enabled:
-                  description: Whether this resource is enabled.
-                  example: true
-                  type: boolean
-              title: Update Data Usage Metrics Export Status Request
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: >-
-                  #/components/schemas/UpdateDataUsageMetricsExportStatusResponse
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Update Data Usage Metrics Export Status
-      tags:
-        - Data Usage Service
-  /dataplans/data-usage/v2/logs/count:
-    get:
-      description: Returns the log ingestion count for the team.
-      externalDocs:
-        url: ''
-      operationId: DataUsageService_GetLogsCount
-      parameters:
-        - description: Date interval to query log ingestion counts over.
-          in: query
-          name: date_range
-          required: false
-          schema:
-            description: This data structure represents a date range.
-            externalDocs:
-              description: Find out more about data usage.
-              url: >-
-                https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
-            properties:
-              fromDate:
-                description: The from date.
-                example: '2021-01-01T00:00:00.000Z'
-                format: date-time
-                minLength: 0
-                type: string
-              toDate:
-                description: The to date.
-                example: '2021-01-01T00:00:00.000Z'
-                format: date-time
-                minLength: 0
-                type: string
-            title: Date Range
-            type: object
-        - description: >-
-            Aggregation resolution with second precision. Must be between 1
-            second and the date_range interval.
-          in: query
-          name: resolution
-          required: false
-          schema:
-            description: >-
-              Aggregation resolution with second precision. Must be between 1
-              second and the date_range interval.
-            minLength: 0
-            type: string
-        - description: >-
-            Optional scope filter that restricts results to the listed
-            applications and subsystems (full match).
-          in: query
-          name: filters
-          required: false
-          schema:
-            description: This data structure represents a filter for scopes.
-            externalDocs:
-              description: Find out more about data usage.
-              url: >-
-                https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
-            properties:
-              application:
-                description: List of application names to filter on (OR logic, full match).
-                items:
-                  description: >-
-                    List of application names to filter on (OR logic, full
-                    match).
-                  example: application1
-                  minLength: 0
-                  type: string
-                minItems: 0
-                type: array
-              subsystem:
-                description: List of subsystem names to filter on (OR logic, full match).
-                items:
-                  description: List of subsystem names to filter on (OR logic, full match).
-                  example: subsystem1
-                  minLength: 0
-                  type: string
-                minItems: 0
-                type: array
-            title: Scopes Filter
-            type: object
-        - description: When true, aggregate the returned counts by subsystem name.
-          in: query
-          name: subsystem_aggregation
-          required: false
-          schema:
-            description: When true, aggregate the returned counts by subsystem name.
-            type: boolean
-        - description: When true, aggregate the returned counts by application name.
-          in: query
-          name: application_aggregation
-          required: false
-          schema:
-            description: When true, aggregate the returned counts by application name.
-            type: boolean
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetLogsCountResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Get Logs Count
-      tags:
-        - Data Usage Service
-  /dataplans/data-usage/v2/spans/count:
-    get:
-      description: Returns the span ingestion count for the team.
-      externalDocs:
-        url: ''
-      operationId: DataUsageService_GetSpansCount
-      parameters:
-        - description: Date interval to query span ingestion counts over.
-          in: query
-          name: date_range
-          required: false
-          schema:
-            description: This data structure represents a date range.
-            externalDocs:
-              description: Find out more about data usage.
-              url: >-
-                https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
-            properties:
-              fromDate:
-                description: The from date.
-                example: '2021-01-01T00:00:00.000Z'
-                format: date-time
-                minLength: 0
-                type: string
-              toDate:
-                description: The to date.
-                example: '2021-01-01T00:00:00.000Z'
-                format: date-time
-                minLength: 0
-                type: string
-            title: Date Range
-            type: object
-        - description: >-
-            Aggregation resolution with second precision. Must be between 1
-            second and the date_range interval.
-          in: query
-          name: resolution
-          required: false
-          schema:
-            description: >-
-              Aggregation resolution with second precision. Must be between 1
-              second and the date_range interval.
-            minLength: 0
-            type: string
-        - description: >-
-            Optional scope filter that restricts results to the listed
-            applications and subsystems (full match).
-          in: query
-          name: filters
-          required: false
-          schema:
-            description: This data structure represents a filter for scopes.
-            externalDocs:
-              description: Find out more about data usage.
-              url: >-
-                https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
-            properties:
-              application:
-                description: List of application names to filter on (OR logic, full match).
-                items:
-                  description: >-
-                    List of application names to filter on (OR logic, full
-                    match).
-                  example: application1
-                  minLength: 0
-                  type: string
-                minItems: 0
-                type: array
-              subsystem:
-                description: List of subsystem names to filter on (OR logic, full match).
-                items:
-                  description: List of subsystem names to filter on (OR logic, full match).
-                  example: subsystem1
-                  minLength: 0
-                  type: string
-                minItems: 0
-                type: array
-            title: Scopes Filter
-            type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetSpansCountResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Get Spans Count
-      tags:
-        - Data Usage Service
   /dataplans/log-policies/v1:
     put:
       description: Updates the log data retention policies.
@@ -12515,7 +11851,26 @@ paths:
               metaLabels:
                 description: Filters all incidents with the given meta labels
                 items:
-                  $ref: '#/components/schemas/incidents.v1.MetaLabel'
+                  description: Meta label.
+                  externalDocs:
+                    url: ''
+                  properties:
+                    key:
+                      description: The key.
+                      example: key
+                      maxLength: 255
+                      minLength: 1
+                      pattern: ^[\s\S]*$
+                      type: string
+                    value:
+                      description: The value.
+                      example: value
+                      maxLength: 255
+                      minLength: 1
+                      pattern: ^[\s\S]*$
+                      type: string
+                  title: Incident meta label
+                  type: object
                 maxItems: 1000
                 minItems: 0
                 type: array
@@ -12524,9 +11879,39 @@ paths:
                   - $ref: '#/components/schemas/v1.FilterOperator'
                 description: The operator for the meta labels filter
               searchQuery:
-                allOf:
-                  - $ref: '#/components/schemas/IncidentSearchQuery'
-                description: Search query for incidents
+                description: Incident search query.
+                externalDocs:
+                  url: ''
+                oneOf:
+                  - required:
+                      - incidentField
+                    type: object
+                  - required:
+                      - contextualLabel
+                    type: object
+                properties:
+                  contextualLabel:
+                    description: The contextual label to search in.
+                    maxLength: 256
+                    minLength: 1
+                    pattern: ^[\s\S]*$
+                    type: string
+                  incidentField:
+                    allOf:
+                      - $ref: '#/components/schemas/IncidentFields'
+                    description: The field to search in
+                    example: INCIDENTS_FIELDS_STATUS
+                  query:
+                    description: The search query
+                    example: error
+                    maxLength: 4096
+                    minLength: 1
+                    pattern: ^[\s\S]*$
+                    type: string
+                required:
+                  - query
+                title: Incident search query
+                type: object
               severity:
                 description: Filter by incident severity
                 items:
@@ -22468,6 +21853,40 @@ components:
         group.
       externalDocs:
         url: ''
+    ArchiveDashboardRequest:
+      title: Archive dashboard request data structure
+      required:
+        - dashboardId
+      type: object
+      properties:
+        dashboardId:
+          maxLength: 21
+          minLength: 21
+          pattern: ^[\s\S]*$
+          type: string
+          description: The dashboard id.
+        requestId:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Idempotency key for the archive request, used to prevent duplicate
+            operations.
+      description: This is a request used to archive a custom dashboard
+      externalDocs:
+        description: Find out more about Dashboards in our documentation.
+        url: >-
+          https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+    ArchiveDashboardResponse:
+      title: Archive dashboard response data structure
+      type: object
+      additionalProperties: false
+      description: This is a response received when the dashboard is successfully archived
+      externalDocs:
+        description: Find out more about Dashboards in our documentation.
+        url: >-
+          https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
     ArchiveRetention:
       type: object
       properties:
@@ -22551,6 +21970,84 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ObjectTag'
+    ArchivedDashboard:
+      title: Archived dashboard data structure
+      type: object
+      properties:
+        archivedAt:
+          maxLength: 30
+          minLength: 20
+          type: string
+          description: Archival timestamp.
+          format: date-time
+        archivedByUserId:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: The ID of the user who archived the dashboard.
+        authorId:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: The author id.
+        authorName:
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: The author name.
+        createdAt:
+          maxLength: 30
+          minLength: 20
+          type: string
+          description: Creation timestamp.
+          format: date-time
+        description:
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            A brief description or summary of the dashboard's purpose or
+            content.
+        folderPath:
+          allOf:
+            - $ref: '#/components/schemas/FolderPath'
+          description: >-
+            The folder path the dashboard was in when archived. Absent (null)
+            means the dashboard was at the root - not in any folder - and is the
+            only reason this field is ever unset.
+        id:
+          maxLength: 21
+          minLength: 21
+          pattern: ^[\s\S]*$
+          type: string
+          description: A unique identifier of the dashboard.
+        name:
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: The dashboard name.
+        slugName:
+          maxLength: 255
+          minLength: 1
+          pattern: ^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$
+          type: string
+          description: The slug name.
+        updatedAt:
+          maxLength: 30
+          minLength: 20
+          type: string
+          description: Last-updated timestamp.
+          format: date-time
+      description: An archived dashboard record.
+      externalDocs:
+        description: Find out more about Dashboards in our documentation.
+        url: >-
+          https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
     AssignCaseRequest:
       title: Assign case request
       required:
@@ -46032,6 +45529,53 @@ components:
       description: Response containing a list of all outgoing webhooks.
       externalDocs:
         url: ''
+    ListArchivedDashboardsRequest:
+      title: List archived dashboards request data structure
+      type: object
+      properties:
+        pageSize:
+          maximum: 500
+          minimum: 1
+          type: integer
+          description: Maximum number of dashboards to return in a single page.
+          format: int32
+        pageToken:
+          maxLength: 49
+          minLength: 49
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Opaque pagination token. Obtained from the previous page's
+            nextPageToken. Clients must not construct or parse this value.
+      description: This is a request used to list archived custom dashboards
+      externalDocs:
+        description: Find out more about Dashboards in our documentation.
+        url: >-
+          https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+    ListArchivedDashboardsResponse:
+      title: List archived dashboards response data structure
+      type: object
+      properties:
+        dashboards:
+          maxItems: 500
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/ArchivedDashboard'
+          description: The page of archived dashboards.
+        nextPageToken:
+          maxLength: 49
+          minLength: 49
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Opaque pagination token for the next page. Absent when there are no
+            more results. Clients must not construct or parse this value.
+      description: This is a response containing a page of archived dashboards
+      externalDocs:
+        description: Find out more about Dashboards in our documentation.
+        url: >-
+          https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
     ListCasesRequest:
       title: List cases request
       type: object
@@ -53396,8 +52940,12 @@ components:
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: The log regex.
-      description: Query.logs query.type.field name.
+          description: The log regex. Not implemented — see the parent schema.
+      description: >-
+        Not implemented and unusable. Fetching log field names by regex is
+        defined in the API but is not supported by the dashboards product: a
+        dashboard whose variable uses fieldName cannot be created in the UI and
+        fails to render when loaded. Use fieldValue instead.
       externalDocs:
         url: ''
     QuerySource.LogsQuery.Type.FieldValue:
@@ -53668,8 +53216,12 @@ components:
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: The span regex.
-      description: Fetches distinct span field names matching the given regex pattern.
+          description: The span regex. Not implemented — see the parent schema.
+      description: >-
+        Not implemented and unusable. Fetching span field names by regex is
+        defined in the API but is not supported by the dashboards product: a
+        dashboard whose variable uses fieldName cannot be created in the UI and
+        fails to render when loaded. Use fieldValue instead.
       externalDocs:
         url: ''
     QuerySource.SpansQuery.Type.FieldValue:
@@ -53680,18 +53232,22 @@ components:
             - $ref: '#/components/schemas/ObservationField'
           description: >-
             The span observation field to fetch values for. Preferred over
-            value.
+            value. Setting both observationField and value is rejected.
         value:
           allOf:
             - $ref: '#/components/schemas/SpanField'
           description: >-
             Deprecated. Legacy span field addressing. Use observationField
-            instead; do not set both.
+            instead. Setting both value and observationField is rejected.
           deprecated: true
       description: >-
-        Fetches distinct values for a specific span field. Set observationField
-        to choose the field; value is a deprecated legacy alternative — prefer
-        observationField and avoid setting both.
+        Fetches distinct values for a specific span field. Exactly one of
+        observationField or value must be set — setting both is rejected. The
+        exclusivity is enforced when the request is validated, not by this
+        schema: both properties are declared independently and are individually
+        optional, so a both-set or neither-set object is only rejected once the
+        request is sent. Prefer observationField; value is a deprecated legacy
+        alternative.
       externalDocs:
         url: ''
     QueryText:
@@ -55352,6 +54908,40 @@ components:
         value:
           minLength: 0
           type: string
+    RestoreDashboardRequest:
+      title: Restore dashboard request data structure
+      required:
+        - dashboardId
+      type: object
+      properties:
+        dashboardId:
+          maxLength: 21
+          minLength: 21
+          pattern: ^[\s\S]*$
+          type: string
+          description: The dashboard id.
+        requestId:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Idempotency key for the restore request, used to prevent duplicate
+            operations.
+      description: This is a request used to restore an archived dashboard
+      externalDocs:
+        description: Find out more about Dashboards in our documentation.
+        url: >-
+          https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+    RestoreDashboardResponse:
+      title: Restore dashboard response data structure
+      type: object
+      additionalProperties: false
+      description: This is a response received when the dashboard is successfully restored
+      externalDocs:
+        description: Find out more about Dashboards in our documentation.
+        url: >-
+          https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
     RestrictedTopicsConfig:
       type: object
       properties:
@@ -69343,17 +68933,13 @@ tags:
     externalDocs:
       url: ''
   - name: Dashboard service
-    description: Get information about the Coralogix Dashboard catalog.
+    description: Manage your dashboards.
     externalDocs:
       url: ''
   - name: Data Usage Query service
     description: >-
       Query billable data usage through the public Coralogix API using daily or
       hourly bucketed aggregations over supported labels.
-    externalDocs:
-      url: ''
-  - name: Data Usage Service
-    description: A service to manage data usage metrics.
     externalDocs:
       url: ''
   - name: Enrichments Service
