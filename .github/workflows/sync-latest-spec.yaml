@@ -4,7 +4,8 @@ name: Sync and Generate OpenAPI SDK
 # (event_type: facade-spec-updated) whenever may26/openapi.yaml changes
 # on master, or manually via workflow_dispatch. Fetches the spec from
 # openapi-facade at the dispatched commit, runs the split tool +
-# Go OpenAPI generator, and opens a PR with the regenerated clients.
+# Go OpenAPI generator, and opens an auto-merging PR with the regenerated
+# clients (opened by the openapi-facade-automation GitHub App).
 
 on:
   repository_dispatch:
@@ -26,10 +27,20 @@ env:
   FACADE_REPO: coralogix/openapi-facade
   FACADE_SPEC_PATH: may26/openapi.yaml
 
+# Syncs all target the one auto/facade-sync-latest PR and arm auto-merge, so a
+# newer facade change should cancel an in-flight sync rather than race it onto
+# the same branch.
+concurrency:
+  group: facade-sdk-sync
+  cancel-in-progress: true
+
 jobs:
-  sync:
+  build:
     name: Sync spec & generate SDK
     runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.facade.outputs.sha }}
+      short_sha: ${{ steps.facade.outputs.short_sha }}
 
     steps:
       - name: Checkout repository
@@ -103,28 +114,85 @@ jobs:
           chmod +x ./go/scripts/generate_openapi.sh
           ./go/scripts/generate_openapi.sh
 
-      - name: Open Pull Request
-        uses: peter-evans/create-pull-request@v6
+      - name: Package generated tree
+        run: tar czf sdk-sync-build.tar.gz openapi.yaml specs go/openapi/gen
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          # GH_TOKEN (not the default GITHUB_TOKEN) so CI workflows
-          # trigger on the auto-opened PR. GITHUB_TOKEN-opened PRs are
-          # blocked by GitHub's anti-loop protection.
-          token: ${{ secrets.GH_TOKEN }}
+          name: sdk-sync-build
+          path: sdk-sync-build.tar.gz
+          retention-days: 1
+
+  # App token minted and used only here -- it can't cross a job boundary, so the
+  # third-party generation steps in `build` never see it.
+  open-pr:
+    name: Open auto-merging sync PR
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: sdk-sync-build
+
+      - name: Extract generated tree
+        run: |
+          rm -rf specs go/openapi/gen
+          tar xzf sdk-sync-build.tar.gz
+
+      # openapi-facade-automation bypasses the review requirement on master.
+      - name: Decode GitHub App private key
+        id: pkey
+        env:
+          RAW_KEY: ${{ secrets.OPENAPI_FACADE_AUTOMATION_APP_PRIVATE_KEY }}
+        run: |
+          decoded=$(printf '%b' "$RAW_KEY")
+          while IFS= read -r line; do
+            [ -n "$line" ] && echo "::add-mask::$line"
+          done <<< "$decoded"
+          {
+            echo 'key<<PKEY_EOF'
+            printf '%s\n' "$decoded"
+            echo 'PKEY_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Mint GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.OPENAPI_FACADE_AUTOMATION_APP_ID }}
+          private-key: ${{ steps.pkey.outputs.key }}
+
+      # Fixed branch: if a sync PR is still open, this updates it in place.
+      # The App installation token (not the default GITHUB_TOKEN) is used so the
+      # required CI checks still run on the auto-opened PR; native auto-merge
+      # then waits for them before merging.
+      - name: Open Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          sign-commits: true
           base: master
-          branch: auto/facade-sync-${{ steps.facade.outputs.short_sha }}
+          branch: auto/facade-sync-latest
           delete-branch: true
           add-paths: |
             openapi.yaml
             specs/**
             go/openapi/gen/**
-          commit-message: "chore: sync OpenAPI SDK from openapi-facade ${{ steps.facade.outputs.short_sha }}"
-          title: "Sync OpenAPI SDK from openapi-facade ${{ steps.facade.outputs.short_sha }}"
+          commit-message: "chore: sync OpenAPI SDK from openapi-facade ${{ needs.build.outputs.short_sha }}"
+          title: "Sync OpenAPI SDK from openapi-facade ${{ needs.build.outputs.short_sha }}"
           body: |
             Automated sync of OpenAPI clients from `${{ env.FACADE_REPO }}` `${{ env.FACADE_SPEC_PATH }}`.
 
             Jira: [CX-42158](https://coralogix.atlassian.net/browse/CX-42158) (umbrella ticket for automated OpenAPI SDK syncs)
 
-            Source commit: [`${{ steps.facade.outputs.short_sha }}`](https://github.com/${{ env.FACADE_REPO }}/commit/${{ steps.facade.outputs.sha }})
+            Source commit: [`${{ needs.build.outputs.short_sha }}`](https://github.com/${{ env.FACADE_REPO }}/commit/${{ needs.build.outputs.sha }})
 
             Regenerated:
             - `openapi.yaml`
@@ -133,3 +201,10 @@ jobs:
           labels: |
             sync
             facade-sync
+
+      # Merges once required checks pass; stays armed and waiting otherwise.
+      - name: Enable auto-merge
+        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: gh pr merge "${{ steps.cpr.outputs.pull-request-number }}" --auto --squash --delete-branch
