@@ -41,10 +41,9 @@ type IncidentQueryFilter struct {
 	// Indicates if the incident is muted
 	IsMuted *bool `json:"isMuted,omitempty"`
 	// Filters all incidents with the given meta labels
-	MetaLabels []IncidentsV1MetaLabel `json:"metaLabels,omitempty"`
+	MetaLabels []IncidentMetaLabel `json:"metaLabels,omitempty"`
 	// The operator for the meta labels filter
 	MetaLabelsOp *V1FilterOperator `json:"metaLabelsOp,omitempty"`
-	// Search query for incidents
 	SearchQuery *IncidentSearchQuery `json:"searchQuery,omitempty"`
 	// Filter by incident severity
 	Severity []IncidentSeverity `json:"severity,omitempty"`
@@ -340,9 +339,9 @@ func (o *IncidentQueryFilter) SetIsMuted(v bool) {
 }
 
 // GetMetaLabels returns the MetaLabels field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetMetaLabels() []IncidentsV1MetaLabel {
+func (o *IncidentQueryFilter) GetMetaLabels() []IncidentMetaLabel {
 	if o == nil || IsNil(o.MetaLabels) {
-		var ret []IncidentsV1MetaLabel
+		var ret []IncidentMetaLabel
 		return ret
 	}
 	return o.MetaLabels
@@ -350,7 +349,7 @@ func (o *IncidentQueryFilter) GetMetaLabels() []IncidentsV1MetaLabel {
 
 // GetMetaLabelsOk returns a tuple with the MetaLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetMetaLabelsOk() ([]IncidentsV1MetaLabel, bool) {
+func (o *IncidentQueryFilter) GetMetaLabelsOk() ([]IncidentMetaLabel, bool) {
 	if o == nil || IsNil(o.MetaLabels) {
 		return nil, false
 	}
@@ -366,8 +365,8 @@ func (o *IncidentQueryFilter) HasMetaLabels() bool {
 	return false
 }
 
-// SetMetaLabels gets a reference to the given []IncidentsV1MetaLabel and assigns it to the MetaLabels field.
-func (o *IncidentQueryFilter) SetMetaLabels(v []IncidentsV1MetaLabel) {
+// SetMetaLabels gets a reference to the given []IncidentMetaLabel and assigns it to the MetaLabels field.
+func (o *IncidentQueryFilter) SetMetaLabels(v []IncidentMetaLabel) {
 	o.MetaLabels = v
 }
 
