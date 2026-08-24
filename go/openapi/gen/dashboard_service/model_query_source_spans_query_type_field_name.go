@@ -20,9 +20,9 @@ var _ = bytes.MinRead
 // checks if the QuerySourceSpansQueryTypeFieldName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceSpansQueryTypeFieldName{}
 
-// QuerySourceSpansQueryTypeFieldName Fetches distinct span field names matching the given regex pattern.
+// QuerySourceSpansQueryTypeFieldName Not implemented and unusable. Fetching span field names by regex is defined in the API but is not supported by the dashboards product: a dashboard whose variable uses fieldName cannot be created in the UI and fails to render when loaded. Use fieldValue instead.
 type QuerySourceSpansQueryTypeFieldName struct {
-	// The span regex.
+	// The span regex. Not implemented — see the parent schema.
 	SpanRegex *string `json:"spanRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

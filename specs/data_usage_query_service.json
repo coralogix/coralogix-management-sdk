@@ -8,7 +8,7 @@
     "/dataplan/data-usage/v1/capabilities": {
       "get": {
         "tags": [
-          "Data Usage Query service"
+          "Data Usage Query Service"
         ],
         "summary": "Get data usage capabilities",
         "description": "Returns the labels, measurement kinds, units, and per-request limits supported by the public data-usage API in v1, so clients can validate queries before submitting them.\n\nRequires the following permissions:\n- `data-usage:Read`",
@@ -62,7 +62,7 @@
     "/dataplan/data-usage/v1/query": {
       "post": {
         "tags": [
-          "Data Usage Query service"
+          "Data Usage Query Service"
         ],
         "summary": "Query data usage",
         "description": "Returns billable data usage aggregated into daily or hourly buckets. Supports filtering and grouping by labels listed by the capabilities endpoint.\n\nRequires the following permissions:\n- `data-usage:Read`",

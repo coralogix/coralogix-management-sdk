@@ -20,11 +20,11 @@ var _ = bytes.MinRead
 // checks if the QuerySourceSpansQueryTypeFieldValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceSpansQueryTypeFieldValue{}
 
-// QuerySourceSpansQueryTypeFieldValue Fetches distinct values for a specific span field. Set observationField to choose the field; value is a deprecated legacy alternative — prefer observationField and avoid setting both.
+// QuerySourceSpansQueryTypeFieldValue Fetches distinct values for a specific span field. Exactly one of observationField or value must be set — setting both is rejected. The exclusivity is enforced when the request is validated, not by this schema: both properties are declared independently and are individually optional, so a both-set or neither-set object is only rejected once the request is sent. Prefer observationField; value is a deprecated legacy alternative.
 type QuerySourceSpansQueryTypeFieldValue struct {
-	// The span observation field to fetch values for. Preferred over value.
+	// The span observation field to fetch values for. Preferred over value. Setting both observationField and value is rejected.
 	ObservationField *ObservationField `json:"observationField,omitempty"`
-	// Deprecated. Legacy span field addressing. Use observationField instead; do not set both.
+	// Deprecated. Legacy span field addressing. Use observationField instead. Setting both value and observationField is rejected.
 	// Deprecated
 	Value *SpanField `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
