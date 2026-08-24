@@ -28,6 +28,8 @@ const (
 	MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN                MetricThresholdConditionType = 1
 	MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS      MetricThresholdConditionType = 2
 	MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS      MetricThresholdConditionType = 3
+	MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_EQUALS                   MetricThresholdConditionType = 4
+	MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_NOT_EQUALS               MetricThresholdConditionType = 5
 )
 
 // Enum value maps for MetricThresholdConditionType.
@@ -37,12 +39,16 @@ var (
 		1: "METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN",
 		2: "METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS",
 		3: "METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS",
+		4: "METRIC_THRESHOLD_CONDITION_TYPE_EQUALS",
+		5: "METRIC_THRESHOLD_CONDITION_TYPE_NOT_EQUALS",
 	}
 	MetricThresholdConditionType_value = map[string]int32{
 		"METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED": 0,
 		"METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN":                1,
 		"METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS":      2,
 		"METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS":      3,
+		"METRIC_THRESHOLD_CONDITION_TYPE_EQUALS":                   4,
+		"METRIC_THRESHOLD_CONDITION_TYPE_NOT_EQUALS":               5,
 	}
 )
 
@@ -77,12 +83,14 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_threshold_
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_threshold_metric_threshold_condition_type_proto_rawDesc = "" +
 	"\n" +
-	"lcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_condition_type.proto\x12\x1bcom.coralogixapis.alerts.v3*\xfd\x01\n" +
+	"lcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_condition_type.proto\x12\x1bcom.coralogixapis.alerts.v3*\xd9\x02\n" +
 	"\x1cMetricThresholdConditionType\x12<\n" +
 	"8METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\x10\x00\x12-\n" +
 	")METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN\x10\x01\x127\n" +
 	"3METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS\x10\x02\x127\n" +
-	"3METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS\x10\x03b\x06proto3"
+	"3METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS\x10\x03\x12*\n" +
+	"&METRIC_THRESHOLD_CONDITION_TYPE_EQUALS\x10\x04\x12.\n" +
+	"*METRIC_THRESHOLD_CONDITION_TYPE_NOT_EQUALS\x10\x05b\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_threshold_metric_threshold_condition_type_proto_rawDescOnce sync.Once

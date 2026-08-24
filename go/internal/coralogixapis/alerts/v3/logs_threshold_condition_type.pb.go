@@ -26,6 +26,8 @@ type LogsThresholdConditionType int32
 const (
 	LogsThresholdConditionType_LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED LogsThresholdConditionType = 0
 	LogsThresholdConditionType_LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN                LogsThresholdConditionType = 1
+	LogsThresholdConditionType_LOGS_THRESHOLD_CONDITION_TYPE_EQUALS                   LogsThresholdConditionType = 2
+	LogsThresholdConditionType_LOGS_THRESHOLD_CONDITION_TYPE_NOT_EQUALS               LogsThresholdConditionType = 3
 )
 
 // Enum value maps for LogsThresholdConditionType.
@@ -33,10 +35,14 @@ var (
 	LogsThresholdConditionType_name = map[int32]string{
 		0: "LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
 		1: "LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN",
+		2: "LOGS_THRESHOLD_CONDITION_TYPE_EQUALS",
+		3: "LOGS_THRESHOLD_CONDITION_TYPE_NOT_EQUALS",
 	}
 	LogsThresholdConditionType_value = map[string]int32{
 		"LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED": 0,
 		"LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN":                1,
+		"LOGS_THRESHOLD_CONDITION_TYPE_EQUALS":                   2,
+		"LOGS_THRESHOLD_CONDITION_TYPE_NOT_EQUALS":               3,
 	}
 )
 
@@ -71,10 +77,12 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_threshold_lo
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_threshold_logs_threshold_condition_type_proto_rawDesc = "" +
 	"\n" +
-	"hcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/threshold/logs_threshold_condition_type.proto\x12\x1bcom.coralogixapis.alerts.v3*\x85\x01\n" +
+	"hcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/threshold/logs_threshold_condition_type.proto\x12\x1bcom.coralogixapis.alerts.v3*\xdd\x01\n" +
 	"\x1aLogsThresholdConditionType\x12:\n" +
 	"6LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\x10\x00\x12+\n" +
-	"'LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN\x10\x01b\x06proto3"
+	"'LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN\x10\x01\x12(\n" +
+	"$LOGS_THRESHOLD_CONDITION_TYPE_EQUALS\x10\x02\x12,\n" +
+	"(LOGS_THRESHOLD_CONDITION_TYPE_NOT_EQUALS\x10\x03b\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_threshold_logs_threshold_condition_type_proto_rawDescOnce sync.Once

@@ -733,6 +733,8 @@ const (
 	MetricThresholdConditionTypeLessThan              = alerts.MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN
 	MetricThresholdConditionTypeMoreThanOrEquals      = alerts.MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS
 	MetricThresholdConditionTypeLessThanOrEquals      = alerts.MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS
+	MetricThresholdConditionTypeEquals                = alerts.MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_EQUALS
+	MetricThresholdConditionTypeNotEquals             = alerts.MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_NOT_EQUALS
 )
 
 // LogsRatioGroupByFor is a group by setting for logs.
@@ -755,6 +757,12 @@ const (
 
 	// LogsThresholdConditionTypeLessThan is a type of alert type.
 	LogsThresholdConditionTypeLessThan = alerts.LogsThresholdConditionType_LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN
+
+	// LogsThresholdConditionTypeEquals is a type of alert type.
+	LogsThresholdConditionTypeEquals = alerts.LogsThresholdConditionType_LOGS_THRESHOLD_CONDITION_TYPE_EQUALS
+
+	// LogsThresholdConditionTypeNotEquals is a type of alert type.
+	LogsThresholdConditionTypeNotEquals = alerts.LogsThresholdConditionType_LOGS_THRESHOLD_CONDITION_TYPE_NOT_EQUALS
 )
 
 // AlertsClient is a client for the Coralogix Alerts API.
