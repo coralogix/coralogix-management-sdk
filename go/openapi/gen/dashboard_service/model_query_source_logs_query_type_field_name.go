@@ -20,9 +20,9 @@ var _ = bytes.MinRead
 // checks if the QuerySourceLogsQueryTypeFieldName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceLogsQueryTypeFieldName{}
 
-// QuerySourceLogsQueryTypeFieldName Query.logs query.type.field name.
+// QuerySourceLogsQueryTypeFieldName Not implemented and unusable. Fetching log field names by regex is defined in the API but is not supported by the dashboards product: a dashboard whose variable uses fieldName cannot be created in the UI and fails to render when loaded. Use fieldValue instead.
 type QuerySourceLogsQueryTypeFieldName struct {
-	// The log regex.
+	// The log regex. Not implemented — see the parent schema.
 	LogRegex *string `json:"logRegex,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
