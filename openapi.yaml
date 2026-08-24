@@ -66859,6 +66859,7 @@ components:
         - PAGERDUTY_INCIDENTS
         - MICROSOFT_TEAMS
         - EVENTBRIDGE
+        - INCIDENT_IO
       type: string
       description: Connector type.
     notification_center.EntityType:

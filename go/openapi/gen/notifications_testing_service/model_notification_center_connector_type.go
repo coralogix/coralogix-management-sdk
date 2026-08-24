@@ -33,6 +33,7 @@ const (
 	NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY_INCIDENTS NotificationCenterConnectorType = "PAGERDUTY_INCIDENTS"
 	NOTIFICATIONCENTERCONNECTORTYPE_MICROSOFT_TEAMS NotificationCenterConnectorType = "MICROSOFT_TEAMS"
 	NOTIFICATIONCENTERCONNECTORTYPE_EVENTBRIDGE NotificationCenterConnectorType = "EVENTBRIDGE"
+	NOTIFICATIONCENTERCONNECTORTYPE_INCIDENT_IO NotificationCenterConnectorType = "INCIDENT_IO"
 )
 
 // All allowed values of NotificationCenterConnectorType enum
@@ -47,6 +48,7 @@ var AllowedNotificationCenterConnectorTypeEnumValues = []NotificationCenterConne
 	"PAGERDUTY_INCIDENTS",
 	"MICROSOFT_TEAMS",
 	"EVENTBRIDGE",
+	"INCIDENT_IO",
 }
 
 func (v *NotificationCenterConnectorType) UnmarshalJSON(src []byte) error {
