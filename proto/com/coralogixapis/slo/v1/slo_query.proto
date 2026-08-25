@@ -97,15 +97,20 @@ message SloQueryResponse {
   repeated SloQueryResultRow rows = 1;
 
   message SloQueryResultRow {
-    string value_of_key = 1;
+    string key_value = 1;
     int32 slo_count = 2;
     int32 permutation_count = 3;
     repeated ResponseGroupingKey grouping_keys = 4;
-    repeated SloStatus statuses = 5;
+    repeated SloStatusCount statuses = 5;
     float min_remaining_error_budget = 6;
     repeated string service = 7;
     repeated string environment = 8;
     repeated string team = 9;
+
+    message SloStatusCount {
+      SloStatus status = 1;
+      uint32 count = 2;
+    }
   }
 }
 
@@ -118,21 +123,24 @@ message SloDrilldownQuery {
 }
 
 message SloDrilldownResponse {
-  ResponseGroupingKey grouping_keys = 1;
-  SloStatus status = 2;
-  float compliance = 3;
-  float remaining_error_budget = 4;
-  int32 alerts = 5;
-  string service = 6;
-  string environment = 7;
-  string team = 8;
+  repeated DrilldownRow rows = 1;
+
+  message DrilldownRow {
+    repeated ResponseGroupingKey grouping_keys = 1;
+    SloStatus status = 2;
+    float compliance = 3;
+    float remaining_error_budget = 4;
+    int32 alerts = 5;
+    string service = 6;
+    string environment = 7;
+    string team = 8;
+  }
 }
 
 message ResponseGroupingKey {
   string key = 1;
   string value = 2;
 }
-
 
 enum SloStatus {
   SLO_STATUS_UNSPECIFIED = 0;
@@ -141,9 +149,4 @@ enum SloStatus {
   SLO_STATUS_CRITICAL = 3;
   SLO_STATUS_BREACHED = 4;
   SLO_STATUS_PENDING = 5;
-}
-
-message SloStatusCount {
-  SloStatus status = 1;
-  uint32 count = 2;
 }
