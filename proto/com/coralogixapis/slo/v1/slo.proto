@@ -191,3 +191,12 @@ message SloFilters {
   };
   repeated SloFilter filters = 1;
 }
+
+enum SloStatus {
+  SLO_STATUS_UNSPECIFIED = 0;
+  SLO_STATUS_OK = 1;
+  SLO_STATUS_WARNING = 2;
+  SLO_STATUS_CRITICAL = 3;
+  SLO_STATUS_BREACHED = 4;
+  SLO_STATUS_PENDING = 5;
+}

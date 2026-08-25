@@ -1,6 +1,7 @@
 syntax = "proto3";
 package com.coralogixapis.slo.v1;
 import "google/protobuf/empty.proto";
+import "com/coralogixapis/slo/v1/slo.proto";
 
 message Navigation {
   Filter filter = 1;
@@ -140,13 +141,4 @@ message SloDrilldownResponse {
 message ResponseGroupingKey {
   string key = 1;
   string value = 2;
-}
-
-enum SloStatus {
-  SLO_STATUS_UNSPECIFIED = 0;
-  SLO_STATUS_OK = 1;
-  SLO_STATUS_WARNING = 2;
-  SLO_STATUS_CRITICAL = 3;
-  SLO_STATUS_BREACHED = 4;
-  SLO_STATUS_PENDING = 5;
 }

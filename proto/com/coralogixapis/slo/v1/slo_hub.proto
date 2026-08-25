@@ -3,17 +3,6 @@ package com.coralogixapis.slo.v1;
 
 import "com/coralogixapis/slo/v1/slo.proto";
 
-
-
-enum SloStatus {
-  SLO_STATUS_UNSPECIFIED = 0;
-  SLO_STATUS_OK = 1;
-  SLO_STATUS_WARNING = 2;
-  SLO_STATUS_CRITICAL = 3;
-  SLO_STATUS_BREACHED = 4;
-  SLO_STATUS_PENDING = 5;
-}
-
 message SloStatusCount {
   SloStatus status = 1;
   uint32 count = 2;
