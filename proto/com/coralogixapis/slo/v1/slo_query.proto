@@ -1,0 +1,149 @@
+syntax = "proto3";
+package com.coralogixapis.slo.v1;
+import "google/protobuf/empty.proto";
+
+message Navigation {
+  Filter filter = 1;
+  Sort sort = 2;
+  Pagination pagination = 3;
+
+  message Filter {
+    oneof value {
+      EntityLabel entity_label = 1;
+      OwnershipTag tag = 2;
+      SloStatus status = 3;
+      SloType slo_type = 4;
+      And and = 5;
+      RemainingBudget remaining_budget = 6;
+      Or or = 7;
+      Not not = 8;
+    }
+
+    enum Op {
+      EQ = 0;
+      CONTAINS = 1;
+    }
+
+    message EntityLabel {
+      string name = 1;
+      string value = 2;
+      Op op = 4;
+    }
+
+    message OwnershipTag {
+      TagName tag = 1;
+      string value = 2;
+      Op op = 3;
+
+      enum TagName {
+        SERVICE = 0;
+        ENVIRONMENT = 1;
+        TEAM = 2;
+      }
+    }
+
+    enum SloType {
+      APM_ERRORS = 0;
+      APM_LATENCY = 1;
+      CUSTOM_EVENT = 2;
+      CUSTOM_TIME_WINDOW = 3;
+    }
+
+    message RemainingBudget {
+      int32 min = 1;
+      int32 max = 2;
+    }
+
+    message And {
+      repeated Filter filters = 1;
+    }
+    message Or {
+      repeated Filter filters = 1;
+    }
+    message Not {
+      Filter filter = 1;
+    }
+  }
+
+  message Sort {
+    string column = 1;
+    Direction direction = 2;
+
+    enum Direction {
+      Asc = 0;
+      Desc = 1;
+    }
+  }
+
+  message Pagination {
+    int32 page_size = 1;
+    optional string next_page_token = 2;
+  }
+}
+
+message SloQuery {
+  PivotBy pivot_by = 1;
+  Navigation navigation = 2;
+
+  message PivotBy {
+    oneof value {
+      string key_name = 1;
+      google.protobuf.Empty slo_id = 2;
+    }
+  }
+}
+
+message SloQueryResponse {
+  repeated SloQueryResultRow rows = 1;
+
+  message SloQueryResultRow {
+    string value_of_key = 1;
+    int32 slo_count = 2;
+    int32 permutation_count = 3;
+    repeated ResponseGroupingKey grouping_keys = 4;
+    repeated SloStatus statuses = 5;
+    float min_remaining_error_budget = 6;
+    repeated string service = 7;
+    repeated string environment = 8;
+    repeated string team = 9;
+  }
+}
+
+
+message SloDrilldownQuery {
+  string key_name = 1;
+  string key_value = 2;
+
+  Navigation navigation = 4;
+}
+
+message SloDrilldownResponse {
+  ResponseGroupingKey grouping_keys = 1;
+  SloStatus status = 2;
+  float compliance = 3;
+  float remaining_error_budget = 4;
+  int32 alerts = 5;
+  string service = 6;
+  string environment = 7;
+  string team = 8;
+}
+
+message ResponseGroupingKey {
+  string key = 1;
+  string value = 2;
+}
+
+
+enum SloStatus {
+  SLO_STATUS_UNSPECIFIED = 0;
+  SLO_STATUS_OK = 1;
+  SLO_STATUS_WARNING = 2;
+  SLO_STATUS_CRITICAL = 3;
+  SLO_STATUS_BREACHED = 4;
+  SLO_STATUS_PENDING = 5;
+}
+
+message SloStatusCount {
+  SloStatus status = 1;
+  uint32 count = 2;
+}
