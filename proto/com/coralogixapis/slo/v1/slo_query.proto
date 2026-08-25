@@ -3,85 +3,6 @@ package com.coralogixapis.slo.v1;
 import "google/protobuf/empty.proto";
 import "com/coralogixapis/slo/v1/slo.proto";
 
-message Navigation {
-  Filter filter = 1;
-  Sort sort = 2;
-  Pagination pagination = 3;
-
-  message Filter {
-    oneof value {
-      EntityLabel entity_label = 1;
-      OwnershipTag tag = 2;
-      SloStatus status = 3;
-      SloType slo_type = 4;
-      And and = 5;
-      RemainingBudget remaining_budget = 6;
-      Or or = 7;
-      Not not = 8;
-    }
-
-    enum Op {
-      EQ = 0;
-      CONTAINS = 1;
-    }
-
-    message EntityLabel {
-      string name = 1;
-      string value = 2;
-      Op op = 4;
-    }
-
-    message OwnershipTag {
-      TagName tag = 1;
-      string value = 2;
-      Op op = 3;
-
-      enum TagName {
-        SERVICE = 0;
-        ENVIRONMENT = 1;
-        TEAM = 2;
-      }
-    }
-
-    enum SloType {
-      APM_ERRORS = 0;
-      APM_LATENCY = 1;
-      CUSTOM_EVENT = 2;
-      CUSTOM_TIME_WINDOW = 3;
-    }
-
-    message RemainingBudget {
-      int32 min = 1;
-      int32 max = 2;
-    }
-
-    message And {
-      repeated Filter filters = 1;
-    }
-    message Or {
-      repeated Filter filters = 1;
-    }
-    message Not {
-      Filter filter = 1;
-    }
-  }
-
-  message Sort {
-    string column = 1;
-    Direction direction = 2;
-
-    enum Direction {
-      Asc = 0;
-      Desc = 1;
-    }
-  }
-
-  message Pagination {
-    int32 page_size = 1;
-    optional string next_page_token = 2;
-  }
-}
-
 message SloQuery {
   PivotBy pivot_by = 1;
   Navigation navigation = 2;
@@ -141,4 +62,83 @@ message SloDrilldownResponse {
 message ResponseGroupingKey {
   string key = 1;
   string value = 2;
+}
+
+message Navigation {
+  Filter filter = 1;
+  Sort sort = 2;
+  Pagination pagination = 3;
+
+  message Filter {
+    oneof value {
+      EntityLabel entity_label = 1;
+      OwnershipTag tag = 2;
+      SloStatus status = 3;
+      SloType slo_type = 4;
+      And and = 5;
+      RemainingBudget remaining_budget = 6;
+      Or or = 7;
+      Not not = 8;
+    }
+
+    enum Op {
+      EQ = 0;
+      CONTAINS = 1;
+    }
+
+    message EntityLabel {
+      string name = 1;
+      string value = 2;
+      Op op = 3;
+    }
+
+    message OwnershipTag {
+      TagName tag = 1;
+      string value = 2;
+      Op op = 3;
+
+      enum TagName {
+        SERVICE = 0;
+        ENVIRONMENT = 1;
+        TEAM = 2;
+      }
+    }
+
+    enum SloType {
+      APM_ERRORS = 0;
+      APM_LATENCY = 1;
+      CUSTOM_EVENT = 2;
+      CUSTOM_TIME_WINDOW = 3;
+    }
+
+    message RemainingBudget {
+      int32 min = 1;
+      int32 max = 2;
+    }
+
+    message And {
+      repeated Filter filters = 1;
+    }
+    message Or {
+      repeated Filter filters = 1;
+    }
+    message Not {
+      Filter filter = 1;
+    }
+  }
+
+  message Sort {
+    string column = 1;
+    Direction direction = 2;
+
+    enum Direction {
+      Asc = 0;
+      Desc = 1;
+    }
+  }
+
+  message Pagination {
+    int32 page_size = 1;
+    optional string next_page_token = 2;
+  }
 }
