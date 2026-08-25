@@ -1,0 +1,9 @@
+syntax = "proto3";
+package com.coralogixapis.slo.v1;
+
+import "com/coralogixapis/slo/v1/slo_query.proto";
+
+service SloQueryService {
+  rpc QuerySlos(SloQuery) returns (SloQueryResponse);
+  rpc DrilldownSlos(SloDrilldownQuery) returns (SloDrilldownResponse);
+}
