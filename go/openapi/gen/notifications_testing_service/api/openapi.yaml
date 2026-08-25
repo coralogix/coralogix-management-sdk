@@ -1067,7 +1067,8 @@
           "EMAIL",
           "PAGERDUTY_INCIDENTS",
           "MICROSOFT_TEAMS",
-          "EVENTBRIDGE"
+          "EVENTBRIDGE",
+          "INCIDENT_IO"
         ]
       },
       "notification_center.EntityType": {
