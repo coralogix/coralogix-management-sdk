@@ -35,7 +35,10 @@ message Dynamic {
 
   v1.common.TimeFrameSelect time_frame = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Time frame which overrides the dashboard time frame"}];
 
-  Interpretation interpretation = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Interpretation of the query results"}];
+  Interpretation interpretation = 3 [
+    deprecated = true,
+    (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Interpretation of the query results (deprecated, use visualization instead)"}
+  ];
 
   Visualization visualization = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies how the query results should be visualized"}];
 
