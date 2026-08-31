@@ -17,11 +17,11 @@ import (
 
 var _ = bytes.MinRead
 
-// checks if the UsersMgmtServiceUpdateUsersRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UsersMgmtServiceUpdateUsersRequest{}
+// checks if the UpdateUserRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateUserRequest{}
 
-// UsersMgmtServiceUpdateUsersRequest struct for UsersMgmtServiceUpdateUsersRequest
-type UsersMgmtServiceUpdateUsersRequest struct {
+// UpdateUserRequest struct for UpdateUserRequest
+type UpdateUserRequest struct {
 	// User account ID of the user to update
 	UserAccountId *int64 `json:"userAccountId,omitempty"`
 	// Template containing updated user properties. Only provided fields will be updated.
@@ -30,27 +30,27 @@ type UsersMgmtServiceUpdateUsersRequest struct {
 	additionalPropertiesFromUnmarshal bool
 }
 
-type _UsersMgmtServiceUpdateUsersRequest UsersMgmtServiceUpdateUsersRequest
+type _UpdateUserRequest UpdateUserRequest
 
-// NewUsersMgmtServiceUpdateUsersRequest instantiates a new UsersMgmtServiceUpdateUsersRequest object
+// NewUpdateUserRequest instantiates a new UpdateUserRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUsersMgmtServiceUpdateUsersRequest() *UsersMgmtServiceUpdateUsersRequest {
-	this := UsersMgmtServiceUpdateUsersRequest{}
+func NewUpdateUserRequest() *UpdateUserRequest {
+	this := UpdateUserRequest{}
 	return &this
 }
 
-// NewUsersMgmtServiceUpdateUsersRequestWithDefaults instantiates a new UsersMgmtServiceUpdateUsersRequest object
+// NewUpdateUserRequestWithDefaults instantiates a new UpdateUserRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUsersMgmtServiceUpdateUsersRequestWithDefaults() *UsersMgmtServiceUpdateUsersRequest {
-	this := UsersMgmtServiceUpdateUsersRequest{}
+func NewUpdateUserRequestWithDefaults() *UpdateUserRequest {
+	this := UpdateUserRequest{}
 	return &this
 }
 
 // GetUserAccountId returns the UserAccountId field value if set, zero value otherwise.
-func (o *UsersMgmtServiceUpdateUsersRequest) GetUserAccountId() int64 {
+func (o *UpdateUserRequest) GetUserAccountId() int64 {
 	if o == nil || IsNil(o.UserAccountId) {
 		var ret int64
 		return ret
@@ -60,7 +60,7 @@ func (o *UsersMgmtServiceUpdateUsersRequest) GetUserAccountId() int64 {
 
 // GetUserAccountIdOk returns a tuple with the UserAccountId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UsersMgmtServiceUpdateUsersRequest) GetUserAccountIdOk() (*int64, bool) {
+func (o *UpdateUserRequest) GetUserAccountIdOk() (*int64, bool) {
 	if o == nil || IsNil(o.UserAccountId) {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *UsersMgmtServiceUpdateUsersRequest) GetUserAccountIdOk() (*int64, bool)
 }
 
 // HasUserAccountId returns a boolean if a field has been set.
-func (o *UsersMgmtServiceUpdateUsersRequest) HasUserAccountId() bool {
+func (o *UpdateUserRequest) HasUserAccountId() bool {
 	if o != nil && !IsNil(o.UserAccountId) {
 		return true
 	}
@@ -77,12 +77,12 @@ func (o *UsersMgmtServiceUpdateUsersRequest) HasUserAccountId() bool {
 }
 
 // SetUserAccountId gets a reference to the given int64 and assigns it to the UserAccountId field.
-func (o *UsersMgmtServiceUpdateUsersRequest) SetUserAccountId(v int64) {
+func (o *UpdateUserRequest) SetUserAccountId(v int64) {
 	o.UserAccountId = &v
 }
 
 // GetUserTemplate returns the UserTemplate field value if set, zero value otherwise.
-func (o *UsersMgmtServiceUpdateUsersRequest) GetUserTemplate() UserTemplate {
+func (o *UpdateUserRequest) GetUserTemplate() UserTemplate {
 	if o == nil || IsNil(o.UserTemplate) {
 		var ret UserTemplate
 		return ret
@@ -92,7 +92,7 @@ func (o *UsersMgmtServiceUpdateUsersRequest) GetUserTemplate() UserTemplate {
 
 // GetUserTemplateOk returns a tuple with the UserTemplate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UsersMgmtServiceUpdateUsersRequest) GetUserTemplateOk() (*UserTemplate, bool) {
+func (o *UpdateUserRequest) GetUserTemplateOk() (*UserTemplate, bool) {
 	if o == nil || IsNil(o.UserTemplate) {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *UsersMgmtServiceUpdateUsersRequest) GetUserTemplateOk() (*UserTemplate,
 }
 
 // HasUserTemplate returns a boolean if a field has been set.
-func (o *UsersMgmtServiceUpdateUsersRequest) HasUserTemplate() bool {
+func (o *UpdateUserRequest) HasUserTemplate() bool {
 	if o != nil && !IsNil(o.UserTemplate) {
 		return true
 	}
@@ -109,11 +109,11 @@ func (o *UsersMgmtServiceUpdateUsersRequest) HasUserTemplate() bool {
 }
 
 // SetUserTemplate gets a reference to the given UserTemplate and assigns it to the UserTemplate field.
-func (o *UsersMgmtServiceUpdateUsersRequest) SetUserTemplate(v UserTemplate) {
+func (o *UpdateUserRequest) SetUserTemplate(v UserTemplate) {
 	o.UserTemplate = &v
 }
 
-func (o UsersMgmtServiceUpdateUsersRequest) MarshalJSON() ([]byte, error) {
+func (o UpdateUserRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -121,7 +121,7 @@ func (o UsersMgmtServiceUpdateUsersRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UsersMgmtServiceUpdateUsersRequest) ToMap() (map[string]interface{}, error) {
+func (o UpdateUserRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.UserAccountId) {
 		toSerialize["userAccountId"] = o.UserAccountId
@@ -137,17 +137,17 @@ func (o UsersMgmtServiceUpdateUsersRequest) ToMap() (map[string]interface{}, err
 	return toSerialize, nil
 }
 
-func (o *UsersMgmtServiceUpdateUsersRequest) UnmarshalJSON(data []byte) (err error) {
-	varUsersMgmtServiceUpdateUsersRequest := _UsersMgmtServiceUpdateUsersRequest{}
+func (o *UpdateUserRequest) UnmarshalJSON(data []byte) (err error) {
+	varUpdateUserRequest := _UpdateUserRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varUsersMgmtServiceUpdateUsersRequest)
+	err = decoder.Decode(&varUpdateUserRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = UsersMgmtServiceUpdateUsersRequest(varUsersMgmtServiceUpdateUsersRequest)
+	*o = UpdateUserRequest(varUpdateUserRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -161,38 +161,38 @@ func (o *UsersMgmtServiceUpdateUsersRequest) UnmarshalJSON(data []byte) (err err
 	return err
 }
 
-type NullableUsersMgmtServiceUpdateUsersRequest struct {
-	value *UsersMgmtServiceUpdateUsersRequest
+type NullableUpdateUserRequest struct {
+	value *UpdateUserRequest
 	isSet bool
 }
 
-func (v NullableUsersMgmtServiceUpdateUsersRequest) Get() *UsersMgmtServiceUpdateUsersRequest {
+func (v NullableUpdateUserRequest) Get() *UpdateUserRequest {
 	return v.value
 }
 
-func (v *NullableUsersMgmtServiceUpdateUsersRequest) Set(val *UsersMgmtServiceUpdateUsersRequest) {
+func (v *NullableUpdateUserRequest) Set(val *UpdateUserRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUsersMgmtServiceUpdateUsersRequest) IsSet() bool {
+func (v NullableUpdateUserRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUsersMgmtServiceUpdateUsersRequest) Unset() {
+func (v *NullableUpdateUserRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUsersMgmtServiceUpdateUsersRequest(val *UsersMgmtServiceUpdateUsersRequest) *NullableUsersMgmtServiceUpdateUsersRequest {
-	return &NullableUsersMgmtServiceUpdateUsersRequest{value: val, isSet: true}
+func NewNullableUpdateUserRequest(val *UpdateUserRequest) *NullableUpdateUserRequest {
+	return &NullableUpdateUserRequest{value: val, isSet: true}
 }
 
-func (v NullableUsersMgmtServiceUpdateUsersRequest) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateUserRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUsersMgmtServiceUpdateUsersRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateUserRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

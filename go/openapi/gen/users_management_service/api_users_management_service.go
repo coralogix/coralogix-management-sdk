@@ -27,11 +27,11 @@ type ApiUsersMgmtServiceCreateUsersRequest struct {
 	ctx context.Context
 	ApiService *UsersManagementServiceAPIService
 	teamId int64
-	usersMgmtServiceCreateUsersRequest *UsersMgmtServiceCreateUsersRequest
+	createUserRequest *[]CreateUserRequest
 }
 
-func (r ApiUsersMgmtServiceCreateUsersRequest) UsersMgmtServiceCreateUsersRequest(usersMgmtServiceCreateUsersRequest UsersMgmtServiceCreateUsersRequest) ApiUsersMgmtServiceCreateUsersRequest {
-	r.usersMgmtServiceCreateUsersRequest = &usersMgmtServiceCreateUsersRequest
+func (r ApiUsersMgmtServiceCreateUsersRequest) CreateUserRequest(createUserRequest []CreateUserRequest) ApiUsersMgmtServiceCreateUsersRequest {
+	r.createUserRequest = &createUserRequest
 	return r
 }
 
@@ -99,7 +99,7 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.usersMgmtServiceCreateUsersRequest
+	localVarPostBody = r.createUserRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -548,11 +548,11 @@ type ApiUsersMgmtServiceUpdateUsersRequest struct {
 	ctx context.Context
 	ApiService *UsersManagementServiceAPIService
 	teamId int64
-	usersMgmtServiceUpdateUsersRequest *UsersMgmtServiceUpdateUsersRequest
+	updateUserRequest *[]UpdateUserRequest
 }
 
-func (r ApiUsersMgmtServiceUpdateUsersRequest) UsersMgmtServiceUpdateUsersRequest(usersMgmtServiceUpdateUsersRequest UsersMgmtServiceUpdateUsersRequest) ApiUsersMgmtServiceUpdateUsersRequest {
-	r.usersMgmtServiceUpdateUsersRequest = &usersMgmtServiceUpdateUsersRequest
+func (r ApiUsersMgmtServiceUpdateUsersRequest) UpdateUserRequest(updateUserRequest []UpdateUserRequest) ApiUsersMgmtServiceUpdateUsersRequest {
+	r.updateUserRequest = &updateUserRequest
 	return r
 }
 
@@ -620,7 +620,7 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersExecute(r 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.usersMgmtServiceUpdateUsersRequest
+	localVarPostBody = r.updateUserRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

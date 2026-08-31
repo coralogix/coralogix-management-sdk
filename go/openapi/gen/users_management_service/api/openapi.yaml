@@ -32,23 +32,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "userAccountId": {
-                    "description": "User account ID of the user to update",
-                    "type": "integer",
-                    "format": "int64",
-                    "minimum": 0
-                  },
-                  "userTemplate": {
-                    "description": "Template containing updated user properties. Only provided fields will be updated.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/UserTemplate"
-                      }
-                    ]
-                  }
-                }
+                "description": "List of users to update. Multiple users can be updated in a single request.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpdateUserRequest"
+                },
+                "minItems": 0
               }
             }
           }
@@ -132,25 +121,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "onboardingMode": {
-                    "description": "Onboarding mode determines whether the user receives an invite link or is created without one",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/OnboardingMode"
-                      }
-                    ]
-                  },
-                  "userTemplate": {
-                    "description": "Template containing all user properties to set during creation",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/UserTemplate"
-                      }
-                    ]
-                  }
-                }
+                "description": "List of users to create. Multiple users can be created in a single request.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateUserRequest"
+                },
+                "minItems": 0
               }
             }
           }
@@ -625,6 +601,27 @@
           "ALLOWED_LOGIN_MODE_LOCAL"
         ]
       },
+      "CreateUserRequest": {
+        "type": "object",
+        "properties": {
+          "onboardingMode": {
+            "description": "Onboarding mode determines whether the user receives an invite link or is created without one",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OnboardingMode"
+              }
+            ]
+          },
+          "userTemplate": {
+            "description": "Template containing all user properties to set during creation",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserTemplate"
+              }
+            ]
+          }
+        }
+      },
       "CreateUsersResponse": {
         "externalDocs": {
           "description": "Find out more about user management",
@@ -821,6 +818,25 @@
             "type": "string",
             "format": "date-time",
             "minLength": 0
+          }
+        }
+      },
+      "UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+          "userAccountId": {
+            "description": "User account ID of the user to update",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "userTemplate": {
+            "description": "Template containing updated user properties. Only provided fields will be updated.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserTemplate"
+              }
+            ]
           }
         }
       },

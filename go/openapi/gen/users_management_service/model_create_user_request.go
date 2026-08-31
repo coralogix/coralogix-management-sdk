@@ -17,11 +17,11 @@ import (
 
 var _ = bytes.MinRead
 
-// checks if the UsersMgmtServiceCreateUsersRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UsersMgmtServiceCreateUsersRequest{}
+// checks if the CreateUserRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateUserRequest{}
 
-// UsersMgmtServiceCreateUsersRequest struct for UsersMgmtServiceCreateUsersRequest
-type UsersMgmtServiceCreateUsersRequest struct {
+// CreateUserRequest struct for CreateUserRequest
+type CreateUserRequest struct {
 	// Onboarding mode determines whether the user receives an invite link or is created without one
 	OnboardingMode *OnboardingMode `json:"onboardingMode,omitempty"`
 	// Template containing all user properties to set during creation
@@ -30,27 +30,27 @@ type UsersMgmtServiceCreateUsersRequest struct {
 	additionalPropertiesFromUnmarshal bool
 }
 
-type _UsersMgmtServiceCreateUsersRequest UsersMgmtServiceCreateUsersRequest
+type _CreateUserRequest CreateUserRequest
 
-// NewUsersMgmtServiceCreateUsersRequest instantiates a new UsersMgmtServiceCreateUsersRequest object
+// NewCreateUserRequest instantiates a new CreateUserRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUsersMgmtServiceCreateUsersRequest() *UsersMgmtServiceCreateUsersRequest {
-	this := UsersMgmtServiceCreateUsersRequest{}
+func NewCreateUserRequest() *CreateUserRequest {
+	this := CreateUserRequest{}
 	return &this
 }
 
-// NewUsersMgmtServiceCreateUsersRequestWithDefaults instantiates a new UsersMgmtServiceCreateUsersRequest object
+// NewCreateUserRequestWithDefaults instantiates a new CreateUserRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUsersMgmtServiceCreateUsersRequestWithDefaults() *UsersMgmtServiceCreateUsersRequest {
-	this := UsersMgmtServiceCreateUsersRequest{}
+func NewCreateUserRequestWithDefaults() *CreateUserRequest {
+	this := CreateUserRequest{}
 	return &this
 }
 
 // GetOnboardingMode returns the OnboardingMode field value if set, zero value otherwise.
-func (o *UsersMgmtServiceCreateUsersRequest) GetOnboardingMode() OnboardingMode {
+func (o *CreateUserRequest) GetOnboardingMode() OnboardingMode {
 	if o == nil || IsNil(o.OnboardingMode) {
 		var ret OnboardingMode
 		return ret
@@ -60,7 +60,7 @@ func (o *UsersMgmtServiceCreateUsersRequest) GetOnboardingMode() OnboardingMode 
 
 // GetOnboardingModeOk returns a tuple with the OnboardingMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UsersMgmtServiceCreateUsersRequest) GetOnboardingModeOk() (*OnboardingMode, bool) {
+func (o *CreateUserRequest) GetOnboardingModeOk() (*OnboardingMode, bool) {
 	if o == nil || IsNil(o.OnboardingMode) {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *UsersMgmtServiceCreateUsersRequest) GetOnboardingModeOk() (*OnboardingM
 }
 
 // HasOnboardingMode returns a boolean if a field has been set.
-func (o *UsersMgmtServiceCreateUsersRequest) HasOnboardingMode() bool {
+func (o *CreateUserRequest) HasOnboardingMode() bool {
 	if o != nil && !IsNil(o.OnboardingMode) {
 		return true
 	}
@@ -77,12 +77,12 @@ func (o *UsersMgmtServiceCreateUsersRequest) HasOnboardingMode() bool {
 }
 
 // SetOnboardingMode gets a reference to the given OnboardingMode and assigns it to the OnboardingMode field.
-func (o *UsersMgmtServiceCreateUsersRequest) SetOnboardingMode(v OnboardingMode) {
+func (o *CreateUserRequest) SetOnboardingMode(v OnboardingMode) {
 	o.OnboardingMode = &v
 }
 
 // GetUserTemplate returns the UserTemplate field value if set, zero value otherwise.
-func (o *UsersMgmtServiceCreateUsersRequest) GetUserTemplate() UserTemplate {
+func (o *CreateUserRequest) GetUserTemplate() UserTemplate {
 	if o == nil || IsNil(o.UserTemplate) {
 		var ret UserTemplate
 		return ret
@@ -92,7 +92,7 @@ func (o *UsersMgmtServiceCreateUsersRequest) GetUserTemplate() UserTemplate {
 
 // GetUserTemplateOk returns a tuple with the UserTemplate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UsersMgmtServiceCreateUsersRequest) GetUserTemplateOk() (*UserTemplate, bool) {
+func (o *CreateUserRequest) GetUserTemplateOk() (*UserTemplate, bool) {
 	if o == nil || IsNil(o.UserTemplate) {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *UsersMgmtServiceCreateUsersRequest) GetUserTemplateOk() (*UserTemplate,
 }
 
 // HasUserTemplate returns a boolean if a field has been set.
-func (o *UsersMgmtServiceCreateUsersRequest) HasUserTemplate() bool {
+func (o *CreateUserRequest) HasUserTemplate() bool {
 	if o != nil && !IsNil(o.UserTemplate) {
 		return true
 	}
@@ -109,11 +109,11 @@ func (o *UsersMgmtServiceCreateUsersRequest) HasUserTemplate() bool {
 }
 
 // SetUserTemplate gets a reference to the given UserTemplate and assigns it to the UserTemplate field.
-func (o *UsersMgmtServiceCreateUsersRequest) SetUserTemplate(v UserTemplate) {
+func (o *CreateUserRequest) SetUserTemplate(v UserTemplate) {
 	o.UserTemplate = &v
 }
 
-func (o UsersMgmtServiceCreateUsersRequest) MarshalJSON() ([]byte, error) {
+func (o CreateUserRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -121,7 +121,7 @@ func (o UsersMgmtServiceCreateUsersRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UsersMgmtServiceCreateUsersRequest) ToMap() (map[string]interface{}, error) {
+func (o CreateUserRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.OnboardingMode) {
 		toSerialize["onboardingMode"] = o.OnboardingMode
@@ -137,17 +137,17 @@ func (o UsersMgmtServiceCreateUsersRequest) ToMap() (map[string]interface{}, err
 	return toSerialize, nil
 }
 
-func (o *UsersMgmtServiceCreateUsersRequest) UnmarshalJSON(data []byte) (err error) {
-	varUsersMgmtServiceCreateUsersRequest := _UsersMgmtServiceCreateUsersRequest{}
+func (o *CreateUserRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateUserRequest := _CreateUserRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varUsersMgmtServiceCreateUsersRequest)
+	err = decoder.Decode(&varCreateUserRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = UsersMgmtServiceCreateUsersRequest(varUsersMgmtServiceCreateUsersRequest)
+	*o = CreateUserRequest(varCreateUserRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -161,38 +161,38 @@ func (o *UsersMgmtServiceCreateUsersRequest) UnmarshalJSON(data []byte) (err err
 	return err
 }
 
-type NullableUsersMgmtServiceCreateUsersRequest struct {
-	value *UsersMgmtServiceCreateUsersRequest
+type NullableCreateUserRequest struct {
+	value *CreateUserRequest
 	isSet bool
 }
 
-func (v NullableUsersMgmtServiceCreateUsersRequest) Get() *UsersMgmtServiceCreateUsersRequest {
+func (v NullableCreateUserRequest) Get() *CreateUserRequest {
 	return v.value
 }
 
-func (v *NullableUsersMgmtServiceCreateUsersRequest) Set(val *UsersMgmtServiceCreateUsersRequest) {
+func (v *NullableCreateUserRequest) Set(val *CreateUserRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUsersMgmtServiceCreateUsersRequest) IsSet() bool {
+func (v NullableCreateUserRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUsersMgmtServiceCreateUsersRequest) Unset() {
+func (v *NullableCreateUserRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUsersMgmtServiceCreateUsersRequest(val *UsersMgmtServiceCreateUsersRequest) *NullableUsersMgmtServiceCreateUsersRequest {
-	return &NullableUsersMgmtServiceCreateUsersRequest{value: val, isSet: true}
+func NewNullableCreateUserRequest(val *CreateUserRequest) *NullableCreateUserRequest {
+	return &NullableCreateUserRequest{value: val, isSet: true}
 }
 
-func (v NullableUsersMgmtServiceCreateUsersRequest) MarshalJSON() ([]byte, error) {
+func (v NullableCreateUserRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUsersMgmtServiceCreateUsersRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateUserRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
