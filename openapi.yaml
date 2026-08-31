@@ -2308,19 +2308,13 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                userAccountId:
-                  description: User account ID of the user to update
-                  format: int64
-                  minimum: 0
-                  type: integer
-                userTemplate:
-                  allOf:
-                    - $ref: '#/components/schemas/UserTemplate'
-                  description: >-
-                    Template containing updated user properties. Only provided
-                    fields will be updated.
-              type: object
+              description: >-
+                List of users to update. Multiple users can be updated in a
+                single request.
+              items:
+                $ref: '#/components/schemas/UpdateUserRequest'
+              minItems: 0
+              type: array
       responses:
         '200':
           content:
@@ -2372,20 +2366,13 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                onboardingMode:
-                  allOf:
-                    - $ref: '#/components/schemas/OnboardingMode'
-                  description: >-
-                    Onboarding mode determines whether the user receives an
-                    invite link or is created without one
-                userTemplate:
-                  allOf:
-                    - $ref: '#/components/schemas/UserTemplate'
-                  description: >-
-                    Template containing all user properties to set during
-                    creation
-              type: object
+              description: >-
+                List of users to create. Multiple users can be created in a
+                single request.
+              items:
+                $ref: '#/components/schemas/CreateUserRequest'
+              minItems: 0
+              type: array
       responses:
         '200':
           content:
@@ -25175,6 +25162,19 @@ components:
       description: Response containing the identifier of the created team.
       externalDocs:
         url: ''
+    CreateUserRequest:
+      type: object
+      properties:
+        onboardingMode:
+          allOf:
+            - $ref: '#/components/schemas/OnboardingMode'
+          description: >-
+            Onboarding mode determines whether the user receives an invite link
+            or is created without one
+        userTemplate:
+          allOf:
+            - $ref: '#/components/schemas/UserTemplate'
+          description: Template containing all user properties to set during creation
     CreateUsersResponse:
       title: CreateUsersResponse
       type: object
@@ -48691,6 +48691,20 @@ components:
       description: Empty response returned after updating a team.
       externalDocs:
         url: ''
+    UpdateUserRequest:
+      type: object
+      properties:
+        userAccountId:
+          minimum: 0
+          type: integer
+          description: User account ID of the user to update
+          format: int64
+        userTemplate:
+          allOf:
+            - $ref: '#/components/schemas/UserTemplate'
+          description: >-
+            Template containing updated user properties. Only provided fields
+            will be updated.
     UpdateUsersResponse:
       title: UpdateUsersResponse
       type: object

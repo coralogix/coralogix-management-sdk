@@ -89,6 +89,7 @@ Class | Method | HTTP request | Description
 
  - [AccessType](docs/AccessType.md)
  - [AllowedLoginMode](docs/AllowedLoginMode.md)
+ - [CreateUserRequest](docs/CreateUserRequest.md)
  - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
@@ -99,13 +100,12 @@ Class | Method | HTTP request | Description
  - [RbacV2User](docs/RbacV2User.md)
  - [SearchUsersResponse](docs/SearchUsersResponse.md)
  - [TemporaryAccess](docs/TemporaryAccess.md)
+ - [UpdateUserRequest](docs/UpdateUserRequest.md)
  - [UpdateUserStatusRequest](docs/UpdateUserStatusRequest.md)
  - [UpdateUsersResponse](docs/UpdateUsersResponse.md)
  - [UpdateUsersStatusesResponse](docs/UpdateUsersStatusesResponse.md)
  - [UserStatus](docs/UserStatus.md)
  - [UserTemplate](docs/UserTemplate.md)
- - [UsersMgmtServiceCreateUsersRequest](docs/UsersMgmtServiceCreateUsersRequest.md)
- - [UsersMgmtServiceUpdateUsersRequest](docs/UsersMgmtServiceUpdateUsersRequest.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
 
 
