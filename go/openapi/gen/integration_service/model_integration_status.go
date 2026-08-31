@@ -24,7 +24,7 @@ var _ MappedNullable = &IntegrationStatus{}
 type IntegrationStatus struct {
 	ConnectionStatus *ConnectionStatus `json:"connectionStatus,omitempty"`
 	// List of details.
-	Details *map[string]string `json:"details,omitempty"`
+	Details map[string]string `json:"details,omitempty"`
 	// The messages.
 	Messages []string `json:"messages,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -88,14 +88,14 @@ func (o *IntegrationStatus) GetDetails() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.Details
+	return o.Details
 }
 
 // GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IntegrationStatus) GetDetailsOk() (*map[string]string, bool) {
+func (o *IntegrationStatus) GetDetailsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Details) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Details, true
 }
@@ -111,7 +111,7 @@ func (o *IntegrationStatus) HasDetails() bool {
 
 // SetDetails gets a reference to the given map[string]string and assigns it to the Details field.
 func (o *IntegrationStatus) SetDetails(v map[string]string) {
-	o.Details = &v
+	o.Details = v
 }
 
 // GetMessages returns the Messages field value if set, zero value otherwise.

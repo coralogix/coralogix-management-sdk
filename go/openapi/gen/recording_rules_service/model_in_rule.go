@@ -28,7 +28,7 @@ type InRule struct {
 	// The expr.
 	Expr string `json:"expr" validate:"regexp=^[\\s\\S]*$"`
 	// List of labels.
-	Labels *map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty"`
 	// Record.
 	Record string `json:"record" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
@@ -118,14 +118,14 @@ func (o *InRule) GetLabels() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.Labels
+	return o.Labels
 }
 
 // GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InRule) GetLabelsOk() (*map[string]string, bool) {
+func (o *InRule) GetLabelsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Labels) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Labels, true
 }
@@ -141,7 +141,7 @@ func (o *InRule) HasLabels() bool {
 
 // SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
 func (o *InRule) SetLabels(v map[string]string) {
-	o.Labels = &v
+	o.Labels = v
 }
 
 // GetRecord returns the Record field value

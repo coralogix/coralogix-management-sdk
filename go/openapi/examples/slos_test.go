@@ -98,6 +98,6 @@ func getRequestBasedSlo(name string) *slos.Slo1 {
 			},
 		},
 		SloTimeFrame: slos.SLOTIMEFRAME_SLO_TIME_FRAME_7_DAYS.Ptr(),
-		Labels:       &map[string]string{"label1": "value1"},
+		Labels:       map[string]string{"label1": "value1"},
 	}
 }

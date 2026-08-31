@@ -197,7 +197,7 @@ func TestIpAccess(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	found := false
-	for _, ipAccess := range *replaceRes.Settings.IpAccess {
+	for _, ipAccess := range replaceRes.Settings.IpAccess {
 		if ipAccess.Name != nil && *ipAccess.Name == "VPN" {
 			found = true
 			require.Equal(t, *ipAccess.IpRange, "198.51.100.0/18")

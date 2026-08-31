@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get Team Members API Keys",
         "description": "Retrieve all API keys for team members.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ApiKeysAdminService_GetTeamMembersApiKeys",
         "responses": {
           "200": {
@@ -65,9 +62,6 @@
         ],
         "summary": "Create API Key",
         "description": "Creates a new API key for the authenticated team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ApiKeysService_CreateApiKey",
         "requestBody": {
           "content": {
@@ -78,13 +72,11 @@
                 "type": "object",
                 "properties": {
                   "accessPolicy": {
-                    "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}",
                     "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
                     "type": "string",
                     "minLength": 0
                   },
                   "hashed": {
-                    "example": true,
                     "description": "Whether the value is stored as a one-way hash.",
                     "type": "boolean"
                   },
@@ -92,7 +84,6 @@
                     "$ref": "#/components/schemas/CreateApiKeyRequest.KeyPermissions"
                   },
                   "name": {
-                    "example": "my_api_key",
                     "description": "Display name.",
                     "type": "string",
                     "minLength": 0
@@ -156,9 +147,6 @@
         ],
         "summary": "Delete API Keys",
         "description": "Delete specified API keys.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ApiKeysAdminService_DeleteApiKeys",
         "requestBody": {
           "content": {
@@ -172,7 +160,6 @@
                     "description": "List of API key IDs to delete.",
                     "type": "array",
                     "items": {
-                      "example": "key_abc123",
                       "description": "List of API key IDs to delete.",
                       "type": "string",
                       "minLength": 0
@@ -235,9 +222,6 @@
         ],
         "summary": "Update API Keys Status",
         "description": "Activate or deactivate specified API keys.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ApiKeysAdminService_UpdateApiKeysStatus",
         "requestBody": {
           "content": {
@@ -331,12 +315,10 @@
         "type": "object",
         "properties": {
           "active": {
-            "example": true,
             "description": "Whether this resource is active.",
             "type": "boolean"
           },
           "keyId": {
-            "example": "key_abc123",
             "description": "Key identifier.",
             "type": "string",
             "minLength": 0
@@ -359,7 +341,6 @@
             "description": "List of permissions.",
             "type": "array",
             "items": {
-              "example": "logs:read",
               "description": "List of permissions.",
               "type": "string",
               "minLength": 0
@@ -386,13 +367,11 @@
         "type": "object",
         "properties": {
           "userEmail": {
-            "example": "test@example.com",
             "description": "The user email.",
             "type": "string",
             "minLength": 0
           },
           "userId": {
-            "example": "user_123",
             "description": "The user id.",
             "type": "string",
             "minLength": 0
@@ -412,7 +391,6 @@
             "description": "List of permissions.",
             "type": "array",
             "items": {
-              "example": "read_logs",
               "description": "List of permissions.",
               "type": "string",
               "minLength": 0
@@ -423,7 +401,6 @@
             "description": "List of permission presets.",
             "type": "array",
             "items": {
-              "example": "my_preset",
               "description": "List of permission presets.",
               "type": "string",
               "minLength": 0
@@ -442,19 +419,16 @@
         "type": "object",
         "properties": {
           "keyId": {
-            "example": "my_key_id",
             "description": "Key identifier.",
             "type": "string",
             "minLength": 0
           },
           "name": {
-            "example": "my_api_key",
             "description": "Display name.",
             "type": "string",
             "minLength": 0
           },
           "value": {
-            "example": "my_api_key_value",
             "description": "The value.",
             "type": "string",
             "minLength": 0
@@ -511,7 +485,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -543,7 +516,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -677,13 +649,11 @@
         "type": "object",
         "properties": {
           "id": {
-            "example": 1,
             "description": "Unique identifier.",
             "type": "integer",
             "format": "int32"
           },
           "name": {
-            "example": "my_preset",
             "description": "Display name.",
             "type": "string",
             "minLength": 0
@@ -692,7 +662,6 @@
             "description": "List of permissions.",
             "type": "array",
             "items": {
-              "example": "logs:read",
               "description": "List of permissions.",
               "type": "string",
               "minLength": 0
@@ -734,7 +703,6 @@
             "minLength": 0
           },
           "id": {
-            "example": "key_abc123",
             "description": "Unique identifier.",
             "type": "string",
             "minLength": 0
@@ -744,7 +712,6 @@
             "type": "boolean"
           },
           "keyName": {
-            "example": "my_api_key",
             "description": "The key name.",
             "type": "string",
             "minLength": 0

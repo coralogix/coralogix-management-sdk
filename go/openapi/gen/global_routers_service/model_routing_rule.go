@@ -25,7 +25,7 @@ type RoutingRule struct {
 	// Condition.
 	Condition *string `json:"condition,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The custom details.
-	CustomDetails *map[string]string `json:"customDetails,omitempty"`
+	CustomDetails map[string]string `json:"customDetails,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
@@ -92,14 +92,14 @@ func (o *RoutingRule) GetCustomDetails() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.CustomDetails
+	return o.CustomDetails
 }
 
 // GetCustomDetailsOk returns a tuple with the CustomDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RoutingRule) GetCustomDetailsOk() (*map[string]string, bool) {
+func (o *RoutingRule) GetCustomDetailsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.CustomDetails) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.CustomDetails, true
 }
@@ -115,7 +115,7 @@ func (o *RoutingRule) HasCustomDetails() bool {
 
 // SetCustomDetails gets a reference to the given map[string]string and assigns it to the CustomDetails field.
 func (o *RoutingRule) SetCustomDetails(v map[string]string) {
-	o.CustomDetails = &v
+	o.CustomDetails = v
 }
 
 // GetEntityType returns the EntityType field value if set, zero value otherwise.

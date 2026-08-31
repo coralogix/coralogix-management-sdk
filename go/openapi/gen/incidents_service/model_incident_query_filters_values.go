@@ -105,11 +105,11 @@ func (o *IncidentQueryFiltersValues) GetContextualLabels() map[string]Contextual
 
 // GetContextualLabelsOk returns a tuple with the ContextualLabels field value
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFiltersValues) GetContextualLabelsOk() (*map[string]ContextualLabelValuesWithCount, bool) {
+func (o *IncidentQueryFiltersValues) GetContextualLabelsOk() (map[string]ContextualLabelValuesWithCount, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]ContextualLabelValuesWithCount{}, false
 	}
-	return &o.ContextualLabels, true
+	return o.ContextualLabels, true
 }
 
 // SetContextualLabels sets field value
@@ -129,11 +129,11 @@ func (o *IncidentQueryFiltersValues) GetDisplayLabels() map[string]DisplayLabelV
 
 // GetDisplayLabelsOk returns a tuple with the DisplayLabels field value
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFiltersValues) GetDisplayLabelsOk() (*map[string]DisplayLabelValuesWithCount, bool) {
+func (o *IncidentQueryFiltersValues) GetDisplayLabelsOk() (map[string]DisplayLabelValuesWithCount, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]DisplayLabelValuesWithCount{}, false
 	}
-	return &o.DisplayLabels, true
+	return o.DisplayLabels, true
 }
 
 // SetDisplayLabels sets field value

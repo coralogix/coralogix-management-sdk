@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get multiple alert scheduler rules",
         "description": "Returns alert suppression rules with optional pagination.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertSchedulerRuleService_GetBulkAlertSchedulerRule",
         "parameters": [
           {
@@ -196,9 +193,6 @@
         ],
         "summary": "Update an alert scheduler rule",
         "description": "Updates an existing alert suppression rule.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertSchedulerRuleService_UpdateAlertSchedulerRule",
         "requestBody": {
           "content": {
@@ -269,9 +263,6 @@
         ],
         "summary": "Create an alert scheduler rule",
         "description": "Creates a new alert suppression rule.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertSchedulerRuleService_CreateAlertSchedulerRule",
         "requestBody": {
           "content": {
@@ -344,9 +335,6 @@
         ],
         "summary": "Update multiple alert scheduler rules",
         "description": "Replaces all alert suppression rules with the provided set.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertSchedulerRuleService_UpdateBulkAlertSchedulerRule",
         "requestBody": {
           "content": {
@@ -422,9 +410,6 @@
         ],
         "summary": "Create multiple alert scheduler rules",
         "description": "Returns all alert suppression rules matching the given criteria.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertSchedulerRuleService_CreateBulkAlertSchedulerRule",
         "requestBody": {
           "content": {
@@ -502,9 +487,6 @@
         ],
         "summary": "Get an alert scheduler rule",
         "description": "Returns the details of the specified alert suppression rule.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertSchedulerRuleService_GetAlertSchedulerRule",
         "parameters": [
           {
@@ -569,9 +551,6 @@
         ],
         "summary": "Delete an alert scheduler rule",
         "description": "Deletes the alert suppression rule with the specified ID.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertSchedulerRuleService_DeleteAlertSchedulerRule",
         "parameters": [
           {
@@ -876,7 +855,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -908,7 +886,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

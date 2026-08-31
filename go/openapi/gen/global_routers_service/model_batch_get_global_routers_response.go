@@ -25,7 +25,7 @@ type BatchGetGlobalRoutersResponse struct {
 	// The not found ids.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	// The routers.
-	Routers *map[string]GlobalRouter `json:"routers,omitempty"`
+	Routers map[string]GlobalRouter `json:"routers,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -87,14 +87,14 @@ func (o *BatchGetGlobalRoutersResponse) GetRouters() map[string]GlobalRouter {
 		var ret map[string]GlobalRouter
 		return ret
 	}
-	return *o.Routers
+	return o.Routers
 }
 
 // GetRoutersOk returns a tuple with the Routers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BatchGetGlobalRoutersResponse) GetRoutersOk() (*map[string]GlobalRouter, bool) {
+func (o *BatchGetGlobalRoutersResponse) GetRoutersOk() (map[string]GlobalRouter, bool) {
 	if o == nil || IsNil(o.Routers) {
-		return nil, false
+		return map[string]GlobalRouter{}, false
 	}
 	return o.Routers, true
 }
@@ -110,7 +110,7 @@ func (o *BatchGetGlobalRoutersResponse) HasRouters() bool {
 
 // SetRouters gets a reference to the given map[string]GlobalRouter and assigns it to the Routers field.
 func (o *BatchGetGlobalRoutersResponse) SetRouters(v map[string]GlobalRouter) {
-	o.Routers = &v
+	o.Routers = v
 }
 
 func (o BatchGetGlobalRoutersResponse) MarshalJSON() ([]byte, error) {

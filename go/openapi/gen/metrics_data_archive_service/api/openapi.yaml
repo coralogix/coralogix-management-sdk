@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get Metrics Storage Configuration",
         "description": "Returns the current metrics storage configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "MetricsConfiguratorPublicService_GetTenantConfig",
         "responses": {
           "200": {
@@ -65,9 +62,6 @@
         ],
         "summary": "Update Metrics Storage Configuration",
         "description": "Updates the metrics storage configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "MetricsConfiguratorPublicService_Update",
         "requestBody": {
           "content": {
@@ -207,9 +201,6 @@
         ],
         "summary": "Configure Tenant",
         "description": "Creates the metrics storage configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "MetricsConfiguratorPublicService_ConfigureTenant",
         "requestBody": {
           "content": {
@@ -348,9 +339,6 @@
         ],
         "summary": "Disable Metrics Archive",
         "description": "Disables the metrics storage configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "MetricsConfiguratorPublicService_DisableArchive",
         "responses": {
           "200": {
@@ -403,9 +391,6 @@
         ],
         "summary": "Enable Metrics Archive",
         "description": "Enables the metrics storage configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "MetricsConfiguratorPublicService_EnableArchive",
         "responses": {
           "200": {
@@ -458,9 +443,6 @@
         ],
         "summary": "Validate Metrics Storage Bucket",
         "description": "Validates the provided metrics storage configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "MetricsConfiguratorPublicService_ValidateBucket",
         "requestBody": {
           "content": {
@@ -632,7 +614,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -664,7 +645,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -721,19 +701,16 @@
         "type": "object",
         "properties": {
           "crn": {
-            "example": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::",
             "description": "The crn.",
             "type": "string",
             "minLength": 0
           },
           "endpoint": {
-            "example": "s3.us-south.cloud-object-storage.appdomain.cloud",
             "description": "Endpoint.",
             "type": "string",
             "minLength": 0
           },
           "serviceCrn": {
-            "example": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::",
             "description": "The service crn.",
             "type": "string",
             "minLength": 0
@@ -766,21 +743,18 @@
         "type": "object",
         "properties": {
           "fiveMinutesResolution": {
-            "example": 2,
             "description": "The five minutes resolution.",
             "type": "integer",
             "format": "int64",
             "minimum": 0
           },
           "oneHourResolution": {
-            "example": 3,
             "description": "The one hour resolution.",
             "type": "integer",
             "format": "int64",
             "minimum": 0
           },
           "rawResolution": {
-            "example": 1,
             "description": "The raw resolution.",
             "type": "integer",
             "format": "int64",

@@ -23,9 +23,9 @@ var _ MappedNullable = &GetEventsStatisticsResponse{}
 // GetEventsStatisticsResponse This data structure represents a response to get events statistics
 type GetEventsStatisticsResponse struct {
 	// The cx event labels field statistics.
-	CxEventLabelsFieldStatistics *map[string]FieldStatistics `json:"cxEventLabelsFieldStatistics,omitempty"`
+	CxEventLabelsFieldStatistics map[string]FieldStatistics `json:"cxEventLabelsFieldStatistics,omitempty"`
 	// The cx event metadata field statistics.
-	CxEventMetadataFieldStatistics *map[string]FieldStatistics `json:"cxEventMetadataFieldStatistics,omitempty"`
+	CxEventMetadataFieldStatistics map[string]FieldStatistics `json:"cxEventMetadataFieldStatistics,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -55,14 +55,14 @@ func (o *GetEventsStatisticsResponse) GetCxEventLabelsFieldStatistics() map[stri
 		var ret map[string]FieldStatistics
 		return ret
 	}
-	return *o.CxEventLabelsFieldStatistics
+	return o.CxEventLabelsFieldStatistics
 }
 
 // GetCxEventLabelsFieldStatisticsOk returns a tuple with the CxEventLabelsFieldStatistics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetEventsStatisticsResponse) GetCxEventLabelsFieldStatisticsOk() (*map[string]FieldStatistics, bool) {
+func (o *GetEventsStatisticsResponse) GetCxEventLabelsFieldStatisticsOk() (map[string]FieldStatistics, bool) {
 	if o == nil || IsNil(o.CxEventLabelsFieldStatistics) {
-		return nil, false
+		return map[string]FieldStatistics{}, false
 	}
 	return o.CxEventLabelsFieldStatistics, true
 }
@@ -78,7 +78,7 @@ func (o *GetEventsStatisticsResponse) HasCxEventLabelsFieldStatistics() bool {
 
 // SetCxEventLabelsFieldStatistics gets a reference to the given map[string]FieldStatistics and assigns it to the CxEventLabelsFieldStatistics field.
 func (o *GetEventsStatisticsResponse) SetCxEventLabelsFieldStatistics(v map[string]FieldStatistics) {
-	o.CxEventLabelsFieldStatistics = &v
+	o.CxEventLabelsFieldStatistics = v
 }
 
 // GetCxEventMetadataFieldStatistics returns the CxEventMetadataFieldStatistics field value if set, zero value otherwise.
@@ -87,14 +87,14 @@ func (o *GetEventsStatisticsResponse) GetCxEventMetadataFieldStatistics() map[st
 		var ret map[string]FieldStatistics
 		return ret
 	}
-	return *o.CxEventMetadataFieldStatistics
+	return o.CxEventMetadataFieldStatistics
 }
 
 // GetCxEventMetadataFieldStatisticsOk returns a tuple with the CxEventMetadataFieldStatistics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetEventsStatisticsResponse) GetCxEventMetadataFieldStatisticsOk() (*map[string]FieldStatistics, bool) {
+func (o *GetEventsStatisticsResponse) GetCxEventMetadataFieldStatisticsOk() (map[string]FieldStatistics, bool) {
 	if o == nil || IsNil(o.CxEventMetadataFieldStatistics) {
-		return nil, false
+		return map[string]FieldStatistics{}, false
 	}
 	return o.CxEventMetadataFieldStatistics, true
 }
@@ -110,7 +110,7 @@ func (o *GetEventsStatisticsResponse) HasCxEventMetadataFieldStatistics() bool {
 
 // SetCxEventMetadataFieldStatistics gets a reference to the given map[string]FieldStatistics and assigns it to the CxEventMetadataFieldStatistics field.
 func (o *GetEventsStatisticsResponse) SetCxEventMetadataFieldStatistics(v map[string]FieldStatistics) {
-	o.CxEventMetadataFieldStatistics = &v
+	o.CxEventMetadataFieldStatistics = v
 }
 
 func (o GetEventsStatisticsResponse) MarshalJSON() ([]byte, error) {

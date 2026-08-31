@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Update Users",
         "description": "Updates team members for the specified team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "UsersMgmtService_UpdateUsers",
         "parameters": [
           {
@@ -115,9 +112,6 @@
         ],
         "summary": "Create Users",
         "description": "Adds members to the specified team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "UsersMgmtService_CreateUsers",
         "parameters": [
           {
@@ -232,9 +226,6 @@
         ],
         "summary": "Get User",
         "description": "Returns the details of a specific team member.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "UsersMgmtService_GetUser",
         "parameters": [
           {
@@ -325,9 +316,6 @@
         ],
         "summary": "Activate/Revoke Users",
         "description": "Updates the active status of multiple team members.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "UsersMgmtService_UpdateUsersStatuses",
         "parameters": [
           {
@@ -437,9 +425,6 @@
         ],
         "summary": "Search Users",
         "description": "Searches for team members by query.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "UsersMgmtService_SearchUsers",
         "parameters": [
           {
@@ -690,7 +675,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -722,7 +706,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -834,7 +817,6 @@
         "type": "object",
         "properties": {
           "expireAt": {
-            "example": "2021-01-01T00:00:00.000Z",
             "description": "Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.",
             "type": "string",
             "format": "date-time",

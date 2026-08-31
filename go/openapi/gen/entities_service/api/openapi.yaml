@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "List Entity Types",
         "description": "Returns all available notification entity types.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "EntitiesService_ListEntityTypes",
         "responses": {
           "200": {
@@ -37,9 +34,6 @@
         ],
         "summary": "List Entity Type Attachment Types",
         "description": "Returns all supported attachment types for the specified entity type.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "EntitiesService_ListEntityTypeAttachmentTypes",
         "parameters": [
           {
@@ -91,9 +85,6 @@
         ],
         "summary": "List Entity Subtypes",
         "description": "Returns all sub-types for the specified entity type.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "EntitiesService_ListEntitySubTypes",
         "parameters": [
           {
@@ -137,12 +128,10 @@
         "type": "object",
         "properties": {
           "defaultEnabled": {
-            "example": true,
             "description": "Whether this attachment type is included by default when policy is Auto.",
             "type": "boolean"
           },
           "name": {
-            "example": "alert_graph",
             "description": "Attachment type identifier (e.g. 'alert_graph', 'log_example').",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -171,7 +160,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -203,7 +191,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

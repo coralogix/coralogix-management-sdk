@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "List custom evaluations",
         "description": "Lists all custom evaluations defined in the catalog.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_GetCustomEvaluations",
         "responses": {
           "200": {
@@ -60,9 +57,6 @@
         ],
         "summary": "Create custom evaluation",
         "description": "Creates a new custom evaluation in the catalog.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_CreateCustomEvaluation",
         "requestBody": {
           "content": {
@@ -221,9 +215,6 @@
         ],
         "summary": "List custom evaluations for application",
         "description": "Lists custom evaluations linked to a specific AI application.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_ListCustomEvaluationsForApplication",
         "parameters": [
           {
@@ -287,9 +278,6 @@
         ],
         "summary": "Delete custom evaluation",
         "description": "Deletes a custom evaluation from the catalog.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_DeleteCustomEvaluation",
         "parameters": [
           {
@@ -329,9 +317,6 @@
         ],
         "summary": "Update custom evaluation",
         "description": "Updates one or more fields of an existing custom evaluation.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_UpdateCustomEvaluation",
         "parameters": [
           {
@@ -467,9 +452,6 @@
         ],
         "summary": "Link custom evaluation to application",
         "description": "Associates a custom evaluation with an AI application.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_LinkCustomEvaluation",
         "parameters": [
           {
@@ -510,9 +492,6 @@
         ],
         "summary": "Unlink custom evaluation from application",
         "description": "Removes the association between a custom evaluation and an AI application.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_UnlinkCustomEvaluationFromApp",
         "parameters": [
           {
@@ -571,9 +550,6 @@
         ],
         "summary": "Count applications per evaluation type",
         "description": "Returns the count of AI applications grouped by evaluation type.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_CountAiAppsPerEvalType",
         "responses": {
           "200": {
@@ -603,9 +579,6 @@
         ],
         "summary": "List AI evaluations",
         "description": "Lists AI evaluations, optionally filtered by application, subsystem, or evaluation type.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_ListAiEvaluations",
         "parameters": [
           {
@@ -713,9 +686,6 @@
         ],
         "summary": "Create AI evaluation",
         "description": "Creates a new AI evaluation for an application.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_CreateAiEvaluation",
         "requestBody": {
           "content": {
@@ -835,9 +805,6 @@
         ],
         "summary": "Get AI evaluation",
         "description": "Gets an AI evaluation by its unique identifier.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_GetAiEvaluation",
         "parameters": [
           {
@@ -891,9 +858,6 @@
         ],
         "summary": "Delete AI evaluation",
         "description": "Deletes an AI evaluation by its unique identifier.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_DeleteAiEvaluation",
         "parameters": [
           {
@@ -933,9 +897,6 @@
         ],
         "summary": "Update AI evaluation",
         "description": "Updates one or more fields of an existing AI evaluation.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiEvaluationsService_UpdateAiEvaluation",
         "parameters": [
           {
@@ -1740,7 +1701,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -1772,7 +1732,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

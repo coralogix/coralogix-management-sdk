@@ -23,9 +23,9 @@ var _ MappedNullable = &ActionsServiceOrderActionsRequest{}
 // ActionsServiceOrderActionsRequest This data structure represents the request to order Actions.
 type ActionsServiceOrderActionsRequest struct {
 	// The private actions order.
-	PrivateActionsOrder *map[string]int64 `json:"privateActionsOrder,omitempty"`
+	PrivateActionsOrder map[string]int64 `json:"privateActionsOrder,omitempty"`
 	// The shared actions order.
-	SharedActionsOrder *map[string]int64 `json:"sharedActionsOrder,omitempty"`
+	SharedActionsOrder map[string]int64 `json:"sharedActionsOrder,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -55,14 +55,14 @@ func (o *ActionsServiceOrderActionsRequest) GetPrivateActionsOrder() map[string]
 		var ret map[string]int64
 		return ret
 	}
-	return *o.PrivateActionsOrder
+	return o.PrivateActionsOrder
 }
 
 // GetPrivateActionsOrderOk returns a tuple with the PrivateActionsOrder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ActionsServiceOrderActionsRequest) GetPrivateActionsOrderOk() (*map[string]int64, bool) {
+func (o *ActionsServiceOrderActionsRequest) GetPrivateActionsOrderOk() (map[string]int64, bool) {
 	if o == nil || IsNil(o.PrivateActionsOrder) {
-		return nil, false
+		return map[string]int64{}, false
 	}
 	return o.PrivateActionsOrder, true
 }
@@ -78,7 +78,7 @@ func (o *ActionsServiceOrderActionsRequest) HasPrivateActionsOrder() bool {
 
 // SetPrivateActionsOrder gets a reference to the given map[string]int64 and assigns it to the PrivateActionsOrder field.
 func (o *ActionsServiceOrderActionsRequest) SetPrivateActionsOrder(v map[string]int64) {
-	o.PrivateActionsOrder = &v
+	o.PrivateActionsOrder = v
 }
 
 // GetSharedActionsOrder returns the SharedActionsOrder field value if set, zero value otherwise.
@@ -87,14 +87,14 @@ func (o *ActionsServiceOrderActionsRequest) GetSharedActionsOrder() map[string]i
 		var ret map[string]int64
 		return ret
 	}
-	return *o.SharedActionsOrder
+	return o.SharedActionsOrder
 }
 
 // GetSharedActionsOrderOk returns a tuple with the SharedActionsOrder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ActionsServiceOrderActionsRequest) GetSharedActionsOrderOk() (*map[string]int64, bool) {
+func (o *ActionsServiceOrderActionsRequest) GetSharedActionsOrderOk() (map[string]int64, bool) {
 	if o == nil || IsNil(o.SharedActionsOrder) {
-		return nil, false
+		return map[string]int64{}, false
 	}
 	return o.SharedActionsOrder, true
 }
@@ -110,7 +110,7 @@ func (o *ActionsServiceOrderActionsRequest) HasSharedActionsOrder() bool {
 
 // SetSharedActionsOrder gets a reference to the given map[string]int64 and assigns it to the SharedActionsOrder field.
 func (o *ActionsServiceOrderActionsRequest) SetSharedActionsOrder(v map[string]int64) {
-	o.SharedActionsOrder = &v
+	o.SharedActionsOrder = v
 }
 
 func (o ActionsServiceOrderActionsRequest) MarshalJSON() ([]byte, error) {

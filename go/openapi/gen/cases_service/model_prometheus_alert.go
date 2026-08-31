@@ -139,11 +139,11 @@ func (o *PrometheusAlert) GetAnnotations() map[string]string {
 
 // GetAnnotationsOk returns a tuple with the Annotations field value
 // and a boolean to check if the value has been set.
-func (o *PrometheusAlert) GetAnnotationsOk() (*map[string]string, bool) {
+func (o *PrometheusAlert) GetAnnotationsOk() (map[string]string, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]string{}, false
 	}
-	return &o.Annotations, true
+	return o.Annotations, true
 }
 
 // SetAnnotations sets field value
@@ -235,11 +235,11 @@ func (o *PrometheusAlert) GetLabels() map[string]string {
 
 // GetLabelsOk returns a tuple with the Labels field value
 // and a boolean to check if the value has been set.
-func (o *PrometheusAlert) GetLabelsOk() (*map[string]string, bool) {
+func (o *PrometheusAlert) GetLabelsOk() (map[string]string, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]string{}, false
 	}
-	return &o.Labels, true
+	return o.Labels, true
 }
 
 // SetLabels sets field value

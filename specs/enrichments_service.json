@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get Enrichments",
         "description": "Returns all enrichment rules for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "EnrichmentService_GetEnrichments",
         "responses": {
           "200": {
@@ -35,9 +32,6 @@
         ],
         "summary": "Atomic Overwrite for CustomEnrichments only",
         "description": "Updates enrichment rules.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "EnrichmentService_AtomicOverwriteEnrichments",
         "requestBody": {
           "content": {
@@ -97,9 +91,6 @@
         ],
         "summary": "Add Enrichments",
         "description": "Creates new enrichment rules.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "EnrichmentService_AddEnrichments",
         "requestBody": {
           "content": {
@@ -146,9 +137,6 @@
         ],
         "summary": "Delete Enrichments",
         "description": "Deletes all enrichment rules for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "EnrichmentService_RemoveEnrichments",
         "parameters": [
           {
@@ -157,11 +145,6 @@
             "description": "The unique identifiers of the enrichment rules to delete.",
             "required": true,
             "schema": {
-              "example": [
-                1,
-                2,
-                3
-              ],
               "description": "The unique identifiers of the enrichment rules to delete.",
               "type": "array",
               "items": {
@@ -198,9 +181,6 @@
         ],
         "summary": "Atomic Overwrite for ALL types of enrichments",
         "description": "Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "EnrichmentService_AtomicOverwriteAllEnrichments",
         "requestBody": {
           "content": {
@@ -244,9 +224,6 @@
         ],
         "summary": "Get Enrichment Limit",
         "description": "Returns the maximum number of enrichment rules allowed.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "EnrichmentService_GetEnrichmentLimit",
         "responses": {
           "200": {
@@ -269,9 +246,6 @@
         ],
         "summary": "Get Company Enrichment Settings",
         "description": "Returns the current enrichment settings for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "EnrichmentService_GetCompanyEnrichmentSettings",
         "responses": {
           "200": {
@@ -357,7 +331,6 @@
         "type": "object",
         "properties": {
           "resourceType": {
-            "example": "aws:ec2:instance",
             "description": "The resource type. Must be one of the AWS resource types available for the account.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -374,7 +347,6 @@
         "type": "object",
         "properties": {
           "enrichmentAmountLimit": {
-            "example": 5,
             "description": "Maximum number of enrichment rules allowed for the account.",
             "type": "integer",
             "format": "int64",
@@ -382,7 +354,6 @@
             "maximum": 2147483647
           },
           "enrichmentsInUse": {
-            "example": 2,
             "description": "Number of enrichment rules currently in use by the account.",
             "type": "integer",
             "format": "int64",
@@ -390,7 +361,6 @@
             "maximum": 2147483647
           },
           "queryOnlyRowLimit": {
-            "example": 10000,
             "description": "Row count above which a custom enrichment becomes query-only (usable in queries but not applied at ingest time). Defaults to 10000.",
             "type": "integer",
             "format": "int64",
@@ -398,7 +368,6 @@
             "maximum": 2147483647
           },
           "queryOnlySizeLimitBytes": {
-            "example": "524288",
             "description": "File size in bytes above which a custom enrichment becomes query-only (usable in queries but not applied at ingest time). Defaults to 524288 (512 KiB).",
             "type": "string",
             "pattern": "^[0-9]+$",
@@ -406,7 +375,6 @@
             "maxLength": 20
           },
           "rowLimit": {
-            "example": 150000,
             "description": "Maximum number of rows allowed in a custom enrichment file. Defaults to 150000.",
             "type": "integer",
             "format": "int64",
@@ -414,7 +382,6 @@
             "maximum": 2147483647
           },
           "sizeLimitBytes": {
-            "example": "20971520",
             "description": "Maximum custom enrichment file size in bytes. Defaults to 20971520 (20 MiB).",
             "type": "string",
             "pattern": "^[0-9]+$",
@@ -431,7 +398,6 @@
         "type": "object",
         "properties": {
           "id": {
-            "example": 1,
             "description": "Unique identifier.",
             "type": "integer",
             "format": "int64",
@@ -449,7 +415,6 @@
         "type": "object",
         "properties": {
           "dataset": {
-            "example": "dataset1",
             "description": "The dataset name in which the enrichment will be applied.",
             "type": "string",
             "pattern": "^[a-zA-Z0-9_][a-zA-Z0-9_./-]*$",
@@ -468,7 +433,6 @@
         "type": "object",
         "properties": {
           "enrichedFieldName": {
-            "example": "1",
             "description": "The enriched field name.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -479,7 +443,6 @@
             "$ref": "#/components/schemas/EnrichmentType"
           },
           "fieldName": {
-            "example": "1",
             "description": "The field name.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -487,7 +450,6 @@
             "maxLength": 255
           },
           "id": {
-            "example": 1,
             "description": "Unique identifier.",
             "type": "integer",
             "format": "int64",
@@ -495,10 +457,6 @@
             "maximum": 2147483647
           },
           "selectedColumns": {
-            "example": [
-              "city",
-              "population"
-            ],
             "description": "The selected columns.",
             "type": "array",
             "items": {
@@ -512,11 +470,6 @@
             "maxItems": 100
           },
           "targets": {
-            "example": [
-              {
-                "dataset": "dataset1"
-              }
-            ],
             "description": "The targets for the enrichment",
             "type": "array",
             "items": {
@@ -563,11 +516,6 @@
             "maxItems": 100
           },
           "targets": {
-            "example": [
-              {
-                "dataset": "dataset1"
-              }
-            ],
             "description": "The targets for the enrichment",
             "type": "array",
             "items": {
@@ -598,7 +546,6 @@
             "$ref": "#/components/schemas/EnrichmentType"
           },
           "fieldName": {
-            "example": "sourceIPs",
             "description": "The field name.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -619,11 +566,6 @@
             "maxItems": 100
           },
           "targets": {
-            "example": [
-              {
-                "dataset": "dataset1"
-              }
-            ],
             "description": "The targets for the enrichment",
             "type": "array",
             "items": {
@@ -736,7 +678,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -768,7 +709,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -822,7 +762,6 @@
         "type": "object",
         "properties": {
           "limit": {
-            "example": 10,
             "description": "Maximum number of enrichment rules allowed for the account. Defaults to 5.",
             "type": "integer",
             "format": "int64",
@@ -830,7 +769,6 @@
             "maximum": 2147483647
           },
           "used": {
-            "example": 5,
             "description": "Number of enrichment rules currently in use.",
             "type": "integer",
             "format": "int64",

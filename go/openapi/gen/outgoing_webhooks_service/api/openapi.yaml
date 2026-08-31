@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get outgoing webhook types",
         "description": "Returns all available outgoing webhook types.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_ListOutgoingWebhookTypes",
         "responses": {
           "200": {
@@ -70,9 +67,6 @@
         ],
         "summary": "Get outgoing webhook type details",
         "description": "Returns the details for the specified outgoing webhook type.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_GetOutgoingWebhookTypeDetails",
         "parameters": [
           {
@@ -145,9 +139,6 @@
         ],
         "summary": "Test an outgoing webhook",
         "description": "Tests an outgoing webhook configuration.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_TestOutgoingWebhook",
         "requestBody": {
           "content": {
@@ -219,9 +210,6 @@
         ],
         "summary": "List all outgoing webhooks",
         "description": "Returns all outgoing webhooks for the team.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_ListAllOutgoingWebhooks",
         "responses": {
           "200": {
@@ -275,9 +263,6 @@
         ],
         "summary": "Update an outgoing webhook",
         "description": "Updates an existing outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:UpdateConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_UpdateOutgoingWebhook",
         "requestBody": {
           "content": {
@@ -291,7 +276,6 @@
                     "$ref": "#/components/schemas/OutgoingWebhookInputData"
                   },
                   "id": {
-                    "example": "example_id",
                     "description": "Unique identifier.",
                     "type": "string",
                     "minLength": 0
@@ -353,9 +337,6 @@
         ],
         "summary": "Create an outgoing webhook",
         "description": "Creates a new outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:UpdateConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_CreateOutgoingWebhook",
         "requestBody": {
           "content": {
@@ -427,9 +408,6 @@
         ],
         "summary": "List outgoing webhooks",
         "description": "Returns outgoing webhooks grouped by type.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_ListOutgoingWebhooks",
         "parameters": [
           {
@@ -501,9 +479,6 @@
         ],
         "summary": "List outbound webhooks summary",
         "description": "Returns summary information for all outgoing webhooks.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadSummary`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_ListOutboundWebhooksSummary",
         "responses": {
           "200": {
@@ -559,9 +534,6 @@
         ],
         "summary": "Get outgoing webhook",
         "description": "Returns the details of the specified outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_GetOutgoingWebhook",
         "parameters": [
           {
@@ -629,9 +601,6 @@
         ],
         "summary": "Delete an outgoing webhook",
         "description": "Deletes the outgoing webhook with the specified ID.\n\nRequires the following permissions:\n- `outbound-webhooks:UpdateConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_DeleteOutgoingWebhook",
         "parameters": [
           {
@@ -640,7 +609,6 @@
             "description": "Unique identifier.",
             "required": true,
             "schema": {
-              "example": "example_id",
               "description": "Unique identifier.",
               "type": "string",
               "minLength": 0
@@ -702,9 +670,6 @@
         ],
         "summary": "Test an existing outgoing webhook",
         "description": "Tests the specified outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "OutgoingWebhooksService_TestExistingOutgoingWebhook",
         "parameters": [
           {
@@ -713,7 +678,6 @@
             "description": "Unique identifier.",
             "required": true,
             "schema": {
-              "example": "example_id",
               "description": "Unique identifier.",
               "type": "string",
               "minLength": 0
@@ -783,7 +747,6 @@
             "type": "boolean"
           },
           "type": {
-            "example": "1",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AttachmentType"
@@ -815,25 +778,21 @@
             "minLength": 0
           },
           "detailType": {
-            "example": "detail_type",
             "description": "The detail type.",
             "type": "string",
             "minLength": 0
           },
           "eventBusArn": {
-            "example": "arn:aws:events:us-east-1:123456789012:event-bus/default",
             "description": "The event bus arn.",
             "type": "string",
             "minLength": 0
           },
           "roleName": {
-            "example": "role_name",
             "description": "The role name.",
             "type": "string",
             "minLength": 0
           },
           "source": {
-            "example": "source",
             "description": "Source.",
             "type": "string",
             "minLength": 0
@@ -849,7 +808,6 @@
         "type": "object",
         "properties": {
           "id": {
-            "example": "example_id",
             "description": "Unique identifier.",
             "type": "string",
             "minLength": 0
@@ -879,7 +837,6 @@
             "minLength": 0
           },
           "uuid": {
-            "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
             "description": "The uuid.",
             "type": "string",
             "minLength": 0
@@ -898,7 +855,6 @@
             "type": "boolean"
           },
           "type": {
-            "example": "1",
             "allOf": [
               {
                 "$ref": "#/components/schemas/DigestType"
@@ -927,9 +883,6 @@
         "type": "object",
         "properties": {
           "emailAddresses": {
-            "example": [
-              "example@coralogix.com"
-            ],
             "description": "The email addresses.",
             "type": "array",
             "items": {
@@ -989,7 +942,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -1021,7 +973,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -1057,7 +1008,6 @@
             }
           },
           "method": {
-            "example": "1",
             "allOf": [
               {
                 "$ref": "#/components/schemas/MethodType"
@@ -1070,7 +1020,6 @@
             "minLength": 0
           },
           "uuid": {
-            "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
             "description": "The uuid.",
             "type": "string",
             "minLength": 0
@@ -1145,19 +1094,16 @@
         "type": "object",
         "properties": {
           "apiToken": {
-            "example": "jira_api_token",
             "description": "The api token.",
             "type": "string",
             "minLength": 0
           },
           "email": {
-            "example": "jira_email",
             "description": "Email address.",
             "type": "string",
             "minLength": 0
           },
           "projectKey": {
-            "example": "jira_project_key",
             "description": "The project key.",
             "type": "string",
             "minLength": 0
@@ -1353,7 +1299,6 @@
             "$ref": "#/components/schemas/EmailGroupConfig"
           },
           "externalId": {
-            "example": 123456,
             "description": "External identifier.",
             "type": "integer",
             "format": "int64",
@@ -1366,7 +1311,6 @@
             "$ref": "#/components/schemas/IbmEventNotificationsConfig"
           },
           "id": {
-            "example": "webhook_id",
             "description": "Unique identifier.",
             "type": "string",
             "minLength": 0
@@ -1381,7 +1325,6 @@
             "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
           },
           "name": {
-            "example": "my_webhook",
             "description": "Display name.",
             "type": "string",
             "minLength": 0
@@ -1399,7 +1342,6 @@
             "$ref": "#/components/schemas/SlackConfig"
           },
           "type": {
-            "example": "1",
             "allOf": [
               {
                 "$ref": "#/components/schemas/WebhookType"
@@ -1413,7 +1355,6 @@
             "minLength": 0
           },
           "url": {
-            "example": "slack.webhook.com",
             "description": "URL.",
             "type": "string",
             "minLength": 0
@@ -1582,7 +1523,6 @@
         "type": "object",
         "properties": {
           "label": {
-            "example": "example_label",
             "description": "The label.",
             "type": "string",
             "minLength": 0
@@ -1606,26 +1546,22 @@
             "minLength": 0
           },
           "externalId": {
-            "example": 123456,
             "description": "External identifier.",
             "type": "integer",
             "format": "int64",
             "minimum": 0
           },
           "id": {
-            "example": "webhook_id",
             "description": "Unique identifier.",
             "type": "string",
             "minLength": 0
           },
           "name": {
-            "example": "my_webhook",
             "description": "Display name.",
             "type": "string",
             "minLength": 0
           },
           "type": {
-            "example": "1",
             "allOf": [
               {
                 "$ref": "#/components/schemas/WebhookType"
@@ -1639,7 +1575,6 @@
             "minLength": 0
           },
           "url": {
-            "example": "slack.webhook.com",
             "description": "URL.",
             "type": "string",
             "minLength": 0
@@ -1679,7 +1614,6 @@
             "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
           },
           "name": {
-            "example": "my_webhook",
             "description": "Display name.",
             "type": "string",
             "minLength": 0
@@ -1697,7 +1631,6 @@
             "$ref": "#/components/schemas/SlackConfig"
           },
           "type": {
-            "example": "1",
             "allOf": [
               {
                 "$ref": "#/components/schemas/WebhookType"
@@ -1705,7 +1638,6 @@
             ]
           },
           "url": {
-            "example": "slack.webhook.com",
             "description": "URL.",
             "type": "string",
             "minLength": 0
@@ -1879,20 +1811,17 @@
             "minLength": 0
           },
           "externalId": {
-            "example": 123456,
             "description": "External identifier.",
             "type": "integer",
             "format": "int64",
             "minimum": 0
           },
           "id": {
-            "example": "webhook_id",
             "description": "Unique identifier.",
             "type": "string",
             "minLength": 0
           },
           "name": {
-            "example": "my_webhook",
             "description": "Display name.",
             "type": "string",
             "minLength": 0
@@ -1904,7 +1833,6 @@
             "minLength": 0
           },
           "url": {
-            "example": "slack.webhook.com",
             "description": "URL.",
             "type": "string",
             "minLength": 0
@@ -1919,14 +1847,12 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 3,
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
             "minimum": 0
           },
           "label": {
-            "example": "example_label",
             "description": "The label.",
             "type": "string",
             "minLength": 0
@@ -1945,7 +1871,6 @@
         "type": "object",
         "properties": {
           "serviceKey": {
-            "example": "pager_duty_service_key",
             "description": "The service key.",
             "type": "string",
             "minLength": 0
@@ -1966,7 +1891,6 @@
             "minLength": 0
           },
           "uuid": {
-            "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
             "description": "The uuid.",
             "type": "string",
             "minLength": 0
@@ -2057,19 +1981,16 @@
         "type": "object",
         "properties": {
           "displayMessage": {
-            "example": "example_display_message",
             "description": "The display message.",
             "type": "string",
             "minLength": 0
           },
           "errorMessage": {
-            "example": "example_error_message",
             "description": "The error message.",
             "type": "string",
             "minLength": 0
           },
           "statusCode": {
-            "example": 400,
             "description": "The status code.",
             "type": "integer",
             "format": "int64",

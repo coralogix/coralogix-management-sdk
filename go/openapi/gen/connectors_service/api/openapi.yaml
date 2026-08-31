@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "List Connectors",
         "description": "Returns notification connectors with optional pagination.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ConnectorsService_ListConnectors",
         "parameters": [
           {
@@ -65,9 +62,6 @@
         ],
         "summary": "Replace a Connector",
         "description": "Updates an existing notification connector.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ConnectorsService_ReplaceConnector",
         "requestBody": {
           "content": {
@@ -104,9 +98,6 @@
         ],
         "summary": "Create a Connector",
         "description": "Creates a new notification connector.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ConnectorsService_CreateConnector",
         "requestBody": {
           "content": {
@@ -145,9 +136,6 @@
         ],
         "summary": "Batch Get Connectors",
         "description": "Returns all notification connectors for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ConnectorsService_BatchGetConnectors",
         "parameters": [
           {
@@ -155,10 +143,6 @@
             "name": "connector_ids",
             "description": "The unique identifiers of the connectors to retrieve.",
             "schema": {
-              "example": [
-                "connector-id-1",
-                "connector-id-2"
-              ],
               "description": "The unique identifiers of the connectors to retrieve.",
               "type": "array",
               "items": {
@@ -193,9 +177,6 @@
         ],
         "summary": "Batch Get Connectors Summaries",
         "description": "Returns summary information for all notification connectors.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ConnectorsService_BatchGetConnectorSummaries",
         "parameters": [
           {
@@ -237,9 +218,6 @@
         ],
         "summary": "List Connector Summaries",
         "description": "Returns a paginated list of notification connector summaries.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ConnectorsService_ListConnectorSummaries",
         "parameters": [
           {
@@ -292,9 +270,6 @@
         ],
         "summary": "Get Connector Type Summaries",
         "description": "Returns summary information for all available connector types.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ConnectorsService_GetConnectorTypeSummaries",
         "parameters": [
           {
@@ -333,9 +308,6 @@
         ],
         "summary": "Get a Connector",
         "description": "Returns the details of the specified notification connector.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ConnectorsService_GetConnector",
         "parameters": [
           {
@@ -372,9 +344,6 @@
         ],
         "summary": "Delete a Connector",
         "description": "Deletes the notification connector with the specified ID.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ConnectorsService_DeleteConnector",
         "parameters": [
           {
@@ -426,9 +395,6 @@
             }
           },
           "notFoundIds": {
-            "example": [
-              "connector-id-3"
-            ],
             "description": "The not found ids.",
             "type": "array",
             "items": {
@@ -458,9 +424,6 @@
             }
           },
           "notFoundIds": {
-            "example": [
-              "connector-id-3"
-            ],
             "description": "The not found ids.",
             "type": "array",
             "items": {
@@ -501,7 +464,6 @@
             "minLength": 0
           },
           "description": {
-            "example": "Connector for team notifications",
             "description": "Human-readable description.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -517,7 +479,6 @@
             ]
           },
           "id": {
-            "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
@@ -525,7 +486,6 @@
             "maxLength": 128
           },
           "name": {
-            "example": "My Slack Connector",
             "description": "Display name.",
             "type": "string",
             "pattern": "^[\\s\\S]+$",
@@ -542,7 +502,6 @@
             ]
           },
           "teamId": {
-            "example": 12345,
             "description": "Team identifier.",
             "type": "integer",
             "format": "int64",
@@ -607,7 +566,6 @@
             "minLength": 0
           },
           "description": {
-            "example": "Connector for team notifications",
             "description": "Human-readable description.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -615,7 +573,6 @@
             "maxLength": 5000
           },
           "id": {
-            "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
@@ -623,7 +580,6 @@
             "maxLength": 128
           },
           "name": {
-            "example": "My Slack Connector",
             "description": "Display name.",
             "type": "string",
             "pattern": "^[\\s\\S]+$",
@@ -640,7 +596,6 @@
             ]
           },
           "teamId": {
-            "example": 12345,
             "description": "The team id.",
             "type": "integer",
             "format": "int64",
@@ -668,7 +623,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 5,
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
@@ -734,7 +688,6 @@
         "type": "object",
         "properties": {
           "entityType": {
-            "example": "ALERTS",
             "allOf": [
               {
                 "$ref": "#/components/schemas/notification_center.EntityType"
@@ -772,7 +725,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -804,7 +756,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

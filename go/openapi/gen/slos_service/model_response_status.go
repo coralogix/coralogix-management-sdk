@@ -24,7 +24,7 @@ var _ MappedNullable = &ResponseStatus{}
 // ResponseStatus Status of the response, including error code and message.
 type ResponseStatus struct {
 	// List of details.
-	Details *map[string]string `json:"details,omitempty"`
+	Details map[string]string `json:"details,omitempty"`
 	// Human-readable message.
 	Message *string `json:"message,omitempty"`
 	StatusCode Code `json:"statusCode"`
@@ -58,14 +58,14 @@ func (o *ResponseStatus) GetDetails() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.Details
+	return o.Details
 }
 
 // GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ResponseStatus) GetDetailsOk() (*map[string]string, bool) {
+func (o *ResponseStatus) GetDetailsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Details) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Details, true
 }
@@ -81,7 +81,7 @@ func (o *ResponseStatus) HasDetails() bool {
 
 // SetDetails gets a reference to the given map[string]string and assigns it to the Details field.
 func (o *ResponseStatus) SetDetails(v map[string]string) {
-	o.Details = &v
+	o.Details = v
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise.

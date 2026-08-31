@@ -23,7 +23,7 @@ var _ MappedNullable = &V3Permutation{}
 // V3Permutation struct for V3Permutation
 type V3Permutation struct {
 	// Labels for the permutation.
-	PermutationLabels *map[string]string `json:"permutationLabels,omitempty"`
+	PermutationLabels map[string]string `json:"permutationLabels,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -53,14 +53,14 @@ func (o *V3Permutation) GetPermutationLabels() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.PermutationLabels
+	return o.PermutationLabels
 }
 
 // GetPermutationLabelsOk returns a tuple with the PermutationLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V3Permutation) GetPermutationLabelsOk() (*map[string]string, bool) {
+func (o *V3Permutation) GetPermutationLabelsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.PermutationLabels) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.PermutationLabels, true
 }
@@ -76,7 +76,7 @@ func (o *V3Permutation) HasPermutationLabels() bool {
 
 // SetPermutationLabels gets a reference to the given map[string]string and assigns it to the PermutationLabels field.
 func (o *V3Permutation) SetPermutationLabels(v map[string]string) {
-	o.PermutationLabels = &v
+	o.PermutationLabels = v
 }
 
 func (o V3Permutation) MarshalJSON() ([]byte, error) {

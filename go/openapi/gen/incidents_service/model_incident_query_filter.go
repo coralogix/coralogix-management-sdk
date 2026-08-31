@@ -28,11 +28,11 @@ type IncidentQueryFilter struct {
 	// Filter by assignee
 	Assignee []string `json:"assignee,omitempty"`
 	// Filter by contextual labels
-	ContextualLabels *map[string]ContextualLabelValues `json:"contextualLabels,omitempty"`
+	ContextualLabels map[string]ContextualLabelValues `json:"contextualLabels,omitempty"`
 	// Filters all incidents created at the given time range
 	CreatedAtRange *V1TimeRange `json:"createdAtRange,omitempty"`
 	// Filter by display labels
-	DisplayLabels *map[string]DisplayLabelValues `json:"displayLabels,omitempty"`
+	DisplayLabels map[string]DisplayLabelValues `json:"displayLabels,omitempty"`
 	// Filters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)
 	// Deprecated
 	EndTime *time.Time `json:"endTime,omitempty"`
@@ -149,14 +149,14 @@ func (o *IncidentQueryFilter) GetContextualLabels() map[string]ContextualLabelVa
 		var ret map[string]ContextualLabelValues
 		return ret
 	}
-	return *o.ContextualLabels
+	return o.ContextualLabels
 }
 
 // GetContextualLabelsOk returns a tuple with the ContextualLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetContextualLabelsOk() (*map[string]ContextualLabelValues, bool) {
+func (o *IncidentQueryFilter) GetContextualLabelsOk() (map[string]ContextualLabelValues, bool) {
 	if o == nil || IsNil(o.ContextualLabels) {
-		return nil, false
+		return map[string]ContextualLabelValues{}, false
 	}
 	return o.ContextualLabels, true
 }
@@ -172,7 +172,7 @@ func (o *IncidentQueryFilter) HasContextualLabels() bool {
 
 // SetContextualLabels gets a reference to the given map[string]ContextualLabelValues and assigns it to the ContextualLabels field.
 func (o *IncidentQueryFilter) SetContextualLabels(v map[string]ContextualLabelValues) {
-	o.ContextualLabels = &v
+	o.ContextualLabels = v
 }
 
 // GetCreatedAtRange returns the CreatedAtRange field value if set, zero value otherwise.
@@ -213,14 +213,14 @@ func (o *IncidentQueryFilter) GetDisplayLabels() map[string]DisplayLabelValues {
 		var ret map[string]DisplayLabelValues
 		return ret
 	}
-	return *o.DisplayLabels
+	return o.DisplayLabels
 }
 
 // GetDisplayLabelsOk returns a tuple with the DisplayLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetDisplayLabelsOk() (*map[string]DisplayLabelValues, bool) {
+func (o *IncidentQueryFilter) GetDisplayLabelsOk() (map[string]DisplayLabelValues, bool) {
 	if o == nil || IsNil(o.DisplayLabels) {
-		return nil, false
+		return map[string]DisplayLabelValues{}, false
 	}
 	return o.DisplayLabels, true
 }
@@ -236,7 +236,7 @@ func (o *IncidentQueryFilter) HasDisplayLabels() bool {
 
 // SetDisplayLabels gets a reference to the given map[string]DisplayLabelValues and assigns it to the DisplayLabels field.
 func (o *IncidentQueryFilter) SetDisplayLabels(v map[string]DisplayLabelValues) {
-	o.DisplayLabels = &v
+	o.DisplayLabels = v
 }
 
 // GetEndTime returns the EndTime field value if set, zero value otherwise.

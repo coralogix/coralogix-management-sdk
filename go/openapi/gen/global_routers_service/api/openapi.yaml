@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "List Global Routers",
         "description": "Returns all notification routers for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GlobalRoutersService_ListGlobalRouters",
         "parameters": [
           {
@@ -78,9 +75,6 @@
         ],
         "summary": "Replace Global Router",
         "description": "Updates an existing notification router.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GlobalRoutersService_ReplaceGlobalRouter",
         "requestBody": {
           "content": {
@@ -117,9 +111,6 @@
         ],
         "summary": "Create Global Router",
         "description": "Creates a new notification router.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GlobalRoutersService_CreateGlobalRouter",
         "requestBody": {
           "content": {
@@ -158,9 +149,6 @@
         ],
         "summary": "Batch Get Global Routers",
         "description": "Returns summary information for all notification routers.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GlobalRoutersService_BatchGetGlobalRouters",
         "parameters": [
           {
@@ -202,9 +190,6 @@
         ],
         "summary": "Validate Entity Label Matcher",
         "description": "Validates a notification router matcher configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GlobalRoutersService_ValidateEntityLabelMatcher",
         "parameters": [
           {
@@ -243,9 +228,6 @@
         ],
         "summary": "Get Global Router",
         "description": "Returns the details of the specified notification router.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GlobalRoutersService_GetGlobalRouter",
         "parameters": [
           {
@@ -282,9 +264,6 @@
         ],
         "summary": "Delete Global Router",
         "description": "Deletes the notification router with the specified ID.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GlobalRoutersService_DeleteGlobalRouter",
         "parameters": [
           {
@@ -329,9 +308,6 @@
         "type": "object",
         "properties": {
           "notFoundIds": {
-            "example": [
-              "global-router-id-3"
-            ],
             "description": "The not found ids.",
             "type": "array",
             "items": {
@@ -410,7 +386,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -442,7 +417,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -537,7 +511,6 @@
             "maxItems": 10
           },
           "id": {
-            "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
@@ -545,7 +518,6 @@
             "maxLength": 128
           },
           "name": {
-            "example": "My Router",
             "description": "Display name.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -664,7 +636,6 @@
         "type": "object",
         "properties": {
           "condition": {
-            "example": "alertDef.priority == 'P3'",
             "description": "Condition.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -680,7 +651,6 @@
             }
           },
           "entityType": {
-            "example": "ALERTS",
             "allOf": [
               {
                 "$ref": "#/components/schemas/notification_center.EntityType"
@@ -730,7 +700,6 @@
             }
           },
           "id": {
-            "example": "d4b56246-64bb-4714-a8bd-97c999f1d801",
             "description": "Unique identifier.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",

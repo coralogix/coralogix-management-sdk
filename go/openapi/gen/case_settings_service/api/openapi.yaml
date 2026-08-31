@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Create a case settings team configuration",
         "description": "Create a new case settings team configuration with an optional display name and settings.\n\nRequires the following permissions:\n- `case-config:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseSettingsService_CreateCaseSettings",
         "requestBody": {
           "content": {
@@ -41,7 +38,6 @@
                     ]
                   },
                   "name": {
-                    "example": "Primary Case Settings",
                     "description": "Optional display name for the case settings team configuration",
                     "type": "string",
                     "pattern": "^[\\s\\S]*$",
@@ -131,9 +127,6 @@
         ],
         "summary": "Get a case settings team configuration",
         "description": "Retrieve a single case settings team configuration by its identifier.\n\nRequires the following permissions:\n- `case-config:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseSettingsService_GetCaseSettings",
         "parameters": [
           {
@@ -142,7 +135,6 @@
             "description": "ID of the case settings team configuration",
             "required": true,
             "schema": {
-              "example": "8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321",
               "description": "ID of the case settings team configuration",
               "type": "string",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -224,9 +216,6 @@
         ],
         "summary": "Delete a case settings team configuration",
         "description": "Delete a case settings team configuration by its identifier.\n\nRequires the following permissions:\n- `case-config:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseSettingsService_DeleteCaseSettings",
         "parameters": [
           {
@@ -235,7 +224,6 @@
             "description": "ID of the case settings team configuration to delete",
             "required": true,
             "schema": {
-              "example": "8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321",
               "description": "ID of the case settings team configuration to delete",
               "type": "string",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -317,9 +305,6 @@
         ],
         "summary": "Update a case settings team configuration",
         "description": "Update the display name and/or settings of an existing case settings team configuration.\n\nRequires the following permissions:\n- `case-config:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseSettingsService_UpdateCaseSettings",
         "parameters": [
           {
@@ -328,7 +313,6 @@
             "description": "ID of the case settings team configuration to update",
             "required": true,
             "schema": {
-              "example": "8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321",
               "description": "ID of the case settings team configuration to update",
               "type": "string",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -363,7 +347,6 @@
                     ]
                   },
                   "name": {
-                    "example": "SRE Case Settings",
                     "description": "New display name for the case settings team configuration",
                     "type": "string",
                     "pattern": "^[\\s\\S]*$",
@@ -449,9 +432,6 @@
         ],
         "summary": "Get the active case settings team configuration",
         "description": "Retrieve the currently active case settings team configuration (after any org- or user-level precedence resolution).\n\nRequires the following permissions:\n- `case-config:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseSettingsService_GetActiveCaseSettings",
         "responses": {
           "200": {
@@ -517,9 +497,6 @@
         ],
         "summary": "Get system default case settings team configuration settings",
         "description": "Retrieve the platform-wide default settings for case settings team configurations.\n\nRequires the following permissions:\n- `case-config:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseSettingsService_GetSystemDefaultCaseSettings",
         "responses": {
           "200": {
@@ -598,7 +575,6 @@
         "type": "object",
         "properties": {
           "postResolutionPeriod": {
-            "example": "3600s",
             "description": "Period after which resolved cases are automatically closed.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -623,7 +599,6 @@
             "type": "boolean"
           },
           "inactivePeriod": {
-            "example": "3600s",
             "description": "Period of inactivity after which cases are automatically resolved.",
             "type": "string",
             "minLength": 0
@@ -657,7 +632,6 @@
         "type": "object",
         "properties": {
           "alertSuppressionStrategy": {
-            "example": "ALERT_SUPPRESSION_STRATEGY_IGNORE",
             "description": "Configuration for how cases process suppressed alerts.",
             "allOf": [
               {
@@ -690,13 +664,11 @@
             ]
           },
           "resolutionSnoozePeriod": {
-            "example": "600s",
             "description": "Period after resolution during which new cases are snoozed.",
             "type": "string",
             "minLength": 0
           },
           "suppressionPeriod": {
-            "example": "3600s",
             "description": "Default period during which duplicate or related cases are suppressed.",
             "type": "string",
             "minLength": 0
@@ -732,7 +704,6 @@
             ]
           },
           "createTime": {
-            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the team configuration was created",
             "type": "string",
             "format": "date-time",
@@ -748,7 +719,6 @@
             ]
           },
           "id": {
-            "example": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
             "description": "Unique identifier for the team configuration",
             "type": "string",
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -756,7 +726,6 @@
             "maxLength": 36
           },
           "name": {
-            "example": "Default Team Config",
             "description": "Human-readable name for the team configuration",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -908,7 +877,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -940,7 +908,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -1171,12 +1138,10 @@
         "type": "object",
         "properties": {
           "enabled": {
-            "example": true,
             "description": "Enable or disable this threshold entry.",
             "type": "boolean"
           },
           "priority": {
-            "example": "P1",
             "description": "Case priority level for which this threshold applies.",
             "allOf": [
               {
@@ -1185,13 +1150,11 @@
             ]
           },
           "threshold": {
-            "example": "300s",
             "description": "Elapsed time after which the KPI is considered breached.",
             "type": "string",
             "minLength": 0
           },
           "type": {
-            "example": "KPI_TYPE_ACKNOWLEDGEMENT",
             "description": "Type of KPI this threshold applies to (acknowledgement or resolution).",
             "allOf": [
               {
@@ -1264,7 +1227,6 @@
         "type": "object",
         "properties": {
           "key": {
-            "example": "service",
             "description": "Key of the pair (e.g., label or grouping name)",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1272,7 +1234,6 @@
             "maxLength": 4096
           },
           "value": {
-            "example": "payments",
             "description": "Value associated with the key",
             "type": "string",
             "pattern": "^[\\s\\S]*$",

@@ -23,7 +23,7 @@ var _ MappedNullable = &GenericWebhookConfig{}
 // GenericWebhookConfig Generic webhook config.
 type GenericWebhookConfig struct {
 	// The headers.
-	Headers *map[string]string `json:"headers,omitempty"`
+	Headers map[string]string `json:"headers,omitempty"`
 	Method *MethodType `json:"method,omitempty"`
 	// Raw payload data.
 	Payload *string `json:"payload,omitempty"`
@@ -58,14 +58,14 @@ func (o *GenericWebhookConfig) GetHeaders() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.Headers
+	return o.Headers
 }
 
 // GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GenericWebhookConfig) GetHeadersOk() (*map[string]string, bool) {
+func (o *GenericWebhookConfig) GetHeadersOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Headers) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Headers, true
 }
@@ -81,7 +81,7 @@ func (o *GenericWebhookConfig) HasHeaders() bool {
 
 // SetHeaders gets a reference to the given map[string]string and assigns it to the Headers field.
 func (o *GenericWebhookConfig) SetHeaders(v map[string]string) {
-	o.Headers = &v
+	o.Headers = v
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.

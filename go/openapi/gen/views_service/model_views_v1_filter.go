@@ -88,11 +88,11 @@ func (o *ViewsV1Filter) GetSelectedValues() map[string]bool {
 
 // GetSelectedValuesOk returns a tuple with the SelectedValues field value
 // and a boolean to check if the value has been set.
-func (o *ViewsV1Filter) GetSelectedValuesOk() (*map[string]bool, bool) {
+func (o *ViewsV1Filter) GetSelectedValuesOk() (map[string]bool, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]bool{}, false
 	}
-	return &o.SelectedValues, true
+	return o.SelectedValues, true
 }
 
 // SetSelectedValues sets field value

@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get all extensions",
         "description": "Creates a new extension.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ExtensionService_GetAllExtensions",
         "requestBody": {
           "content": {
@@ -90,9 +87,6 @@
         ],
         "summary": "Get extension by ID",
         "description": "Returns the details of the specified extension.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ExtensionService_GetExtension",
         "parameters": [
           {
@@ -489,7 +483,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -521,7 +514,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

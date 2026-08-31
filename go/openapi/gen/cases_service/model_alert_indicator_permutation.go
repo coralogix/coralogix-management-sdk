@@ -23,7 +23,7 @@ var _ MappedNullable = &AlertIndicatorPermutation{}
 // AlertIndicatorPermutation Single alert permutation captured as a map of label keys to label values.
 type AlertIndicatorPermutation struct {
 	// A single permutation represented as map<string, string>.
-	Permutation *map[string]string `json:"permutation,omitempty"`
+	Permutation map[string]string `json:"permutation,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -53,14 +53,14 @@ func (o *AlertIndicatorPermutation) GetPermutation() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.Permutation
+	return o.Permutation
 }
 
 // GetPermutationOk returns a tuple with the Permutation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AlertIndicatorPermutation) GetPermutationOk() (*map[string]string, bool) {
+func (o *AlertIndicatorPermutation) GetPermutationOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Permutation) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Permutation, true
 }
@@ -76,7 +76,7 @@ func (o *AlertIndicatorPermutation) HasPermutation() bool {
 
 // SetPermutation gets a reference to the given map[string]string and assigns it to the Permutation field.
 func (o *AlertIndicatorPermutation) SetPermutation(v map[string]string) {
-	o.Permutation = &v
+	o.Permutation = v
 }
 
 func (o AlertIndicatorPermutation) MarshalJSON() ([]byte, error) {

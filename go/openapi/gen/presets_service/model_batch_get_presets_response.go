@@ -25,7 +25,7 @@ type BatchGetPresetsResponse struct {
 	// The not found ids.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	// List of permission presets.
-	Presets *map[string]Preset `json:"presets,omitempty"`
+	Presets map[string]Preset `json:"presets,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -87,14 +87,14 @@ func (o *BatchGetPresetsResponse) GetPresets() map[string]Preset {
 		var ret map[string]Preset
 		return ret
 	}
-	return *o.Presets
+	return o.Presets
 }
 
 // GetPresetsOk returns a tuple with the Presets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BatchGetPresetsResponse) GetPresetsOk() (*map[string]Preset, bool) {
+func (o *BatchGetPresetsResponse) GetPresetsOk() (map[string]Preset, bool) {
 	if o == nil || IsNil(o.Presets) {
-		return nil, false
+		return map[string]Preset{}, false
 	}
 	return o.Presets, true
 }
@@ -110,7 +110,7 @@ func (o *BatchGetPresetsResponse) HasPresets() bool {
 
 // SetPresets gets a reference to the given map[string]Preset and assigns it to the Presets field.
 func (o *BatchGetPresetsResponse) SetPresets(v map[string]Preset) {
-	o.Presets = &v
+	o.Presets = v
 }
 
 func (o BatchGetPresetsResponse) MarshalJSON() ([]byte, error) {

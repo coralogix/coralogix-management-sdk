@@ -23,7 +23,7 @@ var _ MappedNullable = &BatchGetConnectorSummariesResponse{}
 // BatchGetConnectorSummariesResponse Response containing the requested connector summaries and any IDs not found
 type BatchGetConnectorSummariesResponse struct {
 	// The connector summaries.
-	ConnectorSummaries *map[string]ConnectorSummary `json:"connectorSummaries,omitempty"`
+	ConnectorSummaries map[string]ConnectorSummary `json:"connectorSummaries,omitempty"`
 	// The not found ids.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -55,14 +55,14 @@ func (o *BatchGetConnectorSummariesResponse) GetConnectorSummaries() map[string]
 		var ret map[string]ConnectorSummary
 		return ret
 	}
-	return *o.ConnectorSummaries
+	return o.ConnectorSummaries
 }
 
 // GetConnectorSummariesOk returns a tuple with the ConnectorSummaries field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BatchGetConnectorSummariesResponse) GetConnectorSummariesOk() (*map[string]ConnectorSummary, bool) {
+func (o *BatchGetConnectorSummariesResponse) GetConnectorSummariesOk() (map[string]ConnectorSummary, bool) {
 	if o == nil || IsNil(o.ConnectorSummaries) {
-		return nil, false
+		return map[string]ConnectorSummary{}, false
 	}
 	return o.ConnectorSummaries, true
 }
@@ -78,7 +78,7 @@ func (o *BatchGetConnectorSummariesResponse) HasConnectorSummaries() bool {
 
 // SetConnectorSummaries gets a reference to the given map[string]ConnectorSummary and assigns it to the ConnectorSummaries field.
 func (o *BatchGetConnectorSummariesResponse) SetConnectorSummaries(v map[string]ConnectorSummary) {
-	o.ConnectorSummaries = &v
+	o.ConnectorSummaries = v
 }
 
 // GetNotFoundIds returns the NotFoundIds field value if set, zero value otherwise.

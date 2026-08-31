@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get incident aggregations",
         "description": "Retrieve aggregated incident data with support for grouping and filtering.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_ListIncidentAggregations",
         "parameters": [
           {
@@ -108,7 +105,6 @@
                     "type": "object",
                     "properties": {
                       "key": {
-                        "example": "key",
                         "description": "The key.",
                         "type": "string",
                         "pattern": "^[\\s\\S]*$",
@@ -116,7 +112,6 @@
                         "maxLength": 255
                       },
                       "value": {
-                        "example": "value",
                         "description": "The value.",
                         "type": "string",
                         "pattern": "^[\\s\\S]*$",
@@ -152,7 +147,6 @@
                       "maxLength": 256
                     },
                     "incidentField": {
-                      "example": "INCIDENTS_FIELDS_STATUS",
                       "description": "The field to search in",
                       "allOf": [
                         {
@@ -161,7 +155,6 @@
                       ]
                     },
                     "query": {
-                      "example": "error",
                       "description": "The search query",
                       "type": "string",
                       "pattern": "^[\\s\\S]*$",
@@ -260,7 +253,6 @@
                     "maxLength": 256
                   },
                   "incidentField": {
-                    "example": "INCIDENTS_FIELDS_ID",
                     "description": "The field to group by",
                     "allOf": [
                       {
@@ -269,7 +261,6 @@
                     ]
                   },
                   "orderByDirection": {
-                    "example": "ORDER_BY_DIRECTION_ASC",
                     "description": "The order by direction.",
                     "allOf": [
                       {
@@ -311,7 +302,6 @@
               "type": "object",
               "properties": {
                 "pageSize": {
-                  "example": 10,
                   "description": "Number of items to return per page.",
                   "type": "integer",
                   "format": "int64",
@@ -319,7 +309,6 @@
                   "maximum": 10000
                 },
                 "pageToken": {
-                  "example": "next_page_token",
                   "description": "Token for the next page of results",
                   "type": "string",
                   "pattern": "^[\\s\\S]*$",
@@ -388,9 +377,6 @@
         ],
         "summary": "List incident events with filters",
         "description": "List incident events with support for filtering, pagination, and ordering. This operation accepts a page size of at most 1000 (it defaults to 100 when pageSize is omitted) and rejects larger values, even though the shared pagination schema documents a maximum of 10000.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_ListIncidentEvents",
         "parameters": [
           {
@@ -481,7 +467,6 @@
               "type": "object",
               "properties": {
                 "pageSize": {
-                  "example": 10,
                   "description": "Number of items to return per page.",
                   "type": "integer",
                   "format": "int64",
@@ -489,7 +474,6 @@
                   "maximum": 10000
                 },
                 "pageToken": {
-                  "example": "next_page_token",
                   "description": "Token for the next page of results",
                   "type": "string",
                   "pattern": "^[\\s\\S]*$",
@@ -515,7 +499,6 @@
               "type": "object",
               "properties": {
                 "direction": {
-                  "example": "ORDER_BY_DIRECTION_ASC",
                   "description": "Sort direction (ascending or descending)",
                   "allOf": [
                     {
@@ -524,7 +507,6 @@
                   ]
                 },
                 "field": {
-                  "example": "INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED",
                   "description": "Field to order by",
                   "allOf": [
                     {
@@ -591,9 +573,6 @@
         ],
         "summary": "Get total count of incident events",
         "description": "Retrieve the total count of incident events matching a filter.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_ListIncidentEventsTotalCount",
         "parameters": [
           {
@@ -726,9 +705,6 @@
         ],
         "summary": "Get incident by event ID",
         "description": "Retrieve detailed information about a single incident by related alert event id.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_GetIncidentByEventId",
         "parameters": [
           {
@@ -737,7 +713,6 @@
             "description": "Event ID associated to the Incident to acknowledge",
             "required": true,
             "schema": {
-              "example": "event_id_1",
               "description": "Event ID associated to the Incident to acknowledge",
               "type": "string",
               "pattern": "^[\\s\\S]*$",
@@ -801,9 +776,6 @@
         ],
         "summary": "Acknowledge incident by event id",
         "description": "Mark incident as acknowledged by event id.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_AcknowledgeIncidentByEventId",
         "parameters": [
           {
@@ -812,7 +784,6 @@
             "description": "Event ID associated to the Incident to acknowledge",
             "required": true,
             "schema": {
-              "example": "event_id_1",
               "description": "Event ID associated to the Incident to acknowledge",
               "type": "string",
               "pattern": "^[\\s\\S]*$",
@@ -876,9 +847,6 @@
         ],
         "summary": "Resolve incident by event id",
         "description": "Mark incident as resolved by event id.\n\nRequires the following permissions:\n- `incidents:close`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_ResolveIncidentByEventId",
         "parameters": [
           {
@@ -887,7 +855,6 @@
             "description": "Event ID associated to the Incident to resolve",
             "required": true,
             "schema": {
-              "example": "event_id_1",
               "description": "Event ID associated to the Incident to resolve",
               "type": "string",
               "pattern": "^[\\s\\S]*$",
@@ -951,9 +918,6 @@
         ],
         "summary": "Get available filter values",
         "description": "Returns filter values for incidents based on the provided criteria.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_GetFilterValues",
         "requestBody": {
           "content": {
@@ -1030,9 +994,6 @@
         ],
         "summary": "Get available incident event filter values",
         "description": "Returns available filter values for incident events.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_ListIncidentEventsFilterValues",
         "parameters": [
           {
@@ -1165,9 +1126,6 @@
         ],
         "summary": "Get multiple incidents by IDs",
         "description": "Retrieve multiple incidents by their IDs in a single request.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_BatchGetIncident",
         "parameters": [
           {
@@ -1242,9 +1200,6 @@
         ],
         "summary": "List incidents with filters",
         "description": "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_ListIncidents",
         "requestBody": {
           "content": {
@@ -1338,9 +1293,6 @@
         ],
         "summary": "Acknowledge incidents",
         "description": "Mark one or more incidents as acknowledged.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_AcknowledgeIncidents",
         "requestBody": {
           "content": {
@@ -1351,10 +1303,6 @@
                 "type": "object",
                 "properties": {
                   "incidentIds": {
-                    "example": [
-                      "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
-                      "9c858901-8a57-4791-81fe-4c455b099bc9"
-                    ],
                     "description": "List of incident IDs to acknowledge",
                     "type": "array",
                     "items": {
@@ -1430,9 +1378,6 @@
         ],
         "summary": "Assign incidents to a user",
         "description": "Assign one or more incidents to a specific user.\n\nRequires the following permissions:\n- `incidents:assign`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_AssignIncidents",
         "requestBody": {
           "content": {
@@ -1451,10 +1396,6 @@
                     ]
                   },
                   "incidentIds": {
-                    "example": [
-                      "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
-                      "9c858901-8a57-4791-81fe-4c455b099bc9"
-                    ],
                     "description": "List of incident IDs to assign",
                     "type": "array",
                     "items": {
@@ -1529,9 +1470,6 @@
         ],
         "summary": "Remove incident user assignments",
         "description": "Remove user assignments from one or more incidents.\n\nRequires the following permissions:\n- `incidents:assign`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_UnassignIncidents",
         "parameters": [
           {
@@ -1540,10 +1478,6 @@
             "description": "List of incident IDs to unassign",
             "required": true,
             "schema": {
-              "example": [
-                "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
-                "9c858901-8a57-4791-81fe-4c455b099bc9"
-              ],
               "description": "List of incident IDs to unassign",
               "type": "array",
               "items": {
@@ -1613,9 +1547,6 @@
         ],
         "summary": "Close incidents",
         "description": "Closes all incidents matching the given criteria.\n\nRequires the following permissions:\n- `incidents:close`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_CloseIncidents",
         "requestBody": {
           "content": {
@@ -1626,10 +1557,6 @@
                 "type": "object",
                 "properties": {
                   "incidentIds": {
-                    "example": [
-                      "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
-                      "9c858901-8a57-4791-81fe-4c455b099bc9"
-                    ],
                     "description": "List of incident IDs to close",
                     "type": "array",
                     "items": {
@@ -1705,9 +1632,6 @@
         ],
         "summary": "Resolve incidents",
         "description": "Mark one or more incidents as resolved.\n\nRequires the following permissions:\n- `incidents:close`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_ResolveIncidents",
         "requestBody": {
           "content": {
@@ -1718,10 +1642,6 @@
                 "type": "object",
                 "properties": {
                   "incidentIds": {
-                    "example": [
-                      "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
-                      "9c858901-8a57-4791-81fe-4c455b099bc9"
-                    ],
                     "description": "List of incident IDs to resolve",
                     "type": "array",
                     "items": {
@@ -1797,9 +1717,6 @@
         ],
         "summary": "Get incident by ID",
         "description": "Retrieve detailed information about a single incident by its unique identifier.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_GetIncident",
         "parameters": [
           {
@@ -1808,7 +1725,6 @@
             "description": "Unique identifier.",
             "required": true,
             "schema": {
-              "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
               "description": "Unique identifier.",
               "type": "string",
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -1872,9 +1788,6 @@
         ],
         "summary": "Get incident events",
         "description": "Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.\n\nRequires the following permissions:\n- `incidents:read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IncidentsService_GetIncidentEvents",
         "parameters": [
           {
@@ -1883,7 +1796,6 @@
             "description": "ID of the incident to retrieve events for",
             "required": true,
             "schema": {
-              "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
               "description": "ID of the incident to retrieve events for",
               "type": "string",
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -2016,7 +1928,6 @@
         "type": "object",
         "properties": {
           "assignee": {
-            "example": "assignee",
             "description": "Assignee.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2024,7 +1935,6 @@
             "maxLength": 300
           },
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int32",
@@ -2073,10 +1983,6 @@
             }
           },
           "notFoundIds": {
-            "example": [
-              "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
-              "9c858901-8a57-4791-81fe-4c455b099bc9"
-            ],
             "description": "List of IDs that were not found",
             "type": "array",
             "items": {
@@ -2125,7 +2031,6 @@
         "type": "object",
         "properties": {
           "contextualLabelValue": {
-            "example": "contextual_label_value",
             "description": "The contextual label value.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2133,7 +2038,6 @@
             "maxLength": 4096
           },
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int32",
@@ -2202,7 +2106,6 @@
         "type": "object",
         "properties": {
           "fieldName": {
-            "example": "field_name",
             "description": "The field name.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2210,7 +2113,6 @@
             "maxLength": 256
           },
           "fieldValue": {
-            "example": "field_value",
             "description": "The field value.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2231,7 +2133,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int32",
@@ -2239,7 +2140,6 @@
             "maximum": 1000000000
           },
           "displayLabelValue": {
-            "example": "display_label_value",
             "description": "The display label value.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2339,7 +2239,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -2371,7 +2270,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -2518,7 +2416,6 @@
             "maxItems": 1000
           },
           "closedAt": {
-            "example": "2024-01-01T00:00:00.000Z",
             "description": "The closed at.",
             "type": "string",
             "format": "date-time",
@@ -2534,7 +2431,6 @@
             }
           },
           "createdAt": {
-            "example": "2024-01-01T00:00:00.000Z",
             "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time",
@@ -2542,7 +2438,6 @@
             "maxLength": 30
           },
           "description": {
-            "example": "incident_description",
             "description": "Human-readable description.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2572,7 +2467,6 @@
             "maxItems": 10000
           },
           "id": {
-            "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
             "description": "Unique identifier.",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -2580,12 +2474,10 @@
             "maxLength": 36
           },
           "isMuted": {
-            "example": false,
             "description": "The is muted.",
             "type": "boolean"
           },
           "lastStateUpdateKey": {
-            "example": "last_state_update_key",
             "description": "The last state update key.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2593,7 +2485,6 @@
             "maxLength": 2000
           },
           "lastStateUpdateTime": {
-            "example": "2024-01-01T00:00:00.000Z",
             "description": "The last state update time.",
             "type": "string",
             "format": "date-time",
@@ -2610,7 +2501,6 @@
             "maxItems": 1000
           },
           "name": {
-            "example": "incident_name",
             "description": "Display name.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2775,7 +2665,6 @@
             "$ref": "#/components/schemas/incidents.v1.UserDetails"
           },
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
@@ -2809,7 +2698,6 @@
             "$ref": "#/components/schemas/IncidentEventClose"
           },
           "id": {
-            "example": "incident_event_id",
             "description": "The ID of the incident event",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2817,7 +2705,6 @@
             "maxLength": 64
           },
           "incidentEventType": {
-            "example": "INCIDENT_EVENT_TYPE_ACKNOWLEDGE",
             "allOf": [
               {
                 "$ref": "#/components/schemas/IncidentEventType"
@@ -2828,7 +2715,6 @@
             "$ref": "#/components/schemas/IncidentEventOriginatorOperational"
           },
           "originatorType": {
-            "example": "ORIGINATOR_TYPE_OPERATIONAL",
             "allOf": [
               {
                 "$ref": "#/components/schemas/OriginatorType"
@@ -3432,7 +3318,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
@@ -3456,7 +3341,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int32",
@@ -3719,7 +3603,6 @@
             "maxLength": 256
           },
           "incidentField": {
-            "example": "INCIDENTS_FIELDS_STATUS",
             "description": "The field to search in",
             "allOf": [
               {
@@ -3728,7 +3611,6 @@
             ]
           },
           "query": {
-            "example": "error",
             "description": "The search query",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -3774,7 +3656,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
@@ -3798,7 +3679,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int32",
@@ -3831,7 +3711,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
@@ -3855,7 +3734,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int32",
@@ -3894,7 +3772,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
@@ -3918,7 +3795,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 10,
             "description": "Number of items.",
             "type": "integer",
             "format": "int32",
@@ -3926,7 +3802,6 @@
             "maximum": 1000000000
           },
           "status": {
-            "example": "incident_status",
             "allOf": [
               {
                 "$ref": "#/components/schemas/IncidentStatus"
@@ -4057,7 +3932,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": "100",
             "description": "Total number of incident events matching the filter",
             "type": "string",
             "pattern": "^[0-9]+$",
@@ -4065,7 +3939,6 @@
             "maxLength": 20
           },
           "reachedLimit": {
-            "example": false,
             "description": "Indicates if the count reached the system limit",
             "type": "boolean"
           }
@@ -4244,7 +4117,6 @@
         "type": "object",
         "properties": {
           "key": {
-            "example": "key",
             "description": "The key.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -4252,7 +4124,6 @@
             "maxLength": 255
           },
           "value": {
-            "example": "value",
             "description": "The value.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -4270,7 +4141,6 @@
         "type": "object",
         "properties": {
           "pageSize": {
-            "example": 10,
             "description": "Number of items to return per page.",
             "type": "integer",
             "format": "int64",
@@ -4278,7 +4148,6 @@
             "maximum": 10000
           },
           "pageToken": {
-            "example": "next_page_token",
             "description": "Token for the next page of results",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -4299,7 +4168,6 @@
         "type": "object",
         "properties": {
           "nextPageToken": {
-            "example": "next_page_token",
             "description": "Token for the next page of results",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -4307,7 +4175,6 @@
             "maxLength": 4096
           },
           "totalSize": {
-            "example": 100,
             "description": "Total number of items available",
             "type": "integer",
             "format": "int64",
@@ -4328,7 +4195,6 @@
         "type": "object",
         "properties": {
           "userId": {
-            "example": "user_id",
             "description": "The user id.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",

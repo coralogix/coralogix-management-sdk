@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get company IP access settings",
         "description": "Returns the current IP access settings for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IpAccessService_GetCompanyIpAccessSettings",
         "parameters": [
           {
@@ -78,9 +75,6 @@
         ],
         "summary": "Replace company IP access settings",
         "description": "Updates the IP access restrictions for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IpAccessService_ReplaceCompanyIpAccessSettings",
         "requestBody": {
           "content": {
@@ -91,7 +85,6 @@
                 "type": "object",
                 "properties": {
                   "enableCoralogixCustomerSupportAccess": {
-                    "example": "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED",
                     "description": "The Coralogix customer support access setting. Defaults to DISABLED if not provided.",
                     "allOf": [
                       {
@@ -100,7 +93,6 @@
                     ]
                   },
                   "id": {
-                    "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
                     "description": "Unique identifier of the existing IP access settings resource to replace.",
                     "type": "string",
                     "minLength": 0
@@ -167,9 +159,6 @@
         ],
         "summary": "Create company IP access settings",
         "description": "Sets the IP access restrictions for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IpAccessService_CreateCompanyIpAccessSettings",
         "requestBody": {
           "content": {
@@ -180,7 +169,6 @@
                 "type": "object",
                 "properties": {
                   "enableCoralogixCustomerSupportAccess": {
-                    "example": "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED",
                     "description": "The Coralogix customer support access setting.",
                     "allOf": [
                       {
@@ -250,9 +238,6 @@
         ],
         "summary": "Delete company IP access settings",
         "description": "Removes the IP access restrictions for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IpAccessService_DeleteCompanyIpAccessSettings",
         "parameters": [
           {
@@ -260,7 +245,6 @@
             "name": "id",
             "description": "The unique identifier of the company IP access settings to delete.",
             "schema": {
-              "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
               "description": "The unique identifier of the company IP access settings to delete.",
               "type": "string",
               "minLength": 0
@@ -324,7 +308,6 @@
         "type": "object",
         "properties": {
           "enableCoralogixCustomerSupportAccess": {
-            "example": "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED",
             "description": "The Coralogix customer support access setting.",
             "allOf": [
               {
@@ -333,7 +316,6 @@
             ]
           },
           "id": {
-            "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
             "description": "The unique identifier for the company IP access settings. This is typically a company ID.",
             "type": "string",
             "minLength": 0
@@ -423,7 +405,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -455,7 +436,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -502,18 +482,15 @@
         "type": "object",
         "properties": {
           "enabled": {
-            "example": true,
             "description": "Whether this IP access entry is enabled.",
             "type": "boolean"
           },
           "ipRange": {
-            "example": "192.168.0.1/24",
             "description": "The IP range in CIDR notation.",
             "type": "string",
             "minLength": 0
           },
           "name": {
-            "example": "Office Network",
             "description": "The name of the IP access entry.",
             "type": "string",
             "minLength": 0

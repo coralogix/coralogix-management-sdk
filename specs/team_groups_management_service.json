@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get Team Groups",
         "description": "Returns all team groups.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GroupsMgmtService_GetTeamGroups",
         "parameters": [
           {
@@ -102,9 +99,6 @@
         ],
         "summary": "Create Team Group",
         "description": "Creates a new team group.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GroupsMgmtService_CreateTeamGroup",
         "requestBody": {
           "content": {
@@ -223,9 +217,6 @@
         ],
         "summary": "Get Team Group",
         "description": "Returns the team group with the specified ID.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GroupsMgmtService_GetTeamGroup",
         "parameters": [
           {
@@ -303,9 +294,6 @@
         ],
         "summary": "Get Team Group By Name",
         "description": "Returns the team group with the specified name.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GroupsMgmtService_GetTeamGroupByName",
         "parameters": [
           {
@@ -382,9 +370,6 @@
         ],
         "summary": "Update Team Group",
         "description": "Updates the specified team group.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GroupsMgmtService_UpdateTeamGroup",
         "parameters": [
           {
@@ -500,9 +485,6 @@
         ],
         "summary": "Delete Team Group",
         "description": "Deletes the team group with the specified ID.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GroupsMgmtService_DeleteTeamGroup",
         "parameters": [
           {
@@ -580,9 +562,6 @@
         ],
         "summary": "Get Group Users",
         "description": "Returns all users in the specified team group.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "GroupsMgmtService_GetGroupUsers",
         "parameters": [
           {
@@ -776,7 +755,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -808,7 +786,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

@@ -61,11 +61,11 @@ func (o *ListNotificationDeliveriesResponse) GetDeliveriesByCase() map[string]Ca
 
 // GetDeliveriesByCaseOk returns a tuple with the DeliveriesByCase field value
 // and a boolean to check if the value has been set.
-func (o *ListNotificationDeliveriesResponse) GetDeliveriesByCaseOk() (*map[string]CaseNotificationDeliveries, bool) {
+func (o *ListNotificationDeliveriesResponse) GetDeliveriesByCaseOk() (map[string]CaseNotificationDeliveries, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]CaseNotificationDeliveries{}, false
 	}
-	return &o.DeliveriesByCase, true
+	return o.DeliveriesByCase, true
 }
 
 // SetDeliveriesByCase sets field value

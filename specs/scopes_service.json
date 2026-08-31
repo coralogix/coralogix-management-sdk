@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get Team Scopes By Ids",
         "description": "Returns a data access scope by ID.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ScopesService_GetTeamScopesByIds",
         "parameters": [
           {
@@ -26,7 +23,6 @@
               "description": "List of team scope identifiers to retrieve.",
               "type": "array",
               "items": {
-                "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
                 "description": "List of team scope identifiers to retrieve.",
                 "type": "string",
                 "minLength": 0
@@ -85,9 +81,6 @@
         ],
         "summary": "Update Scope",
         "description": "Updates an existing data access scope.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ScopesService_UpdateScope",
         "requestBody": {
           "content": {
@@ -98,19 +91,16 @@
                 "type": "object",
                 "properties": {
                   "defaultExpression": {
-                    "example": "<v1>true",
                     "description": "The default expression.",
                     "type": "string",
                     "minLength": 0
                   },
                   "description": {
-                    "example": "The best scope",
                     "description": "Human-readable description.",
                     "type": "string",
                     "minLength": 0
                   },
                   "displayName": {
-                    "example": "my-scope",
                     "description": "The display name.",
                     "type": "string",
                     "minLength": 0
@@ -124,7 +114,6 @@
                     "minItems": 0
                   },
                   "id": {
-                    "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
                     "description": "Unique identifier.",
                     "type": "string",
                     "minLength": 0
@@ -190,9 +179,6 @@
         ],
         "summary": "Create Scope",
         "description": "Creates a new data access scope.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ScopesService_CreateScope",
         "requestBody": {
           "content": {
@@ -203,19 +189,16 @@
                 "type": "object",
                 "properties": {
                   "defaultExpression": {
-                    "example": "<v1>true",
                     "description": "The default expression.",
                     "type": "string",
                     "minLength": 0
                   },
                   "description": {
-                    "example": "The best scope",
                     "description": "Human-readable description.",
                     "type": "string",
                     "minLength": 0
                   },
                   "displayName": {
-                    "example": "my-scope",
                     "description": "The display name.",
                     "type": "string",
                     "minLength": 0
@@ -289,9 +272,6 @@
         ],
         "summary": "Get Team Scopes",
         "description": "Returns all data access scopes for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ScopesService_GetTeamScopes",
         "responses": {
           "200": {
@@ -344,9 +324,6 @@
         ],
         "summary": "Delete Scope",
         "description": "Deletes the data access scope with the specified ID.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ScopesService_DeleteScope",
         "parameters": [
           {
@@ -355,7 +332,6 @@
             "description": "Unique identifier.",
             "required": true,
             "schema": {
-              "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
               "description": "Unique identifier.",
               "type": "string",
               "minLength": 0
@@ -475,7 +451,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -507,7 +482,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -601,7 +575,6 @@
             "$ref": "#/components/schemas/v1.EntityType"
           },
           "expression": {
-            "example": "<v1>true",
             "description": "The expression.",
             "type": "string",
             "minLength": 0
@@ -627,19 +600,16 @@
         "type": "object",
         "properties": {
           "defaultExpression": {
-            "example": "<v1>true",
             "description": "The default expression.",
             "type": "string",
             "minLength": 0
           },
           "description": {
-            "example": "The best scope",
             "description": "Human-readable description.",
             "type": "string",
             "minLength": 0
           },
           "displayName": {
-            "example": "my-scope",
             "description": "The display name.",
             "type": "string",
             "minLength": 0
@@ -653,13 +623,11 @@
             "minItems": 0
           },
           "id": {
-            "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
             "description": "Unique identifier.",
             "type": "string",
             "minLength": 0
           },
           "teamId": {
-            "example": 1234,
             "description": "Team identifier.",
             "type": "integer",
             "format": "int32"

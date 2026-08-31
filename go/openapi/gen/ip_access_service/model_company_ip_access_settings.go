@@ -27,7 +27,7 @@ type CompanyIpAccessSettings struct {
 	// The unique identifier for the company IP access settings. This is typically a company ID.
 	Id *string `json:"id,omitempty"`
 	// The list of IP access entries.
-	IpAccess *map[string]IpAccess `json:"ipAccess,omitempty"`
+	IpAccess map[string]IpAccess `json:"ipAccess,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -121,14 +121,14 @@ func (o *CompanyIpAccessSettings) GetIpAccess() map[string]IpAccess {
 		var ret map[string]IpAccess
 		return ret
 	}
-	return *o.IpAccess
+	return o.IpAccess
 }
 
 // GetIpAccessOk returns a tuple with the IpAccess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CompanyIpAccessSettings) GetIpAccessOk() (*map[string]IpAccess, bool) {
+func (o *CompanyIpAccessSettings) GetIpAccessOk() (map[string]IpAccess, bool) {
 	if o == nil || IsNil(o.IpAccess) {
-		return nil, false
+		return map[string]IpAccess{}, false
 	}
 	return o.IpAccess, true
 }
@@ -144,7 +144,7 @@ func (o *CompanyIpAccessSettings) HasIpAccess() bool {
 
 // SetIpAccess gets a reference to the given map[string]IpAccess and assigns it to the IpAccess field.
 func (o *CompanyIpAccessSettings) SetIpAccess(v map[string]IpAccess) {
-	o.IpAccess = &v
+	o.IpAccess = v
 }
 
 func (o CompanyIpAccessSettings) MarshalJSON() ([]byte, error) {

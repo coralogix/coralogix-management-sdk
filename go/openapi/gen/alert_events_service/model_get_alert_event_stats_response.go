@@ -23,7 +23,7 @@ var _ MappedNullable = &GetAlertEventStatsResponse{}
 // GetAlertEventStatsResponse Response containing statistical data for alert events.
 type GetAlertEventStatsResponse struct {
 	// The events stats.
-	EventsStats *map[string]EventStats `json:"eventsStats,omitempty"`
+	EventsStats map[string]EventStats `json:"eventsStats,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -53,14 +53,14 @@ func (o *GetAlertEventStatsResponse) GetEventsStats() map[string]EventStats {
 		var ret map[string]EventStats
 		return ret
 	}
-	return *o.EventsStats
+	return o.EventsStats
 }
 
 // GetEventsStatsOk returns a tuple with the EventsStats field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAlertEventStatsResponse) GetEventsStatsOk() (*map[string]EventStats, bool) {
+func (o *GetAlertEventStatsResponse) GetEventsStatsOk() (map[string]EventStats, bool) {
 	if o == nil || IsNil(o.EventsStats) {
-		return nil, false
+		return map[string]EventStats{}, false
 	}
 	return o.EventsStats, true
 }
@@ -76,7 +76,7 @@ func (o *GetAlertEventStatsResponse) HasEventsStats() bool {
 
 // SetEventsStats gets a reference to the given map[string]EventStats and assigns it to the EventsStats field.
 func (o *GetAlertEventStatsResponse) SetEventsStats(v map[string]EventStats) {
-	o.EventsStats = &v
+	o.EventsStats = v
 }
 
 func (o GetAlertEventStatsResponse) MarshalJSON() ([]byte, error) {

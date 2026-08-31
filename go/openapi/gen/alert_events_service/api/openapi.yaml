@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get alert events statistics",
         "description": "Returns statistical data for alert events.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertEventService_GetAlertEventsStats",
         "parameters": [
           {
@@ -114,9 +111,6 @@
         ],
         "summary": "Get alert event by ID",
         "description": "Returns the alert event with the specified ID.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertEventService_GetAlertEvent",
         "parameters": [
           {
@@ -500,7 +494,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -532,7 +525,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

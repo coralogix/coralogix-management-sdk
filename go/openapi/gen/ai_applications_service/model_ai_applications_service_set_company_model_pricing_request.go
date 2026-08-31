@@ -61,11 +61,11 @@ func (o *AiApplicationsServiceSetCompanyModelPricingRequest) GetPrices() map[str
 
 // GetPricesOk returns a tuple with the Prices field value
 // and a boolean to check if the value has been set.
-func (o *AiApplicationsServiceSetCompanyModelPricingRequest) GetPricesOk() (*map[string]ModelPrice, bool) {
+func (o *AiApplicationsServiceSetCompanyModelPricingRequest) GetPricesOk() (map[string]ModelPrice, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]ModelPrice{}, false
 	}
-	return &o.Prices, true
+	return o.Prices, true
 }
 
 // SetPrices sets field value

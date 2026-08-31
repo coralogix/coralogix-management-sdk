@@ -252,7 +252,7 @@ func TestAICustomEvaluations(t *testing.T) {
 	})
 
 	_, httpResp, err = client.
-		AiEvaluationsServiceLinkCustomEvaluation(context.Background(), customEvaluationID, app.id).
+		AiEvaluationsServiceLinkCustomEvaluation(context.Background(), app.id, customEvaluationID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	linkedToApp = true
@@ -345,7 +345,7 @@ func unlinkCustomEvaluationFromApp(t *testing.T, client *aievaluations.AIEvaluat
 	t.Helper()
 
 	_, httpResp, err := client.
-		AiEvaluationsServiceUnlinkCustomEvaluationFromApp(context.Background(), id, applicationID).
+		AiEvaluationsServiceUnlinkCustomEvaluationFromApp(context.Background(), applicationID, id).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }

@@ -23,7 +23,7 @@ var _ MappedNullable = &CountAiAppsPerEvalTypeResponse{}
 // CountAiAppsPerEvalTypeResponse Response containing counts of AI applications per evaluation type.
 type CountAiAppsPerEvalTypeResponse struct {
 	// Map of evaluation-type name to count of AI applications using it.
-	Counts *map[string]int64 `json:"counts,omitempty"`
+	Counts map[string]int64 `json:"counts,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -53,14 +53,14 @@ func (o *CountAiAppsPerEvalTypeResponse) GetCounts() map[string]int64 {
 		var ret map[string]int64
 		return ret
 	}
-	return *o.Counts
+	return o.Counts
 }
 
 // GetCountsOk returns a tuple with the Counts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CountAiAppsPerEvalTypeResponse) GetCountsOk() (*map[string]int64, bool) {
+func (o *CountAiAppsPerEvalTypeResponse) GetCountsOk() (map[string]int64, bool) {
 	if o == nil || IsNil(o.Counts) {
-		return nil, false
+		return map[string]int64{}, false
 	}
 	return o.Counts, true
 }
@@ -76,7 +76,7 @@ func (o *CountAiAppsPerEvalTypeResponse) HasCounts() bool {
 
 // SetCounts gets a reference to the given map[string]int64 and assigns it to the Counts field.
 func (o *CountAiAppsPerEvalTypeResponse) SetCounts(v map[string]int64) {
-	o.Counts = &v
+	o.Counts = v
 }
 
 func (o CountAiAppsPerEvalTypeResponse) MarshalJSON() ([]byte, error) {

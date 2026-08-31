@@ -23,7 +23,7 @@ var _ MappedNullable = &FilterOptionCountsEntityLabelsFilter{}
 // FilterOptionCountsEntityLabelsFilter Filter by alert definition entity labels with And/Or options
 type FilterOptionCountsEntityLabelsFilter struct {
 	// The entity label key-value pairs to filter by
-	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	EntityLabels map[string]string `json:"entityLabels,omitempty"`
 	// Whether all labels must match (AND) or any label can match (OR)
 	ValuesOperator *FilterValuesOperator `json:"valuesOperator,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -55,14 +55,14 @@ func (o *FilterOptionCountsEntityLabelsFilter) GetEntityLabels() map[string]stri
 		var ret map[string]string
 		return ret
 	}
-	return *o.EntityLabels
+	return o.EntityLabels
 }
 
 // GetEntityLabelsOk returns a tuple with the EntityLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FilterOptionCountsEntityLabelsFilter) GetEntityLabelsOk() (*map[string]string, bool) {
+func (o *FilterOptionCountsEntityLabelsFilter) GetEntityLabelsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.EntityLabels) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.EntityLabels, true
 }
@@ -78,7 +78,7 @@ func (o *FilterOptionCountsEntityLabelsFilter) HasEntityLabels() bool {
 
 // SetEntityLabels gets a reference to the given map[string]string and assigns it to the EntityLabels field.
 func (o *FilterOptionCountsEntityLabelsFilter) SetEntityLabels(v map[string]string) {
-	o.EntityLabels = &v
+	o.EntityLabels = v
 }
 
 // GetValuesOperator returns the ValuesOperator field value if set, zero value otherwise.

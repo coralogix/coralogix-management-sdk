@@ -23,7 +23,7 @@ var _ MappedNullable = &BatchGetConnectorsResponse{}
 // BatchGetConnectorsResponse Response containing the requested connectors and any IDs not found
 type BatchGetConnectorsResponse struct {
 	// The connectors.
-	Connectors *map[string]Connector `json:"connectors,omitempty"`
+	Connectors map[string]Connector `json:"connectors,omitempty"`
 	// The not found ids.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -55,14 +55,14 @@ func (o *BatchGetConnectorsResponse) GetConnectors() map[string]Connector {
 		var ret map[string]Connector
 		return ret
 	}
-	return *o.Connectors
+	return o.Connectors
 }
 
 // GetConnectorsOk returns a tuple with the Connectors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BatchGetConnectorsResponse) GetConnectorsOk() (*map[string]Connector, bool) {
+func (o *BatchGetConnectorsResponse) GetConnectorsOk() (map[string]Connector, bool) {
 	if o == nil || IsNil(o.Connectors) {
-		return nil, false
+		return map[string]Connector{}, false
 	}
 	return o.Connectors, true
 }
@@ -78,7 +78,7 @@ func (o *BatchGetConnectorsResponse) HasConnectors() bool {
 
 // SetConnectors gets a reference to the given map[string]Connector and assigns it to the Connectors field.
 func (o *BatchGetConnectorsResponse) SetConnectors(v map[string]Connector) {
-	o.Connectors = &v
+	o.Connectors = v
 }
 
 // GetNotFoundIds returns the NotFoundIds field value if set, zero value otherwise.

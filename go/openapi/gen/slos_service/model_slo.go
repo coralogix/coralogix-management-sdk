@@ -36,7 +36,7 @@ type Slo struct {
 	// Unique identifier of the SLO.
 	Id *string `json:"id,omitempty"`
 	// List of labels.
-	Labels *map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels,omitempty"`
 	// Human-readable display name for the SLO.
 	Name *string `json:"name,omitempty"`
 	// Service, environment, and team ownership configuration for the SLO group and its permutations.
@@ -308,14 +308,14 @@ func (o *Slo) GetLabels() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.Labels
+	return o.Labels
 }
 
 // GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Slo) GetLabelsOk() (*map[string]string, bool) {
+func (o *Slo) GetLabelsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Labels) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Labels, true
 }
@@ -331,7 +331,7 @@ func (o *Slo) HasLabels() bool {
 
 // SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
 func (o *Slo) SetLabels(v map[string]string) {
-	o.Labels = &v
+	o.Labels = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.

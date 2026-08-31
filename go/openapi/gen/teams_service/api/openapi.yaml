@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "List teams",
         "description": "Deprecated. Returns every team in the calling user's organization, together with the organization's default team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "TeamService_ListTeams",
         "responses": {
           "200": {
@@ -94,9 +91,6 @@
         ],
         "summary": "Create team",
         "description": "Deprecated. Creates a team in the calling user's organization and returns its identifier.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "TeamService_CreateTeamInOrg",
         "requestBody": {
           "content": {
@@ -206,9 +200,6 @@
         ],
         "summary": "Get team",
         "description": "Deprecated. Returns a single team by its identifier.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "TeamService_GetTeam",
         "responses": {
           "200": {
@@ -278,9 +269,6 @@
         ],
         "summary": "Update team",
         "description": "Deprecated. Updates a team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "TeamService_UpdateTeam",
         "requestBody": {
           "content": {
@@ -367,9 +355,6 @@
         ],
         "summary": "Delete team",
         "description": "Deprecated. Deletes a team and releases its daily quota back to the organization.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "TeamService_DeleteTeam",
         "responses": {
           "200": {
@@ -511,7 +496,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -543,7 +527,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
