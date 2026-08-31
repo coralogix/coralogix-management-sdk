@@ -30,11 +30,10 @@ type GlobalRouter struct {
 	// The disabled.
 	Disabled *bool `json:"disabled,omitempty"`
 	// The entity labels.
-	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	EntityLabels map[string]string `json:"entityLabels,omitempty"`
 	// Deprecated
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// The fallback destinations to be used if no rule matches.
-	// Deprecated
 	Fallback []RoutingTarget `json:"fallback,omitempty"`
 	// The fallback targets.
 	FallbackTargets []FallbackTarget `json:"fallbackTargets,omitempty"`
@@ -172,14 +171,14 @@ func (o *GlobalRouter) GetEntityLabels() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.EntityLabels
+	return o.EntityLabels
 }
 
 // GetEntityLabelsOk returns a tuple with the EntityLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GlobalRouter) GetEntityLabelsOk() (*map[string]string, bool) {
+func (o *GlobalRouter) GetEntityLabelsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.EntityLabels) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.EntityLabels, true
 }
@@ -195,7 +194,7 @@ func (o *GlobalRouter) HasEntityLabels() bool {
 
 // SetEntityLabels gets a reference to the given map[string]string and assigns it to the EntityLabels field.
 func (o *GlobalRouter) SetEntityLabels(v map[string]string) {
-	o.EntityLabels = &v
+	o.EntityLabels = v
 }
 
 // GetEntityType returns the EntityType field value if set, zero value otherwise.
@@ -234,7 +233,6 @@ func (o *GlobalRouter) SetEntityType(v NotificationCenterEntityType) {
 }
 
 // GetFallback returns the Fallback field value if set, zero value otherwise.
-// Deprecated
 func (o *GlobalRouter) GetFallback() []RoutingTarget {
 	if o == nil || IsNil(o.Fallback) {
 		var ret []RoutingTarget
@@ -245,7 +243,6 @@ func (o *GlobalRouter) GetFallback() []RoutingTarget {
 
 // GetFallbackOk returns a tuple with the Fallback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *GlobalRouter) GetFallbackOk() ([]RoutingTarget, bool) {
 	if o == nil || IsNil(o.Fallback) {
 		return nil, false
@@ -263,7 +260,6 @@ func (o *GlobalRouter) HasFallback() bool {
 }
 
 // SetFallback gets a reference to the given []RoutingTarget and assigns it to the Fallback field.
-// Deprecated
 func (o *GlobalRouter) SetFallback(v []RoutingTarget) {
 	o.Fallback = v
 }

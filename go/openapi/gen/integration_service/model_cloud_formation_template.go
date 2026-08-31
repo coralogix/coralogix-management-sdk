@@ -25,9 +25,9 @@ type CloudFormationTemplate struct {
 	// The commands.
 	Commands []CommandInformation `json:"commands,omitempty"`
 	// The parameters.
-	Parameters *map[string]string `json:"parameters,omitempty"`
+	Parameters map[string]string `json:"parameters,omitempty"`
 	// The post installation steps.
-	PostInstallationSteps *map[string]string `json:"postInstallationSteps,omitempty"`
+	PostInstallationSteps map[string]string `json:"postInstallationSteps,omitempty"`
 	// The template url.
 	TemplateUrl *string `json:"templateUrl,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
@@ -91,14 +91,14 @@ func (o *CloudFormationTemplate) GetParameters() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.Parameters
+	return o.Parameters
 }
 
 // GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CloudFormationTemplate) GetParametersOk() (*map[string]string, bool) {
+func (o *CloudFormationTemplate) GetParametersOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Parameters) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Parameters, true
 }
@@ -114,7 +114,7 @@ func (o *CloudFormationTemplate) HasParameters() bool {
 
 // SetParameters gets a reference to the given map[string]string and assigns it to the Parameters field.
 func (o *CloudFormationTemplate) SetParameters(v map[string]string) {
-	o.Parameters = &v
+	o.Parameters = v
 }
 
 // GetPostInstallationSteps returns the PostInstallationSteps field value if set, zero value otherwise.
@@ -123,14 +123,14 @@ func (o *CloudFormationTemplate) GetPostInstallationSteps() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.PostInstallationSteps
+	return o.PostInstallationSteps
 }
 
 // GetPostInstallationStepsOk returns a tuple with the PostInstallationSteps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CloudFormationTemplate) GetPostInstallationStepsOk() (*map[string]string, bool) {
+func (o *CloudFormationTemplate) GetPostInstallationStepsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.PostInstallationSteps) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.PostInstallationSteps, true
 }
@@ -146,7 +146,7 @@ func (o *CloudFormationTemplate) HasPostInstallationSteps() bool {
 
 // SetPostInstallationSteps gets a reference to the given map[string]string and assigns it to the PostInstallationSteps field.
 func (o *CloudFormationTemplate) SetPostInstallationSteps(v map[string]string) {
-	o.PostInstallationSteps = &v
+	o.PostInstallationSteps = v
 }
 
 // GetTemplateUrl returns the TemplateUrl field value if set, zero value otherwise.

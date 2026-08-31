@@ -27,7 +27,7 @@ type CompanyModelPricing struct {
 	// Unique identifier of the pricing record.
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Map of model name to custom price. Replaces all existing prices on set.
-	Prices *map[string]ModelPrice `json:"prices,omitempty"`
+	Prices map[string]ModelPrice `json:"prices,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -121,14 +121,14 @@ func (o *CompanyModelPricing) GetPrices() map[string]ModelPrice {
 		var ret map[string]ModelPrice
 		return ret
 	}
-	return *o.Prices
+	return o.Prices
 }
 
 // GetPricesOk returns a tuple with the Prices field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CompanyModelPricing) GetPricesOk() (*map[string]ModelPrice, bool) {
+func (o *CompanyModelPricing) GetPricesOk() (map[string]ModelPrice, bool) {
 	if o == nil || IsNil(o.Prices) {
-		return nil, false
+		return map[string]ModelPrice{}, false
 	}
 	return o.Prices, true
 }
@@ -144,7 +144,7 @@ func (o *CompanyModelPricing) HasPrices() bool {
 
 // SetPrices gets a reference to the given map[string]ModelPrice and assigns it to the Prices field.
 func (o *CompanyModelPricing) SetPrices(v map[string]ModelPrice) {
-	o.Prices = &v
+	o.Prices = v
 }
 
 func (o CompanyModelPricing) MarshalJSON() ([]byte, error) {

@@ -765,8 +765,8 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceGetCustomEvaluation
 type ApiAiEvaluationsServiceLinkCustomEvaluationRequest struct {
 	ctx context.Context
 	ApiService *AIEvaluationsServiceAPIService
-	id string
 	applicationId string
+	id string
 }
 
 func (r ApiAiEvaluationsServiceLinkCustomEvaluationRequest) Execute() (*LinkCustomEvaluationResponse, *http.Response, error) {
@@ -779,16 +779,16 @@ AiEvaluationsServiceLinkCustomEvaluation Link custom evaluation to application
 Associates a custom evaluation with an AI application.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier of the custom evaluation.
  @param applicationId Unique identifier of the AI application to link to.
+ @param id Unique identifier of the custom evaluation.
  @return ApiAiEvaluationsServiceLinkCustomEvaluationRequest
 */
-func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceLinkCustomEvaluation(ctx context.Context, id string, applicationId string) ApiAiEvaluationsServiceLinkCustomEvaluationRequest {
+func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceLinkCustomEvaluation(ctx context.Context, applicationId string, id string) ApiAiEvaluationsServiceLinkCustomEvaluationRequest {
 	return ApiAiEvaluationsServiceLinkCustomEvaluationRequest{
 		ApiService: a,
 		ctx: ctx,
-		id: id,
 		applicationId: applicationId,
+		id: id,
 	}
 }
 
@@ -808,23 +808,23 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceLinkCustomEvaluatio
 	}
 
 	localVarPath := localBasePath + "/ai/custom-evaluations/v3/{id}/applications/{application_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"application_id"+"}", url.PathEscape(parameterValueToString(r.applicationId, "applicationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 36 {
-		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
-	}
-	if strlen(r.id) > 36 {
-		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
-	}
 	if strlen(r.applicationId) < 36 {
 		return localVarReturnValue, nil, reportError("applicationId must have at least 36 elements")
 	}
 	if strlen(r.applicationId) > 36 {
 		return localVarReturnValue, nil, reportError("applicationId must have less than 36 elements")
+	}
+	if strlen(r.id) < 36 {
+		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header
@@ -1152,8 +1152,8 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceListCustomEvaluatio
 type ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest struct {
 	ctx context.Context
 	ApiService *AIEvaluationsServiceAPIService
-	id string
 	applicationId string
+	id string
 }
 
 func (r ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest) Execute() (*UnlinkCustomEvaluationFromAppResponse, *http.Response, error) {
@@ -1166,16 +1166,16 @@ AiEvaluationsServiceUnlinkCustomEvaluationFromApp Unlink custom evaluation from 
 Removes the association between a custom evaluation and an AI application.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier of the custom evaluation.
  @param applicationId Unique identifier of the AI application to unlink from.
+ @param id Unique identifier of the custom evaluation.
  @return ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest
 */
-func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUnlinkCustomEvaluationFromApp(ctx context.Context, id string, applicationId string) ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest {
+func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUnlinkCustomEvaluationFromApp(ctx context.Context, applicationId string, id string) ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest {
 	return ApiAiEvaluationsServiceUnlinkCustomEvaluationFromAppRequest{
 		ApiService: a,
 		ctx: ctx,
-		id: id,
 		applicationId: applicationId,
+		id: id,
 	}
 }
 
@@ -1195,23 +1195,23 @@ func (a *AIEvaluationsServiceAPIService) AiEvaluationsServiceUnlinkCustomEvaluat
 	}
 
 	localVarPath := localBasePath + "/ai/custom-evaluations/v3/{id}/applications/{application_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"application_id"+"}", url.PathEscape(parameterValueToString(r.applicationId, "applicationId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 36 {
-		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
-	}
-	if strlen(r.id) > 36 {
-		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
-	}
 	if strlen(r.applicationId) < 36 {
 		return localVarReturnValue, nil, reportError("applicationId must have at least 36 elements")
 	}
 	if strlen(r.applicationId) > 36 {
 		return localVarReturnValue, nil, reportError("applicationId must have less than 36 elements")
+	}
+	if strlen(r.id) < 36 {
+		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
 	// to determine the Content-Type header

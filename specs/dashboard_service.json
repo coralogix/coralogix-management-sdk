@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Validate a dashboard and return issues",
         "description": "Checks a dashboard definition or an existing dashboard by id and returns validation issues without persisting changes.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardsService_CheckDashboard",
         "requestBody": {
           "content": {
@@ -153,9 +150,6 @@
         ],
         "summary": "Replace a dashboard",
         "description": "Replaces an existing dashboard.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardsService_ReplaceDashboard",
         "requestBody": {
           "content": {
@@ -166,7 +160,6 @@
                 "type": "object",
                 "properties": {
                   "accessPolicy": {
-                    "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}",
                     "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
                     "type": "string",
                     "pattern": "^[\\s\\S]*$",
@@ -249,9 +242,6 @@
         ],
         "summary": "Create a new dashboard",
         "description": "Creates a new dashboard.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardsService_CreateDashboard",
         "requestBody": {
           "content": {
@@ -262,7 +252,6 @@
                 "type": "object",
                 "properties": {
                   "accessPolicy": {
-                    "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}",
                     "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
                     "type": "string",
                     "pattern": "^[\\s\\S]*$",
@@ -347,9 +336,6 @@
         ],
         "summary": "Get dashboard catalog",
         "description": "Get a list of all dashboards accessible.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardCatalogService_GetDashboardCatalog",
         "responses": {
           "200": {
@@ -405,9 +391,6 @@
         ],
         "summary": "Get a dashboard by URL slug",
         "description": "Returns the dashboard associated with the specified slug.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardsService_GetDashboardBySlug",
         "parameters": [
           {
@@ -479,9 +462,6 @@
         ],
         "summary": "Get a dashboard",
         "description": "Returns the details of the specified dashboard.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardsService_GetDashboard",
         "responses": {
           "200": {
@@ -535,9 +515,6 @@
         ],
         "summary": "Delete a dashboard",
         "description": "Deletes the dashboard with the specified ID.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardsService_DeleteDashboard",
         "parameters": [
           {
@@ -624,9 +601,6 @@
         ],
         "summary": "Replace the default dashboard",
         "description": "Sets the specified dashboard as the default.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardsService_ReplaceDefaultDashboard",
         "parameters": [
           {
@@ -722,9 +696,6 @@
         ],
         "summary": "Assign a dashboard to a folder",
         "description": "Assigns the dashboard to a folder.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardsService_AssignDashboardFolder",
         "parameters": [
           {
@@ -827,9 +798,6 @@
         ],
         "summary": "Add dashboard to favorites",
         "description": "Pins the specified dashboard.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardsService_PinDashboard",
         "parameters": [
           {
@@ -898,9 +866,6 @@
         ],
         "summary": "Remove dashboard from favorites",
         "description": "Unpins the specified dashboard.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardsService_UnpinDashboard",
         "parameters": [
           {
@@ -1341,12 +1306,10 @@
         "type": "object",
         "properties": {
           "thresholdArc": {
-            "example": true,
             "description": "Whether to show the threshold arc which graphically represents the threshold bands over the min/max range (replaces the deprecated showOuterArc)",
             "type": "boolean"
           },
           "valueArc": {
-            "example": true,
             "description": "Whether to show the value arc which graphically represents the current value (replaces the deprecated showInnerArc)",
             "type": "boolean"
           }
@@ -1371,7 +1334,6 @@
         "type": "object",
         "properties": {
           "maximumDataPoints": {
-            "example": 500,
             "description": "Maximum number of data points to display. The calculated interval ensures this limit is not exceeded.",
             "type": "integer",
             "format": "int32",
@@ -1463,7 +1425,6 @@
             ]
           },
           "colorScheme": {
-            "example": "classic",
             "description": "Applied color scheme, one of the predefined values",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1479,7 +1440,6 @@
             ]
           },
           "customUnit": {
-            "example": "mph",
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1495,7 +1455,6 @@
             ]
           },
           "decimal": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -1503,12 +1462,10 @@
             "maximum": 15
           },
           "decimalPrecision": {
-            "example": false,
             "description": "Whether to render numeric value without abbreviation",
             "type": "boolean"
           },
           "groupNameTemplate": {
-            "example": "Result - {{ variable }}",
             "description": "Custom template name for a bar group, can contain variables",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1516,7 +1473,6 @@
             "maxLength": 4096
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -1529,7 +1485,6 @@
             ]
           },
           "maxBarsPerChart": {
-            "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
             "format": "int32",
@@ -1553,7 +1508,6 @@
             ]
           },
           "sortBy": {
-            "example": "1",
             "description": "Sort type, by name or by value",
             "allOf": [
               {
@@ -1570,7 +1524,6 @@
             ]
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -1595,13 +1548,11 @@
             ]
           },
           "yAxisMax": {
-            "example": 1000,
             "description": "Number indicating the upper band for y axis",
             "type": "number",
             "format": "float"
           },
           "yAxisMin": {
-            "example": -1000,
             "description": "Number indicating the lower band for y axis",
             "type": "number",
             "format": "float"
@@ -1760,7 +1711,6 @@
             ]
           },
           "editorMode": {
-            "example": "1",
             "description": "Type of the query editor used to generate the query, can be text or builder mode",
             "allOf": [
               {
@@ -2426,7 +2376,6 @@
         "type": "object",
         "properties": {
           "collapsed": {
-            "example": false,
             "description": "Indicator if the section is collapsed",
             "type": "boolean"
           },
@@ -2498,7 +2447,6 @@
             "maxItems": 1000
           },
           "description": {
-            "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2532,7 +2480,6 @@
             "$ref": "#/components/schemas/FolderPath"
           },
           "id": {
-            "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2548,7 +2495,6 @@
             ]
           },
           "name": {
-            "example": "Example Name",
             "description": "The display name of the dashboard",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2569,7 +2515,6 @@
             "maxLength": 64
           },
           "slugName": {
-            "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
             "type": "string",
             "pattern": "^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$",
@@ -2803,7 +2748,6 @@
             "$ref": "#/components/schemas/DashboardFolder"
           },
           "id": {
-            "example": "6U1Q8Hpa263Se8PkRKaiE",
             "description": "Unique identifier.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2923,7 +2867,6 @@
             ]
           },
           "resultsPerPage": {
-            "example": 10,
             "description": "How many results are displayed per table page",
             "type": "integer",
             "format": "int32",
@@ -3046,7 +2989,6 @@
         "type": "object",
         "properties": {
           "editorMode": {
-            "example": "2",
             "description": "Type of the query editor used to generate the query, can be text or builder based",
             "allOf": [
               {
@@ -4129,7 +4071,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -4161,7 +4102,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -4326,7 +4266,6 @@
             ]
           },
           "editorMode": {
-            "example": "2",
             "description": "Type of the query editor used to generate the query, can be text or builder based",
             "allOf": [
               {
@@ -4599,7 +4538,6 @@
             ]
           },
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -4627,7 +4565,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -4651,7 +4588,6 @@
             ]
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -4992,7 +4928,6 @@
         "type": "object",
         "properties": {
           "accessPolicy": {
-            "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}",
             "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -5099,7 +5034,6 @@
         "type": "object",
         "properties": {
           "accessPolicy": {
-            "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}",
             "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -5208,18 +5142,15 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "colorAxisMax": {
-            "example": 1000,
             "description": "Optional number indicating the max value for gradient color axis. Automatically calculated from data if not provided.",
             "type": "number",
             "format": "float"
           },
           "colorAxisMin": {
-            "example": -1000,
             "description": "Optional number indicating the lowest value for gradient color axis. Automatically calculated from data if not provided.",
             "type": "number",
             "format": "float"
@@ -5240,7 +5171,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -5279,7 +5209,6 @@
             ]
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -5433,7 +5362,6 @@
             ]
           },
           "decimal": {
-            "example": 2,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -5441,7 +5369,6 @@
             "maximum": 15
           },
           "decimalPrecision": {
-            "example": false,
             "description": "Whether to render numeric value without abbreviation",
             "type": "boolean"
           },
@@ -5462,13 +5389,11 @@
             ]
           },
           "max": {
-            "example": 150000,
             "description": "A maximum value used in percentage threshold calculation and for visual value representation",
             "type": "number",
             "format": "double"
           },
           "min": {
-            "example": 0,
             "description": "A minimum value used in percentage threshold calculation and for visual value representation",
             "type": "number",
             "format": "double"
@@ -5499,7 +5424,6 @@
             "maxItems": 1000
           },
           "unit": {
-            "example": "17",
             "description": "Unit of the value - one from a predefined list, or custom",
             "allOf": [
               {
@@ -5613,7 +5537,6 @@
             ]
           },
           "editorMode": {
-            "example": "1",
             "description": "Type of the query editor used to generate the query, can be text or builder based",
             "allOf": [
               {
@@ -5803,7 +5726,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -5824,7 +5746,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 2,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -5848,13 +5769,11 @@
             ]
           },
           "max": {
-            "example": 150000,
             "description": "A maximum gauge value used in percentage threshold calculation and for visual value representation",
             "type": "number",
             "format": "double"
           },
           "min": {
-            "example": 0,
             "description": "A minimum gauge value used in percentage threshold calculation and for visual value representation",
             "type": "number",
             "format": "double"
@@ -5877,7 +5796,6 @@
             "maxItems": 1000
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the value - one from a predefined list, or 'custom'",
             "allOf": [
               {
@@ -5928,7 +5846,6 @@
             ]
           },
           "decimal": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -5936,7 +5853,6 @@
             "maximum": 15
           },
           "decimalPrecision": {
-            "example": false,
             "description": "Whether to render numeric value without abbreviation",
             "type": "boolean"
           },
@@ -5952,7 +5868,6 @@
             "maxLength": 4096
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -5965,7 +5880,6 @@
             ]
           },
           "maxBarsPerChart": {
-            "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
             "format": "int32",
@@ -5989,7 +5903,6 @@
             ]
           },
           "sortBy": {
-            "example": "1",
             "description": "Sort type, by name or by value",
             "allOf": [
               {
@@ -6006,7 +5919,6 @@
             ]
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -6015,13 +5927,11 @@
             ]
           },
           "yAxisMax": {
-            "example": 1000,
             "description": "Number indicating the upper band for y axis",
             "type": "number",
             "format": "float"
           },
           "yAxisMin": {
-            "example": -1000,
             "description": "Number indicating the lower band for y axis",
             "type": "number",
             "format": "float"
@@ -6188,7 +6098,6 @@
             ]
           },
           "editorMode": {
-            "example": "2",
             "description": "Type of the query editor used to generate the query, can be text or builder mode",
             "allOf": [
               {
@@ -6495,7 +6404,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -6531,7 +6439,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -6550,7 +6457,6 @@
             "maxLength": 4096
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -6563,7 +6469,6 @@
             ]
           },
           "maxBarsPerChart": {
-            "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
             "format": "int32",
@@ -6586,7 +6491,6 @@
             ]
           },
           "sortBy": {
-            "example": "1",
             "description": "Sort type, by name or by value",
             "allOf": [
               {
@@ -6611,7 +6515,6 @@
             "maxItems": 1000
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -6623,13 +6526,11 @@
             "$ref": "#/components/schemas/ObservationField"
           },
           "yAxisMax": {
-            "example": 1000,
             "description": "Number indicating the upper band for y axis",
             "type": "number",
             "format": "float"
           },
           "yAxisMin": {
-            "example": -1000,
             "description": "Number indicating the lower band for y axis",
             "type": "number",
             "format": "float"
@@ -6661,7 +6562,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -6697,7 +6597,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -6716,7 +6615,6 @@
             "maxLength": 4096
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -6729,7 +6627,6 @@
             ]
           },
           "maxBarsPerChart": {
-            "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
             "format": "int32",
@@ -6762,7 +6659,6 @@
             ]
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -6771,13 +6667,11 @@
             ]
           },
           "yAxisMax": {
-            "example": 1000,
             "description": "Number indicating the upper band for y axis",
             "type": "number",
             "format": "float"
           },
           "yAxisMin": {
-            "example": -1000,
             "description": "Number indicating the lower band for y axis",
             "type": "number",
             "format": "float"
@@ -6873,7 +6767,6 @@
             "$ref": "#/components/schemas/ManualIntervalResolution"
           },
           "useAdvancedLimit": {
-            "example": true,
             "description": "Whether the max. data points and min. interval fields are user-editable. When true, users can modify these constraint fields; when false or unset, they are read-only.",
             "type": "boolean"
           }
@@ -6991,11 +6884,6 @@
         "type": "object",
         "properties": {
           "columns": {
-            "example": [
-              "LEGEND_COLUMN_MIN",
-              "LEGEND_COLUMN_MAX",
-              "LEGEND_COLUMN_NAME"
-            ],
             "description": "List of columns to display in legend",
             "type": "array",
             "items": {
@@ -7064,7 +6952,6 @@
         "type": "object",
         "properties": {
           "connectNulls": {
-            "example": false,
             "description": "Whether the line should remain connected instead of producing scattered points when null values are present in between",
             "type": "boolean"
           },
@@ -7102,7 +6989,6 @@
             ]
           },
           "useDataTimeRange": {
-            "example": false,
             "description": "When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.",
             "type": "boolean"
           },
@@ -7227,7 +7113,6 @@
         "type": "object",
         "properties": {
           "editorMode": {
-            "example": "1",
             "description": "Type of the query editor used to generate the query, can be text or builder based",
             "allOf": [
               {
@@ -7253,7 +7138,6 @@
             ]
           },
           "seriesLimitType": {
-            "example": "1",
             "description": "How to limit the result using series_count_limit parameter",
             "allOf": [
               {
@@ -7380,7 +7264,6 @@
             ]
           },
           "decimal": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -7388,12 +7271,10 @@
             "maximum": 15
           },
           "decimalPrecision": {
-            "example": false,
             "description": "Whether to render numeric value without abbreviation",
             "type": "boolean"
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -7413,7 +7294,6 @@
             ]
           },
           "isVisible": {
-            "example": true,
             "description": "Is the query visible",
             "type": "boolean"
           },
@@ -7464,7 +7344,6 @@
             "maxLength": 4096
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -7473,13 +7352,11 @@
             ]
           },
           "yAxisMax": {
-            "example": 1000,
             "description": "Number indicating the upper band for y axis",
             "type": "number",
             "format": "float"
           },
           "yAxisMin": {
-            "example": -1000,
             "description": "Number indicating the lower band for y axis",
             "type": "number",
             "format": "float"
@@ -8096,7 +7973,6 @@
             "maxLength": 30
           },
           "maximumDataPoints": {
-            "example": 500,
             "description": "Maximum number of data points constraint.",
             "type": "integer",
             "format": "int32",
@@ -8400,7 +8276,6 @@
         "type": "object",
         "properties": {
           "editorMode": {
-            "example": "2",
             "description": "Type of the query editor used to generate the query, can be text or builder based",
             "allOf": [
               {
@@ -8425,7 +8300,6 @@
             ]
           },
           "seriesLimitType": {
-            "example": "1",
             "description": "How to limit the result using series_count_limit parameter",
             "allOf": [
               {
@@ -9167,7 +9041,6 @@
             "maxLength": 4096
           },
           "orderDirection": {
-            "example": "1",
             "description": "Order direction, ascending or descending",
             "allOf": [
               {
@@ -9353,7 +9226,6 @@
             ]
           },
           "editorMode": {
-            "example": "1",
             "description": "Type of the query editor used to generate the query, can be text or builder mode",
             "allOf": [
               {
@@ -9680,7 +9552,6 @@
             "$ref": "#/components/schemas/TextAlignment"
           },
           "columnDisplayName": {
-            "example": "Renamed header",
             "description": "Column display name property, allows renaming the column header name",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -9696,7 +9567,6 @@
             ]
           },
           "regexExtract": {
-            "example": "gr[ae]y",
             "description": "Value of Regex Extract property, a regex string",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -9710,7 +9580,6 @@
             "$ref": "#/components/schemas/PropertyUnits"
           },
           "valuesAlias": {
-            "example": "Pod: {{$d.pod}}",
             "description": "Value alias property, used to give alias names to selected fields",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -9863,7 +9732,6 @@
             "format": "double"
           },
           "type": {
-            "example": "1",
             "description": "Type of the threshold, can be relative or absolute",
             "allOf": [
               {
@@ -9890,7 +9758,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -9919,7 +9786,6 @@
             "format": "double"
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -10480,7 +10346,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -10508,7 +10373,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -10516,7 +10380,6 @@
             "maximum": 15
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -10558,7 +10421,6 @@
             ]
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -10576,13 +10438,11 @@
             "maxItems": 1000
           },
           "yAxisMax": {
-            "example": 1000,
             "description": "Number indicating the upper band for y axis",
             "type": "number",
             "format": "float"
           },
           "yAxisMin": {
-            "example": -1000,
             "description": "Number indicating the lower band for y axis",
             "type": "number",
             "format": "float"
@@ -11234,7 +11094,6 @@
         "type": "object",
         "properties": {
           "name": {
-            "example": "pod_name",
             "description": "Variable name that can be applied on section making it repetitive section",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -11602,7 +11461,6 @@
             ]
           },
           "strategyType": {
-            "example": "STRATEGY_TYPE_CATEGORY",
             "description": "Discriminator field - STRATEGY_TYPE_CATEGORY or STRATEGY_TYPE_QUERY_VALUE",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -12132,7 +11990,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -12153,7 +12010,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 2,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -12181,13 +12037,11 @@
             ]
           },
           "max": {
-            "example": 150000,
             "description": "A maximum gauge value used in percentage threshold calculation and for visual value representation",
             "type": "number",
             "format": "double"
           },
           "min": {
-            "example": 0,
             "description": "A minimum gauge value used in percentage threshold calculation and for visual value representation",
             "type": "number",
             "format": "double"
@@ -12218,7 +12072,6 @@
             "maxItems": 1000
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the value - one from a predefined list, or 'custom'",
             "allOf": [
               {
@@ -12254,7 +12107,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -12283,7 +12135,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 2,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -12331,7 +12182,6 @@
             ]
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the value - one from a predefined list, or 'custom'",
             "allOf": [
               {
@@ -12599,7 +12449,6 @@
             "maxItems": 1000
           },
           "rowStyle": {
-            "example": "1",
             "description": "Type of row view style in the table",
             "allOf": [
               {
@@ -12954,12 +12803,10 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
           "barValueDisplay": {
-            "example": "1",
             "description": "Specifies where to display the bar value",
             "allOf": [
               {
@@ -12991,7 +12838,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -12999,7 +12845,6 @@
             "maximum": 15
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -13034,7 +12879,6 @@
             "maxLength": 4096
           },
           "sortBy": {
-            "example": "1",
             "description": "Sort type, by name or by value",
             "allOf": [
               {
@@ -13054,7 +12898,6 @@
             ]
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -13080,13 +12923,11 @@
             ]
           },
           "yAxisMax": {
-            "example": 1000,
             "description": "Number indicating the upper band for y axis",
             "type": "number",
             "format": "float"
           },
           "yAxisMin": {
-            "example": -1000,
             "description": "Number indicating the lower band for y axis",
             "type": "number",
             "format": "float"
@@ -13101,7 +12942,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -13122,7 +12962,6 @@
             "maxLength": 128
           },
           "connectNulls": {
-            "example": false,
             "description": "Whether the line should remain connected instead of producing scattered points when null values are present in between",
             "type": "boolean"
           },
@@ -13134,7 +12973,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -13142,7 +12980,6 @@
             "maximum": 15
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -13196,7 +13033,6 @@
             ]
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -13205,7 +13041,6 @@
             ]
           },
           "useDataTimeRange": {
-            "example": false,
             "description": "When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.",
             "type": "boolean"
           },
@@ -13227,13 +13062,11 @@
             ]
           },
           "yAxisMax": {
-            "example": 1000,
             "description": "Number indicating the upper band for y axis",
             "type": "number",
             "format": "float"
           },
           "yAxisMin": {
-            "example": -1000,
             "description": "Number indicating the lower band for y axis",
             "type": "number",
             "format": "float"
@@ -13248,7 +13081,6 @@
         "type": "object",
         "properties": {
           "connectNulls": {
-            "example": false,
             "description": "Whether the line should remain connected instead of producing scattered points when null values are present in between",
             "type": "boolean"
           },
@@ -13286,7 +13118,6 @@
             ]
           },
           "useDataTimeRange": {
-            "example": false,
             "description": "When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.",
             "type": "boolean"
           },
@@ -13308,12 +13139,10 @@
         "type": "object",
         "properties": {
           "showAllSeries": {
-            "example": true,
             "description": "Type of the tooltip display, can be showing single series value or all series values at once",
             "type": "boolean"
           },
           "showLabels": {
-            "example": true,
             "description": "The show labels.",
             "type": "boolean"
           }
@@ -13336,7 +13165,6 @@
         "type": "object",
         "properties": {
           "showLabels": {
-            "example": true,
             "description": "The show labels.",
             "type": "boolean"
           },
@@ -13938,7 +13766,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -13982,7 +13809,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -13997,7 +13823,6 @@
             "maxLength": 4096
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -14010,7 +13835,6 @@
             ]
           },
           "maxBarsPerChart": {
-            "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
             "format": "int32",
@@ -14033,7 +13857,6 @@
             ]
           },
           "sortBy": {
-            "example": "1",
             "description": "Sort type, by name or by value",
             "allOf": [
               {
@@ -14058,7 +13881,6 @@
             "maxItems": 1000
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -14070,13 +13892,11 @@
             "$ref": "#/components/schemas/ObservationField"
           },
           "yAxisMax": {
-            "example": 1000,
             "description": "Number indicating the upper band for y axis",
             "type": "number",
             "format": "float"
           },
           "yAxisMin": {
-            "example": -1000,
             "description": "Number indicating the lower band for y axis",
             "type": "number",
             "format": "float"
@@ -14091,7 +13911,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -14135,7 +13954,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 4,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -14150,7 +13968,6 @@
             "maxLength": 4096
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -14163,7 +13980,6 @@
             ]
           },
           "maxBarsPerChart": {
-            "example": 20,
             "description": "Maximum number of bars on a chart",
             "type": "integer",
             "format": "int32",
@@ -14196,7 +14012,6 @@
             ]
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the query results - one from a predefined list, or custom",
             "allOf": [
               {
@@ -14205,13 +14020,11 @@
             ]
           },
           "yAxisMax": {
-            "example": 1000,
             "description": "Number indicating the upper band for y axis",
             "type": "number",
             "format": "float"
           },
           "yAxisMin": {
-            "example": -1000,
             "description": "Number indicating the lower band for y axis",
             "type": "number",
             "format": "float"
@@ -14512,7 +14325,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -14541,7 +14353,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 2,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -14569,31 +14380,26 @@
             ]
           },
           "max": {
-            "example": 150000,
             "description": "A maximum gauge value used in percentage threshold calculation and for visual value representation",
             "type": "number",
             "format": "double"
           },
           "min": {
-            "example": 0,
             "description": "A minimum gauge value used in percentage threshold calculation and for visual value representation",
             "type": "number",
             "format": "double"
           },
           "showInnerArc": {
             "deprecated": true,
-            "example": false,
             "description": "Deprecated: use arcDisplay.valueArc instead. Whether to show the inner arc of gauge which graphically represents the value",
             "type": "boolean"
           },
           "showMinMax": {
-            "example": true,
             "description": "Whether to display the min and max range values on the gauge",
             "type": "boolean"
           },
           "showOuterArc": {
             "deprecated": true,
-            "example": true,
             "description": "Deprecated: use arcDisplay.thresholdArc instead. Whether to show the outer arc of gauge which graphically represents the min/max range",
             "type": "boolean"
           },
@@ -14615,7 +14421,6 @@
             "maxItems": 1000
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the value - one from a predefined list, or 'custom'",
             "allOf": [
               {
@@ -14650,7 +14455,6 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "example": false,
             "description": "Whether to render numeric value with abbreviation",
             "type": "boolean"
           },
@@ -14678,7 +14482,6 @@
             "maxLength": 128
           },
           "decimalPrecision": {
-            "example": 5,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -14693,7 +14496,6 @@
             "maxLength": 4096
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -14714,7 +14516,6 @@
             ]
           },
           "maxSlicesPerChart": {
-            "example": 24,
             "description": "Maximum number of slices on a chart",
             "type": "integer",
             "format": "int32",
@@ -14729,7 +14530,6 @@
             "maximum": 2147483647
           },
           "minSlicePercentage": {
-            "example": 5,
             "description": "Minimum percentage threshold for slices to be displayed",
             "type": "integer",
             "format": "int32",
@@ -14737,7 +14537,6 @@
             "maximum": 100
           },
           "showTotal": {
-            "example": false,
             "description": "Whether to show the total amount as a title",
             "type": "boolean"
           },
@@ -14758,7 +14557,6 @@
             "maxItems": 1000
           },
           "unit": {
-            "example": "0",
             "description": "Unit of the value - one from a predefined list, or custom",
             "allOf": [
               {
@@ -14822,7 +14620,6 @@
         "type": "object",
         "properties": {
           "orderDirection": {
-            "example": "1",
             "description": "Order direction, ascending or descending",
             "allOf": [
               {
@@ -15603,7 +15400,6 @@
             ]
           },
           "decimal": {
-            "example": 3,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -15611,7 +15407,6 @@
             "maximum": 15
           },
           "decimalPrecision": {
-            "example": false,
             "description": "Whether to render numeric value without abbreviation",
             "type": "boolean"
           },
@@ -15636,13 +15431,11 @@
             ]
           },
           "max": {
-            "example": 150000,
             "description": "A maximum gauge value used in percentage threshold calculation and for visual value representation",
             "type": "number",
             "format": "double"
           },
           "min": {
-            "example": 0,
             "description": "A minimum gauge value used in percentage threshold calculation and for visual value representation",
             "type": "number",
             "format": "double"
@@ -15657,18 +15450,15 @@
           },
           "showInnerArc": {
             "deprecated": true,
-            "example": false,
             "description": "Deprecated: use arcDisplay.valueArc instead. Whether to show the inner arc of gauge which graphically represents the value",
             "type": "boolean"
           },
           "showMinMax": {
-            "example": true,
             "description": "Whether to display the min and max range values on the gauge",
             "type": "boolean"
           },
           "showOuterArc": {
             "deprecated": true,
-            "example": true,
             "description": "Deprecated: use arcDisplay.thresholdArc instead. Whether to show the outer arc of gauge which graphically represents the min/max range",
             "type": "boolean"
           },
@@ -15698,7 +15488,6 @@
             "maxItems": 1000
           },
           "unit": {
-            "example": "3",
             "description": "Unit of the value - one from a predefined list, or 'custom'",
             "allOf": [
               {
@@ -15738,7 +15527,6 @@
             ]
           },
           "decimal": {
-            "example": 5,
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
             "type": "integer",
             "format": "int32",
@@ -15746,7 +15534,6 @@
             "maximum": 15
           },
           "decimalPrecision": {
-            "example": false,
             "description": "Whether to render numeric value without abbreviation",
             "type": "boolean"
           },
@@ -15758,7 +15545,6 @@
             "maxLength": 4096
           },
           "hashColors": {
-            "example": false,
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "type": "boolean"
           },
@@ -15779,7 +15565,6 @@
             ]
           },
           "maxSlicesPerChart": {
-            "example": 24,
             "description": "Maximum number of slices on a chart",
             "type": "integer",
             "format": "int32",
@@ -15787,7 +15572,6 @@
             "maximum": 2147483647
           },
           "minSlicePercentage": {
-            "example": 5,
             "description": "Minimum percentage threshold for slices to be displayed",
             "type": "integer",
             "format": "int32",
@@ -15807,7 +15591,6 @@
             "type": "boolean"
           },
           "showTotal": {
-            "example": false,
             "description": "Whether to show the total amount as a title",
             "type": "boolean"
           },
@@ -15820,7 +15603,6 @@
             ]
           },
           "unit": {
-            "example": "0",
             "description": "Unit of the value - one from a predefined list, or custom",
             "allOf": [
               {

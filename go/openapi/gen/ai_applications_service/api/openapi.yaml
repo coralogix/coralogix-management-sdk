@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "List AI applications",
         "description": "Lists AI applications, optionally filtered by evaluation type.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiApplicationsService_ListAiApplications",
         "parameters": [
           {
@@ -93,9 +90,6 @@
         ],
         "summary": "Get AI application",
         "description": "Gets an AI application by its unique identifier.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiApplicationsService_GetAiApplicationById",
         "parameters": [
           {
@@ -143,9 +137,6 @@
         ],
         "summary": "Delete AI application",
         "description": "Deletes an AI application by its unique identifier.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiApplicationsService_DeleteAiApplication",
         "parameters": [
           {
@@ -187,9 +178,6 @@
         ],
         "summary": "Get company model pricing",
         "description": "Returns the company-wide custom model pricing configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiApplicationsService_GetCompanyModelPricing",
         "responses": {
           "200": {
@@ -222,9 +210,6 @@
         ],
         "summary": "Set company model pricing",
         "description": "Replaces the company-wide custom model pricing configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiApplicationsService_SetCompanyModelPricing",
         "requestBody": {
           "content": {
@@ -280,9 +265,6 @@
         ],
         "summary": "Delete company model pricing",
         "description": "Deletes the company-wide custom model pricing configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AiApplicationsService_DeleteCompanyModelPricing",
         "responses": {
           "200": {
@@ -465,7 +447,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -497,7 +478,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

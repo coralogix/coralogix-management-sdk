@@ -23,7 +23,7 @@ var _ MappedNullable = &FieldStatistics{}
 // FieldStatistics struct for FieldStatistics
 type FieldStatistics struct {
 	// The field statistics.
-	FieldStatistics *map[string]string `json:"fieldStatistics,omitempty"`
+	FieldStatistics map[string]string `json:"fieldStatistics,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -53,14 +53,14 @@ func (o *FieldStatistics) GetFieldStatistics() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.FieldStatistics
+	return o.FieldStatistics
 }
 
 // GetFieldStatisticsOk returns a tuple with the FieldStatistics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FieldStatistics) GetFieldStatisticsOk() (*map[string]string, bool) {
+func (o *FieldStatistics) GetFieldStatisticsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.FieldStatistics) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.FieldStatistics, true
 }
@@ -76,7 +76,7 @@ func (o *FieldStatistics) HasFieldStatistics() bool {
 
 // SetFieldStatistics gets a reference to the given map[string]string and assigns it to the FieldStatistics field.
 func (o *FieldStatistics) SetFieldStatistics(v map[string]string) {
-	o.FieldStatistics = &v
+	o.FieldStatistics = v
 }
 
 func (o FieldStatistics) MarshalJSON() ([]byte, error) {

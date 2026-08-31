@@ -32,7 +32,7 @@ type IncidentEventExtendedMetadata struct {
 	AlertName *string `json:"alertName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AlertType *IncidentEventAlertType `json:"alertType,omitempty"`
 	// The incident permutation.
-	IncidentPermutation *map[string]string `json:"incidentPermutation,omitempty"`
+	IncidentPermutation map[string]string `json:"incidentPermutation,omitempty"`
 	IncidentSeverity *IncidentSeverity `json:"incidentSeverity,omitempty"`
 	IncidentState *IncidentState `json:"incidentState,omitempty"`
 	IncidentStatus *IncidentStatus `json:"incidentStatus,omitempty"`
@@ -227,14 +227,14 @@ func (o *IncidentEventExtendedMetadata) GetIncidentPermutation() map[string]stri
 		var ret map[string]string
 		return ret
 	}
-	return *o.IncidentPermutation
+	return o.IncidentPermutation
 }
 
 // GetIncidentPermutationOk returns a tuple with the IncidentPermutation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentEventExtendedMetadata) GetIncidentPermutationOk() (*map[string]string, bool) {
+func (o *IncidentEventExtendedMetadata) GetIncidentPermutationOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.IncidentPermutation) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.IncidentPermutation, true
 }
@@ -250,7 +250,7 @@ func (o *IncidentEventExtendedMetadata) HasIncidentPermutation() bool {
 
 // SetIncidentPermutation gets a reference to the given map[string]string and assigns it to the IncidentPermutation field.
 func (o *IncidentEventExtendedMetadata) SetIncidentPermutation(v map[string]string) {
-	o.IncidentPermutation = &v
+	o.IncidentPermutation = v
 }
 
 // GetIncidentSeverity returns the IncidentSeverity field value if set, zero value otherwise.

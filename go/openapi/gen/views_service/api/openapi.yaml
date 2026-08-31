@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "List views service",
         "description": "Lists all company public views",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ViewsService_ListViews",
         "responses": {
           "200": {
@@ -86,9 +83,6 @@
         ],
         "summary": "Create a view service",
         "description": "Creates a new view",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ViewsService_CreateView",
         "requestBody": {
           "content": {
@@ -102,7 +96,6 @@
                     "$ref": "#/components/schemas/SelectedFilters"
                   },
                   "folderId": {
-                    "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
                     "description": "Unique identifier for folders",
                     "type": "string",
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -110,7 +103,6 @@
                     "maxLength": 36
                   },
                   "name": {
-                    "example": "Logs view",
                     "description": "View name",
                     "type": "string",
                     "pattern": "^[\\s\\S]*$",
@@ -209,9 +201,6 @@
         ],
         "summary": "Get view service",
         "description": "Gets a view by ID",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ViewsService_GetView",
         "responses": {
           "200": {
@@ -279,9 +268,6 @@
         ],
         "summary": "Replace a view service",
         "description": "Replaces an existing view",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ViewsService_ReplaceView",
         "requestBody": {
           "content": {
@@ -295,7 +281,6 @@
                     "$ref": "#/components/schemas/SelectedFilters"
                   },
                   "folderId": {
-                    "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
                     "description": "Unique identifier for folders",
                     "type": "string",
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -307,7 +292,6 @@
                     "type": "boolean"
                   },
                   "name": {
-                    "example": "Logs view",
                     "description": "View name",
                     "type": "string",
                     "pattern": "^[\\s\\S]*$",
@@ -399,9 +383,6 @@
         ],
         "summary": "Delete view service",
         "description": "Deletes a view by ID",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ViewsService_DeleteView",
         "responses": {
           "200": {
@@ -423,7 +404,6 @@
           "description": "id",
           "required": true,
           "schema": {
-            "example": 52,
             "description": "id",
             "type": "integer",
             "format": "int32",
@@ -445,7 +425,6 @@
         "type": "object",
         "properties": {
           "fromTime": {
-            "example": "2024-01-25T11:31:43.152Z",
             "description": "The from time.",
             "type": "string",
             "format": "date-time",
@@ -453,7 +432,6 @@
             "maxLength": 35
           },
           "toTime": {
-            "example": "2024-01-25T11:35:43.152Z",
             "description": "The to time.",
             "type": "string",
             "format": "date-time",
@@ -494,7 +472,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -526,7 +503,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -588,7 +564,6 @@
         "properties": {
           "caption": {
             "deprecated": true,
-            "example": "Last Hour",
             "description": "Folder name",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -596,7 +571,6 @@
             "maxLength": 100
           },
           "seconds": {
-            "example": 3600,
             "description": "Folder name",
             "type": "integer",
             "format": "int64",
@@ -718,7 +692,6 @@
             "$ref": "#/components/schemas/SelectedFilters"
           },
           "folderId": {
-            "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
             "description": "Unique identifier for folders",
             "type": "string",
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -726,7 +699,6 @@
             "maxLength": 36
           },
           "id": {
-            "example": 52,
             "description": "id",
             "type": "integer",
             "format": "int32",
@@ -738,7 +710,6 @@
             "type": "boolean"
           },
           "name": {
-            "example": "Logs view",
             "description": "View name",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -796,7 +767,6 @@
         "type": "object",
         "properties": {
           "name": {
-            "example": "applicationName",
             "description": "Filter name",
             "type": "string",
             "pattern": "^[\\s\\S]*$",

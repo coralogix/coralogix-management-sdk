@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "List dashboard folders",
         "description": "List all dashboard folders accessible.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardFoldersService_ListDashboardFolders",
         "responses": {
           "200": {
@@ -68,9 +65,6 @@
         ],
         "summary": "Replace a dashboard folder",
         "description": "Replaces an existing dashboard folder.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardFoldersService_ReplaceDashboardFolder",
         "requestBody": {
           "content": {
@@ -152,9 +146,6 @@
         ],
         "summary": "Create a dashboard folder",
         "description": "Creates a new dashboard folder.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardFoldersService_CreateDashboardFolder",
         "requestBody": {
           "content": {
@@ -238,9 +229,6 @@
         ],
         "summary": "Get a dashboard folder",
         "description": "Returns a dashboard folder data.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardFoldersService_GetDashboardFolder",
         "parameters": [
           {
@@ -309,9 +297,6 @@
         ],
         "summary": "Delete a dashboard folder",
         "description": "Deletes the dashboard folder with the specified ID.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "DashboardFoldersService_DeleteDashboardFolder",
         "parameters": [
           {
@@ -492,7 +477,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -524,7 +508,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

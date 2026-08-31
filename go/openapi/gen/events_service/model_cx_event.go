@@ -33,7 +33,7 @@ type CxEvent struct {
 	// The cx event labels.
 	CxEventLabels map[string]string `json:"cxEventLabels"`
 	// The cx event metadata.
-	CxEventMetadata *map[string]string `json:"cxEventMetadata,omitempty"`
+	CxEventMetadata map[string]string `json:"cxEventMetadata,omitempty"`
 	// The cx event payload.
 	CxEventPayload map[string]interface{} `json:"cxEventPayload"`
 	// The cx event payload type.
@@ -164,11 +164,11 @@ func (o *CxEvent) GetCxEventLabels() map[string]string {
 
 // GetCxEventLabelsOk returns a tuple with the CxEventLabels field value
 // and a boolean to check if the value has been set.
-func (o *CxEvent) GetCxEventLabelsOk() (*map[string]string, bool) {
+func (o *CxEvent) GetCxEventLabelsOk() (map[string]string, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]string{}, false
 	}
-	return &o.CxEventLabels, true
+	return o.CxEventLabels, true
 }
 
 // SetCxEventLabels sets field value
@@ -182,14 +182,14 @@ func (o *CxEvent) GetCxEventMetadata() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.CxEventMetadata
+	return o.CxEventMetadata
 }
 
 // GetCxEventMetadataOk returns a tuple with the CxEventMetadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CxEvent) GetCxEventMetadataOk() (*map[string]string, bool) {
+func (o *CxEvent) GetCxEventMetadataOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.CxEventMetadata) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.CxEventMetadata, true
 }
@@ -205,7 +205,7 @@ func (o *CxEvent) HasCxEventMetadata() bool {
 
 // SetCxEventMetadata gets a reference to the given map[string]string and assigns it to the CxEventMetadata field.
 func (o *CxEvent) SetCxEventMetadata(v map[string]string) {
-	o.CxEventMetadata = &v
+	o.CxEventMetadata = v
 }
 
 // GetCxEventPayload returns the CxEventPayload field value

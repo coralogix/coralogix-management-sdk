@@ -37,7 +37,7 @@ type AlertDefProperties struct {
 	// Whether the alert is currently active and monitoring
 	Enabled *bool `json:"enabled,omitempty"`
 	// Labels used to identify and categorize the alert entity
-	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	EntityLabels map[string]string `json:"entityLabels,omitempty"`
 	// Configuration for flow-based alerts
 	Flow *FlowType `json:"flow,omitempty"`
 	// Keys used to group and aggregate alert data
@@ -67,7 +67,6 @@ type AlertDefProperties struct {
 	// Primary notification group for alert events
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
 	// Additional notification groups for alerts (deprecated)
-	// Deprecated
 	NotificationGroupExcess []AlertDefNotificationGroup `json:"notificationGroupExcess,omitempty"`
 	// Whether the alert is in phantom mode (creating incidents or not)
 	PhantomMode *bool `json:"phantomMode,omitempty"`
@@ -334,14 +333,14 @@ func (o *AlertDefProperties) GetEntityLabels() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.EntityLabels
+	return o.EntityLabels
 }
 
 // GetEntityLabelsOk returns a tuple with the EntityLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AlertDefProperties) GetEntityLabelsOk() (*map[string]string, bool) {
+func (o *AlertDefProperties) GetEntityLabelsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.EntityLabels) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.EntityLabels, true
 }
@@ -357,7 +356,7 @@ func (o *AlertDefProperties) HasEntityLabels() bool {
 
 // SetEntityLabels gets a reference to the given map[string]string and assigns it to the EntityLabels field.
 func (o *AlertDefProperties) SetEntityLabels(v map[string]string) {
-	o.EntityLabels = &v
+	o.EntityLabels = v
 }
 
 // GetFlow returns the Flow field value if set, zero value otherwise.
@@ -809,7 +808,6 @@ func (o *AlertDefProperties) SetNotificationGroup(v AlertDefNotificationGroup) {
 }
 
 // GetNotificationGroupExcess returns the NotificationGroupExcess field value if set, zero value otherwise.
-// Deprecated
 func (o *AlertDefProperties) GetNotificationGroupExcess() []AlertDefNotificationGroup {
 	if o == nil || IsNil(o.NotificationGroupExcess) {
 		var ret []AlertDefNotificationGroup
@@ -820,7 +818,6 @@ func (o *AlertDefProperties) GetNotificationGroupExcess() []AlertDefNotification
 
 // GetNotificationGroupExcessOk returns a tuple with the NotificationGroupExcess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *AlertDefProperties) GetNotificationGroupExcessOk() ([]AlertDefNotificationGroup, bool) {
 	if o == nil || IsNil(o.NotificationGroupExcess) {
 		return nil, false
@@ -838,7 +835,6 @@ func (o *AlertDefProperties) HasNotificationGroupExcess() bool {
 }
 
 // SetNotificationGroupExcess gets a reference to the given []AlertDefNotificationGroup and assigns it to the NotificationGroupExcess field.
-// Deprecated
 func (o *AlertDefProperties) SetNotificationGroupExcess(v []AlertDefNotificationGroup) {
 	o.NotificationGroupExcess = v
 }

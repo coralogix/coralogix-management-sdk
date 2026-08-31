@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "List Actions",
         "description": "Returns all actions for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ActionsService_ListActions",
         "responses": {
           "200": {
@@ -65,9 +62,6 @@
         ],
         "summary": "Replace Action",
         "description": "Replaces all actions with the provided set.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ActionsService_ReplaceAction",
         "requestBody": {
           "content": {
@@ -133,9 +127,6 @@
         ],
         "summary": "Create Action",
         "description": "Creates a new action.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ActionsService_CreateAction",
         "requestBody": {
           "content": {
@@ -270,9 +261,6 @@
         ],
         "summary": "Get Action",
         "description": "Returns the details of a specific action.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ActionsService_GetAction",
         "responses": {
           "200": {
@@ -323,9 +311,6 @@
         ],
         "summary": "Delete Action",
         "description": "Deletes the action with the specified ID.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ActionsService_DeleteAction",
         "responses": {
           "200": {
@@ -394,9 +379,6 @@
         ],
         "summary": "Atomic Batch Execute Actions",
         "description": "Creates multiple actions in a single request.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ActionsService_AtomicBatchExecuteActions",
         "requestBody": {
           "content": {
@@ -470,9 +452,6 @@
         ],
         "summary": "Order Actions",
         "description": "Updates the display order of actions.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "ActionsService_OrderActions",
         "requestBody": {
           "content": {
@@ -852,7 +831,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -884,7 +862,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

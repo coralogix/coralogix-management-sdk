@@ -27,7 +27,7 @@ type AlertEvent struct {
 	// Unique identifier of the alert.
 	AlertId *string `json:"alertId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Labels for the group.
-	GroupLabels *map[string]string `json:"groupLabels,omitempty"`
+	GroupLabels map[string]string `json:"groupLabels,omitempty"`
 	// Key used to correlate incidents.
 	IncidentCorrelationKey *string `json:"incidentCorrelationKey,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Raw payload data.
@@ -37,7 +37,7 @@ type AlertEvent struct {
 	// Unique identifier of the permutation.
 	PermutationId *string `json:"permutationId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Labels for the permutation.
-	PermutationLabels *map[string]string `json:"permutationLabels,omitempty"`
+	PermutationLabels map[string]string `json:"permutationLabels,omitempty"`
 	// Identifier of the event before grouping.
 	PreGroupingEventId *string `json:"preGroupingEventId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Status.
@@ -137,14 +137,14 @@ func (o *AlertEvent) GetGroupLabels() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.GroupLabels
+	return o.GroupLabels
 }
 
 // GetGroupLabelsOk returns a tuple with the GroupLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AlertEvent) GetGroupLabelsOk() (*map[string]string, bool) {
+func (o *AlertEvent) GetGroupLabelsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.GroupLabels) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.GroupLabels, true
 }
@@ -160,7 +160,7 @@ func (o *AlertEvent) HasGroupLabels() bool {
 
 // SetGroupLabels gets a reference to the given map[string]string and assigns it to the GroupLabels field.
 func (o *AlertEvent) SetGroupLabels(v map[string]string) {
-	o.GroupLabels = &v
+	o.GroupLabels = v
 }
 
 // GetIncidentCorrelationKey returns the IncidentCorrelationKey field value if set, zero value otherwise.
@@ -297,14 +297,14 @@ func (o *AlertEvent) GetPermutationLabels() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.PermutationLabels
+	return o.PermutationLabels
 }
 
 // GetPermutationLabelsOk returns a tuple with the PermutationLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AlertEvent) GetPermutationLabelsOk() (*map[string]string, bool) {
+func (o *AlertEvent) GetPermutationLabelsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.PermutationLabels) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.PermutationLabels, true
 }
@@ -320,7 +320,7 @@ func (o *AlertEvent) HasPermutationLabels() bool {
 
 // SetPermutationLabels gets a reference to the given map[string]string and assigns it to the PermutationLabels field.
 func (o *AlertEvent) SetPermutationLabels(v map[string]string) {
-	o.PermutationLabels = &v
+	o.PermutationLabels = v
 }
 
 // GetPreGroupingEventId returns the PreGroupingEventId field value if set, zero value otherwise.

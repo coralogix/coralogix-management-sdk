@@ -158,11 +158,11 @@ func (o *PrometheusAlertIndicator) GetGroupLabels() map[string]string {
 
 // GetGroupLabelsOk returns a tuple with the GroupLabels field value
 // and a boolean to check if the value has been set.
-func (o *PrometheusAlertIndicator) GetGroupLabelsOk() (*map[string]string, bool) {
+func (o *PrometheusAlertIndicator) GetGroupLabelsOk() (map[string]string, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]string{}, false
 	}
-	return &o.GroupLabels, true
+	return o.GroupLabels, true
 }
 
 // SetGroupLabels sets field value

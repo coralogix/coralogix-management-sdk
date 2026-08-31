@@ -159,11 +159,11 @@ func (o *Incident) GetContextualLabels() map[string]string {
 
 // GetContextualLabelsOk returns a tuple with the ContextualLabels field value
 // and a boolean to check if the value has been set.
-func (o *Incident) GetContextualLabelsOk() (*map[string]string, bool) {
+func (o *Incident) GetContextualLabelsOk() (map[string]string, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]string{}, false
 	}
-	return &o.ContextualLabels, true
+	return o.ContextualLabels, true
 }
 
 // SetContextualLabels sets field value
@@ -239,11 +239,11 @@ func (o *Incident) GetDisplayLabels() map[string]string {
 
 // GetDisplayLabelsOk returns a tuple with the DisplayLabels field value
 // and a boolean to check if the value has been set.
-func (o *Incident) GetDisplayLabelsOk() (*map[string]string, bool) {
+func (o *Incident) GetDisplayLabelsOk() (map[string]string, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]string{}, false
 	}
-	return &o.DisplayLabels, true
+	return o.DisplayLabels, true
 }
 
 // SetDisplayLabels sets field value

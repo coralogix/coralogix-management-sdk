@@ -23,7 +23,7 @@ var _ MappedNullable = &AlertDefEntityLabelsFilter{}
 // AlertDefEntityLabelsFilter Filter by alert definition entity labels
 type AlertDefEntityLabelsFilter struct {
 	// The entity label key-value pairs to filter by
-	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	EntityLabels map[string]string `json:"entityLabels,omitempty"`
 	// Whether all labels must match (AND) or any label can match (OR)
 	ValuesOperator *FilterValuesOperator `json:"valuesOperator,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -55,14 +55,14 @@ func (o *AlertDefEntityLabelsFilter) GetEntityLabels() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.EntityLabels
+	return o.EntityLabels
 }
 
 // GetEntityLabelsOk returns a tuple with the EntityLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AlertDefEntityLabelsFilter) GetEntityLabelsOk() (*map[string]string, bool) {
+func (o *AlertDefEntityLabelsFilter) GetEntityLabelsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.EntityLabels) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.EntityLabels, true
 }
@@ -78,7 +78,7 @@ func (o *AlertDefEntityLabelsFilter) HasEntityLabels() bool {
 
 // SetEntityLabels gets a reference to the given map[string]string and assigns it to the EntityLabels field.
 func (o *AlertDefEntityLabelsFilter) SetEntityLabels(v map[string]string) {
-	o.EntityLabels = &v
+	o.EntityLabels = v
 }
 
 // GetValuesOperator returns the ValuesOperator field value if set, zero value otherwise.

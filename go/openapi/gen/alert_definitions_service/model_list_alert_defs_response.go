@@ -23,7 +23,7 @@ var _ MappedNullable = &ListAlertDefsResponse{}
 // ListAlertDefsResponse A response that contains a list of alert definitions
 type ListAlertDefsResponse struct {
 	// The caller's access decision and raw access policy per alert, keyed by alert definition ID
-	Access *map[string]AlertDefAccess `json:"access,omitempty"`
+	Access map[string]AlertDefAccess `json:"access,omitempty"`
 	// List of alert definitions
 	AlertDefs []AlertDef `json:"alertDefs,omitempty"`
 	// Pagination settings for the list of alert definitions
@@ -57,14 +57,14 @@ func (o *ListAlertDefsResponse) GetAccess() map[string]AlertDefAccess {
 		var ret map[string]AlertDefAccess
 		return ret
 	}
-	return *o.Access
+	return o.Access
 }
 
 // GetAccessOk returns a tuple with the Access field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListAlertDefsResponse) GetAccessOk() (*map[string]AlertDefAccess, bool) {
+func (o *ListAlertDefsResponse) GetAccessOk() (map[string]AlertDefAccess, bool) {
 	if o == nil || IsNil(o.Access) {
-		return nil, false
+		return map[string]AlertDefAccess{}, false
 	}
 	return o.Access, true
 }
@@ -80,7 +80,7 @@ func (o *ListAlertDefsResponse) HasAccess() bool {
 
 // SetAccess gets a reference to the given map[string]AlertDefAccess and assigns it to the Access field.
 func (o *ListAlertDefsResponse) SetAccess(v map[string]AlertDefAccess) {
-	o.Access = &v
+	o.Access = v
 }
 
 // GetAlertDefs returns the AlertDefs field value if set, zero value otherwise.

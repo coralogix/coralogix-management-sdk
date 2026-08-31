@@ -57,7 +57,6 @@ type Dashboard struct {
 	// Auto refresh two minutes.
 	TwoMinutes map[string]interface{} `json:"twoMinutes,omitempty"`
 	// A list of variables that can be used within the dashboard for dynamic content
-	// Deprecated
 	Variables []Variable `json:"variables,omitempty"`
 	// A list of variables that can be used within the dashboard for dynamic content
 	VariablesV2 []VariableV2 `json:"variablesV2,omitempty"`
@@ -615,7 +614,6 @@ func (o *Dashboard) SetTwoMinutes(v map[string]interface{}) {
 }
 
 // GetVariables returns the Variables field value if set, zero value otherwise.
-// Deprecated
 func (o *Dashboard) GetVariables() []Variable {
 	if o == nil || IsNil(o.Variables) {
 		var ret []Variable
@@ -626,7 +624,6 @@ func (o *Dashboard) GetVariables() []Variable {
 
 // GetVariablesOk returns a tuple with the Variables field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *Dashboard) GetVariablesOk() ([]Variable, bool) {
 	if o == nil || IsNil(o.Variables) {
 		return nil, false
@@ -644,7 +641,6 @@ func (o *Dashboard) HasVariables() bool {
 }
 
 // SetVariables gets a reference to the given []Variable and assigns it to the Variables field.
-// Deprecated
 func (o *Dashboard) SetVariables(v []Variable) {
 	o.Variables = v
 }

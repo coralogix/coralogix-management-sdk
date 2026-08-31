@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Create a comment event",
         "description": "Create a new comment event for a case.\n\nRequires the following permissions:\n- `case:Comment`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseEventsService_CreateComment",
         "parameters": [
           {
@@ -23,7 +20,6 @@
             "description": "ID of the case to add the event to. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
             "required": true,
             "schema": {
-              "example": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
               "description": "ID of the case to add the event to. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
               "type": "string",
               "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
@@ -51,7 +47,6 @@
                     "maxItems": 100
                   },
                   "text": {
-                    "example": "This is updated text",
                     "description": "Comment text to update. Leading and trailing whitespace is trimmed before the length limits are applied.",
                     "type": "string",
                     "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
@@ -131,9 +126,6 @@
         ],
         "summary": "List events for a case",
         "description": "Retrieve all events associated with a specific case.\n\nRequires the following permissions:\n- `case:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseEventsService_ListEvents",
         "parameters": [
           {
@@ -142,7 +134,6 @@
             "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
             "required": true,
             "schema": {
-              "example": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
               "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
               "type": "string",
               "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
@@ -216,9 +207,6 @@
         ],
         "summary": "Sync external Case events",
         "description": "Synchronize events from an external source (e.g. Slack) into the case.\n\nRequires the following permissions:\n- `case:Comment`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseEventsService_SyncExternalCaseEvents",
         "parameters": [
           {
@@ -227,7 +215,6 @@
             "description": "ID of the case to sync external case events for. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
             "required": true,
             "schema": {
-              "example": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
               "description": "ID of the case to sync external case events for. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
               "type": "string",
               "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
@@ -311,9 +298,6 @@
         ],
         "summary": "Get an event by ID",
         "description": "Retrieve a single event by its unique identifier.\n\nRequires the following permissions:\n- `case:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseEventsService_GetEvent",
         "parameters": [
           {
@@ -322,7 +306,6 @@
             "description": "ID of the event to fetch",
             "required": true,
             "schema": {
-              "example": "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
               "description": "ID of the event to fetch",
               "type": "string",
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -406,9 +389,6 @@
         ],
         "summary": "Update a comment event",
         "description": "Modify the content of an existing comment event.\n\nRequires the following permissions:\n- `case:Comment`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseEventsService_UpdateComment",
         "parameters": [
           {
@@ -417,7 +397,6 @@
             "description": "ID of the comment event to update",
             "required": true,
             "schema": {
-              "example": "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
               "description": "ID of the comment event to update",
               "type": "string",
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -445,7 +424,6 @@
                     "maxItems": 100
                   },
                   "text": {
-                    "example": "This is updated text",
                     "description": "Comment text to update. Leading and trailing whitespace is trimmed before the length limits are applied.",
                     "type": "string",
                     "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
@@ -533,9 +511,6 @@
         ],
         "summary": "Delete a comment event",
         "description": "Delete an existing comment event from a case.\n\nRequires the following permissions:\n- `case:Comment`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CaseEventsService_DeleteComment",
         "parameters": [
           {
@@ -544,7 +519,6 @@
             "description": "ID of the comment event to delete",
             "required": true,
             "schema": {
-              "example": "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
               "description": "ID of the comment event to delete",
               "type": "string",
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -633,7 +607,6 @@
         "type": "object",
         "properties": {
           "id": {
-            "example": "2b1c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e",
             "description": "API key ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -641,7 +614,6 @@
             "maxLength": 256
           },
           "name": {
-            "example": "Incident Management Integration Key",
             "description": "API key name",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -659,7 +631,6 @@
         "type": "object",
         "properties": {
           "assigneeUserId": {
-            "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "New assignee user ID",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -692,7 +663,6 @@
             ]
           },
           "createTime": {
-            "example": "2025-09-22T10:30:00.000Z",
             "description": "Server-side insertion time",
             "type": "string",
             "format": "date-time",
@@ -707,7 +677,6 @@
             ]
           },
           "eventId": {
-            "example": "ef51d3d9-a301-496b-aa7d-9a6e519ba0d5",
             "description": "Unique identifier of the event",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -715,7 +684,6 @@
             "maxLength": 36
           },
           "eventTime": {
-            "example": "2025-09-22T10:29:45.000Z",
             "description": "Logical occurrence time of the event",
             "type": "string",
             "format": "date-time",
@@ -1124,7 +1092,6 @@
             ]
           },
           "unsafeText": {
-            "example": "Looking into DB timeouts",
             "description": "Comment text. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
             "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
@@ -1196,7 +1163,6 @@
         "type": "object",
         "properties": {
           "priority": {
-            "example": "CASE_PRIORITY_P3",
             "description": "Previous priority",
             "allOf": [
               {
@@ -1215,7 +1181,6 @@
         "type": "object",
         "properties": {
           "customDashboardId": {
-            "example": "dashboard_3f166e9f-3c88-4af2-b52e-138f339dab3e",
             "description": "Unique identifier of the custom dashboard. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
             "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
@@ -1223,7 +1188,6 @@
             "maxLength": 4096
           },
           "queryLinkSuffix": {
-            "example": "/dashboards/custom/123/widgets/456?time=123456789",
             "description": "URL suffix for accessing the widget (not including the Coralogix domain part)",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1231,7 +1195,6 @@
             "maxLength": 4096
           },
           "widgetId": {
-            "example": "widget_a1b2c3d4-e5f6-7890-abcd-ef1234567890",
             "description": "Unique identifier of the widget within the dashboard. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
             "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
@@ -1470,7 +1433,6 @@
         "type": "object",
         "properties": {
           "fileId": {
-            "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
             "description": "Unique identifier of the file (same id as used in blobset flow)",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -1478,7 +1440,6 @@
             "maxLength": 36
           },
           "fileName": {
-            "example": "screenshot_2025-09-22.png",
             "description": "Original name of the attached file. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
             "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
@@ -1486,7 +1447,6 @@
             "maxLength": 4096
           },
           "isDeleted": {
-            "example": false,
             "description": "Flag indicating whether the file has been marked as deleted",
             "type": "boolean"
           }
@@ -1517,7 +1477,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -1549,7 +1508,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -1577,7 +1535,6 @@
         "type": "object",
         "properties": {
           "kpiType": {
-            "example": "KPI_TYPE_TIME_TO_ACKNOWLEDGE",
             "description": "Type of KPI that was breached",
             "allOf": [
               {
@@ -1586,7 +1543,6 @@
             ]
           },
           "priority": {
-            "example": "CASE_PRIORITY_P2",
             "description": "Case priority at the time of the breach",
             "allOf": [
               {
@@ -1595,7 +1551,6 @@
             ]
           },
           "threshold": {
-            "example": "300s",
             "description": "Duration after which the KPI threshold was set to breach",
             "type": "string",
             "minLength": 0
@@ -1621,7 +1576,6 @@
         "type": "object",
         "properties": {
           "logContent": {
-            "example": "ERROR: Database connection timeout after 30 seconds",
             "description": "Raw content of the log entry. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "type": "string",
             "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
@@ -1629,7 +1583,6 @@
             "maxLength": 10000
           },
           "logId": {
-            "example": "9c858901-8a57-4791-81fe-4c455b099bc9",
             "description": "Unique identifier of the log entry",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -1637,14 +1590,12 @@
             "maxLength": 36
           },
           "logTimestamp": {
-            "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the log entry was created",
             "type": "string",
             "format": "date-time",
             "minLength": 0
           },
           "queryLinkSuffix": {
-            "example": "/logs/query?time=123456789&query=error",
             "description": "URL suffix for querying related logs (not including the Coralogix domain part)",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1667,7 +1618,6 @@
         "type": "object",
         "properties": {
           "coralogixUserId": {
-            "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "If the Microsoft Teams user is linked to a Coralogix user, this field contains the Coralogix user ID.",
             "type": "string",
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -1675,7 +1625,6 @@
             "maxLength": 36
           },
           "displayName": {
-            "example": "John Doe",
             "description": "Microsoft Teams display name",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1683,7 +1632,6 @@
             "maxLength": 256
           },
           "teamsUserId": {
-            "example": "29:1abc123def456",
             "description": "Microsoft Teams user ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1691,7 +1639,6 @@
             "maxLength": 256
           },
           "userEmail": {
-            "example": "john.doe@example.com",
             "description": "Email of the Microsoft Teams user",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1709,7 +1656,6 @@
         "type": "object",
         "properties": {
           "channelId": {
-            "example": "19:0123456789abcdef0123456789abcdef@thread.tacv2",
             "description": "Microsoft Teams channel ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1717,7 +1663,6 @@
             "maxLength": 4096
           },
           "messageId": {
-            "example": "1616990892312",
             "description": "Microsoft Teams message ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1725,7 +1670,6 @@
             "maxLength": 4096
           },
           "messageUrl": {
-            "example": "https://teams.microsoft.com/l/message/19:abcdef@thread.tacv2/1616990892312",
             "description": "Deep link URL to the Microsoft Teams message",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1733,7 +1677,6 @@
             "maxLength": 4096
           },
           "teamId": {
-            "example": "19:abcdef1234567890abcdef1234567890@thread.tacv2",
             "description": "Microsoft Teams team ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1741,7 +1684,6 @@
             "maxLength": 4096
           },
           "tenantId": {
-            "example": "72f988bf-86f1-41af-91ab-2d7cd011db47",
             "description": "Microsoft Teams tenant ID",
             "type": "string",
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -1749,7 +1691,6 @@
             "maxLength": 36
           },
           "userEmail": {
-            "example": "john.doe@example.com",
             "description": "Email of the Microsoft Teams user",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1757,7 +1698,6 @@
             "maxLength": 4096
           },
           "userId": {
-            "example": "29:1IqRc0iDN0jXaDs0zc5j9dEcLpFXKh9sHg",
             "description": "Microsoft Teams user ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1791,7 +1731,6 @@
         "type": "object",
         "properties": {
           "error": {
-            "example": "Slack API: channel_not_found",
             "description": "Error message for the failed notification",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1808,7 +1747,6 @@
         "type": "object",
         "properties": {
           "token": {
-            "example": "4c8ba1ec-acee-4bc7-ad6c-d35476b58541",
             "description": "Notification token/reference",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1826,7 +1764,6 @@
         "type": "object",
         "properties": {
           "notificationRequestId": {
-            "example": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
             "description": "The notification request ID, as sent to the notifications center.",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -1853,7 +1790,6 @@
         "type": "object",
         "properties": {
           "coralogixUserId": {
-            "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "If the PagerDuty user is linked to a Coralogix user, this field contains the Coralogix user ID.",
             "type": "string",
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -1861,7 +1797,6 @@
             "maxLength": 36
           },
           "displayName": {
-            "example": "John Doe",
             "description": "PagerDuty display name",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1869,7 +1804,6 @@
             "maxLength": 256
           },
           "pagerDutyUserId": {
-            "example": "U012AB3CD",
             "description": "PagerDuty user ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1877,7 +1811,6 @@
             "maxLength": 256
           },
           "userEmail": {
-            "example": "john.doe@example.com",
             "description": "Email of the PagerDuty user",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1947,7 +1880,6 @@
         "type": "object",
         "properties": {
           "receiverName": {
-            "example": "alertmanager-main-0",
             "description": "Prometheus Alert Manager receiver name",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1989,7 +1921,6 @@
         "type": "object",
         "properties": {
           "coralogixUserId": {
-            "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "If the Service Now user is linked to a Coralogix user, this field contains the Coralogix user ID.",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -1997,7 +1928,6 @@
             "maxLength": 36
           },
           "id": {
-            "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "User ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2005,7 +1935,6 @@
             "maxLength": 256
           },
           "userEmail": {
-            "example": "example@coralogix.com",
             "description": "Mail of the user",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2030,7 +1959,6 @@
         "type": "object",
         "properties": {
           "coralogixUserId": {
-            "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "If the Slack user is linked to a Coralogix user, this field contains the Coralogix user ID.",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -2038,7 +1966,6 @@
             "maxLength": 36
           },
           "displayName": {
-            "example": "John Doe",
             "description": "Slack display name",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2046,7 +1973,6 @@
             "maxLength": 256
           },
           "slackUserId": {
-            "example": "U012AB3CD",
             "description": "Slack user ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2054,7 +1980,6 @@
             "maxLength": 256
           },
           "userEmail": {
-            "example": "john.doe@example.com",
             "description": "Email of the Slack user",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2072,7 +1997,6 @@
         "type": "object",
         "properties": {
           "channelId": {
-            "example": "C012AB3CD",
             "description": "Slack channel ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2080,7 +2004,6 @@
             "maxLength": 256
           },
           "threadId": {
-            "example": "1234567890.123456",
             "description": "Slack thread ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2088,7 +2011,6 @@
             "maxLength": 256
           },
           "userEmail": {
-            "example": "john.doe@example.com",
             "description": "Email of the Slack user",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2096,7 +2018,6 @@
             "maxLength": 256
           },
           "userId": {
-            "example": "U012AB3CD",
             "description": "Slack user ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2104,7 +2025,6 @@
             "maxLength": 256
           },
           "workspaceId": {
-            "example": "T012AB3CD",
             "description": "Slack workspace ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2122,7 +2042,6 @@
         "type": "object",
         "properties": {
           "newStatus": {
-            "example": "CASE_STATUS_ACKNOWLEDGED",
             "description": "New status",
             "allOf": [
               {
@@ -2131,7 +2050,6 @@
             ]
           },
           "oldStatus": {
-            "example": "CASE_STATUS_ACTIVE",
             "description": "Previous status",
             "allOf": [
               {
@@ -2217,7 +2135,6 @@
         "type": "object",
         "properties": {
           "unknownAssigneeEmail": {
-            "example": "unknown",
             "description": "Email of the assignee that could not be found",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2256,7 +2173,6 @@
         "type": "object",
         "properties": {
           "id": {
-            "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "User ID",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",

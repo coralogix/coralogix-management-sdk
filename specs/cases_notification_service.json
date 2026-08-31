@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "List notification deliveries for cases",
         "description": "Retrieve notification delivery records for one or more cases, including routing, target, and outcome information.\n\nRequires the following permissions:\n- `case:Read`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "CasesNotificationService_ListNotificationDeliveries",
         "requestBody": {
           "content": {
@@ -25,10 +22,6 @@
                 "type": "object",
                 "properties": {
                   "caseIds": {
-                    "example": [
-                      "3f166e9f-3c88-4af2-b52e-138f339dab3e",
-                      "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                    ],
                     "description": "Case IDs to retrieve notification deliveries for",
                     "type": "array",
                     "items": {
@@ -131,7 +124,6 @@
         "type": "object",
         "properties": {
           "connectorId": {
-            "example": "c1d2e3f4-5678-90ab-cdef-1234567890ab",
             "description": "Unique identifier of the connector",
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
@@ -139,7 +131,6 @@
             "maxLength": 128
           },
           "connectorName": {
-            "example": "Production Slack",
             "description": "Display name of the connector",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -200,7 +191,6 @@
         "type": "object",
         "properties": {
           "errorMessage": {
-            "example": "Connection timeout after 30s",
             "description": "Error message describing the failure",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -280,7 +270,6 @@
         "type": "object",
         "properties": {
           "evidenceUrl": {
-            "example": "https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456",
             "description": "URL to the delivered notification, if available (e.g. Slack message, ServiceNow record)",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -329,7 +318,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -361,7 +349,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -480,7 +467,6 @@
             ]
           },
           "requestNotificationId": {
-            "example": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
             "description": "The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -488,7 +474,6 @@
             "maxLength": 36
           },
           "timestamp": {
-            "example": "2025-09-22T10:30:00.000Z",
             "description": "When the notification was triggered",
             "type": "string",
             "format": "date-time",
@@ -585,7 +570,6 @@
         "type": "object",
         "properties": {
           "routerId": {
-            "example": "d4e5f678-90ab-cdef-1234-567890abcdef",
             "description": "Unique identifier of the router",
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
@@ -593,7 +577,6 @@
             "maxLength": 128
           },
           "routerName": {
-            "example": "Production alerts router",
             "description": "Display name of the router",
             "type": "string",
             "pattern": "^[\\s\\S]*$",

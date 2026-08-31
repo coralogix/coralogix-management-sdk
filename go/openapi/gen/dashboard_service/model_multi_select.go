@@ -23,7 +23,6 @@ var _ MappedNullable = &MultiSelect{}
 // MultiSelect A dashboard variable that allows selecting one or more values from a dynamically or statically populated list.
 type MultiSelect struct {
 	// The selected values.
-	// Deprecated
 	Selected []string `json:"selected,omitempty"`
 	Selection *MultiSelectSelection `json:"selection,omitempty"`
 	SelectionOptions *VariableSelectionOptions `json:"selectionOptions,omitempty"`
@@ -53,7 +52,6 @@ func NewMultiSelectWithDefaults() *MultiSelect {
 }
 
 // GetSelected returns the Selected field value if set, zero value otherwise.
-// Deprecated
 func (o *MultiSelect) GetSelected() []string {
 	if o == nil || IsNil(o.Selected) {
 		var ret []string
@@ -64,7 +62,6 @@ func (o *MultiSelect) GetSelected() []string {
 
 // GetSelectedOk returns a tuple with the Selected field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *MultiSelect) GetSelectedOk() ([]string, bool) {
 	if o == nil || IsNil(o.Selected) {
 		return nil, false
@@ -82,7 +79,6 @@ func (o *MultiSelect) HasSelected() bool {
 }
 
 // SetSelected gets a reference to the given []string and assigns it to the Selected field.
-// Deprecated
 func (o *MultiSelect) SetSelected(v []string) {
 	o.Selected = v
 }

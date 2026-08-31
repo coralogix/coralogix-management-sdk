@@ -23,7 +23,6 @@ var _ MappedNullable = &EnrichmentServiceAtomicOverwriteEnrichmentsRequest{}
 // EnrichmentServiceAtomicOverwriteEnrichmentsRequest Request to atomically update enrichment rules.
 type EnrichmentServiceAtomicOverwriteEnrichmentsRequest struct {
 	// Deprecated: enrichment field definitions.
-	// Deprecated
 	EnrichmentFields []EnrichmentFieldDefinition `json:"enrichmentFields,omitempty"`
 	// Deprecated
 	EnrichmentType *EnrichmentType `json:"enrichmentType,omitempty"`
@@ -53,7 +52,6 @@ func NewEnrichmentServiceAtomicOverwriteEnrichmentsRequestWithDefaults() *Enrich
 }
 
 // GetEnrichmentFields returns the EnrichmentFields field value if set, zero value otherwise.
-// Deprecated
 func (o *EnrichmentServiceAtomicOverwriteEnrichmentsRequest) GetEnrichmentFields() []EnrichmentFieldDefinition {
 	if o == nil || IsNil(o.EnrichmentFields) {
 		var ret []EnrichmentFieldDefinition
@@ -64,7 +62,6 @@ func (o *EnrichmentServiceAtomicOverwriteEnrichmentsRequest) GetEnrichmentFields
 
 // GetEnrichmentFieldsOk returns a tuple with the EnrichmentFields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *EnrichmentServiceAtomicOverwriteEnrichmentsRequest) GetEnrichmentFieldsOk() ([]EnrichmentFieldDefinition, bool) {
 	if o == nil || IsNil(o.EnrichmentFields) {
 		return nil, false
@@ -82,7 +79,6 @@ func (o *EnrichmentServiceAtomicOverwriteEnrichmentsRequest) HasEnrichmentFields
 }
 
 // SetEnrichmentFields gets a reference to the given []EnrichmentFieldDefinition and assigns it to the EnrichmentFields field.
-// Deprecated
 func (o *EnrichmentServiceAtomicOverwriteEnrichmentsRequest) SetEnrichmentFields(v []EnrichmentFieldDefinition) {
 	o.EnrichmentFields = v
 }

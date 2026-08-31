@@ -23,7 +23,7 @@ var _ MappedNullable = &CaseDeepLinks{}
 // CaseDeepLinks Pre-built URLs that navigate from a case to the relevant views.
 type CaseDeepLinks struct {
 	// Per-alert-indicator deep links, keyed by alert_indicator_id.
-	AlertIndicators *map[string]AlertIndicatorDeepLink `json:"alertIndicators,omitempty"`
+	AlertIndicators map[string]AlertIndicatorDeepLink `json:"alertIndicators,omitempty"`
 	// Absolute URL to the case detail page.
 	Detail *string `json:"detail,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Per-impacted-entity drilldown links.
@@ -57,14 +57,14 @@ func (o *CaseDeepLinks) GetAlertIndicators() map[string]AlertIndicatorDeepLink {
 		var ret map[string]AlertIndicatorDeepLink
 		return ret
 	}
-	return *o.AlertIndicators
+	return o.AlertIndicators
 }
 
 // GetAlertIndicatorsOk returns a tuple with the AlertIndicators field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CaseDeepLinks) GetAlertIndicatorsOk() (*map[string]AlertIndicatorDeepLink, bool) {
+func (o *CaseDeepLinks) GetAlertIndicatorsOk() (map[string]AlertIndicatorDeepLink, bool) {
 	if o == nil || IsNil(o.AlertIndicators) {
-		return nil, false
+		return map[string]AlertIndicatorDeepLink{}, false
 	}
 	return o.AlertIndicators, true
 }
@@ -80,7 +80,7 @@ func (o *CaseDeepLinks) HasAlertIndicators() bool {
 
 // SetAlertIndicators gets a reference to the given map[string]AlertIndicatorDeepLink and assigns it to the AlertIndicators field.
 func (o *CaseDeepLinks) SetAlertIndicators(v map[string]AlertIndicatorDeepLink) {
-	o.AlertIndicators = &v
+	o.AlertIndicators = v
 }
 
 // GetDetail returns the Detail field value if set, zero value otherwise.

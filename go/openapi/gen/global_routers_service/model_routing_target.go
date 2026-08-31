@@ -25,7 +25,7 @@ type RoutingTarget struct {
 	// The connector id.
 	ConnectorId *string `json:"connectorId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// The custom details.
-	CustomDetails *map[string]string `json:"customDetails,omitempty"`
+	CustomDetails map[string]string `json:"customDetails,omitempty"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The preset id.
@@ -91,14 +91,14 @@ func (o *RoutingTarget) GetCustomDetails() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.CustomDetails
+	return o.CustomDetails
 }
 
 // GetCustomDetailsOk returns a tuple with the CustomDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RoutingTarget) GetCustomDetailsOk() (*map[string]string, bool) {
+func (o *RoutingTarget) GetCustomDetailsOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.CustomDetails) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.CustomDetails, true
 }
@@ -114,7 +114,7 @@ func (o *RoutingTarget) HasCustomDetails() bool {
 
 // SetCustomDetails gets a reference to the given map[string]string and assigns it to the CustomDetails field.
 func (o *RoutingTarget) SetCustomDetails(v map[string]string) {
-	o.CustomDetails = &v
+	o.CustomDetails = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.

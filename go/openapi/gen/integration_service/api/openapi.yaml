@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get all integrations",
         "description": "Returns all available integration definitions.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_GetIntegrations",
         "parameters": [
           {
@@ -82,9 +79,6 @@
         ],
         "summary": "Get integration definition",
         "description": "Returns the definition for the specified integration type.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_GetIntegrationDefinition",
         "parameters": [
           {
@@ -93,7 +87,6 @@
             "description": "The unique identifier of the integration definition.",
             "required": true,
             "schema": {
-              "example": "aws-sqs",
               "description": "The unique identifier of the integration definition.",
               "type": "string",
               "pattern": "^[\\s\\S]*$",
@@ -167,9 +160,6 @@
         ],
         "summary": "Get deployed integration",
         "description": "Returns the deployed instance of the specified integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_GetDeployedIntegration",
         "parameters": [
           {
@@ -178,7 +168,6 @@
             "description": "The integration id.",
             "required": true,
             "schema": {
-              "example": "aws-sqs",
               "description": "The integration id.",
               "type": "string",
               "pattern": "^[\\s\\S]*$",
@@ -242,9 +231,6 @@
         ],
         "summary": "Delete integration",
         "description": "Removes the specified deployed integration instance.\n\nRequires the following permissions:\n- `integrations:Deploy`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_DeleteIntegration",
         "parameters": [
           {
@@ -316,9 +302,6 @@
         ],
         "summary": "Get RUM integration versions data",
         "description": "Returns RUM application version data.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_GetRumApplicationVersionData",
         "parameters": [
           {
@@ -389,9 +372,6 @@
         ],
         "summary": "Trigger sync of RUM integration data",
         "description": "Syncs RUM data for the team.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_SyncRumData",
         "requestBody": {
           "content": {
@@ -464,9 +444,6 @@
         ],
         "summary": "Get integration details",
         "description": "Returns the details of the specified integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_GetIntegrationDetails",
         "parameters": [
           {
@@ -548,9 +525,6 @@
         ],
         "summary": "List managed integration keys",
         "description": "Returns a list of managed integration keys.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_ListManagedIntegrationKeys",
         "responses": {
           "200": {
@@ -606,9 +580,6 @@
         ],
         "summary": "Get managed integration status",
         "description": "Returns the status of the specified managed integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_GetManagedIntegrationStatus",
         "parameters": [
           {
@@ -680,9 +651,6 @@
         ],
         "summary": "Update integration",
         "description": "Updates an existing integration deployment.\n\nRequires the following permissions:\n- `integrations:Deploy`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_UpdateIntegration",
         "requestBody": {
           "content": {
@@ -759,9 +727,6 @@
         ],
         "summary": "Save integration registration metadata",
         "description": "Creates or updates an integration deployment.\n\nRequires the following permissions:\n- `integrations:Deploy`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_SaveIntegration",
         "requestBody": {
           "content": {
@@ -833,9 +798,6 @@
         ],
         "summary": "Test integration",
         "description": "Tests the integration configuration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_TestIntegration",
         "requestBody": {
           "content": {
@@ -914,9 +876,6 @@
         ],
         "summary": "Get integration template",
         "description": "Returns the template for an integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "IntegrationService_GetTemplate",
         "parameters": [
           {
@@ -1914,7 +1873,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -1946,7 +1904,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"

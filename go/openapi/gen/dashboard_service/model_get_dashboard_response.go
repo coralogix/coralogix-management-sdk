@@ -40,7 +40,7 @@ type GetDashboardResponse struct {
 	// The locker name.
 	LockerName *string `json:"lockerName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Map of resolved widget references for widgets with references in the dashboard
-	ResolvedWidgets *map[string]Widget `json:"resolvedWidgets,omitempty"`
+	ResolvedWidgets map[string]Widget `json:"resolvedWidgets,omitempty"`
 	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	UpdatedOriginType *TokenOriginType `json:"updatedOriginType,omitempty"`
@@ -365,14 +365,14 @@ func (o *GetDashboardResponse) GetResolvedWidgets() map[string]Widget {
 		var ret map[string]Widget
 		return ret
 	}
-	return *o.ResolvedWidgets
+	return o.ResolvedWidgets
 }
 
 // GetResolvedWidgetsOk returns a tuple with the ResolvedWidgets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetDashboardResponse) GetResolvedWidgetsOk() (*map[string]Widget, bool) {
+func (o *GetDashboardResponse) GetResolvedWidgetsOk() (map[string]Widget, bool) {
 	if o == nil || IsNil(o.ResolvedWidgets) {
-		return nil, false
+		return map[string]Widget{}, false
 	}
 	return o.ResolvedWidgets, true
 }
@@ -388,7 +388,7 @@ func (o *GetDashboardResponse) HasResolvedWidgets() bool {
 
 // SetResolvedWidgets gets a reference to the given map[string]Widget and assigns it to the ResolvedWidgets field.
 func (o *GetDashboardResponse) SetResolvedWidgets(v map[string]Widget) {
-	o.ResolvedWidgets = &v
+	o.ResolvedWidgets = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.

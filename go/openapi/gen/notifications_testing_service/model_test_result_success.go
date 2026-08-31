@@ -23,7 +23,7 @@ var _ MappedNullable = &TestResultSuccess{}
 // TestResultSuccess Indicates the notification test succeeded.
 type TestResultSuccess struct {
 	// Metadata.
-	Metadata *map[string]string `json:"metadata,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -53,14 +53,14 @@ func (o *TestResultSuccess) GetMetadata() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.Metadata
+	return o.Metadata
 }
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TestResultSuccess) GetMetadataOk() (*map[string]string, bool) {
+func (o *TestResultSuccess) GetMetadataOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Metadata) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.Metadata, true
 }
@@ -76,7 +76,7 @@ func (o *TestResultSuccess) HasMetadata() bool {
 
 // SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
 func (o *TestResultSuccess) SetMetadata(v map[string]string) {
-	o.Metadata = &v
+	o.Metadata = v
 }
 
 func (o TestResultSuccess) MarshalJSON() ([]byte, error) {

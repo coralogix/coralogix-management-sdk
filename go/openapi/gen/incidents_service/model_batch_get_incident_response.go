@@ -64,11 +64,11 @@ func (o *BatchGetIncidentResponse) GetIncidents() map[string]Incident {
 
 // GetIncidentsOk returns a tuple with the Incidents field value
 // and a boolean to check if the value has been set.
-func (o *BatchGetIncidentResponse) GetIncidentsOk() (*map[string]Incident, bool) {
+func (o *BatchGetIncidentResponse) GetIncidentsOk() (map[string]Incident, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]Incident{}, false
 	}
-	return &o.Incidents, true
+	return o.Incidents, true
 }
 
 // SetIncidents sets field value

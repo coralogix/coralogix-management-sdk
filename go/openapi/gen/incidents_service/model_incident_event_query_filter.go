@@ -23,9 +23,9 @@ var _ MappedNullable = &IncidentEventQueryFilter{}
 // IncidentEventQueryFilter Filter configuration for incident events
 type IncidentEventQueryFilter struct {
 	// The contextual labels of the incident
-	ContextualLabels *map[string]ContextualLabelValues `json:"contextualLabels,omitempty"`
+	ContextualLabels map[string]ContextualLabelValues `json:"contextualLabels,omitempty"`
 	// The display labels of the incident
-	DisplayLabels *map[string]DisplayLabelValues `json:"displayLabels,omitempty"`
+	DisplayLabels map[string]DisplayLabelValues `json:"displayLabels,omitempty"`
 	// Indicates if the incident is muted
 	IsMuted *bool `json:"isMuted,omitempty"`
 	// The labels of the incident
@@ -67,14 +67,14 @@ func (o *IncidentEventQueryFilter) GetContextualLabels() map[string]ContextualLa
 		var ret map[string]ContextualLabelValues
 		return ret
 	}
-	return *o.ContextualLabels
+	return o.ContextualLabels
 }
 
 // GetContextualLabelsOk returns a tuple with the ContextualLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentEventQueryFilter) GetContextualLabelsOk() (*map[string]ContextualLabelValues, bool) {
+func (o *IncidentEventQueryFilter) GetContextualLabelsOk() (map[string]ContextualLabelValues, bool) {
 	if o == nil || IsNil(o.ContextualLabels) {
-		return nil, false
+		return map[string]ContextualLabelValues{}, false
 	}
 	return o.ContextualLabels, true
 }
@@ -90,7 +90,7 @@ func (o *IncidentEventQueryFilter) HasContextualLabels() bool {
 
 // SetContextualLabels gets a reference to the given map[string]ContextualLabelValues and assigns it to the ContextualLabels field.
 func (o *IncidentEventQueryFilter) SetContextualLabels(v map[string]ContextualLabelValues) {
-	o.ContextualLabels = &v
+	o.ContextualLabels = v
 }
 
 // GetDisplayLabels returns the DisplayLabels field value if set, zero value otherwise.
@@ -99,14 +99,14 @@ func (o *IncidentEventQueryFilter) GetDisplayLabels() map[string]DisplayLabelVal
 		var ret map[string]DisplayLabelValues
 		return ret
 	}
-	return *o.DisplayLabels
+	return o.DisplayLabels
 }
 
 // GetDisplayLabelsOk returns a tuple with the DisplayLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentEventQueryFilter) GetDisplayLabelsOk() (*map[string]DisplayLabelValues, bool) {
+func (o *IncidentEventQueryFilter) GetDisplayLabelsOk() (map[string]DisplayLabelValues, bool) {
 	if o == nil || IsNil(o.DisplayLabels) {
-		return nil, false
+		return map[string]DisplayLabelValues{}, false
 	}
 	return o.DisplayLabels, true
 }
@@ -122,7 +122,7 @@ func (o *IncidentEventQueryFilter) HasDisplayLabels() bool {
 
 // SetDisplayLabels gets a reference to the given map[string]DisplayLabelValues and assigns it to the DisplayLabels field.
 func (o *IncidentEventQueryFilter) SetDisplayLabels(v map[string]DisplayLabelValues) {
-	o.DisplayLabels = &v
+	o.DisplayLabels = v
 }
 
 // GetIsMuted returns the IsMuted field value if set, zero value otherwise.

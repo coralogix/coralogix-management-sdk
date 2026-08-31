@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get a list of all accessible alert definitions",
         "description": "Returns all alert definitions for the team.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_ListAlertDefs",
         "parameters": [
           {
@@ -162,7 +159,6 @@
                     "type": "object",
                     "properties": {
                       "direction": {
-                        "example": "ALERT_DEF_ORDER_BY_DIRECTION_DESC",
                         "description": "Direction for ordering",
                         "allOf": [
                           {
@@ -171,7 +167,6 @@
                         ]
                       },
                       "fieldName": {
-                        "example": "ALERT_DEF_ORDER_BY_FIELDS_UPDATED_TIME",
                         "description": "Field name to order by",
                         "allOf": [
                           {
@@ -251,9 +246,6 @@
         ],
         "summary": "Replace an alert definition",
         "description": "Updates an existing alert definition.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_ReplaceAlertDef",
         "requestBody": {
           "content": {
@@ -280,7 +272,6 @@
                     ]
                   },
                   "id": {
-                    "example": "123e4567-e89b-12d3-a456-426614174000",
                     "description": "Alert definition ID",
                     "type": "string",
                     "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -344,9 +335,6 @@
         ],
         "summary": "Create an alert",
         "description": "Creates a new alert definition.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_CreateAlertDef",
         "requestBody": {
           "content": {
@@ -430,9 +418,6 @@
         ],
         "summary": "Get counts for filter options",
         "description": "Returns counts for different filter options based on the provided filters\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_FilterOptionCounts",
         "parameters": [
           {
@@ -554,9 +539,6 @@
         ],
         "summary": "Bulk create alert definitions",
         "description": "Creates multiple alert definitions in a single request. The operation is best-effort - definitions that fail to be created are reported in the response and do not prevent creation of the others. Limited to 100 alert definitions per request.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_BulkCreateAlertDefs",
         "requestBody": {
           "content": {
@@ -661,9 +643,6 @@
         ],
         "summary": "Bulk delete alert definitions",
         "description": "Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are. Limited to 100 alert definitions per request.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_BulkDeleteAlertDefs",
         "requestBody": {
           "content": {
@@ -674,9 +653,6 @@
                 "type": "object",
                 "properties": {
                   "ids": {
-                    "example": [
-                      "123e4567-e89b-12d3-a456-426614174000"
-                    ],
                     "description": "List of alert definition IDs to delete.",
                     "type": "array",
                     "items": {
@@ -748,9 +724,6 @@
         ],
         "summary": "Download alerts",
         "description": "Download alert definitions in base64-encoded byte format. When ids are provided, only those alert definitions are downloaded; otherwise all accessible alert definitions are downloaded.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_DownloadAlerts",
         "parameters": [
           {
@@ -758,9 +731,6 @@
             "name": "ids",
             "description": "Optional list of alert definition IDs to download. When empty, all accessible alert definitions are downloaded. IDs that are not found or not accessible are omitted from the download and reported in the response notFoundIds (no error is returned for them).",
             "schema": {
-              "example": [
-                "123e4567-e89b-12d3-a456-426614174000"
-              ],
               "description": "Optional list of alert definition IDs to download. When empty, all accessible alert definitions are downloaded. IDs that are not found or not accessible are omitted from the download and reported in the response notFoundIds (no error is returned for them).",
               "type": "array",
               "items": {
@@ -830,9 +800,6 @@
         ],
         "summary": "Bulk replace alert definitions",
         "description": "Replaces multiple alert definitions in a single request. Each entry updates the existing alert definition with the matching ID; alert definitions not referenced in the request are left unchanged. The operation is best-effort - entries that fail are reported in the response and do not prevent other entries from being applied. Limited to 100 alert definitions per request.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_BulkReplaceAlertDefs",
         "requestBody": {
           "content": {
@@ -910,9 +877,6 @@
         ],
         "summary": "Get alert definition by alert version ID",
         "description": "Returns the alert definition with the specified version ID.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_GetAlertDefByVersionId",
         "parameters": [
           {
@@ -921,7 +885,6 @@
             "description": "Alert version ID",
             "required": true,
             "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
               "description": "Alert version ID",
               "type": "string",
               "pattern": "^[\\s\\S]*$",
@@ -995,9 +958,6 @@
         ],
         "summary": "Get alert definition by ID",
         "description": "Returns the details of the specified alert definition.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_GetAlertDef",
         "parameters": [
           {
@@ -1006,7 +966,6 @@
             "description": "Alert definition ID",
             "required": true,
             "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
               "description": "Alert definition ID",
               "type": "string",
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -1078,9 +1037,6 @@
         ],
         "summary": "DeleteAlertDef",
         "description": "Deletes the alert definition with the specified ID.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "AlertDefsService_DeleteAlertDef",
         "parameters": [
           {
@@ -1089,7 +1045,6 @@
             "description": "The unique identifier of the alert definition to delete.",
             "required": true,
             "schema": {
-              "example": "123e4567-e89b-12d3-a456-426614174000",
               "description": "The unique identifier of the alert definition to delete.",
               "type": "string",
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -1216,10 +1171,6 @@
         "type": "object",
         "properties": {
           "dayOfWeek": {
-            "example": [
-              "DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED",
-              "DAY_OF_WEEK_TUESDAY"
-            ],
             "description": "Day of the week.",
             "type": "array",
             "items": {
@@ -1271,7 +1222,6 @@
             "maxLength": 36
           },
           "createdTime": {
-            "example": "2023-10-01T12:00:00.000Z",
             "description": "The time when the alert definition was created",
             "type": "string",
             "format": "date-time",
@@ -1280,7 +1230,6 @@
             "maxLength": 64
           },
           "id": {
-            "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The alert definition's persistent ID",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -1288,7 +1237,6 @@
             "maxLength": 36
           },
           "lastTriggeredTime": {
-            "example": "2023-10-01T12:00:00.000Z",
             "description": "The last time the alert definition was triggered",
             "type": "string",
             "format": "date-time",
@@ -1297,7 +1245,6 @@
             "maxLength": 64
           },
           "status": {
-            "example": "ALERT_DEF_STATUS_OK",
             "description": "The current status of the alert",
             "allOf": [
               {
@@ -1306,7 +1253,6 @@
             ]
           },
           "updatedTime": {
-            "example": "2023-10-01T12:00:00.000Z",
             "description": "The time when the alert definition was last updated",
             "type": "string",
             "format": "date-time",
@@ -1409,9 +1355,6 @@
         "type": "object",
         "properties": {
           "alertId": {
-            "example": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ],
             "description": "The alert definition ID(s) to filter by - multiple values are OR'd together",
             "type": "array",
             "items": {
@@ -1451,7 +1394,6 @@
         "type": "object",
         "properties": {
           "minutes": {
-            "example": 30,
             "description": "The time in minutes before the alert can be retriggered",
             "type": "integer",
             "format": "int64",
@@ -1459,7 +1401,6 @@
             "maximum": 10080
           },
           "notifyOn": {
-            "example": "NOTIFY_ON_TRIGGERED_AND_RESOLVED",
             "description": "The condition to notify about the alert",
             "allOf": [
               {
@@ -1544,10 +1485,6 @@
             "maxItems": 100
           },
           "groupByKeys": {
-            "example": [
-              "key1",
-              "key2"
-            ],
             "description": "The keys to group the alerts by",
             "type": "array",
             "items": {
@@ -1607,7 +1544,6 @@
         "type": "object",
         "properties": {
           "priority": {
-            "example": "ALERT_DEF_PRIORITY_P3",
             "description": "The priority of the alert definition",
             "allOf": [
               {
@@ -1723,12 +1659,10 @@
             "maxItems": 1
           },
           "deleted": {
-            "example": false,
             "description": "Whether the alert has been marked as deleted",
             "type": "boolean"
           },
           "description": {
-            "example": "Alert description",
             "description": "A detailed description of what the alert monitors and when it triggers",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1736,7 +1670,6 @@
             "maxLength": 3000
           },
           "enabled": {
-            "example": true,
             "description": "Whether the alert is currently active and monitoring",
             "type": "boolean"
           },
@@ -1757,10 +1690,6 @@
             ]
           },
           "groupByKeys": {
-            "example": [
-              "key1",
-              "key2"
-            ],
             "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
@@ -1854,7 +1783,6 @@
             ]
           },
           "name": {
-            "example": "My Alert",
             "description": "The name of the alert definition",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -1880,12 +1808,10 @@
             "maxItems": 100
           },
           "phantomMode": {
-            "example": false,
             "description": "Whether the alert is in phantom mode (creating incidents or not)",
             "type": "boolean"
           },
           "priority": {
-            "example": "ALERT_DEF_PRIORITY_P4",
             "description": "The priority level of the alert",
             "allOf": [
               {
@@ -1918,7 +1844,6 @@
             ]
           },
           "type": {
-            "example": "ALERT_DEF_TYPE_METRIC_THRESHOLD",
             "description": "Alert type",
             "allOf": [
               {
@@ -2134,9 +2059,6 @@
             ]
           },
           "sloId": {
-            "example": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ],
             "description": "The SLO ID(s) to filter by - multiple values are OR'd together",
             "type": "array",
             "items": {
@@ -2241,7 +2163,6 @@
             ]
           },
           "id": {
-            "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The alert definition ID",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -2333,7 +2254,6 @@
             ]
           },
           "minutes": {
-            "example": 15,
             "description": "The time in minutes before the alert can be retriggered",
             "type": "integer",
             "format": "int64",
@@ -2341,7 +2261,6 @@
             "maximum": 10080
           },
           "notifyOn": {
-            "example": "NOTIFY_ON_TRIGGERED_AND_RESOLVED",
             "description": "The condition under which the alert should be notified",
             "allOf": [
               {
@@ -2376,7 +2295,6 @@
             ]
           },
           "evaluationDelayMs": {
-            "example": 300000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
             "format": "int32",
@@ -2392,7 +2310,6 @@
             ]
           },
           "timeframeMinutes": {
-            "example": 60,
             "description": "The evaluation window duration in minutes",
             "type": "integer",
             "format": "int32",
@@ -2400,7 +2317,6 @@
             "maximum": 2147483647
           },
           "useRowsAsPermutations": {
-            "example": false,
             "description": "Whether each result row is treated as a separate permutation. Defaults to false for immediate alerts to avoid high-cardinality alerts by mistake.",
             "type": "boolean"
           }
@@ -2453,7 +2369,6 @@
         "type": "object",
         "properties": {
           "threshold": {
-            "example": 100,
             "description": "The threshold value to compare against",
             "type": "number",
             "format": "double"
@@ -2477,7 +2392,6 @@
             ]
           },
           "evaluationDelayMs": {
-            "example": 300000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
             "format": "int32",
@@ -2493,7 +2407,6 @@
             ]
           },
           "operator": {
-            "example": "ANALYTICS_THRESHOLD_OPERATOR_MORE_THAN_OR_UNSPECIFIED",
             "description": "The comparison operator applied to all threshold rules",
             "allOf": [
               {
@@ -2511,7 +2424,6 @@
             "maxItems": 5
           },
           "targetColumn": {
-            "example": "error_count",
             "description": "The name of the numeric result column to compare",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2519,7 +2431,6 @@
             "maxLength": 255
           },
           "timeframeMinutes": {
-            "example": 60,
             "description": "The evaluation window duration in minutes",
             "type": "integer",
             "format": "int32",
@@ -2527,7 +2438,6 @@
             "maximum": 2147483647
           },
           "useRowsAsPermutations": {
-            "example": true,
             "description": "Whether each result row is treated as a separate permutation. Defaults to true for threshold alerts as permutation count is easier to estimate.",
             "type": "boolean"
           }
@@ -2586,9 +2496,6 @@
         "type": "object",
         "properties": {
           "deletedIds": {
-            "example": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ],
             "description": "IDs of alert definitions that were successfully deleted",
             "type": "array",
             "items": {
@@ -2602,9 +2509,6 @@
             "maxItems": 100
           },
           "notFoundIds": {
-            "example": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ],
             "description": "IDs of alert definitions that were not found",
             "type": "array",
             "items": {
@@ -2646,9 +2550,6 @@
             "maxItems": 100
           },
           "notFoundIds": {
-            "example": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ],
             "description": "List of alert definition IDs that were not found",
             "type": "array",
             "items": {
@@ -2662,9 +2563,6 @@
             "maxItems": 100
           },
           "skippedIds": {
-            "example": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ],
             "description": "List of alert definition IDs that were skipped (no changes detected)",
             "type": "array",
             "items": {
@@ -2800,7 +2698,6 @@
         "type": "object",
         "properties": {
           "query": {
-            "example": "source logs | filter severity == 'error' | count_agg_key by applicationName",
             "description": "The DataPrime query string",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2848,16 +2745,12 @@
         "type": "object",
         "properties": {
           "content": {
-            "example": "SGVsbG8gV29ybGQ=",
             "description": "Base64-encoded binary data of the alert definitions",
             "type": "string",
             "format": "byte",
             "minLength": 0
           },
           "notFoundIds": {
-            "example": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ],
             "description": "Requested alert definition IDs that were not included in the download because they were not found or are not accessible. Populated on the first streamed message.",
             "type": "array",
             "items": {
@@ -2889,7 +2782,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 25,
             "description": "The count for this enabled status",
             "type": "integer",
             "format": "int64",
@@ -2897,7 +2789,6 @@
             "maximum": 4294967295
           },
           "enabled": {
-            "example": true,
             "description": "Whether the alert is enabled (true) or disabled (false)",
             "type": "boolean"
           }
@@ -2912,7 +2803,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 28,
             "description": "The count for this entity label value",
             "type": "integer",
             "format": "int64",
@@ -2920,7 +2810,6 @@
             "maximum": 4294967295
           },
           "labelKey": {
-            "example": "environment",
             "description": "The entity label key",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2928,7 +2817,6 @@
             "maxLength": 1024
           },
           "labelValue": {
-            "example": "production",
             "description": "The entity label value",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -2985,7 +2873,6 @@
         "type": "object",
         "properties": {
           "index": {
-            "example": 0,
             "description": "Zero-based index of the alert definition in the request list that failed to be created",
             "type": "integer",
             "format": "int32",
@@ -2993,7 +2880,6 @@
             "maximum": 99
           },
           "reason": {
-            "example": "Alert definition name must not be empty.",
             "description": "Human-readable explanation of why the alert definition failed to be created",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -3015,7 +2901,6 @@
         "type": "object",
         "properties": {
           "id": {
-            "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The alert definition ID",
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
@@ -3023,7 +2908,6 @@
             "maxLength": 36
           },
           "reason": {
-            "example": "Alert definition failed validation.",
             "description": "Human-readable explanation of why the alert definition failed to be replaced. May be omitted when no further detail is available.",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -3096,7 +2980,6 @@
         "type": "object",
         "properties": {
           "enabled": {
-            "example": true,
             "description": "Whether to filter for enabled (true) or disabled (false) alerts",
             "type": "boolean"
           }
@@ -3119,7 +3002,6 @@
             }
           },
           "valuesOperator": {
-            "example": "FILTER_VALUES_OPERATOR_AND",
             "description": "Whether all labels must match (AND) or any label can match (OR)",
             "allOf": [
               {
@@ -3138,7 +3020,6 @@
         "type": "object",
         "properties": {
           "matcher": {
-            "example": "FILTER_MATCHER_CONTAINS",
             "description": "The filter operator (EQUALS, NOT_EQUALS, CONTAINS)",
             "allOf": [
               {
@@ -3147,10 +3028,6 @@
             ]
           },
           "name": {
-            "example": [
-              "My Alert",
-              "Another Alert"
-            ],
             "description": "The name(s) of the alert definition - multiple values are OR'd together",
             "type": "array",
             "items": {
@@ -3174,11 +3051,6 @@
         "type": "object",
         "properties": {
           "priority": {
-            "example": [
-              "ALERT_DEF_PRIORITY_P1",
-              "ALERT_DEF_PRIORITY_P2",
-              "ALERT_DEF_PRIORITY_P3"
-            ],
             "description": "The alert priorities to include in the count",
             "type": "array",
             "items": {
@@ -3216,7 +3088,6 @@
         "type": "object",
         "properties": {
           "matcher": {
-            "example": "FILTER_MATCHER_EQUALS",
             "description": "The filter operator (EQUALS, NOT_EQUALS)",
             "allOf": [
               {
@@ -3225,11 +3096,6 @@
             ]
           },
           "status": {
-            "example": [
-              "ALERT_DEF_STATUS_ALERTING",
-              "ALERT_DEF_STATUS_OK",
-              "ALERT_DEF_STATUS_NO_DATA"
-            ],
             "description": "The alert statuses to include in the count",
             "type": "array",
             "items": {
@@ -3249,12 +3115,6 @@
         "type": "object",
         "properties": {
           "type": {
-            "example": [
-              "ALERT_DEF_TYPE_LOGS_THRESHOLD",
-              "ALERT_DEF_TYPE_LOGS_NEW_VALUE",
-              "ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT",
-              "ALERT_DEF_TYPE_TRACING_THRESHOLD"
-            ],
             "description": "The alert types",
             "type": "array",
             "items": {
@@ -3285,7 +3145,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -3325,7 +3184,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -3368,7 +3226,6 @@
             "maxLength": 20
           },
           "timeframeType": {
-            "example": "TIMEFRAME_TYPE_UP_TO",
             "description": "The type of timeframe for the flow alert.",
             "allOf": [
               {
@@ -3396,7 +3253,6 @@
             "maxItems": 30
           },
           "alertsOp": {
-            "example": "ALERTS_OP_OR",
             "description": "The logical operation to apply to the alerts in the group.",
             "allOf": [
               {
@@ -3405,7 +3261,6 @@
             ]
           },
           "nextOp": {
-            "example": "NEXT_OP_OR",
             "description": "The logical operation to apply to the next stage.",
             "allOf": [
               {
@@ -3443,7 +3298,6 @@
         "type": "object",
         "properties": {
           "id": {
-            "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The alert definition ID",
             "type": "string",
             "pattern": "^[\\s\\S]*$",
@@ -3451,7 +3305,6 @@
             "maxLength": 36
           },
           "not": {
-            "example": true,
             "description": "Whether to negate the alert definition or not.",
             "type": "boolean"
           }
@@ -3542,7 +3395,6 @@
         "type": "object",
         "properties": {
           "operation": {
-            "example": "LOG_FILTER_OPERATION_TYPE_INCLUDES",
             "description": "The operation to perform on the label value",
             "allOf": [
               {
@@ -3551,7 +3403,6 @@
             ]
           },
           "value": {
-            "example": "my-app",
             "description": "The value of the label to filter by",
             "type": "string",
             "minLength": 0
@@ -3656,7 +3507,6 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "example": "LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
             "description": "The type of condition for the alert",
             "allOf": [
               {
@@ -3665,7 +3515,6 @@
             ]
           },
           "minimumThreshold": {
-            "example": 10,
             "description": "The threshold value for the alert condition",
             "type": "number",
             "format": "double"
@@ -3723,7 +3572,6 @@
             ]
           },
           "evaluationDelayMs": {
-            "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
             "format": "int32",
@@ -3734,9 +3582,6 @@
             "$ref": "#/components/schemas/v3.LogsFilter"
           },
           "notificationPayloadFilter": {
-            "example": [
-              "obj.field"
-            ],
             "description": "The filter to specify which fields to include in the notification payload",
             "type": "array",
             "items": {
@@ -3775,9 +3620,6 @@
             ]
           },
           "notificationPayloadFilter": {
-            "example": [
-              "obj.field"
-            ],
             "description": "The notification payload filter.",
             "type": "array",
             "items": {
@@ -3798,7 +3640,6 @@
         "type": "object",
         "properties": {
           "keypathToTrack": {
-            "example": "metadata.field",
             "description": "The keypath to track for new values",
             "type": "string",
             "minLength": 0
@@ -3840,7 +3681,6 @@
         "type": "object",
         "properties": {
           "logsNewValueTimeWindowSpecificValue": {
-            "example": "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED",
             "description": "A time window defined by a specific value",
             "allOf": [
               {
@@ -3881,9 +3721,6 @@
             ]
           },
           "notificationPayloadFilter": {
-            "example": [
-              "obj.field"
-            ],
             "description": "The filter to specify which fields to include in the notification payload.",
             "type": "array",
             "items": {
@@ -3913,7 +3750,6 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "example": "LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
             "description": "The type of condition for the alert",
             "allOf": [
               {
@@ -3922,14 +3758,12 @@
             ]
           },
           "threshold": {
-            "example": 10,
             "description": "The threshold value for the alert condition",
             "type": "number",
             "format": "double",
             "minimum": 0
           },
           "timeWindow": {
-            "example": 10,
             "description": "The time window for the alert condition",
             "allOf": [
               {
@@ -4000,14 +3834,12 @@
             ]
           },
           "denominatorAlias": {
-            "example": "denominator_alias",
             "description": "The alias for the denominator filter, used for display purposes",
             "type": "string",
             "minLength": 0,
             "maxLength": 200
           },
           "evaluationDelayMs": {
-            "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
             "format": "int32",
@@ -4015,7 +3847,6 @@
             "maximum": 10800000
           },
           "groupByFor": {
-            "example": "LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY",
             "description": "The group by settings for the numerator and denominator filters",
             "allOf": [
               {
@@ -4024,14 +3855,10 @@
             ]
           },
           "ignoreInfinity": {
-            "example": true,
             "description": "The configuration for ignoring infinity values in the ratio",
             "type": "boolean"
           },
           "notificationPayloadFilter": {
-            "example": [
-              "obj.field"
-            ],
             "description": "The notification payload filter.",
             "type": "array",
             "items": {
@@ -4050,7 +3877,6 @@
             ]
           },
           "numeratorAlias": {
-            "example": "numerator_alias",
             "description": "The alias for the numerator filter, used for display purposes",
             "type": "string",
             "minLength": 0,
@@ -4085,7 +3911,6 @@
         "type": "object",
         "properties": {
           "logsRatioTimeWindowSpecificValue": {
-            "example": "LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
             "description": "Specifies the time window for the ratio alert",
             "allOf": [
               {
@@ -4139,7 +3964,6 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "example": "LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
             "description": "The type of condition for the alert",
             "allOf": [
               {
@@ -4148,7 +3972,6 @@
             ]
           },
           "threshold": {
-            "example": 100,
             "description": "The threshold value for the alert condition",
             "type": "number",
             "format": "double",
@@ -4210,7 +4033,6 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
-            "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
             "format": "int32",
@@ -4234,9 +4056,6 @@
             ]
           },
           "notificationPayloadFilter": {
-            "example": [
-              "obj.field"
-            ],
             "description": "The filter to specify which fields to include in the notification payload",
             "type": "array",
             "items": {
@@ -4286,7 +4105,6 @@
         "type": "object",
         "properties": {
           "comparedTo": {
-            "example": "LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY",
             "description": "The time frame to compare the current value against",
             "allOf": [
               {
@@ -4295,7 +4113,6 @@
             ]
           },
           "conditionType": {
-            "example": "LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
             "description": "The type of condition for the alert",
             "allOf": [
               {
@@ -4355,7 +4172,6 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
-            "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
             "format": "int32",
@@ -4363,7 +4179,6 @@
             "maximum": 10800000
           },
           "ignoreInfinity": {
-            "example": true,
             "description": "Ignore infinity values in the alert",
             "type": "boolean"
           },
@@ -4376,9 +4191,6 @@
             ]
           },
           "notificationPayloadFilter": {
-            "example": [
-              "obj.field"
-            ],
             "description": "The notification payload filter.",
             "type": "array",
             "items": {
@@ -4416,7 +4228,6 @@
         "type": "object",
         "properties": {
           "logsTimeWindowSpecificValue": {
-            "example": "LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
             "description": "A time window defined by a specific value",
             "allOf": [
               {
@@ -4453,7 +4264,6 @@
         "type": "object",
         "properties": {
           "maxUniqueCount": {
-            "example": "100",
             "description": "The maximum unique count",
             "type": "string",
             "pattern": "^-?[0-9]+$",
@@ -4506,7 +4316,6 @@
             ]
           },
           "maxUniqueCountPerGroupByKey": {
-            "example": "100",
             "description": "The maximum unique count per group by key",
             "type": "string",
             "pattern": "^-?[0-9]+$",
@@ -4514,9 +4323,6 @@
             "maxLength": 20
           },
           "notificationPayloadFilter": {
-            "example": [
-              "obj.field"
-            ],
             "description": "The filter to specify which fields to include in the notification payload",
             "type": "array",
             "items": {
@@ -4536,7 +4342,6 @@
             "maxItems": 1
           },
           "uniqueCountKeypath": {
-            "example": "obj.field",
             "description": "The keypath in the logs to be used for unique count",
             "type": "string",
             "minLength": 1
@@ -4552,7 +4357,6 @@
         "type": "object",
         "properties": {
           "logsUniqueValueTimeWindowSpecificValue": {
-            "example": "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12",
             "description": "A time window defined by a specific value",
             "allOf": [
               {
@@ -4590,7 +4394,6 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "example": "METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL",
             "description": "The type of condition for the alert.",
             "allOf": [
               {
@@ -4599,7 +4402,6 @@
             ]
           },
           "forOverPct": {
-            "example": 20,
             "description": "The percentage of the metric that must exceed the threshold to trigger the alert",
             "type": "integer",
             "format": "int64",
@@ -4607,7 +4409,6 @@
             "maximum": 100
           },
           "minNonNullValuesPct": {
-            "example": 10,
             "description": "The percentage of non-null values required to trigger the alert",
             "type": "integer",
             "format": "int64",
@@ -4623,7 +4424,6 @@
             ]
           },
           "threshold": {
-            "example": 10,
             "description": "The threshold value for the alert condition",
             "type": "number",
             "format": "double"
@@ -4674,7 +4474,6 @@
             ]
           },
           "evaluationDelayMs": {
-            "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
             "format": "int32",
@@ -4709,7 +4508,6 @@
         "type": "object",
         "properties": {
           "promql": {
-            "example": "avg_over_time(metric_name[5m]) > 10",
             "description": "A PromQL filter for metrics",
             "type": "string",
             "minLength": 1,
@@ -4726,7 +4524,6 @@
         "type": "object",
         "properties": {
           "minNonNullValuesPct": {
-            "example": 80,
             "description": "If set, specifies the minimum percentage of non-null values required for the alert to be triggered",
             "type": "integer",
             "format": "int64",
@@ -4734,7 +4531,6 @@
             "maximum": 100
           },
           "replaceWithZero": {
-            "example": true,
             "description": "If set to true, missing values will be replaced with zero",
             "type": "boolean"
           }
@@ -4782,7 +4578,6 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "example": "METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS",
             "description": "The type of the alert condition",
             "allOf": [
               {
@@ -4791,7 +4586,6 @@
             ]
           },
           "forOverPct": {
-            "example": 80,
             "description": "The percentage of values that must exceed the threshold to trigger the alert",
             "type": "integer",
             "format": "int64",
@@ -4807,7 +4601,6 @@
             ]
           },
           "threshold": {
-            "example": 100,
             "description": "The threshold value for the alert condition",
             "type": "number",
             "format": "double"
@@ -4862,7 +4655,6 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
-            "example": 60000,
             "description": "The delay in milliseconds before evaluating the alert condition",
             "type": "integer",
             "format": "int32",
@@ -4921,13 +4713,11 @@
         "type": "object",
         "properties": {
           "metricTimeWindowDynamicDuration": {
-            "example": "1h30m",
             "description": "The time window as a dynamic value",
             "type": "string",
             "minLength": 0
           },
           "metricTimeWindowSpecificValue": {
-            "example": "METRIC_TIME_WINDOW_VALUE_MINUTES_5",
             "description": "The time window as a specific value",
             "allOf": [
               {
@@ -5021,14 +4811,12 @@
         "type": "object",
         "properties": {
           "autoRetireSeconds": {
-            "example": 3600,
             "description": "The timeframe in seconds for auto retiring values that were detected as no-data. accepts only multiples of 60 seconds",
             "type": "integer",
             "format": "int32",
             "minimum": 60
           },
           "state": {
-            "example": "NO_DATA_POLICY_STATE_ALERTING",
             "description": "The state to which the alert falls back to when theres no data (replaces UndetectedValuesManagement - this feature is being released gradually and might not be available for all customers yet)",
             "allOf": [
               {
@@ -5059,13 +4847,11 @@
         "type": "object",
         "properties": {
           "connectorId": {
-            "example": "connector_id_example",
             "description": "The connector ID used to send notifications",
             "type": "string",
             "minLength": 0
           },
           "notifyOn": {
-            "example": "NOTIFY_ON_TRIGGERED_AND_RESOLVED",
             "description": "The condition under which the notification should be sent",
             "allOf": [
               {
@@ -5074,7 +4860,6 @@
             ]
           },
           "presetId": {
-            "example": "preset_id_example",
             "description": "Optional preset ID for the notification destination",
             "type": "string",
             "minLength": 0
@@ -5088,7 +4873,6 @@
             ]
           },
           "retriggeringPeriodMinutes": {
-            "example": 600,
             "description": "The time in minutes before a new notification is sent for this destination",
             "type": "integer",
             "format": "int64",
@@ -5113,13 +4897,11 @@
         "type": "object",
         "properties": {
           "id": {
-            "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The ID of the notification router",
             "type": "string",
             "minLength": 0
           },
           "notifyOn": {
-            "example": "NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED",
             "description": "The condition under which the notification should be sent",
             "allOf": [
               {
@@ -5164,7 +4946,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 15,
             "description": "The count for this alert priority",
             "type": "integer",
             "format": "int64",
@@ -5172,7 +4953,6 @@
             "maximum": 4294967295
           },
           "priority": {
-            "example": "ALERT_DEF_PRIORITY_P1",
             "description": "The alert priority",
             "allOf": [
               {
@@ -5191,9 +4971,6 @@
         "type": "object",
         "properties": {
           "emails": {
-            "example": [
-              "mail@gmail.com"
-            ],
             "description": "The list of email recipients for alert notifications",
             "type": "array",
             "items": {
@@ -5344,7 +5121,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 15,
             "description": "The count for this alert status",
             "type": "integer",
             "format": "int64",
@@ -5352,7 +5128,6 @@
             "maximum": 4294967295
           },
           "status": {
-            "example": "ALERT_DEF_STATUS_ALERTING",
             "description": "The alert status",
             "allOf": [
               {
@@ -5371,7 +5146,6 @@
         "type": "object",
         "properties": {
           "duration": {
-            "example": "24",
             "description": "The duration value",
             "type": "string",
             "pattern": "^[0-9]+$",
@@ -5379,7 +5153,6 @@
             "maxLength": 20
           },
           "unit": {
-            "example": "DURATION_UNIT_HOURS",
             "description": "The unit of the duration",
             "allOf": [
               {
@@ -5398,7 +5171,6 @@
         "type": "object",
         "properties": {
           "hours": {
-            "example": 14,
             "description": "The hours.",
             "type": "integer",
             "format": "int32",
@@ -5406,7 +5178,6 @@
             "maximum": 23
           },
           "minutes": {
-            "example": 30,
             "description": "The minutes.",
             "type": "integer",
             "format": "int32",
@@ -5461,7 +5232,6 @@
         "type": "object",
         "properties": {
           "operation": {
-            "example": "TRACING_FILTER_OPERATION_TYPE_STARTS_WITH",
             "description": "The operation to perform on the label value",
             "allOf": [
               {
@@ -5470,10 +5240,6 @@
             ]
           },
           "values": {
-            "example": [
-              "value1",
-              "value2"
-            ],
             "description": "The values of the label to filter by",
             "type": "array",
             "items": {
@@ -5495,9 +5261,6 @@
         "type": "object",
         "properties": {
           "notificationPayloadFilter": {
-            "example": [
-              "obj.field"
-            ],
             "description": "Notification payload field filter",
             "type": "array",
             "items": {
@@ -5576,7 +5339,6 @@
         "type": "object",
         "properties": {
           "latencyThresholdMs": {
-            "example": "1000",
             "description": "The latency threshold to filter traces in milliseconds",
             "type": "string",
             "pattern": "^[0-9]+$",
@@ -5610,7 +5372,6 @@
             ]
           },
           "key": {
-            "example": "span.field.key",
             "description": "The key of the span field to filter by",
             "type": "string",
             "minLength": 0
@@ -5626,7 +5387,6 @@
         "type": "object",
         "properties": {
           "conditionType": {
-            "example": "TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
             "description": "The type of condition for the alert",
             "allOf": [
               {
@@ -5635,7 +5395,6 @@
             ]
           },
           "spanAmount": {
-            "example": 100,
             "description": "The threshold value for the alert condition",
             "type": "number",
             "format": "double",
@@ -5686,9 +5445,6 @@
         "type": "object",
         "properties": {
           "notificationPayloadFilter": {
-            "example": [
-              "obj.field"
-            ],
             "description": "Notification payload field filter",
             "type": "array",
             "items": {
@@ -5726,7 +5482,6 @@
         "type": "object",
         "properties": {
           "tracingTimeWindowValue": {
-            "example": "TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
             "description": "A time window defined by a specific value",
             "allOf": [
               {
@@ -5763,7 +5518,6 @@
         "type": "object",
         "properties": {
           "count": {
-            "example": 42,
             "description": "The count for this alert type",
             "type": "integer",
             "format": "int64",
@@ -5771,7 +5525,6 @@
             "maximum": 4294967295
           },
           "type": {
-            "example": "ALERT_DEF_TYPE_LOGS_THRESHOLD",
             "description": "The alert type",
             "allOf": [
               {
@@ -5842,13 +5595,11 @@
         "type": "object",
         "properties": {
           "fieldName": {
-            "example": "description",
             "description": "The name of the configuration field",
             "type": "string",
             "minLength": 0
           },
           "template": {
-            "example": "template_example",
             "description": "The template for the configuration field",
             "type": "string",
             "minLength": 0
@@ -5872,7 +5623,6 @@
         "type": "object",
         "properties": {
           "integrationId": {
-            "example": 123,
             "description": "The integration ID for the notification",
             "type": "integer",
             "format": "int64",
@@ -5948,13 +5698,11 @@
         "type": "object",
         "properties": {
           "fieldName": {
-            "example": "description",
             "description": "The name of the configuration field",
             "type": "string",
             "minLength": 0
           },
           "template": {
-            "example": "template_example",
             "description": "The template for the configuration field",
             "type": "string",
             "minLength": 0
@@ -5970,7 +5718,6 @@
         "type": "object",
         "properties": {
           "sloId": {
-            "example": "123e4567-e89b-12d3-a456-426614174000",
             "description": "The SLO ID",
             "type": "string",
             "minLength": 1,
@@ -6003,7 +5750,6 @@
             "minItems": 0
           },
           "payloadType": {
-            "example": "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default",
             "description": "the payload type for the notification",
             "type": "string",
             "minLength": 0
@@ -6045,7 +5791,6 @@
         "type": "object",
         "properties": {
           "autoRetireTimeframe": {
-            "example": "AUTO_RETIRE_TIMEFRAME_HOURS_24",
             "description": "The timeframe for auto-retiring the alert when undetected values are detected",
             "allOf": [
               {
@@ -6054,7 +5799,6 @@
             ]
           },
           "triggerUndetectedValues": {
-            "example": true,
             "description": "Should trigger the alert when undetected values are detected",
             "type": "boolean"
           }

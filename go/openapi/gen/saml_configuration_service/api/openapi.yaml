@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Activate/Deactivate SAML",
         "description": "Activates or deactivates SAML for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "SamlConfigurationService_SetActive",
         "requestBody": {
           "content": {
@@ -90,9 +87,6 @@
         ],
         "summary": "Get SAML Configuration",
         "description": "Returns the current SAML configuration for the team.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "SamlConfigurationService_GetConfiguration",
         "parameters": [
           {
@@ -159,9 +153,6 @@
         ],
         "summary": "Set IDP Parameters",
         "description": "Sets the identity provider parameters for SAML.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "SamlConfigurationService_SetIDPParameters",
         "requestBody": {
           "content": {
@@ -236,9 +227,6 @@
         ],
         "summary": "Get SP Parameters",
         "description": "Returns the service provider parameters for SAML.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "SamlConfigurationService_GetSPParameters",
         "parameters": [
           {
@@ -246,7 +234,6 @@
             "name": "team_id",
             "description": "Team identifier.",
             "schema": {
-              "example": 1234567,
               "description": "Team identifier.",
               "type": "integer",
               "format": "int64",
@@ -342,7 +329,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -374,7 +360,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -462,7 +447,6 @@
         "type": "object",
         "properties": {
           "active": {
-            "example": true,
             "description": "Whether SAML SSO is currently active for this team.",
             "type": "boolean"
           },
@@ -470,7 +454,6 @@
             "description": "List of group names mapped from the identity provider for role-based access.",
             "type": "array",
             "items": {
-              "example": "group1",
               "description": "List of group names mapped from the identity provider for role-based access.",
               "type": "string",
               "minLength": 0
@@ -478,19 +461,16 @@
             "minItems": 0
           },
           "metadataContent": {
-            "example": "<?xml version= ...",
             "description": "Raw XML content of the identity provider SAML metadata document.",
             "type": "string",
             "minLength": 0
           },
           "metadataUrl": {
-            "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
             "description": "URL to the identity provider SAML metadata XML document.",
             "type": "string",
             "minLength": 0
           },
           "teamEntityId": {
-            "example": 1234567,
             "description": "Coralogix team entity identifier used as the SAML service provider entity ID.",
             "type": "integer",
             "format": "int64",
@@ -557,31 +537,26 @@
         "type": "object",
         "properties": {
           "assertionConsumerServiceUrl": {
-            "example": "assertion",
             "description": "The assertion consumer service url.",
             "type": "string",
             "minLength": 0
           },
           "binding": {
-            "example": "binding",
             "description": "The binding.",
             "type": "string",
             "minLength": 0
           },
           "metadataUrl": {
-            "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
             "description": "The metadata url.",
             "type": "string",
             "minLength": 0
           },
           "nameIdFormat": {
-            "example": "name_id",
             "description": "The name id format.",
             "type": "string",
             "minLength": 0
           },
           "signingCertPem": {
-            "example": "certificate",
             "description": "The signing cert pem.",
             "type": "string",
             "minLength": 0

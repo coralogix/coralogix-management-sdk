@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "",
     "version": "1.0.0"
@@ -12,9 +12,6 @@
         ],
         "summary": "Get target",
         "description": "Returns the current log archive target configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "S3TargetService_GetTarget",
         "responses": {
           "200": {
@@ -65,9 +62,6 @@
         ],
         "summary": "Set target",
         "description": "Sets the log archive target configuration.",
-        "externalDocs": {
-          "url": ""
-        },
         "operationId": "S3TargetService_SetTarget",
         "requestBody": {
           "content": {
@@ -81,7 +75,6 @@
                     "$ref": "#/components/schemas/TargetFormat"
                   },
                   "isActive": {
-                    "example": true,
                     "description": "Whether archiving to this target is active.",
                     "type": "boolean"
                   },
@@ -156,13 +149,11 @@
         "properties": {
           "archivingFormatId": {
             "deprecated": true,
-            "example": "json_id",
             "description": "The archiving format ID.",
             "type": "string",
             "minLength": 0
           },
           "enableTags": {
-            "example": true,
             "description": "The enable tags.",
             "type": "boolean"
           },
@@ -170,7 +161,6 @@
             "$ref": "#/components/schemas/TargetFormat"
           },
           "isActive": {
-            "example": true,
             "description": "The archiving format id.",
             "type": "boolean"
           }
@@ -216,7 +206,6 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "example": "test",
             "type": "string",
             "minLength": 0
           }
@@ -248,7 +237,6 @@
         "type": "object",
         "properties": {
           "operator": {
-            "example": "FILTER_OPERATOR_OR",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
@@ -277,13 +265,11 @@
         "type": "object",
         "properties": {
           "bucketCrn": {
-            "example": "bucket_crn",
             "description": "The bucket crn.",
             "type": "string",
             "minLength": 0
           },
           "bucketType": {
-            "example": "0",
             "allOf": [
               {
                 "$ref": "#/components/schemas/IbmBucketType"
@@ -291,13 +277,11 @@
             ]
           },
           "endpoint": {
-            "example": "http://some.endpoint.com:8081",
             "description": "Endpoint.",
             "type": "string",
             "minLength": 0
           },
           "serviceCrn": {
-            "example": "service_crn",
             "description": "The service crn.",
             "type": "string",
             "minLength": 0
@@ -377,25 +361,21 @@
         "type": "object",
         "properties": {
           "bucket": {
-            "example": "bucket",
             "description": "Bucket name.",
             "type": "string",
             "minLength": 0
           },
           "externalId": {
-            "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
             "description": "External identifier.",
             "type": "string",
             "minLength": 0
           },
           "region": {
-            "example": "us-west-2",
             "description": "Region.",
             "type": "string",
             "minLength": 0
           },
           "roleArn": {
-            "example": "arn:aws:iam::123456789012:role/CoralogixArchive",
             "description": "The role arn.",
             "type": "string",
             "minLength": 0
