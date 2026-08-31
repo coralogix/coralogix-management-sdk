@@ -29,7 +29,7 @@ func CreateTracingImmediateAlert() *alerts.AlertDefProperties {
 		Enabled:     alerts.PtrBool(true),
 		Priority:    alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
 		Type:        alerts.ALERTDEFTYPE_ALERT_DEF_TYPE_TRACING_IMMEDIATE.Ptr(),
-		EntityLabels: &map[string]string{
+		EntityLabels: map[string]string{
 			"alert_type":        "security",
 			"security_severity": "high",
 		},
@@ -80,7 +80,7 @@ func CreateLogsRatioAlert() *alerts.AlertDefProperties {
 		Enabled:     alerts.PtrBool(true),
 		Priority:    alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
 		Type:        alerts.ALERTDEFTYPE_ALERT_DEF_TYPE_LOGS_RATIO_THRESHOLD.Ptr(),
-		EntityLabels: &map[string]string{
+		EntityLabels: map[string]string{
 			"alert_type":        "security",
 			"security_severity": "high",
 		},
@@ -141,7 +141,7 @@ func CreateTracingThresholdAlert() *alerts.AlertDefProperties {
 		Enabled:     alerts.PtrBool(true),
 		Priority:    alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
 		Type:        alerts.ALERTDEFTYPE_ALERT_DEF_TYPE_TRACING_THRESHOLD.Ptr(),
-		EntityLabels: &map[string]string{
+		EntityLabels: map[string]string{
 			"alert_type":        "security",
 			"security_severity": "high",
 		},
@@ -213,7 +213,7 @@ func CreateFlowAlert(alertID string) *alerts.AlertDefProperties {
 		Enabled:     alerts.PtrBool(true),
 		Priority:    alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
 		Type:        alerts.ALERTDEFTYPE_ALERT_DEF_TYPE_FLOW.Ptr(),
-		EntityLabels: &map[string]string{
+		EntityLabels: map[string]string{
 			"alert_type":        "security",
 			"security_severity": "high",
 		},
@@ -678,7 +678,7 @@ func CreateBurnRateSloAlert(sloID string) *alerts.AlertDefProperties {
 		Enabled:     alerts.PtrBool(true),
 		Priority:    alerts.ALERTDEFPRIORITY_ALERT_DEF_PRIORITY_P1.Ptr(),
 		Type:        alerts.ALERTDEFTYPE_ALERT_DEF_TYPE_SLO_THRESHOLD.Ptr(),
-		EntityLabels: &map[string]string{
+		EntityLabels: map[string]string{
 			"alert_type": "slo",
 		},
 		PhantomMode: alerts.PtrBool(false),
