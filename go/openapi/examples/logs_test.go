@@ -35,6 +35,10 @@ func TestArchiveLogs(t *testing.T) {
 	client := cxsdk.NewArchiveLogsClient(cfg)
 
 	setTargetReq := targets.SetTargetResponse{
+		// IsActive must be true: leaving it false disables the log archive,
+		// which breaks later tests (e.g. TestPolicies) that require an active
+		// archive to create MEDIUM/LOW priority policies.
+		IsActive: true,
 		S3: targets.S3TargetSpec{
 			Bucket: logsBucket,
 			Region: &awsRegion,
