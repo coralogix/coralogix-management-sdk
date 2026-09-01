@@ -35,7 +35,7 @@ func (r ApiUsersMgmtServiceCreateUsersRequest) CreateUserRequest(createUserReque
 	return r
 }
 
-func (r ApiUsersMgmtServiceCreateUsersRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiUsersMgmtServiceCreateUsersRequest) Execute() (*CreateUsersResponse, *http.Response, error) {
 	return r.ApiService.UsersMgmtServiceCreateUsersExecute(r)
 }
 
@@ -57,13 +57,13 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsers(ctx conte
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
-func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r ApiUsersMgmtServiceCreateUsersRequest) (map[string]interface{}, *http.Response, error) {
+//  @return CreateUsersResponse
+func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r ApiUsersMgmtServiceCreateUsersRequest) (*CreateUsersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarReturnValue  *CreateUsersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersManagementServiceAPIService.UsersMgmtServiceCreateUsers")

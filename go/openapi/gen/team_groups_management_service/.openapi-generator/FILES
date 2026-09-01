@@ -29,6 +29,7 @@ model_role_update.go
 model_role_update_action.go
 model_scope_update.go
 model_scope_update_action.go
+model_set_role_by_name.go
 model_set_role_id.go
 model_set_scope_id.go
 model_team_group.go

@@ -27,6 +27,8 @@ type RoleUpdateAction struct {
 	ActionType string `json:"actionType"`
 	// The clear.
 	Clear *ClearRole `json:"clear,omitempty"`
+	// Set the role by name rather than by id. Select this arm by sending `actionType: \"set_role_by_name\"`.
+	SetRoleByName *SetRoleByName `json:"setRoleByName,omitempty"`
 	SetRoleId *SetRoleId `json:"setRoleId,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -108,6 +110,38 @@ func (o *RoleUpdateAction) SetClear(v ClearRole) {
 	o.Clear = &v
 }
 
+// GetSetRoleByName returns the SetRoleByName field value if set, zero value otherwise.
+func (o *RoleUpdateAction) GetSetRoleByName() SetRoleByName {
+	if o == nil || IsNil(o.SetRoleByName) {
+		var ret SetRoleByName
+		return ret
+	}
+	return *o.SetRoleByName
+}
+
+// GetSetRoleByNameOk returns a tuple with the SetRoleByName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoleUpdateAction) GetSetRoleByNameOk() (*SetRoleByName, bool) {
+	if o == nil || IsNil(o.SetRoleByName) {
+		return nil, false
+	}
+	return o.SetRoleByName, true
+}
+
+// HasSetRoleByName returns a boolean if a field has been set.
+func (o *RoleUpdateAction) HasSetRoleByName() bool {
+	if o != nil && !IsNil(o.SetRoleByName) {
+		return true
+	}
+
+	return false
+}
+
+// SetSetRoleByName gets a reference to the given SetRoleByName and assigns it to the SetRoleByName field.
+func (o *RoleUpdateAction) SetSetRoleByName(v SetRoleByName) {
+	o.SetRoleByName = &v
+}
+
 // GetSetRoleId returns the SetRoleId field value if set, zero value otherwise.
 func (o *RoleUpdateAction) GetSetRoleId() SetRoleId {
 	if o == nil || IsNil(o.SetRoleId) {
@@ -154,6 +188,9 @@ func (o RoleUpdateAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Clear) {
 		toSerialize["clear"] = o.Clear
 	}
+	if !IsNil(o.SetRoleByName) {
+		toSerialize["setRoleByName"] = o.SetRoleByName
+	}
 	if !IsNil(o.SetRoleId) {
 		toSerialize["setRoleId"] = o.SetRoleId
 	}
@@ -164,8 +201,11 @@ func (o RoleUpdateAction) ToMap() (map[string]interface{}, error) {
 	if _, exists := toSerialize["clear"]; exists {
 		optionalOneOfGroup0Matches++
 	}
+	if _, exists := toSerialize["setRoleByName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
 	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [setRoleId, clear] may be set"}
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [setRoleId, clear, setRoleByName] may be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["setRoleId"]; exists {
@@ -173,6 +213,9 @@ func (o RoleUpdateAction) ToMap() (map[string]interface{}, error) {
 	}
 	if _, exists := o.AdditionalProperties["clear"]; exists {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field clear must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["setRoleByName"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field setRoleByName must be set through the typed field, not AdditionalProperties"}
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -211,8 +254,11 @@ func (o *RoleUpdateAction) UnmarshalJSON(data []byte) (err error) {
 	if _, exists := allProperties["clear"]; exists {
 		optionalOneOfGroup0Matches++
 	}
+	if _, exists := allProperties["setRoleByName"]; exists {
+		optionalOneOfGroup0Matches++
+	}
 	if optionalOneOfGroup0Matches > 1 {
-		return GenericOpenAPIError{error: "at most one of [setRoleId, clear] may be set"}
+		return GenericOpenAPIError{error: "at most one of [setRoleId, clear, setRoleByName] may be set"}
 	}
 
 	varRoleUpdateAction := _RoleUpdateAction{}
@@ -236,12 +282,16 @@ func (o *RoleUpdateAction) UnmarshalJSON(data []byte) (err error) {
 		if _, exists := additionalProperties["clear"]; exists {
 			optionalOneOfGroup0MatchesInPayload++
 		}
+		if _, exists := additionalProperties["setRoleByName"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
 		if optionalOneOfGroup0MatchesInPayload > 1 {
-			return GenericOpenAPIError{error: "at most one of [setRoleId, clear] may be set"}
+			return GenericOpenAPIError{error: "at most one of [setRoleId, clear, setRoleByName] may be set"}
 		}
 
 		delete(additionalProperties, "actionType")
 		delete(additionalProperties, "clear")
+		delete(additionalProperties, "setRoleByName")
 		delete(additionalProperties, "setRoleId")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

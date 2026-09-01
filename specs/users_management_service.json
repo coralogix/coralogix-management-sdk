@@ -622,6 +622,58 @@
           }
         }
       },
+      "CreateUserResult": {
+        "externalDocs": {
+          "url": ""
+        },
+        "type": "object",
+        "properties": {
+          "message": {
+            "description": "Human-readable detail about this outcome. Set where a status alone is not enough, such as `CREATE_USER_STATUS_FAILED`.",
+            "type": "string",
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "status": {
+            "$ref": "#/components/schemas/CreateUserStatus"
+          },
+          "userAccountId": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "userId": {
+            "description": "Stable id of the user. Absent when the outcome produced no user, such as an invited user, who has none until the invitation is accepted.",
+            "type": "string",
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "username": {
+            "description": "The username from the request this result belongs to",
+            "type": "string",
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        },
+        "required": [
+          "username"
+        ]
+      },
+      "CreateUserStatus": {
+        "type": "string",
+        "enum": [
+          "CREATE_USER_STATUS_UNSPECIFIED",
+          "CREATE_USER_STATUS_CREATED",
+          "CREATE_USER_STATUS_ALREADY_EXISTS",
+          "CREATE_USER_STATUS_INVITED",
+          "CREATE_USER_STATUS_ALREADY_INVITED",
+          "CREATE_USER_STATUS_DOMAIN_NOT_ALLOWED",
+          "CREATE_USER_STATUS_FAILED"
+        ]
+      },
       "CreateUsersResponse": {
         "externalDocs": {
           "description": "Find out more about user management",
@@ -630,7 +682,17 @@
         "title": "CreateUsersResponse",
         "description": "Empty response indicating successful processing of all user creation and invitation requests. Ensure failures are returned via gRPC status codes.",
         "type": "object",
-        "additionalProperties": false
+        "properties": {
+          "results": {
+            "description": "Exactly one entry per user in the request, in request order. Each entry also echoes its `username`, so a caller can join on that instead of on position.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateUserResult"
+            },
+            "minItems": 0,
+            "maxItems": 1000
+          }
+        }
       },
       "Error": {
         "description": "Standard error response body returned for a failed request.",

@@ -109,6 +109,8 @@ tags:
     description: >-
       IP access service provides the API for managing company IP access
       settings.
+  - name: Identity Service
+    description: Resolve the team and user behind the presented credentials.
   - name: Incidents service
     description: >-
       Handle all operations related to incident management within Coralogix.
@@ -844,6 +846,47 @@ paths:
           type: integer
           description: The role id.
           format: int64
+  /aaa/identity/v1/whoami:
+    get:
+      description: >-
+        Returns the team, and where available the user, that the presented
+        credentials authenticate as. Takes no parameters: the identity is
+        derived entirely from the `Authorization` header. Authenticating with an
+        API key resolves a team but no user, so `username` is absent in that
+        case.
+      operationId: IdentityService_WhoAmI
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                teamId: 1234567
+                teamName: my-team
+                teamUrl: https://my-team.app.coralogix.com
+              schema:
+                $ref: '#/components/schemas/WhoAmIResponse'
+          description: ''
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Missing or invalid credentials
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The authenticated team no longer exists
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Who am I
+      tags:
+        - Identity Service
   /aaa/send-data-keys/v3:
     get:
       description: Returns all send-data API keys for the authenticated team.
@@ -1004,6 +1047,17 @@ paths:
                   format: int64
                   minimum: 0
                   type: integer
+                roleName:
+                  description: >-
+                    Name of the role to assign to this group, as an alternative
+                    to `roleId`. Resolved against this team's custom roles and
+                    the global built-in roles. Matching is case-insensitive. The
+                    response reports the resolved role's id and canonical name.
+                    Mutually exclusive with `roleId`: setting both is rejected.
+                  maxLength: 255
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
                 scope:
                   $ref: '#/components/schemas/v2.Scope'
                 teamId:
@@ -25175,10 +25229,66 @@ components:
           allOf:
             - $ref: '#/components/schemas/UserTemplate'
           description: Template containing all user properties to set during creation
+    CreateUserResult:
+      required:
+        - username
+      type: object
+      properties:
+        message:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]+$
+          type: string
+          description: >-
+            Human-readable detail about this outcome. Set where a status alone
+            is not enough, such as `CREATE_USER_STATUS_FAILED`.
+        status:
+          $ref: '#/components/schemas/CreateUserStatus'
+        userAccountId:
+          minimum: 0
+          type: integer
+          format: int64
+        userId:
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]+$
+          type: string
+          description: >-
+            Stable id of the user. Absent when the outcome produced no user,
+            such as an invited user, who has none until the invitation is
+            accepted.
+        username:
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]+$
+          type: string
+          description: The username from the request this result belongs to
+      externalDocs:
+        url: ''
+    CreateUserStatus:
+      enum:
+        - CREATE_USER_STATUS_UNSPECIFIED
+        - CREATE_USER_STATUS_CREATED
+        - CREATE_USER_STATUS_ALREADY_EXISTS
+        - CREATE_USER_STATUS_INVITED
+        - CREATE_USER_STATUS_ALREADY_INVITED
+        - CREATE_USER_STATUS_DOMAIN_NOT_ALLOWED
+        - CREATE_USER_STATUS_FAILED
+      type: string
     CreateUsersResponse:
       title: CreateUsersResponse
       type: object
-      additionalProperties: false
+      properties:
+        results:
+          maxItems: 1000
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateUserResult'
+          description: >-
+            Exactly one entry per user in the request, in request order. Each
+            entry also echoes its `username`, so a caller can join on that
+            instead of on position.
       description: >-
         Empty response indicating successful processing of all user creation and
         invitation requests. Ensure failures are returned via gRPC status codes.
@@ -30399,6 +30509,18 @@ components:
       description: Geomap aggregation simple.
       externalDocs:
         url: ''
+    GeomapAllRegionConfig:
+      type: object
+      properties:
+        regionField:
+          allOf:
+            - $ref: '#/components/schemas/ObservationField'
+          description: >-
+            Data for this field should always return valid region strings from
+            any supported cloud provider, aggregating every provider's regions.
+      description: Geomap all region config.
+      externalDocs:
+        url: ''
     GeomapAwsRegionConfig:
       type: object
       properties:
@@ -30472,6 +30594,12 @@ components:
         - required:
             - awsRegionConfig
           type: object
+        - required:
+            - ibmRegionConfig
+          type: object
+        - required:
+            - allRegionConfig
+          type: object
         - type: object
           not:
             anyOf:
@@ -30481,7 +30609,21 @@ components:
               - required:
                   - awsRegionConfig
                 type: object
+              - required:
+                  - ibmRegionConfig
+                type: object
+              - required:
+                  - allRegionConfig
+                type: object
       properties:
+        allRegionConfig:
+          allOf:
+            - $ref: '#/components/schemas/GeomapAllRegionConfig'
+          description: >-
+            Alternative way to provide geographic information, by specifying a
+            region field whose values may come from any supported cloud
+            provider.
+          x-stability: preview
         awsRegionConfig:
           allOf:
             - $ref: '#/components/schemas/GeomapAwsRegionConfig'
@@ -30494,7 +30636,26 @@ components:
           description: >-
             Default way to provide geographic information, by specifying
             latitude and longitude fields from the query results.
+        ibmRegionConfig:
+          allOf:
+            - $ref: '#/components/schemas/GeomapIbmRegionConfig'
+          description: >-
+            Alternative way to provide geographic information, by specifying an
+            IBM Cloud region field from the query results.
+          x-stability: preview
       description: Geomap field config.
+      externalDocs:
+        url: ''
+    GeomapIbmRegionConfig:
+      type: object
+      properties:
+        regionField:
+          allOf:
+            - $ref: '#/components/schemas/ObservationField'
+          description: >-
+            Data for this field should always return valid IBM Cloud region
+            strings (e.g. us-south, eu-de).
+      description: Geomap ibm region config.
       externalDocs:
         url: ''
     GeomapTooltip:
@@ -43979,6 +44140,9 @@ components:
         - required:
             - clear
           type: object
+        - required:
+            - setRoleByName
+          type: object
         - type: object
           not:
             anyOf:
@@ -43987,6 +44151,9 @@ components:
                 type: object
               - required:
                   - clear
+                type: object
+              - required:
+                  - setRoleByName
                 type: object
       properties:
         actionType:
@@ -43999,6 +44166,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClearRole'
           description: The clear.
+        setRoleByName:
+          allOf:
+            - $ref: '#/components/schemas/SetRoleByName'
+          description: >-
+            Set the role by name rather than by id. Select this arm by sending
+            `actionType: "set_role_by_name"`.
         setRoleId:
           $ref: '#/components/schemas/SetRoleId'
       description: Clear role.
@@ -45060,6 +45233,24 @@ components:
             - $ref: '#/components/schemas/Case'
           description: Case after applying the priority override.
       description: Response containing the case with its updated priority override.
+      externalDocs:
+        url: ''
+    SetRoleByName:
+      required:
+        - value
+      type: object
+      properties:
+        value:
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Name of the role to assign to this group, as an alternative to
+            `setRoleId`. Resolved against this team's custom roles and the
+            global built-in roles. Matching is case-insensitive. The response
+            reports the resolved role's id and canonical name.
+      description: Set role by name.
       externalDocs:
         url: ''
     SetRoleId:
@@ -50647,6 +50838,54 @@ components:
             $ref: '#/components/schemas/Weekday'
           description: The days of week.
       description: Weekly recurrence.
+      externalDocs:
+        url: ''
+    WhoAmIResponse:
+      title: WhoAmIResponse
+      required:
+        - teamId
+        - teamName
+      type: object
+      properties:
+        teamId:
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+          description: Identifier of the team the credentials belong to.
+          format: int64
+          examples:
+            - 1234567
+        teamName:
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Display name of the team.
+          examples:
+            - my-team
+        teamUrl:
+          maxLength: 2048
+          minLength: 1
+          pattern: ^https://[^\s/?#]+[^\s]*$
+          type: string
+          description: >-
+            Full web-app URL of the team. Absent when the team has no URL slug
+            configured.
+          examples:
+            - https://my-team.app.coralogix.com
+        username:
+          maxLength: 320
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Username of the authenticated user. Absent when authenticating with
+            an API key, which carries no user identity.
+          examples:
+            - jane.doe@example.com
+      description: >-
+        The team, and where available the user, that the presented credentials
+        authenticate as.
       externalDocs:
         url: ''
     Widget:

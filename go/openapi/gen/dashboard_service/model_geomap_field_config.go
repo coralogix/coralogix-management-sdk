@@ -22,10 +22,14 @@ var _ MappedNullable = &GeomapFieldConfig{}
 
 // GeomapFieldConfig Geomap field config.
 type GeomapFieldConfig struct {
+	// Alternative way to provide geographic information, by specifying a region field whose values may come from any supported cloud provider.
+	AllRegionConfig *GeomapAllRegionConfig `json:"allRegionConfig,omitempty"`
 	// Alternative way to provide geographic information, by specifying AWS region field from the query results.
 	AwsRegionConfig *GeomapAwsRegionConfig `json:"awsRegionConfig,omitempty"`
 	// Default way to provide geographic information, by specifying latitude and longitude fields from the query results.
 	CoordinateConfig *GeomapCoordinateConfig `json:"coordinateConfig,omitempty"`
+	// Alternative way to provide geographic information, by specifying an IBM Cloud region field from the query results.
+	IbmRegionConfig *GeomapIbmRegionConfig `json:"ibmRegionConfig,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -47,6 +51,38 @@ func NewGeomapFieldConfig() *GeomapFieldConfig {
 func NewGeomapFieldConfigWithDefaults() *GeomapFieldConfig {
 	this := GeomapFieldConfig{}
 	return &this
+}
+
+// GetAllRegionConfig returns the AllRegionConfig field value if set, zero value otherwise.
+func (o *GeomapFieldConfig) GetAllRegionConfig() GeomapAllRegionConfig {
+	if o == nil || IsNil(o.AllRegionConfig) {
+		var ret GeomapAllRegionConfig
+		return ret
+	}
+	return *o.AllRegionConfig
+}
+
+// GetAllRegionConfigOk returns a tuple with the AllRegionConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapFieldConfig) GetAllRegionConfigOk() (*GeomapAllRegionConfig, bool) {
+	if o == nil || IsNil(o.AllRegionConfig) {
+		return nil, false
+	}
+	return o.AllRegionConfig, true
+}
+
+// HasAllRegionConfig returns a boolean if a field has been set.
+func (o *GeomapFieldConfig) HasAllRegionConfig() bool {
+	if o != nil && !IsNil(o.AllRegionConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllRegionConfig gets a reference to the given GeomapAllRegionConfig and assigns it to the AllRegionConfig field.
+func (o *GeomapFieldConfig) SetAllRegionConfig(v GeomapAllRegionConfig) {
+	o.AllRegionConfig = &v
 }
 
 // GetAwsRegionConfig returns the AwsRegionConfig field value if set, zero value otherwise.
@@ -113,6 +149,38 @@ func (o *GeomapFieldConfig) SetCoordinateConfig(v GeomapCoordinateConfig) {
 	o.CoordinateConfig = &v
 }
 
+// GetIbmRegionConfig returns the IbmRegionConfig field value if set, zero value otherwise.
+func (o *GeomapFieldConfig) GetIbmRegionConfig() GeomapIbmRegionConfig {
+	if o == nil || IsNil(o.IbmRegionConfig) {
+		var ret GeomapIbmRegionConfig
+		return ret
+	}
+	return *o.IbmRegionConfig
+}
+
+// GetIbmRegionConfigOk returns a tuple with the IbmRegionConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GeomapFieldConfig) GetIbmRegionConfigOk() (*GeomapIbmRegionConfig, bool) {
+	if o == nil || IsNil(o.IbmRegionConfig) {
+		return nil, false
+	}
+	return o.IbmRegionConfig, true
+}
+
+// HasIbmRegionConfig returns a boolean if a field has been set.
+func (o *GeomapFieldConfig) HasIbmRegionConfig() bool {
+	if o != nil && !IsNil(o.IbmRegionConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetIbmRegionConfig gets a reference to the given GeomapIbmRegionConfig and assigns it to the IbmRegionConfig field.
+func (o *GeomapFieldConfig) SetIbmRegionConfig(v GeomapIbmRegionConfig) {
+	o.IbmRegionConfig = &v
+}
+
 func (o GeomapFieldConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -123,11 +191,17 @@ func (o GeomapFieldConfig) MarshalJSON() ([]byte, error) {
 
 func (o GeomapFieldConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AllRegionConfig) {
+		toSerialize["allRegionConfig"] = o.AllRegionConfig
+	}
 	if !IsNil(o.AwsRegionConfig) {
 		toSerialize["awsRegionConfig"] = o.AwsRegionConfig
 	}
 	if !IsNil(o.CoordinateConfig) {
 		toSerialize["coordinateConfig"] = o.CoordinateConfig
+	}
+	if !IsNil(o.IbmRegionConfig) {
+		toSerialize["ibmRegionConfig"] = o.IbmRegionConfig
 	}
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["coordinateConfig"]; exists {
@@ -136,8 +210,14 @@ func (o GeomapFieldConfig) ToMap() (map[string]interface{}, error) {
 	if _, exists := toSerialize["awsRegionConfig"]; exists {
 		optionalOneOfGroup0Matches++
 	}
+	if _, exists := toSerialize["ibmRegionConfig"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["allRegionConfig"]; exists {
+		optionalOneOfGroup0Matches++
+	}
 	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [coordinateConfig, awsRegionConfig] may be set"}
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [coordinateConfig, awsRegionConfig, ibmRegionConfig, allRegionConfig] may be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["coordinateConfig"]; exists {
@@ -145,6 +225,12 @@ func (o GeomapFieldConfig) ToMap() (map[string]interface{}, error) {
 	}
 	if _, exists := o.AdditionalProperties["awsRegionConfig"]; exists {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field awsRegionConfig must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["ibmRegionConfig"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field ibmRegionConfig must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["allRegionConfig"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field allRegionConfig must be set through the typed field, not AdditionalProperties"}
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -176,12 +262,20 @@ func (o *GeomapFieldConfig) UnmarshalJSON(data []byte) (err error) {
 		if _, exists := additionalProperties["awsRegionConfig"]; exists {
 			optionalOneOfGroup0MatchesInPayload++
 		}
+		if _, exists := additionalProperties["ibmRegionConfig"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if _, exists := additionalProperties["allRegionConfig"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
 		if optionalOneOfGroup0MatchesInPayload > 1 {
-			return GenericOpenAPIError{error: "at most one of [coordinateConfig, awsRegionConfig] may be set"}
+			return GenericOpenAPIError{error: "at most one of [coordinateConfig, awsRegionConfig, ibmRegionConfig, allRegionConfig] may be set"}
 		}
 
+		delete(additionalProperties, "allRegionConfig")
 		delete(additionalProperties, "awsRegionConfig")
 		delete(additionalProperties, "coordinateConfig")
+		delete(additionalProperties, "ibmRegionConfig")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

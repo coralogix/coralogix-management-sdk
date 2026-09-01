@@ -4735,6 +4735,23 @@
         "type": "object",
         "additionalProperties": false
       },
+      "GeomapAllRegionConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Geomap all region config.",
+        "type": "object",
+        "properties": {
+          "regionField": {
+            "description": "Data for this field should always return valid region strings from any supported cloud provider, aggregating every provider's regions.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
+          }
+        }
+      },
       "GeomapAwsRegionConfig": {
         "externalDocs": {
           "url": ""
@@ -4842,6 +4859,15 @@
         "description": "Geomap field config.",
         "type": "object",
         "properties": {
+          "allRegionConfig": {
+            "description": "Alternative way to provide geographic information, by specifying a region field whose values may come from any supported cloud provider.",
+            "x-stability": "preview",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapAllRegionConfig"
+              }
+            ]
+          },
           "awsRegionConfig": {
             "description": "Alternative way to provide geographic information, by specifying AWS region field from the query results.",
             "allOf": [
@@ -4855,6 +4881,15 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/GeomapCoordinateConfig"
+              }
+            ]
+          },
+          "ibmRegionConfig": {
+            "description": "Alternative way to provide geographic information, by specifying an IBM Cloud region field from the query results.",
+            "x-stability": "preview",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GeomapIbmRegionConfig"
               }
             ]
           }
@@ -4874,6 +4909,18 @@
           },
           {
             "type": "object",
+            "required": [
+              "ibmRegionConfig"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "allRegionConfig"
+            ]
+          },
+          {
+            "type": "object",
             "not": {
               "anyOf": [
                 {
@@ -4887,11 +4934,40 @@
                   "required": [
                     "awsRegionConfig"
                   ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "ibmRegionConfig"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "allRegionConfig"
+                  ]
                 }
               ]
             }
           }
         ]
+      },
+      "GeomapIbmRegionConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Geomap ibm region config.",
+        "type": "object",
+        "properties": {
+          "regionField": {
+            "description": "Data for this field should always return valid IBM Cloud region strings (e.g. us-south, eu-de).",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ObservationField"
+              }
+            ]
+          }
+        }
       },
       "GeomapTooltip": {
         "externalDocs": {
