@@ -10,6 +10,9 @@ git_push.sh
 model_access_type.go
 model_allowed_login_mode.go
 model_create_user_request.go
+model_create_user_result.go
+model_create_user_status.go
+model_create_users_response.go
 model_error.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go

@@ -132,6 +132,13 @@
                     "format": "int64",
                     "minimum": 0
                   },
+                  "roleName": {
+                    "description": "Name of the role to assign to this group, as an alternative to `roleId`. Resolved against this team's custom roles and the global built-in roles. Matching is case-insensitive. The response reports the resolved role's id and canonical name. Mutually exclusive with `roleId`: setting both is rejected.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 255
+                  },
                   "scope": {
                     "$ref": "#/components/schemas/v2.Scope"
                   },
@@ -990,6 +997,14 @@
               }
             ]
           },
+          "setRoleByName": {
+            "description": "Set the role by name rather than by id. Select this arm by sending `actionType: \"set_role_by_name\"`.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SetRoleByName"
+              }
+            ]
+          },
           "setRoleId": {
             "$ref": "#/components/schemas/SetRoleId"
           }
@@ -1012,6 +1027,12 @@
           },
           {
             "type": "object",
+            "required": [
+              "setRoleByName"
+            ]
+          },
+          {
+            "type": "object",
             "not": {
               "anyOf": [
                 {
@@ -1024,6 +1045,12 @@
                   "type": "object",
                   "required": [
                     "clear"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "setRoleByName"
                   ]
                 }
               ]
@@ -1107,6 +1134,25 @@
               ]
             }
           }
+        ]
+      },
+      "SetRoleByName": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Set role by name.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "Name of the role to assign to this group, as an alternative to `setRoleId`. Resolved against this team's custom roles and the global built-in roles. Matching is case-insensitive. The response reports the resolved role's id and canonical name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        },
+        "required": [
+          "value"
         ]
       },
       "SetRoleId": {

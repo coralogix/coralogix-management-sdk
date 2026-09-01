@@ -31,6 +31,8 @@ type CreateTeamGroupRequest struct {
 	Name *string `json:"name,omitempty"`
 	// Identifier of the role to assign to this group.
 	RoleId *int64 `json:"roleId,omitempty"`
+	// Name of the role to assign to this group, as an alternative to `roleId`. Resolved against this team's custom roles and the global built-in roles. Matching is case-insensitive. The response reports the resolved role's id and canonical name. Mutually exclusive with `roleId`: setting both is rejected.
+	RoleName *string `json:"roleName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Scope *V2Scope `json:"scope,omitempty"`
 	// Team to associate the group with. If not set, uses the authenticated team.
 	TeamId *int64 `json:"teamId,omitempty"`
@@ -219,6 +221,38 @@ func (o *CreateTeamGroupRequest) SetRoleId(v int64) {
 	o.RoleId = &v
 }
 
+// GetRoleName returns the RoleName field value if set, zero value otherwise.
+func (o *CreateTeamGroupRequest) GetRoleName() string {
+	if o == nil || IsNil(o.RoleName) {
+		var ret string
+		return ret
+	}
+	return *o.RoleName
+}
+
+// GetRoleNameOk returns a tuple with the RoleName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateTeamGroupRequest) GetRoleNameOk() (*string, bool) {
+	if o == nil || IsNil(o.RoleName) {
+		return nil, false
+	}
+	return o.RoleName, true
+}
+
+// HasRoleName returns a boolean if a field has been set.
+func (o *CreateTeamGroupRequest) HasRoleName() bool {
+	if o != nil && !IsNil(o.RoleName) {
+		return true
+	}
+
+	return false
+}
+
+// SetRoleName gets a reference to the given string and assigns it to the RoleName field.
+func (o *CreateTeamGroupRequest) SetRoleName(v string) {
+	o.RoleName = &v
+}
+
 // GetScope returns the Scope field value if set, zero value otherwise.
 func (o *CreateTeamGroupRequest) GetScope() V2Scope {
 	if o == nil || IsNil(o.Scope) {
@@ -340,6 +374,9 @@ func (o CreateTeamGroupRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RoleId) {
 		toSerialize["roleId"] = o.RoleId
 	}
+	if !IsNil(o.RoleName) {
+		toSerialize["roleName"] = o.RoleName
+	}
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
@@ -377,6 +414,7 @@ func (o *CreateTeamGroupRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "groupType")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "roleId")
+		delete(additionalProperties, "roleName")
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "teamId")
 		delete(additionalProperties, "userIds")

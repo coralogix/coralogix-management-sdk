@@ -111,6 +111,7 @@ Class | Method | HTTP request | Description
  - [RoleUpdateAction](docs/RoleUpdateAction.md)
  - [ScopeUpdate](docs/ScopeUpdate.md)
  - [ScopeUpdateAction](docs/ScopeUpdateAction.md)
+ - [SetRoleByName](docs/SetRoleByName.md)
  - [SetRoleId](docs/SetRoleId.md)
  - [SetScopeId](docs/SetScopeId.md)
  - [TeamGroup](docs/TeamGroup.md)
