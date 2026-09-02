@@ -160,3 +160,4 @@ func (a ActionsClient) Order(ctx context.Context, req *actions.OrderActionsReque
 func NewActionsClient(c CallPropertiesCreator) *ActionsClient {
 	return &ActionsClient{callPropertiesCreator: c}
 }
+// ci: draft PR to verify rotated Actions secrets; safe to close
