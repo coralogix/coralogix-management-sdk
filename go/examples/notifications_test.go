@@ -114,9 +114,10 @@ func TestPagerdutyConnector(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 
+	name := fmt.Sprintf("TestPagerdutyConnector-%v", uuid.NewString())
 	connectorRaw := cxsdk.Connector{
 		Type:        cxsdk.ConnectorTypePagerDuty,
-		Name:        "TestPagerdutyConnector",
+		Name:        name,
 		Description: "This is the PagerDuty connector to use for Notification Center testing.",
 		ConnectorConfig: &cxsdk.ConnectorConfig{
 			Fields: []*cxsdk.ConnectorConfigField{
@@ -152,7 +153,7 @@ func TestPagerdutyConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, connector.Connector.Name, "TestPagerdutyConnector")
+	assert.Equal(t, connector.Connector.Name, name)
 
 	if err != nil {
 		t.Fatal(err)

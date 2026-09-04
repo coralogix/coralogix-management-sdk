@@ -61,8 +61,12 @@ func TestEnrichmentsGeo(t *testing.T) {
 	assert.NotEmpty(t, listEnrichmentsResponse.Enrichments)
 
 	// Verify our created enrichments exist in the list
+	listedIDs := []uint32{}
 	for _, e := range listEnrichmentsResponse.Enrichments {
-		assert.Contains(t, enrichmentIDs, e.Id)
+		listedIDs = append(listedIDs, e.Id)
+	}
+	for _, id := range enrichmentIDs {
+		assert.Contains(t, listedIDs, id)
 	}
 
 	// Delete enrichments
@@ -124,8 +128,12 @@ func TestEnrichmentsAws(t *testing.T) {
 		assert.NotEmpty(t, listEnrichmentsResponse.Enrichments)
 
 		// Verify our created enrichments exist in the list
+		listedIDs := []uint32{}
 		for _, e := range listEnrichmentsResponse.Enrichments {
-			assert.Contains(t, enrichmentIDs, e.Id)
+			listedIDs = append(listedIDs, e.Id)
+		}
+		for _, id := range enrichmentIDs {
+			assert.Contains(t, listedIDs, id)
 		}
 
 		// Delete enrichments
@@ -185,8 +193,12 @@ func TestEnrichmentsCustom(t *testing.T) {
 		assert.NotEmpty(t, listEnrichmentsResponse.Enrichments)
 
 		// Verify our created enrichments exist in the list
+		listedIDs := []uint32{}
 		for _, e := range listEnrichmentsResponse.Enrichments {
-			assert.Contains(t, enrichmentIDs, e.Id)
+			listedIDs = append(listedIDs, e.Id)
+		}
+		for _, id := range enrichmentIDs {
+			assert.Contains(t, listedIDs, id)
 		}
 
 		// Delete enrichments
@@ -245,8 +257,12 @@ func TestEnrichmentsSusIp(t *testing.T) {
 	assert.NotEmpty(t, listEnrichmentsResponse.Enrichments)
 
 	// Verify our created enrichments exist in the list
+	listedIDs := []uint32{}
 	for _, e := range listEnrichmentsResponse.Enrichments {
-		assert.Contains(t, enrichmentIDs, e.Id)
+		listedIDs = append(listedIDs, e.Id)
+	}
+	for _, id := range enrichmentIDs {
+		assert.Contains(t, listedIDs, id)
 	}
 
 	// Delete enrichments
