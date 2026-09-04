@@ -31,6 +31,7 @@ import (
 	extensions "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/extension_service"
 	viewsfolders "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/folders_for_views_service"
 	globalrouters "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/global_routers_service"
+	identity "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/identity_service"
 	integrations "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/integration_service"
 	ipaccess "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ip_access_service"
 	archivemetrics "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/metrics_data_archive_service"
@@ -43,6 +44,7 @@ import (
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
 	groups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/team_groups_management_service"
 	teams "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/teams_service"
+	users "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/users_management_service"
 
 	// slo (no plural) is the legacy service. slos (plural) is the new one.
 	recordingrules "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/recording_rules_service"
@@ -76,6 +78,7 @@ type ClientSet struct {
 	extensionDeployments *extensiondeployments.ExtensionDeploymentServiceAPIService
 	integrations         *integrations.IntegrationServiceAPIService
 	globalRouters        *globalrouters.GlobalRoutersServiceAPIService
+	identity             *identity.IdentityServiceAPIService
 	presets              *presets.PresetsServiceAPIService
 	quotas               *quotas.QuotaAllocationRuleSetServiceAPIService
 	scopes               *scopes.ScopesServiceAPIService
@@ -87,6 +90,7 @@ type ClientSet struct {
 	views                *views.ViewsServiceAPIService
 	viewsFolders         *viewsfolders.FoldersForViewsServiceAPIService
 	teams                *teams.TeamsServiceAPIService
+	users                *users.UsersManagementServiceAPIService
 }
 
 // Actions returns the ActionsServiceAPIService client.
@@ -199,6 +203,11 @@ func (c *ClientSet) GlobalRouters() *globalrouters.GlobalRoutersServiceAPIServic
 	return c.globalRouters
 }
 
+// Identity returns the IdentityServiceAPIService client.
+func (c *ClientSet) Identity() *identity.IdentityServiceAPIService {
+	return c.identity
+}
+
 // Presets returns the PresetsServiceAPIService client.
 func (c *ClientSet) Presets() *presets.PresetsServiceAPIService {
 	return c.presets
@@ -254,6 +263,11 @@ func (c *ClientSet) Teams() *teams.TeamsServiceAPIService {
 	return c.teams
 }
 
+// Users returns the UsersManagementServiceAPIService client.
+func (c *ClientSet) Users() *users.UsersManagementServiceAPIService {
+	return c.users
+}
+
 // NewClientSet builds a ClientSet from CallPropertiesCreator.
 func NewClientSet(c *Config) *ClientSet {
 	return &ClientSet{
@@ -279,6 +293,7 @@ func NewClientSet(c *Config) *ClientSet {
 		extensionDeployments: NewExtensionDeploymentsClient(c),
 		integrations:         NewIntegrationsClient(c),
 		globalRouters:        NewGlobalRoutersClient(c),
+		identity:             NewIdentityClient(c),
 		presets:              NewPresetsClient(c),
 		quotas:               NewQuotasClient(c),
 		scopes:               NewScopesClient(c),
@@ -290,6 +305,7 @@ func NewClientSet(c *Config) *ClientSet {
 		views:                NewViewsClient(c),
 		viewsFolders:         NewViewsFoldersClient(c),
 		teams:                NewTeamsClient(c),
+		users:                NewUsersClient(c),
 	}
 }
 
@@ -554,6 +570,19 @@ func NewGlobalRoutersClient(c *Config) *globalrouters.GlobalRoutersServiceAPISer
 	return globalrouters.NewAPIClient(cfg).GlobalRoutersServiceAPI
 }
 
+// NewIdentityClient builds a new IdentityServiceAPIService from CallPropertiesCreator.
+func NewIdentityClient(c *Config) *identity.IdentityServiceAPIService {
+	cfg := identity.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = identity.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return identity.NewAPIClient(cfg).IdentityServiceAPI
+}
+
 // NewPresetsClient builds a new PresetsServiceAPIService from CallPropertiesCreator.
 func NewPresetsClient(c *Config) *presets.PresetsServiceAPIService {
 	cfg := presets.NewConfiguration()
@@ -721,4 +750,17 @@ func NewTeamsClient(c *Config) *teams.TeamsServiceAPIService {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return teams.NewAPIClient(cfg).TeamsServiceAPI
+}
+
+// NewUsersClient builds a new UsersManagementServiceAPIService from CallPropertiesCreator.
+func NewUsersClient(c *Config) *users.UsersManagementServiceAPIService {
+	cfg := users.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = users.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return users.NewAPIClient(cfg).UsersManagementServiceAPI
 }
