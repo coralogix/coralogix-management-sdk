@@ -21,6 +21,7 @@ import (
 	alerts "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_definitions_service"
 	alertscheduler "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_scheduler_rule_service"
 	apikeys "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/api_keys_service"
+	cfggroups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/configuration_group_service"
 	connectors "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/connectors_service"
 	customEnrichments "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/custom_enrichments_service"
 	dashboardfolders "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/dashboard_folders_service"
@@ -63,6 +64,7 @@ type ClientSet struct {
 	archiveLogs          *targets.TargetServiceAPIService
 	archiveMetrics       *archivemetrics.MetricsDataArchiveServiceAPIService
 	archiveRetentions    *archiveretention.RetentionsServiceAPIService
+	configurationGroups  *cfggroups.FleetManagerConfigurationGroupsAPIService
 	connectors           *connectors.ConnectorsServiceAPIService
 	ipAccess             *ipaccess.IPAccessServiceAPIService
 	customRoles          *customroles.RoleManagementServiceAPIService
@@ -132,6 +134,11 @@ func (c *ClientSet) ArchiveRetentions() *archiveretention.RetentionsServiceAPISe
 // APIKeys returns the APIKeysServiceAPIService client.
 func (c *ClientSet) APIKeys() *apikeys.APIKeysServiceAPIService {
 	return c.apiKeys
+}
+
+// ConfigurationGroups returns the FleetManagerConfigurationGroupsAPIService client.
+func (c *ClientSet) ConfigurationGroups() *cfggroups.FleetManagerConfigurationGroupsAPIService {
+	return c.configurationGroups
 }
 
 // Connectors returns the ConnectorsServiceAPIService client.
@@ -267,6 +274,7 @@ func NewClientSet(c *Config) *ClientSet {
 		archiveLogs:          NewArchiveLogsClient(c),
 		archiveRetentions:    NewArchiveRetentionsClient(c),
 		ipAccess:             NewIPAccessClient(c),
+		configurationGroups:  NewConfigurationGroupsClient(c),
 		connectors:           NewConnectorsClient(c),
 		customRoles:          NewCustomRolesClient(c),
 		dashboards:           NewDashboardClient(c),
@@ -396,6 +404,19 @@ func NewIPAccessClient(c *Config) *ipaccess.IPAccessServiceAPIService {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return ipaccess.NewAPIClient(cfg).IPAccessServiceAPI
+}
+
+// NewConfigurationGroupsClient builds a new FleetManagerConfigurationGroupsAPIService.
+func NewConfigurationGroupsClient(c *Config) *cfggroups.FleetManagerConfigurationGroupsAPIService {
+	cfg := cfggroups.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = cfggroups.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return cfggroups.NewAPIClient(cfg).FleetManagerConfigurationGroupsAPI
 }
 
 // NewConnectorsClient builds a new ConnectorsServiceAPIService from CallPropertiesCreator.
