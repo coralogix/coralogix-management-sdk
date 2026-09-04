@@ -18,12 +18,30 @@ import (
 	"context"
 	"fmt"
 	"testing"
+	"time"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
+
+// getConnectorEventually reads a connector by id, retrying while it is still
+// reported as missing. CreateConnector returns an id before the connector is
+// readable, so a single get straight after create is not reliable.
+func getConnectorEventually(t *testing.T, c *cxsdk.NotificationsClient, id string) *cxsdk.GetConnectorResponse {
+	t.Helper()
+
+	var res *cxsdk.GetConnectorResponse
+	require.Eventually(t, func() bool {
+		var err error
+		res, err = c.GetConnector(context.Background(), &cxsdk.GetConnectorRequest{Id: id})
+		return err == nil
+	}, 30*time.Second, time.Second, "connector %s never became readable after create", id)
+
+	return res
+}
 
 func TestHttpsConnector(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
@@ -79,13 +97,7 @@ func TestHttpsConnector(t *testing.T) {
 
 	connectorID := createRes.Connector.Id
 
-	connector, err := c.GetConnector(context.Background(), &cxsdk.GetConnectorRequest{
-		Id: *connectorID,
-	})
-
-	if err != nil {
-		t.Fatal(err)
-	}
+	connector := getConnectorEventually(t, c, *connectorID)
 
 	assert.Equal(t, connector.Connector.Name, name)
 
@@ -145,19 +157,9 @@ func TestPagerdutyConnector(t *testing.T) {
 
 	connectorID := createRes.Connector.Id
 
-	connector, err := c.GetConnector(context.Background(), &cxsdk.GetConnectorRequest{
-		Id: *connectorID,
-	})
-
-	if err != nil {
-		t.Fatal(err)
-	}
+	connector := getConnectorEventually(t, c, *connectorID)
 
 	assert.Equal(t, connector.Connector.Name, name)
-
-	if err != nil {
-		t.Fatal(err)
-	}
 
 	_, err = c.DeleteConnector(context.Background(), &cxsdk.DeleteConnectorRequest{
 		Id: *connectorID,
