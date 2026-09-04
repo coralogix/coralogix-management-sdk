@@ -19,11 +19,9 @@ import (
 	"log"
 	"os"
 	"testing"
-	"time"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
@@ -62,14 +60,10 @@ func TestDashboards(t *testing.T) {
 	if assert.NotNil(t, getRes.AccessPolicy) {
 		assert.JSONEq(t, dashboardAccessPolicy, *getRes.AccessPolicy)
 	}
-	// Pin can still report the dashboard as missing right after create, even
-	// after Get has returned it, so retry instead of failing on the first miss.
-	require.Eventually(t, func() bool {
-		_, e = c.Pin(context.Background(), &cxsdk.PinDashboardRequest{
-			DashboardId: createRes.DashboardId,
-		})
-		return e == nil
-	}, 30*time.Second, time.Second, "dashboard never became pinnable after create")
+	_, e = c.Pin(context.Background(), &cxsdk.PinDashboardRequest{
+		DashboardId: createRes.DashboardId,
+	})
+	assertNilAndPrintError(t, e)
 	_, e = c.Unpin(context.Background(), &cxsdk.UnpinDashboardRequest{
 		DashboardId: createRes.DashboardId,
 	})
