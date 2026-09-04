@@ -115,8 +115,9 @@ func TestPagerdutyConnector(t *testing.T) {
 	cfg := newTestConfig()
 	client := cxsdk.NewConnectorsClient(cfg)
 
+	name := fmt.Sprintf("TestPagerdutyConnector-%v", uuid.NewString())
 	connector := connectors.Connector{
-		Name:        connectors.PtrString("TestPagerdutyConnector"),
+		Name:        connectors.PtrString(name),
 		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY.Ptr(),
 		Description: connectors.PtrString("This is the PagerDuty connector to use for Notification Center testing."),
 		ConnectorConfig: &connectors.ConnectorConfig{
@@ -154,7 +155,7 @@ func TestPagerdutyConnector(t *testing.T) {
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, "TestPagerdutyConnector", *got.Connector.Name)
+	require.Equal(t, name, *got.Connector.Name)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
