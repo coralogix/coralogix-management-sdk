@@ -8,7 +8,13 @@
 
 ## REST and OpenAPI
 
-Our APIs are also available over REST through a variety of OpenAPI endpoints. Read more over at the [OpenAPI Docs](https://docs.coralogix.com)
+The Go SDK talks to Coralogix over REST OpenAPI clients in `go/openapi`.
+Read more at the [OpenAPI Docs](https://docs.coralogix.com).
+
+The Go gRPC clients were removed. Use `go/openapi/cxsdk` for new work.
+The SCIM Users HTTP client remains in the `go` package.
+
+The Rust SDK still uses protobuf in `proto/`.
 
 *These endpoints follow the same versioning schemes mentioned below.*
 
@@ -32,10 +38,10 @@ Here are a few examples of (anticipated) versions:
 
 ## Prerequisites
 
-- `protoc` - for compiling protobuf files
 - `Make` - for Go development
+- `protoc` - only if you contribute to the Rust SDK
 
-The file `proto-toolchain-versions.txt` contains the versions of the protobuf tools that you need to contribute to the SDK: please make sure these are the versions that you have on your system.
+The file `proto-toolchain-versions.txt` contains the versions of the protobuf tools that you need for the Rust SDK.
 
 Please refer to the individual languages on how to build the SDKs
 
@@ -59,7 +65,7 @@ You'll find some example use-cases of the SDK in the `examples` folder under eac
 
 # Protobuf
 
-The `proto/` directory contains all protobuf files for generating your own SDK if necessary. They are also the basis for all SDKs in this repository. 
+The `proto/` directory is the source for the Rust SDK. The Go SDK does not generate gRPC clients from these files. 
 
 # Contributing
 

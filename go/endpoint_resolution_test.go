@@ -16,37 +16,6 @@ package cxsdk
 
 import "testing"
 
-func TestCoralogixGrpcEndpointFromRegion(t *testing.T) {
-	cases := map[string]string{
-		// Known region shorthands resolve to the documented gRPC hosts.
-		"eu2": GrpcEU2,
-		"us1": GrpcUS1,
-		// A base custom/BYOC domain is prefixed with ng-api-grpc.
-		"acme.coralogix.com": "ng-api-grpc.acme.coralogix.com:443",
-		// The OpenAPI host form ("api.<domain>") is normalized to the base
-		// gRPC host, not a double-prefixed "ng-api-grpc.api.<domain>".
-		"api.acme.coralogix.com": "ng-api-grpc.acme.coralogix.com:443",
-	}
-	for in, want := range cases {
-		if got := CoralogixGrpcEndpointFromRegion(in); got != want {
-			t.Errorf("CoralogixGrpcEndpointFromRegion(%q) = %q, want %q", in, got, want)
-		}
-	}
-}
-
-func TestCoralogixGrpcEndpointFromDomain(t *testing.T) {
-	cases := map[string]string{
-		"acme.coralogix.com":      "ng-api-grpc.acme.coralogix.com:443",
-		"api.acme.coralogix.com":  "ng-api-grpc.acme.coralogix.com:443",
-		"mycompany.coralogix.com": "ng-api-grpc.mycompany.coralogix.com:443",
-	}
-	for in, want := range cases {
-		if got := CoralogixGrpcEndpointFromDomain(in); got != want {
-			t.Errorf("CoralogixGrpcEndpointFromDomain(%q) = %q, want %q", in, got, want)
-		}
-	}
-}
-
 func TestCoralogixRestEndpointFromRegion(t *testing.T) {
 	cases := map[string]string{
 		"eu2":                    RestEU2,

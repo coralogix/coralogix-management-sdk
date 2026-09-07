@@ -15,92 +15,18 @@
 package cxsdk
 
 import (
-	"context"
-	"crypto/tls"
 	"fmt"
-	"runtime"
-	"strings"
-	"time"
 
 	"github.com/google/uuid"
-	grpc_retry "github.com/grpc-ecosystem/go-grpc-middleware/retry"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/metadata"
 )
 
-// CallPropertiesCreator is an interface to provide call properties for gRPC calls.
-type CallPropertiesCreator interface {
-	GetTeamsLevelCallProperties(ctx context.Context) (*CallProperties, error)
-	GetUserLevelCallProperties(ctx context.Context) (*CallProperties, error)
-}
-
-// SDKCallPropertiesCreator is a struct that creates CallProperties objects.
+// SDKCallPropertiesCreator holds region and API keys for REST clients such as SCIM Users.
 type SDKCallPropertiesCreator struct {
 	coraglogixRegion string
 	teamsLevelAPIKey string
 	userLevelAPIKey  string
 	correlationID    string
 	sdkVersion       string
-	//allowRetry bool
-}
-
-// CallProperties is a struct that holds the context, connection, and call options for a gRPC call.
-type CallProperties struct {
-	Ctx         context.Context
-	Connection  *grpc.ClientConn
-	CallOptions []grpc.CallOption
-}
-
-// GetTeamsLevelCallProperties returns a new CallProperties object built from a team-level API key. It essentially prepares the context, connection, and call options for a gRPC call.
-func (c SDKCallPropertiesCreator) GetTeamsLevelCallProperties(ctx context.Context) (*CallProperties, error) {
-	ctx = createContext(ctx, c.teamsLevelAPIKey, c.correlationID, c.sdkVersion)
-
-	endpoint := CoralogixGrpcEndpointFromRegion(strings.ToLower(c.coraglogixRegion))
-	conn, err := createSecureConnection(endpoint)
-	if err != nil {
-		return nil, err
-	}
-
-	callOptions := createCallOptions()
-
-	return &CallProperties{Ctx: ctx, Connection: conn, CallOptions: callOptions}, nil
-}
-
-// GetUserLevelCallProperties returns a new CallProperties object built from a user-level API key. It essentially prepares the context, connection, and call options for a gRPC call.
-func (c SDKCallPropertiesCreator) GetUserLevelCallProperties(ctx context.Context) (*CallProperties, error) {
-	ctx = createContext(ctx, c.userLevelAPIKey, c.correlationID, c.sdkVersion)
-
-	endpoint := CoralogixGrpcEndpointFromRegion(strings.ToLower(c.coraglogixRegion))
-	conn, err := createSecureConnection(endpoint)
-	if err != nil {
-		return nil, err
-	}
-
-	callOptions := createCallOptions()
-
-	return &CallProperties{Ctx: ctx, Connection: conn, CallOptions: callOptions}, nil
-}
-
-func createCallOptions() []grpc.CallOption {
-	var callOptions []grpc.CallOption
-	callOptions = append(callOptions, grpc_retry.WithMax(5))
-	callOptions = append(callOptions, grpc_retry.WithBackoff(grpc_retry.BackoffLinear(time.Second)))
-	callOptions = append(callOptions, grpc.MaxCallRecvMsgSize(50*1024*1024)) // 50MB
-	callOptions = append(callOptions, grpc.MaxCallSendMsgSize(50*1024*1024)) // 50MB
-	return callOptions
-}
-
-func createSecureConnection(targetURL string) (*grpc.ClientConn, error) {
-	// We cannot use grpc.NewClient because it doesn't work behind a proxy: https://github.com/grpc/grpc-go/releases/tag/v1.69.0
-	return grpc.Dial(targetURL,
-		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{})))
-}
-
-func createContext(ctx context.Context, apiKey string, corrleationID string, sdkVersion string) context.Context {
-	md := metadata.New(map[string]string{"Authorization": fmt.Sprintf("Bearer %s", apiKey), sdkVersionHeaderName: sdkVersion, sdkLanguageHeaderName: "go", sdkGoVersionHeaderName: runtime.Version(), sdkCorrelationIDHeaderName: corrleationID})
-	ctx = metadata.NewOutgoingContext(ctx, md)
-	return ctx
 }
 
 // NewSDKCallPropertiesCreator creates a new SDKCallPropertiesCreator object.
@@ -125,7 +51,7 @@ func NewSDKCallPropertiesCreatorTerraform(region string, authContext AuthContext
 	}
 }
 
-// NewSDKCallPropertiesCreatorOperator creates a new SDKCallPropertiesCreator object, specifying which version of the Operator Operator is being used.
+// NewSDKCallPropertiesCreatorOperator creates a new SDKCallPropertiesCreator object, specifying which version of the Operator is being used.
 func NewSDKCallPropertiesCreatorOperator(region string, authContext AuthContext, cxOperator string) *SDKCallPropertiesCreator {
 	return &SDKCallPropertiesCreator{
 		coraglogixRegion: region,
