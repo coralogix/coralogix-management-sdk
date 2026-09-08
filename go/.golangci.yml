@@ -7,9 +7,6 @@ linters:
   disable:
     - staticcheck
   settings:
-    errcheck:
-      exclude-functions:
-        - (*google.golang.org/grpc.ClientConn).Close
     revive:
       rules:
         - name: package-comments

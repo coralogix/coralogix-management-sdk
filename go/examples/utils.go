@@ -14,21 +14,15 @@
 package examples
 
 import (
-	"errors"
 	"testing"
 
-	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 	"github.com/stretchr/testify/assert"
 )
 
 func assertNilAndPrintError(t *testing.T, err error) {
 	t.Helper()
 	if err != nil {
-		var e *cxsdk.SdkAPIError
-		if errors.As(err, &e) {
-			t.Fatal(e.Error())
-		}
-		t.Fatalf("unexpected error type %T: %v", err, err)
+		t.Fatalf("unexpected error: %v", err)
 	}
 	assert.Nil(t, err)
 }

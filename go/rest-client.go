@@ -23,9 +23,24 @@ import (
 	"runtime"
 
 	"github.com/google/uuid"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
+
+// HTTPStatusError is returned when the REST API responds with a non-2xx status.
+type HTTPStatusError struct {
+	StatusCode int
+	Status     string
+	Body       string
+}
+
+func (e *HTTPStatusError) Error() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if e.Body != "" {
+		return fmt.Sprintf("API Error: %s. Status code: %s", e.Body, e.Status)
+	}
+	return fmt.Sprintf("API Error. Status code: %s", e.Status)
+}
 
 // RestClient for Coralogix API
 type RestClient struct {
@@ -73,7 +88,7 @@ func (c *RestClient) Request(ctx context.Context, method, path, contentType stri
 
 	response, err := c.client.Do(request)
 	if err != nil {
-		return "", status.Convert(err).Err()
+		return "", err
 	}
 	defer response.Body.Close() //nolint:errcheck
 
@@ -87,16 +102,16 @@ func (c *RestClient) Request(ctx context.Context, method, path, contentType stri
 		return string(bodyResp), nil
 	}
 
-	if response.StatusCode == http.StatusNotFound {
-		return "", status.Error(codes.NotFound, "Not found")
-	}
-
 	responseBody, err := httputil.DumpResponse(response, true)
 	if err != nil {
-		return "", status.Convert(err).Err()
+		return "", err
 	}
 
-	return "", fmt.Errorf("API Error: %s. Status code: %s", string(responseBody), response.Status)
+	return "", &HTTPStatusError{
+		StatusCode: response.StatusCode,
+		Status:     response.Status,
+		Body:       string(responseBody),
+	}
 }
 
 // Get executes GET request to Coralogix API
