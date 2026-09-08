@@ -97,28 +97,7 @@
                   "description": "Filters all incidents with the given meta labels",
                   "type": "array",
                   "items": {
-                    "externalDocs": {
-                      "url": ""
-                    },
-                    "title": "Incident meta label",
-                    "description": "Meta label.",
-                    "type": "object",
-                    "properties": {
-                      "key": {
-                        "description": "The key.",
-                        "type": "string",
-                        "pattern": "^[\\s\\S]*$",
-                        "minLength": 1,
-                        "maxLength": 255
-                      },
-                      "value": {
-                        "description": "The value.",
-                        "type": "string",
-                        "pattern": "^[\\s\\S]*$",
-                        "minLength": 1,
-                        "maxLength": 255
-                      }
-                    }
+                    "$ref": "#/components/schemas/incidents.v1.MetaLabel"
                   },
                   "minItems": 0,
                   "maxItems": 1000
