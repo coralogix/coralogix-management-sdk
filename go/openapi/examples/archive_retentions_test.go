@@ -18,6 +18,7 @@ import (
 	"context"
 	"testing"
 
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 
 	"github.com/coralogix/coralogix-management-sdk/go/openapi/cxsdk"
@@ -49,9 +50,9 @@ func TestArchiveRetentions(t *testing.T) {
 		updateElems = append(updateElems, elem)
 	}
 
-	if len(updateElems) > 1 && updateElems[1].Name != nil {
-		newName := *updateElems[1].Name + "_updated"
-		updateElems[1].Name = &newName
+	updatedName := "openapi-sdk-retention-" + uuid.NewString()
+	if len(updateElems) > 1 {
+		updateElems[1].Name = &updatedName
 	}
 
 	updateReq := retentions.UpdateRetentionsRequest{
@@ -73,7 +74,7 @@ func TestArchiveRetentions(t *testing.T) {
 	require.NotNil(t, verifyResp)
 
 	if len(verifyResp.Retentions) > 1 {
-		require.Contains(t, verifyResp.Retentions[1].GetName(), "_updated")
+		require.Equal(t, updatedName, verifyResp.Retentions[1].GetName())
 	}
 
 	activateResp, httpResp, err := client.
