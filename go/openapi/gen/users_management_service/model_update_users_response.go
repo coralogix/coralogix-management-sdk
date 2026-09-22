@@ -24,6 +24,8 @@ var _ MappedNullable = &UpdateUsersResponse{}
 type UpdateUsersResponse struct {
 	// List of user account IDs for the successfully updated users
 	UserAccountIds []int64 `json:"userAccountIds,omitempty"`
+	// Full details of the successfully updated users, as returned by GetUser.
+	Users []RbacV2User `json:"users,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -79,6 +81,38 @@ func (o *UpdateUsersResponse) SetUserAccountIds(v []int64) {
 	o.UserAccountIds = v
 }
 
+// GetUsers returns the Users field value if set, zero value otherwise.
+func (o *UpdateUsersResponse) GetUsers() []RbacV2User {
+	if o == nil || IsNil(o.Users) {
+		var ret []RbacV2User
+		return ret
+	}
+	return o.Users
+}
+
+// GetUsersOk returns a tuple with the Users field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUsersResponse) GetUsersOk() ([]RbacV2User, bool) {
+	if o == nil || IsNil(o.Users) {
+		return nil, false
+	}
+	return o.Users, true
+}
+
+// HasUsers returns a boolean if a field has been set.
+func (o *UpdateUsersResponse) HasUsers() bool {
+	if o != nil && !IsNil(o.Users) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsers gets a reference to the given []RbacV2User and assigns it to the Users field.
+func (o *UpdateUsersResponse) SetUsers(v []RbacV2User) {
+	o.Users = v
+}
+
 func (o UpdateUsersResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -91,6 +125,9 @@ func (o UpdateUsersResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.UserAccountIds) {
 		toSerialize["userAccountIds"] = o.UserAccountIds
+	}
+	if !IsNil(o.Users) {
+		toSerialize["users"] = o.Users
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -116,6 +153,7 @@ func (o *UpdateUsersResponse) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "userAccountIds")
+		delete(additionalProperties, "users")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

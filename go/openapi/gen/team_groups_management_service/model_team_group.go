@@ -45,6 +45,8 @@ type TeamGroup struct {
 	TeamId *int64 `json:"teamId,omitempty"`
 	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// IDs of the users that are members of this group.
+	UserIds []string `json:"userIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -420,6 +422,38 @@ func (o *TeamGroup) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetUserIds returns the UserIds field value if set, zero value otherwise.
+func (o *TeamGroup) GetUserIds() []string {
+	if o == nil || IsNil(o.UserIds) {
+		var ret []string
+		return ret
+	}
+	return o.UserIds
+}
+
+// GetUserIdsOk returns a tuple with the UserIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TeamGroup) GetUserIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.UserIds) {
+		return nil, false
+	}
+	return o.UserIds, true
+}
+
+// HasUserIds returns a boolean if a field has been set.
+func (o *TeamGroup) HasUserIds() bool {
+	if o != nil && !IsNil(o.UserIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserIds gets a reference to the given []string and assigns it to the UserIds field.
+func (o *TeamGroup) SetUserIds(v []string) {
+	o.UserIds = v
+}
+
 func (o TeamGroup) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -463,6 +497,9 @@ func (o TeamGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
+	if !IsNil(o.UserIds) {
+		toSerialize["userIds"] = o.UserIds
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -497,6 +534,7 @@ func (o *TeamGroup) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "teamId")
 		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "userIds")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

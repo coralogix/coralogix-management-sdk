@@ -665,6 +665,84 @@
   },
   "components": {
     "schemas": {
+      "AccessType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "AccessType",
+        "description": "Defines the access duration for a user. Can be either permanent (indefinite) or temporary (expires at a specific time).",
+        "discriminator": {
+          "propertyName": "accessType"
+        },
+        "type": "object",
+        "properties": {
+          "accessType": {
+            "description": "Type of access: 'permanent' or 'temporary'",
+            "type": "string",
+            "minLength": 0
+          },
+          "permanentAccess": {
+            "description": "Permanent access configuration - user has indefinite access",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PermanentAccess"
+              }
+            ]
+          },
+          "temporaryAccess": {
+            "description": "Temporary access configuration - user access expires at a specified time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TemporaryAccess"
+              }
+            ]
+          }
+        },
+        "required": [
+          "accessType"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "permanentAccess"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "temporaryAccess"
+            ]
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "permanentAccess"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "temporaryAccess"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "AllowedLoginMode": {
+        "type": "string",
+        "enum": [
+          "ALLOWED_LOGIN_MODE_UNSPECIFIED",
+          "ALLOWED_LOGIN_MODE_SSO",
+          "ALLOWED_LOGIN_MODE_LOCAL"
+        ]
+      },
       "ClearRole": {
         "externalDocs": {
           "url": ""
@@ -933,6 +1011,15 @@
             "minItems": 0
           }
         }
+      },
+      "PermanentAccess": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "PermanentAccess",
+        "description": "User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.",
+        "type": "object",
+        "additionalProperties": false
       },
       "Role": {
         "externalDocs": {
@@ -1262,6 +1349,32 @@
             "type": "string",
             "format": "date-time",
             "minLength": 0
+          },
+          "userIds": {
+            "description": "IDs of the users that are members of this group.",
+            "type": "array",
+            "items": {
+              "description": "IDs of the users that are members of this group.",
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "TemporaryAccess": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "TemporaryAccess",
+        "description": "User with temporary access. The user's access will automatically expire at the specified timestamp.",
+        "type": "object",
+        "properties": {
+          "expireAt": {
+            "description": "Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -1410,10 +1523,38 @@
         "description": "A user is an entity that is always part of a team and has an account associated with it",
         "type": "object",
         "properties": {
+          "accessType": {
+            "description": "Access type configuration - defines whether user access is permanent or temporary with expiration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccessType"
+              }
+            ]
+          },
+          "allowedLoginMode": {
+            "description": "List of allowed login modes. Can include SSO, local authentication, or both.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AllowedLoginMode"
+            },
+            "minItems": 0,
+            "maxItems": 2
+          },
           "firstName": {
             "description": "User first name",
             "type": "string",
             "minLength": 0
+          },
+          "groupIds": {
+            "description": "IDs of the team groups this user is a member of.",
+            "type": "array",
+            "items": {
+              "description": "IDs of the team groups this user is a member of.",
+              "type": "integer",
+              "format": "int64",
+              "minimum": 0
+            },
+            "minItems": 0
           },
           "lastName": {
             "description": "User last name",

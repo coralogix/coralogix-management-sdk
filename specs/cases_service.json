@@ -674,18 +674,7 @@
         "operationId": "CasesService_GetCaseDeepLinks",
         "parameters": [
           {
-            "in": "path",
-            "name": "case_id",
-            "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-            "required": true,
-            "schema": {
-              "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-              "type": "string",
-              "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
-              "minLength": 1,
-              "maxLength": 64
-            },
-            "style": "simple"
+            "$ref": "#/components/parameters/case_id"
           }
         ],
         "responses": {
@@ -745,18 +734,7 @@
         "operationId": "CasesService_GetCase",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-            "required": true,
-            "schema": {
-              "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-              "type": "string",
-              "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
-              "minLength": 1,
-              "maxLength": 64
-            },
-            "style": "simple"
+            "$ref": "#/components/parameters/id_2"
           }
         ],
         "responses": {
@@ -1585,18 +1563,7 @@
       },
       "parameters": [
         {
-          "in": "path",
-          "name": "id",
-          "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-          "required": true,
-          "schema": {
-            "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-            "type": "string",
-            "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
-            "minLength": 1,
-            "maxLength": 64
-          },
-          "style": "simple"
+          "$ref": "#/components/parameters/id_2"
         }
       ]
     },
@@ -5143,6 +5110,36 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "parameters": {
+      "case_id": {
+        "in": "path",
+        "name": "case_id",
+        "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
+        "required": true,
+        "schema": {
+          "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
+          "type": "string",
+          "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "style": "simple"
+      },
+      "id_2": {
+        "in": "path",
+        "name": "id",
+        "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
+        "required": true,
+        "schema": {
+          "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
+          "type": "string",
+          "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "style": "simple"
       }
     }
   }

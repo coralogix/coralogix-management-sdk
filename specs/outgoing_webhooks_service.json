@@ -604,16 +604,7 @@
         "operationId": "OutgoingWebhooksService_DeleteOutgoingWebhook",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "description": "Unique identifier.",
-              "type": "string",
-              "minLength": 0
-            },
-            "style": "simple"
+            "$ref": "#/components/parameters/id_4"
           }
         ],
         "responses": {
@@ -673,16 +664,7 @@
         "operationId": "OutgoingWebhooksService_TestExistingOutgoingWebhook",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "description": "Unique identifier.",
-              "type": "string",
-              "minLength": 0
-            },
-            "style": "simple"
+            "$ref": "#/components/parameters/id_4"
           }
         ],
         "responses": {
@@ -2049,6 +2031,20 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "parameters": {
+      "id_4": {
+        "in": "path",
+        "name": "id",
+        "description": "Unique identifier.",
+        "required": true,
+        "schema": {
+          "description": "Unique identifier.",
+          "type": "string",
+          "minLength": 0
+        },
+        "style": "simple"
       }
     }
   }

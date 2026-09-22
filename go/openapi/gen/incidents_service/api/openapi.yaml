@@ -374,14 +374,60 @@
                   "description": "The contextual labels of the incident",
                   "type": "object",
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/ContextualLabelValues"
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "title": "Contextual label values",
+                    "description": "Represents contextual label values for filtering incidents",
+                    "type": "object",
+                    "properties": {
+                      "contextualLabelValues": {
+                        "description": "The contextual label values.",
+                        "type": "array",
+                        "items": {
+                          "description": "The contextual label values.",
+                          "type": "string",
+                          "pattern": "^[\\s\\S]*$",
+                          "minLength": 0,
+                          "maxLength": 4096
+                        },
+                        "minItems": 0,
+                        "maxItems": 1000
+                      }
+                    },
+                    "required": [
+                      "contextualLabelValues"
+                    ]
                   }
                 },
                 "displayLabels": {
                   "description": "The display labels of the incident",
                   "type": "object",
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/DisplayLabelValues"
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "title": "Display label values",
+                    "description": "Represents display label values for filtering incidents",
+                    "type": "object",
+                    "properties": {
+                      "displayLabelValues": {
+                        "description": "The display label values.",
+                        "type": "array",
+                        "items": {
+                          "description": "The display label values.",
+                          "type": "string",
+                          "pattern": "^[\\s\\S]*$",
+                          "minLength": 0,
+                          "maxLength": 4096
+                        },
+                        "minItems": 0,
+                        "maxItems": 1000
+                      }
+                    },
+                    "required": [
+                      "displayLabelValues"
+                    ]
                   }
                 },
                 "isMuted": {
@@ -422,11 +468,29 @@
                   "maxItems": 1000
                 },
                 "timestamp": {
-                  "description": "The time range of the incident",
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/v1.TimeRange"
+                  "externalDocs": {
+                    "url": ""
+                  },
+                  "title": "Time range",
+                  "description": "Represents a time range with start and end timestamps",
+                  "type": "object",
+                  "properties": {
+                    "endTime": {
+                      "description": "End time of the range",
+                      "type": "string",
+                      "format": "date-time",
+                      "minLength": 0
+                    },
+                    "startTime": {
+                      "description": "Start time of the range",
+                      "type": "string",
+                      "format": "date-time",
+                      "minLength": 0
                     }
+                  },
+                  "required": [
+                    "startTime",
+                    "endTime"
                   ]
                 }
               }
@@ -570,14 +634,60 @@
                   "description": "The contextual labels of the incident",
                   "type": "object",
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/ContextualLabelValues"
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "title": "Contextual label values",
+                    "description": "Represents contextual label values for filtering incidents",
+                    "type": "object",
+                    "properties": {
+                      "contextualLabelValues": {
+                        "description": "The contextual label values.",
+                        "type": "array",
+                        "items": {
+                          "description": "The contextual label values.",
+                          "type": "string",
+                          "pattern": "^[\\s\\S]*$",
+                          "minLength": 0,
+                          "maxLength": 4096
+                        },
+                        "minItems": 0,
+                        "maxItems": 1000
+                      }
+                    },
+                    "required": [
+                      "contextualLabelValues"
+                    ]
                   }
                 },
                 "displayLabels": {
                   "description": "The display labels of the incident",
                   "type": "object",
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/DisplayLabelValues"
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "title": "Display label values",
+                    "description": "Represents display label values for filtering incidents",
+                    "type": "object",
+                    "properties": {
+                      "displayLabelValues": {
+                        "description": "The display label values.",
+                        "type": "array",
+                        "items": {
+                          "description": "The display label values.",
+                          "type": "string",
+                          "pattern": "^[\\s\\S]*$",
+                          "minLength": 0,
+                          "maxLength": 4096
+                        },
+                        "minItems": 0,
+                        "maxItems": 1000
+                      }
+                    },
+                    "required": [
+                      "displayLabelValues"
+                    ]
                   }
                 },
                 "isMuted": {
@@ -618,11 +728,29 @@
                   "maxItems": 1000
                 },
                 "timestamp": {
-                  "description": "The time range of the incident",
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/v1.TimeRange"
+                  "externalDocs": {
+                    "url": ""
+                  },
+                  "title": "Time range",
+                  "description": "Represents a time range with start and end timestamps",
+                  "type": "object",
+                  "properties": {
+                    "endTime": {
+                      "description": "End time of the range",
+                      "type": "string",
+                      "format": "date-time",
+                      "minLength": 0
+                    },
+                    "startTime": {
+                      "description": "Start time of the range",
+                      "type": "string",
+                      "format": "date-time",
+                      "minLength": 0
                     }
+                  },
+                  "required": [
+                    "startTime",
+                    "endTime"
                   ]
                 }
               }
@@ -687,18 +815,7 @@
         "operationId": "IncidentsService_GetIncidentByEventId",
         "parameters": [
           {
-            "in": "path",
-            "name": "event_id",
-            "description": "Event ID associated to the Incident to acknowledge",
-            "required": true,
-            "schema": {
-              "description": "Event ID associated to the Incident to acknowledge",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
-              "minLength": 1,
-              "maxLength": 64
-            },
-            "style": "simple"
+            "$ref": "#/components/parameters/event_id"
           }
         ],
         "responses": {
@@ -758,18 +875,7 @@
         "operationId": "IncidentsService_AcknowledgeIncidentByEventId",
         "parameters": [
           {
-            "in": "path",
-            "name": "event_id",
-            "description": "Event ID associated to the Incident to acknowledge",
-            "required": true,
-            "schema": {
-              "description": "Event ID associated to the Incident to acknowledge",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
-              "minLength": 1,
-              "maxLength": 64
-            },
-            "style": "simple"
+            "$ref": "#/components/parameters/event_id"
           }
         ],
         "responses": {
@@ -991,14 +1097,60 @@
                   "description": "The contextual labels of the incident",
                   "type": "object",
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/ContextualLabelValues"
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "title": "Contextual label values",
+                    "description": "Represents contextual label values for filtering incidents",
+                    "type": "object",
+                    "properties": {
+                      "contextualLabelValues": {
+                        "description": "The contextual label values.",
+                        "type": "array",
+                        "items": {
+                          "description": "The contextual label values.",
+                          "type": "string",
+                          "pattern": "^[\\s\\S]*$",
+                          "minLength": 0,
+                          "maxLength": 4096
+                        },
+                        "minItems": 0,
+                        "maxItems": 1000
+                      }
+                    },
+                    "required": [
+                      "contextualLabelValues"
+                    ]
                   }
                 },
                 "displayLabels": {
                   "description": "The display labels of the incident",
                   "type": "object",
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/DisplayLabelValues"
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "title": "Display label values",
+                    "description": "Represents display label values for filtering incidents",
+                    "type": "object",
+                    "properties": {
+                      "displayLabelValues": {
+                        "description": "The display label values.",
+                        "type": "array",
+                        "items": {
+                          "description": "The display label values.",
+                          "type": "string",
+                          "pattern": "^[\\s\\S]*$",
+                          "minLength": 0,
+                          "maxLength": 4096
+                        },
+                        "minItems": 0,
+                        "maxItems": 1000
+                      }
+                    },
+                    "required": [
+                      "displayLabelValues"
+                    ]
                   }
                 },
                 "isMuted": {
@@ -1039,11 +1191,29 @@
                   "maxItems": 1000
                 },
                 "timestamp": {
-                  "description": "The time range of the incident",
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/v1.TimeRange"
+                  "externalDocs": {
+                    "url": ""
+                  },
+                  "title": "Time range",
+                  "description": "Represents a time range with start and end timestamps",
+                  "type": "object",
+                  "properties": {
+                    "endTime": {
+                      "description": "End time of the range",
+                      "type": "string",
+                      "format": "date-time",
+                      "minLength": 0
+                    },
+                    "startTime": {
+                      "description": "Start time of the range",
+                      "type": "string",
+                      "format": "date-time",
+                      "minLength": 0
                     }
+                  },
+                  "required": [
+                    "startTime",
+                    "endTime"
                   ]
                 }
               }
@@ -4274,6 +4444,22 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "parameters": {
+      "event_id": {
+        "in": "path",
+        "name": "event_id",
+        "description": "Event ID associated to the Incident to acknowledge",
+        "required": true,
+        "schema": {
+          "description": "Event ID associated to the Incident to acknowledge",
+          "type": "string",
+          "pattern": "^[\\s\\S]*$",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "style": "simple"
       }
     }
   }

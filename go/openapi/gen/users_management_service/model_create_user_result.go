@@ -26,6 +26,8 @@ type CreateUserResult struct {
 	// Human-readable detail about this outcome. Set where a status alone is not enough, such as `CREATE_USER_STATUS_FAILED`.
 	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	Status *CreateUserStatus `json:"status,omitempty"`
+	// Full details of the created user, as returned by GetUser. Absent when the outcome produced no user, such as an invited user, who has none until the invitation is accepted.
+	User *RbacV2User `json:"user,omitempty"`
 	UserAccountId *int64 `json:"userAccountId,omitempty"`
 	// Stable id of the user. Absent when the outcome produced no user, such as an invited user, who has none until the invitation is accepted.
 	UserId *string `json:"userId,omitempty" validate:"regexp=^[\\s\\S]+$"`
@@ -117,6 +119,38 @@ func (o *CreateUserResult) HasStatus() bool {
 // SetStatus gets a reference to the given CreateUserStatus and assigns it to the Status field.
 func (o *CreateUserResult) SetStatus(v CreateUserStatus) {
 	o.Status = &v
+}
+
+// GetUser returns the User field value if set, zero value otherwise.
+func (o *CreateUserResult) GetUser() RbacV2User {
+	if o == nil || IsNil(o.User) {
+		var ret RbacV2User
+		return ret
+	}
+	return *o.User
+}
+
+// GetUserOk returns a tuple with the User field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateUserResult) GetUserOk() (*RbacV2User, bool) {
+	if o == nil || IsNil(o.User) {
+		return nil, false
+	}
+	return o.User, true
+}
+
+// HasUser returns a boolean if a field has been set.
+func (o *CreateUserResult) HasUser() bool {
+	if o != nil && !IsNil(o.User) {
+		return true
+	}
+
+	return false
+}
+
+// SetUser gets a reference to the given RbacV2User and assigns it to the User field.
+func (o *CreateUserResult) SetUser(v RbacV2User) {
+	o.User = &v
 }
 
 // GetUserAccountId returns the UserAccountId field value if set, zero value otherwise.
@@ -223,6 +257,9 @@ func (o CreateUserResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+	if !IsNil(o.User) {
+		toSerialize["user"] = o.User
+	}
 	if !IsNil(o.UserAccountId) {
 		toSerialize["userAccountId"] = o.UserAccountId
 	}
@@ -276,6 +313,7 @@ func (o *CreateUserResult) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "message")
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "user")
 		delete(additionalProperties, "userAccountId")
 		delete(additionalProperties, "userId")
 		delete(additionalProperties, "username")

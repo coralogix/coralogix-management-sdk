@@ -2,6 +2,8 @@ openapi: 3.1.0
 info:
   title: ''
   version: 1.0.0
+security:
+  - apiKeyAuth: []
 tags:
   - name: AI Applications Service
     description: Manage the catalog of AI applications discovered from spans.
@@ -66,7 +68,7 @@ tags:
   - name: Dashboard folders service
     description: Manage your dashboard folders.
   - name: Dashboard service
-    description: Manage your dashboards.
+    description: Get information about the Coralogix Dashboard catalog.
   - name: Data Usage Query Service
     description: >-
       Query billable data usage through the public Coralogix API using daily or
@@ -419,16 +421,7 @@ paths:
       description: Returns the details of the specified API key.
       operationId: ApiKeysService_GetApiKey
       parameters:
-        - description: Key identifier.
-          in: path
-          name: key_id
-          required: true
-          schema:
-            description: Key identifier.
-            examples:
-              - my_key_id
-            minLength: 0
-            type: string
+        - $ref: '#/components/parameters/key_id'
       responses:
         '200':
           content:
@@ -461,16 +454,7 @@ paths:
       description: Updates the specified API key.
       operationId: ApiKeysService_UpdateApiKey
       parameters:
-        - description: Key identifier.
-          in: path
-          name: key_id
-          required: true
-          schema:
-            description: Key identifier.
-            examples:
-              - my_key_id
-            minLength: 0
-            type: string
+        - $ref: '#/components/parameters/key_id'
       requestBody:
         content:
           application/json:
@@ -2346,275 +2330,23 @@ paths:
           type: integer
           description: Unique team identifier.
           format: int64
-  /aaa/teams/v2/{team_id}/members:
-    put:
-      description: Updates team members for the specified team.
-      operationId: UsersMgmtService_UpdateUsers
-      parameters:
-        - description: Team ID containing the users to update
-          in: path
-          name: team_id
-          required: true
-          schema:
-            description: Team ID containing the users to update
-            format: int64
-            minimum: 0
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: >-
-                List of users to update. Multiple users can be updated in a
-                single request.
-              items:
-                $ref: '#/components/schemas/UpdateUserRequest'
-              minItems: 0
-              type: array
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateUsersResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: User not found
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Update Users
-      tags:
-        - Users Management Service
-    post:
-      description: Adds members to the specified team.
-      operationId: UsersMgmtService_CreateUsers
-      parameters:
-        - description: Team ID where the users will be created
-          in: path
-          name: team_id
-          required: true
-          schema:
-            description: Team ID where the users will be created
-            format: int64
-            minimum: 0
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: >-
-                List of users to create. Multiple users can be created in a
-                single request.
-              items:
-                $ref: '#/components/schemas/CreateUserRequest'
-              minItems: 0
-              type: array
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateUsersResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Team not found
-        '409':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: User already exists
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Create Users
-      tags:
-        - Users Management Service
-  /aaa/teams/v2/{team_id}/members/{user_account_id}:
-    get:
-      description: Returns the details of a specific team member.
-      operationId: UsersMgmtService_GetUser
-      parameters:
-        - description: Team ID to search within
-          in: path
-          name: team_id
-          required: true
-          schema:
-            description: Team ID to search within
-            format: int64
-            minimum: 0
-            type: integer
-        - description: User account ID to retrieve
-          in: path
-          name: user_account_id
-          required: true
-          schema:
-            description: User account ID to retrieve
-            format: int64
-            minimum: 0
-            type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetUserResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: User not found
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Get User
-      tags:
-        - Users Management Service
-  /aaa/teams/v2/{team_id}/members:updateStatuses:
-    patch:
-      description: Updates the active status of multiple team members.
-      operationId: UsersMgmtService_UpdateUsersStatuses
-      parameters:
-        - description: Team ID containing the users to update
-          in: path
-          name: team_id
-          required: true
-          schema:
-            description: Team ID containing the users to update
-            format: int64
-            minimum: 0
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: >-
-                Request to activate or revoke (deactivate) one or more users
-                within a team. This operation changes the user status to either
-                Active (enables access) or Inactive (disables access).
-              properties:
-                status:
-                  allOf:
-                    - $ref: '#/components/schemas/UserStatus'
-                  description: >-
-                    New status for the users: Active (enables system access) or
-                    Inactive (disables system access)
-                userAccountIds:
-                  description: >-
-                    List of user account IDs to update. All users will be set to
-                    the same status.
-                  items:
-                    description: >-
-                      List of user account IDs to update. All users will be set
-                      to the same status.
-                    format: int64
-                    minimum: 0
-                    type: integer
-                  minItems: 0
-                  type: array
-              title: UpdateUserStatusRequest
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateUsersStatusesResponse'
-          description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Unauthorized request
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: User not found
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Internal server error
-      summary: Activate/Revoke Users
-      tags:
-        - Users Management Service
-  /aaa/teams/v2/{team_id}/search:
+  /aaa/users/v2:
     get:
       description: Searches for team members by query.
       operationId: UsersMgmtService_SearchUsers
       parameters:
-        - description: Team ID to search within
-          in: path
+        - description: >-
+            Team ID to search within. Optional on the /aaa/users/v2 routes,
+            which bind no team in the path: omit it and the team of the API key
+            making the call is used.
+          in: query
           name: team_id
-          required: true
+          required: false
           schema:
-            description: Team ID to search within
+            description: >-
+              Team ID to search within. Optional on the /aaa/users/v2 routes,
+              which bind no team in the path: omit it and the team of the API
+              key making the call is used.
             format: int64
             minimum: 0
             type: integer
@@ -2684,6 +2416,298 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Internal server error
       summary: Search Users
+      tags:
+        - Users Management Service
+    put:
+      description: Updates team members for the specified team.
+      operationId: UsersMgmtService_UpdateUsers
+      parameters:
+        - description: >-
+            Team ID containing the users to update. Optional on the
+            /aaa/users/v2 routes, which bind no team in the path: omit it and
+            the team of the API key making the call is used.
+          in: query
+          name: team_id
+          required: false
+          schema:
+            description: >-
+              Team ID containing the users to update. Optional on the
+              /aaa/users/v2 routes, which bind no team in the path: omit it and
+              the team of the API key making the call is used.
+            format: int64
+            minimum: 0
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                List of users to update. Multiple users can be updated in a
+                single request.
+              items:
+                $ref: '#/components/schemas/UpdateUserRequest'
+              minItems: 0
+              type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateUsersResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: User not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update Users
+      tags:
+        - Users Management Service
+    post:
+      description: Adds members to the specified team.
+      operationId: UsersMgmtService_CreateUsers
+      parameters:
+        - description: >-
+            Team ID where the users will be created. Optional on the
+            /aaa/users/v2 routes, which bind no team in the path: omit it and
+            the team of the API key making the call is used.
+          in: query
+          name: team_id
+          required: false
+          schema:
+            description: >-
+              Team ID where the users will be created. Optional on the
+              /aaa/users/v2 routes, which bind no team in the path: omit it and
+              the team of the API key making the call is used.
+            format: int64
+            minimum: 0
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                List of users to create. Multiple users can be created in a
+                single request.
+              items:
+                $ref: '#/components/schemas/CreateUserRequest'
+              minItems: 0
+              type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUsersResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Team not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: User already exists
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Create Users
+      tags:
+        - Users Management Service
+  /aaa/users/v2/{user_account_id}:
+    get:
+      description: Returns the details of a specific team member.
+      operationId: UsersMgmtService_GetUser
+      parameters:
+        - description: User account ID to retrieve
+          in: path
+          name: user_account_id
+          required: true
+          schema:
+            description: User account ID to retrieve
+            format: int64
+            minimum: 0
+            type: integer
+        - description: >-
+            Team ID to search within. Optional on the /aaa/users/v2 routes,
+            which bind no team in the path: omit it and the team of the API key
+            making the call is used.
+          in: query
+          name: team_id
+          required: false
+          schema:
+            description: >-
+              Team ID to search within. Optional on the /aaa/users/v2 routes,
+              which bind no team in the path: omit it and the team of the API
+              key making the call is used.
+            format: int64
+            minimum: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: User not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Get User
+      tags:
+        - Users Management Service
+  /aaa/users/v2:updateStatuses:
+    patch:
+      description: Updates the active status of multiple team members.
+      operationId: UsersMgmtService_UpdateUsersStatuses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                Request to activate or revoke (deactivate) one or more users
+                within a team. This operation changes the user status to either
+                Active (enables access) or Inactive (disables access).
+              properties:
+                status:
+                  allOf:
+                    - $ref: '#/components/schemas/UserStatus'
+                  description: >-
+                    New status for the users: Active (enables system access) or
+                    Inactive (disables system access)
+                teamId:
+                  description: >-
+                    Team ID containing the users to update. Optional on the
+                    /aaa/users/v2 routes, which bind no team in the path: omit
+                    it and the team of the API key making the call is used.
+                  format: int64
+                  minimum: 0
+                  type: integer
+                userAccountIds:
+                  description: >-
+                    List of user account IDs to update. All users will be set to
+                    the same status.
+                  items:
+                    description: >-
+                      List of user account IDs to update. All users will be set
+                      to the same status.
+                    format: int64
+                    minimum: 0
+                    type: integer
+                  minItems: 0
+                  type: array
+                userIds:
+                  description: >-
+                    Stable ids of the users to update, as an alternative to
+                    `userAccountIds`. All users will be set to the same status.
+                    Mutually exclusive with `userAccountIds`: set exactly one of
+                    the two.
+                  items:
+                    description: >-
+                      Stable ids of the users to update, as an alternative to
+                      `userAccountIds`. All users will be set to the same
+                      status. Mutually exclusive with `userAccountIds`: set
+                      exactly one of the two.
+                    maxLength: 255
+                    minLength: 1
+                    pattern: ^[\s\S]+$
+                    type: string
+                  maxItems: 1000
+                  minItems: 1
+                  type: array
+              title: UpdateUserStatusRequest
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateUsersStatusesResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: User not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Activate/Revoke Users
       tags:
         - Users Management Service
   /actions/actions/v2:
@@ -6772,25 +6796,7 @@ paths:
         - `case:Read`
       operationId: CasesService_GetCaseDeepLinks
       parameters:
-        - description: >-
-            ID of the case. Accepts either the case UUID (the `id` field on a
-            case) or the readable identifier (the `readable_id` field, e.g.
-            `CASE-123`).
-          in: path
-          name: case_id
-          required: true
-          schema:
-            description: >-
-              ID of the case. Accepts either the case UUID (the `id` field on a
-              case) or the readable identifier (the `readable_id` field, e.g.
-              `CASE-123`).
-            examples:
-              - 3f166e9f-3c88-4af2-b52e-138f339dab3e
-            maxLength: 64
-            minLength: 1
-            pattern: >-
-              ^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$
-            type: string
+        - $ref: '#/components/parameters/case_id'
       responses:
         '200':
           content:
@@ -6830,25 +6836,7 @@ paths:
         - `case:Read`
       operationId: CaseEventsService_ListEvents
       parameters:
-        - description: >-
-            ID of the case. Accepts either the case UUID (the `id` field on a
-            case) or the readable identifier (the `readable_id` field, e.g.
-            `CASE-123`).
-          in: path
-          name: case_id
-          required: true
-          schema:
-            description: >-
-              ID of the case. Accepts either the case UUID (the `id` field on a
-              case) or the readable identifier (the `readable_id` field, e.g.
-              `CASE-123`).
-            examples:
-              - 3f166e9f-3c88-4af2-b52e-138f339dab3e
-            maxLength: 64
-            minLength: 1
-            pattern: >-
-              ^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$
-            type: string
+        - $ref: '#/components/parameters/case_id'
       responses:
         '200':
           content:
@@ -6967,25 +6955,7 @@ paths:
         - `case:Read`
       operationId: CasesService_GetCase
       parameters:
-        - description: >-
-            ID of the case. Accepts either the case UUID (the `id` field on a
-            case) or the readable identifier (the `readable_id` field, e.g.
-            `CASE-123`).
-          in: path
-          name: id
-          required: true
-          schema:
-            description: >-
-              ID of the case. Accepts either the case UUID (the `id` field on a
-              case) or the readable identifier (the `readable_id` field, e.g.
-              `CASE-123`).
-            examples:
-              - 3f166e9f-3c88-4af2-b52e-138f339dab3e
-            maxLength: 64
-            minLength: 1
-            pattern: >-
-              ^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$
-            type: string
+        - $ref: '#/components/parameters/id_2'
       responses:
         '200':
           content:
@@ -7922,25 +7892,7 @@ paths:
       x-coralogixPermissions:
         - case:Update
     parameters:
-      - name: id
-        in: path
-        description: >-
-          ID of the case. Accepts either the case UUID (the `id` field on a
-          case) or the readable identifier (the `readable_id` field, e.g.
-          `CASE-123`).
-        required: true
-        schema:
-          maxLength: 64
-          minLength: 1
-          pattern: >-
-            ^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$
-          type: string
-          description: >-
-            ID of the case. Accepts either the case UUID (the `id` field on a
-            case) or the readable identifier (the `readable_id` field, e.g.
-            `CASE-123`).
-          examples:
-            - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+      - $ref: '#/components/parameters/id_2'
   /cases/resolved/v1:
     post:
       description: |-
@@ -8510,16 +8462,7 @@ paths:
       x-coralogixPermissions:
         - team-dashboards:Update
     parameters:
-      - name: dashboard_id
-        in: path
-        description: The dashboard id.
-        required: true
-        schema:
-          maxLength: 21
-          minLength: 21
-          pattern: ^[\s\S]*$
-          type: string
-          description: The dashboard id.
+      - $ref: '#/components/parameters/dashboard_id'
   /dashboards/dashboards/v1/{dashboard_id}/default:
     put:
       description: |-
@@ -8529,16 +8472,7 @@ paths:
         - `team-dashboards:Update`
       operationId: DashboardsService_ReplaceDefaultDashboard
       parameters:
-        - description: The dashboard id.
-          in: path
-          name: dashboard_id
-          required: true
-          schema:
-            description: The dashboard id.
-            maxLength: 21
-            minLength: 21
-            pattern: ^[\s\S]*$
-            type: string
+        - $ref: '#/components/parameters/dashboard_id'
       requestBody:
         content:
           application/json:
@@ -8597,16 +8531,7 @@ paths:
         - `team-dashboards:Update`
       operationId: DashboardsService_AssignDashboardFolder
       parameters:
-        - description: The dashboard id.
-          in: path
-          name: dashboard_id
-          required: true
-          schema:
-            description: The dashboard id.
-            maxLength: 21
-            minLength: 21
-            pattern: ^[\s\S]*$
-            type: string
+        - $ref: '#/components/parameters/dashboard_id'
       requestBody:
         content:
           application/json:
@@ -9038,16 +8963,7 @@ paths:
       x-coralogixPermissions:
         - team-dashboards:Read
     parameters:
-      - name: dashboard_id
-        in: path
-        description: The dashboard id.
-        required: true
-        schema:
-          maxLength: 21
-          minLength: 21
-          pattern: ^[\s\S]*$
-          type: string
-          description: The dashboard id.
+      - $ref: '#/components/parameters/dashboard_id'
   /data-exploration/views/v1/folders:
     get:
       description: List view's folders
@@ -12014,33 +11930,13 @@ paths:
         - Fleet Manager Configuration Groups
       x-stability: preview
     parameters:
-      - name: id
-        in: path
-        description: Configuration group UUID v7.
-        required: true
-        schema:
-          maxLength: 36
-          minLength: 36
-          pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-          type: string
-          description: Configuration group UUID v7.
+      - $ref: '#/components/parameters/id'
   /fleet-management/configuration-groups/v1/{id}/archive:
     post:
       description: Archives a fleet-manager configuration group.
       operationId: ConfigurationGroupService_ArchiveConfigurationGroup
       parameters:
-        - description: Configuration group UUID v7.
-          in: path
-          name: id
-          required: true
-          schema:
-            description: Configuration group UUID v7.
-            maxLength: 36
-            minLength: 36
-            pattern: >-
-              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-            type: string
+        - $ref: '#/components/parameters/id'
       responses:
         '200':
           content:
@@ -12362,12 +12258,48 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/ContextualLabelValues'
+                  description: Represents contextual label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    contextualLabelValues:
+                      description: The contextual label values.
+                      items:
+                        description: The contextual label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - contextualLabelValues
+                  title: Contextual label values
+                  type: object
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/DisplayLabelValues'
+                  description: Represents display label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    displayLabelValues:
+                      description: The display label values.
+                      items:
+                        description: The display label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - displayLabelValues
+                  title: Display label values
+                  type: object
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -12398,9 +12330,25 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                allOf:
-                  - $ref: '#/components/schemas/v1.TimeRange'
-                description: The time range of the incident
+                description: Represents a time range with start and end timestamps
+                externalDocs:
+                  url: ''
+                properties:
+                  endTime:
+                    description: End time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                  startTime:
+                    description: Start time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                required:
+                  - startTime
+                  - endTime
+                title: Time range
+                type: object
             title: Incident event query filter
             type: object
         - description: >-
@@ -12507,12 +12455,48 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/ContextualLabelValues'
+                  description: Represents contextual label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    contextualLabelValues:
+                      description: The contextual label values.
+                      items:
+                        description: The contextual label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - contextualLabelValues
+                  title: Contextual label values
+                  type: object
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/DisplayLabelValues'
+                  description: Represents display label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    displayLabelValues:
+                      description: The display label values.
+                      items:
+                        description: The display label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - displayLabelValues
+                  title: Display label values
+                  type: object
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -12543,9 +12527,25 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                allOf:
-                  - $ref: '#/components/schemas/v1.TimeRange'
-                description: The time range of the incident
+                description: Represents a time range with start and end timestamps
+                externalDocs:
+                  url: ''
+                properties:
+                  endTime:
+                    description: End time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                  startTime:
+                    description: Start time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                required:
+                  - startTime
+                  - endTime
+                title: Time range
+                type: object
             title: Incident event query filter
             type: object
       responses:
@@ -12590,18 +12590,7 @@ paths:
         - `incidents:read`
       operationId: IncidentsService_GetIncidentByEventId
       parameters:
-        - description: Event ID associated to the Incident to acknowledge
-          in: path
-          name: event_id
-          required: true
-          schema:
-            description: Event ID associated to the Incident to acknowledge
-            examples:
-              - event_id_1
-            maxLength: 64
-            minLength: 1
-            pattern: ^[\s\S]*$
-            type: string
+        - $ref: '#/components/parameters/event_id'
       responses:
         '200':
           content:
@@ -12641,18 +12630,7 @@ paths:
         - `incidents:acknowledge`
       operationId: IncidentsService_AcknowledgeIncidentByEventId
       parameters:
-        - description: Event ID associated to the Incident to acknowledge
-          in: path
-          name: event_id
-          required: true
-          schema:
-            description: Event ID associated to the Incident to acknowledge
-            examples:
-              - event_id_1
-            maxLength: 64
-            minLength: 1
-            pattern: ^[\s\S]*$
-            type: string
+        - $ref: '#/components/parameters/event_id'
       responses:
         '200':
           content:
@@ -12804,12 +12782,48 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/ContextualLabelValues'
+                  description: Represents contextual label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    contextualLabelValues:
+                      description: The contextual label values.
+                      items:
+                        description: The contextual label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - contextualLabelValues
+                  title: Contextual label values
+                  type: object
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/DisplayLabelValues'
+                  description: Represents display label values for filtering incidents
+                  externalDocs:
+                    url: ''
+                  properties:
+                    displayLabelValues:
+                      description: The display label values.
+                      items:
+                        description: The display label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - displayLabelValues
+                  title: Display label values
+                  type: object
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -12840,9 +12854,25 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                allOf:
-                  - $ref: '#/components/schemas/v1.TimeRange'
-                description: The time range of the incident
+                description: Represents a time range with start and end timestamps
+                externalDocs:
+                  url: ''
+                properties:
+                  endTime:
+                    description: End time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                  startTime:
+                    description: Start time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                required:
+                  - startTime
+                  - endTime
+                title: Time range
+                type: object
             title: Incident event query filter
             type: object
       responses:
@@ -15411,16 +15441,7 @@ paths:
         - `outbound-webhooks:UpdateConfig`
       operationId: OutgoingWebhooksService_DeleteOutgoingWebhook
       parameters:
-        - description: Unique identifier.
-          in: path
-          name: id
-          required: true
-          schema:
-            description: Unique identifier.
-            examples:
-              - example_id
-            minLength: 0
-            type: string
+        - $ref: '#/components/parameters/id_4'
       responses:
         '200':
           content:
@@ -15460,16 +15481,7 @@ paths:
         - `outbound-webhooks:ReadConfig`
       operationId: OutgoingWebhooksService_TestExistingOutgoingWebhook
       parameters:
-        - description: Unique identifier.
-          in: path
-          name: id
-          required: true
-          schema:
-            description: Unique identifier.
-            examples:
-              - example_id
-            minLength: 0
-            type: string
+        - $ref: '#/components/parameters/id_4'
       responses:
         '200':
           content:
@@ -16160,16 +16172,7 @@ paths:
       description: Deletes the notification connector with the specified ID.
       operationId: ConnectorsService_DeleteConnector
       parameters:
-        - description: Unique identifier.
-          in: path
-          name: id
-          required: true
-          schema:
-            description: Unique identifier.
-            maxLength: 128
-            minLength: 1
-            pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
-            type: string
+        - $ref: '#/components/parameters/id_3'
       responses:
         '200':
           content:
@@ -16428,16 +16431,7 @@ paths:
       description: Deletes the custom notification preset with the specified ID.
       operationId: PresetsService_DeleteCustomPreset
       parameters:
-        - description: Unique identifier.
-          in: path
-          name: id
-          required: true
-          schema:
-            description: Unique identifier.
-            maxLength: 128
-            minLength: 1
-            pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
-            type: string
+        - $ref: '#/components/parameters/id_3'
       responses:
         '200':
           content:
@@ -16960,16 +16954,7 @@ paths:
       description: Deletes the notification router with the specified ID.
       operationId: GlobalRoutersService_DeleteGlobalRouter
       parameters:
-        - description: Unique identifier.
-          in: path
-          name: id
-          required: true
-          schema:
-            description: Unique identifier.
-            maxLength: 128
-            minLength: 1
-            pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
-            type: string
+        - $ref: '#/components/parameters/id_3'
       responses:
         '200':
           content:
@@ -24503,6 +24488,13 @@ components:
           items:
             $ref: '#/components/schemas/RemoteConfiguration'
           description: Remote configurations in this family.
+        sources:
+          maxItems: 128
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigurationFamilySource'
+          description: Immutable inputs that produced this configuration family version.
         version:
           maxLength: 256
           minLength: 1
@@ -24559,6 +24551,18 @@ components:
             $ref: '#/components/schemas/RemoteConfigurationCreate'
           description: Remote configurations to create in this family.
       description: Initial configuration family to create.
+      externalDocs:
+        url: ''
+    ConfigurationFamilySource:
+      required:
+        - configurationOverlay
+      type: object
+      properties:
+        configurationOverlay:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationOverlaySource'
+          description: Configuration overlay that produced this family version.
+      description: An immutable input that produced a configuration family version.
       externalDocs:
         url: ''
     ConfigurationGroup:
@@ -24651,6 +24655,35 @@ components:
             description: Tags attached to the configuration group.
           description: Tags attached to the configuration group.
       description: Payload used to create a fleet-manager configuration group.
+      externalDocs:
+        url: ''
+    ConfigurationOverlaySource:
+      required:
+        - overlayId
+        - overlayVersionId
+      type: object
+      properties:
+        overlayId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Configuration overlay UUID v7.
+        overlayName:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Configuration overlay name at read time.
+        overlayVersionId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Configuration overlay version UUID v7.
+      description: Configuration overlay provenance.
       externalDocs:
         url: ''
     ConnectionStatus:
@@ -25826,6 +25859,13 @@ components:
             is not enough, such as `CREATE_USER_STATUS_FAILED`.
         status:
           $ref: '#/components/schemas/CreateUserStatus'
+        user:
+          allOf:
+            - $ref: '#/components/schemas/rbac.v2.User'
+          description: >-
+            Full details of the created user, as returned by GetUser. Absent
+            when the outcome produced no user, such as an invited user, who has
+            none until the invitation is accepted.
         userAccountId:
           minimum: 0
           type: integer
@@ -26015,6 +26055,7 @@ components:
         binary:
           maxLength: 27962028
           minLength: 0
+          pattern: ^[A-Za-z0-9+/]*={0,2}$
           type: string
           description: >-
             Binary content of the enrichment data file encoded as base64. The
@@ -27957,6 +27998,7 @@ components:
       properties:
         content:
           minLength: 0
+          pattern: ^[A-Za-z0-9+/]*={0,2}$
           type: string
           description: Base64-encoded binary data of the alert definitions
           format: byte
@@ -29820,6 +29862,7 @@ components:
         binary:
           maxLength: 27962028
           minLength: 0
+          pattern: ^[A-Za-z0-9+/]*={0,2}$
           type: string
           description: >-
             Binary content of the file encoded as base64. The account's
@@ -47678,6 +47721,14 @@ components:
           type: string
           description: Last-updated timestamp.
           format: date-time
+        userIds:
+          minItems: 0
+          type: array
+          items:
+            minLength: 0
+            type: string
+            description: IDs of the users that are members of this group.
+          description: IDs of the users that are members of this group.
       description: A Team Group entity.
       externalDocs:
         url: ''
@@ -49587,6 +49638,15 @@ components:
           type: integer
           description: User account ID of the user to update
           format: int64
+        userId:
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]+$
+          type: string
+          description: >-
+            Stable id of the user to update, as an alternative to
+            `userAccountId`. Mutually exclusive with `userAccountId`: exactly
+            one must be set.
         userTemplate:
           allOf:
             - $ref: '#/components/schemas/UserTemplate'
@@ -49606,6 +49666,14 @@ components:
             description: List of user account IDs for the successfully updated users
             format: int64
           description: List of user account IDs for the successfully updated users
+        users:
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/rbac.v2.User'
+          description: >-
+            Full details of the successfully updated users, as returned by
+            GetUser.
       description: >-
         Response confirming the successful update of users. Contains the user
         account IDs of all users that were updated.
@@ -51612,8 +51680,9 @@ components:
         highlighted:
           type: boolean
           description: >-
-            When true, this widget is marked as highlighted for all users of the
-            dashboard. Not allowed on a widget reference.
+            Deprecated: has no effect. The value is stored and returned
+            unchanged; it does not highlight anything.
+          deprecated: true
         id:
           allOf:
             - $ref: '#/components/schemas/UUID'
@@ -52530,10 +52599,34 @@ components:
       title: User
       type: object
       properties:
+        accessType:
+          allOf:
+            - $ref: '#/components/schemas/AccessType'
+          description: >-
+            Access type configuration - defines whether user access is permanent
+            or temporary with expiration
+        allowedLoginMode:
+          maxItems: 2
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/AllowedLoginMode'
+          description: >-
+            List of allowed login modes. Can include SSO, local authentication,
+            or both.
         firstName:
           minLength: 0
           type: string
           description: User first name
+        groupIds:
+          minItems: 0
+          type: array
+          items:
+            minimum: 0
+            type: integer
+            description: IDs of the team groups this user is a member of.
+            format: int64
+          description: IDs of the team groups this user is a member of.
         lastName:
           minLength: 0
           type: string
@@ -54020,6 +54113,114 @@ components:
         - DATA_MODE_TYPE_ARCHIVE
       type: string
       description: Data mode type.
+  parameters:
+    case_id:
+      name: case_id
+      in: path
+      description: >-
+        ID of the case. Accepts either the case UUID (the `id` field on a case)
+        or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+      required: true
+      schema:
+        maxLength: 64
+        minLength: 1
+        pattern: >-
+          ^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$
+        type: string
+        description: >-
+          ID of the case. Accepts either the case UUID (the `id` field on a
+          case) or the readable identifier (the `readable_id` field, e.g.
+          `CASE-123`).
+        examples:
+          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+    dashboard_id:
+      name: dashboard_id
+      in: path
+      description: The dashboard id.
+      required: true
+      schema:
+        maxLength: 21
+        minLength: 21
+        pattern: ^[\s\S]*$
+        type: string
+        description: The dashboard id.
+    event_id:
+      name: event_id
+      in: path
+      description: Event ID associated to the Incident to acknowledge
+      required: true
+      schema:
+        maxLength: 64
+        minLength: 1
+        pattern: ^[\s\S]*$
+        type: string
+        description: Event ID associated to the Incident to acknowledge
+        examples:
+          - event_id_1
+    id:
+      name: id
+      in: path
+      description: Configuration group UUID v7.
+      required: true
+      schema:
+        maxLength: 36
+        minLength: 36
+        pattern: >-
+          ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+        type: string
+        description: Configuration group UUID v7.
+    id_2:
+      name: id
+      in: path
+      description: >-
+        ID of the case. Accepts either the case UUID (the `id` field on a case)
+        or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
+      required: true
+      schema:
+        maxLength: 64
+        minLength: 1
+        pattern: >-
+          ^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$
+        type: string
+        description: >-
+          ID of the case. Accepts either the case UUID (the `id` field on a
+          case) or the readable identifier (the `readable_id` field, e.g.
+          `CASE-123`).
+        examples:
+          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+    id_3:
+      name: id
+      in: path
+      description: Unique identifier.
+      required: true
+      schema:
+        maxLength: 128
+        minLength: 1
+        pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
+        type: string
+        description: Unique identifier.
+    id_4:
+      name: id
+      in: path
+      description: Unique identifier.
+      required: true
+      schema:
+        minLength: 0
+        type: string
+        description: Unique identifier.
+        examples:
+          - example_id
+    key_id:
+      name: key_id
+      in: path
+      description: Key identifier.
+      required: true
+      schema:
+        minLength: 0
+        type: string
+        description: Key identifier.
+        examples:
+          - my_key_id
   securitySchemes:
     apiKeyAuth:
       type: apiKey
@@ -54034,5 +54235,3 @@ servers:
   - url: https://api.coralogix.in/mgmt/openapi/5
   - url: https://api.coralogixsg.com/mgmt/openapi/5
   - url: https://api.ap3.coralogix.com/mgmt/openapi/5
-security:
-  - apiKeyAuth: []

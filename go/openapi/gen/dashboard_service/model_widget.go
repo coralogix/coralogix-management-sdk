@@ -31,7 +31,8 @@ type Widget struct {
 	Definition *WidgetDefinition `json:"definition,omitempty"`
 	// Short description of the widget
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// When true, this widget is marked as highlighted for all users of the dashboard. Not allowed on a widget reference.
+	// Deprecated: has no effect. The value is stored and returned unchanged; it does not highlight anything.
+	// Deprecated
 	Highlighted *bool `json:"highlighted,omitempty"`
 	// Widget unique identifier
 	Id *UUID `json:"id,omitempty"`
@@ -198,6 +199,7 @@ func (o *Widget) SetDescription(v string) {
 }
 
 // GetHighlighted returns the Highlighted field value if set, zero value otherwise.
+// Deprecated
 func (o *Widget) GetHighlighted() bool {
 	if o == nil || IsNil(o.Highlighted) {
 		var ret bool
@@ -208,6 +210,7 @@ func (o *Widget) GetHighlighted() bool {
 
 // GetHighlightedOk returns a tuple with the Highlighted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Widget) GetHighlightedOk() (*bool, bool) {
 	if o == nil || IsNil(o.Highlighted) {
 		return nil, false
@@ -225,6 +228,7 @@ func (o *Widget) HasHighlighted() bool {
 }
 
 // SetHighlighted gets a reference to the given bool and assigns it to the Highlighted field.
+// Deprecated
 func (o *Widget) SetHighlighted(v bool) {
 	o.Highlighted = &v
 }

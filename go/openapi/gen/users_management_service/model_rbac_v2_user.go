@@ -22,8 +22,14 @@ var _ MappedNullable = &RbacV2User{}
 
 // RbacV2User A user is an entity that is always part of a team and has an account associated with it
 type RbacV2User struct {
+	// Access type configuration - defines whether user access is permanent or temporary with expiration
+	AccessType *AccessType `json:"accessType,omitempty"`
+	// List of allowed login modes. Can include SSO, local authentication, or both.
+	AllowedLoginMode []AllowedLoginMode `json:"allowedLoginMode,omitempty"`
 	// User first name
 	FirstName *string `json:"firstName,omitempty"`
+	// IDs of the team groups this user is a member of.
+	GroupIds []int64 `json:"groupIds,omitempty"`
 	// User last name
 	LastName *string `json:"lastName,omitempty"`
 	// User status: [Active, Inactive]
@@ -57,6 +63,70 @@ func NewRbacV2UserWithDefaults() *RbacV2User {
 	return &this
 }
 
+// GetAccessType returns the AccessType field value if set, zero value otherwise.
+func (o *RbacV2User) GetAccessType() AccessType {
+	if o == nil || IsNil(o.AccessType) {
+		var ret AccessType
+		return ret
+	}
+	return *o.AccessType
+}
+
+// GetAccessTypeOk returns a tuple with the AccessType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RbacV2User) GetAccessTypeOk() (*AccessType, bool) {
+	if o == nil || IsNil(o.AccessType) {
+		return nil, false
+	}
+	return o.AccessType, true
+}
+
+// HasAccessType returns a boolean if a field has been set.
+func (o *RbacV2User) HasAccessType() bool {
+	if o != nil && !IsNil(o.AccessType) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessType gets a reference to the given AccessType and assigns it to the AccessType field.
+func (o *RbacV2User) SetAccessType(v AccessType) {
+	o.AccessType = &v
+}
+
+// GetAllowedLoginMode returns the AllowedLoginMode field value if set, zero value otherwise.
+func (o *RbacV2User) GetAllowedLoginMode() []AllowedLoginMode {
+	if o == nil || IsNil(o.AllowedLoginMode) {
+		var ret []AllowedLoginMode
+		return ret
+	}
+	return o.AllowedLoginMode
+}
+
+// GetAllowedLoginModeOk returns a tuple with the AllowedLoginMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RbacV2User) GetAllowedLoginModeOk() ([]AllowedLoginMode, bool) {
+	if o == nil || IsNil(o.AllowedLoginMode) {
+		return nil, false
+	}
+	return o.AllowedLoginMode, true
+}
+
+// HasAllowedLoginMode returns a boolean if a field has been set.
+func (o *RbacV2User) HasAllowedLoginMode() bool {
+	if o != nil && !IsNil(o.AllowedLoginMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedLoginMode gets a reference to the given []AllowedLoginMode and assigns it to the AllowedLoginMode field.
+func (o *RbacV2User) SetAllowedLoginMode(v []AllowedLoginMode) {
+	o.AllowedLoginMode = v
+}
+
 // GetFirstName returns the FirstName field value if set, zero value otherwise.
 func (o *RbacV2User) GetFirstName() string {
 	if o == nil || IsNil(o.FirstName) {
@@ -87,6 +157,38 @@ func (o *RbacV2User) HasFirstName() bool {
 // SetFirstName gets a reference to the given string and assigns it to the FirstName field.
 func (o *RbacV2User) SetFirstName(v string) {
 	o.FirstName = &v
+}
+
+// GetGroupIds returns the GroupIds field value if set, zero value otherwise.
+func (o *RbacV2User) GetGroupIds() []int64 {
+	if o == nil || IsNil(o.GroupIds) {
+		var ret []int64
+		return ret
+	}
+	return o.GroupIds
+}
+
+// GetGroupIdsOk returns a tuple with the GroupIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RbacV2User) GetGroupIdsOk() ([]int64, bool) {
+	if o == nil || IsNil(o.GroupIds) {
+		return nil, false
+	}
+	return o.GroupIds, true
+}
+
+// HasGroupIds returns a boolean if a field has been set.
+func (o *RbacV2User) HasGroupIds() bool {
+	if o != nil && !IsNil(o.GroupIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupIds gets a reference to the given []int64 and assigns it to the GroupIds field.
+func (o *RbacV2User) SetGroupIds(v []int64) {
+	o.GroupIds = v
 }
 
 // GetLastName returns the LastName field value if set, zero value otherwise.
@@ -259,8 +361,17 @@ func (o RbacV2User) MarshalJSON() ([]byte, error) {
 
 func (o RbacV2User) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AccessType) {
+		toSerialize["accessType"] = o.AccessType
+	}
+	if !IsNil(o.AllowedLoginMode) {
+		toSerialize["allowedLoginMode"] = o.AllowedLoginMode
+	}
 	if !IsNil(o.FirstName) {
 		toSerialize["firstName"] = o.FirstName
+	}
+	if !IsNil(o.GroupIds) {
+		toSerialize["groupIds"] = o.GroupIds
 	}
 	if !IsNil(o.LastName) {
 		toSerialize["lastName"] = o.LastName
@@ -300,7 +411,10 @@ func (o *RbacV2User) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "accessType")
+		delete(additionalProperties, "allowedLoginMode")
 		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "groupIds")
 		delete(additionalProperties, "lastName")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "userAccountId")

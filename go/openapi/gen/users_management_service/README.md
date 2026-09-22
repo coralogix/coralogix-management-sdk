@@ -78,11 +78,11 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*UsersManagementServiceAPI* | [**UsersMgmtServiceCreateUsers**](docs/UsersManagementServiceAPI.md#usersmgmtservicecreateusers) | **Post** /aaa/teams/v2/{team_id}/members | Create Users
-*UsersManagementServiceAPI* | [**UsersMgmtServiceGetUser**](docs/UsersManagementServiceAPI.md#usersmgmtservicegetuser) | **Get** /aaa/teams/v2/{team_id}/members/{user_account_id} | Get User
-*UsersManagementServiceAPI* | [**UsersMgmtServiceSearchUsers**](docs/UsersManagementServiceAPI.md#usersmgmtservicesearchusers) | **Get** /aaa/teams/v2/{team_id}/search | Search Users
-*UsersManagementServiceAPI* | [**UsersMgmtServiceUpdateUsers**](docs/UsersManagementServiceAPI.md#usersmgmtserviceupdateusers) | **Put** /aaa/teams/v2/{team_id}/members | Update Users
-*UsersManagementServiceAPI* | [**UsersMgmtServiceUpdateUsersStatuses**](docs/UsersManagementServiceAPI.md#usersmgmtserviceupdateusersstatuses) | **Patch** /aaa/teams/v2/{team_id}/members:updateStatuses | Activate/Revoke Users
+*UsersManagementServiceAPI* | [**UsersMgmtServiceCreateUsers**](docs/UsersManagementServiceAPI.md#usersmgmtservicecreateusers) | **Post** /aaa/users/v2 | Create Users
+*UsersManagementServiceAPI* | [**UsersMgmtServiceGetUser**](docs/UsersManagementServiceAPI.md#usersmgmtservicegetuser) | **Get** /aaa/users/v2/{user_account_id} | Get User
+*UsersManagementServiceAPI* | [**UsersMgmtServiceSearchUsers**](docs/UsersManagementServiceAPI.md#usersmgmtservicesearchusers) | **Get** /aaa/users/v2 | Search Users
+*UsersManagementServiceAPI* | [**UsersMgmtServiceUpdateUsers**](docs/UsersManagementServiceAPI.md#usersmgmtserviceupdateusers) | **Put** /aaa/users/v2 | Update Users
+*UsersManagementServiceAPI* | [**UsersMgmtServiceUpdateUsersStatuses**](docs/UsersManagementServiceAPI.md#usersmgmtserviceupdateusersstatuses) | **Patch** /aaa/users/v2:updateStatuses | Activate/Revoke Users
 
 
 ## Documentation For Models

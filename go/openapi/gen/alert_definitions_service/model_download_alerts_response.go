@@ -23,7 +23,7 @@ var _ MappedNullable = &DownloadAlertsResponse{}
 // DownloadAlertsResponse A response containing the downloaded alert data
 type DownloadAlertsResponse struct {
 	// Base64-encoded binary data of the alert definitions
-	Content *string `json:"content,omitempty"`
+	Content *string `json:"content,omitempty" validate:"regexp=^[A-Za-z0-9+\\/]*={0,2}$"`
 	// Requested alert definition IDs that were not included in the download because they were not found or are not accessible. Populated on the first streamed message.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	AdditionalProperties map[string]interface{}
