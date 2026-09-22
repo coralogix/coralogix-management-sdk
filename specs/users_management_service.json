@@ -5,396 +5,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/aaa/teams/v2/{team_id}/members": {
-      "put": {
-        "tags": [
-          "Users Management Service"
-        ],
-        "summary": "Update Users",
-        "description": "Updates team members for the specified team.",
-        "operationId": "UsersMgmtService_UpdateUsers",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "team_id",
-            "description": "Team ID containing the users to update",
-            "required": true,
-            "schema": {
-              "description": "Team ID containing the users to update",
-              "type": "integer",
-              "format": "int64",
-              "minimum": 0
-            },
-            "style": "simple"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "description": "List of users to update. Multiple users can be updated in a single request.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/UpdateUserRequest"
-                },
-                "minItems": 0
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateUsersResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Users Management Service"
-        ],
-        "summary": "Create Users",
-        "description": "Adds members to the specified team.",
-        "operationId": "UsersMgmtService_CreateUsers",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "team_id",
-            "description": "Team ID where the users will be created",
-            "required": true,
-            "schema": {
-              "description": "Team ID where the users will be created",
-              "type": "integer",
-              "format": "int64",
-              "minimum": 0
-            },
-            "style": "simple"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "description": "List of users to create. Multiple users can be created in a single request.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CreateUserRequest"
-                },
-                "minItems": 0
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateUsersResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Team not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "User already exists",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/aaa/teams/v2/{team_id}/members/{user_account_id}": {
-      "get": {
-        "tags": [
-          "Users Management Service"
-        ],
-        "summary": "Get User",
-        "description": "Returns the details of a specific team member.",
-        "operationId": "UsersMgmtService_GetUser",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "team_id",
-            "description": "Team ID to search within",
-            "required": true,
-            "schema": {
-              "description": "Team ID to search within",
-              "type": "integer",
-              "format": "int64",
-              "minimum": 0
-            },
-            "style": "simple"
-          },
-          {
-            "in": "path",
-            "name": "user_account_id",
-            "description": "User account ID to retrieve",
-            "required": true,
-            "schema": {
-              "description": "User account ID to retrieve",
-              "type": "integer",
-              "format": "int64",
-              "minimum": 0
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetUserResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/aaa/teams/v2/{team_id}/members:updateStatuses": {
-      "patch": {
-        "tags": [
-          "Users Management Service"
-        ],
-        "summary": "Activate/Revoke Users",
-        "description": "Updates the active status of multiple team members.",
-        "operationId": "UsersMgmtService_UpdateUsersStatuses",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "team_id",
-            "description": "Team ID containing the users to update",
-            "required": true,
-            "schema": {
-              "description": "Team ID containing the users to update",
-              "type": "integer",
-              "format": "int64",
-              "minimum": 0
-            },
-            "style": "simple"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "title": "UpdateUserStatusRequest",
-                "description": "Request to activate or revoke (deactivate) one or more users within a team. This operation changes the user status to either Active (enables access) or Inactive (disables access).",
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "description": "New status for the users: Active (enables system access) or Inactive (disables system access)",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/UserStatus"
-                      }
-                    ]
-                  },
-                  "userAccountIds": {
-                    "description": "List of user account IDs to update. All users will be set to the same status.",
-                    "type": "array",
-                    "items": {
-                      "description": "List of user account IDs to update. All users will be set to the same status.",
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 0
-                    },
-                    "minItems": 0
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateUsersStatusesResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/aaa/teams/v2/{team_id}/search": {
+    "/aaa/users/v2": {
       "get": {
         "tags": [
           "Users Management Service"
@@ -404,17 +15,16 @@
         "operationId": "UsersMgmtService_SearchUsers",
         "parameters": [
           {
-            "in": "path",
+            "in": "query",
             "name": "team_id",
-            "description": "Team ID to search within",
-            "required": true,
+            "description": "Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
             "schema": {
-              "description": "Team ID to search within",
+              "description": "Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
               "type": "integer",
               "format": "int64",
               "minimum": 0
             },
-            "style": "simple"
+            "style": "form"
           },
           {
             "in": "query",
@@ -499,6 +109,394 @@
           },
           "404": {
             "description": "Team not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users Management Service"
+        ],
+        "summary": "Update Users",
+        "description": "Updates team members for the specified team.",
+        "operationId": "UsersMgmtService_UpdateUsers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "team_id",
+            "description": "Team ID containing the users to update. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+            "schema": {
+              "description": "Team ID containing the users to update. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+              "type": "integer",
+              "format": "int64",
+              "minimum": 0
+            },
+            "style": "form"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "List of users to update. Multiple users can be updated in a single request.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpdateUserRequest"
+                },
+                "minItems": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUsersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users Management Service"
+        ],
+        "summary": "Create Users",
+        "description": "Adds members to the specified team.",
+        "operationId": "UsersMgmtService_CreateUsers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "team_id",
+            "description": "Team ID where the users will be created. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+            "schema": {
+              "description": "Team ID where the users will be created. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+              "type": "integer",
+              "format": "int64",
+              "minimum": 0
+            },
+            "style": "form"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "List of users to create. Multiple users can be created in a single request.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateUserRequest"
+                },
+                "minItems": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUsersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "User already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aaa/users/v2/{user_account_id}": {
+      "get": {
+        "tags": [
+          "Users Management Service"
+        ],
+        "summary": "Get User",
+        "description": "Returns the details of a specific team member.",
+        "operationId": "UsersMgmtService_GetUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_account_id",
+            "description": "User account ID to retrieve",
+            "required": true,
+            "schema": {
+              "description": "User account ID to retrieve",
+              "type": "integer",
+              "format": "int64",
+              "minimum": 0
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "team_id",
+            "description": "Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+            "schema": {
+              "description": "Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+              "type": "integer",
+              "format": "int64",
+              "minimum": 0
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aaa/users/v2:updateStatuses": {
+      "patch": {
+        "tags": [
+          "Users Management Service"
+        ],
+        "summary": "Activate/Revoke Users",
+        "description": "Updates the active status of multiple team members.",
+        "operationId": "UsersMgmtService_UpdateUsersStatuses",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "UpdateUserStatusRequest",
+                "description": "Request to activate or revoke (deactivate) one or more users within a team. This operation changes the user status to either Active (enables access) or Inactive (disables access).",
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "description": "New status for the users: Active (enables system access) or Inactive (disables system access)",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/UserStatus"
+                      }
+                    ]
+                  },
+                  "teamId": {
+                    "description": "Team ID containing the users to update. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+                    "type": "integer",
+                    "format": "int64",
+                    "minimum": 0
+                  },
+                  "userAccountIds": {
+                    "description": "List of user account IDs to update. All users will be set to the same status.",
+                    "type": "array",
+                    "items": {
+                      "description": "List of user account IDs to update. All users will be set to the same status.",
+                      "type": "integer",
+                      "format": "int64",
+                      "minimum": 0
+                    },
+                    "minItems": 0
+                  },
+                  "userIds": {
+                    "description": "Stable ids of the users to update, as an alternative to `userAccountIds`. All users will be set to the same status. Mutually exclusive with `userAccountIds`: set exactly one of the two.",
+                    "type": "array",
+                    "items": {
+                      "description": "Stable ids of the users to update, as an alternative to `userAccountIds`. All users will be set to the same status. Mutually exclusive with `userAccountIds`: set exactly one of the two.",
+                      "type": "string",
+                      "pattern": "^[\\s\\S]+$",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "minItems": 1,
+                    "maxItems": 1000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUsersStatusesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -637,6 +635,14 @@
           },
           "status": {
             "$ref": "#/components/schemas/CreateUserStatus"
+          },
+          "user": {
+            "description": "Full details of the created user, as returned by GetUser. Absent when the outcome produced no user, such as an invited user, who has none until the invitation is accepted.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/rbac.v2.User"
+              }
+            ]
           },
           "userAccountId": {
             "type": "integer",
@@ -892,6 +898,13 @@
             "format": "int64",
             "minimum": 0
           },
+          "userId": {
+            "description": "Stable id of the user to update, as an alternative to `userAccountId`. Mutually exclusive with `userAccountId`: exactly one must be set.",
+            "type": "string",
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 255
+          },
           "userTemplate": {
             "description": "Template containing updated user properties. Only provided fields will be updated.",
             "allOf": [
@@ -919,6 +932,14 @@
               "type": "integer",
               "format": "int64",
               "minimum": 0
+            },
+            "minItems": 0
+          },
+          "users": {
+            "description": "Full details of the successfully updated users, as returned by GetUser.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/rbac.v2.User"
             },
             "minItems": 0
           }
@@ -1020,10 +1041,38 @@
         "description": "A user is an entity that is always part of a team and has an account associated with it",
         "type": "object",
         "properties": {
+          "accessType": {
+            "description": "Access type configuration - defines whether user access is permanent or temporary with expiration",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccessType"
+              }
+            ]
+          },
+          "allowedLoginMode": {
+            "description": "List of allowed login modes. Can include SSO, local authentication, or both.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AllowedLoginMode"
+            },
+            "minItems": 0,
+            "maxItems": 2
+          },
           "firstName": {
             "description": "User first name",
             "type": "string",
             "minLength": 0
+          },
+          "groupIds": {
+            "description": "IDs of the team groups this user is a member of.",
+            "type": "array",
+            "items": {
+              "description": "IDs of the team groups this user is a member of.",
+              "type": "integer",
+              "format": "int64",
+              "minimum": 0
+            },
+            "minItems": 0
           },
           "lastName": {
             "description": "User last name",

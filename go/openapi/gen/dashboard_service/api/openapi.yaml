@@ -579,18 +579,7 @@
       },
       "parameters": [
         {
-          "in": "path",
-          "name": "dashboard_id",
-          "description": "The dashboard id.",
-          "required": true,
-          "schema": {
-            "description": "The dashboard id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 21,
-            "maxLength": 21
-          },
-          "style": "simple"
+          "$ref": "#/components/parameters/dashboard_id"
         }
       ]
     },
@@ -604,18 +593,7 @@
         "operationId": "DashboardsService_ReplaceDefaultDashboard",
         "parameters": [
           {
-            "in": "path",
-            "name": "dashboard_id",
-            "description": "The dashboard id.",
-            "required": true,
-            "schema": {
-              "description": "The dashboard id.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
-              "minLength": 21,
-              "maxLength": 21
-            },
-            "style": "simple"
+            "$ref": "#/components/parameters/dashboard_id"
           }
         ],
         "requestBody": {
@@ -699,18 +677,7 @@
         "operationId": "DashboardsService_AssignDashboardFolder",
         "parameters": [
           {
-            "in": "path",
-            "name": "dashboard_id",
-            "description": "The dashboard id.",
-            "required": true,
-            "schema": {
-              "description": "The dashboard id.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
-              "minLength": 21,
-              "maxLength": 21
-            },
-            "style": "simple"
+            "$ref": "#/components/parameters/dashboard_id"
           }
         ],
         "requestBody": {
@@ -930,18 +897,7 @@
       },
       "parameters": [
         {
-          "in": "path",
-          "name": "dashboard_id",
-          "description": "The dashboard id.",
-          "required": true,
-          "schema": {
-            "description": "The dashboard id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 21,
-            "maxLength": 21
-          },
-          "style": "simple"
+          "$ref": "#/components/parameters/dashboard_id"
         }
       ]
     }
@@ -14793,7 +14749,8 @@
             "maxLength": 4096
           },
           "highlighted": {
-            "description": "When true, this widget is marked as highlighted for all users of the dashboard. Not allowed on a widget reference.",
+            "deprecated": true,
+            "description": "Deprecated: has no effect. The value is stored and returned unchanged; it does not highlight anything.",
             "type": "boolean"
           },
           "id": {
@@ -15737,6 +15694,22 @@
           "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
           "DATA_MODE_TYPE_ARCHIVE"
         ]
+      }
+    },
+    "parameters": {
+      "dashboard_id": {
+        "in": "path",
+        "name": "dashboard_id",
+        "description": "The dashboard id.",
+        "required": true,
+        "schema": {
+          "description": "The dashboard id.",
+          "type": "string",
+          "pattern": "^[\\s\\S]*$",
+          "minLength": 21,
+          "maxLength": 21
+        },
+        "style": "simple"
       }
     }
   }

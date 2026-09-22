@@ -7,6 +7,8 @@ api_team_groups_management_service.go
 client.go
 configuration.go
 git_push.sh
+model_access_type.go
+model_allowed_login_mode.go
 model_clear_role.go
 model_clear_scope.go
 model_create_team_group_request.go
@@ -33,6 +35,7 @@ model_set_role_by_name.go
 model_set_role_id.go
 model_set_scope_id.go
 model_team_group.go
+model_temporary_access.go
 model_update_team_group_request.go
 model_update_team_group_response.go
 model_user_id_list.go

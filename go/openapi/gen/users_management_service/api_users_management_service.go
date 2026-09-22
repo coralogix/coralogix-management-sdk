@@ -26,8 +26,14 @@ type UsersManagementServiceAPIService service
 type ApiUsersMgmtServiceCreateUsersRequest struct {
 	ctx context.Context
 	ApiService *UsersManagementServiceAPIService
-	teamId int64
+	teamId *int64
 	createUserRequest *[]CreateUserRequest
+}
+
+// Team ID where the users will be created. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.
+func (r ApiUsersMgmtServiceCreateUsersRequest) TeamId(teamId int64) ApiUsersMgmtServiceCreateUsersRequest {
+	r.teamId = &teamId
+	return r
 }
 
 func (r ApiUsersMgmtServiceCreateUsersRequest) CreateUserRequest(createUserRequest []CreateUserRequest) ApiUsersMgmtServiceCreateUsersRequest {
@@ -45,14 +51,12 @@ UsersMgmtServiceCreateUsers Create Users
 Adds members to the specified team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId Team ID where the users will be created
  @return ApiUsersMgmtServiceCreateUsersRequest
 */
-func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsers(ctx context.Context, teamId int64) ApiUsersMgmtServiceCreateUsersRequest {
+func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsers(ctx context.Context) ApiUsersMgmtServiceCreateUsersRequest {
 	return ApiUsersMgmtServiceCreateUsersRequest{
 		ApiService: a,
 		ctx: ctx,
-		teamId: teamId,
 	}
 }
 
@@ -71,16 +75,17 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/teams/v2/{team_id}/members"
-	localVarPath = strings.Replace(localVarPath, "{"+"team_id"+"}", url.PathEscape(parameterValueToString(r.teamId, "teamId")), -1)
+	localVarPath := localBasePath + "/aaa/users/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.teamId < 0 {
-		return localVarReturnValue, nil, reportError("teamId must be greater than 0")
-	}
 
+	if r.teamId != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "team_id", r.teamId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -194,8 +199,14 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r 
 type ApiUsersMgmtServiceGetUserRequest struct {
 	ctx context.Context
 	ApiService *UsersManagementServiceAPIService
-	teamId int64
 	userAccountId int64
+	teamId *int64
+}
+
+// Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.
+func (r ApiUsersMgmtServiceGetUserRequest) TeamId(teamId int64) ApiUsersMgmtServiceGetUserRequest {
+	r.teamId = &teamId
+	return r
 }
 
 func (r ApiUsersMgmtServiceGetUserRequest) Execute() (*GetUserResponse, *http.Response, error) {
@@ -208,15 +219,13 @@ UsersMgmtServiceGetUser Get User
 Returns the details of a specific team member.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId Team ID to search within
  @param userAccountId User account ID to retrieve
  @return ApiUsersMgmtServiceGetUserRequest
 */
-func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUser(ctx context.Context, teamId int64, userAccountId int64) ApiUsersMgmtServiceGetUserRequest {
+func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUser(ctx context.Context, userAccountId int64) ApiUsersMgmtServiceGetUserRequest {
 	return ApiUsersMgmtServiceGetUserRequest{
 		ApiService: a,
 		ctx: ctx,
-		teamId: teamId,
 		userAccountId: userAccountId,
 	}
 }
@@ -236,20 +245,21 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUserExecute(r ApiU
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/teams/v2/{team_id}/members/{user_account_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"team_id"+"}", url.PathEscape(parameterValueToString(r.teamId, "teamId")), -1)
+	localVarPath := localBasePath + "/aaa/users/v2/{user_account_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"user_account_id"+"}", url.PathEscape(parameterValueToString(r.userAccountId, "userAccountId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.teamId < 0 {
-		return localVarReturnValue, nil, reportError("teamId must be greater than 0")
-	}
 	if r.userAccountId < 0 {
 		return localVarReturnValue, nil, reportError("userAccountId must be greater than 0")
 	}
 
+	if r.teamId != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "team_id", r.teamId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -350,11 +360,17 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUserExecute(r ApiU
 type ApiUsersMgmtServiceSearchUsersRequest struct {
 	ctx context.Context
 	ApiService *UsersManagementServiceAPIService
-	teamId int64
+	teamId *int64
 	username *string
 	status *UserStatus
 	pageSize *int64
 	pageToken *int64
+}
+
+// Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.
+func (r ApiUsersMgmtServiceSearchUsersRequest) TeamId(teamId int64) ApiUsersMgmtServiceSearchUsersRequest {
+	r.teamId = &teamId
+	return r
 }
 
 // Optional filter by username (partial match supported)
@@ -391,14 +407,12 @@ UsersMgmtServiceSearchUsers Search Users
 Searches for team members by query.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId Team ID to search within
  @return ApiUsersMgmtServiceSearchUsersRequest
 */
-func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsers(ctx context.Context, teamId int64) ApiUsersMgmtServiceSearchUsersRequest {
+func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsers(ctx context.Context) ApiUsersMgmtServiceSearchUsersRequest {
 	return ApiUsersMgmtServiceSearchUsersRequest{
 		ApiService: a,
 		ctx: ctx,
-		teamId: teamId,
 	}
 }
 
@@ -417,16 +431,17 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsersExecute(r 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/teams/v2/{team_id}/search"
-	localVarPath = strings.Replace(localVarPath, "{"+"team_id"+"}", url.PathEscape(parameterValueToString(r.teamId, "teamId")), -1)
+	localVarPath := localBasePath + "/aaa/users/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.teamId < 0 {
-		return localVarReturnValue, nil, reportError("teamId must be greater than 0")
-	}
 
+	if r.teamId != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "team_id", r.teamId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
 	if r.username != nil {
 		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "username", r.username, "form", ""); err != nil {
 			return localVarReturnValue, nil, err
@@ -547,8 +562,14 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsersExecute(r 
 type ApiUsersMgmtServiceUpdateUsersRequest struct {
 	ctx context.Context
 	ApiService *UsersManagementServiceAPIService
-	teamId int64
+	teamId *int64
 	updateUserRequest *[]UpdateUserRequest
+}
+
+// Team ID containing the users to update. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.
+func (r ApiUsersMgmtServiceUpdateUsersRequest) TeamId(teamId int64) ApiUsersMgmtServiceUpdateUsersRequest {
+	r.teamId = &teamId
+	return r
 }
 
 func (r ApiUsersMgmtServiceUpdateUsersRequest) UpdateUserRequest(updateUserRequest []UpdateUserRequest) ApiUsersMgmtServiceUpdateUsersRequest {
@@ -566,14 +587,12 @@ UsersMgmtServiceUpdateUsers Update Users
 Updates team members for the specified team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId Team ID containing the users to update
  @return ApiUsersMgmtServiceUpdateUsersRequest
 */
-func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsers(ctx context.Context, teamId int64) ApiUsersMgmtServiceUpdateUsersRequest {
+func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsers(ctx context.Context) ApiUsersMgmtServiceUpdateUsersRequest {
 	return ApiUsersMgmtServiceUpdateUsersRequest{
 		ApiService: a,
 		ctx: ctx,
-		teamId: teamId,
 	}
 }
 
@@ -592,16 +611,17 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersExecute(r 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/teams/v2/{team_id}/members"
-	localVarPath = strings.Replace(localVarPath, "{"+"team_id"+"}", url.PathEscape(parameterValueToString(r.teamId, "teamId")), -1)
+	localVarPath := localBasePath + "/aaa/users/v2"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.teamId < 0 {
-		return localVarReturnValue, nil, reportError("teamId must be greater than 0")
-	}
 
+	if r.teamId != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "team_id", r.teamId, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -704,7 +724,6 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersExecute(r 
 type ApiUsersMgmtServiceUpdateUsersStatusesRequest struct {
 	ctx context.Context
 	ApiService *UsersManagementServiceAPIService
-	teamId int64
 	updateUserStatusRequest *UpdateUserStatusRequest
 }
 
@@ -723,14 +742,12 @@ UsersMgmtServiceUpdateUsersStatuses Activate/Revoke Users
 Updates the active status of multiple team members.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId Team ID containing the users to update
  @return ApiUsersMgmtServiceUpdateUsersStatusesRequest
 */
-func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatuses(ctx context.Context, teamId int64) ApiUsersMgmtServiceUpdateUsersStatusesRequest {
+func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatuses(ctx context.Context) ApiUsersMgmtServiceUpdateUsersStatusesRequest {
 	return ApiUsersMgmtServiceUpdateUsersStatusesRequest{
 		ApiService: a,
 		ctx: ctx,
-		teamId: teamId,
 	}
 }
 
@@ -749,15 +766,11 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatusesEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/teams/v2/{team_id}/members:updateStatuses"
-	localVarPath = strings.Replace(localVarPath, "{"+"team_id"+"}", url.PathEscape(parameterValueToString(r.teamId, "teamId")), -1)
+	localVarPath := localBasePath + "/aaa/users/v2:updateStatuses"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.teamId < 0 {
-		return localVarReturnValue, nil, reportError("teamId must be greater than 0")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

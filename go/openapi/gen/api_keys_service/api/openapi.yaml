@@ -202,16 +202,7 @@
         "operationId": "ApiKeysService_GetApiKey",
         "parameters": [
           {
-            "in": "path",
-            "name": "key_id",
-            "description": "Key identifier.",
-            "required": true,
-            "schema": {
-              "description": "Key identifier.",
-              "type": "string",
-              "minLength": 0
-            },
-            "style": "simple"
+            "$ref": "#/components/parameters/key_id"
           }
         ],
         "responses": {
@@ -266,16 +257,7 @@
         "operationId": "ApiKeysService_UpdateApiKey",
         "parameters": [
           {
-            "in": "path",
-            "name": "key_id",
-            "description": "Key identifier.",
-            "required": true,
-            "schema": {
-              "description": "Key identifier.",
-              "type": "string",
-              "minLength": 0
-            },
-            "style": "simple"
+            "$ref": "#/components/parameters/key_id"
           }
         ],
         "requestBody": {
@@ -1091,6 +1073,20 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "parameters": {
+      "key_id": {
+        "in": "path",
+        "name": "key_id",
+        "description": "Key identifier.",
+        "required": true,
+        "schema": {
+          "description": "Key identifier.",
+          "type": "string",
+          "minLength": 0
+        },
+        "style": "simple"
       }
     }
   }

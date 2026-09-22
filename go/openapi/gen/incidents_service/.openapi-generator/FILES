@@ -86,6 +86,7 @@ model_pagination_request.go
 model_resolve_incident_by_event_id_response.go
 model_resolve_incidents_request.go
 model_resolve_incidents_response.go
+model_time_range.go
 model_unassign_incidents_response.go
 model_upsert_incident_state_payload.go
 model_upsert_incident_state_type.go

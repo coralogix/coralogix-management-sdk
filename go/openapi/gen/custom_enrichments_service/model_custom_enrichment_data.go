@@ -23,7 +23,7 @@ var _ MappedNullable = &CustomEnrichmentData{}
 // CustomEnrichmentData Custom enrichment data including definition and raw content.
 type CustomEnrichmentData struct {
 	// Binary content of the enrichment data file encoded as base64. The account's enrichment file size limit applies to the decoded byte size (20971520 bytes / 20 MiB by default); maxLength bounds the base64-encoded string.
-	Binary *string `json:"binary,omitempty"`
+	Binary *string `json:"binary,omitempty" validate:"regexp=^[A-Za-z0-9+\\/]*={0,2}$"`
 	// The enrichment definition.
 	Definition *CustomEnrichment `json:"definition,omitempty"`
 	// Textual content of the enrichment data file as a UTF-8 string. The account's enrichment file size limit applies to the UTF-8 byte size of the content (20971520 bytes / 20 MiB by default); maxLength is an upper bound in characters.

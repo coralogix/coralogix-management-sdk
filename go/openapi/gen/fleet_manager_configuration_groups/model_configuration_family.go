@@ -45,6 +45,8 @@ type ConfigurationFamily struct {
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Remote configurations in this family.
 	RemoteConfigurations []RemoteConfiguration `json:"remoteConfigurations,omitempty"`
+	// Immutable inputs that produced this configuration family version.
+	Sources []ConfigurationFamilySource `json:"sources,omitempty"`
 	// Monotonic version number of this configuration family within its group.
 	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
@@ -422,6 +424,38 @@ func (o *ConfigurationFamily) SetRemoteConfigurations(v []RemoteConfiguration) {
 	o.RemoteConfigurations = v
 }
 
+// GetSources returns the Sources field value if set, zero value otherwise.
+func (o *ConfigurationFamily) GetSources() []ConfigurationFamilySource {
+	if o == nil || IsNil(o.Sources) {
+		var ret []ConfigurationFamilySource
+		return ret
+	}
+	return o.Sources
+}
+
+// GetSourcesOk returns a tuple with the Sources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationFamily) GetSourcesOk() ([]ConfigurationFamilySource, bool) {
+	if o == nil || IsNil(o.Sources) {
+		return nil, false
+	}
+	return o.Sources, true
+}
+
+// HasSources returns a boolean if a field has been set.
+func (o *ConfigurationFamily) HasSources() bool {
+	if o != nil && !IsNil(o.Sources) {
+		return true
+	}
+
+	return false
+}
+
+// SetSources gets a reference to the given []ConfigurationFamilySource and assigns it to the Sources field.
+func (o *ConfigurationFamily) SetSources(v []ConfigurationFamilySource) {
+	o.Sources = v
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *ConfigurationFamily) GetVersion() string {
 	if o == nil || IsNil(o.Version) {
@@ -497,6 +531,9 @@ func (o ConfigurationFamily) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RemoteConfigurations) {
 		toSerialize["remoteConfigurations"] = o.RemoteConfigurations
 	}
+	if !IsNil(o.Sources) {
+		toSerialize["sources"] = o.Sources
+	}
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
@@ -534,6 +571,7 @@ func (o *ConfigurationFamily) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "lastActivatedAt")
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "remoteConfigurations")
+		delete(additionalProperties, "sources")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

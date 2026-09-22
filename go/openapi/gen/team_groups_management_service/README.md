@@ -89,6 +89,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AccessType](docs/AccessType.md)
+ - [AllowedLoginMode](docs/AllowedLoginMode.md)
  - [ClearRole](docs/ClearRole.md)
  - [ClearScope](docs/ClearScope.md)
  - [CreateTeamGroupRequest](docs/CreateTeamGroupRequest.md)
@@ -115,6 +117,7 @@ Class | Method | HTTP request | Description
  - [SetRoleId](docs/SetRoleId.md)
  - [SetScopeId](docs/SetScopeId.md)
  - [TeamGroup](docs/TeamGroup.md)
+ - [TemporaryAccess](docs/TemporaryAccess.md)
  - [UpdateTeamGroupRequest](docs/UpdateTeamGroupRequest.md)
  - [UpdateTeamGroupResponse](docs/UpdateTeamGroupResponse.md)
  - [UserIdList](docs/UserIdList.md)

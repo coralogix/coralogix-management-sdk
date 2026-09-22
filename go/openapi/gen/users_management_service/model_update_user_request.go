@@ -24,6 +24,8 @@ var _ MappedNullable = &UpdateUserRequest{}
 type UpdateUserRequest struct {
 	// User account ID of the user to update
 	UserAccountId *int64 `json:"userAccountId,omitempty"`
+	// Stable id of the user to update, as an alternative to `userAccountId`. Mutually exclusive with `userAccountId`: exactly one must be set.
+	UserId *string `json:"userId,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Template containing updated user properties. Only provided fields will be updated.
 	UserTemplate *UserTemplate `json:"userTemplate,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -81,6 +83,38 @@ func (o *UpdateUserRequest) SetUserAccountId(v int64) {
 	o.UserAccountId = &v
 }
 
+// GetUserId returns the UserId field value if set, zero value otherwise.
+func (o *UpdateUserRequest) GetUserId() string {
+	if o == nil || IsNil(o.UserId) {
+		var ret string
+		return ret
+	}
+	return *o.UserId
+}
+
+// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserRequest) GetUserIdOk() (*string, bool) {
+	if o == nil || IsNil(o.UserId) {
+		return nil, false
+	}
+	return o.UserId, true
+}
+
+// HasUserId returns a boolean if a field has been set.
+func (o *UpdateUserRequest) HasUserId() bool {
+	if o != nil && !IsNil(o.UserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserId gets a reference to the given string and assigns it to the UserId field.
+func (o *UpdateUserRequest) SetUserId(v string) {
+	o.UserId = &v
+}
+
 // GetUserTemplate returns the UserTemplate field value if set, zero value otherwise.
 func (o *UpdateUserRequest) GetUserTemplate() UserTemplate {
 	if o == nil || IsNil(o.UserTemplate) {
@@ -126,6 +160,9 @@ func (o UpdateUserRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserAccountId) {
 		toSerialize["userAccountId"] = o.UserAccountId
 	}
+	if !IsNil(o.UserId) {
+		toSerialize["userId"] = o.UserId
+	}
 	if !IsNil(o.UserTemplate) {
 		toSerialize["userTemplate"] = o.UserTemplate
 	}
@@ -153,6 +190,7 @@ func (o *UpdateUserRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "userAccountId")
+		delete(additionalProperties, "userId")
 		delete(additionalProperties, "userTemplate")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

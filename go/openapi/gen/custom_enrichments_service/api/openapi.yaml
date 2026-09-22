@@ -405,6 +405,7 @@
             "description": "Binary content of the enrichment data file encoded as base64. The account's enrichment file size limit applies to the decoded byte size (20971520 bytes / 20 MiB by default); maxLength bounds the base64-encoded string.",
             "type": "string",
             "format": "byte",
+            "pattern": "^[A-Za-z0-9+/]*={0,2}$",
             "minLength": 0,
             "maxLength": 27962028
           },
@@ -494,6 +495,7 @@
             "description": "Binary content of the file encoded as base64. The account's enrichment file size limit applies to the decoded byte size (20971520 bytes / 20 MiB by default); maxLength bounds the base64-encoded string.",
             "type": "string",
             "format": "byte",
+            "pattern": "^[A-Za-z0-9+/]*={0,2}$",
             "minLength": 0,
             "maxLength": 27962028
           },

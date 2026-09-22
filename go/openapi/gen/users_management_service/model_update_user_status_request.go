@@ -24,8 +24,12 @@ var _ MappedNullable = &UpdateUserStatusRequest{}
 type UpdateUserStatusRequest struct {
 	// New status for the users: Active (enables system access) or Inactive (disables system access)
 	Status *UserStatus `json:"status,omitempty"`
+	// Team ID containing the users to update. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.
+	TeamId *int64 `json:"teamId,omitempty"`
 	// List of user account IDs to update. All users will be set to the same status.
 	UserAccountIds []int64 `json:"userAccountIds,omitempty"`
+	// Stable ids of the users to update, as an alternative to `userAccountIds`. All users will be set to the same status. Mutually exclusive with `userAccountIds`: set exactly one of the two.
+	UserIds []string `json:"userIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -81,6 +85,38 @@ func (o *UpdateUserStatusRequest) SetStatus(v UserStatus) {
 	o.Status = &v
 }
 
+// GetTeamId returns the TeamId field value if set, zero value otherwise.
+func (o *UpdateUserStatusRequest) GetTeamId() int64 {
+	if o == nil || IsNil(o.TeamId) {
+		var ret int64
+		return ret
+	}
+	return *o.TeamId
+}
+
+// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserStatusRequest) GetTeamIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.TeamId) {
+		return nil, false
+	}
+	return o.TeamId, true
+}
+
+// HasTeamId returns a boolean if a field has been set.
+func (o *UpdateUserStatusRequest) HasTeamId() bool {
+	if o != nil && !IsNil(o.TeamId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeamId gets a reference to the given int64 and assigns it to the TeamId field.
+func (o *UpdateUserStatusRequest) SetTeamId(v int64) {
+	o.TeamId = &v
+}
+
 // GetUserAccountIds returns the UserAccountIds field value if set, zero value otherwise.
 func (o *UpdateUserStatusRequest) GetUserAccountIds() []int64 {
 	if o == nil || IsNil(o.UserAccountIds) {
@@ -113,6 +149,38 @@ func (o *UpdateUserStatusRequest) SetUserAccountIds(v []int64) {
 	o.UserAccountIds = v
 }
 
+// GetUserIds returns the UserIds field value if set, zero value otherwise.
+func (o *UpdateUserStatusRequest) GetUserIds() []string {
+	if o == nil || IsNil(o.UserIds) {
+		var ret []string
+		return ret
+	}
+	return o.UserIds
+}
+
+// GetUserIdsOk returns a tuple with the UserIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateUserStatusRequest) GetUserIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.UserIds) {
+		return nil, false
+	}
+	return o.UserIds, true
+}
+
+// HasUserIds returns a boolean if a field has been set.
+func (o *UpdateUserStatusRequest) HasUserIds() bool {
+	if o != nil && !IsNil(o.UserIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserIds gets a reference to the given []string and assigns it to the UserIds field.
+func (o *UpdateUserStatusRequest) SetUserIds(v []string) {
+	o.UserIds = v
+}
+
 func (o UpdateUserStatusRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -126,8 +194,14 @@ func (o UpdateUserStatusRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+	if !IsNil(o.TeamId) {
+		toSerialize["teamId"] = o.TeamId
+	}
 	if !IsNil(o.UserAccountIds) {
 		toSerialize["userAccountIds"] = o.UserAccountIds
+	}
+	if !IsNil(o.UserIds) {
+		toSerialize["userIds"] = o.UserIds
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -153,7 +227,9 @@ func (o *UpdateUserStatusRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "teamId")
 		delete(additionalProperties, "userAccountIds")
+		delete(additionalProperties, "userIds")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

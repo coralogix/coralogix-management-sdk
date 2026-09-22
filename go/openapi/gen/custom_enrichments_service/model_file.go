@@ -23,7 +23,7 @@ var _ MappedNullable = &File{}
 // File This data structure represents a file
 type File struct {
 	// Binary content of the file encoded as base64. The account's enrichment file size limit applies to the decoded byte size (20971520 bytes / 20 MiB by default); maxLength bounds the base64-encoded string.
-	Binary *string `json:"binary,omitempty"`
+	Binary *string `json:"binary,omitempty" validate:"regexp=^[A-Za-z0-9+\\/]*={0,2}$"`
 	// File extension indicating the file format. Only \"csv\" is currently supported.
 	Extension *string `json:"extension,omitempty" validate:"regexp=^csv$"`
 	// Name of the file.
