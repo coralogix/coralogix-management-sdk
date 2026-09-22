@@ -37,7 +37,7 @@ func TestClientSetIdentityAndUsers(t *testing.T) {
 		switch request.URL.Path {
 		case "/aaa/identity/v1/whoami":
 			body = `{"teamId":123,"teamName":"test-team"}`
-		case "/aaa/teams/v2/123/search":
+		case "/aaa/users/v2":
 			body = `{"users":[],"totalCount":0}`
 		default:
 			return nil, fmt.Errorf("unexpected request path: %s", request.URL.Path)
@@ -68,7 +68,7 @@ func TestClientSetIdentityAndUsers(t *testing.T) {
 		t.Fatalf("WhoAmI team ID = %d, want 123", whoami.GetTeamId())
 	}
 
-	search, _, err := clientSet.Users().UsersMgmtServiceSearchUsers(context.Background(), 123).Execute()
+	search, _, err := clientSet.Users().UsersMgmtServiceSearchUsers(context.Background()).TeamId(123).Execute()
 	if err != nil {
 		t.Fatalf("SearchUsers request failed: %v", err)
 	}
