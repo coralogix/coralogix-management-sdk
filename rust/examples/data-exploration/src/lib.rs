@@ -97,47 +97,44 @@ mod tests {
         let initial_folders = client.list().await.expect("Failed to list folders");
         let initial_count = initial_folders.len();
 
-        // Create folder
-        let folder = ViewFolder {
-            name: Some("RustTestViewFolder".to_string()),
-            id: None,
-        };
+        let suffix = uuid::Uuid::new_v4();
+        let folder_name = format!("RustTestViewFolder-{suffix}");
+        let updated_name = format!("RustTestViewFolderUpdated-{suffix}");
 
         let create_response = client
-            .create(folder)
+            .create(ViewFolder {
+                name: Some(folder_name),
+                id: None,
+            })
             .await
             .expect("Failed to create folder");
         let mut created_folder = create_response
             .folder
             .expect("Folder not found in response");
+        let folder_id = created_folder
+            .id
+            .clone()
+            .expect("Created folder is missing an id");
 
-        // Update folder name
-        created_folder.name = Some("RustTestViewFolderUpdated".to_string());
+        created_folder.name = Some(updated_name.clone());
+        let replace_result = client.replace(created_folder.clone()).await;
+        let get_result = client.get(folder_id.clone()).await;
+        let list_after_create = client.list().await;
+
         client
-            .replace(created_folder.clone())
-            .await
-            .expect("Failed to replace folder");
-
-        // Get folder
-        let get_response = client
-            .get(created_folder.id.clone().unwrap())
-            .await
-            .expect("Failed to get folder");
-
-        let updated_folder = get_response.expect("Folder not found");
-        assert_eq!(updated_folder.name.unwrap(), "RustTestViewFolderUpdated");
-
-        // Verify folder count increased
-        let folders_after_create = client.list().await.expect("Failed to list folders");
-        assert_eq!(folders_after_create.len(), initial_count + 1);
-
-        // Delete folder
-        client
-            .delete(created_folder.id.unwrap())
+            .delete(folder_id)
             .await
             .expect("Failed to delete folder");
 
-        // Verify folder count returned to initial
+        replace_result.expect("Failed to replace folder");
+        let updated_folder = get_result
+            .expect("Failed to get folder")
+            .expect("Folder not found");
+        assert_eq!(updated_folder.name.unwrap(), updated_name);
+
+        let folders_after_create = list_after_create.expect("Failed to list folders");
+        assert_eq!(folders_after_create.len(), initial_count + 1);
+
         let folders_after_delete = client.list().await.expect("Failed to list folders");
         assert_eq!(folders_after_delete.len(), initial_count);
     }

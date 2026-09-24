@@ -26,10 +26,11 @@ test:
 test-openapi:
 	cd ./go; make test-openapi TESTARGS=${TESTARGS}
 
-proto-renew: ## No-op: protos are synced manually or via copy from cx-management-apis
+# Protos remain in proto/ for the Rust SDK. The Go SDK no longer generates gRPC clients.
+proto-renew:
 	@true
 
-proto-go-generate: proto-renew
-	cd ./go; make proto-clean; make proto-compile
+proto-go-generate:
+	@echo "Go gRPC generation was removed. Proto files are kept for the Rust SDK."
 
 pull-and-build: proto-renew build
