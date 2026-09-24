@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AlertDefType Alert def type.
+// AlertDefType Alert def type. - ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE: preview - ALERT_DEF_TYPE_ANALYTICS_THRESHOLD: preview
 type AlertDefType string
 
 // List of AlertDefType
