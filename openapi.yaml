@@ -19746,10 +19746,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnalyticsImmediateType'
           description: Configuration for analytics immediate alerts
+          x-stability: preview
         analyticsThreshold:
           allOf:
             - $ref: '#/components/schemas/AnalyticsThresholdType'
           description: Configuration for analytics threshold alerts
+          x-stability: preview
         dataSources:
           maxItems: 1
           minItems: 0
@@ -20014,7 +20016,10 @@ components:
         - ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE
         - ALERT_DEF_TYPE_ANALYTICS_THRESHOLD
       type: string
-      description: Alert def type.
+      description: |-
+        Alert def type.
+        - ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE: preview
+        - ALERT_DEF_TYPE_ANALYTICS_THRESHOLD: preview
     AlertDefTypeFilter:
       title: AlertDef Type Filter
       type: object
