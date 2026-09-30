@@ -29,6 +29,7 @@ import (
 	events2metrics "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/events2metrics_service"
 	extensiondeployments "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/extension_deployment_service"
 	extensions "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/extension_service"
+	configurationoverlays "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/fleet_manager_configuration_overlays"
 	viewsfolders "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/folders_for_views_service"
 	globalrouters "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/global_routers_service"
 	identity "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/identity_service"
@@ -78,6 +79,7 @@ type ClientSet struct {
 	extensionDeployments *extensiondeployments.ExtensionDeploymentServiceAPIService
 	integrations         *integrations.IntegrationServiceAPIService
 	globalRouters        *globalrouters.GlobalRoutersServiceAPIService
+	configOverlays       *configurationoverlays.FleetManagerConfigurationOverlaysAPIService
 	identity             *identity.IdentityServiceAPIService
 	presets              *presets.PresetsServiceAPIService
 	quotas               *quotas.QuotaAllocationRuleSetServiceAPIService
@@ -203,6 +205,11 @@ func (c *ClientSet) GlobalRouters() *globalrouters.GlobalRoutersServiceAPIServic
 	return c.globalRouters
 }
 
+// ConfigurationOverlays returns the FleetManagerConfigurationOverlaysAPIService client.
+func (c *ClientSet) ConfigurationOverlays() *configurationoverlays.FleetManagerConfigurationOverlaysAPIService {
+	return c.configOverlays
+}
+
 // Identity returns the IdentityServiceAPIService client.
 func (c *ClientSet) Identity() *identity.IdentityServiceAPIService {
 	return c.identity
@@ -293,6 +300,7 @@ func NewClientSet(c *Config) *ClientSet {
 		extensionDeployments: NewExtensionDeploymentsClient(c),
 		integrations:         NewIntegrationsClient(c),
 		globalRouters:        NewGlobalRoutersClient(c),
+		configOverlays:       NewConfigurationOverlaysClient(c),
 		identity:             NewIdentityClient(c),
 		presets:              NewPresetsClient(c),
 		quotas:               NewQuotasClient(c),
@@ -568,6 +576,19 @@ func NewGlobalRoutersClient(c *Config) *globalrouters.GlobalRoutersServiceAPISer
 		cfg.AddDefaultHeader(k, v)
 	}
 	return globalrouters.NewAPIClient(cfg).GlobalRoutersServiceAPI
+}
+
+// NewConfigurationOverlaysClient builds a new FleetManagerConfigurationOverlaysAPIService from CallPropertiesCreator.
+func NewConfigurationOverlaysClient(c *Config) *configurationoverlays.FleetManagerConfigurationOverlaysAPIService {
+	cfg := configurationoverlays.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = configurationoverlays.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return configurationoverlays.NewAPIClient(cfg).FleetManagerConfigurationOverlaysAPI
 }
 
 // NewIdentityClient builds a new IdentityServiceAPIService from CallPropertiesCreator.

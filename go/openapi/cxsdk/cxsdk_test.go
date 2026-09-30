@@ -77,6 +77,44 @@ func TestClientSetIdentityAndUsers(t *testing.T) {
 	}
 }
 
+func TestClientSetConfigurationOverlays(t *testing.T) {
+	const testHeader = "shared-config"
+
+	config := NewConfigBuilder().
+		WithURL("https://example.test").
+		WithHeader("X-Test-Header", testHeader).
+		Build()
+	config.httpClient = &http.Client{Transport: roundTripFunc(func(request *http.Request) (*http.Response, error) {
+		assertTestHeader(t, request, testHeader)
+
+		if request.URL.Path != "/fleet-management/configuration-overlays/v1" {
+			return nil, fmt.Errorf("unexpected request path: %s", request.URL.Path)
+		}
+		body := `{"overlays":[{"id":"01975ed4-9c1a-7b3f-8d4e-426614174000","name":"Debug logging overlay"}]}`
+
+		return &http.Response{
+			StatusCode: http.StatusOK,
+			Status:     "200 OK",
+			Header:     http.Header{"Content-Type": []string{"application/json"}},
+			Body:       io.NopCloser(strings.NewReader(body)),
+			Request:    request,
+		}, nil
+	})}
+	clientSet := NewClientSet(config)
+
+	if clientSet.ConfigurationOverlays() == nil {
+		t.Fatal("ConfigurationOverlays() returned nil")
+	}
+
+	list, _, err := clientSet.ConfigurationOverlays().ConfigurationOverlayServiceListConfigurationOverlays(context.Background()).Execute()
+	if err != nil {
+		t.Fatalf("ListConfigurationOverlays request failed: %v", err)
+	}
+	if len(list.GetOverlays()) != 1 || list.GetOverlays()[0].GetName() != "Debug logging overlay" {
+		t.Fatalf("ListConfigurationOverlays returned %+v, want one overlay named %q", list.GetOverlays(), "Debug logging overlay")
+	}
+}
+
 type roundTripFunc func(*http.Request) (*http.Response, error)
 
 func (f roundTripFunc) RoundTrip(request *http.Request) (*http.Response, error) {
