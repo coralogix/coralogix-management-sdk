@@ -38,9 +38,9 @@ type S3TargetSpec struct {
 type _S3TargetSpec S3TargetSpec
 
 // NewS3TargetSpec instantiates a new S3TargetSpec object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewS3TargetSpec(bucket string) *S3TargetSpec {
 	this := S3TargetSpec{}
 	this.Bucket = bucket
@@ -48,8 +48,8 @@ func NewS3TargetSpec(bucket string) *S3TargetSpec {
 }
 
 // NewS3TargetSpecWithDefaults instantiates a new S3TargetSpec object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewS3TargetSpecWithDefaults() *S3TargetSpec {
 	this := S3TargetSpec{}
 	return &this

@@ -36,9 +36,9 @@ type V2MetricField struct {
 type _V2MetricField V2MetricField
 
 // NewV2MetricField instantiates a new V2MetricField object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewV2MetricField(aggregations []V2Aggregation, sourceField string, targetBaseMetricName string) *V2MetricField {
 	this := V2MetricField{}
 	this.Aggregations = aggregations
@@ -48,8 +48,8 @@ func NewV2MetricField(aggregations []V2Aggregation, sourceField string, targetBa
 }
 
 // NewV2MetricFieldWithDefaults instantiates a new V2MetricField object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewV2MetricFieldWithDefaults() *V2MetricField {
 	this := V2MetricField{}
 	return &this

@@ -7,342 +7,343 @@
   "paths": {
     "/notifications/notification-center/v1/connectors": {
       "get": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "List Connectors",
         "description": "Returns notification connectors with optional pagination.",
         "operationId": "ConnectorsService_ListConnectors",
         "parameters": [
           {
+            "description": "Filter connectors by their type.",
             "in": "query",
             "name": "connector_type",
-            "description": "Filter connectors by their type.",
+            "required": false,
             "schema": {
-              "description": "Filter connectors by their type.",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/notification_center.ConnectorType"
                 }
-              ]
-            },
-            "style": "form"
+              ],
+              "description": "Filter connectors by their type."
+            }
           },
           {
+            "description": "Filter connectors by the entity type they support.",
             "in": "query",
             "name": "supported_by_entity_type",
-            "description": "Filter connectors by the entity type they support.",
+            "required": false,
             "schema": {
-              "description": "Filter connectors by the entity type they support.",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/notification_center.EntityType"
                 }
-              ]
-            },
-            "style": "form"
+              ],
+              "description": "Filter connectors by the entity type they support."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListConnectorsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "List Connectors",
         "tags": [
           "Connectors service"
-        ],
-        "summary": "Replace a Connector",
+        ]
+      },
+      "put": {
         "description": "Updates an existing notification connector.",
         "operationId": "ConnectorsService_ReplaceConnector",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Replace Connector Request",
                 "description": "Request to replace an existing connector",
-                "type": "object",
                 "properties": {
                   "connector": {
                     "$ref": "#/components/schemas/Connector"
                   }
-                }
+                },
+                "title": "Replace Connector Request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ReplaceConnectorResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "Replace a Connector",
         "tags": [
           "Connectors service"
-        ],
-        "summary": "Create a Connector",
+        ]
+      },
+      "post": {
         "description": "Creates a new notification connector.",
         "operationId": "ConnectorsService_CreateConnector",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Create Connector Request",
                 "description": "Request to create a new connector",
-                "type": "object",
                 "properties": {
                   "connector": {
                     "$ref": "#/components/schemas/Connector"
                   }
-                }
+                },
+                "title": "Create Connector Request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateConnectorResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Create a Connector",
+        "tags": [
+          "Connectors service"
+        ]
       }
     },
     "/notifications/notification-center/v1/connectors/all/list": {
       "get": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "Batch Get Connectors",
         "description": "Returns all notification connectors for the team.",
         "operationId": "ConnectorsService_BatchGetConnectors",
         "parameters": [
           {
+            "description": "The unique identifiers of the connectors to retrieve.",
             "in": "query",
             "name": "connector_ids",
-            "description": "The unique identifiers of the connectors to retrieve.",
+            "required": false,
             "schema": {
               "description": "The unique identifiers of the connectors to retrieve.",
-              "type": "array",
+              "examples": [
+                [
+                  "connector-id-1",
+                  "connector-id-2"
+                ]
+              ],
               "items": {
                 "description": "The unique identifiers of the connectors to retrieve.",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
+              "maxItems": 800,
               "minItems": 0,
-              "maxItems": 800
-            },
-            "style": "form"
+              "type": "array"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BatchGetConnectorsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Batch Get Connectors",
+        "tags": [
+          "Connectors service"
+        ]
       }
     },
     "/notifications/notification-center/v1/connectors/all/summaries": {
       "get": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "Batch Get Connectors Summaries",
         "description": "Returns summary information for all notification connectors.",
         "operationId": "ConnectorsService_BatchGetConnectorSummaries",
         "parameters": [
           {
+            "description": "The unique identifiers of the connectors whose summaries to retrieve.",
             "in": "query",
             "name": "connector_ids",
-            "description": "The unique identifiers of the connectors whose summaries to retrieve.",
+            "required": false,
             "schema": {
               "description": "The unique identifiers of the connectors whose summaries to retrieve.",
-              "type": "array",
               "items": {
                 "description": "The unique identifiers of the connectors whose summaries to retrieve.",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
+              "maxItems": 800,
               "minItems": 0,
-              "maxItems": 800
-            },
-            "style": "form"
+              "type": "array"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BatchGetConnectorSummariesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Batch Get Connectors Summaries",
+        "tags": [
+          "Connectors service"
+        ]
       }
     },
     "/notifications/notification-center/v1/connectors/list/summaries": {
       "get": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "List Connector Summaries",
         "description": "Returns a paginated list of notification connector summaries.",
         "operationId": "ConnectorsService_ListConnectorSummaries",
         "parameters": [
           {
+            "description": "Filter connector summaries by their type.",
             "in": "query",
             "name": "connector_type",
-            "description": "Filter connector summaries by their type.",
+            "required": false,
             "schema": {
-              "description": "Filter connector summaries by their type.",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/notification_center.ConnectorType"
                 }
-              ]
-            },
-            "style": "form"
+              ],
+              "description": "Filter connector summaries by their type."
+            }
           },
           {
+            "description": "Filter connector summaries by the entity type they support.",
             "in": "query",
             "name": "supported_by_entity_type",
-            "description": "Filter connector summaries by the entity type they support.",
+            "required": false,
             "schema": {
-              "description": "Filter connector summaries by the entity type they support.",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/notification_center.EntityType"
                 }
-              ]
-            },
-            "style": "form"
+              ],
+              "description": "Filter connector summaries by the entity type they support."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListConnectorSummariesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "List Connector Summaries",
+        "tags": [
+          "Connectors service"
+        ]
       }
     },
     "/notifications/notification-center/v1/connectors/types/summaries": {
       "get": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "Get Connector Type Summaries",
         "description": "Returns summary information for all available connector types.",
         "operationId": "ConnectorsService_GetConnectorTypeSummaries",
         "parameters": [
           {
+            "description": "Filter connector types by the entity type they support.",
             "in": "query",
             "name": "supported_by_entity_type",
-            "description": "Filter connector types by the entity type they support.",
+            "required": false,
             "schema": {
-              "description": "Filter connector types by the entity type they support.",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/notification_center.EntityType"
                 }
-              ]
-            },
-            "style": "form"
+              ],
+              "description": "Filter connector types by the entity type they support."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetConnectorTypeSummariesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Get Connector Type Summaries",
+        "tags": [
+          "Connectors service"
+        ]
       }
     },
     "/notifications/notification-center/v1/connectors/{id}": {
       "get": {
-        "tags": [
-          "Connectors service"
-        ],
-        "summary": "Get a Connector",
         "description": "Returns the details of the specified notification connector.",
         "operationId": "ConnectorsService_GetConnector",
         "parameters": [
           {
+            "description": "The unique identifier of the connector.",
             "in": "path",
             "name": "id",
-            "description": "The unique identifier of the connector.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the connector.",
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "maxLength": 128,
               "minLength": 1,
-              "maxLength": 128
-            },
-            "style": "simple"
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetConnectorResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "delete": {
+        },
+        "summary": "Get a Connector",
         "tags": [
           "Connectors service"
-        ],
-        "summary": "Delete a Connector",
+        ]
+      },
+      "delete": {
         "description": "Deletes the notification connector with the specified ID.",
         "operationId": "ConnectorsService_DeleteConnector",
         "parameters": [
@@ -352,325 +353,366 @@
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteConnectorResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Delete a Connector",
+        "tags": [
+          "Connectors service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "BatchGetConnectorSummariesResponse": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
         "title": "Batch Get Connector Summaries Response",
-        "description": "Response containing the requested connector summaries and any IDs not found",
         "type": "object",
         "properties": {
           "connectorSummaries": {
-            "description": "The connector summaries.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ConnectorSummary"
-            }
+            },
+            "description": "The connector summaries."
           },
           "notFoundIds": {
-            "description": "The not found ids.",
+            "maxItems": 800,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The not found ids.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The not found ids."
             },
-            "minItems": 0,
-            "maxItems": 800
+            "description": "The not found ids.",
+            "examples": [
+              [
+                "connector-id-3"
+              ]
+            ]
           }
+        },
+        "description": "Response containing the requested connector summaries and any IDs not found",
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         }
       },
       "BatchGetConnectorsResponse": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
         "title": "Batch Get Connectors Response",
-        "description": "Response containing the requested connectors and any IDs not found",
         "type": "object",
         "properties": {
           "connectors": {
-            "description": "The connectors.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/Connector"
-            }
+            },
+            "description": "The connectors."
           },
           "notFoundIds": {
-            "description": "The not found ids.",
+            "maxItems": 800,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The not found ids.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The not found ids."
             },
-            "minItems": 0,
-            "maxItems": 800
+            "description": "The not found ids.",
+            "examples": [
+              [
+                "connector-id-3"
+              ]
+            ]
           }
-        }
-      },
-      "Connector": {
+        },
+        "description": "Response containing the requested connectors and any IDs not found",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "Connector": {
         "title": "Connector",
-        "description": "A connector configuration for sending notifications",
         "type": "object",
         "properties": {
           "configOverrides": {
-            "description": "The config overrides.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EntityTypeConfigOverrides"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The config overrides."
           },
           "connectorConfig": {
             "$ref": "#/components/schemas/ConnectorConfig"
           },
           "createTime": {
-            "description": "The create time.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "The create time.",
+            "format": "date-time"
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 5000,
             "minLength": 0,
-            "maxLength": 5000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description.",
+            "examples": [
+              "Connector for team notifications"
+            ]
           },
           "diagnostics": {
-            "deprecated": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Diagnostics"
               }
-            ]
+            ],
+            "deprecated": true
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "maxLength": 128,
             "minLength": 1,
-            "maxLength": 128
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "type": "string",
+            "description": "Unique identifier.",
+            "examples": [
+              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
+            ]
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]+$",
+            "maxLength": 200,
             "minLength": 1,
-            "maxLength": 200
+            "pattern": "^[\\s\\S]+$",
+            "type": "string",
+            "description": "Display name.",
+            "examples": [
+              "My Slack Connector"
+            ]
           },
           "resolvedConnectorConfig": {
-            "readOnly": true,
-            "description": "Read-only full effective config, including backend auto-resolved fields.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ConnectorConfig"
               }
-            ]
+            ],
+            "description": "Read-only full effective config, including backend auto-resolved fields.",
+            "readOnly": true
           },
           "teamId": {
-            "description": "Team identifier.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 1,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "Team identifier.",
+            "format": "int64",
+            "examples": [
+              12345
+            ]
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "updateTime": {
-            "description": "Timestamp of the last update.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "Timestamp of the last update.",
+            "format": "date-time"
           }
-        }
-      },
-      "ConnectorConfig": {
+        },
+        "description": "A connector configuration for sending notifications",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "ConnectorConfig": {
         "title": "Connector Config",
-        "description": "Configuration for a specific output schema of a connector",
         "type": "object",
         "properties": {
           "fields": {
-            "description": "List of fields.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/notification_center.ConnectorConfigField"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "List of fields."
           }
+        },
+        "description": "Configuration for a specific output schema of a connector",
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         }
       },
       "ConnectorSummary": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Connector Summary",
-        "description": "A summary of a connector, excluding sensitive configuration values.",
         "type": "object",
         "properties": {
           "configOverrides": {
-            "description": "The config overrides.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EntityTypeConfigOverrides"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The config overrides."
           },
           "connectorConfig": {
             "$ref": "#/components/schemas/ConnectorConfig"
           },
           "createTime": {
-            "description": "The create time.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "The create time.",
+            "format": "date-time"
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 5000,
             "minLength": 0,
-            "maxLength": 5000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description.",
+            "examples": [
+              "Connector for team notifications"
+            ]
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "maxLength": 128,
             "minLength": 1,
-            "maxLength": 128
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "type": "string",
+            "description": "Unique identifier.",
+            "examples": [
+              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
+            ]
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]+$",
+            "maxLength": 200,
             "minLength": 1,
-            "maxLength": 200
+            "pattern": "^[\\s\\S]+$",
+            "type": "string",
+            "description": "Display name.",
+            "examples": [
+              "My Slack Connector"
+            ]
           },
           "resolvedConnectorConfig": {
-            "readOnly": true,
-            "description": "Read-only full effective config, including backend auto-resolved fields.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ConnectorConfig"
               }
-            ]
+            ],
+            "description": "Read-only full effective config, including backend auto-resolved fields.",
+            "readOnly": true
           },
           "teamId": {
-            "description": "The team id.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 1,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The team id.",
+            "format": "int64",
+            "examples": [
+              12345
+            ]
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "updateTime": {
-            "description": "Timestamp of the last update.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "Timestamp of the last update.",
+            "format": "date-time"
           }
+        },
+        "description": "A summary of a connector, excluding sensitive configuration values.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ConnectorTypeSummary": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
         "title": "Connector Type Summary",
-        "description": "Summary information about a connector type",
         "type": "object",
         "properties": {
           "count": {
-            "description": "Number of items.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 800,
             "minimum": 0,
-            "maximum": 800
+            "type": "integer",
+            "description": "Number of items.",
+            "format": "int64",
+            "examples": [
+              5
+            ]
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           }
-        }
-      },
-      "CreateConnectorResponse": {
+        },
+        "description": "Summary information about a connector type",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "CreateConnectorResponse": {
         "title": "Create Connector Response",
-        "description": "Response containing the created connector",
         "type": "object",
         "properties": {
           "connector": {
             "$ref": "#/components/schemas/Connector"
           }
+        },
+        "description": "Response containing the created connector",
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         }
       },
       "DeleteConnectorResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Response returned after successfully deleting a notification connector.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response returned after successfully deleting a notification connector.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "Delivery": {
-        "description": "Delivery.",
-        "type": "string",
         "enum": [
           "DELIVERY_UNSPECIFIED",
           "DISABLED",
           "ERRORS_ONLY"
-        ]
+        ],
+        "type": "string",
+        "description": "Delivery."
       },
       "Diagnostics": {
-        "externalDocs": {
-          "description": "Find out more about datasets",
-          "url": "https://coralogix.com/docs/user-guides/data-layer/datasets/"
-        },
         "title": "Connector Diagnostics",
-        "description": "Allows to configure rules for data written into 'notification.deliveries' dataset",
         "type": "object",
         "properties": {
           "delivery": {
-            "description": "Allows to configure what notification data should be written into a dataset.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Delivery"
               }
-            ]
+            ],
+            "description": "Allows to configure what notification data should be written into a dataset."
           }
+        },
+        "description": "Allows to configure rules for data written into 'notification.deliveries' dataset",
+        "externalDocs": {
+          "description": "Find out more about datasets",
+          "url": "https://coralogix.com/docs/user-guides/data-layer/datasets/"
         }
       },
       "EntityTypeConfigOverrides": {
@@ -681,67 +723,72 @@
               {
                 "$ref": "#/components/schemas/notification_center.EntityType"
               }
+            ],
+            "examples": [
+              "ALERTS"
             ]
           },
           "fields": {
-            "description": "List of fields.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TemplatedConnectorConfigField"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "List of fields."
           }
         }
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -749,92 +796,96 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "GetConnectorResponse": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
         "title": "Get Connector Response",
-        "description": "Response containing the requested connector",
         "type": "object",
         "properties": {
           "connector": {
             "$ref": "#/components/schemas/Connector"
           }
-        }
-      },
-      "GetConnectorTypeSummariesResponse": {
+        },
+        "description": "Response containing the requested connector",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "GetConnectorTypeSummariesResponse": {
         "title": "Get Connector Type Summaries Response",
-        "description": "Response containing summaries of connector types",
         "type": "object",
         "properties": {
           "connectorTypeSummaries": {
-            "description": "The connector type summaries.",
+            "maxItems": 800,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConnectorTypeSummary"
             },
-            "minItems": 0,
-            "maxItems": 800
+            "description": "The connector type summaries."
           }
-        }
-      },
-      "ListConnectorSummariesResponse": {
+        },
+        "description": "Response containing summaries of connector types",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "ListConnectorSummariesResponse": {
         "title": "List Connector Summaries Response",
-        "description": "Response containing summaries of connectors",
         "type": "object",
         "properties": {
           "connectors": {
-            "description": "The connectors.",
+            "maxItems": 800,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConnectorSummary"
             },
-            "minItems": 0,
-            "maxItems": 800
+            "description": "The connectors."
           }
-        }
-      },
-      "ListConnectorsResponse": {
+        },
+        "description": "Response containing summaries of connectors",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "ListConnectorsResponse": {
         "title": "List Connectors Response",
-        "description": "Response containing a list of connectors",
         "type": "object",
         "properties": {
           "connectors": {
-            "description": "The connectors.",
+            "maxItems": 800,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Connector"
             },
-            "minItems": 0,
-            "maxItems": 800
+            "description": "The connectors."
           }
+        },
+        "description": "Response containing a list of connectors",
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         }
       },
       "MultipleValues": {
@@ -844,77 +895,75 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "ReplaceConnectorResponse": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
         "title": "Replace Connector Response",
-        "description": "Response containing the updated connector",
         "type": "object",
         "properties": {
           "connector": {
             "$ref": "#/components/schemas/Connector"
           }
+        },
+        "description": "Response containing the updated connector",
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         }
       },
       "TemplatedConnectorConfigField": {
         "type": "object",
         "properties": {
           "fieldName": {
-            "description": "The field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The field name."
           },
           "template": {
-            "description": "Template.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 20000,
             "minLength": 0,
-            "maxLength": 20000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Template."
           }
         }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "notification_center.ConnectorConfigField": {
         "type": "object",
         "properties": {
           "fieldName": {
-            "description": "The field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The field name."
           },
           "value": {
-            "description": "The value.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 20000,
             "minLength": 0,
-            "maxLength": 20000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The value."
           }
         }
       },
       "notification_center.ConnectorType": {
-        "description": "Connector type.",
-        "type": "string",
         "enum": [
           "CONNECTOR_TYPE_UNSPECIFIED",
           "SLACK",
@@ -927,42 +976,43 @@
           "MICROSOFT_TEAMS",
           "EVENTBRIDGE",
           "INCIDENT_IO"
-        ]
+        ],
+        "type": "string",
+        "description": "Connector type."
       },
       "notification_center.EntityType": {
-        "description": "Entity type.",
-        "type": "string",
         "enum": [
           "ENTITY_TYPE_UNSPECIFIED",
           "ALERTS",
           "TEST_NOTIFICATIONS",
           "CASES",
           "OLLY_SCHEDULED_TASKS"
-        ]
+        ],
+        "type": "string",
+        "description": "Entity type."
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     },
     "parameters": {
       "id_3": {
-        "in": "path",
         "name": "id",
+        "in": "path",
         "description": "Unique identifier.",
         "required": true,
         "schema": {
-          "description": "Unique identifier.",
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "maxLength": 128,
           "minLength": 1,
-          "maxLength": 128
-        },
-        "style": "simple"
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "type": "string",
+          "description": "Unique identifier."
+        }
       }
     }
   }

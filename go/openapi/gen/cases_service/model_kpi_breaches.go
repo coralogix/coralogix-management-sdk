@@ -32,9 +32,9 @@ type KPIBreaches struct {
 type _KPIBreaches KPIBreaches
 
 // NewKPIBreaches instantiates a new KPIBreaches object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewKPIBreaches(breachedKpis []BreachedKPI) *KPIBreaches {
 	this := KPIBreaches{}
 	this.BreachedKpis = breachedKpis
@@ -42,8 +42,8 @@ func NewKPIBreaches(breachedKpis []BreachedKPI) *KPIBreaches {
 }
 
 // NewKPIBreachesWithDefaults instantiates a new KPIBreaches object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewKPIBreachesWithDefaults() *KPIBreaches {
 	this := KPIBreaches{}
 	return &this

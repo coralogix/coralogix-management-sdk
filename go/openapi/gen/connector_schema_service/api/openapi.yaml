@@ -7,149 +7,147 @@
   "paths": {
     "/notifications/notification-center/v1/connector-schemas": {
       "get": {
-        "tags": [
-          "Connector Schema service"
-        ],
-        "summary": "Get Connector Schema",
         "description": "Returns the schema definition for notification connectors.",
         "operationId": "ConnectorSchemaService_GetConnectorSchema",
         "parameters": [
           {
+            "description": "Connector type whose schema to retrieve.",
             "in": "query",
             "name": "type",
-            "description": "Connector type whose schema to retrieve.",
+            "required": false,
             "schema": {
-              "description": "Connector type whose schema to retrieve.",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/notification_center.ConnectorType"
                 }
-              ]
-            },
-            "style": "form"
+              ],
+              "description": "Connector type whose schema to retrieve."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetConnectorSchemaResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Get Connector Schema",
+        "tags": [
+          "Connector Schema service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "ConnectorConfigSchema": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Connector config schema.",
         "type": "object",
         "properties": {
           "fields": {
-            "description": "List of fields.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConnectorConfigSchemaField"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "List of fields."
           }
+        },
+        "description": "Connector config schema.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ConnectorConfigSchemaField": {
         "type": "object",
         "properties": {
           "allowOverrides": {
-            "description": "The allow overrides.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The allow overrides."
           },
           "allowedValues": {
-            "description": "The allowed values.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The allowed values.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The allowed values."
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The allowed values."
           },
           "default": {
-            "description": "The default.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The default."
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 1,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "fieldName": {
-            "description": "The field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The field name."
           },
           "fieldType": {
             "$ref": "#/components/schemas/FieldType"
           },
           "required": {
-            "description": "The required.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The required."
           }
         }
       },
       "ConnectorSchema": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Connector schema.",
         "type": "object",
         "properties": {
           "connectorConfigSchema": {
             "$ref": "#/components/schemas/ConnectorConfigSchema"
           },
           "messageConfigSchemas": {
-            "description": "The message config schemas.",
+            "maxItems": 100,
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MessageConfigSchema"
             },
-            "minItems": 1,
-            "maxItems": 100
+            "description": "The message config schemas."
           },
           "supportedPayloadTypes": {
-            "description": "The supported payload types.",
+            "maxItems": 100,
+            "minItems": 1,
             "type": "array",
             "items": {
-              "description": "The supported payload types.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The supported payload types."
             },
-            "minItems": 1,
-            "maxItems": 100
+            "description": "The supported payload types."
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           }
+        },
+        "description": "Connector schema.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "FieldType": {
-        "description": "Field type.",
-        "type": "string",
         "enum": [
           "FIELD_TYPE_UNSPECIFIED",
           "STRING",
@@ -160,56 +158,60 @@
           "URL",
           "ARRAY_OF_STRINGS",
           "BOOLEAN"
-        ]
+        ],
+        "type": "string",
+        "description": "Field type."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -217,50 +219,54 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "GetConnectorSchemaResponse": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response containing the schema definition for a notification connector type.",
+        }
+      },
+      "GetConnectorSchemaResponse": {
         "type": "object",
         "properties": {
           "connectorSchema": {
             "$ref": "#/components/schemas/ConnectorSchema"
           }
+        },
+        "description": "Response containing the schema definition for a notification connector type.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MessageConfigSchema": {
         "type": "object",
         "properties": {
           "fields": {
-            "description": "List of fields.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MessageConfigSchemaField"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "List of fields."
           },
           "payloadType": {
-            "description": "Type of the payload.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Type of the payload."
           }
         }
       },
@@ -268,42 +274,42 @@
         "type": "object",
         "properties": {
           "allowedValues": {
-            "description": "The allowed values.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The allowed values.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 4096,
               "minLength": 0,
-              "maxLength": 4096
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "The allowed values."
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The allowed values."
           },
           "default": {
-            "description": "The default.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The default."
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 1,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "disableOverride": {
-            "description": "The disable override.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The disable override."
           },
           "fieldName": {
-            "description": "The field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The field name."
           },
           "fieldType": {
             "$ref": "#/components/schemas/FieldType"
@@ -312,8 +318,8 @@
             "$ref": "#/components/schemas/TemplateRenderingMode"
           },
           "required": {
-            "description": "The required.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The required."
           }
         }
       },
@@ -324,34 +330,32 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "TemplateRenderingMode": {
-        "description": "Template rendering mode.",
-        "type": "string",
         "enum": [
           "TEMPLATE_RENDERING_MODE_UNSPECIFIED",
           "RELAXED",
           "STRICT"
-        ]
+        ],
+        "type": "string",
+        "description": "Template rendering mode."
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "notification_center.ConnectorType": {
-        "description": "Connector type.",
-        "type": "string",
         "enum": [
           "CONNECTOR_TYPE_UNSPECIFIED",
           "SLACK",
@@ -364,15 +368,17 @@
           "MICROSOFT_TEAMS",
           "EVENTBRIDGE",
           "INCIDENT_IO"
-        ]
+        ],
+        "type": "string",
+        "description": "Connector type."
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

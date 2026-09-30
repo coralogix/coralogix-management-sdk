@@ -30,17 +30,17 @@ type TestExistingPresetResponse struct {
 type _TestExistingPresetResponse TestExistingPresetResponse
 
 // NewTestExistingPresetResponse instantiates a new TestExistingPresetResponse object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewTestExistingPresetResponse() *TestExistingPresetResponse {
 	this := TestExistingPresetResponse{}
 	return &this
 }
 
 // NewTestExistingPresetResponseWithDefaults instantiates a new TestExistingPresetResponse object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewTestExistingPresetResponseWithDefaults() *TestExistingPresetResponse {
 	this := TestExistingPresetResponse{}
 	return &this

@@ -31,17 +31,17 @@ type ListDashboardFoldersResponse struct {
 type _ListDashboardFoldersResponse ListDashboardFoldersResponse
 
 // NewListDashboardFoldersResponse instantiates a new ListDashboardFoldersResponse object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewListDashboardFoldersResponse() *ListDashboardFoldersResponse {
 	this := ListDashboardFoldersResponse{}
 	return &this
 }
 
 // NewListDashboardFoldersResponseWithDefaults instantiates a new ListDashboardFoldersResponse object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewListDashboardFoldersResponseWithDefaults() *ListDashboardFoldersResponse {
 	this := ListDashboardFoldersResponse{}
 	return &this

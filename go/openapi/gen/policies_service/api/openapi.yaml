@@ -7,33 +7,29 @@
   "paths": {
     "/dataplans/log-policies/v1": {
       "put": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Atomic Overwrite Log Policies",
         "description": "Updates the log data retention policies.",
         "operationId": "PoliciesService_AtomicOverwriteLogPolicies",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Atomic Overwrite Log Policies Request",
                 "description": "In an atomic operation delete all existing log policies and create the provided list by order.",
-                "type": "object",
                 "properties": {
                   "policies": {
                     "description": "Policies.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CreateLogPolicyRequest"
                     },
+                    "maxItems": 200,
                     "minItems": 0,
-                    "maxItems": 200
+                    "type": "array"
                   }
                 },
                 "required": [
                   "policies"
-                ]
+                ],
+                "title": "Atomic Overwrite Log Policies Request",
+                "type": "object"
               }
             }
           },
@@ -41,149 +37,195 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AtomicOverwriteLogPoliciesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "429": {
-            "description": "Policy limit exceeded. Request a limit increase or reduce the number of policies.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Policy limit exceeded. Request a limit increase or reduce the number of policies."
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Atomic Overwrite Log Policies",
+        "tags": [
+          "Policies Service"
+        ]
       }
     },
     "/dataplans/policies/v1": {
       "get": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Get Company Policies",
         "description": "Returns all data policies for the team.",
         "operationId": "PoliciesService_GetCompanyPolicies",
         "parameters": [
           {
+            "description": "When true, return only policies that are currently enabled.",
             "in": "query",
             "name": "enabled_only",
-            "description": "When true, return only policies that are currently enabled.",
+            "required": false,
             "schema": {
               "description": "When true, return only policies that are currently enabled.",
+              "examples": [
+                true
+              ],
               "type": "boolean"
-            },
-            "style": "form"
+            }
           },
           {
+            "description": "Filter policies by data source type (for example logs or spans).",
             "in": "query",
             "name": "source_type",
-            "description": "Filter policies by data source type (for example logs or spans).",
+            "required": false,
             "schema": {
-              "description": "Filter policies by data source type (for example logs or spans).",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/v1.SourceType"
                 }
-              ]
-            },
-            "style": "form"
+              ],
+              "description": "Filter policies by data source type (for example logs or spans)."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetCompanyPoliciesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "Get Company Policies",
         "tags": [
           "Policies Service"
-        ],
-        "summary": "Update Policy",
+        ]
+      },
+      "put": {
         "description": "Updates an existing data policy.",
         "operationId": "PoliciesService_UpdatePolicy",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Update Policy Request",
                 "description": "This data structue is used to update an existing policy.",
-                "type": "object",
+                "oneOf": [
+                  {
+                    "required": [
+                      "logRules"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "spanRules"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "rumRules"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "logRules"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "required": [
+                            "spanRules"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "required": [
+                            "rumRules"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "type": "object"
+                  }
+                ],
                 "properties": {
                   "applicationRule": {
                     "$ref": "#/components/schemas/quota.v1.Rule"
@@ -193,31 +235,43 @@
                   },
                   "description": {
                     "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
-                    "type": "string",
-                    "pattern": "^[\\x00-\\xFF]*$",
+                    "examples": [
+                      "My Policy Description"
+                    ],
+                    "maxLength": 255,
                     "minLength": 0,
-                    "maxLength": 255
+                    "pattern": "^[\\x00-\\xFF]*$",
+                    "type": "string"
                   },
                   "enabled": {
                     "description": "Indicates whether the policy should be actively evaluated and applied.",
+                    "examples": [
+                      true
+                    ],
                     "type": "boolean"
                   },
                   "id": {
                     "description": "Unique identifier of the policy to update.",
-                    "type": "string",
-                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "examples": [
+                      "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                    ],
+                    "maxLength": 36,
                     "minLength": 36,
-                    "maxLength": 36
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": "string"
                   },
                   "logRules": {
                     "$ref": "#/components/schemas/LogRules"
                   },
                   "name": {
                     "description": "Human-readable name for the policy. Only Latin-1 characters are accepted.",
-                    "type": "string",
-                    "pattern": "^[\\x00-\\xFF]*$",
+                    "examples": [
+                      "My Policy"
+                    ],
+                    "maxLength": 255,
                     "minLength": 1,
-                    "maxLength": 255
+                    "pattern": "^[\\x00-\\xFF]*$",
+                    "type": "string"
                   },
                   "priority": {
                     "$ref": "#/components/schemas/quota.v1.Priority"
@@ -236,62 +290,19 @@
                   },
                   "targets": {
                     "description": "List of data targets/destinations to which this policy routes data.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/v1.Target"
                     },
+                    "maxItems": 5,
                     "minItems": 0,
-                    "maxItems": 5
+                    "type": "array"
                   }
                 },
                 "required": [
                   "id"
                 ],
-                "oneOf": [
-                  {
-                    "type": "object",
-                    "required": [
-                      "logRules"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "required": [
-                      "spanRules"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "required": [
-                      "rumRules"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "not": {
-                      "anyOf": [
-                        {
-                          "type": "object",
-                          "required": [
-                            "logRules"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "spanRules"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "rumRules"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "title": "Update Policy Request",
+                "type": "object"
               }
             }
           },
@@ -299,61 +310,104 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdatePolicyResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "Update Policy",
         "tags": [
           "Policies Service"
-        ],
-        "summary": "Create Policy",
+        ]
+      },
+      "post": {
         "description": "Creates a new data policy.",
         "operationId": "PoliciesService_CreatePolicy",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Create Policy Request",
                 "description": "This data structue is used to create a new policy. The number of policies per source type is limited per account (200 by default).",
-                "type": "object",
+                "oneOf": [
+                  {
+                    "required": [
+                      "logRules"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "spanRules"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "rumRules"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "logRules"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "required": [
+                            "spanRules"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "required": [
+                            "rumRules"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "type": "object"
+                  }
+                ],
                 "properties": {
                   "applicationRule": {
                     "$ref": "#/components/schemas/quota.v1.Rule"
@@ -363,10 +417,13 @@
                   },
                   "description": {
                     "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
-                    "type": "string",
-                    "pattern": "^[\\x00-\\xFF]*$",
+                    "examples": [
+                      "My Policy Description"
+                    ],
+                    "maxLength": 255,
                     "minLength": 0,
-                    "maxLength": 255
+                    "pattern": "^[\\x00-\\xFF]*$",
+                    "type": "string"
                   },
                   "disabled": {
                     "description": "When true, the policy is disabled and will not be evaluated.",
@@ -377,10 +434,13 @@
                   },
                   "name": {
                     "description": "Human-readable name for the policy. Only Latin-1 characters are accepted.",
-                    "type": "string",
-                    "pattern": "^[\\x00-\\xFF]*$",
+                    "examples": [
+                      "My Policy"
+                    ],
+                    "maxLength": 255,
                     "minLength": 1,
-                    "maxLength": 255
+                    "pattern": "^[\\x00-\\xFF]*$",
+                    "type": "string"
                   },
                   "placement": {
                     "$ref": "#/components/schemas/Placement"
@@ -402,63 +462,32 @@
                   },
                   "targets": {
                     "description": "List of data targets/destinations to which this policy routes data.",
-                    "type": "array",
+                    "examples": [
+                      [
+                        {
+                          "archive_retention": {
+                            "id": "archive_retention_id"
+                          },
+                          "dataset": "dataset1",
+                          "name": "My Target",
+                          "priority": "PRIORITY_TYPE_HIGH"
+                        }
+                      ]
+                    ],
                     "items": {
                       "$ref": "#/components/schemas/v1.Target"
                     },
+                    "maxItems": 5,
                     "minItems": 0,
-                    "maxItems": 5
+                    "type": "array"
                   }
                 },
                 "required": [
                   "name",
                   "priority"
                 ],
-                "oneOf": [
-                  {
-                    "type": "object",
-                    "required": [
-                      "logRules"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "required": [
-                      "spanRules"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "required": [
-                      "rumRules"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "not": {
-                      "anyOf": [
-                        {
-                          "type": "object",
-                          "required": [
-                            "logRules"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "spanRules"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "rumRules"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "title": "Create Policy Request",
+                "type": "object"
               }
             }
           },
@@ -466,73 +495,155 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreatePolicyResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "429": {
-            "description": "Policy limit exceeded. Request a limit increase or reduce the number of policies.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Policy limit exceeded. Request a limit increase or reduce the number of policies."
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Create Policy",
+        "tags": [
+          "Policies Service"
+        ]
       }
     },
     "/dataplans/policies/v1/all/forecast-usage": {
       "post": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Forecast Policy Usage",
         "description": "Forecasts the usage in bytes that a draft TCO policy would match over the requested time window, given its application/subsystem rules and log or span filters. Use this before saving a new or modified policy to see the impact on your quota.",
         "operationId": "PoliciesService_ForecastPolicyUsage",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Forecast Policy Usage Request",
+                "allOf": [
+                  {
+                    "oneOf": [
+                      {
+                        "required": [
+                          "logRules"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "required": [
+                          "spanRules"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "required": [
+                          "rumRules"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "not": {
+                          "anyOf": [
+                            {
+                              "required": [
+                                "logRules"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "required": [
+                                "spanRules"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "required": [
+                                "rumRules"
+                              ],
+                              "type": "object"
+                            }
+                          ]
+                        },
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  {
+                    "oneOf": [
+                      {
+                        "required": [
+                          "day"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "required": [
+                          "week"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "not": {
+                          "anyOf": [
+                            {
+                              "required": [
+                                "day"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "required": [
+                                "week"
+                              ],
+                              "type": "object"
+                            }
+                          ]
+                        },
+                        "type": "object"
+                      }
+                    ]
+                  }
+                ],
                 "description": "Request to forecast the usage in bytes of a draft TCO policy, based on the bytes matched by its filter rules over a given time window.",
-                "type": "object",
                 "properties": {
                   "applicationRule": {
                     "$ref": "#/components/schemas/quota.v1.Rule"
@@ -554,99 +665,20 @@
                   },
                   "timeBucketMs": {
                     "description": "Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.",
-                    "type": "string",
-                    "pattern": "^-?[0-9]+$",
+                    "examples": [
+                      "3600000"
+                    ],
+                    "maxLength": 20,
                     "minLength": 1,
-                    "maxLength": 20
+                    "pattern": "^-?[0-9]+$",
+                    "type": "string"
                   },
                   "week": {
                     "$ref": "#/components/schemas/Week"
                   }
                 },
-                "allOf": [
-                  {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "logRules"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "spanRules"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "rumRules"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "logRules"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "spanRules"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "rumRules"
-                              ]
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "oneOf": [
-                      {
-                        "type": "object",
-                        "required": [
-                          "day"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "required": [
-                          "week"
-                        ]
-                      },
-                      {
-                        "type": "object",
-                        "not": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "required": [
-                                "day"
-                              ]
-                            },
-                            {
-                              "type": "object",
-                              "required": [
-                                "week"
-                              ]
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                ]
+                "title": "Forecast Policy Usage Request",
+                "type": "object"
               }
             }
           },
@@ -654,75 +686,73 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ForecastPolicyUsageResponse"
-                },
                 "example": {
                   "estimatedBytes": "13251739648"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ForecastPolicyUsageResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Forecast Policy Usage",
+        "tags": [
+          "Policies Service"
+        ]
       }
     },
     "/dataplans/policies/v1/all/reorder": {
       "post": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Reorder Policies",
         "description": "Reorders all data policies.",
         "operationId": "PoliciesService_ReorderPolicies",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Reorder Policies Request",
                 "description": "This data structue is used to reorder policies.",
-                "type": "object",
                 "properties": {
                   "orders": {
                     "description": "The orders.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/PolicyOrder"
                     },
+                    "maxItems": 200,
                     "minItems": 0,
-                    "maxItems": 200
+                    "type": "array"
                   },
                   "sourceType": {
                     "$ref": "#/components/schemas/v1.SourceType"
@@ -731,7 +761,9 @@
                 "required": [
                   "orders",
                   "sourceType"
-                ]
+                ],
+                "title": "Reorder Policies Request",
+                "type": "object"
               }
             }
           },
@@ -739,77 +771,77 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ReorderPoliciesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Reorder Policies",
+        "tags": [
+          "Policies Service"
+        ]
       }
     },
     "/dataplans/policies/v1/all/test-policies": {
       "post": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Bulk Test Log Policies",
         "description": "Tests the data policies against sample data.",
         "operationId": "PoliciesService_BulkTestLogPolicies",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Bulk Test Log Policies Request",
                 "description": "Request to test multiple log policies.",
-                "type": "object",
                 "properties": {
                   "metaFieldsValuesList": {
                     "description": "The meta fields values list.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/LogMetaFieldsValues"
                     },
+                    "maxItems": 50,
                     "minItems": 0,
-                    "maxItems": 50
+                    "type": "array"
                   }
                 },
                 "required": [
                   "metaFieldsValuesList"
-                ]
+                ],
+                "title": "Bulk Test Log Policies Request",
+                "type": "object"
               }
             }
           },
@@ -817,197 +849,199 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BulkTestLogPoliciesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Bulk Test Log Policies",
+        "tags": [
+          "Policies Service"
+        ]
       }
     },
     "/dataplans/policies/v1/{id}": {
       "get": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Get Policy by ID",
         "description": "Returns the details of the specified data policy.",
         "operationId": "PoliciesService_GetPolicy",
         "parameters": [
           {
+            "description": "The unique identifier of the data policy to retrieve.",
             "in": "path",
             "name": "id",
-            "description": "The unique identifier of the data policy to retrieve.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the data policy to retrieve.",
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "examples": [
+                "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+              ],
+              "maxLength": 36,
               "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetPolicyResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "delete": {
+        },
+        "summary": "Get Policy by ID",
         "tags": [
           "Policies Service"
-        ],
-        "summary": "Delete Policy",
+        ]
+      },
+      "delete": {
         "description": "Deletes the data policy with the specified ID.",
         "operationId": "PoliciesService_DeletePolicy",
         "parameters": [
           {
+            "description": "The unique identifier of the data policy to delete.",
             "in": "path",
             "name": "id",
-            "description": "The unique identifier of the data policy to delete.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the data policy to delete.",
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "examples": [
+                "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+              ],
+              "maxLength": 36,
               "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeletePolicyResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Delete Policy",
+        "tags": [
+          "Policies Service"
+        ]
       }
     },
     "/dataplans/policiy-settings/v1": {
       "post": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Replace Policy Settings",
         "description": "Updates data policy settings.",
         "operationId": "PoliciesService_ReplacePolicySettings",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Replace Policy Settings Request",
                 "description": "This data structure is used to replace default policy priority settings for logs and/or spans. Server-generated fields (created_at, updated_at) will be ignored if provided.",
-                "type": "object",
                 "properties": {
                   "logsPolicySettings": {
                     "$ref": "#/components/schemas/LogsPolicySettings"
@@ -1015,136 +1049,138 @@
                   "spansPolicySettings": {
                     "$ref": "#/components/schemas/SpansPolicySettings"
                   }
-                }
+                },
+                "title": "Replace Policy Settings Request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ReplacePolicySettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Replace Policy Settings",
+        "tags": [
+          "Policies Service"
+        ]
       }
     },
     "/dataplans/policy-settings/v1": {
       "get": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Get Policy Priority Settings",
         "description": "Returns the current data policy settings.",
         "operationId": "PoliciesService_GetPolicySettings",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetPolicySettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get Policy Priority Settings",
+        "tags": [
+          "Policies Service"
+        ]
       }
     },
     "/dataplans/rum-policies/v1": {
       "put": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Atomic Overwrite Rum Policies",
         "description": "Updates RUM data retention policies.",
         "operationId": "PoliciesService_AtomicOverwriteRumPolicies",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Atomic Overwrite Rum Policies Request",
                 "description": "In an atomic operation delete all existing RUM policies and create the provided list by order.",
-                "type": "object",
                 "properties": {
                   "policies": {
                     "description": "List of RUM policies to create as part of the atomic overwrite.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CreateRumPolicyRequest"
                     },
+                    "maxItems": 10000,
                     "minItems": 0,
-                    "maxItems": 10000
+                    "type": "array"
                   }
                 },
                 "required": [
                   "policies"
-                ]
+                ],
+                "title": "Atomic Overwrite Rum Policies Request",
+                "type": "object"
               }
             }
           },
@@ -1152,12 +1188,8 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AtomicOverwriteRumPoliciesResponse"
-                },
                 "example": {
                   "createResponses": [
                     {
@@ -1179,82 +1211,86 @@
                       }
                     }
                   ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/AtomicOverwriteRumPoliciesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "429": {
-            "description": "Policy limit exceeded. Request a limit increase or reduce the number of policies.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Policy limit exceeded. Request a limit increase or reduce the number of policies."
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Atomic Overwrite Rum Policies",
+        "tags": [
+          "Policies Service"
+        ]
       }
     },
     "/dataplans/span-policies/v1": {
       "put": {
-        "tags": [
-          "Policies Service"
-        ],
-        "summary": "Atomic Overwrite Span Policies",
         "description": "Updates span data retention policies.",
         "operationId": "PoliciesService_AtomicOverwriteSpanPolicies",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Atomic Overwrite Span Policies Request",
                 "description": "In an atomic operation delete all existing span policies and create the provided list by order.",
-                "type": "object",
                 "properties": {
                   "policies": {
                     "description": "List of span policies to create as part of the atomic overwrite.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CreateSpanPolicyRequest"
                     },
+                    "maxItems": 200,
                     "minItems": 0,
-                    "maxItems": 200
+                    "type": "array"
                   }
                 },
                 "required": [
                   "policies"
-                ]
+                ],
+                "title": "Atomic Overwrite Span Policies Request",
+                "type": "object"
               }
             }
           },
@@ -1262,167 +1298,171 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AtomicOverwriteSpanPoliciesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "429": {
-            "description": "Policy limit exceeded. Request a limit increase or reduce the number of policies.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Policy limit exceeded. Request a limit increase or reduce the number of policies."
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Atomic Overwrite Span Policies",
+        "tags": [
+          "Policies Service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "ArchiveRetention": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Archive retention.",
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier."
           }
+        },
+        "description": "Archive retention.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "AtomicOverwriteLogPoliciesResponse": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
         "title": "Atomic Overwrite Log Policies Response",
-        "description": "This data structue is obtained when overwriting log policies atomically.",
         "type": "object",
         "properties": {
           "createResponses": {
-            "description": "The create responses.",
+            "maxItems": 200,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreatePolicyResponse"
             },
-            "minItems": 0,
-            "maxItems": 200
+            "description": "The create responses."
           }
+        },
+        "description": "This data structue is obtained when overwriting log policies atomically.",
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
         }
       },
       "AtomicOverwriteRumPoliciesResponse": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
         "title": "Atomic Overwrite Rum Policies Response",
-        "description": "This data structure is obtained when overwriting RUM policies atomically.",
         "type": "object",
         "properties": {
           "createResponses": {
-            "description": "The create responses.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreatePolicyResponse"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The create responses."
           }
+        },
+        "description": "This data structure is obtained when overwriting RUM policies atomically.",
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
         }
       },
       "AtomicOverwriteSpanPoliciesResponse": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
         "title": "Atomic Overwrite Span Policies Response",
-        "description": "This data structue is obtained when overwriting span policies atomically.",
         "type": "object",
         "properties": {
           "createResponses": {
-            "description": "The create responses.",
+            "maxItems": 200,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreatePolicyResponse"
             },
-            "minItems": 0,
-            "maxItems": 200
+            "description": "The create responses."
           }
-        }
-      },
-      "BulkTestLogPoliciesResponse": {
+        },
+        "description": "This data structue is obtained when overwriting span policies atomically.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "BulkTestLogPoliciesResponse": {
         "title": "Bulk Test Log Policies Response",
-        "description": "Response to test multiple log policies.",
+        "required": [
+          "testPoliciesBulkResult"
+        ],
         "type": "object",
         "properties": {
           "testPoliciesBulkResult": {
-            "description": "The test policies bulk result.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TestPoliciesResult"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The test policies bulk result."
           }
         },
-        "required": [
-          "testPoliciesBulkResult"
-        ]
-      },
-      "CreateGenericPolicyRequest": {
+        "description": "Response to test multiple log policies.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "CreateGenericPolicyRequest": {
         "title": "Create Generic Policy Request",
-        "description": "This data structue is used to create a new policy.",
+        "required": [
+          "name",
+          "description",
+          "priority"
+        ],
         "type": "object",
         "properties": {
           "applicationRule": {
@@ -1432,22 +1472,28 @@
             "$ref": "#/components/schemas/ArchiveRetention"
           },
           "description": {
-            "description": "Human-readable description. Only Latin-1 characters are accepted.",
-            "type": "string",
-            "pattern": "^[\\x00-\\xFF]*$",
+            "maxLength": 255,
             "minLength": 0,
-            "maxLength": 255
+            "pattern": "^[\\x00-\\xFF]*$",
+            "type": "string",
+            "description": "Human-readable description. Only Latin-1 characters are accepted.",
+            "examples": [
+              "My Policy Description"
+            ]
           },
           "disabled": {
-            "description": "The disabled.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The disabled."
           },
           "name": {
-            "description": "Display name. Only Latin-1 characters are accepted.",
-            "type": "string",
-            "pattern": "^[\\x00-\\xFF]*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\x00-\\xFF]*$",
+            "type": "string",
+            "description": "Display name. Only Latin-1 characters are accepted.",
+            "examples": [
+              "My Policy"
+            ]
           },
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
@@ -1459,28 +1505,27 @@
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
           "targets": {
-            "description": "List of targets.",
+            "maxItems": 5,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.Target"
             },
-            "minItems": 0,
-            "maxItems": 5
+            "description": "List of targets."
           }
         },
-        "required": [
-          "name",
-          "description",
-          "priority"
-        ]
-      },
-      "CreateLogPolicyRequest": {
+        "description": "This data structue is used to create a new policy.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "CreateLogPolicyRequest": {
         "title": "Create Log Policy Request",
-        "description": "This data structue is used to create a new log policy.",
+        "required": [
+          "policy",
+          "logRules"
+        ],
         "type": "object",
         "properties": {
           "logRules": {
@@ -1490,35 +1535,35 @@
             "$ref": "#/components/schemas/CreateGenericPolicyRequest"
           }
         },
-        "required": [
-          "policy",
-          "logRules"
-        ]
-      },
-      "CreatePolicyResponse": {
+        "description": "This data structue is used to create a new log policy.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "CreatePolicyResponse": {
         "title": "Create Policy Response",
-        "description": "This data structue is obtained when creating a policy.",
+        "required": [
+          "policy"
+        ],
         "type": "object",
         "properties": {
           "policy": {
             "$ref": "#/components/schemas/Policy"
           }
         },
-        "required": [
-          "policy"
-        ]
-      },
-      "CreateRumPolicyRequest": {
+        "description": "This data structue is obtained when creating a policy.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "CreateRumPolicyRequest": {
         "title": "Create Rum Policy Request",
-        "description": "This data structure is used to create a new RUM policy.",
+        "required": [
+          "policy",
+          "rumRules"
+        ],
         "type": "object",
         "properties": {
           "policy": {
@@ -1528,18 +1573,18 @@
             "$ref": "#/components/schemas/LogRules"
           }
         },
-        "required": [
-          "policy",
-          "rumRules"
-        ]
-      },
-      "CreateSpanPolicyRequest": {
+        "description": "This data structure is used to create a new RUM policy.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "CreateSpanPolicyRequest": {
         "title": "Create Span Policy Request",
-        "description": "This data structue is used to create a new span policy.",
+        "required": [
+          "policy",
+          "spanRules"
+        ],
         "type": "object",
         "properties": {
           "policy": {
@@ -1549,109 +1594,115 @@
             "$ref": "#/components/schemas/SpanRules"
           }
         },
-        "required": [
-          "policy",
-          "spanRules"
-        ]
-      },
-      "Day": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Day",
-        "description": "Marker selecting a one-day forecast window.",
-        "type": "object",
-        "additionalProperties": false
-      },
-      "DeletePolicyResponse": {
+        "description": "This data structue is used to create a new span policy.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "Day": {
+        "title": "Day",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Marker selecting a one-day forecast window.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "DeletePolicyResponse": {
         "title": "Delete Policy Response",
-        "description": "This data structue is obtained when deleting a policy by its ID.",
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier.",
+            "examples": [
+              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            ]
           }
         },
-        "required": [
-          "id"
-        ]
+        "description": "This data structue is obtained when deleting a policy by its ID.",
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+        }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -1659,101 +1710,104 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "First": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
-        "description": "First.",
+        }
+      },
+      "First": {
         "type": "object",
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "First.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "ForecastPolicyUsageResponse": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
         "title": "Forecast Policy Usage Response",
-        "description": "Forecasted usage in bytes for a draft TCO policy, based on bytes matched over a given time window.",
+        "required": [
+          "estimatedBytes"
+        ],
         "type": "object",
         "properties": {
           "estimatedBytes": {
-            "description": "Estimated number of bytes the draft policy would match over the requested time window.",
-            "type": "string",
-            "pattern": "^-?[0-9]+$",
+            "maxLength": 20,
             "minLength": 1,
-            "maxLength": 20
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "description": "Estimated number of bytes the draft policy would match over the requested time window.",
+            "examples": [
+              "13251739648"
+            ]
           },
           "usageBuckets": {
-            "description": "Per-bucket breakdown of matched bytes over the requested time window. Empty unless time_bucket_ms was set on the request.",
+            "maxItems": 10080,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UsageBucket"
             },
-            "minItems": 0,
-            "maxItems": 10080
+            "description": "Per-bucket breakdown of matched bytes over the requested time window. Empty unless time_bucket_ms was set on the request."
           }
         },
-        "required": [
-          "estimatedBytes"
-        ]
-      },
-      "GetCompanyPoliciesResponse": {
+        "description": "Forecasted usage in bytes for a draft TCO policy, based on bytes matched over a given time window.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "GetCompanyPoliciesResponse": {
         "title": "Get Company Policies Response",
-        "description": "This data structue is obtained when retrieving all policies of a company.",
+        "required": [
+          "policies"
+        ],
         "type": "object",
         "properties": {
           "policies": {
-            "description": "List of policies.",
+            "maxItems": 30000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Policy"
             },
-            "minItems": 0,
-            "maxItems": 30000
+            "description": "List of policies."
           }
         },
-        "required": [
-          "policies"
-        ]
-      },
-      "GetPolicyResponse": {
+        "description": "This data structue is obtained when retrieving all policies of a company.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "GetPolicyResponse": {
         "title": "Get Policy Response",
-        "description": "This data structue is obtained when retrieving a policy by its ID.",
         "type": "object",
         "properties": {
           "policy": {
             "$ref": "#/components/schemas/Policy"
           }
+        },
+        "description": "This data structue is obtained when retrieving a policy by its ID.",
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
         }
       },
       "GetPolicySettingsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get Policy Priority Settings Response",
-        "description": "This data structure is returned when getting policy priority settings.",
         "type": "object",
         "properties": {
           "logsPolicySettings": {
@@ -1762,94 +1816,107 @@
           "spansPolicySettings": {
             "$ref": "#/components/schemas/SpansPolicySettings"
           }
+        },
+        "description": "This data structure is returned when getting policy priority settings.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Last": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Last.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Last.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "LogMetaFieldsValues": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
         "title": "Log Meta Fields Values",
-        "description": "Values for log meta fields.",
-        "type": "object",
-        "properties": {
-          "applicationNameValues": {
-            "description": "The application name values.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 1024
-          },
-          "severityValues": {
-            "description": "The severity values.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 1024
-          },
-          "subsystemNameValues": {
-            "description": "The subsystem name values.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 1024
-          }
-        },
         "required": [
           "applicationNameValues",
           "severityValues",
           "subsystemNameValues"
-        ]
-      },
-      "LogRules": {
+        ],
+        "type": "object",
+        "properties": {
+          "applicationNameValues": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The application name values.",
+            "examples": [
+              "application_name"
+            ]
+          },
+          "severityValues": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The severity values.",
+            "examples": [
+              "severity"
+            ]
+          },
+          "subsystemNameValues": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The subsystem name values.",
+            "examples": [
+              "subsystem_name"
+            ]
+          }
+        },
+        "description": "Values for log meta fields.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "LogRules": {
         "title": "Log Rules",
-        "description": "Log rules for a policy.",
+        "required": [
+          "severities"
+        ],
         "type": "object",
         "properties": {
           "dpxlExpression": {
-            "description": "The dpxl expression.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 1,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The dpxl expression."
           },
           "severities": {
-            "description": "The severities.",
+            "maxItems": 6,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/quota.v1.Severity"
             },
-            "minItems": 0,
-            "maxItems": 6
+            "description": "The severities."
           }
         },
-        "required": [
-          "severities"
-        ]
+        "description": "Log rules for a policy.",
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+        }
       },
       "LogsPolicySettings": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Logs Source Policy",
-        "description": "This data structure is used to define the default priority for logs policies.",
         "type": "object",
         "properties": {
           "defaultPriority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           }
+        },
+        "description": "This data structure is used to define the default priority for logs policies.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MultipleValues": {
@@ -1859,21 +1926,50 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "Placement": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Placement.",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "first"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "last"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "first"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "last"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "first": {
             "$ref": "#/components/schemas/First"
@@ -1882,48 +1978,68 @@
             "$ref": "#/components/schemas/Last"
           }
         },
+        "description": "Placement.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "Policy": {
+        "title": "Policy",
+        "required": [
+          "id",
+          "companyId",
+          "name",
+          "priority",
+          "deleted",
+          "enabled",
+          "order"
+        ],
+        "type": "object",
         "oneOf": [
           {
-            "type": "object",
             "required": [
-              "first"
-            ]
+              "logRules"
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
-              "last"
-            ]
+              "spanRules"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "rumRules"
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
-                    "first"
-                  ]
+                    "logRules"
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
-                    "last"
-                  ]
+                    "spanRules"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "rumRules"
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
-      },
-      "Policy": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
-        "title": "Policy",
-        "description": "A policy is a set of rules that define the behavior of the Coralogix system for a specific company.",
-        "type": "object",
+        ],
         "properties": {
           "applicationRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
@@ -1932,57 +2048,81 @@
             "$ref": "#/components/schemas/ArchiveRetention"
           },
           "companyId": {
-            "description": "Internal Coralogix company/team identifier that owns this policy.",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 2147483647,
             "minimum": 0,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "Internal Coralogix company/team identifier that owns this policy.",
+            "format": "int32",
+            "examples": [
+              1234
+            ]
           },
           "createdAt": {
-            "description": "Timestamp (RFC 3339) when the policy was created.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 64,
             "minLength": 0,
-            "maxLength": 64
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Timestamp (RFC 3339) when the policy was created.",
+            "examples": [
+              "2021-01-01T00:00:00.000Z"
+            ]
           },
           "deleted": {
+            "type": "boolean",
             "description": "Soft-delete marker; when true the policy has been deleted and is no longer applied.",
-            "type": "boolean"
+            "examples": [
+              false
+            ]
           },
           "description": {
-            "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
-            "type": "string",
-            "pattern": "^[\\x00-\\xFF]*$",
+            "maxLength": 255,
             "minLength": 0,
-            "maxLength": 255
+            "pattern": "^[\\x00-\\xFF]*$",
+            "type": "string",
+            "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
+            "examples": [
+              "My Policy Description"
+            ]
           },
           "enabled": {
+            "type": "boolean",
             "description": "Indicates whether the policy is actively evaluated and applied.",
-            "type": "boolean"
+            "examples": [
+              true
+            ]
           },
           "id": {
-            "description": "Unique identifier for the policy.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier for the policy.",
+            "examples": [
+              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            ]
           },
           "logRules": {
             "$ref": "#/components/schemas/LogRules"
           },
           "name": {
-            "description": "Human-readable name for the policy. Only Latin-1 characters are accepted.",
-            "type": "string",
-            "pattern": "^[\\x00-\\xFF]*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\x00-\\xFF]*$",
+            "type": "string",
+            "description": "Human-readable name for the policy. Only Latin-1 characters are accepted.",
+            "examples": [
+              "My Policy"
+            ]
           },
           "order": {
-            "description": "Ordering priority that determines the sequence in which policies are evaluated. Can be negative for policies placed first.",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 2147483647,
             "minimum": -2147483648,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "Ordering priority that determines the sequence in which policies are evaluated. Can be negative for policies placed first.",
+            "format": "int32",
+            "examples": [
+              1
+            ]
           },
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
@@ -2003,199 +2143,175 @@
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
           "targets": {
-            "description": "List of data targets/destinations to which this policy routes data.",
+            "maxItems": 5,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.Target"
             },
-            "minItems": 0,
-            "maxItems": 5
-          },
-          "updatedAt": {
-            "description": "Timestamp (RFC 3339) when the policy was last updated.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 64
-          }
-        },
-        "required": [
-          "id",
-          "companyId",
-          "name",
-          "priority",
-          "deleted",
-          "enabled",
-          "order"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "logRules"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "spanRules"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "rumRules"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
+            "description": "List of data targets/destinations to which this policy routes data.",
+            "examples": [
+              [
                 {
-                  "type": "object",
-                  "required": [
-                    "logRules"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "spanRules"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "rumRules"
-                  ]
+                  "name": "My Target",
+                  "dataset": "dataset1",
+                  "priority": "PRIORITY_TYPE_HIGH",
+                  "archive_retention": {
+                    "id": "archive_retention_id"
+                  }
                 }
               ]
-            }
+            ]
+          },
+          "updatedAt": {
+            "maxLength": 64,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Timestamp (RFC 3339) when the policy was last updated.",
+            "examples": [
+              "2021-01-01T00:00:00.000Z"
+            ]
           }
-        ]
-      },
-      "PolicyOrder": {
+        },
+        "description": "A policy is a set of rules that define the behavior of the Coralogix system for a specific company.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "PolicyOrder": {
         "title": "Policy Order",
-        "description": "Order of a policy.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-            "minLength": 36,
-            "maxLength": 36
-          },
-          "order": {
-            "description": "Sort order. Must be a positive number.",
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 2147483647
-          }
-        },
         "required": [
           "order",
           "id"
-        ]
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier.",
+            "examples": [
+              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            ]
+          },
+          "order": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Sort order. Must be a positive number.",
+            "format": "int32",
+            "examples": [
+              1
+            ]
+          }
+        },
+        "description": "Order of a policy.",
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+        }
       },
       "PriorityOverride": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Priority override.",
         "type": "object",
         "properties": {
           "quotaBased": {
             "$ref": "#/components/schemas/QuotaBased"
           }
+        },
+        "description": "Priority override.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "PriorityOverrideStatus": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Priority override status.",
         "type": "object",
         "properties": {
           "quotaBased": {
             "$ref": "#/components/schemas/QuotaBasedStatus"
           }
+        },
+        "description": "Priority override status.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "QuotaBased": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Quota based.",
         "type": "object",
         "properties": {
           "usageTiers": {
-            "description": "Ordered list of usage tiers that map daily quota consumption percentages to priority levels. Percentages must be strictly increasing and priorities strictly decreasing, using only LOW, MEDIUM, or HIGH.",
+            "maxItems": 3,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UsageTier"
             },
-            "minItems": 0,
-            "maxItems": 3
+            "description": "Ordered list of usage tiers that map daily quota consumption percentages to priority levels. Percentages must be strictly increasing and priorities strictly decreasing, using only LOW, MEDIUM, or HIGH.",
+            "examples": [
+              [
+                {
+                  "daily_quota_percentage": 80,
+                  "priority": "PRIORITY_TYPE_HIGH"
+                }
+              ]
+            ]
           }
+        },
+        "description": "Quota based.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "QuotaBasedStatus": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Quota based status.",
         "type": "object",
         "properties": {
           "currentPriority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           },
           "currentUsage": {
-            "description": "The current usage.",
             "type": "number",
+            "description": "The current usage.",
             "format": "double"
           },
           "dailyLimit": {
-            "description": "The daily limit.",
             "type": "number",
+            "description": "The daily limit.",
             "format": "double"
           }
+        },
+        "description": "Quota based status.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ReorderPoliciesResponse": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
         "title": "Reorder Policies Response",
-        "description": "This data structure is obtained when reordering policies.",
+        "required": [
+          "orders"
+        ],
         "type": "object",
         "properties": {
           "orders": {
-            "description": "The orders.",
+            "maxItems": 200,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PolicyOrder"
             },
-            "minItems": 0,
-            "maxItems": 200
+            "description": "The orders."
           }
         },
-        "required": [
-          "orders"
-        ]
+        "description": "This data structure is obtained when reordering policies.",
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+        }
       },
       "ReplacePolicySettingsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Replace Policy Settings Response",
-        "description": "This data structure is returned when replacing policy settings. It contains the complete resource including server-generated fields.",
         "type": "object",
         "properties": {
           "logsPolicySettings": {
@@ -2204,70 +2320,74 @@
           "spansPolicySettings": {
             "$ref": "#/components/schemas/SpansPolicySettings"
           }
+        },
+        "description": "This data structure is returned when replacing policy settings. It contains the complete resource including server-generated fields.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "RuleTypeId": {
-        "description": "Rule type id.",
-        "type": "string",
         "enum": [
           "RULE_TYPE_ID_UNSPECIFIED",
           "RULE_TYPE_ID_IS",
           "RULE_TYPE_ID_IS_NOT",
           "RULE_TYPE_ID_START_WITH",
           "RULE_TYPE_ID_INCLUDES"
-        ]
+        ],
+        "type": "string",
+        "description": "Rule type id."
       },
       "SpanRules": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Span rules.",
         "type": "object",
         "properties": {
           "actionRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
           "dpxlExpression": {
-            "description": "The dpxl expression.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 1,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The dpxl expression."
           },
           "serviceRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
           "tagRules": {
-            "description": "The tag rules.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagRule"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The tag rules."
           }
+        },
+        "description": "Span rules.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SpansPolicySettings": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Spans Source Policy",
-        "description": "This data structure is used to define the default priority for spans policies.",
         "type": "object",
         "properties": {
           "defaultPriority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           }
+        },
+        "description": "This data structure is used to define the default priority for spans policies.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "TagRule": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
         "title": "Tag Rule",
-        "description": "Tag rule for a policy.",
+        "required": [
+          "ruleTypeId",
+          "tagName",
+          "tagValue"
+        ],
         "type": "object",
         "properties": {
           "ruleTypeId": {
@@ -2275,41 +2395,53 @@
               {
                 "$ref": "#/components/schemas/RuleTypeId"
               }
+            ],
+            "examples": [
+              "rule_type_id"
             ]
           },
           "tagName": {
-            "description": "The tag name. Must start with \"tags.\".",
-            "type": "string",
-            "pattern": "^tags\\..*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^tags\\..*$",
+            "type": "string",
+            "description": "The tag name. Must start with \"tags.\".",
+            "examples": [
+              "tags.environment"
+            ]
           },
           "tagValue": {
-            "description": "The tag value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 1,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The tag value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.",
+            "examples": [
+              "tag_value"
+            ]
           }
         },
-        "required": [
-          "ruleTypeId",
-          "tagName",
-          "tagValue"
-        ]
-      },
-      "TestPoliciesResult": {
+        "description": "Tag rule for a policy.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "TestPoliciesResult": {
         "title": "Test Policies Result",
-        "description": "Result of testing policies.",
+        "required": [
+          "metaFieldsValues",
+          "matched",
+          "policy"
+        ],
         "type": "object",
         "properties": {
           "matched": {
+            "type": "boolean",
             "description": "The matched.",
-            "type": "boolean"
+            "examples": [
+              true
+            ]
           },
           "metaFieldsValues": {
             "$ref": "#/components/schemas/LogMetaFieldsValues"
@@ -2318,124 +2450,135 @@
             "$ref": "#/components/schemas/Policy"
           }
         },
-        "required": [
-          "metaFieldsValues",
-          "matched",
-          "policy"
-        ]
-      },
-      "UpdatePolicyResponse": {
+        "description": "Result of testing policies.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
+        }
+      },
+      "UpdatePolicyResponse": {
         "title": "Update Policy Response",
-        "description": "This data structue is obtained when updating a policy.",
+        "required": [
+          "policy"
+        ],
         "type": "object",
         "properties": {
           "policy": {
             "$ref": "#/components/schemas/Policy"
           }
         },
-        "required": [
-          "policy"
-        ]
+        "description": "This data structue is obtained when updating a policy.",
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+        }
       },
       "UsageBucket": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Usage Bucket",
-        "description": "Bytes matched within a single time bucket of the forecast window.",
-        "type": "object",
-        "properties": {
-          "bucketStartMs": {
-            "description": "Start of the bucket window, in epoch milliseconds (the rounded-down bucket timestamp).",
-            "type": "string",
-            "pattern": "^-?[0-9]+$",
-            "minLength": 1,
-            "maxLength": 20
-          },
-          "bytes": {
-            "description": "Number of bytes the draft policy would match within this bucket.",
-            "type": "string",
-            "pattern": "^-?[0-9]+$",
-            "minLength": 1,
-            "maxLength": 20
-          }
-        },
         "required": [
           "bucketStartMs",
           "bytes"
-        ]
+        ],
+        "type": "object",
+        "properties": {
+          "bucketStartMs": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "description": "Start of the bucket window, in epoch milliseconds (the rounded-down bucket timestamp).",
+            "examples": [
+              "1728763200000"
+            ]
+          },
+          "bytes": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "description": "Number of bytes the draft policy would match within this bucket.",
+            "examples": [
+              "552155648"
+            ]
+          }
+        },
+        "description": "Bytes matched within a single time bucket of the forecast window.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "UsageTier": {
         "type": "object",
         "properties": {
           "dailyQuotaPercentage": {
-            "description": "The daily quota percentage. Must be between 0 and 100.",
-            "type": "number",
-            "format": "double",
+            "maximum": 100,
             "minimum": 0,
-            "maximum": 100
+            "type": "number",
+            "description": "The daily quota percentage. Must be between 0 and 100.",
+            "format": "double",
+            "examples": [
+              80
+            ]
           },
           "priority": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/quota.v1.Priority"
               }
+            ],
+            "examples": [
+              "PRIORITY_TYPE_HIGH"
             ]
           }
         }
       },
       "Week": {
+        "title": "Week",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Marker selecting a one-week forecast window.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "Week",
-        "description": "Marker selecting a one-week forecast window.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "quota.v1.Priority": {
-        "description": "TCO priority level assigned to a policy, controlling how data is routed and archived.",
-        "type": "string",
         "enum": [
           "PRIORITY_TYPE_UNSPECIFIED",
           "PRIORITY_TYPE_BLOCK",
           "PRIORITY_TYPE_LOW",
           "PRIORITY_TYPE_MEDIUM",
           "PRIORITY_TYPE_HIGH"
-        ]
+        ],
+        "type": "string",
+        "description": "TCO priority level assigned to a policy, controlling how data is routed and archived."
       },
       "quota.v1.Rule": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Rule.",
         "type": "object",
         "properties": {
           "name": {
-            "description": "The value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 1,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values."
           },
           "ruleTypeId": {
             "$ref": "#/components/schemas/RuleTypeId"
           }
+        },
+        "description": "Rule.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "quota.v1.Severity": {
-        "type": "string",
         "enum": [
           "SEVERITY_UNSPECIFIED",
           "SEVERITY_DEBUG",
@@ -2444,74 +2587,84 @@
           "SEVERITY_WARNING",
           "SEVERITY_ERROR",
           "SEVERITY_CRITICAL"
-        ]
+        ],
+        "type": "string"
       },
       "v1.SourceType": {
-        "description": "Source type.",
-        "type": "string",
         "enum": [
           "SOURCE_TYPE_UNSPECIFIED",
           "SOURCE_TYPE_LOGS",
           "SOURCE_TYPE_SPANS",
           "SOURCE_TYPE_RUM"
-        ]
+        ],
+        "type": "string",
+        "description": "Source type."
       },
       "v1.Target": {
-        "externalDocs": {
-          "description": "Find out more about quota management.",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-        },
         "title": "Target",
-        "description": "This data structure represents a target for quota policies. It defines a named group of datasets with a priority level and optional archive retention configuration.",
         "type": "object",
         "properties": {
           "archiveRetention": {
-            "description": "Optional archive retention configuration for the target.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ArchiveRetention"
               }
-            ]
+            ],
+            "description": "Optional archive retention configuration for the target."
           },
           "dataset": {
-            "description": "The dataset.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 512,
             "minLength": 1,
-            "maxLength": 512
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The dataset.",
+            "examples": [
+              "dataset1"
+            ]
           },
           "dataspace": {
-            "description": "The dataspace.",
-            "type": "string",
-            "pattern": "^[A-Za-z](?:[A-Za-z0-9_]|\\.[A-Za-z0-9_])*$",
+            "maxLength": 50,
             "minLength": 1,
-            "maxLength": 50
+            "pattern": "^[A-Za-z](?:[A-Za-z0-9_]|\\.[A-Za-z0-9_])*$",
+            "type": "string",
+            "description": "The dataspace.",
+            "examples": [
+              "dataspace1"
+            ]
           },
           "priority": {
-            "description": "The base priority for the target.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/quota.v1.Priority"
               }
+            ],
+            "description": "The base priority for the target.",
+            "examples": [
+              "PRIORITY_TYPE_MEDIUM"
             ]
           },
           "priorityOverride": {
-            "description": "Optional quota-based tiered priority override for the target.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/PriorityOverride"
               }
-            ]
+            ],
+            "description": "Optional quota-based tiered priority override for the target."
           }
+        },
+        "description": "This data structure represents a target for quota policies. It defines a named group of datasets with a priority level and optional archive retention configuration.",
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
         }
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

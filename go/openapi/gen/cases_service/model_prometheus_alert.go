@@ -53,9 +53,9 @@ type PrometheusAlert struct {
 type _PrometheusAlert PrometheusAlert
 
 // NewPrometheusAlert instantiates a new PrometheusAlert object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewPrometheusAlert(alertGroupId string, alertName string, annotations map[string]string, createdAt time.Time, fingerprint string, generatorUrl string, labels map[string]string, priority IndicatorPriority, status PrometheusAlertStatus, updatedAt time.Time) *PrometheusAlert {
 	this := PrometheusAlert{}
 	this.AlertGroupId = alertGroupId
@@ -72,8 +72,8 @@ func NewPrometheusAlert(alertGroupId string, alertName string, annotations map[s
 }
 
 // NewPrometheusAlertWithDefaults instantiates a new PrometheusAlert object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewPrometheusAlertWithDefaults() *PrometheusAlert {
 	this := PrometheusAlert{}
 	return &this

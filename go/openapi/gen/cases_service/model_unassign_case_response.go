@@ -32,9 +32,9 @@ type UnassignCaseResponse struct {
 type _UnassignCaseResponse UnassignCaseResponse
 
 // NewUnassignCaseResponse instantiates a new UnassignCaseResponse object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewUnassignCaseResponse(case_ Case) *UnassignCaseResponse {
 	this := UnassignCaseResponse{}
 	this.Case = case_
@@ -42,8 +42,8 @@ func NewUnassignCaseResponse(case_ Case) *UnassignCaseResponse {
 }
 
 // NewUnassignCaseResponseWithDefaults instantiates a new UnassignCaseResponse object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewUnassignCaseResponseWithDefaults() *UnassignCaseResponse {
 	this := UnassignCaseResponse{}
 	return &this

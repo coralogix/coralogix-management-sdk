@@ -32,9 +32,9 @@ type EnrichmentsCreationRequest struct {
 type _EnrichmentsCreationRequest EnrichmentsCreationRequest
 
 // NewEnrichmentsCreationRequest instantiates a new EnrichmentsCreationRequest object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewEnrichmentsCreationRequest(requestEnrichments []EnrichmentRequestModel) *EnrichmentsCreationRequest {
 	this := EnrichmentsCreationRequest{}
 	this.RequestEnrichments = requestEnrichments
@@ -42,8 +42,8 @@ func NewEnrichmentsCreationRequest(requestEnrichments []EnrichmentRequestModel) 
 }
 
 // NewEnrichmentsCreationRequestWithDefaults instantiates a new EnrichmentsCreationRequest object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewEnrichmentsCreationRequestWithDefaults() *EnrichmentsCreationRequest {
 	this := EnrichmentsCreationRequest{}
 	return &this

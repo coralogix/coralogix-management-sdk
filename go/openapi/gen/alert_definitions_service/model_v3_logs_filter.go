@@ -31,17 +31,17 @@ type V3LogsFilter struct {
 type _V3LogsFilter V3LogsFilter
 
 // NewV3LogsFilter instantiates a new V3LogsFilter object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewV3LogsFilter() *V3LogsFilter {
 	this := V3LogsFilter{}
 	return &this
 }
 
 // NewV3LogsFilterWithDefaults instantiates a new V3LogsFilter object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewV3LogsFilterWithDefaults() *V3LogsFilter {
 	this := V3LogsFilter{}
 	return &this

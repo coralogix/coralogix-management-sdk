@@ -7,59 +7,50 @@
   "paths": {
     "/notifications/notification-center/v1/entity-types": {
       "get": {
-        "tags": [
-          "Entities service"
-        ],
-        "summary": "List Entity Types",
         "description": "Returns all available notification entity types.",
         "operationId": "EntitiesService_ListEntityTypes",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListEntityTypesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "List Entity Types",
+        "tags": [
+          "Entities service"
+        ]
       }
     },
     "/notifications/notification-center/v1/entity-types/{entity_type}/attachment-types": {
       "get": {
-        "tags": [
-          "Entities service"
-        ],
-        "summary": "List Entity Type Attachment Types",
         "description": "Returns all supported attachment types for the specified entity type.",
         "operationId": "EntitiesService_ListEntityTypeAttachmentTypes",
         "parameters": [
           {
+            "description": "Entity type whose supported attachment types to list.",
             "in": "path",
             "name": "entity_type",
-            "description": "Entity type whose supported attachment types to list.",
             "required": true,
             "schema": {
-              "description": "Entity type whose supported attachment types to list.",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/notification_center.EntityType"
                 }
-              ]
-            },
-            "style": "simple"
+              ],
+              "description": "Entity type whose supported attachment types to list."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListEntityTypeAttachmentTypesResponse"
-                },
                 "example": {
                   "supportedAttachmentTypes": [
                     {
@@ -71,123 +62,138 @@
                       "name": "log_example"
                     }
                   ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ListEntityTypeAttachmentTypesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "List Entity Type Attachment Types",
+        "tags": [
+          "Entities service"
+        ]
       }
     },
     "/notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes": {
       "get": {
-        "tags": [
-          "Entities service"
-        ],
-        "summary": "List Entity Subtypes",
         "description": "Returns all sub-types for the specified entity type.",
         "operationId": "EntitiesService_ListEntitySubTypes",
         "parameters": [
           {
+            "description": "Entity type whose sub-types to list.",
             "in": "path",
             "name": "entity_type",
-            "description": "Entity type whose sub-types to list.",
             "required": true,
             "schema": {
-              "description": "Entity type whose sub-types to list.",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/notification_center.EntityType"
                 }
-              ]
-            },
-            "style": "simple"
+              ],
+              "description": "Entity type whose sub-types to list."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListEntitySubTypesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "List Entity Subtypes",
+        "tags": [
+          "Entities service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "EntityTypeAttachmentType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Supported attachment type with its default enabled state.",
         "type": "object",
         "properties": {
           "defaultEnabled": {
+            "type": "boolean",
             "description": "Whether this attachment type is included by default when policy is Auto.",
-            "type": "boolean"
+            "examples": [
+              true
+            ]
           },
           "name": {
-            "description": "Attachment type identifier (e.g. 'alert_graph', 'log_example').",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 100,
             "minLength": 0,
-            "maxLength": 100
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Attachment type identifier (e.g. 'alert_graph', 'log_example').",
+            "examples": [
+              "alert_graph"
+            ]
           }
+        },
+        "description": "Supported attachment type with its default enabled state.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -195,74 +201,78 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "ListEntitySubTypesResponse": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response containing a list of notification entity sub-types.",
+        }
+      },
+      "ListEntitySubTypesResponse": {
         "type": "object",
         "properties": {
           "entitySubTypes": {
-            "description": "The entity sub types.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The entity sub types.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The entity sub types."
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The entity sub types."
           }
+        },
+        "description": "Response containing a list of notification entity sub-types.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ListEntityTypeAttachmentTypesResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing a list of supported attachment types for the entity type.",
         "type": "object",
         "properties": {
           "supportedAttachmentTypes": {
-            "description": "The supported attachment types.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EntityTypeAttachmentType"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The supported attachment types."
           }
+        },
+        "description": "Response containing a list of supported attachment types for the entity type.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ListEntityTypesResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing a list of notification entity types.",
         "type": "object",
         "properties": {
           "entityTypes": {
-            "description": "The supported payload types.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/notification_center.EntityType"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The supported payload types."
           }
+        },
+        "description": "Response containing a list of notification entity types.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MultipleValues": {
@@ -272,40 +282,40 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "notification_center.EntityType": {
-        "description": "Entity type.",
-        "type": "string",
         "enum": [
           "ENTITY_TYPE_UNSPECIFIED",
           "ALERTS",
           "TEST_NOTIFICATIONS",
           "CASES",
           "OLLY_SCHEDULED_TASKS"
-        ]
+        ],
+        "type": "string",
+        "description": "Entity type."
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

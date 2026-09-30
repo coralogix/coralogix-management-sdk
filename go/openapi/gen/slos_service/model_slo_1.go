@@ -62,17 +62,17 @@ type Slo1 struct {
 type _Slo1 Slo1
 
 // NewSlo1 instantiates a new Slo1 object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewSlo1() *Slo1 {
 	this := Slo1{}
 	return &this
 }
 
 // NewSlo1WithDefaults instantiates a new Slo1 object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewSlo1WithDefaults() *Slo1 {
 	this := Slo1{}
 	return &this

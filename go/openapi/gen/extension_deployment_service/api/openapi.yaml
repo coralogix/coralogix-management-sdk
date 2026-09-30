@@ -7,528 +7,528 @@
   "paths": {
     "/integrations/extensions/v1/deployed": {
       "get": {
-        "tags": [
-          "Extension deployment service"
-        ],
-        "summary": "Get deployed extensions",
         "description": "Returns all deployed extensions.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
         "operationId": "ExtensionDeploymentService_GetDeployedExtensions",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetDeployedExtensionsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get deployed extensions",
+        "tags": [
+          "Extension deployment service"
+        ],
         "x-coralogixPermissions": [
           "extensions:ReadConfig"
         ]
       },
       "put": {
-        "tags": [
-          "Extension deployment service"
-        ],
-        "summary": "Deploy extension",
         "description": "Deploys an extension.\n\nRequires the following permissions:\n- `extensions:Deploy`",
         "operationId": "ExtensionDeploymentService_DeployExtension",
         "parameters": [
           {
+            "description": "Unique identifier.",
             "in": "query",
             "name": "id",
-            "description": "Unique identifier.",
+            "required": false,
             "schema": {
               "description": "Unique identifier.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "form"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           },
           {
+            "description": "Version number.",
             "in": "query",
             "name": "version",
-            "description": "Version number.",
+            "required": false,
             "schema": {
               "description": "Version number.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "form"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           },
           {
+            "description": "The item ids.",
             "in": "query",
             "name": "item_ids",
-            "description": "The item ids.",
+            "required": false,
             "schema": {
               "description": "The item ids.",
-              "type": "array",
               "items": {
                 "description": "The item ids.",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
+              "maxItems": 10000,
               "minItems": 0,
-              "maxItems": 10000
-            },
-            "style": "form"
+              "type": "array"
+            }
           },
           {
+            "description": "The applications.",
             "in": "query",
             "name": "applications",
-            "description": "The applications.",
+            "required": false,
             "schema": {
               "description": "The applications.",
-              "type": "array",
               "items": {
                 "description": "The applications.",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
+              "maxItems": 10000,
               "minItems": 0,
-              "maxItems": 10000
-            },
-            "style": "form"
+              "type": "array"
+            }
           },
           {
+            "description": "The subsystems.",
             "in": "query",
             "name": "subsystems",
-            "description": "The subsystems.",
+            "required": false,
             "schema": {
               "description": "The subsystems.",
-              "type": "array",
               "items": {
                 "description": "The subsystems.",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
+              "maxItems": 10000,
               "minItems": 0,
-              "maxItems": 10000
-            },
-            "style": "form"
+              "type": "array"
+            }
           },
           {
+            "description": "The extension deployment configuration.",
             "in": "query",
             "name": "extension_deployment",
-            "description": "The extension deployment configuration.",
+            "required": false,
             "schema": {
+              "description": "Extension deployment.",
               "externalDocs": {
                 "url": ""
               },
-              "title": "Extension deployment",
-              "description": "Extension deployment.",
-              "type": "object",
               "properties": {
                 "applications": {
                   "description": "The applications.",
-                  "type": "array",
                   "items": {
                     "description": "The applications.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
+                  "maxItems": 10000,
                   "minItems": 0,
-                  "maxItems": 10000
+                  "type": "array"
                 },
                 "id": {
                   "description": "Unique identifier.",
-                  "type": "string",
-                  "pattern": "^[\\s\\S]*$",
+                  "maxLength": 65535,
                   "minLength": 0,
-                  "maxLength": 65535
+                  "pattern": "^[\\s\\S]*$",
+                  "type": "string"
                 },
                 "itemIds": {
                   "description": "The item ids.",
-                  "type": "array",
                   "items": {
                     "description": "The item ids.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
+                  "maxItems": 10000,
                   "minItems": 0,
-                  "maxItems": 10000
+                  "type": "array"
                 },
                 "subsystems": {
                   "description": "The subsystems.",
-                  "type": "array",
                   "items": {
                     "description": "The subsystems.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
+                  "maxItems": 10000,
                   "minItems": 0,
-                  "maxItems": 10000
+                  "type": "array"
                 },
                 "version": {
                   "description": "Version number.",
-                  "type": "string",
-                  "pattern": "^[\\s\\S]*$",
+                  "maxLength": 65535,
                   "minLength": 0,
-                  "maxLength": 65535
+                  "pattern": "^[\\s\\S]*$",
+                  "type": "string"
                 }
-              }
-            },
-            "style": "form"
+              },
+              "title": "Extension deployment",
+              "type": "object"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeployExtensionResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Deploy extension",
+        "tags": [
+          "Extension deployment service"
+        ],
         "x-coralogixPermissions": [
           "extensions:Deploy"
         ]
       },
       "post": {
-        "tags": [
-          "Extension deployment service"
-        ],
-        "summary": "Update extension",
         "description": "Updates a deployed extension.\n\nRequires the following permissions:\n- `extensions:Deploy`",
         "operationId": "ExtensionDeploymentService_UpdateExtension",
         "parameters": [
           {
+            "description": "Unique identifier.",
             "in": "query",
             "name": "id",
-            "description": "Unique identifier.",
+            "required": false,
             "schema": {
               "description": "Unique identifier.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "form"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           },
           {
+            "description": "Version number.",
             "in": "query",
             "name": "version",
-            "description": "Version number.",
+            "required": false,
             "schema": {
               "description": "Version number.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "form"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           },
           {
+            "description": "The item ids.",
             "in": "query",
             "name": "item_ids",
-            "description": "The item ids.",
+            "required": false,
             "schema": {
               "description": "The item ids.",
-              "type": "array",
               "items": {
                 "description": "The item ids.",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
+              "maxItems": 10000,
               "minItems": 0,
-              "maxItems": 10000
-            },
-            "style": "form"
+              "type": "array"
+            }
           },
           {
+            "description": "The applications.",
             "in": "query",
             "name": "applications",
-            "description": "The applications.",
+            "required": false,
             "schema": {
               "description": "The applications.",
-              "type": "array",
               "items": {
                 "description": "The applications.",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
+              "maxItems": 10000,
               "minItems": 0,
-              "maxItems": 10000
-            },
-            "style": "form"
+              "type": "array"
+            }
           },
           {
+            "description": "The subsystems.",
             "in": "query",
             "name": "subsystems",
-            "description": "The subsystems.",
+            "required": false,
             "schema": {
               "description": "The subsystems.",
-              "type": "array",
               "items": {
                 "description": "The subsystems.",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
+              "maxItems": 10000,
               "minItems": 0,
-              "maxItems": 10000
-            },
-            "style": "form"
+              "type": "array"
+            }
           },
           {
+            "description": "The extension deployment configuration to update.",
             "in": "query",
             "name": "extension_deployment",
-            "description": "The extension deployment configuration to update.",
+            "required": false,
             "schema": {
+              "description": "Extension deployment.",
               "externalDocs": {
                 "url": ""
               },
-              "title": "Extension deployment",
-              "description": "Extension deployment.",
-              "type": "object",
               "properties": {
                 "applications": {
                   "description": "The applications.",
-                  "type": "array",
                   "items": {
                     "description": "The applications.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
+                  "maxItems": 10000,
                   "minItems": 0,
-                  "maxItems": 10000
+                  "type": "array"
                 },
                 "id": {
                   "description": "Unique identifier.",
-                  "type": "string",
-                  "pattern": "^[\\s\\S]*$",
+                  "maxLength": 65535,
                   "minLength": 0,
-                  "maxLength": 65535
+                  "pattern": "^[\\s\\S]*$",
+                  "type": "string"
                 },
                 "itemIds": {
                   "description": "The item ids.",
-                  "type": "array",
                   "items": {
                     "description": "The item ids.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
+                  "maxItems": 10000,
                   "minItems": 0,
-                  "maxItems": 10000
+                  "type": "array"
                 },
                 "subsystems": {
                   "description": "The subsystems.",
-                  "type": "array",
                   "items": {
                     "description": "The subsystems.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
+                  "maxItems": 10000,
                   "minItems": 0,
-                  "maxItems": 10000
+                  "type": "array"
                 },
                 "version": {
                   "description": "Version number.",
-                  "type": "string",
-                  "pattern": "^[\\s\\S]*$",
+                  "maxLength": 65535,
                   "minLength": 0,
-                  "maxLength": 65535
+                  "pattern": "^[\\s\\S]*$",
+                  "type": "string"
                 }
-              }
-            },
-            "style": "form"
+              },
+              "title": "Extension deployment",
+              "type": "object"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdateExtensionResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Update extension",
+        "tags": [
+          "Extension deployment service"
+        ],
         "x-coralogixPermissions": [
           "extensions:Deploy"
         ]
       },
       "delete": {
-        "tags": [
-          "Extension deployment service"
-        ],
-        "summary": "Revert deployment of extension",
         "description": "Undeploys the specified extension.\n\nRequires the following permissions:\n- `extensions:Deploy`",
         "operationId": "ExtensionDeploymentService_UndeployExtension",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Revert deployment of extension request",
                 "description": "Request for undeploying an extension.",
-                "type": "object",
                 "properties": {
                   "id": {
                     "description": "Unique identifier.",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "maxLength": 65535,
                     "minLength": 0,
-                    "maxLength": 65535
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
                   },
                   "keptExtensionItems": {
                     "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
-                    "type": "array",
                     "items": {
                       "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
-                      "type": "string",
-                      "minLength": 0
+                      "minLength": 0,
+                      "type": "string"
                     },
+                    "maxItems": 10000,
                     "minItems": 0,
-                    "maxItems": 10000
+                    "type": "array"
                   }
-                }
+                },
+                "title": "Revert deployment of extension request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UndeployExtensionResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Revert deployment of extension",
+        "tags": [
+          "Extension deployment service"
+        ],
         "x-coralogixPermissions": [
           "extensions:Deploy"
         ]
@@ -538,245 +538,247 @@
   "components": {
     "schemas": {
       "DeployExtensionResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Deploy extension response",
-        "description": "Response returned after successfully deploying an extension.",
         "type": "object",
         "properties": {
           "extensionDeployment": {
             "$ref": "#/components/schemas/ExtensionDeployment"
           }
+        },
+        "description": "Response returned after successfully deploying an extension.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "DeployedExtension": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Deployed extension",
         "type": "object",
         "properties": {
           "applications": {
-            "description": "The applications.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The applications.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The applications."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The applications."
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "itemIds": {
-            "description": "The item ids.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The item ids.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The item ids."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The item ids."
           },
           "subsystems": {
-            "description": "The subsystems.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The subsystems.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The subsystems."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The subsystems."
           },
           "summary": {
             "$ref": "#/components/schemas/DeployedExtensionSummary"
           },
           "version": {
-            "description": "Version number.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version number."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "DeployedExtensionSummary": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Deployed extension summary",
-        "description": "Deployed extension summary.",
         "type": "object",
         "properties": {
           "deployedItemCounts": {
             "$ref": "#/components/schemas/ItemCounts"
           }
+        },
+        "description": "Deployed extension summary.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "ExtensionDeployment": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension deployment",
-        "description": "Extension deployment.",
         "type": "object",
         "properties": {
           "applications": {
-            "description": "The applications.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The applications.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The applications."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The applications."
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "itemIds": {
-            "description": "The item ids.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The item ids.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The item ids."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The item ids."
           },
           "subsystems": {
-            "description": "The subsystems.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The subsystems.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The subsystems."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The subsystems."
           },
           "version": {
-            "description": "Version number.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version number."
           }
+        },
+        "description": "Extension deployment.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "FailedItem": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Failed item",
         "type": "object",
         "properties": {
           "itemId": {
-            "description": "The item id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The item id."
           },
           "reason": {
-            "description": "Reason.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Reason."
           },
           "remoteId": {
-            "description": "The remote id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The remote id."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -784,117 +786,121 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "GetDeployedExtensionsResponse": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "GetDeployedExtensionsResponse": {
         "title": "Get deployed extensions response",
-        "description": "Response containing a list of deployed extensions.",
         "type": "object",
         "properties": {
           "deployedExtensions": {
-            "description": "The deployed extensions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DeployedExtension"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The deployed extensions."
           }
+        },
+        "description": "Response containing a list of deployed extensions.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ItemCounts": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Item counts",
-        "description": "Item counts.",
         "type": "object",
         "properties": {
           "actions": {
-            "description": "List of actions.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "List of actions.",
+            "format": "int64"
           },
           "alerts": {
-            "description": "List of alerts.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "List of alerts.",
+            "format": "int64"
           },
           "customDashboards": {
-            "description": "The custom dashboards.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The custom dashboards.",
+            "format": "int64"
           },
           "enrichments": {
-            "description": "List of enrichments.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "List of enrichments.",
+            "format": "int64"
           },
           "eventsToMetrics": {
-            "description": "The events to metrics.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The events to metrics.",
+            "format": "int64"
           },
           "grafanaDashboards": {
-            "description": "The grafana dashboards.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The grafana dashboards.",
+            "format": "int64"
           },
           "kibanaDashboards": {
-            "description": "The kibana dashboards.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The kibana dashboards.",
+            "format": "int64"
           },
           "metricsRuleGroup": {
-            "description": "The metrics rule group.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The metrics rule group.",
+            "format": "int64"
           },
           "parsingRules": {
-            "description": "The parsing rules.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The parsing rules.",
+            "format": "int64"
           },
           "savedViews": {
-            "description": "The saved views.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The saved views.",
+            "format": "int64"
           }
+        },
+        "description": "Item counts.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MultipleValues": {
@@ -904,64 +910,64 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "UndeployExtensionResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Revert deployment of extension response",
-        "description": "Response returned after successfully undeploying an extension.",
         "type": "object",
         "properties": {
           "extensionDeployment": {
             "$ref": "#/components/schemas/ExtensionDeployment"
           },
           "failedItems": {
-            "description": "The failed items.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FailedItem"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The failed items."
           }
+        },
+        "description": "Response returned after successfully undeploying an extension.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "UpdateExtensionResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Update extension response",
-        "description": "Response returned after successfully updating a deployed extension.",
         "type": "object",
         "properties": {
           "extensionDeployment": {
             "$ref": "#/components/schemas/ExtensionDeployment"
           }
+        },
+        "description": "Response returned after successfully updating a deployed extension.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

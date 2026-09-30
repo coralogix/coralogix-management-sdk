@@ -7,56 +7,57 @@
   "paths": {
     "/cases/cases/v1/{case_id}/comments": {
       "post": {
-        "tags": [
-          "Case Events service"
-        ],
-        "summary": "Create a comment event",
         "description": "Create a new comment event for a case.\n\nRequires the following permissions:\n- `case:Comment`",
         "operationId": "CaseEventsService_CreateComment",
         "parameters": [
           {
+            "description": "ID of the case to add the event to. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
             "in": "path",
             "name": "case_id",
-            "description": "ID of the case to add the event to. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
             "required": true,
             "schema": {
               "description": "ID of the case to add the event to. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-              "type": "string",
-              "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
+              "examples": [
+                "3f166e9f-3c88-4af2-b52e-138f339dab3e"
+              ],
+              "maxLength": 64,
               "minLength": 1,
-              "maxLength": 64
-            },
-            "style": "simple"
+              "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Create comment event request",
                 "description": "Request for creating a comment on a case.",
-                "type": "object",
                 "properties": {
                   "attachments": {
                     "description": "Attachments to the comment",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CommentAttachment"
                     },
+                    "maxItems": 100,
                     "minItems": 0,
-                    "maxItems": 100
+                    "type": "array"
                   },
                   "text": {
                     "description": "Comment text to update. Leading and trailing whitespace is trimmed before the length limits are applied.",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+                    "examples": [
+                      "This is updated text"
+                    ],
+                    "maxLength": 10000,
                     "minLength": 1,
-                    "maxLength": 10000
+                    "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+                    "type": "string"
                   }
                 },
                 "required": [
                   "text"
-                ]
+                ],
+                "title": "Create comment event request",
+                "type": "object"
               }
             }
           },
@@ -64,56 +65,60 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateCommentResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Create a comment event",
+        "tags": [
+          "Case Events service"
+        ],
         "x-coralogixPermissions": [
           "case:Comment"
         ]
@@ -121,10 +126,6 @@
     },
     "/cases/cases/v1/{case_id}/events": {
       "get": {
-        "tags": [
-          "Case Events service"
-        ],
-        "summary": "List events for a case",
         "description": "Retrieve all events associated with a specific case.\n\nRequires the following permissions:\n- `case:Read`",
         "operationId": "CaseEventsService_ListEvents",
         "parameters": [
@@ -134,56 +135,60 @@
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/v1.ListEventsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "List events for a case",
+        "tags": [
+          "Case Events service"
+        ],
         "x-coralogixPermissions": [
           "case:Read"
         ]
@@ -191,90 +196,92 @@
     },
     "/cases/cases/v1/{case_id}/sync-external-thread-comments": {
       "post": {
-        "tags": [
-          "Case Events service"
-        ],
-        "summary": "Sync external Case events",
         "description": "Synchronize events from an external source (e.g. Slack) into the case.\n\nRequires the following permissions:\n- `case:Comment`",
         "operationId": "CaseEventsService_SyncExternalCaseEvents",
         "parameters": [
           {
+            "description": "ID of the case to sync external case events for. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
             "in": "path",
             "name": "case_id",
-            "description": "ID of the case to sync external case events for. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
             "required": true,
             "schema": {
               "description": "ID of the case to sync external case events for. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-              "type": "string",
-              "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
+              "examples": [
+                "3f166e9f-3c88-4af2-b52e-138f339dab3e"
+              ],
+              "maxLength": 64,
               "minLength": 1,
-              "maxLength": 64
-            },
-            "style": "simple"
+              "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SyncExternalCaseEventsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Case not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Case not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Sync external Case events",
+        "tags": [
+          "Case Events service"
+        ],
         "x-coralogixPermissions": [
           "case:Comment"
         ]
@@ -282,90 +289,92 @@
     },
     "/cases/events/v1/{event_id}": {
       "get": {
-        "tags": [
-          "Case Events service"
-        ],
-        "summary": "Get an event by ID",
         "description": "Retrieve a single event by its unique identifier.\n\nRequires the following permissions:\n- `case:Read`",
         "operationId": "CaseEventsService_GetEvent",
         "parameters": [
           {
+            "description": "ID of the event to fetch",
             "in": "path",
             "name": "event_id",
-            "description": "ID of the event to fetch",
             "required": true,
             "schema": {
               "description": "ID of the event to fetch",
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "examples": [
+                "f56645c5-9cd4-4b9f-961f-4f852d8835a0"
+              ],
+              "maxLength": 36,
               "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/v1.GetEventResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Event not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Event not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get an event by ID",
+        "tags": [
+          "Case Events service"
+        ],
         "x-coralogixPermissions": [
           "case:Read"
         ]
@@ -373,56 +382,57 @@
     },
     "/cases/events/v1/{event_id}/comments": {
       "put": {
-        "tags": [
-          "Case Events service"
-        ],
-        "summary": "Update a comment event",
         "description": "Modify the content of an existing comment event.\n\nRequires the following permissions:\n- `case:Comment`",
         "operationId": "CaseEventsService_UpdateComment",
         "parameters": [
           {
+            "description": "ID of the comment event to update",
             "in": "path",
             "name": "event_id",
-            "description": "ID of the comment event to update",
             "required": true,
             "schema": {
               "description": "ID of the comment event to update",
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "examples": [
+                "f56645c5-9cd4-4b9f-961f-4f852d8835a0"
+              ],
+              "maxLength": 36,
               "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Update comment event request",
                 "description": "Request for updating a comment on a case event.",
-                "type": "object",
                 "properties": {
                   "attachments": {
                     "description": "Attachments to the comment",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CommentAttachment"
                     },
+                    "maxItems": 100,
                     "minItems": 0,
-                    "maxItems": 100
+                    "type": "array"
                   },
                   "text": {
                     "description": "Comment text to update. Leading and trailing whitespace is trimmed before the length limits are applied.",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+                    "examples": [
+                      "This is updated text"
+                    ],
+                    "maxLength": 10000,
                     "minLength": 1,
-                    "maxLength": 10000
+                    "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+                    "type": "string"
                   }
                 },
                 "required": [
                   "text"
-                ]
+                ],
+                "title": "Update comment event request",
+                "type": "object"
               }
             }
           },
@@ -430,155 +440,161 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdateCommentResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Event not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Event not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Update a comment event",
+        "tags": [
+          "Case Events service"
+        ],
         "x-coralogixPermissions": [
           "case:Comment"
         ]
       },
       "delete": {
-        "tags": [
-          "Case Events service"
-        ],
-        "summary": "Delete a comment event",
         "description": "Delete an existing comment event from a case.\n\nRequires the following permissions:\n- `case:Comment`",
         "operationId": "CaseEventsService_DeleteComment",
         "parameters": [
           {
+            "description": "ID of the comment event to delete",
             "in": "path",
             "name": "event_id",
-            "description": "ID of the comment event to delete",
             "required": true,
             "schema": {
               "description": "ID of the comment event to delete",
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "examples": [
+                "f56645c5-9cd4-4b9f-961f-4f852d8835a0"
+              ],
+              "maxLength": 36,
               "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteCommentResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Event not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Event not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Delete a comment event",
+        "tags": [
+          "Case Events service"
+        ],
         "x-coralogixPermissions": [
           "case:Comment"
         ]
@@ -588,373 +604,389 @@
   "components": {
     "schemas": {
       "ApiKeyActor": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "API key actor",
-        "description": "Information about the API key that initiated the action.",
         "type": "object",
         "properties": {
           "id": {
-            "description": "API key ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "API key ID",
+            "examples": [
+              "2b1c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e"
+            ]
           },
           "name": {
-            "description": "API key name",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "API key name",
+            "examples": [
+              "Incident Management Integration Key"
+            ]
           }
+        },
+        "description": "Information about the API key that initiated the action.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "AssignedCaseEvent": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Assigned event",
-        "description": "Assigned case event.",
         "type": "object",
         "properties": {
           "assigneeUserId": {
-            "description": "New assignee user ID",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "New assignee user ID",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ]
           },
           "previousAssigneeUserId": {
-            "description": "Previous assignee user ID (if any)",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Previous assignee user ID (if any)"
           }
+        },
+        "description": "Assigned case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CaseEvent": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Case event",
-        "description": "Represents an immutable entry in a case's event timeline.",
-        "type": "object",
-        "properties": {
-          "actor": {
-            "description": "Actor that produced the event (system or user)",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EventActor"
-              }
-            ]
-          },
-          "createTime": {
-            "description": "Server-side insertion time",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          },
-          "eventData": {
-            "description": "Event payload (assignment, comment, status change, etc.)",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CaseEventData"
-              }
-            ]
-          },
-          "eventId": {
-            "description": "Unique identifier of the event",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-            "minLength": 36,
-            "maxLength": 36
-          },
-          "eventTime": {
-            "description": "Logical occurrence time of the event",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          },
-          "updateTime": {
-            "description": "If edited, last modification time of the event",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          }
-        },
         "required": [
           "eventId",
           "eventData",
           "actor",
           "createTime",
           "eventTime"
-        ]
-      },
-      "CaseEventData": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Case event data",
-        "description": "One-of wrapper for concrete case event types.",
+        ],
         "type": "object",
         "properties": {
-          "assigned": {
-            "description": "Case assigned to a user",
+          "actor": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AssignedCaseEvent"
+                "$ref": "#/components/schemas/EventActor"
               }
+            ],
+            "description": "Actor that produced the event (system or user)"
+          },
+          "createTime": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Server-side insertion time",
+            "format": "date-time",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
             ]
           },
-          "changeAssigneeFailed": {
-            "description": "Change assignee failed case event",
+          "eventData": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ChangeAssigneeFailedEvent"
+                "$ref": "#/components/schemas/CaseEventData"
               }
+            ],
+            "description": "Event payload (assignment, comment, status change, etc.)"
+          },
+          "eventId": {
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier of the event",
+            "examples": [
+              "ef51d3d9-a301-496b-aa7d-9a6e519ba0d5"
             ]
           },
-          "comment": {
-            "description": "User comment",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CommentCaseEvent"
-              }
+          "eventTime": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Logical occurrence time of the event",
+            "format": "date-time",
+            "examples": [
+              "2025-09-22T10:29:45.000Z"
             ]
           },
-          "created": {
-            "description": "Created case event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CreatedCaseEvent"
-              }
-            ]
-          },
-          "kpiBreached": {
-            "description": "KPI breach detected for the case",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/KPIBreachedCaseEvent"
-              }
-            ]
-          },
-          "notificationFailed": {
-            "description": "Notification failure",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/NotificationFailedCaseEvent"
-              }
-            ]
-          },
-          "notificationSent": {
-            "description": "Notification(s) sent",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/NotificationSentCaseEvent"
-              }
-            ]
-          },
-          "priorityDetailsChanged": {
-            "description": "Priority details changed case event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PriorityDetailsChangedCaseEvent"
-              }
-            ]
-          },
-          "resolutionReasonChangedEvent": {
-            "description": "Resolution reason changed case event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ResolutionReasonChangedCaseEvent"
-              }
-            ]
-          },
-          "statusChanged": {
-            "description": "Status changed",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusChangedCaseEvent"
-              }
-            ]
-          },
-          "titleChangedEvent": {
-            "description": "Title changed case event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TitleChangedCaseEvent"
-              }
-            ]
-          },
-          "unassigned": {
-            "description": "Case unassigned from a user",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/UnassignedCaseEvent"
-              }
-            ]
+          "updateTime": {
+            "minLength": 0,
+            "type": "string",
+            "description": "If edited, last modification time of the event",
+            "format": "date-time"
           }
         },
+        "description": "Represents an immutable entry in a case's event timeline.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "CaseEventData": {
+        "title": "Case event data",
+        "type": "object",
         "oneOf": [
           {
-            "type": "object",
             "required": [
               "assigned"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "unassigned"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "comment"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "statusChanged"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "notificationSent"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "notificationFailed"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "created"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "priorityDetailsChanged"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "titleChangedEvent"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "resolutionReasonChangedEvent"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "changeAssigneeFailed"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "kpiBreached"
-            ]
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
                     "assigned"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "unassigned"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "comment"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "statusChanged"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "notificationSent"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "notificationFailed"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "created"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "priorityDetailsChanged"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "titleChangedEvent"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "resolutionReasonChangedEvent"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "changeAssigneeFailed"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "kpiBreached"
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
+        ],
+        "properties": {
+          "assigned": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssignedCaseEvent"
+              }
+            ],
+            "description": "Case assigned to a user"
+          },
+          "changeAssigneeFailed": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChangeAssigneeFailedEvent"
+              }
+            ],
+            "description": "Change assignee failed case event"
+          },
+          "comment": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommentCaseEvent"
+              }
+            ],
+            "description": "User comment"
+          },
+          "created": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CreatedCaseEvent"
+              }
+            ],
+            "description": "Created case event"
+          },
+          "kpiBreached": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KPIBreachedCaseEvent"
+              }
+            ],
+            "description": "KPI breach detected for the case"
+          },
+          "notificationFailed": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotificationFailedCaseEvent"
+              }
+            ],
+            "description": "Notification failure"
+          },
+          "notificationSent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotificationSentCaseEvent"
+              }
+            ],
+            "description": "Notification(s) sent"
+          },
+          "priorityDetailsChanged": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriorityDetailsChangedCaseEvent"
+              }
+            ],
+            "description": "Priority details changed case event"
+          },
+          "resolutionReasonChangedEvent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResolutionReasonChangedCaseEvent"
+              }
+            ],
+            "description": "Resolution reason changed case event"
+          },
+          "statusChanged": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusChangedCaseEvent"
+              }
+            ],
+            "description": "Status changed"
+          },
+          "titleChangedEvent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TitleChangedCaseEvent"
+              }
+            ],
+            "description": "Title changed case event"
+          },
+          "unassigned": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UnassignedCaseEvent"
+              }
+            ],
+            "description": "Case unassigned from a user"
+          }
+        },
+        "description": "One-of wrapper for concrete case event types.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "CasePriority": {
-        "description": "Case priority.",
-        "type": "string",
         "enum": [
           "CASE_PRIORITY_UNSPECIFIED",
           "CASE_PRIORITY_P1",
@@ -962,11 +994,11 @@
           "CASE_PRIORITY_P3",
           "CASE_PRIORITY_P4",
           "CASE_PRIORITY_P5"
-        ]
+        ],
+        "type": "string",
+        "description": "Case priority."
       },
       "CaseStatus": {
-        "description": "Case status.",
-        "type": "string",
         "enum": [
           "CASE_STATUS_UNSPECIFIED",
           "CASE_STATUS_PENDING_ACTIVATION",
@@ -974,526 +1006,554 @@
           "CASE_STATUS_ACKNOWLEDGED",
           "CASE_STATUS_RESOLVED",
           "CASE_STATUS_CLOSED"
-        ]
+        ],
+        "type": "string",
+        "description": "Case status."
       },
       "ChangeAssigneeFailedEvent": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Change assignee failed event",
-        "description": "Event recorded when an attempt to reassign a case fails.",
         "type": "object",
         "properties": {
           "unknownAssigneeError": {
-            "description": "Error for unknown assignee",
             "allOf": [
               {
                 "$ref": "#/components/schemas/UnknownAssigneeError"
               }
-            ]
+            ],
+            "description": "Error for unknown assignee"
           }
+        },
+        "description": "Event recorded when an attempt to reassign a case fails.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CommentAttachment": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Comment attachment",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "log"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "customWidget"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "file"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "customWidget": {
-            "description": "Custom dashboard widget attachment with screenshot",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CustomDashboardWidgetAttachment"
               }
-            ]
+            ],
+            "description": "Custom dashboard widget attachment with screenshot"
           },
           "file": {
-            "description": "Generic file attachment",
             "allOf": [
               {
                 "$ref": "#/components/schemas/FileAttachment"
               }
-            ]
+            ],
+            "description": "Generic file attachment"
           },
           "log": {
-            "description": "Log entry attachment with content and metadata",
             "allOf": [
               {
                 "$ref": "#/components/schemas/LogAttachment"
               }
-            ]
+            ],
+            "description": "Log entry attachment with content and metadata"
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "log"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "customWidget"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "file"
-            ]
-          }
-        ]
-      },
-      "CommentCaseEvent": {
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "CommentCaseEvent": {
         "title": "Comment event",
-        "description": "Event recorded when a user posts a comment on a case.",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "slack"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "microsoftTeams"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "slack"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "microsoftTeams"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "attachments": {
-            "description": "Attachments to the comment",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommentAttachment"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "Attachments to the comment"
           },
           "microsoftTeams": {
-            "description": "Microsoft Teams-specific comment metadata",
             "allOf": [
               {
                 "$ref": "#/components/schemas/MicrosoftTeamsCommentMetadata"
               }
-            ]
+            ],
+            "description": "Microsoft Teams-specific comment metadata"
           },
           "slack": {
-            "description": "Slack-specific comment metadata",
             "allOf": [
               {
                 "$ref": "#/components/schemas/SlackCommentMetadata"
               }
-            ]
+            ],
+            "description": "Slack-specific comment metadata"
           },
           "unsafeText": {
-            "description": "Comment text. Leading and trailing whitespace is trimmed before the length limits are applied.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "maxLength": 10000,
             "minLength": 1,
-            "maxLength": 10000
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "type": "string",
+            "description": "Comment text. Leading and trailing whitespace is trimmed before the length limits are applied.",
+            "examples": [
+              "Looking into DB timeouts"
+            ]
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "slack"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "microsoftTeams"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "slack"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "microsoftTeams"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "CreateCommentResponse": {
+        "description": "Event recorded when a user posts a comment on a case.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "CreateCommentResponse": {
         "title": "Create comment event response",
-        "description": "Response returned after successfully creating a comment.",
+        "required": [
+          "event"
+        ],
         "type": "object",
         "properties": {
           "event": {
-            "description": "The created event",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseEvent"
               }
-            ]
+            ],
+            "description": "The created event"
           }
         },
-        "required": [
-          "event"
-        ]
-      },
-      "CreatedCaseEvent": {
+        "description": "Response returned after successfully creating a comment.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "CreatedCaseEvent": {
         "title": "Created event",
-        "description": "Created case event.",
         "type": "object",
         "properties": {
           "priority": {
-            "description": "Previous priority",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CasePriority"
               }
+            ],
+            "description": "Previous priority",
+            "examples": [
+              "CASE_PRIORITY_P3"
             ]
           }
+        },
+        "description": "Created case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CustomDashboardWidgetAttachment": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Custom dashboard widget attachment",
-        "description": "Attachment containing custom dashboard widget data and screenshot",
-        "type": "object",
-        "properties": {
-          "customDashboardId": {
-            "description": "Unique identifier of the custom dashboard. Leading and trailing whitespace is trimmed before the length limits are applied.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 4096
-          },
-          "queryLinkSuffix": {
-            "description": "URL suffix for accessing the widget (not including the Coralogix domain part)",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 4096
-          },
-          "widgetId": {
-            "description": "Unique identifier of the widget within the dashboard. Leading and trailing whitespace is trimmed before the length limits are applied.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 4096
-          },
-          "widgetScreenshot": {
-            "description": "Screenshot of the widget at the time of attachment",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FileAttachment"
-              }
-            ]
-          }
-        },
         "required": [
           "customDashboardId",
           "widgetId",
           "widgetScreenshot"
-        ]
-      },
-      "DeleteCommentResponse": {
+        ],
+        "type": "object",
+        "properties": {
+          "customDashboardId": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier of the custom dashboard. Leading and trailing whitespace is trimmed before the length limits are applied.",
+            "examples": [
+              "dashboard_3f166e9f-3c88-4af2-b52e-138f339dab3e"
+            ]
+          },
+          "queryLinkSuffix": {
+            "maxLength": 4096,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "URL suffix for accessing the widget (not including the Coralogix domain part)",
+            "examples": [
+              "/dashboards/custom/123/widgets/456?time=123456789"
+            ]
+          },
+          "widgetId": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier of the widget within the dashboard. Leading and trailing whitespace is trimmed before the length limits are applied.",
+            "examples": [
+              "widget_a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+            ]
+          },
+          "widgetScreenshot": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FileAttachment"
+              }
+            ],
+            "description": "Screenshot of the widget at the time of attachment"
+          }
+        },
+        "description": "Attachment containing custom dashboard widget data and screenshot",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "DeleteCommentResponse": {
         "title": "Delete comment response",
-        "description": "Empty response; success indicated by HTTP status",
         "type": "object",
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Empty response; success indicated by HTTP status",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "EventActor": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Event actor",
-        "description": "Actor that initiated the event.",
         "type": "object",
-        "properties": {
-          "apiKey": {
-            "description": "API Key generated event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ApiKeyActor"
-              }
-            ]
-          },
-          "microsoftTeams": {
-            "description": "Microsoft Teams generated event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/MicrosoftTeamsActor"
-              }
-            ]
-          },
-          "pagerDuty": {
-            "description": "PagerDuty generated event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PagerDutyActor"
-              }
-            ]
-          },
-          "prometheusAlertManager": {
-            "description": "Prometheus Alert Manager generated event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PrometheusAlertManagerActor"
-              }
-            ]
-          },
-          "serviceNow": {
-            "description": "Service Now generated event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServiceNowActor"
-              }
-            ]
-          },
-          "slack": {
-            "description": "Slack generated event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SlackActor"
-              }
-            ]
-          },
-          "system": {
-            "description": "System-generated event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SystemActor"
-              }
-            ]
-          },
-          "user": {
-            "description": "User-generated event",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/UserActor"
-              }
-            ]
-          }
-        },
         "oneOf": [
           {
-            "type": "object",
             "required": [
               "system"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "user"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "serviceNow"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "apiKey"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "slack"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "prometheusAlertManager"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "pagerDuty"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "microsoftTeams"
-            ]
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
                     "system"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "user"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "serviceNow"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "apiKey"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "slack"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "prometheusAlertManager"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "pagerDuty"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "microsoftTeams"
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
-      },
-      "FileAttachment": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "File attachment",
-        "description": "Attachment representing a file with metadata",
-        "type": "object",
+        ],
         "properties": {
-          "fileId": {
-            "description": "Unique identifier of the file (same id as used in blobset flow)",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-            "minLength": 36,
-            "maxLength": 36
+          "apiKey": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiKeyActor"
+              }
+            ],
+            "description": "API Key generated event"
           },
-          "fileName": {
-            "description": "Original name of the attached file. Leading and trailing whitespace is trimmed before the length limits are applied.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 4096
+          "microsoftTeams": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MicrosoftTeamsActor"
+              }
+            ],
+            "description": "Microsoft Teams generated event"
           },
-          "isDeleted": {
-            "description": "Flag indicating whether the file has been marked as deleted",
-            "type": "boolean"
+          "pagerDuty": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PagerDutyActor"
+              }
+            ],
+            "description": "PagerDuty generated event"
+          },
+          "prometheusAlertManager": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PrometheusAlertManagerActor"
+              }
+            ],
+            "description": "Prometheus Alert Manager generated event"
+          },
+          "serviceNow": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ServiceNowActor"
+              }
+            ],
+            "description": "Service Now generated event"
+          },
+          "slack": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SlackActor"
+              }
+            ],
+            "description": "Slack generated event"
+          },
+          "system": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SystemActor"
+              }
+            ],
+            "description": "System-generated event"
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserActor"
+              }
+            ],
+            "description": "User-generated event"
           }
         },
+        "description": "Actor that initiated the event.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "FileAttachment": {
+        "title": "File attachment",
         "required": [
           "fileName",
           "fileId",
           "isDeleted"
-        ]
-      },
-      "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        ],
         "type": "object",
         "properties": {
+          "fileId": {
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier of the file (same id as used in blobset flow)",
+            "examples": [
+              "3f2504e0-4f89-11d3-9a0c-0305e82c3301"
+            ]
+          },
+          "fileName": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "type": "string",
+            "description": "Original name of the attached file. Leading and trailing whitespace is trimmed before the length limits are applied.",
+            "examples": [
+              "screenshot_2025-09-22.png"
+            ]
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Flag indicating whether the file has been marked as deleted",
+            "examples": [
+              false
+            ]
+          }
+        },
+        "description": "Attachment representing a file with metadata",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "FilterPathAndValues": {
+        "title": "FilterPathAndValues",
+        "required": [
+          "path"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -1501,198 +1561,256 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "KPIBreachedCaseEvent": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "KPIBreachedCaseEvent": {
         "title": "KPI breached event",
-        "description": "Kpi breached case event.",
         "type": "object",
         "properties": {
           "kpiType": {
-            "description": "Type of KPI that was breached",
             "allOf": [
               {
                 "$ref": "#/components/schemas/KPIType"
               }
+            ],
+            "description": "Type of KPI that was breached",
+            "examples": [
+              "KPI_TYPE_TIME_TO_ACKNOWLEDGE"
             ]
           },
           "priority": {
-            "description": "Case priority at the time of the breach",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CasePriority"
               }
+            ],
+            "description": "Case priority at the time of the breach",
+            "examples": [
+              "CASE_PRIORITY_P2"
             ]
           },
           "threshold": {
-            "description": "Duration after which the KPI threshold was set to breach",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Duration after which the KPI threshold was set to breach",
+            "examples": [
+              "300s"
+            ]
           }
+        },
+        "description": "Kpi breached case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "KPIType": {
-        "description": "Kpi type.",
-        "type": "string",
         "enum": [
           "KPI_TYPE_UNSPECIFIED",
           "KPI_TYPE_TIME_TO_ACKNOWLEDGE",
           "KPI_TYPE_TIME_TO_RESOLVE",
           "KPI_TYPE_TIME_TO_UPDATE"
-        ]
+        ],
+        "type": "string",
+        "description": "Kpi type."
       },
       "LogAttachment": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Log attachment",
-        "description": "Attachment containing log data and related information",
-        "type": "object",
-        "properties": {
-          "logContent": {
-            "description": "Raw content of the log entry. Leading and trailing whitespace is trimmed before the length limits are applied.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 10000
-          },
-          "logId": {
-            "description": "Unique identifier of the log entry",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-            "minLength": 36,
-            "maxLength": 36
-          },
-          "logTimestamp": {
-            "description": "Timestamp when the log entry was created",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          },
-          "queryLinkSuffix": {
-            "description": "URL suffix for querying related logs (not including the Coralogix domain part)",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 4096
-          }
-        },
         "required": [
           "logId",
           "logTimestamp",
           "logContent"
-        ]
-      },
-      "MicrosoftTeamsActor": {
+        ],
+        "type": "object",
+        "properties": {
+          "logContent": {
+            "maxLength": 10000,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "type": "string",
+            "description": "Raw content of the log entry. Leading and trailing whitespace is trimmed before the length limits are applied.",
+            "examples": [
+              "ERROR: Database connection timeout after 30 seconds"
+            ]
+          },
+          "logId": {
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier of the log entry",
+            "examples": [
+              "9c858901-8a57-4791-81fe-4c455b099bc9"
+            ]
+          },
+          "logTimestamp": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Timestamp when the log entry was created",
+            "format": "date-time",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ]
+          },
+          "queryLinkSuffix": {
+            "maxLength": 4096,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "URL suffix for querying related logs (not including the Coralogix domain part)",
+            "examples": [
+              "/logs/query?time=123456789&query=error"
+            ]
+          }
+        },
+        "description": "Attachment containing log data and related information",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "MicrosoftTeamsActor": {
         "title": "Microsoft Teams actor",
-        "description": "Information about the Microsoft Teams user who initiated the action.",
         "type": "object",
         "properties": {
           "coralogixUserId": {
-            "description": "If the Microsoft Teams user is linked to a Coralogix user, this field contains the Coralogix user ID.",
-            "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "type": "string",
+            "description": "If the Microsoft Teams user is linked to a Coralogix user, this field contains the Coralogix user ID.",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ]
           },
           "displayName": {
-            "description": "Microsoft Teams display name",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Microsoft Teams display name",
+            "examples": [
+              "John Doe"
+            ]
           },
           "teamsUserId": {
-            "description": "Microsoft Teams user ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Microsoft Teams user ID",
+            "examples": [
+              "29:1abc123def456"
+            ]
           },
           "userEmail": {
-            "description": "Email of the Microsoft Teams user",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Email of the Microsoft Teams user",
+            "examples": [
+              "john.doe@example.com"
+            ]
           }
+        },
+        "description": "Information about the Microsoft Teams user who initiated the action.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MicrosoftTeamsCommentMetadata": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Microsoft Teams comment metadata",
-        "description": "Microsoft Teams source metadata attached to a comment that was synced from Microsoft Teams.",
         "type": "object",
         "properties": {
           "channelId": {
-            "description": "Microsoft Teams channel ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Microsoft Teams channel ID",
+            "examples": [
+              "19:0123456789abcdef0123456789abcdef@thread.tacv2"
+            ]
           },
           "messageId": {
-            "description": "Microsoft Teams message ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Microsoft Teams message ID",
+            "examples": [
+              "1616990892312"
+            ]
           },
           "messageUrl": {
-            "description": "Deep link URL to the Microsoft Teams message",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Deep link URL to the Microsoft Teams message",
+            "examples": [
+              "https://teams.microsoft.com/l/message/19:abcdef@thread.tacv2/1616990892312"
+            ]
           },
           "teamId": {
-            "description": "Microsoft Teams team ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Microsoft Teams team ID",
+            "examples": [
+              "19:abcdef1234567890abcdef1234567890@thread.tacv2"
+            ]
           },
           "tenantId": {
-            "description": "Microsoft Teams tenant ID",
-            "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "type": "string",
+            "description": "Microsoft Teams tenant ID",
+            "examples": [
+              "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            ]
           },
           "userEmail": {
-            "description": "Email of the Microsoft Teams user",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Email of the Microsoft Teams user",
+            "examples": [
+              "john.doe@example.com"
+            ]
           },
           "userId": {
-            "description": "Microsoft Teams user ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Microsoft Teams user ID",
+            "examples": [
+              "29:1IqRc0iDN0jXaDs0zc5j9dEcLpFXKh9sHg"
+            ]
           }
+        },
+        "description": "Microsoft Teams source metadata attached to a comment that was synced from Microsoft Teams.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MultipleValues": {
@@ -1702,546 +1820,620 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "NotificationFailedCaseEvent": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Notification failed event",
-        "description": "Notification failed case event.",
         "type": "object",
         "properties": {
           "error": {
-            "description": "Error message for the failed notification",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 1,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Error message for the failed notification",
+            "examples": [
+              "Slack API: channel_not_found"
+            ]
           }
+        },
+        "description": "Notification failed case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "NotificationMetadata": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Notification metadata",
         "type": "object",
         "properties": {
           "token": {
-            "description": "Notification token/reference",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 1,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Notification token/reference",
+            "examples": [
+              "4c8ba1ec-acee-4bc7-ad6c-d35476b58541"
+            ]
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "NotificationSentCaseEvent": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Notification sent event",
-        "description": "Notification sent case event.",
         "type": "object",
         "properties": {
           "notificationRequestId": {
-            "description": "The notification request ID, as sent to the notifications center.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "The notification request ID, as sent to the notifications center.",
+            "examples": [
+              "a1b2c3d4-5678-90ab-cdef-1234567890ab"
+            ]
           },
           "notifications": {
-            "description": "List of notifications produced by this action",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/NotificationMetadata"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "List of notifications produced by this action"
           }
+        },
+        "description": "Notification sent case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "PagerDutyActor": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "PagerDuty actor",
-        "description": "Information about the PagerDuty user who initiated the action.",
         "type": "object",
         "properties": {
           "coralogixUserId": {
-            "description": "If the PagerDuty user is linked to a Coralogix user, this field contains the Coralogix user ID.",
-            "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "type": "string",
+            "description": "If the PagerDuty user is linked to a Coralogix user, this field contains the Coralogix user ID.",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ]
           },
           "displayName": {
-            "description": "PagerDuty display name",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "PagerDuty display name",
+            "examples": [
+              "John Doe"
+            ]
           },
           "pagerDutyUserId": {
-            "description": "PagerDuty user ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "PagerDuty user ID",
+            "examples": [
+              "U012AB3CD"
+            ]
           },
           "userEmail": {
-            "description": "Email of the PagerDuty user",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Email of the PagerDuty user",
+            "examples": [
+              "john.doe@example.com"
+            ]
           }
+        },
+        "description": "Information about the PagerDuty user who initiated the action.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "PriorityDetails": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Priority details",
-        "description": "Priority details, including system computed and user override values.",
         "type": "object",
         "properties": {
           "override": {
-            "description": "Optional override set by user",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CasePriority"
               }
-            ]
+            ],
+            "description": "Optional override set by user"
           },
           "system": {
-            "description": "System computed priority",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CasePriority"
               }
-            ]
+            ],
+            "description": "System computed priority"
           }
+        },
+        "description": "Priority details, including system computed and user override values.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "PriorityDetailsChangedCaseEvent": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Priority details changed event",
-        "description": "Priority details changed case event.",
         "type": "object",
         "properties": {
           "from": {
-            "description": "Previous priority details",
             "allOf": [
               {
                 "$ref": "#/components/schemas/PriorityDetails"
               }
-            ]
+            ],
+            "description": "Previous priority details"
           },
           "to": {
-            "description": "New priority details",
             "allOf": [
               {
                 "$ref": "#/components/schemas/PriorityDetails"
               }
-            ]
+            ],
+            "description": "New priority details"
           }
+        },
+        "description": "Priority details changed case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "PrometheusAlertManagerActor": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Prometheus Alert Manager actor",
-        "description": "Information about the Prometheus Alert Manager instance that initiated the action.",
         "type": "object",
         "properties": {
           "receiverName": {
-            "description": "Prometheus Alert Manager receiver name",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Prometheus Alert Manager receiver name",
+            "examples": [
+              "alertmanager-main-0"
+            ]
           }
+        },
+        "description": "Information about the Prometheus Alert Manager instance that initiated the action.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ResolutionReasonChangedCaseEvent": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Resolution reason changed event",
-        "description": "Resolution reason changed case event.",
         "type": "object",
         "properties": {
           "from": {
-            "description": "Previous resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "maxLength": 500,
             "minLength": 1,
-            "maxLength": 500
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "type": "string",
+            "description": "Previous resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied."
           },
           "to": {
-            "description": "New resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "maxLength": 500,
             "minLength": 1,
-            "maxLength": 500
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "type": "string",
+            "description": "New resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied."
           }
+        },
+        "description": "Resolution reason changed case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ServiceNowActor": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Service Now actor",
-        "description": "Information about the user who initiated the action in Service Now platform",
         "type": "object",
         "properties": {
           "coralogixUserId": {
-            "description": "If the Service Now user is linked to a Coralogix user, this field contains the Coralogix user ID.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "If the Service Now user is linked to a Coralogix user, this field contains the Coralogix user ID.",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ]
           },
           "id": {
-            "description": "User ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "User ID",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ]
           },
           "userEmail": {
-            "description": "Mail of the user",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Mail of the user",
+            "examples": [
+              "example@coralogix.com"
+            ]
           },
           "username": {
-            "description": "Username",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Username"
           }
+        },
+        "description": "Information about the user who initiated the action in Service Now platform",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SlackActor": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Slack actor",
-        "description": "Information about the Slack user who initiated the action.",
         "type": "object",
         "properties": {
           "coralogixUserId": {
-            "description": "If the Slack user is linked to a Coralogix user, this field contains the Coralogix user ID.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "If the Slack user is linked to a Coralogix user, this field contains the Coralogix user ID.",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ]
           },
           "displayName": {
-            "description": "Slack display name",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Slack display name",
+            "examples": [
+              "John Doe"
+            ]
           },
           "slackUserId": {
-            "description": "Slack user ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Slack user ID",
+            "examples": [
+              "U012AB3CD"
+            ]
           },
           "userEmail": {
-            "description": "Email of the Slack user",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Email of the Slack user",
+            "examples": [
+              "john.doe@example.com"
+            ]
           }
+        },
+        "description": "Information about the Slack user who initiated the action.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SlackCommentMetadata": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Slack comment metadata",
-        "description": "Comment case event.",
         "type": "object",
         "properties": {
           "channelId": {
-            "description": "Slack channel ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Slack channel ID",
+            "examples": [
+              "C012AB3CD"
+            ]
           },
           "threadId": {
-            "description": "Slack thread ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Slack thread ID",
+            "examples": [
+              "1234567890.123456"
+            ]
           },
           "userEmail": {
-            "description": "Email of the Slack user",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Email of the Slack user",
+            "examples": [
+              "john.doe@example.com"
+            ]
           },
           "userId": {
-            "description": "Slack user ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Slack user ID",
+            "examples": [
+              "U012AB3CD"
+            ]
           },
           "workspaceId": {
-            "description": "Slack workspace ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Slack workspace ID",
+            "examples": [
+              "T012AB3CD"
+            ]
           }
+        },
+        "description": "Comment case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "StatusChangedCaseEvent": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Status changed event",
-        "description": "Status changed case event.",
         "type": "object",
         "properties": {
           "newStatus": {
-            "description": "New status",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseStatus"
               }
+            ],
+            "description": "New status",
+            "examples": [
+              "CASE_STATUS_ACKNOWLEDGED"
             ]
           },
           "oldStatus": {
-            "description": "Previous status",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseStatus"
               }
+            ],
+            "description": "Previous status",
+            "examples": [
+              "CASE_STATUS_ACTIVE"
             ]
           }
+        },
+        "description": "Status changed case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SyncExternalCaseEventsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Sync external Case events response",
-        "description": "Response returned after syncing external case events.",
+        "required": [
+          "syncRegistered"
+        ],
         "type": "object",
         "properties": {
           "syncRegistered": {
-            "description": "Indicates whether the sync was successfully registered",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Indicates whether the sync was successfully registered"
           }
         },
-        "required": [
-          "syncRegistered"
-        ]
+        "description": "Response returned after syncing external case events.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "SystemActor": {
+        "title": "System actor",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Empty message indicating system-initiated action.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "System actor",
-        "description": "Empty message indicating system-initiated action.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "TitleChangedCaseEvent": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Title changed event",
-        "description": "Title changed case event.",
         "type": "object",
         "properties": {
           "from": {
-            "description": "Previous case title. Leading and trailing whitespace is trimmed before the length limits are applied.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "maxLength": 512,
             "minLength": 1,
-            "maxLength": 512
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "type": "string",
+            "description": "Previous case title. Leading and trailing whitespace is trimmed before the length limits are applied."
           },
           "to": {
-            "description": "New case title. Leading and trailing whitespace is trimmed before the length limits are applied.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "maxLength": 512,
             "minLength": 1,
-            "maxLength": 512
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "type": "string",
+            "description": "New case title. Leading and trailing whitespace is trimmed before the length limits are applied."
           }
+        },
+        "description": "Title changed case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "UnassignedCaseEvent": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Unassigned event",
-        "description": "Unassigned case event.",
         "type": "object",
         "properties": {
           "previousAssigneeUserId": {
-            "description": "User ID that was unassigned",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "User ID that was unassigned"
           }
+        },
+        "description": "Unassigned case event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "UnknownAssigneeError": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Unknown assignee error",
-        "description": "Change assignee failed event.",
         "type": "object",
         "properties": {
           "unknownAssigneeEmail": {
-            "description": "Email of the assignee that could not be found",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Email of the assignee that could not be found",
+            "examples": [
+              "unknown"
+            ]
           }
+        },
+        "description": "Change assignee failed event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "UpdateCommentResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Update comment event response",
-        "description": "Response returned after successfully updating a comment.",
+        "required": [
+          "event"
+        ],
         "type": "object",
         "properties": {
           "event": {
-            "description": "Updated comment event",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseEvent"
               }
-            ]
+            ],
+            "description": "Updated comment event"
           }
         },
-        "required": [
-          "event"
-        ]
-      },
-      "UserActor": {
+        "description": "Response returned after successfully updating a comment.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "UserActor": {
         "title": "User actor",
-        "description": "Information about the user who initiated the action.",
         "type": "object",
         "properties": {
           "id": {
-            "description": "User ID",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "User ID",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ]
           }
+        },
+        "description": "Information about the user who initiated the action.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v1.GetEventResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get event response",
-        "description": "Response containing the details of a case event.",
+        "required": [
+          "event"
+        ],
         "type": "object",
         "properties": {
           "event": {
-            "description": "The requested event",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseEvent"
               }
-            ]
+            ],
+            "description": "The requested event"
           }
         },
-        "required": [
-          "event"
-        ]
-      },
-      "v1.ListEventsResponse": {
+        "description": "Response containing the details of a case event.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "v1.ListEventsResponse": {
         "title": "List events response",
-        "description": "Response containing a list of case events.",
+        "required": [
+          "events"
+        ],
         "type": "object",
         "properties": {
           "events": {
-            "description": "Events for the case",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CaseEvent"
             },
-            "minItems": 0
+            "description": "Events for the case"
           }
         },
-        "required": [
-          "events"
-        ]
+        "description": "Response containing a list of case events.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     },
     "parameters": {
       "case_id": {
-        "in": "path",
         "name": "case_id",
+        "in": "path",
         "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
         "required": true,
         "schema": {
-          "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-          "type": "string",
-          "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
+          "maxLength": 64,
           "minLength": 1,
-          "maxLength": 64
-        },
-        "style": "simple"
+          "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
+          "type": "string",
+          "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
+          "examples": [
+            "3f166e9f-3c88-4af2-b52e-138f339dab3e"
+          ]
+        }
       }
     }
   }

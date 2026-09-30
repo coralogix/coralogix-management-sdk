@@ -31,17 +31,17 @@ type V1Grouping struct {
 type _V1Grouping V1Grouping
 
 // NewV1Grouping instantiates a new V1Grouping object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewV1Grouping() *V1Grouping {
 	this := V1Grouping{}
 	return &this
 }
 
 // NewV1GroupingWithDefaults instantiates a new V1Grouping object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewV1GroupingWithDefaults() *V1Grouping {
 	this := V1Grouping{}
 	return &this

@@ -7,10 +7,6 @@
   "paths": {
     "/fleet-management/configuration-groups/v1": {
       "post": {
-        "tags": [
-          "Fleet Manager Configuration Groups"
-        ],
-        "summary": "Create configuration group",
         "description": "Creates a fleet-manager configuration group.",
         "operationId": "ConfigurationGroupService_CreateConfigurationGroup",
         "requestBody": {
@@ -18,29 +14,25 @@
             "application/json": {
               "schema": {
                 "description": "Request to create a fleet-manager configuration group.",
-                "type": "object",
                 "properties": {
                   "group": {
-                    "description": "Configuration group to create.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/ConfigurationGroupCreate"
                       }
-                    ]
+                    ],
+                    "description": "Configuration group to create."
                   }
-                }
+                },
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateConfigurationGroupResponse"
-                },
                 "example": {
                   "group": {
                     "description": "Collector configuration group for production.",
@@ -52,82 +44,82 @@
                       "production"
                     ]
                   }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConfigurationGroupResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "409": {
-            "description": "Configuration group already exists",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Configuration group already exists"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Create configuration group",
+        "tags": [
+          "Fleet Manager Configuration Groups"
+        ],
         "x-stability": "preview"
       }
     },
     "/fleet-management/configuration-groups/v1/{id}": {
       "get": {
-        "tags": [
-          "Fleet Manager Configuration Groups"
-        ],
-        "summary": "Get configuration group",
         "description": "Gets a fleet-manager configuration group by ID.",
         "operationId": "ConfigurationGroupService_GetConfigurationGroup",
         "parameters": [
           {
+            "description": "Return only the latest configuration family when true.",
             "in": "query",
             "name": "latest_family_only",
-            "description": "Return only the latest configuration family when true.",
+            "required": false,
             "schema": {
               "description": "Return only the latest configuration family when true.",
               "type": "boolean"
-            },
-            "style": "form"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetConfigurationGroupResponse"
-                },
                 "example": {
                   "group": {
                     "description": "Collector configuration group for production.",
@@ -139,58 +131,62 @@
                       "production"
                     ]
                   }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfigurationGroupResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "Configuration group not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Configuration group not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
-        "x-stability": "preview"
-      },
-      "put": {
+        "summary": "Get configuration group",
         "tags": [
           "Fleet Manager Configuration Groups"
         ],
-        "summary": "Update configuration group",
+        "x-stability": "preview"
+      },
+      "put": {
         "description": "Updates provided fleet-manager configuration group fields and optionally updates the latest family.",
         "operationId": "ConfigurationGroupService_ReplaceConfigurationGroup",
         "requestBody": {
@@ -198,28 +194,25 @@
             "application/json": {
               "schema": {
                 "description": "Request to update a fleet-manager configuration group.",
-                "type": "object",
                 "properties": {
                   "group": {
+                    "description": "Fields used to update a fleet-manager configuration group. Omitted optional fields keep their existing values.",
                     "externalDocs": {
                       "url": ""
                     },
-                    "description": "Fields used to update a fleet-manager configuration group. Omitted optional fields keep their existing values.",
-                    "type": "object",
                     "properties": {
                       "description": {
                         "description": "Human-readable description.",
-                        "type": "string",
-                        "pattern": "^[\\s\\S]*$",
+                        "maxLength": 4096,
                         "minLength": 0,
-                        "maxLength": 4096
+                        "pattern": "^[\\s\\S]*$",
+                        "type": "string"
                       },
                       "family": {
+                        "description": "Fields used to update the latest configuration family. Omitted optional fields keep their existing values.",
                         "externalDocs": {
                           "url": ""
                         },
-                        "description": "Fields used to update the latest configuration family. Omitted optional fields keep their existing values.",
-                        "type": "object",
                         "properties": {
                           "active": {
                             "description": "Whether this family is active.",
@@ -227,81 +220,80 @@
                           },
                           "collectorVersion": {
                             "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
-                            "type": "string",
-                            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+                            "maxLength": 256,
                             "minLength": 5,
-                            "maxLength": 256
+                            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+                            "type": "string"
                           },
                           "description": {
                             "description": "Human-readable description.",
-                            "type": "string",
-                            "pattern": "^[\\s\\S]*$",
+                            "maxLength": 4096,
                             "minLength": 0,
-                            "maxLength": 4096
+                            "pattern": "^[\\s\\S]*$",
+                            "type": "string"
                           },
                           "metadata": {
-                            "description": "Metadata stored with this configuration family.",
-                            "type": "object",
                             "additionalProperties": {
-                              "type": "string",
-                              "pattern": "^[\\s\\S]*$",
+                              "maxLength": 4096,
                               "minLength": 0,
-                              "maxLength": 4096
-                            }
+                              "pattern": "^[\\s\\S]*$",
+                              "type": "string"
+                            },
+                            "description": "Metadata stored with this configuration family.",
+                            "type": "object"
                           },
                           "remoteConfigurations": {
                             "description": "Remote configurations to use when creating or replacing family content.",
-                            "type": "array",
                             "items": {
                               "$ref": "#/components/schemas/RemoteConfigurationReplace"
                             },
+                            "maxItems": 128,
                             "minItems": 0,
-                            "maxItems": 128
+                            "type": "array"
                           }
-                        }
+                        },
+                        "type": "object"
                       },
                       "name": {
                         "description": "Display name.",
-                        "type": "string",
-                        "pattern": "^[\\s\\S]*$",
+                        "maxLength": 256,
                         "minLength": 0,
-                        "maxLength": 256
+                        "pattern": "^[\\s\\S]*$",
+                        "type": "string"
                       },
                       "priorityOrder": {
                         "description": "Selection precedence. Higher values win on ties and 0 is the default.",
-                        "type": "integer",
                         "format": "int32",
+                        "maximum": 2147483647,
                         "minimum": -2147483648,
-                        "maximum": 2147483647
+                        "type": "integer"
                       },
                       "tags": {
                         "description": "Tags attached to the configuration group.",
-                        "type": "array",
                         "items": {
                           "description": "Tags attached to the configuration group.",
-                          "type": "string",
-                          "pattern": "^[\\s\\S]*$",
+                          "maxLength": 256,
                           "minLength": 0,
-                          "maxLength": 256
+                          "pattern": "^[\\s\\S]*$",
+                          "type": "string"
                         },
+                        "maxItems": 64,
                         "minItems": 0,
-                        "maxItems": 64
+                        "type": "array"
                       }
-                    }
+                    },
+                    "type": "object"
                   }
-                }
+                },
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ReplaceConfigurationGroupResponse"
-                },
                 "example": {
                   "group": {
                     "description": "Updated collector configuration group.",
@@ -313,51 +305,59 @@
                       "production"
                     ]
                   }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceConfigurationGroupResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "Configuration group not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Configuration group not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Update configuration group",
+        "tags": [
+          "Fleet Manager Configuration Groups"
+        ],
         "x-stability": "preview"
       },
       "parameters": [
@@ -368,10 +368,6 @@
     },
     "/fleet-management/configuration-groups/v1/{id}/archive": {
       "post": {
-        "tags": [
-          "Fleet Manager Configuration Groups"
-        ],
-        "summary": "Archive configuration group",
         "description": "Archives a fleet-manager configuration group.",
         "operationId": "ConfigurationGroupService_ArchiveConfigurationGroup",
         "parameters": [
@@ -381,57 +377,61 @@
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
+                "example": {},
                 "schema": {
                   "$ref": "#/components/schemas/ArchiveConfigurationGroupResponse"
-                },
-                "example": {}
+                }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "Configuration group not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Configuration group not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Archive configuration group",
+        "tags": [
+          "Fleet Manager Configuration Groups"
+        ],
         "x-stability": "preview"
       }
     }
@@ -439,55 +439,53 @@
   "components": {
     "schemas": {
       "AgentSelectorRequest": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Agent selector used in requests.",
         "type": "object",
         "properties": {
           "attributes": {
-            "description": "Flat agent attributes to match. If collectorVersion is set, service.version must match it or is added automatically.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 4096,
               "minLength": 0,
-              "maxLength": 4096
-            }
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "Flat agent attributes to match. If collectorVersion is set, service.version must match it or is added automatically."
           }
+        },
+        "description": "Agent selector used in requests.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "AgentSelectorResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Agent selector returned in responses.",
         "type": "object",
         "properties": {
           "attributes": {
-            "description": "Flat agent attributes matched by the selector.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 4096,
               "minLength": 0,
-              "maxLength": 4096
-            }
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "Flat agent attributes matched by the selector."
           }
+        },
+        "description": "Agent selector returned in responses.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ArchiveConfigurationGroupResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Empty response returned after archiving a fleet-manager configuration group.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Empty response returned after archiving a fleet-manager configuration group.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "ChartName": {
         "title": "Fleet-manager chart name",
-        "description": "Helm chart name for fleet-manager configuration families.",
-        "type": "string",
         "enum": [
           "CHART_NAME_UNSPECIFIED",
           "CHART_NAME_OTEL_INTEGRATION",
@@ -496,415 +494,419 @@
           "CHART_NAME_OTEL_WINDOWS_STANDALONE",
           "CHART_NAME_OTEL_MACOS_STANDALONE",
           "CHART_NAME_OTEL_ECS_EC2"
-        ]
+        ],
+        "type": "string",
+        "description": "Helm chart name for fleet-manager configuration families."
       },
       "ConfigurationFamily": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Configuration family returned by Fleet Manager.",
         "type": "object",
         "properties": {
           "active": {
-            "description": "Whether this family is active.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether this family is active."
           },
           "basedOnConfigurationFamilyId": {
-            "description": "Configuration family UUID v7 this family is based on.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Configuration family UUID v7 this family is based on."
           },
           "chartName": {
-            "description": "Helm chart name for Helm-backed families.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ChartName"
               }
-            ]
+            ],
+            "description": "Helm chart name for Helm-backed families."
           },
           "chartVersion": {
-            "description": "Helm chart or template version used by this family.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 0,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Helm chart or template version used by this family."
           },
           "collectorVersion": {
-            "description": "Collector semantic version this configuration family targets, without a leading v prefix.",
-            "type": "string",
-            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "maxLength": 256,
             "minLength": 5,
-            "maxLength": 256
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "description": "Collector semantic version this configuration family targets, without a leading v prefix."
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "id": {
-            "description": "Configuration family UUID v7.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Configuration family UUID v7."
           },
           "integrationVersion": {
-            "description": "Integration version from the onboarding flow.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 0,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Integration version from the onboarding flow."
           },
           "lastActivatedAt": {
-            "description": "Time when this family was last activated.",
-            "type": "string",
-            "format": "date-time",
+            "maxLength": 64,
             "minLength": 0,
-            "maxLength": 64
+            "type": "string",
+            "description": "Time when this family was last activated.",
+            "format": "date-time"
           },
           "metadata": {
-            "description": "Metadata stored with this configuration family.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 4096,
               "minLength": 0,
-              "maxLength": 4096
-            }
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "Metadata stored with this configuration family."
           },
           "remoteConfigurations": {
-            "description": "Remote configurations in this family.",
+            "maxItems": 128,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RemoteConfiguration"
             },
-            "minItems": 0,
-            "maxItems": 128
+            "description": "Remote configurations in this family."
           },
           "sources": {
-            "description": "Immutable inputs that produced this configuration family version.",
+            "maxItems": 128,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConfigurationFamilySource"
             },
-            "minItems": 0,
-            "maxItems": 128
+            "description": "Immutable inputs that produced this configuration family version."
           },
           "version": {
-            "description": "Monotonic version number of this configuration family within its group.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Monotonic version number of this configuration family within its group."
           }
+        },
+        "description": "Configuration family returned by Fleet Manager.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ConfigurationFamilyCreate": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Initial configuration family to create.",
         "type": "object",
         "properties": {
           "active": {
-            "description": "Whether this family is active.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether this family is active."
           },
           "basedOnConfigurationFamilyId": {
-            "description": "Configuration family UUID v7 this family is based on.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Configuration family UUID v7 this family is based on."
           },
           "collectorVersion": {
-            "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
-            "type": "string",
-            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "maxLength": 256,
             "minLength": 5,
-            "maxLength": 256
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically."
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "metadata": {
-            "description": "Metadata stored with this configuration family.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 4096,
               "minLength": 0,
-              "maxLength": 4096
-            }
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "Metadata stored with this configuration family."
           },
           "remoteConfigurations": {
-            "description": "Remote configurations to create in this family.",
+            "maxItems": 128,
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RemoteConfigurationCreate"
             },
-            "minItems": 1,
-            "maxItems": 128
+            "description": "Remote configurations to create in this family."
           }
+        },
+        "description": "Initial configuration family to create.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ConfigurationFamilySource": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "An immutable input that produced a configuration family version.",
+        "required": [
+          "configurationOverlay"
+        ],
         "type": "object",
         "properties": {
           "configurationOverlay": {
-            "description": "Configuration overlay that produced this family version.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ConfigurationOverlaySource"
               }
-            ]
+            ],
+            "description": "Configuration overlay that produced this family version."
           }
         },
-        "required": [
-          "configurationOverlay"
-        ]
-      },
-      "ConfigurationGroup": {
+        "description": "An immutable input that produced a configuration family version.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Fleet-manager configuration group.",
+        }
+      },
+      "ConfigurationGroup": {
         "type": "object",
         "properties": {
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "families": {
-            "description": "Configuration families in this group.",
+            "maxItems": 128,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConfigurationFamily"
             },
-            "minItems": 0,
-            "maxItems": 128
+            "description": "Configuration families in this group."
           },
           "id": {
-            "description": "Configuration group UUID v7.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Configuration group UUID v7."
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 0,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           },
           "priorityOrder": {
-            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 2147483647,
             "minimum": -2147483648,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+            "format": "int32"
           },
           "tags": {
-            "description": "Tags attached to the configuration group.",
+            "maxItems": 64,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "Tags attached to the configuration group.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 256,
               "minLength": 0,
-              "maxLength": 256
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Tags attached to the configuration group."
             },
-            "minItems": 0,
-            "maxItems": 64
+            "description": "Tags attached to the configuration group."
           }
+        },
+        "description": "Fleet-manager configuration group.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ConfigurationGroupCreate": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Payload used to create a fleet-manager configuration group.",
         "type": "object",
         "properties": {
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "family": {
-            "description": "Initial configuration family to create with this group.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ConfigurationFamilyCreate"
               }
-            ]
+            ],
+            "description": "Initial configuration family to create with this group."
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 0,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           },
           "priorityOrder": {
-            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 2147483647,
             "minimum": -2147483648,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+            "format": "int32"
           },
           "tags": {
-            "description": "Tags attached to the configuration group.",
+            "maxItems": 64,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "Tags attached to the configuration group.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 256,
               "minLength": 0,
-              "maxLength": 256
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Tags attached to the configuration group."
             },
-            "minItems": 0,
-            "maxItems": 64
+            "description": "Tags attached to the configuration group."
           }
+        },
+        "description": "Payload used to create a fleet-manager configuration group.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ConfigurationOverlaySource": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Configuration overlay provenance.",
-        "type": "object",
-        "properties": {
-          "overlayId": {
-            "description": "Configuration overlay UUID v7.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
-            "minLength": 36,
-            "maxLength": 36
-          },
-          "overlayName": {
-            "description": "Configuration overlay name at read time.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 256
-          },
-          "overlayVersionId": {
-            "description": "Configuration overlay version UUID v7.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
-            "minLength": 36,
-            "maxLength": 36
-          }
-        },
         "required": [
           "overlayId",
           "overlayVersionId"
-        ]
-      },
-      "CreateConfigurationGroupResponse": {
+        ],
+        "type": "object",
+        "properties": {
+          "overlayId": {
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Configuration overlay UUID v7."
+          },
+          "overlayName": {
+            "maxLength": 256,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Configuration overlay name at read time."
+          },
+          "overlayVersionId": {
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Configuration overlay version UUID v7."
+          }
+        },
+        "description": "Configuration overlay provenance.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response containing the created fleet-manager configuration group.",
+        }
+      },
+      "CreateConfigurationGroupResponse": {
         "type": "object",
         "properties": {
           "group": {
-            "description": "Created configuration group.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ConfigurationGroup"
               }
-            ]
+            ],
+            "description": "Created configuration group."
           }
+        },
+        "description": "Response containing the created fleet-manager configuration group.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -912,35 +914,39 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "GetConfigurationGroupResponse": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response containing the requested fleet-manager configuration group.",
+        }
+      },
+      "GetConfigurationGroupResponse": {
         "type": "object",
         "properties": {
           "group": {
-            "description": "Requested configuration group.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ConfigurationGroup"
               }
-            ]
+            ],
+            "description": "Requested configuration group."
           }
+        },
+        "description": "Response containing the requested fleet-manager configuration group.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MultipleValues": {
@@ -950,183 +956,182 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "RemoteConfiguration": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Remote configuration returned by Fleet Manager.",
         "type": "object",
         "properties": {
           "agentSelector": {
-            "description": "Flat agent attributes that match agents for this configuration.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentSelectorResponse"
               }
-            ]
+            ],
+            "description": "Flat agent attributes that match agents for this configuration."
           },
           "createdAt": {
-            "description": "Time when this remote configuration was created.",
-            "type": "string",
-            "format": "date-time",
+            "maxLength": 64,
             "minLength": 0,
-            "maxLength": 64
+            "type": "string",
+            "description": "Time when this remote configuration was created.",
+            "format": "date-time"
           },
           "hash": {
-            "description": "SHA-256 hash of the normalized raw configuration content.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "SHA-256 hash of the normalized raw configuration content."
           },
           "id": {
-            "description": "Remote configuration UUID v7.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Remote configuration UUID v7."
           },
           "name": {
-            "description": "Remote configuration name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 0,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Remote configuration name."
           },
           "rawConfiguration": {
-            "description": "Normalized OpenTelemetry Collector configuration YAML.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 1,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Normalized OpenTelemetry Collector configuration YAML."
           },
           "updatedAt": {
-            "description": "Time when this remote configuration was last updated.",
-            "type": "string",
-            "format": "date-time",
+            "maxLength": 64,
             "minLength": 0,
-            "maxLength": 64
+            "type": "string",
+            "description": "Time when this remote configuration was last updated.",
+            "format": "date-time"
           }
+        },
+        "description": "Remote configuration returned by Fleet Manager.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "RemoteConfigurationCreate": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Remote configuration to create.",
         "type": "object",
         "properties": {
           "agentSelector": {
-            "description": "Flat agent attributes that match agents for this configuration.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentSelectorRequest"
               }
-            ]
+            ],
+            "description": "Flat agent attributes that match agents for this configuration."
           },
           "name": {
-            "description": "Remote configuration name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 0,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Remote configuration name."
           },
           "rawConfiguration": {
-            "description": "OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 1,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured."
           }
+        },
+        "description": "Remote configuration to create.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "RemoteConfigurationReplace": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Remote configuration content used in a family update.",
         "type": "object",
         "properties": {
           "agentSelector": {
-            "description": "Flat agent attributes that match agents for this configuration.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentSelectorRequest"
               }
-            ]
+            ],
+            "description": "Flat agent attributes that match agents for this configuration."
           },
           "name": {
-            "description": "Remote configuration name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 0,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Remote configuration name."
           },
           "rawConfiguration": {
-            "description": "OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 1,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured."
           }
+        },
+        "description": "Remote configuration content used in a family update.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ReplaceConfigurationGroupResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing the updated fleet-manager configuration group.",
         "type": "object",
         "properties": {
           "group": {
-            "description": "Updated configuration group.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ConfigurationGroup"
               }
-            ]
+            ],
+            "description": "Updated configuration group."
           }
+        },
+        "description": "Response containing the updated fleet-manager configuration group.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     },
     "parameters": {
       "id": {
-        "in": "path",
         "name": "id",
+        "in": "path",
         "description": "Configuration group UUID v7.",
         "required": true,
         "schema": {
-          "description": "Configuration group UUID v7.",
-          "type": "string",
-          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+          "maxLength": 36,
           "minLength": 36,
-          "maxLength": 36
-        },
-        "style": "simple"
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+          "type": "string",
+          "description": "Configuration group UUID v7."
+        }
       }
     }
   }

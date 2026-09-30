@@ -34,17 +34,17 @@ type V1Revision struct {
 type _V1Revision V1Revision
 
 // NewV1Revision instantiates a new V1Revision object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewV1Revision() *V1Revision {
 	this := V1Revision{}
 	return &this
 }
 
 // NewV1RevisionWithDefaults instantiates a new V1Revision object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewV1RevisionWithDefaults() *V1Revision {
 	this := V1Revision{}
 	return &this

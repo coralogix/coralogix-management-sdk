@@ -34,9 +34,9 @@ type ListIncidentAggregationsResponse struct {
 type _ListIncidentAggregationsResponse ListIncidentAggregationsResponse
 
 // NewListIncidentAggregationsResponse instantiates a new ListIncidentAggregationsResponse object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewListIncidentAggregationsResponse(incidentAggs []IncidentAggregation, pagination IncidentsV1PaginationResponse) *ListIncidentAggregationsResponse {
 	this := ListIncidentAggregationsResponse{}
 	this.IncidentAggs = incidentAggs
@@ -45,8 +45,8 @@ func NewListIncidentAggregationsResponse(incidentAggs []IncidentAggregation, pag
 }
 
 // NewListIncidentAggregationsResponseWithDefaults instantiates a new ListIncidentAggregationsResponse object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewListIncidentAggregationsResponseWithDefaults() *ListIncidentAggregationsResponse {
 	this := ListIncidentAggregationsResponse{}
 	return &this

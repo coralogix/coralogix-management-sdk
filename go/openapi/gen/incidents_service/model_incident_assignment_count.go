@@ -33,9 +33,9 @@ type IncidentAssignmentCount struct {
 type _IncidentAssignmentCount IncidentAssignmentCount
 
 // NewIncidentAssignmentCount instantiates a new IncidentAssignmentCount object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewIncidentAssignmentCount(assignedTo IncidentsV1UserDetails, count int64) *IncidentAssignmentCount {
 	this := IncidentAssignmentCount{}
 	this.AssignedTo = assignedTo
@@ -44,8 +44,8 @@ func NewIncidentAssignmentCount(assignedTo IncidentsV1UserDetails, count int64) 
 }
 
 // NewIncidentAssignmentCountWithDefaults instantiates a new IncidentAssignmentCount object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewIncidentAssignmentCountWithDefaults() *IncidentAssignmentCount {
 	this := IncidentAssignmentCount{}
 	return &this

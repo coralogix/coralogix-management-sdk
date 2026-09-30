@@ -31,9 +31,9 @@ type GetCustomEnrichmentResponse struct {
 type _GetCustomEnrichmentResponse GetCustomEnrichmentResponse
 
 // NewGetCustomEnrichmentResponse instantiates a new GetCustomEnrichmentResponse object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewGetCustomEnrichmentResponse(customEnrichment CustomEnrichment) *GetCustomEnrichmentResponse {
 	this := GetCustomEnrichmentResponse{}
 	this.CustomEnrichment = customEnrichment
@@ -41,8 +41,8 @@ func NewGetCustomEnrichmentResponse(customEnrichment CustomEnrichment) *GetCusto
 }
 
 // NewGetCustomEnrichmentResponseWithDefaults instantiates a new GetCustomEnrichmentResponse object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewGetCustomEnrichmentResponseWithDefaults() *GetCustomEnrichmentResponse {
 	this := GetCustomEnrichmentResponse{}
 	return &this
