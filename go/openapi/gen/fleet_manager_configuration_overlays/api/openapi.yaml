@@ -79,7 +79,9 @@
                           "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
                           "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
                           "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
-                          "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                          "raw": {
+                            "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                          },
                           "targets": [
                             {
                               "createdAt": "2026-09-28T10:05:00Z",
@@ -100,7 +102,9 @@
                           "createdAt": "2026-09-28T10:00:00Z",
                           "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
                           "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                          "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                          "raw": {
+                            "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                          },
                           "updatedAt": "2026-09-28T10:00:00Z",
                           "version": "1"
                         }
@@ -210,7 +214,9 @@
                         "createdAt": "2026-09-28T10:00:00Z",
                         "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
                         "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                        "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                        "raw": {
+                          "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                        },
                         "updatedAt": "2026-09-28T10:00:00Z",
                         "version": "1"
                       }
@@ -391,7 +397,9 @@
                         "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
                         "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
                         "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
-                        "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                        "raw": {
+                          "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                        },
                         "targets": [
                           {
                             "createdAt": "2026-09-28T10:05:00Z",
@@ -412,7 +420,9 @@
                         "createdAt": "2026-09-28T10:00:00Z",
                         "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
                         "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                        "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                        "raw": {
+                          "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                        },
                         "updatedAt": "2026-09-28T10:00:00Z",
                         "version": "1"
                       }
@@ -517,12 +527,24 @@
                         "minimum": -2147483648,
                         "maximum": 2147483647
                       },
-                      "rawOverlayConfiguration": {
-                        "description": "Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension. Rejected for preset overlays.",
-                        "type": "string",
-                        "pattern": "^[\\s\\S]*$",
-                        "minLength": 1,
-                        "maxLength": 1048576
+                      "raw": {
+                        "externalDocs": {
+                          "url": ""
+                        },
+                        "description": "Raw OpenTelemetry Collector YAML overlay payload.",
+                        "type": "object",
+                        "properties": {
+                          "configuration": {
+                            "description": "OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored and returned in normalized form (sorted keys, no comments). Must not configure the OpAMP extension.",
+                            "type": "string",
+                            "pattern": "^[\\s\\S]*$",
+                            "minLength": 1,
+                            "maxLength": 1048576
+                          }
+                        },
+                        "required": [
+                          "configuration"
+                        ]
                       },
                       "tags": {
                         "externalDocs": {
@@ -591,7 +613,9 @@
                         "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
                         "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
                         "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
-                        "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                        "raw": {
+                          "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                        },
                         "targets": [
                           {
                             "createdAt": "2026-09-28T10:05:00Z",
@@ -612,7 +636,9 @@
                         "createdAt": "2026-09-28T10:00:00Z",
                         "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
                         "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                        "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                        "raw": {
+                          "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                        },
                         "updatedAt": "2026-09-28T10:00:00Z",
                         "version": "1"
                       }
@@ -1034,12 +1060,13 @@
             "minimum": -2147483648,
             "maximum": 2147483647
           },
-          "rawOverlayConfiguration": {
-            "description": "OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored in normalized form. Must not configure the OpAMP extension.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 1048576
+          "raw": {
+            "description": "Raw OpenTelemetry Collector YAML payload.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RawOverlayPayload"
+              }
+            ]
           },
           "tags": {
             "description": "Tags attached to the configuration overlay.",
@@ -1056,7 +1083,7 @@
           }
         },
         "required": [
-          "rawOverlayConfiguration"
+          "raw"
         ]
       },
       "ConfigurationOverlayTarget": {
@@ -1199,14 +1226,6 @@
             "description": "Whether this overlay version is archived.",
             "type": "boolean"
           },
-          "chartName": {
-            "description": "Preset chart name for ObservabilityFeatures overlay versions.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ChartName"
-              }
-            ]
-          },
           "createdAt": {
             "description": "Time when this overlay version was created.",
             "type": "string",
@@ -1228,13 +1247,6 @@
             "minLength": 36,
             "maxLength": 36
           },
-          "observabilityFeaturesOverlay": {
-            "description": "Normalized ObservabilityFeatures JSON overlay payload.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 1048576
-          },
           "overlayHash": {
             "description": "Lowercase hexadecimal SHA-256 hash of the normalized payload: the raw YAML, or the preset JSON.",
             "type": "string",
@@ -1249,12 +1261,21 @@
             "minLength": 36,
             "maxLength": 36
           },
-          "rawOverlayConfiguration": {
-            "description": "OpenTelemetry Collector YAML fragment for this version, re-emitted in normalized form (sorted keys, no comments). Set for raw overlays only.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 1048576
+          "preset": {
+            "description": "Preset payload of this version, for ObservabilityFeatures overlays created outside this API.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PresetOverlayPayload"
+              }
+            ]
+          },
+          "raw": {
+            "description": "Raw YAML payload of this version.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RawOverlayPayload"
+              }
+            ]
           },
           "targets": {
             "description": "Target snapshot for this overlay version.",
@@ -1288,13 +1309,13 @@
           {
             "type": "object",
             "required": [
-              "rawOverlayConfiguration"
+              "raw"
             ]
           },
           {
             "type": "object",
             "required": [
-              "observabilityFeaturesOverlay"
+              "preset"
             ]
           }
         ]
@@ -1365,6 +1386,52 @@
         },
         "required": [
           "overlays"
+        ]
+      },
+      "PresetOverlayPayload": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "ObservabilityFeatures preset overlay payload.",
+        "type": "object",
+        "properties": {
+          "chartName": {
+            "description": "Preset chart name.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChartName"
+              }
+            ]
+          },
+          "observabilityFeatures": {
+            "description": "Normalized ObservabilityFeatures JSON.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          }
+        },
+        "required": [
+          "observabilityFeatures"
+        ]
+      },
+      "RawOverlayPayload": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Raw OpenTelemetry Collector YAML overlay payload.",
+        "type": "object",
+        "properties": {
+          "configuration": {
+            "description": "OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored and returned in normalized form (sorted keys, no comments). Must not configure the OpAMP extension.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          }
+        },
+        "required": [
+          "configuration"
         ]
       },
       "UpdateConfigurationOverlayResponse": {

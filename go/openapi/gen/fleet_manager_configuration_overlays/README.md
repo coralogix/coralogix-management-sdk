@@ -96,6 +96,7 @@ Class | Method | HTTP request | Description
  - [ConfigurationOverlayServiceCreateConfigurationOverlayRequest](docs/ConfigurationOverlayServiceCreateConfigurationOverlayRequest.md)
  - [ConfigurationOverlayServiceUpdateConfigurationOverlayRequest](docs/ConfigurationOverlayServiceUpdateConfigurationOverlayRequest.md)
  - [ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay](docs/ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay.md)
+ - [ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw](docs/ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw.md)
  - [ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayTags](docs/ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayTags.md)
  - [ConfigurationOverlayTarget](docs/ConfigurationOverlayTarget.md)
  - [ConfigurationOverlayTargetCreate](docs/ConfigurationOverlayTargetCreate.md)
@@ -110,6 +111,8 @@ Class | Method | HTTP request | Description
  - [GetConfigurationOverlayResponse](docs/GetConfigurationOverlayResponse.md)
  - [ListConfigurationOverlaysResponse](docs/ListConfigurationOverlaysResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
+ - [PresetOverlayPayload](docs/PresetOverlayPayload.md)
+ - [RawOverlayPayload](docs/RawOverlayPayload.md)
  - [UpdateConfigurationOverlayResponse](docs/UpdateConfigurationOverlayResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
 

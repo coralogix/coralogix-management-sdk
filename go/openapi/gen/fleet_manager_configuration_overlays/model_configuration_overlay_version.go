@@ -28,22 +28,20 @@ type ConfigurationOverlayVersion struct {
 	Active *bool `json:"active,omitempty"`
 	// Whether this overlay version is archived.
 	Archived *bool `json:"archived,omitempty"`
-	// Preset chart name for ObservabilityFeatures overlay versions.
-	ChartName *ChartName `json:"chartName,omitempty"`
 	// Time when this overlay version was created.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// User that created this overlay version.
 	CreatedBy *string `json:"createdBy,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Configuration overlay version UUID v7.
 	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Normalized ObservabilityFeatures JSON overlay payload.
-	ObservabilityFeaturesOverlay *string `json:"observabilityFeaturesOverlay,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Lowercase hexadecimal SHA-256 hash of the normalized payload: the raw YAML, or the preset JSON.
 	OverlayHash *string `json:"overlayHash,omitempty" validate:"regexp=^[0-9a-f]{64}$"`
 	// Parent overlay version UUID v7.
 	ParentVersionId *string `json:"parentVersionId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// OpenTelemetry Collector YAML fragment for this version, re-emitted in normalized form (sorted keys, no comments). Set for raw overlays only.
-	RawOverlayConfiguration *string `json:"rawOverlayConfiguration,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Preset payload of this version, for ObservabilityFeatures overlays created outside this API.
+	Preset *PresetOverlayPayload `json:"preset,omitempty"`
+	// Raw YAML payload of this version.
+	Raw *RawOverlayPayload `json:"raw,omitempty"`
 	// Target snapshot for this overlay version.
 	Targets []ConfigurationOverlayTarget `json:"targets,omitempty"`
 	// Time when this overlay version was last updated.
@@ -140,38 +138,6 @@ func (o *ConfigurationOverlayVersion) SetArchived(v bool) {
 	o.Archived = &v
 }
 
-// GetChartName returns the ChartName field value if set, zero value otherwise.
-func (o *ConfigurationOverlayVersion) GetChartName() ChartName {
-	if o == nil || IsNil(o.ChartName) {
-		var ret ChartName
-		return ret
-	}
-	return *o.ChartName
-}
-
-// GetChartNameOk returns a tuple with the ChartName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayVersion) GetChartNameOk() (*ChartName, bool) {
-	if o == nil || IsNil(o.ChartName) {
-		return nil, false
-	}
-	return o.ChartName, true
-}
-
-// HasChartName returns a boolean if a field has been set.
-func (o *ConfigurationOverlayVersion) HasChartName() bool {
-	if o != nil && !IsNil(o.ChartName) {
-		return true
-	}
-
-	return false
-}
-
-// SetChartName gets a reference to the given ChartName and assigns it to the ChartName field.
-func (o *ConfigurationOverlayVersion) SetChartName(v ChartName) {
-	o.ChartName = &v
-}
-
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *ConfigurationOverlayVersion) GetCreatedAt() time.Time {
 	if o == nil || IsNil(o.CreatedAt) {
@@ -260,38 +226,6 @@ func (o *ConfigurationOverlayVersion) SetId(v string) {
 	o.Id = v
 }
 
-// GetObservabilityFeaturesOverlay returns the ObservabilityFeaturesOverlay field value if set, zero value otherwise.
-func (o *ConfigurationOverlayVersion) GetObservabilityFeaturesOverlay() string {
-	if o == nil || IsNil(o.ObservabilityFeaturesOverlay) {
-		var ret string
-		return ret
-	}
-	return *o.ObservabilityFeaturesOverlay
-}
-
-// GetObservabilityFeaturesOverlayOk returns a tuple with the ObservabilityFeaturesOverlay field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayVersion) GetObservabilityFeaturesOverlayOk() (*string, bool) {
-	if o == nil || IsNil(o.ObservabilityFeaturesOverlay) {
-		return nil, false
-	}
-	return o.ObservabilityFeaturesOverlay, true
-}
-
-// HasObservabilityFeaturesOverlay returns a boolean if a field has been set.
-func (o *ConfigurationOverlayVersion) HasObservabilityFeaturesOverlay() bool {
-	if o != nil && !IsNil(o.ObservabilityFeaturesOverlay) {
-		return true
-	}
-
-	return false
-}
-
-// SetObservabilityFeaturesOverlay gets a reference to the given string and assigns it to the ObservabilityFeaturesOverlay field.
-func (o *ConfigurationOverlayVersion) SetObservabilityFeaturesOverlay(v string) {
-	o.ObservabilityFeaturesOverlay = &v
-}
-
 // GetOverlayHash returns the OverlayHash field value if set, zero value otherwise.
 func (o *ConfigurationOverlayVersion) GetOverlayHash() string {
 	if o == nil || IsNil(o.OverlayHash) {
@@ -356,36 +290,68 @@ func (o *ConfigurationOverlayVersion) SetParentVersionId(v string) {
 	o.ParentVersionId = &v
 }
 
-// GetRawOverlayConfiguration returns the RawOverlayConfiguration field value if set, zero value otherwise.
-func (o *ConfigurationOverlayVersion) GetRawOverlayConfiguration() string {
-	if o == nil || IsNil(o.RawOverlayConfiguration) {
-		var ret string
+// GetPreset returns the Preset field value if set, zero value otherwise.
+func (o *ConfigurationOverlayVersion) GetPreset() PresetOverlayPayload {
+	if o == nil || IsNil(o.Preset) {
+		var ret PresetOverlayPayload
 		return ret
 	}
-	return *o.RawOverlayConfiguration
+	return *o.Preset
 }
 
-// GetRawOverlayConfigurationOk returns a tuple with the RawOverlayConfiguration field value if set, nil otherwise
+// GetPresetOk returns a tuple with the Preset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayVersion) GetRawOverlayConfigurationOk() (*string, bool) {
-	if o == nil || IsNil(o.RawOverlayConfiguration) {
+func (o *ConfigurationOverlayVersion) GetPresetOk() (*PresetOverlayPayload, bool) {
+	if o == nil || IsNil(o.Preset) {
 		return nil, false
 	}
-	return o.RawOverlayConfiguration, true
+	return o.Preset, true
 }
 
-// HasRawOverlayConfiguration returns a boolean if a field has been set.
-func (o *ConfigurationOverlayVersion) HasRawOverlayConfiguration() bool {
-	if o != nil && !IsNil(o.RawOverlayConfiguration) {
+// HasPreset returns a boolean if a field has been set.
+func (o *ConfigurationOverlayVersion) HasPreset() bool {
+	if o != nil && !IsNil(o.Preset) {
 		return true
 	}
 
 	return false
 }
 
-// SetRawOverlayConfiguration gets a reference to the given string and assigns it to the RawOverlayConfiguration field.
-func (o *ConfigurationOverlayVersion) SetRawOverlayConfiguration(v string) {
-	o.RawOverlayConfiguration = &v
+// SetPreset gets a reference to the given PresetOverlayPayload and assigns it to the Preset field.
+func (o *ConfigurationOverlayVersion) SetPreset(v PresetOverlayPayload) {
+	o.Preset = &v
+}
+
+// GetRaw returns the Raw field value if set, zero value otherwise.
+func (o *ConfigurationOverlayVersion) GetRaw() RawOverlayPayload {
+	if o == nil || IsNil(o.Raw) {
+		var ret RawOverlayPayload
+		return ret
+	}
+	return *o.Raw
+}
+
+// GetRawOk returns a tuple with the Raw field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationOverlayVersion) GetRawOk() (*RawOverlayPayload, bool) {
+	if o == nil || IsNil(o.Raw) {
+		return nil, false
+	}
+	return o.Raw, true
+}
+
+// HasRaw returns a boolean if a field has been set.
+func (o *ConfigurationOverlayVersion) HasRaw() bool {
+	if o != nil && !IsNil(o.Raw) {
+		return true
+	}
+
+	return false
+}
+
+// SetRaw gets a reference to the given RawOverlayPayload and assigns it to the Raw field.
+func (o *ConfigurationOverlayVersion) SetRaw(v RawOverlayPayload) {
+	o.Raw = &v
 }
 
 // GetTargets returns the Targets field value if set, zero value otherwise.
@@ -492,9 +458,6 @@ func (o ConfigurationOverlayVersion) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Archived) {
 		toSerialize["archived"] = o.Archived
 	}
-	if !IsNil(o.ChartName) {
-		toSerialize["chartName"] = o.ChartName
-	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
@@ -502,17 +465,17 @@ func (o ConfigurationOverlayVersion) ToMap() (map[string]interface{}, error) {
 		toSerialize["createdBy"] = o.CreatedBy
 	}
 	toSerialize["id"] = o.Id
-	if !IsNil(o.ObservabilityFeaturesOverlay) {
-		toSerialize["observabilityFeaturesOverlay"] = o.ObservabilityFeaturesOverlay
-	}
 	if !IsNil(o.OverlayHash) {
 		toSerialize["overlayHash"] = o.OverlayHash
 	}
 	if !IsNil(o.ParentVersionId) {
 		toSerialize["parentVersionId"] = o.ParentVersionId
 	}
-	if !IsNil(o.RawOverlayConfiguration) {
-		toSerialize["rawOverlayConfiguration"] = o.RawOverlayConfiguration
+	if !IsNil(o.Preset) {
+		toSerialize["preset"] = o.Preset
+	}
+	if !IsNil(o.Raw) {
+		toSerialize["raw"] = o.Raw
 	}
 	if !IsNil(o.Targets) {
 		toSerialize["targets"] = o.Targets
@@ -522,26 +485,26 @@ func (o ConfigurationOverlayVersion) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["version"] = o.Version
 	requiredOneOfGroup0Matches := 0
-	if _, exists := toSerialize["rawOverlayConfiguration"]; exists {
+	if _, exists := toSerialize["raw"]; exists {
 		requiredOneOfGroup0Matches++
 	}
-	if _, exists := toSerialize["observabilityFeaturesOverlay"]; exists {
+	if _, exists := toSerialize["preset"]; exists {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches == 0 {
 		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
-			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [rawOverlayConfiguration, observabilityFeaturesOverlay] must be set"}
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [raw, preset] must be set"}
 		}
 	}
 	if requiredOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [rawOverlayConfiguration, observabilityFeaturesOverlay] must be set"}
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [raw, preset] must be set"}
 	}
 
-	if _, exists := o.AdditionalProperties["rawOverlayConfiguration"]; exists {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field rawOverlayConfiguration must be set through the typed field, not AdditionalProperties"}
+	if _, exists := o.AdditionalProperties["raw"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field raw must be set through the typed field, not AdditionalProperties"}
 	}
-	if _, exists := o.AdditionalProperties["observabilityFeaturesOverlay"]; exists {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field observabilityFeaturesOverlay must be set through the typed field, not AdditionalProperties"}
+	if _, exists := o.AdditionalProperties["preset"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field preset must be set through the typed field, not AdditionalProperties"}
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -575,14 +538,14 @@ func (o *ConfigurationOverlayVersion) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	requiredOneOfGroup0Matches := 0
-	if _, exists := allProperties["rawOverlayConfiguration"]; exists {
+	if _, exists := allProperties["raw"]; exists {
 		requiredOneOfGroup0Matches++
 	}
-	if _, exists := allProperties["observabilityFeaturesOverlay"]; exists {
+	if _, exists := allProperties["preset"]; exists {
 		requiredOneOfGroup0Matches++
 	}
 	if requiredOneOfGroup0Matches > 1 {
-		return GenericOpenAPIError{error: "at most one of [rawOverlayConfiguration, observabilityFeaturesOverlay] may be set"}
+		return GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
 	}
 
 	varConfigurationOverlayVersion := _ConfigurationOverlayVersion{}
@@ -600,26 +563,25 @@ func (o *ConfigurationOverlayVersion) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		requiredOneOfGroup0MatchesInPayload := 0
-		if _, exists := additionalProperties["rawOverlayConfiguration"]; exists {
+		if _, exists := additionalProperties["raw"]; exists {
 			requiredOneOfGroup0MatchesInPayload++
 		}
-		if _, exists := additionalProperties["observabilityFeaturesOverlay"]; exists {
+		if _, exists := additionalProperties["preset"]; exists {
 			requiredOneOfGroup0MatchesInPayload++
 		}
 		if requiredOneOfGroup0MatchesInPayload > 1 {
-			return GenericOpenAPIError{error: "at most one of [rawOverlayConfiguration, observabilityFeaturesOverlay] may be set"}
+			return GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
 		}
 
 		delete(additionalProperties, "active")
 		delete(additionalProperties, "archived")
-		delete(additionalProperties, "chartName")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "createdBy")
 		delete(additionalProperties, "id")
-		delete(additionalProperties, "observabilityFeaturesOverlay")
 		delete(additionalProperties, "overlayHash")
 		delete(additionalProperties, "parentVersionId")
-		delete(additionalProperties, "rawOverlayConfiguration")
+		delete(additionalProperties, "preset")
+		delete(additionalProperties, "raw")
 		delete(additionalProperties, "targets")
 		delete(additionalProperties, "updatedAt")
 		delete(additionalProperties, "version")

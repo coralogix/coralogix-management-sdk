@@ -32,8 +32,7 @@ type ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay struct 
 	ParentVersionId *string `json:"parentVersionId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
-	// Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension. Rejected for preset overlays.
-	RawOverlayConfiguration *string `json:"rawOverlayConfiguration,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Raw *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw `json:"raw,omitempty"`
 	Tags *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayTags `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -218,36 +217,36 @@ func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) Se
 	o.PriorityOrder = &v
 }
 
-// GetRawOverlayConfiguration returns the RawOverlayConfiguration field value if set, zero value otherwise.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) GetRawOverlayConfiguration() string {
-	if o == nil || IsNil(o.RawOverlayConfiguration) {
-		var ret string
+// GetRaw returns the Raw field value if set, zero value otherwise.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) GetRaw() ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw {
+	if o == nil || IsNil(o.Raw) {
+		var ret ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw
 		return ret
 	}
-	return *o.RawOverlayConfiguration
+	return *o.Raw
 }
 
-// GetRawOverlayConfigurationOk returns a tuple with the RawOverlayConfiguration field value if set, nil otherwise
+// GetRawOk returns a tuple with the Raw field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) GetRawOverlayConfigurationOk() (*string, bool) {
-	if o == nil || IsNil(o.RawOverlayConfiguration) {
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) GetRawOk() (*ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw, bool) {
+	if o == nil || IsNil(o.Raw) {
 		return nil, false
 	}
-	return o.RawOverlayConfiguration, true
+	return o.Raw, true
 }
 
-// HasRawOverlayConfiguration returns a boolean if a field has been set.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) HasRawOverlayConfiguration() bool {
-	if o != nil && !IsNil(o.RawOverlayConfiguration) {
+// HasRaw returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) HasRaw() bool {
+	if o != nil && !IsNil(o.Raw) {
 		return true
 	}
 
 	return false
 }
 
-// SetRawOverlayConfiguration gets a reference to the given string and assigns it to the RawOverlayConfiguration field.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) SetRawOverlayConfiguration(v string) {
-	o.RawOverlayConfiguration = &v
+// SetRaw gets a reference to the given ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw and assigns it to the Raw field.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) SetRaw(v ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) {
+	o.Raw = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
@@ -307,8 +306,8 @@ func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) ToM
 	if !IsNil(o.PriorityOrder) {
 		toSerialize["priorityOrder"] = o.PriorityOrder
 	}
-	if !IsNil(o.RawOverlayConfiguration) {
-		toSerialize["rawOverlayConfiguration"] = o.RawOverlayConfiguration
+	if !IsNil(o.Raw) {
+		toSerialize["raw"] = o.Raw
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
@@ -341,7 +340,7 @@ func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) Un
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parentVersionId")
 		delete(additionalProperties, "priorityOrder")
-		delete(additionalProperties, "rawOverlayConfiguration")
+		delete(additionalProperties, "raw")
 		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

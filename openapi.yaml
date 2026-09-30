@@ -18777,7 +18777,8 @@ paths:
                     id: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3002
                     overlayHash: b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
                     parentVersionId: 01975ed4-9c1a-7b3f-8d4e-426614174001
-                    rawOverlayConfiguration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                    raw:
+                      configuration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
                     targets:
                     - createdAt: '2026-09-28T10:05:00Z'
                       id: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3003
@@ -18793,7 +18794,8 @@ paths:
                     createdAt: '2026-09-28T10:00:00Z'
                     id: 01975ed4-9c1a-7b3f-8d4e-426614174001
                     overlayHash: b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
-                    rawOverlayConfiguration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                    raw:
+                      configuration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
                     updatedAt: '2026-09-28T10:00:00Z'
                     version: '1'
               schema:
@@ -18865,7 +18867,8 @@ paths:
                     createdAt: '2026-09-28T10:00:00Z'
                     id: 01975ed4-9c1a-7b3f-8d4e-426614174001
                     overlayHash: b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
-                    rawOverlayConfiguration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                    raw:
+                      configuration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
                     updatedAt: '2026-09-28T10:00:00Z'
                     version: '1'
               schema:
@@ -18982,7 +18985,8 @@ paths:
                     id: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3002
                     overlayHash: b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
                     parentVersionId: 01975ed4-9c1a-7b3f-8d4e-426614174001
-                    rawOverlayConfiguration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                    raw:
+                      configuration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
                     targets:
                     - createdAt: '2026-09-28T10:05:00Z'
                       id: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3003
@@ -18998,7 +19002,8 @@ paths:
                     createdAt: '2026-09-28T10:00:00Z'
                     id: 01975ed4-9c1a-7b3f-8d4e-426614174001
                     overlayHash: b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
-                    rawOverlayConfiguration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                    raw:
+                      configuration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
                     updatedAt: '2026-09-28T10:00:00Z'
                     version: '1'
               schema:
@@ -19072,12 +19077,20 @@ paths:
                       maximum: 2147483647
                       minimum: -2147483648
                       type: integer
-                    rawOverlayConfiguration:
-                      description: Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension. Rejected for preset overlays.
-                      maxLength: 1048576
-                      minLength: 1
-                      pattern: ^[\s\S]*$
-                      type: string
+                    raw:
+                      description: Raw OpenTelemetry Collector YAML overlay payload.
+                      externalDocs:
+                        url: ''
+                      properties:
+                        configuration:
+                          description: OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored and returned in normalized form (sorted keys, no comments). Must not configure the OpAMP extension.
+                          maxLength: 1048576
+                          minLength: 1
+                          pattern: ^[\s\S]*$
+                          type: string
+                      required:
+                      - configuration
+                      type: object
                     tags:
                       description: Replacement tags for a configuration overlay.
                       externalDocs:
@@ -19124,7 +19137,8 @@ paths:
                     id: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3002
                     overlayHash: b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
                     parentVersionId: 01975ed4-9c1a-7b3f-8d4e-426614174001
-                    rawOverlayConfiguration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                    raw:
+                      configuration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
                     targets:
                     - createdAt: '2026-09-28T10:05:00Z'
                       id: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3003
@@ -19140,7 +19154,8 @@ paths:
                     createdAt: '2026-09-28T10:00:00Z'
                     id: 01975ed4-9c1a-7b3f-8d4e-426614174001
                     overlayHash: b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
-                    rawOverlayConfiguration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                    raw:
+                      configuration: "service:\n  telemetry:\n    logs:\n      level: debug\n"
                     updatedAt: '2026-09-28T10:00:00Z'
                     version: '1'
               schema:
@@ -54711,7 +54726,7 @@ components:
         url: ''
     ConfigurationOverlayCreate:
       required:
-      - rawOverlayConfiguration
+      - raw
       type: object
       properties:
         active:
@@ -54735,12 +54750,10 @@ components:
           type: integer
           description: 'Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.'
           format: int32
-        rawOverlayConfiguration:
-          maxLength: 1048576
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
-          description: OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored in normalized form. Must not configure the OpAMP extension.
+        raw:
+          allOf:
+          - $ref: '#/components/schemas/RawOverlayPayload'
+          description: Raw OpenTelemetry Collector YAML payload.
         tags:
           maxItems: 64
           minItems: 0
@@ -54860,10 +54873,10 @@ components:
       type: object
       oneOf:
       - required:
-        - rawOverlayConfiguration
+        - raw
         type: object
       - required:
-        - observabilityFeaturesOverlay
+        - preset
         type: object
       properties:
         active:
@@ -54872,10 +54885,6 @@ components:
         archived:
           type: boolean
           description: Whether this overlay version is archived.
-        chartName:
-          allOf:
-          - $ref: '#/components/schemas/ChartName'
-          description: Preset chart name for ObservabilityFeatures overlay versions.
         createdAt:
           maxLength: 64
           minLength: 0
@@ -54894,12 +54903,6 @@ components:
           pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: Configuration overlay version UUID v7.
-        observabilityFeaturesOverlay:
-          maxLength: 1048576
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
-          description: Normalized ObservabilityFeatures JSON overlay payload.
         overlayHash:
           maxLength: 64
           minLength: 64
@@ -54912,12 +54915,14 @@ components:
           pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: Parent overlay version UUID v7.
-        rawOverlayConfiguration:
-          maxLength: 1048576
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
-          description: OpenTelemetry Collector YAML fragment for this version, re-emitted in normalized form (sorted keys, no comments). Set for raw overlays only.
+        preset:
+          allOf:
+          - $ref: '#/components/schemas/PresetOverlayPayload'
+          description: Preset payload of this version, for ObservabilityFeatures overlays created outside this API.
+        raw:
+          allOf:
+          - $ref: '#/components/schemas/RawOverlayPayload'
+          description: Raw YAML payload of this version.
         targets:
           maxItems: 256
           minItems: 0
@@ -54983,6 +54988,38 @@ components:
             $ref: '#/components/schemas/ConfigurationOverlay'
           description: Configuration overlays, newest first.
       description: Response containing configuration overlays.
+      externalDocs:
+        url: ''
+    PresetOverlayPayload:
+      required:
+      - observabilityFeatures
+      type: object
+      properties:
+        chartName:
+          allOf:
+          - $ref: '#/components/schemas/ChartName'
+          description: Preset chart name.
+        observabilityFeatures:
+          maxLength: 1048576
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Normalized ObservabilityFeatures JSON.
+      description: ObservabilityFeatures preset overlay payload.
+      externalDocs:
+        url: ''
+    RawOverlayPayload:
+      required:
+      - configuration
+      type: object
+      properties:
+        configuration:
+          maxLength: 1048576
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored and returned in normalized form (sorted keys, no comments). Must not configure the OpAMP extension.
+      description: Raw OpenTelemetry Collector YAML overlay payload.
       externalDocs:
         url: ''
     UpdateConfigurationOverlayResponse:
