@@ -22,7 +22,8 @@
                 }
               ],
               "deprecated": true,
-              "description": "Deprecated. Filter routers by entity type."
+              "description": "Deprecated. Filter routers by entity type.",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -466,8 +467,9 @@
             "description": "Human-readable description."
           },
           "disabled": {
+            "description": "The disabled.",
             "type": "boolean",
-            "description": "The disabled."
+            "x-coralogix-presence": true
           },
           "entityLabels": {
             "type": "object",
@@ -483,7 +485,8 @@
                 "$ref": "#/components/schemas/notification_center.EntityType"
               }
             ],
-            "deprecated": true
+            "deprecated": true,
+            "x-coralogix-presence": true
           },
           "fallback": {
             "maxItems": 10,
@@ -505,14 +508,15 @@
             "description": "The fallback targets."
           },
           "id": {
+            "description": "Unique identifier.",
+            "examples": [
+              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
+            ],
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
             "type": "string",
-            "description": "Unique identifier.",
-            "examples": [
-              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
-            ]
+            "x-coralogix-presence": true
           },
           "name": {
             "maxLength": 200,
@@ -604,25 +608,28 @@
         "type": "object",
         "properties": {
           "environment": {
+            "description": "The environment.",
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The environment."
+            "x-coralogix-presence": true
           },
           "service": {
+            "description": "Service name.",
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Service name."
+            "x-coralogix-presence": true
           },
           "team": {
+            "description": "Team.",
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Team."
+            "x-coralogix-presence": true
           }
         },
         "description": "Allows to configure routing labels which are used for routers resolution",
@@ -661,14 +668,16 @@
             ],
             "examples": [
               "ALERTS"
-            ]
+            ],
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 200,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "targets": {
             "maxItems": 10,
@@ -706,21 +715,23 @@
             "description": "The custom details."
           },
           "id": {
+            "description": "Unique identifier.",
+            "examples": [
+              "d4b56246-64bb-4714-a8bd-97c999f1d801"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier.",
-            "examples": [
-              "d4b56246-64bb-4714-a8bd-97c999f1d801"
-            ]
+            "x-coralogix-presence": true
           },
           "presetId": {
+            "description": "The preset id.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
             "type": "string",
-            "description": "The preset id."
+            "x-coralogix-presence": true
           }
         },
         "description": "Defines routing target for notifications",

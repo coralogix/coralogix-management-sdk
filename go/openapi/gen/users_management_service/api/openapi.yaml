@@ -30,7 +30,8 @@
             "schema": {
               "description": "Optional filter by username (partial match supported)",
               "minLength": 0,
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -44,7 +45,8 @@
                   "$ref": "#/components/schemas/UserStatus"
                 }
               ],
-              "description": "Optional filter by user status (e.g., 'active', 'inactive')"
+              "description": "Optional filter by user status (e.g., 'active', 'inactive')",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -626,11 +628,12 @@
         "type": "object",
         "properties": {
           "message": {
+            "description": "Human-readable detail about this outcome. Set where a status alone is not enough, such as `CREATE_USER_STATUS_FAILED`.",
             "maxLength": 1024,
             "minLength": 1,
             "pattern": "^[\\s\\S]+$",
             "type": "string",
-            "description": "Human-readable detail about this outcome. Set where a status alone is not enough, such as `CREATE_USER_STATUS_FAILED`."
+            "x-coralogix-presence": true
           },
           "status": {
             "$ref": "#/components/schemas/CreateUserStatus"
@@ -644,16 +647,18 @@
             "description": "Full details of the created user, as returned by GetUser. Absent when the outcome produced no user, such as an invited user, who has none until the invitation is accepted."
           },
           "userAccountId": {
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "userId": {
+            "description": "Stable id of the user. Absent when the outcome produced no user, such as an invited user, who has none until the invitation is accepted.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]+$",
             "type": "string",
-            "description": "Stable id of the user. Absent when the outcome produced no user, such as an invited user, who has none until the invitation is accepted."
+            "x-coralogix-presence": true
           },
           "username": {
             "maxLength": 255,
@@ -852,10 +857,11 @@
         "type": "object",
         "properties": {
           "nextPageToken": {
+            "description": "Token for the next page of results. Empty if no more pages available.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "Token for the next page of results. Empty if no more pages available.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "totalCount": {
             "minimum": 0,
@@ -907,11 +913,12 @@
             "format": "int64"
           },
           "userId": {
+            "description": "Stable id of the user to update, as an alternative to `userAccountId`. Mutually exclusive with `userAccountId`: exactly one must be set.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]+$",
             "type": "string",
-            "description": "Stable id of the user to update, as an alternative to `userAccountId`. Mutually exclusive with `userAccountId`: exactly one must be set."
+            "x-coralogix-presence": true
           },
           "userTemplate": {
             "allOf": [

@@ -148,14 +148,16 @@
                     "maxLength": 65535,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "dpxlFilter": {
                     "description": "The dpxl filter.",
                     "maxLength": 65535,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "isPrivate": {
                     "description": "The is private.",
@@ -692,18 +694,20 @@
             "description": "The application names."
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "dpxlFilter": {
+            "description": "The dpxl filter.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The dpxl filter."
+            "x-coralogix-presence": true
           },
           "isPrivate": {
             "type": "boolean",
@@ -1018,18 +1022,20 @@
             "description": "The creating user's username. Set by the server; ignored on requests."
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "dpxlFilter": {
+            "description": "The dpxl filter.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The dpxl filter."
+            "x-coralogix-presence": true
           },
           "id": {
             "maxLength": 36,

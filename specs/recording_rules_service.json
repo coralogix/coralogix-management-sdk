@@ -79,7 +79,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Create Rule Group Set",
@@ -210,7 +211,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Update Rule Group Set",
@@ -460,14 +462,15 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
+            "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.",
+            "examples": [
+              60000
+            ],
+            "format": "int64",
             "maximum": 1800000,
             "minimum": 0,
             "type": "integer",
-            "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.",
-            "format": "int64",
-            "examples": [
-              60000
-            ]
+            "x-coralogix-presence": true
           },
           "expr": {
             "maxLength": 10000,
@@ -508,25 +511,28 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "interval": {
+            "description": "Interval.",
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 60,
             "type": "integer",
-            "description": "Interval.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "limit": {
+            "description": "Limit.",
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^[0-9]+$",
             "type": "string",
-            "description": "Limit."
+            "x-coralogix-presence": true
           },
           "name": {
             "maxLength": 255,
@@ -545,11 +551,12 @@
             "description": "List of rules."
           },
           "version": {
+            "description": "Version number.",
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "Version number.",
-            "format": "int64"
+            "x-coralogix-presence": true
           }
         },
         "description": "A group of recording rules.",
@@ -584,11 +591,12 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
+            "description": "The evaluation delay ms.",
+            "format": "int64",
             "maximum": 1800000,
             "minimum": 0,
             "type": "integer",
-            "description": "The evaluation delay ms.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "expr": {
             "maxLength": 10000,
@@ -608,11 +616,12 @@
             "description": "List of labels."
           },
           "lastEvalDurationMs": {
+            "description": "The last eval duration ms.",
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^[0-9]+$",
             "type": "string",
-            "description": "The last eval duration ms."
+            "x-coralogix-presence": true
           },
           "record": {
             "maxLength": 4096,
@@ -646,25 +655,28 @@
             "description": "Unique identifier."
           },
           "interval": {
+            "description": "Interval.",
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 60,
             "type": "integer",
-            "description": "Interval.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "lastEvalAt": {
+            "description": "The last eval at.",
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^[0-9]+$",
             "type": "string",
-            "description": "The last eval at."
+            "x-coralogix-presence": true
           },
           "limit": {
+            "description": "Limit.",
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^[0-9]+$",
             "type": "string",
-            "description": "Limit."
+            "x-coralogix-presence": true
           },
           "name": {
             "maxLength": 255,

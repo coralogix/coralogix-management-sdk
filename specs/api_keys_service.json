@@ -71,7 +71,8 @@
                       "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "hashed": {
                     "description": "Whether the value is stored as a one-way hash.",
@@ -277,14 +278,16 @@
                       "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "isActive": {
                     "description": "Whether the API key is active. Set to false to deactivate without deleting.",
                     "examples": [
                       true
                     ],
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "newName": {
                     "description": "New display name for the API key.",
@@ -292,7 +295,8 @@
                       "my_new_name"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "permissions": {
                     "$ref": "#/components/schemas/UpdateApiKeyRequest.Permissions"
@@ -800,12 +804,13 @@
         "type": "object",
         "properties": {
           "accessPolicy": {
-            "minLength": 0,
-            "type": "string",
             "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
             "examples": [
               "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "active": {
             "type": "boolean",
@@ -848,9 +853,10 @@
             ]
           },
           "value": {
+            "description": "The value.",
             "minLength": 0,
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents the information associated with an API key.",

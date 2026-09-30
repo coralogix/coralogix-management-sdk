@@ -338,7 +338,8 @@
                     "maxLength": 65536,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "examples": {
                     "description": "Example conversations and expected scores.",
@@ -354,32 +355,37 @@
                     "maxLength": 1048576,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]+$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "Display name of the custom evaluation.",
                     "maxLength": 256,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]+$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "policyType": {
                     "description": "Policy type identifier.",
                     "maxLength": 256,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]+$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "safe": {
                     "description": "Description of what counts as safe.",
                     "maxLength": 65536,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "shouldIncludeSystemPrompt": {
                     "description": "Whether to include the system prompt in the LLM input.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "updateMask": {
                     "description": "Comma-separated list of field paths to update. When provided, only the listed fields are touched; a listed field that is absent from the request body is cleared. When omitted, only fields present in the body are updated.",
@@ -393,7 +399,8 @@
                     "maxLength": 65536,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "type": "object"
@@ -581,7 +588,8 @@
               "maxLength": 256,
               "minLength": 1,
               "pattern": "^[\\s\\S]+$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -594,7 +602,8 @@
               "maxLength": 256,
               "minLength": 1,
               "pattern": "^[\\s\\S]+$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -608,7 +617,8 @@
                   "$ref": "#/components/schemas/EvaluationType"
                 }
               ],
-              "description": "Filter by evaluation type."
+              "description": "Filter by evaluation type.",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -621,7 +631,8 @@
               "format": "int32",
               "maximum": 1000,
               "minimum": 1,
-              "type": "integer"
+              "type": "integer",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -634,7 +645,8 @@
               "format": "int64",
               "maximum": 10000,
               "minimum": 0,
-              "type": "integer"
+              "type": "integer",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -715,14 +727,16 @@
                         "$ref": "#/components/schemas/EvaluationTarget"
                       }
                     ],
-                    "description": "What the evaluation runs against: PROMPT, RESPONSE, or CONVERSATION."
+                    "description": "What the evaluation runs against: PROMPT, RESPONSE, or CONVERSATION.",
+                    "x-coralogix-presence": true
                   },
                   "threshold": {
                     "description": "Score threshold. Must be between 0.0 and 1.0 inclusive.",
                     "format": "double",
                     "maximum": 1,
                     "minimum": 0,
-                    "type": "number"
+                    "type": "number",
+                    "x-coralogix-presence": true
                   }
                 },
                 "type": "object"
@@ -912,7 +926,8 @@
                     "maxLength": 256,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]+$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "config": {
                     "allOf": [
@@ -924,14 +939,16 @@
                   },
                   "isEnabled": {
                     "description": "Whether the evaluation is active.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "subsystem": {
                     "description": "Subsystem within the application.",
                     "maxLength": 256,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]+$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "target": {
                     "allOf": [
@@ -939,14 +956,16 @@
                         "$ref": "#/components/schemas/EvaluationTarget"
                       }
                     ],
-                    "description": "What the evaluation runs against: PROMPT, RESPONSE, or CONVERSATION."
+                    "description": "What the evaluation runs against: PROMPT, RESPONSE, or CONVERSATION.",
+                    "x-coralogix-presence": true
                   },
                   "threshold": {
                     "description": "Score threshold. Must be between 0.0 and 1.0 inclusive.",
                     "format": "double",
                     "maximum": 1,
                     "minimum": 0,
-                    "type": "number"
+                    "type": "number",
+                    "x-coralogix-presence": true
                   },
                   "updateMask": {
                     "description": "Comma-separated list of field paths to update. When provided, only the listed fields are touched; a listed field that is absent from the request body is cleared. When omitted, only fields present in the body are updated.",
@@ -1062,14 +1081,16 @@
                 "$ref": "#/components/schemas/EvaluationTarget"
               }
             ],
-            "description": "What the evaluation runs against: PROMPT, RESPONSE, or CONVERSATION."
+            "description": "What the evaluation runs against: PROMPT, RESPONSE, or CONVERSATION.",
+            "x-coralogix-presence": true
           },
           "threshold": {
+            "description": "Score threshold. Must be between 0.0 and 1.0 inclusive.",
+            "format": "double",
             "maximum": 1,
             "minimum": 0,
             "type": "number",
-            "description": "Score threshold. Must be between 0.0 and 1.0 inclusive.",
-            "format": "double"
+            "x-coralogix-presence": true
           },
           "updatedAt": {
             "maxLength": 35,

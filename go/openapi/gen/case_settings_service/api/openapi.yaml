@@ -39,7 +39,8 @@
                     "maxLength": 4096,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -357,7 +358,8 @@
                     "maxLength": 4096,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Update case settings request",
@@ -755,14 +757,15 @@
             ]
           },
           "name": {
+            "description": "Human-readable name for the team configuration",
+            "examples": [
+              "Default Team Config"
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable name for the team configuration",
-            "examples": [
-              "Default Team Config"
-            ]
+            "x-coralogix-presence": true
           },
           "updateTime": {
             "maxLength": 30,

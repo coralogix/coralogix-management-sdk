@@ -297,7 +297,8 @@
             ],
             "examples": [
               "0"
-            ]
+            ],
+            "x-coralogix-presence": true
           },
           "endpoint": {
             "minLength": 0,
@@ -308,12 +309,13 @@
             ]
           },
           "serviceCrn": {
-            "minLength": 0,
-            "type": "string",
             "description": "The service crn.",
             "examples": [
               "service_crn"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents an IBM COS target.",
@@ -397,28 +399,31 @@
             ]
           },
           "externalId": {
-            "minLength": 0,
-            "type": "string",
             "description": "External identifier.",
             "examples": [
               "f47ac10b-58cc-4372-a567-0e02b2c3d479"
-            ]
-          },
-          "region": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "region": {
             "description": "Region.",
             "examples": [
               "us-west-2"
-            ]
-          },
-          "roleArn": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "roleArn": {
             "description": "The role arn.",
             "examples": [
               "arn:aws:iam::123456789012:role/CoralogixArchive"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents an S3 target.",

@@ -19,7 +19,8 @@
               "description": "Team to fetch team groups for. If not set, fetches groups associated with the logged in team.",
               "format": "int64",
               "minimum": 0,
-              "type": "integer"
+              "type": "integer",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -31,7 +32,8 @@
               "description": "Page size.",
               "format": "int64",
               "minimum": 0,
-              "type": "integer"
+              "type": "integer",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -42,7 +44,8 @@
             "schema": {
               "description": "The page token.",
               "minLength": 0,
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -105,15 +108,18 @@
                   "description": {
                     "description": "Human-readable description of the team group.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "externalId": {
                     "description": "External identifier for the group, used when the group is managed by an external identity provider.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "groupType": {
-                    "$ref": "#/components/schemas/GroupType"
+                    "$ref": "#/components/schemas/GroupType",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "Unique display name for the new team group.",
@@ -124,14 +130,16 @@
                     "description": "Identifier of the role to assign to this group.",
                     "format": "int64",
                     "minimum": 0,
-                    "type": "integer"
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "roleName": {
                     "description": "Name of the role to assign to this group, as an alternative to `roleId`. Resolved against this team's custom roles and the global built-in roles. Matching is case-insensitive. The response reports the resolved role's id and canonical name. Mutually exclusive with `roleId`: setting both is rejected.",
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "scope": {
                     "$ref": "#/components/schemas/v2.Scope"
@@ -140,7 +148,8 @@
                     "description": "Team to associate the group with. If not set, uses the authenticated team.",
                     "format": "int64",
                     "minimum": 0,
-                    "type": "integer"
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "userIds": {
                     "description": "The user ids.",
@@ -395,20 +404,24 @@
                   "description": {
                     "description": "New human-readable description for the team group.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "externalId": {
                     "description": "New external identifier for the group.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "groupType": {
-                    "$ref": "#/components/schemas/GroupType"
+                    "$ref": "#/components/schemas/GroupType",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "New display name for the team group.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "roleUpdate": {
                     "$ref": "#/components/schemas/RoleUpdate"
@@ -584,7 +597,8 @@
               "description": "Pagination size. Defaults to 100 if empty.",
               "format": "int64",
               "minimum": 0,
-              "type": "integer"
+              "type": "integer",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -595,7 +609,8 @@
             "schema": {
               "description": "Optional pagination continuation token.",
               "minLength": 0,
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -895,15 +910,17 @@
         "type": "object",
         "properties": {
           "nextPageToken": {
+            "description": "Token for fetching the next page of results.",
             "minLength": 0,
             "type": "string",
-            "description": "Token for fetching the next page of results."
+            "x-coralogix-presence": true
           },
           "totalCount": {
+            "description": "The total count.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "The total count.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "users": {
             "minItems": 0,
@@ -961,15 +978,17 @@
             "description": "List of groups."
           },
           "nextPageToken": {
+            "description": "Token for fetching the next page of results.",
             "minLength": 0,
             "type": "string",
-            "description": "Token for fetching the next page of results."
+            "x-coralogix-presence": true
           },
           "totalCount": {
+            "description": "The total count.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "The total count.",
-            "format": "int64"
+            "x-coralogix-presence": true
           }
         },
         "description": "Response containing a paginated list of team groups.",
@@ -1283,14 +1302,16 @@
             "format": "date-time"
           },
           "description": {
+            "description": "Group description",
             "minLength": 0,
             "type": "string",
-            "description": "Group description"
+            "x-coralogix-presence": true
           },
           "externalId": {
+            "description": "Group external identifier. Applies if team is externally defined.",
             "minLength": 0,
             "type": "string",
-            "description": "Group external identifier. Applies if team is externally defined."
+            "x-coralogix-presence": true
           },
           "groupId": {
             "minimum": 0,

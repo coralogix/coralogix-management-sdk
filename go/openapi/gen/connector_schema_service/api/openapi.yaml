@@ -83,18 +83,20 @@
             "description": "The allowed values."
           },
           "default": {
+            "description": "The default.",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The default."
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "fieldName": {
             "maxLength": 256,
@@ -287,22 +289,25 @@
             "description": "The allowed values."
           },
           "default": {
+            "description": "The default.",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The default."
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "disableOverride": {
+            "description": "The disable override.",
             "type": "boolean",
-            "description": "The disable override."
+            "x-coralogix-presence": true
           },
           "fieldName": {
             "maxLength": 256,

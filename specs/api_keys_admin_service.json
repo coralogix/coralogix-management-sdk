@@ -71,7 +71,8 @@
                       "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "hashed": {
                     "description": "Whether the value is stored as a one-way hash.",

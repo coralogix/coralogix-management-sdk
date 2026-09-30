@@ -43,7 +43,8 @@
             "required": false,
             "schema": {
               "description": "Whether this resource is enabled.",
-              "type": "boolean"
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -136,7 +137,8 @@
             "schema": {
               "description": "Token for fetching the next page of results.",
               "minLength": 0,
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -635,14 +637,16 @@
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "minLength": 0,
             "type": "string",
-            "description": "Creation timestamp."
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description.",
             "minLength": 0,
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "enabled": {
             "type": "boolean",
@@ -652,9 +656,10 @@
             "$ref": "#/components/schemas/alert_scheduler_rule_protobuf.v1.Filter"
           },
           "id": {
+            "description": "Unique identifier.",
             "minLength": 0,
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "metaLabels": {
             "minItems": 0,
@@ -673,14 +678,16 @@
             "$ref": "#/components/schemas/Schedule"
           },
           "uniqueIdentifier": {
+            "description": "Unique identifier.",
             "minLength": 0,
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "minLength": 0,
             "type": "string",
-            "description": "Last-updated timestamp."
+            "x-coralogix-presence": true
           }
         },
         "description": "Alert scheduler rule.",
@@ -1124,9 +1131,10 @@
             "format": "int32"
           },
           "terminationDate": {
+            "description": "ISO 8601 date after which the recurring rule stops being applied.",
             "minLength": 0,
             "type": "string",
-            "description": "ISO 8601 date after which the recurring rule stops being applied."
+            "x-coralogix-presence": true
           },
           "timeframe": {
             "$ref": "#/components/schemas/Timeframe"
@@ -1250,12 +1258,13 @@
             "description": "Start time."
           },
           "submittedStartTime": {
+            "description": "The start time as submitted in the request, before the service normalized it to the next valid occurrence. Populated only in create and update responses; ignored in requests and omitted from read responses.",
             "maxLength": 64,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
+            "readOnly": true,
             "type": "string",
-            "description": "The start time as submitted in the request, before the service normalized it to the next valid occurrence. Populated only in create and update responses; ignored in requests and omitted from read responses.",
-            "readOnly": true
+            "x-coralogix-presence": true
           },
           "timezone": {
             "minLength": 0,
@@ -1407,9 +1416,10 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "minLength": 0,
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "key": {
             "minLength": 0,
@@ -1417,9 +1427,10 @@
             "description": "The key."
           },
           "value": {
+            "description": "The value.",
             "minLength": 0,
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Meta label.",

@@ -19,7 +19,8 @@
               "description": "Team identifier.",
               "format": "int64",
               "minimum": 0,
-              "type": "integer"
+              "type": "integer",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -147,7 +148,8 @@
                     "description": "Team identifier.",
                     "format": "int64",
                     "minimum": 0,
-                    "type": "integer"
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   }
                 },
                 "type": "object"
@@ -287,12 +289,14 @@
                   "newDescription": {
                     "description": "The new description.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "newName": {
                     "description": "The new name.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "newPermissions": {
                     "$ref": "#/components/schemas/v2.Permissions"

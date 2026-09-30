@@ -20,7 +20,8 @@
               "format": "int32",
               "maximum": 1000,
               "minimum": 1,
-              "type": "integer"
+              "type": "integer",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -33,7 +34,8 @@
               "format": "int64",
               "maximum": 10000,
               "minimum": 0,
-              "type": "integer"
+              "type": "integer",
+              "x-coralogix-presence": true
             }
           },
           {

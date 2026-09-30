@@ -205,24 +205,26 @@
             ]
           },
           "teamUrl": {
+            "description": "Full web-app URL of the team. Absent when the team has no URL slug configured.",
+            "examples": [
+              "https://my-team.app.coralogix.com"
+            ],
             "maxLength": 2048,
             "minLength": 1,
             "pattern": "^https://[^\\s/?#]+[^\\s]*$",
             "type": "string",
-            "description": "Full web-app URL of the team. Absent when the team has no URL slug configured.",
-            "examples": [
-              "https://my-team.app.coralogix.com"
-            ]
+            "x-coralogix-presence": true
           },
           "username": {
+            "description": "Username of the authenticated user. Absent when authenticating with an API key, which carries no user identity.",
+            "examples": [
+              "jane.doe@example.com"
+            ],
             "maxLength": 320,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Username of the authenticated user. Absent when authenticating with an API key, which carries no user identity.",
-            "examples": [
-              "jane.doe@example.com"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "The team, and where available the user, that the presented credentials authenticate as.",

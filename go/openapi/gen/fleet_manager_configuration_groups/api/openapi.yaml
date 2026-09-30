@@ -206,7 +206,8 @@
                         "maxLength": 4096,
                         "minLength": 0,
                         "pattern": "^[\\s\\S]*$",
-                        "type": "string"
+                        "type": "string",
+                        "x-coralogix-presence": true
                       },
                       "family": {
                         "description": "Fields used to update the latest configuration family. Omitted optional fields keep their existing values.",
@@ -216,21 +217,24 @@
                         "properties": {
                           "active": {
                             "description": "Whether this family is active.",
-                            "type": "boolean"
+                            "type": "boolean",
+                            "x-coralogix-presence": true
                           },
                           "collectorVersion": {
                             "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
                             "maxLength": 256,
                             "minLength": 5,
                             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
-                            "type": "string"
+                            "type": "string",
+                            "x-coralogix-presence": true
                           },
                           "description": {
                             "description": "Human-readable description.",
                             "maxLength": 4096,
                             "minLength": 0,
                             "pattern": "^[\\s\\S]*$",
-                            "type": "string"
+                            "type": "string",
+                            "x-coralogix-presence": true
                           },
                           "metadata": {
                             "additionalProperties": {
@@ -259,14 +263,16 @@
                         "maxLength": 256,
                         "minLength": 0,
                         "pattern": "^[\\s\\S]*$",
-                        "type": "string"
+                        "type": "string",
+                        "x-coralogix-presence": true
                       },
                       "priorityOrder": {
                         "description": "Selection precedence. Higher values win on ties and 0 is the default.",
                         "format": "int32",
                         "maximum": 2147483647,
                         "minimum": -2147483648,
-                        "type": "integer"
+                        "type": "integer",
+                        "x-coralogix-presence": true
                       },
                       "tags": {
                         "description": "Tags attached to the configuration group.",
@@ -502,15 +508,17 @@
         "type": "object",
         "properties": {
           "active": {
+            "description": "Whether this family is active.",
             "type": "boolean",
-            "description": "Whether this family is active."
+            "x-coralogix-presence": true
           },
           "basedOnConfigurationFamilyId": {
+            "description": "Configuration family UUID v7 this family is based on.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Configuration family UUID v7 this family is based on."
+            "x-coralogix-presence": true
           },
           "chartName": {
             "allOf": [
@@ -518,28 +526,32 @@
                 "$ref": "#/components/schemas/ChartName"
               }
             ],
-            "description": "Helm chart name for Helm-backed families."
+            "description": "Helm chart name for Helm-backed families.",
+            "x-coralogix-presence": true
           },
           "chartVersion": {
+            "description": "Helm chart or template version used by this family.",
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Helm chart or template version used by this family."
+            "x-coralogix-presence": true
           },
           "collectorVersion": {
+            "description": "Collector semantic version this configuration family targets, without a leading v prefix.",
             "maxLength": 256,
             "minLength": 5,
             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
             "type": "string",
-            "description": "Collector semantic version this configuration family targets, without a leading v prefix."
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "id": {
             "maxLength": 36,
@@ -549,11 +561,12 @@
             "description": "Configuration family UUID v7."
           },
           "integrationVersion": {
+            "description": "Integration version from the onboarding flow.",
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Integration version from the onboarding flow."
+            "x-coralogix-presence": true
           },
           "lastActivatedAt": {
             "maxLength": 64,
@@ -607,29 +620,33 @@
         "type": "object",
         "properties": {
           "active": {
+            "description": "Whether this family is active.",
             "type": "boolean",
-            "description": "Whether this family is active."
+            "x-coralogix-presence": true
           },
           "basedOnConfigurationFamilyId": {
+            "description": "Configuration family UUID v7 this family is based on.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Configuration family UUID v7 this family is based on."
+            "x-coralogix-presence": true
           },
           "collectorVersion": {
+            "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
             "maxLength": 256,
             "minLength": 5,
             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
             "type": "string",
-            "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically."
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "metadata": {
             "type": "object",
@@ -680,11 +697,12 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "families": {
             "maxItems": 128,
@@ -703,18 +721,20 @@
             "description": "Configuration group UUID v7."
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "priorityOrder": {
+            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": -2147483648,
             "type": "integer",
-            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "tags": {
             "maxItems": 64,
@@ -739,11 +759,12 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "family": {
             "allOf": [
@@ -754,18 +775,20 @@
             "description": "Initial configuration family to create with this group."
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "priorityOrder": {
+            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": -2147483648,
             "type": "integer",
-            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "tags": {
             "maxItems": 64,
@@ -801,11 +824,12 @@
             "description": "Configuration overlay UUID v7."
           },
           "overlayName": {
+            "description": "Configuration overlay name at read time.",
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Configuration overlay name at read time."
+            "x-coralogix-presence": true
           },
           "overlayVersionId": {
             "maxLength": 36,
@@ -1036,11 +1060,12 @@
             "description": "Flat agent attributes that match agents for this configuration."
           },
           "name": {
+            "description": "Remote configuration name.",
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Remote configuration name."
+            "x-coralogix-presence": true
           },
           "rawConfiguration": {
             "maxLength": 1048576,
@@ -1067,11 +1092,12 @@
             "description": "Flat agent attributes that match agents for this configuration."
           },
           "name": {
+            "description": "Remote configuration name.",
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Remote configuration name."
+            "x-coralogix-presence": true
           },
           "rawConfiguration": {
             "maxLength": 1048576,

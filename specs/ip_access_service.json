@@ -18,7 +18,8 @@
             "schema": {
               "description": "The ID of the company IP access settings to get. If it's not provided, the id will be derived from the authorization header.",
               "minLength": 0,
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -95,7 +96,8 @@
                       "d662a2f1-21c3-493c-8f8a-595d3ab05ef3"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "ipAccess": {
                     "description": "List of IP access entries to replace.",
@@ -256,7 +258,8 @@
                 "d662a2f1-21c3-493c-8f8a-595d3ab05ef3"
               ],
               "minLength": 0,
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],

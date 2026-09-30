@@ -21,7 +21,8 @@
                   "$ref": "#/components/schemas/notification_center.ConnectorType"
                 }
               ],
-              "description": "Filter connectors by their type."
+              "description": "Filter connectors by their type.",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -35,7 +36,8 @@
                   "$ref": "#/components/schemas/notification_center.EntityType"
                 }
               ],
-              "description": "Filter connectors by the entity type they support."
+              "description": "Filter connectors by the entity type they support.",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -233,7 +235,8 @@
                   "$ref": "#/components/schemas/notification_center.ConnectorType"
                 }
               ],
-              "description": "Filter connector summaries by their type."
+              "description": "Filter connector summaries by their type.",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -247,7 +250,8 @@
                   "$ref": "#/components/schemas/notification_center.EntityType"
                 }
               ],
-              "description": "Filter connector summaries by the entity type they support."
+              "description": "Filter connector summaries by the entity type they support.",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -285,7 +289,8 @@
                   "$ref": "#/components/schemas/notification_center.EntityType"
                 }
               ],
-              "description": "Filter connector types by the entity type they support."
+              "description": "Filter connector types by the entity type they support.",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -481,14 +486,15 @@
             "deprecated": true
           },
           "id": {
+            "description": "Unique identifier.",
+            "examples": [
+              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
+            ],
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
             "type": "string",
-            "description": "Unique identifier.",
-            "examples": [
-              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
-            ]
+            "x-coralogix-presence": true
           },
           "name": {
             "maxLength": 200,
@@ -510,14 +516,15 @@
             "readOnly": true
           },
           "teamId": {
+            "description": "Team identifier.",
+            "examples": [
+              12345
+            ],
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 1,
             "type": "integer",
-            "description": "Team identifier.",
-            "format": "int64",
-            "examples": [
-              12345
-            ]
+            "x-coralogix-presence": true
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -588,14 +595,15 @@
             ]
           },
           "id": {
+            "description": "Unique identifier.",
+            "examples": [
+              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
+            ],
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
             "type": "string",
-            "description": "Unique identifier.",
-            "examples": [
-              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
-            ]
+            "x-coralogix-presence": true
           },
           "name": {
             "maxLength": 200,
@@ -617,14 +625,15 @@
             "readOnly": true
           },
           "teamId": {
+            "description": "The team id.",
+            "examples": [
+              12345
+            ],
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 1,
             "type": "integer",
-            "description": "The team id.",
-            "format": "int64",
-            "examples": [
-              12345
-            ]
+            "x-coralogix-presence": true
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"

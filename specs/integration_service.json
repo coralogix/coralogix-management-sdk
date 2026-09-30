@@ -1182,7 +1182,8 @@
             "description": "Human-readable description."
           },
           "language": {
-            "$ref": "#/components/schemas/Language"
+            "$ref": "#/components/schemas/Language",
+            "x-coralogix-presence": true
           },
           "links": {
             "maxItems": 10000,
@@ -1351,7 +1352,8 @@
               "type": "string",
               "description": "The replacement extensions."
             },
-            "description": "The replacement extensions."
+            "description": "The replacement extensions.",
+            "default": []
           }
         },
         "description": "Deprecation.",
@@ -1416,7 +1418,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionItemBinary"
             },
-            "description": "The binaries."
+            "description": "The binaries.",
+            "default": []
           },
           "data": {
             "type": "object",
@@ -1445,7 +1448,8 @@
           },
           "isMandatory": {
             "type": "boolean",
-            "description": "The is mandatory."
+            "description": "The is mandatory.",
+            "default": false
           },
           "name": {
             "maxLength": 65535,
@@ -1527,7 +1531,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionBinary"
             },
-            "description": "The binaries."
+            "description": "The binaries.",
+            "default": []
           },
           "description": {
             "maxLength": 65535,
@@ -1550,11 +1555,13 @@
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
             },
-            "description": "The integration details."
+            "description": "The integration details.",
+            "default": []
           },
           "isTesting": {
             "type": "boolean",
-            "description": "The is testing."
+            "description": "The is testing.",
+            "default": false
           },
           "items": {
             "maxItems": 10000,
@@ -1563,7 +1570,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             },
-            "description": "List of items."
+            "description": "List of items.",
+            "default": []
           },
           "labels": {
             "maxItems": 10000,
@@ -1574,7 +1582,8 @@
               "type": "string",
               "description": "List of labels."
             },
-            "description": "List of labels."
+            "description": "List of labels.",
+            "default": []
           },
           "permissionDeniedItems": {
             "maxItems": 10000,
@@ -1583,7 +1592,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             },
-            "description": "The permission denied items."
+            "description": "The permission denied items.",
+            "default": []
           },
           "version": {
             "maxLength": 65535,
@@ -2588,11 +2598,12 @@
             "$ref": "#/components/schemas/Terraform"
           },
           "upgradeInstructionsMd": {
+            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
             "maxLength": 1048576,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents an integration revision.",
@@ -3533,7 +3544,8 @@
             "items": {
               "$ref": "#/components/schemas/ChangelogEntry"
             },
-            "description": "The changelog."
+            "description": "The changelog.",
+            "default": []
           },
           "darkModeImage": {
             "maxLength": 65535,
@@ -3568,11 +3580,13 @@
               "type": "string",
               "description": "The integrations."
             },
-            "description": "The integrations."
+            "description": "The integrations.",
+            "default": []
           },
           "isHidden": {
             "type": "boolean",
-            "description": "The is hidden."
+            "description": "The is hidden.",
+            "default": false
           },
           "keywords": {
             "maxItems": 10000,
@@ -3583,7 +3597,8 @@
               "type": "string",
               "description": "The keywords."
             },
-            "description": "The keywords."
+            "description": "The keywords.",
+            "default": []
           },
           "name": {
             "maxLength": 65535,
@@ -3599,7 +3614,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
             },
-            "description": "The permission denied revisions."
+            "description": "The permission denied revisions.",
+            "default": []
           },
           "revisions": {
             "maxItems": 10000,
@@ -3608,7 +3624,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
             },
-            "description": "The revisions."
+            "description": "The revisions.",
+            "default": []
           }
         },
         "description": "Represents a Coralogix extension package containing pre-built resources.",

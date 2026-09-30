@@ -520,13 +520,14 @@
             ]
           },
           "teamEntityId": {
-            "minimum": 0,
-            "type": "integer",
             "description": "Coralogix team entity identifier used as the SAML service provider entity ID.",
-            "format": "int64",
             "examples": [
               1234567
-            ]
+            ],
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a set of SAML identity provider parameters",

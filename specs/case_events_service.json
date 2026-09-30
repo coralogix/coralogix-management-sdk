@@ -648,11 +648,12 @@
             ]
           },
           "previousAssigneeUserId": {
+            "description": "Previous assignee user ID (if any)",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Previous assignee user ID (if any)"
+            "x-coralogix-presence": true
           }
         },
         "description": "Assigned case event.",
@@ -1688,14 +1689,15 @@
         "type": "object",
         "properties": {
           "coralogixUserId": {
+            "description": "If the Microsoft Teams user is linked to a Coralogix user, this field contains the Coralogix user ID.",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
             "type": "string",
-            "description": "If the Microsoft Teams user is linked to a Coralogix user, this field contains the Coralogix user ID.",
-            "examples": [
-              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
-            ]
+            "x-coralogix-presence": true
           },
           "displayName": {
             "maxLength": 256,
@@ -1718,14 +1720,15 @@
             ]
           },
           "userEmail": {
+            "description": "Email of the Microsoft Teams user",
+            "examples": [
+              "john.doe@example.com"
+            ],
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Email of the Microsoft Teams user",
-            "examples": [
-              "john.doe@example.com"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Information about the Microsoft Teams user who initiated the action.",
@@ -1758,14 +1761,15 @@
             ]
           },
           "messageUrl": {
+            "description": "Deep link URL to the Microsoft Teams message",
+            "examples": [
+              "https://teams.microsoft.com/l/message/19:abcdef@thread.tacv2/1616990892312"
+            ],
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Deep link URL to the Microsoft Teams message",
-            "examples": [
-              "https://teams.microsoft.com/l/message/19:abcdef@thread.tacv2/1616990892312"
-            ]
+            "x-coralogix-presence": true
           },
           "teamId": {
             "maxLength": 4096,
@@ -1788,14 +1792,15 @@
             ]
           },
           "userEmail": {
+            "description": "Email of the Microsoft Teams user",
+            "examples": [
+              "john.doe@example.com"
+            ],
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Email of the Microsoft Teams user",
-            "examples": [
-              "john.doe@example.com"
-            ]
+            "x-coralogix-presence": true
           },
           "userId": {
             "maxLength": 4096,
@@ -1873,14 +1878,15 @@
         "type": "object",
         "properties": {
           "notificationRequestId": {
+            "description": "The notification request ID, as sent to the notifications center.",
+            "examples": [
+              "a1b2c3d4-5678-90ab-cdef-1234567890ab"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "The notification request ID, as sent to the notifications center.",
-            "examples": [
-              "a1b2c3d4-5678-90ab-cdef-1234567890ab"
-            ]
+            "x-coralogix-presence": true
           },
           "notifications": {
             "maxItems": 1000,
@@ -1902,14 +1908,15 @@
         "type": "object",
         "properties": {
           "coralogixUserId": {
+            "description": "If the PagerDuty user is linked to a Coralogix user, this field contains the Coralogix user ID.",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
             "type": "string",
-            "description": "If the PagerDuty user is linked to a Coralogix user, this field contains the Coralogix user ID.",
-            "examples": [
-              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
-            ]
+            "x-coralogix-presence": true
           },
           "displayName": {
             "maxLength": 256,
@@ -1932,14 +1939,15 @@
             ]
           },
           "userEmail": {
+            "description": "Email of the PagerDuty user",
+            "examples": [
+              "john.doe@example.com"
+            ],
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Email of the PagerDuty user",
-            "examples": [
-              "john.doe@example.com"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Information about the PagerDuty user who initiated the action.",
@@ -1957,7 +1965,8 @@
                 "$ref": "#/components/schemas/CasePriority"
               }
             ],
-            "description": "Optional override set by user"
+            "description": "Optional override set by user",
+            "x-coralogix-presence": true
           },
           "system": {
             "allOf": [
@@ -2024,11 +2033,12 @@
         "type": "object",
         "properties": {
           "from": {
+            "description": "Previous resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "maxLength": 500,
             "minLength": 1,
             "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
             "type": "string",
-            "description": "Previous resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied."
+            "x-coralogix-presence": true
           },
           "to": {
             "maxLength": 500,
@@ -2048,14 +2058,15 @@
         "type": "object",
         "properties": {
           "coralogixUserId": {
+            "description": "If the Service Now user is linked to a Coralogix user, this field contains the Coralogix user ID.",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "If the Service Now user is linked to a Coralogix user, this field contains the Coralogix user ID.",
-            "examples": [
-              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
-            ]
+            "x-coralogix-presence": true
           },
           "id": {
             "maxLength": 256,
@@ -2068,14 +2079,15 @@
             ]
           },
           "userEmail": {
+            "description": "Mail of the user",
+            "examples": [
+              "example@coralogix.com"
+            ],
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Mail of the user",
-            "examples": [
-              "example@coralogix.com"
-            ]
+            "x-coralogix-presence": true
           },
           "username": {
             "maxLength": 256,
@@ -2095,14 +2107,15 @@
         "type": "object",
         "properties": {
           "coralogixUserId": {
+            "description": "If the Slack user is linked to a Coralogix user, this field contains the Coralogix user ID.",
+            "examples": [
+              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "If the Slack user is linked to a Coralogix user, this field contains the Coralogix user ID.",
-            "examples": [
-              "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0"
-            ]
+            "x-coralogix-presence": true
           },
           "displayName": {
             "maxLength": 256,
@@ -2125,14 +2138,15 @@
             ]
           },
           "userEmail": {
+            "description": "Email of the Slack user",
+            "examples": [
+              "john.doe@example.com"
+            ],
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Email of the Slack user",
-            "examples": [
-              "john.doe@example.com"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Information about the Slack user who initiated the action.",
@@ -2165,14 +2179,15 @@
             ]
           },
           "userEmail": {
+            "description": "Email of the Slack user",
+            "examples": [
+              "john.doe@example.com"
+            ],
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Email of the Slack user",
-            "examples": [
-              "john.doe@example.com"
-            ]
+            "x-coralogix-presence": true
           },
           "userId": {
             "maxLength": 256,
