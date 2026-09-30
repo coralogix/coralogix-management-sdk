@@ -31,8 +31,8 @@ type ConfigurationOverlayCreate struct {
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
-	// Raw OpenTelemetry Collector YAML payload.
-	Raw RawOverlayPayload `json:"raw"`
+	// Raw OpenTelemetry Collector YAML overlay.
+	Raw RawOverlayCreate `json:"raw"`
 	// Tags attached to the configuration overlay.
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -45,7 +45,7 @@ type _ConfigurationOverlayCreate ConfigurationOverlayCreate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigurationOverlayCreate(raw RawOverlayPayload) *ConfigurationOverlayCreate {
+func NewConfigurationOverlayCreate(raw RawOverlayCreate) *ConfigurationOverlayCreate {
 	this := ConfigurationOverlayCreate{}
 	this.Raw = raw
 	return &this
@@ -188,9 +188,9 @@ func (o *ConfigurationOverlayCreate) SetPriorityOrder(v int32) {
 }
 
 // GetRaw returns the Raw field value
-func (o *ConfigurationOverlayCreate) GetRaw() RawOverlayPayload {
+func (o *ConfigurationOverlayCreate) GetRaw() RawOverlayCreate {
 	if o == nil {
-		var ret RawOverlayPayload
+		var ret RawOverlayCreate
 		return ret
 	}
 
@@ -199,7 +199,7 @@ func (o *ConfigurationOverlayCreate) GetRaw() RawOverlayPayload {
 
 // GetRawOk returns a tuple with the Raw field value
 // and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayCreate) GetRawOk() (*RawOverlayPayload, bool) {
+func (o *ConfigurationOverlayCreate) GetRawOk() (*RawOverlayCreate, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -207,7 +207,7 @@ func (o *ConfigurationOverlayCreate) GetRawOk() (*RawOverlayPayload, bool) {
 }
 
 // SetRaw sets field value
-func (o *ConfigurationOverlayCreate) SetRaw(v RawOverlayPayload) {
+func (o *ConfigurationOverlayCreate) SetRaw(v RawOverlayCreate) {
 	o.Raw = v
 }
 

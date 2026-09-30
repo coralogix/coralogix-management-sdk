@@ -24,7 +24,7 @@ var _ MappedNullable = &ConfigurationOverlayTargetsReplace{}
 // ConfigurationOverlayTargetsReplace Replacement set of remote-configuration targets for a configuration overlay version.
 type ConfigurationOverlayTargetsReplace struct {
 	// Remote configuration targets, as a set: duplicates are rejected. An empty list removes all targets, or returns 400 on an active overlay.
-	Targets []ConfigurationOverlayTargetReplace `json:"targets"`
+	Values []ConfigurationOverlayTargetReplace `json:"values"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -35,9 +35,9 @@ type _ConfigurationOverlayTargetsReplace ConfigurationOverlayTargetsReplace
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigurationOverlayTargetsReplace(targets []ConfigurationOverlayTargetReplace) *ConfigurationOverlayTargetsReplace {
+func NewConfigurationOverlayTargetsReplace(values []ConfigurationOverlayTargetReplace) *ConfigurationOverlayTargetsReplace {
 	this := ConfigurationOverlayTargetsReplace{}
-	this.Targets = targets
+	this.Values = values
 	return &this
 }
 
@@ -49,28 +49,28 @@ func NewConfigurationOverlayTargetsReplaceWithDefaults() *ConfigurationOverlayTa
 	return &this
 }
 
-// GetTargets returns the Targets field value
-func (o *ConfigurationOverlayTargetsReplace) GetTargets() []ConfigurationOverlayTargetReplace {
+// GetValues returns the Values field value
+func (o *ConfigurationOverlayTargetsReplace) GetValues() []ConfigurationOverlayTargetReplace {
 	if o == nil {
 		var ret []ConfigurationOverlayTargetReplace
 		return ret
 	}
 
-	return o.Targets
+	return o.Values
 }
 
-// GetTargetsOk returns a tuple with the Targets field value
+// GetValuesOk returns a tuple with the Values field value
 // and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayTargetsReplace) GetTargetsOk() ([]ConfigurationOverlayTargetReplace, bool) {
+func (o *ConfigurationOverlayTargetsReplace) GetValuesOk() ([]ConfigurationOverlayTargetReplace, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Targets, true
+	return o.Values, true
 }
 
-// SetTargets sets field value
-func (o *ConfigurationOverlayTargetsReplace) SetTargets(v []ConfigurationOverlayTargetReplace) {
-	o.Targets = v
+// SetValues sets field value
+func (o *ConfigurationOverlayTargetsReplace) SetValues(v []ConfigurationOverlayTargetReplace) {
+	o.Values = v
 }
 
 func (o ConfigurationOverlayTargetsReplace) MarshalJSON() ([]byte, error) {
@@ -83,7 +83,7 @@ func (o ConfigurationOverlayTargetsReplace) MarshalJSON() ([]byte, error) {
 
 func (o ConfigurationOverlayTargetsReplace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["targets"] = o.Targets
+	toSerialize["values"] = o.Values
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -97,7 +97,7 @@ func (o *ConfigurationOverlayTargetsReplace) UnmarshalJSON(data []byte) (err err
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"targets",
+		"values",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -128,7 +128,7 @@ func (o *ConfigurationOverlayTargetsReplace) UnmarshalJSON(data []byte) (err err
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "targets")
+		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

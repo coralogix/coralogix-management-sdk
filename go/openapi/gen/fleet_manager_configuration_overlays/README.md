@@ -111,8 +111,9 @@ Class | Method | HTTP request | Description
  - [GetConfigurationOverlayResponse](docs/GetConfigurationOverlayResponse.md)
  - [ListConfigurationOverlaysResponse](docs/ListConfigurationOverlaysResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
- - [PresetOverlayPayload](docs/PresetOverlayPayload.md)
- - [RawOverlayPayload](docs/RawOverlayPayload.md)
+ - [PresetOverlay](docs/PresetOverlay.md)
+ - [RawOverlay](docs/RawOverlay.md)
+ - [RawOverlayCreate](docs/RawOverlayCreate.md)
  - [UpdateConfigurationOverlayResponse](docs/UpdateConfigurationOverlayResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)
 

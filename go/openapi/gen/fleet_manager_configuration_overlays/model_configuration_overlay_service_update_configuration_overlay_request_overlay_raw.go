@@ -13,7 +13,6 @@ package fleet_manager_configuration_overlays
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -21,10 +20,12 @@ var _ = bytes.MinRead
 // checks if the ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw{}
 
-// ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw Raw OpenTelemetry Collector YAML overlay payload.
+// ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw Raw overlay fields to update. Omitted fields are unchanged.
 type ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw struct {
-	// OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored and returned in normalized form (sorted keys, no comments). Must not configure the OpAMP extension.
-	Configuration string `json:"configuration" validate:"regexp=^[\\s\\S]*$"`
+	// Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension.
+	Configuration *string `json:"configuration,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Replaces the targets. Reordering alone changes nothing; an empty list removes all targets, or returns 400 on an active overlay.
+	Targets *ConfigurationOverlayTargetsReplace `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -35,9 +36,8 @@ type _ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw Con
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw(configuration string) *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw {
+func NewConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw() *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw {
 	this := ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw{}
-	this.Configuration = configuration
 	return &this
 }
 
@@ -49,28 +49,68 @@ func NewConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRawWi
 	return &this
 }
 
-// GetConfiguration returns the Configuration field value
+// GetConfiguration returns the Configuration field value if set, zero value otherwise.
 func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) GetConfiguration() string {
-	if o == nil {
+	if o == nil || IsNil(o.Configuration) {
 		var ret string
 		return ret
 	}
-
-	return o.Configuration
+	return *o.Configuration
 }
 
-// GetConfigurationOk returns a tuple with the Configuration field value
+// GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) GetConfigurationOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Configuration) {
 		return nil, false
 	}
-	return &o.Configuration, true
+	return o.Configuration, true
 }
 
-// SetConfiguration sets field value
+// HasConfiguration returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) HasConfiguration() bool {
+	if o != nil && !IsNil(o.Configuration) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfiguration gets a reference to the given string and assigns it to the Configuration field.
 func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) SetConfiguration(v string) {
-	o.Configuration = v
+	o.Configuration = &v
+}
+
+// GetTargets returns the Targets field value if set, zero value otherwise.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) GetTargets() ConfigurationOverlayTargetsReplace {
+	if o == nil || IsNil(o.Targets) {
+		var ret ConfigurationOverlayTargetsReplace
+		return ret
+	}
+	return *o.Targets
+}
+
+// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) GetTargetsOk() (*ConfigurationOverlayTargetsReplace, bool) {
+	if o == nil || IsNil(o.Targets) {
+		return nil, false
+	}
+	return o.Targets, true
+}
+
+// HasTargets returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) HasTargets() bool {
+	if o != nil && !IsNil(o.Targets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargets gets a reference to the given ConfigurationOverlayTargetsReplace and assigns it to the Targets field.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) SetTargets(v ConfigurationOverlayTargetsReplace) {
+	o.Targets = &v
 }
 
 func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) MarshalJSON() ([]byte, error) {
@@ -83,7 +123,12 @@ func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) 
 
 func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["configuration"] = o.Configuration
+	if !IsNil(o.Configuration) {
+		toSerialize["configuration"] = o.Configuration
+	}
+	if !IsNil(o.Targets) {
+		toSerialize["targets"] = o.Targets
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -93,27 +138,6 @@ func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) 
 }
 
 func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"configuration",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw := _ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -129,6 +153,7 @@ func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlayRaw)
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "configuration")
+		delete(additionalProperties, "targets")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

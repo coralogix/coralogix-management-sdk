@@ -30,8 +30,9 @@ model_filters.go
 model_get_configuration_overlay_response.go
 model_list_configuration_overlays_response.go
 model_multiple_values.go
-model_preset_overlay_payload.go
-model_raw_overlay_payload.go
+model_preset_overlay.go
+model_raw_overlay.go
+model_raw_overlay_create.go
 model_update_configuration_overlay_response.go
 model_v3_filter_operator.go
 response.go

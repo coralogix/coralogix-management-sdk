@@ -25,8 +25,6 @@ var _ MappedNullable = &ConfigurationOverlayServiceCreateConfigurationOverlayReq
 type ConfigurationOverlayServiceCreateConfigurationOverlayRequest struct {
 	// Configuration overlay to create.
 	Overlay ConfigurationOverlayCreate `json:"overlay"`
-	// Remote configurations the overlay applies to, as a set: duplicates are rejected. A version needs at least one target to be activated.
-	Targets []ConfigurationOverlayTargetCreate `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -75,38 +73,6 @@ func (o *ConfigurationOverlayServiceCreateConfigurationOverlayRequest) SetOverla
 	o.Overlay = v
 }
 
-// GetTargets returns the Targets field value if set, zero value otherwise.
-func (o *ConfigurationOverlayServiceCreateConfigurationOverlayRequest) GetTargets() []ConfigurationOverlayTargetCreate {
-	if o == nil || IsNil(o.Targets) {
-		var ret []ConfigurationOverlayTargetCreate
-		return ret
-	}
-	return o.Targets
-}
-
-// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayServiceCreateConfigurationOverlayRequest) GetTargetsOk() ([]ConfigurationOverlayTargetCreate, bool) {
-	if o == nil || IsNil(o.Targets) {
-		return nil, false
-	}
-	return o.Targets, true
-}
-
-// HasTargets returns a boolean if a field has been set.
-func (o *ConfigurationOverlayServiceCreateConfigurationOverlayRequest) HasTargets() bool {
-	if o != nil && !IsNil(o.Targets) {
-		return true
-	}
-
-	return false
-}
-
-// SetTargets gets a reference to the given []ConfigurationOverlayTargetCreate and assigns it to the Targets field.
-func (o *ConfigurationOverlayServiceCreateConfigurationOverlayRequest) SetTargets(v []ConfigurationOverlayTargetCreate) {
-	o.Targets = v
-}
-
 func (o ConfigurationOverlayServiceCreateConfigurationOverlayRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -118,9 +84,6 @@ func (o ConfigurationOverlayServiceCreateConfigurationOverlayRequest) MarshalJSO
 func (o ConfigurationOverlayServiceCreateConfigurationOverlayRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["overlay"] = o.Overlay
-	if !IsNil(o.Targets) {
-		toSerialize["targets"] = o.Targets
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -166,7 +129,6 @@ func (o *ConfigurationOverlayServiceCreateConfigurationOverlayRequest) Unmarshal
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "overlay")
-		delete(additionalProperties, "targets")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

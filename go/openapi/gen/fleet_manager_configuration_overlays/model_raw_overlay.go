@@ -18,39 +18,41 @@ import (
 
 var _ = bytes.MinRead
 
-// checks if the RawOverlayPayload type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RawOverlayPayload{}
+// checks if the RawOverlay type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RawOverlay{}
 
-// RawOverlayPayload Raw OpenTelemetry Collector YAML overlay payload.
-type RawOverlayPayload struct {
-	// OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored and returned in normalized form (sorted keys, no comments). Must not configure the OpAMP extension.
+// RawOverlay Raw YAML overlay content of a version.
+type RawOverlay struct {
+	// OpenTelemetry Collector YAML fragment, re-emitted in normalized form (sorted keys, no comments).
 	Configuration string `json:"configuration" validate:"regexp=^[\\s\\S]*$"`
+	// Target snapshot of this version.
+	Targets []ConfigurationOverlayTarget `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
-type _RawOverlayPayload RawOverlayPayload
+type _RawOverlay RawOverlay
 
-// NewRawOverlayPayload instantiates a new RawOverlayPayload object
+// NewRawOverlay instantiates a new RawOverlay object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRawOverlayPayload(configuration string) *RawOverlayPayload {
-	this := RawOverlayPayload{}
+func NewRawOverlay(configuration string) *RawOverlay {
+	this := RawOverlay{}
 	this.Configuration = configuration
 	return &this
 }
 
-// NewRawOverlayPayloadWithDefaults instantiates a new RawOverlayPayload object
+// NewRawOverlayWithDefaults instantiates a new RawOverlay object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRawOverlayPayloadWithDefaults() *RawOverlayPayload {
-	this := RawOverlayPayload{}
+func NewRawOverlayWithDefaults() *RawOverlay {
+	this := RawOverlay{}
 	return &this
 }
 
 // GetConfiguration returns the Configuration field value
-func (o *RawOverlayPayload) GetConfiguration() string {
+func (o *RawOverlay) GetConfiguration() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -61,7 +63,7 @@ func (o *RawOverlayPayload) GetConfiguration() string {
 
 // GetConfigurationOk returns a tuple with the Configuration field value
 // and a boolean to check if the value has been set.
-func (o *RawOverlayPayload) GetConfigurationOk() (*string, bool) {
+func (o *RawOverlay) GetConfigurationOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,11 +71,43 @@ func (o *RawOverlayPayload) GetConfigurationOk() (*string, bool) {
 }
 
 // SetConfiguration sets field value
-func (o *RawOverlayPayload) SetConfiguration(v string) {
+func (o *RawOverlay) SetConfiguration(v string) {
 	o.Configuration = v
 }
 
-func (o RawOverlayPayload) MarshalJSON() ([]byte, error) {
+// GetTargets returns the Targets field value if set, zero value otherwise.
+func (o *RawOverlay) GetTargets() []ConfigurationOverlayTarget {
+	if o == nil || IsNil(o.Targets) {
+		var ret []ConfigurationOverlayTarget
+		return ret
+	}
+	return o.Targets
+}
+
+// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RawOverlay) GetTargetsOk() ([]ConfigurationOverlayTarget, bool) {
+	if o == nil || IsNil(o.Targets) {
+		return nil, false
+	}
+	return o.Targets, true
+}
+
+// HasTargets returns a boolean if a field has been set.
+func (o *RawOverlay) HasTargets() bool {
+	if o != nil && !IsNil(o.Targets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargets gets a reference to the given []ConfigurationOverlayTarget and assigns it to the Targets field.
+func (o *RawOverlay) SetTargets(v []ConfigurationOverlayTarget) {
+	o.Targets = v
+}
+
+func (o RawOverlay) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -81,9 +115,12 @@ func (o RawOverlayPayload) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RawOverlayPayload) ToMap() (map[string]interface{}, error) {
+func (o RawOverlay) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["configuration"] = o.Configuration
+	if !IsNil(o.Targets) {
+		toSerialize["targets"] = o.Targets
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -92,7 +129,7 @@ func (o RawOverlayPayload) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *RawOverlayPayload) UnmarshalJSON(data []byte) (err error) {
+func (o *RawOverlay) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -114,21 +151,22 @@ func (o *RawOverlayPayload) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varRawOverlayPayload := _RawOverlayPayload{}
+	varRawOverlay := _RawOverlay{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varRawOverlayPayload)
+	err = decoder.Decode(&varRawOverlay)
 
 	if err != nil {
 		return err
 	}
 
-	*o = RawOverlayPayload(varRawOverlayPayload)
+	*o = RawOverlay(varRawOverlay)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "configuration")
+		delete(additionalProperties, "targets")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
@@ -136,38 +174,38 @@ func (o *RawOverlayPayload) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableRawOverlayPayload struct {
-	value *RawOverlayPayload
+type NullableRawOverlay struct {
+	value *RawOverlay
 	isSet bool
 }
 
-func (v NullableRawOverlayPayload) Get() *RawOverlayPayload {
+func (v NullableRawOverlay) Get() *RawOverlay {
 	return v.value
 }
 
-func (v *NullableRawOverlayPayload) Set(val *RawOverlayPayload) {
+func (v *NullableRawOverlay) Set(val *RawOverlay) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRawOverlayPayload) IsSet() bool {
+func (v NullableRawOverlay) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRawOverlayPayload) Unset() {
+func (v *NullableRawOverlay) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRawOverlayPayload(val *RawOverlayPayload) *NullableRawOverlayPayload {
-	return &NullableRawOverlayPayload{value: val, isSet: true}
+func NewNullableRawOverlay(val *RawOverlay) *NullableRawOverlay {
+	return &NullableRawOverlay{value: val, isSet: true}
 }
 
-func (v NullableRawOverlayPayload) MarshalJSON() ([]byte, error) {
+func (v NullableRawOverlay) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRawOverlayPayload) UnmarshalJSON(src []byte) error {
+func (v *NullableRawOverlay) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

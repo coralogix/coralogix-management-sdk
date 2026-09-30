@@ -38,12 +38,10 @@ type ConfigurationOverlayVersion struct {
 	OverlayHash *string `json:"overlayHash,omitempty" validate:"regexp=^[0-9a-f]{64}$"`
 	// Parent overlay version UUID v7.
 	ParentVersionId *string `json:"parentVersionId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Preset payload of this version, for ObservabilityFeatures overlays created outside this API.
-	Preset *PresetOverlayPayload `json:"preset,omitempty"`
-	// Raw YAML payload of this version.
-	Raw *RawOverlayPayload `json:"raw,omitempty"`
-	// Target snapshot for this overlay version.
-	Targets []ConfigurationOverlayTarget `json:"targets,omitempty"`
+	// Preset overlay content of this version, for ObservabilityFeatures overlays created outside this API.
+	Preset *PresetOverlay `json:"preset,omitempty"`
+	// Raw YAML overlay content of this version.
+	Raw *RawOverlay `json:"raw,omitempty"`
 	// Time when this overlay version was last updated.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// Monotonic version number within the parent overlay.
@@ -291,9 +289,9 @@ func (o *ConfigurationOverlayVersion) SetParentVersionId(v string) {
 }
 
 // GetPreset returns the Preset field value if set, zero value otherwise.
-func (o *ConfigurationOverlayVersion) GetPreset() PresetOverlayPayload {
+func (o *ConfigurationOverlayVersion) GetPreset() PresetOverlay {
 	if o == nil || IsNil(o.Preset) {
-		var ret PresetOverlayPayload
+		var ret PresetOverlay
 		return ret
 	}
 	return *o.Preset
@@ -301,7 +299,7 @@ func (o *ConfigurationOverlayVersion) GetPreset() PresetOverlayPayload {
 
 // GetPresetOk returns a tuple with the Preset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayVersion) GetPresetOk() (*PresetOverlayPayload, bool) {
+func (o *ConfigurationOverlayVersion) GetPresetOk() (*PresetOverlay, bool) {
 	if o == nil || IsNil(o.Preset) {
 		return nil, false
 	}
@@ -317,15 +315,15 @@ func (o *ConfigurationOverlayVersion) HasPreset() bool {
 	return false
 }
 
-// SetPreset gets a reference to the given PresetOverlayPayload and assigns it to the Preset field.
-func (o *ConfigurationOverlayVersion) SetPreset(v PresetOverlayPayload) {
+// SetPreset gets a reference to the given PresetOverlay and assigns it to the Preset field.
+func (o *ConfigurationOverlayVersion) SetPreset(v PresetOverlay) {
 	o.Preset = &v
 }
 
 // GetRaw returns the Raw field value if set, zero value otherwise.
-func (o *ConfigurationOverlayVersion) GetRaw() RawOverlayPayload {
+func (o *ConfigurationOverlayVersion) GetRaw() RawOverlay {
 	if o == nil || IsNil(o.Raw) {
-		var ret RawOverlayPayload
+		var ret RawOverlay
 		return ret
 	}
 	return *o.Raw
@@ -333,7 +331,7 @@ func (o *ConfigurationOverlayVersion) GetRaw() RawOverlayPayload {
 
 // GetRawOk returns a tuple with the Raw field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayVersion) GetRawOk() (*RawOverlayPayload, bool) {
+func (o *ConfigurationOverlayVersion) GetRawOk() (*RawOverlay, bool) {
 	if o == nil || IsNil(o.Raw) {
 		return nil, false
 	}
@@ -349,41 +347,9 @@ func (o *ConfigurationOverlayVersion) HasRaw() bool {
 	return false
 }
 
-// SetRaw gets a reference to the given RawOverlayPayload and assigns it to the Raw field.
-func (o *ConfigurationOverlayVersion) SetRaw(v RawOverlayPayload) {
+// SetRaw gets a reference to the given RawOverlay and assigns it to the Raw field.
+func (o *ConfigurationOverlayVersion) SetRaw(v RawOverlay) {
 	o.Raw = &v
-}
-
-// GetTargets returns the Targets field value if set, zero value otherwise.
-func (o *ConfigurationOverlayVersion) GetTargets() []ConfigurationOverlayTarget {
-	if o == nil || IsNil(o.Targets) {
-		var ret []ConfigurationOverlayTarget
-		return ret
-	}
-	return o.Targets
-}
-
-// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayVersion) GetTargetsOk() ([]ConfigurationOverlayTarget, bool) {
-	if o == nil || IsNil(o.Targets) {
-		return nil, false
-	}
-	return o.Targets, true
-}
-
-// HasTargets returns a boolean if a field has been set.
-func (o *ConfigurationOverlayVersion) HasTargets() bool {
-	if o != nil && !IsNil(o.Targets) {
-		return true
-	}
-
-	return false
-}
-
-// SetTargets gets a reference to the given []ConfigurationOverlayTarget and assigns it to the Targets field.
-func (o *ConfigurationOverlayVersion) SetTargets(v []ConfigurationOverlayTarget) {
-	o.Targets = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
@@ -476,9 +442,6 @@ func (o ConfigurationOverlayVersion) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Raw) {
 		toSerialize["raw"] = o.Raw
-	}
-	if !IsNil(o.Targets) {
-		toSerialize["targets"] = o.Targets
 	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
@@ -582,7 +545,6 @@ func (o *ConfigurationOverlayVersion) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "parentVersionId")
 		delete(additionalProperties, "preset")
 		delete(additionalProperties, "raw")
-		delete(additionalProperties, "targets")
 		delete(additionalProperties, "updatedAt")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties

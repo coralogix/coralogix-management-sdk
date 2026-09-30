@@ -23,8 +23,6 @@ var _ MappedNullable = &ConfigurationOverlayServiceUpdateConfigurationOverlayReq
 // ConfigurationOverlayServiceUpdateConfigurationOverlayRequest Request to update a configuration overlay.
 type ConfigurationOverlayServiceUpdateConfigurationOverlayRequest struct {
 	Overlay *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay `json:"overlay,omitempty"`
-	// Replaces the targets. Reordering alone changes nothing; an empty list removes all targets, or returns 400 on an active overlay.
-	TargetReplacement *ConfigurationOverlayTargetsReplace `json:"targetReplacement,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -80,38 +78,6 @@ func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetOverla
 	o.Overlay = &v
 }
 
-// GetTargetReplacement returns the TargetReplacement field value if set, zero value otherwise.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetTargetReplacement() ConfigurationOverlayTargetsReplace {
-	if o == nil || IsNil(o.TargetReplacement) {
-		var ret ConfigurationOverlayTargetsReplace
-		return ret
-	}
-	return *o.TargetReplacement
-}
-
-// GetTargetReplacementOk returns a tuple with the TargetReplacement field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetTargetReplacementOk() (*ConfigurationOverlayTargetsReplace, bool) {
-	if o == nil || IsNil(o.TargetReplacement) {
-		return nil, false
-	}
-	return o.TargetReplacement, true
-}
-
-// HasTargetReplacement returns a boolean if a field has been set.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasTargetReplacement() bool {
-	if o != nil && !IsNil(o.TargetReplacement) {
-		return true
-	}
-
-	return false
-}
-
-// SetTargetReplacement gets a reference to the given ConfigurationOverlayTargetsReplace and assigns it to the TargetReplacement field.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetTargetReplacement(v ConfigurationOverlayTargetsReplace) {
-	o.TargetReplacement = &v
-}
-
 func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -124,9 +90,6 @@ func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) ToMap() (m
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Overlay) {
 		toSerialize["overlay"] = o.Overlay
-	}
-	if !IsNil(o.TargetReplacement) {
-		toSerialize["targetReplacement"] = o.TargetReplacement
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -152,7 +115,6 @@ func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) Unmarshal
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "overlay")
-		delete(additionalProperties, "targetReplacement")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
