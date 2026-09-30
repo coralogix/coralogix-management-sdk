@@ -20,6 +20,7 @@
             "description": "When true, include archived overlays and archived versions.",
             "schema": {
               "description": "When true, include archived overlays and archived versions.",
+              "x-coralogix-presence": true,
               "type": "boolean"
             },
             "style": "form"
@@ -30,6 +31,7 @@
             "description": "Maximum number of overlays to return. Defaults to 100 and cannot exceed 256.",
             "schema": {
               "description": "Maximum number of overlays to return. Defaults to 100 and cannot exceed 256.",
+              "x-coralogix-presence": true,
               "type": "integer",
               "format": "int32",
               "minimum": 1,
@@ -43,6 +45,7 @@
             "description": "Opaque token returned by a previous list response.",
             "schema": {
               "description": "Opaque token returned by a previous list response.",
+              "x-coralogix-presence": true,
               "type": "string",
               "pattern": "^[A-Za-z0-9_-]+$",
               "minLength": 1,
@@ -355,6 +358,7 @@
             "description": "When true, return an archived overlay and include archived versions. Otherwise an archived overlay returns 404.",
             "schema": {
               "description": "When true, return an archived overlay and include archived versions. Otherwise an archived overlay returns 404.",
+              "x-coralogix-presence": true,
               "type": "boolean"
             },
             "style": "form"
@@ -496,10 +500,12 @@
                 "properties": {
                   "active": {
                     "description": "When true, activates the latest version after the update; when false, deactivates it. Activating without targets returns 400.",
+                    "x-coralogix-presence": true,
                     "type": "boolean"
                   },
                   "description": {
                     "description": "Human-readable description.",
+                    "x-coralogix-presence": true,
                     "type": "string",
                     "pattern": "^[\\s\\S]*$",
                     "minLength": 0,
@@ -507,6 +513,7 @@
                   },
                   "name": {
                     "description": "Display name, unique among unarchived overlays.",
+                    "x-coralogix-presence": true,
                     "type": "string",
                     "pattern": "^[\\s\\S]*$",
                     "minLength": 0,
@@ -514,6 +521,7 @@
                   },
                   "parentVersionId": {
                     "description": "Records the parent of the new version. Creates a new version but does not copy content from the parent.",
+                    "x-coralogix-presence": true,
                     "type": "string",
                     "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
                     "minLength": 36,
@@ -521,6 +529,7 @@
                   },
                   "priorityOrder": {
                     "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
+                    "x-coralogix-presence": true,
                     "type": "integer",
                     "format": "int32",
                     "minimum": -2147483648,
@@ -926,10 +935,12 @@
         "properties": {
           "active": {
             "description": "Whether a version of this configuration overlay is active.",
+            "x-coralogix-presence": true,
             "type": "boolean"
           },
           "archived": {
             "description": "Whether this configuration overlay is archived.",
+            "x-coralogix-presence": true,
             "type": "boolean"
           },
           "createdBy": {
@@ -941,6 +952,7 @@
           },
           "description": {
             "description": "Human-readable description.",
+            "x-coralogix-presence": true,
             "type": "string",
             "pattern": "^[\\s\\S]*$",
             "minLength": 0,
@@ -955,6 +967,7 @@
           },
           "name": {
             "description": "Display name.",
+            "x-coralogix-presence": true,
             "type": "string",
             "pattern": "^[\\s\\S]*$",
             "minLength": 0,
@@ -962,6 +975,7 @@
           },
           "priorityOrder": {
             "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
+            "x-coralogix-presence": true,
             "type": "integer",
             "format": "int32",
             "minimum": -2147483648,
@@ -1003,10 +1017,12 @@
         "properties": {
           "active": {
             "description": "When true, activates the first version. It needs at least one target, or the create returns 400 and nothing is created. Defaults to false.",
+            "x-coralogix-presence": true,
             "type": "boolean"
           },
           "description": {
             "description": "Human-readable description.",
+            "x-coralogix-presence": true,
             "type": "string",
             "pattern": "^[\\s\\S]*$",
             "minLength": 0,
@@ -1014,6 +1030,7 @@
           },
           "name": {
             "description": "Display name.",
+            "x-coralogix-presence": true,
             "type": "string",
             "pattern": "^[\\s\\S]*$",
             "minLength": 0,
@@ -1021,6 +1038,7 @@
           },
           "priorityOrder": {
             "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
+            "x-coralogix-presence": true,
             "type": "integer",
             "format": "int32",
             "minimum": -2147483648,
@@ -1164,10 +1182,12 @@
         "properties": {
           "active": {
             "description": "Whether this overlay version is active.",
+            "x-coralogix-presence": true,
             "type": "boolean"
           },
           "archived": {
             "description": "Whether this overlay version is archived.",
+            "x-coralogix-presence": true,
             "type": "boolean"
           },
           "createdAt": {
@@ -1200,6 +1220,7 @@
           },
           "parentVersionId": {
             "description": "Parent overlay version UUID v7.",
+            "x-coralogix-presence": true,
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
             "minLength": 36,
@@ -1304,6 +1325,7 @@
         "properties": {
           "nextPageToken": {
             "description": "Token for the next page. Omitted when there are no further results.",
+            "x-coralogix-presence": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9_-]+$",
             "minLength": 1,
@@ -1425,6 +1447,7 @@
         "properties": {
           "configuration": {
             "description": "Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension.",
+            "x-coralogix-presence": true,
             "type": "string",
             "pattern": "^[\\s\\S]*$",
             "minLength": 1,

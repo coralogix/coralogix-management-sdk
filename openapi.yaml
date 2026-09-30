@@ -18736,6 +18736,7 @@ paths:
         schema:
           description: When true, include archived overlays and archived versions.
           type: boolean
+          x-coralogix-presence: true
       - description: Maximum number of overlays to return. Defaults to 100 and cannot exceed 256.
         in: query
         name: page_size
@@ -18746,6 +18747,7 @@ paths:
           maximum: 256
           minimum: 1
           type: integer
+          x-coralogix-presence: true
       - description: Opaque token returned by a previous list response.
         in: query
         name: page_token
@@ -18756,6 +18758,7 @@ paths:
           minLength: 1
           pattern: ^[A-Za-z0-9_-]+$
           type: string
+          x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -18956,6 +18959,7 @@ paths:
         schema:
           description: When true, return an archived overlay and include archived versions. Otherwise an archived overlay returns 404.
           type: boolean
+          x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -19051,30 +19055,35 @@ paths:
                 active:
                   description: When true, activates the latest version after the update; when false, deactivates it. Activating without targets returns 400.
                   type: boolean
+                  x-coralogix-presence: true
                 description:
                   description: Human-readable description.
                   maxLength: 4096
                   minLength: 0
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 name:
                   description: Display name, unique among unarchived overlays.
                   maxLength: 256
                   minLength: 0
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 parentVersionId:
                   description: Records the parent of the new version. Creates a new version but does not copy content from the parent.
                   maxLength: 36
                   minLength: 36
                   pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
                   type: string
+                  x-coralogix-presence: true
                 priorityOrder:
                   description: 'Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.'
                   format: int32
                   maximum: 2147483647
                   minimum: -2147483648
                   type: integer
+                  x-coralogix-presence: true
                 raw:
                   allOf:
                   - $ref: '#/components/schemas/RawOverlayUpdate'
@@ -54643,11 +54652,13 @@ components:
       type: object
       properties:
         active:
-          type: boolean
           description: Whether a version of this configuration overlay is active.
-        archived:
           type: boolean
+          x-coralogix-presence: true
+        archived:
           description: Whether this configuration overlay is archived.
+          type: boolean
+          x-coralogix-presence: true
         createdBy:
           maxLength: 256
           minLength: 0
@@ -54655,11 +54666,12 @@ components:
           type: string
           description: User that created the configuration overlay.
         description:
+          description: Human-readable description.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Human-readable description.
+          x-coralogix-presence: true
         id:
           maxLength: 36
           minLength: 36
@@ -54667,17 +54679,19 @@ components:
           type: string
           description: Configuration overlay UUID v7.
         name:
+          description: Display name.
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Display name.
+          x-coralogix-presence: true
         priorityOrder:
+          description: 'Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.'
+          format: int32
           maximum: 2147483647
           minimum: -2147483648
           type: integer
-          description: 'Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.'
-          format: int32
+          x-coralogix-presence: true
         tags:
           maxItems: 64
           minItems: 0
@@ -54705,26 +54719,30 @@ components:
       type: object
       properties:
         active:
-          type: boolean
           description: When true, activates the first version. It needs at least one target, or the create returns 400 and nothing is created. Defaults to false.
+          type: boolean
+          x-coralogix-presence: true
         description:
+          description: Human-readable description.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Human-readable description.
+          x-coralogix-presence: true
         name:
+          description: Display name.
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Display name.
+          x-coralogix-presence: true
         priorityOrder:
+          description: 'Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.'
+          format: int32
           maximum: 2147483647
           minimum: -2147483648
           type: integer
-          description: 'Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.'
-          format: int32
+          x-coralogix-presence: true
         raw:
           allOf:
           - $ref: '#/components/schemas/RawOverlayCreate'
@@ -54839,11 +54857,13 @@ components:
         type: object
       properties:
         active:
-          type: boolean
           description: Whether this overlay version is active.
-        archived:
           type: boolean
+          x-coralogix-presence: true
+        archived:
           description: Whether this overlay version is archived.
+          type: boolean
+          x-coralogix-presence: true
         createdAt:
           maxLength: 64
           minLength: 0
@@ -54869,11 +54889,12 @@ components:
           type: string
           description: 'Lowercase hexadecimal SHA-256 hash of the normalized payload: the raw YAML, or the preset JSON.'
         parentVersionId:
+          description: Parent overlay version UUID v7.
           maxLength: 36
           minLength: 36
           pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
-          description: Parent overlay version UUID v7.
+          x-coralogix-presence: true
         preset:
           allOf:
           - $ref: '#/components/schemas/PresetOverlay'
@@ -54927,11 +54948,12 @@ components:
       type: object
       properties:
         nextPageToken:
+          description: Token for the next page. Omitted when there are no further results.
           maxLength: 64
           minLength: 1
           pattern: ^[A-Za-z0-9_-]+$
           type: string
-          description: Token for the next page. Omitted when there are no further results.
+          x-coralogix-presence: true
         overlays:
           maxItems: 256
           minItems: 0
@@ -55014,11 +55036,12 @@ components:
       type: object
       properties:
         configuration:
+          description: Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension.
           maxLength: 1048576
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension.
+          x-coralogix-presence: true
         targets:
           maxItems: 256
           minItems: 0
