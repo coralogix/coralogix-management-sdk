@@ -24,16 +24,16 @@ var _ MappedNullable = &ConfigurationOverlayServiceUpdateConfigurationOverlayReq
 type ConfigurationOverlayServiceUpdateConfigurationOverlayRequest struct {
 	// When true, activates the latest version after the update; when false, deactivates it. Activating without targets returns 400.
 	Active *bool `json:"active,omitempty"`
+	// Custom overlay fields to update. Rejected for preset overlays.
+	Custom *CustomConfigurationOverlayUpdate `json:"custom,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Display name, unique among unarchived overlays.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Records the parent of the new version. Creates a new version but does not copy content from the parent.
 	ParentVersionId *string `json:"parentVersionId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.
+	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
-	// Raw overlay fields to update. Rejected for preset overlays.
-	Raw *RawOverlayUpdate `json:"raw,omitempty"`
 	// Tags attached to the configuration overlay. Replaces all tags.
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -48,6 +48,8 @@ type _ConfigurationOverlayServiceUpdateConfigurationOverlayRequest Configuration
 // will change when the set of required properties is changed
 func NewConfigurationOverlayServiceUpdateConfigurationOverlayRequest() *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest {
 	this := ConfigurationOverlayServiceUpdateConfigurationOverlayRequest{}
+	var priorityOrder int32 = 0
+	this.PriorityOrder = &priorityOrder
 	return &this
 }
 
@@ -56,6 +58,8 @@ func NewConfigurationOverlayServiceUpdateConfigurationOverlayRequest() *Configur
 // but it doesn't guarantee that properties required by API are set
 func NewConfigurationOverlayServiceUpdateConfigurationOverlayRequestWithDefaults() *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest {
 	this := ConfigurationOverlayServiceUpdateConfigurationOverlayRequest{}
+	var priorityOrder int32 = 0
+	this.PriorityOrder = &priorityOrder
 	return &this
 }
 
@@ -89,6 +93,38 @@ func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasActive
 // SetActive gets a reference to the given bool and assigns it to the Active field.
 func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetActive(v bool) {
 	o.Active = &v
+}
+
+// GetCustom returns the Custom field value if set, zero value otherwise.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetCustom() CustomConfigurationOverlayUpdate {
+	if o == nil || IsNil(o.Custom) {
+		var ret CustomConfigurationOverlayUpdate
+		return ret
+	}
+	return *o.Custom
+}
+
+// GetCustomOk returns a tuple with the Custom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetCustomOk() (*CustomConfigurationOverlayUpdate, bool) {
+	if o == nil || IsNil(o.Custom) {
+		return nil, false
+	}
+	return o.Custom, true
+}
+
+// HasCustom returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasCustom() bool {
+	if o != nil && !IsNil(o.Custom) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustom gets a reference to the given CustomConfigurationOverlayUpdate and assigns it to the Custom field.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetCustom(v CustomConfigurationOverlayUpdate) {
+	o.Custom = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -219,38 +255,6 @@ func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetPriori
 	o.PriorityOrder = &v
 }
 
-// GetRaw returns the Raw field value if set, zero value otherwise.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetRaw() RawOverlayUpdate {
-	if o == nil || IsNil(o.Raw) {
-		var ret RawOverlayUpdate
-		return ret
-	}
-	return *o.Raw
-}
-
-// GetRawOk returns a tuple with the Raw field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetRawOk() (*RawOverlayUpdate, bool) {
-	if o == nil || IsNil(o.Raw) {
-		return nil, false
-	}
-	return o.Raw, true
-}
-
-// HasRaw returns a boolean if a field has been set.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasRaw() bool {
-	if o != nil && !IsNil(o.Raw) {
-		return true
-	}
-
-	return false
-}
-
-// SetRaw gets a reference to the given RawOverlayUpdate and assigns it to the Raw field.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetRaw(v RawOverlayUpdate) {
-	o.Raw = &v
-}
-
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetTags() []string {
 	if o == nil || IsNil(o.Tags) {
@@ -296,6 +300,9 @@ func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) ToMap() (m
 	if !IsNil(o.Active) {
 		toSerialize["active"] = o.Active
 	}
+	if !IsNil(o.Custom) {
+		toSerialize["custom"] = o.Custom
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -307,9 +314,6 @@ func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) ToMap() (m
 	}
 	if !IsNil(o.PriorityOrder) {
 		toSerialize["priorityOrder"] = o.PriorityOrder
-	}
-	if !IsNil(o.Raw) {
-		toSerialize["raw"] = o.Raw
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
@@ -338,11 +342,11 @@ func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) Unmarshal
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "active")
+		delete(additionalProperties, "custom")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "parentVersionId")
 		delete(additionalProperties, "priorityOrder")
-		delete(additionalProperties, "raw")
 		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

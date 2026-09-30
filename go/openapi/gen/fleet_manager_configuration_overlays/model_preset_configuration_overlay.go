@@ -18,11 +18,11 @@ import (
 
 var _ = bytes.MinRead
 
-// checks if the PresetOverlay type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &PresetOverlay{}
+// checks if the PresetConfigurationOverlay type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PresetConfigurationOverlay{}
 
-// PresetOverlay ObservabilityFeatures preset overlay content of a version.
-type PresetOverlay struct {
+// PresetConfigurationOverlay ObservabilityFeatures preset overlay content of a version.
+type PresetConfigurationOverlay struct {
 	// Preset chart name.
 	ChartName *ChartName `json:"chartName,omitempty"`
 	// Normalized ObservabilityFeatures JSON.
@@ -33,28 +33,28 @@ type PresetOverlay struct {
 	additionalPropertiesFromUnmarshal bool
 }
 
-type _PresetOverlay PresetOverlay
+type _PresetConfigurationOverlay PresetConfigurationOverlay
 
-// NewPresetOverlay instantiates a new PresetOverlay object
+// NewPresetConfigurationOverlay instantiates a new PresetConfigurationOverlay object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPresetOverlay(observabilityFeatures string) *PresetOverlay {
-	this := PresetOverlay{}
+func NewPresetConfigurationOverlay(observabilityFeatures string) *PresetConfigurationOverlay {
+	this := PresetConfigurationOverlay{}
 	this.ObservabilityFeatures = observabilityFeatures
 	return &this
 }
 
-// NewPresetOverlayWithDefaults instantiates a new PresetOverlay object
+// NewPresetConfigurationOverlayWithDefaults instantiates a new PresetConfigurationOverlay object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPresetOverlayWithDefaults() *PresetOverlay {
-	this := PresetOverlay{}
+func NewPresetConfigurationOverlayWithDefaults() *PresetConfigurationOverlay {
+	this := PresetConfigurationOverlay{}
 	return &this
 }
 
 // GetChartName returns the ChartName field value if set, zero value otherwise.
-func (o *PresetOverlay) GetChartName() ChartName {
+func (o *PresetConfigurationOverlay) GetChartName() ChartName {
 	if o == nil || IsNil(o.ChartName) {
 		var ret ChartName
 		return ret
@@ -64,7 +64,7 @@ func (o *PresetOverlay) GetChartName() ChartName {
 
 // GetChartNameOk returns a tuple with the ChartName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PresetOverlay) GetChartNameOk() (*ChartName, bool) {
+func (o *PresetConfigurationOverlay) GetChartNameOk() (*ChartName, bool) {
 	if o == nil || IsNil(o.ChartName) {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *PresetOverlay) GetChartNameOk() (*ChartName, bool) {
 }
 
 // HasChartName returns a boolean if a field has been set.
-func (o *PresetOverlay) HasChartName() bool {
+func (o *PresetConfigurationOverlay) HasChartName() bool {
 	if o != nil && !IsNil(o.ChartName) {
 		return true
 	}
@@ -81,12 +81,12 @@ func (o *PresetOverlay) HasChartName() bool {
 }
 
 // SetChartName gets a reference to the given ChartName and assigns it to the ChartName field.
-func (o *PresetOverlay) SetChartName(v ChartName) {
+func (o *PresetConfigurationOverlay) SetChartName(v ChartName) {
 	o.ChartName = &v
 }
 
 // GetObservabilityFeatures returns the ObservabilityFeatures field value
-func (o *PresetOverlay) GetObservabilityFeatures() string {
+func (o *PresetConfigurationOverlay) GetObservabilityFeatures() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -97,7 +97,7 @@ func (o *PresetOverlay) GetObservabilityFeatures() string {
 
 // GetObservabilityFeaturesOk returns a tuple with the ObservabilityFeatures field value
 // and a boolean to check if the value has been set.
-func (o *PresetOverlay) GetObservabilityFeaturesOk() (*string, bool) {
+func (o *PresetConfigurationOverlay) GetObservabilityFeaturesOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -105,12 +105,12 @@ func (o *PresetOverlay) GetObservabilityFeaturesOk() (*string, bool) {
 }
 
 // SetObservabilityFeatures sets field value
-func (o *PresetOverlay) SetObservabilityFeatures(v string) {
+func (o *PresetConfigurationOverlay) SetObservabilityFeatures(v string) {
 	o.ObservabilityFeatures = v
 }
 
 // GetTargets returns the Targets field value if set, zero value otherwise.
-func (o *PresetOverlay) GetTargets() []ConfigurationOverlayTarget {
+func (o *PresetConfigurationOverlay) GetTargets() []ConfigurationOverlayTarget {
 	if o == nil || IsNil(o.Targets) {
 		var ret []ConfigurationOverlayTarget
 		return ret
@@ -120,7 +120,7 @@ func (o *PresetOverlay) GetTargets() []ConfigurationOverlayTarget {
 
 // GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PresetOverlay) GetTargetsOk() ([]ConfigurationOverlayTarget, bool) {
+func (o *PresetConfigurationOverlay) GetTargetsOk() ([]ConfigurationOverlayTarget, bool) {
 	if o == nil || IsNil(o.Targets) {
 		return nil, false
 	}
@@ -128,7 +128,7 @@ func (o *PresetOverlay) GetTargetsOk() ([]ConfigurationOverlayTarget, bool) {
 }
 
 // HasTargets returns a boolean if a field has been set.
-func (o *PresetOverlay) HasTargets() bool {
+func (o *PresetConfigurationOverlay) HasTargets() bool {
 	if o != nil && !IsNil(o.Targets) {
 		return true
 	}
@@ -137,11 +137,11 @@ func (o *PresetOverlay) HasTargets() bool {
 }
 
 // SetTargets gets a reference to the given []ConfigurationOverlayTarget and assigns it to the Targets field.
-func (o *PresetOverlay) SetTargets(v []ConfigurationOverlayTarget) {
+func (o *PresetConfigurationOverlay) SetTargets(v []ConfigurationOverlayTarget) {
 	o.Targets = v
 }
 
-func (o PresetOverlay) MarshalJSON() ([]byte, error) {
+func (o PresetConfigurationOverlay) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -149,7 +149,7 @@ func (o PresetOverlay) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PresetOverlay) ToMap() (map[string]interface{}, error) {
+func (o PresetConfigurationOverlay) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ChartName) {
 		toSerialize["chartName"] = o.ChartName
@@ -166,7 +166,7 @@ func (o PresetOverlay) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *PresetOverlay) UnmarshalJSON(data []byte) (err error) {
+func (o *PresetConfigurationOverlay) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -188,16 +188,16 @@ func (o *PresetOverlay) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varPresetOverlay := _PresetOverlay{}
+	varPresetConfigurationOverlay := _PresetConfigurationOverlay{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varPresetOverlay)
+	err = decoder.Decode(&varPresetConfigurationOverlay)
 
 	if err != nil {
 		return err
 	}
 
-	*o = PresetOverlay(varPresetOverlay)
+	*o = PresetConfigurationOverlay(varPresetConfigurationOverlay)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -212,38 +212,38 @@ func (o *PresetOverlay) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullablePresetOverlay struct {
-	value *PresetOverlay
+type NullablePresetConfigurationOverlay struct {
+	value *PresetConfigurationOverlay
 	isSet bool
 }
 
-func (v NullablePresetOverlay) Get() *PresetOverlay {
+func (v NullablePresetConfigurationOverlay) Get() *PresetConfigurationOverlay {
 	return v.value
 }
 
-func (v *NullablePresetOverlay) Set(val *PresetOverlay) {
+func (v *NullablePresetConfigurationOverlay) Set(val *PresetConfigurationOverlay) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePresetOverlay) IsSet() bool {
+func (v NullablePresetConfigurationOverlay) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePresetOverlay) Unset() {
+func (v *NullablePresetConfigurationOverlay) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePresetOverlay(val *PresetOverlay) *NullablePresetOverlay {
-	return &NullablePresetOverlay{value: val, isSet: true}
+func NewNullablePresetConfigurationOverlay(val *PresetConfigurationOverlay) *NullablePresetConfigurationOverlay {
+	return &NullablePresetConfigurationOverlay{value: val, isSet: true}
 }
 
-func (v NullablePresetOverlay) MarshalJSON() ([]byte, error) {
+func (v NullablePresetConfigurationOverlay) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePresetOverlay) UnmarshalJSON(src []byte) error {
+func (v *NullablePresetConfigurationOverlay) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

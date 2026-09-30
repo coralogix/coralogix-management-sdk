@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the ConfigurationOverlayServiceCreateConfigurationOverlayRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationOverlayServiceCreateConfigurationOverlayRequest{}
 
-// ConfigurationOverlayServiceCreateConfigurationOverlayRequest Request to create a raw YAML configuration overlay.
+// ConfigurationOverlayServiceCreateConfigurationOverlayRequest Request to create a custom configuration overlay.
 type ConfigurationOverlayServiceCreateConfigurationOverlayRequest struct {
 	// Configuration overlay to create.
 	Overlay ConfigurationOverlayCreate `json:"overlay"`

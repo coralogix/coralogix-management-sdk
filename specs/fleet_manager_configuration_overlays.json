@@ -79,10 +79,7 @@
                           "active": true,
                           "archived": false,
                           "createdAt": "2026-09-28T10:05:00Z",
-                          "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
-                          "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                          "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
-                          "raw": {
+                          "custom": {
                             "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
                             "targets": [
                               {
@@ -96,6 +93,9 @@
                               }
                             ]
                           },
+                          "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
+                          "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                          "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
                           "updatedAt": "2026-09-28T10:05:00Z",
                           "version": "2"
                         },
@@ -103,11 +103,11 @@
                           "active": false,
                           "archived": false,
                           "createdAt": "2026-09-28T10:00:00Z",
-                          "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
-                          "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                          "raw": {
+                          "custom": {
                             "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
                           },
+                          "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                          "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
                           "updatedAt": "2026-09-28T10:00:00Z",
                           "version": "1"
                         }
@@ -155,13 +155,13 @@
           "Fleet Manager Configuration Overlays"
         ],
         "summary": "Create configuration overlay",
-        "description": "Creates a raw YAML configuration overlay. Its first version is inactive unless active is true. Names must be unique among unarchived overlays.",
+        "description": "Creates a custom configuration overlay (OpenTelemetry Collector YAML). Its first version is inactive unless active is true. Names must be unique among unarchived overlays.",
         "operationId": "ConfigurationOverlayService_CreateConfigurationOverlay",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "description": "Request to create a raw YAML configuration overlay.",
+                "description": "Request to create a custom configuration overlay.",
                 "type": "object",
                 "properties": {
                   "overlay": {
@@ -205,11 +205,11 @@
                         "active": false,
                         "archived": false,
                         "createdAt": "2026-09-28T10:00:00Z",
-                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
-                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                        "raw": {
+                        "custom": {
                           "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
                         },
+                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
                         "updatedAt": "2026-09-28T10:00:00Z",
                         "version": "1"
                       }
@@ -388,10 +388,7 @@
                         "active": true,
                         "archived": false,
                         "createdAt": "2026-09-28T10:05:00Z",
-                        "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
-                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                        "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
-                        "raw": {
+                        "custom": {
                           "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
                           "targets": [
                             {
@@ -405,6 +402,9 @@
                             }
                           ]
                         },
+                        "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
                         "updatedAt": "2026-09-28T10:05:00Z",
                         "version": "2"
                       },
@@ -412,11 +412,11 @@
                         "active": false,
                         "archived": false,
                         "createdAt": "2026-09-28T10:00:00Z",
-                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
-                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                        "raw": {
+                        "custom": {
                           "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
                         },
+                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
                         "updatedAt": "2026-09-28T10:00:00Z",
                         "version": "1"
                       }
@@ -473,16 +473,16 @@
           "Fleet Manager Configuration Overlays"
         ],
         "summary": "Update configuration overlay",
-        "description": "Updates the fields listed in update_mask; other fields are unchanged. A listed field that is omitted from the body is cleared or reset to its default. Changing raw.configuration, raw.targets, or parentVersionId creates a new version. Returns 400 for an archived overlay.",
+        "description": "Updates the fields listed in update_mask; other fields are unchanged. A listed field that is omitted from the body is cleared or reset to its default. Changing custom.configuration, custom.targets, or parentVersionId creates a new version. Returns 400 for an archived overlay.",
         "operationId": "ConfigurationOverlayService_UpdateConfigurationOverlay",
         "parameters": [
           {
             "in": "query",
             "name": "update_mask",
-            "description": "Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, raw, raw.configuration, raw.targets. A listed field that is omitted from the body is cleared (name, description, tags, raw.targets) or reset to its default (priorityOrder 0, active false); raw.configuration cannot be cleared. Unknown fields and * return 400.",
+            "description": "Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, custom, custom.configuration, custom.targets. A listed field that is omitted from the body is cleared (name, description, tags, custom.targets) or reset to its default (priorityOrder 0, active false); custom.configuration cannot be cleared. Unknown fields and * return 400.",
             "required": true,
             "schema": {
-              "description": "Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, raw, raw.configuration, raw.targets. A listed field that is omitted from the body is cleared (name, description, tags, raw.targets) or reset to its default (priorityOrder 0, active false); raw.configuration cannot be cleared. Unknown fields and * return 400.",
+              "description": "Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, custom, custom.configuration, custom.targets. A listed field that is omitted from the body is cleared (name, description, tags, custom.targets) or reset to its default (priorityOrder 0, active false); custom.configuration cannot be cleared. Unknown fields and * return 400.",
               "type": "string",
               "pattern": "^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$",
               "minLength": 1,
@@ -502,6 +502,14 @@
                     "description": "When true, activates the latest version after the update; when false, deactivates it. Activating without targets returns 400.",
                     "x-coralogix-presence": true,
                     "type": "boolean"
+                  },
+                  "custom": {
+                    "description": "Custom overlay fields to update. Rejected for preset overlays.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/CustomConfigurationOverlayUpdate"
+                      }
+                    ]
                   },
                   "description": {
                     "description": "Human-readable description.",
@@ -528,20 +536,13 @@
                     "maxLength": 36
                   },
                   "priorityOrder": {
-                    "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
+                    "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie.",
+                    "default": 0,
                     "x-coralogix-presence": true,
                     "type": "integer",
                     "format": "int32",
                     "minimum": -2147483648,
                     "maximum": 2147483647
-                  },
-                  "raw": {
-                    "description": "Raw overlay fields to update. Rejected for preset overlays.",
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/RawOverlayUpdate"
-                      }
-                    ]
                   },
                   "tags": {
                     "description": "Tags attached to the configuration overlay. Replaces all tags.",
@@ -585,10 +586,7 @@
                         "active": true,
                         "archived": false,
                         "createdAt": "2026-09-28T10:05:00Z",
-                        "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
-                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                        "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
-                        "raw": {
+                        "custom": {
                           "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
                           "targets": [
                             {
@@ -602,6 +600,9 @@
                             }
                           ]
                         },
+                        "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
                         "updatedAt": "2026-09-28T10:05:00Z",
                         "version": "2"
                       },
@@ -609,11 +610,11 @@
                         "active": false,
                         "archived": false,
                         "createdAt": "2026-09-28T10:00:00Z",
-                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
-                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
-                        "raw": {
+                        "custom": {
                           "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
                         },
+                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
                         "updatedAt": "2026-09-28T10:00:00Z",
                         "version": "1"
                       }
@@ -974,7 +975,8 @@
             "maxLength": 256
           },
           "priorityOrder": {
-            "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
+            "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie.",
+            "default": 0,
             "x-coralogix-presence": true,
             "type": "integer",
             "format": "int32",
@@ -1012,13 +1014,21 @@
         "externalDocs": {
           "url": ""
         },
-        "description": "Payload used to create a raw YAML configuration overlay.",
+        "description": "Payload used to create a custom configuration overlay.",
         "type": "object",
         "properties": {
           "active": {
             "description": "When true, activates the first version. It needs at least one target, or the create returns 400 and nothing is created. Defaults to false.",
             "x-coralogix-presence": true,
             "type": "boolean"
+          },
+          "custom": {
+            "description": "Custom overlay: an OpenTelemetry Collector YAML fragment and its targets.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomConfigurationOverlayCreate"
+              }
+            ]
           },
           "description": {
             "description": "Human-readable description.",
@@ -1037,20 +1047,13 @@
             "maxLength": 256
           },
           "priorityOrder": {
-            "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
+            "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie.",
+            "default": 0,
             "x-coralogix-presence": true,
             "type": "integer",
             "format": "int32",
             "minimum": -2147483648,
             "maximum": 2147483647
-          },
-          "raw": {
-            "description": "Raw OpenTelemetry Collector YAML overlay.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RawOverlayCreate"
-              }
-            ]
           },
           "tags": {
             "description": "Tags attached to the configuration overlay.",
@@ -1067,7 +1070,7 @@
           }
         },
         "required": [
-          "raw"
+          "custom"
         ]
       },
       "ConfigurationOverlayTarget": {
@@ -1204,6 +1207,14 @@
             "minLength": 0,
             "maxLength": 256
           },
+          "custom": {
+            "description": "Custom overlay content of this version.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomConfigurationOverlay"
+              }
+            ]
+          },
           "id": {
             "description": "Configuration overlay version UUID v7.",
             "type": "string",
@@ -1212,7 +1223,7 @@
             "maxLength": 36
           },
           "overlayHash": {
-            "description": "Lowercase hexadecimal SHA-256 hash of the normalized payload: the raw YAML, or the preset JSON.",
+            "description": "Lowercase hexadecimal SHA-256 hash of the normalized payload: the custom overlay YAML, or the preset JSON.",
             "type": "string",
             "pattern": "^[0-9a-f]{64}$",
             "minLength": 64,
@@ -1230,15 +1241,7 @@
             "description": "Preset overlay content of this version, for ObservabilityFeatures overlays created outside this API.",
             "allOf": [
               {
-                "$ref": "#/components/schemas/PresetOverlay"
-              }
-            ]
-          },
-          "raw": {
-            "description": "Raw YAML overlay content of this version.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RawOverlay"
+                "$ref": "#/components/schemas/PresetConfigurationOverlay"
               }
             ]
           },
@@ -1265,7 +1268,7 @@
           {
             "type": "object",
             "required": [
-              "raw"
+              "custom"
             ]
           },
           {
@@ -1295,6 +1298,94 @@
         "required": [
           "overlay"
         ]
+      },
+      "CustomConfigurationOverlay": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Custom overlay content of a version.",
+        "type": "object",
+        "properties": {
+          "configuration": {
+            "description": "OpenTelemetry Collector YAML fragment, re-emitted in normalized form (sorted keys, no comments).",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          },
+          "targets": {
+            "description": "Target snapshot of this version.",
+            "x-coralogix-collection": "set",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurationOverlayTarget"
+            },
+            "minItems": 0,
+            "maxItems": 256,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "configuration"
+        ]
+      },
+      "CustomConfigurationOverlayCreate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Custom overlay to create: an OpenTelemetry Collector YAML fragment and its targets.",
+        "type": "object",
+        "properties": {
+          "configuration": {
+            "description": "OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored in normalized form (sorted keys, no comments). Must not configure the OpAMP extension.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          },
+          "targets": {
+            "description": "Remote configurations the overlay applies to, as a set: duplicates are rejected. A version needs at least one target to be activated.",
+            "x-coralogix-collection": "set",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurationOverlayTargetCreate"
+            },
+            "minItems": 0,
+            "maxItems": 256,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "configuration"
+        ]
+      },
+      "CustomConfigurationOverlayUpdate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Custom overlay field values for an update. Only fields listed in update_mask are applied.",
+        "type": "object",
+        "properties": {
+          "configuration": {
+            "description": "Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension.",
+            "x-coralogix-presence": true,
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          },
+          "targets": {
+            "description": "Replaces the targets, as a set: duplicates are rejected and reordering alone changes nothing. An empty list removes all targets, or returns 400 on an active overlay.",
+            "x-coralogix-collection": "set",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurationOverlayTargetReplace"
+            },
+            "minItems": 0,
+            "maxItems": 256,
+            "uniqueItems": true
+          }
+        }
       },
       "GetConfigurationOverlayResponse": {
         "externalDocs": {
@@ -1345,7 +1436,7 @@
           "overlays"
         ]
       },
-      "PresetOverlay": {
+      "PresetConfigurationOverlay": {
         "externalDocs": {
           "url": ""
         },
@@ -1369,101 +1460,19 @@
           },
           "targets": {
             "description": "Target snapshot of this version.",
+            "x-coralogix-collection": "set",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConfigurationOverlayTarget"
             },
             "minItems": 0,
-            "maxItems": 256
+            "maxItems": 256,
+            "uniqueItems": true
           }
         },
         "required": [
           "observabilityFeatures"
         ]
-      },
-      "RawOverlay": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Raw YAML overlay content of a version.",
-        "type": "object",
-        "properties": {
-          "configuration": {
-            "description": "OpenTelemetry Collector YAML fragment, re-emitted in normalized form (sorted keys, no comments).",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 1048576
-          },
-          "targets": {
-            "description": "Target snapshot of this version.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ConfigurationOverlayTarget"
-            },
-            "minItems": 0,
-            "maxItems": 256
-          }
-        },
-        "required": [
-          "configuration"
-        ]
-      },
-      "RawOverlayCreate": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Raw OpenTelemetry Collector YAML overlay to create.",
-        "type": "object",
-        "properties": {
-          "configuration": {
-            "description": "OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored in normalized form (sorted keys, no comments). Must not configure the OpAMP extension.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 1048576
-          },
-          "targets": {
-            "description": "Remote configurations the overlay applies to, as a set: duplicates are rejected. A version needs at least one target to be activated.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ConfigurationOverlayTargetCreate"
-            },
-            "minItems": 0,
-            "maxItems": 256,
-            "uniqueItems": true
-          }
-        },
-        "required": [
-          "configuration"
-        ]
-      },
-      "RawOverlayUpdate": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Raw overlay field values for an update. Only fields listed in update_mask are applied.",
-        "type": "object",
-        "properties": {
-          "configuration": {
-            "description": "Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension.",
-            "x-coralogix-presence": true,
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 1048576
-          },
-          "targets": {
-            "description": "Replaces the targets, as a set: duplicates are rejected and reordering alone changes nothing. An empty list removes all targets, or returns 400 on an active overlay.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ConfigurationOverlayTargetReplace"
-            },
-            "minItems": 0,
-            "maxItems": 256,
-            "uniqueItems": true
-          }
-        }
       },
       "UpdateConfigurationOverlayResponse": {
         "externalDocs": {

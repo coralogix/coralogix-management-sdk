@@ -19,6 +19,9 @@ model_configuration_overlay_target_create.go
 model_configuration_overlay_target_replace.go
 model_configuration_overlay_version.go
 model_create_configuration_overlay_response.go
+model_custom_configuration_overlay.go
+model_custom_configuration_overlay_create.go
+model_custom_configuration_overlay_update.go
 model_error.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go
@@ -26,10 +29,7 @@ model_filters.go
 model_get_configuration_overlay_response.go
 model_list_configuration_overlays_response.go
 model_multiple_values.go
-model_preset_overlay.go
-model_raw_overlay.go
-model_raw_overlay_create.go
-model_raw_overlay_update.go
+model_preset_configuration_overlay.go
 model_update_configuration_overlay_response.go
 model_v3_filter_operator.go
 response.go

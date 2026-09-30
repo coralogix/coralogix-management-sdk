@@ -21,18 +21,18 @@ var _ = bytes.MinRead
 // checks if the ConfigurationOverlayCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationOverlayCreate{}
 
-// ConfigurationOverlayCreate Payload used to create a raw YAML configuration overlay.
+// ConfigurationOverlayCreate Payload used to create a custom configuration overlay.
 type ConfigurationOverlayCreate struct {
 	// When true, activates the first version. It needs at least one target, or the create returns 400 and nothing is created. Defaults to false.
 	Active *bool `json:"active,omitempty"`
+	// Custom overlay: an OpenTelemetry Collector YAML fragment and its targets.
+	Custom CustomConfigurationOverlayCreate `json:"custom"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.
+	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
-	// Raw OpenTelemetry Collector YAML overlay.
-	Raw RawOverlayCreate `json:"raw"`
 	// Tags attached to the configuration overlay.
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -45,9 +45,11 @@ type _ConfigurationOverlayCreate ConfigurationOverlayCreate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigurationOverlayCreate(raw RawOverlayCreate) *ConfigurationOverlayCreate {
+func NewConfigurationOverlayCreate(custom CustomConfigurationOverlayCreate) *ConfigurationOverlayCreate {
 	this := ConfigurationOverlayCreate{}
-	this.Raw = raw
+	this.Custom = custom
+	var priorityOrder int32 = 0
+	this.PriorityOrder = &priorityOrder
 	return &this
 }
 
@@ -56,6 +58,8 @@ func NewConfigurationOverlayCreate(raw RawOverlayCreate) *ConfigurationOverlayCr
 // but it doesn't guarantee that properties required by API are set
 func NewConfigurationOverlayCreateWithDefaults() *ConfigurationOverlayCreate {
 	this := ConfigurationOverlayCreate{}
+	var priorityOrder int32 = 0
+	this.PriorityOrder = &priorityOrder
 	return &this
 }
 
@@ -89,6 +93,30 @@ func (o *ConfigurationOverlayCreate) HasActive() bool {
 // SetActive gets a reference to the given bool and assigns it to the Active field.
 func (o *ConfigurationOverlayCreate) SetActive(v bool) {
 	o.Active = &v
+}
+
+// GetCustom returns the Custom field value
+func (o *ConfigurationOverlayCreate) GetCustom() CustomConfigurationOverlayCreate {
+	if o == nil {
+		var ret CustomConfigurationOverlayCreate
+		return ret
+	}
+
+	return o.Custom
+}
+
+// GetCustomOk returns a tuple with the Custom field value
+// and a boolean to check if the value has been set.
+func (o *ConfigurationOverlayCreate) GetCustomOk() (*CustomConfigurationOverlayCreate, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Custom, true
+}
+
+// SetCustom sets field value
+func (o *ConfigurationOverlayCreate) SetCustom(v CustomConfigurationOverlayCreate) {
+	o.Custom = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -187,30 +215,6 @@ func (o *ConfigurationOverlayCreate) SetPriorityOrder(v int32) {
 	o.PriorityOrder = &v
 }
 
-// GetRaw returns the Raw field value
-func (o *ConfigurationOverlayCreate) GetRaw() RawOverlayCreate {
-	if o == nil {
-		var ret RawOverlayCreate
-		return ret
-	}
-
-	return o.Raw
-}
-
-// GetRawOk returns a tuple with the Raw field value
-// and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayCreate) GetRawOk() (*RawOverlayCreate, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Raw, true
-}
-
-// SetRaw sets field value
-func (o *ConfigurationOverlayCreate) SetRaw(v RawOverlayCreate) {
-	o.Raw = v
-}
-
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *ConfigurationOverlayCreate) GetTags() []string {
 	if o == nil || IsNil(o.Tags) {
@@ -256,6 +260,7 @@ func (o ConfigurationOverlayCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Active) {
 		toSerialize["active"] = o.Active
 	}
+	toSerialize["custom"] = o.Custom
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -265,7 +270,6 @@ func (o ConfigurationOverlayCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PriorityOrder) {
 		toSerialize["priorityOrder"] = o.PriorityOrder
 	}
-	toSerialize["raw"] = o.Raw
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
@@ -282,7 +286,7 @@ func (o *ConfigurationOverlayCreate) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"raw",
+		"custom",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -314,10 +318,10 @@ func (o *ConfigurationOverlayCreate) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "active")
+		delete(additionalProperties, "custom")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "priorityOrder")
-		delete(additionalProperties, "raw")
 		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

@@ -35,7 +35,7 @@ type ConfigurationOverlay struct {
 	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.
+	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
 	// Tags attached to the configuration overlay.
 	Tags []string `json:"tags,omitempty"`
@@ -54,6 +54,8 @@ type _ConfigurationOverlay ConfigurationOverlay
 func NewConfigurationOverlay(id string) *ConfigurationOverlay {
 	this := ConfigurationOverlay{}
 	this.Id = id
+	var priorityOrder int32 = 0
+	this.PriorityOrder = &priorityOrder
 	return &this
 }
 
@@ -62,6 +64,8 @@ func NewConfigurationOverlay(id string) *ConfigurationOverlay {
 // but it doesn't guarantee that properties required by API are set
 func NewConfigurationOverlayWithDefaults() *ConfigurationOverlay {
 	this := ConfigurationOverlay{}
+	var priorityOrder int32 = 0
+	this.PriorityOrder = &priorityOrder
 	return &this
 }
 

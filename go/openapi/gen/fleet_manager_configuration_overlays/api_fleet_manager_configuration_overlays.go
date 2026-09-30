@@ -345,7 +345,7 @@ func (r ApiConfigurationOverlayServiceCreateConfigurationOverlayRequest) Execute
 /*
 ConfigurationOverlayServiceCreateConfigurationOverlay Create configuration overlay
 
-Creates a raw YAML configuration overlay. Its first version is inactive unless active is true. Names must be unique among unarchived overlays.
+Creates a custom configuration overlay (OpenTelemetry Collector YAML). Its first version is inactive unless active is true. Names must be unique among unarchived overlays.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConfigurationOverlayServiceCreateConfigurationOverlayRequest
@@ -819,7 +819,7 @@ type ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest struct {
 	configurationOverlayServiceUpdateConfigurationOverlayRequest *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest
 }
 
-// Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, raw, raw.configuration, raw.targets. A listed field that is omitted from the body is cleared (name, description, tags, raw.targets) or reset to its default (priorityOrder 0, active false); raw.configuration cannot be cleared. Unknown fields and * return 400.
+// Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, custom, custom.configuration, custom.targets. A listed field that is omitted from the body is cleared (name, description, tags, custom.targets) or reset to its default (priorityOrder 0, active false); custom.configuration cannot be cleared. Unknown fields and * return 400.
 func (r ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest) UpdateMask(updateMask string) ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest {
 	r.updateMask = &updateMask
 	return r
@@ -837,7 +837,7 @@ func (r ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest) Execute
 /*
 ConfigurationOverlayServiceUpdateConfigurationOverlay Update configuration overlay
 
-Updates the fields listed in update_mask; other fields are unchanged. A listed field that is omitted from the body is cleared or reset to its default. Changing raw.configuration, raw.targets, or parentVersionId creates a new version. Returns 400 for an archived overlay.
+Updates the fields listed in update_mask; other fields are unchanged. A listed field that is omitted from the body is cleared or reset to its default. Changing custom.configuration, custom.targets, or parentVersionId creates a new version. Returns 400 for an archived overlay.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration overlay UUID v7.
